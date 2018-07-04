@@ -4,8 +4,7 @@ import { ThemeProvider } from "emotion-theming"
 
 import constants, { OperationalStyleConstants } from "../utils/constants"
 import { darken } from "@operational/utils"
-import { MessageType, Context } from "../types"
-
+import { MessageType } from "../types"
 import Messages from "../Messages/Messages"
 import MessageComponent from "../Message/Message"
 
@@ -36,6 +35,17 @@ export interface State {
     message: Message
     addedAt: number
   }[]
+}
+
+export interface Context {
+  pushState?: (url: string) => void
+  replaceState?: (url: string) => void
+  pushMessage: (
+    message: {
+      body: string
+      type: MessageType
+    },
+  ) => void
 }
 
 const colorByMessageType = (type: MessageType): string => {
