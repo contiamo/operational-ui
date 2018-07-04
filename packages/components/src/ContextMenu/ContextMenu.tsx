@@ -28,17 +28,15 @@ export interface State {
   isOpen: boolean
 }
 
-const Container = styled("div")(
-  ({ theme }: WithTheme): {} => ({
-    label: "contextmenu",
-    cursor: "pointer",
-    position: "relative",
-    width: "fit-content",
-  }),
-)
+const Container = styled("div")(({ theme }: WithTheme) => ({
+  label: "contextmenu",
+  cursor: "pointer",
+  position: "relative",
+  width: "fit-content",
+}))
 
 const MenuContainer = styled("div")(
-  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }): {} => ({
+  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }) => ({
     position: "absolute",
     top: `calc(100% + ${theme.deprecated.spacing / 2}px)`,
     left: -theme.deprecated.spacing,

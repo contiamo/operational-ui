@@ -86,6 +86,8 @@ const color = {
   border: borderColors,
 }
 
+type FontWeight = 400 | 500 | 600
+
 /**
  * Font definitions and sizes available for use
  * throughout Operational UI.
@@ -110,13 +112,13 @@ const font = {
   },
   weight: {
     /** 400 */
-    regular: 400,
+    regular: 400 as FontWeight,
 
     /** 500 */
-    medium: 500,
+    medium: 500 as FontWeight,
 
     /** 600 */
-    bold: 600,
+    bold: 600 as FontWeight,
   },
 }
 

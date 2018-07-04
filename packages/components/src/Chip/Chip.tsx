@@ -27,58 +27,52 @@ export interface Props {
   icon?: IconName | React.ReactNode
 }
 
-const Container = styled("div")(
-  ({ theme, color }: { theme?: OperationalStyleConstants; color?: string }): {} => {
-    const backgroundColor = colorCalculator(expandColor(theme, color) || theme.color.primary)
-      .setAlpha(0.1)
-      .toString()
-    return {
-      backgroundColor,
-      fontSize: theme.font.size.small,
-      fontWeight: theme.font.weight.medium,
-      label: "chip",
-      position: "relative",
-      height: theme.space.element,
-      display: "inline-flex",
-      alignItems: "center",
-      boxSizing: "border-box",
-      width: "fit-content",
-      borderRadius: 2,
-      cursor: "pointer",
-      overflow: "hidden",
-      color: theme.color.text.default,
-      margin: `0px ${theme.space.small}px 0px 0px`,
-    }
-  },
-)
+const Container = styled("div")(({ theme, color }: { theme?: OperationalStyleConstants; color?: string }) => {
+  const backgroundColor = colorCalculator(expandColor(theme, color) || theme.color.primary)
+    .setAlpha(0.1)
+    .toString()
+  return {
+    backgroundColor,
+    fontSize: theme.font.size.small,
+    fontWeight: theme.font.weight.medium,
+    label: "chip",
+    position: "relative",
+    height: theme.space.element,
+    display: "inline-flex",
+    alignItems: "center",
+    boxSizing: "border-box",
+    width: "fit-content",
+    borderRadius: 2,
+    cursor: "pointer",
+    overflow: "hidden",
+    color: theme.color.text.default,
+    margin: `0px ${theme.space.small}px 0px 0px`,
+  }
+})
 
-const Content = styled("div")(
-  ({ theme }: WithTheme): {} => ({
-    height: "100%",
+const Content = styled("div")(({ theme }: WithTheme) => ({
+  height: "100%",
+  display: "flex",
+  alignItems: "center",
+  padding: `0px ${theme.space.base}px`,
+  "&:hover": {
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+  },
+}))
+
+const Action = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => {
+  return {
+    borderLeft: `1px solid ${theme.color.ghost}`,
+    width: theme.space.element,
     display: "flex",
     alignItems: "center",
-    padding: `0px ${theme.space.base}px`,
+    justifyContent: "center",
+    height: "100%",
     "&:hover": {
       backgroundColor: "rgba(0, 0, 0, 0.1)",
     },
-  }),
-)
-
-const Action = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => {
-    return {
-      borderLeft: `1px solid ${theme.color.ghost}`,
-      width: theme.space.element,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      height: "100%",
-      "&:hover": {
-        backgroundColor: "rgba(0, 0, 0, 0.1)",
-      },
-    }
-  },
-)
+  }
+})
 
 const Chip: React.SFC<Props> = (props: Props) => (
   <Container id={props.id} className={props.className} color={props.color}>

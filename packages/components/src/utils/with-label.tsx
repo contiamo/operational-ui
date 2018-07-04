@@ -3,21 +3,17 @@ import styled from "react-emotion"
 import { OperationalStyleConstants } from "./constants"
 import { Css } from "../types"
 
-const Container = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
-    display: "inline-block",
-  }),
-)
+const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  display: "inline-block",
+}))
 
-const Label = styled("label")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
-    ...theme.deprecated.typography.small,
-    fontWeight: 600,
-    opacity: 0.7,
-    display: "inline-block",
-    marginBottom: theme.deprecated.spacing / 4,
-  }),
-)
+const Label = styled("label")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  ...theme.deprecated.typography.small,
+  fontWeight: theme.font.weight.bold,
+  opacity: 0.7,
+  display: "inline-block",
+  marginBottom: theme.deprecated.spacing / 4,
+}))
 
 type IComponent = Pick<React.HTMLProps<HTMLDivElement>, "className" | "label" | "id"> & {
   css?: Css

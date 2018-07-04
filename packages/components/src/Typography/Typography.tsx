@@ -15,7 +15,7 @@ const Title = styled("h1")(
     fontSize: theme.font.size.title,
     fontFamily: theme.font.family.main,
     label: "title",
-    fontWeight: 500,
+    fontWeight: theme.font.weight.medium,
     margin: 0,
     color: theme.color.text[color || "default"],
   }),

@@ -19,7 +19,7 @@ const Container = styled("div")(
     tabIndex?: number
     onClick?: () => void
     theme?: OperationalStyleConstants
-  }): {} => {
+  }) => {
     const backgroundColor = deprecatedExpandColor(theme.deprecated, color) || theme.deprecated.colors.white
     return {
       backgroundColor,
@@ -60,7 +60,7 @@ const Container = styled("div")(
 )
 
 const DisplayValue = styled("div")(
-  ({ theme, isPlaceholder }: { isPlaceholder: boolean; theme?: OperationalStyleConstants }): {} => ({
+  ({ theme, isPlaceholder }: { isPlaceholder: boolean; theme?: OperationalStyleConstants }) => ({
     color: isPlaceholder ? theme.deprecated.colors.gray : theme.deprecated.colors.black,
   }),
 )
@@ -80,18 +80,16 @@ const Options = styled("div")(
     animation: `${fadeIn} .15s forwards ease,
     ${resetTransform} .15s forwards ease`,
   },
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
+  ({ theme }: { theme?: OperationalStyleConstants }) => ({
     boxShadow: theme.deprecated.shadows.popup,
     zIndex: theme.deprecated.baseZIndex + 300,
   }),
 )
 
-const OptionsList = styled("div")(
-  ({ theme }: { theme?: OperationalStyleConstants }): {} => ({
-    // whole number + 3/4 ratio here ensures options don't get cut off
-    maxHeight: theme.deprecated.spacing * 12.75,
-    overflow: "auto",
-  }),
-)
+const OptionsList = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  // whole number + 3/4 ratio here ensures options don't get cut off
+  maxHeight: theme.deprecated.spacing * 12.75,
+  overflow: "auto",
+}))
 
 export { Container, Options, OptionsList, DisplayValue }

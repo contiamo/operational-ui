@@ -36,18 +36,16 @@ const getGridCSSProperties = (gridType: string): CssStatic => {
   )
 }
 
-const Container = styled("div")(
-  ({ theme, gridType }: { theme?: OperationalStyleConstants; gridType: string }): {} => ({
-    label: "Grid",
-    width: "100%",
-    height: "100%",
-    display: "grid",
-    padding: (theme.deprecated.spacing * 4) / 3,
-    gridColumnGap: (theme.deprecated.spacing * 4) / 3,
-    gridRowGap: (theme.deprecated.spacing * 4) / 3,
-    ...getGridCSSProperties(gridType),
-  }),
-)
+const Container = styled("div")(({ theme, gridType }: { theme?: OperationalStyleConstants; gridType: string }) => ({
+  label: "Grid",
+  width: "100%",
+  height: "100%",
+  display: "grid",
+  padding: (theme.deprecated.spacing * 4) / 3,
+  gridColumnGap: (theme.deprecated.spacing * 4) / 3,
+  gridRowGap: (theme.deprecated.spacing * 4) / 3,
+  ...getGridCSSProperties(gridType),
+}))
 
 const Grid: React.SFC<Props> = (props: Props) => (
   <Container id={props.id} className={props.className} gridType={props.type}>

@@ -44,7 +44,7 @@ const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }
   alignItems: "center",
   padding: theme.space.element,
   height: theme.titleHeight,
-  fontWeight: 500,
+  fontWeight: theme.font.weight.medium,
 }))
 
 const tabsBarHeight = 43
@@ -62,7 +62,7 @@ const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstant
   textTransform: "uppercase",
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.small,
-  fontWeight: 500,
+  fontWeight: theme.font.weight.medium,
   padding: `${theme.space.element / 2}px ${theme.space.element}px`,
   borderBottom: active ? `2px solid ${theme.color.white}` : `2px solid transparent`,
   ":hover": {

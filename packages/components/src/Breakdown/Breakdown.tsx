@@ -112,7 +112,7 @@ const Bar = styled("div")(
         fontSize: 12,
         position: "relative",
         top: 1,
-        fontWeight: 400,
+        fontWeight: theme.font.weight.regular,
       },
       ":before": {
         backgroundColor: setBrightness(backgroundColor, 155),
