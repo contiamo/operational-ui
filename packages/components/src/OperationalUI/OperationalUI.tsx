@@ -111,6 +111,12 @@ class OperationalUI extends React.Component<Props, State> {
       const filteredMessages = prevState.messages.filter(
         ({ message, addedAt }) => message.type === "error" || now - addedAt < (this.props.hideMessageAfter || 10000),
       )
+
+      // If we're out of messages, clear the interval.
+      if (!filteredMessages.length) {
+        window.clearInterval(this.messageTimerInterval)
+        this.messageTimerInterval = null
+      }
       // Only run a setState if any message(s) were removed. Otherwise, this method returns `undefined` and the component is not updated at all.
       if (prevState.messages.length > filteredMessages.length) {
         return {
@@ -122,9 +128,6 @@ class OperationalUI extends React.Component<Props, State> {
 
   componentDidMount() {
     this.props.withBaseStyles && injectGlobal(baseStylesheet(constants))
-    this.messageTimerInterval = window.setInterval(() => {
-      this.removeOutdatedMessages()
-    }, 2000)
   }
 
   componentWillUnmount() {
@@ -143,6 +146,14 @@ class OperationalUI extends React.Component<Props, State> {
               this.setState(prevState => ({
                 messages: [{ message, addedAt: new Date().getTime() }, ...prevState.messages],
               }))
+
+              // If we don't yet have an interval, start one.
+              if (!this.messageTimerInterval) {
+                this.messageTimerInterval = window.setInterval(() => {
+                  console.log("tick")
+                  this.removeOutdatedMessages()
+                }, 2000)
+              }
             },
           }}
         >
