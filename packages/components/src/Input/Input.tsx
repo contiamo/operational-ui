@@ -33,6 +33,8 @@ export interface Props {
   hint?: string
   /** Disabled input */
   disabled?: boolean
+  /** Should the input fill its container? */
+  fullWidth?: boolean
   onToggle?: () => void
 }
 
@@ -55,12 +57,20 @@ const inputHeight = 36
 
 const InputFieldContainer = styled("div")`
   position: relative;
-  min-width: 360px;
   align-items: center;
   justify-content: center;
-  ${({ withLabel, theme }: { withLabel?: boolean; theme?: OperationalStyleConstants }) => `
+  ${({
+    fullWidth,
+    withLabel,
+    theme,
+  }: {
+    fullWidth: Props["fullWidth"]
+    withLabel?: boolean
+    theme?: OperationalStyleConstants
+  }) => `
     margin-right: ${withLabel ? 0 : theme.space.small}px;
     display: ${withLabel ? "flex" : "inline-flex"};
+    min-width: ${fullWidth ? "100%" : 360};
   `};
 `
 
@@ -180,7 +190,7 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
 
     if (props.label) {
       return (
-        <Label id={props.id} htmlFor={forAttributeId} className={props.className} left>
+        <Label fullWidth={props.fullWidth} id={props.id} htmlFor={forAttributeId} className={props.className} left>
           <LabelText>{props.label}</LabelText>
           <FormFieldControls>
             {props.hint ? (
@@ -199,7 +209,7 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
               </FormFieldControl>
             ) : null}
           </FormFieldControls>
-          <InputFieldContainer withLabel>
+          <InputFieldContainer fullWidth={props.fullWidth} withLabel>
             {inputButtonElement}
             <InputField
               {...commonInputProps}
@@ -214,7 +224,7 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
     }
 
     return (
-      <InputFieldContainer>
+      <InputFieldContainer fullWidth={props.fullWidth}>
         {inputButtonElement}
         <InputField
           {...commonInputProps}

@@ -11,12 +11,14 @@ export const inputFocus = ({ theme, isError }: { theme?: OperationalStyleConstan
   boxShadow: `0 0 0 3px ${isError ? lighten(theme.color.error, 60) : lighten(theme.color.primary, 40)}`,
 })
 
-export const Label = styled("label")(({ theme, left }: { theme?: OperationalStyleConstants; left?: boolean }) => ({
-  display: "inline-block",
-  position: "relative",
-  minWidth: 360,
-  marginRight: left ? theme.space.small : 0,
-}))
+export const Label = styled("label")(
+  ({ fullWidth, theme, left }: { fullWidth?: boolean; theme?: OperationalStyleConstants; left?: boolean }) => ({
+    display: "inline-block",
+    position: "relative",
+    minWidth: fullWidth ? "100%" : 360,
+    marginRight: left ? theme.space.small : 0,
+  }),
+)
 
 export const LabelText = styled("span")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   fontSize: theme.font.size.fineprint,
