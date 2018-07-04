@@ -3,7 +3,7 @@ import styled, { Interpolation } from "react-emotion"
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { fadeIn } from "@operational/utils"
 import { isModifiedEvent } from "../utils"
-import { Icon, IconName, ContextConsumer, Context } from "../"
+import { Icon, IconName, OperationalContext, Context } from "../"
 import { Props as SidenavItemProps } from "../SidenavItem/SidenavItem"
 
 export interface Props {
@@ -155,8 +155,8 @@ const SidenavHeader = (props: Props) => {
   const ContainerComponent = to ? ContainerLink : Container
 
   return (
-    <ContextConsumer>
-      {(ctx: Context) => {
+    <OperationalContext>
+      {ctx => {
         return (
           <ContainerComponent
             id={props.id}
@@ -202,7 +202,7 @@ const SidenavHeader = (props: Props) => {
           </ContainerComponent>
         )
       }}
-    </ContextConsumer>
+    </OperationalContext>
   )
 }
 

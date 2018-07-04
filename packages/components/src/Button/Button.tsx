@@ -4,7 +4,7 @@ import { readableTextColor, darken } from "@operational/utils"
 
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { isWhite, isModifiedEvent } from "../utils"
-import { ContextConsumer, Context, Icon, IconName } from "../"
+import { OperationalContext, Context, Icon, IconName } from "../"
 import Spinner from "../Spinner/Spinner"
 
 export interface Props {
@@ -110,8 +110,8 @@ const ButtonSpinner = styled(Spinner)(
 const Button = (props: Props) => {
   const ContainerComponent = props.to ? ContainerLink : Container
   return (
-    <ContextConsumer>
-      {(ctx: Context) => (
+    <OperationalContext>
+      {ctx => (
         <ContainerComponent
           {...props}
           onClick={(ev: React.SyntheticEvent<Node>) => {
@@ -134,7 +134,7 @@ const Button = (props: Props) => {
           {props.loading && <ButtonSpinner containerColor={props.color} />}
         </ContainerComponent>
       )}
-    </ContextConsumer>
+    </OperationalContext>
   )
 }
 
