@@ -116,11 +116,6 @@ const InputField = styled("input")(
   }),
 )
 
-const HelpTooltip = styled(Tooltip)({
-  minWidth: 100,
-  width: "fit-content",
-})
-
 export const initialState = {
   showTooltip: false,
 }
@@ -191,7 +186,7 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
             {props.hint ? (
               <FormFieldControl>
                 <Icon name="Question" size={14} />
-                <HelpTooltip right>{props.hint}</HelpTooltip>
+                <Tooltip right>{props.hint}</Tooltip>
               </FormFieldControl>
             ) : null}
             {props.onToggle ? (

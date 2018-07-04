@@ -1,158 +1,42 @@
 import * as React from "react"
 import styled from "react-emotion"
+
 import { OperationalStyleConstants } from "../utils/constants"
-import { readableTextColor } from "@operational/utils"
+import colorCalculator from "tinycolor2"
 import { Css } from "../types"
+import Container, { Position } from "./Tooltip.Container"
 
 /**
- * Accepting top/left/right/bottom props is a bit redundant, but it makes for a nice casual API:
- * <Tooltip top/>, as opposed to <Tooltip position="top"/>
- * It gets translated into the Position type inside the component, so it allows for a more
- * straightforward implementation.
+ * In order to allow for tooltips that have a sensible max-width that adjusts its width for shorter text,
+ * and in order to have that working reliably across browsers, this implementation renders the tooltip offscreen
+ * in order to determine how wide it would be were it to not do line breaks at any width.
+ * The actual tooltip is rendered with this information extracted from the DOM node.
  */
+
+/** @todo Type this more strongly with discriminated unions to prevent unexpected behavior for impossible prop combinations such as `<Tooltip right bottom />`. */
 export interface Props {
   className?: string
   children?: React.ReactNode
   /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
-
   smart?: boolean
   /** Top-positioned tooltip */
-
   top?: boolean
   /** Left-positioned tooltip */
-
   left?: boolean
   /** Right-positioned tooltip */
-
   right?: boolean
   /** Bottom-positioned tooltip */
-
   bottom?: boolean
-} // bbTop is an abbreviation of boundingBoxTop
+}
 
 export interface State {
+  // bbTop is an abbreviation of boundingBoxTop
   bbTop: number
   bbBottom: number
   bbLeft: number
   bbRight: number
+  singleLineTextWidth: number
 }
-
-type Position = "top" | "left" | "right" | "bottom"
-
-const Container = styled("div")(({ position, theme }: { position: Position; theme?: OperationalStyleConstants }) => {
-  const backgroundColor = theme.deprecated.colors.black
-  return {
-    backgroundColor,
-    label: "tooltip",
-    ...theme.deprecated.typography.small,
-    lineHeight: 1.3,
-    position: "absolute",
-    zIndex: theme.deprecated.baseZIndex + 101,
-    width: "fit-content",
-    minWidth: 80,
-    maxWidth: 360,
-    whiteSpace: "nowrap",
-    padding: `${theme.deprecated.spacing / 3}px ${(theme.deprecated.spacing * 2) / 3}px`,
-    borderRadius: 2,
-    boxShadow: theme.deprecated.shadows.popup,
-    ...(() => {
-      if (position === "top") {
-        return {
-          left: "50%",
-          transform: "translate3d(-50%, calc(-100% - 6px), 0)",
-        }
-      }
-
-      if (position === "bottom") {
-        return {
-          left: "50%",
-          top: "100%",
-          transform: "translate3d(-50%, 6px, 0)",
-        }
-      }
-
-      if (position === "left") {
-        return {
-          top: "50%",
-          left: -6,
-          transform: "translate3d(-100%, -50%, 0)",
-        }
-      }
-
-      if (position === "right") {
-        return {
-          top: "50%",
-          right: -6,
-          transform: "translate3d(100%, -50%, 0)",
-        }
-      }
-
-      return {}
-    })(),
-    color: readableTextColor(backgroundColor, ["black", "white"]),
-    // This pseudo-element extends the clickable area of the far-away tooltip.
-    "&::after": {
-      content: "''",
-      position: "absolute",
-      top: 0,
-      left: theme.deprecated.spacing * -2,
-      display: "block",
-      width: theme.deprecated.spacing * 2,
-      height: "100%",
-    },
-    // They say behind every great tooltip is a great caret.
-    "&::before": {
-      content: "''",
-      position: "absolute",
-      zIndex: theme.deprecated.baseZIndex - 1,
-      width: 0,
-      height: 0,
-      ...(() => {
-        if (position === "top") {
-          return {
-            bottom: -4,
-            left: `calc(50% - 6px)`,
-            borderLeft: "6px solid transparent",
-            borderRight: "6px solid transparent",
-            borderTop: `6px solid ${backgroundColor}`,
-          }
-        }
-
-        if (position === "bottom") {
-          return {
-            top: -4,
-            left: `calc(50% - 6px)`,
-            borderLeft: "6px solid transparent",
-            borderRight: "6px solid transparent",
-            borderBottom: `6px solid ${backgroundColor}`,
-          }
-        }
-
-        if (position === "left") {
-          return {
-            right: -4,
-            top: `calc(50% - 6px)`,
-            borderTop: "6px solid transparent",
-            borderBottom: "6px solid transparent",
-            borderLeft: `6px solid ${backgroundColor}`,
-          }
-        }
-
-        if (position === "right") {
-          return {
-            left: -4,
-            top: `calc(50% - 6px)`,
-            borderTop: "6px solid transparent",
-            borderBottom: "6px solid transparent",
-            borderRight: `6px solid ${backgroundColor}`,
-          }
-        }
-
-        return {}
-      })(),
-    },
-  }
-})
 
 class Tooltip extends React.Component<Props, State> {
   state = {
@@ -160,22 +44,33 @@ class Tooltip extends React.Component<Props, State> {
     bbLeft: 0,
     bbRight: 0,
     bbBottom: 0,
+    singleLineTextWidth: 0,
   }
 
   containerNode: HTMLElement
+  offScreenWidthTestNode: HTMLElement
 
-  componentDidMount() {
+  setDomProperties() {
+    if (!this.offScreenWidthTestNode || !this.containerNode) {
+      return
+    }
+    const bbOffScreen = this.offScreenWidthTestNode.getBoundingClientRect()
     const bbRect = this.containerNode.getBoundingClientRect()
     this.setState(prevState => ({
       bbTop: bbRect.top,
       bbBottom: bbRect.bottom,
       bbLeft: bbRect.left,
       bbRight: bbRect.right,
+      singleLineTextWidth: bbOffScreen.width,
     }))
   }
 
-  render() {
-    let position: Position = "top"
+  componentDidMount() {
+    this.setDomProperties()
+  }
+
+  getPosition() {
+    let position: Position = "right"
 
     if (this.props.left) {
       position = "left"
@@ -188,6 +83,16 @@ class Tooltip extends React.Component<Props, State> {
     if (this.props.bottom) {
       position = "bottom"
     }
+
+    if (this.props.top) {
+      position = "top"
+    }
+
+    return position
+  }
+
+  getDisplayPosition() {
+    let position: Position = this.getPosition()
 
     if (this.props.smart) {
       /** @todo implement bounding box checks for right- and bottom-placed tooltips.
@@ -202,15 +107,39 @@ class Tooltip extends React.Component<Props, State> {
       }
     }
 
+    return position
+  }
+
+  render() {
+    const displayPosition = this.getDisplayPosition()
+
     return (
-      <Container
-        position={position}
-        innerRef={node => {
-          this.containerNode = node
-        }}
-      >
-        {this.props.children}
-      </Container>
+      <>
+        {/* Test node rendered to determine how wide the text is if it were written in a single line.
+          * Note that the position is set arbitrarily since it does not influence text width.
+          */}
+        <Container
+          position="bottom"
+          offScreenWidthTest
+          singleLineTextWidth={this.state.singleLineTextWidth}
+          innerRef={node => {
+            this.offScreenWidthTestNode = node
+          }}
+        >
+          {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
+          <p>{this.props.children}</p>
+        </Container>
+        <Container
+          singleLineTextWidth={this.state.singleLineTextWidth}
+          position={displayPosition}
+          innerRef={node => {
+            this.containerNode = node
+          }}
+        >
+          {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
+          <p>{this.props.children}</p>
+        </Container>
+      </>
     )
   }
 }
