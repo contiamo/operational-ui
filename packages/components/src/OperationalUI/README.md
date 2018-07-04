@@ -63,13 +63,16 @@ class RoutingComponent extends React.Component {
 You can use `OperationalUI`'s internal flash message feature to automatically render and manage messages by simply using the `pushMessage` method provided in context, as shown in the code snippet below:
 
 ```jsx
-const ContextConsumer = require("../").ContextConsumer
+// This import statement is necessary because of the wiring of this demo website.
+// When using the library outside, use the following:
+// `import { OperationalUI, OperationalContext, Button } from "@operational/components"`
+const OperationalContext = require("../").OperationalContext
 
 class MessageHandler extends React.Component {
   render() {
     return (
       <OperationalUI>
-        <ContextConsumer>
+        <OperationalContext>
           {ctx => (
             <div>
               <Button
@@ -107,7 +110,7 @@ class MessageHandler extends React.Component {
               </Button>
             </div>
           )}
-        </ContextConsumer>
+        </OperationalContext>
       </OperationalUI>
     )
   }

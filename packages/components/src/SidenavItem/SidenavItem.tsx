@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled, { Interpolation } from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import { Icon, IconName, ContextConsumer, Context } from "../"
+import { Icon, IconName, OperationalContext, Context } from "../"
 import { isModifiedEvent } from "../utils"
 
 export interface Props {
@@ -66,8 +66,8 @@ const SidenavItem = (props: Props) => {
   const ContainerComponent = props.to ? ContainerLink : Container
   const isActive = !!props.active
   return (
-    <ContextConsumer>
-      {(ctx: Context) => (
+    <OperationalContext>
+      {ctx => (
         <ContainerComponent
           href={props.to}
           id={props.id}
@@ -89,7 +89,7 @@ const SidenavItem = (props: Props) => {
           <Label>{props.label}</Label>
         </ContainerComponent>
       )}
-    </ContextConsumer>
+    </OperationalContext>
   )
 }
 
