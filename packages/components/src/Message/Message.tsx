@@ -1,10 +1,10 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, expandColor } from "../utils/constants"
-import { readableTextColor, darken } from "@operational/utils"
-import { Icon } from "../"
 import colorCalculator from "tinycolor2"
-import { WithTheme, Css, CssStatic } from "../types"
+
+import { OperationalStyleConstants, expandColor } from "../utils/constants"
+import { Icon } from "../"
+import { WithTheme } from "../types"
 
 export interface Props {
   className?: string
@@ -16,46 +16,42 @@ export interface Props {
   onClose?: () => void
 }
 
-const Container = styled("div")(
-  ({ theme, color }: { theme?: OperationalStyleConstants; color?: string }): CssStatic => {
-    const backgroundColor = colorCalculator(expandColor(theme, color) || theme.color.primary)
-      .setAlpha(0.9)
-      .toString()
-    return {
-      backgroundColor,
-      color: theme.color.white,
-      overflow: "hidden",
-      boxShadow: "0 2px 6px rgba(0, 0, 0, .15)",
-      padding: "8px 52px 8px 16px",
-      borderRadius: theme.borderRadius,
-      minHeight: 36,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      position: "relative",
-      maxWidth: 400,
-    }
-  },
-)
-
-const IconContainer = styled("div")(
-  ({ theme }: WithTheme): CssStatic => ({
-    position: "absolute",
-    top: 0,
-    right: 0,
-    cursor: "pointer",
-    width: 36,
-    height: 36,
-    borderBottomLeftRadius: theme.borderRadius,
-    borderTopRightRadius: theme.borderRadius,
+const Container = styled("div")(({ theme, color }: { theme?: OperationalStyleConstants; color?: string }) => {
+  const backgroundColor = colorCalculator(expandColor(theme, color) || theme.color.primary)
+    .setAlpha(0.9)
+    .toString()
+  return {
+    backgroundColor,
+    color: theme.color.white,
+    overflow: "hidden",
+    boxShadow: "0 2px 6px rgba(0, 0, 0, .15)",
+    padding: "8px 52px 8px 16px",
+    borderRadius: theme.borderRadius,
+    minHeight: 36,
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
-    ":hover": {
-      backgroundColor: "rgba(0, 0, 0, 0.1)",
-    },
-  }),
-)
+    justifyContent: "space-between",
+    position: "relative",
+    maxWidth: 400,
+  }
+})
+
+const IconContainer = styled("div")(({ theme }: WithTheme) => ({
+  position: "absolute",
+  top: 0,
+  right: 0,
+  cursor: "pointer",
+  width: 36,
+  height: 36,
+  borderBottomLeftRadius: theme.borderRadius,
+  borderTopRightRadius: theme.borderRadius,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  ":hover": {
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+  },
+}))
 
 const Message = (props: Props) => (
   <Container className={props.className} color={props.color}>
