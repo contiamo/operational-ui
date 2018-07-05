@@ -76,9 +76,7 @@ const Picture = styled("div")(
     const defaultColor: string = theme.color.primary
     const fixedBackgroundColor: string = color ? expandColor(theme, color) || defaultColor : defaultColor
     const assignedBackgroundColor: null | string = colorAssignment
-      ? theme.deprecated.colors.visualizationPalette[
-          colorAssignment % theme.deprecated.colors.visualizationPalette.length
-        ]
+      ? theme.color.palette[colorAssignment % theme.color.palette.length]
       : null
     const backgroundColor = assignedBackgroundColor || fixedBackgroundColor
     const textColor = readableTextColor(backgroundColor, [theme.color.text.default, "white"])

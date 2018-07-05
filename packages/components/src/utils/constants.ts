@@ -84,6 +84,18 @@ const color = {
   separators: separatorColors,
   text: textColors,
   border: borderColors,
+  palette: [
+    "#1499CE",
+    "#AD329C",
+    "#ED6628",
+    "#31366B",
+    "#1D6199",
+    "#EAD63F",
+    "#D31F1F",
+    "#009691",
+    "#6B1F60",
+    "#006865",
+  ],
 }
 
 type FontWeight = 400 | 500 | 600
