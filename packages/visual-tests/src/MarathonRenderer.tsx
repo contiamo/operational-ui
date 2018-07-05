@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 
-import { Icon, OperationalStyleConstants } from "@operational/components"
+import { Icon, Spinner, OperationalStyleConstants } from "@operational/components"
 import { MarathonRenderer } from "./Marathon"
 
 const Container = styled("ul")({
@@ -32,11 +32,6 @@ const Item = styled("li")({
 const Title = styled("p")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   fontSize: theme.font.size.title,
   display: "inline-block",
-  "& :first-child": {
-    position: "relative",
-    top: -2,
-    marginRight: 6,
-  },
   "& > *": {
     display: "inline-block",
     verticalAlign: "middle",
@@ -58,12 +53,12 @@ const MarathonRendererComponent = ({ results, ref }: MarathonRenderer) => (
       {results.map((result, index) => {
         const content = result.isCompleted ? (
           result.errors.length > 0 ? (
-            <Icon name="X" size={12} color="#F00" />
+            <Icon name="No" color="#9a0000" left />
           ) : (
-            <Icon name="Check" size={12} color="#0F0" />
+            <Icon name="Yes" color="#0c991d" left />
           )
         ) : (
-          <Icon name="MoreHorizontal" size={12} />
+          <Spinner left bounce />
         )
         return (
           <Item key={index}>
