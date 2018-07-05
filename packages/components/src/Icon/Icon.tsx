@@ -13,29 +13,25 @@ export interface PropsWithoutName {
   className?: string
   /**
    * Size
+   *
    * @default 18 for regular icons, 32 for brand icons
    */
   size?: number
-
   /** Icon color, specified as a hex, or a color name (info, success, warning, error) */
   color?: string
-
   /** Use the colored version of the logo (works for `name = Pantheon` only) */
   colored?: boolean
-
   /**
    * OperationalUI needs this prop to animate the inner circle.
    * All other icons should ignore it.
    */
   rotation?: number
-
   /**
-   * Is the icon aligned to the left of something? This adds a right margin to create proper spacing between icons and content.
+   * Indicates that this component is left of other content, and adds an appropriate right margin.
    */
   left?: boolean
-
   /**
-   * Adds a left margin to create proper spacing between icons and content.
+   * Indicates that this component is right of other content, and adds an appropriate left margin.
    */
   right?: boolean
 }

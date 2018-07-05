@@ -8,11 +8,11 @@ import { CardHeader, CardItem } from "../"
 export interface Props {
   color?: string
   /**
-   * Adds a right margin to create proper spacing between this element and neighboring content.
+   * Indicates that this component is left of other content, and adds an appropriate right margin.
    */
   left?: boolean
   /**
-   * Adds a left margin to create proper spacing between this element and neighboring content.
+   * Indicates that this component is right of other content, and adds an appropriate left margin.
    */
   right?: boolean
   children?: React.ReactNode
