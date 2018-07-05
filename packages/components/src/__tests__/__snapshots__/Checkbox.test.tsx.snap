@@ -2,36 +2,6 @@
 
 exports[`Checkbox Should render 1`] = `
 <div
-  class="css-1baulvz"
->
-  <div
-    class="css-1t3b2j5-checkbox"
-  >
-    <label
-      class="css-126cxia"
-    >
-      <input
-        checked=""
-        type="checkbox"
-      />
-      <span
-        class="css-101i1vj"
-      >
-        1
-      </span>
-    </label>
-    <label
-      class="css-126cxia"
-    >
-      <input
-        type="checkbox"
-      />
-      <span
-        class="css-101i1vj"
-      >
-        2
-      </span>
-    </label>
-  </div>
-</div>
+  class="css-ar73w8-Messages"
+/>
 `;

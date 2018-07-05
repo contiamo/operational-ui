@@ -4214,7 +4214,7 @@ glamor@^2.20.24, glamor@^2.20.40:
     prop-types "^15.5.10"
     through "^2.3.8"
 
-glamorous@^4.6.0, glamorous@^4.8.0:
+glamorous@^4.8.0:
   version "4.13.1"
   resolved "https://registry.npmjs.org/glamorous/-/glamorous-4.13.1.tgz#8909afcbc7f09133c6eb26bedcc1250c1f774312"
   dependencies:

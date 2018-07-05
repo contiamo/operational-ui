@@ -2,10 +2,6 @@
 
 exports[`Tooltip Component Should intialize without problems 1`] = `
 <div
-  class="css-mt2a1r-tooltip"
->
-  <p>
-    Hello
-  </p>
-</div>
+  class="css-ar73w8-Messages"
+/>
 `;

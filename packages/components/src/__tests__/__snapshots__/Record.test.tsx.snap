@@ -2,22 +2,6 @@
 
 exports[`Record Component Should render 1`] = `
 <div
-  class="css-pp6hf6-record"
->
-  <div
-    class="css-iq9a13"
-  >
-    Title
-    <div
-      class="css-zqbql9"
-    >
-      controls
-    </div>
-  </div>
-  <div
-    class="css-3hhcrm"
-  >
-    Some content
-  </div>
-</div>
+  class="css-ar73w8-Messages"
+/>
 `;

@@ -1,22 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Code Should render 1`] = `
-<pre>
-  <code
-    class="json css-ikhqhf"
-  >
-    {
-  "properties": {
-    "startAt": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "endAt": {
-      "type": "string",
-      "format": "date-time"
-    }
-  }
-}
-  </code>
-</pre>
+<div
+  class="css-ar73w8-Messages"
+/>
 `;

@@ -1,66 +1,57 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
-import { readableTextColor, darken } from "@operational/utils"
+import colorCalculator from "tinycolor2"
+
+import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { Icon } from "../"
-import { WithTheme, Css, CssStatic } from "../types"
+import { WithTheme } from "../types"
 
 export interface Props {
   className?: string
   /** Message contents, can be any html element/React fragment. */
-
   children?: React.ReactNode
   /** Background message color */
-
   color?: string
   /** Called when close icon is clicked. Icon is not rendered at all if this prop is not specified. */
-
   onClose?: () => void
 }
 
-const Container = styled("div")(
-  ({ theme, color }: { theme?: OperationalStyleConstants; color?: string }): CssStatic => {
-    const backgroundColor = deprecatedExpandColor(theme.deprecated, color) || theme.deprecated.colors.info
-    const textColor = readableTextColor(backgroundColor, [theme.deprecated.colors.black, "white"])
-    return {
-      backgroundColor,
-      color: textColor,
-      overflow: "hidden",
-      padding: `${(theme.deprecated.spacing * 1) / 2}px ${theme.deprecated.spacing * 3.5}px ${theme.deprecated.spacing /
-        2}px ${theme.deprecated.spacing}px`,
-      paddingRight: theme.deprecated.spacing * 2.5,
-      // Icon space
-      borderRadius: 4,
-      minHeight: theme.deprecated.spacing * 2.5,
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      position: "relative",
-      maxWidth: 400,
-    }
-  },
-)
+const Container = styled("div")(({ theme, color }: { theme?: OperationalStyleConstants; color?: string }) => {
+  const backgroundColor = colorCalculator(expandColor(theme, color) || theme.color.primary)
+    .setAlpha(0.9)
+    .toString()
+  return {
+    backgroundColor,
+    color: theme.color.white,
+    overflow: "hidden",
+    boxShadow: "0 2px 6px rgba(0, 0, 0, .15)",
+    padding: "8px 52px 8px 16px",
+    borderRadius: theme.borderRadius,
+    minHeight: 36,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    position: "relative",
+    maxWidth: 400,
+  }
+})
 
-const IconContainer = styled("div")(
-  ({ theme }: WithTheme): CssStatic => ({
-    position: "absolute",
-    top: 0,
-    right: 0,
-    cursor: "pointer",
-    width: theme.deprecated.spacing * 2.5,
-    height: theme.deprecated.spacing * 2.5,
-    padding: theme.deprecated.spacing * 0.5,
-    borderBottomLeftRadius: theme.deprecated.borderRadius,
-    borderTopRightRadius: theme.deprecated.borderRadius,
-    "& svg": {
-      width: "100%",
-      height: "100%",
-    },
-    ":hover": {
-      backgroundColor: "rgba(0, 0, 0, 0.1)",
-    },
-  }),
-)
+const IconContainer = styled("div")(({ theme }: WithTheme) => ({
+  position: "absolute",
+  top: 0,
+  right: 0,
+  cursor: "pointer",
+  width: 36,
+  height: 36,
+  borderBottomLeftRadius: theme.borderRadius,
+  borderTopRightRadius: theme.borderRadius,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  ":hover": {
+    backgroundColor: "rgba(0, 0, 0, 0.1)",
+  },
+}))
 
 const Message = (props: Props) => (
   <Container className={props.className} color={props.color}>

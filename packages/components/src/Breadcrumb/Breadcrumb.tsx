@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
 import { darken } from "@operational/utils"
-import { Icon, IconName, ContextConsumer, Context } from "../"
+import { Icon, IconName, OperationalContext, Context } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
 import { isModifiedEvent } from "../utils"
 
@@ -39,8 +39,8 @@ const Breadcrumb = (props: Props) => {
   const reactFeatherIcon = props.icon === String(props.icon) ? (props.icon as IconName) : "ChevronDown"
   const ContainerComponent: any = props.to ? ContainerLink : Container
   return (
-    <ContextConsumer>
-      {(ctx: Context) => (
+    <OperationalContext>
+      {ctx => (
         <ContainerComponent
           className={props.className}
           href={props.to}
@@ -55,7 +55,7 @@ const Breadcrumb = (props: Props) => {
           {props.icon && <Icon name={props.icon} size={12} />}
         </ContainerComponent>
       )}
-    </ContextConsumer>
+    </OperationalContext>
   )
 }
 

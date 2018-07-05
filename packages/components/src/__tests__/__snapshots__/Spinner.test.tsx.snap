@@ -2,19 +2,6 @@
 
 exports[`Spinner Component Should render 1`] = `
 <div
-  class="css-i5a8z9-spinner"
->
-  <div
-    class="css-9lnn08"
-  />
-  <div
-    class="css-9lnn08"
-  />
-  <div
-    class="css-9lnn08"
-  />
-  <div
-    class="css-9lnn08"
-  />
-</div>
+  class="css-ar73w8-Messages"
+/>
 `;

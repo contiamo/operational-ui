@@ -2,31 +2,6 @@
 
 exports[`Breakdown Component Should initialize properly 1`] = `
 <div
-  class="css-p239k7-breakdown"
->
-  <div
-    class="css-12lv4jb"
-  >
-    3
-  </div>
-  <div
-    class="css-8atqhb"
-  >
-    <label
-      class="css-oebjw"
-    >
-      hi
-    </label>
-    <div
-      class="css-eqr342"
-      fill="0.5"
-    >
-      <span
-        class="css-o9u70j"
-      >
-        hello
-      </span>
-    </div>
-  </div>
-</div>
+  class="css-ar73w8-Messages"
+/>
 `;

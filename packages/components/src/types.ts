@@ -1,5 +1,4 @@
 import { OperationalStyleConstants } from "./utils/constants"
-import { CSSProperties } from "glamorous"
 
 export type WithTheme = { theme?: OperationalStyleConstants }
 
@@ -7,9 +6,6 @@ export type WithTheme = { theme?: OperationalStyleConstants }
 
 export type Css = any // TODO: make this stricter to disallow { margin: 20, fruit: "much much" }
 
-export type CssStatic = CSSProperties
+export type CssStatic = {}
 
-export interface Context {
-  pushState?: (path: string) => void
-  replaceState?: (path: string) => void
-}
+export type MessageType = "info" | "success" | "error"
