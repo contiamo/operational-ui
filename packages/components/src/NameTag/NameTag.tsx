@@ -26,9 +26,9 @@ const Container = styled("div")(
     right,
   }: {
     theme?: OperationalStyleConstants
-    color?: string
-    left?: boolean
-    right?: boolean
+    color?: Props["color"]
+    left?: Props["left"]
+    right?: Props["right"]
   }) => {
     const backgroundColor = expandColor(theme, color) || theme.color.primary
     const textColor = readableTextColor(backgroundColor, [theme.color.white, theme.color.black])
