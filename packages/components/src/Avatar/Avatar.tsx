@@ -51,7 +51,6 @@ const Title = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) =
 const Picture = styled("div")(
   {
     textTransform: "uppercase",
-
     borderRadius: "50%",
     display: "flex",
     alignItems: "center",
@@ -93,7 +92,7 @@ const Picture = styled("div")(
             height: 48,
           }
         : {
-            fontSize: 9,
+            fontSize: 11,
             width: 32,
             height: 32,
           }
