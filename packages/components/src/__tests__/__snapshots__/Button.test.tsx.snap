@@ -2,7 +2,7 @@
 
 exports[`Button Component Should initialize properly 1`] = `
 <button
-  class="css-j26hxv-button"
+  class="css-1p16o1e-button"
 >
   hi
 </button>

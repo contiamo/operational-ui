@@ -60,3 +60,17 @@ You can have a field with a "copy to clipboard" button with the `copy` prop.
 ```jsx
 <Input value="go to my clipboard!" label="Something to save" copy />
 ```
+
+### Full Width
+
+#### With Label
+
+```jsx
+<Input fullWidth value="Dave the Sheep" label="Hi, my name is" />
+```
+
+#### Without a Label
+
+```jsx
+<Input fullWidth value="I feel naked" />
+```
