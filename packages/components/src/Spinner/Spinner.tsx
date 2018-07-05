@@ -5,11 +5,19 @@ import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {
   id?: string
+  /** Color as color key or a custom CSS color string */
   color?: string
+  /**
+   * Spinner size
+   *
+   * @default 18px
+   */
   size?: number
+  /** Renders a bouncing animation as opposed to a regular spinning one. */
+  bounce?: boolean
 }
 
-const spin = keyframes({
+const spinKeyframes = keyframes({
   "0%": {
     transform: "rotate(0deg)",
   },
@@ -18,25 +26,76 @@ const spin = keyframes({
   },
 })
 
+const bounceKeyframes = keyframes({
+  "0%": {
+    transform: "translate3d(0, 0, 0)",
+  },
+  "50%": {
+    transform: "translate3d(0, -6px, 0)",
+  },
+  "100%": {
+    transform: "translate3d(0, 0, 0)",
+  },
+})
+
 const defaultSize = 18
 
 const Container = styled("div")(
-  ({ size, color, theme }: { size?: number; color?: string; theme?: OperationalStyleConstants }) => ({
+  ({
+    size,
+    color,
+    bounce,
+    theme,
+  }: {
+    size?: number
+    color?: string
+    bounce?: boolean
+    theme?: OperationalStyleConstants
+  }) => ({
     label: "spinner",
     display: "inline-block",
     width: size || defaultSize,
     height: size || defaultSize,
-    animation: `${spin} 1.5s infinite linear`,
+    ...(bounce
+      ? {
+          "& g:nth-child(1)": {
+            animation: `${bounceKeyframes} 1.5s infinite linear`,
+          },
+          "& g:nth-child(2)": {
+            animation: `${bounceKeyframes} 1.5s infinite linear`,
+          },
+          "& g:nth-child(3)": {
+            animation: `${bounceKeyframes} 1.5s infinite linear`,
+          },
+        }
+      : { animation: `${spinKeyframes} 1.5s infinite linear` }),
     fill: expandColor(theme, color) || "currentColor",
   }),
 )
 
+const RegularSpinner = () => (
+  <svg viewBox="0 0 360 360">
+    <path d="M160,0 L160,100 L200,100 L200,0Z" />
+    <path d="M321.396,67.075l-70.697,70.697l-28.284,-28.284l70.697,-70.697c9.428,9.428 18.856,18.856 28.284,28.284Z" />
+    <path d="M260,160 L360,160 L360,200 L260,200Z" />
+    <path d="M321.853,292.842l-28.285,28.284l-69.71,-69.711l28.284,-28.284c23.237,23.237 46.474,46.474 69.711,69.711Z" />
+    <path d="M160,260 L160,360 L200,360 L200,260Z" />
+    <path d="M136.142,251.415l-69.71,69.711l-28.285,-28.284l69.711,-69.711c9.428,9.428 18.856,18.856 28.284,28.284Z" />
+    <path d="M0,160 L100,160 L100,200 L0,200Z" />
+    <path d="M137.592,109.495l-28.299,28.269l-70.659,-70.734l28.3,-28.269c23.553,23.578 47.105,47.156 70.658,70.734Z" />
+  </svg>
+)
+
+const BouncingSpinner = (props: Props) => (
+  <svg viewBox="0 0 360 360">
+    <rect x="0" y="140" width="80" height="80" />
+    <rect x="140" y="140" width="80" height="80" />
+    <rect x="280" y="140" width="80" height="80" />
+  </svg>
+)
+
 const Spinner = (props: Props) => (
-  <Container {...props}>
-    <svg viewBox="0 0 100 100">
-      <path d="M50,5L50,5c2.2,0,3.9,2.5,3.9,5.6v11.2c0,3.1-1.8,5.6-3.9,5.6l0,0c-2.2,0-3.9-2.5-3.9-5.6V10.6  C46.1,7.5,47.8,5,50,5z M81.8,18.2L81.8,18.2c1.5,1.5,1,4.6-1.2,6.8l-8,8c-2.2,2.2-5.2,2.7-6.8,1.2l0,0c-1.5-1.5-1-4.6,1.2-6.8l8-8  C77.3,17.2,80.3,16.6,81.8,18.2z M95,50L95,50c0,2.2-2.5,3.9-5.6,3.9H78.1c-3.1,0-5.6-1.8-5.6-3.9l0,0c0-2.2,2.5-3.9,5.6-3.9h11.2  C92.5,46.1,95,47.8,95,50z M81.8,81.8L81.8,81.8c-1.5,1.5-4.6,1-6.8-1.2l-8-8c-2.2-2.2-2.7-5.2-1.2-6.8l0,0c1.5-1.5,4.6-1,6.8,1.2  l8,8C82.8,77.3,83.4,80.3,81.8,81.8z M50,95L50,95c-2.2,0-3.9-2.5-3.9-5.6V78.1c0-3.1,1.8-5.6,3.9-5.6l0,0c2.2,0,3.9,2.5,3.9,5.6  v11.2C53.9,92.5,52.2,95,50,95z M18.2,81.8L18.2,81.8c-1.5-1.5-1-4.6,1.2-6.8l8-8c2.2-2.2,5.2-2.7,6.8-1.2l0,0  c1.5,1.5,1,4.6-1.2,6.8l-8,8C22.7,82.8,19.7,83.4,18.2,81.8z M5,50L5,50c0-2.2,2.5-3.9,5.6-3.9h11.2c3.1,0,5.6,1.8,5.6,3.9l0,0  c0,2.2-2.5,3.9-5.6,3.9H10.6C7.5,53.9,5,52.2,5,50z M18.2,18.2L18.2,18.2c1.5-1.5,4.6-1,6.8,1.2l8,8c2.2,2.2,2.7,5.2,1.2,6.8l0,0  c-1.5,1.5-4.6,1-6.8-1.2l-8-8C17.2,22.7,16.6,19.7,18.2,18.2z" />
-    </svg>
-  </Container>
+  <Container {...props}>{props.bounce ? <BouncingSpinner /> : <RegularSpinner />}</Container>
 )
 
 export default Spinner
