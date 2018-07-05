@@ -30,8 +30,11 @@ const bounceKeyframes = keyframes({
   "0%": {
     transform: "translate3d(0, 0, 0)",
   },
-  "50%": {
-    transform: "translate3d(0, -6px, 0)",
+  "30%": {
+    transform: "translate3d(0, -4px, 0)",
+  },
+  "60%": {
+    transform: "translate3d(0, 0, 0)",
   },
   "100%": {
     transform: "translate3d(0, 0, 0)",
@@ -56,20 +59,11 @@ const Container = styled("div")(
     display: "inline-block",
     width: size || defaultSize,
     height: size || defaultSize,
-    ...(bounce
-      ? {
-          "& g:nth-child(1)": {
-            animation: `${bounceKeyframes} 1.5s infinite linear`,
-          },
-          "& g:nth-child(2)": {
-            animation: `${bounceKeyframes} 1.5s infinite linear`,
-          },
-          "& g:nth-child(3)": {
-            animation: `${bounceKeyframes} 1.5s infinite linear`,
-          },
-        }
-      : { animation: `${spinKeyframes} 1.5s infinite linear` }),
-    fill: expandColor(theme, color) || "currentColor",
+    ...(bounce ? {} : { animation: `${spinKeyframes} 1.5s infinite linear` }),
+    color: expandColor(theme, color) || "currentColor",
+    "& svg": {
+      fill: "currentColor",
+    },
   }),
 )
 
@@ -86,12 +80,36 @@ const RegularSpinner = () => (
   </svg>
 )
 
-const BouncingSpinner = (props: Props) => (
-  <svg viewBox="0 0 360 360">
-    <rect x="0" y="140" width="80" height="80" />
-    <rect x="140" y="140" width="80" height="80" />
-    <rect x="280" y="140" width="80" height="80" />
-  </svg>
+const BouncingSpinnerContainer = styled("div")({
+  width: "100%",
+  height: "100%",
+  position: "relative",
+})
+
+/**
+ * The bouncing spinner is constructed out of 3 80x80 boxes spaced out horizontally on a 360x360 grid (these units don't refer to pixels, they simply mimic the grid of the icons.
+ * The math used in here lays these boxes out so they're vertically centered and spaced equally on the horizontal axis without any gutter.
+ */
+const BouncingSpinnerBox = styled("div")(({ no }: { no: number }) => ({
+  width: `${(80 / 360) * 100}%`,
+  height: `${(80 / 360) * 100}%`,
+  position: "absolute",
+  top: `${(140 / 360) * 100}%`,
+  left: `${((no * 140) / 360) * 100}%`,
+  backgroundColor: "currentColor",
+  animation: `${bounceKeyframes} 1s infinite ease-in-out`,
+  /*
+   * Achieve the wave effect through incremental animation delays on the individual elements.
+   */
+  animationDelay: `${no * 0.16}s`,
+}))
+
+const BouncingSpinner = () => (
+  <BouncingSpinnerContainer>
+    <BouncingSpinnerBox no={0} />
+    <BouncingSpinnerBox no={1} />
+    <BouncingSpinnerBox no={2} />
+  </BouncingSpinnerContainer>
 )
 
 const Spinner = (props: Props) => (

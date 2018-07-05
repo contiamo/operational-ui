@@ -14,7 +14,7 @@ Spinners render in custom sizes and colors.
 
 ### Bouncing mode
 
-In addition to the regular spinning animation, there is a bouncing one that is designed to indicate that data already displayed on the page is being synced.
+In addition to the regular spinning animation, there is a bouncing one that is designed to indicate that data already displayed on the page is being updated.
 
 ```js
 <>
