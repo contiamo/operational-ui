@@ -35,6 +35,19 @@ export const FormFieldControls = styled("div")({
   right: 0,
 })
 
+export const hoverTooltip: {} = {
+  [TooltipContainer as any]: {
+    opacity: 0.01,
+    pointerEvents: "none",
+  },
+  ":hover": {
+    [TooltipContainer as any]: {
+      opacity: 1,
+      pointerEvents: "all",
+    },
+  },
+}
+
 export const FormFieldControl = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   position: "relative",
   verticalAlign: "middle",
@@ -45,14 +58,9 @@ export const FormFieldControl = styled("div")(({ theme }: { theme?: OperationalS
     opacity: 0.4,
     position: "relative",
   },
-  [TooltipContainer as any]: {
-    opacity: 0.01,
-  },
+  ...hoverTooltip,
   ":hover": {
     "& svg": {
-      opacity: 1,
-    },
-    [TooltipContainer as any]: {
       opacity: 1,
     },
   },
