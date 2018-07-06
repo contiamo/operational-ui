@@ -20,7 +20,6 @@ const LogoContainer = styled("div")(
   {
     display: "inline-flex",
     alignItems: "center",
-    height: "100%",
   },
   ({ size, stack }: LogoProps & WithTheme) => ({
     width: size,
