@@ -25,6 +25,7 @@ module.exports = env => ({
           {
             loader: "ts-loader",
             options: {
+              allowTsInNodeModules: true,
               configFile: path.resolve(__dirname, env === "package" ? "tsconfig.json" : "tsconfig.styleguide.json"),
             },
           },
