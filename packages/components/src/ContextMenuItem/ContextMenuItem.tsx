@@ -8,24 +8,34 @@ export interface Props {
   id?: string
   className?: string
   children?: any
+  condensed?: boolean
   onClick?: () => void
   __isContextMenuItem?: boolean
 }
 
 const Container = styled("div")(
-  ({ theme, clickable }: { theme?: OperationalStyleConstants; clickable: boolean }): any => ({
+  ({
+    theme,
+    clickable,
+    condensed,
+  }: {
+    theme?: OperationalStyleConstants
+    clickable: boolean
+    condensed: boolean
+  }): any => ({
     label: "contextmenuitem",
-    backgroundColor: theme.deprecated.colors.white,
-    minWidth: 160,
+    backgroundColor: theme.color.white,
+    minWidth: condensed ? 160 : 250,
+    lineHeight: `${condensed ? 33 : 44}px`,
     width: "fit-content",
-    padding: `${theme.deprecated.spacing / 2}px ${theme.deprecated.spacing}px`,
+    padding: `0 ${theme.space.content}px`,
     border: "1px solid",
-    borderColor: theme.deprecated.colors.separator,
+    borderColor: theme.color.separators.default,
     ...(clickable
       ? {
           cursor: "pointer",
           "&:hover": {
-            backgroundColor: darken(theme.deprecated.colors.white, 2),
+            backgroundColor: darken(theme.color.white, 2),
           },
         }
       : {}),
@@ -36,7 +46,13 @@ const Container = styled("div")(
 )
 
 const ContextMenuItem: React.SFC<Props> = (props: Props) => (
-  <Container id={props.id} className={props.className} clickable={!!props.onClick} onClick={props.onClick}>
+  <Container
+    id={props.id}
+    className={props.className}
+    clickable={!!props.onClick}
+    onClick={props.onClick}
+    condensed={props.condensed}
+  >
     {props.children}
   </Container>
 )

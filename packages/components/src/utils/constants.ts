@@ -166,11 +166,22 @@ const zIndex = {
   confirm: 500,
 }
 
+/**
+ * Shadows to apply to elements
+ */
+const shadows = {
+  pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
+  card: "0px 1px 5px #d3d1d1",
+  focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
+  popup: "0 3px 12px rgba(0, 0, 0, .15)",
+}
+
 const constants = {
   font,
   space,
   zIndex,
   color,
+  shadows,
   borderRadius: 2,
   sidebarWidth: 256,
   titleHeight: 50,

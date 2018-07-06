@@ -11,17 +11,24 @@ export interface Props {
 
   /** Class name */
   className?: string
+
   children: React.ReactNode
+
   /** Specify whether the menu items are visible. Overrides internal open state that triggers on click. */
-
   open?: boolean
+
+  /** Condensed mode */
+  condensed?: boolean
+
   onClick?: () => void
+
   /** Handles click events anywhere outside the context menu container, including menu items. */
-
   onOutsideClick?: () => void
-  /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
 
+  /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
   keepOpenOnItemClick?: boolean
+
+  noOffset?: boolean
 }
 
 export interface State {
@@ -36,13 +43,13 @@ const Container = styled("div")(({ theme }: WithTheme) => ({
 }))
 
 const MenuContainer = styled("div")(
-  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }) => ({
+  ({ theme, isExpanded, noOffset }: { theme?: OperationalStyleConstants; isExpanded: boolean; noOffset: boolean }) => ({
     position: "absolute",
-    top: `calc(100% + ${theme.deprecated.spacing / 2}px)`,
-    left: -theme.deprecated.spacing,
-    boxShadow: theme.deprecated.shadows.popup,
+    top: noOffset ? "100%" : `calc(100% + ${theme.space.small}px)`,
+    left: noOffset ? 0 : -theme.space.content,
+    boxShadow: theme.shadows.popup,
     width: "fit-content",
-    zIndex: theme.deprecated.baseZIndex + 300,
+    zIndex: theme.zIndex.selectOptions,
     ...(isExpanded
       ? {
           display: "block",
@@ -100,6 +107,7 @@ class ContextMenu extends React.Component<Props, State> {
           menuItems.push(
             React.cloneElement(child, {
               key: "contextmenu-" + index,
+              condensed: this.props.condensed,
               onClick:
                 onClick &&
                 (() => {
@@ -132,6 +140,7 @@ class ContextMenu extends React.Component<Props, State> {
             this.menuContainerNode = node
           }}
           isExpanded={this.props.open || this.state.isOpen}
+          noOffset={this.props.noOffset}
         >
           {menuItems}
         </MenuContainer>
