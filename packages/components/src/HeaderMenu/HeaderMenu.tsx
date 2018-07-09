@@ -13,7 +13,7 @@ export interface Props {
   /** Items to display in dropdown */
   items?: any
 
-  /** Carat */
+  /** Display carat on right */
   carat?: boolean
 }
 
@@ -22,8 +22,10 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
   lineHeight: "50px",
   padding: `0 ${theme.space.content}px`,
   color: "#ffffffcc",
+  backgroundColor: "transparent",
+  boxShadow: "none",
   fontWeight: theme.font.weight.medium,
-  "&:hover": {
+  "&:hover, &.open": {
     color: theme.color.white,
     backgroundColor: "hsla(0, 0%, 100%, 0.1)",
     boxShadow: "0 3px 6px rgba(0, 0%, 0%, 0.3)",
@@ -43,7 +45,7 @@ const ContainerWithCarat = styled(Container)(({ theme }: { theme?: OperationalSt
     borderTopColor: "#ffffff80",
     transform: "translateY(calc(-50% + 2px))",
   },
-  "&:hover": {
+  "&:hover, &.open": {
     "&::after": {
       borderTopColor: theme.color.white,
     },
@@ -54,7 +56,7 @@ const StyledContextMenuItem = styled(ContextMenuItem)(({ theme }: { theme?: Oper
   color: theme.color.text.default,
 }))
 
-const HeaderMenu = (props: Props) => {
+const HeaderMenu: React.SFC<Props> = props => {
   const ContainerComponent: any = props.carat ? ContainerWithCarat : Container
   return (
     <ContextMenu noOffset>
@@ -63,12 +65,18 @@ const HeaderMenu = (props: Props) => {
         const onClick = option.onClick || (props.onClick && (() => props.onClick(option)))
         return (
           (option.label || option.value) && (
-            <StyledContextMenuItem onClick={onClick}>{option.label || option.value}</StyledContextMenuItem>
+            <StyledContextMenuItem onClick={onClick} key={""}>
+              {option.label || option.value}
+            </StyledContextMenuItem>
           )
         )
       })}
     </ContextMenu>
   )
+}
+
+HeaderMenu.defaultProps = {
+  carat: false,
 }
 
 export default HeaderMenu
