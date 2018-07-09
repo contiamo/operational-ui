@@ -37,7 +37,7 @@ class ComponentWithHeader extends React.Component {
         }
         end={
           <HeaderMenu items={userOptions} align="right">
-            ImogenMason <Avatar name="Imogen Mason" />
+            Imogen Mason <Avatar name="Imogen Mason" />
           </HeaderMenu>
         }
       />
