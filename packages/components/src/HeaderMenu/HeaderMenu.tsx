@@ -13,7 +13,7 @@ export interface Props {
   /** Items to display in dropdown */
   items?: any
 
-  /** Display carat on right */
+  /** Display carat on opposite side to align prop */
   carat?: boolean
 
   /** Alignment */
@@ -41,25 +41,27 @@ const Container = styled("div")(({ theme, align }: { theme?: OperationalStyleCon
   },
 }))
 
-const ContainerWithCarat = styled(Container)(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  // downward caret.
-  "&::after": {
-    content: "''",
-    position: "absolute",
-    top: "50%",
-    right: theme.space.content + theme.space.small,
-    width: 0,
-    height: 0,
-    border: "4px solid transparent",
-    borderTopColor: "#ffffff80",
-    transform: "translateY(calc(-50% + 2px))",
-  },
-  "&:hover, &.open": {
+const ContainerWithCarat = styled(Container)(
+  ({ theme, align }: { theme?: OperationalStyleConstants; align: "left" | "right" }) => ({
+    // downward caret.
     "&::after": {
-      borderTopColor: theme.color.white,
+      content: "''",
+      position: "absolute",
+      top: "50%",
+      [align === "left" ? "right" : "left"]: theme.space.content + theme.space.small,
+      width: 0,
+      height: 0,
+      border: "4px solid transparent",
+      borderTopColor: "#ffffff80",
+      transform: "translateY(calc(-50% + 2px))",
     },
-  },
-}))
+    "&:hover, &.open": {
+      "&::after": {
+        borderTopColor: theme.color.white,
+      },
+    },
+  }),
+)
 
 const StyledContextMenuItem = styled(ContextMenuItem)(
   ({ theme, align }: { theme?: OperationalStyleConstants; align: "left" | "right" }) => ({
