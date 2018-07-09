@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import { ContextMenu, ContextMenuItem } from "../"
+import { ContextMenu } from "../"
 
 export interface Props {
   /** Options to display in dropdown */
@@ -21,7 +21,17 @@ export interface Props {
 }
 
 const Container = styled("div")(
-  ({ theme, align, carat }: { theme?: OperationalStyleConstants; align: "left" | "right"; carat: boolean }) => ({
+  ({
+    theme,
+    align,
+    isOpen,
+    withCarat,
+  }: {
+    theme?: OperationalStyleConstants
+    align: "left" | "right"
+    isOpen: boolean
+    withCarat: boolean
+  }) => ({
     width: 250,
     lineHeight: "50px",
     padding: `0 ${theme.space.content}px`,
@@ -32,38 +42,55 @@ const Container = styled("div")(
     display: "flex",
     alignItems: "center",
     justifyContent: align === "left" ? "flex-start" : "flex-end",
-    "&>div": {
+    "& > div": {
       marginLeft: theme.space.small,
     },
+    ...(isOpen
+      ? {
+          color: theme.color.white,
+          backgroundColor: "hsla(0, 0%, 100%, 0.1)",
+          boxShadow: "0 3px 6px rgba(0, 0%, 0%, 0.3)",
+        }
+      : {}),
     "&:hover, &.open": {
       color: theme.color.white,
       backgroundColor: "hsla(0, 0%, 100%, 0.1)",
       boxShadow: "0 3px 6px rgba(0, 0%, 0%, 0.3)",
-      "&::after": {
-        borderTopColor: theme.color.white,
-      },
     },
-    // downward caret.
-    "&::after": {
-      content: carat ? "''" : null,
-      position: "absolute",
-      top: "50%",
-      [align === "left" ? "right" : "left"]: theme.space.content + theme.space.small,
-      width: 0,
-      height: 0,
-      border: "4px solid transparent",
-      borderTopColor: "#ffffff80",
-      transform: "translateY(calc(-50% + 2px))",
-    },
+    ...(withCarat
+      ? {
+          "&::after": {
+            content: "''",
+            position: "absolute",
+            top: "50%",
+            [align === "left" ? "right" : "left"]: theme.space.content + theme.space.small,
+            width: 0,
+            height: 0,
+            border: "4px solid transparent",
+            borderTopColor: "#ffffff80",
+            transform: "translateY(calc(-50% + 2px))",
+          },
+          "&:hover, &.open": {
+            color: theme.color.white,
+            backgroundColor: "hsla(0, 0%, 100%, 0.1)",
+            boxShadow: "0 3px 6px rgba(0, 0%, 0%, 0.3)",
+            "&::after": {
+              borderTopColor: theme.color.white,
+            },
+          },
+        }
+      : {}),
   }),
 )
 
 const HeaderMenu: React.SFC<Props> = (props: Props) => {
   return (
     <ContextMenu {...props}>
-      <Container align={props.align} carat={props.carat}>
-        {props.children}
-      </Container>
+      {isOpen => (
+        <Container isOpen={isOpen} align={props.align} withCarat={Boolean(props.carat)}>
+          {props.children}
+        </Container>
+      )}
     </ContextMenu>
   )
 }
