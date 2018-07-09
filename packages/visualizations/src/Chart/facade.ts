@@ -54,9 +54,8 @@ const defaultColorAssigner = (palette: string[]): ((key: string) => string) => {
   return colorAssigner(palette)
 }
 
-const initialColorAssigner: (key: string) => string = defaultColorAssigner(defaultConfig().palette)
-
 const defaultAccessors = () => {
+  const initialColorAssigner = defaultColorAssigner(defaultConfig().palette)
   return {
     data: {
       series: (d: Data): SeriesData => d.series,
