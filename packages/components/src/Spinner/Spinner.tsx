@@ -67,7 +67,6 @@ const Container = styled("div")(
     left?: boolean
     right?: boolean
   }) => ({
-    label: "spinner",
     display: "inline-block",
     width: size || defaultSize,
     height: size || defaultSize,
