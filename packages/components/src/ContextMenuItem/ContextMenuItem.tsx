@@ -10,7 +10,6 @@ export interface Props {
   children?: any
   condensed?: boolean
   onClick?: () => void
-  __isContextMenuItem?: boolean
 }
 
 const Container = styled("div")(
@@ -24,13 +23,13 @@ const Container = styled("div")(
     condensed: boolean
   }): any => ({
     label: "contextmenuitem",
-    backgroundColor: theme.color.white,
-    minWidth: condensed ? 160 : 250,
+    width: (condensed ? 160 : 250) - theme.space.small * 2,
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    color: theme.color.text.default,
     lineHeight: `${condensed ? 33 : 44}px`,
-    width: "fit-content",
-    padding: `0 ${theme.space.content}px`,
-    border: "1px solid",
-    borderColor: theme.color.separators.default,
+    padding: `0 ${theme.space.small}px`,
     ...(clickable
       ? {
           cursor: "pointer",
@@ -40,7 +39,8 @@ const Container = styled("div")(
         }
       : {}),
     "&:not(:first-child)": {
-      borderTop: 0,
+      borderTop: "1px solid",
+      borderColor: theme.color.separators.default,
     },
   }),
 )
@@ -56,9 +56,5 @@ const ContextMenuItem: React.SFC<Props> = (props: Props) => (
     {props.children}
   </Container>
 )
-
-ContextMenuItem.defaultProps = {
-  __isContextMenuItem: true,
-}
 
 export default ContextMenuItem

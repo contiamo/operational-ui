@@ -23,16 +23,13 @@ Using a `to` prop navigates automatically, and render proper anchor tags with hr
 ```
 
 ### Usage with context menu
-```jsx
-const Breadcrumb = require("../Breadcrumb/Breadcrumb").default;
-const ContextMenuItem =  require("../ContextMenuItem/ContextMenuItem").default;
 
-<Breadcrumbs>
-  <ContextMenu css={{ display: "inline-block", margin: 0 }}>
+```jsx
+const Breadcrumb = require("../Breadcrumb/Breadcrumb").default
+const items = ["Item 1", "Item 2", "Item 3"]
+;<Breadcrumbs>
+  <ContextMenu css={{ display: "inline-block", margin: 0 }} items={items} condensed>
     <Breadcrumb icon="ChevronDown">Hello</Breadcrumb>
-    <ContextMenuItem>Item 1</ContextMenuItem>
-    <ContextMenuItem>Item 2</ContextMenuItem>
-    <ContextMenuItem>Item 3</ContextMenuItem>
   </ContextMenu>
   <Breadcrumb>Good Bye</Breadcrumb>
 </Breadcrumbs>

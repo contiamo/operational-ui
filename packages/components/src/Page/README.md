@@ -136,12 +136,12 @@ const Tab = n => () => (
 
 ```jsx
 const options = [
-  { value: "Payroll", onClick: () => {} },
-  { value: "All Databases", onClick: () => {} },
-  { value: "Sales - Germany only", onClick: () => {} },
-  { value: "Sales - global", onClick: () => {} },
-  { value: "Reporting", onClick: () => {} },
-  { value: "Logistics", onClick: () => {} },
+  { label: "Payroll", onClick: () => {} },
+  { label: "All Databases", onClick: () => {} },
+  { label: "Sales - Germany only", onClick: () => {} },
+  { label: "Sales - global", onClick: () => {} },
+  { label: "Reporting", onClick: () => {} },
+  { label: "Logistics", onClick: () => {} },
 ]
 
 const actions = (
