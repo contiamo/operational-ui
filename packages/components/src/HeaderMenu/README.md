@@ -1,25 +1,25 @@
 Menus that drop down from the header bar, i.e. project selectors, and user menus.
 
-## Usage
+### Usage
 
 ```jsx
 const { ContextMenuItem } = require("../")
 
 const projectOptions = [
-  { key: "project1", value: "Project 1" },
-  { key: "project2", value: "Project 2" },
-  { key: "project3", value: "Project 3" },
+  { key: "project1", label: "Project 1" },
+  { key: "project2", label: "Project 2" },
+  { key: "project3", label: "Project 3" },
 ]
 
 const userOptions = [
-  { value: "My account", onClick: () => alert("Navigate to account") },
-  { value: "Logout", onClick: () => alert("Logout") },
+  { label: "My account", onClick: () => alert("Navigate to account") },
+  { label: "Logout", onClick: () => alert("Logout") },
 ]
 
 class ComponentWithHeader extends React.Component {
   constructor(props) {
     super(props)
-    this.state = { project: { key: "project1", value: "Project 1" } }
+    this.state = { project: { key: "project1", label: "Project 1" } }
   }
 
   onClick(project) {
@@ -32,7 +32,7 @@ class ComponentWithHeader extends React.Component {
         logo={<ContiamoLogo />}
         main={
           <HeaderMenu items={projectOptions} onClick={this.onClick.bind(this)} carat>
-            {this.state.project.value}
+            {this.state.project.label}
           </HeaderMenu>
         }
         end={

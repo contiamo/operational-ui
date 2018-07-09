@@ -3,6 +3,7 @@ import styled from "react-emotion"
 import { fadeIn } from "@operational/utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
+import { ContextMenuItem } from "../"
 
 export interface Props {
   /** Id */
@@ -13,13 +14,15 @@ export interface Props {
 
   children: React.ReactNode
 
+  css?: any
   /** Specify whether the menu items are visible. Overrides internal open state that triggers on click. */
   open?: boolean
 
   /** Condensed mode */
   condensed?: boolean
 
-  onClick?: () => void
+  /** onClick method for all menu items */
+  onClick?: (item?: any) => void
 
   /** Handles click events anywhere outside the context menu container, including menu items. */
   onOutsideClick?: () => void
@@ -27,7 +30,8 @@ export interface Props {
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
   keepOpenOnItemClick?: boolean
 
-  noOffset?: boolean
+  /** Menu items */
+  items?: any[]
 }
 
 export interface State {
@@ -42,13 +46,23 @@ const Container = styled("div")(({ theme }: WithTheme) => ({
 }))
 
 const MenuContainer = styled("div")(
-  ({ theme, isExpanded, noOffset }: { theme?: OperationalStyleConstants; isExpanded: boolean; noOffset: boolean }) => ({
+  ({
+    theme,
+    isExpanded,
+    condensed,
+  }: {
+    theme?: OperationalStyleConstants
+    isExpanded: boolean
+    condensed: boolean
+  }) => ({
     position: "absolute",
-    top: noOffset ? "100%" : `calc(100% + ${theme.space.small}px)`,
-    left: noOffset ? 0 : -theme.space.content,
+    top: "100%",
+    left: 0,
     boxShadow: theme.shadows.popup,
-    width: "fit-content",
     zIndex: theme.zIndex.selectOptions,
+    padding: `0 ${theme.space.small}px`,
+    backgroundColor: theme.color.white,
+    width: "fit-content",
     ...(isExpanded
       ? {
           display: "block",
@@ -77,10 +91,6 @@ class ContextMenu extends React.Component<Props, State> {
       this.props.onOutsideClick()
     }
 
-    if (isTargetInsideContainer && this.props.onClick) {
-      this.props.onClick()
-    }
-
     const newIsActive = isTargetInsideMenu ? this.state.isOpen : isTargetInsideContainer ? !this.state.isOpen : false
     this.setState(prevState => ({
       isOpen: newIsActive,
@@ -96,57 +106,40 @@ class ContextMenu extends React.Component<Props, State> {
   }
 
   render() {
-    const menuItems: any = []
-    const children: any = []
-    React.Children.forEach(
-      this.props.children,
-      (child: any, index: number): void => {
-        if (child.props && child.props.__isContextMenuItem) {
-          const { onClick } = child.props
-          menuItems.push(
-            React.cloneElement(child, {
-              key: "contextmenu-" + index,
-              condensed: this.props.condensed,
-              onClick:
-                onClick &&
-                (() => {
-                  if (!this.props.keepOpenOnItemClick) {
-                    this.setState(prevState => ({
-                      isOpen: false,
-                    }))
-                  }
-
-                  onClick()
-                }),
-            }),
-          )
-        } else {
-          children.push(
-            React.cloneElement(child, {
-              className: this.state.isOpen ? "open" : "closed",
-              key: "contextmenu-main",
-            }),
-          )
-        }
-      },
-    )
     return (
       <Container
         innerRef={node => {
           this.containerNode = node
         }}
         id={this.props.id}
+        css={this.props.css}
         className={this.props.className}
       >
-        {children}
+        {this.props.children}
         <MenuContainer
           innerRef={node => {
             this.menuContainerNode = node
           }}
           isExpanded={this.props.open || this.state.isOpen}
-          noOffset={this.props.noOffset}
+          condensed={this.props.condensed}
         >
-          {menuItems}
+          {(this.props.items || []).map((item: any, index: number) => {
+            const onClick = () => {
+              if (!this.props.keepOpenOnItemClick) {
+                this.setState(() => ({
+                  isOpen: false,
+                }))
+              }
+
+              const clickHandler = item.onClick || this.props.onClick
+              clickHandler && clickHandler(item)
+            }
+            return (
+              <ContextMenuItem onClick={onClick} key={`contextmenu-${index}`} condensed={this.props.condensed}>
+                {item.label || item}
+              </ContextMenuItem>
+            )
+          })}
         </MenuContainer>
       </Container>
     )

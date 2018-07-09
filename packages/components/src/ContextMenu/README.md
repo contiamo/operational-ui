@@ -3,23 +3,17 @@ Context menus are nested menus that can expand from anywhere on a page. Their us
 ### Usage
 
 ```jsx
-const { ContextMenuItem } = require("../")
-;<ContextMenu>
+const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
+;<ContextMenu items={menuItems} onClick={item => alert(`clicked ${item}`)}>
   <span>Click here</span>
-  <ContextMenuItem onClick={() => alert("clicked")}>Menu 1</ContextMenuItem>
-  <ContextMenuItem onClick={() => alert("clicked")}>Menu 2</ContextMenuItem>
-  <ContextMenuItem onClick={() => alert("clicked")}>Menu 3</ContextMenuItem>
 </ContextMenu>
 ```
 
 #### Condensed
 
 ```jsx
-const { ContextMenuItem } = require("../")
-;<ContextMenu condensed>
+const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
+;<ContextMenu condensed items={menuItems} onClick={() => alert("clicked")}>
   <span>Click here</span>
-  <ContextMenuItem onClick={() => alert("clicked")}>Menu 1</ContextMenuItem>
-  <ContextMenuItem onClick={() => alert("clicked")}>Menu 2</ContextMenuItem>
-  <ContextMenuItem onClick={() => alert("clicked")}>Menu 3</ContextMenuItem>
 </ContextMenu>
 ```

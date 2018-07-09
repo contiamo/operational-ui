@@ -11,7 +11,7 @@ export interface Props {
   onClick?: any
 
   /** Items to display in dropdown */
-  items?: any
+  items?: any[]
 
   /** Display carat on opposite side to align prop */
   carat?: boolean
@@ -63,28 +63,11 @@ const ContainerWithCarat = styled(Container)(
   }),
 )
 
-const StyledContextMenuItem = styled(ContextMenuItem)(
-  ({ theme, align }: { theme?: OperationalStyleConstants; align: "left" | "right" }) => ({
-    color: theme.color.text.default,
-    textAlign: align,
-  }),
-)
-
-const HeaderMenu: React.SFC<Props> = props => {
+const HeaderMenu: React.SFC<Props> = (props: Props) => {
   const ContainerComponent: any = props.carat ? ContainerWithCarat : Container
   return (
-    <ContextMenu noOffset>
+    <ContextMenu items={props.items} onClick={props.onClick}>
       <ContainerComponent align={props.align}>{props.children}</ContainerComponent>
-      {props.items.map((option: any) => {
-        const onClick = option.onClick || (props.onClick && (() => props.onClick(option)))
-        return (
-          (option.label || option.value) && (
-            <StyledContextMenuItem onClick={onClick} key={""} align={props.align}>
-              {option.label || option.value}
-            </StyledContextMenuItem>
-          )
-        )
-      })}
     </ContextMenu>
   )
 }
