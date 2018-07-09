@@ -15,14 +15,24 @@ export interface Props {
   size?: number
   /** Renders a bouncing animation as opposed to a regular spinning one. */
   bounce?: boolean
+  /**
+   * Indicates that this component is left of other content, and adds an appropriate right margin.
+   */
+  left?: boolean
+  /**
+   * Indicates that this component is right of other content, and adds an appropriate left margin.
+   */
+  right?: boolean
 }
 
 const spinKeyframes = keyframes({
   "0%": {
     transform: "rotate(0deg)",
+    transformOrigin: "center center",
   },
   "100%": {
     transform: "rotate(360deg)",
+    transformOrigin: "center center",
   },
 })
 
@@ -49,23 +59,39 @@ const Container = styled("div")(
     color,
     bounce,
     theme,
+    left,
+    right,
   }: {
     size?: number
     color?: string
     bounce?: boolean
     theme?: OperationalStyleConstants
+    left?: boolean
+    right?: boolean
   }) => ({
     label: "spinner",
     display: "inline-block",
     width: size || defaultSize,
     height: size || defaultSize,
-    ...(bounce ? {} : { animation: `${spinKeyframes} 1.5s infinite linear` }),
     color: expandColor(theme, color) || "currentColor",
+    ...(left ? { marginRight: theme.space.small } : {}),
+    ...(right ? { marginLeft: theme.space.small } : {}),
     "& svg": {
       fill: "currentColor",
     },
   }),
 )
+
+/**
+ * This additional container is introduced to make transforms set on the main container from the outside (e.g. `styled` helper) do not mess up the rotation origin.
+ */
+const AnimationContainer = styled("div")(({ bounce, size }: { bounce?: boolean; size?: number }) => ({
+  margin: 0,
+  lineHeight: 0,
+  width: size || defaultSize,
+  height: size || defaultSize,
+  ...(bounce ? {} : { animation: `${spinKeyframes} 1.5s infinite linear` }),
+}))
 
 const RegularSpinner = () => (
   <svg viewBox="0 0 360 360">
@@ -113,7 +139,11 @@ const BouncingSpinner = () => (
 )
 
 const Spinner = (props: Props) => (
-  <Container {...props}>{props.bounce ? <BouncingSpinner /> : <RegularSpinner />}</Container>
+  <Container {...props}>
+    <AnimationContainer bounce={props.bounce} size={props.size}>
+      {props.bounce ? <BouncingSpinner /> : <RegularSpinner />}
+    </AnimationContainer>
+  </Container>
 )
 
 export default Spinner
