@@ -3,7 +3,7 @@ import styled from "react-emotion"
 import { fadeIn } from "@operational/utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
-import { ContextMenuItem } from "../"
+import ContextMenuItem from "./ContextMenu.Item"
 
 export interface Props {
   /** Id */
@@ -12,9 +12,8 @@ export interface Props {
   /** Class name */
   className?: string
 
-  children: React.ReactNode
+  children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
 
-  css?: any
   /** Specify whether the menu items are visible. Overrides internal open state that triggers on click. */
   open?: boolean
 
@@ -125,11 +124,10 @@ class ContextMenu extends React.Component<Props, State> {
           this.containerNode = node
         }}
         id={this.props.id}
-        css={this.props.css}
         className={this.props.className}
         align={this.props.align}
       >
-        {this.props.children}
+        {typeof this.props.children === "function" ? this.props.children(this.state.isOpen) : this.props.children}
         <MenuContainer
           innerRef={node => {
             this.menuContainerNode = node
