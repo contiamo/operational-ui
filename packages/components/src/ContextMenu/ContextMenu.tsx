@@ -121,7 +121,12 @@ class ContextMenu extends React.Component<Props, State> {
             }),
           )
         } else {
-          children.push(child)
+          children.push(
+            React.cloneElement(child, {
+              className: this.state.isOpen ? "open" : "closed",
+              key: "contextmenu-main",
+            }),
+          )
         }
       },
     )

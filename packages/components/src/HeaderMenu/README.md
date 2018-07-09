@@ -4,10 +4,16 @@ Menus that drop down from the header bar, i.e. project selectors, and user menus
 
 ```jsx
 const { ContextMenuItem } = require("../")
+
 const projectOptions = [
   { key: "project1", value: "Project 1" },
   { key: "project2", value: "Project 2" },
   { key: "project3", value: "Project 3" },
+]
+
+const userOptions = [
+  { value: "My account", onClick: () => alert("Navigate to account") },
+  { value: "Logout", onClick: () => alert("Logout") },
 ]
 
 class ComponentWithHeader extends React.Component {
@@ -29,7 +35,11 @@ class ComponentWithHeader extends React.Component {
             {this.state.project.value}
           </HeaderMenu>
         }
-        end={<Avatar name="Imogen Mason" />}
+        end={
+          <HeaderMenu items={userOptions}>
+            ImogenMason <Avatar name="Imogen Mason" />
+          </HeaderMenu>
+        }
       />
     )
   }
