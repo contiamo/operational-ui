@@ -19,13 +19,13 @@ export interface Props {
 
 const Container = styled("div")(
   ({ left, right, theme }: { left?: boolean; right?: boolean; theme?: OperationalStyleConstants }) => ({
-    ...hoverTooltip,
     position: "relative",
     display: "inline-block",
     verticalAlign: "middle",
     color: theme.color.text.lightest,
-    ...(left ? { marginRight: theme.space.small } : {}),
-    ...(right ? { marginLeft: theme.space.small } : {}),
+    ...(left ? { marginRight: theme.space.base } : {}),
+    ...(right ? { marginLeft: theme.space.base } : {}),
+    ...hoverTooltip,
   }),
 )
 

@@ -33,6 +33,12 @@ class StatefulInput extends React.Component {
 <Input value="12" label="Phone number" hint="Please use country code" />
 ```
 
+### With toggle state
+
+```jsx
+<Input value="Database Name" label="Name" onToggle={() => {}} disabled={true} hint="This value cannot be changed" />
+```
+
 ### With Error
 
 ```jsx

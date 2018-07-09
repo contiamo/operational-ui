@@ -3,7 +3,7 @@ import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
 
 import { Label, LabelText, FormFieldControls, FormFieldControl, FormFieldError, inputFocus } from "../utils/mixins"
-import { Icon } from "../"
+import { Icon, Hint } from "../"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 import { Css, CssStatic } from "../types"
 
@@ -73,12 +73,7 @@ const Textarea = (props: Props) => {
     <Label className={props.className} id={props.id}>
       {props.label ? <LabelText>{props.label}</LabelText> : null}
       <FormFieldControls>
-        {props.hint ? (
-          <FormFieldControl>
-            <Icon name="Question" size={14} />
-            <HelpTooltip right>{props.hint}</HelpTooltip>
-          </FormFieldControl>
-        ) : null}
+        {props.hint && <Hint>{props.hint}</Hint>}
       </FormFieldControls>
       <TextareaComp
         disabled={Boolean(props.disabled)}
