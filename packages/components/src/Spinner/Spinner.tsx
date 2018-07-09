@@ -28,11 +28,9 @@ export interface Props {
 const spinKeyframes = keyframes({
   "0%": {
     transform: "rotate(0deg)",
-    transformOrigin: "center center",
   },
   "100%": {
     transform: "rotate(360deg)",
-    transformOrigin: "center center",
   },
 })
 
@@ -90,6 +88,7 @@ const AnimationContainer = styled("div")(({ bounce, size }: { bounce?: boolean; 
   lineHeight: 0,
   width: size || defaultSize,
   height: size || defaultSize,
+  transformOrigin: "center center",
   ...(bounce ? {} : { animation: `${spinKeyframes} 1.5s infinite linear` }),
 }))
 
