@@ -80,7 +80,8 @@ const Container = styled("div")(
 )
 
 /**
- * This additional container is introduced to make transforms set on the main container from the outside (e.g. `styled` helper) do not mess up the rotation origin.
+ * This additional container is introduced to make transforms set on the main container from the outside
+ * (e.g. `styled` helper) do not mess up the rotation origin.
  */
 const AnimationContainer = styled("div")(({ bounce, size }: { bounce?: boolean; size?: number }) => ({
   margin: 0,
@@ -88,7 +89,11 @@ const AnimationContainer = styled("div")(({ bounce, size }: { bounce?: boolean; 
   width: size || defaultSize,
   height: size || defaultSize,
   transformOrigin: "center center",
-  ...(bounce ? {} : { animation: `${spinKeyframes} 1.5s infinite linear` }),
+  /*
+   * When the bounce animation is used, animation properties are set on the individual bouncing squares,
+   * therefore no animation is set on the container.
+   */
+  animation: bounce ? "none" : `${spinKeyframes} 1.5s infinite linear`,
 }))
 
 const RegularSpinner = () => (
