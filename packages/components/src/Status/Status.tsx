@@ -1,7 +1,7 @@
 import React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import * as tinycolor from "tinycolor2"
+import tinycolor from "tinycolor2"
 
 export interface Props {
   success?: boolean
