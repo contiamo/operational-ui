@@ -20,32 +20,32 @@ export interface Props {
   align: "left" | "right"
 }
 
-const Container = styled("div")(({ theme, align }: { theme?: OperationalStyleConstants; align: "left" | "right" }) => ({
-  width: 250,
-  lineHeight: "50px",
-  padding: `0 ${theme.space.content}px`,
-  color: "#ffffffcc",
-  backgroundColor: "transparent",
-  boxShadow: "none",
-  fontWeight: theme.font.weight.medium,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: align === "left" ? "flex-start" : "flex-end",
-  "&>div": {
-    marginLeft: theme.space.small,
-  },
-  "&:hover, &.open": {
-    color: theme.color.white,
-    backgroundColor: "hsla(0, 0%, 100%, 0.1)",
-    boxShadow: "0 3px 6px rgba(0, 0%, 0%, 0.3)",
-  },
-}))
-
-const ContainerWithCarat = styled(Container)(
-  ({ theme, align }: { theme?: OperationalStyleConstants; align: "left" | "right" }) => ({
+const Container = styled("div")(
+  ({ theme, align, carat }: { theme?: OperationalStyleConstants; align: "left" | "right"; carat: boolean }) => ({
+    width: 250,
+    lineHeight: "50px",
+    padding: `0 ${theme.space.content}px`,
+    color: "#ffffffcc",
+    backgroundColor: "transparent",
+    boxShadow: "none",
+    fontWeight: theme.font.weight.medium,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: align === "left" ? "flex-start" : "flex-end",
+    "&>div": {
+      marginLeft: theme.space.small,
+    },
+    "&:hover, &.open": {
+      color: theme.color.white,
+      backgroundColor: "hsla(0, 0%, 100%, 0.1)",
+      boxShadow: "0 3px 6px rgba(0, 0%, 0%, 0.3)",
+      "&::after": {
+        borderTopColor: theme.color.white,
+      },
+    },
     // downward caret.
     "&::after": {
-      content: "''",
+      content: carat ? "''" : null,
       position: "absolute",
       top: "50%",
       [align === "left" ? "right" : "left"]: theme.space.content + theme.space.small,
@@ -55,19 +55,15 @@ const ContainerWithCarat = styled(Container)(
       borderTopColor: "#ffffff80",
       transform: "translateY(calc(-50% + 2px))",
     },
-    "&:hover, &.open": {
-      "&::after": {
-        borderTopColor: theme.color.white,
-      },
-    },
   }),
 )
 
 const HeaderMenu: React.SFC<Props> = (props: Props) => {
-  const ContainerComponent: any = props.carat ? ContainerWithCarat : Container
   return (
-    <ContextMenu items={props.items} onClick={props.onClick}>
-      <ContainerComponent align={props.align}>{props.children}</ContainerComponent>
+    <ContextMenu {...props}>
+      <Container align={props.align} carat={props.carat}>
+        {props.children}
+      </Container>
     </ContextMenu>
   )
 }
