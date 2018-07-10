@@ -71,8 +71,8 @@ const Container = styled("div")(
     width: size || defaultSize,
     height: size || defaultSize,
     color: expandColor(theme, color) || "currentColor",
-    ...(left ? { marginRight: theme.space.small } : {}),
-    ...(right ? { marginLeft: theme.space.small } : {}),
+    marginRight: left ? theme.space.small : 0,
+    marginLeft: right ? theme.space.small : 0,
     "& svg": {
       fill: "currentColor",
     },
@@ -111,8 +111,10 @@ const BouncingSpinnerContainer = styled("div")({
 })
 
 /**
- * The bouncing spinner is constructed out of 3 80x80 boxes spaced out horizontally on a 360x360 grid (these units don't refer to pixels, they simply mimic the grid of the icons.
- * The math used in here lays these boxes out so they're vertically centered and spaced equally on the horizontal axis without any gutter.
+ * The bouncing spinner is constructed out of 3 80x80 boxes spaced out horizontally on a 360x360 grid
+ * (these units don't refer to pixels, they simply mimic the grid of the icons.
+ * The math used in here lays these boxes out so they're vertically centered and spaced
+ * equally on the horizontal axis without any gutter.
  */
 const BouncingSpinnerBox = styled("div")(({ no }: { no: number }) => ({
   width: `${(80 / 360) * 100}%`,
