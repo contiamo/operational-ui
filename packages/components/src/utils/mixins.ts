@@ -2,7 +2,7 @@ import React from "react"
 import styled from "react-emotion"
 import { lighten } from "@operational/utils"
 import { OperationalStyleConstants } from "./constants"
-import TooltipContainer from "../Tooltip/Tooltip.Container"
+import { dangerousContainerClassName as dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
 
 export const inputFocus = ({ theme, isError }: { theme?: OperationalStyleConstants; isError?: boolean }) => ({
   outline: 0,
@@ -36,12 +36,12 @@ export const FormFieldControls = styled("div")({
 })
 
 export const hoverTooltip: {} = {
-  [TooltipContainer as any]: {
+  [`.${dangerousTooltipContainerClassName}`]: {
     opacity: 0.01,
     pointerEvents: "none",
   },
   ":hover": {
-    [TooltipContainer as any]: {
+    [`.${dangerousTooltipContainerClassName}`]: {
       opacity: 1,
       pointerEvents: "all",
     },

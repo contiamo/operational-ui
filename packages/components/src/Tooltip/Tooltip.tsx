@@ -38,6 +38,8 @@ export interface State {
   singleLineTextWidth: number
 }
 
+export const dangerousContainerClassName = "operational-ui-tooltip"
+
 class Tooltip extends React.Component<Props, State> {
   state = {
     bbTop: 0,
@@ -130,6 +132,7 @@ class Tooltip extends React.Component<Props, State> {
           <p>{this.props.children}</p>
         </Container>
         <Container
+          className={dangerousContainerClassName}
           singleLineTextWidth={this.state.singleLineTextWidth}
           position={displayPosition}
           innerRef={node => {
