@@ -32,17 +32,23 @@ export interface Props {
 
   /** Menu items */
   items?: any[]
+
+  /** Alignment */
+  align?: "left" | "right"
 }
 
 export interface State {
   isOpen: boolean
 }
 
-const Container = styled("div")(({ theme }: WithTheme) => ({
+const Container = styled("div")(({ theme, align }: { theme?: OperationalStyleConstants; align: "left" | "right" }) => ({
   label: "contextmenu",
   cursor: "pointer",
   position: "relative",
   width: "fit-content",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: align === "right" ? "flex-end" : "flex-start",
 }))
 
 const MenuContainer = styled("div")(
@@ -106,6 +112,13 @@ class ContextMenu extends React.Component<Props, State> {
   }
 
   render() {
+    const StyledContextMenuItem = styled(ContextMenuItem)(
+      ({ theme, align }: { theme?: OperationalStyleConstants; align: "left" | "right" }) => ({
+        color: theme.color.text.default,
+        textAlign: align,
+      }),
+    )
+
     return (
       <Container
         innerRef={node => {
@@ -114,6 +127,7 @@ class ContextMenu extends React.Component<Props, State> {
         id={this.props.id}
         css={this.props.css}
         className={this.props.className}
+        align={this.props.align}
       >
         {this.props.children}
         <MenuContainer
@@ -135,9 +149,14 @@ class ContextMenu extends React.Component<Props, State> {
               clickHandler && clickHandler(item)
             }
             return (
-              <ContextMenuItem onClick={onClick} key={`contextmenu-${index}`} condensed={this.props.condensed}>
+              <StyledContextMenuItem
+                onClick={onClick}
+                key={`contextmenu-${index}`}
+                condensed={this.props.condensed}
+                align={this.props.align}
+              >
                 {item.label || item}
-              </ContextMenuItem>
+              </StyledContextMenuItem>
             )
           })}
         </MenuContainer>
