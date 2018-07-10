@@ -23,8 +23,8 @@ const Container = styled("div")(
     display: "inline-block",
     verticalAlign: "middle",
     color: theme.color.text.lightest,
-    ...(left ? { marginRight: theme.space.base } : {}),
-    ...(right ? { marginLeft: theme.space.base } : {}),
+    marginRight: left ? theme.space.base : 0,
+    marginLeft: right ? theme.space.base : 0,
     ...hoverTooltip,
   }),
 )

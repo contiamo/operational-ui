@@ -37,6 +37,10 @@ export const FormFieldControls = styled("div")({
 
 export const hoverTooltip: {} = {
   [`.${dangerousTooltipContainerClassName}`]: {
+    /*
+     * Rendering at 0.01 opacity is still necessary in order to determine tooltip dimensions
+     * See ../Tooltip/Tooltip.tsx implementation for more details
+     */
     opacity: 0.01,
     pointerEvents: "none",
   },
@@ -78,7 +82,7 @@ export const FormFieldError = styled("div")(({ theme }: { theme?: OperationalSty
   transform: "translate3d(0, 100%, 0)",
   position: "absolute",
   backgroundColor: lighten(theme.color.error, 60),
-  boxShadow: `0px 1px 5px #d3d1d3`,
+  boxShadow: `0px 3px 5px #d3d1d3`,
   // Nudge up just a little bit to look blended into the form
   bottom: 2,
   left: 0,

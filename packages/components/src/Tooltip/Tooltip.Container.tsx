@@ -23,13 +23,15 @@ const makeContainerPositionStyles = (position: Position) => {
       }
     case "left":
       return {
-        top: "50%",
+        // 1px nudge fixes visual misalignment for carets that are rendered at half-pixel
+        top: "calc(50% - 1px)",
         left: -6,
         transform: "translate3d(-100%, -50%, 0)",
       }
     case "right":
       return {
-        top: "50%",
+        // 1px nudge fixes visual misalignment for carets that are rendered at half-pixel
+        top: "calc(50% - 1px)",
         right: -6,
         transform: "translate3d(100%, -50%, 0)",
       }

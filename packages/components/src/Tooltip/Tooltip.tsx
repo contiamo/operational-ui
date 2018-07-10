@@ -38,6 +38,13 @@ export interface State {
   singleLineTextWidth: number
 }
 
+/*
+ * This class name is used as a selector when customizing the opacity for tooltips
+ * that are only displayed when a particular parent of theirs is hovered.
+ * The pattern replaces the https://emotion.sh/docs/babel#components-as-selectors
+ * pattern to remove the need for babel plugin dependancy in projects that rely on
+ * this library.
+ */
 export const dangerousContainerClassName = "operational-ui-tooltip"
 
 class Tooltip extends React.Component<Props, State> {
