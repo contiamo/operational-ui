@@ -9,30 +9,21 @@ import ContextMenuItem from "./ContextMenu.Item"
 export interface Props {
   /** Id */
   id?: string
-
   /** Class name */
   className?: string
-
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
-
   /** Specify whether the menu items are visible. Overrides internal open state that triggers on click. */
   open?: boolean
-
   /** Condensed mode */
   condensed?: boolean
-
   /** onClick method for all menu items */
   onClick?: (item?: any) => void
-
   /** Handles click events anywhere outside the context menu container, including menu items. */
   onOutsideClick?: () => void
-
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
   keepOpenOnItemClick?: boolean
-
   /** Menu items */
   items?: any[]
-
   /** Alignment */
   align?: "left" | "right"
 }

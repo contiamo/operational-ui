@@ -6,14 +6,10 @@ import { ContextMenu } from "../"
 export interface Props {
   /** Options to display in dropdown */
   children: React.ReactNode[]
-
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
   onClick?: any
-
   /** Items to display in dropdown */
   items?: any[]
-
-
   /** Display caret on opposite side to align prop */
   withCaret?: boolean
   /** Alignment */
