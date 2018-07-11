@@ -1,6 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { WithTheme, Css, CssStatic } from "../types"
+import Overlay from "../Internals/Overlay"
 
 export interface Props {
   id?: string
@@ -14,21 +15,11 @@ export interface Props {
   onClose?: () => void
 }
 
-const Container = styled("div")(
-  ({ theme }: WithTheme): CssStatic => ({
-    label: "modal",
-    position: "fixed",
-    top: 0,
-    left: 0,
-    zIndex: theme.deprecated.baseZIndex + 100,
-    width: "100vw",
-    height: "100vh",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(0, 0, 0, .6)",
-  }),
-)
+const Container = styled(Overlay)({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+})
 
 const Content = styled("div")(
   ({ theme }: WithTheme): CssStatic => ({
