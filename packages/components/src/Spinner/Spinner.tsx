@@ -15,6 +15,14 @@ export interface Props {
   size?: number
   /** Renders a bouncing animation as opposed to a regular spinning one. */
   bounce?: boolean
+  /**
+   * Indicates that this component is left of other content, and adds an appropriate right margin.
+   */
+  left?: boolean
+  /**
+   * Indicates that this component is right of other content, and adds an appropriate left margin.
+   */
+  right?: boolean
 }
 
 const spinKeyframes = keyframes({
@@ -49,23 +57,44 @@ const Container = styled("div")(
     color,
     bounce,
     theme,
+    left,
+    right,
   }: {
     size?: number
     color?: string
     bounce?: boolean
     theme?: OperationalStyleConstants
+    left?: boolean
+    right?: boolean
   }) => ({
-    label: "spinner",
     display: "inline-block",
     width: size || defaultSize,
     height: size || defaultSize,
-    ...(bounce ? {} : { animation: `${spinKeyframes} 1.5s infinite linear` }),
     color: expandColor(theme, color) || "currentColor",
+    marginRight: left ? theme.space.small : 0,
+    marginLeft: right ? theme.space.small : 0,
     "& svg": {
       fill: "currentColor",
     },
   }),
 )
+
+/**
+ * This additional container is introduced to make transforms set on the main container from the outside
+ * (e.g. `styled` helper) do not mess up the rotation origin.
+ */
+const AnimationContainer = styled("div")(({ bounce, size }: { bounce?: boolean; size?: number }) => ({
+  margin: 0,
+  lineHeight: 0,
+  width: size || defaultSize,
+  height: size || defaultSize,
+  transformOrigin: "center center",
+  /*
+   * When the bounce animation is used, animation properties are set on the individual bouncing squares,
+   * therefore no animation is set on the container.
+   */
+  animation: bounce ? "none" : `${spinKeyframes} 1.5s infinite linear`,
+}))
 
 const RegularSpinner = () => (
   <svg viewBox="0 0 360 360">
@@ -87,8 +116,10 @@ const BouncingSpinnerContainer = styled("div")({
 })
 
 /**
- * The bouncing spinner is constructed out of 3 80x80 boxes spaced out horizontally on a 360x360 grid (these units don't refer to pixels, they simply mimic the grid of the icons.
- * The math used in here lays these boxes out so they're vertically centered and spaced equally on the horizontal axis without any gutter.
+ * The bouncing spinner is constructed out of 3 80x80 boxes spaced out horizontally on a 360x360 grid
+ * (these units don't refer to pixels, they simply mimic the grid of the icons.
+ * The math used in here lays these boxes out so they're vertically centered and spaced
+ * equally on the horizontal axis without any gutter.
  */
 const BouncingSpinnerBox = styled("div")(({ no }: { no: number }) => ({
   width: `${(80 / 360) * 100}%`,
@@ -113,7 +144,11 @@ const BouncingSpinner = () => (
 )
 
 const Spinner = (props: Props) => (
-  <Container {...props}>{props.bounce ? <BouncingSpinner /> : <RegularSpinner />}</Container>
+  <Container {...props}>
+    <AnimationContainer bounce={props.bounce} size={props.size}>
+      {props.bounce ? <BouncingSpinner /> : <RegularSpinner />}
+    </AnimationContainer>
+  </Container>
 )
 
 export default Spinner
