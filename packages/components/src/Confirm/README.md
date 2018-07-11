@@ -31,7 +31,6 @@ To have the correct style, this `Confirm` must be the first child of a `PageArea
               cancelButton: <Button color="success">I'm feel guilty :-/</Button>,
               actionButton: <Button color="error">I'm a bad guy!</Button>,
               onConfirm: () => alert("boooooommm!"),
-              onCancel: () => alert("you are weak!"),
             })
           }
         >

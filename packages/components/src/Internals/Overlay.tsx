@@ -18,7 +18,7 @@ export const Overlay = styled("div")`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
-  animation: ${fadeIn} 0.2s ease-in;
+  animation: ${fadeIn} 0.1s ease-in;
   z-index: ${({ theme }: { theme?: OperationalStyleConstants }) => theme.zIndex.confirm};
 `
 

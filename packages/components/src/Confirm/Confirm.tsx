@@ -7,7 +7,7 @@ import Overlay from "../Internals/Overlay"
 
 const fromBottom = keyframes`
   0% {
-    top: -150%
+    top: -10px
   }
 
   100% {
