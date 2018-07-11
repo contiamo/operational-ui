@@ -45,7 +45,7 @@ export interface State {
  * pattern to remove the need for babel plugin dependancy in projects that rely on
  * this library.
  */
-export const dangerousContainerClassName = "operational-ui-tooltip"
+export const dangerousTooltipContainerClassName = "operational-ui-tooltip"
 
 class Tooltip extends React.Component<Props, State> {
   state = {
@@ -139,7 +139,7 @@ class Tooltip extends React.Component<Props, State> {
           <p>{this.props.children}</p>
         </Container>
         <Container
-          className={dangerousContainerClassName}
+          className={dangerousTooltipContainerClassName}
           singleLineTextWidth={this.state.singleLineTextWidth}
           position={displayPosition}
           innerRef={node => {

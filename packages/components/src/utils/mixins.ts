@@ -2,7 +2,7 @@ import React from "react"
 import styled from "react-emotion"
 import { lighten } from "@operational/utils"
 import { OperationalStyleConstants } from "./constants"
-import { dangerousContainerClassName as dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
+import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
 
 export const inputFocus = ({ theme, isError }: { theme?: OperationalStyleConstants; isError?: boolean }) => ({
   outline: 0,

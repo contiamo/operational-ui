@@ -18,7 +18,7 @@ export interface Props {
 }
 
 const Container = styled("div")(
-  ({ left, right, theme }: { left?: boolean; right?: boolean; theme?: OperationalStyleConstants }) => ({
+  ({ left, right, theme }: { left?: Props["left"]; right?: Props["right"]; theme?: OperationalStyleConstants }) => ({
     position: "relative",
     display: "inline-block",
     verticalAlign: "middle",
