@@ -7,9 +7,14 @@ export const colorMapper = (colors: string[]) => {
 }
 
 /*
-* This FNV-1a hash algorithm, often simply called "fnv", disperses hashes throughout
-* the 32-bit hash space with very good dispersion and is very fast.
-*/
+ * Hashing algorithm used to pair strings with colors (see `colorMapper` above), chosen
+ * as a compromise between speed and low risk of having identical colors assigned for two
+ * strings that are nearly identical.
+ *
+ * Copied from https://github.com/tjwebb/fnv-plus (MIT licensed), author Travis Webb <me@traviswebb.com>
+ * This FNV-1a hash algorithm, often simply called "fnv", disperses hashes throughout
+ * the 32-bit hash space with very good dispersion and is very fast.
+ */
 function hash32FNV1aUTF(str: string) {
   let c
   let i
