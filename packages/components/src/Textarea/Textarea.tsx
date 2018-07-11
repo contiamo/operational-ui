@@ -72,9 +72,7 @@ const Textarea = (props: Props) => {
   return (
     <Label className={props.className} id={props.id}>
       {props.label ? <LabelText>{props.label}</LabelText> : null}
-      <FormFieldControls>
-        {props.hint && <Hint>{props.hint}</Hint>}
-      </FormFieldControls>
+      <FormFieldControls>{props.hint && <Hint>{props.hint}</Hint>}</FormFieldControls>
       <TextareaComp
         disabled={Boolean(props.disabled)}
         isCode={Boolean(props.code)}

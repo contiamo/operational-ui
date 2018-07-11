@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@operational/components": "^5.2.0",
-    "@operational/utils": "^5.0.0",
     "@operational/visualizations": "^5.2.0",
     "emotion": "^9.2.3",
     "emotion-theming": "^9.2.3",

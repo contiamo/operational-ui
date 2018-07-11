@@ -12,23 +12,21 @@
     "postinstall": "npm run package",
     "start": "run-p start:*",
     "start:component": "cd packages/components && yarn start",
-    "start:watch-utils": "cd packages/utils && yarn package:watch",
     "build": "run-s build:*",
     "build:clean": "rimraf dist",
-    "build:components": "lerna run --scope @operational/components docs:build && cp -r packages/components/styleguide ./dist",
-    "build:visual-test": "lerna run --scope @operational/visual-tests build && cp -r packages/visual-tests/dist/ ./dist/visual-tests",
+    "build:components":
+      "lerna run --scope @operational/components docs:build && cp -r packages/components/styleguide ./dist",
+    "build:visual-test":
+      "lerna run --scope @operational/visual-tests build && cp -r packages/visual-tests/dist/ ./dist/visual-tests",
     "build:cname": "cp CNAME dist",
     "clean": "lerna clean",
     "test": "run-s \"test:* -- -- --maxWorkers=$JEST_MAX_WORKERS\"",
     "test:components": "cd packages/components && npm run test",
     "test:components:update": "npm run test:components -- -- -u",
-    "test:utils": "cd packages/utils && npm run test",
-    "test:visual-tests": "cd packages/utils && npm run test",
     "test:visualizations": "cd packages/visualizations && npm run test",
     "lint": "tslint ./packages/*/src/**/*.{json,ts,tsx}",
     "prettify": "prettier ./packages/**/*.{json,ts,tsx} --write",
     "package": "run-s package:*",
-    "package:utils": "lerna run --scope @operational/utils package",
     "package:components": "lerna run --scope @operational/components package",
     "package:visualizations": "lerna run --scope @operational/visualizations package",
     "package:visual-tests": "lerna run --scope @operational/visual-tests package",
@@ -41,15 +39,8 @@
     "deploy": "gh-pages -d dist"
   },
   "lint-staged": {
-    "*.(js|jsx|json|html|md)": [
-      "prettier --write",
-      "git add"
-    ],
-    "*.(ts|tsx)": [
-      "tslint --fix",
-      "prettier --write",
-      "git add"
-    ]
+    "*.(js|jsx|json|html|md)": ["prettier --write", "git add"],
+    "*.(ts|tsx)": ["tslint --fix", "prettier --write", "git add"]
   },
   "devDependencies": {
     "@types/core-js": "0.9.43",
@@ -100,7 +91,5 @@
     "tslint-plugin-blank-line": "^0.0.8",
     "typescript": "next"
   },
-  "workspaces": [
-    "packages/*"
-  ]
+  "workspaces": ["packages/*"]
 }
