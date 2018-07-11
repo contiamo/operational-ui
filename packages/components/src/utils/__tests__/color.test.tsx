@@ -1,4 +1,3 @@
-import * as React from "react"
 import { colorMapper } from "../color"
 
 describe("ColorMapper", () => {
