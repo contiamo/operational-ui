@@ -2,8 +2,6 @@ import * as React from "react"
 import styled from "react-emotion"
 
 import { OperationalStyleConstants } from "../utils/constants"
-import colorCalculator from "tinycolor2"
-import { Css } from "../types"
 import Container, { Position } from "./Tooltip.Container"
 
 /**
@@ -37,6 +35,15 @@ export interface State {
   bbRight: number
   singleLineTextWidth: number
 }
+
+/*
+ * This class name is used as a selector when customizing the opacity for tooltips
+ * that are only displayed when a particular parent of theirs is hovered.
+ * The pattern replaces the https://emotion.sh/docs/babel#components-as-selectors
+ * pattern to remove the need for babel plugin dependancy in projects that rely on
+ * this library.
+ */
+export const dangerousTooltipContainerClassName = "operational-ui-tooltip"
 
 class Tooltip extends React.Component<Props, State> {
   state = {
@@ -130,6 +137,7 @@ class Tooltip extends React.Component<Props, State> {
           <p>{this.props.children}</p>
         </Container>
         <Container
+          className={dangerousTooltipContainerClassName}
           singleLineTextWidth={this.state.singleLineTextWidth}
           position={displayPosition}
           innerRef={node => {

@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import { Icon, IconName } from "../"
+import { Icon, IconName, Hint } from "../"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 import { Label, LabelText, inputFocus, FormFieldControls, FormFieldControl, FormFieldError } from "../utils/mixins"
 import CopyToClipboard from "react-copy-to-clipboard"
@@ -193,12 +193,7 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
         <Label fullWidth={props.fullWidth} id={props.id} htmlFor={forAttributeId} className={props.className} left>
           <LabelText>{props.label}</LabelText>
           <FormFieldControls>
-            {props.hint ? (
-              <FormFieldControl>
-                <Icon name="Question" size={14} />
-                <Tooltip right>{props.hint}</Tooltip>
-              </FormFieldControl>
-            ) : null}
+            {props.hint && <Hint>{props.hint}</Hint>}
             {props.onToggle ? (
               <FormFieldControl
                 onClick={() => {

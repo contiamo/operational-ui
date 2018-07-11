@@ -2,7 +2,7 @@ import React from "react"
 import styled from "react-emotion"
 import { lighten } from "@operational/utils"
 import { OperationalStyleConstants } from "./constants"
-import TooltipContainer from "../Tooltip/Tooltip.Container"
+import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
 
 export const inputFocus = ({ theme, isError }: { theme?: OperationalStyleConstants; isError?: boolean }) => ({
   outline: 0,
@@ -35,26 +35,37 @@ export const FormFieldControls = styled("div")({
   right: 0,
 })
 
+export const hoverTooltip: {} = {
+  [`.${dangerousTooltipContainerClassName}`]: {
+    /*
+     * Rendering at 0.01 opacity is still necessary in order to determine tooltip dimensions
+     * See ../Tooltip/Tooltip.tsx implementation for more details
+     */
+    opacity: 0.01,
+    pointerEvents: "none",
+  },
+  ":hover": {
+    [`.${dangerousTooltipContainerClassName}`]: {
+      opacity: 1,
+      pointerEvents: "all",
+    },
+  },
+}
+
 export const FormFieldControl = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  cursor: "pointer",
   position: "relative",
   verticalAlign: "middle",
   display: "inline-block",
   width: "fit-content",
-  marginLeft: 4,
+  marginLeft: theme.space.base,
+  color: theme.color.text.lightest,
+  ...hoverTooltip,
   "& svg": {
-    opacity: 0.4,
     position: "relative",
   },
-  [TooltipContainer as any]: {
-    opacity: 0.01,
-  },
   ":hover": {
-    "& svg": {
-      opacity: 1,
-    },
-    [TooltipContainer as any]: {
-      opacity: 1,
-    },
+    color: theme.color.text.default,
   },
 }))
 
@@ -64,11 +75,16 @@ export const FormFieldError = styled("div")(({ theme }: { theme?: OperationalSty
   padding: `${theme.space.base / 2}px ${theme.space.element}px`,
   marginBottom: 0,
   width: "100%",
-  borderRadius: theme.borderRadius,
+  borderBottomLeftRadius: theme.borderRadius,
+  borderBottomRightRadius: theme.borderRadius,
+  border: `1px solid ${theme.color.error}`,
+  borderTop: 0,
+  transform: "translate3d(0, 100%, 0)",
   position: "absolute",
   backgroundColor: lighten(theme.color.error, 60),
-  boxShadow: `0px 1px 5px #d3d1d3`,
-  bottom: -theme.space.big,
+  boxShadow: `0px 3px 5px #d3d1d3`,
+  // Nudge up just a little bit to look blended into the form
+  bottom: 2,
   left: 0,
   zIndex: theme.zIndex.formFieldError,
 }))
