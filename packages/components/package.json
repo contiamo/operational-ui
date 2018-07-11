@@ -21,7 +21,7 @@
     "start": "npm run docs:start",
     "docs:start": "styleguidist server",
     "docs:build": "styleguidist build",
-    "package": "rimraf lib && webpack --env package",
+    "package": "rimraf lib && tsc",
     "package:watch": "tsc -d -w",
     "test": "jest",
     "test:watch": "jest --watch"
