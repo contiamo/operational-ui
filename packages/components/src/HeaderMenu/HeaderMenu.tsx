@@ -13,9 +13,9 @@ export interface Props {
   /** Items to display in dropdown */
   items?: any[]
 
-  /** Display carat on opposite side to align prop */
-  carat?: boolean
 
+  /** Display caret on opposite side to align prop */
+  withCaret?: boolean
   /** Alignment */
   align: "left" | "right"
 }
@@ -28,12 +28,12 @@ const Container = styled("div")(
     theme,
     align,
     isOpen,
-    withCarat,
+    withCaret,
   }: {
     theme?: OperationalStyleConstants
     align: "left" | "right"
     isOpen: boolean
-    withCarat: boolean
+    withCaret: boolean
   }) => ({
     width: 250,
     lineHeight: "50px",
@@ -53,7 +53,7 @@ const Container = styled("div")(
       backgroundColor,
       color: theme.color.white,
     },
-    ...(withCarat
+    ...(withCaret
       ? {
           "&::after": {
             content: "''",
@@ -83,7 +83,7 @@ const HeaderMenu: React.SFC<Props> = (props: Props) => {
   return (
     <ContextMenu {...props}>
       {isOpen => (
-        <Container isOpen={isOpen} align={props.align} withCarat={Boolean(props.carat)}>
+        <Container isOpen={isOpen} align={props.align} withCaret={Boolean(props.withCaret)}>
           {props.children}
         </Container>
       )}
@@ -93,7 +93,7 @@ const HeaderMenu: React.SFC<Props> = (props: Props) => {
 
 HeaderMenu.defaultProps = {
   align: "left",
-  carat: false,
+  withCaret: false,
 }
 
 export default HeaderMenu

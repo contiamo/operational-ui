@@ -31,7 +31,7 @@ class ComponentWithHeader extends React.Component {
       <HeaderBar
         logo={<ContiamoLogo />}
         main={
-          <HeaderMenu items={projectOptions} onClick={this.onClick.bind(this)} carat>
+          <HeaderMenu items={projectOptions} onClick={this.onClick.bind(this)} withCaret>
             {this.state.project.label}
           </HeaderMenu>
         }

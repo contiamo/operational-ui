@@ -145,7 +145,7 @@ const options = [
 ]
 
 const actions = (
-  <HeaderMenu items={options} carat align={"right"}>
+  <HeaderMenu items={options} withCaret align={"right"}>
     Sales / Foodmart
   </HeaderMenu>
 )
