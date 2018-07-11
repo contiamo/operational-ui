@@ -2,8 +2,6 @@ import * as React from "react"
 import styled from "react-emotion"
 
 import { OperationalStyleConstants } from "../utils/constants"
-import colorCalculator from "tinycolor2"
-import { Css } from "../types"
 import Container, { Position } from "./Tooltip.Container"
 
 /**

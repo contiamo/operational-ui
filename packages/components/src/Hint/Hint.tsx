@@ -1,5 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
+
 import { OperationalStyleConstants } from "../utils/constants"
 import { Icon, Tooltip } from "../"
 import { hoverTooltip } from "../utils/mixins"
