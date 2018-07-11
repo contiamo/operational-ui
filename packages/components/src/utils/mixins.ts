@@ -92,6 +92,15 @@ export const FormFieldError = styled("div")(({ theme }: { theme?: OperationalSty
 export const fadeIn = keyframes({
   from: {
     opacity: 0,
+  },
+  to: {
+    opacity: 1,
+  },
+})
+
+export const floatIn = keyframes({
+  from: {
+    opacity: 0,
     transform: "translate3d(0, -6px, 0)",
   },
   to: {
