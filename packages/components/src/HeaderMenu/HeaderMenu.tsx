@@ -20,6 +20,9 @@ export interface Props {
   align: "left" | "right"
 }
 
+const backgroundColor = "hsla(0, 0%, 100%, 0.1)"
+const boxShadow = "0 3px 6px rgba(0, 0%, 0%, 0.3)"
+
 const Container = styled("div")(
   ({
     theme,
@@ -36,8 +39,8 @@ const Container = styled("div")(
     lineHeight: "50px",
     padding: `0 ${theme.space.content}px`,
     color: isOpen ? theme.color.white : "#ffffffcc",
-    backgroundColor: isOpen ? "hsla(0, 0%, 100%, 0.1)" : "transparent",
-    boxShadow: isOpen ? "0 3px 6px rgba(0, 0%, 0%, 0.3)" : "none",
+    backgroundColor: isOpen ? backgroundColor : "transparent",
+    boxShadow: isOpen ? boxShadow : "none",
     fontWeight: theme.font.weight.medium,
     display: "flex",
     alignItems: "center",
@@ -46,9 +49,9 @@ const Container = styled("div")(
       marginLeft: theme.space.small,
     },
     "&:hover": {
+      boxShadow,
+      backgroundColor,
       color: theme.color.white,
-      backgroundColor: "hsla(0, 0%, 100%, 0.1)",
-      boxShadow: "0 3px 6px rgba(0, 0%, 0%, 0.3)",
     },
     ...(withCarat
       ? {
@@ -64,9 +67,9 @@ const Container = styled("div")(
             transform: "translateY(calc(-50% + 2px))",
           },
           "&:hover": {
+            boxShadow,
+            backgroundColor,
             color: theme.color.white,
-            backgroundColor: "hsla(0, 0%, 100%, 0.1)",
-            boxShadow: "0 3px 6px rgba(0, 0%, 0%, 0.3)",
             "&::after": {
               borderTopColor: theme.color.white,
             },
