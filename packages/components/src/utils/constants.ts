@@ -163,6 +163,7 @@ const zIndex = {
   selectOptions: 300,
   formFieldError: 299,
   tooltip: 400,
+  confirm: 500,
 }
 
 const constants = {
