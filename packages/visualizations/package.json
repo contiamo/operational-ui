@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "parcel scripts/dev-server/index.html",
+    "start:visual:tests": "parcel visual-tests/index.html",
     "test": "jest",
     "test:watch": "jest --watch",
     "package": "rimraf lib && tsc",
@@ -49,5 +50,12 @@
     "snapshotSerializers": [
       "<rootDir>/../../node_modules/jest-serializer-enzyme"
     ]
+  },
+  "devDependencies": {
+    "emotion": "^9.2.5",
+    "emotion-theming": "^9.2.5",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "react-emotion": "^9.2.5"
   }
 }
