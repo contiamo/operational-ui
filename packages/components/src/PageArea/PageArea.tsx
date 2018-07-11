@@ -10,6 +10,7 @@ export interface PageAreaProps {
 
 export const PageArea = styled("div")(({ name }: PageAreaProps) => ({
   gridArea: name,
+  position: "relative",
 }))
 
 export default PageArea
