@@ -52,15 +52,7 @@ const Container = styled("div")(({ theme, align }: { theme?: OperationalStyleCon
 }))
 
 const MenuContainer = styled("div")(
-  ({
-    theme,
-    isExpanded,
-    condensed,
-  }: {
-    theme?: OperationalStyleConstants
-    isExpanded: boolean
-    condensed: boolean
-  }) => ({
+  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }) => ({
     position: "absolute",
     top: "100%",
     left: 0,
@@ -69,14 +61,15 @@ const MenuContainer = styled("div")(
     padding: `0 ${theme.space.small}px`,
     backgroundColor: theme.color.white,
     width: "fit-content",
-    ...(isExpanded
-      ? {
-          display: "block",
-          animation: `${fadeIn} ease-in-out forwards 0.2s`,
-        }
-      : {
-          display: "none",
-        }),
+    display: isExpanded ? "block" : "none",
+    animation: `${fadeIn} ease-in-out forwards 0.2s`,
+  }),
+)
+
+const StyledContextMenuItem = styled(ContextMenuItem)(
+  ({ theme, align }: { theme?: OperationalStyleConstants; align: "left" | "right" }) => ({
+    color: theme.color.text.default,
+    textAlign: align,
   }),
 )
 
@@ -87,7 +80,6 @@ class ContextMenu extends React.Component<Props, State> {
 
   containerNode: any
   menuContainerNode: any
-  outsideClickHandler: any
 
   handleClick = (ev: any): void => {
     const isTargetInsideMenu = this.menuContainerNode.contains(ev.target)
@@ -97,7 +89,14 @@ class ContextMenu extends React.Component<Props, State> {
       this.props.onOutsideClick()
     }
 
-    const newIsActive = isTargetInsideMenu ? this.state.isOpen : isTargetInsideContainer ? !this.state.isOpen : false
+    const newIsActive = isTargetInsideMenu
+      ? this.props.keepOpenOnItemClick
+        ? true
+        : false
+      : isTargetInsideContainer
+        ? !this.state.isOpen
+        : false
+
     this.setState(prevState => ({
       isOpen: newIsActive,
     }))
@@ -112,13 +111,6 @@ class ContextMenu extends React.Component<Props, State> {
   }
 
   render() {
-    const StyledContextMenuItem = styled(ContextMenuItem)(
-      ({ theme, align }: { theme?: OperationalStyleConstants; align: "left" | "right" }) => ({
-        color: theme.color.text.default,
-        textAlign: align,
-      }),
-    )
-
     return (
       <Container
         innerRef={node => {
@@ -134,22 +126,12 @@ class ContextMenu extends React.Component<Props, State> {
             this.menuContainerNode = node
           }}
           isExpanded={this.props.open || this.state.isOpen}
-          condensed={this.props.condensed}
         >
           {(this.props.items || []).map((item: any, index: number) => {
-            const onClick = () => {
-              if (!this.props.keepOpenOnItemClick) {
-                this.setState(() => ({
-                  isOpen: false,
-                }))
-              }
-
-              const clickHandler = item.onClick || this.props.onClick
-              clickHandler && clickHandler(item)
-            }
+            const clickHandler = item.onClick || this.props.onClick
             return (
               <StyledContextMenuItem
-                onClick={onClick}
+                onClick={clickHandler && (() => clickHandler(item))}
                 key={`contextmenu-${index}`}
                 condensed={this.props.condensed}
                 align={this.props.align}

@@ -37,7 +37,9 @@ const Container = styled("div")(
             backgroundColor: darken(theme.color.white, 2),
           },
         }
-      : {}),
+      : {
+          cursor: "default",
+        }),
     "&:not(:first-child)": {
       borderTop: "1px solid",
       borderColor: theme.color.separators.default,
