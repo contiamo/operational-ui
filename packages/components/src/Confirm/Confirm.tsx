@@ -3,16 +3,7 @@ import styled, { keyframes } from "react-emotion"
 import { Card } from "../"
 import { Props as ButtonProps } from "../Button/Button"
 import { OperationalStyleConstants } from "../utils/constants"
-
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-
-  100% {
-    opacity: 1;
-  }
-`
+import Overlay from "../Internals/Overlay"
 
 const fromBottom = keyframes`
   0% {
@@ -22,17 +13,6 @@ const fromBottom = keyframes`
   100% {
     top: 0
   }
-`
-
-const Overlay = styled("div")`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.6);
-  animation: ${fadeIn} 0.2s ease-in;
-  z-index: ${({ theme }: { theme?: OperationalStyleConstants }) => theme.zIndex.confirm};
 `
 
 const Modal = styled(Card)`
