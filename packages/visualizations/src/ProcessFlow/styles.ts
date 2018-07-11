@@ -1,6 +1,6 @@
 import { css } from "glamor"
-import { setBrightness } from "@operational/utils"
 
+import { setBrightness } from "../utils/color"
 import { deprecatedTheme } from "../utils/theme"
 
 const breakdownStyle = {
