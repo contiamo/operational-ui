@@ -1,5 +1,5 @@
 import * as React from "react"
-import { colorMapper } from "../utils/color"
+import { colorMapper } from "../color"
 
 describe("ColorMapper", () => {
   it("should deterministically assign colors to strings", () => {
