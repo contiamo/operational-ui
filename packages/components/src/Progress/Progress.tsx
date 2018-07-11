@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled, { keyframes } from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import { lighten } from "@operational/utils"
+import { lighten } from "../utils"
 import { WithTheme } from "../types"
 import { Icon } from "../"
 
@@ -44,20 +44,18 @@ const fillProgress = keyframes({
   },
 })
 
-const Bar = styled("div")(
-  ({ theme, isError }: { theme?: OperationalStyleConstants; isError: boolean }) => ({
-    width: "100%",
-    height: 3,
-    backgroundColor: theme.deprecated.colors.info,
-    ...(isError
-      ? {
-          backgroundColor: theme.deprecated.colors.error,
-        }
-      : {
-          animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`,
-        }),
-  }),
-)
+const Bar = styled("div")(({ theme, isError }: { theme?: OperationalStyleConstants; isError: boolean }) => ({
+  width: "100%",
+  height: 3,
+  backgroundColor: theme.deprecated.colors.info,
+  ...(isError
+    ? {
+        backgroundColor: theme.deprecated.colors.error,
+      }
+    : {
+        animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`,
+      }),
+}))
 
 const ErrorMessage = styled("div")(({ theme }: WithTheme) => ({
   ...theme.deprecated.typography.body,

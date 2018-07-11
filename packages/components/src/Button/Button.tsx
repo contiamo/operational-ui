@@ -1,9 +1,8 @@
 import * as React from "react"
 import styled, { Interpolation } from "react-emotion"
-import { readableTextColor, darken } from "@operational/utils"
 
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
-import { isWhite, isModifiedEvent } from "../utils"
+import { isWhite, readableTextColor, darken, isModifiedEvent } from "../utils"
 import { OperationalContext, Context, Icon, IconName } from "../"
 import Spinner from "../Spinner/Spinner"
 

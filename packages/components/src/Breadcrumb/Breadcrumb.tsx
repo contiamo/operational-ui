@@ -1,10 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import { darken } from "@operational/utils"
+import { darken, isModifiedEvent } from "../utils"
 import { Icon, IconName, OperationalContext, Context } from "../"
 import { WithTheme, Css, CssStatic } from "../types"
-import { isModifiedEvent } from "../utils"
 
 export interface Props {
   className?: string

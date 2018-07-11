@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { withTheme } from "emotion-theming"
-import { darken } from "@operational/utils"
+import { darken } from "../utils"
 import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
 import Tab, { Props as TabProps } from "../Tab/Tab"

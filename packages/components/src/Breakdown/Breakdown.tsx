@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
-import { setBrightness } from "@operational/utils"
+import { setBrightness } from "../utils"
 import { WithTheme, Css, CssStatic } from "../types"
 import { IconName } from "../"
 

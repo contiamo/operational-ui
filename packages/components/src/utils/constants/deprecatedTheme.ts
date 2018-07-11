@@ -178,12 +178,11 @@ const operational: Theme = {
 }
 
 /*
- * Expands a color expressed either as a custom hex value
- * or a color key to pick from within the theme.colors object.
+ * This version is for use with the old theme, and is deprecated in favour of the new one
  */
 /*
- * This version is for use with the old theme, and is deprecated in favour of the version
- * in @operational/utils which can be used for components that use OperationalStyleConstants rather than Theme
+ * Expands a color expressed either as a custom hex value
+ * or a color key to pick from within the theme.colors object.
  */
 export const expandColor = (theme: Theme, color?: string): string | null => {
   if (!color) {

@@ -1,9 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { readableTextColor } from "@operational/utils"
 
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
 import { colorMapper } from "../utils/color"
+import { readableTextColor } from "../utils"
 import { CardHeader, CardItem } from "../"
 
 export interface Props {
