@@ -35,9 +35,9 @@ const Container = styled("div")(
     width: 250,
     lineHeight: "50px",
     padding: `0 ${theme.space.content}px`,
-    color: "#ffffffcc",
-    backgroundColor: "transparent",
-    boxShadow: "none",
+    color: isOpen ? theme.color.white : "#ffffffcc",
+    backgroundColor: isOpen ? "hsla(0, 0%, 100%, 0.1)" : "transparent",
+    boxShadow: isOpen ? "0 3px 6px rgba(0, 0%, 0%, 0.3)" : "none",
     fontWeight: theme.font.weight.medium,
     display: "flex",
     alignItems: "center",
@@ -45,14 +45,7 @@ const Container = styled("div")(
     "& > div": {
       marginLeft: theme.space.small,
     },
-    ...(isOpen
-      ? {
-          color: theme.color.white,
-          backgroundColor: "hsla(0, 0%, 100%, 0.1)",
-          boxShadow: "0 3px 6px rgba(0, 0%, 0%, 0.3)",
-        }
-      : {}),
-    "&:hover, &.open": {
+    "&:hover": {
       color: theme.color.white,
       backgroundColor: "hsla(0, 0%, 100%, 0.1)",
       boxShadow: "0 3px 6px rgba(0, 0%, 0%, 0.3)",
@@ -70,7 +63,7 @@ const Container = styled("div")(
             borderTopColor: "#ffffff80",
             transform: "translateY(calc(-50% + 2px))",
           },
-          "&:hover, &.open": {
+          "&:hover": {
             color: theme.color.white,
             backgroundColor: "hsla(0, 0%, 100%, 0.1)",
             boxShadow: "0 3px 6px rgba(0, 0%, 0%, 0.3)",
