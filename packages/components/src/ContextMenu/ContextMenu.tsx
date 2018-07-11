@@ -82,11 +82,7 @@ class ContextMenu extends React.Component<Props, State> {
 
     const newIsActive = isTargetInsideMenu
       ? this.props.keepOpenOnItemClick
-        ? true
-        : false
-      : isTargetInsideContainer
-        ? !this.state.isOpen
-        : false
+      : isTargetInsideContainer && !this.state.isOpen
 
     this.setState(prevState => ({
       isOpen: newIsActive,
