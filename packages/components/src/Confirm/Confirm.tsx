@@ -82,12 +82,12 @@ export class Confirm extends React.Component<ConfirmProps, ConfirmState> {
   }
 
   onCancelClick = () => {
-    this.state.onCancel()
+    this.state.onCancel && this.state.onCancel()
     this.closeConfirm()
   }
 
   onActionClick = () => {
-    this.state.onConfirm()
+    this.state.onConfirm && this.state.onConfirm()
     this.closeConfirm()
   }
 
@@ -107,7 +107,7 @@ export class Confirm extends React.Component<ConfirmProps, ConfirmState> {
           </Modal>
         )}
         {children(this.openConfirm)}
-        {isOpen && <Overlay onClick={this.closeConfirm} />}
+        {isOpen && <Overlay onClick={this.onCancelClick} />}
       </>
     )
   }
