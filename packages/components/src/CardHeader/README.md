@@ -72,3 +72,18 @@ Passing `title` and `action` props to the `Card` component can be used as a shor
   <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
 </Card>
 ```
+
+### Usage with spinner
+
+```jsx
+<Card>
+  <CardHeader
+    title="My Card"
+    action={
+      <>
+        Updating<Spinner right size={12} />
+      </>
+    }
+  />
+</Card>
+```
