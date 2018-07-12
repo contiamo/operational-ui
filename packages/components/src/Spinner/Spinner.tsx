@@ -83,18 +83,29 @@ const Container = styled("div")(
  * This additional container is introduced to make transforms set on the main container from the outside
  * (e.g. `styled` helper) do not mess up the rotation origin.
  */
-const AnimationContainer = styled("div")(({ bounce, size }: { bounce?: boolean; size?: number }) => ({
-  margin: 0,
-  lineHeight: 0,
-  width: size || defaultSize,
-  height: size || defaultSize,
-  transformOrigin: "center center",
-  /*
-   * When the bounce animation is used, animation properties are set on the individual bouncing squares,
-   * therefore no animation is set on the container.
-   */
-  animation: bounce ? "none" : `${spinKeyframes} 1.5s infinite linear`,
-}))
+const AnimationContainer = styled("div")`
+  ${({ bounce, size }: { bounce?: boolean; size?: number }) => `
+    margin: 0px;
+    lineHeight: 0;
+    width: ${size || defaultSize}px;
+    height: ${size || defaultSize}px;
+    transform-origin: center center;
+    /*
+     * When the bounce animation is used, animation properties are set on the individual bouncing squares,
+     * therefore no animation is set on the container.
+     */
+    animation: ${bounce ? "none" : `${spinKeyframes} 1.5s infinite linear`};
+  `};
+  & svg {
+    /*
+     * Prevents margins and width assignments to be inherited from the outside, which would cause the spinner
+     * to spin around a transform origin other than its center, leading to highly undesirable looks.
+     */
+    margin: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+`
 
 const RegularSpinner = () => (
   <svg viewBox="0 0 360 360">
