@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled, { keyframes } from "react-emotion"
-import { Card } from "../"
+import Card from "../Card/Card"
 import { Props as ButtonProps } from "../Button/Button"
 import { OperationalStyleConstants } from "../utils/constants"
 import Overlay from "../Internals/Overlay"
