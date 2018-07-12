@@ -18,7 +18,7 @@ export interface Props {
   /** Display caret on opposite side to align prop */
   withCaret?: boolean
   /** Alignment */
-  align: "left" | "right"
+  align?: "left" | "right"
 }
 
 const backgroundColor = "hsla(0, 0%, 100%, 0.1)"

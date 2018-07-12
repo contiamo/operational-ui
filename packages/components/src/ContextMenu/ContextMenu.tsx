@@ -44,7 +44,7 @@ const Container = styled("div")(({ theme, align }: { theme?: OperationalStyleCon
   width: "fit-content",
   display: "flex",
   alignItems: "center",
-  justifyContent: align === "right" ? "flex-end" : "flex-start",
+  justifyContent: align === "left" ? "flex-start" : "flex-end",
 }))
 
 const MenuContainer = styled("div")(
@@ -72,6 +72,10 @@ const StyledContextMenuItem = styled(ContextMenuItem)(
 class ContextMenu extends React.Component<Props, State> {
   state = {
     isOpen: false,
+  }
+
+  defaultProps = {
+    align: "left",
   }
 
   containerNode: any
