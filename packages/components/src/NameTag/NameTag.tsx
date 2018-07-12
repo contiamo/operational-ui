@@ -3,9 +3,11 @@ import styled from "react-emotion"
 import { readableTextColor } from "@operational/utils"
 
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
+import { colorMapper } from "../utils/color"
 import { CardHeader, CardItem } from "../"
 
 export interface Props {
+  /** Background color */
   color?: string
   /**
    * Indicates that this component is left of other content, and adds an appropriate right margin.
@@ -15,7 +17,10 @@ export interface Props {
    * Indicates that this component is right of other content, and adds an appropriate left margin.
    */
   right?: boolean
-  children?: React.ReactNode
+  /**
+   * Children to this component are expected to be a plain string
+   */
+  children?: string
 }
 
 const Container = styled("div")(
@@ -24,13 +29,19 @@ const Container = styled("div")(
     color,
     left,
     right,
+    children,
+    assignColor,
   }: {
     theme?: OperationalStyleConstants
     color?: Props["color"]
     left?: Props["left"]
     right?: Props["right"]
+    children: string
+    assignColor: boolean
   }) => {
-    const backgroundColor = expandColor(theme, color) || theme.color.primary
+    const backgroundColor = assignColor
+      ? colorMapper(theme.color.palette)(children)
+      : expandColor(theme, color) || theme.color.primary
     const textColor = readableTextColor(backgroundColor, [theme.color.white, theme.color.black])
     return {
       backgroundColor,
@@ -49,6 +60,14 @@ const Container = styled("div")(
   },
 )
 
-const NameTag: React.SFC<Props> = props => <Container {...props}>{props.children}</Container>
+const NameTag: React.SFC<Props> = props => (
+  <Container {...props} assignColor={Boolean(!props.color)}>
+    {props.children}
+  </Container>
+)
+
+NameTag.defaultProps = {
+  children: "",
+}
 
 export default NameTag
