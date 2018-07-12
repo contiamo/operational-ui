@@ -20,7 +20,7 @@ const Container = styled("div")(
   }: {
     theme?: OperationalStyleConstants
     clickable: boolean
-    condensed: boolean
+    condensed: Props["condensed"]
   }): any => ({
     label: "contextmenuitem",
     width: (condensed ? 160 : 250) - theme.space.small * 2,

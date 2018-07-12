@@ -27,9 +27,9 @@ const Container = styled("div")(
     withCaret,
   }: {
     theme?: OperationalStyleConstants
-    align: "left" | "right"
+    align: Props["align"]
     isOpen: boolean
-    withCaret: boolean
+    withCaret: Props["withCaret"]
   }) => ({
     width: 250,
     lineHeight: "50px",
