@@ -6,6 +6,11 @@ import { OperationalStyleConstants } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
 import ContextMenuItem from "./ContextMenu.Item"
 
+export interface Item {
+  label: string
+  onClick?: (item: string | Item) => void
+}
+
 export interface Props {
   /** Id */
   id?: string
@@ -17,13 +22,13 @@ export interface Props {
   /** Condensed mode */
   condensed?: boolean
   /** onClick method for all menu items */
-  onClick?: (item?: any) => void
+  onClick?: (item?: string | Item) => void
   /** Handles click events anywhere outside the context menu container, including menu items. */
   onOutsideClick?: () => void
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
   keepOpenOnItemClick?: boolean
   /** Menu items */
-  items?: any[]
+  items?: (string | Item)[]
   /** Alignment */
   align?: "left" | "right"
 }
@@ -114,8 +119,8 @@ class ContextMenu extends React.Component<Props, State> {
           }}
           isExpanded={this.props.open || this.state.isOpen}
         >
-          {(this.props.items || []).map((item: any, index: number) => {
-            const clickHandler = item.onClick || this.props.onClick
+          {this.props.items.map((item: string | Item, index: number) => {
+            const clickHandler = (typeof item !== "string" && item.onClick) || this.props.onClick
             return (
               <StyledContextMenuItem
                 onClick={clickHandler && (() => clickHandler(item))}
@@ -123,7 +128,7 @@ class ContextMenu extends React.Component<Props, State> {
                 condensed={this.props.condensed}
                 align={this.props.align}
               >
-                {item.label || item}
+                {typeof item === "string" ? item : item.label}
               </StyledContextMenuItem>
             )
           })}

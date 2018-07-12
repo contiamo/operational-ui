@@ -3,13 +3,18 @@ import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
 import { ContextMenu } from "../"
 
+export interface Item {
+  label: string
+  onClick?: (item: string | Item) => void
+}
+
 export interface Props {
   /** Clickable component(s) from which menu appears  */
   children: React.ReactNode[]
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
   onClick?: any
   /** Items to display in dropdown */
-  items?: any[]
+  items?: (string | Item)[]
   /** Display caret on opposite side to align prop */
   withCaret?: boolean
   /** Alignment */
