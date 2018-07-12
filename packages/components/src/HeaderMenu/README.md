@@ -3,8 +3,6 @@ Menus that drop down from the header bar, i.e. project selectors, and user menus
 ### Usage
 
 ```jsx
-const { ContextMenuItem } = require("../")
-
 const projectOptions = [
   { key: "project1", label: "Project 1" },
   { key: "project2", label: "Project 2" },
