@@ -1,4 +1,4 @@
-import { ClickPayload, D3Selection, EventBus, State, StateWriter } from "./typings"
+import { D3Selection, EventBus, State, StateWriter } from "./typings"
 import Events from "../shared/event_catalog"
 import { approxZero, stepFunction } from "../utils/font_sizing_utils"
 
@@ -16,7 +16,7 @@ class RootLabel {
     this.events.on(Events.FOCUS.ELEMENT.CLICK, this.update.bind(this))
   }
 
-  private update(payload: ClickPayload): void {
+  private update(): void {
     const computed = this.state.current.get("computed")
     const config = this.state.current.get("config")
     const renderer = computed.renderer

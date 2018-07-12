@@ -10,7 +10,7 @@ import "d3-transition"
 import { interpolate as d3Interpolate, interpolateObject as d3InterpolateObject } from "d3-interpolate"
 import { arc as d3Arc } from "d3-shape"
 import { scaleLinear as d3ScaleLinear } from "d3-scale"
-import { withD3Element, transitionIfVisible, onTransitionEnd } from "../utils/d3_utils"
+import { withD3Element, onTransitionEnd } from "../utils/d3_utils"
 
 const arrowPath: string = "M-5 0 L0 -5 L5 0 M-4 -5 L0 -9 L4 -5 M-3 -10 L0 -13 L3 -10"
 const spaceForArrow: number = 20
@@ -68,7 +68,8 @@ class Renderer {
           .attrTween("d", this.removeArcTween.bind(this))
           .style("opacity", 1e-6)
           .remove()
-          .call(onTransitionEnd, this.updateZoom.bind(this))
+
+    this.updateZoom()
   }
 
   private updateZoom(): void {
@@ -329,10 +330,15 @@ class Renderer {
     }, 0)(this.dataHandler.topNode.children)
     const isSurrounded = zoomNode === this.dataHandler.topNode && zoomNode.value === totalRootChildValue
 
-    transitionIfVisible(this.el.select(`circle.${styles.centerCircle}`), config.duration).attr(
-      "r",
-      innerRadius * (isSurrounded ? 1 : config.centerCircleRadius),
-    )
+    document.hidden || config.disableAnimations
+      ? this.el
+          .select(`circle.${styles.centerCircle}`)
+          .attr("r", innerRadius * (isSurrounded ? 1 : config.centerCircleRadius))
+      : this.el
+          .select(`circle.${styles.centerCircle}`)
+          .transition()
+          .duration(config.duration)
+          .attr("r", innerRadius * (isSurrounded ? 1 : config.centerCircleRadius))
 
     // If no payload has been sent (resetting zoom) and the chart hasn't already been zoomed
     // (occurs when no zoom config is passed in from the outside)

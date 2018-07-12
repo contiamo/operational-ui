@@ -27,12 +27,6 @@ const transitionIfDuration = (selection: D3SelectionOrTransition, duration?: num
   return duration != null ? selection.transition().duration(duration) : selection
 }
 
-// Only animates transitions if the document can be seen
-// N.B. can only be used if no attribute interpolation required
-export const transitionIfVisible = (selection: D3Selection, duration: number) => {
-  return document.hidden ? selection : selection.transition().duration(duration)
-}
-
 // Helper function to trigger a callback function when all elements of a selection have finished transitioning
 // @TODO Add a simple unit test for this to avoid off-by-one errors
 export const onTransitionEnd = (selection: D3Transition, func?: () => void): any => {
