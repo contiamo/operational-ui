@@ -28,7 +28,7 @@ export interface Props {
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
   keepOpenOnItemClick?: boolean
   /** Menu items */
-  items?: (string | Item)[]
+  items: (string | Item)[]
   /** Alignment */
   align?: "left" | "right"
 }
@@ -103,6 +103,11 @@ class ContextMenu extends React.Component<Props, State> {
   }
 
   render() {
+    {
+      if (!this.props.items) {
+        throw new Error("No array of items has been provided for the ContextMenu.")
+      }
+    }
     return (
       <Container
         innerRef={node => {

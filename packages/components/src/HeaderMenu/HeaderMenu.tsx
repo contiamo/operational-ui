@@ -14,7 +14,7 @@ export interface Props {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
   onClick?: any
   /** Items to display in dropdown */
-  items?: (string | Item)[]
+  items: (string | Item)[]
   /** Display caret on opposite side to align prop */
   withCaret?: boolean
   /** Alignment */
@@ -81,6 +81,11 @@ const Container = styled("div")(
 )
 
 const HeaderMenu: React.SFC<Props> = (props: Props) => {
+  {
+    if (!props.items) {
+      throw new Error("No array of items has been provided for the HeaderMenu.")
+    }
+  }
   return (
     <ContextMenu {...props}>
       {isOpen => (
