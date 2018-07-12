@@ -4,7 +4,7 @@ import { OperationalStyleConstants } from "../utils/constants"
 import { ContextMenu } from "../"
 
 export interface Props {
-  /** Options to display in dropdown */
+  /** Clickable component(s) from which menu appears  */
   children: React.ReactNode[]
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
   onClick?: any
