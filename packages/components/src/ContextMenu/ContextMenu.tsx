@@ -103,11 +103,10 @@ class ContextMenu extends React.Component<Props, State> {
   }
 
   render() {
-    {
-      if (!this.props.items) {
-        throw new Error("No array of items has been provided for the ContextMenu.")
-      }
+    if (!this.props.items) {
+      throw new Error("No array of items has been provided for the ContextMenu.")
     }
+
     return (
       <Container
         innerRef={node => {

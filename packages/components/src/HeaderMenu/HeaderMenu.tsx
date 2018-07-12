@@ -81,11 +81,6 @@ const Container = styled("div")(
 )
 
 const HeaderMenu: React.SFC<Props> = (props: Props) => {
-  {
-    if (!props.items) {
-      throw new Error("No array of items has been provided for the HeaderMenu.")
-    }
-  }
   return (
     <ContextMenu {...props}>
       {isOpen => (
