@@ -21,16 +21,3 @@ Using a `to` prop navigates automatically, and render proper anchor tags with hr
   <Breadcrumb>Subpage 1</Breadcrumb>
 </Breadcrumbs>
 ```
-
-### Usage with context menu
-
-```jsx
-const Breadcrumb = require("../Breadcrumb/Breadcrumb").default
-const items = ["Item 1", "Item 2", "Item 3"]
-;<Breadcrumbs>
-  <ContextMenu css={{ display: "inline-block", margin: 0 }} items={items} condensed>
-    <Breadcrumb icon="ChevronDown">Hello</Breadcrumb>
-  </ContextMenu>
-  <Breadcrumb>Good Bye</Breadcrumb>
-</Breadcrumbs>
-```
