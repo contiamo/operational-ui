@@ -1,6 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
+import { colorMapper } from "../utils/color"
 import { readableTextColor, getInitials } from "@operational/utils"
 
 export interface Props {
@@ -67,7 +68,7 @@ const Picture = styled("div")(
   }: {
     theme?: OperationalStyleConstants
     color?: Props["color"]
-    colorAssignment?: number
+    colorAssignment?: string
     photo?: Props["photo"]
     showName: Props["showName"]
     addBorder: Props["addBorder"]
@@ -76,7 +77,7 @@ const Picture = styled("div")(
     const defaultColor: string = theme.color.primary
     const fixedBackgroundColor: string = color ? expandColor(theme, color) || defaultColor : defaultColor
     const assignedBackgroundColor: null | string = colorAssignment
-      ? theme.color.palette[colorAssignment % theme.color.palette.length]
+      ? colorMapper(theme.color.palette)(colorAssignment)
       : null
     const backgroundColor = assignedBackgroundColor || fixedBackgroundColor
     const textColor = readableTextColor(backgroundColor, [theme.color.text.default, "white"])
@@ -119,19 +120,12 @@ const Picture = styled("div")(
 
 const Avatar: React.SFC<Props> = props => {
   const initials = getInitials(props.name)
-  const colorAssignmentNumber =
-    props.assignColor && !props.color
-      ? [initials.charCodeAt(0), initials.charCodeAt(1)].reduce(
-          (accumulator, current) => accumulator + (!current || isNaN(current) ? 0 : current),
-          0,
-        )
-      : undefined
   return (
     <Container {...props}>
       <Picture
         photo={props.photo}
         color={props.color}
-        colorAssignment={colorAssignmentNumber}
+        colorAssignment={!props.color ? props.name : undefined}
         showName={props.showName}
         size={props.size}
         addBorder={props.addBorder}
