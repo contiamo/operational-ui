@@ -12,7 +12,7 @@ export interface Props {
   /** Clickable component(s) from which menu appears  */
   children: React.ReactNode[]
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
-  onClick?: any
+  onClick?: (item?: string | Item) => void
   /** Items to display in dropdown */
   items: (string | Item)[]
   /** Display caret on opposite side to align prop */
