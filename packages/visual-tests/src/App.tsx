@@ -20,8 +20,6 @@ import {
   PageContent,
 } from "@operational/components"
 
-import { darken } from "@operational/utils"
-
 import Marathon, { MarathonEnvironment } from "./Marathon"
 import MarathonRenderer from "./MarathonRenderer"
 import allTestCases, { fromHash, toHash } from "./TestCases"

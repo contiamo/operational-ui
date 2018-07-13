@@ -1,5 +1,4 @@
 import * as React from "react"
-import { injectStylesheet, baseStylesheet } from "@operational/utils"
 import { operational } from "@operational/theme"
 import { defaults, flatten, flow, map, uniq } from "lodash/fp"
 
@@ -404,11 +403,13 @@ const data = {
 }
 
 const journeys = unloop(data.journeys)
+
 const nodeIds = flow(
   map((journey: any): string[] => journey.path),
   flatten,
   uniq,
 )(journeys)
+
 const nodes = map((nodeId: string) => {
   const baseId: string = nodeId.split("+")[0]
   const baseNode = data.nodes.find(d => d.id === baseId)
@@ -416,10 +417,13 @@ const nodes = map((nodeId: string) => {
 })(nodeIds)
 
 const viz: ProcessFlow = new ProcessFlow(containerNode)
+
 viz.data({ journeys, nodes })
+
 viz.accessors("node", {
   label: (d: any) => `Node id: ${d.id}`,
 })
+
 viz.config({
   focusElement: {
     type: "path",

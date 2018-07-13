@@ -4,7 +4,7 @@ import styled from "react-emotion"
 import { Label, LabelText, inputFocus } from "../utils/mixins"
 import SelectOption from "./Select.Option"
 import SelectFilter from "./Select.Filter"
-import { readableTextColor, fadeIn, resetTransform } from "@operational/utils"
+import { readableTextColor, fadeIn, resetTransform } from "../utils"
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
 
 export type Value = number | string

@@ -16,7 +16,7 @@ import * as styles from "./styles"
 import { Selection, select } from "d3-selection"
 import { arc as d3Arc, Arc, pie as d3Pie, Pie, PieArcDatum } from "d3-shape"
 import { interpolateObject } from "d3-interpolate"
-import { colorAssigner } from "@operational/utils"
+import { colorAssigner } from "../../utils/colorAssigner"
 import { withD3Element } from "../../utils/d3_utils"
 import { approxZero, stepFunction } from "../../utils/font_sizing_utils"
 

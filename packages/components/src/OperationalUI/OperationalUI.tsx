@@ -3,7 +3,7 @@ import { injectGlobal } from "emotion"
 import { ThemeProvider } from "emotion-theming"
 
 import constants, { OperationalStyleConstants } from "../utils/constants"
-import { darken } from "@operational/utils"
+import { darken } from "../utils"
 import { MessageType } from "../types"
 import Messages from "../Messages/Messages"
 import MessageComponent from "../Message/Message"

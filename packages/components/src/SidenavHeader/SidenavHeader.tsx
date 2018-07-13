@@ -1,8 +1,7 @@
 import * as React from "react"
 import styled, { Interpolation } from "react-emotion"
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
-import { fadeIn } from "@operational/utils"
-import { isModifiedEvent } from "../utils"
+import { isModifiedEvent, fadeIn } from "../utils"
 import { Icon, IconName, OperationalContext, Context } from "../"
 import { Props as SidenavItemProps } from "../SidenavItem/SidenavItem"
 

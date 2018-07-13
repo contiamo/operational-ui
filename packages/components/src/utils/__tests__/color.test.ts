@@ -1,4 +1,4 @@
-import { readableTextColor, darken, lighten, setBrightness } from "../index"
+import { readableTextColor, darken, lighten, setBrightness } from "../color"
 
 xdescribe("Color utils", () => {
   it("Should give me a readable text color against a presented background color", () => {

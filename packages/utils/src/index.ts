@@ -1,5 +1,0 @@
-export * from "./styles"
-export * from "./color"
-export * from "./d3"
-export * from "./colorAssigner"
-export * from "./text"

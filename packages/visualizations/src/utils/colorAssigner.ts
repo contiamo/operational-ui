@@ -1,4 +1,4 @@
-interface UsageCount {
+export interface UsageCount {
   [key: string]: number
 }
 

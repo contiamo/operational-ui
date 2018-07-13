@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { readableTextColor } from "@operational/utils"
+import { readableTextColor } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import deprecate from "../utils/deprecate"
 

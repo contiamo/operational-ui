@@ -2,7 +2,7 @@ import { ClickPayload, D3Selection, Datum, EventBus, HoverPayload, State, StateW
 import Events from "../shared/event_catalog"
 import { clone, defaults, isEmpty, isObject, last } from "lodash/fp"
 import * as styles from "./styles"
-import { readableTextColor } from "@operational/utils"
+import { readableTextColor } from "../utils/color"
 
 const ARROW_WIDTH: number = 7
 const HOPS_WIDTH: number = 40

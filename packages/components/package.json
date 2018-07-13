@@ -32,7 +32,6 @@
     "react-dom": "^16.2.0"
   },
   "dependencies": {
-    "@operational/utils": "^5.0.0",
     "emotion": "^9.2.3",
     "emotion-theming": "^9.2.3",
     "moment": "^2.19.0",

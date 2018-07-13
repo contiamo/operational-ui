@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { readableTextColor, spin, fadeIn, resetTransform } from "@operational/utils"
+import { readableTextColor, spin, fadeIn, resetTransform } from "../utils"
 import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
 import * as mixins from "../utils/mixins"
 

@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import { readableTextColor, darken } from "@operational/utils"
+import { readableTextColor, darken } from "../utils"
 import { WithTheme, Css, CssStatic } from "../types"
 
 export interface Props {

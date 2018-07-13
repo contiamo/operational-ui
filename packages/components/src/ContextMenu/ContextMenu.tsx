@@ -1,6 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { fadeIn } from "@operational/utils"
+
+import { fadeIn } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import { WithTheme, Css, CssStatic } from "../types"
 

@@ -1,10 +1,7 @@
 import * as React from "react"
 import { render } from "react-dom"
-import { injectStylesheet, baseStylesheet } from "@operational/utils"
 import { operational } from "@operational/theme"
 import { OperationalUI } from "@operational/components"
-
-injectStylesheet(baseStylesheet(operational))
 
 const containerNode = document.getElementById("app")
 const containerNode2 = document.getElementById("app2")
@@ -207,6 +204,7 @@ const createData: any = () => {
 }
 
 const data = createData()
+
 const App = () => (
   <OperationalUI>
     <VisualizationWrapper
@@ -216,6 +214,7 @@ const App = () => (
     />
   </OperationalUI>
 )
+
 render(<App />, containerNode)
 
 // setTimeout(() => {

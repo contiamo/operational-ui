@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import { darken } from "@operational/utils"
+import { darken } from "../utils"
 import { Icon } from "../"
 
 export interface Props {

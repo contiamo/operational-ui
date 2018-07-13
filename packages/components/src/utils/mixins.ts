@@ -1,6 +1,6 @@
 import React from "react"
-import styled from "react-emotion"
-import { lighten } from "@operational/utils"
+import styled, { keyframes } from "react-emotion"
+import { lighten } from "../utils"
 import { OperationalStyleConstants } from "./constants"
 import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
 
@@ -88,3 +88,29 @@ export const FormFieldError = styled("div")(({ theme }: { theme?: OperationalSty
   left: 0,
   zIndex: theme.zIndex.formFieldError,
 }))
+
+export const fadeIn = keyframes({
+  from: {
+    opacity: 0,
+    transform: "translate3d(0, -6px, 0)",
+  },
+  to: {
+    opacity: 1,
+    transform: "translate3d(0, 0, 0)",
+  },
+})
+
+export const resetTransform = keyframes({
+  to: {
+    transform: "none",
+  },
+})
+
+export const spin = keyframes({
+  from: {
+    transform: "rotate(0deg)",
+  },
+  to: {
+    transform: "rotate(359deg)",
+  },
+})

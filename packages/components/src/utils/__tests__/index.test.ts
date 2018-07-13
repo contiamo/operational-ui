@@ -1,4 +1,4 @@
-import { getInitials } from "../text"
+import { getInitials } from "../"
 
 describe("text", () => {
   describe("getInitial", () => {
