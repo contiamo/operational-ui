@@ -59,17 +59,19 @@ class Renderer {
   }
 
   private exit(arcs: D3Selection, duration: number, disableAnimations: boolean): void {
-    disableAnimations
-      ? arcs.exit().remove()
-      : arcs
-          .exit()
-          .transition()
-          .duration(duration)
-          .attrTween("d", this.removeArcTween.bind(this))
-          .style("opacity", 1e-6)
-          .remove()
-
-    this.updateZoom()
+    if (disableAnimations) {
+      arcs.exit().remove()
+      this.updateZoom()
+    } else {
+      arcs
+        .exit()
+        .transition()
+        .duration(duration)
+        .attrTween("d", this.removeArcTween.bind(this))
+        .style("opacity", 1e-6)
+        .remove()
+        .call(onTransitionEnd, this.updateZoom.bind(this))
+    }
   }
 
   private updateZoom(): void {
