@@ -2,23 +2,19 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
 import { ContextMenu } from "../"
-
-export interface Item {
-  label: string
-  onClick?: (item: string | Item) => void
-}
+import { Props as CMProps, Item } from "../ContextMenu/ContextMenu"
 
 export interface Props {
   /** Clickable component(s) from which menu appears  */
   children: React.ReactNode[]
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
-  onClick?: (item?: string | Item) => void
+  onClick?: CMProps["onClick"]
   /** Items to display in dropdown */
-  items: (string | Item)[]
+  items: CMProps["items"]
   /** Display caret on opposite side to align prop */
   withCaret?: boolean
   /** Alignment */
-  align?: "left" | "right"
+  align?: CMProps["align"]
 }
 
 const backgroundColor = "hsla(0, 0%, 100%, 0.1)"
