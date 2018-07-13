@@ -113,6 +113,7 @@ const Button = (props: Props) => {
       {ctx => (
         <ContainerComponent
           {...props}
+          href={props.to}
           onClick={(ev: React.SyntheticEvent<Node>) => {
             if (props.disabled) {
               ev.preventDefault()
