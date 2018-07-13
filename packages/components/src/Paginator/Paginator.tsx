@@ -83,6 +83,7 @@ const getRange = ({ page, itemCount, itemsPerPage }: Props) => {
 
 const Container = styled("div")({
   label: "paginator",
+  marginTop: 20,
   "& [role=button]": {
     display: "flex",
     alignItems: "center",
