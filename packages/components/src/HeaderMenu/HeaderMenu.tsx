@@ -1,8 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import { ContextMenu } from "../"
-import { Props as CMProps, Item } from "../ContextMenu/ContextMenu"
+import ContextMenu, { Props as CMProps } from "../ContextMenu/ContextMenu"
 
 export interface Props {
   /** Clickable component(s) from which menu appears  */
