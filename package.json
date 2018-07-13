@@ -15,6 +15,7 @@
     "build": "run-s build:*",
     "build:clean": "rimraf dist",
     "build:components": "lerna run --scope @operational/components docs:build && cp -r packages/components/styleguide ./dist",
+    "build:visual-tests": "lerna run --scope @operational/visualizations build:visual-tests && cp -r packages/visualizations/dist ./dist/visual-tests",
     "build:cname": "cp CNAME dist",
     "clean": "lerna clean",
     "test": "run-s \"test:* -- -- --maxWorkers=$JEST_MAX_WORKERS\"",

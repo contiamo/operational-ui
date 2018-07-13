@@ -12,7 +12,8 @@
   },
   "scripts": {
     "start": "parcel scripts/dev-server/index.html",
-    "start:visual:tests": "parcel visual-tests/index.html",
+    "start:visual-tests": "parcel visual-tests/index.html",
+    "build:visual-tests": "parcel build visual-tests/index.html --public-url .",
     "test": "jest",
     "test:watch": "jest --watch",
     "package": "rimraf lib && tsc",
