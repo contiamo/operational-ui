@@ -15,7 +15,7 @@
     "build": "run-s build:*",
     "build:clean": "rimraf dist",
     "build:components": "lerna run --scope @operational/components docs:build && cp -r packages/components/styleguide ./dist",
-    "build:visual-test": "lerna run --scope @operational/visual-tests build && cp -r packages/visual-tests/dist/ ./dist/visual-tests",
+    "build:visual-tests": "lerna run --scope @operational/visualizations build:visual-tests && cp -r packages/visualizations/dist ./dist/visual-tests",
     "build:cname": "cp CNAME dist",
     "clean": "lerna clean",
     "test": "run-s \"test:* -- -- --maxWorkers=$JEST_MAX_WORKERS\"",
@@ -27,7 +27,6 @@
     "package": "run-s package:*",
     "package:components": "lerna run --scope @operational/components package",
     "package:visualizations": "lerna run --scope @operational/visualizations package",
-    "package:visual-tests": "lerna run --scope @operational/visual-tests package",
     "precommit": "lint-staged",
     "publish": "lerna publish",
     "next": "npm run publish -- --canary --npm-tag=next --skip-git --yes",
@@ -37,7 +36,7 @@
     "deploy": "gh-pages -d dist"
   },
   "lint-staged": {
-    "*.(js|jsx|json|html|md)": [
+    "*.(js|jsx|json|md)": [
       "prettier --write",
       "git add"
     ],

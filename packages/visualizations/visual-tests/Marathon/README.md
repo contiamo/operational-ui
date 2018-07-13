@@ -8,7 +8,7 @@ Define a test like so:
 
 ```js
 const test = ({ container, test, expect }) => {
-  container.innerHTML = "<p>Hello</p>"  
+  container.innerHTML = "<p>Hello</p>"
 
   test("injected some html", () => {
     expect(container.querySelector("p").innerText).toBe("Hello")
@@ -16,13 +16,14 @@ const test = ({ container, test, expect }) => {
 }
 ```
 
-Available test environment methods: 
-* `test`: may be used synchronously or with the `done` callback (promises not supported) 
-* `expect`: only `.toBe` method is supported, checking shallow equality (primitives recommended)
-* `beforeEach`
-* `afterEach`
-* `beforeAll`
-* `afterAll`
+Available test environment methods:
+
+- `test`: may be used synchronously or with the `done` callback (promises not supported)
+- `expect`: only `.toBe` method is supported, checking shallow equality (primitives recommended)
+- `beforeEach`
+- `afterEach`
+- `beforeAll`
+- `afterAll`
 
 Run it inside marathon:
 
