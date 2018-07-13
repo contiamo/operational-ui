@@ -14,33 +14,33 @@ const Container = styled("div")(
     onClick,
     condensed,
   }: {
-      theme?: OperationalStyleConstants
-      onClick?: () => void
-      condensed: Props["condensed"]
-    }): any => ({
-      label: "contextmenuitem",
-      width: (condensed ? 160 : 250) - theme.space.small * 2,
-      whiteSpace: "nowrap",
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      color: theme.color.text.default,
-      lineHeight: `${condensed ? 33 : 44}px`,
-      padding: `0 ${theme.space.small}px`,
-      ...(!!onClick
-        ? {
+    theme?: OperationalStyleConstants
+    onClick?: () => void
+    condensed: Props["condensed"]
+  }) => ({
+    label: "contextmenuitem",
+    width: (condensed ? 160 : 250) - theme.space.small * 2,
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    color: theme.color.text.default,
+    lineHeight: `${condensed ? 33 : 44}px`,
+    padding: `0 ${theme.space.small}px`,
+    ...(!!onClick
+      ? {
           cursor: "pointer",
           "&:hover": {
             backgroundColor: darken(theme.color.white, 2),
           },
         }
-        : {
+      : {
           cursor: "default",
         }),
-      "&:not(:first-child)": {
-        borderTop: "1px solid",
-        borderColor: theme.color.separators.default,
-      },
-    }),
+    "&:not(:first-child)": {
+      borderTop: "1px solid",
+      borderColor: theme.color.separators.default,
+    },
+  }),
 )
 
 const ContextMenuItem: React.SFC<Props> = props => (
