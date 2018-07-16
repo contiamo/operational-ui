@@ -147,8 +147,10 @@ class ChartFacade implements Facade {
   }
 
   config(config?: Partial<ChartConfig>): ChartConfig {
-    // Changing the palette config only updates the legendColor accessor if the default is still be used.
-    // It will not overwrite a user-defined legendColor accessor.
+    /**
+     * Changing the palette config only updates the legendColor accessor if the default is still be used.
+     * It will not overwrite a user-defined legendColor accessor.
+     */
     if (config.palette && !this.customColorAccessor) {
       this.state.accessors("series", { legendColor: defaultColorAssigner(config.palette) })
     }
