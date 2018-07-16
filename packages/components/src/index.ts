@@ -54,6 +54,7 @@ export { default as Tabs } from "./Tabs/Tabs"
 export { default as Table } from "./Table/Table"
 export { default as Textarea } from "./Textarea/Textarea"
 export { default as Tooltip } from "./Tooltip/Tooltip"
+export { default as Tree } from "./Tree/Tree"
 export { Title, Heading1, Heading2, Small, Body } from "./Typography/Typography"
 
 export default OperationalUI
