@@ -8,6 +8,9 @@ This component displays an indicator of status.
     <Status success />Deployed
   </Card>
   <Card>
+    <Status running />Running
+  </Card>
+  <Card>
     <Status error />Offline
   </Card>
   <Card>
