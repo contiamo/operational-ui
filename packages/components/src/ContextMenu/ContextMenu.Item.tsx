@@ -19,13 +19,13 @@ const Container = styled("div")(
     condensed: Props["condensed"]
   }) => ({
     label: "contextmenuitem",
-    width: (condensed ? 160 : 250) - theme.space.small * 2,
+    width: condensed ? 160 : 250,
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
     color: theme.color.text.default,
     lineHeight: `${condensed ? 33 : 44}px`,
-    padding: `0 ${theme.space.small}px`,
+    padding: `0 ${theme.space.content}px`,
     ...(!!onClick
       ? {
           cursor: "pointer",

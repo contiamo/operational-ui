@@ -54,7 +54,6 @@ const MenuContainer = styled("div")(
     left: 0,
     boxShadow: theme.shadows.popup,
     zIndex: theme.zIndex.selectOptions,
-    padding: `0 ${theme.space.small}px`,
     backgroundColor: theme.color.white,
     width: "fit-content",
     display: isExpanded ? "block" : "none",
