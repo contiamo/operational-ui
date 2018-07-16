@@ -61,7 +61,7 @@ const textColors = {
  */
 const borderColors = {
   default: "#c0c0c0",
-  disabled: "#e8e8e8",
+  disabled: "#d8d8d8",
 }
 
 /**
