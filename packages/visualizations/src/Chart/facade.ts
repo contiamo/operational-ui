@@ -7,7 +7,7 @@ import Events from "../shared/event_catalog"
 import StateHandler from "../shared/state_handler"
 import EventEmitter from "../shared/event_bus"
 import { colorAssigner } from "../utils/colorAssigner"
-import { deprecatedTheme } from "../utils/theme"
+import theme from "../utils/constants"
 import { has, isEmpty, uniqueId } from "lodash/fp"
 import defaultNumberFormatter from "../utils/number_formatter"
 
@@ -41,7 +41,7 @@ const defaultConfig = (): ChartConfig => {
     minBarWidth: 3,
     numberFormatter: defaultNumberFormatter,
     outerBarSpacing: 10,
-    palette: deprecatedTheme.palettes.qualitative.generic,
+    palette: theme.palettes.qualitative.generic,
     showComponentFocus: false,
     timeAxisPriority: ["x1", "x2", "y1", "y2"],
     uid: uniqueId("chart"),

@@ -1,9 +1,9 @@
 import { css } from "glamor"
-import { deprecatedTheme } from "../../utils/theme"
+import theme from "../../utils/constants"
 
 const labelStyle = {
-  fill: deprecatedTheme.colors.gray,
-  fontFamily: deprecatedTheme.fontFamily,
+  fill: theme.colors.axis.label,
+  fontFamily: theme.font.family,
   "&.weekend": {
     fill: "#9d261d",
   },
@@ -13,7 +13,7 @@ const labelStyle = {
 }
 
 const borderStyle = {
-  stroke: deprecatedTheme.colors.border,
+  stroke: theme.colors.axis.border,
   shapeRendering: "crispedges",
 }
 
@@ -22,7 +22,7 @@ const componentRectStyle = {
 }
 
 const rulesStyle = {
-  stroke: deprecatedTheme.colors.lightGray,
+  stroke: theme.colors.axis.rules,
   strokeWidth: "1",
   shapeRendering: "crispedges",
   "&.zero": {
@@ -31,7 +31,7 @@ const rulesStyle = {
 }
 
 const tickStyle = {
-  stroke: deprecatedTheme.colors.border,
+  stroke: theme.colors.axis.border,
   strokeWidth: "1",
   shapeRendering: "crispedges",
   "&.zero": {

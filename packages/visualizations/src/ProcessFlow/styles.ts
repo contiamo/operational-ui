@@ -1,7 +1,7 @@
 import { css } from "glamor"
 
 import { setBrightness } from "../utils/color"
-import { deprecatedTheme } from "../utils/theme"
+import theme from "../utils/constants"
 
 const breakdownStyle = {
   maxWidth: "300px",
@@ -17,15 +17,15 @@ const breakdownsContainerStyle = {
 
 const breakdownContainerStyle = {
   padding: `2%`,
-  background: deprecatedTheme.colors.white,
+  background: theme.colors.white,
   width: "46%",
   float: "left",
 }
 
 const breakdownLabelStyle = {
-  ...deprecatedTheme.typography.small,
+  ...theme.font.small,
   display: "block",
-  marginBottom: deprecatedTheme.spacing / 4,
+  marginBottom: theme.space.small,
 }
 
 const breakdownCommentLabelStyle = {
@@ -37,7 +37,7 @@ const breakdownBackgroundBarStyle = {
   width: "100%",
   fontSize: 12,
   overflow: "hidden",
-  backgroundColor: deprecatedTheme.colors.lightGray,
+  backgroundColor: theme.colors.lightGrey,
 }
 
 const breakdownBarStyle = {
@@ -49,17 +49,17 @@ const breakdownBarStyle = {
   display: "block",
   height: "100%",
   pointerEvents: "none",
-  backgroundColor: setBrightness(deprecatedTheme.colors.info, 145),
+  backgroundColor: setBrightness(theme.colors.primary, 145),
 }
 
 const breakdownTextStyle = {
-  ...deprecatedTheme.typography.small,
+  ...theme.font.small,
   lineHeight: 1,
-  color: deprecatedTheme.colors.gray,
+  color: theme.font.color,
   position: "relative",
   top: 1,
   fontWeight: 400,
-  padding: `${deprecatedTheme.spacing / 4}px ${deprecatedTheme.spacing / 2}px`,
+  padding: `${theme.space.small}px ${theme.space.default}px`,
 }
 
 const titleStyle = {

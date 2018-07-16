@@ -1,14 +1,14 @@
 import { css } from "glamor"
-import { deprecatedTheme } from "../utils/theme"
+import theme from "../utils/constants"
 
 const focusGroupStyle = {
   strokeWidth: "1.5px",
   "& line": {
-    stroke: deprecatedTheme.colors.gray,
+    stroke: theme.colors.focus.stroke,
     shapeRenderering: "crispEdges",
   },
   "& circle": {
-    stroke: "#fff",
+    stroke: theme.colors.white,
   },
 }
 

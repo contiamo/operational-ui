@@ -1,5 +1,5 @@
 import { css } from "glamor"
-import { deprecatedTheme } from "../../utils/theme"
+import theme from "../../utils/constants"
 
 const arcStyle = {
   stroke: "#fff",
@@ -11,19 +11,19 @@ const labelStyle = {
   fill: "#333",
   stroke: "none",
   pointerEvents: "none",
-  ...deprecatedTheme.typography.small,
+  ...theme.font.small,
 }
 
 const labelBackgroundStyle = {
   fill: "rgba(255, 255, 255, 0.2)",
   pointerEvents: "none",
   stroke: "none",
-  borderRadius: deprecatedTheme.borderRadius,
+  borderRadius: theme.borderRadius,
 }
 
 const totalStyle = {
   fill: "#4c4c4c",
-  ...deprecatedTheme.typography.small,
+  ...theme.font.small,
 }
 
 const comparisonStyle = {
