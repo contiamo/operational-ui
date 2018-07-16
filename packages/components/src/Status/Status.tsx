@@ -12,7 +12,7 @@ export interface Props {
 
 const getColorFromProps = ({ running, success, error, theme }: Props): string => {
   if (running) {
-    return theme.color.running
+    return theme.color.warn
   }
 
   if (success) {
