@@ -46,7 +46,7 @@ class VisualizationWrapper extends React.Component<Props, {}> {
         this.viz.accessors(key, accessors)
       },
     )(this.props.accessors)
-    this.viz.config(defaults({ palette: deprecatedTheme.colors.visualizationPalette })(this.props.config || {}))
+    this.viz.config(defaults({ palette: deprecatedTheme.palettes.qualitative.generic })(this.props.config || {}))
   }
 
   componentWillUnmount() {

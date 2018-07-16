@@ -38,7 +38,7 @@ const defaultConfig = (): PieChartConfig => {
     minLegendWidth: 50,
     minTotalFontSize: 11,
     outerBorderMargin: 1,
-    palette: deprecatedTheme.colors.visualizationPalette,
+    palette: deprecatedTheme.palettes.qualitative.generic,
     showComponentFocus: false,
     uid: uniqueId("piechart"),
     visualizationName: "piechart",

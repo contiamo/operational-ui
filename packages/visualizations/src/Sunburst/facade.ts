@@ -27,7 +27,7 @@ const defaultConfig = (): SunburstConfig => {
     minTotalFontSize: deprecatedTheme.typography.small.fontSize,
     numberFormatter: defaultNumberFormatter,
     outerBorderMargin: 1,
-    palette: deprecatedTheme.colors.visualizationPalette,
+    palette: deprecatedTheme.palettes.qualitative.generic,
     propagateColors: true,
     sort: true,
     uid: uniqueId("sunburst"),

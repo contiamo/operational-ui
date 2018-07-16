@@ -41,7 +41,7 @@ const defaultConfig = (): ChartConfig => {
     minBarWidth: 3,
     numberFormatter: defaultNumberFormatter,
     outerBarSpacing: 10,
-    palette: deprecatedTheme.colors.visualizationPalette,
+    palette: deprecatedTheme.palettes.qualitative.generic,
     showComponentFocus: false,
     timeAxisPriority: ["x1", "x2", "y1", "y2"],
     uid: uniqueId("chart"),
