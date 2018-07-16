@@ -1,9 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 
-import { fadeIn } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
-import { WithTheme, Css, CssStatic } from "../types"
 import ContextMenuItem from "./ContextMenu.Item"
 
 export interface Item {
@@ -57,7 +55,6 @@ const MenuContainer = styled("div")(
     backgroundColor: theme.color.white,
     width: "fit-content",
     display: isExpanded ? "block" : "none",
-    animation: `${fadeIn} ease-in-out forwards 0.2s`,
   }),
 )
 
