@@ -32,21 +32,21 @@ export interface Props {
 type PropsWithTheme = Props & { theme?: OperationalStyleConstants }
 
 const makeColors = (theme: OperationalStyleConstants, color: string) => {
-  const defaultColor: string = theme.color.white
+  const defaultColor = theme.color.white
 
-  const BackgroundColors: { [key: string]: string } = {
+  const backgroundColors: { [key: string]: string } = {
     grey: theme.color.background.light,
     warning: defaultColor,
   }
 
-  const TextColors: { [key: string]: string } = {
+  const textColors: { [key: string]: string } = {
     grey: theme.color.text.action,
     warning: theme.color.error,
   }
 
-  const backgroundColor: string = BackgroundColors[color] || expandColor(theme, color) || defaultColor
-  const textColor: string =
-    TextColors[color] || readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
+  const backgroundColor = backgroundColors[color] || expandColor(theme, color) || defaultColor
+  const textColor =
+    textColors[color] || readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
   return {
     background: backgroundColor,
     foreground: textColor,
