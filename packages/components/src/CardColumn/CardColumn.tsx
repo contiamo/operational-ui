@@ -32,7 +32,7 @@ const Title = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) =
   marginBottom: theme.space.content,
 }))
 
-const CardColumn: React.SFC<Props> = ({ title, children, ...props }) => (
+const CardColumn: React.SFC<Props & React.HTMLAttributes<HTMLDivElement>> = ({ title, children, ...props }) => (
   <Container {...props}>
     {title && <Title>{title}</Title>}
     {children}
