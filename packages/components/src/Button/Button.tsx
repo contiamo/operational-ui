@@ -14,7 +14,7 @@ export interface Props {
   type?: string
   /** Navigation property à la react-router <Link/> */
   to?: string
-  /** Color assigned to the avatar circle (hex or named color from `theme.color`) */
+  /** Button color theme (hex or named color from `theme.color`) */
   color?: string
   /** Icon to display on right of button (optional) */
   icon?: IconName
@@ -32,12 +32,21 @@ export interface Props {
 type PropsWithTheme = Props & { theme?: OperationalStyleConstants }
 
 const makeColors = (theme: OperationalStyleConstants, color: string) => {
-  const defaultColor: string = theme.color.white
-  const grey: string = theme.color.background.light
-  const greyText: string = theme.color.text.action
-  const backgroundColor: string = color === "grey" ? grey : expandColor(theme, color) || defaultColor
-  const textColor: string =
-    color === "grey" ? greyText : readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
+  const defaultColor = theme.color.white
+
+  const backgroundColors: { [key: string]: string } = {
+    grey: theme.color.background.light,
+    warning: defaultColor,
+  }
+
+  const textColors: { [key: string]: string } = {
+    grey: theme.color.text.action,
+    warning: theme.color.error,
+  }
+
+  const backgroundColor = backgroundColors[color] || expandColor(theme, color) || defaultColor
+  const textColor =
+    textColors[color] || readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
   return {
     background: backgroundColor,
     foreground: textColor,

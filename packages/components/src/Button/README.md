@@ -7,27 +7,47 @@ Using buttons is as simple as including the component with a text node as a chil
 ```jsx
 <div style={{ marginBottom: 10 }}>
   <Button>Default</Button>
-  <Button color="primary">Set color</Button>
-  <Button color="#393939">Custom color</Button>
-  <Button color="success" disabled>Disabled</Button>
-  <Button disabled>Disabled</Button>
+  <Button color="grey">Grey</Button>
+  <Button color="basic">Basic</Button>
+  <Button color="primary">Primary</Button>
+  <Button color="success">Success</Button>
+  <Button color="error">Error</Button>
+  <Button color="warning">Warning</Button>
+  <Button color="#ff0000">Custom color</Button>
   <Button condensed>Condensed</Button>
 </div>
 <div style={{ marginBottom: 10 }}>
-  <Button color="success" icon="Open">Icon</Button>
+  <Button disabled>Default</Button>
+  <Button disabled color="grey">Grey</Button>
+  <Button disabled color="basic">Basic</Button>
+  <Button disabled color="primary">Primary</Button>
+  <Button disabled color="success">Success</Button>
+  <Button disabled color="error">Error</Button>
+  <Button disabled color="warning">Warning</Button>
+  <Button disabled color="#ff0000">Custom color</Button>
+  <Button disabled condensed>Condensed</Button>
+</div>
+<div style={{ marginBottom: 10 }}>
+  <Button color="grey" icon="Open">Icon</Button>
   <Button color="success" icon="Labs">Icon</Button>
   <Button condensed icon="Open">Icon</Button>
   <Button loading>Loading</Button>
 </div>
 <div style={{ marginBottom: 10 }}>
-  <Button color="grey" disabled>Update</Button>
-  <Button color="grey">Test</Button>
-  <Button color="error">Delete this bundle</Button>
+  <Button disabled color="grey" icon="Open">Icon</Button>
+  <Button disabled color="success" icon="Labs">Icon</Button>
+  <Button disabled condensed icon="Open">Icon</Button>
+  <Button disabled loading>Loading</Button>
 </div>
 <div style={{ backgroundColor: "#1499ce", padding: 5 }}>
   <Button color="ghost">Ghost</Button>
   <Button color="ghost" icon="Open">Ghost with icon</Button>
   <Button color="ghost" icon="Open" condensed>Ghost condensed</Button>
+</div>
+<div style={{ backgroundColor: "#1499ce", padding: 5 }}>
+  <Button disabled color="ghost">Ghost</Button>
+  <Button disabled color="ghost" icon="Open">Ghost with icon</Button>
+  <Button disabled color="ghost" icon="Open" condensed>Ghost condensed</Button>
 </div>
 ```
 
