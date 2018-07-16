@@ -1,4 +1,5 @@
 import {
+  cloneDeep,
   filter,
   find,
   flow,
@@ -70,7 +71,7 @@ class ChartSeriesManager implements SeriesManager {
       this.assignBarIndices.bind(this),
       this.handleGroupedSeries("stacked", this.computeStack.bind(this)),
       this.handleGroupedSeries("range", this.computeRange.bind(this)),
-    )(this.state.current.get("accessors").data.series(this.state.current.get("data")))
+    )(cloneDeep(this.state.current.get("accessors").data.series(this.state.current.get("data"))))
 
     this.removeAllExcept(map(this.key)(data))
     forEach(this.updateOrCreate.bind(this))(data)

@@ -41,7 +41,7 @@ const defaultConfig = (): ChartConfig => {
     minBarWidth: 3,
     numberFormatter: defaultNumberFormatter,
     outerBarSpacing: 10,
-    palette: deprecatedTheme.colors.visualizationPalette,
+    palette: deprecatedTheme.palettes.qualitative.generic,
     showComponentFocus: false,
     timeAxisPriority: ["x1", "x2", "y1", "y2"],
     uid: uniqueId("chart"),
@@ -50,12 +50,12 @@ const defaultConfig = (): ChartConfig => {
   }
 }
 
-const defaultColorAssigner = (palette: string[]): ((key: string) => string) => {
-  return colorAssigner(palette)
+const defaultColorAssigner = (palette: string[]): ((d: { [key: string]: any }) => string) => {
+  const assigner = colorAssigner(palette)
+  return (d: { [key: string]: any }): string => d.legendColor || assigner(d.key)
 }
 
 const defaultAccessors = () => {
-  const initialColorAssigner = defaultColorAssigner(defaultConfig().palette)
   return {
     data: {
       series: (d: Data): SeriesData => d.series,
@@ -66,7 +66,7 @@ const defaultAccessors = () => {
       hide: (d: { [key: string]: any }): boolean => d.hide || false,
       hideInLegend: (d: { [key: string]: any }): boolean => d.hideInLegend || false,
       key: (d: { [key: string]: any }): string => d.key || uniqueId("key"),
-      legendColor: (d: { [key: string]: any }): string => d.legendColor || initialColorAssigner(d.key),
+      legendColor: defaultColorAssigner(defaultConfig().palette),
       legendName: (d: { [key: string]: any }): string => d.name || d.key || "",
       renderAs: (d: { [key: string]: any }): RendererOptions[] => d.renderAs,
       axis: (d: { [key: string]: any }): AxisPosition => d.axis || "x1", // Only used for flags
@@ -81,7 +81,7 @@ class ChartFacade implements Facade {
   private canvas: ChartCanvas
   private components: Components
   private context: Element
-  private customColorAccessor: boolean
+  private customColorAccessor: boolean = false
   private events: EventEmitter
   private series: ChartSeriesManager
   private state: StateHandler<ChartConfig, Data>
@@ -147,16 +147,18 @@ class ChartFacade implements Facade {
   }
 
   config(config?: Partial<ChartConfig>): ChartConfig {
+    /**
+     * Changing the palette config only updates the legendColor accessor if the default is still be used.
+     * It will not overwrite a user-defined legendColor accessor.
+     */
     if (config.palette && !this.customColorAccessor) {
-      const assignColors: (key: string, color?: string) => string = defaultColorAssigner(config.palette)
-      this.accessors("series", {
-        legendColor: (d: { [key: string]: any }): string => assignColors(d.key),
-      })
+      this.state.accessors("series", { legendColor: defaultColorAssigner(config.palette) })
     }
     return this.state.config(config)
   }
 
   accessors(type: string, accessors: Accessors<any>): Accessors<any> {
+    // If a custom legendColor accessor is specified, this must not be overwritten if the palette config changes.
     if (type === "series" && has("legendColor")(accessors)) {
       this.customColorAccessor = true
     }
