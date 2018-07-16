@@ -149,15 +149,19 @@ class ChartFacade implements Facade {
   config(config?: Partial<ChartConfig>): ChartConfig {
     if (config.palette && !this.customColorAccessor) {
       const assignColors: (key: string, color?: string) => string = defaultColorAssigner(config.palette)
-      this.accessors("series", {
-        legendColor: (d: { [key: string]: any }): string => assignColors(d.key),
-      })
+      this.accessors(
+        "series",
+        {
+          legendColor: (d: { [key: string]: any }): string => assignColors(d.key),
+        },
+        true,
+      )
     }
     return this.state.config(config)
   }
 
-  accessors(type: string, accessors: Accessors<any>): Accessors<any> {
-    if (type === "series" && has("legendColor")(accessors)) {
+  accessors(type: string, accessors: Accessors<any>, suppressFlagModify: boolean = false): Accessors<any> {
+    if (type === "series" && has("legendColor")(accessors) && !suppressFlagModify) {
       this.customColorAccessor = true
     }
     return this.state.accessors(type, accessors)

@@ -15,13 +15,18 @@ import * as area2 from "./area-2"
 import * as area3 from "./area-3"
 import * as area4 from "./area-4"
 import * as area5 from "./area-5"
+import * as lines1 from "./lines-1"
+import * as lines2 from "./lines-2"
 import * as bars1 from "./bars-1"
 import * as bars2 from "./bars-2"
 import * as bars3 from "./bars-3"
 import * as bars4 from "./bars-4"
+import * as bars5 from "./bars-5"
+import * as bars6 from "./bars-6"
 import * as symbol1 from "./symbol-1"
 import * as symbol2 from "./symbol-2"
 import * as symbol3 from "./symbol-3"
+import * as symbol4 from "./symbol-4"
 import * as flags1 from "./flags-1"
 import * as range1 from "./range-1"
 import * as range2 from "./range-2"
@@ -47,13 +52,18 @@ export default [
   area3,
   area4,
   area5,
+  lines1,
+  lines2,
   bars1,
   bars2,
   bars3,
   bars4,
+  bars5,
+  bars6,
   symbol1,
   symbol2,
   symbol3,
+  symbol4,
   flags1,
   range1,
   range2,
