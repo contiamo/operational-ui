@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled, { Interpolation } from "react-emotion"
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
-import { isModifiedEvent, fadeIn } from "../utils"
+import { isModifiedEvent, floatIn } from "../utils"
 import { Icon, IconName, OperationalContext, Context } from "../"
 import { Props as SidenavItemProps } from "../SidenavItem/SidenavItem"
 
@@ -82,7 +82,7 @@ const LabelText = styled("div")`
 `
 
 const ItemsContainer = styled("div")({
-  animation: `${fadeIn} .15s forwards ease`,
+  animation: `${floatIn} .15s forwards ease`,
   position: "relative",
   top: -16,
   marginTop: -10,

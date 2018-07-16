@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { readableTextColor, spin, fadeIn, resetTransform } from "../utils"
+import { readableTextColor, spin, floatIn, resetTransform } from "../utils"
 import { OperationalStyleConstants, deprecatedExpandColor } from "../utils/constants"
 import * as mixins from "../utils/mixins"
 
@@ -77,7 +77,7 @@ const Options = styled("div")(
     borderRadius: 4,
     opacity: 0,
     transform: "translateY(-10px)",
-    animation: `${fadeIn} .15s forwards ease,
+    animation: `${floatIn} .15s forwards ease,
     ${resetTransform} .15s forwards ease`,
   },
   ({ theme }: { theme?: OperationalStyleConstants }) => ({

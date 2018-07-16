@@ -131,3 +131,25 @@ const Tab = n => () => (
   </PageArea>
 </Page>
 ```
+
+### With dropdown menu
+
+```jsx
+const options = [
+  { label: "Payroll", onClick: () => {} },
+  { label: "All Databases", onClick: () => {} },
+  { label: "Sales - Germany only", onClick: () => {} },
+  { label: "Sales - global", onClick: () => {} },
+  { label: "Reporting", onClick: () => {} },
+  { label: "Logistics", onClick: () => {} },
+]
+
+const actions = (
+  <HeaderMenu items={options} withCaret align={"right"}>
+    Sales / Foodmart
+  </HeaderMenu>
+)
+;<Page title="Settings Page" actions={actions}>
+  <Card>Hello, this is page content</Card>
+</Page>
+```

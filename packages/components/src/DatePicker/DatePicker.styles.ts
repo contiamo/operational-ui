@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import { fadeIn } from "../utils"
 import { Card } from "../"
 import * as mixins from "../utils/mixins"
 

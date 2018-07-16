@@ -1,56 +1,67 @@
 import * as React from "react"
 import styled from "react-emotion"
 
-import { fadeIn } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
-import { WithTheme, Css, CssStatic } from "../types"
+import ContextMenuItem from "./ContextMenu.Item"
+
+export interface Item {
+  label: string
+  onClick?: (item: string | Item) => void
+}
 
 export interface Props {
   /** Id */
   id?: string
-
   /** Class name */
   className?: string
-  children: React.ReactNode
+  children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
   /** Specify whether the menu items are visible. Overrides internal open state that triggers on click. */
-
   open?: boolean
-  onClick?: () => void
+  /** Condensed mode */
+  condensed?: boolean
+  /** onClick method for all menu items */
+  onClick?: (item?: string | Item) => void
   /** Handles click events anywhere outside the context menu container, including menu items. */
-
   onOutsideClick?: () => void
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
-
   keepOpenOnItemClick?: boolean
+  /** Menu items */
+  items: (string | Item)[]
+  /** Alignment */
+  align?: "left" | "right"
 }
 
 export interface State {
   isOpen: boolean
 }
 
-const Container = styled("div")(({ theme }: WithTheme) => ({
+const Container = styled("div")(({ theme, align }: { theme?: OperationalStyleConstants; align: Props["align"] }) => ({
   label: "contextmenu",
   cursor: "pointer",
   position: "relative",
   width: "fit-content",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: align === "left" ? "flex-start" : "flex-end",
 }))
 
 const MenuContainer = styled("div")(
   ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }) => ({
     position: "absolute",
-    top: `calc(100% + ${theme.deprecated.spacing / 2}px)`,
-    left: -theme.deprecated.spacing,
-    boxShadow: theme.deprecated.shadows.popup,
+    top: "100%",
+    left: 0,
+    boxShadow: theme.shadows.popup,
+    zIndex: theme.zIndex.selectOptions,
+    backgroundColor: theme.color.white,
     width: "fit-content",
-    zIndex: theme.deprecated.baseZIndex + 300,
-    ...(isExpanded
-      ? {
-          display: "block",
-          animation: `${fadeIn} ease-in-out forwards 0.2s`,
-        }
-      : {
-          display: "none",
-        }),
+    display: isExpanded ? "block" : "none",
+  }),
+)
+
+const StyledContextMenuItem = styled(ContextMenuItem)(
+  ({ theme, align }: { theme?: OperationalStyleConstants; align: Props["align"] }) => ({
+    color: theme.color.text.default,
+    textAlign: align,
   }),
 )
 
@@ -59,9 +70,12 @@ class ContextMenu extends React.Component<Props, State> {
     isOpen: false,
   }
 
+  defaultProps = {
+    align: "left",
+  }
+
   containerNode: any
   menuContainerNode: any
-  outsideClickHandler: any
 
   handleClick = (ev: any): void => {
     const isTargetInsideMenu = this.menuContainerNode.contains(ev.target)
@@ -71,11 +85,10 @@ class ContextMenu extends React.Component<Props, State> {
       this.props.onOutsideClick()
     }
 
-    if (isTargetInsideContainer && this.props.onClick) {
-      this.props.onClick()
-    }
+    const newIsActive = isTargetInsideMenu
+      ? this.props.keepOpenOnItemClick
+      : isTargetInsideContainer && !this.state.isOpen
 
-    const newIsActive = isTargetInsideMenu ? this.state.isOpen : isTargetInsideContainer ? !this.state.isOpen : false
     this.setState(prevState => ({
       isOpen: newIsActive,
     }))
@@ -90,34 +103,10 @@ class ContextMenu extends React.Component<Props, State> {
   }
 
   render() {
-    const menuItems: any = []
-    const children: any = []
-    React.Children.forEach(
-      this.props.children,
-      (child: any, index: number): void => {
-        if (child.props && child.props.__isContextMenuItem) {
-          const { onClick } = child.props
-          menuItems.push(
-            React.cloneElement(child, {
-              key: "contextmenu-" + index,
-              onClick:
-                onClick &&
-                (() => {
-                  if (!this.props.keepOpenOnItemClick) {
-                    this.setState(prevState => ({
-                      isOpen: false,
-                    }))
-                  }
+    if (!this.props.items) {
+      throw new Error("No array of items has been provided for the ContextMenu.")
+    }
 
-                  onClick()
-                }),
-            }),
-          )
-        } else {
-          children.push(child)
-        }
-      },
-    )
     return (
       <Container
         innerRef={node => {
@@ -125,15 +114,28 @@ class ContextMenu extends React.Component<Props, State> {
         }}
         id={this.props.id}
         className={this.props.className}
+        align={this.props.align}
       >
-        {children}
+        {typeof this.props.children === "function" ? this.props.children(this.state.isOpen) : this.props.children}
         <MenuContainer
           innerRef={node => {
             this.menuContainerNode = node
           }}
           isExpanded={this.props.open || this.state.isOpen}
         >
-          {menuItems}
+          {this.props.items.map((item: string | Item, index: number) => {
+            const clickHandler = (typeof item !== "string" && item.onClick) || this.props.onClick
+            return (
+              <StyledContextMenuItem
+                onClick={clickHandler && (() => clickHandler(item))}
+                key={`contextmenu-${index}`}
+                condensed={this.props.condensed}
+                align={this.props.align}
+              >
+                {typeof item === "string" ? item : item.label}
+              </StyledContextMenuItem>
+            )
+          })}
         </MenuContainer>
       </Container>
     )

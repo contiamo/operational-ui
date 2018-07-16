@@ -4,7 +4,7 @@ import styled from "react-emotion"
 import { Label, LabelText, inputFocus } from "../utils/mixins"
 import SelectOption from "./Select.Option"
 import SelectFilter from "./Select.Filter"
-import { readableTextColor, fadeIn, resetTransform } from "../utils"
+import { readableTextColor, floatIn, resetTransform } from "../utils"
 import { OperationalStyleConstants, expandColor } from "../utils/constants"
 
 export type Value = number | string
@@ -131,7 +131,7 @@ const Options = styled("div")(
     borderRadius: 4,
     opacity: 0,
     transform: "translateY(-10px)",
-    animation: `${fadeIn} .15s forwards ease,
+    animation: `${floatIn} .15s forwards ease,
     ${resetTransform} .15s forwards ease`,
   },
   ({ theme }: { theme?: OperationalStyleConstants }) => ({
