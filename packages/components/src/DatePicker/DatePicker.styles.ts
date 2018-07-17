@@ -1,5 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
+import colorCalculator from "tinycolor2"
+
 import { OperationalStyleConstants } from "../utils/constants"
 import { Card } from "../"
 import * as mixins from "../utils/mixins"
@@ -65,10 +67,10 @@ export const Toggle = styled("div")(({ theme }: { theme?: OperationalStyleConsta
 }))
 
 export const MonthNav = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  marginBottom: theme.deprecated.spacing / 2,
+  marginBottom: theme.space.element,
   textAlign: "center",
   "& > *": {
-    margin: `0 6px`,
+    margin: `0 2px`,
     verticalAlign: "middle",
     display: "inline-block",
   },
@@ -80,13 +82,18 @@ export const MonthNav = styled("div")(({ theme }: { theme?: OperationalStyleCons
   },
 }))
 
-export const IconContainer = styled("div")({
-  backgroundColor: "#FFFFFF",
-  padding: 4,
-  height: "auto",
-  width: "fit-content",
+export const IconContainer = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  width: 20,
+  height: 20,
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  borderRadius: "50%",
   cursor: "pointer",
-})
+  ":hover": {
+    backgroundColor: theme.color.background.lighter,
+  },
+}))
 
 export const Days = styled("div")({
   textAlign: "center",
@@ -105,24 +112,38 @@ export const Day = styled("div")(
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    border: "1px solid #efefef",
+    padding: 3,
+    borderRadius: "50%",
+    backgroundClip: "content-box",
   },
   ({
     theme,
     selected,
     isPlaceholder,
+    isDisabled,
   }: {
     theme?: OperationalStyleConstants
     selected?: boolean
     isPlaceholder?: boolean
+    isDisabled?: boolean
   }) => ({
     ...theme.deprecated.typography.body,
     backgroundColor: selected ? theme.deprecated.colors.info : "transparent",
     color: selected
       ? theme.deprecated.colors.white
-      : isPlaceholder
+      : isPlaceholder || isDisabled
         ? theme.deprecated.colors.gray
         : theme.deprecated.colors.black,
+    cursor: isDisabled ? "not-allowed" : "pointer",
+    ":hover": {
+      backgroundColor: selected
+        ? colorCalculator(theme.color.primary)
+            .darken(5)
+            .toString()
+        : isDisabled
+          ? "transparent"
+          : theme.color.background.lighter,
+    },
   }),
 )
 

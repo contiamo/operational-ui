@@ -5,10 +5,10 @@ DatePickers can currently be used to pick an period bound by two day selections.
 ```jsx
 class ComponentWithDatePicker extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       start: "2017-10-03",
-      end: "2017-10-18"
+      end: "2017-10-18",
     }
   }
 
@@ -17,6 +17,8 @@ class ComponentWithDatePicker extends React.Component {
       <DatePicker
         start={this.state.start}
         end={this.state.end}
+        min="2017-10-01"
+        max="2018-01-01"
         placeholder="Pick a date"
         onChange={newState => {
           this.setState(prevState => newState)
@@ -26,5 +28,5 @@ class ComponentWithDatePicker extends React.Component {
   }
 }
 
-<ComponentWithDatePicker />
+;<ComponentWithDatePicker />
 ```
