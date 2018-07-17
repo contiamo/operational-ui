@@ -1,6 +1,7 @@
 import OperationalUI from "./OperationalUI/OperationalUI"
 
 export { OperationalStyleConstants } from "./utils/constants"
+export { default as ActionMenu } from "./ActionMenu/ActionMenu"
 export { default as Avatar } from "./Avatar/Avatar"
 export { default as AvatarGroup } from "./AvatarGroup/AvatarGroup"
 export { default as Breadcrumb } from "./Breadcrumb/Breadcrumb"
