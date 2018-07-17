@@ -7,10 +7,13 @@ export interface Props {
   title?: string
   /** Align the content to the right */
   contentRight?: boolean
+
+  /** Set the component as a flex-box column */
+  flexColumn?: boolean
 }
 
 const Container = styled("div")(
-  ({ theme, contentRight }: { theme?: OperationalStyleConstants; contentRight?: Props["contentRight"] }) => ({
+  ({ theme, contentRight, flexColumn }: { theme?: OperationalStyleConstants } & Props) => ({
     label: "card-column",
     minWidth: 280 / 2,
     padding: theme.space.element / 2,
@@ -19,6 +22,13 @@ const Container = styled("div")(
       maxWidth: "100%",
     },
     textAlign: contentRight ? "right" : null,
+    ...(flexColumn
+      ? {
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: contentRight ? "flex-end" : "flex-start",
+        }
+      : {}),
   }),
 )
 
@@ -32,7 +42,7 @@ const Title = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) =
   marginBottom: theme.space.content,
 }))
 
-const CardColumn: React.SFC<Props & React.HTMLAttributes<HTMLDivElement>> = ({ title, children, ...props }) => (
+const CardColumn: React.SFC<Props> = ({ title, children, ...props }) => (
   <Container {...props}>
     {title && <Title>{title}</Title>}
     {children}
