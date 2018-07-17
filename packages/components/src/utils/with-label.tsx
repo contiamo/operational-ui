@@ -14,9 +14,9 @@ const Label = styled("label")(({ theme }: { theme?: OperationalStyleConstants })
   marginBottom: theme.deprecated.spacing / 4,
 }))
 
-type IComponent = Pick<React.HTMLProps<HTMLDivElement>, "className" | "label" | "id">
-
-function withLabel<T extends IComponent>(Component: React.ComponentType<T>): React.SFC<T> {
+function withLabel<T extends Pick<React.HTMLProps<HTMLDivElement>, "className" | "label" | "id">>(
+  Component: React.ComponentType<T>,
+): React.SFC<T> {
   return (props: T) => {
     const { id, label } = props
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
