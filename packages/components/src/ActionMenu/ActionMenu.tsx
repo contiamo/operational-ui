@@ -1,16 +1,16 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import ContextMenu, { Props as CMProps } from "../ContextMenu/ContextMenu"
+import ContextMenu, { Props as ContextMenuProps } from "../ContextMenu/ContextMenu"
 import Icon from "../Icon/Icon"
 
 export interface Props {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
-  onClick?: CMProps["onClick"]
+  onClick?: ContextMenuProps["onClick"]
   /** Title */
   title?: string
   /** Actions to display in dropdown */
-  items: CMProps["items"]
+  items: ContextMenuProps["items"]
 }
 
 const Container = styled("div")(({ theme, isOpen }: { theme?: OperationalStyleConstants; isOpen: boolean }) => ({
@@ -42,7 +42,7 @@ const ActionMenu: React.SFC<Props> = (props: Props) => {
       {isOpen => (
         <Container isOpen={isOpen}>
           {props.title}
-          <Icon name={"Menu"} />
+          <Icon name={isOpen ? "ChevronUp" : "Menu"} />
         </Container>
       )}
     </ContextMenu>
