@@ -196,6 +196,16 @@ export const Lock: React.SFC<IconProps> = props => {
   )
 }
 
+export const Menu: React.SFC<IconProps> = props => {
+  const size = props.size || 18
+  const color = props.color || "currentColor"
+  return (
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
+      <path d="M320,280.187l-280,0l0,-40l280,0l0,40Zm0,-80l-280,0l0,-40l280,0l0,40Zm0,-80l-280,0l0,-40l280,0l0,40Z" />
+    </svg>
+  )
+}
+
 export const No: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
@@ -222,6 +232,26 @@ export const Open: React.SFC<IconProps> = props => {
   return (
     <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M300,320.187l-260,0l0,-260l160,0l0,40l-120,0l0,180l180,0l0,-120l40,0l0,160Zm40,-200l-40,0l0,-31.715l-85.858,85.858l-28.284,-28.285l85.858,-85.858l-31.716,0l0,-40l100,0l0,100Z" />
+    </svg>
+  )
+}
+
+export const Pause: React.SFC<IconProps> = props => {
+  const size = props.size || 18
+  const color = props.color || "currentColor"
+  return (
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
+      <path d="M140,40.187l0,280l-40,0l0,-280l40,0Zm120,0l0,280l-40,0l0,-280l40,0Z" />
+    </svg>
+  )
+}
+
+export const Play: React.SFC<IconProps> = props => {
+  const size = props.size || 18
+  const color = props.color || "currentColor"
+  return (
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
+      <path d="M121.796,40.268c1.219,0.153 1.532,0.16 2.731,0.438c1.348,0.314 2.663,0.767 3.918,1.352c1.254,0.584 2.419,1.337 3.555,2.129l160,120c0.95,0.765 1.21,0.934 2.078,1.795c7.438,7.371 7.655,20.826 0,28.411c-0.868,0.861 -1.128,1.029 -2.078,1.794l-160,120c-1.008,0.703 -1.245,0.907 -2.322,1.503c-9.2,5.087 -22.292,1.475 -27.377,-8.189c-1.075,-2.042 -1.792,-4.269 -2.11,-6.555c-0.17,-1.219 -0.149,-1.53 -0.191,-2.759l0,-240c0.042,-1.228 0.021,-1.539 0.191,-2.759c1.205,-8.653 8.594,-16.054 17.461,-17.102c2.646,-0.313 3.288,-0.105 4.144,-0.058Zm18.204,219.919l106.667,-80l-106.667,-80c0,53.334 0,106.667 0,160Z" />
     </svg>
   )
 }
