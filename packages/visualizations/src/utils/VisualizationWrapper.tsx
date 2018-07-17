@@ -1,7 +1,7 @@
 import * as React from "react"
 import { defaults, forEach } from "lodash/fp"
 
-import { deprecatedTheme } from "./theme"
+import theme from "./constants"
 
 export interface Props {
   style?: {}
@@ -46,7 +46,7 @@ class VisualizationWrapper extends React.Component<Props, {}> {
         this.viz.accessors(key, accessors)
       },
     )(this.props.accessors)
-    this.viz.config(defaults({ palette: deprecatedTheme.palettes.qualitative.generic })(this.props.config || {}))
+    this.viz.config(defaults({ palette: theme.palettes.qualitative.generic })(this.props.config || {}))
   }
 
   componentWillUnmount() {

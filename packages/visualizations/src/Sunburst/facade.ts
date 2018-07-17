@@ -7,7 +7,7 @@ import StateHandler from "../shared/state_handler"
 import EventEmitter from "../shared/event_bus"
 import { has, uniqueId } from "lodash/fp"
 import { colorAssigner } from "../utils/colorAssigner"
-import { deprecatedTheme } from "../utils/theme"
+import theme from "../utils/constants"
 import defaultNumberFormatter from "../utils/number_formatter"
 import { Accessors, AccessorsObject, Components, Facade, RawData, SunburstConfig } from "./typings"
 
@@ -24,10 +24,10 @@ const defaultConfig = (): SunburstConfig => {
     maxBreadcrumbLength: 4,
     maxRings: 10,
     maxTotalFontSize: 54,
-    minTotalFontSize: deprecatedTheme.typography.small.fontSize,
+    minTotalFontSize: theme.font.small.fontSize,
     numberFormatter: defaultNumberFormatter,
     outerBorderMargin: 1,
-    palette: deprecatedTheme.palettes.qualitative.generic,
+    palette: theme.palettes.qualitative.generic,
     propagateColors: true,
     sort: true,
     uid: uniqueId("sunburst"),
