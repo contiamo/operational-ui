@@ -21,6 +21,7 @@ const Container = styled("div")(
     condensed: Props["condensed"]
     width?: Props["width"]
   }) => ({
+    userSelect: "none",
     label: "contextmenuitem",
     width: width || (condensed ? 160 : 250),
     whiteSpace: "nowrap",
