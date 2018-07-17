@@ -3,7 +3,6 @@
   "version": "5.2.0",
   "description": "A collection of primitive, composable UI components that make up Contiamo applications",
   "main": "./lib/index.js",
-  "module": "./src/index.ts",
   "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
@@ -21,7 +20,7 @@
     "start": "npm run docs:start",
     "docs:start": "styleguidist server",
     "docs:build": "styleguidist build",
-    "package": "rimraf lib && webpack --env package",
+    "package": "rimraf lib && tsc",
     "package:watch": "tsc -d -w",
     "test": "jest",
     "test:watch": "jest --watch"
