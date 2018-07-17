@@ -8,28 +8,20 @@ import Hint from "../Hint/Hint"
 export interface Props {
   id?: string
   className?: string
-
   /** Controlled value of the field */
   value: string
-
   /** Label of the field */
   label?: string
-
   /** OnChange handler */
   onChange?: (val: string) => void
-
   /** Change the font to monospace to better display of code */
   code?: boolean
-
   /** Text for a hint */
   hint?: string
-
   /** Error text */
   error?: string
-
   /** Should the input fill its container? */
   fullWidth?: boolean
-
   /** Is it disabled? */
   disabled?: boolean
 }

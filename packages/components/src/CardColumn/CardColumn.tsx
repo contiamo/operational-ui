@@ -7,7 +7,6 @@ export interface Props {
   title?: string
   /** Align the content to the right */
   contentRight?: boolean
-
   /** Set the component as a flex-box column */
   flexColumn?: boolean
 }
