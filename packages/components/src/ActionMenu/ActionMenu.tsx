@@ -36,12 +36,19 @@ const Container = styled("div")(({ theme, isOpen }: { theme?: OperationalStyleCo
   justifyContent: "space-between",
 }))
 
+const TitleContainer = styled("p")({
+  width: 90,
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+})
+
 const ActionMenu: React.SFC<Props> = (props: Props) => {
   return (
     <ContextMenu {...props} items={props.items} width={144} condensed>
       {isOpen => (
         <Container isOpen={isOpen}>
-          {props.title}
+          <TitleContainer>{props.title}</TitleContainer>
           <Icon name={isOpen ? "ChevronUp" : "Menu"} />
         </Container>
       )}
