@@ -146,6 +146,9 @@ const space = {
   /** Small space is `8px` */
   small: 8,
 
+  /** Medium space is `12px` */
+  medium: 12,
+
   /** Content space is `16px` */
   content: 16,
 

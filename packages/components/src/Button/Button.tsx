@@ -72,7 +72,7 @@ const containerStyles: Interpolation<Props> = ({
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
-    padding: `0 ${condensed ? theme.space.small : theme.space.content}px`,
+    padding: `0 ${condensed ? theme.space.medium : theme.space.element}px`,
     borderRadius: theme.borderRadius,
     border: 0,
     boxShadow: isWhite(backgroundColor) && `0 0 0 1px ${theme.color.border.disabled} inset`,
