@@ -29,6 +29,8 @@ export interface Props {
   items: (string | Item)[]
   /** Alignment */
   align?: "left" | "right"
+  /** Custom width */
+  width?: number
 }
 
 export interface State {
@@ -104,6 +106,7 @@ class ContextMenu extends React.Component<Props, State> {
                 key={`contextmenu-${index}`}
                 condensed={this.props.condensed}
                 align={this.props.align}
+                width={this.props.width}
               >
                 {typeof item === "string" ? item : item.label}
               </StyledContextMenuItem>

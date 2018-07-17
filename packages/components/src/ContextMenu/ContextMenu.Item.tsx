@@ -5,6 +5,7 @@ import { darken } from "../utils"
 
 export interface Props {
   condensed?: boolean
+  width?: number
   onClick?: () => void
 }
 
@@ -13,13 +14,15 @@ const Container = styled("div")(
     theme,
     onClick,
     condensed,
+    width,
   }: {
     theme?: OperationalStyleConstants
     onClick?: () => void
     condensed: Props["condensed"]
+    width?: Props["width"]
   }) => ({
     label: "contextmenuitem",
-    width: condensed ? 160 : 250,
+    width: width || (condensed ? 160 : 250),
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
