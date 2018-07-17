@@ -43,18 +43,16 @@ const TitleContainer = styled("p")({
   textOverflow: "ellipsis",
 })
 
-const ActionMenu: React.SFC<Props> = (props: Props) => {
-  return (
-    <ContextMenu {...props} items={props.items} width={144} condensed>
-      {isOpen => (
-        <Container isOpen={isOpen}>
-          <TitleContainer>{props.title}</TitleContainer>
-          <Icon name={isOpen ? "ChevronUp" : "Menu"} />
-        </Container>
-      )}
-    </ContextMenu>
-  )
-}
+const ActionMenu: React.SFC<Props> = (props: Props) => (
+  <ContextMenu {...props} items={props.items} width={144} condensed>
+    {isOpen => (
+      <Container isOpen={isOpen}>
+        <TitleContainer>{props.title}</TitleContainer>
+        <Icon name={isOpen ? "ChevronUp" : "Menu"} />
+      </Container>
+    )}
+  </ContextMenu>
+)
 
 ActionMenu.defaultProps = {
   title: "Actions",
