@@ -7,10 +7,12 @@ export interface Props {
   title?: string
   /** Align the content to the right */
   contentRight?: boolean
+  /** Set the component as a flex-box column */
+  flexColumn?: boolean
 }
 
 const Container = styled("div")(
-  ({ theme, contentRight }: { theme?: OperationalStyleConstants; contentRight?: Props["contentRight"] }) => ({
+  ({ theme, contentRight, flexColumn }: { theme?: OperationalStyleConstants } & Props) => ({
     label: "card-column",
     minWidth: 280 / 2,
     padding: theme.space.element / 2,
@@ -19,6 +21,13 @@ const Container = styled("div")(
       maxWidth: "100%",
     },
     textAlign: contentRight ? "right" : null,
+    ...(flexColumn
+      ? {
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: contentRight ? "flex-end" : "flex-start",
+        }
+      : {}),
   }),
 )
 

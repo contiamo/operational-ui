@@ -70,7 +70,7 @@ class ContextMenu extends React.Component<Props, State> {
     isOpen: false,
   }
 
-  defaultProps = {
+  static defaultProps: Partial<Props> = {
     align: "left",
   }
 

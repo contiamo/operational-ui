@@ -85,3 +85,28 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
   </CardColumns>
 </Card>
 ```
+
+### With flexColumn
+
+```jsx
+<Card title="Playground">
+  <CardColumns>
+    <CardColumn title="Input">
+      <Textarea code value="hello-word" fullWidth />
+    </CardColumn>
+    <CardColumn title="Schema" flexColumn>
+      <Code syntax="json">{`schema is not availble for this function`}</Code>
+    </CardColumn>
+  </CardColumns>
+  <CardColumns>
+    <CardColumn>
+      <Button color="primary">Send Request</Button>
+    </CardColumn>
+    <CardColumn contentRight>
+      <Button color="grey" icon="ExternalLink">
+        curl/code
+      </Button>
+    </CardColumn>
+  </CardColumns>
+</Card>
+```

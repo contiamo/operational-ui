@@ -12,6 +12,20 @@ export interface Props {
   children?: string | string[]
 }
 
+const Container = styled("div")`
+  display: flex;
+  flex: 1;
+  pre {
+    flex: 1;
+    display: flex;
+    margin: 0;
+  }
+
+  code {
+    flex: 1;
+  }
+`
+
 const Code = styled(Highlight)(({ theme }: { theme?: OperationalStyleConstants }) => {
   return {
     margin: 0,
@@ -22,6 +36,10 @@ const Code = styled(Highlight)(({ theme }: { theme?: OperationalStyleConstants }
   }
 })
 
-const StyledCode = (props: Props) => <Code className={`${css(styles)} ${props.syntax}`}>{props.children}</Code>
+const StyledCode = (props: Props) => (
+  <Container>
+    <Code className={`${css(styles)} ${props.syntax}`}>{props.children}</Code>
+  </Container>
+)
 
 export default StyledCode

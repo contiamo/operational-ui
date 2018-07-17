@@ -2,34 +2,27 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
 
-import { Label, LabelText, FormFieldControls, FormFieldControl, FormFieldError, inputFocus } from "../utils/mixins"
-import { Icon, Hint } from "../"
-import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
-import { Css, CssStatic } from "../types"
+import { Label, LabelText, FormFieldControls, FormFieldError, inputFocus } from "../utils/mixins"
+import Hint from "../Hint/Hint"
 
 export interface Props {
   id?: string
   className?: string
   /** Controlled value of the field */
-
   value: string
   /** Label of the field */
-
   label?: string
   /** OnChange handler */
-
   onChange?: (val: string) => void
   /** Change the font to monospace to better display of code */
-
   code?: boolean
   /** Text for a hint */
-
   hint?: string
   /** Error text */
-
   error?: string
+  /** Should the input fill its container? */
+  fullWidth?: boolean
   /** Is it disabled? */
-
   disabled?: boolean
 }
 
@@ -44,7 +37,7 @@ const TextareaComp = styled("textarea")(
     isCode: boolean
     isError: boolean
     disabled: boolean
-  }): CssStatic => {
+  }) => {
     return {
       ...theme.deprecated.typography.body,
       display: "block",
@@ -63,14 +56,9 @@ const TextareaComp = styled("textarea")(
   },
 )
 
-const HelpTooltip = styled(Tooltip)({
-  minWidth: 100,
-  width: "fit-content",
-})
-
 const Textarea = (props: Props) => {
   return (
-    <Label className={props.className} id={props.id}>
+    <Label fullWidth={props.fullWidth} className={props.className} id={props.id}>
       {props.label ? <LabelText>{props.label}</LabelText> : null}
       <FormFieldControls>{props.hint && <Hint>{props.hint}</Hint>}</FormFieldControls>
       <TextareaComp
