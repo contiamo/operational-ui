@@ -74,7 +74,7 @@ const borderColors = {
 const color = {
   primary: primaryColor,
   disabled: "#f5f5f5",
-  warn: "#ffbd41",
+  warning: "#ffbd41",
   success: "#0c991d",
   error: "#9a0000",
   basic: "#636363",
