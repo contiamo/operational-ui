@@ -4,12 +4,17 @@ import { OperationalStyleConstants } from "../utils/constants"
 import tinycolor from "tinycolor2"
 
 export interface Props {
+  running?: boolean
   success?: boolean
   error?: boolean
   theme?: OperationalStyleConstants
 }
 
-const getColorFromProps = ({ success, error, theme }: Props): string => {
+const getColorFromProps = ({ running, success, error, theme }: Props): string => {
+  if (running) {
+    return theme.color.warning
+  }
+
   if (success) {
     return theme.color.success
   }
@@ -18,7 +23,7 @@ const getColorFromProps = ({ success, error, theme }: Props): string => {
     return theme.color.error
   }
 
-  return theme.color.background.dark
+  return "#989898"
 }
 
 export const Status = styled("div")((props: Props) => ({
