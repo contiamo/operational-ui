@@ -196,6 +196,16 @@ export const Lock: React.SFC<IconProps> = props => {
   )
 }
 
+export const Menu: React.SFC<IconProps> = props => {
+  const size = props.size || 18
+  const color = props.color || "currentColor"
+  return (
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
+      <path d="M320,280.187l-280,0l0,-40l280,0l0,40Zm0,-80l-280,0l0,-40l280,0l0,40Zm0,-80l-280,0l0,-40l280,0l0,40Z" />
+    </svg>
+  )
+}
+
 export const No: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
@@ -226,12 +236,42 @@ export const Open: React.SFC<IconProps> = props => {
   )
 }
 
+export const Pause: React.SFC<IconProps> = props => {
+  const size = props.size || 18
+  const color = props.color || "currentColor"
+  return (
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
+      <path d="M140,40.187l0,280l-40,0l0,-280l40,0Zm120,0l0,280l-40,0l0,-280l40,0Z" />
+    </svg>
+  )
+}
+
+export const Play: React.SFC<IconProps> = props => {
+  const size = props.size || 18
+  const color = props.color || "currentColor"
+  return (
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
+      <path d="M121.796,40.268c1.219,0.153 1.532,0.16 2.731,0.438c1.348,0.314 2.663,0.767 3.918,1.352c1.254,0.584 2.419,1.337 3.555,2.129l160,120c0.95,0.765 1.21,0.934 2.078,1.795c7.438,7.371 7.655,20.826 0,28.411c-0.868,0.861 -1.128,1.029 -2.078,1.794l-160,120c-1.008,0.703 -1.245,0.907 -2.322,1.503c-9.2,5.087 -22.292,1.475 -27.377,-8.189c-1.075,-2.042 -1.792,-4.269 -2.11,-6.555c-0.17,-1.219 -0.149,-1.53 -0.191,-2.759l0,-240c0.042,-1.228 0.021,-1.539 0.191,-2.759c1.205,-8.653 8.594,-16.054 17.461,-17.102c2.646,-0.313 3.288,-0.105 4.144,-0.058Zm18.204,219.919l106.667,-80l-106.667,-80c0,53.334 0,106.667 0,160Z" />
+    </svg>
+  )
+}
+
 export const Project: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
   return (
     <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
       <path d="M40,300.187l280,0l0,-180l-180,0l-20,-40l-80,0l0,220Z" />
+    </svg>
+  )
+}
+
+export const Resume: React.SFC<IconProps> = props => {
+  const size = props.size || 18
+  const color = props.color || "currentColor"
+  return (
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
+      <path d="M100,50.187c0,-5.522 -4.477,-10 -10,-10c-6.108,0 -13.892,0 -20,0c-5.523,0 -10,4.478 -10,10c0,43.553 0,216.448 0,260c0,5.523 4.477,10 10,10c6.108,0 13.892,0 20,0c5.523,0 10,-4.477 10,-10c0,-43.552 0,-216.447 0,-260Zm61.796,-9.919c2.76,0.346 5.469,1.083 7.882,2.417c1.077,0.596 1.314,0.8 2.322,1.502l160,120c0.95,0.765 1.21,0.934 2.078,1.795c7.411,7.343 7.7,20.781 0,28.411c-0.868,0.861 -1.128,1.029 -2.078,1.794l-160,120c-1.008,0.703 -1.245,0.907 -2.322,1.503c-9.233,5.106 -22.322,1.418 -27.377,-8.189c-1.075,-2.042 -1.791,-4.269 -2.11,-6.555c-0.17,-1.219 -0.148,-1.53 -0.191,-2.759l0,-240c0.043,-1.228 0.021,-1.539 0.191,-2.759c1.205,-8.652 8.594,-16.054 17.461,-17.102c2.647,-0.313 3.288,-0.105 4.144,-0.058Zm18.204,219.919l106.667,-80l-106.667,-80c0,53.334 0,106.667 0,160Z" />
     </svg>
   )
 }
