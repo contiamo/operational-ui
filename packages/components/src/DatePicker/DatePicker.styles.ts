@@ -70,7 +70,7 @@ export const MonthNav = styled("div")(({ theme }: { theme?: OperationalStyleCons
   marginBottom: theme.space.element,
   textAlign: "center",
   "& > *": {
-    margin: `0 2px`,
+    margin: "0 2px",
     verticalAlign: "middle",
     display: "inline-block",
   },
