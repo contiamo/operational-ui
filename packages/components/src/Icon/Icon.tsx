@@ -36,7 +36,7 @@ export interface PropsWithoutName {
 
 export interface Props extends PropsWithoutName {
   /**
-   * Icon name. See https://feathericons.com (convert name to PascalCase) for feather icons.
+   * Icon name.
    * For OperationalUI brand icons, use the values `OperationalUI`, `Labs`, `Components`, `Blocks` and `Visualizations`
    */
   name: IconName
