@@ -141,7 +141,7 @@ class DatePicker extends React.Component<Props, State> {
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
 
     const canGoToPreviousMonth = !min || min < toDate(this.state.year, this.state.month, 0)
-    const canGoToNextMonth = !max || max > toDate(this.state.year, this.state.month, 0)
+    const canGoToNextMonth = !max || max > toDate(this.state.year, this.state.month, 30)
 
     const datePickerWithoutLabel = (
       <Container
