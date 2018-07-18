@@ -18,7 +18,7 @@ class ComponentWithDatePicker extends React.Component {
         start={this.state.start}
         end={this.state.end}
         min="2017-10-01"
-        max="2018-01-01"
+        max="2017-11-30"
         placeholder="Pick a date"
         onChange={newState => {
           this.setState(prevState => newState)

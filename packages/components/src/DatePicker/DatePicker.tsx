@@ -38,6 +38,16 @@ export interface State {
   month: number
 }
 
+const changeMonth = (
+  diff: number,
+  { year, month }: { year: number; month: number },
+): { year: number; month: number } => {
+  return {
+    month: month + diff < 0 ? month + diff + 12 : (month + diff) % 12,
+    year: month + diff < 0 ? year - 1 : month + diff > 11 ? year + 1 : year,
+  }
+}
+
 class DatePicker extends React.Component<Props, State> {
   static defaultProps = {
     placeholder: "Enter date",
@@ -84,15 +94,7 @@ class DatePicker extends React.Component<Props, State> {
   }
 
   changeMonth(diff: number) {
-    this.setState(prevState => ({
-      month: prevState.month + diff < 0 ? prevState.month + diff + 12 : (prevState.month + diff) % 12,
-      year:
-        prevState.month + diff < 0
-          ? prevState.year - 1
-          : prevState.month + diff > 11
-            ? prevState.year + 1
-            : prevState.year,
-    }))
+    this.setState(prevState => changeMonth(diff, { month: prevState.month, year: prevState.year }))
   }
 
   componentDidMount() {
@@ -140,8 +142,10 @@ class DatePicker extends React.Component<Props, State> {
     const { isExpanded, month, year } = this.state
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
 
+    const nextMonth = changeMonth(1, { month: this.state.month, year: this.state.year })
+
     const canGoToPreviousMonth = !min || min < toDate(this.state.year, this.state.month, 0)
-    const canGoToNextMonth = !max || max > toDate(this.state.year, this.state.month, 30)
+    const canGoToNextMonth = !max || max >= toDate(nextMonth.year, nextMonth.month, 0)
 
     const datePickerWithoutLabel = (
       <Container
