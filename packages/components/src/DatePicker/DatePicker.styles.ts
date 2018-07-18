@@ -82,24 +82,50 @@ export const MonthNav = styled("div")(({ theme }: { theme?: OperationalStyleCons
   },
 }))
 
-export const IconContainer = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  width: 20,
-  height: 20,
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  borderRadius: "50%",
-  cursor: "pointer",
-  ":hover": {
-    backgroundColor: theme.color.background.lighter,
-  },
-}))
+export const IconContainer = styled("div")(
+  ({ theme, disabled }: { theme?: OperationalStyleConstants; disabled?: boolean }): {} => ({
+    width: 20,
+    height: 20,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "50%",
+    cursor: disabled ? "not-allowed" : "pointer",
+    opacity: disabled ? "0.6" : "1",
+    ":hover": {
+      backgroundColor: disabled ? undefined : theme.color.background.lighter,
+    },
+  }),
+)
 
 export const Days = styled("div")({
   textAlign: "center",
   width: 210,
   margin: "auto -1px",
 })
+
+const makeDayTextColor = ({
+  isPlaceholder,
+  isDisabled,
+  selected,
+  theme,
+}: {
+  isPlaceholder?: boolean
+  isDisabled?: boolean
+  selected?: boolean
+  theme?: OperationalStyleConstants
+}) => {
+  if (selected) {
+    return theme.color.white
+  }
+  if (isDisabled) {
+    return theme.color.text.lightest
+  }
+  if (isPlaceholder) {
+    return theme.color.text.lighter
+  }
+  return theme.color.text.dark
+}
 
 export const Day = styled("div")(
   {
@@ -129,11 +155,7 @@ export const Day = styled("div")(
   }) => ({
     ...theme.deprecated.typography.body,
     backgroundColor: selected ? theme.deprecated.colors.info : "transparent",
-    color: selected
-      ? theme.deprecated.colors.white
-      : isPlaceholder || isDisabled
-        ? theme.deprecated.colors.gray
-        : theme.deprecated.colors.black,
+    color: makeDayTextColor({ isPlaceholder, isDisabled, selected, theme }),
     cursor: isDisabled ? "not-allowed" : "pointer",
     ":hover": {
       backgroundColor: selected

@@ -35,7 +35,6 @@ const isSelected = (date: string, current: IDatePair): boolean => {
 }
 
 const Month = ({ year, month, start, end, onChange, min, max }: Props) => {
-  console.log(min, max)
   const prevPlaceholderDays = monthStartDay(year, month)
   const nextMonth = month === 11 ? 0 : month + 1
   const nextYear = month === 11 ? year + 1 : year

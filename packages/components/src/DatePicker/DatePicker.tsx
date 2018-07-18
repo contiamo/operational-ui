@@ -5,9 +5,7 @@ import { Label, LabelText } from "../utils/mixins"
 import { Card, Icon } from "../"
 
 import { Container, Toggle, MonthNav, IconContainer, Input, DatePickerCard } from "./DatePicker.styles"
-
-import { months, toYearMonthDay, validateDateString } from "./DatePicker.utils"
-
+import { months, toYearMonthDay, validateDateString, toDate } from "./DatePicker.utils"
 import Month from "./DatePicker.Month"
 
 export interface Props {
@@ -36,6 +34,7 @@ export interface Props {
 export interface State {
   isExpanded: boolean
   year: number
+  /** Current month. Starting at 0, corresponding to January */
   month: number
 }
 
@@ -141,6 +140,9 @@ class DatePicker extends React.Component<Props, State> {
     const { isExpanded, month, year } = this.state
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
 
+    const canGoToPreviousMonth = !min || min < toDate(this.state.year, this.state.month, 0)
+    const canGoToNextMonth = !max || max > toDate(this.state.year, this.state.month, 0)
+
     const datePickerWithoutLabel = (
       <Container
         innerRef={(node: React.ReactNode) => {
@@ -188,8 +190,12 @@ class DatePicker extends React.Component<Props, State> {
         <DatePickerCard isExpanded={isExpanded}>
           <MonthNav>
             <IconContainer
+              disabled={!canGoToPreviousMonth}
               onClick={(ev: any) => {
                 ev.preventDefault()
+                if (!canGoToPreviousMonth) {
+                  return
+                }
                 this.changeMonth(-1)
               }}
             >
@@ -197,8 +203,12 @@ class DatePicker extends React.Component<Props, State> {
             </IconContainer>
             <span>{`${months[month]}, ${year}`}</span>
             <IconContainer
+              disabled={!canGoToNextMonth}
               onClick={(ev: any) => {
                 ev.preventDefault()
+                if (!canGoToNextMonth) {
+                  return
+                }
                 this.changeMonth(+1)
               }}
             >
