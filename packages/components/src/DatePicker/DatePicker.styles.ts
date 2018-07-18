@@ -91,7 +91,7 @@ export const IconContainer = styled("div")(
     justifyContent: "center",
     borderRadius: "50%",
     cursor: disabled ? "not-allowed" : "pointer",
-    opacity: disabled ? "0.6" : "1",
+    opacity: disabled ? "0.4" : "1",
     ":hover": {
       backgroundColor: disabled ? undefined : theme.color.background.lighter,
     },
