@@ -165,7 +165,7 @@ const SidenavHeader = (props: Props) => {
             <Content onClick={props.onClick} isCondensed={Boolean(props.condensed)}>
               <LabelText isActive={isActive}>
                 {props.label}
-                {props.icon && <Icon name={props.icon as IconName} size={18} right />}
+                {props.icon && <Icon name={props.icon as IconName} right />}
               </LabelText>
               {!props.condensed && (
                 <Summary isActive={isActive}>

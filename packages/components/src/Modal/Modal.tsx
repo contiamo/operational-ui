@@ -42,6 +42,10 @@ class Modal extends React.Component<Props, {}> {
     document.body.addEventListener("click", this.handleClick)
   }
 
+  componentWillUnmount() {
+    document.body.removeEventListener("click", this.handleClick)
+  }
+
   render() {
     return (
       <Container id={this.props.id} className={this.props.className}>

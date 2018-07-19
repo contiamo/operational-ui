@@ -77,11 +77,8 @@ class ContextMenu extends React.Component<Props, State> {
   componentDidUpdate() {
     if (this.state.isOpen) {
       document.addEventListener("click", this.toggle)
-      return
-    }
-    if (!this.state.isOpen) {
+    } else {
       document.removeEventListener("click", this.toggle)
-      return
     }
   }
 

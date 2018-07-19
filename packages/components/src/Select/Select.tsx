@@ -180,13 +180,9 @@ class Select extends React.Component<Props, State> {
     if (this.state.open) {
       document.addEventListener("click", this.handleClick)
       document.addEventListener("keyup", this.handleEsc)
-      return
-    }
-
-    if (!this.state.open) {
+    } else {
       document.removeEventListener("click", this.handleClick)
       document.removeEventListener("keyup", this.handleEsc)
-      return
     }
   }
 
