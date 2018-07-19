@@ -104,7 +104,7 @@ const Tab = n => () => (
 ```jsx
 const Tab = n => () => (
   <PageContent>
-    <Card title={`${n} Tab`} />
+    <Card title={`${n} Tab`}>The tabs are not working because nothing update `activeTabName`!</Card>
   </PageContent>
 )
 ;<Page
@@ -119,7 +119,7 @@ const Tab = n => () => (
 />
 ```
 
-### With activeTabName trigger from outside (router)
+### With activeTabName controlled (classically with a router)
 
 ```jsx
 const Tab = n => () => (
