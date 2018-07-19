@@ -39,11 +39,15 @@ const Container = styled("div")(
           },
         }
       : {
-          cursor: "default",
+          cursor: "not-allowed",
+          opacity: 0.6,
         }),
     "&:not(:first-child)": {
       borderTop: "1px solid",
       borderColor: theme.color.separators.default,
+    },
+    "&:last-child": {
+      paddingBottom: 2,
     },
   }),
 )

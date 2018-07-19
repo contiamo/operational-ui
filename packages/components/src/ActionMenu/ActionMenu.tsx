@@ -1,5 +1,6 @@
 import * as React from "react"
 import styled from "react-emotion"
+import { darken } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import ContextMenu, { Props as ContextMenuProps } from "../ContextMenu/ContextMenu"
 import Icon from "../Icon/Icon"
@@ -28,6 +29,9 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
   justifyContent: "space-between",
   userSelect: "none",
   outline: `1px solid ${theme.color.separators.light}`,
+  "&:hover": {
+    backgroundColor: darken(theme.color.white, 5),
+  },
 }))
 
 const TitleContainer = styled("p")({

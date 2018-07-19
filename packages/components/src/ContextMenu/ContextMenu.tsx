@@ -69,7 +69,6 @@ const MenuContainer = styled("div")(
       zIndex: theme.zIndex.selectOptions,
       width: "fit-content",
       display: isExpanded ? "block" : "none",
-      paddingBottom: theme.space.base,
     }),
 )
 
