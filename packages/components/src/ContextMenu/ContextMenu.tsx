@@ -58,23 +58,22 @@ const MenuContainer = styled("div")(
     isExpanded,
     embedChildrenInMenu,
   }: {
-      theme?: OperationalStyleConstants
-      isExpanded: boolean
-      embedChildrenInMenu: boolean
-    }) => ({
-      position: "absolute",
-      top: embedChildrenInMenu ? 0 : "100%",
-      left: 0,
-      boxShadow: theme.shadows.popup,
-      zIndex: theme.zIndex.selectOptions,
-      width: "fit-content",
-      display: isExpanded ? "block" : "none",
-    }),
+    theme?: OperationalStyleConstants
+    isExpanded: boolean
+    embedChildrenInMenu: boolean
+  }) => ({
+    position: "absolute",
+    top: embedChildrenInMenu ? 0 : "100%",
+    left: 0,
+    boxShadow: theme.shadows.popup,
+    zIndex: theme.zIndex.selectOptions,
+    width: "fit-content",
+    display: isExpanded ? "block" : "none",
+  }),
 )
 
 const StyledContextMenuItem = styled(ContextMenuItem)(
   ({ theme, align }: { theme?: OperationalStyleConstants; align: Props["align"] }) => ({
-    color: theme.color.text.default,
     textAlign: align,
   }),
 )

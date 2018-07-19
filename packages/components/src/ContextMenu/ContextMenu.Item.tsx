@@ -27,20 +27,20 @@ const Container = styled("div")(
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
-    color: theme.color.text.default,
     backgroundColor: theme.color.white,
     lineHeight: `${condensed ? 35 : 44}px`,
     padding: `0 ${theme.space.content}px`,
     ...(!!onClick
       ? {
           cursor: "pointer",
+          color: theme.color.text.default,
           "&:hover": {
             backgroundColor: darken(theme.color.white, 2),
           },
         }
       : {
           cursor: "not-allowed",
-          opacity: 0.6,
+          color: theme.color.text.lightest,
         }),
     "&:not(:first-child)": {
       borderTop: "1px solid",
