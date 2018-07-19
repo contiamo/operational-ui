@@ -28,8 +28,8 @@ const Container = styled("div")(
     overflow: "hidden",
     textOverflow: "ellipsis",
     color: theme.color.text.default,
-    lineHeight: `${condensed ? 33 : 44}px`,
     backgroundColor: theme.color.white,
+    lineHeight: `${condensed ? 35 : 44}px`,
     padding: `0 ${theme.space.content}px`,
     ...(!!onClick
       ? {
