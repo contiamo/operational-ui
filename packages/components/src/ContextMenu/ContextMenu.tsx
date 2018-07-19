@@ -35,7 +35,7 @@ export interface Props {
    * Whether to include the click element in the context menu styling.
    * Only recommended when the click element is the same width as the context menu.
    */
-  styleClickElement?: boolean
+  embedChildrenInMenu?: boolean
 }
 
 export interface State {
@@ -56,14 +56,14 @@ const MenuContainer = styled("div")(
   ({
     theme,
     isExpanded,
-    styleClickElement,
+    embedChildrenInMenu,
   }: {
       theme?: OperationalStyleConstants
       isExpanded: boolean
-      styleClickElement: boolean
+      embedChildrenInMenu: boolean
     }) => ({
       position: "absolute",
-      top: styleClickElement ? 0 : "100%",
+      top: embedChildrenInMenu ? 0 : "100%",
       left: 0,
       boxShadow: theme.shadows.popup,
       zIndex: theme.zIndex.selectOptions,
@@ -87,7 +87,7 @@ class ContextMenu extends React.Component<Props, State> {
 
   static defaultProps: Partial<Props> = {
     align: "left",
-    styleClickElement: false,
+    embedChildrenInMenu: false,
   }
 
   componentDidUpdate() {
@@ -108,15 +108,16 @@ class ContextMenu extends React.Component<Props, State> {
       throw new Error("No array of items has been provided for the ContextMenu.")
     }
 
+    const children =
+      typeof this.props.children === "function" ? this.props.children(this.state.isOpen) : this.props.children
     return (
       <Container id={this.props.id} className={this.props.className} align={this.props.align} onClick={this.toggle}>
-        {typeof this.props.children === "function" ? this.props.children(this.state.isOpen) : this.props.children}
+        {children}
         <MenuContainer
           isExpanded={this.props.open || this.state.isOpen}
-          styleClickElement={this.props.styleClickElement}
+          embedChildrenInMenu={this.props.embedChildrenInMenu}
         >
-          {this.props.styleClickElement &&
-            (typeof this.props.children === "function" ? this.props.children(this.state.isOpen) : this.props.children)}
+          {this.props.embedChildrenInMenu && children}
           {this.props.items.map((item: string | Item, index: number) => {
             const clickHandler = (typeof item !== "string" && item.onClick) || this.props.onClick
             return (

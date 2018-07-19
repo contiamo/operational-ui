@@ -38,7 +38,7 @@ const TitleContainer = styled("p")({
 })
 
 const ActionMenu: React.SFC<Props> = (props: Props) => (
-  <ContextMenu {...props} items={props.items} width={width} condensed styleClickElement>
+  <ContextMenu {...props} items={props.items} width={width} condensed embedChildrenInMenu>
     {isOpen => (
       <Container>
         <TitleContainer>{props.title}</TitleContainer>
