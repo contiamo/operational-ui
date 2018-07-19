@@ -30,19 +30,21 @@ const Content = styled("div")(
 )
 
 class Modal extends React.Component<Props, {}> {
-  contentNode: any
+  contentNode: HTMLElement
+
+  handleClick = (event: MouseEvent) => {
+    if (this.contentNode && !this.contentNode.contains(event.target as HTMLElement)) {
+      this.props.onClose && this.props.onClose()
+    }
+  }
+
+  componentDidMount() {
+    document.body.addEventListener("click", this.handleClick)
+  }
 
   render() {
     return (
-      <Container
-        id={this.props.id}
-        className={this.props.className}
-        onClick={ev => {
-          if (this.contentNode && !this.contentNode.contains(ev.target)) {
-            this.props.onClose && this.props.onClose()
-          }
-        }}
-      >
+      <Container id={this.props.id} className={this.props.className}>
         <Content
           innerRef={contentNode => {
             this.contentNode = contentNode
