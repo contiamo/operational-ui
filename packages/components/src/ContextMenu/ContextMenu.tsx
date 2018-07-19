@@ -35,7 +35,7 @@ export interface State {
   isOpen: boolean
 }
 
-const Container = styled("div")(({ theme, align }: { theme?: OperationalStyleConstants; align: Props["align"] }) => ({
+const Container = styled("div")(({ align }: { align: Props["align"] }) => ({
   label: "contextmenu",
   cursor: "pointer",
   position: "relative",
@@ -74,33 +74,18 @@ class ContextMenu extends React.Component<Props, State> {
     align: "left",
   }
 
-  containerNode: any
-  menuContainerNode: any
-
-  handleClick = (ev: any): void => {
-    const isTargetInsideMenu = this.menuContainerNode.contains(ev.target)
-    const isTargetInsideContainer = this.containerNode.contains(ev.target)
-
-    if (!isTargetInsideContainer && this.props.onOutsideClick) {
-      this.props.onOutsideClick()
+  componentDidUpdate() {
+    if (this.state.isOpen) {
+      document.addEventListener("click", this.toggle)
+    } else {
+      document.removeEventListener("click", this.toggle)
     }
+  }
 
-    const newIsActive = isTargetInsideMenu
-      ? this.props.keepOpenOnItemClick
-      : isTargetInsideContainer && !this.state.isOpen
-
+  toggle = () =>
     this.setState(prevState => ({
-      isOpen: newIsActive,
+      isOpen: !prevState.isOpen,
     }))
-  }
-
-  componentDidMount() {
-    document.addEventListener("click", this.handleClick)
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener("click", this.handleClick)
-  }
 
   render() {
     if (!this.props.items) {
@@ -108,21 +93,9 @@ class ContextMenu extends React.Component<Props, State> {
     }
 
     return (
-      <Container
-        innerRef={node => {
-          this.containerNode = node
-        }}
-        id={this.props.id}
-        className={this.props.className}
-        align={this.props.align}
-      >
+      <Container id={this.props.id} className={this.props.className} align={this.props.align} onClick={this.toggle}>
         {typeof this.props.children === "function" ? this.props.children(this.state.isOpen) : this.props.children}
-        <MenuContainer
-          innerRef={node => {
-            this.menuContainerNode = node
-          }}
-          isExpanded={this.props.open || this.state.isOpen}
-        >
+        <MenuContainer isExpanded={this.props.open || this.state.isOpen}>
           {this.props.items.map((item: string | Item, index: number) => {
             const clickHandler = (typeof item !== "string" && item.onClick) || this.props.onClick
             return (

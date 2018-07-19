@@ -108,17 +108,6 @@ const CloseButton = styled("div")(({ theme }: { theme?: OperationalStyleConstant
   },
 }))
 
-const IconContainer = styled("div")`
-  display: inline-block;
-  vertical-align: middle;
-  ${({ theme }: { theme?: OperationalStyleConstants }) => `margin: 0 0 0 ${theme.space.small}px;`} width: 18px;
-  height: 18px;
-  & > svg {
-    position: relative;
-    top: -2px;
-  }
-`
-
 const Summary = styled("div")`
   display: block;
   font-weight: normal;
@@ -176,9 +165,7 @@ const SidenavHeader = (props: Props) => {
             <Content onClick={props.onClick} isCondensed={Boolean(props.condensed)}>
               <LabelText isActive={isActive}>
                 {props.label}
-                <IconContainer>
-                  {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={18} /> : props.icon}
-                </IconContainer>
+                {props.icon && <Icon name={props.icon as IconName} right />}
               </LabelText>
               {!props.condensed && (
                 <Summary isActive={isActive}>

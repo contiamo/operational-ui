@@ -60,16 +60,21 @@ const Textarea = (props: Props) => {
   return (
     <Label fullWidth={props.fullWidth} className={props.className} id={props.id}>
       {props.label ? <LabelText>{props.label}</LabelText> : null}
-      <FormFieldControls>{props.hint && <Hint>{props.hint}</Hint>}</FormFieldControls>
+      {props.hint && (
+        <FormFieldControls>
+          <Hint>{props.hint}</Hint>
+        </FormFieldControls>
+      )}
       <TextareaComp
         disabled={Boolean(props.disabled)}
         isCode={Boolean(props.code)}
         value={props.value}
         isError={Boolean(props.error)}
-        onChange={(e: any) => {
-          if (props.onChange) {
-            props.onChange(e.target.value)
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          if (!props.onChange) {
+            return
           }
+          props.onChange(e.target.value)
         }}
       />
       {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}

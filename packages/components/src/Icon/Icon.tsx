@@ -1,9 +1,7 @@
 import * as React from "react"
-import * as ReactFeather from "react-feather"
 import styled from "react-emotion"
-import { withTheme } from "emotion-theming"
 
-import { OperationalStyleConstants, expandColor } from "../utils/constants"
+import constants, { OperationalStyleConstants, expandColor } from "../utils/constants"
 import BrandIcons, { BrandIconName } from "./Icon.Brand"
 import * as CustomIcons from "./Icon.Custom"
 
@@ -48,23 +46,23 @@ export interface PropsWithTheme extends Props {
   theme?: OperationalStyleConstants
 }
 
-const Icon = withTheme(({ left, right, ...props }: PropsWithTheme) => {
-  const color: string = expandColor(props.theme, props.color) || "currentColor"
+const Icon = ({ left, right, color, ...props }: Props) => {
+  const iconColor: string = expandColor(constants, color) || "currentColor"
 
   const TypedCustomIcons: { [key: string]: React.SFC<{ size?: number; color?: string }> } = CustomIcons
 
   if (TypedCustomIcons[props.name]) {
     const Comp = TypedCustomIcons[props.name]
-    return <Comp {...props} size={props.size || 18} color={color} />
+    return <Comp {...props} size={props.size || 18} color={iconColor} />
   }
 
   if (BrandIcons[props.name]) {
     const Comp = BrandIcons[props.name]
-    return <Comp {...props} size={props.size || 32} color={color} />
+    return <Comp {...props} size={props.size || 32} color={iconColor} />
   }
 
   return null
-})
+}
 
 export default styled(Icon)(({ left, right, theme }: PropsWithTheme) => ({
   marginLeft: right ? theme.space.small : 0,

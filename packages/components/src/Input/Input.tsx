@@ -192,18 +192,20 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
       return (
         <Label fullWidth={props.fullWidth} id={props.id} htmlFor={forAttributeId} className={props.className} left>
           <LabelText>{props.label}</LabelText>
-          <FormFieldControls>
-            {props.hint && <Hint>{props.hint}</Hint>}
-            {props.onToggle ? (
-              <FormFieldControl
-                onClick={() => {
-                  props.onToggle()
-                }}
-              >
-                <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />
-              </FormFieldControl>
-            ) : null}
-          </FormFieldControls>
+          {(props.hint || props.onToggle) && (
+            <FormFieldControls>
+              {props.hint && <Hint>{props.hint}</Hint>}
+              {props.onToggle ? (
+                <FormFieldControl
+                  onClick={() => {
+                    props.onToggle()
+                  }}
+                >
+                  <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />
+                </FormFieldControl>
+              ) : null}
+            </FormFieldControls>
+          )}
           <InputFieldContainer fullWidth={props.fullWidth} withLabel>
             {inputButtonElement}
             <InputField
