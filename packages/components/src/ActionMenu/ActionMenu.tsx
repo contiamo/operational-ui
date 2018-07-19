@@ -28,7 +28,7 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
   alignItems: "center",
   justifyContent: "space-between",
   userSelect: "none",
-  outline: `1px solid ${theme.color.separators.light}`,
+  boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
   "&:hover": {
     backgroundColor: darken(theme.color.white, 5),
   },
