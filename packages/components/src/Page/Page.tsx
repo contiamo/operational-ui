@@ -20,7 +20,7 @@ export interface Props {
    * List of tabs
    * This will disable any children to render `tabs[i].component` instead
    */
-  tabs?: { name: string; component: React.ComponentType }[]
+  tabs?: { name: string; component: React.ComponentType; hidden?: boolean }[]
   /**
    * Active tab name
    *
@@ -128,7 +128,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
         {tabs ? (
           <>
             <TabsBar>
-              {tabs.map(({ name }, i) => (
+              {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
                 <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i)}>
                   {name}
                 </Tab>
