@@ -5,22 +5,21 @@ import { Label, LabelText } from "../utils/mixins"
 import { Card, Icon } from "../"
 
 import { Container, Toggle, MonthNav, IconContainer, Input, DatePickerCard } from "./DatePicker.styles"
-
-import { months, toYearMonthDay, validateDateString } from "./DatePicker.utils"
-
+import { months, toYearMonthDay, validateDateString, toDate, changeMonth } from "./DatePicker.utils"
 import Month from "./DatePicker.Month"
 
 export interface Props {
   id?: string
   label?: string
+  /** Min date in the format YYYY-MM-DD. Dates lower than this cannot be selected. */
+  min?: string
+  /** Max date in the format YYYY-MM-DD. Dates higher than this cannot be selected. */
+  max?: string
   /** Start date in the format YYYY-MM-DD. */
-
   start?: string
   /** End date in the format YYYY-MM-DD. */
-
   end?: string
   /** Triggered every time the start or end dates change. `undefined` values clear start or end values. */
-
   onChange?: (
     date: {
       start?: string
@@ -29,13 +28,13 @@ export interface Props {
   ) => void
   className?: string
   /** Placeholder text when no dates selected */
-
   placeholder?: string
 }
 
 export interface State {
   isExpanded: boolean
   year: number
+  /** Current month. Starting at 0, corresponding to January */
   month: number
 }
 
@@ -85,15 +84,7 @@ class DatePicker extends React.Component<Props, State> {
   }
 
   changeMonth(diff: number) {
-    this.setState(prevState => ({
-      month: prevState.month + diff < 0 ? prevState.month + diff + 12 : (prevState.month + diff) % 12,
-      year:
-        prevState.month + diff < 0
-          ? prevState.year - 1
-          : prevState.month + diff > 11
-            ? prevState.year + 1
-            : prevState.year,
-    }))
+    this.setState(prevState => changeMonth(diff, { month: prevState.month, year: prevState.year }))
   }
 
   componentDidMount() {
@@ -137,9 +128,14 @@ class DatePicker extends React.Component<Props, State> {
   }
 
   render() {
-    const { onChange, placeholder, start, end, label, id, className } = this.props
+    const { onChange, placeholder, start, end, label, min, max, id, className } = this.props
     const { isExpanded, month, year } = this.state
     const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
+
+    const nextMonth = changeMonth(1, { month: this.state.month, year: this.state.year })
+
+    const canGoToPreviousMonth = !min || min < toDate(this.state.year, this.state.month, 0)
+    const canGoToNextMonth = !max || max >= toDate(nextMonth.year, nextMonth.month, 0)
 
     const datePickerWithoutLabel = (
       <Container
@@ -188,24 +184,32 @@ class DatePicker extends React.Component<Props, State> {
         <DatePickerCard isExpanded={isExpanded}>
           <MonthNav>
             <IconContainer
+              disabled={!canGoToPreviousMonth}
               onClick={(ev: any) => {
                 ev.preventDefault()
+                if (!canGoToPreviousMonth) {
+                  return
+                }
                 this.changeMonth(-1)
               }}
             >
-              <Icon name="ChevronLeft" size={14} />
+              <Icon name="ChevronLeft" size={12} />
             </IconContainer>
             <span>{`${months[month]}, ${year}`}</span>
             <IconContainer
+              disabled={!canGoToNextMonth}
               onClick={(ev: any) => {
                 ev.preventDefault()
+                if (!canGoToNextMonth) {
+                  return
+                }
                 this.changeMonth(+1)
               }}
             >
-              <Icon name="ChevronRight" size={14} />
+              <Icon name="ChevronRight" size={12} />
             </IconContainer>
           </MonthNav>
-          <Month start={start} end={end} year={year} month={month} onChange={onChange} />
+          <Month start={start} end={end} min={min} max={max} year={year} month={month} onChange={onChange} />
         </DatePickerCard>
       </Container>
     )

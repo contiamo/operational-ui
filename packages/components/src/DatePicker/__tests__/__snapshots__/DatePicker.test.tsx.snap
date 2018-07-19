@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DatePicker Component Should render 1`] = `
+<div
+  class="css-ar73w8-Messages"
+/>
+`;

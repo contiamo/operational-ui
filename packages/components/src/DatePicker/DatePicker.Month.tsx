@@ -13,6 +13,8 @@ export interface Props {
   month: number
   start?: string
   end?: string
+  min?: string
+  max?: string
   onChange?: (date: IDatePair) => void
 }
 
@@ -32,7 +34,7 @@ const isSelected = (date: string, current: IDatePair): boolean => {
   return date === start || date === end || (!!start && !!end && date >= start && date <= end)
 }
 
-const Month = ({ year, month, start, end, onChange }: Props) => {
+const Month = ({ year, month, start, end, onChange, min, max }: Props) => {
   const prevPlaceholderDays = monthStartDay(year, month)
   const nextMonth = month === 11 ? 0 : month + 1
   const nextYear = month === 11 ? year + 1 : year
@@ -47,6 +49,7 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
       {range(prevPlaceholderDays).map((number, index) => {
         const day = daysInPreviousMonth + index - prevPlaceholderDays
         const date = toDate(prevYear, prevMonth, day)
+        const isDisabled = (min && date < min) || (max && date > max)
         return (
           <Day
             selected={isSelected(date, {
@@ -55,8 +58,12 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
             })}
             key={index}
             isPlaceholder
+            isDisabled={isDisabled}
             onClick={(ev: any) => {
               ev.preventDefault()
+              if (isDisabled) {
+                return
+              }
               onChange &&
                 onChange(
                   setNewDate(date, {
@@ -72,6 +79,7 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
       })}
       {range(daysInCurrentMonth).map((number, index) => {
         const date = toDate(year, month, index)
+        const isDisabled = (min && date < min) || (max && date > max)
         return (
           <Day
             selected={isSelected(date, {
@@ -79,8 +87,12 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
               end,
             })}
             key={index}
+            isDisabled={isDisabled}
             onClick={(ev: any) => {
               ev.preventDefault()
+              if (isDisabled) {
+                return
+              }
               onChange &&
                 onChange(
                   setNewDate(date, {
@@ -96,6 +108,7 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
       })}
       {range(nextPlaceholderDays).map((number, index) => {
         const date = toDate(nextYear, nextMonth, number)
+        const isDisabled = (min && date < min) || (max && date > max)
         return (
           <Day
             key={index}
@@ -103,9 +116,13 @@ const Month = ({ year, month, start, end, onChange }: Props) => {
               start,
               end,
             })}
+            isDisabled={isDisabled}
             isPlaceholder
             onClick={(ev: any) => {
               ev.preventDefault()
+              if (isDisabled) {
+                return
+              }
               onChange &&
                 onChange(
                   setNewDate(date, {
