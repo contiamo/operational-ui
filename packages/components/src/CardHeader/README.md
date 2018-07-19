@@ -16,15 +16,11 @@ Passing `title` and `action` props to the `Card` component can be used as a shor
 <Card>
   <CardHeader
     action={
-      <div>
+      <>
         <Button condensed>Button</Button>
-        <Button condensed color="primary">
-          Button <Icon name="Plus" />
-        </Button>
-        <a href="#">
-          Link <Icon name="ExternalLink" />
-        </a>
-      </div>
+        Persisting changes
+        <Spinner bounce right />
+      </>
     }
   >
     Title for my card
@@ -48,10 +44,10 @@ Passing `title` and `action` props to the `Card` component can be used as a shor
 <Card>
   <CardHeader
     action={
-      <div>
+      <>
         <Button condensed>Button</Button>
         <a href="#">Link</a>
-      </div>
+      </>
     }
     title={
       <>
