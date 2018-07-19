@@ -20,7 +20,7 @@ const StyledPageAreas = styled("div")(
     return {
       gridTemplateColumns,
       display: "grid",
-      alignItems: "start",
+      alignItems: "stretch",
       gridTemplateAreas: `"${props.areas}"`,
       gridGap: props.theme.space.element,
       maxWidth: props.isFill ? "none" : 1150,
