@@ -49,10 +49,15 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
   },
 }))
 
+const ActionsContainer = styled("div")`
+  display: flex;
+  align-items: center;
+`
+
 const CardHeader = (props: Props) => (
   <Container id={props.id} className={props.className}>
     <div>{props.title || props.children}</div>
-    <div>{props.action}</div>
+    <ActionsContainer>{props.action}</ActionsContainer>
   </Container>
 )
 
