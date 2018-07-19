@@ -216,6 +216,16 @@ export const No: React.SFC<IconProps> = props => {
   )
 }
 
+export const Nothing: React.SFC<IconProps> = props => {
+  const size = props.size || 18
+  const color = props.color || "currentColor"
+  return (
+    <svg viewBox="0 0 360 360" fill={color} width={size} height={size} className={props.className}>
+      <path d="M180.465,70.236c39.89,0.189 78.628,23.457 97.298,59.348c18.549,35.658 15.663,81.525 -8.344,114.849c-24.164,33.542 -68.192,51.739 -109.784,43.897c-44.272,-8.349 -81.753,-45.94 -88.409,-92.378c-5.794,-40.43 12.637,-83.426 47.4,-106.92c17.733,-11.984 38.916,-18.553 60.418,-18.792c0.474,-0.004 0.948,-0.005 1.421,-0.004Zm-0.595,40c-25.871,0.125 -51.138,15.724 -62.69,39.318c-9.245,18.882 -9.328,42.011 -0.183,60.985c11.292,23.432 36.257,39.604 62.893,39.696c17.737,0.061 35.341,-6.886 48.355,-19.206c17.165,-16.249 25.233,-41.561 20.443,-64.921c-6.332,-30.881 -35.239,-55.49 -67.9,-55.87c-0.306,-0.002 -0.612,-0.003 -0.918,-0.002Z" />
+    </svg>
+  )
+}
+
 export const Olap: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"

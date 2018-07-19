@@ -26,7 +26,7 @@ const makeIconColor = (status: Status, theme: OperationalStyleConstants) => {
     case "failure":
       return theme.color.error
     case "waiting":
-      return theme.color.text.light
+      return theme.color.text.lightest
     case "running":
       return theme.color.text.dark
   }
@@ -62,7 +62,6 @@ const Body = styled("div")`
     font-size: ${theme.font.size.body}px;
     & svg {
       color: ${makeIconColor(status, theme)};
-      opacity: ${status === "waiting" ? 0 : 1};
     }
   `};
 `
@@ -83,7 +82,7 @@ const ProgressPanelIcon: React.SFC<{ status: Status }> = props => {
     case "failure":
       return <Icon left name="No" />
     case "waiting":
-      return <Icon left name="No" />
+      return <Icon left name="Nothing" />
     case "running":
       return <Spinner left />
   }
