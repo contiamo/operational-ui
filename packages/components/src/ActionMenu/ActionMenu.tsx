@@ -4,6 +4,8 @@ import { OperationalStyleConstants } from "../utils/constants"
 import ContextMenu, { Props as ContextMenuProps } from "../ContextMenu/ContextMenu"
 import Icon from "../Icon/Icon"
 
+const width = 144
+
 export interface Props {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
   onClick?: ContextMenuProps["onClick"]
@@ -14,10 +16,16 @@ export interface Props {
 }
 
 const Container = styled("div")(({ theme, isOpen }: { theme?: OperationalStyleConstants; isOpen: boolean }) => ({
-  width: 144,
+  width,
   height: 35,
   padding: `0 ${theme.space.content}px`,
   backgroundColor: theme.color.white,
+  color: theme.color.primary,
+  fontWeight: theme.font.weight.medium,
+  borderRadius: theme.borderRadius,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
   ...(isOpen
     ? {
         boxShadow: `0 3px 12px ${theme.color.border.disabled}`,
@@ -28,12 +36,6 @@ const Container = styled("div")(({ theme, isOpen }: { theme?: OperationalStyleCo
     : {
         border: `1px solid ${theme.color.separators.light}`,
       }),
-  color: theme.color.primary,
-  fontWeight: theme.font.weight.medium,
-  borderRadius: theme.borderRadius,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
 }))
 
 const TitleContainer = styled("p")({
@@ -44,7 +46,7 @@ const TitleContainer = styled("p")({
 })
 
 const ActionMenu: React.SFC<Props> = (props: Props) => (
-  <ContextMenu {...props} items={props.items} width={144} condensed>
+  <ContextMenu {...props} items={props.items} width={width} condensed>
     {isOpen => (
       <Container isOpen={isOpen}>
         <TitleContainer>{props.title}</TitleContainer>

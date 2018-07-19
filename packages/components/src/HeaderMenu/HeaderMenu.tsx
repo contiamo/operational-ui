@@ -1,19 +1,19 @@
 import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
-import ContextMenu, { Props as CMProps } from "../ContextMenu/ContextMenu"
+import ContextMenu, { Props as ContextMenuProps } from "../ContextMenu/ContextMenu"
 
 export interface Props {
   /** Clickable component(s) from which menu appears  */
   children: React.ReactNode[]
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
-  onClick?: CMProps["onClick"]
+  onClick?: ContextMenuProps["onClick"]
   /** Items to display in dropdown */
-  items: CMProps["items"]
+  items: ContextMenuProps["items"]
   /** Display caret on opposite side to align prop */
   withCaret?: boolean
   /** Alignment */
-  align?: CMProps["align"]
+  align?: ContextMenuProps["align"]
 }
 
 const backgroundColor = "hsla(0, 0%, 100%, 0.1)"
