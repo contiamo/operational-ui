@@ -82,7 +82,7 @@ const ProgressPanelIcon: React.SFC<{ status: Status }> = props => {
     case "failure":
       return <Icon left name="No" />
     case "waiting":
-      return <Icon left name="Nothing" />
+      return <Icon left name="EmptyCircle" />
     case "running":
       return <Spinner left />
   }
