@@ -26,6 +26,16 @@ export const range = (n: number): number[] =>
     length: n,
   }).map((_: number, i: number): number => i)
 
+export const changeMonth = (
+  diff: number,
+  { year, month }: { year: number; month: number },
+): { year: number; month: number } => {
+  return {
+    month: month + diff < 0 ? month + diff + 12 : (month + diff) % 12,
+    year: month + diff < 0 ? year - 1 : month + diff > 11 ? year + 1 : year,
+  }
+}
+
 export const toDate = (year: number, month: number, day: number): string =>
   `${year}-${month < 9 ? "0" : ""}${month + 1}-${day < 9 ? "0" : ""}${day + 1}`
 

@@ -5,7 +5,7 @@ import { Label, LabelText } from "../utils/mixins"
 import { Card, Icon } from "../"
 
 import { Container, Toggle, MonthNav, IconContainer, Input, DatePickerCard } from "./DatePicker.styles"
-import { months, toYearMonthDay, validateDateString, toDate } from "./DatePicker.utils"
+import { months, toYearMonthDay, validateDateString, toDate, changeMonth } from "./DatePicker.utils"
 import Month from "./DatePicker.Month"
 
 export interface Props {
@@ -36,16 +36,6 @@ export interface State {
   year: number
   /** Current month. Starting at 0, corresponding to January */
   month: number
-}
-
-const changeMonth = (
-  diff: number,
-  { year, month }: { year: number; month: number },
-): { year: number; month: number } => {
-  return {
-    month: month + diff < 0 ? month + diff + 12 : (month + diff) % 12,
-    year: month + diff < 0 ? year - 1 : month + diff > 11 ? year + 1 : year,
-  }
 }
 
 class DatePicker extends React.Component<Props, State> {
