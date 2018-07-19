@@ -20,11 +20,11 @@ export interface Props {
    * List of tabs
    * This will disable any children to render `tabs[i].component` instead
    */
-  tabs?: { name: string; component: React.ComponentType }[]
+  tabs?: { name: string; component: React.ComponentType; hidden?: boolean }[]
   /**
    * Active tab name
    *
-   * Useful for easy router mapping
+   * If not specified, active tab is controlled by internal state.
    */
   activeTabName?: string
   /**
@@ -90,27 +90,30 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
     fill: false,
   }
 
-  constructor(props: Props) {
-    super(props)
-    if (props.activeTabName && props.tabs) {
-      const index = props.tabs.findIndex(({ name }) => name.toLowerCase() === props.activeTabName.toLowerCase())
-      this.state = {
-        ...initialState,
-        activeTab: index === -1 ? 0 : index,
-      }
-    } else {
-      this.state = initialState
-    }
-  }
+  state = initialState
 
   onTabClick(index: number) {
     this.setState({ activeTab: index })
     this.props.onTabChange && this.props.onTabChange(this.props.tabs[index].name.toLowerCase())
   }
 
+  getActiveTab(): number {
+    let activeTab: number
+    if (this.props.activeTabName) {
+      const index = this.props.tabs.findIndex(
+        ({ name }) => name.toLowerCase() === this.props.activeTabName.toLowerCase(),
+      )
+      activeTab = index === -1 ? 0 : index
+    } else {
+      activeTab = this.state.activeTab
+    }
+
+    return activeTab
+  }
+
   render() {
     const { children, title, actions, tabs, areas, fill } = this.props
-    const { activeTab } = this.state
+    const activeTab = this.getActiveTab()
     const grid = React.Children.count(children) > 1 ? "main side" : "main"
     const CurrentTab = tabs && tabs[activeTab].component
 
@@ -125,7 +128,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
         {tabs ? (
           <>
             <TabsBar>
-              {tabs.map(({ name }, i) => (
+              {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
                 <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i)}>
                   {name}
                 </Tab>
