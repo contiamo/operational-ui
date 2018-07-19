@@ -1,6 +1,5 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { withTheme } from "emotion-theming"
 
 import { OperationalStyleConstants } from "../utils/constants"
 import Icon from "../Icon/Icon"
