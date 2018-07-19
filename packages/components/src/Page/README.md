@@ -119,6 +119,55 @@ const Tab = n => () => (
 />
 ```
 
+### With activeTabName trigger from outside (router)
+
+```jsx
+const Tab = n => () => (
+  <PageContent>
+    <Card title={`${n} Tab`} />
+  </PageContent>
+)
+
+class Router extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      tabName: "jobs",
+    }
+  }
+
+  goTo(tabName) {
+    this.setState({ tabName })
+  }
+
+  render() {
+    return (
+      <>
+        <div style={{ paddingBottom: 10, marginBottom: 10, borderBottom: "1px black solid" }}>
+          <h1>Router actions</h1>
+          <p>Current route: {this.state.tabName}</p>
+          <Button onClick={() => this.goTo("overview")}>go to overview</Button>
+          <Button onClick={() => this.goTo("jobs")}>go to jobs</Button>
+          <Button onClick={() => this.goTo("functions")}>go to functions</Button>
+        </div>
+        <Page
+          title="Bundle detail"
+          activeTabName={this.state.tabName}
+          onTabChange={this.goTo.bind(this)}
+          tabs={[
+            { name: "overview", component: Tab("overview") },
+            { name: "jobs", component: Tab("jobs") },
+            { name: "functions", component: Tab("functions") },
+          ]}
+        />
+      </>
+    )
+  }
+}
+
+;<Router />
+```
+
 ### With different layout
 
 ```jsx

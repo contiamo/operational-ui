@@ -103,6 +103,15 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
     }
   }
 
+  componentDidUpdate(props: Props) {
+    if (this.props.activeTabName && props.activeTabName !== this.props.activeTabName) {
+      const index = this.props.tabs.findIndex(
+        ({ name }) => name.toLowerCase() === this.props.activeTabName.toLowerCase(),
+      )
+      this.setState({ activeTab: index === -1 ? 0 : index })
+    }
+  }
+
   onTabClick(index: number) {
     this.setState({ activeTab: index })
     this.props.onTabChange && this.props.onTabChange(this.props.tabs[index].name.toLowerCase())
