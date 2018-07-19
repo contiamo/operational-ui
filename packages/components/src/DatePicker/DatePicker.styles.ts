@@ -6,7 +6,7 @@ import { OperationalStyleConstants } from "../utils/constants"
 import { Card } from "../"
 import * as mixins from "../utils/mixins"
 
-const inputHeight: number = 33
+const inputHeight: number = 36
 
 export interface ContainerProps {
   isExpanded: boolean
