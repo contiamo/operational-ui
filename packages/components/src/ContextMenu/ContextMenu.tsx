@@ -29,6 +29,13 @@ export interface Props {
   items: (string | Item)[]
   /** Alignment */
   align?: "left" | "right"
+  /** Custom width */
+  width?: number
+  /**
+   * Whether to include the click element in the context menu styling.
+   * Only recommended when the click element is the same width as the context menu.
+   */
+  embedChildrenInMenu?: boolean
 }
 
 export interface State {
@@ -46,13 +53,20 @@ const Container = styled("div")(({ align }: { align: Props["align"] }) => ({
 }))
 
 const MenuContainer = styled("div")(
-  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }) => ({
+  ({
+    theme,
+    isExpanded,
+    embedChildrenInMenu,
+  }: {
+    theme?: OperationalStyleConstants
+    isExpanded: boolean
+    embedChildrenInMenu: boolean
+  }) => ({
     position: "absolute",
-    top: "100%",
+    top: embedChildrenInMenu ? 0 : "100%",
     left: 0,
     boxShadow: theme.shadows.popup,
     zIndex: theme.zIndex.selectOptions,
-    backgroundColor: theme.color.white,
     width: "fit-content",
     display: isExpanded ? "block" : "none",
   }),
@@ -60,7 +74,6 @@ const MenuContainer = styled("div")(
 
 const StyledContextMenuItem = styled(ContextMenuItem)(
   ({ theme, align }: { theme?: OperationalStyleConstants; align: Props["align"] }) => ({
-    color: theme.color.text.default,
     textAlign: align,
   }),
 )
@@ -72,6 +85,7 @@ class ContextMenu extends React.Component<Props, State> {
 
   static defaultProps: Partial<Props> = {
     align: "left",
+    embedChildrenInMenu: false,
   }
 
   componentDidUpdate() {
@@ -92,10 +106,16 @@ class ContextMenu extends React.Component<Props, State> {
       throw new Error("No array of items has been provided for the ContextMenu.")
     }
 
+    const children =
+      typeof this.props.children === "function" ? this.props.children(this.state.isOpen) : this.props.children
     return (
       <Container id={this.props.id} className={this.props.className} align={this.props.align} onClick={this.toggle}>
-        {typeof this.props.children === "function" ? this.props.children(this.state.isOpen) : this.props.children}
-        <MenuContainer isExpanded={this.props.open || this.state.isOpen}>
+        {children}
+        <MenuContainer
+          isExpanded={this.props.open || this.state.isOpen}
+          embedChildrenInMenu={this.props.embedChildrenInMenu}
+        >
+          {this.props.embedChildrenInMenu && children}
           {this.props.items.map((item: string | Item, index: number) => {
             const clickHandler = (typeof item !== "string" && item.onClick) || this.props.onClick
             return (
@@ -104,6 +124,7 @@ class ContextMenu extends React.Component<Props, State> {
                 key={`contextmenu-${index}`}
                 condensed={this.props.condensed}
                 align={this.props.align}
+                width={this.props.width}
               >
                 {typeof item === "string" ? item : item.label}
               </StyledContextMenuItem>
