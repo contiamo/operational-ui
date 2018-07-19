@@ -31,6 +31,11 @@ export interface Props {
   align?: "left" | "right"
   /** Custom width */
   width?: number
+  /**
+   * Whether to include the click element in the context menu styling.
+   * Only recommended when the click element is the same width as the context menu.
+   */
+  styleClickElement?: boolean
 }
 
 export interface State {
@@ -48,16 +53,23 @@ const Container = styled("div")(({ align }: { align: Props["align"] }) => ({
 }))
 
 const MenuContainer = styled("div")(
-  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }) => ({
-    position: "absolute",
-    top: "100%",
-    left: 0,
-    boxShadow: theme.shadows.popup,
-    zIndex: theme.zIndex.selectOptions,
-    backgroundColor: theme.color.white,
-    width: "fit-content",
-    display: isExpanded ? "block" : "none",
-  }),
+  ({
+    theme,
+    isExpanded,
+    styleClickElement,
+  }: {
+      theme?: OperationalStyleConstants
+      isExpanded: boolean
+      styleClickElement: boolean
+    }) => ({
+      position: "absolute",
+      top: styleClickElement ? 0 : "100%",
+      left: 0,
+      boxShadow: theme.shadows.popup,
+      zIndex: theme.zIndex.selectOptions,
+      width: "fit-content",
+      display: isExpanded ? "block" : "none",
+    }),
 )
 
 const StyledContextMenuItem = styled(ContextMenuItem)(
@@ -74,6 +86,7 @@ class ContextMenu extends React.Component<Props, State> {
 
   static defaultProps: Partial<Props> = {
     align: "left",
+    styleClickElement: false,
   }
 
   componentDidUpdate() {
@@ -97,7 +110,12 @@ class ContextMenu extends React.Component<Props, State> {
     return (
       <Container id={this.props.id} className={this.props.className} align={this.props.align} onClick={this.toggle}>
         {typeof this.props.children === "function" ? this.props.children(this.state.isOpen) : this.props.children}
-        <MenuContainer isExpanded={this.props.open || this.state.isOpen}>
+        <MenuContainer
+          isExpanded={this.props.open || this.state.isOpen}
+          styleClickElement={this.props.styleClickElement}
+        >
+          {this.props.styleClickElement &&
+            (typeof this.props.children === "function" ? this.props.children(this.state.isOpen) : this.props.children)}
           {this.props.items.map((item: string | Item, index: number) => {
             const clickHandler = (typeof item !== "string" && item.onClick) || this.props.onClick
             return (

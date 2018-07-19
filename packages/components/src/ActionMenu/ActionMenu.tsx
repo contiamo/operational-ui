@@ -15,7 +15,7 @@ export interface Props {
   items: ContextMenuProps["items"]
 }
 
-const Container = styled("div")(({ theme, isOpen }: { theme?: OperationalStyleConstants; isOpen: boolean }) => ({
+const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   width,
   height: 35,
   padding: `0 ${theme.space.content}px`,
@@ -26,16 +26,8 @@ const Container = styled("div")(({ theme, isOpen }: { theme?: OperationalStyleCo
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  ...(isOpen
-    ? {
-        boxShadow: `0 3px 12px ${theme.color.border.disabled}`,
-        borderColor: `${theme.color.separators.light} ${theme.color.white}`,
-        borderWidth: "1px",
-        borderStyle: "solid",
-      }
-    : {
-        border: `1px solid ${theme.color.separators.light}`,
-      }),
+  userSelect: "none",
+  outline: `1px solid ${theme.color.separators.light}`,
 }))
 
 const TitleContainer = styled("p")({
@@ -46,9 +38,9 @@ const TitleContainer = styled("p")({
 })
 
 const ActionMenu: React.SFC<Props> = (props: Props) => (
-  <ContextMenu {...props} items={props.items} width={width} condensed>
+  <ContextMenu {...props} items={props.items} width={width} condensed styleClickElement>
     {isOpen => (
-      <Container isOpen={isOpen}>
+      <Container>
         <TitleContainer>{props.title}</TitleContainer>
         <Icon name={isOpen ? "ChevronUp" : "Menu"} />
       </Container>
