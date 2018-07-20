@@ -35,6 +35,7 @@ const TreeItem = styled("div")`
   padding: 4px 8px;
   width: fit-content;
   min-width: 160px;
+  user-select: none;
   ${({
     theme,
     hasChildren,
@@ -118,7 +119,7 @@ const TreeRecursive: React.SFC<{
 }
 
 class Tree extends React.Component<Props, State> {
-  state: State = {
+  readonly state: State = {
     openPaths: this.props.trees
       .map((tree, index) => getInitialOpenPaths([index])(tree))
       .reduce((current, accumulator) => [...current, ...accumulator], []),
