@@ -3,14 +3,34 @@ import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
 import tinycolor from "tinycolor2"
 
-export interface Props {
+export interface DeprecatedProps {
   running?: boolean
   success?: boolean
   error?: boolean
+  state?: never
   theme?: OperationalStyleConstants
 }
 
-const getColorFromProps = ({ running, success, error, theme }: Props): string => {
+export interface LatestProps {
+  running?: never
+  success?: never
+  error?: never
+  state?: "error" | "success" | "running" | "neutral"
+  theme?: OperationalStyleConstants
+}
+
+export type Props = DeprecatedProps | LatestProps
+
+const getColorFromProps = ({ running, success, error, state, theme }: Props): string => {
+  if (state) {
+    return (
+      new Map<LatestProps["state"], string>(
+        [["error", theme.color.error], ["running", theme.color.warning], ["success", theme.color.success]],
+      ).get(state) || "#989898"
+    )
+  }
+
+  // deprecated api bellow
   if (running) {
     return theme.color.warning
   }
@@ -26,7 +46,7 @@ const getColorFromProps = ({ running, success, error, theme }: Props): string =>
   return "#989898"
 }
 
-export const Status = styled("div")((props: Props) => ({
+const StatusDot = styled("div")((props: Props) => ({
   display: "inline-block",
   marginRight: props.theme.space.small,
   width: props.theme.space.small,
@@ -38,5 +58,12 @@ export const Status = styled("div")((props: Props) => ({
       .toHslString()}`,
   backgroundColor: getColorFromProps(props),
 }))
+
+export const Status: React.SFC<Props> = ({ children, ...props }) => (
+  <>
+    <StatusDot {...props} />
+    {children}
+  </>
+)
 
 export default Status
