@@ -37,15 +37,18 @@ const TextareaComp = styled("textarea")(
     theme,
     isCode,
     isError,
+    isAction,
     disabled,
     resize,
   }: {
     theme?: OperationalStyleConstants
     isCode: boolean
     isError: boolean
+    isAction: boolean
     disabled: boolean
     resize: ResizeOptions
   }) => {
+    const topPadding = (isAction ? 20 : 0) + theme.space.small
     return {
       resize: resize || "both",
       fontSize: theme.font.size.small,
@@ -55,7 +58,7 @@ const TextareaComp = styled("textarea")(
       minHeight: 120,
       borderRadius: theme.borderRadius,
       borderColor: isError ? theme.color.error : theme.color.border.default,
-      padding: `${theme.space.small}px ${theme.space.medium}px`,
+      padding: `${topPadding}px ${theme.space.medium}px ${theme.space.small}px ${theme.space.medium}px`,
       fontFamily: isCode ? "monospace" : "inherit",
       opacity: disabled ? 0.6 : 1.0,
       ":focus": inputFocus({
@@ -112,6 +115,7 @@ const Textarea: React.SFC<Props> = (props: Props) => {
         isCode={Boolean(props.code)}
         value={props.value}
         isError={Boolean(props.error)}
+        isAction={Boolean(props.action)}
         resize={props.resize}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
           if (!props.onChange) {
