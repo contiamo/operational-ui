@@ -44,11 +44,14 @@ In addition to the regular spinning animation, there is a bouncing one that is d
     <circle r="15px" fill="gold" cx="340" cy="90" />
     <circle r="10px" fill="orange" cx="15" cy="90" />
   </svg>
-  <div style={{ position: "absolute", bottom: 11, left: 60 }}>
+  <div style={{ position: "absolute", bottom: 11, left: 60, zIndex: 2 }}>
     <Spinner color="black" size={60} />
   </div>
-  <div style={{ position: "absolute", bottom: 11, left: 240 }}>
+  <div style={{ position: "absolute", bottom: 11, left: 240, zIndex: 2 }}>
     <Spinner color="black" size={60} />
+  </div>
+  <div style={{ position: "absolute", bottom: 53, left: 59, zIndex: 1 }}>
+    <ContiamoLogo size={50} />
   </div>
 </div>
 ```
