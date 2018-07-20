@@ -5,7 +5,7 @@ import { OperationalStyleConstants } from "../utils/constants"
 import Icon from "../Icon/Icon"
 import Spinner from "../Spinner/Spinner"
 
-export type Status = "waiting" | "running" | "success" | "failure"
+export type Status = "waiting" | "todo" | "running" | "success" | "failure" | "done" | "failed"
 
 export interface Props {
   /** Progress items */
@@ -22,10 +22,13 @@ export interface Props {
 const makeIconColor = (status: Status, theme: OperationalStyleConstants) => {
   switch (status) {
     case "success":
+    case "done":
       return theme.color.success
     case "failure":
+    case "failed":
       return theme.color.error
     case "waiting":
+    case "todo":
       return theme.color.text.lightest
     case "running":
       return theme.color.text.dark
@@ -35,12 +38,15 @@ const makeIconColor = (status: Status, theme: OperationalStyleConstants) => {
 const makeTextColor = (status: Status, theme: OperationalStyleConstants) => {
   switch (status) {
     case "success":
+    case "done":
       return theme.color.text.default
     case "failure":
+    case "failed":
       return theme.color.text.default
     case "running":
       return theme.color.text.lighter
     case "waiting":
+    case "todo":
       return theme.color.text.lightest
   }
 }
@@ -78,10 +84,13 @@ const Error = styled("p")`
 const ProgressPanelIcon: React.SFC<{ status: Status }> = props => {
   switch (props.status) {
     case "success":
+    case "done":
       return <Icon left name="Yes" />
     case "failure":
+    case "failed":
       return <Icon left name="No" />
     case "waiting":
+    case "todo":
       return <Icon left name="EmptyCircle" />
     case "running":
       return <Spinner left />
