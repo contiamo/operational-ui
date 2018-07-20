@@ -19,35 +19,35 @@ export interface Props {
   }[]
 }
 
-const makeIconColor = (status: Status, theme: OperationalStyleConstants) => {
+const getVariation = (status: Status, theme: OperationalStyleConstants = { color: { text: {} } } as any) => {
   switch (status) {
     case "success":
     case "done":
-      return theme.color.success
+      return {
+        iconColor: theme.color.success,
+        textColor: theme.color.text.default,
+        Icon: <Icon left name="Yes" />,
+      }
     case "failure":
     case "failed":
-      return theme.color.error
+      return {
+        iconColor: theme.color.error,
+        textColor: theme.color.text.default,
+        Icon: <Icon left name="No" />,
+      }
     case "waiting":
     case "todo":
-      return theme.color.text.lightest
+      return {
+        iconColor: theme.color.text.lightest,
+        textColor: theme.color.text.lighter,
+        Icon: <Icon left name="EmptyCircle" />,
+      }
     case "running":
-      return theme.color.text.dark
-  }
-}
-
-const makeTextColor = (status: Status, theme: OperationalStyleConstants) => {
-  switch (status) {
-    case "success":
-    case "done":
-      return theme.color.text.default
-    case "failure":
-    case "failed":
-      return theme.color.text.default
-    case "running":
-      return theme.color.text.lighter
-    case "waiting":
-    case "todo":
-      return theme.color.text.lightest
+      return {
+        iconColor: theme.color.text.dark,
+        textColor: theme.color.text.lightest,
+        Icon: <Spinner left />,
+      }
   }
 }
 
@@ -64,10 +64,10 @@ const Body = styled("div")`
   align-items: center;
   justify-content: flex-start;
   ${({ theme, status }: { theme?: OperationalStyleConstants; status: Status }) => `
-    color: ${makeTextColor(status, theme)};
+    color: ${getVariation(status, theme).textColor};
     font-size: ${theme.font.size.body}px;
     & svg {
-      color: ${makeIconColor(status, theme)};
+      color: ${getVariation(status, theme).iconColor};
     }
   `};
 `
@@ -81,28 +81,12 @@ const Error = styled("p")`
   `};
 `
 
-const ProgressPanelIcon: React.SFC<{ status: Status }> = props => {
-  switch (props.status) {
-    case "success":
-    case "done":
-      return <Icon left name="Yes" />
-    case "failure":
-    case "failed":
-      return <Icon left name="No" />
-    case "waiting":
-    case "todo":
-      return <Icon left name="EmptyCircle" />
-    case "running":
-      return <Spinner left />
-  }
-}
-
 const ProgressPanel: React.SFC<Props> = props => (
   <Container>
     {props.items.map(({ status, title, error }, index) => (
       <Item key={index}>
         <Body status={status}>
-          <ProgressPanelIcon status={status} />
+          {getVariation(status).Icon}
           {title}
         </Body>
         {error && <Error>{error}</Error>}
