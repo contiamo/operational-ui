@@ -10,14 +10,17 @@ The tree component renders a tree structure with collapsable nodes in a filetree
       childNodes: [
         {
           label: "Region",
+          initiallyOpen: true,
           childNodes: [
             {
               label: "City",
               tag: "D",
+              disabled: true,
               childNodes: [],
             },
             {
               label: "County",
+              color: "primary",
               tag: "D",
               childNodes: [],
             },
@@ -27,15 +30,21 @@ The tree component renders a tree structure with collapsable nodes in a filetree
     },
     {
       label: "Legal Entity",
+      initiallyOpen: true,
       childNodes: [
         {
           label: "LLC",
           tag: "D",
           childNodes: [],
+          draggable: true,
+          onDragStart: ev => {
+            ev.dataTransfer.effectAllowed = "move"
+          },
         },
         {
           label: "Inc.",
           tag: "D",
+          color: "#2C363F",
           childNodes: [],
         },
       ],
