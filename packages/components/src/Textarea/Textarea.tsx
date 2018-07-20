@@ -5,6 +5,8 @@ import { OperationalStyleConstants } from "../utils/constants"
 import { Label, LabelText, FormFieldControls, FormFieldError, inputFocus } from "../utils/mixins"
 import Hint from "../Hint/Hint"
 
+type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
+
 export interface Props {
   id?: string
   className?: string
@@ -24,6 +26,10 @@ export interface Props {
   fullWidth?: boolean
   /** Is it disabled? */
   disabled?: boolean
+  /** Action button/link - right of header */
+  action?: React.ReactNode
+  /** Resize option */
+  resize?: ResizeOptions
 }
 
 const TextareaComp = styled("textarea")(
@@ -32,20 +38,24 @@ const TextareaComp = styled("textarea")(
     isCode,
     isError,
     disabled,
+    resize,
   }: {
     theme?: OperationalStyleConstants
     isCode: boolean
     isError: boolean
     disabled: boolean
+    resize: ResizeOptions
   }) => {
     return {
-      ...theme.deprecated.typography.body,
+      resize: resize || "both",
+      fontSize: theme.font.size.small,
+      fontWeight: theme.font.weight.regular,
       display: "block",
       width: "100%",
       minHeight: 120,
-      borderRadius: 4,
-      borderColor: isError ? theme.deprecated.colors.error : theme.deprecated.colors.inputBorder,
-      padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px`,
+      borderRadius: theme.borderRadius,
+      borderColor: isError ? theme.color.error : theme.color.border.default,
+      padding: `${theme.space.small}px ${theme.space.medium}px`,
       fontFamily: isCode ? "monospace" : "inherit",
       opacity: disabled ? 0.6 : 1.0,
       ":focus": inputFocus({
@@ -56,20 +66,53 @@ const TextareaComp = styled("textarea")(
   },
 )
 
-const Textarea = (props: Props) => {
+const ActionHeader = styled("div")(({ theme, isError }: { theme?: OperationalStyleConstants; isError: boolean }) => ({
+  fontSize: theme.font.size.fineprint,
+  padding: `${theme.space.base}px ${theme.space.small}px`,
+  color: theme.color.text.lighter,
+  width: "100%",
+  borderTopLeftRadius: theme.borderRadius,
+  borderTopRightRadius: theme.borderRadius,
+  border: `1px solid ${isError ? theme.color.error : theme.color.border.default}`,
+  borderBottom: 0,
+  position: "absolute",
+  backgroundColor: theme.color.background.lighter,
+  top: 18,
+  left: 0,
+  zIndex: theme.zIndex.formFieldError,
+  display: "flex",
+  justifyContent: "flex-end",
+
+  /**
+   * Use case: External Links typically have <Icon/>s next to them.
+   */
+  "& a": {
+    display: "inline-flex",
+    alignItems: "center",
+    textDecoration: "none",
+  },
+  "& svg": {
+    margin: `0 ${theme.space.base}px`,
+    width: 12,
+    height: 12,
+  },
+}))
+
+const Textarea: React.SFC<Props> = (props: Props) => {
   return (
     <Label fullWidth={props.fullWidth} className={props.className} id={props.id}>
-      {props.label ? <LabelText>{props.label}</LabelText> : null}
+      {props.label && <LabelText>{props.label}</LabelText>}
       {props.hint && (
         <FormFieldControls>
           <Hint>{props.hint}</Hint>
         </FormFieldControls>
       )}
       <TextareaComp
-        disabled={Boolean(props.disabled)}
+        disabled={props.disabled}
         isCode={Boolean(props.code)}
         value={props.value}
         isError={Boolean(props.error)}
+        resize={props.resize}
         onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
           if (!props.onChange) {
             return
@@ -77,9 +120,15 @@ const Textarea = (props: Props) => {
           props.onChange(e.target.value)
         }}
       />
-      {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}
+      {props.action && <ActionHeader isError={Boolean(props.error)}>{props.action}</ActionHeader>}
+      {props.error && <FormFieldError>{props.error}</FormFieldError>}
     </Label>
   )
+}
+
+Textarea.defaultProps = {
+  disabled: false,
+  resize: "both",
 }
 
 export default Textarea

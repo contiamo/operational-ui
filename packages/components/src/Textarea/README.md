@@ -22,7 +22,18 @@ class MyForm extends React.Component {
     return (
       <Form>
         <Textarea value={v1} onChange={this.handleChange("v1")} label="simple" />
-        <Textarea value={v2} onChange={this.handleChange("v2")} label="with error" error="oh no!" />
+        <Textarea
+          value={v2}
+          onChange={this.handleChange("v2")}
+          label="with error"
+          error="oh no!"
+          action={
+            <>
+              <Icon name="Copy" />
+              <a href="#">Copy to clipboard</a>
+            </>
+          }
+        />
         <Textarea value={v3} onChange={this.handleChange("v3")} label="with hint" hint="this is a hint" />
         <Textarea value={v4} onChange={this.handleChange("v4")} label="disabled" disabled />
         <Textarea value={v5} onChange={this.handleChange("v5")} label="a code" code />
