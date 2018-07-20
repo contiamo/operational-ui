@@ -17,7 +17,7 @@ export interface Props {
   /** Link url prop a'la react-router */
   to?: string
   /** Click handler */
-  onClick?: (ev: any) => void
+  onClick?: (ev: React.MouseEvent<HTMLElement>) => void
 }
 
 const containerStyles = ({
@@ -64,7 +64,7 @@ const ContiamoLogo: React.SFC<Props> = ({ size, color, stack, to, ...props }) =>
           stack={stack}
           {...props}
           href={to}
-          onClick={(ev: React.MouseEvent<HTMLAnchorElement>) => {
+          onClick={(ev: React.MouseEvent<HTMLElement>) => {
             props.onClick && props.onClick(ev)
 
             if (!isModifiedEvent(ev) && to && ctx.pushState) {

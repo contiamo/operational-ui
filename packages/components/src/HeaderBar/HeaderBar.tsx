@@ -40,11 +40,11 @@ const Bar = styled("div")(
   },
 )
 
-const StartContainer = styled("div")``
+const StartContainer = styled("div")()
 
-const CenterContainer = styled("div")``
+const CenterContainer = styled("div")()
 
-const EndContainer = styled("div")``
+const EndContainer = styled("div")()
 
 const HeaderBar: React.SFC<HeaderProps> = ({ logo, main, end }) => (
   <Bar>
