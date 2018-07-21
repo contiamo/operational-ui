@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 
-import { OperationalStyleConstants } from "../utils/constants"
+import defaultTheme, { OperationalStyleConstants } from "../utils/constants"
 import Icon from "../Icon/Icon"
 import Spinner from "../Spinner/Spinner"
 
@@ -19,7 +19,7 @@ export interface Props {
   }[]
 }
 
-const getVariation = (status: Status, theme: OperationalStyleConstants = { color: { text: {} } } as any) => {
+const getVariation = (status: Status, theme: OperationalStyleConstants = defaultTheme) => {
   switch (status) {
     case "success":
     case "done":
