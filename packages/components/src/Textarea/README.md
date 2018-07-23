@@ -1,4 +1,4 @@
-A textarea field, with optionnal label, hint and error.
+A textarea field, with optional label, hint and error.
 
 ```jsx
 class MyForm extends React.Component {
@@ -23,15 +23,16 @@ class MyForm extends React.Component {
       <Form>
         <Textarea value={v1} onChange={this.handleChange("v1")} label="simple" />
         <Textarea
+          copy
           value={v2}
           onChange={this.handleChange("v2")}
           label="with error"
           error="oh no!"
           action={
-            <>
-              <Icon name="Copy" />
-              <a href="#">Copy to clipboard</a>
-            </>
+            <div>
+              <Icon size={8} name="Copy" />
+              <a href="#textarea">Copy to clipboard</a>
+            </div>
           }
         />
         <Textarea value={v3} onChange={this.handleChange("v3")} label="with hint" hint="this is a hint" />

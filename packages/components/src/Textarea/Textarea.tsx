@@ -1,9 +1,11 @@
 import * as React from "react"
 import styled from "react-emotion"
+import CopyToClipboard from "react-copy-to-clipboard"
 import { OperationalStyleConstants } from "../utils/constants"
 
 import { Label, LabelText, labelTextHeight, FormFieldControls, FormFieldError, inputFocus } from "../utils/mixins"
 import Hint from "../Hint/Hint"
+import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
 
@@ -30,6 +32,12 @@ export interface Props {
   action?: React.ReactNode
   /** Resize option */
   resize?: ResizeOptions
+  /** Copy text to clipboard on click */
+  copy?: boolean
+}
+
+export interface State {
+  showTooltip: boolean
 }
 
 const TextareaComp = styled("textarea")(
@@ -97,48 +105,72 @@ const ActionHeader = styled("div")(
     },
     "& svg": {
       margin: `0 ${theme.space.base}px`,
-      width: 12,
-      height: 12,
+      width: 10,
+      height: 10,
     },
   }),
 )
 
-const Textarea: React.SFC<Props> = (props: Props) => {
-  return (
-    <Label fullWidth={props.fullWidth} className={props.className} id={props.id}>
-      {props.label && <LabelText>{props.label}</LabelText>}
-      {props.hint && (
-        <FormFieldControls>
-          <Hint>{props.hint}</Hint>
-        </FormFieldControls>
-      )}
-      <TextareaComp
-        disabled={props.disabled}
-        isCode={Boolean(props.code)}
-        value={props.value}
-        isError={Boolean(props.error)}
-        isAction={Boolean(props.action)}
-        resize={props.resize}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-          if (!props.onChange) {
-            return
-          }
-          props.onChange(e.target.value)
-        }}
-      />
-      {props.action && (
-        <ActionHeader isError={Boolean(props.error)} isLabel={Boolean(props.label)}>
-          {props.action}
-        </ActionHeader>
-      )}
-      {props.error && <FormFieldError>{props.error}</FormFieldError>}
-    </Label>
-  )
-}
+class Textarea extends React.Component<Props, State> {
+  timeoutId: number = null
 
-Textarea.defaultProps = {
-  disabled: false,
-  resize: "vertical",
+  state = {
+    showTooltip: false,
+  }
+
+  static defaultProps: Partial<Props> = {
+    copy: false,
+    disabled: false,
+    resize: "vertical",
+  }
+
+  showTooltip = () => {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId)
+    }
+    this.setState(() => ({ showTooltip: true }))
+
+    this.timeoutId = window.setTimeout(() => {
+      this.setState(() => ({ showTooltip: false }))
+      this.timeoutId = null
+    }, 1000)
+  }
+
+  render() {
+    return (
+      <Label fullWidth={this.props.fullWidth} className={this.props.className} id={this.props.id}>
+        {this.props.label && <LabelText>{this.props.label}</LabelText>}
+        {this.props.hint && (
+          <FormFieldControls>
+            <Hint>{this.props.hint}</Hint>
+          </FormFieldControls>
+        )}
+        <TextareaComp
+          disabled={this.props.disabled}
+          isCode={Boolean(this.props.code)}
+          value={this.props.value}
+          isError={Boolean(this.props.error)}
+          isAction={Boolean(this.props.action)}
+          resize={this.props.resize}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            if (!this.props.onChange) {
+              return
+            }
+            this.props.onChange(e.target.value)
+          }}
+        />
+        {this.props.action && (
+          <ActionHeader isError={Boolean(this.props.error)} isLabel={Boolean(this.props.label)}>
+            {this.state.showTooltip && <Tooltip right>Copied!</Tooltip>}
+            <CopyToClipboard text={this.props.value} onCopy={this.showTooltip}>
+              {this.props.action}
+            </CopyToClipboard>
+          </ActionHeader>
+        )}
+        {this.props.error && <FormFieldError>{this.props.error}</FormFieldError>}
+      </Label>
+    )
+  }
 }
 
 export default Textarea
