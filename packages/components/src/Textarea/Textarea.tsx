@@ -103,11 +103,14 @@ const ActionHeader = styled("div")(
       display: "inline-flex",
       alignItems: "center",
       textDecoration: "none",
+      color: "#1499ce",
+      cursor: "pointer",
     },
     "& svg": {
       margin: `0 ${theme.space.base}px`,
       width: 10,
       height: 10,
+      cursor: "pointer",
     },
   }),
 )
@@ -168,7 +171,7 @@ class Textarea extends React.Component<Props, State> {
               <CopyToClipboard text={this.props.value} onCopy={this.showTooltip}>
                 <div>
                   <Icon size={8} name="Copy" />
-                  <a href="#textarea">Copy to clipboard</a>
+                  <a>Copy to clipboard</a>
                 </div>
               </CopyToClipboard>
             )}
