@@ -147,7 +147,7 @@ class Textarea extends React.Component<Props, State> {
         )}
         <TextareaComp
           disabled={this.props.disabled}
-          isCode={Boolean(this.props.code)}
+          isCode={this.props.code}
           value={this.props.value}
           isError={Boolean(this.props.error)}
           isAction={Boolean(this.props.action)}
