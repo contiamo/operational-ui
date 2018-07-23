@@ -46,7 +46,7 @@ const Container = styled("div")(
     return {
       backgroundColor,
       color: textColor,
-      fontSize: theme.font.size.small,
+      fontSize: theme.font.size.fineprint,
       fontWeight: theme.font.weight.bold,
       width: 18,
       height: 18,
