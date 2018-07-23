@@ -11,18 +11,24 @@ class ContentWithModal extends React.Component {
     }
   }
 
+  onClose() {
+    this.setState(prevState => ({
+      isModalOpen: false,
+    }))
+  }
+
   render() {
     return (
       <div>
         {this.state.isModalOpen ? (
-          <Modal
-            onClose={() => {
-              this.setState(prevState => ({
-                isModalOpen: false,
-              }))
-            }}
-          >
-            <div style={{ width: 300, height: 240 }}>Hello</div>
+          <Modal title="Modal header" onClose={this.onClose.bind(this)}>
+            <p>Modal content</p>
+            Any <Icon name="OperationalUI" size={16} /> components or HTML elements can be rendered here.
+            <div style={{ width: "100%", paddingTop: 20 }}>
+              <Button style={{ float: "right", marginRight: 0 }} onClick={this.onClose.bind(this)}>
+                OK
+              </Button>
+            </div>
           </Modal>
         ) : null}
         <Button

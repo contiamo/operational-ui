@@ -1,7 +1,9 @@
 import * as React from "react"
 import styled from "react-emotion"
-import { WithTheme, Css, CssStatic } from "../types"
+import { OperationalStyleConstants } from "../utils/constants"
+
 import Overlay from "../Internals/Overlay"
+import Card from "../Card/Card"
 
 export interface Props {
   id?: string
@@ -13,6 +15,8 @@ export interface Props {
 
   children: React.ReactNode
   onClose?: () => void
+  /** Title */
+  title?: string
 }
 
 const Container = styled(Overlay)({
@@ -21,13 +25,15 @@ const Container = styled(Overlay)({
   justifyContent: "center",
 })
 
-const Content = styled("div")(
-  ({ theme }: WithTheme): CssStatic => ({
-    backgroundColor: theme.deprecated.colors.white,
-    padding: theme.deprecated.spacing,
-    boxShadow: theme.deprecated.shadows.popup,
-  }),
-)
+const Content = styled(Card)(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  minWidth: 400,
+  minHeight: 150,
+  zIndex: theme.zIndex.confirm + 1,
+}))
 
 class Modal extends React.Component<Props, {}> {
   contentNode: HTMLElement
@@ -50,10 +56,11 @@ class Modal extends React.Component<Props, {}> {
     return (
       <Container id={this.props.id} className={this.props.className}>
         <Content
-          innerRef={contentNode => {
-            this.contentNode = contentNode
+          innerRef={card => {
+            this.contentNode = card && card.containerNode
           }}
           className={this.props.contentClassName}
+          title={this.props.title}
         >
           {this.props.children}
         </Content>
