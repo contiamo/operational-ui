@@ -138,7 +138,7 @@ const Textarea: React.SFC<Props> = (props: Props) => {
 
 Textarea.defaultProps = {
   disabled: false,
-  resize: "both",
+  resize: "vertical",
 }
 
 export default Textarea
