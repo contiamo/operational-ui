@@ -1,11 +1,11 @@
 import * as React from "react"
 import styled from "react-emotion"
 
-import { OperationalStyleConstants } from "../utils/constants"
+import defaultTheme, { OperationalStyleConstants } from "../utils/constants"
 import Icon from "../Icon/Icon"
 import Spinner from "../Spinner/Spinner"
 
-export type Status = "waiting" | "running" | "success" | "failure"
+export type Status = "waiting" | "todo" | "running" | "success" | "failure" | "done" | "failed"
 
 export interface Props {
   /** Progress items */
@@ -19,29 +19,35 @@ export interface Props {
   }[]
 }
 
-const makeIconColor = (status: Status, theme: OperationalStyleConstants) => {
+const getVariation = (status: Status, theme: OperationalStyleConstants = defaultTheme) => {
   switch (status) {
     case "success":
-      return theme.color.success
+    case "done":
+      return {
+        iconColor: theme.color.success,
+        textColor: theme.color.text.default,
+        icon: <Icon left name="Yes" />,
+      }
     case "failure":
-      return theme.color.error
+    case "failed":
+      return {
+        iconColor: theme.color.error,
+        textColor: theme.color.text.default,
+        icon: <Icon left name="No" />,
+      }
     case "waiting":
-      return theme.color.text.lightest
+    case "todo":
+      return {
+        iconColor: theme.color.text.lightest,
+        textColor: theme.color.text.lighter,
+        icon: <Icon left name="EmptyCircle" />,
+      }
     case "running":
-      return theme.color.text.dark
-  }
-}
-
-const makeTextColor = (status: Status, theme: OperationalStyleConstants) => {
-  switch (status) {
-    case "success":
-      return theme.color.text.default
-    case "failure":
-      return theme.color.text.default
-    case "running":
-      return theme.color.text.lighter
-    case "waiting":
-      return theme.color.text.lightest
+      return {
+        iconColor: theme.color.text.dark,
+        textColor: theme.color.text.lightest,
+        icon: <Spinner left />,
+      }
   }
 }
 
@@ -58,10 +64,10 @@ const Body = styled("div")`
   align-items: center;
   justify-content: flex-start;
   ${({ theme, status }: { theme?: OperationalStyleConstants; status: Status }) => `
-    color: ${makeTextColor(status, theme)};
+    color: ${getVariation(status, theme).textColor};
     font-size: ${theme.font.size.body}px;
     & svg {
-      color: ${makeIconColor(status, theme)};
+      color: ${getVariation(status, theme).iconColor};
     }
   `};
 `
@@ -75,25 +81,12 @@ const Error = styled("p")`
   `};
 `
 
-const ProgressPanelIcon: React.SFC<{ status: Status }> = props => {
-  switch (props.status) {
-    case "success":
-      return <Icon left name="Yes" />
-    case "failure":
-      return <Icon left name="No" />
-    case "waiting":
-      return <Icon left name="EmptyCircle" />
-    case "running":
-      return <Spinner left />
-  }
-}
-
 const ProgressPanel: React.SFC<Props> = props => (
   <Container>
     {props.items.map(({ status, title, error }, index) => (
       <Item key={index}>
         <Body status={status}>
-          <ProgressPanelIcon status={status} />
+          {getVariation(status).icon}
           {title}
         </Body>
         {error && <Error>{error}</Error>}
