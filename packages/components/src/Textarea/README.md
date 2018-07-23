@@ -11,6 +11,7 @@ class MyForm extends React.Component {
       v4: "",
       v5: "",
       v6: "",
+      v7: "",
     }
     this.handleChange = key => value => {
       this.setState({ [key]: value })
@@ -18,27 +19,27 @@ class MyForm extends React.Component {
   }
 
   render() {
-    const { v1, v2, v3, v4, v5, v6 } = this.state
+    const { v1, v2, v3, v4, v5, v6, v7 } = this.state
 
     return (
       <Form>
         <Textarea value={v1} onChange={this.handleChange("v1")} label="simple" />
+        <Textarea copy value={v2} onChange={this.handleChange("v2")} label="with copying" />
         <Textarea
-          copy
-          value={v2}
-          onChange={this.handleChange("v2")}
-          label="with copying"
+          value={v3}
+          onChange={this.handleChange("v3")}
+          label="with actions"
           action={
             <div>
-              <Icon size={8} name="Copy" />
-              <a href="#textarea">Copy to clipboard</a>
+              <Icon size={8} name="Open" />
+              <a href="#textarea">More information</a>
             </div>
           }
         />
-        <Textarea value={v3} onChange={this.handleChange("v3")} label="with error" error="oh no!" />
-        <Textarea value={v4} onChange={this.handleChange("v4")} label="with hint" hint="this is a hint" />
-        <Textarea value={v5} onChange={this.handleChange("v5")} label="disabled" disabled />
-        <Textarea value={v6} onChange={this.handleChange("v6")} label="a code" code />
+        <Textarea value={v4} onChange={this.handleChange("v4")} label="with error" error="oh no!" />
+        <Textarea value={v5} onChange={this.handleChange("v5")} label="with hint" hint="this is a hint" />
+        <Textarea value={v6} onChange={this.handleChange("v6")} label="disabled" disabled />
+        <Textarea value={v7} onChange={this.handleChange("v7")} label="a code" code />
       </Form>
     )
   }

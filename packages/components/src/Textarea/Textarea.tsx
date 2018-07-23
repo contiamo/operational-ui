@@ -5,6 +5,7 @@ import { OperationalStyleConstants } from "../utils/constants"
 
 import { Label, LabelText, labelTextHeight, FormFieldControls, FormFieldError, inputFocus } from "../utils/mixins"
 import Hint from "../Hint/Hint"
+import Icon from "../Icon/Icon"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
@@ -150,7 +151,7 @@ class Textarea extends React.Component<Props, State> {
           isCode={this.props.code}
           value={this.props.value}
           isError={Boolean(this.props.error)}
-          isAction={Boolean(this.props.action)}
+          isAction={Boolean(this.props.action || this.props.copy)}
           resize={this.props.resize}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             if (!this.props.onChange) {
@@ -159,12 +160,18 @@ class Textarea extends React.Component<Props, State> {
             this.props.onChange(e.target.value)
           }}
         />
-        {this.props.action && (
+        {(this.props.action || this.props.copy) && (
           <ActionHeader isError={Boolean(this.props.error)} isLabel={Boolean(this.props.label)}>
+            {this.props.action}
             {this.state.showTooltip && <Tooltip right>Copied!</Tooltip>}
-            <CopyToClipboard text={this.props.value} onCopy={this.showTooltip}>
-              {this.props.action}
-            </CopyToClipboard>
+            {this.props.copy && (
+              <CopyToClipboard text={this.props.value} onCopy={this.showTooltip}>
+                <div>
+                  <Icon size={8} name="Copy" />
+                  <a href="#textarea">Copy to clipboard</a>
+                </div>
+              </CopyToClipboard>
+            )}
           </ActionHeader>
         )}
         {this.props.error && <FormFieldError>{this.props.error}</FormFieldError>}
