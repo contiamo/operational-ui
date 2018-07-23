@@ -2,10 +2,10 @@ import * as React from "react"
 import styled from "react-emotion"
 
 import constants, { OperationalStyleConstants, expandColor } from "../utils/constants"
-import NameTag from "../NameTag/NameTag"
 import Icon from "../Icon/Icon"
 import { togglePath, containsPath, getInitialOpenPaths } from "./Tree.utils"
 import { Tree as ITree } from "./Tree.types"
+import SmallNameTag from "../Internals/SmallNameTag"
 
 export interface Props {
   /** An array of tree structures */
@@ -94,9 +94,9 @@ const TreeRecursive: React.SFC<{
       >
         <Icon left name={isOpen ? "ChevronDown" : "Add"} size={12} />
         {tree.tag && (
-          <NameTag color={tagColor} left>
+          <SmallNameTag color={tagColor} left>
             {tree.tag}
-          </NameTag>
+          </SmallNameTag>
         )}
         {tree.label}
       </TreeItem>
