@@ -20,6 +20,7 @@ const Bar = styled("div")(
   {
     display: "grid",
     width: "100%",
+    padding: 0,
     " > *": {
       display: "flex",
       alignItems: "center",
@@ -28,7 +29,6 @@ const Bar = styled("div")(
   ({ theme }: { theme?: OperationalStyleConstants }) => {
     return {
       height: theme.titleHeight,
-      padding: `0 ${theme.space.content}px`,
       gridTemplateColumns: `${theme.sidebarWidth}px auto 50px`,
       backgroundColor: theme.color.background.dark,
       color: theme.color.white,
@@ -40,8 +40,10 @@ const Bar = styled("div")(
 )
 
 const StartContainer = styled("div")()
+
 const CenterContainer = styled("div")()
-const EndContainer = styled("div")({ justifyContent: "flex-end" })
+
+const EndContainer = styled("div")()
 
 const HeaderBar: React.SFC<HeaderProps> = ({ logo, main, end }) => (
   <Bar>
