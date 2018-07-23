@@ -50,7 +50,7 @@ const TextareaComp = styled("textarea")(
   }) => {
     const topPadding = (isAction ? 20 : 0) + theme.space.small
     return {
-      resize: resize || "both",
+      resize,
       fontSize: theme.font.size.small,
       fontWeight: theme.font.weight.regular,
       display: "block",
