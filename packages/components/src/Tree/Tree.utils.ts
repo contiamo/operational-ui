@@ -1,6 +1,6 @@
 import { Tree } from "./Tree.types"
 
-const pathsEqual = (path1: number[], path2: number[]) => path1.join("") === path2.join("")
+const pathsEqual = (path1: number[], path2: number[]) => path1.join("-") === path2.join("-")
 
 export const getInitialOpenPaths = (basePath: number[]) => (tree: Tree): number[][] => {
   return [
