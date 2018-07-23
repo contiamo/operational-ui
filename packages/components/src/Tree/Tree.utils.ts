@@ -1,5 +1,7 @@
 import { Tree } from "./Tree.types"
 
+const pathsEqual = (path1: number[], path2: number[]) => path1.join("") === path2.join("")
+
 export const getInitialOpenPaths = (basePath: number[]) => (tree: Tree): number[][] => {
   return [
     ...(tree.initiallyOpen ? [basePath] : []),
@@ -19,7 +21,7 @@ export const togglePath = (path: number[]) => (paths: number[][]): number[][] =>
     return [path]
   }
   const [head, ...tail] = paths
-  if (head.join("") === path.join("")) {
+  if (pathsEqual(head, path)) {
     return tail
   }
   return [head, ...togglePath(path)(tail)]
@@ -30,7 +32,7 @@ export const containsPath = (path: number[]) => (paths: number[][]): boolean => 
     return false
   }
   const [head, ...tail] = paths
-  if (head.join("") === path.join("")) {
+  if (pathsEqual(head, path)) {
     return true
   }
   return containsPath(path)(tail)
