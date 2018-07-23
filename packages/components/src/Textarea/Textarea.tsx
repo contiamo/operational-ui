@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
 
-import { Label, LabelText, FormFieldControls, FormFieldError, inputFocus } from "../utils/mixins"
+import { Label, LabelText, labelTextHeight, FormFieldControls, FormFieldError, inputFocus } from "../utils/mixins"
 import Hint from "../Hint/Hint"
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
@@ -69,37 +69,39 @@ const TextareaComp = styled("textarea")(
   },
 )
 
-const ActionHeader = styled("div")(({ theme, isError }: { theme?: OperationalStyleConstants; isError: boolean }) => ({
-  fontSize: theme.font.size.fineprint,
-  padding: `${theme.space.base}px ${theme.space.small}px`,
-  color: theme.color.text.lighter,
-  width: "100%",
-  borderTopLeftRadius: theme.borderRadius,
-  borderTopRightRadius: theme.borderRadius,
-  border: `1px solid ${isError ? theme.color.error : theme.color.border.default}`,
-  borderBottom: 0,
-  position: "absolute",
-  backgroundColor: theme.color.background.lighter,
-  top: 18,
-  left: 0,
-  zIndex: theme.zIndex.formFieldError,
-  display: "flex",
-  justifyContent: "flex-end",
+const ActionHeader = styled("div")(
+  ({ theme, isError, isLabel }: { theme?: OperationalStyleConstants; isError: boolean; isLabel: boolean }) => ({
+    fontSize: theme.font.size.fineprint,
+    padding: `${theme.space.base}px ${theme.space.small}px`,
+    color: theme.color.text.lighter,
+    width: "100%",
+    borderTopLeftRadius: theme.borderRadius,
+    borderTopRightRadius: theme.borderRadius,
+    border: `1px solid ${isError ? theme.color.error : theme.color.border.default}`,
+    borderBottom: 0,
+    position: "absolute",
+    backgroundColor: theme.color.background.lighter,
+    top: `${isLabel ? labelTextHeight + theme.space.base : 0}px`,
+    left: 0,
+    zIndex: theme.zIndex.formFieldError,
+    display: "flex",
+    justifyContent: "flex-end",
 
-  /**
-   * Use case: External Links typically have <Icon/>s next to them.
-   */
-  "& a": {
-    display: "inline-flex",
-    alignItems: "center",
-    textDecoration: "none",
-  },
-  "& svg": {
-    margin: `0 ${theme.space.base}px`,
-    width: 12,
-    height: 12,
-  },
-}))
+    /**
+     * Use case: External Links typically have <Icon/>s next to them.
+     */
+    "& a": {
+      display: "inline-flex",
+      alignItems: "center",
+      textDecoration: "none",
+    },
+    "& svg": {
+      margin: `0 ${theme.space.base}px`,
+      width: 12,
+      height: 12,
+    },
+  }),
+)
 
 const Textarea: React.SFC<Props> = (props: Props) => {
   return (
@@ -124,7 +126,11 @@ const Textarea: React.SFC<Props> = (props: Props) => {
           props.onChange(e.target.value)
         }}
       />
-      {props.action && <ActionHeader isError={Boolean(props.error)}>{props.action}</ActionHeader>}
+      {props.action && (
+        <ActionHeader isError={Boolean(props.error)} isLabel={Boolean(props.label)}>
+          {props.action}
+        </ActionHeader>
+      )}
       {props.error && <FormFieldError>{props.error}</FormFieldError>}
     </Label>
   )
