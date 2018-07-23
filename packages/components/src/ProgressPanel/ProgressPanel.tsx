@@ -26,27 +26,27 @@ const getVariation = (status: Status, theme: OperationalStyleConstants = default
       return {
         iconColor: theme.color.success,
         textColor: theme.color.text.default,
-        Icon: <Icon left name="Yes" />,
+        icon: <Icon left name="Yes" />,
       }
     case "failure":
     case "failed":
       return {
         iconColor: theme.color.error,
         textColor: theme.color.text.default,
-        Icon: <Icon left name="No" />,
+        icon: <Icon left name="No" />,
       }
     case "waiting":
     case "todo":
       return {
         iconColor: theme.color.text.lightest,
         textColor: theme.color.text.lighter,
-        Icon: <Icon left name="EmptyCircle" />,
+        icon: <Icon left name="EmptyCircle" />,
       }
     case "running":
       return {
         iconColor: theme.color.text.dark,
         textColor: theme.color.text.lightest,
-        Icon: <Spinner left />,
+        icon: <Spinner left />,
       }
   }
 }
@@ -86,7 +86,7 @@ const ProgressPanel: React.SFC<Props> = props => (
     {props.items.map(({ status, title, error }, index) => (
       <Item key={index}>
         <Body status={status}>
-          {getVariation(status).Icon}
+          {getVariation(status).icon}
           {title}
         </Body>
         {error && <Error>{error}</Error>}
