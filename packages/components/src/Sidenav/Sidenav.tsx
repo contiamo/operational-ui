@@ -34,6 +34,7 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
+    overflow: "auto",
     width: theme.sidebarWidth,
     height: "100%",
     borderRight: "1px solid",
