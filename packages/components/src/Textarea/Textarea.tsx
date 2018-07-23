@@ -103,7 +103,7 @@ const ActionHeader = styled("div")(
       display: "inline-flex",
       alignItems: "center",
       textDecoration: "none",
-      color: "#1499ce",
+      color: theme.color.primary,
       cursor: "pointer",
     },
     "& svg": {
