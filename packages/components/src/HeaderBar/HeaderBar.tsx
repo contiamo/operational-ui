@@ -29,7 +29,6 @@ const Bar = styled("div")(
   ({ theme }: { theme?: OperationalStyleConstants }) => {
     return {
       height: theme.titleHeight,
-      paddingRight: theme.space.content,
       gridTemplateColumns: `${theme.sidebarWidth}px auto 50px`,
       backgroundColor: theme.color.background.dark,
       color: theme.color.white,

@@ -23,5 +23,5 @@ This component provides a Contiamo logo for use out of the box. It is typically 
 #### Stacked
 
 ```jsx
-<ContiamoLogo size={35} color="#747474" stack />
+<ContiamoLogo size={100} color="#747474" stack />
 ```
