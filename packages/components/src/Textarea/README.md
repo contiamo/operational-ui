@@ -10,6 +10,7 @@ class MyForm extends React.Component {
       v3: "",
       v4: "",
       v5: "",
+      v6: "",
     }
     this.handleChange = key => value => {
       this.setState({ [key]: value })
@@ -17,7 +18,7 @@ class MyForm extends React.Component {
   }
 
   render() {
-    const { v1, v2, v3, v4, v5 } = this.state
+    const { v1, v2, v3, v4, v5, v6 } = this.state
 
     return (
       <Form>
@@ -26,8 +27,7 @@ class MyForm extends React.Component {
           copy
           value={v2}
           onChange={this.handleChange("v2")}
-          label="with error"
-          error="oh no!"
+          label="with copying"
           action={
             <div>
               <Icon size={8} name="Copy" />
@@ -35,9 +35,10 @@ class MyForm extends React.Component {
             </div>
           }
         />
-        <Textarea value={v3} onChange={this.handleChange("v3")} label="with hint" hint="this is a hint" />
-        <Textarea value={v4} onChange={this.handleChange("v4")} label="disabled" disabled />
-        <Textarea value={v5} onChange={this.handleChange("v5")} label="a code" code />
+        <Textarea value={v3} onChange={this.handleChange("v3")} label="with error" error="oh no!" />
+        <Textarea value={v4} onChange={this.handleChange("v4")} label="with hint" hint="this is a hint" />
+        <Textarea value={v5} onChange={this.handleChange("v5")} label="disabled" disabled />
+        <Textarea value={v6} onChange={this.handleChange("v6")} label="a code" code />
       </Form>
     )
   }
