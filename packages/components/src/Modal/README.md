@@ -24,8 +24,8 @@ class ContentWithModal extends React.Component {
           <Modal title="Modal header" onClose={this.onClose.bind(this)}>
             <p>Modal content</p>
             Any <Icon name="OperationalUI" size={16} /> components or HTML elements can be rendered here.
-            <div style={{ width: "100%", paddingTop: 20 }}>
-              <Button style={{ float: "right", marginRight: 0 }} onClick={this.onClose.bind(this)}>
+            <div style={{ position: "absolute", bottom: 20, right: 20 }}>
+              <Button style={{ marginRight: 0 }} onClick={this.onClose.bind(this)}>
                 OK
               </Button>
             </div>

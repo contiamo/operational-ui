@@ -1,37 +1,12 @@
 import * as React from "react"
-import styled, { keyframes } from "react-emotion"
-import Card from "../Card/Card"
+import styled from "react-emotion"
 import { Props as ButtonProps } from "../Button/Button"
-import { OperationalStyleConstants } from "../utils/constants"
-import Overlay from "../Internals/Overlay"
+import Modal from "../Modal/Modal"
 
-const fromBottom = keyframes`
-  0% {
-    top: -10px
-  }
-
-  100% {
-    top: 0
-  }
-`
-
-const Modal = styled(Card)`
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-  animation: ${fromBottom} 0.2s;
-  min-width: 600px;
-  min-height: 200px;
-  z-index: ${({ theme }: { theme?: OperationalStyleConstants }) => theme.zIndex.confirm + 1};
-`
-
-const Actions = styled("div")`
-  text-align: right;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-`
+const Actions = styled("div")({
+  paddingTop: 20,
+  float: "right",
+})
 
 export interface ConfirmOptions {
   title: React.ReactNode
@@ -74,27 +49,22 @@ export class Confirm extends React.Component<Props, Readonly<State>> {
   }
 
   render() {
-    const { children } = this.props
     const isOpen = Boolean(this.state.options)
 
-    if (isOpen) {
-      const { title, body, cancelButton, actionButton } = this.state.options
-      return (
-        <>
-          <Modal title={title}>
-            {body}
+    return (
+      <>
+        {this.props.children(this.openConfirm)}
+        {isOpen && (
+          <Modal title={this.state.options.title} onClose={this.closeConfirm.bind(this)}>
+            {this.state.options.body}
             <Actions>
-              {React.cloneElement(cancelButton, { onClick: this.onCancelClick })}
-              {React.cloneElement(actionButton, { onClick: this.onActionClick })}
+              {React.cloneElement(this.state.options.cancelButton, { onClick: this.onCancelClick })}
+              {React.cloneElement(this.state.options.actionButton, { onClick: this.onActionClick })}
             </Actions>
           </Modal>
-          {children(this.openConfirm)}
-          <Overlay onClick={this.onCancelClick} />
-        </>
-      )
-    }
-
-    return children(this.openConfirm)
+        )}
+      </>
+    )
   }
 }
 
