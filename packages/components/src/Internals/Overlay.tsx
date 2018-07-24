@@ -19,7 +19,7 @@ export const Overlay = styled("div")`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
   animation: ${fadeIn} 0.1s ease-in;
-  z-index: ${({ theme }: { theme?: OperationalStyleConstants }) => theme.zIndex.confirm};
+  z-index: ${({ theme }: { theme?: OperationalStyleConstants }) => theme.zIndex.modal - 1};
 `
 
 export default Overlay
