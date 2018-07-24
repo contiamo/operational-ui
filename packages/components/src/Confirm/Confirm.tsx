@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "react-emotion"
 import { OperationalStyleConstants } from "../utils/constants"
 
-import { Props as ButtonProps } from "../Button/Button"
+import Button, { Props as ButtonProps } from "../Button/Button"
 import Modal from "../Modal/Modal"
 
 const Actions = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
@@ -60,8 +60,12 @@ export class Confirm extends React.Component<Props, Readonly<State>> {
           <Modal title={this.state.options.title} onClose={this.closeConfirm.bind(this)}>
             {this.state.options.body}
             <Actions>
-              {React.cloneElement(this.state.options.cancelButton, { onClick: this.onCancelClick })}
-              {React.cloneElement(this.state.options.actionButton, { onClick: this.onActionClick })}
+              {React.cloneElement(this.state.options.cancelButton || <Button>Cancel</Button>, {
+                onClick: this.onCancelClick,
+              })}
+              {React.cloneElement(this.state.options.actionButton || <Button color="success">Confirm</Button>, {
+                onClick: this.onActionClick,
+              })}
             </Actions>
           </Modal>
         )}

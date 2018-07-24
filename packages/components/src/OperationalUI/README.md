@@ -118,3 +118,25 @@ class MessageHandler extends React.Component {
 
 ;<MessageHandler />
 ```
+
+### Confirmation
+
+```
+// This import statement is necessary because of the wiring of this demo website.
+// When using the library outside, use the following:
+// `import { OperationalUI, OperationalContext, Button } from "@operational/components"`
+const OperationalContext = require("../").OperationalContext
+
+;<OperationalUI>
+  <OperationalContext>
+    {ctx => (
+      <Button onClick={() => {
+        ctx.confirm({
+          title: "Are you sure",
+          body: "This is a scary operation."
+        })
+      }}>Do something scary</Button>
+    )}
+  </OperationalContext>
+</OperationalUI>
+```
