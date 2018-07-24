@@ -7,7 +7,7 @@ import { darken } from "../utils"
 import { MessageType } from "../types"
 import Messages from "../Messages/Messages"
 import MessageComponent from "../Message/Message"
-import Confirm, { ConfirmOptions } from "../Confirm/Confirm"
+import Confirm, { ConfirmOptions } from "../Internals/Confirm"
 
 export interface Props {
   /** Children */
