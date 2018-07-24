@@ -166,10 +166,10 @@ class Textarea extends React.Component<Props, State> {
         {(this.props.action || this.props.copy) && (
           <ActionHeader isError={Boolean(this.props.error)} isLabel={Boolean(this.props.label)}>
             {this.props.action}
-            {this.state.showTooltip && <Tooltip right>Copied!</Tooltip>}
             {this.props.copy && (
               <CopyToClipboard text={this.props.value} onCopy={this.showTooltip}>
                 <div>
+                  {this.state.showTooltip && <Tooltip right>Copied!</Tooltip>}
                   <Icon size={8} name="Copy" />
                   <a>Copy to clipboard</a>
                 </div>
