@@ -20,6 +20,8 @@ export const Label = styled("label")(
   }),
 )
 
+export const labelTextHeight = 15
+
 export const LabelText = styled("span")(({ theme }: { theme?: OperationalStyleConstants }) => ({
   fontSize: theme.font.size.fineprint,
   display: "inline-block",
@@ -27,6 +29,7 @@ export const LabelText = styled("span")(({ theme }: { theme?: OperationalStyleCo
   marginBottom: theme.space.base,
   fontWeight: theme.font.weight.bold,
   color: theme.color.text.lightest,
+  height: labelTextHeight,
 }))
 
 export const FormFieldControls = styled("div")({
