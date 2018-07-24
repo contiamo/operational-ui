@@ -29,7 +29,7 @@ const Bar = styled("div")(
   ({ theme }: { theme?: OperationalStyleConstants }) => {
     return {
       height: theme.titleHeight,
-      gridTemplateColumns: `${theme.sidebarWidth}px auto 50px`,
+      gridTemplateColumns: `${theme.sidebarWidth}px auto 250px`,
       backgroundColor: theme.color.background.dark,
       color: theme.color.white,
       " > *": {
@@ -43,7 +43,10 @@ const StartContainer = styled("div")()
 
 const CenterContainer = styled("div")()
 
-const EndContainer = styled("div")()
+const EndContainer = styled("div")`
+  display: flex;
+  justify-content: flex-end;
+`
 
 const HeaderBar: React.SFC<HeaderProps> = ({ logo, main, end }) => (
   <Bar>

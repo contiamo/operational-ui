@@ -51,6 +51,9 @@ const containerStyles = ({
   width: ${size_ * (stack ? stackedSvgAspectRatio : svgAspectRatio)}px;
   height: ${size_}px;
   fill: ${expandColor(theme, color_) || theme.color.white};
+  & svg {
+    height: ${size_ - 12}px;
+  }
 `
 
 const Container = styled("div")(containerStyles)
