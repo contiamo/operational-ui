@@ -24,8 +24,6 @@ const Content = styled(Card)(({ theme }: { theme?: OperationalStyleConstants }) 
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  minWidth: 600,
-  minHeight: 200,
   zIndex: theme.zIndex.confirm + 1,
 }))
 

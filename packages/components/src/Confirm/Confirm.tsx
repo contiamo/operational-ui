@@ -1,12 +1,14 @@
 import * as React from "react"
 import styled from "react-emotion"
+import { OperationalStyleConstants } from "../utils/constants"
+
 import { Props as ButtonProps } from "../Button/Button"
 import Modal from "../Modal/Modal"
 
-const Actions = styled("div")({
-  paddingTop: 20,
+const Actions = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+  marginTop: theme.space.element,
   float: "right",
-})
+}))
 
 export interface ConfirmOptions {
   title: React.ReactNode

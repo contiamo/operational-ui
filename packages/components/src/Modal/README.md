@@ -24,8 +24,8 @@ class ContentWithModal extends React.Component {
           <Modal title="Modal header" onClose={this.onClose.bind(this)}>
             <p>Modal content</p>
             Any <Icon name="OperationalUI" size={16} /> components or HTML elements can be rendered here.
-            <div style={{ position: "absolute", bottom: 20, right: 20 }}>
-              <Button style={{ marginRight: 0 }} onClick={this.onClose.bind(this)}>
+            <div style={{ width: "100%", marginTop: 20 }}>
+              <Button style={{ marginRight: 0, float: "right" }} onClick={this.onClose.bind(this)}>
                 OK
               </Button>
             </div>
@@ -48,11 +48,3 @@ class ContentWithModal extends React.Component {
 
 ;<ContentWithModal />
 ```
-
-### Props
-
-| Name           | Description                                                                                                               | Type   | Default | Required |
-| :------------- | :------------------------------------------------------------------------------------------------------------------------ | :----- | :------ | :------- |
-| childCss       | Glamor CSS object passed down to the container's immediate child, which holds the content. Use to specify/override styles | string | -       | Yes      |
-| childClassName | Class name for the modal container's immediate child, which holds the content. Use to specify/override styles.            | string | -       | Yes      |
-| onClose        | Callback called when the modal is closed (outside area is clicked).                                                       | string | -       | Yes      |
