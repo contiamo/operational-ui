@@ -43,7 +43,7 @@ const GridContainer = styled("div")(
 )
 
 const Main = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  overflow: "auto",
+  overflow: "hidden",
   backgroundColor: theme.color.white,
   gridColumnStart: "2",
   gridColumnEnd: "span 1",
@@ -52,7 +52,7 @@ const Main = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) =>
 }))
 
 const Side = styled("div")({
-  overflow: "auto",
+  overflow: "hidden",
   gridColumnStart: "1",
   gridColumnEnd: "span 1",
   gridRowStart: "2",
