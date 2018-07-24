@@ -36,6 +36,8 @@ const StackedSvg: React.SFC<{}> = props => (
 
 const stackedSvgAspectRatio = 860 / 560
 
+const logoPadding = 6
+
 const containerStyles = ({
   stack,
   color_,
@@ -47,12 +49,12 @@ const containerStyles = ({
   size_?: number
   theme?: OperationalStyleConstants
 }) => `
-  padding: 6px;
+  padding: ${logoPadding}px;
   width: ${size_ * (stack ? stackedSvgAspectRatio : svgAspectRatio)}px;
   height: ${size_}px;
   fill: ${expandColor(theme, color_) || theme.color.white};
   & svg {
-    height: ${size_ - 12}px;
+    height: ${size_ - 2 * logoPadding}px;
   }
 `
 
