@@ -35,8 +35,6 @@ const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants 
 }))
 
 class Card<T = {}> extends React.PureComponent<Props<T>> {
-  containerNode: HTMLElement
-
   static defaultProps = {
     keyFormatter: (title: string) => title,
   }
@@ -51,12 +49,7 @@ class Card<T = {}> extends React.PureComponent<Props<T>> {
     )
 
     return (
-      <Container
-        {...props}
-        innerRef={containerNode => {
-          this.containerNode = containerNode
-        }}
-      >
+      <Container {...props}>
         {(title || action) && <CardHeader title={title} action={action && <this.props.action />} />}
         {data && titles.map((title, i) => <CardItem key={i} value={values[i]} title={title} />)}
         {children}

@@ -19,14 +19,8 @@ export interface Props {
   action?: CardProps["action"]
 }
 
-const Container = styled(Overlay)({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-})
-
 const Content = styled(Card)(({ theme }: { theme?: OperationalStyleConstants }) => ({
-  position: "absolute",
+  position: "fixed",
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
@@ -35,39 +29,13 @@ const Content = styled(Card)(({ theme }: { theme?: OperationalStyleConstants }) 
   zIndex: theme.zIndex.confirm + 1,
 }))
 
-class Modal extends React.Component<Props, {}> {
-  contentNode: HTMLElement
-
-  handleClick = (event: MouseEvent) => {
-    if (this.contentNode && !this.contentNode.contains(event.target as HTMLElement)) {
-      this.props.onClose && this.props.onClose()
-    }
-  }
-
-  componentDidMount() {
-    document.body.addEventListener("click", this.handleClick)
-  }
-
-  componentWillUnmount() {
-    document.body.removeEventListener("click", this.handleClick)
-  }
-
-  render() {
-    return (
-      <Container id={this.props.id} className={this.props.className}>
-        <Content
-          innerRef={card => {
-            this.contentNode = card && card.containerNode
-          }}
-          className={this.props.contentClassName}
-          title={this.props.title}
-          action={this.props.action}
-        >
-          {this.props.children}
-        </Content>
-      </Container>
-    )
-  }
-}
+const Modal: React.SFC<Props> = (props: Props) => (
+  <>
+    <Overlay id={props.id} className={props.className} onClick={props.onClose} />
+    <Content className={props.contentClassName} title={props.title} action={props.action}>
+      {props.children}
+    </Content>
+  </>
+)
 
 export default Modal
