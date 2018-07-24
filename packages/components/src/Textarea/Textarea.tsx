@@ -78,42 +78,37 @@ const TextareaComp = styled("textarea")(
   },
 )
 
-const ActionHeader = styled("div")(
-  ({ theme, isError, isLabel }: { theme?: OperationalStyleConstants; isError: boolean; isLabel: boolean }) => ({
-    fontSize: theme.font.size.fineprint,
-    padding: `${theme.space.base}px ${theme.space.small}px`,
-    color: theme.color.text.lighter,
-    width: "100%",
-    borderTopLeftRadius: theme.borderRadius,
-    borderTopRightRadius: theme.borderRadius,
-    border: `1px solid ${isError ? theme.color.error : theme.color.border.default}`,
-    borderBottom: 0,
-    position: "absolute",
-    backgroundColor: theme.color.background.lighter,
-    top: `${isLabel ? labelTextHeight + theme.space.base : 0}px`,
-    left: 0,
-    zIndex: theme.zIndex.formFieldError,
-    display: "flex",
-    justifyContent: "flex-end",
+const borderWidth = 1
 
-    /**
-     * Use case: External Links typically have <Icon/>s next to them.
-     */
-    "& a": {
-      display: "inline-flex",
-      alignItems: "center",
-      textDecoration: "none",
-      color: theme.color.primary,
-      cursor: "pointer",
-    },
-    "& svg": {
-      margin: `0 ${theme.space.base}px`,
-      width: 10,
-      height: 10,
-      cursor: "pointer",
-    },
-  }),
-)
+const ActionHeader = styled("div")(({ theme, isLabel }: { theme?: OperationalStyleConstants; isLabel: boolean }) => ({
+  fontSize: theme.font.size.fineprint,
+  padding: `${theme.space.base}px ${theme.space.small}px`,
+  color: theme.color.text.lighter,
+  width: `calc(100% - ${2 * borderWidth}px)`,
+  position: "absolute",
+  backgroundColor: theme.color.background.lighter,
+  top: `${borderWidth + (isLabel ? labelTextHeight + theme.space.base : 0)}px`,
+  left: borderWidth,
+  zIndex: theme.zIndex.formFieldError,
+  display: "flex",
+  justifyContent: "flex-end",
+  /**
+   * Use case: External Links typically have <Icon/>s next to them.
+   */
+  "& a": {
+    display: "inline-flex",
+    alignItems: "center",
+    textDecoration: "none",
+    color: theme.color.primary,
+    cursor: "pointer",
+  },
+  "& svg": {
+    margin: `0 ${theme.space.base}px`,
+    width: 10,
+    height: 10,
+    cursor: "pointer",
+  },
+}))
 
 class Textarea extends React.Component<Props, State> {
   timeoutId: number = null
@@ -164,7 +159,7 @@ class Textarea extends React.Component<Props, State> {
           }}
         />
         {(this.props.action || this.props.copy) && (
-          <ActionHeader isError={Boolean(this.props.error)} isLabel={Boolean(this.props.label)}>
+          <ActionHeader isLabel={Boolean(this.props.label)}>
             {this.props.action}
             {this.props.copy && (
               <CopyToClipboard text={this.props.value} onCopy={this.showTooltip}>
