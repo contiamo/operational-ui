@@ -24,7 +24,7 @@ const Content = styled(Card)(({ theme }: { theme?: OperationalStyleConstants }) 
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  zIndex: theme.zIndex.confirm + 1,
+  zIndex: theme.zIndex.modal,
 }))
 
 const Modal: React.SFC<Props> = (props: Props) => (
