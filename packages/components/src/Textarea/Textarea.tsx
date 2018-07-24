@@ -98,9 +98,11 @@ const ActionHeader = styled("div")(({ theme, isLabel }: { theme?: OperationalSty
   "& a": {
     display: "inline-flex",
     alignItems: "center",
-    textDecoration: "none",
     color: theme.color.primary,
     cursor: "pointer",
+    "&:hover": {
+      textDecoration: "underline",
+    },
   },
   "& svg": {
     margin: `0 ${theme.space.base}px`,
