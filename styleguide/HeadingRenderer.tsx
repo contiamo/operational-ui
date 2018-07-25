@@ -1,9 +1,12 @@
 import * as React from "react"
 import { Heading1, Heading2, Title } from "../src"
 
-// export { Title, Heading1, Heading2, Body, Small }
+export interface HeadingRendererProps {
+  level: number
+  children: React.ReactNode | React.ReactNode[]
+}
 
-const HeadingRenderer: React.SFC<any> = ({ classes, level, children, ...props }) => {
+const HeadingRenderer: React.SFC<HeadingRendererProps> = ({ level, children, ...props }) => {
   const Tag = (() => {
     switch (level) {
       case 1:

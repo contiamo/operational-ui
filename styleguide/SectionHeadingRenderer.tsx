@@ -1,8 +1,16 @@
 import * as React from "react"
 import { CardHeader } from "../src"
 
-const SectionHeadingRenderer: React.SFC<any> = ({ classes, children, toolbar, id, href, depth, deprecated }) => (
-  <CardHeader action={toolbar}>{children}</CardHeader>
+export interface SectionHeadingRendererProps {
+  children: React.ReactNode | React.ReactNode[]
+  toolbar: React.ReactNode
+  id: string
+}
+
+const SectionHeadingRenderer: React.SFC<SectionHeadingRendererProps> = ({ children, toolbar, id }) => (
+  <CardHeader id={id} action={toolbar}>
+    {children}
+  </CardHeader>
 )
 
 export default SectionHeadingRenderer

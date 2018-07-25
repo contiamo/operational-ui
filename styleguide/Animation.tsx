@@ -58,7 +58,7 @@ class Animation extends React.Component<Props, State> {
       .map((i: number) => ({ x: integerRandom(n), y: integerRandom(n) })),
   }
 
-  public animationInterval: any
+  public animationInterval: number
 
   // Shift the coordinate of every third tile in a random direction.
   // Each animation shifts a different set of tiles.

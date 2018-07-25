@@ -1,9 +1,19 @@
 import * as React from "react"
 import { SidenavHeader, SidenavItem } from "../src"
 
-const ComponentsListRenderer: React.SFC<any> = ({ classes, items }) => (
+export interface ComponentsListItem {
+  heading: string
+  name: string
+  href: string
+}
+
+export interface ComponentsListRendererProps {
+  items: ComponentsListItem[]
+}
+
+const ComponentsListRenderer: React.SFC<ComponentsListRendererProps> = ({ items }) => (
   <SidenavHeader active={true} label="Components">
-    {items.map(({ heading, name, href, content }: any) => <SidenavItem key={href} label={name} to={href} />)}
+    {items.map(({ heading, name, href }) => <SidenavItem key={href} label={name} to={href} />)}
   </SidenavHeader>
 )
 

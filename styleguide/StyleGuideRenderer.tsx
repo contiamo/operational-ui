@@ -4,6 +4,16 @@ import * as React from "react"
 import { HeaderBar, Layout, Logo, OperationalUI, Page } from "../src"
 import Splash from "./Splash"
 
+export interface StyleGuideRendererState {
+  isSplashVisible: boolean
+}
+
+export interface StyleGuideRendererProps {
+  title: string
+  children: React.ReactNode[] | React.ReactNode
+  toc: React.ReactNode
+}
+
 injectGlobal({
   "#rsg-root": {
     height: "100vh",
@@ -13,7 +23,7 @@ injectGlobal({
   },
 })
 
-class StyleGuideRenderer extends React.Component<any> {
+class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, StyleGuideRendererState> {
   public state = {
     isSplashVisible: true,
   }

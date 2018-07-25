@@ -1,7 +1,12 @@
 import * as React from "react"
 import { Button } from "../src"
 
-const TabButtonRenderer: React.SFC<any> = ({ classes, name, className, onClick, active, children }) => (
+export interface TabButtonRendererProps {
+  onClick: React.EventHandler<React.SyntheticEvent<MouseEvent>>
+  children: React.ReactNode | React.ReactNode[]
+}
+
+const TabButtonRenderer: React.SFC<TabButtonRendererProps> = ({ onClick, children }) => (
   <Button onClick={onClick}>{children}</Button>
 )
 

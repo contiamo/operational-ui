@@ -1,13 +1,18 @@
 import * as React from "react"
+
 import { Card } from "../src"
 
-const ReactComponentRenderer: React.SFC<any> = ({
-  classes,
+export interface ReactComponentRendererProps {
+  name: string
+  heading: string
+  examples: React.ReactNode | React.ReactNode[]
+  tabButtons: React.ReactNode | React.ReactNode[]
+  tabBody: React.ReactNode
+}
+
+const ReactComponentRenderer: React.SFC<ReactComponentRendererProps> = ({
   name,
   heading,
-  pathLine,
-  description,
-  docs,
   examples,
   tabButtons,
   tabBody,

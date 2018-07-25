@@ -1,7 +1,17 @@
 import * as React from "react"
 import { Input, Sidenav, SidenavHeader } from "../src"
 
-const TableOfContentsRenderer: React.SFC<any> = ({ classes, children, searchTerm, onSearchTermChange }) => (
+export interface TableOfContentsRendererProps {
+  children: React.ReactNode | React.ReactNode[]
+  searchTerm: string
+  onSearchTermChange: (newVal: string) => void
+}
+
+const TableOfContentsRenderer: React.SFC<TableOfContentsRendererProps> = ({
+  children,
+  searchTerm,
+  onSearchTermChange,
+}) => (
   <Sidenav>
     <SidenavHeader
       label={
