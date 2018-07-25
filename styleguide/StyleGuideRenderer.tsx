@@ -23,8 +23,8 @@ injectGlobal({
   },
 })
 
-class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, StyleGuideRendererState> {
-  public state = {
+class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readonly<StyleGuideRendererState>> {
+  public readonly state = {
     isSplashVisible: true,
   }
 

@@ -76,8 +76,8 @@ const Static = styled("div")`
   }
 `
 
-class Splash extends React.Component<Props, State> {
-  public state = {
+class Splash extends React.Component<Props, Readonly<State>> {
+  public readonly state = {
     rotation: 0,
     animationSize: Math.max(window.innerWidth, window.innerHeight),
   }

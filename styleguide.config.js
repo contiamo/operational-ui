@@ -35,7 +35,6 @@ module.exports = {
       rules: [
         {
           test: /\.(ts|tsx)/,
-          include: [join(__dirname, "src"), join(__dirname, "styleguide")],
           use: {
             loader: "ts-loader",
             options: {
