@@ -17,7 +17,7 @@
     "build:styleguide": "styleguidist build",
     "build:package": "rimraf lib && tsc -d",
     "watch": "npm run package -- -w",
-    "test": "jest",
+    "test": "jest --maxWorkers=$JEST_MAX_WORKERS",
     "test:watch": "jest --watch",
 
     "prepublish": "npm run build",
