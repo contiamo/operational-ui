@@ -73,12 +73,12 @@ class MessageHandler extends React.Component {
     return (
       <OperationalUI>
         <OperationalContext>
-          {ctx => (
+          {operationalContext => (
             <div>
               <Button
                 color="primary"
                 onClick={() => {
-                  ctx.pushMessage({
+                  operationalContext.pushMessage({
                     body: "Info message",
                     type: "info",
                   })
@@ -89,7 +89,7 @@ class MessageHandler extends React.Component {
               <Button
                 color="success"
                 onClick={() => {
-                  ctx.pushMessage({
+                  operationalContext.pushMessage({
                     body: "Success message",
                     type: "success",
                   })
@@ -100,7 +100,7 @@ class MessageHandler extends React.Component {
               <Button
                 color="error"
                 onClick={() => {
-                  ctx.pushMessage({
+                  operationalContext.pushMessage({
                     body: "Error message",
                     type: "error",
                   })
