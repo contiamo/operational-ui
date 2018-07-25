@@ -31,7 +31,15 @@ export { default as Message } from "./Message/Message"
 export { default as Messages } from "./Messages/Messages"
 export { default as Modal } from "./Modal/Modal"
 export { default as NameTag } from "./NameTag/NameTag"
-export { default as OperationalUI, Context, Consumer as OperationalContext } from "./OperationalUI/OperationalUI"
+
+export {
+  default as OperationalUI,
+  Context,
+  Consumer as OperationalContext,
+  ConfirmOptions,
+  ModalOptions,
+} from "./OperationalUI/OperationalUI"
+
 export { default as Page } from "./Page/Page"
 export { default as PageArea } from "./PageArea/PageArea"
 export { default as PageAreas } from "./PageAreas/PageAreas"

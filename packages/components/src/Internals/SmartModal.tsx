@@ -39,7 +39,9 @@ export class SmartModal extends React.Component<Props, Readonly<State>> {
         {typeof this.props.children === "function" ? this.props.children(this.openModal) : this.props.children}
         {isOpen && (
           <Modal title={this.state.options.title} onClose={this.closeModal.bind(this)}>
-            {this.state.options.body}
+            {typeof this.state.options.body === "function"
+              ? this.state.options.body(this.closeModal)
+              : this.state.options.body}
           </Modal>
         )}
       </>

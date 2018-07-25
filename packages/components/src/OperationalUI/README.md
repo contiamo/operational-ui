@@ -73,12 +73,12 @@ class MessageHandler extends React.Component {
     return (
       <OperationalUI>
         <OperationalContext>
-          {ctx => (
+          {operationalContext => (
             <div>
               <Button
                 color="primary"
                 onClick={() => {
-                  ctx.pushMessage({
+                  operationalContext.pushMessage({
                     body: "Info message",
                     type: "info",
                   })
@@ -89,7 +89,7 @@ class MessageHandler extends React.Component {
               <Button
                 color="success"
                 onClick={() => {
-                  ctx.pushMessage({
+                  operationalContext.pushMessage({
                     body: "Success message",
                     type: "success",
                   })
@@ -100,7 +100,7 @@ class MessageHandler extends React.Component {
               <Button
                 color="error"
                 onClick={() => {
-                  ctx.pushMessage({
+                  operationalContext.pushMessage({
                     body: "Error message",
                     type: "error",
                   })
@@ -119,7 +119,9 @@ class MessageHandler extends React.Component {
 ;<MessageHandler />
 ```
 
-### Confirmation
+### Render a confirm box (prompt)
+
+`OperationalUI` supports rendering an opinionated confirm box through a method in its context.
 
 ```
 // This import statement is necessary because of the wiring of this demo website.
@@ -129,11 +131,35 @@ const OperationalContext = require("../").OperationalContext
 
 ;<OperationalUI>
   <OperationalContext>
-    {ctx => (
+    {operationalContext => (
       <Button onClick={() => {
-        ctx.confirm({
+        operationalContext.confirm({
           title: "Are you sure",
           body: "This is a scary operation."
+        })
+      }}>Do something scary</Button>
+    )}
+  </OperationalContext>
+</OperationalUI>
+```
+
+### Render a modal box
+
+Modals are a more flexible alternative to the confirm box, that may contain anything, and are not tied to the cancel and confirm button structure.
+
+```
+// This import statement is necessary because of the wiring of this demo website.
+// When using the library outside, use the following:
+// `import { OperationalUI, OperationalContext, Button } from "@operational/components"`
+const OperationalContext = require("../").OperationalContext
+
+;<OperationalUI>
+  <OperationalContext>
+    {operationalContext => (
+      <Button onClick={() => {
+        operationalContext.modal({
+          title: "This is a modal",
+          body: (close) => <Button onClick={() => { close() }}>Close this modal</Button>
         })
       }}>Do something scary</Button>
     )}
