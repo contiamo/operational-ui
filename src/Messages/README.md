@@ -1,8 +1,6 @@
-The messages component gives opinionated layout and positioning to a list of message components.
+The messages component gives opinionated layout and positioning to a list of message components. This is a low-level example you can use to handle messages in a very custom manner. For a more opinionated and significantly less verbose message management setup, see the [`OperationalUI`](#operationalui) component.
 
-### Usage (low-level)
-
-> This is a low-level example you can use to handle messages in a very custom manner. For a more opinionated and significantly less verbose message management setup, see the `OperationalUI` component.
+### Usage
 
 ```jsx
 class MessagesContainer extends React.Component {
