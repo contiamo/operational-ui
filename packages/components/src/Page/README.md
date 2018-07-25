@@ -253,3 +253,41 @@ const actions = (
   <Card>Hello, this is page content</Card>
 </Page>
 ```
+
+### Render a confirm box (prompt)
+
+`Page` components support rendering an opinionated confirm box through a method in its context.
+
+```
+<OperationalUI>
+  <Page>
+    {({ confirm, modal }) => (
+      <Button onClick={() => {
+        confirm({
+          title: "Are you sure",
+          body: "This is a scary operation."
+        })
+      }}>Do something scary</Button>
+    )}
+  </Page>
+</OperationalUI>
+```
+
+### Render a modal box
+
+Modals are a more flexible alternative to the confirm box, that may contain anything, and are not tied to the cancel and confirm button structure.
+
+```
+<OperationalUI>
+  <Page>
+    {({ confirm, modal }) => (
+      <Button onClick={() => {
+        modal({
+          title: "This is a modal",
+          body: (close) => <Button onClick={() => { close() }}>Close this modal</Button>
+        })
+      }}>Do something scary</Button>
+    )}
+  </Page>
+</OperationalUI>
+```

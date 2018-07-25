@@ -47,9 +47,23 @@ const sidebar = (
           </Button>
         }
       >
-        {Array(10)
-          .fill("Hello!!!!")
-          .map((value, i) => <Card key={i}>{value}</Card>)}
+        {({ confirm, modal }) => (
+          <div>
+            {Array(10)
+              .fill("Hello!!!!")
+              .map((value, i) => <Card key={i}>{value}</Card>)}
+            <Button
+              onClick={() => {
+                confirm({
+                  title: "Are you sure",
+                  body: "This is a scary operation.",
+                })
+              }}
+            >
+              Open a modal
+            </Button>
+          </div>
+        )}
       </Page>
     }
   />

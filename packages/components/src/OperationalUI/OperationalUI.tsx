@@ -7,8 +7,6 @@ import { darken } from "../utils"
 import { MessageType } from "../types"
 import Messages from "../Messages/Messages"
 import MessageComponent from "../Message/Message"
-import Confirm, { ConfirmOptions } from "../Confirm/Confirm"
-import Modal, { ModalOptions } from "../Modal/Modal"
 
 export interface Props {
   /** Children */
@@ -43,8 +41,6 @@ export interface Context {
   pushState?: (url: string) => void
   replaceState?: (url: string) => void
   pushMessage: (message: Message) => void
-  confirm: (confirm: ConfirmOptions) => void
-  modal: (modal: ModalOptions) => void
 }
 
 const colorByMessageType = (type: MessageType): string => {
@@ -65,8 +61,6 @@ const defaultContext: Context = {
   pushState: undefined,
   replaceState: undefined,
   pushMessage: (message: Message) => {},
-  confirm: (confirm: ConfirmOptions) => {},
-  modal: (modal: ModalOptions) => {},
 }
 
 const { Provider, Consumer } = React.createContext(defaultContext)
@@ -147,53 +141,41 @@ class OperationalUI extends React.Component<Props, State> {
     const { pushState, replaceState, children } = this.props
     return (
       <ThemeProvider theme={constants}>
-        <Modal>
-          {modal => (
-            <Confirm>
-              {confirm => (
-                <Provider
-                  value={{
-                    pushState,
-                    replaceState,
-                    confirm,
-                    modal,
-                    pushMessage: (message: Message) => {
-                      this.setState(prevState => ({
-                        messages: [{ message, addedAt: new Date().getTime() }, ...prevState.messages],
-                      }))
+        <Provider
+          value={{
+            pushState,
+            replaceState,
+            pushMessage: (message: Message) => {
+              this.setState(prevState => ({
+                messages: [{ message, addedAt: new Date().getTime() }, ...prevState.messages],
+              }))
 
-                      // If we don't yet have an interval, start one.
-                      if (!this.messageTimerInterval) {
-                        this.messageTimerInterval = window.setInterval(() => this.removeOutdatedMessages(), 2000)
-                      }
-                    },
-                  }}
+              // If we don't yet have an interval, start one.
+              if (!this.messageTimerInterval) {
+                this.messageTimerInterval = window.setInterval(() => this.removeOutdatedMessages(), 2000)
+              }
+            },
+          }}
+        >
+          <>
+            <Messages>
+              {this.state.messages.map(({ message }, index) => (
+                <MessageComponent
+                  key={index}
+                  color={colorByMessageType(message.type)}
+                  onClose={() =>
+                    this.setState(prevState => ({
+                      messages: prevState.messages.filter((_, filteredMessageIndex) => filteredMessageIndex !== index),
+                    }))
+                  }
                 >
-                  <>
-                    <Messages>
-                      {this.state.messages.map(({ message }, index) => (
-                        <MessageComponent
-                          key={index}
-                          color={colorByMessageType(message.type)}
-                          onClose={() =>
-                            this.setState(prevState => ({
-                              messages: prevState.messages.filter(
-                                (_, filteredMessageIndex) => filteredMessageIndex !== index,
-                              ),
-                            }))
-                          }
-                        >
-                          {message.body}
-                        </MessageComponent>
-                      ))}
-                    </Messages>
-                    {children}
-                  </>
-                </Provider>
-              )}
-            </Confirm>
-          )}
-        </Modal>
+                  {message.body}
+                </MessageComponent>
+              ))}
+            </Messages>
+            {children}
+          </>
+        </Provider>
       </ThemeProvider>
     )
   }
@@ -201,4 +183,4 @@ class OperationalUI extends React.Component<Props, State> {
 
 export default OperationalUI
 
-export { Consumer, ConfirmOptions, ModalOptions }
+export { Consumer }
