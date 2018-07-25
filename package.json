@@ -21,7 +21,8 @@
     "test:watch": "jest --watch",
 
     "prepublish": "npm run build",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "ci": "run-p build test"
   },
   "lint-staged": {
     "*.(js|jsx|json|md)": ["prettier --write", "git add"],
