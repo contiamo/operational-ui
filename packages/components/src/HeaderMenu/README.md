@@ -27,7 +27,7 @@ class ComponentWithHeader extends React.Component {
   render() {
     return (
       <HeaderBar
-        logo={<ContiamoLogo />}
+        logo={<Logo name="Contiamo" />}
         main={
           <HeaderMenu items={projectOptions} onClick={this.onClick.bind(this)} withCaret>
             {this.state.project.label}

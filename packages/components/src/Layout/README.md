@@ -33,7 +33,7 @@ const sidebar = (
     sidenav={sidebar}
     header={
       <HeaderBar
-        logo={<ContiamoLogo />}
+        logo={<Logo name="Contiamo" />}
         main={<Select naked options={[{ value: "Contiamo" }]} value="Contiamo" placeholder="Select Project..." />}
         end={<Avatar name="Tejas Kumar" />}
       />
@@ -80,7 +80,7 @@ const sidebar = (
     sidenav={sidebar}
     header={
       <HeaderBar
-        logo={<ContiamoLogo />}
+        logo={<Logo name="Contiamo" />}
         main={<Select naked options={[{ value: "Contiamo" }]} value="Contiamo" placeholder="Select Project..." />}
         end={<Avatar name="Tejas Kumar" />}
       />
