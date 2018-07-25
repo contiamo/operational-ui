@@ -21,6 +21,12 @@ module.exports = {
     HeadingRenderer: join(__dirname, "styleguide/HeadingRenderer"),
     TabButtonRenderer: join(__dirname, "styleguide/TabButtonRenderer"),
   },
+  dangerouslyUpdateWebpackConfig(webpackConfig, env) {
+    webpackConfig.output = {
+      path: join(__dirname, "dist"),
+    }
+    return webpackConfig
+  },
   webpackConfig: {
     resolve: {
       extensions: [".js", ".tsx", ".ts"],
