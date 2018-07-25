@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ContextMenu Component Should render 1`] = `
+Array [
+  <div
+    class="css-ar73w8-Messages"
+  />,
+  <div
+    class="css-ernwd6-contextmenu"
+  >
+    <svg
+      class="css-1jl4146"
+      fill="currentColor"
+      height="16"
+      viewBox="0 0 360 360"
+      width="16"
+    >
+      <path
+        d="M320,340.187l-280,0l0,-320l280,0l0,320Zm-120,-59.999l0,-40l-120,0l0,40l120,0Zm80,-80l0,-40l-200,0l0,40l200,0Zm0,-80l0,-40l-200,0l0,40l200,0Z"
+      />
+    </svg>
+    <div
+      class="css-nlu54r"
+    >
+      <div
+        class="css-13wy4i8-contextmenuitem"
+      >
+        Item 1
+      </div>
+      <div
+        class="css-13wy4i8-contextmenuitem"
+      >
+        Item 2
+      </div>
+      <div
+        class="css-13wy4i8-contextmenuitem"
+      >
+        Item 3
+      </div>
+    </div>
+  </div>,
+]
+`

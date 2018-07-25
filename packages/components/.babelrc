@@ -1,8 +1,0 @@
-{
-  "plugins": [["emotion", { "sourceMap": true, "autoLabel": true }]],
-  "env": {
-    "production": {
-      "plugins": [["emotion", { "sourceMap": false, "autoLabel": false, "hoist": true }]]
-    }
-  }
-}

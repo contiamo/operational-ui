@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tabs Should render 1`] = `
+Array [
+  <div
+    class="css-ar73w8-Messages"
+  />,
+  <div
+    class="css-8s7da5-tabs"
+  >
+    <ul
+      class="css-u71hb6"
+    >
+      <li
+        class="css-pks5d5"
+        color="#1499cc"
+      />
+    </ul>
+    <div
+      class="css-1647809"
+    >
+      <div
+        class="css-0"
+      >
+        Test
+      </div>
+    </div>
+  </div>,
+]
+`

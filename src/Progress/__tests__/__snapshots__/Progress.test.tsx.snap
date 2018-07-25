@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Progress Component Should initialize properly 1`] = `
+Array [
+  <div
+    class="css-ar73w8-Messages"
+  />,
+  <div
+    class="css-1f8ra8u-progress"
+  >
+    <div
+      class="css-1x11kw8"
+    />
+  </div>,
+]
+`

@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumbs Component Should initialize properly 1`] = `
+Array [
+  <div
+    class="css-ar73w8-Messages"
+  />,
+  <div
+    class="css-og215-breadcrumbs"
+  >
+    <span
+      class="css-udjxb6"
+    >
+      /
+    </span>
+    <span
+      class="css-uysxol-breadcrumb"
+    >
+      <span
+        class="css-0"
+      >
+        <a
+          href="http://ui.contiamo.com"
+        >
+          Home
+        </a>
+      </span>
+    </span>
+    <span
+      class="css-udjxb6"
+    >
+      /
+    </span>
+    <span
+      class="css-uysxol-breadcrumb"
+    >
+      <span
+        class="css-0"
+      >
+        Link 1
+      </span>
+    </span>
+  </div>,
+]
+`
