@@ -11,7 +11,7 @@ const projects = [
   { key: "project3", label: "Project 3" },
 ]
 ;<HeaderBar
-  logo={<ContiamoLogo />}
+  logo={<Logo name="Contiamo" />}
   main={<HeaderMenu items={projects}>Project 1</HeaderMenu>}
   end={
     <HeaderMenu items={[{ key: "account", label: "My account" }, { key: "log-out", label: "Log out" }]} align="right">
