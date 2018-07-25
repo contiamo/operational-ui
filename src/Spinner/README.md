@@ -51,7 +51,7 @@ In addition to the regular spinning animation, there is a bouncing one that is d
     <Spinner color="black" size={60} />
   </div>
   <div style={{ position: "absolute", bottom: 53, left: 59, zIndex: 1 }}>
-    <ContiamoLogo size={50} />
+    <Logo name="Contiamo" size={50} />
   </div>
 </div>
 ```

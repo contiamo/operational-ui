@@ -8,4 +8,4 @@ package-lock.json
 dist
 build
 lib
-packages/components/styleguide/index.html
+styleguide
