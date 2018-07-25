@@ -7,8 +7,8 @@ import { darken } from "../utils"
 import { MessageType } from "../types"
 import Messages from "../Messages/Messages"
 import MessageComponent from "../Message/Message"
-import Confirm, { ConfirmOptions } from "../Internals/Confirm"
-import SmartModal, { ModalOptions } from "../Internals/SmartModal"
+import Confirm, { ConfirmOptions } from "../Confirm/Confirm"
+import Modal, { ModalOptions } from "../Modal/Modal"
 
 export interface Props {
   /** Children */
@@ -147,7 +147,7 @@ class OperationalUI extends React.Component<Props, State> {
     const { pushState, replaceState, children } = this.props
     return (
       <ThemeProvider theme={constants}>
-        <SmartModal>
+        <Modal>
           {modal => (
             <Confirm>
               {confirm => (
@@ -193,7 +193,7 @@ class OperationalUI extends React.Component<Props, State> {
               )}
             </Confirm>
           )}
-        </SmartModal>
+        </Modal>
       </ThemeProvider>
     )
   }

@@ -1,13 +1,13 @@
 import * as React from "react"
 import { render } from "enzyme"
-import { Modal as ThemelessModal } from "../../index"
+import { Card as ThemelessCard } from "../../index"
 import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
-const Modal = wrapDefaultTheme(ThemelessModal)
+const Card = wrapDefaultTheme(ThemelessCard)
 
-describe("Modal Component", () => {
+describe("Card", () => {
   it("Should render", () => {
-    const renderedComponent = render(<Modal>i love you</Modal>)
+    const renderedComponent = render(<Card>hi</Card>)
     expect(renderedComponent).toMatchSnapshot()
   })
 })
