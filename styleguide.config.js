@@ -6,6 +6,7 @@ module.exports = {
   propsParser,
   components: join(__dirname, "src/**/*.tsx"),
   ignore: ["/**/*test*", "**/Internals/**", "/**/utils/**", "**/*.*.{ts,tsx}"],
+  title: "Components",
   theme: {
     fontFamily: {
       base: "inherit",

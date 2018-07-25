@@ -1,7 +1,9 @@
 import { injectGlobal } from "emotion"
 import * as React from "react"
+import styled from "react-emotion"
 
 import { HeaderBar, Layout, Logo, OperationalUI, Page } from "../src"
+import constants from "../src/utils/constants"
 import Splash from "./Splash"
 
 export interface StyleGuideRendererState {
@@ -26,6 +28,12 @@ injectGlobal({
   },
 })
 
+const Version = styled("div")`
+  font-size: 16px;
+  font-weight: bold;
+  margin-right: ${constants.space.content}px;
+`
+
 class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readonly<StyleGuideRendererState>> {
   public readonly state = {
     isSplashVisible: true,
@@ -42,7 +50,9 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
       <OperationalUI withBaseStyles>
         {isSplashVisible && <Splash hide={this.hideSplash} />}
         <Layout
-          header={<HeaderBar logo={<Logo name="Contiamo" />} />}
+          header={
+            <HeaderBar logo={<Logo name="Contiamo" />} end={<Version>v{require("../package.json").version}</Version>} />
+          }
           sidenav={toc}
           main={<Page title={title}>{children}</Page>}
         />
