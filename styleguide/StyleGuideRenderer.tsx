@@ -21,6 +21,9 @@ injectGlobal({
   ".rsg--controls-12": {
     marginTop: 16,
   },
+  ".rsg--spacing-7": {
+    margin: 0,
+  },
 })
 
 class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readonly<StyleGuideRendererState>> {
