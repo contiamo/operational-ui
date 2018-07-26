@@ -1,8 +1,9 @@
 import * as React from "react"
-import styled from "../utils/styled"
+import { keyframes } from "react-emotion"
 
 import Card, { Props as CardProps } from "../Card/Card"
 import Overlay from "../Internals/Overlay"
+import styled from "../utils/styled"
 
 export interface Props {
   id?: string
@@ -14,11 +15,23 @@ export interface Props {
   action?: CardProps["action"]
 }
 
+const fromBottom = keyframes`
+  0% {
+    top: -10px
+  }
+  100% {
+    top: 0
+  }
+`
+
 const Content = styled(Card)(({ theme }) => ({
-  position: "fixed",
-  top: "50%",
+  position: "absolute",
+  top: 0,
   left: "50%",
-  transform: "translate(-50%, -50%)",
+  transform: "translate(-50%, 0)",
+  animation: `${fromBottom} 0.2s`,
+  minWidth: 600,
+  minHeight: 200,
   zIndex: theme.zIndex.modal,
 }))
 
