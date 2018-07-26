@@ -1,8 +1,8 @@
 import * as React from "react"
-import styled from "react-emotion"
 import { Consumer } from "../OperationalUI/OperationalUI"
 import { isModifiedEvent } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 import shapes from "./Logo.Shapes"
 
 export interface Props {
@@ -16,23 +16,21 @@ export interface Props {
   to?: string
   /** Click handler */
   onClick?: (ev: React.MouseEvent<HTMLElement>) => void
+  /** Stack the logo? */
+  stack?: boolean
+}
+
+export interface ContainerStyleProps {
+  stack: boolean
+  color_: string
+  size_: number
+  aspectRatio: number
 }
 
 const logoPadding = 6
 
-const containerStyles = ({
-  stack,
-  color_,
-  size_,
-  theme,
-  aspectRatio,
-}: {
-  stack?: boolean
-  color_?: string
-  size_?: number
-  aspectRatio: number
-  theme?: OperationalStyleConstants
-}) => `
+const Container = styled("div")<ContainerStyleProps>(
+  ({ color_, size_, theme, aspectRatio }) => `
   padding: ${logoPadding}px;
   width: ${(size_ - 2 * logoPadding) * aspectRatio + 2 * logoPadding}px;
   height: ${size_}px;
@@ -40,17 +38,26 @@ const containerStyles = ({
   & svg {
     height: ${size_ - 2 * logoPadding}px;
   }
-`
+`,
+)
 
-const Container = styled("div")(containerStyles)
+const LinkContainer = styled("a")<ContainerStyleProps>(
+  ({ color_, size_, theme, aspectRatio }) => `
+  padding: ${logoPadding}px;
+  width: ${(size_ - 2 * logoPadding) * aspectRatio + 2 * logoPadding}px;
+  height: ${size_}px;
+  fill: ${expandColor(theme, color_) || theme.color.white};
+  & svg {
+    height: ${size_ - 2 * logoPadding}px;
+  }
+`,
+)
 
-const LinkContainer = styled("a")(containerStyles)
-
-const Logo: React.SFC<Props> = ({ name, size, color, to, ...props }) => {
+const Logo: React.SFC<Props> = ({ stack, name, size, color, to, ...props }) => {
   const { svg, aspectRatio } = shapes[name]
   if (!to) {
     return (
-      <Container size_={size} aspectRatio={aspectRatio} color_={color} {...props}>
+      <Container stack={stack!} size_={size!} aspectRatio={aspectRatio} color_={color!} {...props}>
         {svg}
       </Container>
     )
@@ -59,8 +66,9 @@ const Logo: React.SFC<Props> = ({ name, size, color, to, ...props }) => {
     <Consumer>
       {ctx => (
         <LinkContainer
-          size_={size}
-          color_={color}
+          size_={size!}
+          color_={color!}
+          stack={stack!}
           aspectRatio={aspectRatio}
           {...props}
           href={to}
@@ -85,6 +93,7 @@ const Logo: React.SFC<Props> = ({ name, size, color, to, ...props }) => {
 Logo.defaultProps = {
   size: 50,
   color: "white",
+  stack: false,
 }
 
 export default Logo

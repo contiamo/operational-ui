@@ -60,7 +60,7 @@ const colorByMessageType = (type: MessageType): string => {
 const defaultContext: Context = {
   pushState: undefined,
   replaceState: undefined,
-  pushMessage: (message: IMessage) => void 0,
+  pushMessage: (_: IMessage) => void 0,
 }
 
 const { Provider, Consumer } = React.createContext(defaultContext)
@@ -119,7 +119,7 @@ class OperationalUI extends React.Component<Props, State> {
     )
 
     // If we're out of messages, clear the interval.
-    if (!filteredMessages.length) {
+    if (!filteredMessages.length && this.messageTimerInterval) {
       window.clearInterval(this.messageTimerInterval)
       this.messageTimerInterval = null
     }
@@ -136,7 +136,9 @@ class OperationalUI extends React.Component<Props, State> {
   }
 
   public componentWillUnmount() {
-    window.clearInterval(this.messageTimerInterval)
+    if (this.messageTimerInterval) {
+      window.clearInterval(this.messageTimerInterval)
+    }
   }
 
   public render() {

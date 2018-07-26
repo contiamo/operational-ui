@@ -1,6 +1,6 @@
 import * as React from "react"
-import styled from "react-emotion"
 import Avatar from "../Avatar/Avatar"
+import styled from "../utils/styled"
 
 export interface AvatarItem {
   photo?: string
@@ -36,14 +36,14 @@ const AvatarGroup: React.SFC<Props> = props => {
     ? props.avatars.map((avatar, i) => <GroupedAvatar addBorder size={props.size} key={i} {...avatar} />)
     : props.children
   const count = React.Children.count(avatarsToDisplay)
-  const mustSlice = props.maximumToDisplay < count
+  const mustSlice = props.maximumToDisplay! < count
 
   return (
     <Container>
-      {mustSlice ? React.Children.toArray(avatarsToDisplay).slice(0, props.maximumToDisplay - 1) : avatarsToDisplay}
+      {mustSlice ? React.Children.toArray(avatarsToDisplay).slice(0, props.maximumToDisplay! - 1) : avatarsToDisplay}
       {mustSlice && (
         <GroupedAvatar addBorder size={props.size} onClick={props.onMoreClick} name="more" assignColor={false}>
-          +{count - props.maximumToDisplay + 1}
+          +{count - props.maximumToDisplay! + 1}
         </GroupedAvatar>
       )}
     </Container>

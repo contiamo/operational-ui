@@ -1,8 +1,8 @@
 import * as React from "react"
-import styled from "react-emotion"
+import styled from "../utils/styled"
 
 import { floatIn, readableTextColor, resetTransform } from "../utils"
-import { expandColor, OperationalStyleConstants } from "../utils/constants"
+import { expandColor } from "../utils/constants"
 import { inputFocus, Label, LabelText } from "../utils/mixins"
 import SelectFilter from "./Select.Filter"
 import SelectOption from "./Select.Option"
@@ -60,62 +60,58 @@ export interface State {
   search: string
 }
 
-const Container = styled("div")(
-  ({ theme, color, disabled, naked }: Partial<Props> & { theme?: OperationalStyleConstants }) => {
-    const backgroundColor = naked ? "transparent" : expandColor(theme, color) || theme.color.white
-    const dropdownArrowWidth = 56
-    return {
-      backgroundColor,
-      label: "select",
-      position: "relative",
-      display: "flex",
-      alignItems: "center",
-      padding: `${theme.space.small}px ${dropdownArrowWidth}px ${theme.space.small}px ${theme.space.content}px`,
-      borderRadius: 4,
-      width: "fit-content",
-      minWidth: !naked && 240,
-      minHeight: 20,
-      border: naked ? 0 : "1px solid",
-      borderColor: theme.color.border.default,
-      opacity: disabled ? 0.5 : 1,
-      cursor: "pointer",
-      color: readableTextColor(backgroundColor, ["black", "white"]),
-      outline: "none",
-      pointerEvents: disabled ? "none" : "all",
-      // downward caret.
-      "&::after": {
-        content: "''",
-        position: "absolute",
-        top: "50%",
-        right: theme.space.small,
-        width: 0,
-        height: 0,
-        border: "4px solid transparent",
-        borderTopColor: theme.color.border.default,
-        transform: "translateY(calc(-50% + 2px))",
-      },
-      "&:focus":
-        !naked &&
-        inputFocus({
-          theme,
-        }),
-    }
-  },
-)
+const Container = styled("div")<Partial<Props>>(({ theme, color, disabled, naked }) => {
+  const backgroundColor = naked ? "transparent" : expandColor(theme, color) || theme.color.white
+  const dropdownArrowWidth = 56
+  return {
+    backgroundColor,
+    label: "select",
+    position: "relative",
+    display: "flex",
+    alignItems: "center",
+    padding: `${theme.space.small}px ${dropdownArrowWidth}px ${theme.space.small}px ${theme.space.content}px`,
+    borderRadius: 4,
+    width: "fit-content",
+    minWidth: !naked ? 240 : "none",
+    minHeight: 20,
+    border: naked ? 0 : "1px solid",
+    borderColor: theme.color.border.default,
+    opacity: disabled ? 0.5 : 1,
+    cursor: "pointer",
+    color: readableTextColor(backgroundColor, ["black", "white"]),
+    outline: "none",
+    pointerEvents: disabled ? "none" : "all",
+    // downward caret.
+    "&::after": {
+      content: "''",
+      position: "absolute",
+      top: "50%",
+      right: theme.space.small,
+      width: 0,
+      height: 0,
+      border: "4px solid transparent",
+      borderTopColor: theme.color.border.default,
+      transform: "translateY(calc(-50% + 2px))",
+    },
+    "&:focus":
+      !naked &&
+      inputFocus({
+        theme,
+      }),
+  }
+})
 
-const DisplayValue = styled("div")(
-  ({ theme, isPlaceholder }: { isPlaceholder: boolean; theme?: OperationalStyleConstants }) => {
-    if (isPlaceholder) {
-      return {
-        color: theme.color.text.lightest,
-      }
-    }
-
+const DisplayValue = styled("div")<{ isPlaceholder: boolean }>(({ theme, isPlaceholder }) => {
+  if (isPlaceholder) {
     return {
-      color: "currentColor",
+      color: theme.color.text.lightest,
     }
-  },
-)
+  }
+
+  return {
+    color: "currentColor",
+  }
+})
 
 const Options = styled("div")(
   {
@@ -134,7 +130,7 @@ const Options = styled("div")(
     animation: `${floatIn} .15s forwards ease,
     ${resetTransform} .15s forwards ease`,
   },
-  ({ theme }: { theme?: OperationalStyleConstants }) => ({
+  ({ theme }) => ({
     boxShadow: "0 3px 12px rgba(0, 0, 0, .14)",
     zIndex: theme.zIndex.selectOptions,
   }),
@@ -152,7 +148,7 @@ class Select extends React.Component<Props, State> {
     search: "",
   }
 
-  public containerNode: Node
+  public containerNode?: Node
 
   public static defaultProps: Partial<Props> = {
     placeholder: "No entries selected",
@@ -186,7 +182,7 @@ class Select extends React.Component<Props, State> {
     }
   }
 
-  public getDisplayValue(): string {
+  public getDisplayValue(): string | undefined {
     const { placeholder } = this.props
 
     if (!this.props.value) {
@@ -202,7 +198,7 @@ class Select extends React.Component<Props, State> {
       .map(option => ((this.props.value as Value[]).indexOf(option.value) > -1 ? displayOption(option) : null))
       .filter(a => !!a)
       .join(", ")
-    return listDisplay === "" ? this.props.placeholder : listDisplay
+    return listDisplay === "" ? this.props.placeholder || "" : listDisplay
   }
 
   public selectOption(option: IOption) {
@@ -213,9 +209,9 @@ class Select extends React.Component<Props, State> {
     }
 
     if (!Array.isArray(this.props.value)) {
-      this.setState(prevState => ({
+      this.setState({
         open: false,
-      }))
+      })
       onChange(this.props.value === option.value ? null : option.value)
       return
     }
@@ -269,10 +265,10 @@ class Select extends React.Component<Props, State> {
             <Options>
               {filterable && (
                 <SelectFilter
-                  onChange={(val: string) => {
-                    this.setState(prevState => ({
-                      search: val,
-                    }))
+                  onChange={(filterValue: string) => {
+                    this.setState({
+                      search: filterValue,
+                    })
                   }}
                 />
               )}

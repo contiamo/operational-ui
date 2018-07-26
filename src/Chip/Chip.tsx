@@ -1,9 +1,8 @@
 import * as React from "react"
-import styled from "react-emotion"
 import tinycolor from "tinycolor2"
 import { Icon, IconName } from "../"
-import { WithTheme } from "../types"
-import { expandColor, OperationalStyleConstants } from "../utils/constants"
+import { expandColor } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   /** Id */
@@ -27,7 +26,7 @@ export interface Props {
   icon?: IconName | React.ReactNode
 }
 
-const Container = styled("div")(({ theme, color }: { theme?: OperationalStyleConstants; color?: string }) => {
+const Container = styled("div")<{ color?: string }>(({ theme, color }) => {
   const backgroundColor = tinycolor(expandColor(theme, color) || theme.color.primary)
     .setAlpha(0.1)
     .toString()
@@ -50,7 +49,7 @@ const Container = styled("div")(({ theme, color }: { theme?: OperationalStyleCon
   }
 })
 
-const Content = styled("div")(({ theme }: WithTheme) => ({
+const Content = styled("div")(({ theme }) => ({
   height: "100%",
   display: "flex",
   alignItems: "center",
@@ -60,7 +59,7 @@ const Content = styled("div")(({ theme }: WithTheme) => ({
   },
 }))
 
-const Action = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => {
+const Action = styled("div")(({ theme }) => {
   return {
     borderLeft: `1px solid ${theme.color.ghost}`,
     width: theme.space.element,

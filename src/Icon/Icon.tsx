@@ -1,7 +1,7 @@
 import * as React from "react"
-import styled from "react-emotion"
+import styled from "../utils/styled"
 
-import constants, { expandColor, OperationalStyleConstants } from "../utils/constants"
+import constants, { expandColor } from "../utils/constants"
 import BrandIcons, { BrandIconName } from "./Icon.Brand"
 import * as CustomIcons from "./Icon.Custom"
 
@@ -42,10 +42,6 @@ export interface Props extends PropsWithoutName {
   name: IconName
 }
 
-export interface PropsWithTheme extends Props {
-  theme?: OperationalStyleConstants
-}
-
 const Icon = ({ left, right, color, ...props }: Props) => {
   const iconColor: string = expandColor(constants, color) || "currentColor"
 
@@ -64,7 +60,7 @@ const Icon = ({ left, right, color, ...props }: Props) => {
   return null
 }
 
-export default styled(Icon)(({ left, right, theme }: PropsWithTheme) => ({
+export default styled(Icon)<Props>(({ left, right, theme }) => ({
   marginLeft: right ? theme.space.small : 0,
   marginRight: left ? theme.space.small : 0,
 }))

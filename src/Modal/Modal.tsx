@@ -8,7 +8,7 @@ export interface ModalOptions {
 }
 
 export interface State {
-  options?: ModalOptions
+  options: Partial<ModalOptions>
 }
 
 export interface Props {
@@ -17,7 +17,7 @@ export interface Props {
 
 export class Modal extends React.Component<Props, Readonly<State>> {
   public readonly state: State = {
-    options: undefined,
+    options: {},
   }
 
   public openModal = (options: ModalOptions) => {
@@ -25,11 +25,11 @@ export class Modal extends React.Component<Props, Readonly<State>> {
   }
 
   public closeModal = () => {
-    this.setState({ options: undefined })
+    this.setState({ options: {} })
   }
 
   public render() {
-    const isOpen = Boolean(this.state.options)
+    const isOpen = Boolean(this.state.options.body)
 
     return (
       <>

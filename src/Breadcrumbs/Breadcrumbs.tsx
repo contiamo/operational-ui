@@ -1,6 +1,5 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { WithTheme } from "../types"
+import styled from "../utils/styled"
 
 export interface Props {
   className?: string
@@ -19,7 +18,7 @@ const Container = styled("div")({
   },
 })
 
-const Slash = styled("span")(({ theme }: WithTheme) => ({
+const Slash = styled("span")(({ theme }) => ({
   display: "inline-block",
   margin: `0 ${theme.deprecated.spacing / 2}px`,
   color: theme.deprecated.colors.gray,

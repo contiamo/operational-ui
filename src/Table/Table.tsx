@@ -1,6 +1,5 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   /** Table columns headings */
@@ -29,11 +28,7 @@ export interface Props {
   __experimentalRowActions?: React.ReactNode[]
 }
 
-interface CompProps {
-  theme?: OperationalStyleConstants
-}
-
-const Container = styled("table")(({ theme }: CompProps) => ({
+const Container = styled("table")(({ theme }) => ({
   width: "100%",
   backgroundColor: theme.color.white,
   textAlign: "left",
@@ -42,15 +37,19 @@ const Container = styled("table")(({ theme }: CompProps) => ({
   fontFamily: theme.font.family.main,
 }))
 
-const Tr = styled("tr")(({ hover, theme }: { hover?: boolean } & CompProps) => ({
+const Tr = styled("tr")<{ hover?: boolean }>(({ hover, theme }) => ({
   height: 50,
-  ":hover": hover && {
-    backgroundColor: theme.color.background.lighter,
-    cursor: "pointer",
-  },
+  ...(hover
+    ? {
+        ":hover": {
+          backgroundColor: theme.color.background.lighter,
+          cursor: "pointer",
+        },
+      }
+    : {}),
 }))
 
-const Th = styled("th")(({ theme }: CompProps) => ({
+const Th = styled("th")(({ theme }) => ({
   verticalAlign: "bottom",
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.lightest,
@@ -60,7 +59,7 @@ const Th = styled("th")(({ theme }: CompProps) => ({
   },
 }))
 
-const Td = styled("td")(({ theme }: CompProps) => ({
+const Td = styled("td")(({ theme }) => ({
   verticalAlign: "center",
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.default,
@@ -69,7 +68,7 @@ const Td = styled("td")(({ theme }: CompProps) => ({
   },
 }))
 
-const Action = styled(Td)(({ theme }: CompProps) => ({
+const Action = styled(Td)(({ theme }) => ({
   textAlign: "right",
   paddingRight: theme.space.content,
   color: "transparent",
@@ -78,7 +77,7 @@ const Action = styled(Td)(({ theme }: CompProps) => ({
   },
 }))
 
-const Actions = styled(Td)(({ theme }: CompProps) => ({
+const Actions = styled(Td)(({ theme }) => ({
   textAlign: "right",
   paddingRight: theme.space.small,
 
@@ -93,7 +92,7 @@ const Actions = styled(Td)(({ theme }: CompProps) => ({
   },
 }))
 
-const EmptyView = styled(Td)(({ theme }: CompProps) => ({
+const EmptyView = styled(Td)(({ theme }) => ({
   color: theme.color.text.default,
   height: 50,
   lineHeight: "50px",

@@ -1,9 +1,9 @@
 import * as React from "react"
-import styled from "react-emotion"
+import styled from "../utils/styled"
 
 import Icon from "../Icon/Icon"
 import SmallNameTag from "../Internals/SmallNameTag"
-import constants, { expandColor, OperationalStyleConstants } from "../utils/constants"
+import constants, { expandColor } from "../utils/constants"
 import { Tree as ITree } from "./Tree.types"
 import { containsPath, getInitialOpenPaths, togglePath } from "./Tree.utils"
 
@@ -29,26 +29,19 @@ const TreeChildren = styled("div")`
   margin-left: 28px;
 `
 
-const TreeItem = styled("div")`
+const TreeItem = styled("div")<{
+  hasChildren: boolean
+  hasTag: boolean
+  isTopLevel: boolean
+  isDisabled: boolean
+}>`
   display: flex;
   align-items: center;
   padding: 4px 8px;
   width: fit-content;
   min-width: 160px;
   user-select: none;
-  ${({
-    theme,
-    hasChildren,
-    hasTag,
-    isTopLevel,
-    isDisabled,
-  }: {
-    theme?: OperationalStyleConstants
-    hasChildren: boolean
-    hasTag: boolean
-    isTopLevel: boolean
-    isDisabled: boolean
-  }) => `
+  ${({ theme, hasChildren, hasTag, isTopLevel, isDisabled }) => `
     font-size: ${hasTag ? theme.font.size.fineprint : theme.font.size.small}px;
     font-weight: ${hasTag || isTopLevel ? theme.font.weight.bold : theme.font.weight.regular};
     font-family: ${hasTag ? theme.font.family.code : theme.font.family.main};
@@ -78,7 +71,7 @@ const TreeRecursive: React.SFC<{
 }> = ({ tree, path, recursiveTogglePath, openPaths }) => {
   const isOpen = containsPath(path)(openPaths)
   const { label, tag, disabled, initiallyOpen, childNodes, color, ...treeHtmlProps } = tree
-  const tagColor = expandColor(constants, color)
+  const tagColor = expandColor(constants, color) || ""
   return (
     <TreeContainer>
       <TreeItem

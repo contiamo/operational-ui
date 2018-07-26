@@ -1,7 +1,6 @@
 import * as React from "react"
-import styled from "react-emotion"
 import { Progress } from "../"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   /** Side navigation, see `Sidenav` component */
@@ -36,13 +35,13 @@ const GridContainer = styled("div")(
     height: "100%",
     overflow: "hidden",
   },
-  ({ theme }: { theme?: OperationalStyleConstants }) => ({
+  ({ theme }) => ({
     gridTemplateRows: `${theme.titleHeight}px auto`,
     gridTemplateColumns: `${theme.sidebarWidth}px auto`,
   }),
 )
 
-const Main = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Main = styled("div")(({ theme }) => ({
   overflow: "hidden",
   backgroundColor: theme.color.white,
   gridColumnStart: "2",

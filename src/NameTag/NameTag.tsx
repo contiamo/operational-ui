@@ -1,9 +1,9 @@
 import * as React from "react"
-import styled from "react-emotion"
+import styled from "../utils/styled"
 
 import { readableTextColor } from "../utils"
 import { colorMapper } from "../utils/color"
-import { expandColor, OperationalStyleConstants } from "../utils/constants"
+import { expandColor } from "../utils/constants"
 
 export interface Props {
   /** Background color */
@@ -22,46 +22,36 @@ export interface Props {
   children?: string
 }
 
-const Container = styled("div")(
-  ({
-    theme,
-    color,
-    left,
-    right,
-    children,
-    assignColor,
-  }: {
-    theme?: OperationalStyleConstants
-    color?: Props["color"]
-    left?: Props["left"]
-    right?: Props["right"]
-    children: string
-    assignColor: boolean
-  }) => {
-    const backgroundColor = assignColor
-      ? colorMapper(theme.color.palette)(children)
-      : expandColor(theme, color) || theme.color.primary
-    const textColor = readableTextColor(backgroundColor, [theme.color.white, theme.color.black])
-    return {
-      backgroundColor,
-      color: textColor,
-      fontSize: theme.font.size.small,
-      fontWeight: theme.font.weight.bold,
-      width: 28,
-      height: 20,
-      borderRadius: theme.borderRadius,
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      ...(left ? { marginRight: theme.space.small } : {}),
-      ...(right ? { marginLeft: theme.space.small } : {}),
-    }
-  },
-)
+const Container = styled("div")<{
+  color?: Props["color"]
+  left?: Props["left"]
+  right?: Props["right"]
+  children: string
+  assignColor: boolean
+}>(({ theme, color, left, right, children, assignColor }) => {
+  const backgroundColor = assignColor
+    ? colorMapper(theme.color.palette)(children)
+    : expandColor(theme, color) || theme.color.primary
+  const textColor = readableTextColor(backgroundColor, [theme.color.white, theme.color.black])
+  return {
+    backgroundColor,
+    color: textColor,
+    fontSize: theme.font.size.small,
+    fontWeight: theme.font.weight.bold,
+    width: 28,
+    height: 20,
+    borderRadius: theme.borderRadius,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    ...(left ? { marginRight: theme.space.small } : {}),
+    ...(right ? { marginLeft: theme.space.small } : {}),
+  }
+})
 
 const NameTag: React.SFC<Props> = props => (
   <Container {...props} assignColor={Boolean(!props.color)}>
-    {props.children}
+    {props.children || ""}
   </Container>
 )
 

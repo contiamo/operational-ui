@@ -1,7 +1,6 @@
 import * as React from "react"
-import styled from "react-emotion"
+import styled from "../utils/styled"
 
-import { OperationalStyleConstants } from "../utils/constants"
 import ContextMenuItem from "./ContextMenu.Item"
 
 export interface Item {
@@ -52,31 +51,22 @@ const Container = styled("div")(({ align }: { align: Props["align"] }) => ({
   justifyContent: align === "left" ? "flex-start" : "flex-end",
 }))
 
-const MenuContainer = styled("div")(
-  ({
-    theme,
-    isExpanded,
-    embedChildrenInMenu,
-  }: {
-    theme?: OperationalStyleConstants
-    isExpanded: boolean
-    embedChildrenInMenu: boolean
-  }) => ({
-    position: "absolute",
-    top: embedChildrenInMenu ? 0 : "100%",
-    left: 0,
-    boxShadow: theme.shadows.popup,
-    zIndex: theme.zIndex.selectOptions,
-    width: "fit-content",
-    display: isExpanded ? "block" : "none",
-  }),
-)
+const MenuContainer = styled("div")<{
+  isExpanded: boolean
+  embedChildrenInMenu?: Props["embedChildrenInMenu"]
+}>(({ theme, isExpanded, embedChildrenInMenu }) => ({
+  position: "absolute",
+  top: embedChildrenInMenu ? 0 : "100%",
+  left: 0,
+  boxShadow: theme.shadows.popup,
+  zIndex: theme.zIndex.selectOptions,
+  width: "fit-content",
+  display: isExpanded ? "block" : "none",
+}))
 
-const StyledContextMenuItem = styled(ContextMenuItem)(
-  ({ theme, align }: { theme?: OperationalStyleConstants; align: Props["align"] }) => ({
-    textAlign: align,
-  }),
-)
+const StyledContextMenuItem = styled(ContextMenuItem)<{ align: Props["align"] }>(({ align }) => ({
+  textAlign: align,
+}))
 
 class ContextMenu extends React.Component<Props, State> {
   public state = {

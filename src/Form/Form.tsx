@@ -1,4 +1,4 @@
-import styled from "react-emotion"
+import styled from "../utils/styled"
 
 export const Form = styled("form")({
   "> *:not(:last-child)": {

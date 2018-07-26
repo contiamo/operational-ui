@@ -63,8 +63,8 @@ class DatePicker extends React.Component<Props, State> {
 
   public containerNode: any
   public inputNode: any
-  public keypressHandler: (a: any) => void
-  public outsideClickHandler: (a: any) => void // Throw runtime errors if start/end dates are of the wrong format.
+  public keypressHandler?: EventListenerOrEventListenerObject
+  public outsideClickHandler?: EventListenerOrEventListenerObject
 
   // Optional props argument is used when the component doesn't have
   // these dates on the instance (e.g. constructor).
@@ -121,14 +121,18 @@ class DatePicker extends React.Component<Props, State> {
   }
 
   public componentWillUnmount() {
-    document.removeEventListener("click", this.outsideClickHandler)
-    document.removeEventListener("keydown", this.keypressHandler)
+    if (this.outsideClickHandler) {
+      document.removeEventListener("click", this.outsideClickHandler)
+    }
+    if (this.keypressHandler) {
+      document.removeEventListener("keydown", this.keypressHandler)
+    }
   }
 
   public render() {
     const { onChange, placeholder, start, end, label, min, max, id } = this.props
     const { isExpanded, month, year } = this.state
-    const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : null)
+    const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : undefined)
 
     const nextMonth = changeMonth(1, { month: this.state.month, year: this.state.year })
 
@@ -149,8 +153,8 @@ class DatePicker extends React.Component<Props, State> {
               ev.preventDefault()
               if (onChange) {
                 onChange({
-                  start: null,
-                  end: null,
+                  start: undefined,
+                  end: undefined,
                 })
               }
             }}
@@ -167,7 +171,7 @@ class DatePicker extends React.Component<Props, State> {
           }}
           value={[start, end].filter(s => !!s).join(" - ")}
           placeholder={placeholder}
-          onClick={(ev: any) => {
+          onClick={() => {
             this.setState(
               prevState => ({
                 isExpanded: !prevState.isExpanded,

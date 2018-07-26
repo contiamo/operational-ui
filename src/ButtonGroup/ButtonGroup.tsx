@@ -1,6 +1,5 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { WithTheme } from "../types"
+import styled from "../utils/styled"
 
 export interface Props {
   /** Id */
@@ -13,7 +12,7 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = styled("div")(({ theme }: WithTheme) => ({
+const Container = styled("div")({
   label: "buttongroup",
   "& > button": {
     margin: 0,
@@ -27,7 +26,7 @@ const Container = styled("div")(({ theme }: WithTheme) => ({
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
   },
-}))
+})
 
 const ButtonGroup = (props: Props) => (
   <Container id={props.id} className={props.className}>

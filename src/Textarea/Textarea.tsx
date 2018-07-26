@@ -1,7 +1,6 @@
 import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
-import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 import Hint from "../Hint/Hint"
 import Icon from "../Icon/Icon"
@@ -41,46 +40,36 @@ export interface State {
   showTooltip: boolean
 }
 
-const TextareaComp = styled("textarea")(
-  ({
-    theme,
-    isCode,
-    isError,
-    isAction,
-    disabled,
+const TextareaComp = styled("textarea")<{
+  isCode: boolean
+  isError: boolean
+  isAction: boolean
+  disabled: boolean
+  resize: ResizeOptions
+}>(({ theme, isCode, isError, isAction, disabled, resize }) => {
+  const topPadding = (isAction ? 20 : 0) + theme.space.small
+  return {
     resize,
-  }: {
-    theme?: OperationalStyleConstants
-    isCode: boolean
-    isError: boolean
-    isAction: boolean
-    disabled: boolean
-    resize: ResizeOptions
-  }) => {
-    const topPadding = (isAction ? 20 : 0) + theme.space.small
-    return {
-      resize,
-      fontSize: theme.font.size.small,
-      fontWeight: theme.font.weight.regular,
-      display: "block",
-      width: "100%",
-      minHeight: 120,
-      borderRadius: theme.borderRadius,
-      borderColor: isError ? theme.color.error : theme.color.border.default,
-      padding: `${topPadding}px ${theme.space.medium}px ${theme.space.small}px ${theme.space.medium}px`,
-      fontFamily: isCode ? "monospace" : "inherit",
-      opacity: disabled ? 0.6 : 1.0,
-      ":focus": inputFocus({
-        theme,
-        isError,
-      }),
-    }
-  },
-)
+    fontSize: theme.font.size.small,
+    fontWeight: theme.font.weight.regular,
+    display: "block",
+    width: "100%",
+    minHeight: 120,
+    borderRadius: theme.borderRadius,
+    borderColor: isError ? theme.color.error : theme.color.border.default,
+    padding: `${topPadding}px ${theme.space.medium}px ${theme.space.small}px ${theme.space.medium}px`,
+    fontFamily: isCode ? "monospace" : "inherit",
+    opacity: disabled ? 0.6 : 1.0,
+    ":focus": inputFocus({
+      theme,
+      isError,
+    }),
+  }
+})
 
 const borderWidth = 1
 
-const ActionHeader = styled("div")(({ theme, isLabel }: { theme?: OperationalStyleConstants; isLabel: boolean }) => ({
+const ActionHeader = styled("div")<{ isLabel: boolean }>(({ theme, isLabel }) => ({
   fontSize: theme.font.size.fineprint,
   padding: `${theme.space.base}px ${theme.space.small}px`,
   color: theme.color.text.lighter,
@@ -113,7 +102,7 @@ const ActionHeader = styled("div")(({ theme, isLabel }: { theme?: OperationalSty
 }))
 
 class Textarea extends React.Component<Props, State> {
-  public timeoutId: number = null
+  public timeoutId: number | null = null
 
   public state = {
     showTooltip: false,
@@ -121,6 +110,7 @@ class Textarea extends React.Component<Props, State> {
 
   public static defaultProps: Partial<Props> = {
     copy: false,
+    code: false,
     disabled: false,
     resize: "vertical",
   }
@@ -147,12 +137,12 @@ class Textarea extends React.Component<Props, State> {
           </FormFieldControls>
         )}
         <TextareaComp
-          disabled={this.props.disabled}
-          isCode={this.props.code}
+          disabled={this.props.disabled!}
+          isCode={this.props.code!}
           value={this.props.value}
           isError={Boolean(this.props.error)}
           isAction={Boolean(this.props.action || this.props.copy)}
-          resize={this.props.resize}
+          resize={this.props.resize!}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             if (!this.props.onChange) {
               return

@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled, { css } from "react-emotion"
 import Highlight from "react-highlight"
-import { OperationalStyleConstants } from "../utils/constants"
 import styles from "./styles"
 
 export interface Props {
@@ -26,7 +25,7 @@ const Container = styled("div")`
   }
 `
 
-const Code = styled(Highlight)(({ theme }: { theme?: OperationalStyleConstants }) => {
+const Code = styled(Highlight)(({ theme }) => {
   return {
     margin: 0,
     backgroundColor: "rgba(20, 153, 206, 0.05)",

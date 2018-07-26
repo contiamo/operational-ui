@@ -1,9 +1,8 @@
 import * as React from "react"
-import styled from "react-emotion"
 import { IconName } from "../"
-import { WithTheme } from "../types"
 import { setBrightness } from "../utils"
-import { deprecatedExpandColor, OperationalStyleConstants } from "../utils/constants"
+import { deprecatedExpandColor } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   /** Id */
@@ -41,7 +40,7 @@ export interface Props {
   onMouseLeave?: () => void
 }
 
-const Container = styled("div")(
+const Container = styled("div")<{ onClick?: () => void }>(
   {
     label: "breakdown",
     display: "flex",
@@ -50,8 +49,8 @@ const Container = styled("div")(
     position: "relative",
     maxWidth: 300,
   },
-  ({ theme, onClick }: { theme?: OperationalStyleConstants; onClick: () => void }) => ({
-    padding: `${theme.deprecated.spacing * 3 / 4}px 0`,
+  ({ theme, onClick }) => ({
+    padding: `${(theme.deprecated.spacing * 3) / 4}px 0`,
     ...(onClick
       ? {
           cursor: "pointer",
@@ -75,13 +74,13 @@ const Label = styled("label")(
   {
     display: "block",
   },
-  ({ theme }: { theme?: OperationalStyleConstants }) => ({
+  ({ theme }) => ({
     marginBottom: theme.deprecated.spacing / 4,
     fontSize: theme.deprecated.typography.small.fontSize,
   }),
 )
 
-const Bar = styled("div")(
+const Bar = styled("div")<{ fill: number; color?: string }>(
   {
     position: "relative",
     width: "100%",
@@ -102,7 +101,7 @@ const Bar = styled("div")(
       pointerEvents: "none",
     },
   },
-  ({ theme, fill, color }: { theme?: OperationalStyleConstants; fill: number; color: string }) => {
+  ({ theme, fill, color }) => {
     const backgroundColor: string = deprecatedExpandColor(theme.deprecated, color) || theme.deprecated.colors.info
     return {
       padding: `${theme.deprecated.spacing / 4}px ${theme.deprecated.spacing / 2}px`,
@@ -130,7 +129,7 @@ const Number = styled("div")(
     alignItems: "center",
     justifyContent: "center",
   },
-  ({ theme }: WithTheme) => ({
+  ({ theme }) => ({
     ...theme.deprecated.typography.heading1,
     flex: `0 0 ${theme.deprecated.spacing * 2.5}px`,
     color: theme.deprecated.colors.lightGray,

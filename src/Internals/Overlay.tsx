@@ -1,5 +1,4 @@
 import styled, { keyframes } from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
 
 const fadeIn = keyframes`
   0% {
@@ -19,7 +18,7 @@ export const Overlay = styled("div")`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
   animation: ${fadeIn} 0.1s ease-in;
-  z-index: ${({ theme }: { theme?: OperationalStyleConstants }) => theme.zIndex.modal - 1};
+  z-index: ${({ theme }) => theme.zIndex.modal - 1};
 `
 
 export default Overlay

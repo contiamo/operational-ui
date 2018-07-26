@@ -1,7 +1,6 @@
 import * as React from "react"
-import styled from "react-emotion"
 import { darken } from "../utils"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   condensed?: boolean
@@ -9,48 +8,40 @@ export interface Props {
   onClick?: () => void
 }
 
-const Container = styled("div")(
-  ({
-    theme,
-    onClick,
-    condensed,
-    width,
-  }: {
-    theme?: OperationalStyleConstants
-    onClick?: () => void
-    condensed: Props["condensed"]
-    width?: Props["width"]
-  }) => ({
-    userSelect: "none",
-    label: "contextmenuitem",
-    width: width || (condensed ? 160 : 250),
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    backgroundColor: theme.color.white,
-    lineHeight: `${condensed ? 35 : 44}px`,
-    padding: `0 ${theme.space.content}px`,
-    ...(!!onClick
-      ? {
-          cursor: "pointer",
-          color: theme.color.text.default,
-          "&:hover": {
-            backgroundColor: darken(theme.color.white, 2),
-          },
-        }
-      : {
-          cursor: "not-allowed",
-          color: theme.color.text.lightest,
-        }),
-    "&:not(:first-child)": {
-      borderTop: "1px solid",
-      borderColor: theme.color.separators.default,
-    },
-    "&:last-child": {
-      paddingBottom: 2,
-    },
-  }),
-)
+const Container = styled("div")<{
+  onClick?: () => void
+  condensed: Props["condensed"]
+  width?: Props["width"]
+}>(({ theme, onClick, condensed, width }) => ({
+  userSelect: "none",
+  label: "contextmenuitem",
+  width: width || (condensed ? 160 : 250),
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  backgroundColor: theme.color.white,
+  lineHeight: `${condensed ? 35 : 44}px`,
+  padding: `0 ${theme.space.content}px`,
+  ...(!!onClick
+    ? {
+        cursor: "pointer",
+        color: theme.color.text.default,
+        "&:hover": {
+          backgroundColor: darken(theme.color.white, 2),
+        },
+      }
+    : {
+        cursor: "not-allowed",
+        color: theme.color.text.lightest,
+      }),
+  "&:not(:first-child)": {
+    borderTop: "1px solid",
+    borderColor: theme.color.separators.default,
+  },
+  "&:last-child": {
+    paddingBottom: 2,
+  },
+}))
 
 const ContextMenuItem: React.SFC<Props> = props => (
   <Container {...props} condensed={props.condensed}>

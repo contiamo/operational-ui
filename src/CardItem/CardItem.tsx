@@ -1,6 +1,5 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   /** Title of the item */
@@ -9,7 +8,7 @@ export interface Props {
   value: React.ReactNode
 }
 
-const CardItemTitle = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const CardItemTitle = styled("div")(({ theme }) => ({
   color: theme.color.text.lightest,
   fontFamily: theme.font.family.main,
   fontWeight: theme.font.weight.medium,
@@ -17,7 +16,7 @@ const CardItemTitle = styled("div")(({ theme }: { theme?: OperationalStyleConsta
   textTransform: "uppercase",
 }))
 
-const CardItemBody = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const CardItemBody = styled("div")(({ theme }) => ({
   color: theme.color.text.default,
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.body,

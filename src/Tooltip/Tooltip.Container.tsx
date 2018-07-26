@@ -1,7 +1,5 @@
-import styled from "react-emotion"
 import tinycolor from "tinycolor2"
-
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export type Position = "top" | "left" | "right" | "bottom"
 
@@ -73,72 +71,64 @@ const makeCaretPositionStyles = (position: Position, backgroundColor: string): {
   }
 }
 
-export const Container = styled("div")(
-  ({
-    position,
-    offScreenWidthTest,
-    singleLineTextWidth,
-    theme,
-  }: {
-    position: Position
-    offScreenWidthTest?: boolean
-    singleLineTextWidth: number
-    theme?: OperationalStyleConstants
-  }) => {
-    const backgroundColor = tinycolor(theme.color.black)
-      .setAlpha(0.9)
-      .toString()
-    return {
-      backgroundColor,
-      label: "tooltip",
-      color: theme.color.white,
+export const Container = styled("div")<{
+  position: Position
+  offScreenWidthTest?: boolean
+  singleLineTextWidth: number
+}>(({ position, offScreenWidthTest, singleLineTextWidth, theme }) => {
+  const backgroundColor = tinycolor(theme.color.black)
+    .setAlpha(0.9)
+    .toString()
+  return {
+    backgroundColor,
+    label: "tooltip",
+    color: theme.color.white,
+    position: "absolute",
+    zIndex: theme.zIndex.tooltip,
+    borderRadius: 2,
+    boxShadow: "0 2px 6px rgba(0, 0, 0, .15)",
+    "& > p": {
+      fontSize: 11,
+      lineHeight: 1.3,
+      margin: 0,
+      padding: "2px 6px",
+      textAlign: "center",
+    },
+    ...(offScreenWidthTest
+      ? {
+          width: "fit-content",
+          whiteSpace: "nowrap",
+          position: "fixed",
+          opacity: 0.01,
+          top: -200,
+          left: -200,
+        }
+      : {
+          // If there was an issue determining singleLineTextWidth, default to the 150px width
+          // Otherwise, honor the single line text width unless greater than 150px.
+          width: singleLineTextWidth === 0 ? 150 : Math.min(singleLineTextWidth + 4, 150),
+        }),
+    ...makeContainerPositionStyles(position),
+    // This pseudo-element extends the clickable area of a tooltip extending enough to disappear as the mouse moves over to the caret.
+    "&::after": {
+      content: "''",
+      position: "absolute",
+      top: 0,
+      left: -32,
+      display: "block",
+      width: -32,
+      height: "100%",
+    },
+    // They say behind every great tooltip is a great caret.
+    "&::before": {
+      content: "''",
       position: "absolute",
       zIndex: theme.zIndex.tooltip,
-      borderRadius: 2,
-      boxShadow: "0 2px 6px rgba(0, 0, 0, .15)",
-      "& > p": {
-        fontSize: 11,
-        lineHeight: 1.3,
-        margin: 0,
-        padding: "2px 6px",
-        textAlign: "center",
-      },
-      ...(offScreenWidthTest
-        ? {
-            width: "fit-content",
-            whiteSpace: "nowrap",
-            position: "fixed",
-            opacity: 0.01,
-            top: -200,
-            left: -200,
-          }
-        : {
-            // If there was an issue determining singleLineTextWidth, default to the 150px width
-            // Otherwise, honor the single line text width unless greater than 150px.
-            width: singleLineTextWidth === 0 ? 150 : Math.min(singleLineTextWidth + 4, 150),
-          }),
-      ...makeContainerPositionStyles(position),
-      // This pseudo-element extends the clickable area of a tooltip extending enough to disappear as the mouse moves over to the caret.
-      "&::after": {
-        content: "''",
-        position: "absolute",
-        top: 0,
-        left: -32,
-        display: "block",
-        width: -32,
-        height: "100%",
-      },
-      // They say behind every great tooltip is a great caret.
-      "&::before": {
-        content: "''",
-        position: "absolute",
-        zIndex: theme.zIndex.tooltip,
-        width: 0,
-        height: 0,
-        ...makeCaretPositionStyles(position, backgroundColor),
-      },
-    }
-  },
-)
+      width: 0,
+      height: 0,
+      ...makeCaretPositionStyles(position, backgroundColor),
+    },
+  }
+})
 
 export default Container

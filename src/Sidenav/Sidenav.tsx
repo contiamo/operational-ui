@@ -1,8 +1,7 @@
 import * as React from "react"
-import styled from "react-emotion"
 import { readableTextColor } from "../utils"
-import { OperationalStyleConstants } from "../utils/constants"
 import deprecate from "../utils/deprecate"
+import styled from "../utils/styled"
 
 export interface Props {
   id?: string
@@ -26,7 +25,7 @@ export interface State {
   isHovered: boolean
 }
 
-const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => {
+const Container = styled("div")(({ theme }) => {
   const backgroundColor = theme.color.white
   const color = readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
   return {

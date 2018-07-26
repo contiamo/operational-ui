@@ -1,8 +1,8 @@
 import * as React from "react"
-import styled from "react-emotion"
 import { getInitials, readableTextColor } from "../utils"
 import { colorMapper } from "../utils/color"
-import { expandColor, OperationalStyleConstants } from "../utils/constants"
+import { expandColor } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   /** Name of the person */
@@ -44,12 +44,19 @@ const Name = styled("div")({
   margin: 0,
 })
 
-const Title = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Title = styled("div")(({ theme }) => ({
   color: theme.color.text.lighter,
   margin: 0,
 }))
 
-const Picture = styled("div")(
+const Picture = styled("div")<{
+  color?: Props["color"]
+  colorAssignment?: string
+  photo?: Props["photo"]
+  showName: Props["showName"]
+  addBorder: Props["addBorder"]
+  size: Props["size"]
+}>(
   {
     textTransform: "uppercase",
     borderRadius: "50%",
@@ -57,23 +64,7 @@ const Picture = styled("div")(
     alignItems: "center",
     justifyContent: "center",
   },
-  ({
-    theme,
-    color,
-    colorAssignment,
-    photo,
-    showName,
-    addBorder,
-    size,
-  }: {
-    theme?: OperationalStyleConstants
-    color?: Props["color"]
-    colorAssignment?: string
-    photo?: Props["photo"]
-    showName: Props["showName"]
-    addBorder: Props["addBorder"]
-    size: Props["size"]
-  }) => {
+  ({ theme, color, colorAssignment, photo, showName, addBorder, size }) => {
     const defaultColor: string = theme.color.primary
     const fixedBackgroundColor: string = color ? expandColor(theme, color) || defaultColor : defaultColor
     const assignedBackgroundColor: null | string = colorAssignment

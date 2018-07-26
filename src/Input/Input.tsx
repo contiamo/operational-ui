@@ -1,10 +1,9 @@
 import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
-import styled from "react-emotion"
 import { Hint, Icon, IconName } from "../"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
-import { OperationalStyleConstants } from "../utils/constants"
 import { FormFieldControl, FormFieldControls, FormFieldError, inputFocus, Label, LabelText } from "../utils/mixins"
+import styled from "../utils/styled"
 
 export interface Props {
   className?: string
@@ -57,19 +56,14 @@ interface PropsWithoutCopy extends Props {
 // Rendered height taking into account paddings, font-sizes and line-height
 const inputHeight = 36
 
-const InputFieldContainer = styled("div")`
+const InputFieldContainer = styled("div")<{
+  fullWidth: Props["fullWidth"]
+  withLabel?: boolean
+}>`
   position: relative;
   align-items: center;
   justify-content: center;
-  ${({
-    fullWidth,
-    withLabel,
-    theme,
-  }: {
-    fullWidth: Props["fullWidth"]
-    withLabel?: boolean
-    theme?: OperationalStyleConstants
-  }) => `
+  ${({ fullWidth, withLabel, theme }) => `
     margin-right: ${withLabel ? 0 : theme.space.small}px;
     display: ${withLabel ? "flex" : "inline-flex"};
     min-width: ${fullWidth ? "100%" : 360};
@@ -84,7 +78,7 @@ const InputButton = styled("div")`
   display: flex;
   align-items: center;
   justify-content: center;
-  ${({ theme }: { theme?: OperationalStyleConstants }) => `
+  ${({ theme }) => `
     background-color: ${theme.color.background.lighter};
     border-top-left-radius: ${theme.borderRadius}px;
     border-bottom-left-radius: ${theme.borderRadius}px;
@@ -94,39 +88,30 @@ const InputButton = styled("div")`
   `};
 `
 
-const InputField = styled("input")(
-  ({
+const InputField = styled("input")<{
+  disabled: boolean
+  isStandalone: boolean
+  isError: boolean
+  withIconButton: boolean
+}>(({ theme, disabled, isError, withIconButton }) => ({
+  ...(withIconButton
+    ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
+    : { borderRadius: theme.borderRadius }),
+  fontSize: theme.font.size.body,
+  height: inputHeight,
+  label: "input",
+  flexGrow: 1,
+  padding: "8px 12px",
+  opacity: disabled ? 0.6 : 1.0,
+  font: "inherit",
+  border: "1px solid",
+  borderColor: isError ? theme.color.error : theme.color.border.default,
+  WebkitAppearance: "none",
+  "&:focus": inputFocus({
     theme,
-    disabled,
-    isStandalone,
     isError,
-    withIconButton,
-  }: {
-    theme?: OperationalStyleConstants
-    disabled: boolean
-    isStandalone: boolean
-    isError: boolean
-    withIconButton: boolean
-  }) => ({
-    ...(withIconButton
-      ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
-      : { borderRadius: theme.borderRadius }),
-    fontSize: theme.font.size.body,
-    height: inputHeight,
-    label: "input",
-    flexGrow: 1,
-    padding: "8px 12px",
-    opacity: disabled ? 0.6 : 1.0,
-    font: "inherit",
-    border: "1px solid",
-    borderColor: isError ? theme.color.error : theme.color.border.default,
-    WebkitAppearance: "none",
-    "&:focus": inputFocus({
-      theme,
-      isError,
-    }),
   }),
-)
+}))
 
 export const initialState = {
   showTooltip: false,
@@ -136,7 +121,7 @@ export type State = Readonly<typeof initialState>
 
 class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
   public readonly state = initialState
-  public timeoutId: number = null
+  public timeoutId: number | null = null
 
   public showTooltip = () => {
     if (this.timeoutId) {
@@ -156,7 +141,7 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
     }
 
     return this.props.copy ? (
-      <CopyToClipboard text={this.props.value} onCopy={this.showTooltip}>
+      <CopyToClipboard text={this.props.value || ""} onCopy={this.showTooltip}>
         <InputButton>
           {this.state.showTooltip && <Tooltip left>Copied!</Tooltip>}
           <Icon name="Copy" size={16} />
@@ -205,7 +190,9 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
               {props.onToggle ? (
                 <FormFieldControl
                   onClick={() => {
-                    props.onToggle()
+                    if (props.onToggle) {
+                      props.onToggle()
+                    }
                   }}
                 >
                   <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />

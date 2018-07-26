@@ -1,5 +1,5 @@
 import * as React from "react"
-import styled from "react-emotion"
+import styled from "../utils/styled"
 
 import Icon from "../Icon/Icon"
 import Spinner from "../Spinner/Spinner"
@@ -59,11 +59,11 @@ const Item = styled("div")`
   padding: 6px 0;
 `
 
-const Body = styled("div")`
+const Body = styled("div")<{ status: Status }>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  ${({ theme, status }: { theme?: OperationalStyleConstants; status: Status }) => `
+  ${({ theme, status }) => `
     color: ${getVariation(status, theme).textColor};
     font-size: ${theme.font.size.body}px;
     & svg {
@@ -75,7 +75,7 @@ const Body = styled("div")`
 const Error = styled("p")`
   margin: 4px 0;
   padding-left: 26px;
-  ${({ theme }: { theme?: OperationalStyleConstants }) => `
+  ${({ theme }) => `
     font-size: ${theme.font.size.fineprint}px;
     color: ${theme.color.error};
   `};

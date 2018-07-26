@@ -1,9 +1,8 @@
 import * as React from "react"
-import styled from "react-emotion"
+import styled from "../utils/styled"
 
 import Icon from "../Icon/Icon"
 import Tooltip from "../Tooltip/Tooltip"
-import { OperationalStyleConstants } from "../utils/constants"
 import { hoverTooltip } from "../utils/mixins"
 
 export interface Props {
@@ -19,17 +18,15 @@ export interface Props {
   right?: boolean
 }
 
-const Container = styled("div")(
-  ({ left, right, theme }: { left?: Props["left"]; right?: Props["right"]; theme?: OperationalStyleConstants }) => ({
-    position: "relative",
-    display: "inline-block",
-    verticalAlign: "middle",
-    color: theme.color.text.lightest,
-    marginRight: left ? theme.space.base : 0,
-    marginLeft: right ? theme.space.base : 0,
-    ...hoverTooltip,
-  }),
-)
+const Container = styled("div")<{ left?: Props["left"]; right?: Props["right"] }>(({ left, right, theme }) => ({
+  position: "relative",
+  display: "inline-block",
+  verticalAlign: "middle",
+  color: theme.color.text.lightest,
+  marginRight: left ? theme.space.base : 0,
+  marginLeft: right ? theme.space.base : 0,
+  ...hoverTooltip,
+}))
 
 const Hint: React.SFC<Props> = props => (
   <Container {...props}>

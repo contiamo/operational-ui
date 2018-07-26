@@ -1,10 +1,9 @@
 import * as React from "react"
-import styled, { Interpolation } from "react-emotion"
+import styled from "react-emotion"
 import Icon, { IconName } from "../Icon/Icon"
 import { Consumer as OperationalContext } from "../OperationalUI/OperationalUI"
 import { Props as SidenavItemProps } from "../SidenavItem/SidenavItem"
 import { floatIn, isModifiedEvent } from "../utils"
-import { OperationalStyleConstants } from "../utils/constants"
 
 export interface Props {
   id?: string
@@ -36,39 +35,39 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const containerStyles: Interpolation<{
-  theme?: OperationalStyleConstants
-}> = ({ theme }) => {
-  return {
-    label: "sidenavheader",
-    textDecoration: "none",
-    width: "100%",
-    position: "relative",
-    borderBottom: "1px solid",
-    borderBottomColor: theme.color.separators.default,
-  }
-}
+const Container = styled("div")(({ theme }) => ({
+  label: "sidenavheader",
+  textDecoration: "none",
+  width: "100%",
+  position: "relative",
+  borderBottom: "1px solid",
+  borderBottomColor: theme.color.separators.default,
+}))
 
-const Container = styled("div")(containerStyles)
-const ContainerLink = styled("a")(containerStyles)
+const ContainerLink = styled("a")(({ theme }) => ({
+  label: "sidenavheader",
+  textDecoration: "none",
+  width: "100%",
+  position: "relative",
+  borderBottom: "1px solid",
+  borderBottomColor: theme.color.separators.default,
+}))
 
-const Content = styled("div")(
-  ({ theme, isCondensed }: { theme?: OperationalStyleConstants; isCondensed: boolean }) => ({
-    textDecoration: "none",
-    cursor: "pointer",
-    position: "relative",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "center",
-    height: isCondensed ? 60 : 73,
-    overflow: "hidden",
-    padding: `0 ${theme.space.content}px`,
-    width: "100%",
-  }),
-)
+const Content = styled("div")<{ isCondensed: boolean }>(({ theme, isCondensed }) => ({
+  textDecoration: "none",
+  cursor: "pointer",
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  justifyContent: "center",
+  height: isCondensed ? 60 : 73,
+  overflow: "hidden",
+  padding: `0 ${theme.space.content}px`,
+  width: "100%",
+}))
 
-const LabelText = styled("div")`
+const LabelText = styled("div")<{ isActive: boolean }>`
   position: relative;
   font-weight: 500;
   letter-spacing: 0.25;
@@ -76,7 +75,7 @@ const LabelText = styled("div")`
   white-space: nowrap;
   user-select: none;
   margin: 0;
-  ${({ theme }: { isActive: boolean; theme?: OperationalStyleConstants }) => `
+  ${({ theme }) => `
     color: ${theme.color.text.dark};
     font-size: ${theme.font.size.body}px;
   `};
@@ -89,7 +88,7 @@ const ItemsContainer = styled("div")({
   marginTop: -10,
 })
 
-const CloseButton = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const CloseButton = styled("div")(({ theme }) => ({
   position: "absolute",
   cursor: "pointer",
   display: "none",
@@ -109,13 +108,13 @@ const CloseButton = styled("div")(({ theme }: { theme?: OperationalStyleConstant
   },
 }))
 
-const Summary = styled("div")`
+const Summary = styled("div")<{ isActive: boolean }>`
   display: block;
   font-weight: normal;
   text-transform: none;
   user-select: none;
   margin-top: 4px;
-  ${({ theme, isActive }: { theme?: OperationalStyleConstants; isActive: boolean }) => `
+  ${({ theme, isActive }) => `
     font-size: ${theme.font.size.fineprint}px;
     color: ${theme.color.text.lightest};
     left: ${theme.space.content}px;

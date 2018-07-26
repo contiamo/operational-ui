@@ -1,9 +1,9 @@
 import * as React from "react"
-import styled from "react-emotion"
 import Icon, { IconName } from "../Icon/Icon"
 import { Consumer as OperationalContext } from "../OperationalUI/OperationalUI"
 import { darken, isModifiedEvent } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   className?: string

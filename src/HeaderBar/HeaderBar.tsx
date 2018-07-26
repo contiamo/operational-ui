@@ -1,6 +1,5 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface HeaderProps {
   /**
@@ -26,7 +25,7 @@ const Bar = styled("div")(
       alignItems: "center",
     },
   },
-  ({ theme }: { theme?: OperationalStyleConstants }) => {
+  ({ theme }) => {
     return {
       height: theme.titleHeight,
       gridTemplateColumns: `${theme.sidebarWidth}px auto 250px`,

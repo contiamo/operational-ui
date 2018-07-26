@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled, { keyframes } from "react-emotion"
-import { expandColor, OperationalStyleConstants } from "../utils/constants"
+import { expandColor } from "../utils/constants"
 
 export interface Props {
   id?: string
@@ -50,31 +50,22 @@ const bounceKeyframes = keyframes({
 
 const defaultSize = 18
 
-const Container = styled("div")(
-  ({
-    size,
-    color,
-    theme,
-    left,
-    right,
-  }: {
-    size?: number
-    color?: string
-    bounce?: boolean
-    theme?: OperationalStyleConstants
-    left?: boolean
-    right?: boolean
-  }) => ({
-    display: "inline-block",
-    width: size || defaultSize,
-    height: size || defaultSize,
-    marginRight: left ? theme.space.small : 0,
-    marginLeft: right ? theme.space.small : 0,
-    "& svg": {
-      fill: expandColor(theme, color) || theme.color.text.lighter,
-    },
-  }),
-)
+const Container = styled("div")<{
+  size?: number
+  color?: string
+  bounce?: boolean
+  left?: boolean
+  right?: boolean
+}>(({ size, color, theme, left, right }) => ({
+  display: "inline-block",
+  width: size || defaultSize,
+  height: size || defaultSize,
+  marginRight: left ? theme.space.small : 0,
+  marginLeft: right ? theme.space.small : 0,
+  "& svg": {
+    fill: expandColor(theme, color) || theme.color.text.lighter,
+  },
+}))
 
 /**
  * This additional container is introduced to make transforms set on the main container from the outside
@@ -118,21 +109,19 @@ const BouncingSpinnerContainer = styled("div")({
  * The math used in here lays these boxes out so they're vertically centered and spaced
  * equally on the horizontal axis without any gutter.
  */
-const BouncingSpinnerBox = styled("div")(
-  ({ no, theme, color }: { no: number; theme?: OperationalStyleConstants; color?: Props["color"] }) => ({
-    width: `${80 / 360 * 100}%`,
-    height: `${80 / 360 * 100}%`,
-    position: "absolute",
-    top: `${140 / 360 * 100}%`,
-    left: `${no * 140 / 360 * 100}%`,
-    backgroundColor: expandColor(theme, color) || theme.color.text.lighter,
-    animation: `${bounceKeyframes} 1s infinite ease-in-out`,
-    /*
+const BouncingSpinnerBox = styled("div")<{ no: number; color?: Props["color"] }>(({ no, theme, color }) => ({
+  width: `${(80 / 360) * 100}%`,
+  height: `${(80 / 360) * 100}%`,
+  position: "absolute",
+  top: `${(140 / 360) * 100}%`,
+  left: `${((no * 140) / 360) * 100}%`,
+  backgroundColor: expandColor(theme, color) || theme.color.text.lighter,
+  animation: `${bounceKeyframes} 1s infinite ease-in-out`,
+  /*
    * Achieve the wave effect through incremental animation delays on the individual elements.
    */
-    animationDelay: `${no * 0.16}s`,
-  }),
-)
+  animationDelay: `${no * 0.16}s`,
+}))
 
 const BouncingSpinner = (props: Props) => (
   <BouncingSpinnerContainer>

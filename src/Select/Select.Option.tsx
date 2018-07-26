@@ -1,8 +1,7 @@
 import * as React from "react"
-import styled from "react-emotion"
 import { Icon } from "../"
 import { darken } from "../utils"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   id?: number | string
@@ -12,7 +11,7 @@ export interface Props {
   children?: React.ReactNode
 }
 
-const Container = styled("div")(({ theme, selected }: { theme?: OperationalStyleConstants; selected: boolean }) => {
+const Container = styled("div")<{ selected: boolean }>(({ theme, selected }) => {
   const backgroundColor = selected ? theme.color.background.lighter : theme.color.white
   return {
     backgroundColor,
@@ -31,7 +30,7 @@ const Container = styled("div")(({ theme, selected }: { theme?: OperationalStyle
   }
 })
 
-const IconContainer = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => {
+const IconContainer = styled("div")(({ theme }) => {
   const size = 14
   return {
     display: "flex",

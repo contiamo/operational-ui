@@ -1,15 +1,13 @@
 import * as React from "react"
-import styled from "react-emotion"
 import tinycolor from "tinycolor2"
-
 import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface DeprecatedProps {
   running?: boolean
   success?: boolean
   error?: boolean
   state?: never
-  theme?: OperationalStyleConstants
 }
 
 export interface LatestProps {
@@ -17,12 +15,17 @@ export interface LatestProps {
   success?: never
   error?: never
   state?: "error" | "success" | "running" | "neutral"
-  theme?: OperationalStyleConstants
 }
 
 export type Props = DeprecatedProps | LatestProps
 
-const getColorFromProps = ({ running, success, error, state, theme }: Props): string => {
+const getColorFromProps = ({
+  running,
+  success,
+  error,
+  state,
+  theme,
+}: Props & { theme: OperationalStyleConstants }): string => {
   if (state) {
     return (
       new Map<LatestProps["state"], string>(
@@ -47,7 +50,7 @@ const getColorFromProps = ({ running, success, error, state, theme }: Props): st
   return "#989898"
 }
 
-const StatusDot = styled("div")((props: Props) => ({
+const StatusDot = styled("div")<Props>(props => ({
   display: "inline-block",
   marginRight: props.theme.space.small,
   width: props.theme.space.small,

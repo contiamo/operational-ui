@@ -1,5 +1,5 @@
-import styled from "react-emotion"
 import tinycolor from "tinycolor2"
+import styled from "../utils/styled"
 
 import { OperationalStyleConstants } from "../utils/constants"
 import * as mixins from "../utils/mixins"
@@ -12,18 +12,18 @@ export interface ContainerProps {
 
 const inputDefaultWidth = 240
 
-export const Container = styled("div")(({ isExpanded, theme }: any) => ({
+export const Container = styled("div")<{ isExpanded?: boolean }>({
   label: "datepicker",
   width: inputDefaultWidth,
   position: "relative",
-}))
+})
 
-export const DatePickerCard = styled("div")(
+export const DatePickerCard = styled("div")<{ isExpanded: boolean }>(
   {
     position: "absolute",
     left: 0,
   },
-  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }) => ({
+  ({ theme, isExpanded }) => ({
     backgroundColor: theme.deprecated.colors.white,
     display: isExpanded ? "block" : "none",
     boxShadow: theme.deprecated.shadows.popup,
@@ -31,15 +31,14 @@ export const DatePickerCard = styled("div")(
     // Push down the card to the bottom of the input field,
     // plus the twice the size of the outside focus shadow.
     top: inputHeight + 6,
-    padding: `${theme.deprecated.spacing * 3 / 4}px ${theme.deprecated.spacing}px ${theme.deprecated.spacing *
-      4 /
+    padding: `${(theme.deprecated.spacing * 3) / 4}px ${theme.deprecated.spacing}px ${(theme.deprecated.spacing * 4) /
       3}px`,
     width: inputDefaultWidth,
     zIndex: theme.deprecated.baseZIndex + 1000,
   }),
 )
 
-export const Toggle = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+export const Toggle = styled("div")(({ theme }) => ({
   position: "absolute",
   cursor: "pointer",
   top: 1,
@@ -65,7 +64,7 @@ export const Toggle = styled("div")(({ theme }: { theme?: OperationalStyleConsta
   },
 }))
 
-export const MonthNav = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+export const MonthNav = styled("div")(({ theme }) => ({
   marginBottom: theme.space.element,
   textAlign: "center",
   "& > *": {
@@ -81,8 +80,8 @@ export const MonthNav = styled("div")(({ theme }: { theme?: OperationalStyleCons
   },
 }))
 
-export const IconContainer = styled("div")(
-  ({ theme, disabled }: { theme?: OperationalStyleConstants; disabled?: boolean }): {} => ({
+export const IconContainer = styled("div")<{ disabled?: boolean }>(
+  ({ theme, disabled }): {} => ({
     width: 20,
     height: 20,
     display: "inline-flex",
@@ -112,7 +111,7 @@ const makeDayTextColor = ({
   isPlaceholder?: boolean
   isDisabled?: boolean
   selected?: boolean
-  theme?: OperationalStyleConstants
+  theme: OperationalStyleConstants
 }) => {
   if (selected) {
     return theme.color.white
@@ -126,7 +125,11 @@ const makeDayTextColor = ({
   return theme.color.text.dark
 }
 
-export const Day = styled("div")(
+export const Day = styled("div")<{
+  selected?: boolean
+  isPlaceholder?: boolean
+  isDisabled?: boolean
+}>(
   {
     userSelect: "none",
     width: 30,
@@ -141,17 +144,7 @@ export const Day = styled("div")(
     borderRadius: "50%",
     backgroundClip: "content-box",
   },
-  ({
-    theme,
-    selected,
-    isPlaceholder,
-    isDisabled,
-  }: {
-    theme?: OperationalStyleConstants
-    selected?: boolean
-    isPlaceholder?: boolean
-    isDisabled?: boolean
-  }) => ({
+  ({ theme, selected, isPlaceholder, isDisabled }) => ({
     ...theme.deprecated.typography.body,
     backgroundColor: selected ? theme.deprecated.colors.info : "transparent",
     color: makeDayTextColor({ isPlaceholder, isDisabled, selected, theme }),
@@ -161,35 +154,35 @@ export const Day = styled("div")(
         ? tinycolor(theme.color.primary)
             .darken(5)
             .toString()
-        : isDisabled ? "transparent" : theme.color.background.lighter,
+        : isDisabled
+          ? "transparent"
+          : theme.color.background.lighter,
     },
   }),
 )
 
-export const Input = styled("input")(
-  ({ theme, isExpanded }: { theme?: OperationalStyleConstants; isExpanded: boolean }) => ({
-    ...theme.deprecated.typography.body,
-    userSelect: "none",
-    borderRadius: theme.deprecated.borderRadius,
-    padding: theme.deprecated.spacing * 2 / 3,
-    height: inputHeight,
-    cursor: "pointer",
-    border: "1px solid",
-    borderColor: "rgb(208, 217, 229)",
-    width: "100%",
-    position: "relative",
-    "&:focus": mixins.inputFocus({
-      theme,
-    }),
-    ...(isExpanded
-      ? mixins.inputFocus({
-          theme,
-        })
-      : {}),
+export const Input = styled("input")<{ isExpanded: boolean }>(({ theme, isExpanded }) => ({
+  ...theme.deprecated.typography.body,
+  userSelect: "none",
+  borderRadius: theme.deprecated.borderRadius,
+  padding: (theme.deprecated.spacing * 2) / 3,
+  height: inputHeight,
+  cursor: "pointer",
+  border: "1px solid",
+  borderColor: "rgb(208, 217, 229)",
+  width: "100%",
+  position: "relative",
+  "&:focus": mixins.inputFocus({
+    theme,
   }),
-)
+  ...(isExpanded
+    ? mixins.inputFocus({
+        theme,
+      })
+    : {}),
+}))
 
-export const ClearButton = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+export const ClearButton = styled("div")(({ theme }) => ({
   width: inputHeight,
   height: inputHeight,
   cursor: "pointer",

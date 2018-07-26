@@ -1,9 +1,7 @@
 import * as React from "react"
 import styled, { keyframes } from "react-emotion"
 import { Icon } from "../"
-import { WithTheme } from "../types"
 import { lighten } from "../utils"
-import { OperationalStyleConstants } from "../utils/constants"
 
 export interface Props {
   id?: string
@@ -29,7 +27,7 @@ const Container = styled("div")(
     left: 0,
     position: "absolute",
   },
-  ({ theme }: { theme?: OperationalStyleConstants }) => ({
+  ({ theme }) => ({
     zIndex: theme.deprecated.baseZIndex + 300,
     backgroundColor: "transparent",
   }),
@@ -44,7 +42,7 @@ const fillProgress = keyframes({
   },
 })
 
-const Bar = styled("div")(({ theme, isError }: { theme?: OperationalStyleConstants; isError: boolean }) => ({
+const Bar = styled("div")<{ isError: boolean }>(({ theme, isError }) => ({
   width: "100%",
   height: 3,
   backgroundColor: theme.deprecated.colors.info,
@@ -57,7 +55,7 @@ const Bar = styled("div")(({ theme, isError }: { theme?: OperationalStyleConstan
       }),
 }))
 
-const ErrorMessage = styled("div")(({ theme }: WithTheme) => ({
+const ErrorMessage = styled("div")(({ theme }) => ({
   ...theme.deprecated.typography.body,
   padding: `${theme.deprecated.spacing / 2}px ${theme.deprecated.spacing / 2}px`,
   display: "flex",
@@ -70,7 +68,7 @@ const ErrorMessage = styled("div")(({ theme }: WithTheme) => ({
   color: theme.deprecated.colors.white,
 }))
 
-const Action = styled("div")(({ theme }: WithTheme) => ({
+const Action = styled("div")(({ theme }) => ({
   opacity: 0.7,
   display: "inline-block",
   marginLeft: theme.deprecated.spacing,
@@ -87,8 +85,8 @@ const Action = styled("div")(({ theme }: WithTheme) => ({
   // Temporary hack since feather icons for refresh and close
   // have a mismatch in size.
   ":first-of-type svg": {
-    width: theme.deprecated.spacing * 3 / 4,
-    height: theme.deprecated.spacing * 3 / 4,
+    width: (theme.deprecated.spacing * 3) / 4,
+    height: (theme.deprecated.spacing * 3) / 4,
   },
   ":hover": {
     opacity: 1,

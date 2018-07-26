@@ -1,11 +1,10 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 import Button, { Props as ButtonProps } from "../Button/Button"
 import ControlledModal from "../Internals/ControlledModal"
 
-const Actions = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Actions = styled("div")(({ theme }) => ({
   marginTop: theme.space.element,
   float: "right",
 }))
@@ -20,7 +19,7 @@ export interface ConfirmOptions {
 }
 
 export interface State {
-  options?: ConfirmOptions
+  options: Partial<ConfirmOptions>
 }
 
 export interface Props {
@@ -29,7 +28,7 @@ export interface Props {
 
 export class Confirm extends React.Component<Props, Readonly<State>> {
   public readonly state: State = {
-    options: undefined,
+    options: {},
   }
 
   public openConfirm = (options: ConfirmOptions) => {
@@ -37,7 +36,7 @@ export class Confirm extends React.Component<Props, Readonly<State>> {
   }
 
   public closeConfirm = () => {
-    this.setState({ options: undefined })
+    this.setState({ options: {} })
   }
 
   public onCancelClick = () => {
@@ -55,7 +54,7 @@ export class Confirm extends React.Component<Props, Readonly<State>> {
   }
 
   public render() {
-    const isOpen = Boolean(this.state.options)
+    const isOpen = Boolean(this.state.options.body)
 
     return (
       <>

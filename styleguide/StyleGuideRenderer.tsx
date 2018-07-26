@@ -41,7 +41,7 @@ const Version = styled("div")`
 
 const { Provider, Consumer } = React.createContext({
   activeComponent: "",
-  updateActiveComponent: (componentName: string) => void 0,
+  updateActiveComponent: (_: string) => undefined,
 })
 
 class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readonly<StyleGuideRendererState>> {
@@ -55,8 +55,9 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
   }
 
   private updateActiveComponent = (activeComponent: string) => {
-    window.history.pushState(null, null, `#${activeComponent}`)
+    window.history.pushState(null, undefined, `#${activeComponent}`)
     this.setState({ activeComponent })
+    return undefined
   }
 
   public render() {

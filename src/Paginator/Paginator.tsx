@@ -1,14 +1,13 @@
 import * as React from "react"
-import styled from "react-emotion"
 import * as Icon from "react-feather"
 import Button from "../Button/Button"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   id?: string
   className?: string
   /** Function to be executed after changing page */
-  onChange?: (page: number) => void
+  onChange?: (page: Props["page"]) => void
   /** Index of the current selected page */
   page?: number
   /** Total number of items */
@@ -17,7 +16,7 @@ export interface Props {
   itemsPerPage: number
 }
 
-const PaginatorSpan = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const PaginatorSpan = styled("div")(({ theme }) => ({
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.small,
   padding: `0 ${theme.space.content}px`,
@@ -33,7 +32,7 @@ const PaginatorSpan = styled("div")(({ theme }: { theme?: OperationalStyleConsta
 
 interface ControlProps {
   children: any
-  onChange?: (page: number) => void
+  onChange?: Props["onChange"]
   page: number
   isDisabled: boolean
   itemCount: number
@@ -41,7 +40,7 @@ interface ControlProps {
   type: "first" | "previous" | "next" | "last"
 }
 
-const NavigationButton = styled(Button)(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const NavigationButton = styled(Button)({
   width: 56,
   marginRight: 3,
   padding: 0,
@@ -51,13 +50,13 @@ const NavigationButton = styled(Button)(({ theme }: { theme?: OperationalStyleCo
   "& span": {
     padding: "0 3px",
   },
-}))
+})
 
 const PaginatorControl = ({ children, itemCount, itemsPerPage, page, onChange, type, isDisabled }: ControlProps) => {
   const pageChanges = {
     first: 1,
-    previous: page - 1,
-    next: page + 1,
+    previous: page! - 1,
+    next: page! + 1,
     last: Math.ceil(itemCount / itemsPerPage),
   }
 
@@ -75,12 +74,12 @@ const PaginatorControl = ({ children, itemCount, itemsPerPage, page, onChange, t
 }
 
 const getRange = ({ page, itemCount, itemsPerPage }: Props) => {
-  const start = 1 + (page - 1) * itemsPerPage
-  const end = Math.min(itemCount, page * itemsPerPage)
+  const start = 1 + (page! - 1) * itemsPerPage
+  const end = Math.min(itemCount, page! * itemsPerPage)
   return `${start}-${end}`
 }
 
-const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Container = styled("div")(({ theme }) => ({
   label: "paginator",
   marginTop: theme.space.element,
   "& [role=button]": {
@@ -95,11 +94,11 @@ const Paginator: React.SFC<Props> = props => {
   const controlProps = {
     itemCount: props.itemCount,
     itemsPerPage: props.itemsPerPage,
-    page: props.page,
+    page: props.page!,
     onChange: props.onChange,
   }
   const isFirstDisabled = props.page === 1
-  const isLastDisabled = props.itemsPerPage * props.page >= props.itemCount
+  const isLastDisabled = props.itemsPerPage * props.page! >= props.itemCount
   return (
     <Container id={props.id} className={props.className}>
       <PaginatorControl type="first" {...controlProps} isDisabled={isFirstDisabled}>

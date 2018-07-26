@@ -1,6 +1,5 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   /** Column title */
@@ -11,27 +10,25 @@ export interface Props {
   flexColumn?: boolean
 }
 
-const Container = styled("div")(
-  ({ theme, contentRight, flexColumn }: { theme?: OperationalStyleConstants } & Props) => ({
-    label: "card-column",
-    minWidth: 280 / 2,
-    padding: theme.space.element / 2,
-    flex: "1 0",
-    " img": {
-      maxWidth: "100%",
-    },
-    textAlign: contentRight ? "right" : null,
-    ...(flexColumn
-      ? {
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: contentRight ? "flex-end" : "flex-start",
-        }
-      : {}),
-  }),
-)
+const Container = styled("div")<Props>(({ theme, contentRight, flexColumn }) => ({
+  label: "card-column",
+  minWidth: 280 / 2,
+  padding: theme!.space.element / 2,
+  flex: "1 0",
+  " img": {
+    maxWidth: "100%",
+  },
+  textAlign: contentRight ? "right" : "left",
+  ...(flexColumn
+    ? {
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: contentRight ? "flex-end" : "flex-start",
+      }
+    : {}),
+}))
 
-const Title = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Title = styled("div")(({ theme }) => ({
   fontFamily: theme.font.family.main,
   fontWeight: theme.font.weight.medium,
   color: theme.color.text.dark,

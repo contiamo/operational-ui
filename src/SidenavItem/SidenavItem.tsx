@@ -1,5 +1,5 @@
 import * as React from "react"
-import styled, { Interpolation } from "react-emotion"
+import styled, { Interpolation, Themed } from "react-emotion"
 import Icon, { IconName } from "../Icon/Icon"
 import { Consumer as OperationalContext } from "../OperationalUI/OperationalUI"
 import { isModifiedEvent } from "../utils"
@@ -18,10 +18,14 @@ export interface Props {
 
 const size: number = 36
 
-const containerStyles: Interpolation<{
-  theme?: OperationalStyleConstants
-  isActive: boolean
-}> = ({ theme, isActive }) => ({
+const containerStyles: Interpolation<
+  Themed<
+    {
+      isActive: boolean
+    },
+    OperationalStyleConstants
+  >
+> = ({ theme, isActive }) => ({
   display: "flex",
   padding: `0 ${theme.space.content * 0.5}px`,
   height: size,
@@ -58,7 +62,7 @@ const IconContainer = styled("span")({
   flex: `0 0 ${size}px`,
 })
 
-const Label = styled("span")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Label = styled("span")(({ theme }) => ({
   display: "inline-block",
   paddingLeft: theme.space.base,
 }))

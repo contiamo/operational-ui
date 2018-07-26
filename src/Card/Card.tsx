@@ -1,7 +1,6 @@
 import * as React from "react"
-import styled from "react-emotion"
 import { CardHeader, CardItem } from "../"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props<T = {}> {
   /** Any object to show. The key is the title of the data. */
@@ -22,7 +21,7 @@ export interface Props<T = {}> {
   children?: React.ReactNode
 }
 
-const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Container = styled("div")(({ theme }) => ({
   marginBottom: theme.space.element,
   borderTop: `1px solid ${theme.color.separators.light}`,
   padding: 20,
@@ -40,17 +39,18 @@ class Card<T = {}> extends React.PureComponent<Props<T>> {
   }
 
   public render() {
-    const { title, keyFormatter, valueFormatters = {}, data, keys, children, action, ...props } = this.props
+    const { title, keyFormatter, valueFormatters = {}, data, keys, children, action: Action, ...props } = this.props
 
     const _keys = keys ? keys : Object.keys(data || {})
-    const titles = _keys.map(keyFormatter)
+    const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
     const values = _keys.map(
+      // @ts-ignore @fabien0102 please type this better.
       (i: Extract<keyof T, string>) => (valueFormatters[i] ? valueFormatters[i](data[i] as any) : data[i]),
     )
 
     return (
       <Container {...props}>
-        {(title || action) && <CardHeader title={title} action={action && <this.props.action />} />}
+        {(title || Action) && <CardHeader title={title} action={Action && <Action />} />}
         {data && titles.map((cardItemTitle, i) => <CardItem key={i} value={values[i]} title={cardItemTitle} />)}
         {children}
       </Container>

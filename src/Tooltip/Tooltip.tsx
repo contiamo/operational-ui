@@ -52,8 +52,8 @@ class Tooltip extends React.Component<Props, State> {
     singleLineTextWidth: 0,
   }
 
-  public containerNode: HTMLElement
-  public offScreenWidthTestNode: HTMLElement
+  public containerNode?: HTMLElement
+  public offScreenWidthTestNode?: HTMLElement
 
   public setDomProperties() {
     if (!this.offScreenWidthTestNode || !this.containerNode) {

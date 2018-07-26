@@ -1,9 +1,8 @@
 import * as React from "react"
-import styled from "react-emotion"
 import ContextMenu, { Props as ContextMenuProps } from "../ContextMenu/ContextMenu"
 import Icon from "../Icon/Icon"
 import { darken } from "../utils"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 const width = 144
 
@@ -16,7 +15,7 @@ export interface Props {
   items: ContextMenuProps["items"]
 }
 
-const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Container = styled("div")(({ theme }) => ({
   width,
   height: 35,
   padding: `0 ${theme.space.content}px`,

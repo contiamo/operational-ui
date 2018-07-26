@@ -1,5 +1,5 @@
 import * as React from "react"
-import styled, { Interpolation } from "react-emotion"
+import styled, { Interpolation, Themed } from "react-emotion"
 
 import Icon, { IconName } from "../Icon/Icon"
 import { Consumer as OperationalContext } from "../OperationalUI/OperationalUI"
@@ -30,8 +30,6 @@ export interface Props {
   children?: React.ReactNode
 }
 
-type PropsWithTheme = Props & { theme?: OperationalStyleConstants }
-
 const makeColors = (theme: OperationalStyleConstants, color: string) => {
   const defaultColor = theme.color.white
 
@@ -54,15 +52,15 @@ const makeColors = (theme: OperationalStyleConstants, color: string) => {
   }
 }
 
-const containerStyles: Interpolation<Props> = ({
+const containerStyles: Interpolation<Themed<Props, OperationalStyleConstants>> = ({
   theme,
   color,
   disabled,
   condensed,
   loading,
   fullWidth,
-}: PropsWithTheme) => {
-  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color)
+}) => {
+  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color || "")
   return {
     backgroundColor,
     lineHeight: `${condensed ? 28 : 36}px`,
@@ -76,7 +74,7 @@ const containerStyles: Interpolation<Props> = ({
     padding: `0 ${condensed ? theme.space.medium : theme.space.element}px`,
     borderRadius: theme.borderRadius,
     border: 0,
-    boxShadow: isWhite(backgroundColor) && `0 0 0 1px ${theme.color.border.disabled} inset`,
+    boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.border.disabled} inset` : "none",
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.6 : 1.0,
     outline: "none",
@@ -101,25 +99,23 @@ const containerStyles: Interpolation<Props> = ({
 const Container = styled("button")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
-const ButtonSpinner = styled(Spinner)(
-  ({ theme, containerColor }: { theme?: OperationalStyleConstants; containerColor: string }) => ({
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate3d(-50%, -50%, 0)",
-    color: makeColors(theme, containerColor).foreground,
-  }),
-)
+const ButtonSpinner = styled(Spinner)<{ containerColor?: Props["color"] }>(({ theme, containerColor }) => ({
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate3d(-50%, -50%, 0)",
+  color: makeColors(theme, containerColor || "").foreground,
+}))
 
 const Button = (props: Props) => {
-  const ContainerComponent = props.to ? ContainerLink : Container
+  const ContainerComponent: React.ComponentType<any> = props.to ? ContainerLink : Container
   return (
     <OperationalContext>
       {ctx => (
         <ContainerComponent
           {...props}
           href={props.to}
-          onClick={(ev: React.SyntheticEvent<Node>) => {
+          onClick={(ev: React.SyntheticEvent<React.ReactNode>) => {
             if (props.disabled) {
               ev.preventDefault()
               return

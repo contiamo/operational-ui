@@ -1,11 +1,10 @@
 import * as React from "react"
-import styled from "react-emotion"
 import { Title } from ".."
 import Confirm, { ConfirmOptions } from "../Confirm/Confirm"
 import Modal, { ModalOptions } from "../Modal/Modal"
 import PageArea from "../PageArea/PageArea"
 import PageContent from "../PageContent/PageContent"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export type Tabs = Array<{ name: string; component: React.ComponentType; hidden?: boolean }>
 
@@ -42,13 +41,13 @@ export interface Props {
   onTabChange?: (name: string) => void
 }
 
-const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Container = styled("div")(({ theme }) => ({
   height: "100%",
   position: "relative",
   backgroundColor: theme.color.background.lighter,
 }))
 
-const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const TitleBar = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
@@ -59,14 +58,14 @@ const TitleBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }
 
 const tabsBarHeight = 43
 
-const TabsBar = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const TabsBar = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "flex-end",
   height: tabsBarHeight,
   backgroundColor: theme.color.primary,
 }))
 
-const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstants; active?: boolean }) => ({
+const Tab = styled("div")<{ active?: boolean }>(({ theme, active }) => ({
   color: theme.color.white,
   opacity: active ? 1 : 0.8,
   textTransform: "uppercase",
@@ -81,12 +80,12 @@ const Tab = styled("div")(({ theme, active }: { theme?: OperationalStyleConstant
   },
 }))
 
-const ViewContainer = styled("div")(({ theme, isInTab }: { theme?: OperationalStyleConstants; isInTab?: boolean }) => ({
+const ViewContainer = styled("div")<{ isInTab?: boolean }>(({ theme, isInTab }) => ({
   height: `calc(100% - ${isInTab ? theme.titleHeight + tabsBarHeight : theme.titleHeight}px)`,
   overflow: "auto",
 }))
 
-const ActionsContainer = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const ActionsContainer = styled("div")(({ theme }) => ({
   marginLeft: theme.space.element,
 }))
 
@@ -112,7 +111,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
   public getActiveTab(tabs: Tabs): number {
     let activeTab: number
     if (this.props.activeTabName) {
-      const index = tabs.findIndex(({ name }) => name.toLowerCase() === this.props.activeTabName.toLowerCase())
+      const index = tabs.findIndex(({ name }) => name.toLowerCase() === this.props.activeTabName!.toLowerCase())
       activeTab = index === -1 ? 0 : index
     } else {
       activeTab = this.state.activeTab
@@ -135,7 +134,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
                   : this.props.children
               const tabs =
                 typeof this.props.tabs === "function" ? this.props.tabs(modalConfirmContext) : this.props.tabs
-              const activeTab = this.getActiveTab(tabs)
+              const activeTab = this.getActiveTab(tabs || [])
               const grid = React.Children.count(children) > 1 ? "main side" : "main"
               const CurrentTab = tabs && tabs[activeTab].component
               return (
@@ -155,9 +154,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
                           </Tab>
                         ))}
                       </TabsBar>
-                      <ViewContainer isInTab>
-                        <CurrentTab />
-                      </ViewContainer>
+                      <ViewContainer isInTab>{CurrentTab && <CurrentTab />}</ViewContainer>
                     </>
                   ) : (
                     <ViewContainer>

@@ -82,7 +82,7 @@ class Splash extends React.Component<Props, Readonly<State>> {
     animationSize: Math.max(window.innerWidth, window.innerHeight),
   }
 
-  public rotationInterval: number
+  public rotationInterval?: number
 
   public handleResize = () => {
     this.setState({

@@ -1,6 +1,5 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   id?: string
@@ -11,11 +10,6 @@ export interface Props {
 
   onChange?: (on: boolean) => void
   className?: string
-}
-
-export interface StyleProps {
-  on: boolean
-  theme?: OperationalStyleConstants
 }
 
 const width: number = 28
@@ -32,7 +26,7 @@ const Container = styled("div")({
   cursor: "pointer",
 })
 
-const Button = styled("div")(
+const Button = styled("div")<Props>(
   {
     height,
     transition: "transform .3s",
@@ -43,7 +37,7 @@ const Button = styled("div")(
     width: height,
     borderRadius: "50%",
   },
-  ({ on, theme }: StyleProps) => ({
+  ({ on, theme }) => ({
     transform: `translate3d(${on ? width - height : 0}px, 0, 0)`,
     backgroundColor: theme.deprecated.colors.white,
     border: `1px solid ${on ? theme.deprecated.colors.info : theme.deprecated.colors.gray}`,
@@ -51,7 +45,7 @@ const Button = styled("div")(
   }),
 )
 
-const Rail = styled("div")(
+const Rail = styled("div")<Props>(
   {
     width,
     height: railHeight,
@@ -62,7 +56,7 @@ const Rail = styled("div")(
     borderRadius: railHeight / 2,
     overflow: "hidden",
   },
-  ({ on, theme }: StyleProps) => ({
+  ({ on, theme }) => ({
     backgroundColor: theme.deprecated.colors.gray,
     zIndex: theme.deprecated.baseZIndex,
     "&:after": {

@@ -1,6 +1,5 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 import Card, { Props as CardProps } from "../Card/Card"
 import Overlay from "../Internals/Overlay"
@@ -15,7 +14,7 @@ export interface Props {
   action?: CardProps["action"]
 }
 
-const Content = styled(Card)(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Content = styled(Card)(({ theme }) => ({
   position: "fixed",
   top: "50%",
   left: "50%",

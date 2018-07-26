@@ -1,13 +1,12 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   className?: string
   children?: React.ReactNode
 }
 
-const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Container = styled("div")(({ theme }) => ({
   label: "Messages",
   position: "fixed",
   zIndex: theme.deprecated.baseZIndex + 500,

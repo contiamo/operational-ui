@@ -1,6 +1,5 @@
 import * as React from "react"
-import styled from "react-emotion"
-import { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   id?: string
@@ -13,7 +12,7 @@ export interface Props {
   action?: React.ReactNode
 }
 
-const Container = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+const Container = styled("div")(({ theme }) => ({
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.body,
   fontWeight: theme.font.weight.medium,

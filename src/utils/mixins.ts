@@ -3,25 +3,23 @@ import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
 import { lighten } from "../utils"
 import { OperationalStyleConstants } from "./constants"
 
-export const inputFocus = ({ theme, isError }: { theme?: OperationalStyleConstants; isError?: boolean }) => ({
+export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
   outline: 0,
   border: "1px solid",
   borderColor: isError ? theme.color.error : theme.color.primary,
   boxShadow: `0 0 0 3px ${isError ? lighten(theme.color.error, 60) : lighten(theme.color.primary, 40)}`,
 })
 
-export const Label = styled("label")(
-  ({ fullWidth, theme, left }: { fullWidth?: boolean; theme?: OperationalStyleConstants; left?: boolean }) => ({
-    display: "inline-block",
-    position: "relative",
-    minWidth: fullWidth ? "100%" : 360,
-    marginRight: left ? theme.space.small : 0,
-  }),
-)
+export const Label = styled("label")<{ fullWidth?: boolean; left?: boolean }>(({ fullWidth, theme, left }) => ({
+  display: "inline-block",
+  position: "relative",
+  minWidth: fullWidth ? "100%" : 360,
+  marginRight: left ? theme.space.small : 0,
+}))
 
 export const labelTextHeight = 15
 
-export const LabelText = styled("span")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+export const LabelText = styled("span")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
   display: "inline-block",
   verticalAlign: "middle",
@@ -54,7 +52,7 @@ export const hoverTooltip: {} = {
   },
 }
 
-export const FormFieldControl = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+export const FormFieldControl = styled("div")(({ theme }) => ({
   cursor: "pointer",
   position: "relative",
   verticalAlign: "middle",
@@ -71,7 +69,7 @@ export const FormFieldControl = styled("div")(({ theme }: { theme?: OperationalS
   },
 }))
 
-export const FormFieldError = styled("div")(({ theme }: { theme?: OperationalStyleConstants }) => ({
+export const FormFieldError = styled("div")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
   color: theme.color.error,
   padding: `${theme.space.base / 2}px ${theme.space.element}px`,

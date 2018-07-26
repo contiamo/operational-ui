@@ -42,8 +42,8 @@ const Container = styled("div")(({ size }: { size: number }) => ({
 const Box = styled("div")(({ a, x, y }: { a: number; x: number; y: number }) => ({
   position: "absolute",
   transition: "all 0.5s ease-in-out",
-  top: `calc(${x / (a - 1) * 100}% + 4px)`,
-  left: `calc(${y / (a - 1) * 100}% + 4px)`,
+  top: `calc(${(x / (a - 1)) * 100}% + 4px)`,
+  left: `calc(${(y / (a - 1)) * 100}% + 4px)`,
   borderRadius: 6,
   width: `calc(${100 / (a - 1)}% - 8px)`,
   height: `calc(${100 / (a - 1)}% - 8px)`,
@@ -55,10 +55,10 @@ class Animation extends React.Component<Props, State> {
     animationStep: 0,
     coordinates: Array.apply(null, { length: 30 })
       .map(Number.call, Number)
-      .map((i: number) => ({ x: integerRandom(n), y: integerRandom(n) })),
+      .map((a: number) => ({ x: integerRandom(a), y: integerRandom(a) })),
   }
 
-  public animationInterval: number
+  public animationInterval?: number
 
   // Shift the coordinate of every third tile in a random direction.
   // Each animation shifts a different set of tiles.
