@@ -64,34 +64,37 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
     const { isSplashVisible } = this.state
     return (
       <OperationalUI withBaseStyles>
-        {isSplashVisible && <Splash hide={this.hideSplash} />}
-        <Provider
-          value={{
-            activeComponent: this.state.activeComponent,
-            updateActiveComponent: this.updateActiveComponent,
-          }}
-        >
-          {hasSidebar ? (
-            <Layout
-              header={
+        {isSplashVisible ? (
+          <Splash hide={this.hideSplash} />
+        ) : (
+          <Provider
+            value={{
+              activeComponent: this.state.activeComponent,
+              updateActiveComponent: this.updateActiveComponent,
+            }}
+          >
+            {hasSidebar ? (
+              <Layout
+                header={
+                  <HeaderBar
+                    logo={<Logo name="OperationalUI" />}
+                    end={<Version>v{require("../package.json").version}</Version>}
+                  />
+                }
+                sidenav={toc}
+                main={<Page title={title}>{children}</Page>}
+              />
+            ) : (
+              <div>
                 <HeaderBar
                   logo={<Logo name="OperationalUI" />}
                   end={<Version>v{require("../package.json").version}</Version>}
                 />
-              }
-              sidenav={toc}
-              main={<Page title={title}>{children}</Page>}
-            />
-          ) : (
-            <div>
-              <HeaderBar
-                logo={<Logo name="OperationalUI" />}
-                end={<Version>v{require("../package.json").version}</Version>}
-              />
-              <div style={{ width: 768, margin: `${constants.space.big}px auto 0` }}>{children}</div>
-            </div>
-          )}
-        </Provider>
+                <div style={{ width: 768, margin: `${constants.space.big}px auto 0` }}>{children}</div>
+              </div>
+            )}
+          </Provider>
+        )}
       </OperationalUI>
     )
   }
