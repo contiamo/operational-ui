@@ -125,5 +125,5 @@ export const getBrightness = (color: string): number => {
 export const setBrightness = (color: string, targetBrightness: number): string => {
   const c = tinycolor(color)
   const brightness = c.getBrightness()
-  return c.brighten(targetBrightness / brightness * 100 - 100).toString()
+  return c.brighten((targetBrightness / brightness) * 100 - 100).toString()
 }
