@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "../utils/styled"
 
 import Button, { Props as ButtonProps } from "../Button/Button"
-import ControlledModal from "../Internals/ControlledModal"
+import ControlledModal from "./ControlledModal"
 
 const Actions = styled("div")(({ theme }) => ({
   position: "absolute",
