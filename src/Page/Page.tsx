@@ -1,34 +1,48 @@
 import * as React from "react"
 import { Title } from ".."
-import Confirm, { ConfirmOptions } from "../Confirm/Confirm"
-import Modal, { ModalOptions } from "../Modal/Modal"
-import PageArea from "../PageArea/PageArea"
+import PageArea, { PageAreaProps } from "../PageArea/PageArea"
 import PageContent from "../PageContent/PageContent"
 import styled from "../utils/styled"
 
 export type Tabs = Array<{ name: string; children: React.ReactNode; hidden?: boolean }>
 
-export interface ModalConfirmContext {
-  modal: (modalOptions: ModalOptions) => void
-  confirm: (confirmOptions: ConfirmOptions) => void
-}
-
-export interface Props {
+export interface BaseProps {
   /** Page title */
   title?: string
   /** Page actions, typically `condensed button` component inside a fragment */
   actions?: React.ReactNode
+}
+
+export interface PropsWithSimplePage extends BaseProps {
   /** Content of the page */
-  children?: React.ReactNode | ((modalConfirmContext: ModalConfirmContext) => React.ReactNode)
+  children: PageAreaProps["children"]
   /** Areas template for `PageArea` disposition */
-  areas?: "main" | "main side" | "side main"
+  areas?: "main"
   /** Fill the entire width */
   fill?: boolean
+  tabs?: never
+  activeTabName?: never
+  onTabChange?: never
+}
+
+export interface PropsWithComplexePage extends BaseProps {
+  /** Content of the page */
+  children: React.ReactNode
+  /** Areas template for `PageArea` disposition */
+  areas: "main side" | "side main"
+  /** Fill the entire width */
+  fill?: boolean
+  tabs?: never
+  activeTabName?: never
+  onTabChange?: never
+}
+
+export interface PropsWithTabs extends BaseProps {
   /**
    * List of tabs
    * This will disable any children to render `tabs[i].component` instead
    */
-  tabs?: Tabs | ((modalConfirmContext: ModalConfirmContext) => Tabs)
+  tabs: Tabs
   /**
    * Active tab name
    *
@@ -39,7 +53,12 @@ export interface Props {
    * Send the active name tab on each tab change (in lowercase).
    */
   onTabChange?: (name: string) => void
+  children?: never
+  areas?: never
+  fill?: never
 }
+
+export type Props = PropsWithSimplePage | PropsWithComplexePage | PropsWithTabs
 
 const Container = styled("div")(({ theme }) => ({
   height: "100%",
@@ -99,7 +118,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
     fill: false,
   }
 
-  public state = initialState
+  public readonly state = initialState
 
   public onTabClick(index: number, tabs: Tabs) {
     this.setState({ activeTab: index })
@@ -121,58 +140,45 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
   }
 
   public render() {
+    const { title, actions, areas, fill, tabs, children } = this.props
+    const activeTab = this.getActiveTab(tabs || [])
+    const currentTabChildren = tabs && tabs[activeTab].children
+
     return (
-      <Modal>
-        {modal => (
-          <Confirm>
-            {confirm => {
-              const modalConfirmContext: ModalConfirmContext = { modal, confirm }
-              const { title, actions, areas, fill } = this.props
-              const children =
-                typeof this.props.children === "function"
-                  ? this.props.children(modalConfirmContext)
-                  : this.props.children
-              const tabs =
-                typeof this.props.tabs === "function" ? this.props.tabs(modalConfirmContext) : this.props.tabs
-              const activeTab = this.getActiveTab(tabs || [])
-              const grid = React.Children.count(children) > 1 ? "main side" : "main"
-              const currentTabChildren = tabs && tabs[activeTab].children
-              return (
-                <Container>
-                  {title && (
-                    <TitleBar>
-                      <Title color="white">{title}</Title>
-                      <ActionsContainer>{actions}</ActionsContainer>
-                    </TitleBar>
-                  )}
-                  {tabs ? (
-                    <>
-                      <TabsBar>
-                        {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
-                          <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
-                            {name}
-                          </Tab>
-                        ))}
-                      </TabsBar>
-                      <ViewContainer isInTab>{currentTabChildren}</ViewContainer>
-                    </>
-                  ) : (
-                    <ViewContainer>
-                      <PageContent areas={areas ? areas : grid} fill={fill}>
-                        {areas === "main" ? <PageArea>{children}</PageArea> : children}
-                      </PageContent>
-                    </ViewContainer>
-                  )}
-                </Container>
-              )
-            }}
-          </Confirm>
+      <Container>
+        {title && (
+          <TitleBar>
+            <Title color="white">{title}</Title>
+            <ActionsContainer>{actions}</ActionsContainer>
+          </TitleBar>
         )}
-      </Modal>
+        {tabs ? (
+          <>
+            <TabsBar>
+              {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
+                <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
+                  {name}
+                </Tab>
+              ))}
+            </TabsBar>
+            <ViewContainer isInTab>{currentTabChildren}</ViewContainer>
+          </>
+        ) : (
+          <ViewContainer>
+            <PageContent areas={areas} fill={fill}>
+              {areas === "main" ? (
+                <PageArea>
+                  {modalConfirmContext => (typeof children === "function" ? children(modalConfirmContext) : children)}
+                </PageArea>
+              ) : (
+                children
+              )}
+            </PageContent>
+          </ViewContainer>
+        )}
+      </Container>
     )
   }
 }
 
 export default Page
-
-export { ModalOptions, ConfirmOptions }
