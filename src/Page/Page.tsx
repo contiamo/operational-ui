@@ -25,7 +25,7 @@ export interface PropsWithSimplePage extends BaseProps {
   onTabChange?: never
 }
 
-export interface PropsWithComplexePage extends BaseProps {
+export interface PropsWithComplexPage extends BaseProps {
   /** Content of the page */
   children: React.ReactNode
   /** Areas template for `PageArea` disposition */
@@ -58,7 +58,7 @@ export interface PropsWithTabs extends BaseProps {
   fill?: never
 }
 
-export type Props = PropsWithSimplePage | PropsWithComplexePage | PropsWithTabs
+export type Props = PropsWithSimplePage | PropsWithComplexPage | PropsWithTabs
 
 const Container = styled("div")(({ theme }) => ({
   height: "100%",
