@@ -1,6 +1,8 @@
 import * as React from "react"
+import Waypoint from "react-waypoint"
 
 import { Card } from "../src"
+import { Consumer } from "./StyleGuideRenderer"
 
 export interface ReactComponentRendererProps {
   name: string
@@ -17,12 +19,27 @@ const ReactComponentRenderer: React.SFC<ReactComponentRendererProps> = ({
   tabButtons,
   tabBody,
 }) => (
-  <Card id={name.toLowerCase()}>
-    {heading} {/* See ./SectionHeadingRenderer.tsx */}
-    {examples}
-    {tabButtons}
-    <div style={{ marginTop: 16 }}>{tabBody}</div>
-  </Card>
+  <Consumer>
+    {({ updateActiveComponent }) => (
+      <Waypoint
+        topOffset="0"
+        bottomOffset="95%"
+        onPositionChange={({ currentPosition }: { currentPosition: "inside" | "outside" }) => {
+          if (currentPosition !== "inside") {
+            return
+          }
+          updateActiveComponent(name)
+        }}
+      >
+        <Card id={name}>
+          {heading} {/* See ./SectionHeadingRenderer.tsx */}
+          {tabButtons}
+          <div style={{ marginTop: 16 }}>{tabBody}</div>
+          {examples}
+        </Card>
+      </Waypoint>
+    )}
+  </Consumer>
 )
 
 export default ReactComponentRenderer

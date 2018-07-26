@@ -17,6 +17,7 @@ const TableOfContentsRenderer: React.SFC<TableOfContentsRendererProps> = ({
       label={
         <Input
           fullWidth
+          autoFocus
           value={searchTerm}
           placeholder="Search Components..."
           aria-label="Search Components..."

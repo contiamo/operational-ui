@@ -1,5 +1,7 @@
 import * as React from "react"
+
 import { SidenavHeader, SidenavItem } from "../src"
+import { Consumer } from "./StyleGuideRenderer"
 
 export interface ComponentsListItem {
   heading: string
@@ -12,9 +14,15 @@ export interface ComponentsListRendererProps {
 }
 
 const ComponentsListRenderer: React.SFC<ComponentsListRendererProps> = ({ items }) => (
-  <SidenavHeader active={true} label="Components">
-    {items.map(({ heading, name, href }) => <SidenavItem key={href} label={name} to={href} />)}
-  </SidenavHeader>
+  <Consumer>
+    {({ activeComponent }) => (
+      <SidenavHeader active={true} label="Components">
+        {items.map(({ name, href }) => (
+          <SidenavItem active={activeComponent === name} key={href} label={name} to={`#${name}`} />
+        ))}
+      </SidenavHeader>
+    )}
+  </Consumer>
 )
 
 export default ComponentsListRenderer

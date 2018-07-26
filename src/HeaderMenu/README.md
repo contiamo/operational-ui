@@ -26,19 +26,11 @@ class ComponentWithHeader extends React.Component {
 
   render() {
     return (
-      <HeaderBar
-        logo={<Logo name="Contiamo" />}
-        main={
-          <HeaderMenu items={projectOptions} onClick={this.onClick.bind(this)} withCaret>
-            {this.state.project.label}
-          </HeaderMenu>
-        }
-        end={
-          <HeaderMenu items={userOptions} align="right">
-            Imogen Mason <Avatar name="Imogen Mason" />
-          </HeaderMenu>
-        }
-      />
+      <div style={{ display: "inline-block", backgroundColor: "#3e3e3e" }}>
+        <HeaderMenu items={projectOptions} onClick={this.onClick.bind(this)} withCaret>
+          {this.state.project.label}
+        </HeaderMenu>
+      </div>
     )
   }
 }

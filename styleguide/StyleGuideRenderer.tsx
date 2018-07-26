@@ -8,12 +8,14 @@ import Splash from "./Splash"
 
 export interface StyleGuideRendererState {
   isSplashVisible: boolean
+  activeComponent: string
 }
 
 export interface StyleGuideRendererProps {
   title: string
   children: React.ReactNode[] | React.ReactNode
   toc: React.ReactNode
+  hasSidebar: boolean
 }
 
 injectGlobal({
@@ -21,10 +23,13 @@ injectGlobal({
     height: "100vh",
   },
   ".rsg--controls-12": {
-    marginTop: 16,
+    marginTop: constants.space.content,
   },
   ".rsg--spacing-7": {
     margin: 0,
+  },
+  ".rsg--tab-14": {
+    marginTop: constants.space.content,
   },
 })
 
@@ -34,31 +39,64 @@ const Version = styled("div")`
   margin-right: ${constants.space.content}px;
 `
 
+const { Provider, Consumer } = React.createContext({
+  activeComponent: "",
+  updateActiveComponent: (componentName: string) => void 0,
+})
+
 class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readonly<StyleGuideRendererState>> {
   public readonly state = {
-    isSplashVisible: true,
+    isSplashVisible: !Boolean(window.location.hash),
+    activeComponent: "",
   }
 
-  public hideSplash = () => {
+  private hideSplash = () => {
     this.setState({ isSplashVisible: false })
   }
 
+  private updateActiveComponent = (activeComponent: string) => {
+    window.history.pushState(null, null, `#${activeComponent}`)
+    this.setState({ activeComponent })
+  }
+
   public render() {
-    const { title, children, toc } = this.props
+    const { title, children, toc, hasSidebar } = this.props
     const { isSplashVisible } = this.state
     return (
       <OperationalUI withBaseStyles>
         {isSplashVisible && <Splash hide={this.hideSplash} />}
-        <Layout
-          header={
-            <HeaderBar logo={<Logo name="Contiamo" />} end={<Version>v{require("../package.json").version}</Version>} />
-          }
-          sidenav={toc}
-          main={<Page title={title}>{children}</Page>}
-        />
+        <Provider
+          value={{
+            activeComponent: this.state.activeComponent,
+            updateActiveComponent: this.updateActiveComponent,
+          }}
+        >
+          {hasSidebar ? (
+            <Layout
+              header={
+                <HeaderBar
+                  logo={<Logo name="OperationalUI" />}
+                  end={<Version>v{require("../package.json").version}</Version>}
+                />
+              }
+              sidenav={toc}
+              main={<Page title={title}>{children}</Page>}
+            />
+          ) : (
+            <div>
+              <HeaderBar
+                logo={<Logo name="OperationalUI" />}
+                end={<Version>v{require("../package.json").version}</Version>}
+              />
+              <div style={{ width: 768, margin: `${constants.space.big}px auto 0` }}>{children}</div>
+            </div>
+          )}
+        </Provider>
       </OperationalUI>
     )
   }
 }
+
+export { Consumer }
 
 export default StyleGuideRenderer

@@ -12,7 +12,11 @@ const projects = [
 ]
 ;<HeaderBar
   logo={<Logo name="Contiamo" />}
-  main={<HeaderMenu items={projects}>Project 1</HeaderMenu>}
+  main={
+    <HeaderMenu withCaret items={projects}>
+      Project 1
+    </HeaderMenu>
+  }
   end={
     <HeaderMenu items={[{ key: "account", label: "My account" }, { key: "log-out", label: "Log out" }]} align="right">
       Imogen Mason <Avatar name="Imogen Mason" />

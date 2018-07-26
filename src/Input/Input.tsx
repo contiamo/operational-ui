@@ -29,6 +29,8 @@ export interface Props {
   type?: string
   children?: string
   autoComplete?: string
+  /** Automatically focus the input on page load */
+  autoFocus?: boolean
   error?: string
   hint?: string
   /** Disabled input */
@@ -173,6 +175,7 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
     const forAttributeId = props.label && props.labelId
     const commonInputProps = {
       innerRef: props.inputRef,
+      autoFocus: props.autoFocus,
       name: props.name,
       disabled: Boolean(props.disabled),
       value: props.value || "",
