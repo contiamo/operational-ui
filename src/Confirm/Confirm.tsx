@@ -5,8 +5,10 @@ import Button, { Props as ButtonProps } from "../Button/Button"
 import ControlledModal from "../Internals/ControlledModal"
 
 const Actions = styled("div")(({ theme }) => ({
-  marginTop: theme.space.element,
-  float: "right",
+  position: "absolute",
+  textAlign: "right",
+  bottom: theme.space.element,
+  right: theme.space.element,
 }))
 
 export interface ConfirmOptions {
