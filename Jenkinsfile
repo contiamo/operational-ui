@@ -28,7 +28,8 @@ def npmPublish(tag,registry){
   sh """
   #!/bin/bash
   npm --registry https://${registry} whoami
-  npm run publish -- --canary --npm-tag=${tag} --skip-git --yes --registry https://${registry}
+  npm version $(npm show . version)-$(git rev-parse --short HEAD) --no-git-tag-version
+  npm publish --tag next
   """
 }
 def buildWebsite(dir,command){
