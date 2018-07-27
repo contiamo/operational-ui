@@ -9,21 +9,77 @@ import Container, { Position } from "./Tooltip.Container"
  * The actual tooltip is rendered with this information extracted from the DOM node.
  */
 
-/** @todo Type this more strongly with discriminated unions to prevent unexpected behavior for impossible prop combinations such as `<Tooltip right bottom />`. */
-export interface Props {
+export interface BaseProps {
   className?: string
   children?: React.ReactNode
+}
+
+export interface TopProps extends BaseProps {
   /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
-  smart?: boolean
+  smart?: never
   /** Top-positioned tooltip */
   top?: boolean
   /** Left-positioned tooltip */
+  left?: never
+  /** Right-positioned tooltip */
+  right?: never
+  /** Bottom-positioned tooltip */
+  bottom?: never
+}
+
+export interface SmartProps extends BaseProps {
+  /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
+  smart?: boolean
+  /** Top-positioned tooltip */
+  top?: never
+  /** Left-positioned tooltip */
+  left?: never
+  /** Right-positioned tooltip */
+  right?: never
+  /** Bottom-positioned tooltip */
+  bottom?: never
+}
+
+export interface LeftProps extends BaseProps {
+  /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
+  smart?: never
+  /** Top-positioned tooltip */
+  top?: never
+  /** Left-positioned tooltip */
   left?: boolean
+  /** Right-positioned tooltip */
+  right?: never
+  /** Bottom-positioned tooltip */
+  bottom?: never
+}
+
+export interface RightProps extends BaseProps {
+  /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
+  smart?: never
+  /** Top-positioned tooltip */
+  top?: never
+  /** Left-positioned tooltip */
+  left?: never
   /** Right-positioned tooltip */
   right?: boolean
   /** Bottom-positioned tooltip */
+  bottom?: never
+}
+
+export interface BottomProps extends BaseProps {
+  /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
+  smart?: never
+  /** Top-positioned tooltip */
+  top?: never
+  /** Left-positioned tooltip */
+  left?: never
+  /** Right-positioned tooltip */
+  right?: never
+  /** Bottom-positioned tooltip */
   bottom?: boolean
 }
+
+export type TooltipProps = TopProps | LeftProps | RightProps | BottomProps | SmartProps
 
 export interface State {
   // bbTop is an abbreviation of boundingBoxTop
@@ -43,7 +99,7 @@ export interface State {
  */
 export const dangerousTooltipContainerClassName = "operational-ui-tooltip"
 
-class Tooltip extends React.Component<Props, State> {
+class Tooltip extends React.Component<TooltipProps, State> {
   public state = {
     bbTop: 0,
     bbLeft: 0,
@@ -100,7 +156,8 @@ class Tooltip extends React.Component<Props, State> {
     let position: Position = this.getPosition()
 
     if (this.props.smart) {
-      /** @todo implement bounding box checks for right- and bottom-placed tooltips.
+      /**
+       * @todo implement bounding box checks for right- and bottom-placed tooltips.
        * This should be easier once the OperationalUI provides window dimensions in context.
        */
       if (this.state.bbLeft < 0 && String(position) === "left") {

@@ -4,7 +4,6 @@ import * as React from "react"
 
 import Message from "../Message/Message"
 import Messages from "../Messages/Messages"
-import { MessageType } from "../types"
 import { darken } from "../utils"
 import constants, { OperationalStyleConstants } from "../utils/constants"
 
@@ -24,6 +23,8 @@ export interface Props {
    */
   hideMessageAfter?: number
 }
+
+export type MessageType = "info" | "success" | "error"
 
 export interface IMessage {
   body: string
