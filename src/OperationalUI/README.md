@@ -34,12 +34,12 @@ class RoutingComponent extends React.Component {
     return (
       <OperationalUI
         pushState={newPath => {
-          /*
-                                                           * This is a simple way to persist path changes in state.
-                                                           * Routing libraries like `react-router` do this automatically,
-                                                           * so if you have access to its `history` object, you can simply do
-                                                           * `<OperationalUI pushState={history.push} />`
-                                                           */
+          /**
+           * This is a simple way to persist path changes in state.
+           * Routing libraries like `react-router` do this automatically,
+           * so if you have access to its `history` object, you can simply do
+           * `<OperationalUI pushState={history.push} />`
+           */
           this.setState(() => ({
             path: newPath,
           }))
