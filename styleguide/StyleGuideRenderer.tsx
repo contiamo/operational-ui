@@ -12,7 +12,6 @@ export interface StyleGuideRendererState {
 }
 
 export interface StyleGuideRendererProps {
-  title: string
   children: React.ReactNode[] | React.ReactNode
   toc: React.ReactNode
   hasSidebar: boolean
@@ -76,7 +75,7 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
   }
 
   public render() {
-    const { title, children, toc, hasSidebar } = this.props
+    const { children, toc, hasSidebar } = this.props
     const { isSplashVisible } = this.state
     return (
       <OperationalUI withBaseStyles>
@@ -90,7 +89,7 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
             }}
           >
             {hasSidebar ? (
-              <Layout header={<Header />} sidenav={toc} main={<Page title={title}>{children}</Page>} />
+              <Layout header={<Header />} sidenav={toc} main={<Page title="Components">{children}</Page>} />
             ) : (
               <div>
                 <Header />
