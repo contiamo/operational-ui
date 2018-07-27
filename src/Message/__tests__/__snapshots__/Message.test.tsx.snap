@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Message Component Should render 1`] = `
+Array [
+  <div
+    class="css-ar73w8-Messages"
+  />,
+  <div
+    class="css-imevwx"
+  >
+    <div
+      class="css-q9kd00"
+    >
+      <svg
+        class="css-1jl4146"
+        fill="currentColor"
+        height="18"
+        viewBox="0 0 360 360"
+        width="18"
+      >
+        <path
+          d="M180,151.903l105.858,-105.858c9.428,9.428 18.856,18.856 28.284,28.285l-105.858,105.857l105.858,105.858l-28.284,28.285l-105.858,-105.858l-105.858,105.858l-28.284,-28.285l105.858,-105.858l-105.858,-105.857l28.284,-28.285l105.858,105.858Z"
+        />
+      </svg>
+    </div>
+  </div>,
+]
+`

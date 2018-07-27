@@ -1,9 +1,21 @@
 {
-  "extends": "./tsconfig.base",
   "compilerOptions": {
-    "baseUrl": "./packages",
-    "paths": {
-      "@operational/*": ["./*/src"]
-    }
-  }
+    "target": "es2015",
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "outDir": "lib",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "baseUrl": ".",
+    "jsx": "react",
+    "lib": ["dom", "es2016", "dom.iterable", "scripthost", "es2017.object"],
+    "strict": true,
+    "downlevelIteration": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  },
+  "include": ["src", "styleguide"]
 }

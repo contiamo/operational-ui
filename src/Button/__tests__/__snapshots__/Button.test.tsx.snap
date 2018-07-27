@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Component Should initialize properly 1`] = `
+Array [
+  <div
+    class="css-ar73w8-Messages"
+  />,
+  <button
+    class="css-19mfxrd-button"
+  >
+    hi
+  </button>,
+]
+`

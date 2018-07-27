@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select Should render correctly 1`] = `
+Array [
+  <div
+    class="css-ar73w8-Messages"
+  />,
+  <div
+    class="css-2xp493-select"
+    role="listbox"
+    tabindex="-2"
+  >
+    <div
+      class="css-thzv76"
+    >
+      Select me
+    </div>
+  </div>,
+]
+`

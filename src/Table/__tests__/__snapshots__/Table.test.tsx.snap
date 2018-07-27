@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Table Component Should render 1`] = `
+Array [
+  <div
+    class="css-ar73w8-Messages"
+  />,
+  <table
+    class="css-39fsjl"
+  >
+    <thead>
+      <tr
+        class="css-16kb41"
+      />
+    </thead>
+    <tbody>
+      <tr
+        class="css-16kb41"
+      >
+        <td
+          class="css-5t6k2w"
+          colspan="0"
+        >
+          There are no records available
+        </td>
+      </tr>
+    </tbody>
+  </table>,
+]
+`;
