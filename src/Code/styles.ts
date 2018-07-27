@@ -12,7 +12,6 @@ Visual Studio-like style based on original C# coloring by Jason Diamond <jason@d
     display: block;
     overflow-x: auto;
     padding: 0.5em;
-    background: white;
     color: black;
 }
 
