@@ -44,7 +44,11 @@ class Card<T = {}> extends React.PureComponent<Props<T>> {
     const _keys = keys ? keys : Object.keys(data || {})
     const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
     const values = _keys.map(
-      // @ts-ignore @fabien0102 please type this better.
+      /**
+       * @todo Improve typings: the typing of this does not satisfy the typescript compiler
+       * https://github.com/contiamo/operational-ui/issues/629
+       */
+      // @ts-ignore
       (i: Extract<keyof T, string>) => (valueFormatters[i] ? valueFormatters[i](data[i] as any) : data[i]),
     )
 
