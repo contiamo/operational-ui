@@ -299,8 +299,8 @@ const actions = (
 `Page` components support rendering an opinionated confirm box through a method in its context.
 
 ```jsx
-const Tab = n => () => (
-  <PageContent>
+const Tab = n => props => (
+  <PageContent {...props}>
     {({ confirm }) => (
       <Card
         title={`${n} Tab`}

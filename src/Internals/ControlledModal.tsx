@@ -26,7 +26,7 @@ const fromBottom = keyframes`
 
 const Content = styled(Card)(({ theme }) => ({
   position: "absolute",
-  top: 0,
+  top: theme.space.element,
   left: "50%",
   transform: "translate(-50%, 0)",
   animation: `${fromBottom} 0.2s`,

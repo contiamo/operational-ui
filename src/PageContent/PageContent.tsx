@@ -1,14 +1,27 @@
 import * as React from "react"
-import PageArea, { PageAreaProps } from "../PageArea/PageArea"
+import Confirm, { ConfirmOptions } from "../Internals/Confirm"
+import Modal, { ModalOptions } from "../Internals/Modal"
+import { PageProps } from "../Page/Page"
+import PageArea from "../PageArea/PageArea"
 import styled from "../utils/styled"
+
+export interface ModalConfirmContext {
+  modal: (modalOptions: ModalOptions) => void
+  confirm: (confirmOptions: ConfirmOptions) => void
+}
 
 export interface Props {
   /** Children to render, you */
-  children?: PageAreaProps["children"]
+  children?: PageProps["children"]
   /** Areas template for `PageArea` disposition */
   areas?: "main" | "main side" | "side main"
   /** Fill the entire width */
   fill?: boolean
+  /**
+   * Confirm and Modal callback give by the Page component internally
+   * @internal
+   */
+  __modalConfirmContext?: ModalConfirmContext
 }
 
 const StyledPageContent = styled("div")<{ areas?: Props["areas"]; isFill?: boolean }>(props => {
@@ -24,28 +37,35 @@ const StyledPageContent = styled("div")<{ areas?: Props["areas"]; isFill?: boole
     alignItems: "start",
     gridTemplateAreas: `"${props.areas}"`,
     gridGap: props.theme.space.element,
-    maxWidth: props.isFill ? "none" : 1150,
-    minWidth: 800,
     width: "100%",
-    height: `calc(100% - ${props.theme.titleHeight}px)`,
+    height: "100%",
     padding: props.theme.space.element,
+    overflow: "auto",
   }
 })
 
 // `fill` must be rename internally to avoid conflict with the native `fill` DOM attribute
-const PageContent: React.SFC<Props> = ({ fill, children, ...props }) => {
+const PageContent: React.SFC<Props> = ({ fill, children, __modalConfirmContext, ...props }) => {
   const oneChild = typeof children === "function" || React.Children.count(children) === 1
 
   return (
-    <StyledPageContent {...props} isFill={fill}>
-      {oneChild ? (
-        <PageArea>
-          {modalConfirmContext => (typeof children === "function" ? children(modalConfirmContext) : children)}
-        </PageArea>
-      ) : (
-        children
+    <Modal>
+      {modal => (
+        <Confirm>
+          {confirm => (
+            <StyledPageContent {...props}>
+              {oneChild ? (
+                <PageArea fill={fill}>
+                  {typeof children === "function" ? children({ confirm, modal }) : children}
+                </PageArea>
+              ) : (
+                children
+              )}
+            </StyledPageContent>
+          )}
+        </Confirm>
       )}
-    </StyledPageContent>
+    </Modal>
   )
 }
 

@@ -1,12 +1,14 @@
 import * as React from "react"
 import { Title } from ".."
-import PageArea, { PageAreaProps } from "../PageArea/PageArea"
-import PageContent from "../PageContent/PageContent"
+import PageArea from "../PageArea/PageArea"
+import PageContent, { ModalConfirmContext } from "../PageContent/PageContent"
 import styled from "../utils/styled"
 
 export type Tabs = Array<{ name: string; children: React.ReactNode; hidden?: boolean }>
 
 export interface BaseProps {
+  /** Content of the page */
+  children?: React.ReactNode | ((modalConfirmContext: ModalConfirmContext) => React.ReactNode)
   /** Page title */
   title?: string
   /** Page actions, typically `condensed button` component inside a fragment */
@@ -14,8 +16,6 @@ export interface BaseProps {
 }
 
 export interface PropsWithSimplePage extends BaseProps {
-  /** Content of the page */
-  children: PageAreaProps["children"]
   /** Areas template for `PageArea` disposition */
   areas?: "main"
   /** Fill the entire width */
@@ -26,8 +26,6 @@ export interface PropsWithSimplePage extends BaseProps {
 }
 
 export interface PropsWithComplexPage extends BaseProps {
-  /** Content of the page */
-  children: React.ReactNode
   /** Areas template for `PageArea` disposition */
   areas: "main side" | "side main"
   /** Fill the entire width */
@@ -58,7 +56,7 @@ export interface PropsWithTabs extends BaseProps {
   fill?: never
 }
 
-export type Props = PropsWithSimplePage | PropsWithComplexPage | PropsWithTabs
+export type PageProps = PropsWithSimplePage | PropsWithComplexPage | PropsWithTabs
 
 const Container = styled("div")(({ theme }) => ({
   height: "100%",
@@ -101,7 +99,8 @@ const Tab = styled("div")<{ active?: boolean }>(({ theme, active }) => ({
 
 const ViewContainer = styled("div")<{ isInTab?: boolean }>(({ theme, isInTab }) => ({
   height: `calc(100% - ${isInTab ? theme.titleHeight + tabsBarHeight : theme.titleHeight}px)`,
-  overflow: "auto",
+  overflow: "hidden",
+  position: "relative",
 }))
 
 const ActionsContainer = styled("div")(({ theme }) => ({
@@ -112,7 +111,7 @@ const initialState = {
   activeTab: 0,
 }
 
-class Page extends React.Component<Props, Readonly<typeof initialState>> {
+class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   public static defaultProps = {
     areas: "main",
     fill: false,
@@ -120,14 +119,14 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
 
   public readonly state = initialState
 
-  public onTabClick(index: number, tabs: Tabs) {
+  private onTabClick(index: number, tabs: Tabs) {
     this.setState({ activeTab: index })
     if (this.props.onTabChange) {
       this.props.onTabChange(tabs[index].name.toLowerCase())
     }
   }
 
-  public getActiveTab(tabs: Tabs): number {
+  private getActiveTab(tabs: Tabs): number {
     let activeTab: number
     if (this.props.activeTabName) {
       const index = tabs.findIndex(({ name }) => name.toLowerCase() === this.props.activeTabName!.toLowerCase())
@@ -139,10 +138,44 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
     return activeTab
   }
 
+  private renderPageWithTabs() {
+    const { tabs } = this.props
+    if (tabs) {
+      const activeTab = this.getActiveTab(tabs)
+      const currentTabChildren = tabs[activeTab].children
+
+      return (
+        <>
+          <TabsBar>
+            {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
+              <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
+                {name}
+              </Tab>
+            ))}
+          </TabsBar>
+          <ViewContainer isInTab>{currentTabChildren}</ViewContainer>
+        </>
+      )
+    }
+  }
+
+  private renderPageWithoutTabs() {
+    const { areas, fill, children } = this.props
+
+    return (
+      <ViewContainer>
+        <PageContent areas={areas} fill={fill}>
+          {modalConfirmContext => {
+            const resolvedChildren = typeof children === "function" ? children(modalConfirmContext) : children
+            return areas === "main" ? <PageArea>{resolvedChildren}</PageArea> : resolvedChildren
+          }}
+        </PageContent>
+      </ViewContainer>
+    )
+  }
+
   public render() {
-    const { title, actions, areas, fill, tabs, children } = this.props
-    const activeTab = this.getActiveTab(tabs || [])
-    const currentTabChildren = tabs && tabs[activeTab].children
+    const { title, actions, tabs } = this.props
 
     return (
       <Container>
@@ -152,30 +185,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
             <ActionsContainer>{actions}</ActionsContainer>
           </TitleBar>
         )}
-        {tabs ? (
-          <>
-            <TabsBar>
-              {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
-                <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
-                  {name}
-                </Tab>
-              ))}
-            </TabsBar>
-            <ViewContainer isInTab>{currentTabChildren}</ViewContainer>
-          </>
-        ) : (
-          <ViewContainer>
-            <PageContent areas={areas} fill={fill}>
-              {areas === "main" ? (
-                <PageArea>
-                  {modalConfirmContext => (typeof children === "function" ? children(modalConfirmContext) : children)}
-                </PageArea>
-              ) : (
-                children
-              )}
-            </PageContent>
-          </ViewContainer>
-        )}
+        {tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}
       </Container>
     )
   }
