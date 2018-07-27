@@ -27,9 +27,9 @@ def npmLogin(registry,user,pass,email){
 def npmPublish(tag,registry){
   sh """
   #!/bin/bash
-  npm whoami
-  npm version \$(npm show . version)-\$(git rev-parse --short HEAD) --no-git-tag-version
-  npm publish --tag next
+  npm whoami --registry ${registry}
+  npm version \$(npm show . version)-\$(git rev-parse --short HEAD) --no-git-tag-version --registry ${registry}
+  npm publish --tag next --registry ${registry}
   """
 }
 def buildWebsite(dir,command){
