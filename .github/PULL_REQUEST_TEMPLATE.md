@@ -4,7 +4,7 @@
 
 ### Related issue
 
-<!-- Paste the github issue here. -->
+<!-- Paste the github issue here -->
 
 ### To be tested
 
