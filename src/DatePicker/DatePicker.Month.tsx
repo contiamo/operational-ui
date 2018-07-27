@@ -87,7 +87,7 @@ const Month = ({ year, month, start, end, onChange, min, max }: Props) => {
               end,
             })}
             key={index}
-            isDisabled={Boolean(isDisabled)}
+            isDisabled={isDisabled}
             onClick={(ev: any) => {
               ev.preventDefault()
               if (isDisabled) {
@@ -109,7 +109,7 @@ const Month = ({ year, month, start, end, onChange, min, max }: Props) => {
       })}
       {range(nextPlaceholderDays).map((number, index) => {
         const date = toDate(nextYear, nextMonth, number)
-        const isDisabled = (min && date < min) || (max && date > max)
+        const isDisabled = Boolean((min && date < min) || (max && date > max))
         return (
           <Day
             key={index}
@@ -117,7 +117,7 @@ const Month = ({ year, month, start, end, onChange, min, max }: Props) => {
               start,
               end,
             })}
-            isDisabled={Boolean(isDisabled)}
+            isDisabled={isDisabled}
             isPlaceholder
             onClick={(ev: any) => {
               ev.preventDefault()
