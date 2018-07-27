@@ -11,8 +11,8 @@ Install the package via npm or yarn:
 Create your first application like so:
 
 ```js
-import * as React from "react";
-import { Button, OperationalUI } from "@operational/components";
+import * as React from "react"
+import { Button, OperationalUI } from "@operational/components"
 
 // Always wrap your interface in the `OperationalUI` wrapper,
 // which does important setup work, and takes a single child element.
@@ -21,5 +21,5 @@ const App = () => (
   <OperationalUI>
     <Button>Hello</Button>
   </OperationalUI>
-);
+)
 ```

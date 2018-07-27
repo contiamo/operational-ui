@@ -4,7 +4,7 @@
 const avatars = [
   {
     name: "Peter Pan",
-    photo: "http://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
+    photo: "https://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
   },
   { name: "Wendy Darling" },
   { name: "John Darling" },
@@ -30,7 +30,7 @@ const avatars = [
 const avatars = [
   {
     name: "Peter Pan",
-    photo: "http://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
+    photo: "https://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
   },
   { name: "Wendy Darling" },
   { name: "John Darling" },
@@ -53,7 +53,7 @@ const avatars = [
 const avatars = [
   {
     name: "Peter Pan",
-    photo: "http://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
+    photo: "https://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
   },
   { name: "Wendy Darling" },
   { name: "John Darling" },
@@ -76,7 +76,7 @@ const avatars = [
 const avatars = [
   {
     name: "Peter Pan",
-    photo: "http://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
+    photo: "https://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
   },
   { name: "Wendy Darling" },
   { name: "John Darling" },
@@ -101,7 +101,7 @@ const avatars = [
 const avatars = [
   {
     name: "Peter Pan",
-    photo: "http://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
+    photo: "https://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
   },
   { name: "Wendy Darling" },
   { name: "John Darling" },

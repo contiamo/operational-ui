@@ -28,10 +28,24 @@ const Container = styled("div")`
 const Code = styled(Highlight)(({ theme }) => {
   return {
     margin: 0,
-    backgroundColor: "rgba(20, 153, 206, 0.05)",
     border: "1px solid rgba(20, 153, 206, 0.1)",
     borderRadius: theme.borderRadius,
     padding: `${theme.space.small}px`,
+
+    /**
+     * We use !important here to handle an edge case:
+     * this component, by default, gets a class .hljs
+     * that also imports a global style for this class.
+     *
+     * Some bundlers (including Styleguidist's) place
+     * this imported style _after_ our emotion-based
+     * className definition, and the cascading nature
+     * of CSS overrides this component's style.
+     *
+     * In short, we use !important for opinionation
+     * of this component.
+     */
+    backgroundColor: "rgba(20, 153, 206, 0.05) !important",
   }
 })
 

@@ -13,7 +13,6 @@
     "no-console": [true, "log", "error"],
     "no-unused-expression": true,
     "no-implicit-dependencies": [true, "dev"],
-    "no-unused-variable": [true, { "check-parameters": true }],
     "no-duplicate-imports": true,
     "completed-docs": false,
     "import-spacing": true,

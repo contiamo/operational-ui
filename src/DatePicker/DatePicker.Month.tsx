@@ -48,7 +48,7 @@ const Month = ({ year, month, start, end, onChange, min, max }: Props) => {
       {range(prevPlaceholderDays).map((_, index) => {
         const day = daysInPreviousMonth + index - prevPlaceholderDays
         const date = toDate(prevYear, prevMonth, day)
-        const isDisabled = (min && date < min) || (max && date > max)
+        const isDisabled = Boolean((min && date < min) || (max && date > max))
         return (
           <Day
             selected={isSelected(date, {
@@ -57,7 +57,7 @@ const Month = ({ year, month, start, end, onChange, min, max }: Props) => {
             })}
             key={index}
             isPlaceholder
-            isDisabled={Boolean(isDisabled)}
+            isDisabled={isDisabled}
             onClick={(ev: any) => {
               ev.preventDefault()
               if (isDisabled) {
@@ -79,7 +79,7 @@ const Month = ({ year, month, start, end, onChange, min, max }: Props) => {
       })}
       {range(daysInCurrentMonth).map((_, index) => {
         const date = toDate(year, month, index)
-        const isDisabled = (min && date < min) || (max && date > max)
+        const isDisabled = Boolean((min && date < min) || (max && date > max))
         return (
           <Day
             selected={isSelected(date, {

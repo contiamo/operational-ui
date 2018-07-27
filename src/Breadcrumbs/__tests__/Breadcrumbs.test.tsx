@@ -11,7 +11,7 @@ describe("Breadcrumbs Component", () => {
       render(
         <Breadcrumbs>
           <Breadcrumb>
-            <a href="http://ui.contiamo.com">Home</a>
+            <a href="https://ui.contiamo.com">Home</a>
           </Breadcrumb>
           <Breadcrumb>Link 1</Breadcrumb>
         </Breadcrumbs>,

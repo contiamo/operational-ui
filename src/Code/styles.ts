@@ -1,14 +1,4 @@
-export default `/*
-This stylesheet must be injected into the document in order for the syntax highlighting to work
-Direct copy from https://github.com/isagalaev/highlight.js/blob/master/src/styles/vs.css
-*/
-
-
-/*
-Visual Studio-like style based on original C# coloring by Jason Diamond <jason@diamond.name>
-*/
-
-.hljs {
+export default `.hljs {
     display: block;
     overflow-x: auto;
     padding: 0.5em;

@@ -29,13 +29,13 @@
 This will automatically hide the initials
 
 ```jsx
-<Avatar photo="http://thecatapi.com/api/images/get?format=src&size=small" name="Franklin Green" />
+<Avatar photo="https://thecatapi.com/api/images/get?format=src&size=small" name="Franklin Green" />
 ```
 
 ### Should be also beautiful on a dark background
 
 ```jsx
 <div style={{ backgroundColor: "#333333", padding: 10 }}>
-  <Avatar photo="http://thecatapi.com/api/images/get?format=src&size=small" name="Franklin Green" />
+  <Avatar photo="https://thecatapi.com/api/images/get?format=src&size=small" name="Franklin Green" />
 </div>
 ```
