@@ -1,5 +1,6 @@
 import * as React from "react"
 
+import { Consumer } from "../OperationalUI/OperationalUI"
 import Container, { Position } from "./Tooltip.Container"
 
 /**
@@ -16,7 +17,7 @@ export interface BaseProps {
 
 export interface TopProps extends BaseProps {
   /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
-  smart?: never
+  smart?: boolean
   /** Top-positioned tooltip */
   top?: boolean
   /** Left-positioned tooltip */
@@ -42,7 +43,7 @@ export interface SmartProps extends BaseProps {
 
 export interface LeftProps extends BaseProps {
   /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
-  smart?: never
+  smart?: boolean
   /** Top-positioned tooltip */
   top?: never
   /** Left-positioned tooltip */
@@ -55,7 +56,7 @@ export interface LeftProps extends BaseProps {
 
 export interface RightProps extends BaseProps {
   /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
-  smart?: never
+  smart?: boolean
   /** Top-positioned tooltip */
   top?: never
   /** Left-positioned tooltip */
@@ -68,7 +69,7 @@ export interface RightProps extends BaseProps {
 
 export interface BottomProps extends BaseProps {
   /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
-  smart?: never
+  smart?: boolean
   /** Top-positioned tooltip */
   top?: never
   /** Left-positioned tooltip */
@@ -152,14 +153,10 @@ class Tooltip extends React.Component<TooltipProps, State> {
     return position
   }
 
-  public getDisplayPosition() {
+  public getDisplayPosition(windowSize: { width: number; height: number }) {
     let position: Position = this.getPosition()
 
     if (this.props.smart) {
-      /**
-       * @todo implement bounding box checks for right- and bottom-placed tooltips.
-       * This should be easier once the OperationalUI provides window dimensions in context.
-       */
       if (this.state.bbLeft < 0 && String(position) === "left") {
         position = "right"
       }
@@ -167,42 +164,55 @@ class Tooltip extends React.Component<TooltipProps, State> {
       if (this.state.bbTop < 0 && String(position) === "top") {
         position = "bottom"
       }
+
+      if (this.state.bbRight > windowSize.width && String(position) === "right") {
+        position = "left"
+      }
+
+      if (this.state.bbBottom > windowSize.height && String(position) === "bottom") {
+        position = "top"
+      }
     }
 
     return position
   }
 
   public render() {
-    const displayPosition = this.getDisplayPosition()
-
     return (
-      <>
-        {/* Test node rendered to determine how wide the text is if it were written in a single line.
-          * Note that the position is set arbitrarily since it does not influence text width.
-          */}
-        <Container
-          position="bottom"
-          offScreenWidthTest
-          singleLineTextWidth={this.state.singleLineTextWidth}
-          innerRef={node => {
-            this.offScreenWidthTestNode = node
-          }}
-        >
-          {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
-          <p>{this.props.children}</p>
-        </Container>
-        <Container
-          className={dangerousTooltipContainerClassName}
-          singleLineTextWidth={this.state.singleLineTextWidth}
-          position={displayPosition}
-          innerRef={node => {
-            this.containerNode = node
-          }}
-        >
-          {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
-          <p>{this.props.children}</p>
-        </Container>
-      </>
+      <Consumer>
+        {operationalContext => {
+          const displayPosition = this.getDisplayPosition(operationalContext.windowSize)
+          return (
+            <>
+              {/* Test node rendered to determine how wide the text is if it were written in a single line.
+            * Note that the position is set arbitrarily since it does not influence text width.
+            */}
+              <Container
+                position="bottom"
+                offScreenWidthTest
+                singleLineTextWidth={this.state.singleLineTextWidth}
+                innerRef={node => {
+                  this.offScreenWidthTestNode = node
+                }}
+              >
+                {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
+                <p>{this.props.children}</p>
+              </Container>
+              <Container
+                className={dangerousTooltipContainerClassName}
+                singleLineTextWidth={this.state.singleLineTextWidth}
+                position={displayPosition}
+                innerRef={node => {
+                  this.containerNode = node
+                }}
+              >
+                {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
+                <p>{this.props.children}</p>
+              </Container>
+            </>
+          )
+        }}
+      </Consumer>
     )
   }
 }
