@@ -58,9 +58,29 @@ class RoutingComponent extends React.Component {
 ;<RoutingComponent />
 ```
 
-### Setting up Message Management
+### Window size
 
-You can use `OperationalUI`'s internal flash message feature to automatically render and manage messages by simply using the `pushMessage` method provided in context, as shown in the code snippet below:
+This component keeps track of the window size and makes it available through context, as in the snippet below:
+
+```jsx
+// This import statement is necessary because of the wiring of this demo website.
+// When using the library outside, use the following:
+// `import { OperationalUI, OperationalContext } from "@operational/components"`
+const OperationalContext = require("../").OperationalContext
+;<OperationalUI>
+  <OperationalContext>
+    {operationalContext => (
+      <p>{`The viewport is ${operationalContext.windowSize.width} pixels wide and ${
+        operationalContext.windowSize.height
+      } tall.`}</p>
+    )}
+  </OperationalContext>
+</OperationalUI>
+```
+
+### Messages and Loaders
+
+You can use `OperationalUI`'s flash- and progress bar features to automatically render and manage these universal UI elements using the `pushMessage` and `setLoadingState` methods provided in context, as shown in the code snippet below:
 
 ```jsx
 // This import statement is necessary because of the wiring of this demo website.
@@ -74,7 +94,7 @@ class MessageHandler extends React.Component {
       <OperationalUI>
         <OperationalContext>
           {operationalContext => (
-            <div>
+            <div style={{ padding: 20 }}>
               <Button
                 color="primary"
                 onClick={() => {
@@ -107,6 +127,13 @@ class MessageHandler extends React.Component {
                 }}
               >
                 Create an error message
+              </Button>
+              <Button
+                onClick={() => {
+                  operationalContext.setLoading(!operationalContext.loading)
+                }}
+              >
+                Toggle loading state
               </Button>
             </div>
           )}

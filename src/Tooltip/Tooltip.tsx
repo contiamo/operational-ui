@@ -13,11 +13,11 @@ import Container, { Position } from "./Tooltip.Container"
 export interface BaseProps {
   className?: string
   children?: React.ReactNode
+  /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
+  smart?: boolean
 }
 
 export interface TopProps extends BaseProps {
-  /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
-  smart?: boolean
   /** Top-positioned tooltip */
   top?: boolean
   /** Left-positioned tooltip */
@@ -29,8 +29,6 @@ export interface TopProps extends BaseProps {
 }
 
 export interface SmartProps extends BaseProps {
-  /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
-  smart?: boolean
   /** Top-positioned tooltip */
   top?: never
   /** Left-positioned tooltip */
@@ -42,8 +40,6 @@ export interface SmartProps extends BaseProps {
 }
 
 export interface LeftProps extends BaseProps {
-  /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
-  smart?: boolean
   /** Top-positioned tooltip */
   top?: never
   /** Left-positioned tooltip */
@@ -55,8 +51,6 @@ export interface LeftProps extends BaseProps {
 }
 
 export interface RightProps extends BaseProps {
-  /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
-  smart?: boolean
   /** Top-positioned tooltip */
   top?: never
   /** Left-positioned tooltip */
@@ -68,8 +62,6 @@ export interface RightProps extends BaseProps {
 }
 
 export interface BottomProps extends BaseProps {
-  /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
-  smart?: boolean
   /** Top-positioned tooltip */
   top?: never
   /** Left-positioned tooltip */
@@ -156,6 +148,7 @@ class Tooltip extends React.Component<TooltipProps, State> {
   public getDisplayPosition(windowSize: { width: number; height: number }) {
     let position: Position = this.getPosition()
 
+    /** Swap the positions of tooltips in case they are clipped in this particular viewport */
     if (this.props.smart) {
       if (this.state.bbLeft < 0 && String(position) === "left") {
         position = "right"

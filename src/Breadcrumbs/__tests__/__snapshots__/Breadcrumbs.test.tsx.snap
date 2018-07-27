@@ -1,10 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Breadcrumbs Component Should initialize properly 1`] = `
-Array [
+<div
+  class="css-ftf61z"
+>
   <div
     class="css-ar73w8-Messages"
-  />,
+  />
   <div
     class="css-og215-breadcrumbs"
   >
@@ -40,6 +42,6 @@ Array [
         Link 1
       </span>
     </span>
-  </div>,
-]
-`
+  </div>
+</div>
+`;
