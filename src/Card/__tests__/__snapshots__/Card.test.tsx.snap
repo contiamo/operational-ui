@@ -1,14 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Card Should render 1`] = `
-Array [
+<div
+  class="css-ftf61z"
+>
   <div
     class="css-ar73w8-Messages"
-  />,
+  />
   <div
     class="css-1h3wh5n"
   >
     hi
-  </div>,
-]
+  </div>
+</div>
 `;

@@ -1,11 +1,14 @@
 import { injectGlobal } from "emotion"
 import { ThemeProvider } from "emotion-theming"
+import debounce from "lodash/debounce"
 import * as React from "react"
 
 import Message from "../Message/Message"
 import Messages from "../Messages/Messages"
+import Progress from "../Progress/Progress"
 import { darken } from "../utils"
 import constants, { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   /** Children */
@@ -40,6 +43,7 @@ export interface State {
     message: IMessage
     addedAt: number
   }>
+  isLoading: boolean
 }
 
 export interface WindowSize {
@@ -52,6 +56,8 @@ export interface Context {
   replaceState?: (url: string) => void
   pushMessage: (message: IMessage) => void
   windowSize: WindowSize
+  loading: boolean
+  setLoading: (isLoading: boolean) => void
 }
 
 const colorByMessageType = (type: MessageType): string => {
@@ -76,6 +82,8 @@ const defaultContext: Context = {
     width: 1080,
     height: 640,
   },
+  loading: false,
+  setLoading: (_: boolean) => void 0,
 }
 
 const { Provider, Consumer } = React.createContext(defaultContext)
@@ -112,6 +120,12 @@ a:hover: {
 }
 `
 
+const Container = styled("div")`
+  position: relative;
+  min-height: 60px;
+  height: 100%;
+`
+
 class OperationalUI extends React.Component<Props, State> {
   public state: State = {
     windowSize: {
@@ -119,6 +133,7 @@ class OperationalUI extends React.Component<Props, State> {
       height: window.innerHeight,
     },
     messages: [],
+    isLoading: false,
   }
 
   /**
@@ -148,13 +163,17 @@ class OperationalUI extends React.Component<Props, State> {
     }
   }
 
-  public handleResize = () => {
+  public handleResize = debounce(() => {
     this.setState(_ => ({
       windowSize: {
         width: window.innerWidth,
-        height: window.innerWidth,
+        height: window.innerHeight,
       },
     }))
+  }, 200)
+
+  public setLoading = (isLoading: boolean) => {
+    this.setState(() => ({ isLoading }))
   }
 
   public componentDidMount() {
@@ -189,10 +208,13 @@ class OperationalUI extends React.Component<Props, State> {
                 this.messageTimerInterval = window.setInterval(() => this.removeOutdatedMessages(), 2000)
               }
             },
+            loading: this.state.isLoading,
+            setLoading: this.setLoading,
             windowSize: this.state.windowSize,
           }}
         >
-          <>
+          <Container>
+            {this.state.isLoading && <Progress />}
             <Messages>
               {this.state.messages.map(({ message }, index) => (
                 <Message
@@ -209,7 +231,7 @@ class OperationalUI extends React.Component<Props, State> {
               ))}
             </Messages>
             {children}
-          </>
+          </Container>
         </Provider>
       </ThemeProvider>
     )

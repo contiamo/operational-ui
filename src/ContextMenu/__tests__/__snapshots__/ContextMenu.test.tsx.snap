@@ -1,10 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ContextMenu Component Should render 1`] = `
-Array [
+<div
+  class="css-ftf61z"
+>
   <div
     class="css-ar73w8-Messages"
-  />,
+  />
   <div
     class="css-ernwd6-contextmenu"
   >
@@ -38,6 +40,6 @@ Array [
         Item 3
       </div>
     </div>
-  </div>,
-]
-`
+  </div>
+</div>
+`;

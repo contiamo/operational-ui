@@ -1,23 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tooltip Component Should intialize without problems 1`] = `
-Array [
+<div
+  class="css-ftf61z"
+>
   <div
     class="css-ar73w8-Messages"
-  />,
+  />
   <div
-    class="css-mt2a1r-tooltip"
+    class="css-fnbfpp-tooltip"
   >
     <p>
       Hello
     </p>
-  </div>,
+  </div>
   <div
     class="operational-ui-tooltip css-8ur09t-tooltip"
   >
     <p>
       Hello
     </p>
-  </div>,
-]
-`
+  </div>
+</div>
+`;

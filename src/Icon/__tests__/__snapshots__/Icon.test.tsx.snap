@@ -1,10 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Icon Component Renders an <svg> tag 1`] = `
-Array [
+<div
+  class="css-ftf61z"
+>
   <div
     class="css-ar73w8-Messages"
-  />,
+  />
   <svg
     class="css-1jl4146"
     fill="currentColor"
@@ -15,6 +17,6 @@ Array [
     <path
       d="M200,160.188l120,-0.001l0,40l-120,0l0,120l-40,0l0,-120l-120,0l0,-40l120,0l0,-120l40,0l0,120Z"
     />
-  </svg>,
-]
-`
+  </svg>
+</div>
+`;

@@ -1,10 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Switch Should render 1`] = `
-Array [
+<div
+  class="css-ftf61z"
+>
   <div
     class="css-ar73w8-Messages"
-  />,
+  />
   <div
     class="css-1bzrg5j-switch"
   >
@@ -14,6 +16,6 @@ Array [
     <div
       class="css-lobscw"
     />
-  </div>,
-]
-`
+  </div>
+</div>
+`;

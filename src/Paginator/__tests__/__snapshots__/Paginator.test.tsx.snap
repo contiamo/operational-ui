@@ -1,10 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Paginator Component Should initialize properly 1`] = `
-Array [
+<div
+  class="css-ftf61z"
+>
   <div
     class="css-ar73w8-Messages"
-  />,
+  />
   <div
     class="css-10vchk0-paginator"
   >
@@ -76,6 +78,6 @@ Array [
     >
       last
     </button>
-  </div>,
-]
+  </div>
+</div>
 `;
