@@ -70,16 +70,6 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
           error("Failed while running npm install. Error: ${e}")
         }
       }      
-      stage ('Yarn Verify'){
-        try {
-          sh """            
-          #!/bin/bash
-          yarn verify
-          """
-        } catch(e) {
-          error("Failed while running LERNA. Error: ${e}.")          
-        }     
-      }      
       stage ('NPM Publish Next Tag') {
         npmLogin(env.NpmRegistry,"\${NPM_USER}","\${NPM_PASS}",env.NpmEmail)
         try {
