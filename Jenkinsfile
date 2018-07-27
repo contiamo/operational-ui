@@ -27,7 +27,7 @@ def npmLogin(registry,user,pass,email){
 def npmPublish(tag,registry){
   sh """
   #!/bin/bash
-  npm --registry https://${registry} whoami
+  npm whoami
   npm version $(npm show . version)-$(git rev-parse --short HEAD) --no-git-tag-version
   npm publish --tag next
   """
