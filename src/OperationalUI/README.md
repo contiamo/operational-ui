@@ -3,7 +3,7 @@ Main provider for Operational UI. Should need to wrap all your application with 
 ### Classic example
 
 ```jsx static
-<OperationalUI withBaseStyles>
+<OperationalUI>
   <App />
 </OperationalUI>
 ```

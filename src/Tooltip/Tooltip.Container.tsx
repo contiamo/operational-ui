@@ -99,7 +99,7 @@ export const Container = styled("div")<{
           width: "fit-content",
           whiteSpace: "nowrap",
           position: "fixed",
-          opacity: 0.01,
+          opacity: 0.001,
           top: -200,
           left: -200,
         }

@@ -10,8 +10,8 @@ import constants, { OperationalStyleConstants } from "../utils/constants"
 export interface Props {
   /** Children */
   children?: React.ReactNode
-  /** Use the base styles */
-  withBaseStyles?: boolean
+  /** Omit setting a set of base styles */
+  noBaseStyles?: boolean
   /** Custom push state method expecting a single string */
   pushState?: (path: string) => void
   /** Custom replace state method expecting a single string */
@@ -32,16 +32,26 @@ export interface IMessage {
 }
 
 export interface State {
+  windowSize: {
+    width: number
+    height: number
+  }
   messages: Array<{
     message: IMessage
     addedAt: number
   }>
 }
 
+export interface WindowSize {
+  width: number
+  height: number
+}
+
 export interface Context {
   pushState?: (url: string) => void
   replaceState?: (url: string) => void
   pushMessage: (message: IMessage) => void
+  windowSize: WindowSize
 }
 
 const colorByMessageType = (type: MessageType): string => {
@@ -62,6 +72,10 @@ const defaultContext: Context = {
   pushState: undefined,
   replaceState: undefined,
   pushMessage: (_: IMessage) => void 0,
+  windowSize: {
+    width: 1080,
+    height: 640,
+  },
 }
 
 const { Provider, Consumer } = React.createContext(defaultContext)
@@ -100,6 +114,10 @@ a:hover: {
 
 class OperationalUI extends React.Component<Props, State> {
   public state: State = {
+    windowSize: {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    },
     messages: [],
   }
 
@@ -130,16 +148,27 @@ class OperationalUI extends React.Component<Props, State> {
     }
   }
 
+  public handleResize = () => {
+    this.setState(_ => ({
+      windowSize: {
+        width: window.innerWidth,
+        height: window.innerWidth,
+      },
+    }))
+  }
+
   public componentDidMount() {
-    if (this.props.withBaseStyles) {
+    if (!this.props.noBaseStyles) {
       injectGlobal(baseStylesheet(constants))
     }
+    window.addEventListener("resize", this.handleResize)
   }
 
   public componentWillUnmount() {
     if (this.messageTimerInterval) {
       window.clearInterval(this.messageTimerInterval)
     }
+    window.removeEventListener("resize", this.handleResize)
   }
 
   public render() {
@@ -160,6 +189,7 @@ class OperationalUI extends React.Component<Props, State> {
                 this.messageTimerInterval = window.setInterval(() => this.removeOutdatedMessages(), 2000)
               }
             },
+            windowSize: this.state.windowSize,
           }}
         >
           <>
