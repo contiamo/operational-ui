@@ -5,6 +5,8 @@ import * as React from "react"
 
 import Message from "../Message/Message"
 import Messages from "../Messages/Messages"
+import { IMessage, MessageType } from "../OperationalContext/OperationalContext"
+import { Provider } from "../OperationalContext/OperationalContext.init"
 import Progress from "../Progress/Progress"
 import { darken } from "../utils"
 import constants, { OperationalStyleConstants } from "../utils/constants"
@@ -27,13 +29,6 @@ export interface Props {
   hideMessageAfter?: number
 }
 
-export type MessageType = "info" | "success" | "error"
-
-export interface IMessage {
-  body: string
-  type: MessageType
-}
-
 export interface State {
   windowSize: {
     width: number
@@ -45,48 +40,6 @@ export interface State {
   }>
   isLoading: boolean
 }
-
-export interface WindowSize {
-  width: number
-  height: number
-}
-
-export interface Context {
-  pushState?: (url: string) => void
-  replaceState?: (url: string) => void
-  pushMessage: (message: IMessage) => void
-  windowSize: WindowSize
-  loading: boolean
-  setLoading: (isLoading: boolean) => void
-}
-
-const colorByMessageType = (type: MessageType): string => {
-  switch (type) {
-    case "info":
-      return "primary"
-    case "success":
-      return "success"
-    case "error":
-      return "error"
-  }
-}
-
-// Defining a default context value here, used below when instantiating
-// the context consumer and provider below in order for context to be
-// correctly detected throughout the application.
-const defaultContext: Context = {
-  pushState: undefined,
-  replaceState: undefined,
-  pushMessage: (_: IMessage) => void 0,
-  windowSize: {
-    width: 1080,
-    height: 640,
-  },
-  loading: false,
-  setLoading: (_: boolean) => void 0,
-}
-
-const { Provider, Consumer } = React.createContext(defaultContext)
 
 const baseStylesheet = (theme: OperationalStyleConstants): string => `
 * {
@@ -125,6 +78,17 @@ const Container = styled("div")`
   min-height: 60px;
   height: 100%;
 `
+
+const colorByMessageType = (type: MessageType): string => {
+  switch (type) {
+    case "info":
+      return "primary"
+    case "success":
+      return "success"
+    case "error":
+      return "error"
+  }
+}
 
 class OperationalUI extends React.Component<Props, State> {
   public state: State = {
@@ -239,5 +203,3 @@ class OperationalUI extends React.Component<Props, State> {
 }
 
 export default OperationalUI
-
-export { Consumer }

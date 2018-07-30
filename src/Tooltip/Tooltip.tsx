@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { Consumer } from "../OperationalUI/OperationalUI"
+import OperationalContext from "../OperationalContext/OperationalContext"
 import Container, { Position } from "./Tooltip.Container"
 
 /**
@@ -172,7 +172,7 @@ class Tooltip extends React.Component<TooltipProps, State> {
 
   public render() {
     return (
-      <Consumer>
+      <OperationalContext>
         {operationalContext => {
           const displayPosition = this.getDisplayPosition(operationalContext.windowSize)
           return (
@@ -205,7 +205,7 @@ class Tooltip extends React.Component<TooltipProps, State> {
             </>
           )
         }}
-      </Consumer>
+      </OperationalContext>
     )
   }
 }

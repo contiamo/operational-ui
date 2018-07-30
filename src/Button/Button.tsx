@@ -2,7 +2,7 @@ import * as React from "react"
 import styled, { Interpolation, Themed } from "react-emotion"
 
 import Icon, { IconName } from "../Icon/Icon"
-import { Consumer as OperationalContext } from "../OperationalUI/OperationalUI"
+import OperationalContext from "../OperationalContext/OperationalContext"
 import Spinner from "../Spinner/Spinner"
 import { darken, isModifiedEvent, isWhite, readableTextColor } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
