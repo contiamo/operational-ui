@@ -11,7 +11,7 @@
     "access": "public"
   },
   "files": [
-    "lib/src"
+    "lib/src/**/*"
   ],
   "scripts": {
     "start": "styleguidist server",
