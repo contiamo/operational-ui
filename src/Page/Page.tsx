@@ -6,7 +6,7 @@ import PageArea from "../PageArea/PageArea"
 import PageContent from "../PageContent/PageContent"
 import styled from "../utils/styled"
 
-export type Tabs = Array<{ name: string; component: React.ComponentType; hidden?: boolean }>
+export type Tabs = Array<{ name: string; children: React.ReactNode; hidden?: boolean }>
 
 export interface ModalConfirmContext {
   modal: (modalOptions: ModalOptions) => void
@@ -136,7 +136,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
                 typeof this.props.tabs === "function" ? this.props.tabs(modalConfirmContext) : this.props.tabs
               const activeTab = this.getActiveTab(tabs || [])
               const grid = React.Children.count(children) > 1 ? "main side" : "main"
-              const CurrentTab = tabs && tabs[activeTab].component
+              const currentTabChildren = tabs && tabs[activeTab].children
               return (
                 <Container>
                   {title && (
@@ -154,7 +154,7 @@ class Page extends React.Component<Props, Readonly<typeof initialState>> {
                           </Tab>
                         ))}
                       </TabsBar>
-                      <ViewContainer isInTab>{CurrentTab && <CurrentTab />}</ViewContainer>
+                      <ViewContainer isInTab>{currentTabChildren}</ViewContainer>
                     </>
                   ) : (
                     <ViewContainer>

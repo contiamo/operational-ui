@@ -57,17 +57,17 @@ const actions = (
 ### With tabs
 
 ```jsx
-const Tab = n => () => (
+const Tab = props => (
   <PageContent>
-    <Card title={`${n} Tab`} />
+    <Card title={`${props.title} Tab`} />
   </PageContent>
 )
 ;<Page
   title="Bundle detail"
   tabs={[
-    { name: "overview", component: Tab("overview") },
-    { name: "jobs", component: Tab("jobs") },
-    { name: "functions", component: Tab("functions") },
+    { name: "overview", children: <Tab title="Overview" /> },
+    { name: "jobs", children: <Tab title="Jobs" /> },
+    { name: "functions", children: <Tab title="Functions" /> },
   ]}
 />
 ```
@@ -75,7 +75,7 @@ const Tab = n => () => (
 ### Sticky Header with Tabs
 
 ```jsx
-const Tab = n => () => (
+const TabContent = props => (
   <PageContent areas="side main">
     {Array(50)
       .fill("Hello, this is page content")
@@ -91,9 +91,9 @@ const Tab = n => () => (
     }
     title="Bundle detail"
     tabs={[
-      { name: "overview", component: Tab("overview") },
-      { name: "jobs", component: Tab("jobs") },
-      { name: "functions", component: Tab("functions") },
+      { name: "overview", children: <TabContent /> },
+      { name: "jobs", children: <TabContent /> },
+      { name: "functions", children: <TabContent /> },
     ]}
   />
 </div>
@@ -102,9 +102,9 @@ const Tab = n => () => (
 ### With tabs and handlers
 
 ```jsx
-const Tab = n => () => (
+const Tab = props => (
   <PageContent>
-    <Card title={`${n} Tab`}>The tabs are not working because nothing update `activeTabName`!</Card>
+    <Card title={`${props.title} Tab`}>The tabs are not working because nothing update `activeTabName`!</Card>
   </PageContent>
 )
 ;<Page
@@ -112,9 +112,9 @@ const Tab = n => () => (
   activeTabName="jobs"
   onTabChange={console.log}
   tabs={[
-    { name: "overview", component: Tab("overview") },
-    { name: "jobs", component: Tab("jobs") },
-    { name: "functions", component: Tab("functions") },
+    { name: "overview", children: <Tab title="Overview" /> },
+    { name: "jobs", children: <Tab title="Jobs" /> },
+    { name: "functions", children: <Tab title="Functions" /> },
   ]}
 />
 ```
@@ -122,9 +122,9 @@ const Tab = n => () => (
 ### With activeTabName controlled (classically with a router)
 
 ```jsx
-const Tab = n => () => (
+const Tab = props => (
   <PageContent>
-    <Card title={`${n} Tab`} />
+    <Card title={`${props.title} Tab`} />
   </PageContent>
 )
 
@@ -155,9 +155,9 @@ class Router extends React.Component {
           activeTabName={this.state.tabName}
           onTabChange={this.goTo.bind(this)}
           tabs={[
-            { name: "overview", component: Tab("overview") },
-            { name: "jobs", component: Tab("jobs") },
-            { name: "functions", component: Tab("functions") },
+            { name: "overview", children: <Tab title="Overview" /> },
+            { name: "jobs", children: <Tab title="Jobs" /> },
+            { name: "functions", children: <Tab title="Functions" /> },
           ]}
         />
       </>
@@ -171,9 +171,9 @@ class Router extends React.Component {
 ### With hidden tab
 
 ```jsx
-const Tab = n => () => (
+const Tab = props => (
   <PageContent>
-    <Card title={`${n} Tab`} />
+    <Card title={`${props.title} Tab`} />
   </PageContent>
 )
 
@@ -205,10 +205,10 @@ class Router extends React.Component {
           activeTabName={this.state.tabName}
           onTabChange={this.goTo.bind(this)}
           tabs={[
-            { name: "overview", component: Tab("overview") },
-            { name: "jobs", component: Tab("jobs") },
-            { name: "functions", component: Tab("functions") },
-            { name: "editor", component: Tab("editor"), hidden: true },
+            { name: "overview", children: <Tab title="Overview" /> },
+            { name: "jobs", children: <Tab title="Overview" /> },
+            { name: "functions", children: <Tab title="Overview" /> },
+            { name: "editor", children: <Tab title="Editor" />, hidden: true },
           ]}
         />
       </>
