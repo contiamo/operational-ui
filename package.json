@@ -1,6 +1,6 @@
 {
   "name": "@operational/components",
-  "version": "6.4.0",
+  "version": "6.4.0-TEST1",
   "description": "Building blocks for effective operational user interfaces",
   "main": "./lib/src/index.js",
   "types": "./lib/src/index.d.ts",
@@ -11,7 +11,7 @@
     "access": "public"
   },
   "files": [
-    "lib/src"
+    "lib/src/**/*"
   ],
   "scripts": {
     "start": "styleguidist server",
