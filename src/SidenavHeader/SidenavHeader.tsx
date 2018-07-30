@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 import Icon, { IconName } from "../Icon/Icon"
-import { Consumer as OperationalContext } from "../OperationalUI/OperationalUI"
+import OperationalContext from "../OperationalContext/OperationalContext"
 import { Props as SidenavItemProps } from "../SidenavItem/SidenavItem"
 import { floatIn, isModifiedEvent } from "../utils"
 
