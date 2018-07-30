@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "react-emotion"
 
-import { Button } from "../src"
+import { Button } from "../"
 import Animation from "./Animation"
 import OperationalLogo from "./OperationalLogo"
 

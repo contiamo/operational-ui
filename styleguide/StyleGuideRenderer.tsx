@@ -4,7 +4,7 @@ import styled from "../src/utils/styled"
 
 import { HeaderBar, Layout, Logo, OperationalUI, Page } from "../src"
 import constants from "../src/utils/constants"
-import Splash from "./Splash"
+import Splash from "../src/website"
 
 export interface StyleGuideRendererState {
   isSplashVisible: boolean
