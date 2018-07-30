@@ -1,6 +1,6 @@
 import * as React from "react"
 import Icon, { IconName } from "../Icon/Icon"
-import { Consumer as OperationalContext } from "../OperationalUI/OperationalUI"
+import OperationalContext from "../OperationalContext/OperationalContext"
 import { darken, isModifiedEvent } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
