@@ -5,29 +5,19 @@ import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface Props {
-  /** Id */
-  id?: string
-
   /** Chip color, provided as a hex value or a named theme color */
   color?: string
-
   /** Handle clicks on the chip's body. This is never triggered when the icon bar is clicked. When an icon is not specified, however, this basically turns into a full element click handler. */
   onClick?: () => void
-
   /** Handle clicks on the chip's icon area on the right. */
   onIconClick?: () => void
-
-  /** Class name */
-  className?: string
-
-  children: React.ReactNode
-
   /** The name of the icon shown in the right icon bar area of the chip. A typical use here would be the `X` icon for closing the chip. Note that this icon is only displayed if there is an `onIconClick` prop present.  */
   icon?: IconName | React.ReactNode
+  children: React.ReactNode
 }
 
-const Container = styled("div")<{ color?: string }>(({ theme, color }) => {
-  const backgroundColor = tinycolor(expandColor(theme, color) || theme.color.primary)
+const Container = styled("div")<{ color_?: string }>(({ theme, color_ }) => {
+  const backgroundColor = tinycolor(expandColor(theme, color_) || theme.color.primary)
     .setAlpha(0.1)
     .toString()
   return {
@@ -73,12 +63,12 @@ const Action = styled("div")(({ theme }) => {
   }
 })
 
-const Chip: React.SFC<Props> = (props: Props) => (
-  <Container id={props.id} className={props.className} color={props.color}>
-    <Content onClick={props.onClick}>{props.children}</Content>
-    {props.onIconClick && (
-      <Action onClick={props.onIconClick}>
-        {typeof props.icon === "string" ? <Icon name={props.icon as IconName} size={12} /> : props.icon}
+const Chip: React.SFC<Props> = ({ onClick, onIconClick, icon, children, ...props }) => (
+  <Container color_={props.color} {...props}>
+    <Content onClick={onClick}>{children}</Content>
+    {onIconClick && (
+      <Action onClick={onIconClick}>
+        {typeof icon === "string" ? <Icon name={icon as IconName} size={12} /> : icon}
       </Action>
     )}
   </Container>

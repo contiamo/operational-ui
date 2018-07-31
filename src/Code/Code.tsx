@@ -4,8 +4,6 @@ import Highlight from "react-highlight"
 import styles from "./styles"
 
 export interface Props {
-  /** Id */
-  id?: string
   /** Language for syntax highlighting */
   syntax?: string
   children?: string | string[]
@@ -49,9 +47,9 @@ const Code = styled(Highlight)(({ theme }) => {
   }
 })
 
-const StyledCode = (props: Props) => (
-  <Container>
-    <Code className={`${css(styles)} ${props.syntax}`}>{props.children}</Code>
+const StyledCode: React.SFC<Props> = ({ syntax, children, ...props }) => (
+  <Container {...props}>
+    <Code className={`${css(styles)} ${syntax}`}>{children}</Code>
   </Container>
 )
 

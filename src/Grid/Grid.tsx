@@ -2,9 +2,6 @@ import * as React from "react"
 import styled from "../utils/styled"
 
 export interface Props {
-  id?: string
-  className?: string
-
   /** Either 'IDE', or of an `MxN` format, with `M` and `N` as integers. */
   type: string
   children?: React.ReactNode
@@ -45,8 +42,8 @@ const Container = styled("div")<{ gridType: string }>(({ theme, gridType }) => (
   ...getGridCSSProperties(gridType),
 }))
 
-const Grid: React.SFC<Props> = (props: Props) => (
-  <Container id={props.id} className={props.className} gridType={props.type}>
+const Grid: React.SFC<Props> = ({ type, ...props }) => (
+  <Container {...props} gridType={type}>
     {props.children}
   </Container>
 )

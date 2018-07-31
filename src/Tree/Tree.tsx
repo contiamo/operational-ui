@@ -127,9 +127,10 @@ class Tree extends React.Component<Props, State> {
   }
 
   public render() {
+    const { trees, ...props } = this.props
     return (
-      <Container {...this.props}>
-        {this.props.trees.map((tree, index) => (
+      <Container {...props}>
+        {trees.map((tree, index) => (
           <TreeRecursive
             key={index}
             tree={tree}

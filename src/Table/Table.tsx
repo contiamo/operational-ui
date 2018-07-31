@@ -5,26 +5,16 @@ export interface Props {
   /** Table columns headings */
   columns: string[]
   /** Table rows as an array of cells */
-
   rows: Array<Array<string | React.ReactNode>>
   /** Called on row click */
-
   onRowClick?: (row: Array<string | React.ReactNode>, index: number) => void
   /**
    * Text to display on right on row hover
    */
-
   rowActionName?: string
-  /**
-   * This will not work anymore!
-   * @deprecated
-   */
-
-  __experimentalColumnCss?: any
   /**
    * Add actions on the end of each row
    */
-
   __experimentalRowActions?: React.ReactNode[]
 }
 

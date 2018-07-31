@@ -4,16 +4,11 @@ import { Icon } from "../"
 import { lighten } from "../utils"
 
 export interface Props {
-  id?: string
-  className?: string
   /** Show an error instead of the progress */
-
   error?: string
   /** Provide a button to retry the action to load */
-
   onRetry?: () => void
   /** OnClose callback */
-
   onClose?: () => void
 }
 
@@ -93,20 +88,20 @@ const Action = styled("div")(({ theme }) => ({
   },
 }))
 
-const Progress: React.SFC<Props> = props => (
-  <Container id={props.id} className={props.className}>
-    <Bar isError={Boolean(props.error)} />
-    {props.error ? (
+const Progress: React.SFC<Props> = ({ error, onRetry, onClose, ...props }) => (
+  <Container {...props}>
+    <Bar isError={Boolean(error)} />
+    {error ? (
       <ErrorMessage>
-        {props.error}
-        {props.onRetry && (
-          <Action onClick={props.onRetry}>
+        {error}
+        {onRetry && (
+          <Action onClick={onRetry}>
             <Icon name="Sync" />
             <span>Retry</span>
           </Action>
         )}
-        {props.onClose && (
-          <Action onClick={props.onClose}>
+        {onClose && (
+          <Action onClick={onClose}>
             <Icon name="No" />
             <span>Dismiss</span>
           </Action>

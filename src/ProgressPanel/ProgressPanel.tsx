@@ -81,9 +81,9 @@ const Error = styled("p")`
   `};
 `
 
-const ProgressPanel: React.SFC<Props> = props => (
-  <Container>
-    {props.items.map(({ status, title, error }, index) => (
+const ProgressPanel: React.SFC<Props> = ({ items, ...props }) => (
+  <Container {...props}>
+    {items.map(({ status, title, error }, index) => (
       <Item key={index}>
         <Body status={status}>
           {getVariation(status).icon}

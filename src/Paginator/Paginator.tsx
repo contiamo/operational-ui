@@ -4,8 +4,6 @@ import Button from "../Button/Button"
 import styled from "../utils/styled"
 
 export interface Props {
-  id?: string
-  className?: string
   /** Function to be executed after changing page */
   onChange?: (page: Props["page"]) => void
   /** Index of the current selected page */
@@ -90,17 +88,17 @@ const Container = styled("div")(({ theme }) => ({
   },
 }))
 
-const Paginator: React.SFC<Props> = props => {
+const Paginator: React.SFC<Props> = ({ itemCount, itemsPerPage, page, onChange, ...props }) => {
   const controlProps = {
-    itemCount: props.itemCount,
-    itemsPerPage: props.itemsPerPage,
-    page: props.page!,
-    onChange: props.onChange,
+    itemCount,
+    itemsPerPage,
+    page: page!,
+    onChange,
   }
-  const isFirstDisabled = props.page === 1
-  const isLastDisabled = props.itemsPerPage * props.page! >= props.itemCount
+  const isFirstDisabled = page === 1
+  const isLastDisabled = itemsPerPage * page! >= itemCount
   return (
-    <Container id={props.id} className={props.className}>
+    <Container {...props}>
       <PaginatorControl type="first" {...controlProps} isDisabled={isFirstDisabled}>
         first
       </PaginatorControl>
@@ -108,9 +106,8 @@ const Paginator: React.SFC<Props> = props => {
         <Icon.ChevronsLeft size="11" />
         <span>prev</span>
       </PaginatorControl>
-      <PaginatorSpan key={props.page}>
-        <span>{getRange({ page: props.page, itemCount: props.itemCount, itemsPerPage: props.itemsPerPage })}</span> of{" "}
-        {props.itemCount}
+      <PaginatorSpan key={page}>
+        <span>{getRange({ page, itemCount, itemsPerPage })}</span> of {itemCount}
       </PaginatorSpan>
       <PaginatorControl type="next" {...controlProps} isDisabled={isLastDisabled}>
         <span>next</span>

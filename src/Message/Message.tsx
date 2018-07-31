@@ -15,8 +15,8 @@ export interface Props {
   onClose?: () => void
 }
 
-const Container = styled("div")<{ color?: string }>(({ theme, color }) => {
-  const backgroundColor = tinycolor(expandColor(theme, color) || theme.color.primary)
+const Container = styled("div")<{ color_?: string }>(({ theme, color_ }) => {
+  const backgroundColor = tinycolor(expandColor(theme, color_) || theme.color.primary)
     .setAlpha(0.9)
     .toString()
   return {
@@ -52,12 +52,12 @@ const IconContainer = styled("div")(({ theme }) => ({
   },
 }))
 
-const Message = (props: Props) => (
-  <Container className={props.className} color={props.color}>
-    <IconContainer onClick={props.onClose}>
+const Message: React.SFC<Props> = ({ color, onClose, children, ...props }) => (
+  <Container {...props} color_={color}>
+    <IconContainer onClick={onClose}>
       <Icon name="No" />
     </IconContainer>
-    {props.children}
+    {children}
   </Container>
 )
 

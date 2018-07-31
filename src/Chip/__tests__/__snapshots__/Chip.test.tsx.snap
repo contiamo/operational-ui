@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Chip Should render 1`] = `
+Array [
+  <div
+    class="css-ar73w8-Messages"
+  />,
+  <div
+    class="css-t1h0j7-chip"
+  >
+    <div
+      class="css-1k6isyt"
+    >
+      Hi
+    </div>
+  </div>,
+]
+`;

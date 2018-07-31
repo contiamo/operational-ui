@@ -2,14 +2,10 @@ import * as React from "react"
 import styled from "../utils/styled"
 
 export interface Props {
-  id?: string
   /** Is the switch on? */
-
   on: boolean
   /** A change handler. Passes the new `on` boolean */
-
   onChange?: (on: boolean) => void
-  className?: string
 }
 
 const width: number = 28
@@ -74,18 +70,17 @@ const Rail = styled("div")<Props>(
   }),
 )
 
-const Switch = (props: Props) => (
+const Switch: React.SFC<Props> = ({ on, onChange, ...props }) => (
   <Container
-    id={props.id}
-    className={props.className}
+    {...props}
     onClick={() => {
-      if (props.onChange) {
-        props.onChange(!props.on)
+      if (onChange) {
+        onChange(!on)
       }
     }}
   >
-    <Button on={props.on} />
-    <Rail on={props.on} />
+    <Button on={on} />
+    <Rail on={on} />
   </Container>
 )
 
