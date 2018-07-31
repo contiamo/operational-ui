@@ -139,24 +139,22 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   }
 
   private renderPageWithTabs() {
-    const { tabs } = this.props
-    if (tabs) {
-      const activeTab = this.getActiveTab(tabs)
-      const currentTabChildren = tabs[activeTab].children
+    const tabs = this.props.tabs!
+    const activeTab = this.getActiveTab(tabs)
+    const currentTabChildren = tabs[activeTab].children
 
-      return (
-        <>
-          <TabsBar>
-            {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
-              <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
-                {name}
-              </Tab>
-            ))}
-          </TabsBar>
-          <ViewContainer isInTab>{currentTabChildren}</ViewContainer>
-        </>
-      )
-    }
+    return (
+      <>
+        <TabsBar>
+          {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
+            <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
+              {name}
+            </Tab>
+          ))}
+        </TabsBar>
+        <ViewContainer isInTab>{currentTabChildren}</ViewContainer>
+      </>
+    )
   }
 
   private renderPageWithoutTabs() {
