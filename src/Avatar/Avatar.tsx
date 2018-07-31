@@ -15,8 +15,6 @@ export interface Props {
   hideInitials?: boolean
   /** A URL to an image of the person */
   photo?: string
-  /** Class name */
-  className?: string
   /** Color assigned to the avatar circle (hex or named color from `theme.colors`) */
   color?: string
   /** Automatically assign a deterministic color. (Invalidates `color` assignment)  */
