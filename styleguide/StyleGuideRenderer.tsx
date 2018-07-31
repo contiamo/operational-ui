@@ -2,9 +2,8 @@ import { injectGlobal } from "emotion"
 import * as React from "react"
 import styled from "../src/utils/styled"
 
-import { HeaderBar, Layout, Logo, OperationalUI, Page } from "../src"
+import { Button, HeaderBar, Layout, Logo, OperationalUI, Page, Splash } from "../src"
 import constants from "../src/utils/constants"
-import Splash from "../src/website"
 
 export interface StyleGuideRendererState {
   isSplashVisible: boolean
@@ -63,10 +62,6 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
     activeComponent: "",
   }
 
-  private hideSplash = () => {
-    this.setState({ isSplashVisible: false })
-  }
-
   private updateActiveComponent = (activeComponent: string) => {
     if (this.props.hasSidebar) {
       window.history.pushState(null, undefined, `#${activeComponent}`)
@@ -81,7 +76,35 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
     return (
       <OperationalUI>
         {isSplashVisible ? (
-          <Splash hide={this.hideSplash} />
+          <Splash
+            color="#005f96"
+            title="Operational UI"
+            actions={
+              <>
+                <Button
+                  onClick={() => {
+                    this.setState(() => ({
+                      isSplashVisible: false,
+                    }))
+                  }}
+                >
+                  Docs
+                </Button>
+                <Button to="https://github.com/contiamo/operational-ui/">GitHub</Button>
+              </>
+            }
+          >
+            <p>
+              Operational is a UI library optimized for day-to-day operational decision-making. It does its best when
+              used for interfaces that assume familiarity through routine use, prioritizing compactness and{" "}
+              {
+                <a href="https://twitter.com/edwardtufte/status/450076034759524352" target="_blank">
+                  small effective differences
+                </a>
+              }.
+            </p>
+            <p>It is predictable to use, and it lets you and your team breathe. Exhales, not sighs.</p>
+          </Splash>
         ) : (
           <Provider
             value={{

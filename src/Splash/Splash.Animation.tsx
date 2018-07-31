@@ -11,7 +11,7 @@ export interface State {
 }
 
 // Number of squares in the animation grid
-const n: number = 12
+const n: number = 15
 
 // Return integer random between 0 and range - 1, boundaries included
 const integerRandom = (range: number): number => {
@@ -53,7 +53,7 @@ const Box = styled("div")(({ a, x, y }: { a: number; x: number; y: number }) => 
 class Animation extends React.Component<Props, State> {
   public state = {
     animationStep: 0,
-    coordinates: Array.apply(null, { length: 30 })
+    coordinates: Array.apply(null, { length: 50 })
       .map(Number.call, Number)
       .map((a: number) => ({ x: integerRandom(a), y: integerRandom(a) })),
   }

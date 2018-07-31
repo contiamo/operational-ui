@@ -1,12 +1,19 @@
 import * as React from "react"
-import styled from "react-emotion"
 
-import { Button } from "../"
-import Animation from "./Animation"
-import OperationalLogo from "./OperationalLogo"
+import { expandColor } from "../utils/constants"
+import styled from "../utils/styled"
+import Animation from "./Splash.Animation"
+import OperationalLogo from "./Splash.Logo"
 
-export interface Props {
-  hide: () => void
+export interface SplashProps {
+  /** The title of the project */
+  title: string
+  /** Actions displayed below the title, typically a fragment of `<Button/>` elements */
+  actions: React.ReactNode
+  /** Main content */
+  children: React.ReactNode
+  /** Backdrop color */
+  color?: string
 }
 
 export interface State {
@@ -14,19 +21,23 @@ export interface State {
   animationSize: number
 }
 
-const Container = styled("div")`
-  position: fixed;
+const Container = styled("div")<{ color_?: string }>`
   z-index: 10000;
+  position: fixed;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
   padding: 10px;
-  background-color: #005f96;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: opacity 0.2s;
+  ${({ color_, theme }) => {
+    return `
+      background-color: ${expandColor(theme, color_) || theme.color.primary};
+    `
+  }};
 `
 
 const Content = styled("div")`
@@ -76,7 +87,7 @@ const Static = styled("div")`
   }
 `
 
-class Splash extends React.Component<Props, Readonly<State>> {
+class Splash extends React.Component<SplashProps, Readonly<State>> {
   public readonly state = {
     rotation: 0,
     animationSize: Math.max(window.innerWidth, window.innerHeight),
@@ -106,37 +117,17 @@ class Splash extends React.Component<Props, Readonly<State>> {
 
   public render() {
     return (
-      <Container>
+      <Container color_={this.props.color}>
         <Animation size={this.state.animationSize} />
         <Content>
           <TitleBar>
             <OperationalLogo size={110} rotation={this.state.rotation} />
             <TitleBarContent>
-              <h1>Operational UI</h1>
-              <div>
-                <Button
-                  onClick={() => {
-                    this.props.hide()
-                  }}
-                >
-                  Docs
-                </Button>
-                <Button to="https://github.com/contiamo/operational-ui/">GitHub</Button>
-              </div>
+              <h1>{this.props.title}</h1>
+              <div>{this.props.actions}</div>
             </TitleBarContent>
           </TitleBar>
-          <Static>
-            <p>
-              Operational is a UI library optimized for day-to-day operational decision-making. It does its best when
-              used for interfaces that assume familiarity through routine use, prioritizing compactness and{" "}
-              {
-                <a href="https://twitter.com/edwardtufte/status/450076034759524352" target="_blank">
-                  small effective differences
-                </a>
-              }.
-            </p>
-            <p>It is predictable to use, and it lets you and your team breathe. Exhales, not sighs.</p>
-          </Static>
+          <Static>{this.props.children}</Static>
         </Content>
       </Container>
     )
