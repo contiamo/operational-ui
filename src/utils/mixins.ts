@@ -41,12 +41,12 @@ export const hoverTooltip: {} = {
      * Rendering at 0.001 opacity is still necessary in order to determine tooltip dimensions
      * See ../Tooltip/Tooltip.tsx implementation for more details
      */
-    opacity: 0.001,
+    visibility: "hidden",
     pointerEvents: "none",
   },
   ":hover": {
     [`.${dangerousTooltipContainerClassName}`]: {
-      opacity: 1,
+      visibility: "visible",
       pointerEvents: "all",
     },
   },
