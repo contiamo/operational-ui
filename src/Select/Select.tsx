@@ -24,33 +24,22 @@ const displayOption = (opt: IOption): string => {
 }
 
 export interface Props extends DefaultProps {
-  /** Id */
-  id?: string
-
   /** Options available */
   options: IOption[]
-
   /** Current value */
   value: null | Value | Value[]
-
   /** Make the list filterable */
   filterable?: boolean
-
   /** Disable the component */
   disabled?: boolean
-
   /** Callback trigger on any changes */
   onChange?: (newValue: null | Value | Value[], changedItem?: Value) => void
-
   /** Text color */
   color?: string
-
   /** Text to display when no active selection */
   placeholder?: string
-
   /** Label text */
   label?: string
-
   /** Should the Select be rendered with a full box style? */
   naked?: boolean
 }
@@ -241,11 +230,11 @@ class Select extends React.Component<Props, State> {
   }
 
   public render() {
-    const { id, color, disabled, naked, value, options, filterable, label } = this.props
+    const { color, disabled, naked, value, options, filterable, label, onChange, ...props } = this.props
     const { open, search } = this.state
     const selectWithoutLabel = (
       <Container
-        id={id}
+        {...props}
         color={color}
         disabled={disabled}
         naked={naked}
@@ -294,7 +283,7 @@ class Select extends React.Component<Props, State> {
       </Container>
     )
     return label ? (
-      <Label>
+      <Label {...props}>
         <LabelText>{label}</LabelText>
         {selectWithoutLabel}
       </Label>
