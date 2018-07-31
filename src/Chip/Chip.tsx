@@ -1,10 +1,11 @@
 import * as React from "react"
 import tinycolor from "tinycolor2"
 import { Icon, IconName } from "../"
+import { DefaultProps } from "../types"
 import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Chip color, provided as a hex value or a named theme color */
   color?: string
   /** Handle clicks on the chip's body. This is never triggered when the icon bar is clicked. When an icon is not specified, however, this basically turns into a full element click handler. */

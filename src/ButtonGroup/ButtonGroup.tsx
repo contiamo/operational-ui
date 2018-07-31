@@ -1,14 +1,8 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props {
-  /** Id */
-  id?: string
-  /** Class name */
-
-  className?: string
-  /** Children as a list of `Button` elements. Avoid mixing condensed and full-height buttons. */
-
+export interface Props extends DefaultProps {
   children?: React.ReactNode
 }
 
@@ -18,6 +12,8 @@ const Container = styled("div")({
     margin: 0,
   },
   "& > button:not(:first-child)": {
+    // To avoid overlapping borders
+    marginLeft: -1,
     borderLeft: 0,
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
@@ -28,10 +24,6 @@ const Container = styled("div")({
   },
 })
 
-const ButtonGroup = (props: Props) => (
-  <Container id={props.id} className={props.className}>
-    {props.children}
-  </Container>
-)
+const ButtonGroup: React.SFC<Props> = ({ children, ...props }) => <Container {...props}>{children}</Container>
 
 export default ButtonGroup

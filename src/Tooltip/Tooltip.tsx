@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import OperationalContext from "../OperationalContext/OperationalContext"
+import { DefaultProps } from "../types"
 import Container, { Position } from "./Tooltip.Container"
 
 /**
@@ -10,7 +11,7 @@ import Container, { Position } from "./Tooltip.Container"
  * The actual tooltip is rendered with this information extracted from the DOM node.
  */
 
-export interface BaseProps {
+export interface BaseProps extends DefaultProps {
   className?: string
   children?: React.ReactNode
   /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */

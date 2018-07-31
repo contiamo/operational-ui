@@ -2,11 +2,12 @@ import * as React from "react"
 import { Title } from ".."
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps } from "../PageContent/PageContent"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 export type Tabs = Array<{ name: string; children: React.ReactNode; hidden?: boolean }>
 
-export interface BaseProps {
+export interface BaseProps extends DefaultProps {
   /** Content of the page */
   children?: PageContentProps["children"]
   /** Page title */
@@ -173,10 +174,10 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   }
 
   public render() {
-    const { title, actions, tabs } = this.props
+    const { title, actions, tabs, ...props } = this.props
 
     return (
-      <Container>
+      <Container {...props}>
         {title && (
           <TitleBar>
             <Title color="white">{title}</Title>

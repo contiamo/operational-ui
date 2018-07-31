@@ -1,11 +1,12 @@
 import * as React from "react"
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
+import { DefaultProps } from "../types"
 import { darken, isModifiedEvent } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Navigation property à la react-router <Link/> */
   to?: string
   onClick?: (ev?: React.SyntheticEvent<React.ReactNode>) => void

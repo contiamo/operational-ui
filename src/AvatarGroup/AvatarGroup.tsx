@@ -1,5 +1,6 @@
 import * as React from "react"
 import Avatar from "../Avatar/Avatar"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 export interface AvatarItem {
@@ -7,7 +8,7 @@ export interface AvatarItem {
   name: string
 }
 
-export interface Props {
+export interface Props extends DefaultProps {
   children?: React.ReactNode
   /** Avatars list */
   avatars?: AvatarItem[]

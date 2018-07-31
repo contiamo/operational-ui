@@ -1,8 +1,9 @@
 import * as React from "react"
 import { Progress } from "../"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Side navigation, see `Sidenav` component */
   sidenav: React.ReactNode
   /** Header content, see `Page` component */

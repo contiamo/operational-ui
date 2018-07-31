@@ -2,10 +2,11 @@ import * as React from "react"
 import styled, { Interpolation, Themed } from "react-emotion"
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
+import { DefaultProps } from "../types"
 import { isModifiedEvent } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 
-export interface Props {
+export interface Props extends DefaultProps {
   onClick?: () => void
   /** Navigation property à la react-router <Link/> */
   to?: string

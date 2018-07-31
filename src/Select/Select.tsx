@@ -1,4 +1,5 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 import { floatIn, readableTextColor, resetTransform } from "../utils"
@@ -22,7 +23,7 @@ const displayOption = (opt: IOption): string => {
   return String(opt.value)
 }
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Id */
   id?: string
 

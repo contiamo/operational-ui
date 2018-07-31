@@ -1,10 +1,11 @@
 import * as React from "react"
 import { IconName } from "../"
+import { DefaultProps } from "../types"
 import { setBrightness } from "../utils"
 import { deprecatedExpandColor } from "../utils/constants"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   children: React.ReactNode
   /** A number by which the breakdown is represented */
   number?: number

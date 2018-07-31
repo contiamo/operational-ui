@@ -4,12 +4,11 @@ import styled, { Interpolation, Themed } from "react-emotion"
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import Spinner from "../Spinner/Spinner"
+import { DefaultProps } from "../types"
 import { darken, isModifiedEvent, isWhite, readableTextColor } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 
-export interface Props {
-  id?: string
-  className?: string
+export interface Props extends DefaultProps {
   /** Invoked when you click on the button */
   onClick?: (e?: React.SyntheticEvent<React.ReactNode>) => void
   type?: string
@@ -52,15 +51,19 @@ const makeColors = (theme: OperationalStyleConstants, color: string) => {
   }
 }
 
-const containerStyles: Interpolation<Themed<Props, OperationalStyleConstants>> = ({
-  theme,
-  color,
-  disabled,
-  condensed,
-  loading,
-  fullWidth,
-}) => {
-  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color || "")
+const containerStyles: Interpolation<
+  Themed<
+    {
+      color_?: Props["color"]
+      disabled?: boolean
+      condensed?: Props["condensed"]
+      loading?: Props["loading"]
+      fullWidth?: Props["fullWidth"]
+    },
+    OperationalStyleConstants
+  >
+> = ({ theme, color_, disabled, condensed, loading, fullWidth }) => {
+  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color_ || "")
   return {
     backgroundColor,
     lineHeight: `${condensed ? 28 : 36}px`,
@@ -107,34 +110,36 @@ const ButtonSpinner = styled(Spinner)<{ containerColor?: Props["color"] }>(({ th
   color: makeColors(theme, containerColor || "").foreground,
 }))
 
-const Button = (props: Props) => {
-  const ContainerComponent: React.ComponentType<any> = props.to ? ContainerLink : Container
+const Button: React.SFC<Props> = ({ to, children, icon, color, onClick, loading, ...props }) => {
+  const ContainerComponent: React.ComponentType<any> = to ? ContainerLink : Container
   return (
     <OperationalContext>
       {ctx => (
         <ContainerComponent
           {...props}
-          href={props.to}
+          color_={color}
+          loading={loading}
+          href={to}
           onClick={(ev: React.SyntheticEvent<React.ReactNode>) => {
             if (props.disabled) {
               ev.preventDefault()
               return
             }
 
-            if (props.onClick) {
-              props.onClick()
+            if (onClick) {
+              onClick()
             }
 
-            if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
+            if (!isModifiedEvent(ev) && to && ctx.pushState) {
               ev.preventDefault()
-              ctx.pushState(props.to)
+              ctx.pushState(to)
             }
           }}
-          title={props.loading && props.children === String(props.children) ? String(props.children) : undefined}
+          title={loading && children === String(children) ? String(children) : undefined}
         >
-          {props.children}
-          {props.icon && <Icon right name={props.icon} size={18} />}
-          {props.loading && <ButtonSpinner containerColor={props.color} />}
+          {children}
+          {icon && <Icon right name={icon} size={18} />}
+          {loading && <ButtonSpinner containerColor={color} />}
         </ContainerComponent>
       )}
     </OperationalContext>

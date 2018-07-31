@@ -1,13 +1,14 @@
 import * as React from "react"
-import styled from "../utils/styled"
 
 import Icon from "../Icon/Icon"
 import SmallNameTag from "../Internals/SmallNameTag"
+import { DefaultProps } from "../types"
 import constants, { expandColor } from "../utils/constants"
+import styled from "../utils/styled"
 import { Tree as ITree } from "./Tree.types"
 import { containsPath, getInitialOpenPaths, togglePath } from "./Tree.utils"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** An array of tree structures */
   trees: ITree[]
 }

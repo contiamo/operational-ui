@@ -1,8 +1,9 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import { readableTextColor } from "../utils"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   children?: React.ReactNode
 }
 

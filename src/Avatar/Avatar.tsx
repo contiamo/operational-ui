@@ -1,10 +1,11 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import { getInitials, readableTextColor } from "../utils"
 import { colorMapper } from "../utils/color"
 import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Name of the person */
   name: string
   /** Title of the person */
@@ -15,8 +16,6 @@ export interface Props {
   hideInitials?: boolean
   /** A URL to an image of the person */
   photo?: string
-  /** Class name */
-  className?: string
   /** Color assigned to the avatar circle (hex or named color from `theme.colors`) */
   color?: string
   /** Automatically assign a deterministic color. (Invalidates `color` assignment)  */

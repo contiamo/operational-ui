@@ -1,12 +1,13 @@
 import * as React from "react"
 import { Icon } from "../"
+import { DefaultProps } from "../types"
 import { Label, LabelText } from "../utils/mixins"
 
 import Month from "./DatePicker.Month"
 import { Container, DatePickerCard, IconContainer, Input, MonthNav, Toggle } from "./DatePicker.styles"
 import { changeMonth, months, toDate, toYearMonthDay, validateDateString } from "./DatePicker.utils"
 
-export interface Props {
+export interface Props extends DefaultProps {
   id?: string
   label?: string
   /** Min date in the format YYYY-MM-DD. Dates lower than this cannot be selected. */

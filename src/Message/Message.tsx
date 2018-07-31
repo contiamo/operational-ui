@@ -1,11 +1,12 @@
 import * as React from "react"
 import tinycolor from "tinycolor2"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 import { Icon } from "../"
 import { expandColor } from "../utils/constants"
 
-export interface Props {
+export interface Props extends DefaultProps {
   className?: string
   /** Message contents, can be any html element/React fragment. */
   children?: React.ReactNode

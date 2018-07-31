@@ -1,11 +1,12 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 import { readableTextColor } from "../utils"
 import { colorMapper } from "../utils/color"
 import { expandColor } from "../utils/constants"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Background color */
   color?: string
   /**

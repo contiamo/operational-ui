@@ -1,16 +1,17 @@
 import * as React from "react"
 import tinycolor from "tinycolor2"
+import { DefaultProps } from "../types"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
-export interface DeprecatedProps {
+export interface DeprecatedProps extends DefaultProps {
   running?: boolean
   success?: boolean
   error?: boolean
   state?: never
 }
 
-export interface LatestProps {
+export interface LatestProps extends DefaultProps {
   running?: never
   success?: never
   error?: never

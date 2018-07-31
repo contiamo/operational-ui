@@ -1,7 +1,8 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Areas template for `PageArea` disposition */
   areas?: "main" | "main side" | "side main"
   /** Fill the entire width */

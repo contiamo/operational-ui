@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from "fs"
 import { join } from "path"
 
-const BLACK_LIST = ["Internals", "utils", "__tests__", "polyfills.ts", "index.ts", ".DS_Store"]
+const BLACK_LIST = ["Internals", "utils", "__tests__", "polyfills.ts", "index.ts", "types.ts", ".DS_Store"]
 
 describe("lib exports", () => {
   const mainExport = readFileSync(join(__dirname, "../index.ts"), "utf-8")

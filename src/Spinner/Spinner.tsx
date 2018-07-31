@@ -1,8 +1,9 @@
 import * as React from "react"
 import styled, { keyframes } from "react-emotion"
+import { DefaultProps } from "../types"
 import { expandColor } from "../utils/constants"
 
-export interface Props {
+export interface Props extends DefaultProps {
   id?: string
   /** Color as color key or a custom CSS color string */
   color?: string

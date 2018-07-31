@@ -1,4 +1,5 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 import ContextMenuItem from "./ContextMenu.Item"
@@ -8,7 +9,7 @@ export interface Item {
   onClick?: (item: string | Item) => void
 }
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Id */
   id?: string
   /** Class name */
