@@ -22,6 +22,9 @@ module.exports = {
     HeadingRenderer: join(__dirname, "styleguide/HeadingRenderer"),
     TabButtonRenderer: join(__dirname, "styleguide/TabButtonRenderer"),
   },
+  context: {
+    styled: "react-emotion",
+  },
   dangerouslyUpdateWebpackConfig(webpackConfig, env) {
     webpackConfig.output = {
       path: join(__dirname, "dist"),

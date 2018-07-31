@@ -2,7 +2,6 @@ import * as React from "react"
 import styled from "../utils/styled"
 
 export interface Props {
-  className?: string
   /** Children as `Breadcrumb` elements */
   children?: React.ReactNode
 }
@@ -36,8 +35,8 @@ const Slash = styled("span")(({ theme }) => ({
 const intersperseSlashes = (index: number) => ([head, ...tail]: React.ReactNode[]): React.ReactNode[] =>
   head ? [<Slash key={`divider-${index}`}>/</Slash>, head, ...intersperseSlashes(index + 1)(tail)] : []
 
-const Breadcrumbs = (props: Props) => (
-  <Container className={props.className}>{intersperseSlashes(0)(React.Children.toArray(props.children))}</Container>
+const Breadcrumbs: React.SFC<Props> = props => (
+  <Container {...props}>{intersperseSlashes(0)(React.Children.toArray(props.children))}</Container>
 )
 
 export default Breadcrumbs
