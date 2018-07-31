@@ -1,1 +1,0 @@
-A tab, to be use with `<Tabs />`
