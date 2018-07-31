@@ -1,9 +1,10 @@
 import * as React from "react"
 import styled, { css } from "react-emotion"
 import Highlight from "react-highlight"
+import { DefaultProps } from "../types"
 import styles from "./styles"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Language for syntax highlighting */
   syntax?: string
   children?: string | string[]

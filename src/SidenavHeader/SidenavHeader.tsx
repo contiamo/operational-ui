@@ -3,9 +3,10 @@ import styled from "react-emotion"
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { Props as SidenavItemProps } from "../SidenavItem/SidenavItem"
+import { DefaultProps } from "../types"
 import { floatIn, isModifiedEvent } from "../utils"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Main label for the header */
   label: string | React.ReactNode
   /** Navigation property à la react-router <Link/> */

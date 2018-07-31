@@ -1,11 +1,12 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 import Icon from "../Icon/Icon"
 import Tooltip from "../Tooltip/Tooltip"
 import { hoverTooltip } from "../utils/mixins"
 
-export interface Props {
+export interface Props extends DefaultProps {
   className?: string
   children?: React.ReactNode
   /**

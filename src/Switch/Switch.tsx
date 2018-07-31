@@ -1,7 +1,8 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Is the switch on? */
   on: boolean
   /** A change handler. Passes the new `on` boolean */

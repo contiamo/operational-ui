@@ -1,7 +1,8 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface HeaderProps {
+export interface HeaderProps extends DefaultProps {
   /**
    * The "logo" element of the HeaderBar.
    * Typically, the leftmost element.

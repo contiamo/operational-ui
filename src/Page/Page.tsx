@@ -2,11 +2,12 @@ import * as React from "react"
 import { Title } from ".."
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps } from "../PageContent/PageContent"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 export type Tabs = Array<{ name: string; children: React.ReactNode; hidden?: boolean }>
 
-export interface BaseProps {
+export interface BaseProps extends DefaultProps {
   /** Content of the page */
   children?: PageContentProps["children"]
   /** Page title */

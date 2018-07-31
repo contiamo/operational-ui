@@ -1,6 +1,7 @@
 import * as React from "react"
 import Confirm, { ConfirmOptions } from "../Internals/Confirm"
 import Modal, { ModalOptions } from "../Internals/Modal"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 export interface ModalConfirmContext {
@@ -8,7 +9,7 @@ export interface ModalConfirmContext {
   confirm: (confirmOptions: ConfirmOptions) => void
 }
 
-export interface PageContentProps {
+export interface PageContentProps extends DefaultProps {
   /** Children to render, you */
   children?: React.ReactNode | ((modalConfirmContext: ModalConfirmContext) => React.ReactNode)
   /** Areas template for `PageArea` disposition */

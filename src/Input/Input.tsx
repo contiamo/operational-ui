@@ -2,10 +2,11 @@ import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
 import { Hint, Icon, IconName } from "../"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
+import { DefaultProps } from "../types"
 import { FormFieldControl, FormFieldControls, FormFieldError, inputFocus, Label, LabelText } from "../utils/mixins"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   className?: string
   /** Text displayed when the input field has no value. */
   placeholder?: string

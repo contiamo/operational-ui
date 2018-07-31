@@ -4,10 +4,11 @@ import styled, { Interpolation, Themed } from "react-emotion"
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import Spinner from "../Spinner/Spinner"
+import { DefaultProps } from "../types"
 import { darken, isModifiedEvent, isWhite, readableTextColor } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Invoked when you click on the button */
   onClick?: (e?: React.SyntheticEvent<React.ReactNode>) => void
   type?: string

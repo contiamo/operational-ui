@@ -1,8 +1,9 @@
 import * as React from "react"
 import { CardHeader, CardItem } from "../"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props<T = {}> {
+export interface Props<T = {}> extends DefaultProps {
   /** Any object to show. The key is the title of the data. */
   data?: T
   /**  A function to format keys of `data` */

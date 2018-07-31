@@ -1,9 +1,10 @@
 import * as React from "react"
 import styled, { keyframes } from "react-emotion"
 import { Icon } from "../"
+import { DefaultProps } from "../types"
 import { lighten } from "../utils"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Show an error instead of the progress */
   error?: string
   /** Provide a button to retry the action to load */

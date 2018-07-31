@@ -1,4 +1,5 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 import Icon from "../Icon/Icon"
@@ -7,7 +8,7 @@ import constants, { OperationalStyleConstants } from "../utils/constants"
 
 export type Status = "waiting" | "todo" | "running" | "success" | "failure" | "done" | "failed"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Progress items */
   items: Array<{
     /** Progress item status */

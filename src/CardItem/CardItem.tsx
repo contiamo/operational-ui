@@ -1,7 +1,8 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Title of the item */
   title: string
   /** Value of the item */

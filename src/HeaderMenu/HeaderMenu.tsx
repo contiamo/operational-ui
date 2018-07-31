@@ -1,8 +1,9 @@
 import * as React from "react"
 import ContextMenu, { Props as ContextMenuProps } from "../ContextMenu/ContextMenu"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Clickable component(s) from which menu appears  */
   children: React.ReactNode[]
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */

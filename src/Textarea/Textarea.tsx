@@ -1,5 +1,6 @@
 import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 import Hint from "../Hint/Hint"
@@ -9,7 +10,7 @@ import { FormFieldControls, FormFieldError, inputFocus, Label, LabelText, labelT
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
 
-export interface Props {
+export interface Props extends DefaultProps {
   id?: string
   className?: string
   /** Controlled value of the field */

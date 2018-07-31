@@ -1,10 +1,11 @@
 import * as React from "react"
+import { DefaultProps } from "../types"
 import { getInitials, readableTextColor } from "../utils"
 import { colorMapper } from "../utils/color"
 import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Name of the person */
   name: string
   /** Title of the person */

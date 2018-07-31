@@ -1,9 +1,10 @@
 import * as React from "react"
 import * as Icon from "react-feather"
 import Button from "../Button/Button"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface Props extends DefaultProps {
   /** Function to be executed after changing page */
   onChange?: (page: Props["page"]) => void
   /** Index of the current selected page */
