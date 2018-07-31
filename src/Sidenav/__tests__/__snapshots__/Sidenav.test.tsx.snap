@@ -2,6 +2,6 @@
 
 exports[`Sidenav component renders 1`] = `
 <OperationalUI>
-  <DeprecatedComponent />
+  <Sidenav />
 </OperationalUI>
-`
+`;

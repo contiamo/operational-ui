@@ -6,8 +6,6 @@ import { isModifiedEvent } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 
 export interface Props {
-  id?: string
-  className?: string
   onClick?: () => void
   /** Navigation property à la react-router <Link/> */
   to?: string
@@ -67,33 +65,30 @@ const Label = styled("span")(({ theme }) => ({
   paddingLeft: theme.space.base,
 }))
 
-const SidenavItem = (props: Props) => {
-  const ContainerComponent = props.to ? ContainerLink : Container
-  const isActive = !!props.active
+const SidenavItem: React.SFC<Props> = ({ to, active, icon, label, ...props }) => {
+  const ContainerComponent = to ? ContainerLink : Container
+  const isActive = Boolean(active)
   return (
     <OperationalContext>
       {ctx => (
         <ContainerComponent
-          href={props.to}
-          id={props.id}
-          className={props.className}
+          {...props}
+          href={to}
           onClick={(ev: React.SyntheticEvent<Node>) => {
             ev.stopPropagation()
             if (props.onClick) {
               props.onClick()
             }
 
-            if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
+            if (!isModifiedEvent(ev) && to && ctx.pushState) {
               ev.preventDefault()
-              ctx.pushState(props.to)
+              ctx.pushState(to)
             }
           }}
           isActive={isActive}
         >
-          <IconContainer>
-            {props.icon === String(props.icon) ? <Icon name={props.icon as IconName} size={18} /> : props.icon}
-          </IconContainer>
-          <Label>{props.label}</Label>
+          <IconContainer>{icon === String(icon) ? <Icon name={icon as IconName} size={18} /> : icon}</IconContainer>
+          <Label>{label}</Label>
         </ContainerComponent>
       )}
     </OperationalContext>
