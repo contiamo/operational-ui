@@ -6,9 +6,9 @@ import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface Props {
-  className?: string
   /** Navigation property à la react-router <Link/> */
   to?: string
+  onClick?: (ev?: React.SyntheticEvent<React.ReactNode>) => void
   children?: React.ReactNode
   icon?: IconName
 }
@@ -34,23 +34,26 @@ const ContainerLink = styled("a")(containerStyles, ({ theme }: { theme: Operatio
 
 const Content = styled("span")()
 
-const Breadcrumb = (props: Props) => {
-  const ContainerComponent: any = props.to ? ContainerLink : Container
+const Breadcrumb: React.SFC<Props> = ({ to, icon, onClick, ...props }) => {
+  const ContainerComponent: any = to ? ContainerLink : Container
   return (
     <OperationalContext>
       {ctx => (
         <ContainerComponent
-          className={props.className}
-          href={props.to}
+          {...props}
+          href={to}
           onClick={(ev: React.SyntheticEvent<Node>) => {
-            if (!isModifiedEvent(ev) && props.to && ctx.pushState) {
+            if (onClick) {
+              onClick(ev)
+            }
+            if (!isModifiedEvent(ev) && to && ctx.pushState) {
               ev.preventDefault()
-              ctx.pushState(props.to)
+              ctx.pushState(to)
             }
           }}
         >
           <Content>{props.children}</Content>
-          {props.icon && <Icon name={props.icon} size={12} />}
+          {icon && <Icon name={icon} size={12} />}
         </ContainerComponent>
       )}
     </OperationalContext>
