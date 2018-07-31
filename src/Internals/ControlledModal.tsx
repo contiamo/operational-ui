@@ -15,12 +15,12 @@ export interface Props {
   action?: CardProps["action"]
 }
 
-const fromBottom = keyframes`
+const fromTop = keyframes`
   0% {
-    top: -10px
+    transform: translate(-50%, -10px)
   }
   100% {
-    top: 0
+    transform: translate(-50%, 0)
   }
 `
 
@@ -29,7 +29,7 @@ const Content = styled(Card)(({ theme }) => ({
   top: theme.space.element,
   left: "50%",
   transform: "translate(-50%, 0)",
-  animation: `${fromBottom} 0.2s`,
+  animation: `${fromTop} 0.2s`,
   minWidth: 600,
   minHeight: 200,
   zIndex: theme.zIndex.modal,
