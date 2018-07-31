@@ -9,6 +9,7 @@ exports[`Select Should render correctly 1`] = `
   />
   <div
     class="css-2xp493-select"
+    placeholder="Select me"
     role="listbox"
     tabindex="-2"
   >

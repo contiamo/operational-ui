@@ -7,14 +7,12 @@ import { FormFieldControl, FormFieldControls, FormFieldError, inputFocus, Label,
 import styled from "../utils/styled"
 
 export interface Props extends DefaultProps {
-  className?: string
   /** Text displayed when the input field has no value. */
   placeholder?: string
   /** The name used to refer to the input, for forms. */
   name?: string
   /** The current value of the input field. You must always supply this from the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components. */
   value?: string
-  id?: string
   /** Specifies the id that should be used when hooking up label for attributes with input id attributes, if a label is present. */
   labelId?: string
   /** Label text, rendering the input inside a tag if specified. The `labelId` props is responsible for specifying for and id attributes. */
@@ -156,75 +154,91 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
   }
 
   public render() {
-    const props = this.props
+    const {
+      fullWidth,
+      copy,
+      icon,
+      onIconClick,
+      label,
+      labelId,
+      inputRef,
+      autoFocus,
+      name,
+      hint,
+      autoComplete,
+      onToggle,
+      disabled,
+      value,
+      type,
+      onFocus,
+      onBlur,
+      placeholder,
+      error,
+      onChange,
+      ...props
+    } = this.props
 
-    const forAttributeId = props.label && props.labelId
+    const forAttributeId = label && labelId
     const commonInputProps = {
-      innerRef: props.inputRef,
-      autoFocus: props.autoFocus,
-      name: props.name,
-      disabled: Boolean(props.disabled),
-      value: props.value || "",
-      isStandalone: !Boolean(props.label),
-      type: props.type,
-      onFocus: props.onFocus,
-      onBlur: props.onBlur,
-      placeholder: props.placeholder,
-      isError: Boolean(props.error),
-      onChange: (e: any) => {
-        if (props.onChange) {
-          props.onChange(e.target.value)
+      innerRef: inputRef,
+      autoFocus,
+      name,
+      disabled: Boolean(disabled),
+      value: value || "",
+      isStandalone: !Boolean(label),
+      type,
+      onFocus,
+      onBlur,
+      placeholder,
+      isError: Boolean(error),
+      onChange: (ev: React.FormEvent<HTMLInputElement>) => {
+        if (onChange) {
+          onChange(ev.currentTarget.value)
         }
       },
     }
 
-    const withIconButton = Boolean(props.icon && props.onIconClick) || Boolean(props.copy)
+    const withIconButton = Boolean(icon && onIconClick) || Boolean(copy)
     const inputButtonElement = this.getButtonElement()
 
-    if (props.label) {
+    if (label) {
       return (
-        <Label fullWidth={props.fullWidth} id={props.id} htmlFor={forAttributeId} className={props.className} left>
-          <LabelText>{props.label}</LabelText>
-          {(props.hint || props.onToggle) && (
+        <Label {...props} fullWidth={fullWidth} htmlFor={forAttributeId} left>
+          <LabelText>{label}</LabelText>
+          {(hint || onToggle) && (
             <FormFieldControls>
-              {props.hint && <Hint>{props.hint}</Hint>}
-              {props.onToggle ? (
+              {hint && <Hint>{hint}</Hint>}
+              {onToggle ? (
                 <FormFieldControl
                   onClick={() => {
-                    if (props.onToggle) {
-                      props.onToggle()
+                    if (onToggle) {
+                      onToggle()
                     }
                   }}
                 >
-                  <Icon name={props.disabled ? "Lock" : "Unlock"} size={12} />
+                  <Icon name={disabled ? "Lock" : "Unlock"} size={12} />
                 </FormFieldControl>
               ) : null}
             </FormFieldControls>
           )}
-          <InputFieldContainer fullWidth={props.fullWidth} withLabel>
+          <InputFieldContainer fullWidth={fullWidth} withLabel>
             {inputButtonElement}
             <InputField
               {...commonInputProps}
               id={forAttributeId}
-              autoComplete={props.autoComplete}
+              autoComplete={autoComplete}
               withIconButton={withIconButton}
             />
           </InputFieldContainer>
-          {props.error ? <FormFieldError>{props.error}</FormFieldError> : null}
+          {error ? <FormFieldError>{error}</FormFieldError> : null}
         </Label>
       )
     }
 
     return (
-      <InputFieldContainer fullWidth={props.fullWidth}>
+      <InputFieldContainer {...props} fullWidth={fullWidth}>
         {inputButtonElement}
-        <InputField
-          {...commonInputProps}
-          id={props.id}
-          className={props.className}
-          autoComplete={props.autoComplete}
-          withIconButton={withIconButton}
-        />
+        <InputField {...commonInputProps} autoComplete={autoComplete} withIconButton={withIconButton} />
       </InputFieldContainer>
     )
   }

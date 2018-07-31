@@ -25,7 +25,6 @@ export interface Props extends DefaultProps {
       end?: string
     },
   ) => void
-  className?: string
   /** Placeholder text when no dates selected */
   placeholder?: string
 }
@@ -131,9 +130,9 @@ class DatePicker extends React.Component<Props, State> {
   }
 
   public render() {
-    const { onChange, placeholder, start, end, label, min, max, id } = this.props
+    const { onChange, placeholder, start, end, label, min, max, ...props } = this.props
     const { isExpanded, month, year } = this.state
-    const domId = id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : undefined)
+    const domId = props.id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : undefined)
 
     const nextMonth = changeMonth(1, { month: this.state.month, year: this.state.year })
 
@@ -142,10 +141,10 @@ class DatePicker extends React.Component<Props, State> {
 
     const datePickerWithoutLabel = (
       <Container
+        {...props}
         innerRef={(node: React.ReactNode) => {
           this.containerNode = node
         }}
-        key={id}
         isExpanded={isExpanded}
       >
         {!!(start && end) && (

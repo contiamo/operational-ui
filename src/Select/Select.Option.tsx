@@ -31,7 +31,7 @@ const Container = styled("div")<{ selected: boolean }>(({ theme, selected }) => 
 })
 
 const IconContainer = styled("div")(({ theme }) => {
-  const size = 14
+  const size = 18
   return {
     display: "flex",
     alignItems: "center",
