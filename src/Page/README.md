@@ -300,7 +300,7 @@ const actions = (
 
 ```jsx
 const Tab = props => (
-  <PageContent {...props}>
+  <PageContent>
     {({ confirm }) => (
       <Card
         title={`${props.title} Tab`}
