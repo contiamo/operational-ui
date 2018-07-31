@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonGroup Component Should initialize properly 1`] = `
+<div
+  class="css-ftf61z"
+>
+  <div
+    class="css-ar73w8-Messages"
+  />
+  <div
+    class="css-1o7twmc-buttongroup"
+  >
+    <button
+      class="css-19mfxrd-button"
+    >
+      Hello
+    </button>
+  </div>
+</div>
+`;

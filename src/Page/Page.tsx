@@ -174,10 +174,10 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   }
 
   public render() {
-    const { title, actions, tabs } = this.props
+    const { title, actions, tabs, ...props } = this.props
 
     return (
-      <Container>
+      <Container {...props}>
         {title && (
           <TitleBar>
             <Title color="white">{title}</Title>

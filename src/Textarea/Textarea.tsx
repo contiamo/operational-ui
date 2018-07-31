@@ -11,8 +11,6 @@ import { FormFieldControls, FormFieldError, inputFocus, Label, LabelText, labelT
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
 
 export interface Props extends DefaultProps {
-  id?: string
-  className?: string
   /** Controlled value of the field */
   value: string
   /** Label of the field */
@@ -133,34 +131,49 @@ class Textarea extends React.Component<Props, State> {
   }
 
   public render() {
+    const {
+      fullWidth,
+      resize,
+      label,
+      hint,
+      disabled,
+      code,
+      value,
+      error,
+      action,
+      height,
+      copy,
+      onChange,
+      ...props
+    } = this.props
     return (
-      <Label fullWidth={this.props.fullWidth} className={this.props.className} id={this.props.id}>
-        {this.props.label && <LabelText>{this.props.label}</LabelText>}
-        {this.props.hint && (
+      <Label {...props} fullWidth={fullWidth}>
+        {label && <LabelText>{label}</LabelText>}
+        {hint && (
           <FormFieldControls>
-            <Hint>{this.props.hint}</Hint>
+            <Hint>{hint}</Hint>
           </FormFieldControls>
         )}
         <TextareaComp
-          disabled={this.props.disabled!}
-          isCode={this.props.code!}
-          value={this.props.value}
-          isError={Boolean(this.props.error)}
-          isAction={Boolean(this.props.action || this.props.copy)}
-          resize={this.props.resize!}
-          height={this.props.height}
+          disabled={disabled!}
+          isCode={code!}
+          value={value}
+          isError={Boolean(error)}
+          isAction={Boolean(action || copy)}
+          resize={resize!}
+          height={height}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            if (!this.props.onChange) {
+            if (!onChange) {
               return
             }
-            this.props.onChange(e.target.value)
+            onChange(e.target.value)
           }}
         />
         {(this.props.action || this.props.copy) && (
-          <ActionHeader isLabel={Boolean(this.props.label)}>
-            {this.props.action}
-            {this.props.copy && (
-              <CopyToClipboard text={this.props.value} onCopy={this.showTooltip}>
+          <ActionHeader isLabel={Boolean(label)}>
+            {action}
+            {copy && (
+              <CopyToClipboard text={value} onCopy={this.showTooltip}>
                 <div>
                   {this.state.showTooltip && <Tooltip right>Copied!</Tooltip>}
                   <Icon size={8} name="Copy" />
@@ -170,7 +183,7 @@ class Textarea extends React.Component<Props, State> {
             )}
           </ActionHeader>
         )}
-        {this.props.error && <FormFieldError>{this.props.error}</FormFieldError>}
+        {error && <FormFieldError>{error}</FormFieldError>}
       </Label>
     )
   }

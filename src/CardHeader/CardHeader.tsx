@@ -3,8 +3,6 @@ import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 export interface Props extends DefaultProps {
-  id?: string
-  className?: string
   /** As title, please note that is override by `title` if provided */
   children?: React.ReactNode
   /** Main title */
@@ -54,10 +52,10 @@ const ActionsContainer = styled("div")`
   align-items: center;
 `
 
-const CardHeader = (props: Props) => (
-  <Container id={props.id} className={props.className}>
-    <div>{props.title || props.children}</div>
-    <ActionsContainer>{props.action}</ActionsContainer>
+const CardHeader: React.SFC<Props> = ({ title, children, action, ...props }) => (
+  <Container {...props}>
+    <div>{title || children}</div>
+    <ActionsContainer>{action}</ActionsContainer>
   </Container>
 )
 

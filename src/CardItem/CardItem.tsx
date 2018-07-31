@@ -25,8 +25,8 @@ const CardItemBody = styled("div")(({ theme }) => ({
   marginBottom: theme.space.content,
 }))
 
-const CardItem: React.SFC<Props> = ({ title, value, children }) => (
-  <div>
+const CardItem: React.SFC<Props> = ({ title, value, children, ...props }) => (
+  <div {...props}>
     <CardItemTitle>{title}</CardItemTitle>
     <CardItemBody>{children || value}</CardItemBody>
   </div>
