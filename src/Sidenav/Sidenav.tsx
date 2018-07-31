@@ -1,24 +1,9 @@
 import * as React from "react"
 import { readableTextColor } from "../utils"
-import deprecate from "../utils/deprecate"
 import styled from "../utils/styled"
 
 export interface Props {
-  id?: string
-  className?: string
   children?: React.ReactNode
-  /**
-   * Expanded state
-   *
-   * @deprecated this prop is ignored as per design decision (all sidenavs are expanded)
-   */
-  expanded?: boolean
-  /**
-   * Specifies whether sidenav should expand on hover
-   *
-   * @deprecated this prop is ignored as per design decision (all sidenavs are expanded)
-   */
-  expandOnHover?: boolean
 }
 
 export interface State {
@@ -42,19 +27,6 @@ const Container = styled("div")(({ theme }) => {
   }
 })
 
-export class Sidenav extends React.Component<Props, State> {
-  public render() {
-    return (
-      <Container id={this.props.id} className={this.props.className}>
-        {this.props.children}
-      </Container>
-    )
-  }
-}
+const Sidenav: React.SFC<Props> = ({ children, ...props }) => <Container {...props}>{children}</Container>
 
-export default deprecate<Props>(
-  props =>
-    props.expanded || props.expandOnHover
-      ? ["`expanded` and `expandOnHover` props are no longer supported. Sidenavs are expanded by default."]
-      : [],
-)(Sidenav)
+export default Sidenav

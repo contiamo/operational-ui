@@ -6,8 +6,6 @@ import { Props as SidenavItemProps } from "../SidenavItem/SidenavItem"
 import { floatIn, isModifiedEvent } from "../utils"
 
 export interface Props {
-  id?: string
-  className?: string
   /** Main label for the header */
   label: string | React.ReactNode
   /** Navigation property à la react-router <Link/> */
@@ -129,8 +127,8 @@ const truncate = (maxLength: number) => (text: string) => {
   return text.slice(0, maxLength) + "..."
 }
 
-const SidenavHeader = (props: Props) => {
-  const isActive = Boolean(props.active)
+const SidenavHeader: React.SFC<Props> = ({ onToggle, active, to, ...props }) => {
+  const isActive = Boolean(active)
 
   // The implementation of this component relies on the fact that it only has valid
   // `SidenavItem` components as children. The type casting here expresses that assumption.
@@ -139,30 +137,29 @@ const SidenavHeader = (props: Props) => {
   const hasChildLinks = childSidenavItems.some(child => Boolean(child.props.to))
 
   // Actual `to` prop should invalidate if the element has sublinks and is active
-  const to = isActive && hasChildLinks ? undefined : props.to
-  const ContainerComponent = to ? ContainerLink : Container
+  const href = isActive && hasChildLinks ? undefined : to
+  const ContainerComponent = href ? ContainerLink : Container
 
   return (
     <OperationalContext>
       {ctx => {
         return (
           <ContainerComponent
-            id={props.id}
-            href={to}
-            className={[props.className, "op_sidenavheader"].filter(cls => Boolean(cls)).join(" ")}
+            {...props}
+            href={href}
             onClick={(ev: React.SyntheticEvent<Node>) => {
               if (props.onClick) {
                 props.onClick()
               }
-              if (props.onToggle) {
-                props.onToggle(!props.active)
+              if (onToggle) {
+                onToggle(!active)
               }
 
-              if (!isModifiedEvent(ev) && ctx.pushState && props.to) {
+              if (!isModifiedEvent(ev) && ctx.pushState && to) {
                 ev.preventDefault()
 
                 // Even if the `props.to` prop was ignored, redirect should still happen here
-                ctx.pushState(props.to)
+                ctx.pushState(to)
               }
             }}
           >
@@ -182,12 +179,12 @@ const SidenavHeader = (props: Props) => {
                 onClick={(ev: React.SyntheticEvent<Node>) => {
                   // Prevent clicks on parent in order to avoid conflicting behavior
                   ev.stopPropagation()
-                  if (props.onToggle) {
-                    props.onToggle(!props.active)
+                  if (onToggle) {
+                    onToggle(!active)
                   }
                 }}
               >
-                <Icon name={props.active ? "ChevronUp" : "ChevronDown"} />
+                <Icon name={active ? "ChevronUp" : "ChevronDown"} />
               </CloseButton>
             )}
             {isActive && <ItemsContainer>{props.children}</ItemsContainer>}
