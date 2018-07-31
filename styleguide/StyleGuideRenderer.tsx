@@ -32,7 +32,8 @@ injectGlobal({
   "#rsg-root": {
     height: "100vh",
   },
-  ".rsg--controls-12": {
+  // buttons style override
+  [`[class^="rsg--controls-"]`]: {
     marginTop: constants.space.content,
   },
   ".rsg--spacing-7": {
@@ -56,8 +57,6 @@ const { Provider, Consumer } = React.createContext({
 
 const Header = () => <HeaderBar logo={<Logo name="OperationalUI" />} end={<Version>v{version}</Version>} />
 
-const IsolatedContainer = styled("div")(({ theme }) => ({ width: 768, margin: `${theme.space.big}px auto 0` }))
-
 class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readonly<StyleGuideRendererState>> {
   public readonly state = {
     isSplashVisible: !Boolean(window.location.hash),
@@ -69,7 +68,9 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
   }
 
   private updateActiveComponent = (activeComponent: string) => {
-    window.history.pushState(null, undefined, `#${activeComponent}`)
+    if (this.props.hasSidebar) {
+      window.history.pushState(null, undefined, `#${activeComponent}`)
+    }
     this.setState({ activeComponent })
     return undefined
   }
@@ -91,10 +92,10 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
             {hasSidebar ? (
               <Layout header={<Header />} sidenav={toc} main={<Page title="Components">{children}</Page>} />
             ) : (
-              <div>
+              <>
                 <Header />
-                <IsolatedContainer>{children}</IsolatedContainer>
-              </div>
+                <Page fill>{children}</Page>
+              </>
             )}
           </Provider>
         )}

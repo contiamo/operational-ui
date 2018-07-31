@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import ControlledModal from "../Internals/ControlledModal"
+import ControlledModal from "./ControlledModal"
 
 export interface ModalOptions {
   title: React.ReactNode

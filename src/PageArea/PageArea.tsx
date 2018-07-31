@@ -1,16 +1,12 @@
-import * as React from "react"
 import styled from "../utils/styled"
 
 export interface PageAreaProps {
   /** Name of the area */
   name?: "main" | "side"
-  /** Your content */
-  children?: React.ReactNode
 }
 
-export const PageArea = styled("div")(({ name }: PageAreaProps) => ({
+export const PageArea = styled("div")<PageAreaProps>(({ name }) => ({
   gridArea: name,
-  position: "relative",
 }))
 
 export default PageArea

@@ -48,7 +48,7 @@ const sidebar = (
         }
       >
         {({ confirm, modal }) => (
-          <div>
+          <>
             {Array(10)
               .fill("Hello!!!!")
               .map((value, i) => <Card key={i}>{value}</Card>)}
@@ -62,7 +62,7 @@ const sidebar = (
             >
               Open a modal
             </Button>
-          </div>
+          </>
         )}
       </Page>
     }

@@ -70,5 +70,5 @@ const Overview = () => (
     </PageArea>
   </PageContent>
 )
-;<Page title="Bundle detail" compactHeader tabs={[{ name: "overview", component: Overview }]} />
+;<Page title="Bundle detail" compactHeader tabs={[{ name: "overview", children: <Overview /> }]} />
 ```
