@@ -191,9 +191,9 @@ class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
       onBlur,
       placeholder,
       isError: Boolean(error),
-      onChange: (e: any) => {
+      onChange: (ev: React.FormEvent<HTMLInputElement>) => {
         if (onChange) {
-          onChange(e.target.value)
+          onChange(ev.currentTarget.value)
         }
       },
     }
