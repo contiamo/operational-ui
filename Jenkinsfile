@@ -28,7 +28,7 @@ def npmPublish(tag,registry){
   sh """
   #!/bin/bash
   npm whoami --registry https://${registry}
-  npm version \$(npm show . version)-\$(git rev-parse --short HEAD) --no-git-tag-version --registry https://${registry}
+  npm version \$(npm show . version)-\$(git rev-parse --short HEAD) --no-git-tag-version --registry https://${registry} --unsafe-perm
   npm publish --tag next --registry https://${registry} || echo "Publish failed, possibly because the SHA is the same. Continuing..."
   """
 }
