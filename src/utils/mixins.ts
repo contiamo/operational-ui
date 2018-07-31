@@ -37,10 +37,6 @@ export const FormFieldControls = styled("div")({
 
 export const hoverTooltip: {} = {
   [`.${dangerousTooltipContainerClassName}`]: {
-    /*
-     * Rendering at 0.001 opacity is still necessary in order to determine tooltip dimensions
-     * See ../Tooltip/Tooltip.tsx implementation for more details
-     */
     visibility: "hidden",
     pointerEvents: "none",
   },

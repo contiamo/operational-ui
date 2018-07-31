@@ -8,7 +8,7 @@ exports[`Tooltip Component Should intialize without problems 1`] = `
     class="css-ar73w8-Messages"
   />
   <div
-    class="css-fnbfpp-tooltip"
+    class="css-626z2-tooltip"
   >
     <p>
       Hello

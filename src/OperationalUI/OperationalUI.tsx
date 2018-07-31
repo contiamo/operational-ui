@@ -5,7 +5,7 @@ import * as React from "react"
 
 import Message from "../Message/Message"
 import Messages from "../Messages/Messages"
-import { IMessage, MessageType } from "../OperationalContext/OperationalContext"
+import { IMessage, MessageType, WindowSize } from "../OperationalContext/OperationalContext"
 import { Provider } from "../OperationalContext/OperationalContext.init"
 import Progress from "../Progress/Progress"
 import { darken } from "../utils"
@@ -30,10 +30,7 @@ export interface Props {
 }
 
 export interface State {
-  windowSize: {
-    width: number
-    height: number
-  }
+  windowSize: WindowSize
   messages: Array<{
     message: IMessage
     addedAt: number
@@ -128,7 +125,7 @@ class OperationalUI extends React.Component<Props, State> {
   }
 
   public handleResize = debounce(() => {
-    this.setState(_ => ({
+    this.setState(() => ({
       windowSize: {
         width: window.innerWidth,
         height: window.innerHeight,

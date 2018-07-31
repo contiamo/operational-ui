@@ -21,9 +21,11 @@ export interface Context {
   setLoading: (isLoading: boolean) => void
 }
 
-// Defining a default context value here, used below when instantiating
-// the context consumer and provider below in order for context to be
-// correctly detected throughout the application.
+/**
+ * Defining a default context value here, used below when instantiating
+ * the context consumer and provider below in order for context to be
+ * correctly detected throughout the application.
+ */
 const defaultContext: Context = {
   pushState: undefined,
   replaceState: undefined,
