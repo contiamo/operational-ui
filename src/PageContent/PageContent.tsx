@@ -1,7 +1,6 @@
 import * as React from "react"
 import Confirm, { ConfirmOptions } from "../Internals/Confirm"
 import Modal, { ModalOptions } from "../Internals/Modal"
-import { PageProps } from "../Page/Page"
 import styled from "../utils/styled"
 
 export interface ModalConfirmContext {
@@ -9,16 +8,16 @@ export interface ModalConfirmContext {
   confirm: (confirmOptions: ConfirmOptions) => void
 }
 
-export interface Props {
+export interface PageContentProps {
   /** Children to render, you */
-  children?: PageProps["children"]
+  children?: React.ReactNode | ((modalConfirmContext: ModalConfirmContext) => React.ReactNode)
   /** Areas template for `PageArea` disposition */
   areas?: "main" | "main side" | "side main"
   /** Fill the entire width */
   fill?: boolean
 }
 
-const StyledPageContent = styled("div")<{ areas?: Props["areas"]; fill_?: boolean }>(props => {
+const StyledPageContent = styled("div")<{ areas?: PageContentProps["areas"]; fill_?: boolean }>(props => {
   const gridTemplateColumns = {
     main: "auto",
     "main side": "auto 280px",
@@ -47,7 +46,7 @@ const Container = styled("div")<{ fill_?: boolean }>(() => ({
 }))
 
 // `fill` must be rename internally to avoid conflict with the native `fill` DOM attribute
-const PageContent: React.SFC<Props> = ({ fill, children, ...props }) => {
+const PageContent: React.SFC<PageContentProps> = ({ fill, children, ...props }) => {
   return (
     <Modal>
       {modal => (

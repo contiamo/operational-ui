@@ -1,14 +1,14 @@
 import * as React from "react"
 import { Title } from ".."
 import PageArea from "../PageArea/PageArea"
-import PageContent, { ModalConfirmContext } from "../PageContent/PageContent"
+import PageContent, { PageContentProps } from "../PageContent/PageContent"
 import styled from "../utils/styled"
 
 export type Tabs = Array<{ name: string; children: React.ReactNode; hidden?: boolean }>
 
 export interface BaseProps {
   /** Content of the page */
-  children?: React.ReactNode | ((modalConfirmContext: ModalConfirmContext) => React.ReactNode)
+  children?: PageContentProps["children"]
   /** Page title */
   title?: string
   /** Page actions, typically `condensed button` component inside a fragment */
