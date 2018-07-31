@@ -1,7 +1,7 @@
 import { render } from "enzyme"
 import * as React from "react"
-import { Code as ThemelessCode } from "../index"
-import wrapDefaultTheme from "../utils/wrap-default-theme"
+import { Code as ThemelessCode } from "../../index"
+import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
 const Code = wrapDefaultTheme(ThemelessCode)
 
