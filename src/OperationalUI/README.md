@@ -1,9 +1,9 @@
-Main provider for Operational UI. Should need to wrap all your application with this component.
+Main wrapper for Operational UI, required at the top level of the application. See `OperationalContext` for some more involved context-reliant features of this component.
 
 ### Classic example
 
 ```jsx static
-<OperationalUI withBaseStyles>
+<OperationalUI>
   <App />
 </OperationalUI>
 ```
@@ -56,65 +56,4 @@ class RoutingComponent extends React.Component {
 }
 
 ;<RoutingComponent />
-```
-
-### Setting up Message Management
-
-You can use `OperationalUI`'s internal flash message feature to automatically render and manage messages by simply using the `pushMessage` method provided in context, as shown in the code snippet below:
-
-```jsx
-// This import statement is necessary because of the wiring of this demo website.
-// When using the library outside, use the following:
-// `import { OperationalUI, OperationalContext, Button } from "@operational/components"`
-const OperationalContext = require("../").OperationalContext
-
-class MessageHandler extends React.Component {
-  render() {
-    return (
-      <OperationalUI>
-        <OperationalContext>
-          {operationalContext => (
-            <div>
-              <Button
-                color="primary"
-                onClick={() => {
-                  operationalContext.pushMessage({
-                    body: "Info message",
-                    type: "info",
-                  })
-                }}
-              >
-                Create an info message
-              </Button>
-              <Button
-                color="success"
-                onClick={() => {
-                  operationalContext.pushMessage({
-                    body: "Success message",
-                    type: "success",
-                  })
-                }}
-              >
-                Create a success message
-              </Button>
-              <Button
-                color="error"
-                onClick={() => {
-                  operationalContext.pushMessage({
-                    body: "Error message",
-                    type: "error",
-                  })
-                }}
-              >
-                Create an error message
-              </Button>
-            </div>
-          )}
-        </OperationalContext>
-      </OperationalUI>
-    )
-  }
-}
-
-;<MessageHandler />
 ```

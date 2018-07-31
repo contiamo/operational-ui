@@ -1,10 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Table Component Should render 1`] = `
-Array [
+<div
+  class="css-ftf61z"
+>
   <div
     class="css-ar73w8-Messages"
-  />,
+  />
   <table
     class="css-39fsjl"
   >
@@ -25,6 +27,6 @@ Array [
         </td>
       </tr>
     </tbody>
-  </table>,
-]
+  </table>
+</div>
 `;

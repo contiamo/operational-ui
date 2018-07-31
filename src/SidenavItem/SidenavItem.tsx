@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled, { Interpolation, Themed } from "react-emotion"
 import Icon, { IconName } from "../Icon/Icon"
-import { Consumer as OperationalContext } from "../OperationalUI/OperationalUI"
+import OperationalContext from "../OperationalContext/OperationalContext"
 import { isModifiedEvent } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 

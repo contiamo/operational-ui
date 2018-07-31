@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Consumer } from "../OperationalUI/OperationalUI"
+import OperationalContext from "../OperationalContext/OperationalContext"
 import { isModifiedEvent } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
@@ -63,7 +63,7 @@ const Logo: React.SFC<Props> = ({ stack, name, size, color, to, ...props }) => {
     )
   }
   return (
-    <Consumer>
+    <OperationalContext>
       {ctx => (
         <LinkContainer
           size_={size!}
@@ -86,7 +86,7 @@ const Logo: React.SFC<Props> = ({ stack, name, size, color, to, ...props }) => {
           {svg}
         </LinkContainer>
       )}
-    </Consumer>
+    </OperationalContext>
   )
 }
 

@@ -1,17 +1,22 @@
 import { injectGlobal } from "emotion"
 import { ThemeProvider } from "emotion-theming"
+import debounce from "lodash/debounce"
 import * as React from "react"
 
 import Message from "../Message/Message"
 import Messages from "../Messages/Messages"
+import { IMessage, MessageType, WindowSize } from "../OperationalContext/OperationalContext"
+import { Provider } from "../OperationalContext/OperationalContext.init"
+import Progress from "../Progress/Progress"
 import { darken } from "../utils"
 import constants, { OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface Props {
   /** Children */
   children?: React.ReactNode
-  /** Use the base styles */
-  withBaseStyles?: boolean
+  /** Omit setting a set of base styles */
+  noBaseStyles?: boolean
   /** Custom push state method expecting a single string */
   pushState?: (path: string) => void
   /** Custom replace state method expecting a single string */
@@ -24,47 +29,14 @@ export interface Props {
   hideMessageAfter?: number
 }
 
-export type MessageType = "info" | "success" | "error"
-
-export interface IMessage {
-  body: string
-  type: MessageType
-}
-
 export interface State {
+  windowSize: WindowSize
   messages: Array<{
     message: IMessage
     addedAt: number
   }>
+  isLoading: boolean
 }
-
-export interface Context {
-  pushState?: (url: string) => void
-  replaceState?: (url: string) => void
-  pushMessage: (message: IMessage) => void
-}
-
-const colorByMessageType = (type: MessageType): string => {
-  switch (type) {
-    case "info":
-      return "primary"
-    case "success":
-      return "success"
-    case "error":
-      return "error"
-  }
-}
-
-// Defining a default context value here, used below when instantiating
-// the context consumer and provider below in order for context to be
-// correctly detected throughout the application.
-const defaultContext: Context = {
-  pushState: undefined,
-  replaceState: undefined,
-  pushMessage: (_: IMessage) => void 0,
-}
-
-const { Provider, Consumer } = React.createContext(defaultContext)
 
 const baseStylesheet = (theme: OperationalStyleConstants): string => `
 * {
@@ -98,9 +70,31 @@ a:hover: {
 }
 `
 
+const Container = styled("div")`
+  position: relative;
+  min-height: 60px;
+  height: 100%;
+`
+
+const colorByMessageType = (type: MessageType): string => {
+  switch (type) {
+    case "info":
+      return "primary"
+    case "success":
+      return "success"
+    case "error":
+      return "error"
+  }
+}
+
 class OperationalUI extends React.Component<Props, State> {
   public state: State = {
+    windowSize: {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    },
     messages: [],
+    isLoading: false,
   }
 
   /**
@@ -130,16 +124,31 @@ class OperationalUI extends React.Component<Props, State> {
     }
   }
 
+  public handleResize = debounce(() => {
+    this.setState(() => ({
+      windowSize: {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      },
+    }))
+  }, 200)
+
+  public setLoading = (isLoading: boolean) => {
+    this.setState(() => ({ isLoading }))
+  }
+
   public componentDidMount() {
-    if (this.props.withBaseStyles) {
+    if (!this.props.noBaseStyles) {
       injectGlobal(baseStylesheet(constants))
     }
+    window.addEventListener("resize", this.handleResize)
   }
 
   public componentWillUnmount() {
     if (this.messageTimerInterval) {
       window.clearInterval(this.messageTimerInterval)
     }
+    window.removeEventListener("resize", this.handleResize)
   }
 
   public render() {
@@ -160,9 +169,13 @@ class OperationalUI extends React.Component<Props, State> {
                 this.messageTimerInterval = window.setInterval(() => this.removeOutdatedMessages(), 2000)
               }
             },
+            loading: this.state.isLoading,
+            setLoading: this.setLoading,
+            windowSize: this.state.windowSize,
           }}
         >
-          <>
+          <Container>
+            {this.state.isLoading && <Progress />}
             <Messages>
               {this.state.messages.map(({ message }, index) => (
                 <Message
@@ -179,7 +192,7 @@ class OperationalUI extends React.Component<Props, State> {
               ))}
             </Messages>
             {children}
-          </>
+          </Container>
         </Provider>
       </ThemeProvider>
     )
@@ -187,5 +200,3 @@ class OperationalUI extends React.Component<Props, State> {
 }
 
 export default OperationalUI
-
-export { Consumer }

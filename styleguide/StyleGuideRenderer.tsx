@@ -79,7 +79,7 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
     const { children, toc, hasSidebar } = this.props
     const { isSplashVisible } = this.state
     return (
-      <OperationalUI withBaseStyles>
+      <OperationalUI>
         {isSplashVisible ? (
           <Splash hide={this.hideSplash} />
         ) : (

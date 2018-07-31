@@ -1,10 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Spinner Component Should render 1`] = `
-Array [
+<div
+  class="css-ftf61z"
+>
   <div
     class="css-ar73w8-Messages"
-  />,
+  />
   <div
     class="css-1w0xah4"
   >
@@ -40,6 +42,6 @@ Array [
         />
       </svg>
     </div>
-  </div>,
-]
-`
+  </div>
+</div>
+`;
