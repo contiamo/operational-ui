@@ -20,6 +20,8 @@ export interface Props {
   onChange?: (val: string) => void
   /** Change the font to monospace to better display of code */
   code?: boolean
+  /** Custom starting height */
+  height?: number
   /** Text for a hint */
   hint?: string
   /** Error text */
@@ -46,9 +48,11 @@ const TextareaComp = styled("textarea")<{
   isAction: boolean
   disabled: boolean
   resize: ResizeOptions
-}>(({ theme, isCode, isError, isAction, disabled, resize }) => {
+  height?: number
+}>(({ theme, isCode, isError, isAction, disabled, resize, height }) => {
   const topPadding = (isAction ? 20 : 0) + theme.space.small
   return {
+    height,
     resize,
     fontSize: theme.font.size.small,
     fontWeight: theme.font.weight.regular,
@@ -143,6 +147,7 @@ class Textarea extends React.Component<Props, State> {
           isError={Boolean(this.props.error)}
           isAction={Boolean(this.props.action || this.props.copy)}
           resize={this.props.resize!}
+          height={this.props.height}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             if (!this.props.onChange) {
               return

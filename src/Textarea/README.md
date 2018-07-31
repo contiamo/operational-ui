@@ -12,6 +12,7 @@ class MyForm extends React.Component {
       v5: "",
       v6: "",
       v7: "",
+      v8: "",
     }
     this.handleChange = key => value => {
       this.setState({ [key]: value })
@@ -19,7 +20,7 @@ class MyForm extends React.Component {
   }
 
   render() {
-    const { v1, v2, v3, v4, v5, v6, v7 } = this.state
+    const { v1, v2, v3, v4, v5, v6, v7, v8 } = this.state
 
     return (
       <Form>
@@ -40,6 +41,7 @@ class MyForm extends React.Component {
         <Textarea value={v5} onChange={this.handleChange("v5")} label="with hint" hint="this is a hint" />
         <Textarea value={v6} onChange={this.handleChange("v6")} label="disabled" disabled />
         <Textarea value={v7} onChange={this.handleChange("v7")} label="a code" code />
+        <Textarea value={v8} onChange={this.handleChange("v7")} label="fixed height" height={200} />
       </Form>
     )
   }
