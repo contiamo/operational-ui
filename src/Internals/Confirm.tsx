@@ -4,12 +4,9 @@ import styled from "../utils/styled"
 import Button, { ButtonProps } from "../Button/Button"
 import ControlledModal from "./ControlledModal"
 
-const Actions = styled("div")(({ theme }) => ({
-  position: "absolute",
-  textAlign: "right",
-  bottom: theme.space.element,
-  right: theme.space.element,
-}))
+const Actions = styled("div")({
+  alignSelf: "flex-end",
+})
 
 export interface ConfirmOptions<T = {}> {
   title: React.ReactNode
@@ -76,12 +73,14 @@ export class Confirm extends React.Component<Props, Readonly<State>> {
         {this.props.children(this.openConfirm)}
         {isOpen && (
           <ControlledModal title={this.state.options.title} onClose={this.closeConfirm.bind(this)}>
-            {typeof this.state.options.body === "function"
-              ? React.createElement(this.state.options.body, {
-                  setConfirmState: this.setConfirmState,
-                  state: this.state.options.state,
-                })
-              : this.state.options.body}
+            <div>
+              {typeof this.state.options.body === "function"
+                ? React.createElement(this.state.options.body, {
+                    setConfirmState: this.setConfirmState,
+                    state: this.state.options.state,
+                  })
+                : this.state.options.body}
+            </div>
             <Actions>
               {React.cloneElement(this.state.options.cancelButton || <Button>Cancel</Button>, {
                 onClick: this.onCancelClick,
