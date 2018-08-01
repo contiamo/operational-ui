@@ -2,15 +2,12 @@ import * as React from "react"
 import { CardHeader } from "../src"
 
 export interface SectionHeadingRendererProps {
-  children: React.ReactNode | React.ReactNode[]
+  children: React.ReactNode
   toolbar: React.ReactNode
-  id: string
+  depth: number
 }
 
-const SectionHeadingRenderer: React.SFC<SectionHeadingRendererProps> = ({ children, toolbar, id }) => (
-  <CardHeader id={id} action={toolbar}>
-    {children}
-  </CardHeader>
-)
+const SectionHeadingRenderer: React.SFC<SectionHeadingRendererProps> = ({ children, toolbar, depth }) =>
+  depth > 1 ? <CardHeader action={toolbar}>{children}</CardHeader> : null
 
 export default SectionHeadingRenderer

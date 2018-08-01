@@ -33,7 +33,7 @@ const Title = styled("div")(({ theme }) => ({
   fontFamily: theme.font.family.main,
   fontWeight: theme.font.weight.medium,
   color: theme.color.text.dark,
-  fontSize: 14,
+  fontSize: theme.font.size.body,
   borderBottom: `1px solid ${theme.color.separators.default}`,
   paddingBottom: theme.space.small,
   marginBottom: theme.space.content,

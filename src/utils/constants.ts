@@ -110,6 +110,7 @@ const font = {
     main: `"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif`,
     code: "Menlo, monospace",
   },
+  lineHeight: 1.4,
   size: {
     /** 18px */
     title: 18,

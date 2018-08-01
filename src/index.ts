@@ -52,6 +52,9 @@ export { default as Table } from "./Table/Table"
 export { default as Textarea } from "./Textarea/Textarea"
 export { default as Tooltip } from "./Tooltip/Tooltip"
 export { default as Tree } from "./Tree/Tree"
-export { Title, Heading1, Heading2, Small, Body } from "./Typography/Typography"
+export { default as FinePrint } from "./Typography/FinePrint"
+export { default as Body } from "./Typography/Body"
+export { default as Title } from "./Typography/Title"
+export { default as Small } from "./Typography/Small"
 
 export default OperationalUI
