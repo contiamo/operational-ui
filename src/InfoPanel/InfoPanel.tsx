@@ -38,7 +38,7 @@ const SpinnerContainer = styled("div")(
     marginTop: 4, // precision measurement to align with  text sibling that has line-height 1.4
   },
   ({ theme }) => ({
-    marginLeft: theme.space.base,
+    marginLeft: theme.space.small,
   }),
 )
 
