@@ -7,6 +7,7 @@ export const Title = styled("h1")<{
   fontSize: theme.font.size.title,
   fontFamily: theme.font.family.main,
   fontWeight: theme.font.weight.medium,
+  lineHeight: theme.font.lineHeight,
   margin: 0,
   color: theme.color.text[color || "default"],
 }))
