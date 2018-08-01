@@ -10,10 +10,6 @@ export interface Item {
 }
 
 export interface Props extends DefaultProps {
-  /** Id */
-  id?: string
-  /** Class name */
-  className?: string
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
   /** Specify whether the menu items are visible. Overrides internal open state that triggers on click. */
   open?: boolean
@@ -97,25 +93,23 @@ class ContextMenu extends React.Component<Props, State> {
       throw new Error("No array of items has been provided for the ContextMenu.")
     }
 
-    const children =
-      typeof this.props.children === "function" ? this.props.children(this.state.isOpen) : this.props.children
+    const { items, condensed, children, open, embedChildrenInMenu, align, width, ...props } = this.props
+
+    const renderedChildren = typeof children === "function" ? children(this.state.isOpen) : children
     return (
-      <Container id={this.props.id} className={this.props.className} align={this.props.align} onClick={this.toggle}>
-        {children}
-        <MenuContainer
-          isExpanded={this.props.open || this.state.isOpen}
-          embedChildrenInMenu={this.props.embedChildrenInMenu}
-        >
-          {this.props.embedChildrenInMenu && children}
-          {this.props.items.map((item: string | Item, index: number) => {
+      <Container {...props} align={align} onClick={this.toggle}>
+        {renderedChildren}
+        <MenuContainer isExpanded={open || this.state.isOpen} embedChildrenInMenu={this.props.embedChildrenInMenu}>
+          {embedChildrenInMenu && renderedChildren}
+          {items.map((item: string | Item, index: number) => {
             const clickHandler = (typeof item !== "string" && item.onClick) || this.props.onClick
             return (
               <StyledContextMenuItem
                 onClick={clickHandler && (() => clickHandler(item))}
                 key={`contextmenu-${index}`}
-                condensed={this.props.condensed}
-                align={this.props.align}
-                width={this.props.width}
+                condensed={condensed}
+                align={align}
+                width={width}
               >
                 {typeof item === "string" ? item : item.label}
               </StyledContextMenuItem>
