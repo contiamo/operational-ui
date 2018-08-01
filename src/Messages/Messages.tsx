@@ -2,7 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface MessagesProps extends DefaultProps {
   children?: React.ReactNode
 }
 
@@ -19,6 +19,6 @@ const Container = styled("div")(({ theme }) => ({
   },
 }))
 
-const Messages: React.SFC<Props> = ({ children, ...props }) => <Container {...props}>{children}</Container>
+const Messages: React.SFC<MessagesProps> = ({ children, ...props }) => <Container {...props}>{children}</Container>
 
 export default Messages

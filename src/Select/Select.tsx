@@ -23,7 +23,7 @@ const displayOption = (opt: IOption): string => {
   return String(opt.value)
 }
 
-export interface Props extends DefaultProps {
+export interface SelectProps extends DefaultProps {
   /** Options available */
   options: IOption[]
   /** Current value */
@@ -50,7 +50,7 @@ export interface State {
   search: string
 }
 
-const Container = styled("div")<Partial<Props>>(({ theme, color, disabled, naked }) => {
+const Container = styled("div")<Partial<SelectProps>>(({ theme, color, disabled, naked }) => {
   const backgroundColor = naked ? "transparent" : expandColor(theme, color) || theme.color.white
   const dropdownArrowWidth = 56
   return {
@@ -131,7 +131,7 @@ const OptionsList = styled("div")({
   overflow: "auto",
 })
 
-class Select extends React.Component<Props, State> {
+class Select extends React.Component<SelectProps, State> {
   public state: State = {
     open: false,
     updating: false,
@@ -140,7 +140,7 @@ class Select extends React.Component<Props, State> {
 
   public containerNode?: Node
 
-  public static defaultProps: Partial<Props> = {
+  public static defaultProps: Partial<SelectProps> = {
     placeholder: "No entries selected",
     naked: false,
   }

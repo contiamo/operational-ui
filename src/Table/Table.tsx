@@ -2,7 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface TableProps extends DefaultProps {
   /** Table columns headings */
   columns: string[]
   /** Table rows as an array of cells */
@@ -90,7 +90,14 @@ const EmptyView = styled(Td)(({ theme }) => ({
   textAlign: "center",
 }))
 
-const Table: React.SFC<Props> = ({ rows, columns, onRowClick, rowActionName, __experimentalRowActions, ...props }) => {
+const Table: React.SFC<TableProps> = ({
+  rows,
+  columns,
+  onRowClick,
+  rowActionName,
+  __experimentalRowActions,
+  ...props
+}) => {
   return (
     <Container {...props}>
       <thead>

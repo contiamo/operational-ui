@@ -3,7 +3,7 @@ import { DefaultProps } from "../types"
 import { readableTextColor } from "../utils"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface SidenavProps extends DefaultProps {
   children?: React.ReactNode
 }
 
@@ -28,6 +28,6 @@ const Container = styled("div")(({ theme }) => {
   }
 })
 
-const Sidenav: React.SFC<Props> = ({ children, ...props }) => <Container {...props}>{children}</Container>
+const Sidenav: React.SFC<SidenavProps> = ({ children, ...props }) => <Container {...props}>{children}</Container>
 
 export default Sidenav

@@ -6,7 +6,7 @@ import styled from "../utils/styled"
 import { Icon } from "../"
 import { expandColor } from "../utils/constants"
 
-export interface Props extends DefaultProps {
+export interface MessageProps extends DefaultProps {
   className?: string
   /** Message contents, can be any html element/React fragment. */
   children?: React.ReactNode
@@ -53,7 +53,7 @@ const IconContainer = styled("div")(({ theme }) => ({
   },
 }))
 
-const Message: React.SFC<Props> = ({ color, onClose, children, ...props }) => (
+const Message: React.SFC<MessageProps> = ({ color, onClose, children, ...props }) => (
   <Container {...props} color_={color}>
     <IconContainer onClick={onClose}>
       <Icon name="No" />

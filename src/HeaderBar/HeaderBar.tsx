@@ -2,7 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface HeaderProps extends DefaultProps {
+export interface HeaderBarProps extends DefaultProps {
   /**
    * The "logo" element of the HeaderBar.
    * Typically, the leftmost element.
@@ -48,7 +48,7 @@ const EndContainer = styled("div")`
   justify-content: flex-end;
 `
 
-const HeaderBar: React.SFC<HeaderProps> = ({ logo, main, end }) => (
+const HeaderBar: React.SFC<HeaderBarProps> = ({ logo, main, end }) => (
   <Bar>
     <StartContainer>{logo}</StartContainer>
     <CenterContainer>{main}</CenterContainer>

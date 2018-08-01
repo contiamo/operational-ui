@@ -5,7 +5,7 @@ import { colorMapper } from "../utils/color"
 import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface AvatarProps extends DefaultProps {
   /** Name of the person */
   name: string
   /** Title of the person */
@@ -49,12 +49,12 @@ const Title = styled("div")(({ theme }) => ({
 }))
 
 const Picture = styled("div")<{
-  color?: Props["color"]
+  color?: AvatarProps["color"]
   colorAssignment?: string
-  photo?: Props["photo"]
-  showName: Props["showName"]
-  addBorder: Props["addBorder"]
-  size: Props["size"]
+  photo?: AvatarProps["photo"]
+  showName: AvatarProps["showName"]
+  addBorder: AvatarProps["addBorder"]
+  size: AvatarProps["size"]
 }>(
   {
     textTransform: "uppercase",
@@ -108,7 +108,7 @@ const Picture = styled("div")<{
   },
 )
 
-const Avatar: React.SFC<Props> = props => {
+const Avatar: React.SFC<AvatarProps> = props => {
   const initials = getInitials(props.name)
   return (
     <Container {...props}>

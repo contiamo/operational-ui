@@ -8,7 +8,7 @@ export interface AvatarItem {
   name: string
 }
 
-export interface Props extends DefaultProps {
+export interface AvatarGroupProps extends DefaultProps {
   children?: React.ReactNode
   /** Avatars list */
   avatars?: AvatarItem[]
@@ -28,7 +28,7 @@ const GroupedAvatar = styled(Avatar)({
   marginLeft: -8,
 })
 
-const AvatarGroup: React.SFC<Props> = ({ avatars, size, onMoreClick, ...props }) => {
+const AvatarGroup: React.SFC<AvatarGroupProps> = ({ avatars, size, onMoreClick, ...props }) => {
   const avatarsToDisplay = avatars
     ? avatars.map((avatar, i) => <GroupedAvatar addBorder size={size} key={i} {...avatar} />)
     : props.children

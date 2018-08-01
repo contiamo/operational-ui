@@ -12,7 +12,7 @@ import { darken } from "../utils"
 import constants, { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface OperationalUIProps {
   /** Children */
   children?: React.ReactNode
   /** Omit setting a set of base styles */
@@ -87,7 +87,7 @@ const colorByMessageType = (type: MessageType): string => {
   }
 }
 
-class OperationalUI extends React.Component<Props, State> {
+class OperationalUI extends React.Component<OperationalUIProps, State> {
   public state: State = {
     windowSize: {
       width: window.innerWidth,

@@ -2,7 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface ButtonGroupProps extends DefaultProps {
   children?: React.ReactNode
 }
 
@@ -24,6 +24,8 @@ const Container = styled("div")({
   },
 })
 
-const ButtonGroup: React.SFC<Props> = ({ children, ...props }) => <Container {...props}>{children}</Container>
+const ButtonGroup: React.SFC<ButtonGroupProps> = ({ children, ...props }) => (
+  <Container {...props}>{children}</Container>
+)
 
 export default ButtonGroup

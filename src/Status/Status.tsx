@@ -18,7 +18,7 @@ export interface LatestProps extends DefaultProps {
   state?: "error" | "success" | "running" | "neutral"
 }
 
-export type Props = DeprecatedProps | LatestProps
+export type StatusProps = DeprecatedProps | LatestProps
 
 const getColorFromProps = ({
   running,
@@ -26,7 +26,7 @@ const getColorFromProps = ({
   error,
   state,
   theme,
-}: Props & { theme: OperationalStyleConstants }): string => {
+}: StatusProps & { theme: OperationalStyleConstants }): string => {
   if (state) {
     return (
       new Map<LatestProps["state"], string>(
@@ -51,7 +51,7 @@ const getColorFromProps = ({
   return "#989898"
 }
 
-const StatusDot = styled("div")<Props>(props => ({
+const StatusDot = styled("div")<StatusProps>(props => ({
   display: "inline-block",
   marginRight: props.theme.space.small,
   width: props.theme.space.small,
@@ -64,7 +64,7 @@ const StatusDot = styled("div")<Props>(props => ({
   backgroundColor: getColorFromProps(props),
 }))
 
-const Status: React.SFC<Props> = ({ children, ...props }) => (
+const Status: React.SFC<StatusProps> = ({ children, ...props }) => (
   <>
     <StatusDot {...props} />
     {children}

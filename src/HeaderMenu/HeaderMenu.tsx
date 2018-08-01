@@ -1,9 +1,9 @@
 import * as React from "react"
-import ContextMenu, { Props as ContextMenuProps } from "../ContextMenu/ContextMenu"
+import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface HeaderMenuProps extends DefaultProps {
   /** Clickable component(s) from which menu appears  */
   children: React.ReactNode[]
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
@@ -20,9 +20,9 @@ const backgroundColor = "hsla(0, 0%, 100%, 0.1)"
 const boxShadow = "0 3px 6px rgba(0, 0%, 0%, 0.3)"
 
 const Container = styled("div")<{
-  align: Props["align"]
+  align: HeaderMenuProps["align"]
   isOpen: boolean
-  withCaret: Props["withCaret"]
+  withCaret: HeaderMenuProps["withCaret"]
 }>(({ theme, align, isOpen, withCaret }) => ({
   width: 250,
   lineHeight: "50px",
@@ -67,7 +67,7 @@ const Container = styled("div")<{
     : {}),
 }))
 
-const HeaderMenu: React.SFC<Props> = (props: Props) => {
+const HeaderMenu: React.SFC<HeaderMenuProps> = props => {
   return (
     <ContextMenu {...props}>
       {isOpen => (

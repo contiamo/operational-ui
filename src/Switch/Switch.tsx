@@ -2,7 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface SwitchProps extends DefaultProps {
   /** Is the switch on? */
   on: boolean
   /** A change handler. Passes the new `on` boolean */
@@ -23,7 +23,7 @@ const Container = styled("div")({
   cursor: "pointer",
 })
 
-const Button = styled("div")<Props>(
+const Button = styled("div")<SwitchProps>(
   {
     height,
     transition: "transform .3s",
@@ -42,7 +42,7 @@ const Button = styled("div")<Props>(
   }),
 )
 
-const Rail = styled("div")<Props>(
+const Rail = styled("div")<SwitchProps>(
   {
     width,
     height: railHeight,
@@ -71,7 +71,7 @@ const Rail = styled("div")<Props>(
   }),
 )
 
-const Switch: React.SFC<Props> = ({ on, onChange, ...props }) => (
+const Switch: React.SFC<SwitchProps> = ({ on, onChange, ...props }) => (
   <Container
     {...props}
     onClick={() => {

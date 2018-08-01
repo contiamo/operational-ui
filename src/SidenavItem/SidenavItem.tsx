@@ -6,7 +6,7 @@ import { DefaultProps } from "../types"
 import { isModifiedEvent } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 
-export interface Props extends DefaultProps {
+export interface SidenavItemProps extends DefaultProps {
   onClick?: () => void
   /** Navigation property à la react-router <Link/> */
   to?: string
@@ -66,7 +66,7 @@ const Label = styled("span")(({ theme }) => ({
   paddingLeft: theme.space.base,
 }))
 
-const SidenavItem: React.SFC<Props> = ({ to, active, icon, label, ...props }) => {
+const SidenavItem: React.SFC<SidenavItemProps> = ({ to, active, icon, label, ...props }) => {
   const ContainerComponent = to ? ContainerLink : Container
   const isActive = Boolean(active)
   return (

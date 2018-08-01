@@ -6,7 +6,7 @@ import { readableTextColor } from "../utils"
 import { colorMapper } from "../utils/color"
 import { expandColor } from "../utils/constants"
 
-export interface Props extends DefaultProps {
+export interface NameTagProps extends DefaultProps {
   /** Background color */
   color?: string
   /**
@@ -24,9 +24,9 @@ export interface Props extends DefaultProps {
 }
 
 const Container = styled("div")<{
-  color?: Props["color"]
-  left?: Props["left"]
-  right?: Props["right"]
+  color?: NameTagProps["color"]
+  left?: NameTagProps["left"]
+  right?: NameTagProps["right"]
   children: string
   assignColor: boolean
 }>(({ theme, color, left, right, children, assignColor }) => {
@@ -50,7 +50,7 @@ const Container = styled("div")<{
   }
 })
 
-const NameTag: React.SFC<Props> = props => (
+const NameTag: React.SFC<NameTagProps> = props => (
   <Container {...props} assignColor={Boolean(!props.color)}>
     {props.children || ""}
   </Container>

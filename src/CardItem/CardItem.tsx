@@ -2,7 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface CardItemProps extends DefaultProps {
   /** Title of the item */
   title: string
   /** Value of the item */
@@ -25,7 +25,7 @@ const CardItemBody = styled("div")(({ theme }) => ({
   marginBottom: theme.space.content,
 }))
 
-const CardItem: React.SFC<Props> = ({ title, value, children, ...props }) => (
+const CardItem: React.SFC<CardItemProps> = ({ title, value, children, ...props }) => (
   <div {...props}>
     <CardItemTitle>{title}</CardItemTitle>
     <CardItemBody>{children || value}</CardItemBody>

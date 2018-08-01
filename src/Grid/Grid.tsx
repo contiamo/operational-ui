@@ -2,7 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface GridProps extends DefaultProps {
   /** Either 'IDE', or of an `MxN` format, with `M` and `N` as integers. */
   type: string
   children?: React.ReactNode
@@ -43,7 +43,7 @@ const Container = styled("div")<{ gridType: string }>(({ theme, gridType }) => (
   ...getGridCSSProperties(gridType),
 }))
 
-const Grid: React.SFC<Props> = ({ type, ...props }) => (
+const Grid: React.SFC<GridProps> = ({ type, ...props }) => (
   <Container {...props} gridType={type}>
     {props.children}
   </Container>

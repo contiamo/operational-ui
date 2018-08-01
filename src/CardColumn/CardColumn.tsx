@@ -2,7 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface CardColumnProps extends DefaultProps {
   /** Column title */
   title?: string
   /** Align the content to the right */
@@ -11,7 +11,7 @@ export interface Props extends DefaultProps {
   flexColumn?: boolean
 }
 
-const Container = styled("div")<Props>(({ theme, contentRight, flexColumn }) => ({
+const Container = styled("div")<CardColumnProps>(({ theme, contentRight, flexColumn }) => ({
   label: "card-column",
   minWidth: 280 / 2,
   padding: theme!.space.element / 2,
@@ -39,7 +39,7 @@ const Title = styled("div")(({ theme }) => ({
   marginBottom: theme.space.content,
 }))
 
-const CardColumn: React.SFC<Props> = ({ title, children, ...props }) => (
+const CardColumn: React.SFC<CardColumnProps> = ({ title, children, ...props }) => (
   <Container {...props}>
     {title && <Title>{title}</Title>}
     {children}

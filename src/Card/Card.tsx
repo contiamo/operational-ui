@@ -3,7 +3,7 @@ import { CardHeader, CardItem } from "../"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props<T = {}> extends DefaultProps {
+export interface CardProps<T = {}> extends DefaultProps {
   /** Any object to show. The key is the title of the data. */
   data?: T
   /**  A function to format keys of `data` */
@@ -34,7 +34,7 @@ const Container = styled("div")(({ theme }) => ({
   },
 }))
 
-class Card<T = {}> extends React.PureComponent<Props<T>> {
+class Card<T = {}> extends React.PureComponent<CardProps<T>> {
   public static defaultProps = {
     keyFormatter: (title: string) => title,
   }

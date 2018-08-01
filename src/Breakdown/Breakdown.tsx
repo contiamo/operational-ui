@@ -5,7 +5,7 @@ import { setBrightness } from "../utils"
 import { deprecatedExpandColor } from "../utils/constants"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface BreakdownProps extends DefaultProps {
   children: React.ReactNode
   /** A number by which the breakdown is represented */
   number?: number
@@ -119,7 +119,7 @@ const Number = styled("div")(
 
 const Span = styled("span")({ fontFeatureSettings: "'tnum'" })
 
-const Breakdown: React.SFC<Props> = ({ number, color, fill, label, children, ...props }) => (
+const Breakdown: React.SFC<BreakdownProps> = ({ number, color, fill, label, children, ...props }) => (
   <Container {...props}>
     <Number>{number}</Number>
     <Content>

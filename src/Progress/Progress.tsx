@@ -4,7 +4,7 @@ import { Icon } from "../"
 import { DefaultProps } from "../types"
 import { lighten } from "../utils"
 
-export interface Props extends DefaultProps {
+export interface ProgressProps extends DefaultProps {
   /** Show an error instead of the progress */
   error?: string
   /** Provide a button to retry the action to load */
@@ -89,7 +89,7 @@ const Action = styled("div")(({ theme }) => ({
   },
 }))
 
-const Progress: React.SFC<Props> = ({ error, onRetry, onClose, ...props }) => (
+const Progress: React.SFC<ProgressProps> = ({ error, onRetry, onClose, ...props }) => (
   <Container {...props}>
     <Bar isError={Boolean(error)} />
     {error ? (
