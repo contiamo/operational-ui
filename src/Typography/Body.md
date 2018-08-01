@@ -2,8 +2,8 @@ Ordinary body text.
 
 ### Usage
 
-```js
-;<Body>
+```jsx
+<Body>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum augue lorem. Suspendisse et tellus augue.
   Nulla lorem magna, efficitur eu condimentum molestie, varius et risus. Maecenas vitae arcu ligula. Fusce lobortis,
   eros consequat euismod pretium, risus lorem placerat leo, eu consectetur arcu tortor vitae ante. Proin malesuada dui
