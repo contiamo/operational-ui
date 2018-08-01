@@ -3,10 +3,16 @@ const { join } = require("path")
 const { parse: propsParser } = require("react-docgen-typescript")
 
 module.exports = {
-  propsParser,
-  components: join(__dirname, "src/**/*.tsx"),
-  ignore: ["/**/*test*", "**/Internals/**", "/**/utils/**", "**/*.*.{ts,tsx}"],
   title: "Operational UI",
+  propsParser,
+  sections: [
+    {
+      name: "Components",
+      components: "src/**/*.tsx",
+      ignore: ["/**/*test*", "**/Internals/**", "**/utils/**", "**/Typography/**", "**/*.*.{ts,tsx}"],
+    },
+    { name: "Typography", components: "src/Typography/*.tsx" },
+  ],
   theme: {
     fontFamily: {
       base: "inherit",

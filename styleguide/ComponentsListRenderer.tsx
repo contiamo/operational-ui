@@ -6,7 +6,7 @@ import { Consumer } from "./StyleGuideRenderer"
 export interface ComponentsListItem {
   heading: string
   name: string
-  href: string
+  components: ComponentsListItem[]
 }
 
 export interface ComponentsListRendererProps {
@@ -15,13 +15,20 @@ export interface ComponentsListRendererProps {
 
 const ComponentsListRenderer: React.SFC<ComponentsListRendererProps> = ({ items }) => (
   <Consumer>
-    {({ activeComponent }) => (
-      <SidenavHeader active={true} label="Components">
-        {items.map(({ name, href }) => (
-          <SidenavItem active={activeComponent === name} key={href} label={name} to={`#${name}`} />
-        ))}
-      </SidenavHeader>
-    )}
+    {({ activeComponent }) =>
+      items.map(({ name, components }) => (
+        <SidenavHeader active={true} label={name} key={name}>
+          {components.map(component => (
+            <SidenavItem
+              active={activeComponent === component.name}
+              key={`${name}-${component.name}`}
+              label={component.name}
+              to={`#${component.name}`}
+            />
+          ))}
+        </SidenavHeader>
+      ))
+    }
   </Consumer>
 )
 
