@@ -31,7 +31,7 @@ const Container = styled("div")<CardColumnProps>(({ theme, contentRight, flexCol
 
 const Title = styled("div")(({ theme }) => ({
   fontFamily: theme.font.family.main,
-  fontWeight: theme.font.weight.medium,
+  fontWeight: theme.font.weight.bold,
   color: theme.color.text.dark,
   fontSize: theme.font.size.body,
   borderBottom: `1px solid ${theme.color.separators.default}`,
