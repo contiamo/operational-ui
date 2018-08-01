@@ -1,11 +1,12 @@
 import * as React from "react"
 
 import Spinner from "../Spinner/Spinner"
+import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface CardInfoProps {
+export interface InfoPanelProps extends DefaultProps {
   /** Is something in progress? */
-  running?: boolean
+  loading?: boolean
 }
 
 const Container = styled("div")(
@@ -40,10 +41,10 @@ const SpinnerContainer = styled("div")(
   }),
 )
 
-const CardInfo: React.SFC<CardInfoProps> = ({ children, running }) => (
+const InfoPanel: React.SFC<InfoPanelProps> = ({ children, loading }) => (
   <Container>
     <Content>{children}</Content>
-    {running && (
+    {loading && (
       <SpinnerContainer>
         <Spinner />
       </SpinnerContainer>
@@ -51,8 +52,8 @@ const CardInfo: React.SFC<CardInfoProps> = ({ children, running }) => (
   </Container>
 )
 
-CardInfo.defaultProps = {
-  running: false,
+InfoPanel.defaultProps = {
+  loading: false,
 }
 
-export default CardInfo
+export default InfoPanel
