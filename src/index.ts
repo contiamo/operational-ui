@@ -56,6 +56,7 @@ export { default as Textarea, TextareaProps } from "./Textarea/Textarea"
 export { default as Tooltip, TooltipProps } from "./Tooltip/Tooltip"
 export { default as Tree, TreeProps } from "./Tree/Tree"
 
+// Typography components
 export { default as FinePrint } from "./Typography/FinePrint"
 export { default as Body } from "./Typography/Body"
 export { default as Title } from "./Typography/Title"

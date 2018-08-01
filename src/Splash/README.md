@@ -2,15 +2,38 @@ The splash component can be used to render a simple animated splash screen for a
 
 ### Usage
 
-```jsx static
-<Splash
-  title="Some Title"
-  actions={
-    <>
-      <Button>Action</Button>
-    </>
-  }
->
-  <p>A project</p>
-</Splash>
+```jsx
+const initialState = {
+  isOpen: false,
+}
+;<>
+  {state.isOpen && (
+    <Splash
+      title="My Interesting Project"
+      actions={
+        <Button
+          onClick={() => {
+            setState(() => ({
+              isOpen: false,
+            }))
+          }}
+        >
+          Dismiss this window
+        </Button>
+      }
+    >
+      <p>I made a software project. It is interesting for the following reasons:</p>
+    </Splash>
+  )}
+  <Button
+    color="primary"
+    onClick={() => {
+      setState(() => ({
+        isOpen: true,
+      }))
+    }}
+  >
+    Open splash
+  </Button>
+</>
 ```

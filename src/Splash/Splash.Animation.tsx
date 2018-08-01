@@ -11,7 +11,10 @@ export interface State {
 }
 
 // Number of squares in the animation grid
-const n: number = 15
+const squares: number = 16
+
+// Number of animating boxes
+const boxes: number = 50
 
 // Return integer random between 0 and range - 1, boundaries included
 const integerRandom = (range: number): number => {
@@ -24,8 +27,8 @@ const bounce = (coord: number): number => {
   if (coord < 0) {
     return -coord
   }
-  if (coord > n - 1) {
-    return 2 * n - 2 - coord
+  if (coord > squares - 1) {
+    return 2 * (squares - 1) - coord
   }
   return coord
 }
@@ -39,23 +42,23 @@ const Container = styled("div")(({ size }: { size: number }) => ({
   transform: "translate3d(-50%, -50%, 0)",
 }))
 
-const Box = styled("div")(({ a, x, y }: { a: number; x: number; y: number }) => ({
+const Box = styled("div")(({ x, y }: { x: number; y: number }) => ({
   position: "absolute",
   transition: "all 0.5s ease-in-out",
-  top: `calc(${(x / (a - 1)) * 100}% + 4px)`,
-  left: `calc(${(y / (a - 1)) * 100}% + 4px)`,
+  top: `calc(${(x / (squares - 1)) * 100}% + 4px)`,
+  left: `calc(${(y / (squares - 1)) * 100}% + 4px)`,
   borderRadius: 6,
-  width: `calc(${100 / (a - 1)}% - 8px)`,
-  height: `calc(${100 / (a - 1)}% - 8px)`,
+  width: `calc(${100 / (squares - 1)}% - 8px)`,
+  height: `calc(${100 / (squares - 1)}% - 8px)`,
   backgroundColor: "rgba(255, 255, 255, 0.06)",
 }))
 
 class Animation extends React.Component<Props, State> {
   public state = {
     animationStep: 0,
-    coordinates: Array.apply(null, { length: 50 })
+    coordinates: Array.apply(null, { length: boxes })
       .map(Number.call, Number)
-      .map((a: number) => ({ x: integerRandom(a), y: integerRandom(a) })),
+      .map(() => ({ x: integerRandom(squares), y: integerRandom(squares) })),
   }
 
   public animationInterval?: number
@@ -92,7 +95,7 @@ class Animation extends React.Component<Props, State> {
     return (
       <Container size={size}>
         {this.state.coordinates.map((coord: { x: number; y: number }, index: number) => (
-          <Box key={index} a={n} x={coord.x} y={coord.y} />
+          <Box key={index} x={coord.x} y={coord.y} />
         ))}
       </Container>
     )
