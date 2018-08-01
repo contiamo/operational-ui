@@ -11,13 +11,14 @@ const Actions = styled("div")(({ theme }) => ({
   right: theme.space.element,
 }))
 
-export interface ConfirmOptions {
+export interface ConfirmOptions<T = {}> {
   title: React.ReactNode
-  body: React.ReactNode
+  body: React.ReactNode | React.ComponentType<{ setConfirmState: (state?: Pick<T, keyof T>) => void; state?: T }>
   cancelButton?: React.ReactElement<ButtonProps>
   actionButton?: React.ReactElement<ButtonProps>
-  onConfirm?: () => void
-  onCancel?: () => void
+  onConfirm?: (confirmState?: T) => void
+  onCancel?: (confirmState?: T) => void
+  state?: T
 }
 
 export interface State {
@@ -33,26 +34,38 @@ export class Confirm extends React.Component<Props, Readonly<State>> {
     options: {},
   }
 
-  public openConfirm = (options: ConfirmOptions) => {
+  private openConfirm = (options: ConfirmOptions) => {
     this.setState({ options })
   }
 
-  public closeConfirm = () => {
+  private closeConfirm = () => {
     this.setState({ options: {} })
   }
 
-  public onCancelClick = () => {
+  private onCancelClick = () => {
     if (this.state.options.onCancel) {
-      this.state.options.onCancel()
+      this.state.options.onCancel(this.state.options.state)
     }
     this.closeConfirm()
   }
 
-  public onActionClick = () => {
+  private onActionClick = () => {
     if (this.state.options.onConfirm) {
-      this.state.options.onConfirm()
+      this.state.options.onConfirm(this.state.options.state)
     }
     this.closeConfirm()
+  }
+
+  private setConfirmState = (state: any) => {
+    this.setState(prevState => ({
+      options: {
+        ...prevState.options,
+        state: {
+          ...prevState.options.state,
+          ...state,
+        },
+      },
+    }))
   }
 
   public render() {
@@ -63,7 +76,12 @@ export class Confirm extends React.Component<Props, Readonly<State>> {
         {this.props.children(this.openConfirm)}
         {isOpen && (
           <ControlledModal title={this.state.options.title} onClose={this.closeConfirm.bind(this)}>
-            {this.state.options.body}
+            {typeof this.state.options.body === "function"
+              ? React.createElement(this.state.options.body, {
+                  setConfirmState: this.setConfirmState,
+                  state: this.state.options.state,
+                })
+              : this.state.options.body}
             <Actions>
               {React.cloneElement(this.state.options.cancelButton || <Button>Cancel</Button>, {
                 onClick: this.onCancelClick,
