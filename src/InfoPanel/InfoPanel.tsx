@@ -16,6 +16,7 @@ const Container = styled("div")(
     border: "1px solid",
     wordWrap: "break-word",
     hyphens: "auto",
+    wordBreak: "break-all", // fallback for older browsers
   },
   ({ theme }) => ({
     background: theme.color.background.lighter,
