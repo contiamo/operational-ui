@@ -130,7 +130,11 @@ class DatePicker extends React.Component<DatePickerProps, State> {
   }
 
   public render() {
-    const { onChange, placeholder, start, end, label, min, max, ...props } = this.props
+    /**
+     * Contrary to other component implementations, the `className` prop is destructured from the spread `props` object.
+     * This is to allow for it to only apply to the datepicker's container, which may be the label or the picker itself.
+     */
+    const { onChange, placeholder, start, end, label, min, max, className, ...props } = this.props
     const { isExpanded, month, year } = this.state
     const domId = props.id || (label && label.toLowerCase ? label.toLowerCase().replace(/\s/g, "-") : undefined)
 
@@ -139,9 +143,10 @@ class DatePicker extends React.Component<DatePickerProps, State> {
     const canGoToPreviousMonth = !min || min < toDate(this.state.year, this.state.month, 0)
     const canGoToNextMonth = !max || max >= toDate(nextMonth.year, nextMonth.month, 0)
 
-    const datePickerWithoutLabel = (
+    const datePickerWithoutLabel = (isStandalone: boolean) => (
       <Container
         {...props}
+        className={isStandalone ? className : undefined}
         innerRef={(node: React.ReactNode) => {
           this.containerNode = node
         }}
@@ -217,12 +222,12 @@ class DatePicker extends React.Component<DatePickerProps, State> {
       </Container>
     )
     return label ? (
-      <Label>
+      <Label {...props} className={className}>
         <LabelText>{label}</LabelText>
-        {datePickerWithoutLabel}
+        {datePickerWithoutLabel(false)}
       </Label>
     ) : (
-      datePickerWithoutLabel
+      datePickerWithoutLabel(true)
     )
   }
 }

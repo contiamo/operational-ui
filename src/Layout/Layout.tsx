@@ -67,13 +67,13 @@ const Header = styled("div")({
   gridRowEnd: "span 1",
 })
 
-const Layout: React.SFC<LayoutProps> = props => (
-  <Container>
-    {props.loading && <Progress />}
+const Layout: React.SFC<LayoutProps> = ({ loading, header, sidenav, main, ...props }) => (
+  <Container {...props}>
+    {loading && <Progress />}
     <GridContainer>
-      <Header>{props.header}</Header>
-      <Side>{props.sidenav}</Side>
-      <Main>{props.main}</Main>
+      <Header>{header}</Header>
+      <Side>{sidenav}</Side>
+      <Main>{main}</Main>
     </GridContainer>
   </Container>
 )

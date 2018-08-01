@@ -9,7 +9,6 @@ exports[`NameTag Component Should render 1`] = `
   />
   <div
     class="css-1w6ld2o"
-    color="primary"
   >
     PG
   </div>

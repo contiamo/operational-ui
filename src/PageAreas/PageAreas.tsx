@@ -9,7 +9,7 @@ export interface PageAreasProps extends DefaultProps {
   fill?: boolean
 }
 
-const StyledPageAreas = styled("div")<{ areas?: PageAreasProps["areas"]; isFill?: boolean }>(props => {
+const Container = styled("div")<{ areas?: PageAreasProps["areas"]; fill_?: boolean }>(props => {
   const gridTemplateColumns = {
     main: "auto",
     "main side": "auto 280px",
@@ -22,13 +22,12 @@ const StyledPageAreas = styled("div")<{ areas?: PageAreasProps["areas"]; isFill?
     alignItems: "stretch",
     gridTemplateAreas: `"${props.areas}"`,
     gridGap: props.theme.space.element,
-    maxWidth: props.isFill ? "none" : 1150,
+    maxWidth: props.fill_ ? "none" : 1150,
     minWidth: 800,
     width: "100%",
   }
 })
 
-// `fill` must be rename internally to avoid conflict with the native `fill` DOM attribute
-const PageAreas: React.SFC<PageAreasProps> = ({ fill, ...props }) => <StyledPageAreas {...props} isFill={fill} />
+const PageAreas: React.SFC<PageAreasProps> = ({ fill, ...props }) => <Container {...props} fill_={fill} />
 
 export default PageAreas
