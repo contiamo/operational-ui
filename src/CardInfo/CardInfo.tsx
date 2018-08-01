@@ -10,30 +10,44 @@ export interface CardInfoProps {
 
 const Container = styled("div")(
   {
-    position: "relative",
+    display: "flex",
+    alignItems: "flex-start",
     border: "1px solid",
+    wordWrap: "break-word",
+    hyphens: "auto",
   },
   ({ theme }) => ({
     background: theme.color.background.lighter,
     borderColor: theme.color.background.light,
-    padding: theme.space.content,
+    padding: theme.space.medium,
     borderRadius: theme.borderRadius,
+    fontSize: theme.font.size.body,
+    fontWeight: theme.font.weight.medium,
+    lineHeight: theme.font.lineHeight,
+    color: theme.color.text.lighter,
   }),
 )
 
-const SpinnerContainer = styled("div")({ position: "absolute" }, ({ theme }) => ({
-  top: theme.space.content,
-  right: theme.space.content,
-}))
+const Content = styled("div")({ flexGrow: 1 })
+
+const SpinnerContainer = styled("div")(
+  {
+    justifySelf: "flex-end",
+    marginTop: 4, // precision measurement to align with  text sibling that has line-height 1.4
+  },
+  ({ theme }) => ({
+    marginLeft: theme.space.base,
+  }),
+)
 
 const CardInfo: React.SFC<CardInfoProps> = ({ children, running }) => (
   <Container>
+    <Content>{children}</Content>
     {running && (
       <SpinnerContainer>
         <Spinner />
       </SpinnerContainer>
     )}
-    {children}
   </Container>
 )
 
