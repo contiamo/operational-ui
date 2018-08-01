@@ -8,14 +8,15 @@
 
 ### To be tested
 
+Me
+- [ ] No error/warning in the console
+
 Tester 1
 
-- [ ] No error/warning in the console
 - [ ] The netlify build is working
   <!-- Put here everything that the reviewer 1 should test to be sure that everything is working properly -->
 
 Tester 2
 
-- [ ] No error/warning in the console
 - [ ] The netlify build is working
   <!-- Put here everything that the reviewer 2 should test to be sure that everything is working properly -->
