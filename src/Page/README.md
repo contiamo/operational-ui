@@ -388,7 +388,7 @@ const Tab = props => (
             },
             body: props => (
               <>
-                <p>This will start the execution of the job immediately.</p>
+                <Body>This will start the execution of the job immediately.</Body>
                 <CardColumns>
                   <CardColumn title="Environment variables provided to the job">
                     <CardItem
