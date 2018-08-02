@@ -9,7 +9,7 @@ export interface CardProps<T extends {} = {}> extends DefaultProps {
   /**  A function to format keys of `data` */
   keyFormatter?: (key: Extract<keyof T, string>) => string
   /** A key-value object to format values of `data`. */
-  valueFormatters?: { [P in Extract<keyof T, string>]?: (value: T[P] | void) => React.ReactNode }
+  valueFormatters?: { [P in Extract<keyof T, string>]?: (value: T[P]) => React.ReactNode }
   /** An ordered array to pick only some keys to display  */
   keys?: Array<Extract<keyof T, string>>
   /** Title of the card */
@@ -45,7 +45,7 @@ const Card: CardComponent = props => {
   const values = _keys.map(i => {
     const valueFormatter = valueFormatters[i]
     const value = data ? data[i] : undefined
-    return valueFormatter ? valueFormatter(value) : value
+    return valueFormatter ? valueFormatter(value!) : value
   })
 
   return (
