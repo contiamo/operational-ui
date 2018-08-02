@@ -104,21 +104,3 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
 }
 
 export default Confirm
-
-const test = (
-  <Confirm>
-    {confirm => (
-      <Button
-        onClick={() =>
-          confirm({
-            title: "coucou",
-            state: {
-              apeijgaeg: false,
-            },
-            body: ({ confirmState }) => <Button>{confirmState.apeijgaeg}</Button>,
-          })
-        }
-      />
-    )}
-  </Confirm>
-)
