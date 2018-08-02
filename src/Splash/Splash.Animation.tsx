@@ -83,7 +83,7 @@ class Animation extends React.Component<Props, State> {
   }
 
   public componentDidMount() {
-    this.animationInterval = setInterval(this.shiftSomeTiles.bind(this), 5000)
+    this.animationInterval = window.setInterval(this.shiftSomeTiles.bind(this), 5000)
   }
 
   public componentWillUnmount() {
