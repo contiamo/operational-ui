@@ -34,14 +34,10 @@ const Container = styled("div")(({ theme }) => ({
   },
 }))
 
-const objectKeys = <T extends {}>(x: T): keyof T => {
-  // @ts-ignore
-  return Object.keys(x)
-}
+const objectKeys = <T extends {}>(x: T) => Object.keys(x) as Array<keyof T>
 
 const Card = <T extends {}>(props: CardProps<T>) => {
   const { title, keyFormatter, valueFormatters = {}, data, keys, children, action: Action, ...rest } = props
-
   const _keys = keys ? keys : objectKeys(data || {})
   const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
   const values = _keys.map(i => {
@@ -57,11 +53,6 @@ const Card = <T extends {}>(props: CardProps<T>) => {
       {children}
     </Container>
   )
-}
-
-// @ts-ignore
-Card.defaultProps = {
-  keyFormatter: (title: string) => title,
 }
 
 export default Card
