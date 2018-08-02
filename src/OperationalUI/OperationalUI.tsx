@@ -139,7 +139,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     this.setState(() => ({ isLoading }))
   }
 
-  public componentDidCatch(error: any) {
+  public componentDidCatch(error: Error) {
     this.setState({ error })
   }
 
