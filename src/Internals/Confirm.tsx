@@ -13,7 +13,7 @@ export interface ConfirmBodyProps<T> {
   confirmState: T
 }
 
-export interface ConfirmOptions<T> {
+export interface ConfirmOptions<T = {}> {
   title: React.ReactNode
   body: React.ReactNode | React.ComponentType<ConfirmBodyProps<T>>
   cancelButton?: React.ReactElement<ButtonProps>
@@ -28,21 +28,17 @@ export interface State<T> {
 }
 
 export interface Props {
-  children: (confirm: <U>(options: ConfirmOptions<U>) => void) => React.ReactNode
+  children: (confirm: <T>(options: ConfirmOptions<T>) => void) => React.ReactNode
 }
 
 export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
-  constructor(props: Props) {
-    super(props)
-    this.state = {
-      options: {},
-    }
-    this.openConfirm = function<U>(options: ConfirmOptions<U>) {
-      this.setState(prevState => ({ options: { ...prevState.options, options } }))
-    }
+  public readonly state: State<T> = {
+    options: {},
   }
 
-  private openConfirm: <U>(options: ConfirmOptions<U>) => void
+  private openConfirm(options: ConfirmOptions<T>) {
+    this.setState({ options })
+  }
 
   private closeConfirm = () => {
     this.setState({ options: {} })
@@ -77,9 +73,9 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
 
     return (
       <>
-        {this.props.children(this.openConfirm)}
+        {this.props.children(this.openConfirm.bind(this))}
         {isOpen && (
-          <ControlledModal title={this.state.options.title} onClose={this.closeConfirm.bind(this)}>
+          <ControlledModal title={this.state.options.title} onClose={this.closeConfirm}>
             <div>
               {typeof this.state.options.body === "function" && this.state.options.state
                 ? React.createElement(this.state.options.body, {
