@@ -8,7 +8,7 @@ const Actions = styled("div")({
   alignSelf: "flex-end",
 })
 
-export interface ConfirmOptions<T = {}> {
+export interface ConfirmOptions<T extends object = {}> {
   title: React.ReactNode
   body: React.ReactNode | React.ComponentType<{ setConfirmState: (state?: Pick<T, keyof T>) => void; state?: T }>
   cancelButton?: React.ReactElement<ButtonProps>
@@ -18,20 +18,20 @@ export interface ConfirmOptions<T = {}> {
   state?: T
 }
 
-export interface State {
-  options: Partial<ConfirmOptions>
+export interface State<T extends object = {}> {
+  options: Partial<ConfirmOptions<T>>
 }
 
-export interface Props {
-  children: (confirm: (options: ConfirmOptions) => void) => React.ReactNode
+export interface Props<T extends object = {}> {
+  children: (confirm: (options: ConfirmOptions<T>) => void) => React.ReactNode
 }
 
-export class Confirm extends React.Component<Props, Readonly<State>> {
-  public readonly state: State = {
+export class Confirm<T extends object = {}> extends React.Component<Props<T>, Readonly<State<T>>> {
+  public readonly state: State<T> = {
     options: {},
   }
 
-  private openConfirm = (options: ConfirmOptions) => {
+  private openConfirm = (options: ConfirmOptions<T>) => {
     this.setState({ options })
   }
 
@@ -53,14 +53,12 @@ export class Confirm extends React.Component<Props, Readonly<State>> {
     this.closeConfirm()
   }
 
-  private setConfirmState = (state: any) => {
+  private setConfirmState = (state?: Pick<T, keyof T>) => {
     this.setState(prevState => ({
       options: {
         ...prevState.options,
-        state: {
-          ...prevState.options.state,
-          ...state,
-        },
+        // No spreading here due to https://github.com/Microsoft/TypeScript/issues/10727
+        state: Object.assign({}, prevState.options.state, state),
       },
     }))
   }
