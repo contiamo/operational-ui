@@ -3,6 +3,7 @@ import { ThemeProvider } from "emotion-theming"
 import debounce from "lodash/debounce"
 import * as React from "react"
 
+import ErrorBoundary from "../Internals/ErrorBoundary/ErrorBoundary"
 import Message from "../Message/Message"
 import Messages from "../Messages/Messages"
 import { IMessage, MessageType, WindowSize } from "../OperationalContext/OperationalContext"
@@ -36,6 +37,7 @@ export interface State {
     addedAt: number
   }>
   isLoading: boolean
+  error?: Error
 }
 
 const baseStylesheet = (theme: OperationalStyleConstants): string => `
@@ -137,6 +139,10 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     this.setState(() => ({ isLoading }))
   }
 
+  public componentDidCatch(error: any) {
+    this.setState({ error })
+  }
+
   public componentDidMount() {
     if (!this.props.noBaseStyles) {
       injectGlobal(baseStylesheet(constants))
@@ -155,45 +161,51 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     const { pushState, replaceState, children } = this.props
     return (
       <ThemeProvider theme={constants}>
-        <Provider
-          value={{
-            pushState,
-            replaceState,
-            pushMessage: (message: IMessage) => {
-              this.setState(prevState => ({
-                messages: [{ message, addedAt: new Date().getTime() }, ...prevState.messages],
-              }))
+        {this.state.error ? (
+          <ErrorBoundary error={this.state.error} />
+        ) : (
+          <Provider
+            value={{
+              pushState,
+              replaceState,
+              pushMessage: (message: IMessage) => {
+                this.setState(prevState => ({
+                  messages: [{ message, addedAt: new Date().getTime() }, ...prevState.messages],
+                }))
 
-              // If we don't yet have an interval, start one.
-              if (!this.messageTimerInterval) {
-                this.messageTimerInterval = window.setInterval(() => this.removeOutdatedMessages(), 2000)
-              }
-            },
-            loading: this.state.isLoading,
-            setLoading: this.setLoading,
-            windowSize: this.state.windowSize,
-          }}
-        >
-          <Container>
-            {this.state.isLoading && <Progress />}
-            <Messages>
-              {this.state.messages.map(({ message }, index) => (
-                <Message
-                  key={index}
-                  color={colorByMessageType(message.type)}
-                  onClose={() =>
-                    this.setState(prevState => ({
-                      messages: prevState.messages.filter((_, filteredMessageIndex) => filteredMessageIndex !== index),
-                    }))
-                  }
-                >
-                  {message.body}
-                </Message>
-              ))}
-            </Messages>
-            {children}
-          </Container>
-        </Provider>
+                // If we don't yet have an interval, start one.
+                if (!this.messageTimerInterval) {
+                  this.messageTimerInterval = window.setInterval(() => this.removeOutdatedMessages(), 2000)
+                }
+              },
+              loading: this.state.isLoading,
+              setLoading: this.setLoading,
+              windowSize: this.state.windowSize,
+            }}
+          >
+            <Container>
+              {this.state.isLoading && <Progress />}
+              <Messages>
+                {this.state.messages.map(({ message }, index) => (
+                  <Message
+                    key={index}
+                    color={colorByMessageType(message.type)}
+                    onClose={() =>
+                      this.setState(prevState => ({
+                        messages: prevState.messages.filter(
+                          (_, filteredMessageIndex) => filteredMessageIndex !== index,
+                        ),
+                      }))
+                    }
+                  >
+                    {message.body}
+                  </Message>
+                ))}
+              </Messages>
+              {children}
+            </Container>
+          </Provider>
+        )}
       </ThemeProvider>
     )
   }
