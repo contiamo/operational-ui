@@ -10,6 +10,9 @@ export interface ErrorBoundaryProps {
    * @default process.env.NODE_ENV
    */
   environment?: string
+  /**
+   * The error that is thrown.
+   */
   error: Error
 }
 
