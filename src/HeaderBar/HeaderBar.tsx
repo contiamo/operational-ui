@@ -48,8 +48,8 @@ const EndContainer = styled("div")`
   justify-content: flex-end;
 `
 
-const HeaderBar: React.SFC<HeaderBarProps> = ({ logo, main, end }) => (
-  <Bar>
+const HeaderBar: React.SFC<HeaderBarProps> = ({ logo, main, end, ...props }) => (
+  <Bar {...props}>
     <StartContainer>{logo}</StartContainer>
     <CenterContainer>{main}</CenterContainer>
     <EndContainer>{end}</EndContainer>
