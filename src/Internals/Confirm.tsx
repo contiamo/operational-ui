@@ -28,17 +28,21 @@ export interface State<T> {
 }
 
 export interface Props {
-  children: (confirm: <T>(options: ConfirmOptions<T>) => void) => React.ReactNode
+  children: (confirm: <U>(options: ConfirmOptions<U>) => void) => React.ReactNode
 }
 
 export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
-  public readonly state: State<T> = {
-    options: {},
+  constructor(props: Props) {
+    super(props)
+    this.state = {
+      options: {},
+    }
+    this.openConfirm = function<U>(options: ConfirmOptions<U>) {
+      this.setState(prevState => ({ options: { ...prevState.options, options } }))
+    }
   }
 
-  private openConfirm = (options: ConfirmOptions<T>) => {
-    this.setState({ options })
-  }
+  private openConfirm: <U>(options: ConfirmOptions<U>) => void
 
   private closeConfirm = () => {
     this.setState({ options: {} })
@@ -109,9 +113,9 @@ const test = (
           confirm({
             title: "coucou",
             state: {
-              a: 2,
+              apeijgaeg: false,
             },
-            body: ({ confirmState }) => <Button children={confirmState.a} />,
+            body: ({ confirmState }) => <Button>{confirmState.apeijgaeg}</Button>,
           })
         }
       />
