@@ -8,9 +8,14 @@ const Actions = styled("div")({
   alignSelf: "flex-end",
 })
 
-export interface ConfirmOptions<T extends object = {}> {
+export interface ConfirmBodyProps<T> {
+  setConfirmState: (state?: Pick<T, keyof T>) => void
+  confirmState: T
+}
+
+export interface ConfirmOptions<T> {
   title: React.ReactNode
-  body: React.ReactNode | React.ComponentType<{ setConfirmState: (state?: Pick<T, keyof T>) => void; state?: T }>
+  body: React.ReactNode | React.ComponentType<ConfirmBodyProps<T>>
   cancelButton?: React.ReactElement<ButtonProps>
   actionButton?: React.ReactElement<ButtonProps>
   onConfirm?: (confirmState?: T) => void
@@ -18,15 +23,15 @@ export interface ConfirmOptions<T extends object = {}> {
   state?: T
 }
 
-export interface State<T extends object = {}> {
+export interface State<T> {
   options: Partial<ConfirmOptions<T>>
 }
 
-export interface Props<T extends object = {}> {
-  children: (confirm: (options: ConfirmOptions<T>) => void) => React.ReactNode
+export interface Props {
+  children: (confirm: <T>(options: ConfirmOptions<T>) => void) => React.ReactNode
 }
 
-export class Confirm<T extends object = {}> extends React.Component<Props<T>, Readonly<State<T>>> {
+export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
   public readonly state: State<T> = {
     options: {},
   }
@@ -53,7 +58,7 @@ export class Confirm<T extends object = {}> extends React.Component<Props<T>, Re
     this.closeConfirm()
   }
 
-  private setConfirmState = (state?: Pick<T, keyof T>) => {
+  private setConfirmState: ConfirmBodyProps<T>["setConfirmState"] = state => {
     this.setState(prevState => ({
       options: {
         ...prevState.options,
@@ -72,10 +77,10 @@ export class Confirm<T extends object = {}> extends React.Component<Props<T>, Re
         {isOpen && (
           <ControlledModal title={this.state.options.title} onClose={this.closeConfirm.bind(this)}>
             <div>
-              {typeof this.state.options.body === "function"
+              {typeof this.state.options.body === "function" && this.state.options.state
                 ? React.createElement(this.state.options.body, {
                     setConfirmState: this.setConfirmState,
-                    state: this.state.options.state,
+                    confirmState: this.state.options.state,
                   })
                 : this.state.options.body}
             </div>
@@ -95,3 +100,21 @@ export class Confirm<T extends object = {}> extends React.Component<Props<T>, Re
 }
 
 export default Confirm
+
+const test = (
+  <Confirm>
+    {confirm => (
+      <Button
+        onClick={() =>
+          confirm({
+            title: "coucou",
+            state: {
+              a: 2,
+            },
+            body: ({ confirmState }) => <Button children={confirmState.a} />,
+          })
+        }
+      />
+    )}
+  </Confirm>
+)

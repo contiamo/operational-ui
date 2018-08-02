@@ -393,15 +393,21 @@ const Tab = props => (
                   <CardColumn title="Environment variables provided to the job">
                     <CardItem
                       title="MY_VAR_1"
-                      value={<Input value={props.state.var1} onChange={val => props.setConfirmState({ var1: val })} />}
+                      value={
+                        <Input value={props.confirmState.var1} onChange={val => props.setConfirmState({ var1: val })} />
+                      }
                     />
                     <CardItem
                       title="MY_VAR_2"
-                      value={<Input value={props.state.var2} onChange={val => props.setConfirmState({ var2: val })} />}
+                      value={
+                        <Input value={props.confirmState.var2} onChange={val => props.setConfirmState({ var2: val })} />
+                      }
                     />
                     <CardItem
                       title="MY_VAR_3"
-                      value={<Input value={props.state.var3} onChange={val => props.setConfirmState({ var3: val })} />}
+                      value={
+                        <Input value={props.confirmState.var3} onChange={val => props.setConfirmState({ var3: val })} />
+                      }
                     />
                   </CardColumn>
                 </CardColumns>
