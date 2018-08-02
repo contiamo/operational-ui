@@ -2,11 +2,11 @@ import * as React from "react"
 import styled from "react-emotion"
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
-import { Props as SidenavItemProps } from "../SidenavItem/SidenavItem"
+import { SidenavItemProps } from "../SidenavItem/SidenavItem"
 import { DefaultProps } from "../types"
 import { floatIn, isModifiedEvent } from "../utils"
 
-export interface Props extends DefaultProps {
+export interface SidenavHeaderProps extends DefaultProps {
   /** Main label for the header */
   label: string | React.ReactNode
   /** Navigation property à la react-router <Link/> */
@@ -128,7 +128,7 @@ const truncate = (maxLength: number) => (text: string) => {
   return text.slice(0, maxLength) + "..."
 }
 
-const SidenavHeader: React.SFC<Props> = ({ onToggle, active, to, ...props }) => {
+const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, ...props }) => {
   const isActive = Boolean(active)
 
   // The implementation of this component relies on the fact that it only has valid

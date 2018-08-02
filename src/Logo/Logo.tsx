@@ -6,7 +6,7 @@ import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 import shapes from "./Logo.Shapes"
 
-export interface Props extends DefaultProps {
+export interface LogoProps extends DefaultProps {
   /** Size, in pixels, that the logomark should be */
   size?: number
   /** A color from the constants, or an arbitrary hex value */
@@ -54,7 +54,7 @@ const LinkContainer = styled("a")<ContainerStyleProps>(
 `,
 )
 
-const Logo: React.SFC<Props> = ({ stack, name, size, color, to, ...props }) => {
+const Logo: React.SFC<LogoProps> = ({ stack, name, size, color, to, ...props }) => {
   const { svg, aspectRatio } = shapes[name]
   if (!to) {
     return (

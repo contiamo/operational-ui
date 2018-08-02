@@ -8,7 +8,7 @@ import constants, { OperationalStyleConstants } from "../utils/constants"
 
 export type Status = "waiting" | "todo" | "running" | "success" | "failure" | "done" | "failed"
 
-export interface Props extends DefaultProps {
+export interface ProgressPanelProps extends DefaultProps {
   /** Progress items */
   items: Array<{
     /** Progress item status */
@@ -82,7 +82,7 @@ const Error = styled("p")`
   `};
 `
 
-const ProgressPanel: React.SFC<Props> = ({ items, ...props }) => (
+const ProgressPanel: React.SFC<ProgressPanelProps> = ({ items, ...props }) => (
   <Container {...props}>
     {items.map(({ status, title, error }, index) => (
       <Item key={index}>

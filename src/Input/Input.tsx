@@ -6,7 +6,7 @@ import { DefaultProps } from "../types"
 import { FormFieldControl, FormFieldControls, FormFieldError, inputFocus, Label, LabelText } from "../utils/mixins"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface BaseProps extends DefaultProps {
   /** Text displayed when the input field has no value. */
   placeholder?: string
   /** The name used to refer to the input, for forms. */
@@ -38,13 +38,13 @@ export interface Props extends DefaultProps {
   onToggle?: () => void
 }
 
-interface PropsWithCopy extends Props {
+export interface BasePropsWithCopy extends BaseProps {
   copy: true
   onIconClick?: never
   icon?: never
 }
 
-interface PropsWithoutCopy extends Props {
+export interface BasePropsWithoutCopy extends BaseProps {
   copy?: false
   /** Icon to display in an adjacent icon button */
   icon?: IconName
@@ -52,11 +52,13 @@ interface PropsWithoutCopy extends Props {
   onIconClick?: () => void
 }
 
+export type InputProps = BasePropsWithCopy | BasePropsWithoutCopy
+
 // Rendered height taking into account paddings, font-sizes and line-height
 const inputHeight = 36
 
 const InputFieldContainer = styled("div")<{
-  fullWidth: Props["fullWidth"]
+  fullWidth: InputProps["fullWidth"]
   withLabel?: boolean
 }>`
   position: relative;
@@ -118,7 +120,7 @@ export const initialState = {
 
 export type State = Readonly<typeof initialState>
 
-class Input extends React.Component<PropsWithoutCopy | PropsWithCopy, State> {
+class Input extends React.Component<InputProps, State> {
   public readonly state = initialState
   public timeoutId: number | null = null
 

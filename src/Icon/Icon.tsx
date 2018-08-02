@@ -1,14 +1,14 @@
 import * as React from "react"
 import styled from "../utils/styled"
 
+import { DefaultProps } from "../types"
 import constants, { expandColor } from "../utils/constants"
 import BrandIcons, { BrandIconName } from "./Icon.Brand"
 import * as CustomIcons from "./Icon.Custom"
 
 export type IconName = BrandIconName | keyof typeof CustomIcons
 
-export interface PropsWithoutName {
-  className?: string
+export interface PropsWithoutName extends DefaultProps {
   /**
    * Size
    *
@@ -34,7 +34,7 @@ export interface PropsWithoutName {
   right?: boolean
 }
 
-export interface Props extends PropsWithoutName {
+export interface IconProps extends PropsWithoutName {
   /**
    * Icon name.
    * For OperationalUI brand icons, use the values `OperationalUI`, `Labs`, `Components`, `Blocks` and `Visualizations`
@@ -42,7 +42,7 @@ export interface Props extends PropsWithoutName {
   name: IconName
 }
 
-const Icon = ({ left, right, color, ...props }: Props) => {
+const Icon: React.SFC<IconProps> = ({ left, right, color, ...props }) => {
   const iconColor: string = expandColor(constants, color) || "currentColor"
 
   const TypedCustomIcons: { [key: string]: React.SFC<{ size?: number; color?: string }> } = CustomIcons
@@ -60,7 +60,7 @@ const Icon = ({ left, right, color, ...props }: Props) => {
   return null
 }
 
-export default styled(Icon)<Props>(({ left, right, theme }) => ({
+export default styled(Icon)<IconProps>(({ left, right, theme }) => ({
   marginLeft: right ? theme.space.small : 0,
   marginRight: left ? theme.space.small : 0,
 }))

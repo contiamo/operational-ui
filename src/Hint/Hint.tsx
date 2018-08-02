@@ -6,7 +6,7 @@ import Icon from "../Icon/Icon"
 import Tooltip from "../Tooltip/Tooltip"
 import { hoverTooltip } from "../utils/mixins"
 
-export interface Props extends DefaultProps {
+export interface HintProps extends DefaultProps {
   className?: string
   children?: React.ReactNode
   /**
@@ -19,7 +19,7 @@ export interface Props extends DefaultProps {
   right?: boolean
 }
 
-const Container = styled("div")<{ left?: Props["left"]; right?: Props["right"] }>(({ left, right, theme }) => ({
+const Container = styled("div")<{ left?: HintProps["left"]; right?: HintProps["right"] }>(({ left, right, theme }) => ({
   position: "relative",
   display: "inline-block",
   verticalAlign: "middle",
@@ -29,7 +29,7 @@ const Container = styled("div")<{ left?: Props["left"]; right?: Props["right"] }
   ...hoverTooltip,
 }))
 
-const Hint: React.SFC<Props> = props => (
+const Hint: React.SFC<HintProps> = props => (
   <Container {...props}>
     <Icon name="Question" size={12} />
     <Tooltip right>{props.children}</Tooltip>

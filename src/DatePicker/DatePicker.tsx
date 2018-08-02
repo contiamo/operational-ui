@@ -7,7 +7,7 @@ import Month from "./DatePicker.Month"
 import { Container, DatePickerCard, IconContainer, Input, MonthNav, Toggle } from "./DatePicker.styles"
 import { changeMonth, months, toDate, toYearMonthDay, validateDateString } from "./DatePicker.utils"
 
-export interface Props extends DefaultProps {
+export interface DatePickerProps extends DefaultProps {
   id?: string
   label?: string
   /** Min date in the format YYYY-MM-DD. Dates lower than this cannot be selected. */
@@ -36,12 +36,12 @@ export interface State {
   month: number
 }
 
-class DatePicker extends React.Component<Props, State> {
+class DatePicker extends React.Component<DatePickerProps, State> {
   public static defaultProps = {
     placeholder: "Enter date",
   }
 
-  constructor(props: Props) {
+  constructor(props: DatePickerProps) {
     super(props)
     this.validate(props) // Start year month is either based on the start date
     // or the current month if no start date is specified.
@@ -69,7 +69,7 @@ class DatePicker extends React.Component<Props, State> {
   // Optional props argument is used when the component doesn't have
   // these dates on the instance (e.g. constructor).
 
-  public validate(props?: Props) {
+  public validate(props?: DatePickerProps) {
     const validatedProps = props || this.props // Validate start date of
 
     if (validatedProps.start) {

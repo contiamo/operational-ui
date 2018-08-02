@@ -3,7 +3,7 @@ import { Progress } from "../"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface LayoutProps extends DefaultProps {
   /** Side navigation, see `Sidenav` component */
   sidenav: React.ReactNode
   /** Header content, see `Page` component */
@@ -67,7 +67,7 @@ const Header = styled("div")({
   gridRowEnd: "span 1",
 })
 
-const Layout = (props: Props) => (
+const Layout: React.SFC<LayoutProps> = props => (
   <Container>
     {props.loading && <Progress />}
     <GridContainer>

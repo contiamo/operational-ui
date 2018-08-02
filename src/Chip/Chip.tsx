@@ -5,7 +5,7 @@ import { DefaultProps } from "../types"
 import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface ChipProps extends DefaultProps {
   /** Chip color, provided as a hex value or a named theme color */
   color?: string
   /** Handle clicks on the chip's body. This is never triggered when the icon bar is clicked. When an icon is not specified, however, this basically turns into a full element click handler. */
@@ -64,7 +64,7 @@ const Action = styled("div")(({ theme }) => {
   }
 })
 
-const Chip: React.SFC<Props> = ({ onClick, onIconClick, icon, children, ...props }) => (
+const Chip: React.SFC<ChipProps> = ({ onClick, onIconClick, icon, children, ...props }) => (
   <Container color_={props.color} {...props}>
     <Content onClick={onClick}>{children}</Content>
     {onIconClick && (

@@ -10,7 +10,7 @@ import { FormFieldControls, FormFieldError, inputFocus, Label, LabelText, labelT
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
 
-export interface Props extends DefaultProps {
+export interface TextareaProps extends DefaultProps {
   /** Controlled value of the field */
   value: string
   /** Label of the field */
@@ -104,14 +104,14 @@ const ActionHeader = styled("div")<{ isLabel: boolean }>(({ theme, isLabel }) =>
   },
 }))
 
-class Textarea extends React.Component<Props, State> {
+class Textarea extends React.Component<TextareaProps, State> {
   public timeoutId: number | null = null
 
   public state = {
     showTooltip: false,
   }
 
-  public static defaultProps: Partial<Props> = {
+  public static defaultProps: Partial<TextareaProps> = {
     copy: false,
     code: false,
     disabled: false,

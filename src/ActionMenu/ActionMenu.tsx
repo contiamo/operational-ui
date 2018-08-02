@@ -1,5 +1,5 @@
 import * as React from "react"
-import ContextMenu, { Props as ContextMenuProps } from "../ContextMenu/ContextMenu"
+import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import Icon from "../Icon/Icon"
 import { DefaultProps } from "../types"
 import { darken } from "../utils"
@@ -7,7 +7,7 @@ import styled from "../utils/styled"
 
 const width = 144
 
-export interface Props extends DefaultProps {
+export interface ActionMenuProps extends DefaultProps {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
   onClick?: ContextMenuProps["onClick"]
   /** Title */
@@ -41,7 +41,7 @@ const TitleContainer = styled("p")({
   textOverflow: "ellipsis",
 })
 
-const ActionMenu: React.SFC<Props> = (props: Props) => (
+const ActionMenu: React.SFC<ActionMenuProps> = props => (
   <ContextMenu {...props} items={props.items} width={width} condensed embedChildrenInMenu>
     {isOpen => (
       <Container>

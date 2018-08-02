@@ -9,7 +9,7 @@ export interface Item {
   onClick?: (item: string | Item) => void
 }
 
-export interface Props extends DefaultProps {
+export interface ContextMenuProps extends DefaultProps {
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
   /** Specify whether the menu items are visible. Overrides internal open state that triggers on click. */
   open?: boolean
@@ -38,7 +38,7 @@ export interface State {
   isOpen: boolean
 }
 
-const Container = styled("div")(({ align }: { align: Props["align"] }) => ({
+const Container = styled("div")(({ align }: { align: ContextMenuProps["align"] }) => ({
   label: "contextmenu",
   cursor: "pointer",
   position: "relative",
@@ -50,7 +50,7 @@ const Container = styled("div")(({ align }: { align: Props["align"] }) => ({
 
 const MenuContainer = styled("div")<{
   isExpanded: boolean
-  embedChildrenInMenu?: Props["embedChildrenInMenu"]
+  embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
 }>(({ theme, isExpanded, embedChildrenInMenu }) => ({
   position: "absolute",
   top: embedChildrenInMenu ? 0 : "100%",
@@ -61,16 +61,16 @@ const MenuContainer = styled("div")<{
   display: isExpanded ? "block" : "none",
 }))
 
-const StyledContextMenuItem = styled(ContextMenuItem)<{ align: Props["align"] }>(({ align }) => ({
+const StyledContextMenuItem = styled(ContextMenuItem)<{ align: ContextMenuProps["align"] }>(({ align }) => ({
   textAlign: align,
 }))
 
-class ContextMenu extends React.Component<Props, State> {
+class ContextMenu extends React.Component<ContextMenuProps, State> {
   public state = {
     isOpen: false,
   }
 
-  public static defaultProps: Partial<Props> = {
+  public static defaultProps: Partial<ContextMenuProps> = {
     align: "left",
     embedChildrenInMenu: false,
   }

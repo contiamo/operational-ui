@@ -4,9 +4,9 @@ import Button from "../Button/Button"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface PaginatorProps extends DefaultProps {
   /** Function to be executed after changing page */
-  onChange?: (page: Props["page"]) => void
+  onChange?: (page: PaginatorProps["page"]) => void
   /** Index of the current selected page */
   page?: number
   /** Total number of items */
@@ -31,7 +31,7 @@ const PaginatorSpan = styled("div")(({ theme }) => ({
 
 interface ControlProps {
   children: any
-  onChange?: Props["onChange"]
+  onChange?: PaginatorProps["onChange"]
   page: number
   isDisabled: boolean
   itemCount: number
@@ -72,7 +72,7 @@ const PaginatorControl = ({ children, itemCount, itemsPerPage, page, onChange, t
   )
 }
 
-const getRange = ({ page, itemCount, itemsPerPage }: Props) => {
+const getRange = ({ page, itemCount, itemsPerPage }: PaginatorProps) => {
   const start = 1 + (page! - 1) * itemsPerPage
   const end = Math.min(itemCount, page! * itemsPerPage)
   return `${start}-${end}`
@@ -89,7 +89,7 @@ const Container = styled("div")(({ theme }) => ({
   },
 }))
 
-const Paginator: React.SFC<Props> = ({ itemCount, itemsPerPage, page, onChange, ...props }) => {
+const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, onChange, ...props }) => {
   const controlProps = {
     itemCount,
     itemsPerPage,

@@ -2,14 +2,14 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface PageAreasProps extends DefaultProps {
   /** Areas template for `PageArea` disposition */
   areas?: "main" | "main side" | "side main"
   /** Fill the entire width */
   fill?: boolean
 }
 
-const StyledPageAreas = styled("div")<{ areas?: Props["areas"]; isFill?: boolean }>(props => {
+const StyledPageAreas = styled("div")<{ areas?: PageAreasProps["areas"]; isFill?: boolean }>(props => {
   const gridTemplateColumns = {
     main: "auto",
     "main side": "auto 280px",
@@ -29,6 +29,6 @@ const StyledPageAreas = styled("div")<{ areas?: Props["areas"]; isFill?: boolean
 })
 
 // `fill` must be rename internally to avoid conflict with the native `fill` DOM attribute
-const PageAreas: React.SFC<Props> = ({ fill, ...props }) => <StyledPageAreas {...props} isFill={fill} />
+const PageAreas: React.SFC<PageAreasProps> = ({ fill, ...props }) => <StyledPageAreas {...props} isFill={fill} />
 
 export default PageAreas

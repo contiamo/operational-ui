@@ -6,7 +6,7 @@ import { darken, isModifiedEvent } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface BreadcrumbProps extends DefaultProps {
   /** Navigation property à la react-router <Link/> */
   to?: string
   onClick?: (ev?: React.SyntheticEvent<React.ReactNode>) => void
@@ -35,7 +35,7 @@ const ContainerLink = styled("a")(containerStyles, ({ theme }: { theme: Operatio
 
 const Content = styled("span")()
 
-const Breadcrumb: React.SFC<Props> = ({ to, icon, onClick, ...props }) => {
+const Breadcrumb: React.SFC<BreadcrumbProps> = ({ to, icon, onClick, ...props }) => {
   const ContainerComponent: any = to ? ContainerLink : Container
   return (
     <OperationalContext>

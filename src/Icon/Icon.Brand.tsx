@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Props as IconProps } from "./Icon"
+import { IconProps } from "./Icon"
 
 export type Props = Pick<IconProps, Exclude<keyof IconProps, "name">>
 export type BrandIconName = "OperationalUI" | "Pantheon" | "Labs" | "Contiamo"

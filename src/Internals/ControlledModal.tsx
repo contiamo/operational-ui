@@ -1,7 +1,7 @@
 import * as React from "react"
 import { keyframes } from "react-emotion"
 
-import Card, { Props as CardProps } from "../Card/Card"
+import Card, { CardProps } from "../Card/Card"
 import Overlay from "../Internals/Overlay"
 import styled from "../utils/styled"
 

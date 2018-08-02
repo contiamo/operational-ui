@@ -2,7 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface Props extends DefaultProps {
+export interface CardHeaderProps extends DefaultProps {
   /** As title, please note that is override by `title` if provided */
   children?: React.ReactNode
   /** Main title */
@@ -52,7 +52,7 @@ const ActionsContainer = styled("div")`
   align-items: center;
 `
 
-const CardHeader: React.SFC<Props> = ({ title, children, action, ...props }) => (
+const CardHeader: React.SFC<CardHeaderProps> = ({ title, children, action, ...props }) => (
   <Container {...props}>
     <div>{title || children}</div>
     <ActionsContainer>{action}</ActionsContainer>

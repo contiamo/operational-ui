@@ -3,7 +3,7 @@ import styled, { keyframes } from "react-emotion"
 import { DefaultProps } from "../types"
 import { expandColor } from "../utils/constants"
 
-export interface Props extends DefaultProps {
+export interface SpinnerProps extends DefaultProps {
   id?: string
   /** Color as color key or a custom CSS color string */
   color?: string
@@ -85,7 +85,7 @@ const AnimationContainer = styled("div")(({ bounce, size }: { bounce?: boolean; 
   animation: bounce ? "none" : `${spinKeyframes} 1.5s infinite linear`,
 }))
 
-const RegularSpinner = (_: { color?: Props["color"] }) => (
+const RegularSpinner = (_: { color?: SpinnerProps["color"] }) => (
   <svg viewBox="0 0 360 360">
     <path d="M160,0 L160,100 L200,100 L200,0Z" />
     <path d="M321.396,67.075l-70.697,70.697l-28.284,-28.284l70.697,-70.697c9.428,9.428 18.856,18.856 28.284,28.284Z" />
@@ -110,7 +110,7 @@ const BouncingSpinnerContainer = styled("div")({
  * The math used in here lays these boxes out so they're vertically centered and spaced
  * equally on the horizontal axis without any gutter.
  */
-const BouncingSpinnerBox = styled("div")<{ no: number; color?: Props["color"] }>(({ no, theme, color }) => ({
+const BouncingSpinnerBox = styled("div")<{ no: number; color?: SpinnerProps["color"] }>(({ no, theme, color }) => ({
   width: `${(80 / 360) * 100}%`,
   height: `${(80 / 360) * 100}%`,
   position: "absolute",
@@ -124,7 +124,7 @@ const BouncingSpinnerBox = styled("div")<{ no: number; color?: Props["color"] }>
   animationDelay: `${no * 0.16}s`,
 }))
 
-const BouncingSpinner = (props: Props) => (
+const BouncingSpinner = (props: SpinnerProps) => (
   <BouncingSpinnerContainer>
     <BouncingSpinnerBox color={props.color} no={0} />
     <BouncingSpinnerBox color={props.color} no={1} />
@@ -132,7 +132,7 @@ const BouncingSpinner = (props: Props) => (
   </BouncingSpinnerContainer>
 )
 
-const Spinner: React.SFC<Props> = props => (
+const Spinner: React.SFC<SpinnerProps> = props => (
   <Container {...props}>
     <AnimationContainer bounce={props.bounce} size={props.size}>
       {props.bounce ? <BouncingSpinner color={props.color} /> : <RegularSpinner color={props.color} />}

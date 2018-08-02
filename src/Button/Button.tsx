@@ -8,7 +8,7 @@ import { DefaultProps } from "../types"
 import { darken, isModifiedEvent, isWhite, readableTextColor } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 
-export interface Props extends DefaultProps {
+export interface ButtonProps extends DefaultProps {
   /** Invoked when you click on the button */
   onClick?: (e?: React.SyntheticEvent<React.ReactNode>) => void
   type?: string
@@ -54,11 +54,11 @@ const makeColors = (theme: OperationalStyleConstants, color: string) => {
 const containerStyles: Interpolation<
   Themed<
     {
-      color_?: Props["color"]
+      color_?: ButtonProps["color"]
       disabled?: boolean
-      condensed?: Props["condensed"]
-      loading?: Props["loading"]
-      fullWidth?: Props["fullWidth"]
+      condensed?: ButtonProps["condensed"]
+      loading?: ButtonProps["loading"]
+      fullWidth?: ButtonProps["fullWidth"]
     },
     OperationalStyleConstants
   >
@@ -102,7 +102,7 @@ const containerStyles: Interpolation<
 const Container = styled("button")(containerStyles)
 const ContainerLink = styled("a")(containerStyles)
 
-const ButtonSpinner = styled(Spinner)<{ containerColor?: Props["color"] }>(({ theme, containerColor }) => ({
+const ButtonSpinner = styled(Spinner)<{ containerColor?: ButtonProps["color"] }>(({ theme, containerColor }) => ({
   position: "absolute",
   top: "50%",
   left: "50%",
@@ -110,7 +110,7 @@ const ButtonSpinner = styled(Spinner)<{ containerColor?: Props["color"] }>(({ th
   color: makeColors(theme, containerColor || "").foreground,
 }))
 
-const Button: React.SFC<Props> = ({ to, children, icon, color, onClick, loading, ...props }) => {
+const Button: React.SFC<ButtonProps> = ({ to, children, icon, color, onClick, loading, ...props }) => {
   const ContainerComponent: React.ComponentType<any> = to ? ContainerLink : Container
   return (
     <OperationalContext>
