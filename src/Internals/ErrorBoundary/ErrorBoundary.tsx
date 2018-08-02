@@ -44,8 +44,10 @@ const ErrorBoundary: React.SFC<ErrorBoundaryProps> = ({ environment, error }) =>
       color="error"
       title={!isProduction ? error.message : "Something Went Wrong"}
       actions={
-        !isProduction && (
+        !isProduction ? (
           <Button to="https://reactjs.org/docs/error-boundaries.html">Learn More about Error Boundaries</Button>
+        ) : (
+          <Button to="/">Reload</Button>
         )
       }
     >
@@ -59,7 +61,11 @@ const ErrorBoundary: React.SFC<ErrorBoundaryProps> = ({ environment, error }) =>
 
           {error.stack && (
             <StackTrace>
-              {error.stack.split("\n").map((line, index) => <p style={{ paddingLeft: `${index * 8}px` }}>{line}</p>)}
+              {error.stack.split("\n").map((line, index) => (
+                <p key={index} style={{ paddingLeft: `${index * 8}px` }}>
+                  {line}
+                </p>
+              ))}
             </StackTrace>
           )}
         </>
