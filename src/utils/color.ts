@@ -1,4 +1,4 @@
-import tinycolor from "tinycolor2"
+import tinycolor, { ColorFormats } from "tinycolor2"
 
 export const isWhite = (color: string) =>
   ["white", "#fff", "#ffffff", "hsl(0, 0%, 100%)"].indexOf(color.toLowerCase()) > -1
