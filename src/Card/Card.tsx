@@ -22,8 +22,6 @@ export interface CardProps<T extends {} = {}> extends DefaultProps {
   children?: React.ReactNode
 }
 
-export type CardComponent = <T extends {}>(props: CardProps<T>) => React.ReactElement<any> | null
-
 const Container = styled("div")(({ theme }) => ({
   marginBottom: theme.space.element,
   borderTop: `1px solid ${theme.color.separators.light}`,
@@ -38,7 +36,7 @@ const Container = styled("div")(({ theme }) => ({
 
 const objectKeys = <T extends {}>(x: T) => Object.keys(x) as Array<keyof T>
 
-const Card: CardComponent = props => {
+export default function Card<T extends {}>(props: CardProps<T>) {
   const { title, keyFormatter, valueFormatters = {}, data, keys, children, action: Action, ...rest } = props
   const _keys = keys ? keys : objectKeys(data || {})
   const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
@@ -57,4 +55,4 @@ const Card: CardComponent = props => {
   )
 }
 
-export default Card
+export type CardComponent = typeof Card
