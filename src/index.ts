@@ -62,4 +62,7 @@ export { default as Body } from "./Typography/Body"
 export { default as Title } from "./Typography/Title"
 export { default as Small } from "./Typography/Small"
 
+// Internals components
+export { ConfirmBodyProps } from "./Internals/Confirm"
+
 export default OperationalUI

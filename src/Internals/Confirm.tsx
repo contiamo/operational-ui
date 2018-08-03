@@ -4,55 +4,68 @@ import styled from "../utils/styled"
 import Button, { ButtonProps } from "../Button/Button"
 import ControlledModal from "./ControlledModal"
 
-const Actions = styled("div")(({ theme }) => ({
-  position: "absolute",
-  textAlign: "right",
-  bottom: theme.space.element,
-  right: theme.space.element,
-}))
+const Actions = styled("div")({
+  alignSelf: "flex-end",
+})
 
-export interface ConfirmOptions {
-  title: React.ReactNode
-  body: React.ReactNode
-  cancelButton?: React.ReactElement<ButtonProps>
-  actionButton?: React.ReactElement<ButtonProps>
-  onConfirm?: () => void
-  onCancel?: () => void
+export interface ConfirmBodyProps<T> {
+  setConfirmState: (state?: Pick<T, keyof T>) => void
+  confirmState: T
 }
 
-export interface State {
-  options: Partial<ConfirmOptions>
+export interface ConfirmOptions<T = {}> {
+  title: React.ReactNode
+  body: React.ReactNode | React.ComponentType<ConfirmBodyProps<T>>
+  cancelButton?: React.ReactElement<ButtonProps>
+  actionButton?: React.ReactElement<ButtonProps>
+  onConfirm?: (confirmState?: T) => void
+  onCancel?: (confirmState?: T) => void
+  state?: T
+}
+
+export interface State<T> {
+  options: Partial<ConfirmOptions<T>>
 }
 
 export interface Props {
-  children: (confirm: (options: ConfirmOptions) => void) => React.ReactNode
+  children: (confirm: <T>(options: ConfirmOptions<T>) => void) => React.ReactNode
 }
 
-export class Confirm extends React.Component<Props, Readonly<State>> {
-  public readonly state: State = {
+export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
+  public readonly state: State<T> = {
     options: {},
   }
 
-  public openConfirm = (options: ConfirmOptions) => {
+  private openConfirm(options: ConfirmOptions<T>) {
     this.setState({ options })
   }
 
-  public closeConfirm = () => {
+  private closeConfirm = () => {
     this.setState({ options: {} })
   }
 
-  public onCancelClick = () => {
+  private onCancelClick = () => {
     if (this.state.options.onCancel) {
-      this.state.options.onCancel()
+      this.state.options.onCancel(this.state.options.state)
     }
     this.closeConfirm()
   }
 
-  public onActionClick = () => {
+  private onActionClick = () => {
     if (this.state.options.onConfirm) {
-      this.state.options.onConfirm()
+      this.state.options.onConfirm(this.state.options.state)
     }
     this.closeConfirm()
+  }
+
+  private setConfirmState: ConfirmBodyProps<T>["setConfirmState"] = state => {
+    this.setState(prevState => ({
+      options: {
+        ...prevState.options,
+        // No spreading here due to https://github.com/Microsoft/TypeScript/issues/10727
+        state: Object.assign({}, prevState.options.state, state),
+      },
+    }))
   }
 
   public render() {
@@ -60,10 +73,17 @@ export class Confirm extends React.Component<Props, Readonly<State>> {
 
     return (
       <>
-        {this.props.children(this.openConfirm)}
+        {this.props.children(this.openConfirm.bind(this))}
         {isOpen && (
-          <ControlledModal title={this.state.options.title} onClose={this.closeConfirm.bind(this)}>
-            {this.state.options.body}
+          <ControlledModal title={this.state.options.title} onClose={this.closeConfirm}>
+            <div>
+              {typeof this.state.options.body === "function" && this.state.options.state
+                ? React.createElement(this.state.options.body, {
+                    setConfirmState: this.setConfirmState,
+                    confirmState: this.state.options.state,
+                  })
+                : this.state.options.body}
+            </div>
             <Actions>
               {React.cloneElement(this.state.options.cancelButton || <Button>Cancel</Button>, {
                 onClick: this.onCancelClick,

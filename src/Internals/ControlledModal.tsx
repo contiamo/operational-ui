@@ -33,6 +33,8 @@ const Content = styled(Card)(({ theme }) => ({
   minWidth: 600,
   minHeight: 200,
   zIndex: theme.zIndex.modal,
+  display: "flex",
+  flexDirection: "column",
 }))
 
 const ControlledModal: React.SFC<Props> = (props: Props) => (

@@ -64,7 +64,7 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
 
   private updateActiveComponent = (activeComponent: string) => {
     if (this.props.hasSidebar) {
-      window.history.pushState(null, undefined, `#${activeComponent}`)
+      window.history.pushState(null, "", `#${activeComponent}`)
     }
     this.setState({ activeComponent })
     return undefined

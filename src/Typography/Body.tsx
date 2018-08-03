@@ -8,7 +8,7 @@ export const Body = styled("p")<{
   fontFamily: theme.font.family.main,
   fontWeight: theme.font.weight.regular,
   lineHeight: theme.font.lineHeight,
-  margin: `${theme.space.base}px 0`,
+  margin: `0 0 ${theme.space.element}px 0`,
   color: theme.color.text[color || "default"],
 }))
 

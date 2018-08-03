@@ -33,7 +33,7 @@ export class Modal extends React.Component<Props, Readonly<State>> {
 
     return (
       <>
-        {typeof this.props.children === "function" ? this.props.children(this.openModal) : this.props.children}
+        {this.props.children(this.openModal)}
         {isOpen && (
           <ControlledModal title={this.state.options.title} onClose={this.closeModal}>
             {typeof this.state.options.body === "function"
