@@ -3,7 +3,10 @@ import * as React from "react"
 import { Card as ThemelessCard } from "../../index"
 import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
-const Card = wrapDefaultTheme(ThemelessCard)
+// we need to reinforce type
+// because after wrapDefaultTheme it is general React.SFC
+// but we want parametric function
+const Card = wrapDefaultTheme(ThemelessCard) as typeof ThemelessCard
 
 describe("Card", () => {
   it("Should render", () => {

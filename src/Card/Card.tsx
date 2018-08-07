@@ -3,13 +3,13 @@ import { CardHeader, CardItem } from "../"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface CardProps<T = {}> extends DefaultProps {
+export interface CardProps<T extends {} = {}> extends DefaultProps {
   /** Any object to show. The key is the title of the data. */
   data?: T
   /**  A function to format keys of `data` */
-  keyFormatter?: (key: string) => string
+  keyFormatter?: (key: Extract<keyof T, string>) => string
   /** A key-value object to format values of `data`. */
-  valueFormatters?: { [P in Extract<keyof T, string>]?: (value: string) => React.ReactNode }
+  valueFormatters?: { [P in Extract<keyof T, string>]?: (value: T[P]) => React.ReactNode }
   /** An ordered array to pick only some keys to display  */
   keys?: Array<Extract<keyof T, string>>
   /** Title of the card */
@@ -34,33 +34,23 @@ const Container = styled("div")(({ theme }) => ({
   },
 }))
 
-class Card<T = {}> extends React.PureComponent<CardProps<T>> {
-  public static defaultProps = {
-    keyFormatter: (title: string) => title,
-  }
+const objectKeys = <T extends {}>(x: T) => Object.keys(x) as Array<keyof T>
 
-  public render() {
-    const { title, keyFormatter, valueFormatters = {}, data, keys, children, action: Action, ...props } = this.props
+export default function Card<T extends {}>(props: CardProps<T>) {
+  const { title, keyFormatter, valueFormatters = {}, data, keys, children, action: Action, ...rest } = props
+  const _keys = keys ? keys : objectKeys(data || {})
+  const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
+  const values = _keys.map(i => {
+    const valueFormatter = valueFormatters[i]
+    const value = data ? data[i] : undefined
+    return valueFormatter ? valueFormatter(value!) : value
+  })
 
-    const _keys = keys ? keys : Object.keys(data || {})
-    const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
-    const values = _keys.map(
-      /**
-       * @todo Improve typings: the typing of this does not satisfy the typescript compiler
-       * https://github.com/contiamo/operational-ui/issues/629
-       */
-      // @ts-ignore
-      (i: Extract<keyof T, string>) => (valueFormatters[i] ? valueFormatters[i](data[i] as any) : data[i]),
-    )
-
-    return (
-      <Container {...props}>
-        {(title || Action) && <CardHeader title={title} action={Action && <Action />} />}
-        {data && titles.map((cardItemTitle, i) => <CardItem key={i} value={values[i]} title={cardItemTitle} />)}
-        {children}
-      </Container>
-    )
-  }
+  return (
+    <Container {...rest}>
+      {(title || Action) && <CardHeader title={title} action={Action && <Action />} />}
+      {data && titles.map((cardItemTitle, i) => <CardItem key={i} value={values[i]} title={cardItemTitle} />)}
+      {children}
+    </Container>
+  )
 }
-
-export default Card
