@@ -1,5 +1,6 @@
 import { injectGlobal } from "emotion"
 import { ThemeProvider } from "emotion-theming"
+import { Cancelable } from "lodash"
 import debounce from "lodash/debounce"
 import * as React from "react"
 
@@ -126,7 +127,12 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     }
   }
 
-  public handleResize = debounce(() => {
+  /**
+   * Explicit typing is required here in order to give the typescript compiler access to typings
+   * used to work out type definitions for the debounce method.
+   * @todo look into making this unnecessary.
+   */
+  public handleResize: (() => void) & Cancelable = debounce(() => {
     this.setState(() => ({
       windowSize: {
         width: window.innerWidth,
