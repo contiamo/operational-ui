@@ -1,8 +1,8 @@
-import deepmerge from "deepmerge"
 import { injectGlobal } from "emotion"
 import { ThemeProvider } from "emotion-theming"
 import { Cancelable } from "lodash"
 import debounce from "lodash/debounce"
+import merge from "lodash/merge"
 import * as React from "react"
 
 import ErrorBoundary from "../Internals/ErrorBoundary"
@@ -175,7 +175,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
   public render() {
     const { pushState, replaceState, children, theme } = this.props
     return (
-      <ThemeProvider theme={deepmerge(constants, theme)}>
+      <ThemeProvider theme={merge(constants, theme)}>
         {this.state.error ? (
           <ErrorBoundary error={this.state.error} />
         ) : (
