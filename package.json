@@ -1,6 +1,6 @@
 {
   "name": "@operational/components",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "description": "Building blocks for effective operational user interfaces",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
