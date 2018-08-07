@@ -64,7 +64,7 @@ const Container = styled("div")<{
   marginRight: left ? theme.space.small : 0,
   marginLeft: right ? theme.space.small : 0,
   "& svg": {
-    fill: expandColor(theme, color) || theme.color.text.lighter,
+    fill: expandColor(theme, color) || "currentColor",
   },
 }))
 
