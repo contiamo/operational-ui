@@ -54,5 +54,3 @@ export default function Card<T extends {}>(props: CardProps<T>) {
     </Container>
   )
 }
-
-export type CardComponent = typeof Card

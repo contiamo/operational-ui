@@ -10,7 +10,7 @@ export { default as Breadcrumbs, BreadcrumbsProps } from "./Breadcrumbs/Breadcru
 export { default as Breakdown, BreakdownProps } from "./Breakdown/Breakdown"
 export { default as Button, ButtonProps } from "./Button/Button"
 export { default as ButtonGroup, ButtonGroupProps } from "./ButtonGroup/ButtonGroup"
-export { default as Card, CardProps, CardComponent } from "./Card/Card"
+export { default as Card, CardProps } from "./Card/Card"
 export { default as CardColumn, CardColumnProps } from "./CardColumn/CardColumn"
 export { default as CardColumns } from "./CardColumns/CardColumns"
 export { default as CardHeader, CardHeaderProps } from "./CardHeader/CardHeader"
