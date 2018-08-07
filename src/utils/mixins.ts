@@ -6,6 +6,11 @@
  */
 // @ts-ignore
 import * as React from "react"
+/**
+ * Same issue for deprecated `Theme` object.
+ */
+// @ts-ignore
+import { Theme } from "./constants/deprecatedTheme"
 
 import styled, { keyframes } from "react-emotion"
 import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
