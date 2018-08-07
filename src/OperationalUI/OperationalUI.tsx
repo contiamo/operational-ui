@@ -96,6 +96,10 @@ const colorByMessageType = (type: MessageType): string => {
 }
 
 class OperationalUI extends React.Component<OperationalUIProps, State> {
+  public static defaultProps = {
+    theme: {},
+  }
+
   public state: State = {
     windowSize: {
       width: window.innerWidth,
