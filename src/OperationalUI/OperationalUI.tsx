@@ -2,6 +2,7 @@ import { injectGlobal } from "emotion"
 import { ThemeProvider } from "emotion-theming"
 import { Cancelable } from "lodash"
 import debounce from "lodash/debounce"
+import merge from "lodash/merge"
 import * as React from "react"
 
 import ErrorBoundary from "../Internals/ErrorBoundary"
@@ -10,7 +11,7 @@ import Messages from "../Messages/Messages"
 import { IMessage, MessageType, WindowSize } from "../OperationalContext/OperationalContext"
 import { Provider } from "../OperationalContext/OperationalContext.init"
 import Progress from "../Progress/Progress"
-import { darken } from "../utils"
+import { darken, DeepPartial } from "../utils"
 import constants, { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
@@ -29,6 +30,10 @@ export interface OperationalUIProps {
    * @default 10000 (10s)
    */
   hideMessageAfter?: number
+  /**
+   * Custom theme
+   */
+  theme?: DeepPartial<OperationalStyleConstants>
 }
 
 export interface State {
@@ -41,7 +46,7 @@ export interface State {
   error?: Error
 }
 
-const baseStylesheet = (theme: OperationalStyleConstants): string => `
+const baseStylesheet = (theme: OperationalStyleConstants) => `
 * {
   box-sizing: border-box;
   text-rendering: optimizeLegibility;
@@ -91,6 +96,10 @@ const colorByMessageType = (type: MessageType): string => {
 }
 
 class OperationalUI extends React.Component<OperationalUIProps, State> {
+  public static defaultProps = {
+    theme: {},
+  }
+
   public state: State = {
     windowSize: {
       width: window.innerWidth,
@@ -164,9 +173,9 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
   }
 
   public render() {
-    const { pushState, replaceState, children } = this.props
+    const { pushState, replaceState, children, theme } = this.props
     return (
-      <ThemeProvider theme={constants}>
+      <ThemeProvider theme={merge(constants, theme)}>
         {this.state.error ? (
           <ErrorBoundary error={this.state.error} />
         ) : (
