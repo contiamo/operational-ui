@@ -1,12 +1,14 @@
-### Summary
+<!-- IMPORTANT: If this is a breaking change or a backwards compatible feature, please prefix the title of this PR with **Breaking: ** or **Feature: ** -->
+
+## Summary
 
 <!-- Some context about this PR: screenshots and links to the docs are appreciate -->
 
-### Related issue
+## Related issue
 
 <!-- Paste the github issue here -->
 
-### To be tested
+## To be tested
 
 Me
 - [ ] No error/warning in the console
