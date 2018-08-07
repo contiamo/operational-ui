@@ -1,4 +1,4 @@
-import { operational } from "./constants/deprecatedTheme"
+import { operational, Theme } from "./constants/deprecatedTheme"
 
 /**
  * # Operational UI's styling constants.
@@ -190,7 +190,12 @@ const constants = {
   borderRadius: 2,
   sidebarWidth: 256,
   titleHeight: 50,
-  deprecated: operational,
+  /**
+   * This redundant type-casting is necessary to give the typescript compiler access
+   * to the `Theme` interface and prevent it from doing incorrect imports for it.
+   * @todo look into making this unnecessary.
+   */
+  deprecated: operational as Theme,
 }
 
 /*
