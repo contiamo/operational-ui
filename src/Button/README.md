@@ -29,6 +29,7 @@ Using buttons is as simple as including the component with a text node as a chil
   <Button color="grey" icon="Open">Icon</Button>
   <Button color="success" icon="Labs">Icon</Button>
   <Button loading>Loading</Button>
+  <Button color="primary" loading>Loading</Button>
   <Button condensed icon="Open">Icon</Button>
   <Button condensed loading>Loading</Button>
 
@@ -37,6 +38,7 @@ Using buttons is as simple as including the component with a text node as a chil
   <Button disabled color="grey" icon="Open">Icon</Button>
   <Button disabled color="success" icon="Labs">Icon</Button>
   <Button disabled loading>Loading</Button>
+  <Button disabled color="primary" loading>Loading</Button>
   <Button disabled condensed icon="Open">Icon</Button>
   <Button disabled condensed loading>Loading</Button>
 </div>
