@@ -12,6 +12,8 @@ export interface SplashProps {
   actions: React.ReactNode
   /** Main content */
   children: React.ReactNode
+  /** Customizable logo */
+  logo?: React.ReactNode
   /** Backdrop color, dark enough to support white text as in the example. */
   color?: string
 }
@@ -109,7 +111,7 @@ class Splash extends React.Component<SplashProps, Readonly<State>> {
         <Animation size={this.state.animationSize} />
         <Content>
           <TitleBar>
-            <OperationalLogo size={110} />
+            {this.props.logo ? this.props.logo : <OperationalLogo size={110} />}
             <TitleBarContent>
               <h1>{this.props.title}</h1>
               <div>{this.props.actions}</div>
