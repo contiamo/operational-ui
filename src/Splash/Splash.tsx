@@ -16,6 +16,8 @@ export interface SplashProps {
   logo?: React.ReactNode
   /** Backdrop color, dark enough to support white text as in the example. */
   color?: string
+  /** Text color in the Splash component */
+  textColor?: string
 }
 
 export interface State {
@@ -39,9 +41,11 @@ const Container = styled("div")<{ color_?: string }>`
   `};
 `
 
-const Content = styled("div")`
+const Content = styled("div")<{ textColor_?: string }>`
   position: relative;
-  color: #ffffff;
+  ${({ textColor_ }) => `
+      color: ${textColor_ || "#ffffff"};
+  `};
 `
 
 const TitleBar = styled("div")`
@@ -109,7 +113,7 @@ class Splash extends React.Component<SplashProps, Readonly<State>> {
     return (
       <Container color_={this.props.color}>
         <Animation size={this.state.animationSize} />
-        <Content>
+        <Content textColor_={this.props.textColor}>
           <TitleBar>
             {this.props.logo ? this.props.logo : <OperationalLogo size={110} />}
             <TitleBarContent>
