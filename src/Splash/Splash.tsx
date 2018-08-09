@@ -1,5 +1,6 @@
 import * as React from "react"
 
+import { readableTextColor } from "../utils"
 import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 import Animation from "./Splash.Animation"
@@ -43,8 +44,8 @@ const Container = styled("div")<{ color_?: string }>`
 
 const Content = styled("div")<{ textColor_?: string }>`
   position: relative;
-  ${({ textColor_ }) => `
-      color: ${textColor_ || "#ffffff"};
+  ${({ textColor_, theme }) => `
+      color: ${readableTextColor(textColor_ || "#ffffff", [theme.color.white, theme.color.black])};
   `};
 `
 
