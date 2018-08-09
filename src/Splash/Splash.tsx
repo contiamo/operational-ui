@@ -45,7 +45,7 @@ const Container = styled("div")<{ color_?: string }>`
 const Content = styled("div")<{ textColor_?: string }>`
   position: relative;
   ${({ textColor_, theme }) => `
-      color: ${readableTextColor(textColor_ || "#ffffff", [theme.color.white, theme.color.black])};
+      color: ${textColor_ ? readableTextColor(textColor_, [theme.color.white, theme.color.black]) : "#ffffff"};
   `};
 `
 
