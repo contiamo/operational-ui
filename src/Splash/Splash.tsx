@@ -17,7 +17,6 @@ export interface SplashProps {
 }
 
 export interface State {
-  rotation: number
   animationSize: number
 }
 
@@ -87,11 +86,8 @@ const Static = styled("div")`
 
 class Splash extends React.Component<SplashProps, Readonly<State>> {
   public readonly state = {
-    rotation: 0,
     animationSize: Math.max(window.innerWidth, window.innerHeight),
   }
-
-  public rotationInterval?: number
 
   public handleResize = () => {
     this.setState({
@@ -101,16 +97,10 @@ class Splash extends React.Component<SplashProps, Readonly<State>> {
 
   public componentDidMount() {
     window.addEventListener("resize", this.handleResize)
-    this.rotationInterval = window.setInterval(() => {
-      this.setState(prevState => ({
-        rotation: 180 - prevState.rotation,
-      }))
-    }, 8000)
   }
 
   public componentWillUnmount() {
     window.removeEventListener("resize", this.handleResize)
-    window.clearInterval(this.rotationInterval)
   }
 
   public render() {
@@ -119,7 +109,7 @@ class Splash extends React.Component<SplashProps, Readonly<State>> {
         <Animation size={this.state.animationSize} />
         <Content>
           <TitleBar>
-            <OperationalLogo size={110} rotation={this.state.rotation} />
+            <OperationalLogo size={110} />
             <TitleBarContent>
               <h1>{this.props.title}</h1>
               <div>{this.props.actions}</div>
