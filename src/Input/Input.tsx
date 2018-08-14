@@ -67,7 +67,8 @@ const InputFieldContainer = styled("div")<{
   ${({ fullWidth, withLabel, theme }) => `
     margin-right: ${withLabel ? 0 : theme.space.small}px;
     display: ${withLabel ? "flex" : "inline-flex"};
-    min-width: ${fullWidth ? "100%" : 360};
+    width: 100%;
+    max-width: ${fullWidth ? "none" : "360px"};
   `};
 `
 
@@ -86,6 +87,9 @@ const InputButton = styled("div")`
     border: 1px solid;
     border-color: ${theme.color.border.default};
     color: ${theme.color.text.light};
+    &:hover {
+      background-color: ${theme.color.background.light};
+    }
   `};
 `
 
@@ -99,6 +103,7 @@ const InputField = styled("input")<{
     ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
     : { borderRadius: theme.borderRadius }),
   fontSize: theme.font.size.body,
+  width: "100%",
   height: inputHeight,
   label: "input",
   flexGrow: 1,
