@@ -23,8 +23,6 @@ const Container = styled("div")(({ theme }) => ({
   // This ensures that the card header text and card controls are placed in opposite corners.
   justifyContent: "space-between",
   height: theme.space.element * 2,
-  margin: -theme.space.element,
-  marginBottom: theme.space.element,
   padding: `0 ${theme.space.element}px`,
   lineHeight: 1,
   "& > :not(:first-child)": {

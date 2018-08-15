@@ -17,30 +17,62 @@ export interface CardProps<T extends {} = {}> extends DefaultProps {
   /** Title of the card */
   title?: React.ReactNode
   /** Component containing buttons/links/actions assigned to the card */
-  action?: React.ComponentType
-  /** DOM id attribute, useful for hash linking */
-  id?: string
-  className?: string
+  action?: React.ReactNode
+  /** Card sections */
+  sections?: React.ReactNode
+  /** Section stacking */
+  stackSections?: "horizontal" | "vertical"
+  /** React children */
   children?: React.ReactNode
 }
 
 const Container = styled("div")(({ theme }) => ({
   marginBottom: theme.space.element,
   borderTop: `1px solid ${theme.color.separators.light}`,
-  padding: 20,
   boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.16)",
   backgroundColor: theme.color.white,
   wordWrap: "break-word",
   "& > img": {
     maxWidth: "100%",
   },
+  /**
+   * Since there is no further element to separate this card from, the bottom margin is disabled.
+   * This avoids unwanted overflowing behavior especially in cases where there is a single card.
+   */
+  "&:last-child": {
+    marginBottom: 0,
+  },
 }))
+
+const Content = styled("div")`
+  ${({ theme }) => `
+    padding: ${theme.space.element}px;
+  `};
+`
+
+const SectionsContainer = styled("div")<{ stackHorizontal: boolean }>`
+  ${({ stackHorizontal }) => `
+    display: ${stackHorizontal ? "flex" : "block"};
+  `};
+`
 
 const objectKeys = <T extends {}>(x: T) => Object.keys(x) as Array<keyof T>
 
 export default function Card<T extends {}>(props: CardProps<T>) {
-  const { title, keyFormatter, valueFormatters = {}, data, keys, sortKeys, children, action: Action, ...rest } = props
-  const _keys = (keys ? keys : objectKeys(data || {})).sort(sortKeys)
+  const {
+    title,
+    keyFormatter,
+    valueFormatters = {},
+    sections,
+    stackSections,
+    data,
+    keys,
+    sortKeys,
+    children,
+    action,
+    ...rest
+  } = props
+  const _keys = keys ? keys : objectKeys(data || {}).sort(sortKeys)
   const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
   const values = _keys.map(i => {
     const valueFormatter = valueFormatters[i]
@@ -50,9 +82,15 @@ export default function Card<T extends {}>(props: CardProps<T>) {
 
   return (
     <Container {...rest}>
-      {(title || Action) && <CardHeader title={title} action={Action && <Action />} />}
-      {data && titles.map((cardItemTitle, i) => <CardItem key={i} value={values[i]} title={cardItemTitle} />)}
-      {children}
+      {(title || action) && <CardHeader title={title} action={action} />}
+      {sections ? (
+        <SectionsContainer stackHorizontal={stackSections === "horizontal"}>{sections}</SectionsContainer>
+      ) : (
+        <Content>
+          {data && titles.map((cardItemTitle, i) => <CardItem key={i} value={values[i]} title={cardItemTitle} />)}
+          {children}
+        </Content>
+      )}
     </Container>
   )
 }

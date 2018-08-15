@@ -5,7 +5,7 @@ import { DefaultProps } from "../types"
 import { darken } from "../utils"
 import styled from "../utils/styled"
 
-const width = 144
+const width = 120
 
 export interface ActionMenuProps extends DefaultProps {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
