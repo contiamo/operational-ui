@@ -74,6 +74,8 @@ const InputFieldContainer = styled("div")<{
 
 const InputButton = styled("div")`
   width: ${inputHeight}px;
+  /** Makes sure the button doesn't shrink when inside a flex container */
+  flex: 0 0 ${inputHeight}px;
   height: ${inputHeight}px;
   top: 0px;
   left: 0px;
@@ -205,7 +207,7 @@ class Input extends React.Component<InputProps, State> {
       },
     }
 
-    const withIconButton = Boolean(icon && onIconClick) || Boolean(copy)
+    const withIconButton = Boolean(icon) || Boolean(copy)
     const inputButtonElement = this.getButtonElement()
 
     if (label) {
