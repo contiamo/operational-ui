@@ -1,7 +1,9 @@
+import { DefaultProps, DragProps } from "../types"
+
 /**
  * Recursive tree interface
  */
-export interface Tree {
+export interface Tree extends DefaultProps, DragProps {
   label: string
   tag?: string
   color?: string
