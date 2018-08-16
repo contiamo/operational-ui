@@ -16,7 +16,7 @@ export interface SidenavItemProps extends DefaultProps {
   /** Is it currently active? */
   active?: boolean
   /** An Icon for the menu item */
-  icon?: IconName | React.ReactNode
+  icon?: IconName
   /** A label for the item when the containing sidenav is full */
   label: string
   /** A label for the item when the containing sidenav is compact */
@@ -80,14 +80,9 @@ const IconContainer = styled("span")<{ compact: SidenavItemProps["compact"] }>((
   }
 })
 
-const Label = styled("span")<{ compact: SidenavHeaderProps["compact"] }>(
-  ({ theme }) => ({
-    display: "inline-block",
-    paddingLeft: theme.space.base,
-  }),
-  ({ compact, theme }) => {
-    if (compact) {
-      return {
+const Label = styled("span")<{ compact: SidenavHeaderProps["compact"] }>(({ compact, theme }) => {
+  return compact
+    ? {
         marginTop: theme.space.medium,
         padding: 0,
         display: "block",
@@ -102,9 +97,11 @@ const Label = styled("span")<{ compact: SidenavHeaderProps["compact"] }>(
         overflow: "hidden",
         textAlign: "center",
       }
-    }
-  },
-)
+    : {
+        display: "inline-block",
+        paddingLeft: theme.space.base,
+      }
+})
 
 const SidenavItem: React.SFC<SidenavItemProps> = ({ to, active, icon, label, compact, shortLabel, ...props }) => {
   const ContainerComponent = to ? ContainerLink : Container
@@ -130,7 +127,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({ to, active, icon, label, com
           isActive={isActive}
         >
           <IconContainer compact={compact}>
-            {icon === String(icon) ? <Icon name={icon as IconName} size={getSize(compact)} /> : icon}
+            {icon === String(icon) ? <Icon name={icon} size={getSize(compact)} /> : icon}
           </IconContainer>
           <Label compact={compact}>{compact ? shortLabel || label : label}</Label>
         </ContainerComponent>

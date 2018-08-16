@@ -35,7 +35,7 @@ class StatefulSidenav extends React.Component {
           >
             <SidenavItem label="The First Prize" shortLabel="First" icon="Add" />
             <SidenavItem label="The Second Prize" shortLabel="Second" icon="Admin" />
-            <SidenavItem label="The Third Prize" shortLabel="Third" icon="Bundle" />
+            <SidenavItem label="No Short Label" icon="Bundle" />
           </SidenavHeader>
           <SidenavHeader
             label="Let It Snow"
