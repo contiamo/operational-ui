@@ -188,6 +188,7 @@ const constants = {
   color,
   shadows,
   borderRadius: 2,
+  compactSidebarWidth: 90,
   sidebarWidth: 256,
   titleHeight: 50,
   /**
