@@ -80,28 +80,30 @@ const IconContainer = styled("span")<{ compact: SidenavItemProps["compact"] }>((
   }
 })
 
-const Label = styled("span")<{ compact: SidenavHeaderProps["compact"] }>(({ compact, theme }) => {
-  return compact
-    ? {
-        marginTop: theme.space.medium,
-        padding: 0,
-        display: "block",
-        fontSize: 11,
-        fontWeight: theme.font.weight.medium,
-        lineHeight: 1.18,
-        color: theme.color.text.lighter,
-        textTransform: "uppercase",
-        width: "100%",
-        wordBreak: "break-all",
-        wordWrap: "break-word",
-        overflow: "hidden",
-        textAlign: "center",
-      }
-    : {
-        display: "inline-block",
-        paddingLeft: theme.space.base,
-      }
-})
+const Label = styled("span")<{ compact: SidenavHeaderProps["compact"]; hasIcon: boolean }>(
+  ({ compact, theme, hasIcon }) => {
+    return compact
+      ? {
+          marginTop: theme.space.medium,
+          padding: 0,
+          display: "block",
+          fontSize: 11,
+          fontWeight: theme.font.weight.medium,
+          lineHeight: 1.18,
+          color: theme.color.text.lighter,
+          textTransform: "uppercase",
+          width: "100%",
+          wordBreak: "break-all",
+          wordWrap: "break-word",
+          overflow: "hidden",
+          textAlign: "center",
+        }
+      : {
+          display: "inline-block",
+          paddingLeft: hasIcon ? theme.space.base : 0,
+        }
+  },
+)
 
 const SidenavItem: React.SFC<SidenavItemProps> = ({ to, active, icon, label, compact, shortLabel, ...props }) => {
   const ContainerComponent = to ? ContainerLink : Container
@@ -126,10 +128,14 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({ to, active, icon, label, com
           }}
           isActive={isActive}
         >
-          <IconContainer compact={compact}>
-            {icon === String(icon) ? <Icon name={icon} size={getSize(compact)} /> : icon}
-          </IconContainer>
-          <Label compact={compact}>{compact ? shortLabel || label : label}</Label>
+          {icon && (
+            <IconContainer compact={compact}>
+              <Icon name={icon} size={getSize(compact)} />
+            </IconContainer>
+          )}
+          <Label hasIcon={Boolean(icon)} compact={compact}>
+            {compact ? shortLabel || label : label}
+          </Label>
         </ContainerComponent>
       )}
     </OperationalContext>
