@@ -2,7 +2,7 @@ import * as React from "react"
 import { Input, Sidenav, SidenavHeader } from "../src"
 
 export interface TableOfContentsRendererProps {
-  children: React.ReactNode | React.ReactNode[]
+  children: React.ReactElement<any>
   searchTerm: string
   onSearchTermChange: (newVal: string) => void
 }
