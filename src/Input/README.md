@@ -36,7 +36,7 @@ class StatefulInput extends React.Component {
 ### In a small container
 
 ```jsx
-<div style={{ width: 100 }}>
+<div style={{ width: 100, marginBottom: 16 }}>
   <Input value="12" label="Phone number" hint="Please use country code" />
 </div>
 <div style={{ width: 100 }}>
