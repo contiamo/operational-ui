@@ -33,6 +33,17 @@ class StatefulInput extends React.Component {
 <Input value="12" label="Phone number" hint="Please use country code" />
 ```
 
+### In a small container
+
+```jsx
+<div style={{ width: 100, marginBottom: 16 }}>
+  <Input value="12" label="Phone number" hint="Please use country code" />
+</div>
+<div style={{ width: 100 }}>
+  <Input value="12" label="Phone number" hint="Please use country code" icon="Play" onIconClick={() => {}} />
+</div>
+```
+
 ### With toggle state
 
 ```jsx
