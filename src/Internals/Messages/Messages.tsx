@@ -1,6 +1,6 @@
 import * as React from "react"
-import { DefaultProps } from "../types"
-import styled from "../utils/styled"
+import { DefaultProps } from "../../types"
+import styled from "../../utils/styled"
 
 export interface MessagesProps extends DefaultProps {
   children?: React.ReactNode

@@ -1,10 +1,10 @@
 import * as React from "react"
 import tinycolor from "tinycolor2"
-import { DefaultProps } from "../types"
-import styled from "../utils/styled"
+import { DefaultProps } from "../../types"
+import styled from "../../utils/styled"
 
-import { Icon } from "../"
-import { expandColor } from "../utils/constants"
+import { Icon } from "../../"
+import { expandColor } from "../../utils/constants"
 
 export interface MessageProps extends DefaultProps {
   className?: string
