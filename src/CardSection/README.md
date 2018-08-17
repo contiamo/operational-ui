@@ -70,13 +70,21 @@ Card sections can assume a number of states indicating disabledness and drag-and
 
 ### A drag-and-drop example
 
+The following example shows how card sections can support a full-fledged drag-and-drop example. This example is quite verbose to implement the HTML5 drag-and-drop API, but beyond the logic, the different settings to toggle drag-and-drop feedback states are all represented.
+
 ```jsx
 class DragAndDropExample extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      labelsInSource: ["123", "456", "789"],
-      labelsInTarget: [],
+      /** Items in the drag source container */
+      itemsInSource: ["Item 1", "Item 2", "Item 3"],
+      /** Items in the drop target container */
+      itemsInTarget: [],
+      /** The item being dragged out of the above two arrays, if any */
+      dragSource: undefined,
+      /** The identifier of the current drop target, if any */
+      dropTarget: undefined,
     }
   }
 
@@ -86,14 +94,14 @@ class DragAndDropExample extends React.Component {
         <div style={{ width: 600, height: 300, margin: 20 }}>
           <Card>
             <Tree
-              trees={this.state.labelsInSource.map(label => ({
-                label,
+              trees={this.state.itemsInSource.map(item => ({
+                label: item,
                 draggable: true,
                 onDragStart: ev => {
-                  this.setState({ dragSource: label })
+                  this.setState(() => ({ dragSource: item }))
                 },
                 onDragEnd: ev => {
-                  this.setState({ dragSource: undefined })
+                  this.setState(() => ({ dragSource: undefined }))
                 },
                 tag: "C",
                 childNodes: [],
@@ -104,52 +112,57 @@ class DragAndDropExample extends React.Component {
             stackSections="horizontal"
             sections={
               <>
+                {/* Drop target identified by "container1" */}
                 <CardSection
-                  title="Title 1"
-                  actions={["action1", "action2"]}
+                  title="Container 1"
                   dragAndDropFeedback={
-                    this.state.dragSource === undefined
-                      ? undefined
-                      : this.state.dropTarget === "1"
+                    this.state.dragSource
+                      ? this.state.dropTarget === "container1"
                         ? "dropping"
                         : "validTarget"
+                      : undefined
                   }
                   onDragOver={ev => {
                     ev.preventDefault()
-                    this.setState({ dropTarget: "1" })
+                    this.setState({ dropTarget: "container1" })
                   }}
                   onDragLeave={() => {
                     this.setState({ dropTarget: undefined })
                   }}
                   onDrop={() => {
                     this.setState(prevState => ({
-                      labelsInTarget: [...prevState.labelsInTarget, prevState.dragSource],
-                      labelsInSource: prevState.labelsInSource.filter(label => label !== prevState.dragSource),
+                      itemsInTarget: [...prevState.itemsInTarget, prevState.dragSource],
+                      itemsInSource: prevState.itemsInSource.filter(item => item !== prevState.dragSource),
                       dragSource: undefined,
                       dropTarget: undefined,
                     }))
                   }}
                 >
                   <Tree
-                    trees={this.state.labelsInTarget.map(label => ({
-                      label,
+                    trees={this.state.itemsInTarget.map(item => ({
+                      label: item,
                       tag: "C",
                       childNodes: [],
+                      onRemove: () => {
+                        this.setState(prevState => ({
+                          itemsInSource: [...prevState.itemsInSource, item],
+                          itemsInTarget: prevState.itemsInTarget.filter(targetItem => targetItem !== item),
+                        }))
+                      },
                     }))}
                   />
                 </CardSection>
+                {/* Drop target identified by "container2" */}
                 <CardSection
-                  title="Title 2"
-                  dragAndDropFeedback={this.state.dragSource === undefined ? undefined : "invalidTarget"}
+                  title="Container 2"
+                  dragAndDropFeedback={this.state.dragSource ? "invalidTarget" : undefined}
                   onDragOver={() => {
-                    this.setState({ dropTarget: "2" })
+                    this.setState({ dropTarget: "container2" })
                   }}
                   onDragLeave={() => {
                     this.setState({ dropTarget: undefined })
                   }}
-                >
-                  asdf
-                </CardSection>
+                />
               </>
             }
           />
