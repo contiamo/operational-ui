@@ -53,7 +53,7 @@ const IconContainer = styled("div")(({ theme }) => ({
   },
 }))
 
-const Message: React.SFC<MessageProps> = ({ color, onClose, children, ...props }) => (
+export const Message: React.SFC<MessageProps> = ({ color, onClose, children, ...props }) => (
   <Container {...props} color_={color}>
     <IconContainer onClick={onClose}>
       <Icon name="No" />
