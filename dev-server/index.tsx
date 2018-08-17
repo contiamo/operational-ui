@@ -70,6 +70,12 @@ class DragAndDropExample extends React.Component<{}, State> {
                       label,
                       tag: "C",
                       childNodes: [],
+                      onRemove: () => {
+                        this.setState(prevState => ({
+                          labelsInTarget: prevState.labelsInTarget.filter(labelInTarget => labelInTarget !== label),
+                          labelsInSource: [...prevState.labelsInSource, label],
+                        }))
+                      },
                     }))}
                   />
                 </CardSection>

@@ -11,4 +11,5 @@ export interface Tree extends DefaultProps, DragProps {
   disabled?: boolean
   childNodes: Tree[]
   onClick?: () => void
+  onRemove?: () => void
 }
