@@ -14,6 +14,8 @@ export interface BaseProps extends DefaultProps {
   title?: string
   /** Page actions, typically `condensed button` component inside a fragment */
   actions?: React.ReactNode
+  /** Actions position */
+  actionsPosition?: "start" | "end"
 }
 
 export interface PropsWithSimplePage extends BaseProps {
@@ -65,13 +67,19 @@ const Container = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.background.lighter,
 }))
 
-const TitleBar = styled("div")(({ theme }) => ({
+const TitleBar = styled("div")<{ actionPosition: PageProps["actionsPosition"] }>(({ theme, actionPosition }) => ({
   backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
   padding: theme.space.element,
   height: theme.titleHeight,
   fontWeight: theme.font.weight.medium,
+  ...(actionPosition === "start"
+    ? {
+        flexDirection: "row-reverse",
+        justifyContent: "flex-end",
+      }
+    : {}),
 }))
 
 const tabsBarHeight = 43
@@ -104,18 +112,28 @@ const ViewContainer = styled("div")<{ isInTab?: boolean }>(({ theme, isInTab }) 
   position: "relative",
 }))
 
-const ActionsContainer = styled("div")(({ theme }) => ({
-  marginLeft: theme.space.element,
-}))
+const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosition"] }>(
+  ({ theme, actionPosition }) => ({
+    ...(actionPosition === "start"
+      ? {
+          // Deal with the button margin (theme.space.small)
+          marginRight: theme.space.element - theme.space.small,
+        }
+      : {
+          marginLeft: theme.space.element,
+        }),
+  }),
+)
 
 const initialState = {
   activeTab: 0,
 }
 
 class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
-  public static defaultProps = {
+  public static defaultProps: Partial<PageProps> = {
     areas: "main",
     fill: false,
+    actionsPosition: "end",
   }
 
   public readonly state = initialState
@@ -174,14 +192,14 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   }
 
   public render() {
-    const { title, actions, tabs, areas, activeTabName, onTabChange, fill, ...props } = this.props
+    const { title, actions, actionsPosition, tabs, areas, activeTabName, onTabChange, fill, ...props } = this.props
 
     return (
       <Container {...props}>
         {title && (
-          <TitleBar>
+          <TitleBar actionPosition={actionsPosition}>
             <Title color="white">{title}</Title>
-            <ActionsContainer>{actions}</ActionsContainer>
+            <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
           </TitleBar>
         )}
         {tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}
