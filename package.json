@@ -32,7 +32,7 @@
       "git add"
     ],
     "*.(ts|tsx)": [
-      "tslint --fix --project .",
+      "tslint --fix",
       "prettier --write",
       "git add"
     ]

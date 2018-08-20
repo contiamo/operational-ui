@@ -31,6 +31,10 @@ export interface OperationalUIProps {
    */
   hideMessageAfter?: number
   /**
+   * Dangerous: Disable the error boundary if explicitly set to false
+   */
+  errorBoundary?: boolean
+  /**
    * Custom theme
    */
   theme?: DeepPartial<OperationalStyleConstants>
@@ -96,8 +100,9 @@ const colorByMessageType = (type: MessageType): string => {
 }
 
 class OperationalUI extends React.Component<OperationalUIProps, State> {
-  public static defaultProps = {
+  public static defaultProps: Partial<OperationalUIProps> = {
     theme: {},
+    errorBoundary: true,
   }
 
   public state: State = {
@@ -173,10 +178,10 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
   }
 
   public render() {
-    const { pushState, replaceState, children, theme } = this.props
+    const { pushState, replaceState, children, theme, errorBoundary } = this.props
     return (
       <ThemeProvider theme={merge(constants, theme)}>
-        {this.state.error ? (
+        {this.state.error && errorBoundary !== false ? (
           <ErrorBoundary error={this.state.error} />
         ) : (
           <Provider
