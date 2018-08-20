@@ -37,6 +37,7 @@ export interface IconProps extends DefaultProps {
    * For OperationalUI brand icons, use the values `OperationalUI`, `Labs`, `Components`, `Blocks` and `Visualizations`
    */
   name: IconName
+  onClick?: () => void
 }
 
 const Icon: React.SFC<IconProps> = ({ left, right, color, ...props }) => {
@@ -57,7 +58,8 @@ const Icon: React.SFC<IconProps> = ({ left, right, color, ...props }) => {
   return null
 }
 
-export default styled(Icon)<IconProps>(({ left, right, theme }) => ({
+export default styled(Icon)<IconProps>(({ left, right, theme, onClick }) => ({
   marginLeft: right ? theme.space.small : 0,
   marginRight: left ? theme.space.small : 0,
+  cursor: Boolean(onClick) ? "pointer" : "default",
 }))
