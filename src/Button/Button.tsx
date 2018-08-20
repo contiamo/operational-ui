@@ -20,6 +20,8 @@ export interface ButtonProps extends DefaultProps {
   icon?: IconName
   /** Icon position */
   iconPosition?: "start" | "end"
+  /** Icon color */
+  iconColor?: string
   /** Loading flag - if enabled, the text hides and a spinner appears in the center */
   loading?: boolean
   /** Disabled option */
@@ -112,7 +114,17 @@ const ButtonSpinner = styled(Spinner)<{ containerColor?: ButtonProps["color"] }>
   color: makeColors(theme, containerColor || "").foreground,
 }))
 
-const Button: React.SFC<ButtonProps> = ({ to, children, icon, iconPosition, color, onClick, loading, ...props }) => {
+const Button: React.SFC<ButtonProps> = ({
+  to,
+  children,
+  icon,
+  iconPosition,
+  iconColor,
+  color,
+  onClick,
+  loading,
+  ...props
+}) => {
   const ContainerComponent: React.ComponentType<any> = to ? ContainerLink : Container
   return (
     <OperationalContext>
@@ -139,9 +151,9 @@ const Button: React.SFC<ButtonProps> = ({ to, children, icon, iconPosition, colo
           }}
           title={loading && children === String(children) ? String(children) : undefined}
         >
-          {icon && iconPosition === "start" && <Icon left name={icon} size={18} />}
+          {icon && iconPosition === "start" && <Icon left name={icon} size={18} color={iconColor} />}
           {children}
-          {icon && iconPosition === "end" && <Icon right name={icon} size={18} />}
+          {icon && iconPosition === "end" && <Icon right name={icon} size={18} color={iconColor} />}
           {loading && <ButtonSpinner containerColor={color} />}
         </ContainerComponent>
       )}
