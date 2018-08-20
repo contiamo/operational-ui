@@ -32,7 +32,14 @@ Using buttons is as simple as including the component with a text node as a chil
   <Button color="primary" loading>Loading</Button>
   <Button condensed icon="Open">Icon</Button>
   <Button condensed loading>Loading</Button>
-
+</div>
+<div style={{ marginBottom: 10 }}>
+  <Button iconPosition="start" color="grey" icon="Open">Icon</Button>
+  <Button iconPosition="start" color="success" icon="Labs">Icon</Button>
+  <Button iconPosition="start" loading>Loading</Button>
+  <Button iconPosition="start" color="primary" loading>Loading</Button>
+  <Button iconPosition="start" condensed icon="Open">Icon</Button>
+  <Button iconPosition="start" condensed loading>Loading</Button>
 </div>
 <div style={{ marginBottom: 10 }}>
   <Button disabled color="grey" icon="Open">Icon</Button>
