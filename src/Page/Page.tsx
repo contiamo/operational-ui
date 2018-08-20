@@ -14,6 +14,7 @@ export interface BaseProps extends DefaultProps {
   title?: string
   /** Page actions, typically `condensed button` component inside a fragment */
   actions?: React.ReactNode
+  actionsPosition?: "start" | "end"
 }
 
 export interface PropsWithSimplePage extends BaseProps {
@@ -104,7 +105,7 @@ const ViewContainer = styled("div")<{ isInTab?: boolean }>(({ theme, isInTab }) 
   position: "relative",
 }))
 
-const ActionsContainer = styled("div")(({ theme }) => ({
+const EndContainer = styled("div")(({ theme }) => ({
   marginLeft: theme.space.element,
 }))
 
@@ -116,6 +117,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   public static defaultProps = {
     areas: "main",
     fill: false,
+    actionsPosition: "end",
   }
 
   public readonly state = initialState
@@ -180,8 +182,19 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
       <Container {...props}>
         {title && (
           <TitleBar>
-            <Title color="white">{title}</Title>
-            <ActionsContainer>{actions}</ActionsContainer>
+            {props.actionsPosition === "end" ? (
+              <>
+                <Title color="white">{title}</Title>
+                <EndContainer>{actions}</EndContainer>
+              </>
+            ) : (
+              <>
+                {actions}
+                <EndContainer>
+                  <Title color="white">{title}</Title>
+                </EndContainer>
+              </>
+            )}
           </TitleBar>
         )}
         {tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}
