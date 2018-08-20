@@ -8,7 +8,7 @@ import * as CustomIcons from "./Icon.Custom"
 
 export type IconName = BrandIconName | keyof typeof CustomIcons
 
-export interface PropsWithoutName extends DefaultProps {
+export interface IconProps extends DefaultProps {
   /**
    * Size
    *
@@ -32,9 +32,6 @@ export interface PropsWithoutName extends DefaultProps {
    * Indicates that this component is right of other content, and adds an appropriate left margin.
    */
   right?: boolean
-}
-
-export interface IconProps extends PropsWithoutName {
   /**
    * Icon name.
    * For OperationalUI brand icons, use the values `OperationalUI`, `Labs`, `Components`, `Blocks` and `Visualizations`
