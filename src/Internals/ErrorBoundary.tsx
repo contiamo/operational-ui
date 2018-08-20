@@ -59,7 +59,7 @@ const ErrorBoundary: React.SFC<ErrorBoundaryProps> = ({ environment, error }) =>
           </p>
           <p>Please handle your errors in your components further down the React tree.</p>
 
-          <p>{`The error: ${error.message}.`}</p>
+          <p>{`The error: ${error.message.length < 200 ? error.message : error.message.slice(0, 200) + `…`}`}</p>
 
           {error.stack && (
             <StackTrace>
