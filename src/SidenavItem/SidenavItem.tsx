@@ -20,7 +20,7 @@ export interface SidenavItemProps extends DefaultProps {
   /** A label for the item when the containing sidenav is compact */
   shortLabel?: string
   compact?: SidenavHeaderProps["compact"]
-  /** **Compact-mode only:** Should we place this at the bottom? */
+  /** Should we place this at the bottom of its sidenav? */
   end?: boolean
 }
 
@@ -32,7 +32,6 @@ const makeContainer = (type: "link" | "block") =>
     isActive: SidenavHeaderProps["active"]
     end_: boolean
   }>(({ theme, compact, isActive, end_ }) => {
-    const shouldPlaceAtBottom = Boolean(end_)
     return {
       display: "flex",
       padding: `${compact ? 10 : 0}px ${compact ? 0 : theme.space.content}px`,
@@ -48,9 +47,12 @@ const makeContainer = (type: "link" | "block") =>
       color: isActive ? theme.color.primary : theme.color.text.lightest,
       fontWeight: theme.font.weight.regular,
       boxShadow: isActive && compact ? `2px 0 0 inset ${theme.color.primary}` : "none",
-      marginTop: shouldPlaceAtBottom ? "auto" : 0,
-      alignSelf: shouldPlaceAtBottom ? "flex-end" : "flex-start",
-      ...(shouldPlaceAtBottom ? { "& + &": { marginTop: 0 } } : {}),
+      marginTop: end_ ? "auto" : 0,
+      alignSelf: end_ ? "flex-end" : "flex-start",
+
+      // This allows stacking of `end` SidenavItems.
+      ...(end_ ? { "& + &": { marginTop: 0 } } : {}),
+
       // Specificity is piled up here to override default styles
       "a:link&, a:visited&": {
         textDecoration: "none",
@@ -61,7 +63,7 @@ const makeContainer = (type: "link" | "block") =>
         color: isActive ? theme.color.primary : theme.color.text.dark,
       },
       "&:last-child": {
-        marginBottom: shouldPlaceAtBottom ? 0 : theme.space.content,
+        marginBottom: end_ ? 0 : theme.space.content,
       },
     }
   })
