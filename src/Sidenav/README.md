@@ -101,7 +101,7 @@ class StatefulSidenav extends React.Component {
       <SidenavHeader label="Let It Snow">
         <SidenavItem label="Steak" icon="Jobs" />
         <SidenavItem label="Frites" active icon="Lock" />
-        <SidenavItem end label="Rum" icon="No" />
+        <SidenavItem label="Rum" icon="No" />
       </SidenavHeader>
     </Sidenav>
   </div>

@@ -1,4 +1,3 @@
-import { FunctionInterpolation, Themed } from "create-emotion-styled"
 import * as React from "react"
 
 import Icon, { IconName } from "../Icon/Icon"
@@ -7,7 +6,6 @@ import { SidenavProps } from "../Sidenav/Sidenav"
 import { SidenavItemProps } from "../SidenavItem/SidenavItem"
 import { DefaultProps } from "../types"
 import { floatIn, isModifiedEvent } from "../utils"
-import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface SidenavHeaderProps extends DefaultProps {
@@ -41,26 +39,19 @@ export interface SidenavHeaderProps extends DefaultProps {
   compact?: SidenavProps["compact"]
 }
 
-const makeContainerStyles: FunctionInterpolation<Themed<Partial<SidenavHeaderProps>, OperationalStyleConstants>> = ({
-  theme,
-  compact,
-  end,
-}) => ({
-  label: "sidenavheader",
-  textDecoration: "none",
-  width: "100%",
-  position: "relative",
-  borderBottom: compact ? 0 : "1px solid",
-  borderBottomColor: theme.color.separators.default,
-  marginTop: end ? "auto" : 0,
-  alignSelf: end ? "flex-end" : "flex-start",
-})
-
-const Container = styled("div")<{ compact: SidenavHeaderProps["compact"]; end: SidenavHeaderProps["end"] }>(
-  makeContainerStyles,
-)
-
-const ContainerLink = styled("a")<{ compact: SidenavHeaderProps["compact"] }>(makeContainerStyles)
+const makeContainer = (type: "link" | "block") =>
+  styled(type === "link" ? "a" : "div")<{ compact: SidenavHeaderProps["compact"]; end_: SidenavHeaderProps["end"] }>(
+    ({ theme, compact, end_ }) => ({
+      label: "sidenavheader",
+      textDecoration: "none",
+      width: "100%",
+      position: "relative",
+      borderBottom: compact ? 0 : "1px solid",
+      borderBottomColor: theme.color.separators.default,
+      marginTop: end_ ? "auto" : 0,
+      alignSelf: end_ ? "flex-end" : "flex-start",
+    }),
+  )
 
 const Content = styled("div")<{ isCondensed: boolean; isActive: boolean; compact: SidenavHeaderProps["compact"] }>(
   ({ theme, isCondensed, compact, isActive }) => ({
@@ -151,15 +142,15 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
 
   // Actual `to` prop should invalidate if the element has sublinks and is active
   const href = isActive && hasChildLinks ? undefined : to
-  const ContainerComponent = href ? ContainerLink : Container
+  const Container = href ? makeContainer("link") : makeContainer("block")
 
   return (
     <OperationalContext>
       {ctx => {
         return (
-          <ContainerComponent
+          <Container
             {...props}
-            end={end}
+            end_={end}
             compact={compact}
             href={href}
             onClick={(ev: React.SyntheticEvent<Node>) => {
@@ -215,7 +206,7 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
                 })}
               </ItemsContainer>
             )}
-          </ContainerComponent>
+          </Container>
         )
       }}
     </OperationalContext>
