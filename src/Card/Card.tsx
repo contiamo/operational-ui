@@ -3,7 +3,7 @@ import { CardHeader, CardItem } from "../"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface CardProps<T extends {} = {}> extends DefaultProps {
+export interface CardPropsRegular<T extends {} = {}> extends DefaultProps {
   /** Any object to show. The key is the title of the data. */
   data?: T
   /**  A function to format keys of `data` */
@@ -18,13 +18,36 @@ export interface CardProps<T extends {} = {}> extends DefaultProps {
   title?: React.ReactNode
   /** Component containing buttons/links/actions assigned to the card */
   action?: React.ReactNode
+  /** React children */
+  children?: React.ReactNode
+  /** Card sections */
+  sections?: never
+  /** Section stacking */
+  stackSections?: never
+}
+
+export interface CardPropsWithSections extends DefaultProps {
+  /** Any object to show. The key is the title of the data. */
+  data?: never
+  /**  A function to format keys of `data` */
+  keyFormatter?: never
+  /** A key-value object to format values of `data`. */
+  valueFormatters?: never
+  /** An ordered array to pick only some keys to display  */
+  keys?: never
+  /** Title of the card */
+  title?: React.ReactNode
+  /** Component containing buttons/links/actions assigned to the card */
+  action?: React.ReactNode
+  /** React children */
+  children?: never
   /** Card sections */
   sections?: React.ReactNode
   /** Section stacking */
   stackSections?: "horizontal" | "vertical"
-  /** React children */
-  children?: React.ReactNode
 }
+
+export type CardProps<T extends {} = {}> = CardPropsRegular<T> | CardPropsWithSections
 
 const Container = styled("div")(({ theme }) => ({
   marginBottom: theme.space.element,
