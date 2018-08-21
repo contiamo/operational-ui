@@ -6,6 +6,20 @@ export interface IconProps {
   className?: string
 }
 
+// @todo redraw for consistent thickness and view boundary
+export const Share: React.SFC<IconProps> = props => {
+  const size = props.size || 18
+  const color = props.color || "currentColor"
+  return (
+    <svg viewBox="0 0 80 80" fill={color} width={size} height={size} className={props.className}>
+      <path
+        d="M71,963.362a13.015,13.015,0,0,0-12.375,17L37.156,992.3a12.984,12.984,0,1,0,0,20.156l21.5,11.937a12.778,12.778,0,0,0-.656,3.969,13.07,13.07,0,1,0,3.781-9.125l-20.906-11.625a12.919,12.919,0,0,0,1.125-5.25,12.788,12.788,0,0,0-1.125-5.25L61.75,985.487A13,13,0,1,0,71,963.362Zm0,6a7,7,0,1,1-7,7A6.955,6.955,0,0,1,71,969.362Zm-42,26a7,7,0,1,1-7,7A6.955,6.955,0,0,1,29,995.362Zm42,26a7,7,0,1,1-7,7A6.955,6.955,0,0,1,71,1021.362Z"
+        transform="translate(-12 -962)"
+      />
+    </svg>
+  )
+}
+
 export const Add: React.SFC<IconProps> = props => {
   const size = props.size || 18
   const color = props.color || "currentColor"
