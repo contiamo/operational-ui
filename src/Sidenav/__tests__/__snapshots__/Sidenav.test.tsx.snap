@@ -5,6 +5,10 @@ exports[`Sidenav component renders 1`] = `
   errorBoundary={true}
   theme={Object {}}
 >
-  <Sidenav />
+  <Sidenav>
+    <div>
+      hello
+    </div>
+  </Sidenav>
 </OperationalUI>
 `;
