@@ -133,6 +133,41 @@ const Tab = props => (
 />
 ```
 
+### With condensed title bar
+
+```jsx
+const Tab = props => (
+  <PageContent>
+    <Card title={props.title}>The tabs are not working because nothing update `activeTabName`!</Card>
+  </PageContent>
+)
+const options = [
+  { label: "Payroll", onClick: () => {} },
+  { label: "All Databases", onClick: () => {} },
+  { label: "Sales - Germany only", onClick: () => {} },
+  { label: "Sales - global", onClick: () => {} },
+  { label: "Reporting", onClick: () => {} },
+  { label: "Logistics", onClick: () => {} },
+]
+const actions = (
+  <HeaderMenu items={options} withCaret>
+    Sales / Foodmart
+  </HeaderMenu>
+)
+;<Page
+  title="Bundle detail"
+  condensedTabs
+  activeTabName="sql"
+  onTabChange={console.log}
+  tabs={[
+    { name: "olap", children: <Tab title="OLAP" /> },
+    { name: "entity", children: <Tab title="Entity" /> },
+    { name: "sql", children: <Tab title="SQL" /> },
+  ]}
+  actions={actions}
+/>
+```
+
 ### With activeTabName controlled (classically with a router)
 
 ```jsx
