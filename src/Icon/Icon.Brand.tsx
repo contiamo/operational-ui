@@ -1,14 +1,14 @@
 import * as React from "react"
-import { IconProps } from "./Icon"
+import { IconProps, OperationalUIIconProps, PantheonIconProps } from "./Icon"
 
 export type Props = Pick<IconProps, Exclude<keyof IconProps, "name">>
 export type BrandIconName = "OperationalUI" | "Pantheon" | "Labs" | "Contiamo"
 
 export interface BrandIcons {
-  [key: string]: React.SFC<Props>
+  [key: string]: React.SFC<Props> | React.SFC<OperationalUIIconProps> | React.SFC<PantheonIconProps>
 }
 
-const OperationalUI: React.SFC<Props> = props => {
+const OperationalUI: React.SFC<OperationalUIIconProps> = ({ rotation, ...props }) => {
   const size = props.size
   const color = props.color || "currentColor"
   return (
@@ -17,7 +17,7 @@ const OperationalUI: React.SFC<Props> = props => {
       height={size}
       viewBox="0 0 1000 1000"
       style={{
-        transform: `rotate(${props.rotation || 0}deg)`,
+        transform: `rotate(${rotation || 0}deg)`,
         transition: "1s transform ease",
       }}
       fill={color}
@@ -58,10 +58,10 @@ const Labs: React.SFC<Props> = props => {
   )
 }
 
-const Pantheon: React.SFC<Props> = props => (
+const Pantheon: React.SFC<PantheonIconProps> = ({ colored, ...props }) => (
   <svg viewBox="0 0 565.18 565.18" width={props.size} height={props.size} {...props}>
     <title>Pantheon-Logo-CMYK</title>
-    <g fill={props.colored ? "#344fa0" : "currentColor"}>
+    <g fill={colored ? "#344fa0" : "currentColor"}>
       <path d="M74.47,338.72A3.35,3.35,0,0,0,72.08,343l8.26,23.65a3.35,3.35,0,0,0,4.52,1.84L99.13,362a3.79,3.79,0,0,0,1.94-4.76l-6.95-19.91a3.79,3.79,0,0,0-4.49-2.51Z" />
       <path d="M155.26,276.38a3.8,3.8,0,0,0,3.83-3.45l.94-8.41a3.81,3.81,0,0,0-3-4.21l-10.81-2.18a3.32,3.32,0,0,0-4,2.8L141,272.48a3.34,3.34,0,0,0,3.27,3.62Z" />
       <path d="M471.07,227.81a3.78,3.78,0,0,0,4.48,2.51l15.16-3.86a3.35,3.35,0,0,0,2.39-4.26l-8.26-23.65a3.35,3.35,0,0,0-4.52-1.84l-14.27,6.43a3.79,3.79,0,0,0-1.94,4.76Z" />
@@ -79,7 +79,7 @@ const Pantheon: React.SFC<Props> = props => (
       <path d="M311.31,439.82a3.25,3.25,0,0,0-3.6-2.54L292.56,439a3.24,3.24,0,0,0-2.95,3.26L290,458a2.85,2.85,0,0,0,3.09,2.79l18.93-2.1a2.84,2.84,0,0,0,2.4-3.4Z" />
       <path d="M402,149.53a2.9,2.9,0,0,0-4.19.29l-10.12,12.05a3.17,3.17,0,0,0,.3,4.35s3.08,2.78,5.54,5.24S398.8,177,398.8,177a3.17,3.17,0,0,0,4.34.3l12.06-10.12a2.91,2.91,0,0,0,.29-4.19s-3.63-4-6.53-6.94S402,149.53,402,149.53Z" />
     </g>
-    <g fill={props.colored ? "#27245e" : "currentColor"}>
+    <g fill={colored ? "#27245e" : "currentColor"}>
       <path d="M282.59,206.53A75.48,75.48,0,1,0,358.07,282,75.48,75.48,0,0,0,282.59,206.53Zm.48,121.67A46.2,46.2,0,1,1,329.26,282,46.19,46.19,0,0,1,283.07,328.2Z" />
       <path d="M165.17,332.24a3.8,3.8,0,0,0,2-4.76l-2.8-8a3.81,3.81,0,0,0-4.5-2.51l-10.72,2.73a3.32,3.32,0,0,0-2.37,4.26l3.83,11a3.33,3.33,0,0,0,4.51,1.84Z" />
       <path d="M127.74,240a3.79,3.79,0,0,0,4.49-2.51l4.69-13.44a3.78,3.78,0,0,0-1.95-4.76l-13.42-6.06a3.33,3.33,0,0,0-4.51,1.85l-6,17a3.34,3.34,0,0,0,2.39,4.26Z" />
@@ -111,7 +111,7 @@ const Pantheon: React.SFC<Props> = props => (
       <path d="M372.41,153.81a3.24,3.24,0,0,0,4.33-.71l9.5-12.55a2.85,2.85,0,0,0-.67-4.12l-16.11-10.16a2.84,2.84,0,0,0-4,1.17l-7.18,14a3.24,3.24,0,0,0,1.23,4.22Z" />
       <path d="M271.49,86.71a3.22,3.22,0,0,0,2.94-3.25L274,66.8a2.86,2.86,0,0,0-3.09-2.8L245,66.88a2.84,2.84,0,0,0-2.39,3.41l3.3,16.33a3.24,3.24,0,0,0,3.59,2.53Z" />
     </g>
-    <g fill={props.colored ? "#49ba84" : "currentColor"}>
+    <g fill={colored ? "#49ba84" : "currentColor"}>
       <path d="M70.76,242.87a3.35,3.35,0,0,0-4,2.8L64,270.56a3.35,3.35,0,0,0,3.28,3.62l15.64.39a3.77,3.77,0,0,0,3.8-3.44l2.33-20.95a3.79,3.79,0,0,0-3-4.21Z" />
       <path d="M170.58,221.76a3.82,3.82,0,0,0,4.95-1.44l4.52-7.16a3.79,3.79,0,0,0-.84-5.07l-8.83-6.69a3.34,3.34,0,0,0-4.82.79l-6.2,9.83a3.32,3.32,0,0,0,1.36,4.68Z" />
       <path d="M106.22,311.53a3.33,3.33,0,0,0,4,2.81l14.43-2.92a3.8,3.8,0,0,0,3-4.21L126,293.07a3.79,3.79,0,0,0-3.82-3.44L107.5,290a3.34,3.34,0,0,0-3.27,3.62Z" />

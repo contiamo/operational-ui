@@ -17,9 +17,12 @@ exports[`ProgressPanel Component Should initialize properly 1`] = `
         class="css-9fq4n"
       >
         <svg
-          class="css-u2jm3j"
+          class="css-1yjru7g"
+          color="currentColor"
           fill="currentColor"
           height="18"
+          name="Yes"
+          size="18"
           viewBox="0 0 360 360"
           width="18"
         >
@@ -37,9 +40,12 @@ exports[`ProgressPanel Component Should initialize properly 1`] = `
         class="css-5ugjy6"
       >
         <svg
-          class="css-u2jm3j"
+          class="css-1yjru7g"
+          color="currentColor"
           fill="currentColor"
           height="18"
+          name="No"
+          size="18"
           viewBox="0 0 360 360"
           width="18"
         >
@@ -107,9 +113,12 @@ exports[`ProgressPanel Component Should initialize properly 1`] = `
         class="css-9xk9fc"
       >
         <svg
-          class="css-u2jm3j"
+          class="css-1yjru7g"
+          color="currentColor"
           fill="currentColor"
           height="18"
+          name="EmptyCircle"
+          size="18"
           viewBox="0 0 360 360"
           width="18"
         >

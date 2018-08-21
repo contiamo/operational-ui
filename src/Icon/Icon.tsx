@@ -8,7 +8,7 @@ import * as CustomIcons from "./Icon.Custom"
 
 export type IconName = BrandIconName | keyof typeof CustomIcons
 
-export interface IconProps extends DefaultProps {
+export interface CommunIconProps extends DefaultProps {
   /**
    * Size
    *
@@ -17,13 +17,6 @@ export interface IconProps extends DefaultProps {
   size?: number
   /** Icon color, specified as a hex, or a color name (info, success, warning, error) */
   color?: string
-  /** Use the colored version of the logo (works for `name = Pantheon` only) */
-  colored?: boolean
-  /**
-   * OperationalUI needs this prop to animate the inner circle.
-   * All other icons should ignore it.
-   */
-  rotation?: number
   /**
    * Indicates that this component is left of other content, and adds an appropriate right margin.
    */
@@ -39,6 +32,28 @@ export interface IconProps extends DefaultProps {
   name: IconName
   onClick?: () => void
 }
+
+export interface OperationalUIIconProps extends CommunIconProps {
+  name: "OperationalUI"
+  /**
+   * OperationalUI needs this prop to animate the inner circle.
+   * All other icons should ignore it.
+   */
+  rotation?: number
+}
+
+export interface PantheonIconProps extends CommunIconProps {
+  name: "Pantheon"
+  /** Use the colored version of the logo (works for `name = Pantheon` only) */
+  colored?: boolean
+}
+
+export interface OtherIconProps extends CommunIconProps {
+  colored?: never
+  rotation?: never
+}
+
+export type IconProps = OtherIconProps | OperationalUIIconProps | PantheonIconProps
 
 const Icon: React.SFC<IconProps> = ({ left, right, color, ...props }) => {
   const iconColor: string = expandColor(constants, color) || "currentColor"

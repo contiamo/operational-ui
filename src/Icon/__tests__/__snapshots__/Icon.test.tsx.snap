@@ -8,9 +8,12 @@ exports[`Icon Component Renders an <svg> tag 1`] = `
     class="css-ar73w8-Messages"
   />
   <svg
-    class="css-1jl4146"
+    class="css-1uz51xv"
+    color="currentColor"
     fill="currentColor"
     height="18"
+    name="Add"
+    size="18"
     viewBox="0 0 360 360"
     width="18"
   >
