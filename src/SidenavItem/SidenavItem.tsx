@@ -18,7 +18,7 @@ export interface SidenavItemProps extends DefaultProps {
   /** A label for the item when the containing sidenav is full */
   label: string
   /** A label for the item when the containing sidenav is compact */
-  shortLabel?: string
+  compactLabel?: string
   compact?: SidenavHeaderProps["compact"]
   /** Should we place this at the bottom of its sidenav? */
   end?: boolean
@@ -106,7 +106,16 @@ const Label = styled("span")<{ compact: SidenavHeaderProps["compact"]; hasIcon: 
   },
 )
 
-const SidenavItem: React.SFC<SidenavItemProps> = ({ to, active, icon, label, compact, shortLabel, end, ...props }) => {
+const SidenavItem: React.SFC<SidenavItemProps> = ({
+  to,
+  active,
+  icon,
+  label,
+  compact,
+  compactLabel,
+  end,
+  ...props
+}) => {
   const Container = to ? makeContainer("link") : makeContainer("block")
   const isActive = Boolean(active)
   return (
@@ -136,7 +145,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({ to, active, icon, label, com
             </IconContainer>
           )}
           <Label hasIcon={Boolean(icon)} compact={compact}>
-            {compact ? shortLabel || label : label}
+            {compact ? compactLabel || label : label}
           </Label>
         </Container>
       )}

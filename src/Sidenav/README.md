@@ -33,8 +33,8 @@ class StatefulSidenav extends React.Component {
             active={this.state.activeHeaders.includes(1)}
             onToggle={this.toggle.bind(this, 1)}
           >
-            <SidenavItem label="The First Prize" shortLabel="First" icon="Add" />
-            <SidenavItem label="The Second Prize" shortLabel="Second" icon="Admin" />
+            <SidenavItem label="The First Prize" compactLabel="First" icon="Add" />
+            <SidenavItem label="The Second Prize" compactLabel="Second" icon="Admin" />
             <SidenavItem label="No Short Label" icon="Bundle" />
           </SidenavHeader>
           <SidenavHeader
@@ -42,19 +42,19 @@ class StatefulSidenav extends React.Component {
             active={this.state.activeHeaders.includes(2)}
             onToggle={this.toggle.bind(this, 2)}
           >
-            <SidenavItem label="The Fourth Prize" shortLabel="Fourth" icon="Catalog" />
-            <SidenavItem label="The Fifth Prize" shortLabel="Fifth" icon="ChevronDown" />
+            <SidenavItem label="The Fourth Prize" compactLabel="Fourth" icon="Catalog" />
+            <SidenavItem label="The Fifth Prize" compactLabel="Fifth" icon="ChevronDown" />
             {/* No Icon case */}
-            <SidenavItem label="The Sixth Prize" shortLabel="Sixth" />
+            <SidenavItem label="The Sixth Prize" compactLabel="Sixth" />
           </SidenavHeader>
           <SidenavHeader
             label="Let It Snow"
             active={this.state.activeHeaders.includes(3)}
             onToggle={this.toggle.bind(this, 3)}
           >
-            <SidenavItem label="The Seventh Prize" shortLabel="Seventh" icon="Document" />
-            <SidenavItem label="The Eighth Prize" shortLabel="Eighth" icon="Endpoint" />
-            <SidenavItem label="The Ninth Prize" shortLabel="Ninth" icon="Entity" />
+            <SidenavItem label="The Seventh Prize" compactLabel="Seventh" icon="Document" />
+            <SidenavItem label="The Eighth Prize" compactLabel="Eighth" icon="Endpoint" />
+            <SidenavItem label="The Ninth Prize" compactLabel="Ninth" icon="Entity" />
           </SidenavHeader>
         </Sidenav>
       </div>

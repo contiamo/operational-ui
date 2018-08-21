@@ -35,11 +35,11 @@ const Container = styled("div")<{ compact?: SidenavProps["compact"] }>(({ theme,
 const Sidenav: React.SFC<SidenavProps> = ({ children, ...props }) => (
   <Container {...props}>
     {React.Children.map(children, child => {
-      // see line 8
-      const dudeMyChildIsAnElementJustLetMeUseItUgh = child as React.ReactElement<any>
+      // see line 8 for the safety of this assertion
+      const childElement = child as React.ReactElement<any>
       return {
-        ...dudeMyChildIsAnElementJustLetMeUseItUgh,
-        props: { ...dudeMyChildIsAnElementJustLetMeUseItUgh.props, compact: props.compact },
+        ...childElement,
+        props: { ...childElement.props, compact: props.compact },
       }
     })}
   </Container>
