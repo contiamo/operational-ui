@@ -23,8 +23,6 @@ export interface SidenavHeaderProps extends DefaultProps {
   active?: boolean
   /** Callback called when the active state changes */
   onToggle?: (newActiveState: boolean) => void
-  /** Place this item at the bottom? */
-  end?: boolean
   /**
    * Expanded state
    *
@@ -40,18 +38,13 @@ export interface SidenavHeaderProps extends DefaultProps {
 }
 
 const makeContainer = (type: "link" | "block") =>
-  styled(type === "link" ? "a" : "div")<{ compact: SidenavHeaderProps["compact"]; end_: SidenavHeaderProps["end"] }>(
-    ({ theme, compact, end_ }) => ({
-      label: "sidenavheader",
-      textDecoration: "none",
-      width: "100%",
-      position: "relative",
-      borderBottom: compact ? 0 : "1px solid",
-      borderBottomColor: theme.color.separators.default,
-      marginTop: end_ ? "auto" : 0,
-      alignSelf: end_ ? "flex-end" : "flex-start",
-    }),
-  )
+  styled(type === "link" ? "a" : "div")<{ compact: SidenavHeaderProps["compact"] }>(({ theme, compact }) => ({
+    label: "sidenavheader",
+    textDecoration: "none",
+    width: "100%",
+    borderBottom: compact ? 0 : "1px solid",
+    borderBottomColor: theme.color.separators.default,
+  }))
 
 const Content = styled("div")<{ isCondensed: boolean; isActive: boolean; compact: SidenavHeaderProps["compact"] }>(
   ({ theme, isCondensed, compact, isActive }) => ({
@@ -131,7 +124,7 @@ const truncate = (maxLength: number) => (text: string) => {
   return text.slice(0, maxLength) + "..."
 }
 
-const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, compact, end, ...props }) => {
+const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, compact, ...props }) => {
   const isActive = Boolean(active) || Boolean(compact)
 
   // The implementation of this component relies on the fact that it only has valid
@@ -150,7 +143,6 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
         return (
           <Container
             {...props}
-            end_={end}
             compact={compact}
             href={href}
             onClick={(ev: React.SyntheticEvent<Node>) => {

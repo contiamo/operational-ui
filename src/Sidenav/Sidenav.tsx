@@ -19,6 +19,7 @@ const Container = styled("div")<{ compact?: SidenavProps["compact"] }>(({ theme,
   const color = readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
   return {
     color,
+    position: "relative",
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",

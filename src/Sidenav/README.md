@@ -86,24 +86,13 @@ class StatefulSidenav extends React.Component {
 ### With a header placed at the bottom
 
 ```jsx
-<div style={{ height: 600, display: "flex" }}>
-  <div>
-    <Sidenav compact>
-      <SidenavHeader end label="Let It Snow">
-        <SidenavItem label="Steak" icon="Jobs" />
-        <SidenavItem label="Frites" active icon="Lock" />
-        <SidenavItem label="Rum" icon="No" />
-      </SidenavHeader>
-    </Sidenav>
-  </div>
-  <div>
-    <Sidenav compact>
-      <SidenavHeader label="Let It Snow">
-        <SidenavItem label="Steak" icon="Jobs" />
-        <SidenavItem label="Frites" active icon="Lock" />
-        <SidenavItem label="Rum" icon="No" />
-      </SidenavHeader>
-    </Sidenav>
-  </div>
+<div style={{ height: 600 }}>
+  <Sidenav compact>
+    <SidenavHeader label="Let It Snow">
+      <SidenavItem label="Steak" icon="Jobs" />
+      <SidenavItem label="Frites" active icon="Lock" />
+    </SidenavHeader>
+    <SidenavItem end label="Rum" icon="No" />
+  </Sidenav>
 </div>
 ```

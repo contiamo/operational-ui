@@ -1,11 +1,9 @@
 import * as React from "react"
-import { Interpolation, Themed } from "react-emotion"
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { SidenavHeaderProps } from "../SidenavHeader/SidenavHeader"
 import { DefaultProps } from "../types"
 import { isModifiedEvent } from "../utils"
-import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface SidenavItemProps extends DefaultProps {
@@ -22,53 +20,54 @@ export interface SidenavItemProps extends DefaultProps {
   /** A label for the item when the containing sidenav is compact */
   shortLabel?: string
   compact?: SidenavHeaderProps["compact"]
+  /** **Compact-mode only:** Should we place this at the bottom? */
+  end?: boolean
 }
 
-const getSize = (compact = false) => (compact ? 30 : 18)
+const getIconSize = (compact = false) => (compact ? 30 : 18)
 
-const containerStyles: Interpolation<
-  Themed<
-    {
-      isActive: boolean
-      compact: SidenavHeaderProps["compact"]
-    },
-    OperationalStyleConstants
-  >
-> = ({ theme, compact, isActive }) => ({
-  display: "flex",
-  padding: `${compact ? 10 : 0}px ${compact ? 0 : theme.space.content}px`,
-  height: compact ? "auto" : 36,
-  cursor: "pointer",
-  position: "relative",
-  width: "100%",
-  alignItems: "center",
-  flexDirection: compact ? "column" : "row",
-  justifyContent: compact ? "center" : "flex-start",
-  whiteSpace: "nowrap",
-  userSelect: "none",
-  fontSize: theme.font.size.body,
-  color: isActive ? theme.color.primary : theme.color.text.lightest,
-  fontWeight: theme.font.weight.regular,
-  boxShadow: isActive && compact ? `2px 0 0 inset ${theme.color.primary}` : "none",
-  // Specificity is piled up here to override default styles
-  "a:link&, a:visited&": {
-    textDecoration: "none",
-    color: isActive ? theme.color.primary : theme.color.text.lightest,
-  },
-  "&:hover": {
-    backgroundColor: theme.color.background.lighter,
-    color: isActive ? theme.color.primary : theme.color.text.dark,
-  },
-  "&:last-child": {
-    marginBottom: theme.space.content,
-  },
-})
-
-const Container = styled("div")(containerStyles)
-const ContainerLink = styled("a")(containerStyles)
+const makeContainer = (type: "link" | "block") =>
+  styled(type === "link" ? "a" : "div")<{
+    compact: SidenavHeaderProps["compact"]
+    isActive: SidenavHeaderProps["active"]
+    end_: boolean
+  }>(({ theme, compact, isActive, end_ }) => {
+    const shouldPlaceAtBottom = Boolean(end_)
+    return {
+      display: "flex",
+      padding: `${compact ? 10 : 0}px ${compact ? 0 : theme.space.content}px`,
+      height: compact ? "auto" : 36,
+      cursor: "pointer",
+      width: "100%",
+      alignItems: "center",
+      flexDirection: compact ? "column" : "row",
+      justifyContent: compact ? "center" : "flex-start",
+      whiteSpace: "nowrap",
+      userSelect: "none",
+      fontSize: theme.font.size.body,
+      color: isActive ? theme.color.primary : theme.color.text.lightest,
+      fontWeight: theme.font.weight.regular,
+      boxShadow: isActive && compact ? `2px 0 0 inset ${theme.color.primary}` : "none",
+      marginTop: shouldPlaceAtBottom ? "auto" : 0,
+      alignSelf: shouldPlaceAtBottom ? "flex-end" : "flex-start",
+      ...(shouldPlaceAtBottom ? { "& + &": { marginTop: 0 } } : {}),
+      // Specificity is piled up here to override default styles
+      "a:link&, a:visited&": {
+        textDecoration: "none",
+        color: isActive ? theme.color.primary : theme.color.text.lightest,
+      },
+      "&:hover": {
+        backgroundColor: theme.color.background.lighter,
+        color: isActive ? theme.color.primary : theme.color.text.dark,
+      },
+      "&:last-child": {
+        marginBottom: shouldPlaceAtBottom ? 0 : theme.space.content,
+      },
+    }
+  })
 
 const IconContainer = styled("span")<{ compact: SidenavItemProps["compact"] }>(({ compact, theme }) => {
-  const iconSize = getSize(compact)
+  const iconSize = getIconSize(compact)
   return {
     width: iconSize,
     height: iconSize,
@@ -105,14 +104,15 @@ const Label = styled("span")<{ compact: SidenavHeaderProps["compact"]; hasIcon: 
   },
 )
 
-const SidenavItem: React.SFC<SidenavItemProps> = ({ to, active, icon, label, compact, shortLabel, ...props }) => {
-  const ContainerComponent = to ? ContainerLink : Container
+const SidenavItem: React.SFC<SidenavItemProps> = ({ to, active, icon, label, compact, shortLabel, end, ...props }) => {
+  const Container = to ? makeContainer("link") : makeContainer("block")
   const isActive = Boolean(active)
   return (
     <OperationalContext>
       {ctx => (
-        <ContainerComponent
+        <Container
           {...props}
+          end_={Boolean(end)}
           compact={compact}
           href={to}
           onClick={(ev: React.SyntheticEvent<Node>) => {
@@ -130,13 +130,13 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({ to, active, icon, label, com
         >
           {icon && (
             <IconContainer compact={compact}>
-              <Icon name={icon} size={getSize(compact)} />
+              <Icon name={icon} size={getIconSize(compact)} />
             </IconContainer>
           )}
           <Label hasIcon={Boolean(icon)} compact={compact}>
             {compact ? shortLabel || label : label}
           </Label>
-        </ContainerComponent>
+        </Container>
       )}
     </OperationalContext>
   )
