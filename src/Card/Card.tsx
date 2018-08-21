@@ -10,6 +10,8 @@ export interface CardProps<T extends {} = {}> extends DefaultProps {
   keyFormatter?: (key: Extract<keyof T, string>) => string
   /** A key-value object to format values of `data`. */
   valueFormatters?: { [P in Extract<keyof T, string>]?: (value: T[P]) => React.ReactNode }
+  /** Sort method for keys. By default, they will be sorted alphabetically as regular JavaScript strings */
+  sortKeys?: (a: keyof T, b: keyof T) => number
   /** An ordered array to pick only some keys to display  */
   keys?: Array<Extract<keyof T, string>>
   /** Title of the card */
@@ -37,8 +39,8 @@ const Container = styled("div")(({ theme }) => ({
 const objectKeys = <T extends {}>(x: T) => Object.keys(x) as Array<keyof T>
 
 export default function Card<T extends {}>(props: CardProps<T>) {
-  const { title, keyFormatter, valueFormatters = {}, data, keys, children, action: Action, ...rest } = props
-  const _keys = keys ? keys : objectKeys(data || {})
+  const { title, keyFormatter, valueFormatters = {}, data, keys, sortKeys, children, action: Action, ...rest } = props
+  const _keys = (keys ? keys : objectKeys(data || {})).sort(sortKeys)
   const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
   const values = _keys.map(i => {
     const valueFormatter = valueFormatters[i]
