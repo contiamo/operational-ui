@@ -1,10 +1,13 @@
+import { FunctionInterpolation, Themed } from "create-emotion-styled"
 import * as React from "react"
+
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { SidenavProps } from "../Sidenav/Sidenav"
 import { SidenavItemProps } from "../SidenavItem/SidenavItem"
 import { DefaultProps } from "../types"
 import { floatIn, isModifiedEvent } from "../utils"
+import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface SidenavHeaderProps extends DefaultProps {
@@ -22,6 +25,8 @@ export interface SidenavHeaderProps extends DefaultProps {
   active?: boolean
   /** Callback called when the active state changes */
   onToggle?: (newActiveState: boolean) => void
+  /** Place this item at the bottom? */
+  end?: boolean
   /**
    * Expanded state
    *
@@ -36,23 +41,26 @@ export interface SidenavHeaderProps extends DefaultProps {
   compact?: SidenavProps["compact"]
 }
 
-const Container = styled("div")<{ compact: SidenavHeaderProps["compact"] }>(({ theme, compact }) => ({
+const makeContainerStyles: FunctionInterpolation<Themed<Partial<SidenavHeaderProps>, OperationalStyleConstants>> = ({
+  theme,
+  compact,
+  end,
+}) => ({
   label: "sidenavheader",
   textDecoration: "none",
   width: "100%",
   position: "relative",
   borderBottom: compact ? 0 : "1px solid",
   borderBottomColor: theme.color.separators.default,
-}))
+  marginTop: end ? "auto" : 0,
+  alignSelf: end ? "flex-end" : "flex-start",
+})
 
-const ContainerLink = styled("a")<{ compact: SidenavHeaderProps["compact"] }>(({ theme, compact }) => ({
-  label: "sidenavheader",
-  textDecoration: "none",
-  width: "100%",
-  position: "relative",
-  borderBottom: compact ? 0 : "1px solid",
-  borderBottomColor: theme.color.separators.default,
-}))
+const Container = styled("div")<{ compact: SidenavHeaderProps["compact"]; end: SidenavHeaderProps["end"] }>(
+  makeContainerStyles,
+)
+
+const ContainerLink = styled("a")<{ compact: SidenavHeaderProps["compact"] }>(makeContainerStyles)
 
 const Content = styled("div")<{ isCondensed: boolean; isActive: boolean; compact: SidenavHeaderProps["compact"] }>(
   ({ theme, isCondensed, compact, isActive }) => ({
@@ -132,7 +140,7 @@ const truncate = (maxLength: number) => (text: string) => {
   return text.slice(0, maxLength) + "..."
 }
 
-const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, compact, ...props }) => {
+const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, compact, end, ...props }) => {
   const isActive = Boolean(active) || Boolean(compact)
 
   // The implementation of this component relies on the fact that it only has valid
@@ -151,6 +159,7 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
         return (
           <ContainerComponent
             {...props}
+            end={end}
             compact={compact}
             href={href}
             onClick={(ev: React.SyntheticEvent<Node>) => {
