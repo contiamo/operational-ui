@@ -12,11 +12,8 @@ exports[`ContextMenu Component Should render 1`] = `
   >
     <svg
       class="css-1uz51xv"
-      color="currentColor"
       fill="currentColor"
       height="16"
-      name="Document"
-      size="16"
       viewBox="0 0 360 360"
       width="16"
     >

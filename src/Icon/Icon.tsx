@@ -46,6 +46,7 @@ export interface PantheonIconProps extends CommunIconProps {
   name: "Pantheon"
   /** Use the colored version of the logo (works for `name = Pantheon` only) */
   colored?: boolean
+  color?: never
 }
 
 export interface OtherIconProps extends CommunIconProps {
@@ -55,22 +56,26 @@ export interface OtherIconProps extends CommunIconProps {
 
 export type IconProps = OtherIconProps | OperationalUIIconProps | PantheonIconProps
 
-const Icon: React.SFC<IconProps> = ({ left, right, color, ...props }) => {
+const Icon: React.SFC<IconProps> = ({ left, right, color, name, ...props }) => {
   const iconColor: string = expandColor(constants, color) || "currentColor"
 
   const TypedCustomIcons: { [key: string]: React.SFC<{ size?: number; color?: string }> } = CustomIcons
 
-  if (TypedCustomIcons[props.name]) {
-    const Comp = TypedCustomIcons[props.name]
+  if (TypedCustomIcons[name]) {
+    const Comp = TypedCustomIcons[name]
     return <Comp {...props} size={props.size || 18} color={iconColor} />
   }
 
-  if (BrandIcons[props.name]) {
-    const Comp = BrandIcons[props.name]
+  if (BrandIcons[name]) {
+    const Comp = BrandIcons[name]
     return <Comp {...props} size={props.size || 32} color={iconColor} />
   }
 
   return null
+}
+
+Icon.defaultProps = {
+  size: 18,
 }
 
 export default styled(Icon)<IconProps>(({ left, right, theme, onClick }) => ({

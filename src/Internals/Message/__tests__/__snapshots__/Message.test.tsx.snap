@@ -15,11 +15,8 @@ exports[`Message Component Should render 1`] = `
     >
       <svg
         class="css-1uz51xv"
-        color="currentColor"
         fill="currentColor"
         height="18"
-        name="No"
-        size="18"
         viewBox="0 0 360 360"
         width="18"
       >

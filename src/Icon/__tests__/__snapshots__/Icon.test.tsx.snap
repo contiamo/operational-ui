@@ -9,11 +9,8 @@ exports[`Icon Component Renders an <svg> tag 1`] = `
   />
   <svg
     class="css-1uz51xv"
-    color="currentColor"
     fill="currentColor"
     height="18"
-    name="Add"
-    size="18"
     viewBox="0 0 360 360"
     width="18"
   >
