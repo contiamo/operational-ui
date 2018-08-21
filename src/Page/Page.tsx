@@ -66,13 +66,19 @@ const Container = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.background.lighter,
 }))
 
-const TitleBar = styled("div")(({ theme }) => ({
+const TitleBar = styled("div")<{ actionsPosition: "start" | "end" }>(({ theme, actionsPosition }) => ({
   backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
   padding: theme.space.element,
   height: theme.titleHeight,
   fontWeight: theme.font.weight.medium,
+  "& > :nth-child(n)": {
+    marginRight: theme.space.element,
+  },
+  "& > :nth-child(2)": {
+    order: actionsPosition === "start" ? -1 : undefined,
+  },
 }))
 
 const tabsBarHeight = 43
@@ -105,9 +111,7 @@ const ViewContainer = styled("div")<{ isInTab?: boolean }>(({ theme, isInTab }) 
   position: "relative",
 }))
 
-const EndContainer = styled("div")(({ theme }) => ({
-  marginLeft: theme.space.element,
-}))
+const ActionsContainer = styled("div")(() => ({}))
 
 const initialState = {
   activeTab: 0,
@@ -176,25 +180,14 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   }
 
   public render() {
-    const { title, actions, tabs, areas, activeTabName, onTabChange, fill, ...props } = this.props
+    const { title, actions, tabs, areas, activeTabName, onTabChange, fill, actionsPosition, ...props } = this.props
 
     return (
       <Container {...props}>
         {title && (
-          <TitleBar>
-            {props.actionsPosition === "end" ? (
-              <>
-                <Title color="white">{title}</Title>
-                <EndContainer>{actions}</EndContainer>
-              </>
-            ) : (
-              <>
-                {actions}
-                <EndContainer>
-                  <Title color="white">{title}</Title>
-                </EndContainer>
-              </>
-            )}
+          <TitleBar actionsPosition={actionsPosition || "end"}>
+            <Title color="white">{title}</Title>
+            <ActionsContainer>{actions}</ActionsContainer>
           </TitleBar>
         )}
         {tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}
