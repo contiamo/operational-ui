@@ -54,6 +54,20 @@ const actions = (
 </Page>
 ```
 
+### With actions on start
+
+```jsx
+/* Always use condensed buttons in page actions */
+const actions = (
+  <Button condensed icon="ExternalLink" color="ghost">
+    Go somewhere else
+  </Button>
+)
+;<Page title="Settings Page" actions={actions} actionsPosition="start">
+  <Card>Hello, this is page content</Card>
+</Page>
+```
+
 ### With tabs
 
 ```jsx

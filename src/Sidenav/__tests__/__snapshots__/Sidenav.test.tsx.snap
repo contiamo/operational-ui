@@ -2,6 +2,7 @@
 
 exports[`Sidenav component renders 1`] = `
 <OperationalUI
+  errorBoundary={true}
   theme={Object {}}
 >
   <Sidenav />

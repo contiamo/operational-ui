@@ -78,7 +78,7 @@ const color = {
   success: "#0c991d",
   error: "#9a0000",
   basic: "#636363",
-  ghost: "hsla(0, 0%, 100%, 0.2)",
+  ghost: "hsla(0, 0%, 100%, 0.33)",
   white: whiteColor,
   black: "#000",
   background: backgroundColors,
