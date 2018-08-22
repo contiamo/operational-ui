@@ -35,33 +35,57 @@ const TreeItem = styled("div")<{
   hasTag: boolean
   isTopLevel: boolean
   isDisabled: boolean
+  isRemovable: boolean
 }>`
   display: flex;
   align-items: center;
   padding: 4px 8px;
   width: fit-content;
   min-width: 160px;
-  user-select: none;
-  ${({ theme, hasChildren, hasTag, isTopLevel, isDisabled }) => `
+  ${({ theme, hasChildren, hasTag, isTopLevel, isDisabled, isRemovable }) => `
     font-size: ${hasTag ? theme.font.size.fineprint : theme.font.size.small}px;
     font-weight: ${hasTag || isTopLevel ? theme.font.weight.bold : theme.font.weight.regular};
     font-family: ${hasTag ? theme.font.family.code : theme.font.family.main};
     color: ${theme.color.text.dark};
+    opacity: ${isDisabled ? "0.4" : "1.0"};
     ${
-      isDisabled
-        ? "opacity: 0.4;"
-        : `
+      /** If the item can be removed, hover feedback should only be applied to the close button and not the entire item */
+      !isRemovable
+        ? ` 
       cursor: pointer;
       :hover {
         background-color: ${theme.color.background.lighter};
       }
     `
+        : ""
     }
     & svg {
-      visibility: ${hasChildren ? "visible" : "hidden"};
       color: ${theme.color.text.lightest};
     }
+    & > svg:first-child {
+      visibility: ${hasChildren ? "visible" : "hidden"};
+    }
   `};
+`
+
+const TreeLabel = styled("span")`
+  display: block;
+  flex: 1;
+`
+
+/**
+ * This is a single-use close button with hard-coded padding to ensure the close icon inside stays readable.
+ * @todo look into re-using and formalizing this element.
+ */
+const CloseButton = styled("div")`
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  padding: 4px;
+  ${({ theme }) => `border-radius: ${theme.borderRadius}px`};
+  :hover {
+    ${({ theme }) => `background-color: ${theme.color.background.light};`};
+  }
 `
 
 const TreeRecursive: React.SFC<{
@@ -71,7 +95,7 @@ const TreeRecursive: React.SFC<{
   openPaths: number[][]
 }> = ({ tree, path, recursiveTogglePath, openPaths }) => {
   const isOpen = containsPath(path)(openPaths)
-  const { label, tag, disabled, initiallyOpen, childNodes, color, ...treeHtmlProps } = tree
+  const { label, tag, disabled, initiallyOpen, childNodes, color, onRemove, ...treeHtmlProps } = tree
   const tagColor = expandColor(constants, color) || ""
   return (
     <TreeContainer>
@@ -81,6 +105,7 @@ const TreeRecursive: React.SFC<{
         hasChildren={tree.childNodes.length > 0}
         isTopLevel={path.length < 2}
         isDisabled={Boolean(tree.disabled)}
+        isRemovable={Boolean(onRemove)}
         onClick={() => {
           if (treeHtmlProps.onClick) {
             treeHtmlProps.onClick()
@@ -94,7 +119,17 @@ const TreeRecursive: React.SFC<{
             {tree.tag}
           </SmallNameTag>
         )}
-        {tree.label}
+        <TreeLabel>{tree.label}</TreeLabel>
+        {onRemove && (
+          <CloseButton
+            onClick={ev => {
+              ev.stopPropagation()
+              onRemove()
+            }}
+          >
+            <Icon name="No" size={12} />
+          </CloseButton>
+        )}
       </TreeItem>
       {isOpen &&
         !tree.disabled && (

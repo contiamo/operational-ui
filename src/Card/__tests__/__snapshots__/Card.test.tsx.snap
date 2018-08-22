@@ -8,9 +8,13 @@ exports[`Card Should render 1`] = `
     class="css-ar73w8-Messages"
   />
   <div
-    class="css-1h3wh5n"
+    class="css-13aykpc"
   >
-    hi
+    <div
+      class="css-90kvr8"
+    >
+      hi
+    </div>
   </div>
 </div>
 `;
