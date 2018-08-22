@@ -44,19 +44,16 @@ const GridContainer = styled("div")(
 
 const Main = styled("div")(({ theme }) => ({
   overflow: "hidden",
-  backgroundColor: theme.color.white,
-  gridColumnStart: "2",
   gridColumnEnd: "span 1",
+  gridColumnStart: "2",
   gridRowStart: "2",
   gridRowEnd: "span 1",
+  height: `calc(100vh - ${theme.titleHeight}px)`, // FORCE a height that is the page - the logo so that children with 100% have context
+  backgroundColor: theme.color.white,
 }))
 
-const Side = styled("div")({
-  overflow: "hidden",
+const Side = styled(Main)({
   gridColumnStart: "1",
-  gridColumnEnd: "span 1",
-  gridRowStart: "2",
-  gridRowEnd: "span 1",
 })
 
 const Header = styled("div")({
