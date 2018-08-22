@@ -1,6 +1,7 @@
 import * as React from "react"
-import * as Icon from "react-feather"
+
 import Button from "../Button/Button"
+import Icon from "../Icon/Icon"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
@@ -104,7 +105,7 @@ const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, o
         first
       </PaginatorControl>
       <PaginatorControl type="previous" {...controlProps} isDisabled={isFirstDisabled}>
-        <Icon.ChevronsLeft size="11" />
+        <Icon name="ChevronLeft" size={11} />
         <span>prev</span>
       </PaginatorControl>
       <PaginatorSpan key={page}>
@@ -112,7 +113,7 @@ const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, o
       </PaginatorSpan>
       <PaginatorControl type="next" {...controlProps} isDisabled={isLastDisabled}>
         <span>next</span>
-        <Icon.ChevronsRight size="11" />
+        <Icon name="ChevronRight" size={11} />
       </PaginatorControl>
       <PaginatorControl type="last" {...controlProps} isDisabled={isLastDisabled}>
         last

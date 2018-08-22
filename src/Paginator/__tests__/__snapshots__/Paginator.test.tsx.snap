@@ -19,21 +19,14 @@ exports[`Paginator Component Should initialize properly 1`] = `
       class="css-1tb3crw-button"
     >
       <svg
-        fill="none"
+        class="css-1uz51xv"
+        fill="currentColor"
         height="11"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        viewBox="0 0 24 24"
+        viewBox="0 0 360 360"
         width="11"
-        xmlns="http://www.w3.org/2000/svg"
       >
-        <polyline
-          points="11 17 6 12 11 7"
-        />
-        <polyline
-          points="18 17 13 12 18 7"
+        <path
+          d="M264.142,54.33l-125.858,125.858l125.858,125.857l-28.284,28.285l-154.142,-154.142l154.142,-154.143c9.428,9.428 18.856,18.857 28.284,28.285Z"
         />
       </svg>
       <span>
@@ -55,21 +48,14 @@ exports[`Paginator Component Should initialize properly 1`] = `
         next
       </span>
       <svg
-        fill="none"
+        class="css-1uz51xv"
+        fill="currentColor"
         height="11"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        viewBox="0 0 24 24"
+        viewBox="0 0 360 360"
         width="11"
-        xmlns="http://www.w3.org/2000/svg"
       >
-        <polyline
-          points="13 17 18 12 13 7"
-        />
-        <polyline
-          points="6 17 11 12 6 7"
+        <path
+          d="M278.284,180.187l-154.142,154.143l-28.284,-28.285l125.858,-125.858l-125.858,-125.857l28.284,-28.285c51.381,51.381 102.762,102.762 154.142,154.142Z"
         />
       </svg>
     </button>
