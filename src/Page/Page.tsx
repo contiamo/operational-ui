@@ -15,7 +15,7 @@ export interface BaseProps extends DefaultProps {
   /** Page actions, typically `condensed button` component inside a fragment */
   actions?: React.ReactNode
   /** Actions position */
-  actionsPosition?: "start" | "end"
+  actionsPosition?: "start" | "main" | "end"
 }
 
 export interface PropsWithSimplePage extends BaseProps {
@@ -26,6 +26,7 @@ export interface PropsWithSimplePage extends BaseProps {
   tabs?: never
   activeTabName?: never
   onTabChange?: never
+  condensedTitle?: never
 }
 
 export interface PropsWithComplexPage extends BaseProps {
@@ -36,6 +37,7 @@ export interface PropsWithComplexPage extends BaseProps {
   tabs?: never
   activeTabName?: never
   onTabChange?: never
+  condensedTitle?: never
 }
 
 export interface PropsWithTabs extends BaseProps {
@@ -57,6 +59,8 @@ export interface PropsWithTabs extends BaseProps {
   children?: never
   areas?: never
   fill?: never
+  /** Condensed option */
+  condensedTitle?: boolean
 }
 
 export type PageProps = PropsWithSimplePage | PropsWithComplexPage | PropsWithTabs
@@ -67,38 +71,33 @@ const Container = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.background.lighter,
 }))
 
-const TitleBar = styled("div")<{ actionPosition: PageProps["actionsPosition"] }>(({ theme, actionPosition }) => ({
+const TitleBar = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
   padding: theme.space.element,
   height: theme.titleHeight,
   fontWeight: theme.font.weight.medium,
-  ...(actionPosition === "start"
-    ? {
-        flexDirection: "row-reverse",
-        justifyContent: "flex-end",
-      }
-    : {}),
 }))
 
 const tabsBarHeight = 43
 
-const TabsBar = styled("div")(({ theme }) => ({
+const TabsBar = styled("div")<{ condensed?: boolean }>(({ theme, condensed }) => ({
   display: "flex",
   alignItems: "flex-end",
-  height: tabsBarHeight,
+  height: condensed ? theme.titleHeight : tabsBarHeight,
   backgroundColor: theme.color.primary,
+  ...(condensed ? { paddingLeft: 30 } : {}),
 }))
 
-const Tab = styled("div")<{ active?: boolean }>(({ theme, active }) => ({
+const Tab = styled("div")<{ active?: boolean; condensed?: boolean }>(({ theme, active, condensed }) => ({
   color: theme.color.white,
   opacity: active ? 1 : 0.8,
   textTransform: "uppercase",
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.small,
   fontWeight: theme.font.weight.medium,
-  padding: `${theme.space.element / 2}px ${theme.space.element}px`,
+  padding: `${(condensed ? theme.space.big : theme.space.element) / 2}px ${theme.space.element}px`,
   borderBottom: active ? `2px solid ${theme.color.white}` : `2px solid transparent`,
   ":hover": {
     cursor: "pointer",
@@ -116,12 +115,20 @@ const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosit
   ({ theme, actionPosition }) => ({
     ...(actionPosition === "start"
       ? {
+          order: -1,
           // Deal with the button margin (theme.space.small)
           marginRight: theme.space.element - theme.space.small,
         }
       : {
           marginLeft: theme.space.element,
         }),
+    ...(actionPosition === "end"
+      ? {
+          flexGrow: 1,
+          display: "flex",
+          justifyContent: "flex-end",
+        }
+      : {}),
   }),
 )
 
@@ -133,7 +140,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   public static defaultProps: Partial<PageProps> = {
     areas: "main",
     fill: false,
-    actionsPosition: "end",
+    actionsPosition: "main",
   }
 
   public readonly state = initialState
@@ -157,54 +164,72 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
     return activeTab
   }
 
+  private renderTabsBar() {
+    const tabs = this.props.tabs!
+    const activeTab = this.getActiveTab(tabs)
+    const { condensedTitle } = this.props
+
+    return (
+      <TabsBar condensed={condensedTitle}>
+        {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
+          <Tab condensed={condensedTitle} key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
+            {name}
+          </Tab>
+        ))}
+      </TabsBar>
+    )
+  }
+
   private renderPageWithTabs() {
     const tabs = this.props.tabs!
     const activeTab = this.getActiveTab(tabs)
     const currentTabChildren = tabs[activeTab].children
+    const { title, actions, actionsPosition, condensedTitle } = this.props
 
     return (
       <>
-        <TabsBar>
-          {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
-            <Tab key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
-              {name}
-            </Tab>
-          ))}
-        </TabsBar>
+        {title && (
+          <>
+            <TitleBar>
+              <Title color="white">{title}</Title>
+              {condensedTitle && this.renderTabsBar()}
+              <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
+            </TitleBar>
+            {!condensedTitle && this.renderTabsBar()}
+          </>
+        )}
         <ViewContainer isInTab>{currentTabChildren}</ViewContainer>
       </>
     )
   }
 
   private renderPageWithoutTabs() {
-    const { areas, fill, children } = this.props
+    const { title, actions, actionsPosition, areas, children, fill } = this.props
 
     return (
-      <ViewContainer>
-        <PageContent areas={areas} fill={fill}>
-          {modalConfirmContext => {
-            const resolvedChildren = typeof children === "function" ? children(modalConfirmContext) : children
-            return areas === "main" ? <PageArea>{resolvedChildren}</PageArea> : resolvedChildren
-          }}
-        </PageContent>
-      </ViewContainer>
-    )
-  }
-
-  public render() {
-    const { title, actions, actionsPosition, tabs, areas, activeTabName, onTabChange, fill, ...props } = this.props
-
-    return (
-      <Container {...props}>
+      <>
         {title && (
-          <TitleBar actionPosition={actionsPosition}>
+          <TitleBar>
             <Title color="white">{title}</Title>
             <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
           </TitleBar>
         )}
-        {tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}
-      </Container>
+        <ViewContainer>
+          <PageContent areas={areas} fill={fill}>
+            {modalConfirmContext => {
+              const resolvedChildren = typeof children === "function" ? children(modalConfirmContext) : children
+              return areas === "main" ? <PageArea>{resolvedChildren}</PageArea> : resolvedChildren
+            }}
+          </PageContent>
+        </ViewContainer>
+      </>
     )
+  }
+
+  public render() {
+    const { tabs, ...props } = this.props
+
+    return <Container {...props}>{tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}</Container>
   }
 }
 
