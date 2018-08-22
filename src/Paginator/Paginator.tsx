@@ -46,6 +46,7 @@ const NavigationButton = styled(Button)({
   padding: 0,
   "& svg": {
     verticalAlign: "middle",
+    marginTop: 1,
   },
   "& span": {
     padding: "0 3px",

@@ -11,12 +11,12 @@ exports[`Paginator Component Should initialize properly 1`] = `
     class="css-10vchk0-paginator"
   >
     <button
-      class="css-1tb3crw-button"
+      class="css-1bcwm3d-button"
     >
       first
     </button>
     <button
-      class="css-1tb3crw-button"
+      class="css-1bcwm3d-button"
     >
       <svg
         class="css-1uz51xv"
@@ -42,7 +42,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
        of 258
     </div>
     <button
-      class="css-1tb3crw-button"
+      class="css-1bcwm3d-button"
     >
       <span>
         next
@@ -60,7 +60,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
       </svg>
     </button>
     <button
-      class="css-1tb3crw-button"
+      class="css-1bcwm3d-button"
     >
       last
     </button>
