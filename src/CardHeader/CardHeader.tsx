@@ -9,6 +9,7 @@ export interface CardHeaderProps extends DefaultProps {
   title?: React.ReactNode
   /** Action part (right side), this is typically where to put a button */
   action?: React.ReactNode
+  __isCardHeader?: boolean
 }
 
 const Container = styled("div")(({ theme }) => ({
@@ -58,5 +59,9 @@ const CardHeader: React.SFC<CardHeaderProps> = ({ title, children, action, ...pr
     <ActionsContainer>{action}</ActionsContainer>
   </Container>
 )
+
+CardHeader.defaultProps = {
+  __isCardHeader: true,
+}
 
 export default CardHeader

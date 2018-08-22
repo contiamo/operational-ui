@@ -1,6 +1,7 @@
 import * as React from "react"
 import { CardHeader, CardItem } from "../"
 import { DefaultProps } from "../types"
+import deprecate from "../utils/deprecate"
 import styled from "../utils/styled"
 
 export interface CardProps<T extends {} = {}> extends DefaultProps {
@@ -38,7 +39,7 @@ const Container = styled("div")(({ theme }) => ({
 
 const objectKeys = <T extends {}>(x: T) => Object.keys(x) as Array<keyof T>
 
-export default function Card<T extends {}>(props: CardProps<T>) {
+function Card<T extends {}>(props: CardProps<T>) {
   const { title, keyFormatter, valueFormatters = {}, data, keys, sortKeys, children, action: Action, ...rest } = props
   const _keys = (keys ? keys : objectKeys(data || {})).sort(sortKeys)
   const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
@@ -56,3 +57,17 @@ export default function Card<T extends {}>(props: CardProps<T>) {
     </Container>
   )
 }
+
+const CardWithWarning = deprecate(props => {
+  const children = React.Children.toArray((props as any).children)
+  const hasCardHeader = children.some((child: any) => child.props && child.props.__isCardHeader)
+  if (hasCardHeader) {
+    return [
+      "<CardHeader/> components are deprecated - use the `title` and `action` props in `<Card/>` to achieve the same behavior.",
+    ]
+  }
+  return []
+})(Card)
+
+/** @component */
+export default CardWithWarning as typeof Card
