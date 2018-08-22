@@ -156,7 +156,7 @@ const actions = (
 )
 ;<Page
   title="Bundle detail"
-  condensedTabs
+  condensedTitle
   activeTabName="sql"
   onTabChange={console.log}
   tabs={[
