@@ -194,13 +194,15 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
     return (
       <>
         {title && (
-          <TitleBar actionPosition={actionsPosition}>
-            <Title color="white">{title}</Title>
-            {condensedTabs && this.renderTabsBar()}
-            <ActionsContainer actionPosition={actionsPosition} condensed={condensedTabs}>{actions}</ActionsContainer>
-          </TitleBar>
+          <>
+            <TitleBar actionPosition={actionsPosition}>
+              <Title color="white">{title}</Title>
+              {condensedTabs && this.renderTabsBar()}
+              <ActionsContainer actionPosition={actionsPosition} condensed={condensedTabs}>{actions}</ActionsContainer>
+            </TitleBar>
+            {!condensedTabs && this.renderTabsBar()}
+          </>
         )}
-        {!condensedTabs && this.renderTabsBar()}
         <ViewContainer isInTab>{currentTabChildren}</ViewContainer>
       </>
     )
