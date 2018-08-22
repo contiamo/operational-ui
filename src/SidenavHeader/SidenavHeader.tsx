@@ -5,7 +5,7 @@ import OperationalContext from "../OperationalContext/OperationalContext"
 import { SidenavProps } from "../Sidenav/Sidenav"
 import { SidenavItemProps } from "../SidenavItem/SidenavItem"
 import { DefaultProps } from "../types"
-import { floatIn, isModifiedEvent } from "../utils"
+import { isModifiedEvent } from "../utils"
 import styled from "../utils/styled"
 
 export interface SidenavHeaderProps extends DefaultProps {
@@ -79,7 +79,8 @@ const LabelText = styled("div")<{ isActive: boolean; compact: SidenavHeaderProps
 `
 
 const ItemsContainer = styled("div")({
-  animation: `${floatIn} .15s forwards ease`,
+  /** @todo add this animation when we move to a JSON-style API for SidenavHeaders */
+  // animation: `${floatIn} .15s forwards ease`,
   position: "relative",
 })
 
