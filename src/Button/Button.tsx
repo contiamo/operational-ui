@@ -126,6 +126,8 @@ const Button: React.SFC<ButtonProps> = ({
   ...props
 }) => {
   const ContainerComponent: React.ComponentType<any> = to ? ContainerLink : Container
+  const iconProps = { name: icon!, size: 18, color: iconColor }
+
   return (
     <OperationalContext>
       {ctx => (
@@ -151,9 +153,9 @@ const Button: React.SFC<ButtonProps> = ({
           }}
           title={loading && children === String(children) ? String(children) : undefined}
         >
-          {icon && iconPosition === "start" && <Icon left name={icon} size={18} color={iconColor} />}
+          {icon && iconPosition === "start" && <Icon left {...iconProps} />}
           {children}
-          {icon && iconPosition === "end" && <Icon right name={icon} size={18} color={iconColor} />}
+          {icon && iconPosition === "end" && <Icon right {...iconProps} />}
           {loading && <ButtonSpinner containerColor={color} />}
         </ContainerComponent>
       )}
