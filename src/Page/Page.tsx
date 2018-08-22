@@ -26,7 +26,7 @@ export interface PropsWithSimplePage extends BaseProps {
   tabs?: never
   activeTabName?: never
   onTabChange?: never
-  condensedTabs?: never
+  condensedTitle?: never
 }
 
 export interface PropsWithComplexPage extends BaseProps {
@@ -37,7 +37,7 @@ export interface PropsWithComplexPage extends BaseProps {
   tabs?: never
   activeTabName?: never
   onTabChange?: never
-  condensedTabs?: never
+  condensedTitle?: never
 }
 
 export interface PropsWithTabs extends BaseProps {
@@ -60,7 +60,7 @@ export interface PropsWithTabs extends BaseProps {
   areas?: never
   fill?: never
   /** Condensed option */
-  condensedTabs?: boolean
+  condensedTitle?: boolean
 }
 
 export type PageProps = PropsWithSimplePage | PropsWithComplexPage | PropsWithTabs
@@ -172,12 +172,12 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   private renderTabsBar() {
     const tabs = this.props.tabs!
     const activeTab = this.getActiveTab(tabs)
-    const { condensedTabs } = this.props
+    const { condensedTitle } = this.props
 
     return (
-      <TabsBar condensed={condensedTabs}>
+      <TabsBar condensed={condensedTitle}>
         {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
-          <Tab condensed={condensedTabs} key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
+          <Tab condensed={condensedTitle} key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
             {name}
           </Tab>
         ))}
@@ -189,7 +189,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
     const tabs = this.props.tabs!
     const activeTab = this.getActiveTab(tabs)
     const currentTabChildren = tabs[activeTab].children
-    const { title, actions, actionsPosition, condensedTabs } = this.props
+    const { title, actions, actionsPosition, condensedTitle } = this.props
 
     return (
       <>
@@ -197,10 +197,10 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
           <>
             <TitleBar actionPosition={actionsPosition}>
               <Title color="white">{title}</Title>
-              {condensedTabs && this.renderTabsBar()}
-              <ActionsContainer actionPosition={actionsPosition} condensed={condensedTabs}>{actions}</ActionsContainer>
+              {condensedTitle && this.renderTabsBar()}
+              <ActionsContainer actionPosition={actionsPosition} condensed={condensedTitle}>{actions}</ActionsContainer>
             </TitleBar>
-            {!condensedTabs && this.renderTabsBar()}
+            {!condensedTitle && this.renderTabsBar()}
           </>
         )}
         <ViewContainer isInTab>{currentTabChildren}</ViewContainer>
