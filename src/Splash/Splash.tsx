@@ -1,5 +1,6 @@
 import * as React from "react"
 
+import { readableTextColor } from "../utils"
 import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 import Animation from "./Splash.Animation"
@@ -12,12 +13,15 @@ export interface SplashProps {
   actions: React.ReactNode
   /** Main content */
   children: React.ReactNode
+  /** Customizable logo */
+  logo?: React.ReactNode
   /** Backdrop color, dark enough to support white text as in the example. */
   color?: string
+  /** Text color in the Splash component */
+  textColor?: string
 }
 
 export interface State {
-  rotation: number
   animationSize: number
 }
 
@@ -38,9 +42,11 @@ const Container = styled("div")<{ color_?: string }>`
   `};
 `
 
-const Content = styled("div")`
+const Content = styled("div")<{ textColor_?: string }>`
   position: relative;
-  color: #ffffff;
+  ${({ textColor_, theme }) => `
+      color: ${textColor_ ? readableTextColor(textColor_, [theme.color.white, theme.color.black]) : "#ffffff"};
+  `};
 `
 
 const TitleBar = styled("div")`
@@ -87,11 +93,8 @@ const Static = styled("div")`
 
 class Splash extends React.Component<SplashProps, Readonly<State>> {
   public readonly state = {
-    rotation: 0,
     animationSize: Math.max(window.innerWidth, window.innerHeight),
   }
-
-  public rotationInterval?: number
 
   public handleResize = () => {
     this.setState({
@@ -101,25 +104,19 @@ class Splash extends React.Component<SplashProps, Readonly<State>> {
 
   public componentDidMount() {
     window.addEventListener("resize", this.handleResize)
-    this.rotationInterval = window.setInterval(() => {
-      this.setState(prevState => ({
-        rotation: 180 - prevState.rotation,
-      }))
-    }, 8000)
   }
 
   public componentWillUnmount() {
     window.removeEventListener("resize", this.handleResize)
-    window.clearInterval(this.rotationInterval)
   }
 
   public render() {
     return (
       <Container color_={this.props.color}>
         <Animation size={this.state.animationSize} />
-        <Content>
+        <Content textColor_={this.props.textColor}>
           <TitleBar>
-            <OperationalLogo size={110} rotation={this.state.rotation} />
+            {this.props.logo ? this.props.logo : <OperationalLogo size={110} />}
             <TitleBarContent>
               <h1>{this.props.title}</h1>
               <div>{this.props.actions}</div>
