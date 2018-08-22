@@ -34,8 +34,26 @@ const sidebar = (
     header={
       <HeaderBar
         logo={<Logo name="Contiamo" />}
-        main={<Select naked options={[{ value: "Contiamo" }]} value="Contiamo" placeholder="Select Project..." />}
-        end={<Avatar name="Tejas Kumar" />}
+        main={
+          <HeaderMenu
+            withCaret
+            items={[
+              { key: "project1", label: "Project 1" },
+              { key: "project2", label: "Project 2" },
+              { key: "project3", label: "Project 3" },
+            ]}
+          >
+            Project 1
+          </HeaderMenu>
+        }
+        end={
+          <HeaderMenu
+            items={[{ key: "account", label: "My account" }, { key: "log-out", label: "Log out" }]}
+            align="right"
+          >
+            Imogen Mason <Avatar name="Imogen Mason" />
+          </HeaderMenu>
+        }
       />
     }
     main={
@@ -171,8 +189,26 @@ const sidebar = (
     header={
       <HeaderBar
         logo={<Logo name="Contiamo" />}
-        main={<Select naked options={[{ value: "Contiamo" }]} value="Contiamo" placeholder="Select Project..." />}
-        end={<Avatar name="Tejas Kumar" />}
+        main={
+          <HeaderMenu
+            withCaret
+            items={[
+              { key: "project1", label: "Project 1" },
+              { key: "project2", label: "Project 2" },
+              { key: "project3", label: "Project 3" },
+            ]}
+          >
+            Project 1
+          </HeaderMenu>
+        }
+        end={
+          <HeaderMenu
+            items={[{ key: "account", label: "My account" }, { key: "log-out", label: "Log out" }]}
+            align="right"
+          >
+            Imogen Mason <Avatar name="Imogen Mason" />
+          </HeaderMenu>
+        }
       />
     }
     main={
