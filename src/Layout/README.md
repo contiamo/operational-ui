@@ -34,8 +34,102 @@ const sidebar = (
     header={
       <HeaderBar
         logo={<Logo name="Contiamo" />}
-        main={<Select naked options={[{ value: "Contiamo" }]} value="Contiamo" placeholder="Select Project..." />}
-        end={<Avatar name="Tejas Kumar" />}
+        main={
+          <HeaderMenu
+            withCaret
+            items={[
+              { key: "project1", label: "Project 1" },
+              { key: "project2", label: "Project 2" },
+              { key: "project3", label: "Project 3" },
+            ]}
+          >
+            Project 1
+          </HeaderMenu>
+        }
+        end={
+          <HeaderMenu
+            items={[{ key: "account", label: "My account" }, { key: "log-out", label: "Log out" }]}
+            align="right"
+          >
+            Imogen Mason <Avatar name="Imogen Mason" />
+          </HeaderMenu>
+        }
+      />
+    }
+    main={
+      <Page
+        title="Page Title"
+        actions={
+          <Button condensed color="ghost">
+            Help
+          </Button>
+        }
+      >
+        {({ confirm, modal }) => (
+          <>
+            {Array(10)
+              .fill("Hello!!!!")
+              .map((value, i) => <Card key={i}>{value}</Card>)}
+            <Button
+              onClick={() => {
+                confirm({
+                  title: "Are you sure",
+                  body: "This is a scary operation.",
+                })
+              }}
+            >
+              Open a modal
+            </Button>
+          </>
+        )}
+      </Page>
+    }
+  />
+</div>
+```
+
+### Example with Compact Sidenav
+
+```jsx
+const sidebar = (
+  <Sidenav compact>
+    <SidenavHeader label="Use cases" active>
+      <SidenavItem label="Overview" icon="Home" />
+      <SidenavItem label="Use Cases" icon="Search" active />
+      <SidenavItem label="Guides" icon="Document" />
+    </SidenavHeader>
+    <SidenavItem end label="Admin" icon="Jobs" />
+  </Sidenav>
+)
+
+// Container must set the height explicitly.
+// This component will set height to 100%.
+;<div style={{ height: 400 }}>
+  <Layout
+    sidenav={sidebar}
+    header={
+      <HeaderBar
+        logo={<Logo name="Contiamo" />}
+        main={
+          <HeaderMenu
+            withCaret
+            items={[
+              { key: "project1", label: "Project 1" },
+              { key: "project2", label: "Project 2" },
+              { key: "project3", label: "Project 3" },
+            ]}
+          >
+            Project 1
+          </HeaderMenu>
+        }
+        end={
+          <HeaderMenu
+            items={[{ key: "account", label: "My account" }, { key: "log-out", label: "Log out" }]}
+            align="right"
+          >
+            Imogen Mason <Avatar name="Imogen Mason" />
+          </HeaderMenu>
+        }
       />
     }
     main={
@@ -95,8 +189,26 @@ const sidebar = (
     header={
       <HeaderBar
         logo={<Logo name="Contiamo" />}
-        main={<Select naked options={[{ value: "Contiamo" }]} value="Contiamo" placeholder="Select Project..." />}
-        end={<Avatar name="Tejas Kumar" />}
+        main={
+          <HeaderMenu
+            withCaret
+            items={[
+              { key: "project1", label: "Project 1" },
+              { key: "project2", label: "Project 2" },
+              { key: "project3", label: "Project 3" },
+            ]}
+          >
+            Project 1
+          </HeaderMenu>
+        }
+        end={
+          <HeaderMenu
+            items={[{ key: "account", label: "My account" }, { key: "log-out", label: "Log out" }]}
+            align="right"
+          >
+            Imogen Mason <Avatar name="Imogen Mason" />
+          </HeaderMenu>
+        }
       />
     }
     main={
