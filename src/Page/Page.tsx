@@ -80,9 +80,9 @@ const TitleBar = styled("div")<{ actionPosition: PageProps["actionsPosition"] }>
   fontWeight: theme.font.weight.medium,
   ...(actionPosition === "start"
     ? {
-      flexDirection: "row-reverse",
-      justifyContent: "flex-end",
-    }
+        flexDirection: "row-reverse",
+        justifyContent: "flex-end",
+      }
     : {}),
 }))
 
@@ -117,23 +117,16 @@ const ViewContainer = styled("div")<{ isInTab?: boolean }>(({ theme, isInTab }) 
   position: "relative",
 }))
 
-const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosition"], condensed?: boolean }>(
-  ({ theme, actionPosition, condensed }) => ({
+const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosition"] }>(
+  ({ theme, actionPosition }) => ({
     ...(actionPosition === "start"
       ? {
-        // Deal with the button margin (theme.space.small)
-        marginRight: theme.space.element - theme.space.small,
-      }
+          // Deal with the button margin (theme.space.small)
+          marginRight: theme.space.element - theme.space.small,
+        }
       : {
-        marginLeft: theme.space.element,
-      }),
-    ...(condensed
-      ? {
-        flexGrow: 1,
-        display: "flex",
-        justifyContent: "flex-end",
-      }
-      : {}),
+          marginLeft: theme.space.element,
+        }),
   }),
 )
 
@@ -198,7 +191,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
             <TitleBar actionPosition={actionsPosition}>
               <Title color="white">{title}</Title>
               {condensedTitle && this.renderTabsBar()}
-              <ActionsContainer actionPosition={actionsPosition} condensed={condensedTitle}>{actions}</ActionsContainer>
+              <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
             </TitleBar>
             {!condensedTitle && this.renderTabsBar()}
           </>
