@@ -3,7 +3,7 @@ import { CardHeader, CardItem } from "../"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface CardPropsRegular<T extends {} = {}> extends DefaultProps {
+export interface CardPropsWithChildrenOrData<T extends {} = {}> extends DefaultProps {
   /** Any object to show. The key is the title of the data. */
   data?: T
   /**  A function to format keys of `data` */
@@ -47,7 +47,7 @@ export interface CardPropsWithSections extends DefaultProps {
   stackSections?: "horizontal" | "vertical"
 }
 
-export type CardProps<T extends {} = {}> = CardPropsRegular<T> | CardPropsWithSections
+export type CardProps<T extends {} = {}> = CardPropsWithChildrenOrData<T> | CardPropsWithSections
 
 const Container = styled("div")(({ theme }) => ({
   marginBottom: theme.space.element,
@@ -81,6 +81,21 @@ const SectionsContainer = styled("div")<{ stackHorizontal: boolean }>`
 
 const objectKeys = <T extends {}>(x: T) => Object.keys(x) as Array<keyof T>
 
+/**
+ * Render card items corresponding to the specified data.
+ */
+function renderData<T extends {}>(props: CardPropsWithChildrenOrData<T>) {
+  const { keyFormatter, valueFormatters = {}, data, keys, sortKeys } = props
+  const _keys = keys ? keys : objectKeys(data || {}).sort(sortKeys)
+  const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
+  const values = _keys.map(i => {
+    const valueFormatter = valueFormatters[i]
+    const value = data ? data[i] : undefined
+    return valueFormatter ? valueFormatter(value!) : value
+  })
+  return data && titles.map((cardItemTitle, i) => <CardItem key={i} value={values[i]} title={cardItemTitle} />)
+}
+
 export default function Card<T extends {}>(props: CardProps<T>) {
   const {
     title,
@@ -90,18 +105,10 @@ export default function Card<T extends {}>(props: CardProps<T>) {
     stackSections,
     data,
     keys,
-    sortKeys,
     children,
     action,
     ...rest
   } = props
-  const _keys = keys ? keys : objectKeys(data || {}).sort(sortKeys)
-  const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
-  const values = _keys.map(i => {
-    const valueFormatter = valueFormatters[i]
-    const value = data ? data[i] : undefined
-    return valueFormatter ? valueFormatter(value!) : value
-  })
 
   return (
     <Container {...rest}>
@@ -110,7 +117,7 @@ export default function Card<T extends {}>(props: CardProps<T>) {
         <SectionsContainer stackHorizontal={stackSections === "horizontal"}>{sections}</SectionsContainer>
       ) : (
         <Content>
-          {data && titles.map((cardItemTitle, i) => <CardItem key={i} value={values[i]} title={cardItemTitle} />)}
+          {renderData(props as CardPropsWithChildrenOrData<T>)}
           {children}
         </Content>
       )}
