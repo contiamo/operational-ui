@@ -66,6 +66,7 @@
     ]
   },
   "dependencies": {
+    "create-emotion-styled": "^9.2.6",
     "emotion": "^9.2.5",
     "emotion-theming": "^9.2.6",
     "lodash": "^4.17.10",

@@ -6,5 +6,11 @@ import wrapDefaultTheme from "../../utils/wrap-default-theme"
 const Sidenav = wrapDefaultTheme(ThemelessSidenav)
 
 test("Sidenav component renders", () => {
-  expect(shallow(<Sidenav />)).toMatchSnapshot()
+  expect(
+    shallow(
+      <Sidenav>
+        <div>hello</div>
+      </Sidenav>,
+    ),
+  ).toMatchSnapshot()
 })

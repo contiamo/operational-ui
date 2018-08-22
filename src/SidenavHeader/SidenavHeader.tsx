@@ -1,10 +1,12 @@
 import * as React from "react"
-import styled from "react-emotion"
+
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
+import { SidenavProps } from "../Sidenav/Sidenav"
 import { SidenavItemProps } from "../SidenavItem/SidenavItem"
 import { DefaultProps } from "../types"
-import { floatIn, isModifiedEvent } from "../utils"
+import { isModifiedEvent } from "../utils"
+import styled from "../utils/styled"
 
 export interface SidenavHeaderProps extends DefaultProps {
   /** Main label for the header */
@@ -32,43 +34,39 @@ export interface SidenavHeaderProps extends DefaultProps {
   /** Close handler (via chevron button on the top right) */
   onClose?: () => void
   children?: React.ReactNode
+  compact?: SidenavProps["compact"]
 }
 
-const Container = styled("div")(({ theme }) => ({
-  label: "sidenavheader",
-  textDecoration: "none",
-  width: "100%",
-  position: "relative",
-  borderBottom: "1px solid",
-  borderBottomColor: theme.color.separators.default,
-}))
+const makeContainer = (type: "link" | "block") =>
+  styled(type === "link" ? "a" : "div")<{ compact: SidenavHeaderProps["compact"] }>(({ theme, compact }) => ({
+    label: "sidenavheader",
+    textDecoration: "none",
+    width: "100%",
+    borderBottom: compact ? 0 : "1px solid",
+    borderBottomColor: theme.color.separators.default,
+  }))
 
-const ContainerLink = styled("a")(({ theme }) => ({
-  label: "sidenavheader",
-  textDecoration: "none",
-  width: "100%",
-  position: "relative",
-  borderBottom: "1px solid",
-  borderBottomColor: theme.color.separators.default,
-}))
+const Content = styled("div")<{ isCondensed: boolean; isActive: boolean; compact: SidenavHeaderProps["compact"] }>(
+  ({ theme, isCondensed, compact, isActive }) => ({
+    textDecoration: "none",
+    cursor: "pointer",
+    position: "relative",
+    display: compact ? "none" : "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    height: isCondensed ? 60 : 73,
+    overflow: "hidden",
+    padding: `0 ${theme.space.content}px`,
+    width: "100%",
+    marginBottom: isActive ? -26 : 0,
+  }),
+)
 
-const Content = styled("div")<{ isCondensed: boolean }>(({ theme, isCondensed }) => ({
-  textDecoration: "none",
-  cursor: "pointer",
-  position: "relative",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "flex-start",
-  justifyContent: "center",
-  height: isCondensed ? 60 : 73,
-  overflow: "hidden",
-  padding: `0 ${theme.space.content}px`,
-  width: "100%",
-}))
-
-const LabelText = styled("div")<{ isActive: boolean }>`
+const LabelText = styled("div")<{ isActive: boolean; compact: SidenavHeaderProps["compact"] }>`
   position: relative;
-  font-weight: 500;
+  display: flex;
+  font-weight: ${({ theme }) => theme.font.weight.medium};
   letter-spacing: 0.25;
   text-transform: uppercase;
   white-space: nowrap;
@@ -81,10 +79,9 @@ const LabelText = styled("div")<{ isActive: boolean }>`
 `
 
 const ItemsContainer = styled("div")({
-  animation: `${floatIn} .15s forwards ease`,
+  /** @todo add this animation when we move to a JSON-style API for SidenavHeaders */
+  // animation: `${floatIn} .15s forwards ease`,
   position: "relative",
-  top: -16,
-  marginTop: -10,
 })
 
 const CloseButton = styled("div")(({ theme }) => ({
@@ -107,17 +104,17 @@ const CloseButton = styled("div")(({ theme }) => ({
   },
 }))
 
-const Summary = styled("div")<{ isActive: boolean }>`
+const Summary = styled("div")<{ isActive: boolean; compact: SidenavHeaderProps["compact"] }>`
   display: block;
   font-weight: normal;
   text-transform: none;
   user-select: none;
   margin-top: 4px;
-  ${({ theme, isActive }) => `
+  ${({ theme, isActive, compact }) => `
     font-size: ${theme.font.size.fineprint}px;
     color: ${theme.color.text.lightest};
     left: ${theme.space.content}px;
-    visibility: ${isActive ? "hidden" : "visible"};
+    visibility: ${compact || isActive ? "hidden" : "visible"};
   `};
 `
 
@@ -128,8 +125,8 @@ const truncate = (maxLength: number) => (text: string) => {
   return text.slice(0, maxLength) + "..."
 }
 
-const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, ...props }) => {
-  const isActive = Boolean(active)
+const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, compact, ...props }) => {
+  const isActive = Boolean(active) || Boolean(compact)
 
   // The implementation of this component relies on the fact that it only has valid
   // `SidenavItem` components as children. The type casting here expresses that assumption.
@@ -139,14 +136,15 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, ..
 
   // Actual `to` prop should invalidate if the element has sublinks and is active
   const href = isActive && hasChildLinks ? undefined : to
-  const ContainerComponent = href ? ContainerLink : Container
+  const Container = href ? makeContainer("link") : makeContainer("block")
 
   return (
     <OperationalContext>
       {ctx => {
         return (
-          <ContainerComponent
+          <Container
             {...props}
+            compact={compact}
             href={href}
             onClick={(ev: React.SyntheticEvent<Node>) => {
               if (props.onClick) {
@@ -164,13 +162,18 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, ..
               }
             }}
           >
-            <Content onClick={props.onClick} isCondensed={Boolean(props.condensed)}>
-              <LabelText isActive={isActive}>
+            <Content
+              isActive={isActive}
+              compact={compact}
+              onClick={props.onClick}
+              isCondensed={Boolean(props.condensed)}
+            >
+              <LabelText compact={compact} isActive={isActive}>
                 {props.label}
                 {props.icon && <Icon name={props.icon as IconName} right />}
               </LabelText>
               {!props.condensed && (
-                <Summary isActive={isActive}>
+                <Summary compact={compact} isActive={isActive}>
                   {truncate(24)(childSidenavItems.map(child => child.props.label).join(", "))}
                 </Summary>
               )}
@@ -188,8 +191,15 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, ..
                 <Icon name={active ? "ChevronUp" : "ChevronDown"} />
               </CloseButton>
             )}
-            {isActive && <ItemsContainer>{props.children}</ItemsContainer>}
-          </ContainerComponent>
+            {isActive && (
+              <ItemsContainer>
+                {React.Children.map(props.children, child => {
+                  const typedChild = child as React.ReactElement<SidenavItemProps>
+                  return { ...typedChild, props: { ...typedChild.props, compact } }
+                })}
+              </ItemsContainer>
+            )}
+          </Container>
         )
       }}
     </OperationalContext>
