@@ -15,7 +15,7 @@ export interface BaseProps extends DefaultProps {
   /** Page actions, typically `condensed button` component inside a fragment */
   actions?: React.ReactNode
   /** Actions position */
-  actionsPosition?: "start" | "end"
+  actionsPosition?: "start" | "main" | "end"
 }
 
 export interface PropsWithSimplePage extends BaseProps {
@@ -71,19 +71,13 @@ const Container = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.background.lighter,
 }))
 
-const TitleBar = styled("div")<{ actionPosition: PageProps["actionsPosition"] }>(({ theme, actionPosition }) => ({
+const TitleBar = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
   padding: theme.space.element,
   height: theme.titleHeight,
   fontWeight: theme.font.weight.medium,
-  ...(actionPosition === "start"
-    ? {
-        flexDirection: "row-reverse",
-        justifyContent: "flex-end",
-      }
-    : {}),
 }))
 
 const tabsBarHeight = 43
@@ -121,12 +115,20 @@ const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosit
   ({ theme, actionPosition }) => ({
     ...(actionPosition === "start"
       ? {
+          order: -1,
           // Deal with the button margin (theme.space.small)
           marginRight: theme.space.element - theme.space.small,
         }
       : {
           marginLeft: theme.space.element,
         }),
+    ...(actionPosition === "end"
+      ? {
+          flexGrow: 1,
+          display: "flex",
+          justifyContent: "flex-end",
+        }
+      : {}),
   }),
 )
 
@@ -138,7 +140,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   public static defaultProps: Partial<PageProps> = {
     areas: "main",
     fill: false,
-    actionsPosition: "end",
+    actionsPosition: "main",
   }
 
   public readonly state = initialState
@@ -188,7 +190,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
       <>
         {title && (
           <>
-            <TitleBar actionPosition={actionsPosition}>
+            <TitleBar>
               <Title color="white">{title}</Title>
               {condensedTitle && this.renderTabsBar()}
               <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
@@ -207,7 +209,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
     return (
       <>
         {title && (
-          <TitleBar actionPosition={actionsPosition}>
+          <TitleBar>
             <Title color="white">{title}</Title>
             <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
           </TitleBar>

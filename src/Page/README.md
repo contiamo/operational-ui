@@ -68,6 +68,20 @@ const actions = (
 </Page>
 ```
 
+### With actions on end
+
+```jsx
+/* Always use condensed buttons in page actions */
+const actions = (
+  <Button condensed icon="ExternalLink" color="ghost">
+    Go somewhere else
+  </Button>
+)
+;<Page title="Settings Page" actions={actions} actionsPosition="end">
+  <Card>Hello, this is page content</Card>
+</Page>
+```
+
 ### With tabs
 
 ```jsx
@@ -165,6 +179,78 @@ const actions = (
     { name: "sql", children: <Tab title="SQL" /> },
   ]}
   actions={actions}
+/>
+```
+
+### With condensed title bar and actions on start
+
+```jsx
+const Tab = props => (
+  <PageContent>
+    <Card title={props.title}>The tabs are not working because nothing update `activeTabName`!</Card>
+  </PageContent>
+)
+const options = [
+  { label: "Payroll", onClick: () => {} },
+  { label: "All Databases", onClick: () => {} },
+  { label: "Sales - Germany only", onClick: () => {} },
+  { label: "Sales - global", onClick: () => {} },
+  { label: "Reporting", onClick: () => {} },
+  { label: "Logistics", onClick: () => {} },
+]
+const actions = (
+  <HeaderMenu items={options} withCaret>
+    Sales / Foodmart
+  </HeaderMenu>
+)
+;<Page
+  title="Bundle detail"
+  condensedTitle
+  activeTabName="sql"
+  onTabChange={console.log}
+  tabs={[
+    { name: "olap", children: <Tab title="OLAP" /> },
+    { name: "entity", children: <Tab title="Entity" /> },
+    { name: "sql", children: <Tab title="SQL" /> },
+  ]}
+  actions={actions}
+  actionsPosition="start"
+/>
+```
+
+### With condensed title bar and actions on end
+
+```jsx
+const Tab = props => (
+  <PageContent>
+    <Card title={props.title}>The tabs are not working because nothing update `activeTabName`!</Card>
+  </PageContent>
+)
+const options = [
+  { label: "Payroll", onClick: () => {} },
+  { label: "All Databases", onClick: () => {} },
+  { label: "Sales - Germany only", onClick: () => {} },
+  { label: "Sales - global", onClick: () => {} },
+  { label: "Reporting", onClick: () => {} },
+  { label: "Logistics", onClick: () => {} },
+]
+const actions = (
+  <HeaderMenu items={options} withCaret>
+    Sales / Foodmart
+  </HeaderMenu>
+)
+;<Page
+  title="Bundle detail"
+  condensedTitle
+  activeTabName="sql"
+  onTabChange={console.log}
+  tabs={[
+    { name: "olap", children: <Tab title="OLAP" /> },
+    { name: "entity", children: <Tab title="Entity" /> },
+    { name: "sql", children: <Tab title="SQL" /> },
+  ]}
+  actions={actions}
+  actionsPosition="end"
 />
 ```
 
