@@ -79,7 +79,8 @@ const TreeLabel = styled("span")`
  */
 const CloseButton = styled("div")`
   cursor: pointer;
-  width: fit-content;
+  width: 20px;
+  height: 20px;
   padding: 4px;
   ${({ theme }) => `border-radius: ${theme.borderRadius}px`};
   :hover {
