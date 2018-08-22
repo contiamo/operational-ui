@@ -65,6 +65,7 @@ const Container = styled("div")(({ theme }) => ({
   height: "100%",
   position: "relative",
   backgroundColor: theme.color.background.lighter,
+  overflow: "hidden",
 }))
 
 const TitleBar = styled("div")<{ actionPosition: PageProps["actionsPosition"] }>(({ theme, actionPosition }) => ({

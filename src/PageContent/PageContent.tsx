@@ -36,6 +36,7 @@ const StyledPageContent = styled("div")<{ areas?: PageContentProps["areas"]; fil
     minWidth: 800,
     maxWidth: props.fill_ ? "none" : 1150,
     padding: props.theme.space.element,
+    overflow: "auto",
   }
 })
 

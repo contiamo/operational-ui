@@ -38,7 +38,7 @@ const GridContainer = styled("div")(
   },
   ({ theme }) => ({
     gridTemplateRows: `${theme.titleHeight}px auto`,
-    gridTemplateColumns: `${theme.sidebarWidth}px auto`,
+    gridAutoColumns: `min-content auto`,
   }),
 )
 
