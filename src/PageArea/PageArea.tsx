@@ -15,9 +15,8 @@ export interface PageAreaProps extends DefaultProps {
   name?: "main" | "side"
 }
 
-export const PageArea = styled("div")<PageAreaProps>(({ theme, name }) => ({
+export const PageArea = styled("div")<PageAreaProps>(({ name }) => ({
   gridArea: name,
-  padding: `${theme.space.element}px 0`,
 }))
 
 export default PageArea

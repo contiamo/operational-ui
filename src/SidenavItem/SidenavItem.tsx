@@ -51,7 +51,7 @@ const makeContainer = (type: "link" | "block") =>
       alignSelf: end_ ? "flex-end" : "flex-start",
 
       // This allows stacking of `end` SidenavItems.
-      ...(end_ ? { "& + &": { marginTop: 0 } } : {}),
+      ...(end_ ? { "& + .operational-ui__sidenav-item_end": { marginTop: 0 } } : {}),
 
       // Specificity is piled up here to override default styles
       "a:link&, a:visited&": {
@@ -114,6 +114,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
   compact,
   compactLabel,
   end,
+  className,
   ...props
 }) => {
   const Container = to ? makeContainer("link") : makeContainer("block")
@@ -123,6 +124,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
       {ctx => (
         <Container
           {...props}
+          className={end ? "operational-ui__sidenav-item_end" : ""}
           end_={Boolean(end)}
           compact={compact}
           href={to}

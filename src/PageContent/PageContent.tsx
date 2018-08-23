@@ -35,7 +35,28 @@ const StyledPageContent = styled("div")<{ areas?: PageContentProps["areas"]; fil
     height: "100%",
     minWidth: 800,
     maxWidth: props.fill_ ? "none" : 1150,
-    padding: `0 ${props.theme.space.element}px`,
+    padding: `${props.theme.space.element}px`,
+
+    /**
+     * Since PageContent is in a scrollable context,
+     * a user often scrolls past the bottom padding
+     * on large pages, and the bottom edge of the last
+     * child touches the bottom of the container: there
+     * _is no padding on the bottom_ because it has been
+     * passed.
+     *
+     * The following hack adds a small piece of pseudo-DOM
+     * in order to preserve space on the bottom.
+     *
+     * The `grid-gap` adds appropriate bottom spacing to
+     * PageContent since this pseudo-element is seen as a
+     * grid row.
+     */
+    "::after": {
+      content: '""',
+      display: "block",
+      height: 1,
+    },
   }
 })
 
