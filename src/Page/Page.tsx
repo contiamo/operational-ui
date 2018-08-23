@@ -105,11 +105,13 @@ const Tab = styled("div")<{ active?: boolean; condensed?: boolean }>(({ theme, a
   },
 }))
 
-const ViewContainer = styled("div")<{ isInTab?: boolean }>(({ theme, isInTab }) => ({
-  height: `calc(100% - ${isInTab ? theme.titleHeight + tabsBarHeight : theme.titleHeight}px)`,
-  overflow: "hidden",
-  position: "relative",
-}))
+const ViewContainer = styled("div")<{ isInTab?: boolean; isTitleCondensed?: boolean }>(
+  ({ theme, isInTab, isTitleCondensed }) => ({
+    height: `calc(100% - ${isInTab && !isTitleCondensed ? theme.titleHeight + tabsBarHeight : theme.titleHeight}px)`,
+    overflow: "hidden",
+    position: "relative",
+  }),
+)
 
 const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosition"] }>(
   ({ theme, actionPosition }) => ({
@@ -198,7 +200,9 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
             {!condensedTitle && this.renderTabsBar()}
           </>
         )}
-        <ViewContainer isInTab>{currentTabChildren}</ViewContainer>
+        <ViewContainer isInTab isTitleCondensed={condensedTitle}>
+          {currentTabChildren}
+        </ViewContainer>
       </>
     )
   }
