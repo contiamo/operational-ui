@@ -61,7 +61,7 @@ const Label = styled("label")(
   }),
 )
 
-const Bar = styled("div")<{ fill: number; color?: string }>(
+const Bar = styled("div")<{ fill_: number; color?: string }>(
   {
     position: "relative",
     width: "100%",
@@ -82,7 +82,7 @@ const Bar = styled("div")<{ fill: number; color?: string }>(
       pointerEvents: "none",
     },
   },
-  ({ theme, fill, color }) => {
+  ({ theme, fill_, color }) => {
     const backgroundColor: string = deprecatedExpandColor(theme.deprecated, color) || theme.deprecated.colors.info
     return {
       padding: `${theme.deprecated.spacing / 4}px ${theme.deprecated.spacing / 2}px`,
@@ -97,7 +97,7 @@ const Bar = styled("div")<{ fill: number; color?: string }>(
       ":before": {
         backgroundColor: setBrightness(backgroundColor, 155),
         transition: "all 0.3s ease-in-out",
-        width: `${fill * 100}%`,
+        width: `${fill_ * 100}%`,
       },
     }
   },
@@ -124,7 +124,7 @@ const Breakdown: React.SFC<BreakdownProps> = ({ number, color, fill, label, chil
     <Number>{number}</Number>
     <Content>
       <Label>{children}</Label>
-      <Bar color={color} fill={fill}>
+      <Bar color={color} fill_={fill}>
         <Span>{label}</Span>
       </Bar>
     </Content>
