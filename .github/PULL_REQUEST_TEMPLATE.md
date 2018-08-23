@@ -1,4 +1,4 @@
-<!-- IMPORTANT: If this is a breaking change or a backwards compatible feature, please prefix the title of this PR with **Breaking: ** or **Feature: ** -->
+<!-- IMPORTANT: If this is a breaking change or a backwards compatible feature, please prefix the title of this PR with **Breaking:** or **Feature:** -->
 
 ## Summary
 
