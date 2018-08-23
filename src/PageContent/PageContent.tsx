@@ -18,7 +18,7 @@ export interface PageContentProps extends DefaultProps {
   fill?: boolean
 }
 
-const StyledPageContent = styled("div")<{ areas?: PageContentProps["areas"]; fill_?: boolean }>(props => {
+const StyledPageContent = styled("div")<{ areas?: PageContentProps["areas"]; fill?: boolean }>(props => {
   const gridTemplateColumns = {
     main: "auto",
     "main side": "auto 280px",
@@ -34,7 +34,7 @@ const StyledPageContent = styled("div")<{ areas?: PageContentProps["areas"]; fil
     width: "100%",
     height: "100%",
     minWidth: 800,
-    maxWidth: props.fill_ ? "none" : 1150,
+    maxWidth: props.fill ? "none" : 1150,
     padding: `${props.theme.space.element}px`,
 
     /**
@@ -60,12 +60,12 @@ const StyledPageContent = styled("div")<{ areas?: PageContentProps["areas"]; fil
   }
 })
 
-const Container = styled("div")<{ fill_?: boolean }>(() => ({
+const Container = styled("div")({
   position: "relative",
   width: "100%",
   height: "100%",
   overflow: "auto",
-}))
+})
 
 // `fill` must be rename internally to avoid conflict with the native `fill` DOM attribute
 const PageContent: React.SFC<PageContentProps> = ({ fill, children, ...props }) => {
@@ -75,7 +75,7 @@ const PageContent: React.SFC<PageContentProps> = ({ fill, children, ...props }) 
         <Confirm>
           {confirm => (
             <Container>
-              <StyledPageContent {...props} fill_={fill}>
+              <StyledPageContent {...props} fill={fill}>
                 {typeof children === "function" ? children({ confirm, modal }) : children}
               </StyledPageContent>
             </Container>
