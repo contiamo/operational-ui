@@ -150,14 +150,14 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   private onTabClick(index: number, tabs: Tabs) {
     this.setState({ activeTab: index })
     if (this.props.onTabChange) {
-      this.props.onTabChange(tabs[index].name.toLowerCase())
+      this.props.onTabChange(tabs[index].name)
     }
   }
 
   private getActiveTab(tabs: Tabs): number {
     let activeTab: number
     if (this.props.activeTabName) {
-      const index = tabs.findIndex(({ name }) => name.toLowerCase() === this.props.activeTabName!.toLowerCase())
+      const index = tabs.findIndex(({ name }) => name === this.props.activeTabName)
       activeTab = index === -1 ? 0 : index
     } else {
       activeTab = this.state.activeTab
