@@ -9,11 +9,11 @@ import * as React from "react"
 
 import styled from "../utils/styled"
 
-export const Form = styled("form")({
+export const Form = styled("form")(({ theme }) => ({
   "> *:not(:last-child)": {
-    marginBottom: 34,
+    marginBottom: 34 - theme.space.small,
     display: "block",
   },
-})
+}))
 
 export default Form

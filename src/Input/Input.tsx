@@ -65,6 +65,7 @@ const InputFieldContainer = styled("div")<{
   align-items: center;
   justify-content: center;
   ${({ fullWidth, withLabel, theme }) => `
+    margin-bottom: ${theme.space.small}px; 
     margin-right: ${withLabel ? 0 : theme.space.small}px;
     display: ${withLabel ? "flex" : "inline-flex"};
     width: 100%;
