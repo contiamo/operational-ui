@@ -9,12 +9,17 @@ import * as React from "react"
 
 import styled from "../utils/styled"
 
-export const Form = styled("form")({
-  "> *:not(:last-child)": {
-    marginBottom: 34,
+export const Form = styled("form")(({ theme }) => ({
+  // Space between groups
+  "> :not(:last-child)": {
+    marginBottom: 34 - theme.space.small,
     display: "block",
-    width: "fit-content",
   },
-})
+
+  // Space between children _inside_ groups
+  "> :not(:last-child) > *": {
+    marginBottom: theme.space.small,
+  },
+}))
 
 export default Form
