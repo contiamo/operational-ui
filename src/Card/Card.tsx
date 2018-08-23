@@ -1,5 +1,6 @@
 import * as React from "react"
-import { CardHeader, CardItem } from "../"
+import { CardItem } from "../"
+import CardHeader from "../Internals/CardHeader"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 

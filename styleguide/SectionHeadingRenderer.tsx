@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "../src/utils/styled"
 
-import { CardHeader } from "../src"
+import CardHeader from "../src/Internals/CardHeader"
 
 export interface SectionHeadingRendererProps {
   children: React.ReactNode
