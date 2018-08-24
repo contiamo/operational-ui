@@ -19,7 +19,7 @@ const Container = styled("div")<{ areas?: PageAreasProps["areas"]; fill_?: boole
   return {
     gridTemplateColumns,
     display: "grid",
-    alignItems: "stretch",
+    alignItems: "flex-start",
     gridTemplateAreas: `"${props.areas || "main"}"`,
     gridGap: props.theme.space.element,
     maxWidth: props.fill_ ? "none" : 1150,

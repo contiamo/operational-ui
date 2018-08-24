@@ -8,7 +8,7 @@ exports[`Grid Component Should render 1`] = `
     class="css-ar73w8-Messages"
   />
   <div
-    class="css-x3scvq-Grid"
+    class="css-tnve84-Grid"
   />
 </div>
 `;

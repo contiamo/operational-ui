@@ -83,7 +83,7 @@ class StatefulSidenav extends React.Component {
 </Sidenav>
 ```
 
-### With a header placed at the bottom
+### With an item placed at the bottom
 
 ```jsx
 <div style={{ height: 600 }}>
