@@ -11,7 +11,7 @@
 ## To be tested
 
 Me
-- [ ] No error/warning in the console
+- [ ] No error/warning in the console on `localhost:6060`
 
 Tester 1
 
