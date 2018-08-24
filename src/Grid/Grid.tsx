@@ -37,6 +37,7 @@ const Container = styled("div")<{ gridType: string }>(({ theme, gridType }) => (
   width: "100%",
   height: "100%",
   display: "grid",
+  alignItems: "flex-start",
   padding: (theme.deprecated.spacing * 4) / 3,
   gridColumnGap: (theme.deprecated.spacing * 4) / 3,
   gridRowGap: (theme.deprecated.spacing * 4) / 3,

@@ -9,6 +9,10 @@ export interface CardItemProps extends DefaultProps {
   value: React.ReactNode
 }
 
+const Container = styled("div")(({ theme }) => ({
+  ":not(:last-child)": { marginBottom: theme.space.content },
+}))
+
 const CardItemTitle = styled("div")(({ theme }) => ({
   color: theme.color.text.lightest,
   fontFamily: theme.font.family.main,
@@ -22,14 +26,13 @@ const CardItemBody = styled("div")(({ theme }) => ({
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.body,
   marginTop: theme.space.base,
-  marginBottom: theme.space.content,
 }))
 
 const CardItem: React.SFC<CardItemProps> = ({ title, value, children, ...props }) => (
-  <div {...props}>
+  <Container {...props}>
     <CardItemTitle>{title}</CardItemTitle>
     <CardItemBody>{children || value}</CardItemBody>
-  </div>
+  </Container>
 )
 
 export default CardItem

@@ -37,7 +37,7 @@ const GridContainer = styled("div")(
     overflow: "hidden",
   },
   ({ theme }) => ({
-    gridTemplateRows: `${theme.titleHeight}px auto`,
+    gridTemplateRows: `${theme.titleHeight}px 100%`,
     gridAutoColumns: `min-content auto`,
   }),
 )
@@ -48,7 +48,7 @@ const Main = styled("div")(({ theme }) => ({
   gridColumnStart: "2",
   gridRowStart: "2",
   gridRowEnd: "span 1",
-  height: `calc(100vh - ${theme.titleHeight}px)`, // FORCE a height that is the page - the logo so that children with 100% have context
+  height: `calc(100% - ${theme.titleHeight}px)`, // FORCE a height that is the page - the logo so that children with 100% have context
   backgroundColor: theme.color.white,
 }))
 

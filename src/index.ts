@@ -13,7 +13,6 @@ export { default as ButtonGroup, ButtonGroupProps } from "./ButtonGroup/ButtonGr
 export { default as Card, CardProps } from "./Card/Card"
 export { default as CardColumn, CardColumnProps } from "./CardColumn/CardColumn"
 export { default as CardColumns } from "./CardColumns/CardColumns"
-export { default as CardHeader, CardHeaderProps } from "./CardHeader/CardHeader"
 export { default as CardItem, CardItemProps } from "./CardItem/CardItem"
 export { default as CardSection, CardSectionProps, DragAndDropFeedback } from "./CardSection/CardSection"
 export { default as Chip, ChipProps } from "./Chip/Chip"

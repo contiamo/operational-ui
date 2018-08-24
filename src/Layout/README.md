@@ -93,18 +93,19 @@ const sidebar = (
 ```jsx
 const sidebar = (
   <Sidenav compact>
-    <SidenavHeader label="Use cases" active>
+    <SidenavHeader label="Use cases">
       <SidenavItem label="Overview" icon="Home" />
-      <SidenavItem label="Use Cases" icon="Search" active />
+      <SidenavItem label="Use Cases" icon="Search" />
       <SidenavItem label="Guides" icon="Document" />
     </SidenavHeader>
+    <SidenavItem active end label="Other Guy" icon="User" />
     <SidenavItem end label="Admin" icon="Jobs" />
   </Sidenav>
 )
 
 // Container must set the height explicitly.
 // This component will set height to 100%.
-;<div style={{ height: 400 }}>
+;<div style={{ height: 600 }}>
   <Layout
     sidenav={sidebar}
     header={

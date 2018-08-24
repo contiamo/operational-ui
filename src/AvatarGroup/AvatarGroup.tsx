@@ -25,7 +25,7 @@ const Container = styled("div")({
 })
 
 const GroupedAvatar = styled(Avatar)({
-  marginLeft: -8,
+  marginLeft: -12,
 })
 
 const AvatarGroup: React.SFC<AvatarGroupProps> = ({ avatars, size, onMoreClick, ...props }) => {
