@@ -3,6 +3,7 @@ import { Title } from ".."
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps } from "../PageContent/PageContent"
 import { DefaultProps } from "../types"
+import deprecate from "../utils/deprecate"
 import styled from "../utils/styled"
 
 export type Tabs = Array<{ name: string; children: React.ReactNode; hidden?: boolean }>
@@ -171,7 +172,17 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
     const activeTab = this.getActiveTab(tabs)
     const { condensedTitle } = this.props
 
-    return (
+    /**
+     * @todo remove this and break the API properly in v9.0
+     */
+    const TabsBarWithWarning = deprecate(
+      () =>
+        tabs && tabs.find(tab => Boolean(tab.name.match(/[A-Z]/g)))
+          ? [
+              "The Page component no longer lowercases the active tab name when passed back through its onTabChange callback. Names are passed exactly as they appear in the tab name field.",
+            ]
+          : [],
+    )(() => (
       <TabsBar condensed={condensedTitle}>
         {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
           <Tab condensed={condensedTitle} key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
@@ -179,7 +190,9 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
           </Tab>
         ))}
       </TabsBar>
-    )
+    ))
+
+    return <TabsBarWithWarning />
   }
 
   private renderPageWithTabs() {
