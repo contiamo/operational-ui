@@ -5,7 +5,7 @@ import OperationalContext from "../OperationalContext/OperationalContext"
 import { SidenavProps } from "../Sidenav/Sidenav"
 import { SidenavItemProps } from "../SidenavItem/SidenavItem"
 import { DefaultProps } from "../types"
-import { isModifiedEvent } from "../utils"
+import { isModifiedEvent, isOutsideLink } from "../utils"
 import styled from "../utils/styled"
 
 export interface SidenavHeaderProps extends DefaultProps {
@@ -154,7 +154,7 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
                 onToggle(!active)
               }
 
-              if (!isModifiedEvent(ev) && ctx.pushState && to) {
+              if (!isModifiedEvent(ev) && ctx.pushState && to && !isOutsideLink(to)) {
                 ev.preventDefault()
 
                 // Even if the `props.to` prop was ignored, redirect should still happen here

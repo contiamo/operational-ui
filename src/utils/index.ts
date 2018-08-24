@@ -5,6 +5,8 @@ export { default as wrapDefaultTheme } from "./wrap-default-theme"
 
 export const isModifiedEvent = (event: any) => !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey)
 
+export const isOutsideLink = (url: string) => Boolean(url.match(/^http/g))
+
 /**
  * Return the initials in 2 letters from a full name.
  *

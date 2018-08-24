@@ -1,7 +1,7 @@
 import * as React from "react"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { DefaultProps } from "../types"
-import { isModifiedEvent } from "../utils"
+import { isModifiedEvent, isOutsideLink } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 import shapes from "./Logo.Shapes"
@@ -78,7 +78,7 @@ const Logo: React.SFC<LogoProps> = ({ stack, name, size, color, to, ...props }) 
               props.onClick(ev)
             }
 
-            if (!isModifiedEvent(ev) && to && ctx.pushState) {
+            if (!isModifiedEvent(ev) && ctx.pushState && to && !isOutsideLink(to)) {
               ev.preventDefault()
               ctx.pushState(to)
             }

@@ -3,7 +3,7 @@ import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { SidenavHeaderProps } from "../SidenavHeader/SidenavHeader"
 import { DefaultProps } from "../types"
-import { isModifiedEvent } from "../utils"
+import { isModifiedEvent, isOutsideLink } from "../utils"
 import styled from "../utils/styled"
 
 export interface SidenavItemProps extends DefaultProps {
@@ -134,7 +134,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
               props.onClick()
             }
 
-            if (!isModifiedEvent(ev) && to && ctx.pushState) {
+            if (!isModifiedEvent(ev) && ctx.pushState && to && !isOutsideLink(to)) {
               ev.preventDefault()
               ctx.pushState(to)
             }
