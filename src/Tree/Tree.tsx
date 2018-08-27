@@ -39,10 +39,9 @@ const TreeItem = styled("div")<{
 }>`
   display: flex;
   align-items: center;
-  padding: 4px 8px;
-  width: fit-content;
-  min-width: 160px;
+  max-width: 200px;
   ${({ theme, hasChildren, hasTag, isTopLevel, isDisabled, isRemovable }) => `
+    padding: ${theme.space.base}px;
     font-size: ${hasTag ? theme.font.size.fineprint : theme.font.size.small}px;
     font-weight: ${hasTag || isTopLevel ? theme.font.weight.bold : theme.font.weight.regular};
     font-family: ${hasTag ? theme.font.family.code : theme.font.family.main};
@@ -63,27 +62,40 @@ const TreeItem = styled("div")<{
       color: ${theme.color.text.lightest};
     }
     & > svg:first-child {
+      margin-right: ${theme.space.base}px;
+      flex-shrink: 0;
       visibility: ${hasChildren ? "visible" : "hidden"};
     }
   `};
 `
 
 const TreeLabel = styled("span")`
-  display: block;
+  display: inline-block;
+  word-wrap: break-word;
   flex: 1;
+  /**
+   * Explicit width assignment is required here because flex positioning works unpredictably with word-wrapping:
+   * in some cases, content to the right of the tree label is pushed past the width of the container
+   * rather than the word being broken. 
+   */
+  max-width: calc(100% - 70px);
 `
 
 /**
  * This is a single-use close button with hard-coded padding to ensure the close icon inside stays readable.
  * @todo look into re-using and formalizing this element.
  */
-const CloseButton = styled("div")`
+const IconButton = styled("div")<{ hidden_?: boolean }>`
   cursor: pointer;
   width: 20px;
   height: 20px;
-  padding: 4px;
-  ${({ theme }) => `border-radius: ${theme.borderRadius}px`};
-  :hover {
+  ${({ hidden_ }) => (hidden_ ? "visibility: hidden;" : "")} ${({ theme }) => `
+    border-radius: ${theme.borderRadius}px;
+    padding: ${theme.space.base}px;
+    :not(:last-child) {
+      margin-right: ${theme.space.base}px;
+    }
+  `} :hover {
     ${({ theme }) => `background-color: ${theme.color.background.light};`};
   }
 `
@@ -113,7 +125,9 @@ const TreeRecursive: React.SFC<{
           recursiveTogglePath(path)
         }}
       >
-        <Icon left name={isOpen ? "ChevronDown" : "Add"} size={12} />
+        <IconButton hidden_={childNodes.length === 0}>
+          <Icon name={isOpen ? "ChevronDown" : "Add"} size={12} />
+        </IconButton>
         {tree.tag && (
           <SmallNameTag color={tagColor} left>
             {tree.tag}
@@ -121,14 +135,14 @@ const TreeRecursive: React.SFC<{
         )}
         <TreeLabel>{tree.label}</TreeLabel>
         {onRemove && (
-          <CloseButton
+          <IconButton
             onClick={ev => {
               ev.stopPropagation()
               onRemove()
             }}
           >
             <Icon name="No" size={12} />
-          </CloseButton>
+          </IconButton>
         )}
       </TreeItem>
       {isOpen &&
