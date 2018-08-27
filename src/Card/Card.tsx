@@ -68,11 +68,17 @@ const Container = styled("div")(({ theme }) => ({
   },
 }))
 
-const Content = styled("div")`
-  ${({ theme }) => `
-    padding: ${theme.space.element}px;
-  `};
-`
+const Content = styled("div")(({ theme }) => ({
+  padding: theme.space.element,
+
+  /**
+   * Reset the last child margin bottom, so any elements can set a custom `marginBottom` to have
+   * a natural spacing.
+   */
+  "& > :last-child": {
+    marginBottom: 0,
+  },
+}))
 
 const SectionsContainer = styled("div")<{ stackHorizontal: boolean }>`
   ${({ stackHorizontal }) => `

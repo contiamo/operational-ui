@@ -51,3 +51,35 @@ Progress panels indicate progress on a list of steps making up a larger process 
   ]}
 />
 ```
+
+### Inside a card
+
+```jsx
+<Card title="Progress panel">
+  <ProgressPanel
+    items={[
+      {
+        status: "done",
+        title: "Something",
+      },
+    ]}
+  />
+  <CardColumns>
+    <CardColumn title="Danger zone">
+      <Button color="error" icon="Remove">
+        Destroy Editor
+      </Button>
+    </CardColumn>
+  </CardColumns>
+</Card>
+<Card title="Progress panel">
+  <ProgressPanel
+    items={[
+      {
+        status: "done",
+        title: "Something",
+      },
+    ]}
+  />
+</Card>
+```
