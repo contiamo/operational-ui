@@ -12,26 +12,31 @@
   **Fix:**
     For when we fix something that previously
     did not look or work correctly.
+    
+  Leaving off this prefix will prevent the PR from being
+  included in a release. A good case to omit the prefix
+  is when proposing infrastructural changes to the repo
+  that do not affect the library.
 -->
-## Summary
+# Summary
 
 <!-- Some context about this PR: screenshots and links to the docs are appreciate -->
 
-## Related issue
+# Related issue
 
 <!-- Paste the github issue here -->
 
-## To be tested
+# To be tested
 
 Me
-- [ ] No error/warning in the console on `localhost:6060`
+- [ ] No error or warning in the console on `localhost:6060`
 
 Tester 1
 
-- [ ] The netlify build is working
+- [ ] The Netlify build is working
   <!-- Put here everything that the reviewer 1 should test to be sure that everything is working properly -->
 
 Tester 2
 
-- [ ] The netlify build is working
+- [ ] The Netlify build is working
   <!-- Put here everything that the reviewer 2 should test to be sure that everything is working properly -->
