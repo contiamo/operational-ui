@@ -1,9 +1,8 @@
 import * as child_process from "child_process"
 import { danger, GitHubPRDSL, markdown, message, warn } from "danger"
+import jest from "danger-plugin-jest"
 import * as fs from "fs"
 import { includes } from "lodash"
-
-// import jest from "danger-plugin-jest"
 
 // Setup
 const pr = danger.github.pr
@@ -15,6 +14,9 @@ const wrongLockfileChanged = includes([...modified, ...added], "package-lock.jso
 
 const titlePrefixes = ["**Fix:**", "**Feature:**", "**Breaking:**"]
 const isPrPrefixed = (title: GitHubPRDSL["title"]) => titlePrefixes.some(prefix => title.startsWith(prefix))
+
+// Warn when there is a big PR
+const bigPRThreshold = 500
 
 message(`Here's [the demo](https://deploy-preview-${pr.number}--operational-ui.netlify.com/) for testing!`)
 
@@ -49,9 +51,6 @@ if (pr.body.length === 0) {
   fail("Please add a description to your PR.")
 }
 
-// Warn when there is a big PR
-const bigPRThreshold = 500
-
 if (danger.github.pr.additions + danger.github.pr.deletions > bigPRThreshold) {
   warn(":exclamation: Big PR")
 }
@@ -60,12 +59,6 @@ if (danger.github.pr.additions + danger.github.pr.deletions > bigPRThreshold) {
 if (pr.assignee === null) {
   fail("Please assign someone to merge this PR, and optionally include people who should review.")
 }
-
-// Show TSLint errors inline
-// Yes, this is a bit lossy, we run the linter twice now, but its still a short amount of time
-// Perhaps we could indicate that tslint failed somehow the first time?
-// This process should always fail, so needs the `|| true` so it won't raise.
-child_process.execSync(`npm run lint -- -- --format json --out tslint-errors.json || true`)
 
 if (fs.existsSync("tslint-errors.json")) {
   const tslintErrors = JSON.parse(fs.readFileSync("tslint-errors.json", "utf8")) as any[]
@@ -83,8 +76,4 @@ if (fs.existsSync("tslint-errors.json")) {
   }
 }
 
-/**
- * @todo uncomment this when https://github.com/danger/danger-swift/issues/69 is fixed
- * also, on GitHub this will mean Travis is no longer required.
- */
-// jest()
+jest()
