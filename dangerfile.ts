@@ -1,5 +1,5 @@
 import * as child_process from "child_process"
-import { danger, GitHubPRDSL, markdown, warn } from "danger"
+import { danger, GitHubPRDSL, markdown, message, warn } from "danger"
 import * as fs from "fs"
 import { includes } from "lodash"
 
@@ -16,7 +16,7 @@ const wrongLockfileChanged = includes([...modified, ...added], "package-lock.jso
 const titlePrefixes = ["**Fix:**", "**Feature:**", "**Breaking:**"]
 const isPrPrefixed = (title: GitHubPRDSL["title"]) => titlePrefixes.some(prefix => title.startsWith(prefix))
 
-pr.body.replace("the demo", `[the demo](https://deploy-preview-${pr.number}--operational-ui.netlify.com/#ActionMenu)`)
+message(`Here's [the demo](https://deploy-preview-${pr.number}--operational-ui.netlify.com/#ActionMenu) for testing!`)
 
 if (packageChanged && wrongLockfileChanged) {
   fail(
