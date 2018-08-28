@@ -20,7 +20,7 @@
     "build:styleguide": "styleguidist build",
     "build:package": "rimraf lib && tsc -d",
     "watch": "npm run build:package -- -w",
-    "test": "jest --maxWorkers=$JEST_MAX_WORKERS",
+    "test": "jest --outputFile test-results.json --json --maxWorkers=$JEST_MAX_WORKERS",
     "test:watch": "jest --watch",
     "preversion": "npm run build",
     "version": "auto-changelog && git add CHANGELOG.md",
