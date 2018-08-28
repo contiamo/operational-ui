@@ -15,6 +15,8 @@ const wrongLockfileChanged = includes([...modified, ...added], "package-lock.jso
 const titlePrefixes = ["**Fix:**", "**Feature:**", "**Breaking:**"]
 const isPrPrefixed = (title: GitHubPRDSL["title"]) => titlePrefixes.some(prefix => title.startsWith(prefix))
 
+pr.body.replace("the demo", `[the demo](https://deploy-preview-${pr.number}--operational-ui.netlify.com/#ActionMenu)`)
+
 if (packageChanged && wrongLockfileChanged) {
   fail(
     "This PR contains `package-lock.json`, but we expect a `yarn.lock` instead as yarn is the preferred package manager for this project. We should not have to maintain two lockfiles.",
@@ -23,7 +25,7 @@ if (packageChanged && wrongLockfileChanged) {
 
 if (!isPrPrefixed(pr.title)) {
   warn(`This PR is not prefixed with one of:
-- ${titlePrefixes.join("\n- ")}
+- ${titlePrefixes.map(prefix => `\`${prefix}\``).join("\n- ")}
 
 Because of this, the PR will not be included in the library. This is fine if the PR deals with an infrastrucutral change to the non-exported parts of this library.`)
 }
