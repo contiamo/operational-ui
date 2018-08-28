@@ -23,11 +23,11 @@ if (packageChanged && wrongLockfileChanged) {
   )
 }
 
-if (!isPrPrefixed(pr.title)) {
-  warn(`This PR is not prefixed with one of:
+if (modified.find(file => file.includes("src")) && !isPrPrefixed(pr.title)) {
+  fail(`This PR is not prefixed with one of:
 - ${titlePrefixes.map(prefix => `\`${prefix}\``).join("\n- ")}
 
-Because of this, the PR will not be included in the library. This is fine if the PR deals with an infrastrucutral change to the non-exported parts of this library.`)
+Prefixing a PR that touches files in \`src\` helps us semantically version releases of this library better.`)
 }
 
 if (pr.body.includes("[ ]")) {
