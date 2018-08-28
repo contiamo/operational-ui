@@ -172,7 +172,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
     const { condensedTitle, onTabChange, activeTabName } = this.props
 
     /**
-     * @todo remove this and break the API properly in v9.0
+     * @todo remove this after we merge https://github.com/contiamo/operational-ui/pull/692
      */
     if (
       process.env.NODE_ENV !== "production" &&
