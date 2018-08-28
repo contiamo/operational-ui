@@ -1,8 +1,9 @@
 import * as child_process from "child_process"
 import { danger, GitHubPRDSL, markdown, warn } from "danger"
-import jest from "danger-plugin-jest"
 import * as fs from "fs"
 import { includes } from "lodash"
+
+// import jest from "danger-plugin-jest"
 
 // Setup
 const pr = danger.github.pr
@@ -73,4 +74,8 @@ if (fs.existsSync("tslint-errors.json")) {
   }
 }
 
-jest()
+/**
+ * @todo uncomment this when https://github.com/danger/danger-swift/issues/69 is fixed
+ * also, on GitHub this will mean Travis is no longer required.
+ */
+// jest()
