@@ -18,6 +18,10 @@ const isPrPrefixed = (title: GitHubPRDSL["title"]) => titlePrefixes.some(prefix 
 
 message(`Here's [the demo](https://deploy-preview-${pr.number}--operational-ui.netlify.com/) for testing!`)
 
+if (pr.title.includes("WIP")) {
+  fail("This PR is a work in progress and should not be reviewed or merged _yet_.")
+}
+
 if (packageChanged && wrongLockfileChanged) {
   fail(
     "This PR contains `package-lock.json`, but we expect a `yarn.lock` instead as yarn is the preferred package manager for this project. We should not have to maintain two lockfiles.",
