@@ -20,12 +20,14 @@
     "build:styleguide": "styleguidist build",
     "build:package": "rimraf lib && tsc -d",
     "watch": "npm run build:package -- -w",
-    "test": "jest --maxWorkers=$JEST_MAX_WORKERS",
+    "test": "jest --outputFile test-results.json --json --maxWorkers=$JEST_MAX_WORKERS",
     "test:watch": "jest --watch",
     "preversion": "npm run build",
     "version": "auto-changelog && git add CHANGELOG.md",
     "precommit": "lint-staged",
-    "ci": "run-p build test"
+    "danger:ci": "danger ci",
+    "danger": "run-p danger:*",
+    "ci": "run-s test && run-p danger build"
   },
   "lint-staged": {
     "*.(js|jsx|json|md)": [
@@ -88,13 +90,15 @@
     "@types/react-copy-to-clipboard": "^4.2.5",
     "@types/react-dom": "^16.0.6",
     "@types/react-router": "^4.0.28",
-    "@types/tinycolor2": "^1.4.0",
+    "@types/tinycolor2": "1.4.0",
     "auto-changelog": "^1.8.0",
+    "danger": "^3.8.6",
+    "danger-plugin-jest": "^1.1.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.0.0-beta6",
     "husky": "^0.14.3",
-    "jest": "^23.4.0",
+    "jest": "^23.5.0",
     "jest-enzyme": "^6.0.2",
     "jest-serializer-enzyme": "^1.0.0",
     "lint-staged": "^7.2.0",
@@ -109,7 +113,7 @@
     "tslint": "^5.10.0",
     "tslint-config-prettier": "^1.13.0",
     "tslint-plugin-blank-line": "^0.0.8",
-    "typescript": "^3.1.0-dev.20180803",
+    "typescript": "3.1.0-dev.20180803",
     "webpack": "^4.16.2"
   }
 }

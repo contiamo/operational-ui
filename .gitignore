@@ -8,3 +8,4 @@ package-lock.json
 dist
 build
 lib
+test-results.json
