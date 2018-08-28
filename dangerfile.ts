@@ -16,7 +16,7 @@ const wrongLockfileChanged = includes([...modified, ...added], "package-lock.jso
 const titlePrefixes = ["**Fix:**", "**Feature:**", "**Breaking:**"]
 const isPrPrefixed = (title: GitHubPRDSL["title"]) => titlePrefixes.some(prefix => title.startsWith(prefix))
 
-message(`Here's [the demo](https://deploy-preview-${pr.number}--operational-ui.netlify.com/#ActionMenu) for testing!`)
+message(`Here's [the demo](https://deploy-preview-${pr.number}--operational-ui.netlify.com/) for testing!`)
 
 if (packageChanged && wrongLockfileChanged) {
   fail(
@@ -31,9 +31,14 @@ if (modified.find(file => file.includes("src")) && !isPrPrefixed(pr.title)) {
 Prefixing a PR that touches files in \`src\` helps us semantically version releases of this library better.`)
 }
 
-if (pr.body.includes("[ ]")) {
-  fail("There is an unchecked checkbox in this PR's description so it cannot be merged.")
-}
+/**
+ * Disabling this because we can't yet trigger
+ * rechecks when a checkbox _is actually_ checked
+ * as in, when the PR body is edited.
+ */
+// if (pr.body.includes("[ ]")) {
+//   warn("There is an unchecked checkbox in this PR's description so it cannot be merged.")
+// }
 
 // No PR is too small to warrant a paragraph or two of summary
 if (pr.body.length === 0) {
