@@ -25,7 +25,9 @@
     "preversion": "npm run build",
     "version": "auto-changelog && git add CHANGELOG.md",
     "precommit": "lint-staged",
-    "ci": "run-p build test"
+    "danger:ci": "danger ci",
+    "danger": "run-p danger:*",
+    "ci": "run-p danger build"
   },
   "lint-staged": {
     "*.(js|jsx|json|md)": [
@@ -90,6 +92,8 @@
     "@types/react-router": "^4.0.28",
     "@types/tinycolor2": "^1.4.0",
     "auto-changelog": "^1.8.0",
+    "danger": "^3.8.6",
+    "danger-plugin-jest": "^1.1.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.0.0-beta6",
