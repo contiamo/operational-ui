@@ -54,7 +54,10 @@ const getVariation = (status: Status, theme: OperationalStyleConstants = constan
 
 const Container = styled("div")`
   display: block;
-  margin-bottom: ${({ theme }) => `${theme.space.big}px`};
+
+  &:not(:last-child) {
+    margin-bottom: ${({ theme }) => `${theme.space.big}px`};
+  }
 `
 
 const Item = styled("div")`
