@@ -16,14 +16,14 @@ Simply add any content inside the card.
 ```jsx
 <Card
   title="Functions"
-  action={() => (
+  action={
     <div>
       You can configure Functions in your bundle.yaml:
       <a href="#">
         Learn how <Icon name="ExternalLink" />
       </a>
     </div>
-  )}
+  }
 >
   <p>Here is a bare card with custom padding.</p>
   <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />

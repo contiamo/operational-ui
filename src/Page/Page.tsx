@@ -169,7 +169,23 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   private renderTabsBar() {
     const tabs = this.props.tabs!
     const activeTab = this.getActiveTab(tabs)
-    const { condensedTitle } = this.props
+    const { condensedTitle, onTabChange, activeTabName } = this.props
+
+    /**
+     * @todo remove this after we merge https://github.com/contiamo/operational-ui/pull/692
+     */
+    if (
+      process.env.NODE_ENV !== "production" &&
+      activeTabName &&
+      Boolean(onTabChange) &&
+      Boolean(tabs) &&
+      Boolean(tabs.find(tab => activeTabName.toLowerCase() === tab.name.toLowerCase())) &&
+      Boolean(!tabs.find(tab => activeTabName === tab.name))
+    ) {
+      console.warn(
+        "Operational UI Warning:\nThe Page component no longer lowercases the active tab name when passed back through its onTabChange callback.\nNames are passed exactly as they appear in the tab name field.",
+      )
+    }
 
     return (
       <TabsBar condensed={condensedTitle}>
