@@ -40,6 +40,7 @@ const Container = styled("div")<{
     fontWeight: theme.font.weight.bold,
     width: 18,
     height: 18,
+    flexShrink: 0,
     borderRadius: theme.borderRadius,
     display: "inline-flex",
     alignItems: "center",

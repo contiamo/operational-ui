@@ -12,6 +12,12 @@ export interface CardSectionProps extends DefaultProps, DragProps {
   disabled?: boolean
   /** Feedback during drag and drop interaction */
   dragAndDropFeedback?: DragAndDropFeedback
+  /**
+   * Disable horizontal padding. Useful for usage with e.g. the `Tree` component, which
+   * has visually weak and often hidden toggle button on the left, and would produce
+   * disproportionate horizontal space in small sections.
+   */
+  noHorizontalPadding?: boolean
   /** Actions */
   actions?: ContextMenuProps["items"]
   /** Action click handler */
@@ -72,10 +78,10 @@ const Overlay = styled("div")<{ overlayType: OverlayType }>`
   }};
 `
 
-const Content = styled("div")`
+const Content = styled("div")<{ noHorizontalPadding?: boolean }>`
   display: block;
-  ${({ theme }) => `
-    padding: ${theme.space.element}px;
+  ${({ theme, noHorizontalPadding }) => `
+    padding: ${noHorizontalPadding ? `${theme.space.element}px 0` : theme.space.element}px;
   `};
 `
 
@@ -119,6 +125,7 @@ const CardSection: React.SFC<CardSectionProps> = ({
   disabled,
   dragAndDropFeedback,
   actions,
+  noHorizontalPadding,
   onActionClick,
   ...props
 }) => (
@@ -130,7 +137,7 @@ const CardSection: React.SFC<CardSectionProps> = ({
         {actions && <StyledActionMenu items={actions} onClick={onActionClick} />}
       </Title>
     )}
-    <Content>{children}</Content>
+    <Content noHorizontalPadding={noHorizontalPadding}>{children}</Content>
   </Container>
 )
 

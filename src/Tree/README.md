@@ -33,7 +33,7 @@ The tree component renders a tree structure with collapsable nodes in a filetree
       initiallyOpen: true,
       childNodes: [
         {
-          label: "LLC",
+          label: "Limited Liability Company",
           tag: "D",
           childNodes: [],
           draggable: true,
