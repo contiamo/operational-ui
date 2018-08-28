@@ -33,10 +33,10 @@ Me
 
 Tester 1
 
-- [ ] The Netlify build is working
+- [ ] Things look good on the demo.
   <!-- Put here everything that the reviewer 1 should test to be sure that everything is working properly -->
 
 Tester 2
 
-- [ ] The Netlify build is working
+- [ ] Things look good on the demo.
   <!-- Put here everything that the reviewer 2 should test to be sure that everything is working properly -->
