@@ -1,5 +1,18 @@
-<!-- IMPORTANT: If this is a breaking change or a backwards compatible feature, please prefix the title of this PR with **Breaking:** or **Feature:** -->
+<!-- 
+  ❗️IMPORTANT ❗️
+  Please prefix the title of this PR with _one_ of the following.
 
+  **Breaking:**
+    For when we break a public API.
+
+  **Feature:** 
+    For when we add something NEW that doesn't
+    break the public API.
+      
+  **Fix:**
+    For when we fix something that previously
+    did not look or work correctly.
+-->
 ## Summary
 
 <!-- Some context about this PR: screenshots and links to the docs are appreciate -->
