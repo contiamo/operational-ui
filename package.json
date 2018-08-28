@@ -23,7 +23,7 @@
     "test": "jest --maxWorkers=$JEST_MAX_WORKERS",
     "test:watch": "jest --watch",
     "preversion": "npm run build",
-    "version": "git push --tags && auto-changelog && git add CHANGELOG.md",
+    "version": "auto-changelog && git add CHANGELOG.md",
     "precommit": "lint-staged",
     "ci": "run-p build test"
   },
