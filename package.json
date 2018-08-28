@@ -27,7 +27,7 @@
     "precommit": "lint-staged",
     "danger:ci": "danger ci",
     "danger": "run-p danger:*",
-    "ci": "run-p danger build"
+    "ci": "run-s test && run-p danger build"
   },
   "lint-staged": {
     "*.(js|jsx|json|md)": [
