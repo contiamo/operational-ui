@@ -91,7 +91,7 @@
     "@types/react-copy-to-clipboard": "^4.2.5",
     "@types/react-dom": "^16.0.6",
     "@types/react-router": "^4.0.28",
-    "@types/tinycolor2": "1.4.0",
+    "@types/tinycolor2": "^1.4.0",
     "auto-changelog": "^1.8.0",
     "danger": "^3.8.6",
     "danger-plugin-jest": "^1.1.0",

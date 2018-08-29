@@ -28,7 +28,7 @@ export interface ContainerStyleProps {
   aspectRatio: number
 }
 
-const logoPadding = 6
+const logoPadding = 9
 
 const Container = styled("div")<ContainerStyleProps>(
   ({ color_, size_, theme, aspectRatio }) => `
