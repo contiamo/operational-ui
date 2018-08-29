@@ -55,7 +55,7 @@ Extract from: https://github.com/mac-s-g/react-json-view
 #### TypeScript
 
 ```jsx
-<Code syntax="ts">{`interface Person {
+<Code syntax="typecript">{`interface Person {
   firstName: string;
   lastName: string;
 }
