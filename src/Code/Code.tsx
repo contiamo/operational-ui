@@ -94,6 +94,7 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "collapsed" | "src" | "shoul
     }}
     displayDataTypes={false}
     enableClipboard={false}
+    name={false}
   />
 )
 
