@@ -10,24 +10,98 @@ exports[`Code Should render 1`] = `
   <div
     class="css-tj45kb"
   >
-    <pre>
-      <code
-        class="json css-10jr7dl"
+    <div
+      class="react-json-view"
+      style="font-family:monospace;cursor:default;background-color:rgba(20, 153, 206, 0.05);position:relative;margin:0;border:1px solid rgba(20, 153, 206, 0.1);border-radius:2px;padding:8px;flex:1"
+    >
+      <div
+        class="pretty-json-container object-container"
       >
-        {
-  "properties": {
-    "startAt": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "endAt": {
-      "type": "string",
-      "format": "date-time"
-    }
-  }
-}
-      </code>
-    </pre>
+        <div
+          class="object-content"
+        >
+          <div
+            class="object-key-val"
+          >
+            <span>
+              <span
+                style="display:inline-block;cursor:pointer"
+              >
+                <div
+                  class="icon-container"
+                  style="display:inline-block;width:17px"
+                >
+                  <span
+                    class="collapsed-icon"
+                  >
+                    <svg
+                      fill="currentColor"
+                      style="vertical-align:top;color:#2aa198;height:1em;width:1em;padding-left:2px"
+                      viewBox="0 0 15 15"
+                    >
+                      <path
+                        d="M0 14l6-6-6-6z"
+                      />
+                    </svg>
+                  </span>
+                </div>
+                <span
+                  style="display:inline-block;color:#002b36;letter-spacing:0.5px;font-style:none;vertical-align:top;opacity:0.85;:hover:[object Object]"
+                >
+                  <span
+                    class="object-key"
+                  >
+                    <span
+                      style="vertical-align:top"
+                    >
+                      "
+                    </span>
+                    <span>
+                      root
+                    </span>
+                    <span
+                      style="vertical-align:top"
+                    >
+                      "
+                    </span>
+                  </span>
+                  <span
+                    style="display:inline-block;margin:0px 5px;color:#002b36;vertical-align:top"
+                  >
+                    :
+                  </span>
+                </span>
+                <span
+                  style="display:inline-block;cursor:pointer;font-weight:bold;color:#002b36"
+                >
+                  {
+                </span>
+              </span>
+            </span>
+            <span
+              class="brace-row"
+            >
+              <span
+                style="display:inline-block;cursor:pointer;font-weight:bold;color:#002b36;padding-left:0px"
+              >
+                }
+              </span>
+              <div
+                class="object-meta-data"
+                style="display:inline-block;padding:0px 0px 0px 10px"
+              >
+                <span
+                  class="object-size"
+                  style="color:rgba(0, 0, 0, 0.3);border-radius:3px;font-style:italic;margin:0px 6px 0px 0px;cursor:default"
+                >
+                  0 items
+                </span>
+              </div>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;
