@@ -9,10 +9,6 @@ import constants from "../utils/constants"
 import { Languages } from "./languages"
 import styles from "./styles"
 
-function isJson(props: CodeProps): props is JSONCodeProps {
-  return props.syntax === "json"
-}
-
 export interface DefaultCodeProps extends DefaultProps {
   /** Language for syntax highlighting */
   syntax?: Exclude<Languages, "json">
@@ -103,7 +99,7 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "collapsed" | "src" | "shoul
 
 const Code: React.SFC<CodeProps> = ({ children, ...props }) => (
   <Container {...omit(props, ["src", "collapsed", "shouldCollapse", "syntax"])}>
-    {isJson(props) ? (
+    {props.syntax === "json" ? (
       <StyledReactJson src={props.src} collapsed={props.collapsed} shouldCollapse={props.shouldCollapse} />
     ) : (
       <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{children}</StyledHighlight>
