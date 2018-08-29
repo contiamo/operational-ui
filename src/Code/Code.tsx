@@ -6,6 +6,7 @@ import ReactJson, { ReactJsonViewProps } from "react-json-view"
 
 import { DefaultProps } from "../types"
 import constants from "../utils/constants"
+import { Languages } from "./languages"
 import styles from "./styles"
 
 function isJson(props: CodeProps): props is JSONCodeProps {
@@ -14,7 +15,7 @@ function isJson(props: CodeProps): props is JSONCodeProps {
 
 export interface DefaultCodeProps extends DefaultProps {
   /** Language for syntax highlighting */
-  syntax?: string
+  syntax?: Exclude<Languages, "json">
   children?: string | string[]
 }
 
