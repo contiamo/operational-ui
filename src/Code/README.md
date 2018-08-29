@@ -31,6 +31,8 @@ Box for displaying formatted code snippets.
 | `collapsed`      | `boolean` or `integer` | `false` | When set to `true`, all nodes will be collapsed by default. Use an integer value to collapse at a particular depth.                   |
 | `shouldCollapse` | `(field)=>{}`          | `false` | Callback function to provide control over what objects and arrays should be collapsed by default. An object is passed to the callback |
 
+Extract from: https://github.com/mac-s-g/react-json-view
+
 ```jsx
 <Code
   syntax="json"
