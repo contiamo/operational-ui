@@ -1,10 +1,22 @@
 import * as React from "react"
-import { CardItem } from "../"
+import CardItem from "../CardItem/CardItem"
 import CardHeader from "../Internals/CardHeader"
+import Tabs, { Tab } from "../Internals/Tabs"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface CardPropsWithChildrenOrData<T extends {} = {}> extends DefaultProps {
+export interface BaseProps extends DefaultProps {
+  /** Component containing buttons/links/actions assigned to the card */
+  action?: React.ReactNode
+  /** Card tabs */
+  tabs?: Tab[]
+  /** Active tab name */
+  activeTabName?: string
+  /** Callback fired on tab change */
+  onTabChange?: (newTabName: string) => void
+}
+
+export interface CardPropsWithChildrenOrData<T extends {} = {}> extends BaseProps {
   /** Any object to show. The key is the title of the data. */
   data?: T
   /**  A function to format keys of `data` */
@@ -17,8 +29,6 @@ export interface CardPropsWithChildrenOrData<T extends {} = {}> extends DefaultP
   keys?: Array<Extract<keyof T, string>>
   /** Title of the card */
   title?: React.ReactNode
-  /** Component containing buttons/links/actions assigned to the card */
-  action?: React.ReactNode
   /** React children */
   children?: React.ReactNode
   /** Card sections */
@@ -27,7 +37,7 @@ export interface CardPropsWithChildrenOrData<T extends {} = {}> extends DefaultP
   stackSections?: never
 }
 
-export interface CardPropsWithSections extends DefaultProps {
+export interface CardPropsWithSections extends BaseProps {
   /** Any object to show. The key is the title of the data. */
   data?: never
   /**  A function to format keys of `data` */
@@ -38,8 +48,6 @@ export interface CardPropsWithSections extends DefaultProps {
   keys?: never
   /** Title of the card */
   title?: React.ReactNode
-  /** Component containing buttons/links/actions assigned to the card */
-  action?: React.ReactNode
   /** React children */
   children?: never
   /** Card sections */
@@ -48,7 +56,45 @@ export interface CardPropsWithSections extends DefaultProps {
   stackSections?: "horizontal" | "vertical"
 }
 
-export type CardProps<T extends {} = {}> = CardPropsWithChildrenOrData<T> | CardPropsWithSections
+export interface CardPropsWithTabs extends BaseProps {
+  /** Any object to show. The key is the title of the data. */
+  data?: never
+  /**  A function to format keys of `data` */
+  keyFormatter?: never
+  /** A key-value object to format values of `data`. */
+  valueFormatters?: never
+  /** An ordered array to pick only some keys to display  */
+  keys?: never
+  /** Card sections */
+  sections?: never
+  /** Section stacking */
+  stackSections?: never
+  /** React children */
+  children?: never
+  /** Title of the card */
+  title?: never
+  /**
+   * List of tabs
+   * This will disable any children to render `tabs[i].component` instead
+   */
+  tabs: Tab[]
+  /**
+   * Active tab name
+   *
+   * If not specified, active tab is controlled by internal state.
+   */
+  activeTabName?: string
+  /**
+   * Send the active name tab on each tab change (in lowercase).
+   */
+  onTabChange?: (name: string) => void
+}
+
+export type CardProps<T extends {} = {}> = CardPropsWithChildrenOrData<T> | CardPropsWithSections | CardPropsWithTabs
+
+export interface State {
+  activeTab: number
+}
 
 const Container = styled("div")(({ theme }) => ({
   marginBottom: theme.space.element,
@@ -97,7 +143,7 @@ function renderData<T extends {}>(props: CardPropsWithChildrenOrData<T>) {
   return data && titles.map((cardItemTitle, i) => <CardItem key={i} value={values[i]} title={cardItemTitle} />)
 }
 
-export default function Card<T extends {}>(props: CardProps<T>) {
+function Card<T extends {}>(props: CardProps<T>) {
   const {
     title,
     keyFormatter,
@@ -108,20 +154,43 @@ export default function Card<T extends {}>(props: CardProps<T>) {
     keys,
     children,
     action,
+    tabs,
+    activeTabName,
+    onTabChange,
     ...rest
   } = props
+
+  if (sections) {
+    return (
+      <Container {...rest}>
+        {(title || action) && <CardHeader title={title} action={action} />}
+        <SectionsContainer stackHorizontal={stackSections === "horizontal"}>{sections}</SectionsContainer>
+      </Container>
+    )
+  }
+
+  if (tabs) {
+    return (
+      <Tabs tabs={tabs} activeTabName={activeTabName} onTabChange={onTabChange}>
+        {({ tabsBar, activeChildren }) => (
+          <Container {...rest}>
+            <CardHeader title={tabsBar} action={action} />
+            <Content>{activeChildren}</Content>
+          </Container>
+        )}
+      </Tabs>
+    )
+  }
 
   return (
     <Container {...rest}>
       {(title || action) && <CardHeader title={title} action={action} />}
-      {sections ? (
-        <SectionsContainer stackHorizontal={stackSections === "horizontal"}>{sections}</SectionsContainer>
-      ) : (
-        <Content>
-          {renderData(props as CardPropsWithChildrenOrData<T>)}
-          {children}
-        </Content>
-      )}
+      <Content>
+        {renderData(props as CardPropsWithChildrenOrData<T>)}
+        {children}
+      </Content>
     </Container>
   )
 }
+
+export default Card

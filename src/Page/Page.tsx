@@ -1,11 +1,10 @@
 import * as React from "react"
 import { Title } from ".."
+import Tabs, { Tab, tabsBarHeight } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps } from "../PageContent/PageContent"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-
-export type Tabs = Array<{ name: string; children: React.ReactNode; hidden?: boolean }>
 
 export interface BaseProps extends DefaultProps {
   /** Content of the page */
@@ -45,7 +44,7 @@ export interface PropsWithTabs extends BaseProps {
    * List of tabs
    * This will disable any children to render `tabs[i].component` instead
    */
-  tabs: Tabs
+  tabs: Tab[]
   /**
    * Active tab name
    *
@@ -71,38 +70,17 @@ const Container = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.background.lighter,
 }))
 
-const TitleBar = styled("div")(({ theme }) => ({
+const TitleBar = styled("div")`
+  background-color: ${({ theme }) => theme.color.primary};
+`
+
+const TitleContainer = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
   padding: theme.space.element,
   height: theme.titleHeight,
   fontWeight: theme.font.weight.medium,
-}))
-
-const tabsBarHeight = 43
-
-const TabsBar = styled("div")<{ condensed?: boolean }>(({ theme, condensed }) => ({
-  display: "flex",
-  alignItems: "flex-end",
-  height: condensed ? theme.titleHeight : tabsBarHeight,
-  backgroundColor: theme.color.primary,
-  ...(condensed ? { paddingLeft: 30 } : {}),
-}))
-
-const Tab = styled("div")<{ active?: boolean; condensed?: boolean }>(({ theme, active, condensed }) => ({
-  color: theme.color.white,
-  opacity: active ? 1 : 0.8,
-  textTransform: "uppercase",
-  fontFamily: theme.font.family.main,
-  fontSize: theme.font.size.small,
-  fontWeight: theme.font.weight.medium,
-  padding: `${(condensed ? theme.space.big : theme.space.element) / 2}px ${theme.space.element}px`,
-  borderBottom: active ? `2px solid ${theme.color.white}` : `2px solid transparent`,
-  ":hover": {
-    cursor: "pointer",
-    opacity: 1,
-  },
 }))
 
 const ViewContainer = styled("div")<{ isInTab?: boolean; isTitleCondensed?: boolean }>(
@@ -134,9 +112,7 @@ const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosit
   }),
 )
 
-const initialState = {
-  activeTab: 0,
-}
+const initialState = {}
 
 class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   public static defaultProps: Partial<PageProps> = {
@@ -147,79 +123,36 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
 
   public readonly state = initialState
 
-  private onTabClick(index: number, tabs: Tabs) {
-    this.setState({ activeTab: index })
-    if (this.props.onTabChange) {
-      this.props.onTabChange(tabs[index].name)
-    }
-  }
-
-  private getActiveTab(tabs: Tabs): number {
-    let activeTab: number
-    if (this.props.activeTabName) {
-      const index = tabs.findIndex(({ name }) => name === this.props.activeTabName)
-      activeTab = index === -1 ? 0 : index
-    } else {
-      activeTab = this.state.activeTab
-    }
-
-    return activeTab
-  }
-
-  private renderTabsBar() {
-    const tabs = this.props.tabs!
-    const activeTab = this.getActiveTab(tabs)
-    const { condensedTitle, onTabChange, activeTabName } = this.props
-
-    /**
-     * @todo remove this after we merge https://github.com/contiamo/operational-ui/pull/692
-     */
-    if (
-      process.env.NODE_ENV !== "production" &&
-      activeTabName &&
-      Boolean(onTabChange) &&
-      Boolean(tabs) &&
-      Boolean(tabs.find(tab => activeTabName.toLowerCase() === tab.name.toLowerCase())) &&
-      Boolean(!tabs.find(tab => activeTabName === tab.name))
-    ) {
-      console.warn(
-        "Operational UI Warning:\nThe Page component no longer lowercases the active tab name when passed back through its onTabChange callback.\nNames are passed exactly as they appear in the tab name field.",
-      )
-    }
-
-    return (
-      <TabsBar condensed={condensedTitle}>
-        {tabs.filter(({ hidden }) => !hidden).map(({ name }, i) => (
-          <Tab condensed={condensedTitle} key={i} active={i === activeTab} onClick={() => this.onTabClick(i, tabs)}>
-            {name}
-          </Tab>
-        ))}
-      </TabsBar>
-    )
-  }
-
   private renderPageWithTabs() {
     const tabs = this.props.tabs!
-    const activeTab = this.getActiveTab(tabs)
-    const currentTabChildren = tabs[activeTab].children
     const { title, actions, actionsPosition, condensedTitle } = this.props
 
     return (
-      <>
-        {title && (
+      <Tabs
+        tabs={tabs}
+        activeTabName={this.props.activeTabName}
+        onTabChange={this.props.onTabChange}
+        condensed={condensedTitle}
+        dark
+      >
+        {({ tabsBar, activeChildren }) => (
           <>
-            <TitleBar>
-              <Title color="white">{title}</Title>
-              {condensedTitle && this.renderTabsBar()}
-              <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
-            </TitleBar>
-            {!condensedTitle && this.renderTabsBar()}
+            {title && (
+              <TitleBar>
+                <TitleContainer>
+                  <Title color="white">{title}</Title>
+                  {condensedTitle && tabsBar}
+                  <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
+                </TitleContainer>
+                {!condensedTitle && tabsBar}
+              </TitleBar>
+            )}
+            <ViewContainer isInTab isTitleCondensed={condensedTitle}>
+              {activeChildren}
+            </ViewContainer>
           </>
         )}
-        <ViewContainer isInTab isTitleCondensed={condensedTitle}>
-          {currentTabChildren}
-        </ViewContainer>
-      </>
+      </Tabs>
     )
   }
 
@@ -230,8 +163,10 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
       <>
         {title && (
           <TitleBar>
-            <Title color="white">{title}</Title>
-            <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
+            <TitleContainer>
+              <Title color="white">{title}</Title>
+              <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
+            </TitleContainer>
           </TitleBar>
         )}
         <ViewContainer>

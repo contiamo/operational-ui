@@ -14,17 +14,7 @@ Simply add any content inside the card.
 ### With title & action
 
 ```jsx
-<Card
-  title="Functions"
-  action={
-    <div>
-      You can configure Functions in your bundle.yaml:
-      <a href="#">
-        Learn how <Icon name="ExternalLink" />
-      </a>
-    </div>
-  }
->
+<Card title="Functions" action={<Button condensed>Configure</Button>}>
   <p>Here is a bare card with custom padding.</p>
   <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
 </Card>
@@ -97,6 +87,33 @@ const myData = {
     deployedSha: val => "******",
     repo: val => val.split(".com")[1],
   }}
+/>
+```
+
+### With `tabs`
+
+Cards support tabs the same way (and with the exact same API) that `Page` components do. These tabs work both as stateful and controlled components, with a controlled one presented below:
+
+```jsx
+initialState = {
+  activeTab: "Tab 1",
+}
+;<Card
+  activeTabName={state.activeTab}
+  onTabChange={newTabName => {
+    setState(() => ({ activeTab: newTabName }))
+  }}
+  tabs={[
+    {
+      name: "Tab 1",
+      children: <Button>One kind of button</Button>,
+      icon: "User",
+    },
+    {
+      name: "Tab 2",
+      children: <Button>The other kind of button</Button>,
+    },
+  ]}
 />
 ```
 
