@@ -9,20 +9,21 @@ describe("Code", () => {
   it("Should render", () => {
     expect(
       render(
-        <Code syntax="json">
-          {`{
-  "properties": {
-    "startAt": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "endAt": {
-      "type": "string",
-      "format": "date-time"
-    }
-  }
-}`}
-        </Code>,
+        <Code
+          syntax="json"
+          src={{
+            properties: {
+              startAt: {
+                type: "string",
+                format: "date-time",
+              },
+              endAt: {
+                type: "string",
+                format: "date-time",
+              },
+            },
+          }}
+        />,
       ),
     ).toMatchSnapshot()
   })
