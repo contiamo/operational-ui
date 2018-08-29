@@ -4,21 +4,50 @@ Box for displaying formatted code snippets.
 
 #### JSON
 
+**Default**
+
 ```jsx
-<Code syntax="json">
-  {`{
-  "properties": {
-    "startAt": {
-      "type": "string",
-      "format": "date-time"
+<Code
+  syntax="json"
+  src={{
+    properties: {
+      startAt: {
+        type: "string",
+        format: "date-time",
+      },
+      endAt: {
+        type: "string",
+        format: "date-time",
+      },
     },
-    "endAt": {
-      "type": "string",
-      "format": "date-time"
-    }
-  }
-}`}
-</Code>
+  }}
+/>
+```
+
+**With custom collapse options**
+
+| Name             | Type                   | Default | Description                                                                                                                           |
+| :--------------- | :--------------------- | :------ | :------------------------------------------------------------------------------------------------------------------------------------ |
+| `collapsed`      | `boolean` or `integer` | `false` | When set to `true`, all nodes will be collapsed by default. Use an integer value to collapse at a particular depth.                   |
+| `shouldCollapse` | `(field)=>{}`          | `false` | Callback function to provide control over what objects and arrays should be collapsed by default. An object is passed to the callback |
+
+```jsx
+<Code
+  syntax="json"
+  src={{
+    properties: {
+      startAt: {
+        type: "string",
+        format: "date-time",
+      },
+      endAt: {
+        type: "string",
+        format: "date-time",
+      },
+    },
+  }}
+  collapsed={2}
+/>
 ```
 
 #### TypeScript
