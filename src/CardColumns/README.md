@@ -70,7 +70,15 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
       <Textarea code value="hello-word" />
     </CardColumn>
     <CardColumn title="Schema">
-      <Code syntax="json" src={{}} />
+      <Code
+        syntax="json"
+        src={{
+          items: {
+            type: "integer",
+          },
+          type: "array",
+        }}
+      />
     </CardColumn>
   </CardColumns>
   <CardColumns>
