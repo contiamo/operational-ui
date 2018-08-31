@@ -1,5 +1,7 @@
 # Operational UI Components
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/contiamo/operational-ui.svg)](https://greenkeeper.io/)
+
 The `@operational/components` package contains simple, stateless UI building blocks - your typical input fields, buttons, cards, grids, and so on. See [demo and docs](https://operational-ui.js.org/).
 
 ## Getting Started
