@@ -4,7 +4,7 @@ import styled from "../utils/styled"
 
 export interface TableProps extends DefaultProps {
   /** Table columns headings */
-  columns: string[]
+  columns: React.ReactNode[]
   /** Table rows as an array of cells */
   rows: Array<Array<string | React.ReactNode>>
   /** Called on row click */
@@ -102,7 +102,9 @@ const Table: React.SFC<TableProps> = ({
     <Container {...props}>
       <thead>
         <Tr>
-          {columns.map((title, i) => <Th key={i}>{title}</Th>)}
+          {columns.map((title, i) => (
+            <Th key={i}>{title}</Th>
+          ))}
           {Boolean(__experimentalRowActions || rowActionName) && <Th />}
         </Tr>
       </thead>
@@ -118,7 +120,9 @@ const Table: React.SFC<TableProps> = ({
                 }
               }}
             >
-              {row.map((data, j) => <Td key={j}>{data}</Td>)}
+              {row.map((data, j) => (
+                <Td key={j}>{data}</Td>
+              ))}
               {rowActionName && <Action>{rowActionName}</Action>}
               {__experimentalRowActions && <Actions>{__experimentalRowActions[i]}</Actions>}
             </Tr>
