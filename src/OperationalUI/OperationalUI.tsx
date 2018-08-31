@@ -34,6 +34,11 @@ export interface OperationalUIProps {
    * Dangerous: Disable the error boundary if explicitly set to false
    */
   errorBoundary?: boolean
+
+  /**
+   * Custom error handler on `componentDidCatch`
+   */
+  onError?: (error: Error) => void
   /**
    * Custom theme
    */
@@ -161,6 +166,9 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
 
   public componentDidCatch(error: Error) {
     this.setState({ error })
+    if (this.props.onError) {
+      this.props.onError(error)
+    }
   }
 
   public componentDidMount() {
