@@ -2,7 +2,7 @@ import * as React from "react"
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { DefaultProps } from "../types"
-import { darken, isModifiedEvent } from "../utils"
+import { darken, isModifiedEvent, isOutsideLink } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
@@ -47,7 +47,7 @@ const Breadcrumb: React.SFC<BreadcrumbProps> = ({ to, icon, onClick, ...props })
             if (onClick) {
               onClick(ev)
             }
-            if (!isModifiedEvent(ev) && to && ctx.pushState) {
+            if (!isModifiedEvent(ev) && ctx.pushState && to && !isOutsideLink(to)) {
               ev.preventDefault()
               ctx.pushState(to)
             }

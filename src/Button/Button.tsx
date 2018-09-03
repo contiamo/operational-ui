@@ -5,7 +5,7 @@ import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import Spinner from "../Spinner/Spinner"
 import { DefaultProps } from "../types"
-import { darken, isModifiedEvent, isWhite, readableTextColor } from "../utils"
+import { darken, isModifiedEvent, isOutsideLink, isWhite, readableTextColor } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 
 export interface ButtonProps extends DefaultProps {
@@ -146,7 +146,7 @@ const Button: React.SFC<ButtonProps> = ({
               onClick()
             }
 
-            if (!isModifiedEvent(ev) && to && ctx.pushState) {
+            if (!isModifiedEvent(ev) && ctx.pushState && to && !isOutsideLink(to)) {
               ev.preventDefault()
               ctx.pushState(to)
             }
