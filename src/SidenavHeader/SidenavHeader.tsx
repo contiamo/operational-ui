@@ -1,5 +1,4 @@
 import * as React from "react"
-
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { SidenavProps } from "../Sidenav/Sidenav"
@@ -194,6 +193,10 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
             {isActive && (
               <ItemsContainer>
                 {React.Children.map(props.children, child => {
+                  if (!child) {
+                    return child
+                  }
+
                   const typedChild = child as React.ReactElement<SidenavItemProps>
                   return { ...typedChild, props: { ...typedChild.props, compact } }
                 })}
