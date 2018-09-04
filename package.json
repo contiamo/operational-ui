@@ -97,7 +97,7 @@
     "auto-changelog": "^1.8.0",
     "danger": "^3.8.6",
     "danger-plugin-jest": "^1.1.0",
-    "enzyme": "^3.3.0",
+    "enzyme": "^3.5.1",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.0.0-beta6",
     "husky": "^0.14.3",
