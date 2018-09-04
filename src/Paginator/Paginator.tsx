@@ -83,12 +83,10 @@ const getRange = ({ page, itemCount, itemsPerPage }: PaginatorProps) => {
 const Container = styled("div")(({ theme }) => ({
   label: "paginator",
   marginTop: theme.space.element,
-  "& [role=button]": {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    minWidth: 25,
-  },
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  minWidth: 25,
 }))
 
 const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, onChange, ...props }) => {
