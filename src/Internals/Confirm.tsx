@@ -1,10 +1,10 @@
 import * as React from "react"
-import styled from "../utils/styled"
-
 import Button, { ButtonProps } from "../Button/Button"
+import styled from "../utils/styled"
 import ControlledModal from "./ControlledModal"
 
 const Actions = styled("div")({
+  marginTop: 20,
   alignSelf: "flex-end",
 })
 

@@ -117,6 +117,10 @@ const Container = styled("div")(({ theme }) => ({
 const Content = styled("div")`
   ${({ theme }) => `
     padding: ${theme.space.element}px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   `};
 `
 
