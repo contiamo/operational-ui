@@ -1,11 +1,12 @@
 import * as React from "react"
-import styled from "../utils/styled"
-
 import Button, { ButtonProps } from "../Button/Button"
+import styled from "../utils/styled"
 import ControlledModal from "./ControlledModal"
 
 const Actions = styled("div")({
-  alignSelf: "flex-end",
+  position: "absolute",
+  bottom: 20,
+  right: 20,
 })
 
 export interface ConfirmBodyProps<T> {
