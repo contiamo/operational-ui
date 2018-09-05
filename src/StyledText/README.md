@@ -32,7 +32,7 @@ Apply styling to HTML text elements. Specifically used to apply styling to React
   <h1>UC-OTE-CableFailure</h1>
   <h3>User (user.name@contiamo.com)</h3>
   <h3>last edit: july 13, 2018</h3>
-  <h3>updated for git and Datalab Jupyter Hub environment</h3>
+  <h4>updated for git and Datalab Jupyter Hub environment</h4>
   <p>
     start jupyter - <a href="#">https://jupyter.de</a>
   </p>
