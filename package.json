@@ -26,7 +26,7 @@
     "version": "auto-changelog && git add CHANGELOG.md",
     "precommit": "lint-staged",
     "danger:ci": "danger ci",
-    "danger": "run-p danger:*",
+    "danger": "[ ! -z $DANGER_GITHUB_API_TOKEN ] && run-p danger:* || echo \"Skipping Danger for External Contributor\"",
     "ci": "run-s test && run-p danger build"
   },
   "lint-staged": {
