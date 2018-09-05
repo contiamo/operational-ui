@@ -85,7 +85,6 @@ const Container = styled("div")(({ theme }) => ({
   marginTop: theme.space.element,
   display: "flex",
   alignItems: "center",
-  minWidth: 25,
 }))
 
 const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, onChange, ...props }) => {
