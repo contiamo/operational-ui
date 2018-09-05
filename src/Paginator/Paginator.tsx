@@ -85,7 +85,6 @@ const Container = styled("div")(({ theme }) => ({
   marginTop: theme.space.element,
   display: "flex",
   alignItems: "center",
-  justifyContent: "center",
   minWidth: 25,
 }))
 

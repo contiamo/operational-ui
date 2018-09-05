@@ -8,7 +8,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
     class="css-ar73w8-Messages"
   />
   <div
-    class="css-10vchk0-paginator"
+    class="css-1oba68g-paginator"
   >
     <button
       class="css-1bcwm3d-button"
