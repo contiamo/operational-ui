@@ -38,11 +38,6 @@ const Container = styled("div")(({ theme }) => ({
     alignItems: "center",
     textDecoration: "none",
   },
-  "& svg": {
-    marginLeft: theme.space.base,
-    width: 12,
-    height: 12,
-  },
 }))
 
 const ActionsContainer = styled("div")`

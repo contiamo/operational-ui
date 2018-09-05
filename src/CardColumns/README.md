@@ -86,7 +86,7 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
       <Button color="primary">Send Request</Button>
     </CardColumn>
     <CardColumn contentRight>
-      <Button color="grey" icon="ExternalLink">
+      <Button color="grey" icon="Open">
         curl/code
       </Button>
     </CardColumn>
@@ -119,7 +119,7 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
       <Button color="primary">Send Request</Button>
     </CardColumn>
     <CardColumn contentRight>
-      <Button color="grey" icon="ExternalLink">
+      <Button color="grey" icon="Open">
         curl/code
       </Button>
     </CardColumn>
