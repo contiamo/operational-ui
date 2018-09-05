@@ -125,7 +125,7 @@ const Button: React.SFC<ButtonProps> = ({
   loading,
   ...props
 }) => {
-  const ContainerComponent: React.ComponentType<any> = to ? ContainerLink : Container
+  const ContainerComponent = to ? ContainerLink : Container
   const iconProps = { name: icon!, size: 18, color: iconColor }
 
   return (

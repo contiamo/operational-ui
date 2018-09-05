@@ -14,7 +14,17 @@ Simply add any content inside the card.
 ### With title & action
 
 ```jsx
-<Card title="Functions" action={<Button condensed>Configure</Button>}>
+<Card
+  title="Functions"
+  action={
+    <>
+      Learn more at the
+      <SimpleLink right icon="Open" to="https://github.com">
+        Configuration page
+      </SimpleLink>
+    </>
+  }
+>
   <p>Here is a bare card with custom padding.</p>
   <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
 </Card>

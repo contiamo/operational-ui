@@ -49,7 +49,7 @@ Here is a simple usage example:
 ```jsx
 /* Always use condensed buttons in page actions */
 const actions = (
-  <Button condensed icon="ExternalLink" color="ghost">
+  <Button condensed icon="Open" color="ghost">
     Go somewhere else
   </Button>
 )
@@ -63,7 +63,7 @@ const actions = (
 ```jsx
 /* Always use condensed buttons in page actions */
 const actions = (
-  <Button condensed icon="ExternalLink" color="ghost">
+  <Button condensed icon="Open" color="ghost">
     Go somewhere else
   </Button>
 )
@@ -77,7 +77,7 @@ const actions = (
 ```jsx
 /* Always use condensed buttons in page actions */
 const actions = (
-  <Button condensed icon="ExternalLink" color="ghost">
+  <Button condensed icon="Open" color="ghost">
     Go somewhere else
   </Button>
 )
@@ -119,7 +119,7 @@ const TabContent = props => (
 ;<div style={{ height: 200 }}>
   <Page
     actions={
-      <Button condensed icon="ExternalLink" color="ghost">
+      <Button condensed icon="Open" color="ghost">
         Go somewhere else
       </Button>
     }
