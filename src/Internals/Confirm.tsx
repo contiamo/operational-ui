@@ -3,10 +3,12 @@ import Button, { ButtonProps } from "../Button/Button"
 import styled from "../utils/styled"
 import ControlledModal from "./ControlledModal"
 
-const Actions = styled("div")({
-  marginTop: 20,
-  alignSelf: "flex-end",
-})
+const Actions = styled("div")`
+  ${({ theme }) => `
+  margin-top: ${theme.space.element};
+  align-self: flex-end;
+`};
+`
 
 export interface ConfirmBodyProps<T> {
   setConfirmState: (state?: Pick<T, keyof T>) => void
