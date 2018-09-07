@@ -15,13 +15,13 @@ export interface ConfirmBodyProps<T> {
   confirmState: T
 }
 
-export interface ConfirmOptions<T = {}> {
+export interface ConfirmOptions<T> {
   title: React.ReactNode
   body: React.ReactNode | React.ComponentType<ConfirmBodyProps<T>>
   cancelButton?: React.ReactElement<ButtonProps>
   actionButton?: React.ReactElement<ButtonProps>
-  onConfirm?: (confirmState?: T) => void
-  onCancel?: (confirmState?: T) => void
+  onConfirm?: (confirmState: T) => void
+  onCancel?: (confirmState: T) => void
   state?: T
 }
 
@@ -48,14 +48,14 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
 
   private onCancelClick = () => {
     if (this.state.options.onCancel) {
-      this.state.options.onCancel(this.state.options.state)
+      this.state.options.onCancel(this.state.options.state as T)
     }
     this.closeConfirm()
   }
 
   private onActionClick = () => {
     if (this.state.options.onConfirm) {
-      this.state.options.onConfirm(this.state.options.state)
+      this.state.options.onConfirm(this.state.options.state as T)
     }
     this.closeConfirm()
   }

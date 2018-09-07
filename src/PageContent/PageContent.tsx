@@ -6,7 +6,7 @@ import styled from "../utils/styled"
 
 export interface ModalConfirmContext {
   modal: (modalOptions: ModalOptions) => void
-  confirm: (confirmOptions: ConfirmOptions) => void
+  confirm: <T = undefined>(confirmOptions: ConfirmOptions<T>) => void
 }
 
 export interface PageContentProps extends DefaultProps {
