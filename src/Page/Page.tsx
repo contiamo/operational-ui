@@ -4,6 +4,7 @@ import Tabs, { Tab, tabsBarHeight } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps } from "../PageContent/PageContent"
 import { DefaultProps } from "../types"
+import constants from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface BaseProps extends DefaultProps {
@@ -83,13 +84,43 @@ const TitleContainer = styled("div")(({ theme }) => ({
   fontWeight: theme.font.weight.medium,
 }))
 
-const ViewContainer = styled("div")<{ isInTab?: boolean; isTitleCondensed?: boolean }>(
-  ({ theme, isInTab, isTitleCondensed }) => ({
-    height: `calc(100% - ${isInTab && !isTitleCondensed ? theme.titleHeight + tabsBarHeight : theme.titleHeight}px)`,
-    overflow: "hidden",
-    position: "relative",
-  }),
-)
+/**
+ * This is a component that contains the contents of
+ * Page. It includes a bit of hack that prevents it
+ * from being scrolled at all: the component is meant
+ * to have a full-height and a hidden overflow, while
+ * its _children_ scroll, not it itself.
+ *
+ * In order to enforce this, we use the `onScroll` hack.
+ *
+ * More info: https://github.com/contiamo/operational-ui/pull/731
+ */
+class ViewContainer extends React.Component<{ isInTab?: boolean; isTitleCondensed?: boolean }> {
+  private ref = React.createRef<HTMLDivElement>()
+
+  public render() {
+    const { isInTab, isTitleCondensed } = this.props
+
+    return (
+      <div
+        style={{
+          height: `calc(100% - ${
+            isInTab && !isTitleCondensed ? constants.titleHeight + tabsBarHeight : constants.titleHeight
+          }px)`,
+          overflow: "hidden",
+          position: "relative",
+        }}
+        ref={this.ref}
+        onScroll={() => {
+          if (this.ref.current) {
+            this.ref.current.scrollTop = 0
+          }
+        }}
+        {...this.props}
+      />
+    )
+  }
+}
 
 const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosition"] }>(
   ({ theme, actionPosition }) => ({
@@ -114,6 +145,7 @@ const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosit
 
 const initialState = {}
 
+// tslint:disable-next-line:max-classes-per-file
 class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   public static defaultProps: Partial<PageProps> = {
     areas: "main",
