@@ -27,7 +27,6 @@ export type CodeProps = DefaultCodeProps | JSONCodeProps
 
 const Container = styled("div")`
   display: flex;
-  flex: 1;
   pre {
     flex: 1;
     display: flex;
@@ -36,6 +35,14 @@ const Container = styled("div")`
 
   code {
     flex: 1;
+  }
+
+  /**
+    * This is necessary because of odd arrow
+    * placements inside the JSON viewer.
+    */
+  .icon-container > span {
+    display: inline-flex;
   }
 `
 
