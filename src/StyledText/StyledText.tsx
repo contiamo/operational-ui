@@ -52,6 +52,11 @@ const Container = styled("div")(({ theme }) => ({
     fontWeight: theme.font.weight.regular,
     color: theme.color.text.default,
   },
+  "& blockquote": {
+    borderLeft: `2px solid ${theme.color.separators.default}`,
+    paddingLeft: theme.space.small,
+    marginLeft: theme.space.content,
+  },
 }))
 
 const StyledText: React.SFC<StyledTextProps> = ({ children }) => <Container>{children}</Container>
