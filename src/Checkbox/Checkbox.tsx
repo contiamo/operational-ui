@@ -58,7 +58,7 @@ const Label = styled("label")`
   user-select: none;
 
   font-size: 12px;
-  color: #545454;
+  color: ${props => props.theme.color.text.default};
 
   :hover {
     color: ${props => props.theme.color.primary};
@@ -77,7 +77,7 @@ const Label = styled("label")`
     left: 0;
     width: 20px;
     height: 20px;
-    border-radius: 2px;
+    border-radius: ${props => props.theme.borderRadius}px;
     background-color: #f2f2f2;
     border: solid 1px #c0c0c0;
   }
