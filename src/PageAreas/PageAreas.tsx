@@ -25,6 +25,14 @@ const Container = styled("div")<{ areas?: PageAreasProps["areas"]; fill_?: boole
     maxWidth: props.fill_ ? "none" : 1150,
     minWidth: 800,
     width: "100%",
+
+    "> div": {
+      height: "100%",
+    },
+
+    ":not(:last-child)": {
+      marginBottom: props.theme.space.element,
+    },
   }
 })
 
