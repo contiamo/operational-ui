@@ -55,6 +55,8 @@ const MenuContainer = styled("div")<{
   position: "absolute",
   top: embedChildrenInMenu ? 0 : "100%",
   left: 0,
+  maxHeight: 360,
+  overflow: "auto",
   boxShadow: theme.shadows.popup,
   zIndex: theme.zIndex.selectOptions,
   width: "fit-content",

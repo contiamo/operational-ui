@@ -26,3 +26,14 @@ const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
   {isOpen => <span>{`I am ${isOpen ? "open" : "closed"}`}</span>}
 </ContextMenu>
 ```
+
+#### Large number of items
+
+The context menu doesn't grow past a certain maximum height, but scrolls in its container instead.
+
+```jsx
+const menuItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(item => `Menu ${item}`)
+;<ContextMenu condensed items={menuItems} onClick={() => alert("clicked")}>
+  Many options may be selected here
+</ContextMenu>
+```
