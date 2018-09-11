@@ -48,14 +48,14 @@ Text areas detect a `cmd+enter` submit through an `onSubmit` prop, like so:
 ```jsx
 initialState = {
   value: "Type something",
-  isSubmitted: false,
+  submittedValue: undefined,
 }
 ;<>
   <Textarea
     value={state.value}
     onChange={newValue => setState(() => ({ value: newValue }))}
-    onSubmit={() => setState(() => ({ isSubmitted: true }))}
+    onSubmit={() => setState(prevState => ({ submittedValue: prevState.value }))}
   />
-  {state.isSubmitted ? <p>Submitted: {state.value}</p> : <p>Submit by hitting cmd+enter</p>}
+  {state.submittedValue ? <p>Submitted: {state.submittedValue}</p> : <p>Submit by hitting cmd+enter</p>}
 </>
 ```

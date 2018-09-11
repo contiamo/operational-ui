@@ -1,15 +1,9 @@
-/**
- * Having React typings in scope is necessary for styled components not using React directly, otherwise
- * botched module names like `import("eac")` show up in the .d.ts files due to a typescript compiler error.
- * See issue: https://github.com/emotion-js/emotion/issues/788
- * @todo remove this as soon as the issue is fixed.
- */
-// @ts-ignore
 import * as React from "react"
 
+import { isCmdEnter } from "../utils"
 import styled from "../utils/styled"
 
-export const Form = styled("form")(({ theme }) => ({
+const Container = styled("form")(({ theme }) => ({
   // Space between groups
   "> :not(:last-child)": {
     marginBottom: 34 - theme.space.small,
@@ -21,5 +15,21 @@ export const Form = styled("form")(({ theme }) => ({
     marginBottom: theme.space.small,
   },
 }))
+
+/**
+ * The `any` type variable is required to allow the `isCmdEnter` method
+ * to be re-used across different node types (both `HTMLFormElement` and `HTMLElement`
+ * cause issues here).
+ */
+const Form: React.SFC = (props: React.HTMLProps<any>) => (
+  <Container
+    {...props}
+    onKeyDown={(ev: React.KeyboardEvent<any>) => {
+      if (isCmdEnter(ev) && props.onSubmit) {
+        props.onSubmit(ev)
+      }
+    }}
+  />
+)
 
 export default Form

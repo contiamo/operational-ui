@@ -1,6 +1,7 @@
 import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
 import { DefaultProps } from "../types"
+import { isCmdEnter } from "../utils"
 import styled from "../utils/styled"
 
 import Hint from "../Hint/Hint"
@@ -166,10 +167,7 @@ class Textarea extends React.Component<TextareaProps, State> {
           resize={resize!}
           height={height}
           onKeyDown={(ev: React.KeyboardEvent<HTMLTextAreaElement>) => {
-            const crossBrowserSafeKeycode = ev.which || ev.keyCode
-            const modifierKey = ev.ctrlKey || ev.metaKey
-            const isCmdPlusEnter = crossBrowserSafeKeycode === 13 && modifierKey
-            if (isCmdPlusEnter && onSubmit) {
+            if (isCmdEnter(ev) && onSubmit) {
               onSubmit()
             }
           }}
