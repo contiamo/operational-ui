@@ -35,6 +35,8 @@ export interface TextareaProps extends DefaultProps {
   resize?: ResizeOptions
   /** Copy text to clipboard on click */
   copy?: boolean
+  /** cmd+enter submit handler */
+  onSubmit?: () => void
 }
 
 export interface State {
@@ -144,6 +146,7 @@ class Textarea extends React.Component<TextareaProps, State> {
       height,
       copy,
       onChange,
+      onSubmit,
       ...props
     } = this.props
     return (
@@ -162,6 +165,14 @@ class Textarea extends React.Component<TextareaProps, State> {
           isAction={Boolean(action || copy)}
           resize={resize!}
           height={height}
+          onKeyDown={(ev: React.KeyboardEvent<HTMLTextAreaElement>) => {
+            const crossBrowserSafeKeycode = ev.which || ev.keyCode
+            const modifierKey = ev.ctrlKey || ev.metaKey
+            const isCmdPlusEnter = crossBrowserSafeKeycode === 13 && modifierKey
+            if (isCmdPlusEnter && onSubmit) {
+              onSubmit()
+            }
+          }}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             if (!onChange) {
               return
