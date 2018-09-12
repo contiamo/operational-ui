@@ -1,6 +1,7 @@
 import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
 import { DefaultProps } from "../types"
+import { isCmdEnter } from "../utils"
 import styled from "../utils/styled"
 
 import Hint from "../Hint/Hint"
@@ -35,6 +36,8 @@ export interface TextareaProps extends DefaultProps {
   resize?: ResizeOptions
   /** Copy text to clipboard on click */
   copy?: boolean
+  /** cmd+enter submit handler */
+  onSubmit?: () => void
 }
 
 export interface State {
@@ -144,6 +147,7 @@ class Textarea extends React.Component<TextareaProps, State> {
       height,
       copy,
       onChange,
+      onSubmit,
       ...props
     } = this.props
     return (
@@ -162,6 +166,11 @@ class Textarea extends React.Component<TextareaProps, State> {
           isAction={Boolean(action || copy)}
           resize={resize!}
           height={height}
+          onKeyDown={(ev: React.KeyboardEvent<HTMLTextAreaElement>) => {
+            if (isCmdEnter(ev) && onSubmit) {
+              onSubmit()
+            }
+          }}
           onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
             if (!onChange) {
               return

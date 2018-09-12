@@ -10,6 +10,15 @@ export const isModifiedEvent = (event: any) => !!(event.metaKey || event.altKey 
 export const isOutsideLink = (url: string) => urlRegex({ exact: true }).test(url)
 
 /**
+ * Detect if a key event originated from a cmd+enter
+ */
+export const isCmdEnter = (ev: React.KeyboardEvent<HTMLElement>) => {
+  const crossBrowserSafeKeycode = ev.which || ev.keyCode
+  const modifierKey = ev.ctrlKey || ev.metaKey
+  return crossBrowserSafeKeycode === 13 && modifierKey
+}
+
+/**
  * Return the initials in 2 letters from a full name.
  *
  * @param name
