@@ -30,7 +30,7 @@ export interface CommunIconProps extends DefaultProps {
    * For OperationalUI brand icons, use the values `OperationalUI`, `Labs`, `Components`, `Blocks` and `Visualizations`
    */
   name: IconName
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent) => void
 }
 
 export interface OperationalUIIconProps extends CommunIconProps {
@@ -82,4 +82,5 @@ export default styled(Icon)<IconProps>(({ left, right, theme, onClick }) => ({
   marginLeft: right ? theme.space.small : 0,
   marginRight: left ? theme.space.small : 0,
   cursor: Boolean(onClick) ? "pointer" : "default",
+  transition: "fill .075s ease",
 }))

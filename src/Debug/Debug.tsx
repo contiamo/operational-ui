@@ -1,8 +1,10 @@
 import { title } from "case"
 import * as React from "react"
+import CopyToClipboard from "react-copy-to-clipboard"
 
 import Code from "../Code/Code"
 import Icon from "../Icon/Icon"
+import Tooltip from "../Tooltip/Tooltip"
 import styled from "../utils/styled"
 
 export interface DebugProps<T extends {}> {
@@ -14,10 +16,11 @@ export interface DebugProps<T extends {}> {
 
 export interface DebugState {
   isExpanded: boolean
+  copied: boolean
   top?: number
   left?: number
 
-  // Required for calcuating final drop position.
+  // Required for calculating final drop position.
   contextTop?: number
   contextLeft?: number
 }
@@ -95,8 +98,15 @@ function makeRowsFromObject<T>(inputValuesProp: DebugProps<T>["values"]) {
   })
 }
 
-const DebugToggler = styled(Icon)`
+const Icons = styled("div")`
+  position: relative;
   margin-left: auto;
+  display: flex;
+  align-items: center;
+
+  svg + svg {
+    margin-left: ${({ theme }) => theme.space.small}px;
+  }
 `
 
 const Title = styled("span")`
@@ -111,6 +121,7 @@ class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
 
   public state: DebugState = {
     isExpanded: this.props.expanded!,
+    copied: false,
   }
 
   public dragStart = (event: React.DragEvent) => {
@@ -143,9 +154,14 @@ class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
 
   private toggle = () => this.setState(({ isExpanded }) => ({ isExpanded: !isExpanded }))
 
+  private showCopyFeedback = () => {
+    this.setState(() => ({ copied: true }))
+    setTimeout(() => this.setState(() => ({ copied: false })), 1000)
+  }
+
   public render() {
     const { title: debugTitle, values } = this.props
-    const { isExpanded, top, left } = this.state
+    const { isExpanded, top, left, copied } = this.state
 
     return (
       <Container
@@ -161,7 +177,17 @@ class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
         className={this.props.className}
       >
         <Header onClick={() => this.toggle()}>
-          <Title>{debugTitle}</Title> <DebugToggler name={isExpanded ? "ChevronUp" : "ChevronDown"} />
+          <Title>{debugTitle}</Title>
+          <Icons>
+            <CopyToClipboard
+              text={JSON.stringify({ currentUrl: window.location.href, env: process.env, debug: values }, null, 2)}
+              onCopy={this.showCopyFeedback}
+            >
+              <Icon onClick={e => e.stopPropagation()} name="Copy" />
+            </CopyToClipboard>
+            <Icon name={isExpanded ? "ChevronUp" : "ChevronDown"} />
+            {copied && <Tooltip top>Copied</Tooltip>}
+          </Icons>
         </Header>
         {isExpanded && (
           <ConfigTable>
