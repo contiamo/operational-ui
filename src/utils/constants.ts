@@ -169,6 +169,7 @@ const zIndex = {
   formFieldError: 299,
   tooltip: 400,
   modal: 500,
+  debugViewer: 1000,
 }
 
 /**
