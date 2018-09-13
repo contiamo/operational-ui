@@ -9,7 +9,14 @@ module.exports = {
     {
       name: "Components",
       components: "src/**/*.tsx",
-      ignore: ["/**/*test*", "**/Internals/**", "**/utils/**", "**/Typography/**", "**/*.*.{ts,tsx}"],
+      ignore: [
+        "/**/*test*",
+        "**/Internals/**",
+        "**/utils/**",
+        "**/Typography/**",
+        "**/Debug/makeRows*",
+        "**/*.*.{ts,tsx}",
+      ],
     },
     { name: "Typography", components: "src/Typography/*.tsx" },
   ],
