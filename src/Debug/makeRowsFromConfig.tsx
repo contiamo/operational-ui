@@ -7,6 +7,7 @@ import { DebugProps } from "./Debug"
 
 const DebugJSONViewer = styled(Code)`
   color: white;
+  max-width: 50vw;
 `
 
 export function makeRowsFromConfig<T>(inputValuesProp: DebugProps<T>["values"]) {

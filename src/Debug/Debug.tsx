@@ -47,7 +47,16 @@ const Header = styled("div")`
   cursor: pointer;
 `
 
+const ConfigTableContainer = styled("div")`
+  overflow: auto;
+  max-height: 80vh;
+  -webkit-overflow-scrolling: touch;
+`
+
 const ConfigTable = styled("table")`
+  font: inherit;
+  color: inherit;
+
   td {
     padding: ${({ theme }) => `${theme.space.small}px ${theme.space.content}px`};
   }
@@ -149,9 +158,11 @@ class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
           </Icons>
         </Header>
         {isExpanded && (
-          <ConfigTable>
-            <tbody>{makeRowsFromConfig(values)}</tbody>
-          </ConfigTable>
+          <ConfigTableContainer>
+            <ConfigTable>
+              <tbody>{makeRowsFromConfig(values)}</tbody>
+            </ConfigTable>
+          </ConfigTableContainer>
         )}
       </Container>
     )
