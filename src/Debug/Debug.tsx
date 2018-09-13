@@ -5,7 +5,7 @@ import Code from "../Code/Code"
 import Icon from "../Icon/Icon"
 import styled from "../utils/styled"
 
-export interface DebugProps<T = {}> {
+export interface DebugProps<T> {
   title: string
   values: T
   className?: string
@@ -24,14 +24,14 @@ export interface DebugState {
 
 const Container = styled("div")`
   position: fixed;
-  bottom: 40px;
-  right: 40px;
+  bottom: ${({ theme }) => theme.space.element}px;
+  right: ${({ theme }) => theme.space.element}px;
   width: fit-content;
   display: grid;
   grid-template-rows: 40px auto;
   background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   color: white;
   z-index: ${({ theme }) => theme.zIndex.debugViewer};
 `
@@ -59,8 +59,8 @@ const ConfigTable = styled("table")`
   }
 `
 
-const makeRowsFromObject = (object: {}) =>
-  Object.entries(object).map(([key, value]) => {
+function makeRowsFromObject<T>(object: T) {
+  return Object.entries(object).map(([key, value]) => {
     const casedKey = title(key)
     if (value instanceof Object) {
       return (
@@ -93,6 +93,7 @@ const makeRowsFromObject = (object: {}) =>
       </tr>
     )
   })
+}
 
 const DebugToggler = styled(Icon)`
   margin-left: auto;
@@ -103,7 +104,7 @@ const Title = styled("span")`
   margin-right: ${({ theme }) => theme.space.element}px;
 `
 
-class Debug<T = {}> extends React.Component<DebugProps<T>, DebugState> {
+class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
   public static defaultProps = {
     expanded: false,
   }
