@@ -3,8 +3,8 @@ A component that displays information intended to convey meaningful information 
 ## Usage
 
 ```jsx
-const styled = require("react-emotion")
-const UnfloatedDebug = styled.default(Debug)({
+const { styled } = require("../../")
+const UnfloatedDebug = styled(Debug)({
   /**
    * Remove the following line to see the _actual_
    * behavior, with drag & drop.
