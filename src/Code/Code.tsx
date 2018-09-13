@@ -21,12 +21,12 @@ interface JSONCodeProps extends DefaultProps {
   src: ReactJsonViewProps["src"]
   collapsed?: ReactJsonViewProps["collapsed"]
   shouldCollapse?: ReactJsonViewProps["shouldCollapse"]
-  codeTheme?: Partial<typeof codeTheme>
+  codeTheme?: Partial<typeof defaultCodeTheme>
 }
 
 export type CodeProps = DefaultCodeProps | JSONCodeProps
 
-const codeTheme = {
+const defaultCodeTheme = {
   /**
    * Default Background
    */
@@ -164,7 +164,7 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "codeTheme" | "collapsed" | 
       padding: `${constants.space.small}px`,
       flex: 1,
     }}
-    theme={{ ...codeTheme, ...props.codeTheme } || codeTheme}
+    theme={{ ...defaultCodeTheme, ...props.codeTheme } || defaultCodeTheme}
     displayDataTypes={false}
     enableClipboard={false}
     name={false}
