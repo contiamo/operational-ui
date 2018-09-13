@@ -19,7 +19,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
       class="css-1bcwm3d-button"
     >
       <svg
-        class="css-1uz51xv"
+        class="css-qdx4tx"
         fill="currentColor"
         height="11"
         viewBox="0 0 360 360"
@@ -48,7 +48,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
         next
       </span>
       <svg
-        class="css-1uz51xv"
+        class="css-qdx4tx"
         fill="currentColor"
         height="11"
         viewBox="0 0 360 360"
