@@ -62,7 +62,7 @@ const ConfigTable = styled("table")`
   }
 `
 
-function makeRowsFromObject<T>(inputValuesProp: DebugProps<T>["values"]) {
+export function makeRowsFromObject<T>(inputValuesProp: DebugProps<T>["values"]) {
   return Object.entries(inputValuesProp).map(([key, value]) => {
     const casedKey = title(key)
     if (value instanceof Object) {
