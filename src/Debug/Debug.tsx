@@ -1,11 +1,10 @@
-import { title } from "case"
 import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
 
-import Code from "../Code/Code"
 import Icon from "../Icon/Icon"
 import Tooltip from "../Tooltip/Tooltip"
 import styled from "../utils/styled"
+import { makeRowsFromConfig } from "./makeRowsFromConfig"
 
 export interface DebugProps<T extends {}> {
   title: string
@@ -48,10 +47,6 @@ const Header = styled("div")`
   cursor: pointer;
 `
 
-const DebugJSONViewer = styled(Code)`
-  color: white;
-`
-
 const ConfigTable = styled("table")`
   td {
     padding: ${({ theme }) => `${theme.space.small}px ${theme.space.content}px`};
@@ -61,42 +56,6 @@ const ConfigTable = styled("table")`
     font-weight: ${({ theme }) => theme.font.weight.medium};
   }
 `
-
-export function makeRowsFromObject<T>(inputValuesProp: DebugProps<T>["values"]) {
-  return Object.entries(inputValuesProp).map(([key, value]) => {
-    const casedKey = title(key)
-    if (value instanceof Object) {
-      return (
-        <React.Fragment key={key}>
-          <tr>
-            <td colSpan={2}>{casedKey}</td>
-          </tr>
-          <tr>
-            <td colSpan={2}>
-              <DebugJSONViewer
-                codeTheme={{
-                  base00: "transparent",
-                  base02: "transparent",
-                  base04: "cyan",
-                  base07: "orange",
-                  base09: "white",
-                }}
-                syntax="json"
-                src={value}
-              />
-            </td>
-          </tr>
-        </React.Fragment>
-      )
-    }
-    return (
-      <tr key={key}>
-        <td>{casedKey}</td>
-        <td>{value}</td>
-      </tr>
-    )
-  })
-}
 
 const Icons = styled("div")`
   position: relative;
@@ -191,7 +150,7 @@ class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
         </Header>
         {isExpanded && (
           <ConfigTable>
-            <tbody>{makeRowsFromObject(values)}</tbody>
+            <tbody>{makeRowsFromConfig(values)}</tbody>
           </ConfigTable>
         )}
       </Container>

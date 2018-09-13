@@ -1,8 +1,8 @@
-import { makeRowsFromObject } from "../Debug"
+import { makeRowsFromConfig } from "../makeRowsFromConfig"
 
 describe("Debug Viewer", () => {
   it("Should handle no data well", () => {
-    expect(makeRowsFromObject({})).toMatchInlineSnapshot(`Array []`)
+    expect(makeRowsFromConfig({})).toMatchInlineSnapshot(`Array []`)
   })
 
   it("Should create table rows from config values", () => {
@@ -12,7 +12,7 @@ describe("Debug Viewer", () => {
       loves: "Everyone",
     }
 
-    expect(makeRowsFromObject(myConfig)).toMatchInlineSnapshot(`
+    expect(makeRowsFromConfig(myConfig)).toMatchInlineSnapshot(`
 Array [
   <tr>
     <td>
@@ -49,7 +49,7 @@ Array [
       loves: "Everyone",
     }
 
-    expect(makeRowsFromObject(myConfig)).toMatchInlineSnapshot(`
+    expect(makeRowsFromConfig(myConfig)).toMatchInlineSnapshot(`
 Array [
   <React.Fragment>
     <tr>
