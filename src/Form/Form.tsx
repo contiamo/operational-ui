@@ -21,7 +21,7 @@ const Container = styled("form")(({ theme }) => ({
  * to be re-used across different node types (both `HTMLFormElement` and `HTMLElement`
  * cause issues here).
  */
-const Form: React.SFC = (props: React.HTMLProps<any>) => (
+const Form: React.SFC<typeof Container> = (props: React.HTMLProps<any>) => (
   <Container
     {...props}
     onKeyDown={(ev: React.KeyboardEvent<any>) => {
