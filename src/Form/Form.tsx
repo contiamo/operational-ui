@@ -21,10 +21,10 @@ const Container = styled("form")(({ theme }) => ({
  * to be re-used across different node types (both `HTMLFormElement` and `HTMLElement`
  * cause issues here).
  */
-const Form: React.SFC<typeof Container> = (props: React.HTMLProps<any>) => (
+const Form: React.SFC<React.FormHTMLAttributes<{}>> = props => (
   <Container
     {...props}
-    onKeyDown={(ev: React.KeyboardEvent<any>) => {
+    onKeyDown={(ev: React.KeyboardEvent<HTMLFormElement>) => {
       if (isCmdEnter(ev) && props.onSubmit) {
         props.onSubmit(ev)
       }
