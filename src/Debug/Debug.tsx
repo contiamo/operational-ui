@@ -5,7 +5,7 @@ import Code from "../Code/Code"
 import Icon from "../Icon/Icon"
 import styled from "../utils/styled"
 
-export interface DebugProps<T> {
+export interface DebugProps<T extends {}> {
   title: string
   values: T
   className?: string
