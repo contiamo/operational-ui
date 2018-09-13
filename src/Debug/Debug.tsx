@@ -45,7 +45,7 @@ const Header = styled("div")`
   cursor: pointer;
 `
 
-const DebugCode = styled(Code)`
+const DebugJSONViewer = styled(Code)`
   color: white;
 `
 
@@ -59,8 +59,8 @@ const ConfigTable = styled("table")`
   }
 `
 
-function makeRowsFromObject<T>(object: T) {
-  return Object.entries(object).map(([key, value]) => {
+function makeRowsFromObject<T>(inputValuesProp: DebugProps<T>["values"]) {
+  return Object.entries(inputValuesProp).map(([key, value]) => {
     const casedKey = title(key)
     if (value instanceof Object) {
       return (
@@ -70,7 +70,7 @@ function makeRowsFromObject<T>(object: T) {
           </tr>
           <tr>
             <td colSpan={2}>
-              <DebugCode
+              <DebugJSONViewer
                 codeTheme={{
                   base00: "transparent",
                   base02: "transparent",
