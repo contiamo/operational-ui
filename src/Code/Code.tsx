@@ -21,9 +21,95 @@ interface JSONCodeProps extends DefaultProps {
   src: ReactJsonViewProps["src"]
   collapsed?: ReactJsonViewProps["collapsed"]
   shouldCollapse?: ReactJsonViewProps["shouldCollapse"]
+  codeTheme?: Partial<typeof codeTheme>
 }
 
 export type CodeProps = DefaultCodeProps | JSONCodeProps
+
+const codeTheme = {
+  /**
+   * Default Background
+   */
+
+  base00: "rgba(20, 153, 206, 0.05)", // background color
+  /**
+   * Lighter Background (Used for status bars)
+   */
+
+  base01: "rgb(245, 245, 245)",
+  /**
+   * Selection Background
+   */
+
+  base02: "rgb(235, 235, 235)",
+  /**
+   * Comments, Invisibles, Line Highlighting
+   */
+
+  base03: "#93a1a1",
+  /**
+   * Descriptor (1 item, 2 items)
+   */
+
+  base04: "rgba(0, 0, 0, 0.3)",
+  /**
+   * Default Foreground, Caret, Delimiters, Operators
+   */
+
+  base05: "#586e75",
+  /**
+   * Light Foreground (Not often used)
+   */
+
+  base06: "#073642",
+  /**
+   * Keys and curlies
+   */
+
+  base07: "#002b36",
+  /**
+   * Variables, XML Tags, Markup Link Text, Markup Lists, Diff Deleted
+   */
+
+  base08: "#d33682",
+  /**
+   * Values:
+   * `{ key: "value" }`
+   *
+   */
+
+  base09: "#cb4b16",
+  /**
+   * Classes, Markup Bold, Search Text Background
+   */
+
+  base0A: "#dc322f",
+  /**
+   * Strings, Inherited Class, Markup Code, Diff Inserted
+   */
+
+  base0B: "#859900",
+  /**
+   * Support, Regular Expressions, Escape Characters, Markup Quotes
+   */
+
+  base0C: "#6c71c4",
+  /**
+   * Functions, Methods, Attribute IDs, Headings
+   */
+
+  base0D: "#586e75",
+  /**
+   * Keywords, Storage, Selector, Markup Italic, Diff Changed
+   */
+
+  base0E: "#2aa198",
+  /**
+   * Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
+   */
+
+  base0F: "#268bd2",
+}
 
 const Container = styled("div")`
   display: flex;
@@ -70,7 +156,7 @@ const StyledHighlight = styled(Highlight)(({ theme }) => {
   }
 })
 
-const StyledReactJson = (props: Pick<JSONCodeProps, "collapsed" | "src" | "shouldCollapse">) => (
+const StyledReactJson = (props: Pick<JSONCodeProps, "codeTheme" | "collapsed" | "src" | "shouldCollapse">) => (
   <ReactJson
     {...props}
     style={{
@@ -80,25 +166,7 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "collapsed" | "src" | "shoul
       padding: `${constants.space.small}px`,
       flex: 1,
     }}
-    theme={{
-      /** Base16 theme - http://chriskempson.com/projects/base16/ */
-      base00: "rgba(20, 153, 206, 0.05)", // background color
-      base01: "rgb(245, 245, 245)",
-      base02: "rgb(235, 235, 235)",
-      base03: "#93a1a1",
-      base04: "rgba(0, 0, 0, 0.3)",
-      base05: "#586e75",
-      base06: "#073642",
-      base07: "#002b36",
-      base08: "#d33682",
-      base09: "#cb4b16",
-      base0A: "#dc322f",
-      base0B: "#859900",
-      base0C: "#6c71c4",
-      base0D: "#586e75",
-      base0E: "#2aa198",
-      base0F: "#268bd2",
-    }}
+    theme={{ ...codeTheme, ...props.codeTheme } || codeTheme}
     displayDataTypes={false}
     enableClipboard={false}
     name={false}
@@ -108,7 +176,12 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "collapsed" | "src" | "shoul
 const Code: React.SFC<CodeProps> = ({ children, ...props }) => (
   <Container {...omit(props, ["src", "collapsed", "shouldCollapse", "syntax"])}>
     {props.syntax === "json" ? (
-      <StyledReactJson src={props.src} collapsed={props.collapsed} shouldCollapse={props.shouldCollapse} />
+      <StyledReactJson
+        codeTheme={props.codeTheme}
+        src={props.src}
+        collapsed={props.collapsed}
+        shouldCollapse={props.shouldCollapse}
+      />
     ) : (
       <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{children}</StyledHighlight>
     )}

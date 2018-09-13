@@ -69,6 +69,7 @@
     ]
   },
   "dependencies": {
+    "case": "^1.5.5",
     "create-emotion-styled": "^9.2.6",
     "emotion": "^9.2.5",
     "emotion-theming": "^9.2.6",
