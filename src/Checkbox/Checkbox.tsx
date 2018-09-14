@@ -7,16 +7,16 @@ import styled from "../utils/styled"
 const toggleCheckboxAnimation = keyframes`
   0% {
     opacity: 0;
-    transform: translateY(-50%) scale(0) rotate(45deg);
+    transform: scale(0.6) rotate(45deg);
   }
 
   70% {
     opacity: 1;
-    transform: translateY(-50%) scale(1.2) rotate(45deg);
+    transform: scale(1.1) rotate(45deg);
   }
   
   100% {
-    transform: translateY(-50%) scale(1) rotate(45deg);
+    transform: scale(1) rotate(45deg);
   }
 `
 
@@ -29,12 +29,12 @@ const Input = styled("input")`
     content: "";
     display: block;
     width: 5px;
-    height: 11px;
+    height: 10px;
     position: absolute;
     left: 7px;
     margin: 0 auto;
-    top: 48%;
-    transform: translateY(-50%) rotate(45deg);
+    top: 2px;
+    transform: rotate(45deg);
     border-right: 2px solid ${props => props.theme.color.primary};
     border-bottom: 2px solid ${props => props.theme.color.primary};
     cursor: pointer;
@@ -53,7 +53,7 @@ const Label = styled("label")`
   height: 20px;
   display: block;
   margin-bottom: 10px;
-  padding-left: 30px;
+  padding-left: 32px;
   line-height: 20px;
   user-select: none;
 
@@ -75,8 +75,8 @@ const Label = styled("label")`
     display: block;
     top: 0;
     left: 0;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: ${props => props.theme.borderRadius}px;
     background-color: #f2f2f2;
     border: solid 1px #c0c0c0;
