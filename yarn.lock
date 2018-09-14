@@ -23,6 +23,13 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@babel/polyfill@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.0.0.tgz#c8ff65c9ec3be6a1ba10113ebd40e8750fb90bff"
+  dependencies:
+    core-js "^2.5.7"
+    regenerator-runtime "^0.11.1"
+
 "@babel/types@7.0.0-beta.51":
   version "7.0.0-beta.51"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.0.0-beta.51.tgz#d802b7b543b5836c778aa691797abf00f3d97ea9"
@@ -1147,7 +1154,7 @@ babel-plugin-transform-strict-mode@^6.24.1:
     babel-runtime "^6.22.0"
     babel-types "^6.24.1"
 
-babel-polyfill@^6.23.0, babel-polyfill@^6.26.0:
+babel-polyfill@^6.26.0:
   version "6.26.0"
   resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.26.0.tgz#379937abc67d7895970adc621f284cd966cf2153"
   dependencies:
@@ -2183,7 +2190,7 @@ core-js@^1.0.0:
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
 
-core-js@^2.4.0, core-js@^2.5.0:
+core-js@^2.4.0, core-js@^2.5.0, core-js@^2.5.7:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.7.tgz#f972608ff0cead68b841a16a932d0b183791814e"
 
@@ -2534,12 +2541,12 @@ danger-plugin-jest@^1.1.0:
   optionalDependencies:
     serve "^5.1.5"
 
-danger@^3.8.6:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/danger/-/danger-3.9.0.tgz#41e6257fcfd4b92dcde16a47c96f5731931b5108"
+danger@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/danger/-/danger-4.0.1.tgz#e07c213b44fe9768534392ae4f2f2b0ba6121018"
   dependencies:
+    "@babel/polyfill" "^7.0.0"
     "@octokit/rest" "^15.9.5"
-    babel-polyfill "^6.23.0"
     chalk "^2.3.0"
     commander "^2.13.0"
     debug "^3.1.0"
@@ -8009,7 +8016,7 @@ regenerator-runtime@^0.10.5:
   version "0.10.5"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.10.5.tgz#336c3efc1220adcedda2c9fab67b5a7955a33658"
 
-regenerator-runtime@^0.11.0:
+regenerator-runtime@^0.11.0, regenerator-runtime@^0.11.1:
   version "0.11.1"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
 
