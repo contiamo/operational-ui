@@ -96,7 +96,7 @@
     "@types/tinycolor2": "^1.4.0",
     "@types/url-regex": "^4.1.0",
     "auto-changelog": "^1.8.0",
-    "danger": "^3.8.6",
+    "danger": "^4.0.1",
     "danger-plugin-jest": "^1.1.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
