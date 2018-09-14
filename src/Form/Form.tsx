@@ -16,11 +16,6 @@ const Container = styled("form")(({ theme }) => ({
   },
 }))
 
-/**
- * The `any` type variable is required to allow the `isCmdEnter` method
- * to be re-used across different node types (both `HTMLFormElement` and `HTMLElement`
- * cause issues here).
- */
 const Form: React.SFC<React.FormHTMLAttributes<{}>> = props => (
   <Container
     {...props}

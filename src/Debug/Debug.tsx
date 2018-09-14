@@ -148,7 +148,7 @@ class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
           <Title>{debugTitle}</Title>
           <Icons>
             <CopyToClipboard
-              text={JSON.stringify({ currentUrl: window.location.href, env: process.env, debug: values }, null, 2)}
+              text={JSON.stringify({ currentUrl: window.location.href, debug: values }, null, 2)}
               onCopy={this.showCopyFeedback}
             >
               <Icon onClick={e => e.stopPropagation()} name="Copy" />
