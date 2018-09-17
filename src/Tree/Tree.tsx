@@ -27,7 +27,7 @@ const TreeContainer = styled("div")`
 `
 
 const TreeChildren = styled("div")`
-  margin-left: 28px;
+  margin-left: 16px;
 `
 
 const TreeItem = styled("div")<{
