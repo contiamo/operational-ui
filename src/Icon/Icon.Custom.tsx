@@ -18,6 +18,12 @@ export const Admin: React.SFC<IconProps> = ({ size, color, ...props }) => (
   </svg>
 )
 
+export const Building: React.SFC<IconProps> = ({ size, color, ...props }) => (
+  <svg viewBox="0 0 360 360" fill={color} width={size} height={size} {...props}>
+    <path d="M280,340.187l-80,0l0,-60l-40,0l0,60l-80,0l0,-320l200,0l0,320Zm-20,-80l0,-40l-40,0l0,40l40,0Zm-60,0l0,-40l-40,0l0,40l40,0Zm-60,0l0,-40l-40,0l0,40l40,0Zm120,-60l0,-40l-40,0l0,40l40,0Zm-60,0l0,-40l-40,0l0,40l40,0Zm-60,0l0,-40l-40,0l0,40l40,0Zm0,-60l0,-40l-40,0l0,40l40,0Zm60,0l0,-40l-40,0l0,40l40,0Zm60,0l0,-40l-40,0l0,40l40,0Zm-120,-60l0,-40l-40,0l0,40l40,0Zm120,0l0,-40l-40,0l0,40l40,0Zm-60,0l0,-40l-40,0l0,40l40,0Z" />
+  </svg>
+)
+
 export const Bundle: React.SFC<IconProps> = ({ size, color, ...props }) => (
   <svg viewBox="0 0 360 360" fill={color} width={size} height={size} {...props}>
     <path d="M320,160.187l0,160l-280,0l0,-160l0,-100l280,0l0,100Zm-40,0.001l-200,0l0,120l200,0l0,-120Zm-60,60l-80,0l0,-40l80,0l0,40Z" />
