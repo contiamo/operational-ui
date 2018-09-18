@@ -11,7 +11,7 @@ const Actions = styled("div")`
 `
 
 export interface ConfirmBodyProps<T> {
-  setConfirmState: (state?: Pick<T, keyof T>) => void
+  setConfirmState: (state?: Partial<T>) => void
   confirmState: T
 }
 
