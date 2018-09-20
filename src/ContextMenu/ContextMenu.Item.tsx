@@ -1,15 +1,25 @@
 import * as React from "react"
-import Icon from "../Icon/Icon"
+import Icon, { IconProps } from "../Icon/Icon"
 import { darken } from "../utils"
+import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
-import { ContextMenuItem } from "./ContextMenu"
+
+type StringOrItem = string | IContextMenuItem
 
 export interface Props {
   condensed?: boolean
   width?: string | number
   onClick?: () => void
   align?: "left" | "right"
-  item: string | ContextMenuItem
+  item: StringOrItem
+}
+
+export interface IContextMenuItem {
+  label: string
+  description?: string
+  icon?: IconProps["name"]
+  iconColor?: keyof OperationalStyleConstants["color"]
+  onClick?: (item: StringOrItem) => void
 }
 
 const Container = styled("div")<Props>(({ align, theme, onClick, condensed, width, item }) => ({
@@ -64,7 +74,7 @@ const Description = styled("p")`
 `
 
 const ContentContainer = styled("div")`
-  line-height: 1.4;
+  line-height: ${({ theme }) => theme.font.lineHeight};
   padding: ${({ theme }) => theme.space.content}px 0;
   width: calc(100% - ${({ theme }) => theme.space.content}px);
 `
@@ -73,19 +83,20 @@ const ContextMenuIcon = styled(Icon)`
   flex: 0 0 auto;
 `
 
-const Content: React.SFC<any> = ({ children }) => {
-  if (typeof children === "string") {
-    return children
+const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
+  // Fragments are required to hint to the compiler that this is valid types.
+  if (typeof value === "string") {
+    return <>{value}</>
   }
 
-  if (!children.description) {
-    return children.label
+  if (typeof value.description === "undefined") {
+    return <>{value.label}</>
   }
 
   return (
     <ContentContainer>
-      <Title>{children.label}</Title>
-      <Description>{children.description}</Description>
+      <Title>{value.label}</Title>
+      <Description>{value.description}</Description>
     </ContentContainer>
   )
 }
@@ -94,7 +105,7 @@ const ContextMenuItem: React.SFC<Props> = props => (
   <Container {...props} condensed={props.condensed}>
     {typeof props.item !== "string" &&
       props.item.icon && <ContextMenuIcon color={props.item.iconColor} left name={props.item.icon} />}
-    <Content>{props.item}</Content>
+    <Content value={props.item} />
   </Container>
 )
 
