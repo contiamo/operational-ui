@@ -2,11 +2,16 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
+import { IconProps } from "../Icon/Icon"
+import { OperationalStyleConstants } from "../utils/constants"
 import ContextMenuItem from "./ContextMenu.Item"
 
-export interface Item {
+export interface ContextMenuItem {
   label: string
-  onClick?: (item: string | Item) => void
+  description?: string
+  icon?: IconProps["name"]
+  iconColor?: keyof OperationalStyleConstants["color"]
+  onClick?: (item: string | ContextMenuItem) => void
 }
 
 export interface ContextMenuProps extends DefaultProps {
@@ -16,13 +21,13 @@ export interface ContextMenuProps extends DefaultProps {
   /** Condensed mode */
   condensed?: boolean
   /** onClick method for all menu items */
-  onClick?: (item?: string | Item) => void
+  onClick?: (item?: string | ContextMenuItem) => void
   /** Handles click events anywhere outside the context menu container, including menu items. */
   onOutsideClick?: () => void
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
   keepOpenOnItemClick?: boolean
   /** Menu items */
-  items: Array<string | Item>
+  items: Array<string | ContextMenuItem>
   /** Alignment */
   align?: "left" | "right"
   /** Custom width */
@@ -63,10 +68,6 @@ const MenuContainer = styled("div")<{
   display: isExpanded ? "block" : "none",
 }))
 
-const StyledContextMenuItem = styled(ContextMenuItem)<{ align: ContextMenuProps["align"] }>(({ align }) => ({
-  textAlign: align,
-}))
-
 class ContextMenu extends React.Component<ContextMenuProps, State> {
   public state = {
     isOpen: false,
@@ -103,18 +104,17 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
         {renderedChildren}
         <MenuContainer isExpanded={open || this.state.isOpen} embedChildrenInMenu={this.props.embedChildrenInMenu}>
           {embedChildrenInMenu && renderedChildren}
-          {items.map((item: string | Item, index: number) => {
+          {items.map((item: string | ContextMenuItem, index: number) => {
             const clickHandler = (typeof item !== "string" && item.onClick) || this.props.onClick
             return (
-              <StyledContextMenuItem
+              <ContextMenuItem
                 onClick={clickHandler && (() => clickHandler(item))}
                 key={`contextmenu-${index}`}
                 condensed={condensed}
                 align={align}
-                width={width}
-              >
-                {typeof item === "string" ? item : item.label}
-              </StyledContextMenuItem>
+                width={width || "100%"}
+                item={item}
+              />
             )
           })}
         </MenuContainer>
