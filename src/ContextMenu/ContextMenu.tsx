@@ -2,17 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-import { IconProps } from "../Icon/Icon"
-import { OperationalStyleConstants } from "../utils/constants"
-import ContextMenuItem from "./ContextMenu.Item"
-
-export interface ContextMenuItem {
-  label: string
-  description?: string
-  icon?: IconProps["name"]
-  iconColor?: keyof OperationalStyleConstants["color"]
-  onClick?: (item: string | ContextMenuItem) => void
-}
+import ContextMenuItem, { IContextMenuItem } from "./ContextMenu.Item"
 
 export interface ContextMenuProps extends DefaultProps {
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
@@ -21,13 +11,13 @@ export interface ContextMenuProps extends DefaultProps {
   /** Condensed mode */
   condensed?: boolean
   /** onClick method for all menu items */
-  onClick?: (item?: string | ContextMenuItem) => void
+  onClick?: (item?: string | IContextMenuItem) => void
   /** Handles click events anywhere outside the context menu container, including menu items. */
   onOutsideClick?: () => void
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
   keepOpenOnItemClick?: boolean
   /** Menu items */
-  items: Array<string | ContextMenuItem>
+  items: Array<string | IContextMenuItem>
   /** Alignment */
   align?: "left" | "right"
   /** Custom width */
@@ -98,13 +88,16 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
 
     const { items, condensed, children, open, embedChildrenInMenu, align, width, ...props } = this.props
 
-    const renderedChildren = typeof children === "function" ? children(this.state.isOpen) : children
+    const renderedChildren =
+      typeof children === "function"
+        ? (children as ((isActive: boolean) => React.ReactNode))(this.state.isOpen)
+        : children
     return (
       <Container {...props} align={align} onClick={this.toggle}>
         {renderedChildren}
         <MenuContainer isExpanded={open || this.state.isOpen} embedChildrenInMenu={this.props.embedChildrenInMenu}>
           {embedChildrenInMenu && renderedChildren}
-          {items.map((item: string | ContextMenuItem, index: number) => {
+          {items.map((item: string | IContextMenuItem, index: number) => {
             const clickHandler = (typeof item !== "string" && item.onClick) || this.props.onClick
             return (
               <ContextMenuItem
