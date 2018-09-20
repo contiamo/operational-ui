@@ -84,7 +84,7 @@ const ContextMenuIcon = styled(Icon)`
 `
 
 const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
-  // Fragments are required to hint to the compiler that this is valid types.
+  // Fragments are required to hint to the compiler that these are valid types.
   if (typeof value === "string") {
     return <>{value}</>
   }
