@@ -5,7 +5,7 @@ import { readableTextColor } from "../utils"
 import styled from "../utils/styled"
 
 export interface SidenavProps extends DefaultProps {
-  children: React.ReactElement<any> | Array<React.ReactElement<any>>
+  children: React.ReactElement<any> | Array<React.ReactElement<any> | boolean>
   /** Show the sidebar in compact mode */
   compact?: boolean
 }
@@ -35,6 +35,9 @@ const Container = styled("div")<{ compact?: SidenavProps["compact"] }>(({ theme,
 const Sidenav: React.SFC<SidenavProps> = ({ children, ...props }) => (
   <Container {...props}>
     {React.Children.map(children, child => {
+      if (!child) {
+        return
+      }
       // see line 8 for the safety of this assertion
       const childElement = child as React.ReactElement<any>
       return {
