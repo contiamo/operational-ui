@@ -25,7 +25,7 @@ export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstant
 })
 
 export const Label = styled("label")<{ fullWidth?: boolean; left?: boolean }>(({ fullWidth, theme, left }) => ({
-  display: "block",
+  display: "inline-block",
   position: "relative",
   width: "100%",
   maxWidth: fullWidth ? "none" : "360px",
@@ -36,7 +36,7 @@ export const labelTextHeight = 15
 
 export const LabelText = styled("span")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
-  display: "inline-block",
+  display: "block",
   verticalAlign: "middle",
   marginBottom: theme.space.base,
   fontWeight: theme.font.weight.bold,
