@@ -112,8 +112,8 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
 
   public state: State = {
     windowSize: {
-      width: window.innerWidth,
-      height: window.innerHeight,
+      width: 0,
+      height: 0,
     },
     messages: [],
     isLoading: false,
@@ -124,7 +124,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
    *  whether any messages need to be removed from state
    */
 
-  public messageTimerInterval: number | null = null
+  public messageTimerInterval: number | null | any = null
 
   public removeOutdatedMessages() {
     if (this.props.hideMessageAfter === 0) {
@@ -137,7 +137,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
 
     // If we're out of messages, clear the interval.
     if (!filteredMessages.length && this.messageTimerInterval) {
-      window.clearInterval(this.messageTimerInterval)
+      clearInterval(this.messageTimerInterval)
       this.messageTimerInterval = null
     }
     // Only run a setState if any message(s) were removed.
@@ -152,16 +152,17 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
    * @todo look into making this unnecessary.
    */
   public handleResize: (() => void) & Cancelable = debounce(() => {
-    this.setState(() => ({
-      windowSize: {
-        width: window.innerWidth,
-        height: window.innerHeight,
-      },
-    }))
+    this.onSetWindowSize()
   }, 200)
 
   public setLoading = (isLoading: boolean) => {
     this.setState(() => ({ isLoading }))
+  }
+
+  public onSetWindowSize = () => {
+    this.setState(() => ({
+      windowSize: { width: window.innerWidth, height: window.innerHeight },
+    }))
   }
 
   public componentDidCatch(error: Error) {
@@ -175,14 +176,15 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     if (!this.props.noBaseStyles) {
       injectGlobal(baseStylesheet(constants))
     }
-    window.addEventListener("resize", this.handleResize)
+    this.onSetWindowSize()
+    document.body.addEventListener("resize", this.handleResize)
   }
 
   public componentWillUnmount() {
     if (this.messageTimerInterval) {
-      window.clearInterval(this.messageTimerInterval)
+      clearInterval(this.messageTimerInterval)
     }
-    window.removeEventListener("resize", this.handleResize)
+    document.body.removeEventListener("resize", this.handleResize)
   }
 
   public render() {
@@ -203,7 +205,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
 
                 // If we don't yet have an interval, start one.
                 if (!this.messageTimerInterval) {
-                  this.messageTimerInterval = window.setInterval(() => this.removeOutdatedMessages(), 2000)
+                  this.messageTimerInterval = setInterval(() => this.removeOutdatedMessages(), 2000)
                 }
               },
               loading: this.state.isLoading,
