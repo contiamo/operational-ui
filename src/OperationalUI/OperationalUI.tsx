@@ -124,7 +124,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
    *  whether any messages need to be removed from state
    */
 
-  public messageTimerInterval: ReturnType<typeof setTimeout> | null = null
+  public messageTimerInterval: ReturnType<typeof setInterval> | null = null
 
   public removeOutdatedMessages() {
     if (this.props.hideMessageAfter === 0) {
