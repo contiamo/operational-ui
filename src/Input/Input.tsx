@@ -47,7 +47,7 @@ export interface BasePropsWithCopy extends BaseProps {
 export interface BasePropsWithoutCopy extends BaseProps {
   copy?: false
   /** Icon to display in an adjacent icon button */
-  icon?: IconName
+  icon?: IconName | React.ReactNode
   /** Click handler on the icon */
   onIconClick?: () => void
 }
@@ -157,7 +157,7 @@ class Input extends React.Component<InputProps, State> {
       </CopyToClipboard>
     ) : (
       <InputButton onClick={this.props.onIconClick}>
-        {typeof this.props.icon === "string" ? <Icon name={this.props.icon} size={16} /> : this.props.icon}
+        {typeof this.props.icon === "string" ? <Icon name={this.props.icon as IconName} size={16} /> : this.props.icon}
       </InputButton>
     )
   }
