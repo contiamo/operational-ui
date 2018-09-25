@@ -1,5 +1,4 @@
 import * as React from "react"
-import styled from "../utils/styled"
 
 interface Props {
   size: number
@@ -11,15 +10,15 @@ interface State {
   rotation: number
 }
 
-const Container = styled("div")<{ size_: number }>`
-  ${({ size_ }) => `
-    width: ${size_};
-    height: ${size_};
-  `};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
+// const Container = styled("div") <{ size_: number }>`
+//   ${({ size_ }) => `
+//     width: ${size_};
+//     height: ${size_};
+//   `};
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// `
 
 class OperationalLogo extends React.Component<Props, State> {
   public state: State = {
@@ -60,8 +59,26 @@ class OperationalLogo extends React.Component<Props, State> {
       fill: color,
     }
 
+    const imgProps = {
+      style: {
+        position: "relative",
+        width: size,
+        height: size,
+        style: {
+          transform: `rotate(${rotation || 0}deg)`,
+          transition: "1s transform ease",
+        },
+      },
+    }
+
     if (Logo) {
-      return <Container size_={size}>{React.cloneElement(Logo, { ...svgProps, ...Logo.props })}</Container>
+      const logoProps = Object.assign(
+        {},
+        Logo.props,
+        Logo.type === "svg" ? svgProps : {},
+        Logo.type === "img" ? imgProps : {},
+      )
+      return <Logo.type {...logoProps} />
     }
 
     return (
