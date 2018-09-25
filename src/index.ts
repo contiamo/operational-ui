@@ -3,6 +3,7 @@ import OperationalUI from "./OperationalUI/OperationalUI"
 export { OperationalStyleConstants } from "./utils/constants"
 
 export { default as ActionMenu, ActionMenuProps } from "./ActionMenu/ActionMenu"
+export { default as Autocomplete, AutocompleteProps } from "./Autocomplete/Autocomplete"
 export { default as Avatar, AvatarProps } from "./Avatar/Avatar"
 export { default as AvatarGroup, AvatarGroupProps } from "./AvatarGroup/AvatarGroup"
 export { default as Breadcrumb, BreadcrumbProps } from "./Breadcrumb/Breadcrumb"
