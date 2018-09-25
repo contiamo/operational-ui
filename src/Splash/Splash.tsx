@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { expandColor } from "../utils/constants"
+import { readableTextColor } from "../utils"
 import styled from "../utils/styled"
 import Animation from "./Splash.Animation"
 import OperationalLogo from "./Splash.Logo"
@@ -13,7 +13,7 @@ export interface SplashProps {
   /** Main content */
   children: React.ReactNode
   /** Backdrop color, dark enough to support white text as in the example. */
-  color?: string
+  color: string
   /* Splash Logo */
   logo?: React.ReactElement<any>
   /* Size of splash logo */
@@ -24,7 +24,7 @@ export interface State {
   animationSize: number
 }
 
-const Container = styled("div")<{ color_?: string }>`
+const Container = styled("div")<{ color: string }>`
   z-index: 10000;
   position: fixed;
   top: 0px;
@@ -36,14 +36,16 @@ const Container = styled("div")<{ color_?: string }>`
   align-items: center;
   justify-content: center;
   transition: opacity 0.2s;
-  ${({ color_, theme }) => `
-      background-color: ${expandColor(theme, color_) || theme.color.primary};
+  ${({ color }) => `
+      background-color: ${color};
   `};
 `
 
-const Content = styled("div")`
+const Content = styled("div")<{ color: string }>`
   position: relative;
-  color: #ffffff;
+  ${({ color }) => `
+    color: ${readableTextColor(color, ["#000", "#FFF"])};
+  `};
 `
 
 const TitleBar = styled("div")`
@@ -95,6 +97,7 @@ class Splash extends React.Component<SplashProps, Readonly<State>> {
 
   public static defaultProps = {
     logoSize: 110,
+    color: "#fff",
   }
 
   public handleResize = () => {
@@ -112,11 +115,11 @@ class Splash extends React.Component<SplashProps, Readonly<State>> {
   }
 
   public render() {
-    const { logo, logoSize } = this.props
+    const { logo, logoSize, color } = this.props
     return (
-      <Container color_={this.props.color}>
+      <Container color={color}>
         <Animation size={this.state.animationSize} />
-        <Content>
+        <Content color={color}>
           <TitleBar>
             <OperationalLogo size={logoSize} logo={logo} />
             <TitleBarContent>
