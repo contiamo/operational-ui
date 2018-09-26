@@ -24,6 +24,11 @@ const Container = styled("div")`
   }
 `
 
+const defaultStyle = {
+  display: "inline-block",
+  animation: "rotation 8s 0s infinite linear",
+}
+
 class OperationalLogo extends React.Component<Props, {}> {
   public static defaultProps = {
     color: "currentColor",
@@ -33,24 +38,20 @@ class OperationalLogo extends React.Component<Props, {}> {
   public render() {
     const { size, color, logo: Logo } = this.props
 
-    const defaultStyle = {
-      display: "inline-block",
-      animation: "rotation 8s 0s infinite linear",
-    }
-
     const svgProps = {
       width: size,
       height: size,
       viewBox: "0 0 1000 1000",
-      style: Object.assign({}, defaultStyle),
+      style: { ...defaultStyle },
       fill: color,
     }
 
     const imgProps = {
-      style: Object.assign({}, defaultStyle, {
+      style: {
         width: size,
         height: size,
-      }),
+        ...defaultStyle,
+      },
     }
 
     if (Logo) {
