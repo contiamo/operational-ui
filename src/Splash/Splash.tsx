@@ -16,8 +16,6 @@ export interface SplashProps {
   color: string
   /* Splash Logo */
   logo?: React.ReactElement<any>
-  /* Size of splash logo */
-  logoSize: number
 }
 
 export interface State {
@@ -96,7 +94,6 @@ class Splash extends React.Component<SplashProps, Readonly<State>> {
   }
 
   public static defaultProps = {
-    logoSize: 110,
     color: "#fff",
   }
 
@@ -115,13 +112,13 @@ class Splash extends React.Component<SplashProps, Readonly<State>> {
   }
 
   public render() {
-    const { logo, logoSize, color } = this.props
+    const { logo, color } = this.props
     return (
       <Container color={color}>
         <Animation size={this.state.animationSize} />
         <Content color={color}>
           <TitleBar>
-            <OperationalLogo size={logoSize} logo={logo} />
+            <OperationalLogo size={110} logo={logo} />
             <TitleBarContent>
               <h1>{this.props.title}</h1>
               <div>{this.props.actions}</div>
