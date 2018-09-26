@@ -12,11 +12,14 @@ const Container = styled("div")`
     0% {
       transform: rotate(0deg);
     }
-    10% {
+    45% {
+      transform: rotate(0deg);
+    }
+    50% {
       transform: rotate(180deg);
     }
-    20% {
-      transform: rotate(0deg);
+    95% {
+      transform: rotate(180deg);
     }
     100% {
       transform: rotate(0deg);
@@ -26,7 +29,7 @@ const Container = styled("div")`
 
 const defaultStyle = {
   display: "inline-block",
-  animation: "rotation 8s 0s infinite linear",
+  animation: "rotation 11s 0s infinite linear",
 }
 
 class OperationalLogo extends React.Component<Props, {}> {
