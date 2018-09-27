@@ -27,7 +27,8 @@
     "precommit": "lint-staged",
     "danger:ci": "danger ci",
     "danger": "[ ! -z $DANGER_GITHUB_API_TOKEN ] && run-p danger:* || echo \"Skipping Danger for External Contributor\"",
-    "ci": "run-s test && run-p danger build"
+    "ci": "run-s test && run-p danger build",
+    "save-my-yarn-lock": "([ ! -f yarn.lock ] && echo Don't kill me! && exit 1) || echo \"yarn.lock is safe :)\""
   },
   "lint-staged": {
     "*.(js|jsx|json|md)": [
@@ -38,6 +39,9 @@
       "tslint --fix",
       "prettier --write",
       "git add"
+    ],
+    "yarn.lock": [
+      "yarn save-my-yarn-lock"
     ]
   },
   "peerDependencies": {
