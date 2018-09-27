@@ -15,7 +15,7 @@ export interface SplashProps {
   /** Backdrop color, dark enough to support white text as in the example. */
   color: string
   /* Splash Logo */
-  logo?: React.ReactElement<any>
+  logo?: React.ReactElement<any> | string
 }
 
 export interface State {
