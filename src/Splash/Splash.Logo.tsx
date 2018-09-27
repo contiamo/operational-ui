@@ -3,7 +3,7 @@ import styled from "../utils/styled"
 
 interface Props {
   size: number
-  logo: React.ReactElement<any> | null
+  logo: React.ReactElement<any> | string | null
   color?: string
 }
 
@@ -57,20 +57,7 @@ class OperationalLogo extends React.Component<Props, {}> {
       },
     }
 
-    if (Logo) {
-      const logoProps = Object.assign(
-        { ...Logo.props },
-        Logo.type === "svg" ? svgProps : {},
-        Logo.type === "img" ? imgProps : {},
-      )
-      return (
-        <Container>
-          <Logo.type {...logoProps} />
-        </Container>
-      )
-    }
-
-    return (
+    const FallBackLogo = (
       <Container>
         <svg {...svgProps}>
           <path d="M500.743,40.001c88.918,0.211 178.355,26.868 252.941,76.306c112.296,74.434 189.545,199.47 203.79,335.26c8.805,83.934 -5.812,170.352 -42.271,246.55c-48.304,100.952 -134.846,183.347 -238.145,226.515c-111.421,46.563 -241.073,46.834 -352.822,0.539c-103.597,-42.919 -190.259,-125.05 -238.835,-225.798c-41.96,-87.027 -55.511,-187.399 -37.697,-283.566c17.252,-93.127 64.421,-180.453 132.496,-246.336c77.417,-74.923 181.333,-121.449 289.561,-128.49c10.307,-0.671 20.664,-0.989 30.982,-0.98Zm-1.423,40c-81.015,0.192 -162.718,24.451 -230.905,69.647c-92.956,61.615 -160.034,161.222 -181.017,271.516c-16.687,87.708 -4.676,180.552 34.034,260.837c44.39,92.066 123.679,167.093 218.113,206.216c75.207,31.156 159.683,39.656 239.936,24.262c104.039,-19.956 199.574,-81.384 261.528,-167.378c51.253,-71.14 79.411,-158.798 78.986,-247.138c-0.427,-88.883 -29.892,-177.322 -83.093,-248.667c-63.458,-85.102 -159.585,-144.986 -265.165,-163.185c-23.885,-4.117 -48.124,-6.13 -72.417,-6.11Z" />
@@ -82,6 +69,39 @@ class OperationalLogo extends React.Component<Props, {}> {
         </svg>
       </Container>
     )
+
+    if (typeof Logo === "string") {
+      /**
+       * If it is a typeof string, assume
+       * the it is link/path to an img
+       */
+      return (
+        <Container>
+          <img src={Logo} {...imgProps} />
+        </Container>
+      )
+    } else if (Logo) {
+      /**
+       * Otherwise this is a React.node which is an HTML El
+       * this can be svg|jp?g|png etc.
+       */
+      const logoProps = Object.assign(
+        { ...Logo.props },
+        Logo.type === "svg" ? svgProps : {},
+        Logo.type === "img" ? imgProps : {},
+      )
+      return (
+        <Container>
+          <Logo.type {...logoProps} />
+        </Container>
+      )
+    }
+    /**
+     * If no condition matches, this means that the
+     * user did not pass a `logo` prop, so revert back
+     * to the default logo.
+     */
+    return FallBackLogo
   }
 }
 
