@@ -87,11 +87,7 @@ function makeItems<TValue>({
     )
   }
 
-  if (!results || !results.length) {
-    return [noResultsMessage || ""]
-  }
-
-  return []
+  return [noResultsMessage || ""]
 }
 
 class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, AutocompleteState> {

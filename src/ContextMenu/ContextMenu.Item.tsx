@@ -80,9 +80,9 @@ const ContentContainer = styled("div")<Partial<Props>>`
   width: calc(100% - ${({ theme }) => theme.space.content}px);
 `
 
-const ContextMenuIcon = styled(Icon)<Partial<Props>>`
+const ContextMenuIcon = styled(Icon)<{ iconlocation_: Props["iconLocation"] }>`
   flex: 0 0 auto;
-  margin-left: ${({ iconLocation }) => (iconLocation && iconLocation === "right" ? "auto" : 0)};
+  margin-left: ${({ iconlocation_ }) => (iconlocation_ && iconlocation_ === "right" ? "auto" : 0)};
 `
 
 const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
@@ -106,7 +106,7 @@ const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
 const InPlaceIcon = (props: Props) =>
   typeof props.item !== "string" ? (
     <ContextMenuIcon
-      iconLocation={props.iconLocation}
+      iconlocation_={props.iconLocation}
       color={props.item.iconColor}
       left={props.iconLocation === "left" || !props.iconLocation}
       name={props.item.icon as IconName}
