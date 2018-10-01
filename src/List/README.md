@@ -4,7 +4,7 @@ This component renders a navigable list.
 
 ```jsx
 <List
-  items={goToStep => [
+  items={[
     {
       photo: "https://placehold.it/140x60",
       description: "We will ask you to authenticate yourself with OAuth.",

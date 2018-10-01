@@ -31,6 +31,10 @@ const ImageContainer = styled("div")`
   margin-right: ${({ theme }) => theme.space.element}px;
   width: 170px;
   flex: 0 0 170px;
+
+  img {
+    max-width: 100%;
+  }
 `
 
 const StyledIcon = styled(Icon)`
