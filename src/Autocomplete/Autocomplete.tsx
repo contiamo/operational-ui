@@ -1,8 +1,9 @@
 import * as React from "react"
 
-import ContextMenu, { Item } from "../ContextMenu/ContextMenu"
+import ContextMenu from "../ContextMenu/ContextMenu"
+import { IContextMenuItem, IContextMenuItem as Item } from "../ContextMenu/ContextMenu.Item"
 import Input from "../Input/Input"
-import Spinner from "../Spinner/Spinner"
+import Progress from "../Progress/Progress"
 import styled from "../utils/styled"
 
 export interface AutocompleteProps<TValue> {
@@ -79,7 +80,10 @@ function makeItems<TValue>({
 
   if (results && results.length) {
     return results.map(
-      result => (typeof result === "string" ? { label: result, icon: resultIcon } : { ...result, icon: resultIcon }),
+      (result: string | IContextMenuItem) =>
+        typeof result === "string"
+          ? { label: result, icon: resultIcon } // typescript is so weird
+          : { ...result, icon: resultIcon },
     )
   }
 
@@ -113,20 +117,18 @@ class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, Au
       onChange,
       onResultClick,
     } = this.props
+
     const { searchValue } = this.state
+
     return (
       <Container
+        iconLocation="right"
         fullWidth={fullWidth}
         items={makeItems({ results, searchValue, resultIcon, minCharacters, noResultsMessage })}
         onClick={item => (item && typeof item === "string" ? onResultClick(item) : onResultClick((item as Item).label))}
       >
-        <Input
-          icon={loading ? <Spinner /> : "Search"}
-          fullWidth={true}
-          value={searchValue}
-          onChange={onChange}
-          label={label}
-        />
+        {loading && <Progress bottom />}
+        <Input fullWidth={true} value={searchValue} onChange={onChange} label={label} />
       </Container>
     )
   }
