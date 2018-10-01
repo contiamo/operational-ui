@@ -11,21 +11,24 @@ export interface ProgressProps extends DefaultProps {
   onRetry?: () => void
   /** OnClose callback */
   onClose?: () => void
+  /** Show progress bar on the bottom? */
+  bottom?: boolean
 }
 
-const Container = styled("div")(
+const Container = styled("div")<ProgressProps>(
   {
     label: "progress",
     width: "100%",
     overflowX: "hidden",
     textAlign: "center",
-    top: 0,
     left: 0,
     position: "absolute",
-  },
-  ({ theme }) => ({
-    zIndex: theme.deprecated.baseZIndex + 300,
     backgroundColor: "transparent",
+  },
+  ({ theme, bottom }) => ({
+    zIndex: theme.deprecated.baseZIndex + 300,
+    top: bottom ? "auto" : 0,
+    bottom: bottom ? 0 : "auto",
   }),
 )
 

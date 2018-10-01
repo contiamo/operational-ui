@@ -18,6 +18,8 @@ export interface ContextMenuProps extends DefaultProps {
   keepOpenOnItemClick?: boolean
   /** Menu items */
   items: Array<string | IContextMenuItem>
+  /** Where shall we place an icon in rows? */
+  iconLocation?: "left" | "right"
   /** Alignment */
   align?: "left" | "right"
   /** Custom width */
@@ -54,7 +56,8 @@ const MenuContainer = styled("div")<{
   overflow: "auto",
   boxShadow: theme.shadows.popup,
   zIndex: theme.zIndex.selectOptions,
-  width: "100%",
+  width: `calc(100% - ${theme.space.small}px)`,
+  minWidth: "fit-content",
   display: isExpanded ? "block" : "none",
 }))
 
@@ -86,7 +89,7 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
       throw new Error("No array of items has been provided for the ContextMenu.")
     }
 
-    const { items, condensed, children, open, embedChildrenInMenu, align, width, ...props } = this.props
+    const { items, condensed, iconLocation, children, open, embedChildrenInMenu, align, width, ...props } = this.props
 
     const renderedChildren =
       typeof children === "function"
@@ -105,6 +108,7 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
                 key={`contextmenu-${index}`}
                 condensed={condensed}
                 align={align}
+                iconLocation={iconLocation}
                 width={width || "100%"}
                 item={item}
               />

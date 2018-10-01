@@ -13,9 +13,14 @@ const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
 
 ```jsx
 const menuItems = [{ label: "Menu 1", icon: "Search" }, "Menu 2", "Menu 3"]
-;<ContextMenu items={menuItems} onClick={item => alert(`clicked ${item}`)}>
-  <span>Click here</span>
-</ContextMenu>
+;<>
+  <ContextMenu items={menuItems} onClick={item => alert(`clicked ${item}`)}>
+    <Button>Click here for icon on left</Button>
+  </ContextMenu>
+  <ContextMenu iconLocation="right" items={menuItems} onClick={item => alert(`clicked ${item}`)}>
+    <Button color="primary">Click here for icon on right</Button>
+  </ContextMenu>
+</>
 ```
 
 #### Condensed
