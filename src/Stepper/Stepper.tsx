@@ -77,7 +77,7 @@ const StepLabel = styled("div")`
 const Stepper: React.SFC<StepperProps> = props => {
   const { steps, stepColor, onStepChange, activeSlideIndex } = props
   return (
-    <div>
+    <>
       <Steps>
         {steps.map(({ title }, index) => (
           <Step
@@ -96,7 +96,7 @@ const Stepper: React.SFC<StepperProps> = props => {
         ))}
       </Steps>
       <StepContent>{steps[activeSlideIndex!].content}</StepContent>
-    </div>
+    </>
   )
 }
 
