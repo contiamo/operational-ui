@@ -10,9 +10,7 @@ export interface StepperProps {
   onStepChange?: (slideIndex: number) => void
 }
 
-export interface StepperState {
-  activeSlideIndex: number
-}
+const circleSize = 24
 
 const StepContent = styled("div")`
   height: 100%;
@@ -39,15 +37,13 @@ const Step = styled("li")<{ isActive: boolean; number: number; color: StepperPro
   /* Number with circles */
   ::before {
     content: "${({ number }) => number}";
-    width: 30px;
-    height: 30px;
-    display: flex;
-    flex: 0 0 30px;
-    align-items: flex-start;
-    justify-content: center;
+    width: ${circleSize}px;
+    height: ${circleSize}px;
+    flex: 0 0 ${circleSize}px;
+    line-height: 23px;
+    text-align: center;
     font-weight: ${({ theme }) => theme.font.weight.bold};
-    font-size: ${({ theme }) => theme.font.size.title}px;
-    padding-top: 3px;
+    font-size: ${({ theme }) => theme.font.size.body}px;
     box-sizing: border-box;
     background: ${({ theme, color, isActive }) => (isActive ? expandColor(theme, color) : theme.color.border.default)};
     margin-right: ${({ theme }) => theme.space.small}px;
@@ -78,46 +74,35 @@ const StepLabel = styled("div")`
   overflow: hidden;
 `
 
-class Stepper extends React.PureComponent<StepperProps, StepperState> {
-  public state: StepperState = {
-    activeSlideIndex: 0,
-  }
+const Stepper: React.SFC<StepperProps> = props => {
+  const { steps, stepColor, onStepChange, activeSlideIndex } = props
+  return (
+    <div>
+      <Steps>
+        {steps.map(({ title }, index) => (
+          <Step
+            key={index}
+            isActive={activeSlideIndex === index}
+            number={index + 1}
+            color={stepColor}
+            onClick={() => {
+              if (onStepChange) {
+                onStepChange(index)
+              }
+            }}
+          >
+            <StepLabel>{title}</StepLabel>
+          </Step>
+        ))}
+      </Steps>
+      <StepContent>{steps[activeSlideIndex!].content}</StepContent>
+    </div>
+  )
+}
 
-  public static defaultProps = {
-    stepColor: "primary",
-    activeSlideIndex: 0,
-  }
-
-  public static getDerivedStateFromProps({ activeSlideIndex }: Partial<StepperProps>) {
-    return { activeSlideIndex }
-  }
-
-  public render() {
-    const { steps, stepColor, onStepChange } = this.props
-    const { activeSlideIndex } = this.state
-    return (
-      <div>
-        <Steps>
-          {steps.map(({ title }, index) => (
-            <Step
-              key={index}
-              isActive={activeSlideIndex === index}
-              number={index + 1}
-              color={stepColor}
-              onClick={() => {
-                if (onStepChange) {
-                  onStepChange(index)
-                }
-              }}
-            >
-              <StepLabel>{title}</StepLabel>
-            </Step>
-          ))}
-        </Steps>
-        <StepContent>{steps[activeSlideIndex].content}</StepContent>
-      </div>
-    )
-  }
+Stepper.defaultProps = {
+  stepColor: "primary",
+  activeSlideIndex: 0,
 }
 
 export default Stepper

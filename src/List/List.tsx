@@ -39,7 +39,7 @@ const ImageContainer = styled("div")`
 
 const StyledIcon = styled(Icon)`
   fill: ${({ theme }) => theme.color.border.default};
-  width: 30px;
+  width: 24px;
   flex: 0 0 30px;
   margin-left: auto;
   justify-self: flex-end;
