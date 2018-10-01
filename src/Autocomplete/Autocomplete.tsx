@@ -12,6 +12,10 @@ export interface AutocompleteProps<TValue> {
    */
   label?: string
   /**
+   * An Icon to append to each result
+   */
+  resultIcon?: Item["icon"]
+  /**
    * Should the input fill its container?
    */
   fullWidth?: boolean
@@ -57,7 +61,7 @@ const initialState = {
 type AutocompleteState = Readonly<typeof initialState>
 
 const Container = styled(ContextMenu)<Partial<AutocompleteProps<any>>>`
-  width: ${({ fullWidth }) => (fullWidth ? "100%" : "initial")};
+  width: ${({ fullWidth }) => (fullWidth ? "100%" : "fit-content")};
   display: flex;
   align-items: center;
 `
@@ -66,6 +70,7 @@ function makeItems<TValue>({
   searchValue,
   minCharacters,
   results,
+  resultIcon,
   noResultsMessage,
 }: Partial<AutocompleteProps<TValue> & AutocompleteState>) {
   if (!searchValue || !(searchValue.length > (minCharacters || 0))) {
@@ -73,7 +78,9 @@ function makeItems<TValue>({
   }
 
   if (results && results.length) {
-    return results
+    return results.map(
+      result => (typeof result === "string" ? { label: result, icon: resultIcon } : { ...result, icon: resultIcon }),
+    )
   }
 
   if (!results || !results.length) {
@@ -95,13 +102,27 @@ class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, Au
   }
 
   public render() {
-    const { fullWidth, label, results, minCharacters, loading, noResultsMessage, onChange, onResultClick } = this.props
+    const {
+      fullWidth,
+      label,
+      results,
+      resultIcon,
+      minCharacters,
+      loading,
+      noResultsMessage,
+      onChange,
+      onResultClick,
+    } = this.props
     const { searchValue } = this.state
     return (
-      <Container items={makeItems({ results, searchValue, minCharacters, noResultsMessage })} onClick={onResultClick}>
+      <Container
+        fullWidth={fullWidth}
+        items={makeItems({ results, searchValue, resultIcon, minCharacters, noResultsMessage })}
+        onClick={item => (item && typeof item === "string" ? onResultClick(item) : onResultClick((item as Item).label))}
+      >
         <Input
           icon={loading ? <Spinner /> : "Search"}
-          fullWidth={fullWidth}
+          fullWidth={true}
           value={searchValue}
           onChange={onChange}
           label={label}

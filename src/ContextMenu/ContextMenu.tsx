@@ -54,7 +54,7 @@ const MenuContainer = styled("div")<{
   overflow: "auto",
   boxShadow: theme.shadows.popup,
   zIndex: theme.zIndex.selectOptions,
-  width: "fit-content",
+  width: "100%",
   display: isExpanded ? "block" : "none",
 }))
 
