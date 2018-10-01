@@ -24,8 +24,10 @@ export interface IContextMenuItem {
 
 const Container = styled("div")<Props>(({ align, theme, onClick, condensed, width, item }) => ({
   userSelect: "none",
+  display: "flex",
+  alignItems: "center",
   label: "contextmenuitem",
-  width: width || (condensed ? 160 : 250),
+  width: width || (condensed ? 160 : "100%"),
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",

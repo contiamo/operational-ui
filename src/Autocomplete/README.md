@@ -70,6 +70,7 @@ class Container extends React.Component {
           <Autocomplete
             value={this.state.search}
             loading={loading}
+            resultIcon="Add"
             results={data}
             noResultsMessage="No result Found"
             onResultClick={result => alert("You chose " + result)}
