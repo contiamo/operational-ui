@@ -42,7 +42,7 @@ If you have an existing local repository, please update it before you start. So 
 
 ### Testing
 
-We have a **`**dev-server**`** build that uses code examples of `Operational-UI`. To get started
+We have a **`dev-server`** build that uses code examples of `Operational-UI`. To get started
 
 - `yarn`
 - `yarn dev`
