@@ -13,6 +13,7 @@ export interface Props {
   align?: "left" | "right"
   iconLocation?: "left" | "right"
   item: StringOrItem
+  tabIndex: number
 }
 
 export interface IContextMenuItem {
