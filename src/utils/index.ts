@@ -15,7 +15,7 @@ export const isOutsideLink = (url: string) => urlRegex({ exact: true }).test(url
 export const isCmdEnter = (ev: React.KeyboardEvent<HTMLElement>) => {
   const crossBrowserSafeKeycode = ev.which || ev.keyCode
   const modifierKey = ev.ctrlKey || ev.metaKey
-  return crossBrowserSafeKeycode === 13 && modifierKey
+  return crossBrowserSafeKeycode === keyCodes.enter && modifierKey
 }
 
 /**
@@ -34,6 +34,20 @@ export const getInitials = (name: string): string => {
 
   const [firstInitial, , lastInitial] = fullInitials
   return fullInitials.length > 2 ? firstInitial + lastInitial : fullInitials
+}
+
+export const keyCodes = {
+  /** 38 */
+  up: 38,
+
+  /** 40 */
+  down: 40,
+
+  /** 13 */
+  enter: 13,
+
+  /** 27 */
+  esc: 27,
 }
 
 /**
