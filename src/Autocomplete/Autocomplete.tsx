@@ -2,7 +2,7 @@ import * as React from "react"
 
 import ContextMenu from "../ContextMenu/ContextMenu"
 import { IContextMenuItem, IContextMenuItem as Item } from "../ContextMenu/ContextMenu.Item"
-import Input from "../Input/Input"
+import Input, { InputProps } from "../Input/Input"
 import Progress from "../Progress/Progress"
 import styled from "../utils/styled"
 
@@ -17,14 +17,13 @@ export interface AutocompleteProps<TValue> {
    */
   resultIcon?: Item["icon"]
   /**
+   * A hint to the user.
+   */
+  hint?: InputProps["hint"]
+  /**
    * Should the input fill its container?
    */
   fullWidth?: boolean
-  /**
-   * The current value of the input field.
-   * You must always supply this from the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components.
-   */
-  value: { label: string; value?: TValue }
   /**
    * A search can show a loading indicator.
    */
@@ -46,20 +45,10 @@ export interface AutocompleteProps<TValue> {
    */
   results?: Array<{ label: string; value: TValue }>
   /**
-   * Minimum characters to query for results.
+   * The value of the Search
    */
-  minCharacters?: number
+  value: ""
 }
-
-const initialState = {
-  /**
-   * `true` if the dropdown result is open
-   */
-  isOpen: false,
-  searchValue: "",
-}
-
-type AutocompleteState = Readonly<typeof initialState>
 
 const Container = styled(ContextMenu)<Partial<AutocompleteProps<any>>>`
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "fit-content")};
@@ -67,14 +56,8 @@ const Container = styled(ContextMenu)<Partial<AutocompleteProps<any>>>`
   align-items: center;
 `
 
-function makeItems<TValue>({
-  searchValue,
-  minCharacters,
-  results,
-  resultIcon,
-  noResultsMessage,
-}: Partial<AutocompleteProps<TValue> & AutocompleteState>) {
-  if (!searchValue || !(searchValue.length > (minCharacters || 0))) {
+function makeItems<TValue>({ value, results, resultIcon, noResultsMessage }: Partial<AutocompleteProps<TValue>>) {
+  if (!results || !value) {
     return []
   }
 
@@ -90,44 +73,29 @@ function makeItems<TValue>({
   return [noResultsMessage || ""]
 }
 
-class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, AutocompleteState> {
-  public readonly state = initialState
-
-  public static defaultProps = {
-    minCharacters: 3,
-  }
-
-  public static getDerivedStateFromProps(props: AutocompleteProps<any>) {
-    return { searchValue: props.value }
-  }
-
-  public render() {
-    const {
-      fullWidth,
-      label,
-      results,
-      resultIcon,
-      minCharacters,
-      loading,
-      noResultsMessage,
-      onChange,
-      onResultClick,
-    } = this.props
-
-    const { searchValue } = this.state
-
-    return (
-      <Container
-        iconLocation="right"
-        fullWidth={fullWidth}
-        items={makeItems({ results, searchValue, resultIcon, minCharacters, noResultsMessage })}
-        onClick={item => (item && typeof item === "string" ? onResultClick(item) : onResultClick((item as Item).label))}
-      >
-        {loading && <Progress bottom />}
-        <Input fullWidth={true} value={searchValue} onChange={onChange} label={label} />
-      </Container>
-    )
-  }
+function Autocomplete<TValue>({
+  fullWidth,
+  label,
+  results,
+  resultIcon,
+  loading,
+  noResultsMessage,
+  onChange,
+  value,
+  onResultClick,
+  hint,
+}: AutocompleteProps<TValue>) {
+  return (
+    <Container
+      iconLocation="right"
+      fullWidth={fullWidth}
+      items={makeItems({ results, value, resultIcon, noResultsMessage })}
+      onClick={onResultClick}
+    >
+      {loading && <Progress bottom />}
+      <Input hint={hint} fullWidth={true} value={value} onChange={onChange} label={label} />
+    </Container>
+  )
 }
 
 export default Autocomplete

@@ -1,87 +1,44 @@
 ### Single value search
 
 ```jsx
-const data = [
-  "Homer J. Simpson",
-  "Marge Simpson",
-  "Bart Simpson",
-  "Lisa Simpson",
-  "Maggie Simpson",
-  "Krusty",
-  "Abraham Simpson",
-  "Ned Flanders",
-  "Apu Nahasapeemapetilon Jr",
-  "Barney Gumble",
-  "Moe Szyslak",
-  "Willie",
-  "Charles Montgomery Burns",
-  "Tahiti Mel",
-  "Jeff Albertson",
-  "Martin Prince",
-  "Chef Wiggum",
-  "Lou",
-]
-
-// Fake `restful-react.Get` component
-class Get extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: false,
-      res: null,
-    }
-  }
-
-  componentWillUnmount() {
-    clearTimeout(this.timeoutId)
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.path !== this.props.path) {
-      this.setState({ loading: true })
-
-      clearTimeout(this.timeoutId)
-      this.timeoutId = setTimeout(() => {
-        this.setState({
-          res: data.filter(i => i.toLowerCase().startsWith(this.props.path.slice(8).toLowerCase())),
+updateSearch = text => {
+  // You can even debounce this.
+  setState({ search: text })
+  if (text.length > 3) {
+    setState({ loading: true })
+    fetch("https://dog.ceo/api/breeds/list")
+      .then(results => results.json())
+      .then(results =>
+        setState({
+          data: results.message
+            .filter(name => ~name.indexOf(text))
+            .map(breed => ({ label: breed, value: `https://dog.ceo/api/breed/${breed}/images` })),
           loading: false,
-        })
-      }, 1000)
-    }
-  }
-
-  render() {
-    return this.props.children(this.state.res, { loading: this.state.loading })
+        }),
+      )
+  } else {
+    setState({ data: undefined })
   }
 }
+;<div style={{ display: "flex", alignItems: "flex-start" }}>
+  <Autocomplete
+    value={state.search}
+    loading={state.loading}
+    resultIcon="Add"
+    results={state.data}
+    noResultsMessage="No result Found"
+    onResultClick={result => {
+      fetch(result.value)
+        .then(response => response.json())
+        .then(dogImage => setState({ chosenDog: { ...result, value: dogImage.message[0] } }))
+    }}
+    onChange={updateSearch}
+    label="Find a Good Boye 🐶"
+    hint={`Try "Husky"`}
+  />
 
-class Container extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      search: "",
-      value: { label: "" },
-    }
-  }
-  render() {
-    return (
-      <Get path={`?search=${this.state.search}`}>
-        {(data, { loading }) => (
-          <Autocomplete
-            value={this.state.search}
-            loading={loading}
-            resultIcon="Add"
-            results={data}
-            noResultsMessage="No result Found"
-            onResultClick={result => alert("You chose " + result)}
-            onChange={search => this.setState({ search })}
-            label="Choose your simpson"
-          />
-        )}
-      </Get>
-    )
-  }
-}
-
-;<Container />
+  {state.chosenDog && (
+    <img alt={state.chosenDog.label} src={state.chosenDog.value} style={{ marginLeft: 8, width: 100 }} />
+  )}
+</div>
 ```
