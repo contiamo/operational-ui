@@ -50,9 +50,8 @@ const Container = styled("div")(({ align }: { align: ContextMenuProps["align"] }
 }))
 
 const MenuContainer = styled("div")<{
-  isExpanded: boolean
   embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
-}>(({ theme, isExpanded, embedChildrenInMenu }) => ({
+}>(({ theme, embedChildrenInMenu }) => ({
   position: "absolute",
   top: embedChildrenInMenu ? 0 : "100%",
   left: 0,
@@ -62,7 +61,6 @@ const MenuContainer = styled("div")<{
   zIndex: theme.zIndex.selectOptions,
   width: `calc(100% - ${theme.space.small}px)`,
   minWidth: "fit-content",
-  display: isExpanded ? "block" : "none",
 }))
 
 class ContextMenu extends React.Component<ContextMenuProps, State> {
@@ -124,8 +122,7 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
 
     // Reset focused item to first if items change.
     if (!isEqual(this.props.items, prevProps.items)) {
-      this.setState(() => ({ focusedItemIndex: 0 }))
-      this.focusElement()
+      this.setState(() => ({ focusedItemIndex: this.props.items.length - 1 }))
     }
   }
 
@@ -141,11 +138,7 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
       <Container {...props} align={align} onClick={this.toggle} onKeyUp={this.handleKeyPress}>
         {renderedChildren}
         {this.state.isOpen && (
-          <MenuContainer
-            innerRef={node => (this.menu = node)}
-            isExpanded={open || this.state.isOpen}
-            embedChildrenInMenu={this.props.embedChildrenInMenu}
-          >
+          <MenuContainer innerRef={node => (this.menu = node)} embedChildrenInMenu={this.props.embedChildrenInMenu}>
             {embedChildrenInMenu && renderedChildren}
             {items.map((item: string | IContextMenuItem, index: number) => {
               const clickHandler = (typeof item !== "string" && item.onClick) || this.props.onClick
