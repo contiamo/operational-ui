@@ -54,7 +54,7 @@ const List = ({ items, fullWidth }: ListProps) =>
         </ImageContainer>
       )}
       <Body style={{ margin: 0 }}>{description}</Body>
-      {onClick && <StyledIcon right size={30} name="ChevronRight" />}
+      {onClick && <StyledIcon right size={21} name="ChevronRight" />}
     </Container>
   ))
 
