@@ -96,6 +96,7 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
 
     if (keyCode === keyCodes.esc) {
       this.setState(() => ({ isOpen: false }))
+      return
     }
 
     if ([keyCodes.up, keyCodes.down].includes(keyCode)) {
