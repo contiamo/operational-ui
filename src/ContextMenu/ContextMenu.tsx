@@ -4,6 +4,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
+import { keyCodes } from "../utils"
 import ContextMenuItem, { IContextMenuItem } from "./ContextMenu.Item"
 
 export interface ContextMenuProps extends DefaultProps {
@@ -63,13 +64,6 @@ const MenuContainer = styled("div")<{
   minWidth: "fit-content",
   display: isExpanded ? "block" : "none",
 }))
-
-const keyCodes = {
-  up: 38,
-  down: 40,
-  enter: 13,
-  esc: 27,
-}
 
 class ContextMenu extends React.Component<ContextMenuProps, State> {
   public menu: HTMLDivElement | null = null
