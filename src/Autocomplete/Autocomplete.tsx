@@ -64,9 +64,7 @@ function makeItems<TValue>({ value, results, resultIcon, noResultsMessage }: Par
   if (results && results.length) {
     return results.map(
       (result: string | IContextMenuItem) =>
-        typeof result === "string"
-          ? { label: result, icon: resultIcon } // typescript is so weird
-          : { ...result, icon: resultIcon },
+        typeof result === "string" ? { label: result, icon: resultIcon } : { ...result, icon: resultIcon },
     )
   }
 
