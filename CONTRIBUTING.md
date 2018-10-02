@@ -36,7 +36,7 @@ If you have an existing local repository, please update it before you start. So 
 
 - `git remote add upstream git@github.com:contiamo/operational-ui.git`
 - `git checkout master`
-- `git pull upstream master`
+- `git pull upstream master --rebase`
 - `git checkout -b my-topic-branch`
 - Make your changes, test and then push your code to make the pull request
 
