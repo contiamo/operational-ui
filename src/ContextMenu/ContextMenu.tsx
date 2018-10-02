@@ -66,33 +66,9 @@ const MenuContainer = styled("div")<{
 }))
 
 class ContextMenu extends React.Component<ContextMenuProps, State> {
-  public menu: HTMLDivElement | null = null
+  private menu: HTMLDivElement | null = null
 
-  public state: State = {
-    isOpen: false,
-    focusedItemIndex: 0,
-  }
-
-  public static defaultProps: Partial<ContextMenuProps> = {
-    align: "left",
-    embedChildrenInMenu: false,
-  }
-
-  public componentDidUpdate(prevProps: ContextMenuProps) {
-    if (this.state.isOpen) {
-      document.addEventListener("click", this.toggle)
-    } else {
-      document.removeEventListener("click", this.toggle)
-    }
-
-    // Reset focused item to first if items change.
-    if (!isEqual(this.props.items, prevProps.items)) {
-      this.setState(() => ({ focusedItemIndex: 0 }))
-      this.focusElement()
-    }
-  }
-
-  public toggle = () =>
+  private toggle = () =>
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
     }))
@@ -124,6 +100,30 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
 
     if ([keyCodes.up, keyCodes.down].includes(keyCode)) {
       this.setState(keyCode === keyCodes.up ? this.onUpPress : this.onDownPress)
+      this.focusElement()
+    }
+  }
+
+  public state: State = {
+    isOpen: false,
+    focusedItemIndex: 0,
+  }
+
+  public static defaultProps: Partial<ContextMenuProps> = {
+    align: "left",
+    embedChildrenInMenu: false,
+  }
+
+  public componentDidUpdate(prevProps: ContextMenuProps) {
+    if (this.state.isOpen) {
+      document.addEventListener("click", this.toggle)
+    } else {
+      document.removeEventListener("click", this.toggle)
+    }
+
+    // Reset focused item to first if items change.
+    if (!isEqual(this.props.items, prevProps.items)) {
+      this.setState(() => ({ focusedItemIndex: 0 }))
       this.focusElement()
     }
   }
