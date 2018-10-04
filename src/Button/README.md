@@ -14,6 +14,7 @@ Using buttons is as simple as including the component with a text node as a chil
   <Button color="error">Error</Button>
   <Button color="warning">Warning</Button>
   <Button color="#ff0000">Custom color</Button>
+  <Button textColor="#300" color="#ff0000">Custom text color</Button>
 </div>
 <div style={{ marginBottom: 10 }}>
   <Button disabled>Default</Button>
