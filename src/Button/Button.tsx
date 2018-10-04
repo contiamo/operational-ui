@@ -16,6 +16,8 @@ export interface ButtonProps extends DefaultProps {
   to?: string
   /** Button color theme (hex or named color from `theme.color`) */
   color?: string
+  /** Button color theme (hex or named color from `theme.color`) */
+  textColor?: keyof OperationalStyleConstants["color"] | string
   /** Icon to display on right or left of button (optional) */
   icon?: IconName
   /** Icon position */
@@ -57,16 +59,13 @@ const makeColors = (theme: OperationalStyleConstants, color: string) => {
 
 const containerStyles: Interpolation<
   Themed<
-    {
-      color_?: ButtonProps["color"]
-      disabled?: boolean
-      condensed?: ButtonProps["condensed"]
-      loading?: ButtonProps["loading"]
-      fullWidth?: ButtonProps["fullWidth"]
+    Pick<ButtonProps, "disabled" | "condensed" | "fullWidth" | "textColor" | "loading"> & {
+      onClick: (ev: React.SyntheticEvent<React.ReactNode>) => void
+      color_?: string
     },
     OperationalStyleConstants
   >
-> = ({ theme, color_, disabled, condensed, loading, fullWidth }) => {
+> = ({ theme, color_, disabled, condensed, loading, fullWidth, textColor }) => {
   const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color_ || "")
   return {
     backgroundColor,
@@ -90,7 +89,7 @@ const containerStyles: Interpolation<
     // Apply styles with increased specificity to override defaults
     "&, a:link&, a:visited&": {
       textDecoration: "none",
-      color: loading ? "transparent" : foregroundColor,
+      color: loading ? "transparent" : expandColor(theme, textColor) || foregroundColor,
     },
     ...(!disabled
       ? {
@@ -123,6 +122,10 @@ const Button: React.SFC<ButtonProps> = ({
   color,
   onClick,
   loading,
+  disabled,
+  condensed,
+  fullWidth,
+  textColor,
   ...props
 }) => {
   const ContainerComponent = to ? ContainerLink : Container
@@ -135,9 +138,13 @@ const Button: React.SFC<ButtonProps> = ({
           {...props}
           color_={color}
           loading={loading}
+          disabled={disabled}
+          condensed={condensed}
+          fullWidth={fullWidth}
+          textColor={textColor}
           href={to}
           onClick={(ev: React.SyntheticEvent<React.ReactNode>) => {
-            if (props.disabled) {
+            if (disabled) {
               ev.preventDefault()
               return
             }
