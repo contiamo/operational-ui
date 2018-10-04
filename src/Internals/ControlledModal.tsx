@@ -29,7 +29,7 @@ const fromTop = (fullSize: boolean) => {
 
 const Container = styled(Card)<Partial<Props>>(({ theme, fullSize }) => ({
   top: fullSize ? theme.space.content : theme.space.element,
-  left: fullSize ? 20 : "50%",
+  left: fullSize ? theme.space.element : "50%",
   height: fullSize ? `calc(100% - ${theme.space.element + theme.space.content}px)` : "fit-content",
   animation: `${fromTop(Boolean(fullSize))} 0.2s`,
   position: "absolute",
