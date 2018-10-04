@@ -40,17 +40,17 @@ If you have an existing local repository, please update it before you start. So 
 - `git checkout -b my-topic-branch`
 - Make your changes, test and then push your code to make the pull request
 
-### Testing
+## Testing
 
 We have a **`dev-server`** build that uses code examples of `Operational-UI`. To get started
 
 - `yarn`
 - `yarn dev`
 
-### Coding Style
+## Coding Style
 
 Please use the coding style of `Operational-UI`. There is linting in place, so if possible enable linting in your editor to get real time feedback.
 
-### License
+## License
 
 By contributing your code to Operational-UI /contiamo/operational-ui github repository. You agree to licence your contribution under the MIT license.
