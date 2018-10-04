@@ -113,21 +113,7 @@ const ButtonSpinner = styled(Spinner)<{ containerColor?: ButtonProps["color"] }>
   color: makeColors(theme, containerColor || "").foreground,
 }))
 
-const Button: React.SFC<ButtonProps> = ({
-  to,
-  children,
-  icon,
-  iconPosition,
-  iconColor,
-  color,
-  onClick,
-  loading,
-  disabled,
-  condensed,
-  fullWidth,
-  textColor,
-  ...props
-}) => {
+const Button: React.SFC<ButtonProps> = ({ to, children, icon, iconPosition, iconColor, color, onClick, ...props }) => {
   const ContainerComponent = to ? ContainerLink : Container
   const iconProps = { name: icon!, size: 18, color: iconColor }
 
@@ -137,14 +123,9 @@ const Button: React.SFC<ButtonProps> = ({
         <ContainerComponent
           {...props}
           color_={color}
-          loading={loading}
-          disabled={disabled}
-          condensed={condensed}
-          fullWidth={fullWidth}
-          textColor={textColor}
           href={to}
           onClick={(ev: React.SyntheticEvent<React.ReactNode>) => {
-            if (disabled) {
+            if (props.disabled) {
               ev.preventDefault()
               return
             }
@@ -158,12 +139,12 @@ const Button: React.SFC<ButtonProps> = ({
               ctx.pushState(to)
             }
           }}
-          title={loading && children === String(children) ? String(children) : undefined}
+          title={props.loading && children === String(children) ? String(children) : undefined}
         >
           {icon && iconPosition === "start" && <Icon left {...iconProps} />}
           {children}
           {icon && iconPosition === "end" && <Icon right {...iconProps} />}
-          {loading && <ButtonSpinner containerColor={color} />}
+          {props.loading && <ButtonSpinner containerColor={color} />}
         </ContainerComponent>
       )}
     </OperationalContext>
