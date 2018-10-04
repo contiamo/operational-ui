@@ -20,6 +20,8 @@ const Container = styled("div")(({ theme }) => ({
   alignItems: "center",
   backgroundColor: theme.color.background.lighter,
   color: theme.color.text.lighter,
+  flex: "0 0 auto", // Make sure it stays the same size if other parts of the card push it
+
   // This ensures that the card header text and card controls are placed in opposite corners.
   justifyContent: "space-between",
   height: theme.space.element * 2,
