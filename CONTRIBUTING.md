@@ -53,4 +53,4 @@ Please use the coding style of `Operational-UI`. There is linting in place, so i
 
 ## License
 
-By contributing your code to Operational-UI /contiamo/operational-ui github repository. You agree to licence your contribution under the MIT license.
+By contributing your code to Operational-UI, you agree to licence your contribution under the MIT license.
