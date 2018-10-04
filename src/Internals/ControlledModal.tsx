@@ -34,10 +34,9 @@ const Container = styled(Card)<Partial<Props>>(({ theme, fullSize }) => ({
   animation: `${fromTop(Boolean(fullSize))} 0.2s`,
   position: "absolute",
   minWidth: 600,
-  minHeight: 200,
   zIndex: theme.zIndex.modal,
   maxWidth: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the screen!
-  maxHeight: `calc(100% - ${theme.space.element * 2}px)`,
+
   ...(fullSize
     ? // Full-size specific rules
       {
@@ -45,6 +44,7 @@ const Container = styled(Card)<Partial<Props>>(({ theme, fullSize }) => ({
         width: 1110,
         display: "grid",
         gridTemplateRows: "40px 100%",
+        maxHeight: `calc(100% - ${theme.space.element * 2}px)`,
       }
     : // Regular size rules
       {
