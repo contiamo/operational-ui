@@ -27,7 +27,7 @@ export interface Props {
   children: (confirm: <T>(options: ConfirmOptions<T>) => void) => React.ReactNode
 }
 
-const actionsBarSize = 56
+const actionsBarSize = 36
 
 const Actions = styled("div")`
   margin-top: ${({ theme }) => theme.space.element}px;
