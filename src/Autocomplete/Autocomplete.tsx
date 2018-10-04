@@ -31,11 +31,11 @@ export interface AutocompleteProps<TValue> {
   /**
    * Message to display when there are no results.
    */
-  noResultsMessage?: string | Item
+  noResultsMessage?: string | Item<TValue>
   /**
    * Called when a result is selected.
    */
-  onResultClick: (item?: string | Item) => void
+  onResultClick: (item: Item<TValue>) => void
   /**
    * Called on search input change.
    */
@@ -43,14 +43,14 @@ export interface AutocompleteProps<TValue> {
   /**
    * Search results
    */
-  results?: Array<{ label: string; value: TValue }>
+  results?: Array<Item<TValue>>
   /**
    * The value of the Search
    */
   value: string
 }
 
-const Container = styled(ContextMenu)<Partial<AutocompleteProps<any>>>`
+const Container = styled(ContextMenu)<{ fullWidth: boolean }>`
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "fit-content")};
   display: flex;
   align-items: center;
@@ -86,9 +86,9 @@ function Autocomplete<TValue>({
   return (
     <Container
       iconLocation="right"
-      fullWidth={fullWidth}
+      fullWidth={Boolean(fullWidth)}
       items={makeItems({ results, value, resultIcon, noResultsMessage })}
-      onClick={onResultClick}
+      onClick={item => onResultClick(item as IContextMenuItem<TValue>)}
     >
       {loading && <Progress bottom />}
       <Input hint={hint} fullWidth={true} value={value} onChange={onChange} label={label} />
