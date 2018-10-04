@@ -12,46 +12,64 @@ export interface Props {
   onClose?: () => void
   title?: CardProps["title"]
   action?: CardProps["action"]
+  fullSize?: boolean
 }
 
-const fromTop = keyframes`
+const fromTop = (fullSize: boolean) => {
+  const left = fullSize ? 0 : "-50%"
+  return keyframes`
   0% {
-    transform: translate(-50%, -10px)
+    transform: translate(${left}, -10px)
   }
   100% {
-    transform: translate(-50%, 0)
+    transform: translate(${left}, 0)
   }
 `
+}
 
-const Container = styled(Card)(({ theme }) => ({
+const Container = styled(Card)<Partial<Props>>(({ theme, fullSize }) => ({
+  top: fullSize ? theme.space.content : theme.space.element,
+  left: fullSize ? 20 : "50%",
+  height: fullSize ? `calc(100% - ${theme.space.element + theme.space.content}px)` : "fit-content",
+  animation: `${fromTop(Boolean(fullSize))} 0.2s`,
   position: "absolute",
-  top: theme.space.element,
-  left: "50%",
-  transform: "translate(-50%, 0)",
-  animation: `${fromTop} 0.2s`,
   minWidth: 600,
   minHeight: 200,
   zIndex: theme.zIndex.modal,
   display: "flex",
   flexDirection: "column",
+  maxWidth: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the screen!
+
+  ...(fullSize
+    ? // Full-size specific rules
+      {
+        border: 0,
+        width: 1110,
+      }
+    : // Regular size rules
+      {
+        transform: "translate(-50%, 0)",
+      }),
 }))
 
-const Content = styled("div")({
+const Content = styled("div")(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
-  /**
-   * Moved the min-height from the container to be driven by
-   * the content. Accounting for the padding of the Card Content
-   * which is what is restricting the dynamic growth.
-   */
-  minHeight: 120,
-})
+
+  // Invert control of spacing from Card to Modal
+  margin: theme.space.element * -1,
+  padding: theme.space.element,
+
+  // Ensure scrollability if content is too long
+  height: `calc(100% + ${theme.space.element * 2}px)`, // height + padding top + padding bottom
+  overflow: "auto",
+}))
 
 const ControlledModal: React.SFC<Props> = (props: Props) => (
   <>
     <Overlay id={props.id} className={props.className} onClick={props.onClose} />
-    <Container className={props.contentClassName} title={props.title} action={props.action}>
+    <Container className={props.contentClassName} fullSize={props.fullSize} title={props.title} action={props.action}>
       <Content>{props.children}</Content>
     </Container>
   </>
