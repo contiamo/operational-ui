@@ -16,13 +16,13 @@ export interface Props {
 }
 
 const fromTop = (fullSize: boolean) => {
-  const left = fullSize ? 0 : "-50%"
+  const translateX = fullSize ? 0 : "-50%"
   return keyframes`
   0% {
-    transform: translate(${left}, -10px)
+    transform: translate(${translateX}, -10px)
   }
   100% {
-    transform: translate(${left}, 0)
+    transform: translate(${translateX}, 0)
   }
 `
 }
