@@ -16,12 +16,13 @@ export interface Props {
   tabIndex: number
 }
 
-export interface IContextMenuItem {
+export interface IContextMenuItem<TValue = any> {
   label: string
   description?: string
   icon?: IconProps["name"]
   iconColor?: keyof OperationalStyleConstants["color"]
   onClick?: (item: StringOrItem) => void
+  value?: TValue
 }
 
 const Container = styled("div")<Props>(({ align, theme, onClick, condensed, width, item }) => ({
