@@ -47,7 +47,7 @@ export interface AutocompleteProps<TValue> {
   /**
    * The value of the Search
    */
-  value: ""
+  value: string
 }
 
 const Container = styled(ContextMenu)<Partial<AutocompleteProps<any>>>`
