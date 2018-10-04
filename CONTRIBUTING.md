@@ -10,7 +10,7 @@ Also as a guideline, always try to keep your PR as small as possible. Focus on o
 
 As creating an issue or a pull request, please begin it with the following prefixes
 
-- **`**Breaking**`** (For when a change that will break the API)
+- **`**Breaking**`** (For a change that will break the API)
 - **`**Feature**`** (For when you add something that doesn’t break the API & adds more functionality to the current API)
 - **`**Fix**`** (For when you fix something that previously didn’t function or appear correctly)
 
