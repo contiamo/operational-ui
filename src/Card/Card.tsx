@@ -119,6 +119,7 @@ const Content = styled("div")`
 
   /* Allow dynamic height */
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
   flex: 1;
 `
