@@ -116,12 +116,6 @@ const Container = styled("div")(({ theme }) => ({
 
 const Content = styled("div")`
   padding: ${({ theme }) => theme.space.element}px;
-
-  /* Allow dynamic height */
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  flex: 1;
 `
 
 const SectionsContainer = styled("div")<{ stackHorizontal: boolean }>`

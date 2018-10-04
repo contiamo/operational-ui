@@ -28,23 +28,23 @@ const fromTop = (fullSize: boolean) => {
 }
 
 const Container = styled(Card)<Partial<Props>>(({ theme, fullSize }) => ({
-  top: fullSize ? theme.space.content : theme.space.element,
+  top: theme.space.element,
   left: fullSize ? theme.space.element : "50%",
-  height: fullSize ? `calc(100% - ${theme.space.element + theme.space.content}px)` : "fit-content",
+  height: fullSize ? "100%" : "fit-content",
   animation: `${fromTop(Boolean(fullSize))} 0.2s`,
   position: "absolute",
   minWidth: 600,
   minHeight: 200,
   zIndex: theme.zIndex.modal,
-  display: "flex",
-  flexDirection: "column",
   maxWidth: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the screen!
-
+  maxHeight: `calc(100% - ${theme.space.element * 2}px)`,
   ...(fullSize
     ? // Full-size specific rules
       {
         border: 0,
         width: 1110,
+        display: "grid",
+        gridTemplateRows: "40px 100%",
       }
     : // Regular size rules
       {
@@ -52,7 +52,7 @@ const Container = styled(Card)<Partial<Props>>(({ theme, fullSize }) => ({
       }),
 }))
 
-const Content = styled("div")(({ theme }) => ({
+const Content = styled("div")<Props>(({ theme, fullSize }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
@@ -62,7 +62,7 @@ const Content = styled("div")(({ theme }) => ({
   padding: theme.space.element,
 
   // Ensure scrollability if content is too long
-  height: `calc(100% + ${theme.space.element * 2}px)`, // height + padding top + padding bottom
+  height: fullSize ? `calc(100% - 60px)` : `100%`, // height + padding top + padding bottom
   overflow: "auto",
 }))
 
