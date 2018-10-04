@@ -29,7 +29,7 @@ const Container = styled("div")`
 
 const defaultStyle = {
   display: "inline-block",
-  animation: "rotation 11s 0s infinite linear",
+  animation: "rotation 11s 0s infinite ease-in-out",
 }
 
 class OperationalLogo extends React.Component<Props, {}> {
