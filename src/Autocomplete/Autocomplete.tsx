@@ -31,7 +31,7 @@ export interface AutocompleteProps<TValue> {
   /**
    * Message to display when there are no results.
    */
-  noResultsMessage?: string | Item<TValue>
+  noResultsMessage?: string
   /**
    * Called when a result is selected.
    */
