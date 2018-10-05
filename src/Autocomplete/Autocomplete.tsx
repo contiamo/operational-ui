@@ -94,18 +94,14 @@ class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, Re
   public render() {
     const {
       fullWidth,
-      label,
       results,
       resultIcon,
       loading,
       noResultsMessage,
-      onChange,
-      value,
       onResultClick,
-      hint,
-      placeholder,
-      clear,
       selectedResult,
+      children,
+      ...inputProps
     } = this.props
 
     const { isContextMenuOpen } = this.state
@@ -115,21 +111,16 @@ class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, Re
         open={isContextMenuOpen}
         iconLocation="right"
         fullWidth={Boolean(fullWidth)}
-        items={makeItems({ results, value, resultIcon, noResultsMessage })}
+        items={makeItems({ results, value: this.props.value, resultIcon, noResultsMessage })}
         onClick={item => onResultClick(item as IContextMenuItem<TValue>)}
       >
         {loading && <Progress bottom />}
         <Input
           onFocus={this.openContextMenu}
           onBlur={this.closeContextMenu}
-          hint={hint}
           fullWidth={true}
-          value={value}
-          onChange={onChange}
-          label={label}
-          placeholder={placeholder}
           preset={Boolean(selectedResult)}
-          clear={clear}
+          {...inputProps}
         />
       </Container>
     )
