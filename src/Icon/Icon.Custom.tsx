@@ -30,6 +30,30 @@ export const Bundle: React.SFC<IconProps> = ({ size, color, ...props }) => (
   </svg>
 )
 
+export const CaretDown: React.SFC<IconProps> = ({ size, color, ...props }) => (
+  <svg viewBox="0 0 360 360" fill={color} width={size} height={size} {...props}>
+    <path d="M320,120.187l-140,140l-140,-140l280,0Z" />
+  </svg>
+)
+
+export const CaretLeft: React.SFC<IconProps> = ({ size, color, ...props }) => (
+  <svg viewBox="0 0 360 360" fill={color} width={size} height={size} {...props}>
+    <path d="M240,320.187l-140,-140l140,-140l0,280Z" />
+  </svg>
+)
+
+export const CaretRight: React.SFC<IconProps> = ({ size, color, ...props }) => (
+  <svg viewBox="0 0 360 360" fill={color} width={size} height={size} {...props}>
+    <path d="M120,40.187l140,140l-140,140l0,-280Z" />
+  </svg>
+)
+
+export const CaretUp: React.SFC<IconProps> = ({ size, color, ...props }) => (
+  <svg viewBox="0 0 360 360" fill={color} width={size} height={size} {...props}>
+    <path d="M40,240.187l140,-140l140,140l-280,0Z" />
+  </svg>
+)
+
 export const Catalog: React.SFC<IconProps> = ({ size, color, ...props }) => (
   <svg viewBox="0 0 360 360" fill={color} width={size} height={size} {...props}>
     <path d="M20,60.188c0,0 129.492,-0.003 130,-0.001c19.813,0.085 29.778,10.314 30,30c0.003,0.268 0,220 0,220c0,0 -9.994,-29.902 -30,-30c-0.183,0 -130,0.001 -130,0.001l0,-220Zm340,-0.001c0,0 -129.492,-0.002 -130,0c-19.797,0.085 -29.775,10.074 -30,30c-0.003,0.268 0,220 0,220c0,0 10.302,-29.873 30,-30c0.183,-0.001 130,0 130,0l0,-220Zm-40,79.999l0,-40l-80,0l0,40l80,0Z" />
