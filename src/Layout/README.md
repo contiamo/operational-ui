@@ -85,6 +85,7 @@ const sidebar = (
                         <Form>
                           <Body>You can only add users who are already in your organization.</Body>
                           <Autocomplete
+                            onResultClick={result => alert("Thanks for choosing " + result.label)}
                             value="Click me for results..."
                             results={[
                               { label: "Tweakin', tweakin' off that 2CB, huh?" },

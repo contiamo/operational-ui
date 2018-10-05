@@ -35,14 +35,15 @@ const Actions = styled("div")`
   height: ${actionsBarSize}px;
 `
 
-const ControlledModalContent = styled("div")<{ fullSize: boolean }>(({ fullSize }) => ({
-  ...(fullSize
-    ? {
-        height: `calc(100% - ${actionsBarSize}px)`,
-        overflow: "auto",
-      }
-    : {}),
-}))
+const ControlledModalContent = styled("div")<{ fullSize: boolean }>(
+  ({ fullSize }) =>
+    fullSize
+      ? {
+          height: `calc(100% - ${actionsBarSize}px)`,
+          overflow: "auto",
+        }
+      : {},
+)
 
 export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
   public readonly state: State<T> = {
@@ -63,14 +64,17 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
     if (onCancel) {
       onCancel(state as T)
     }
+
     this.closeConfirm()
   }
 
   private onActionClick = () => {
     const { onConfirm, state } = this.state.options
+
     if (onConfirm) {
       onConfirm(state as T)
     }
+
     this.closeConfirm()
   }
 
@@ -85,8 +89,8 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
   }
 
   public render() {
-    const { actionButton, fullSize, title, cancelButton, state, body } = this.state.options
-    const isOpen = Boolean(body)
+    const { actionButton, fullSize, title, cancelButton, state, body: Body } = this.state.options
+    const isOpen = Boolean(Body)
 
     return (
       <>
@@ -94,12 +98,11 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
         {isOpen && (
           <ControlledModal fullSize={fullSize} title={title} onClose={this.closeConfirm}>
             <ControlledModalContent fullSize={Boolean(fullSize)}>
-              {typeof body === "function" && state
-                ? React.createElement(body, {
-                    setConfirmState: this.setConfirmState,
-                    confirmState: state,
-                  })
-                : body}
+              {typeof Body === "function" && state ? (
+                <Body setConfirmState={this.setConfirmState} confirmState={state} />
+              ) : (
+                Body
+              )}
             </ControlledModalContent>
             <Actions>
               {React.cloneElement(cancelButton || <Button>Cancel</Button>, {
