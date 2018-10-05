@@ -28,7 +28,7 @@ const sidebar = (
 
 // Container must set the height explicitly.
 // This component will set height to 100%.
-;<div style={{ height: 400 }}>
+;<div style={{ height: 600 }}>
   <Layout
     sidenav={sidebar}
     header={
@@ -81,22 +81,23 @@ const sidebar = (
                   onClick={() => {
                     confirm({
                       title: "Yikes",
-                      body: `Tweakin', tweakin' off that 2CB, huh?
-Is he gon' make it? TBD, huh
-Thought I was gon' run, DMC, huh?
-I done died and lived again on DMT, huh
-See, this a type of high that won't come down
-This the type of high that get you gunned down
-Yeezy, Yeezy trollin' OD, huh?
-Turn TMZ to Smack DVD, huh?
-`
-                        .split("\n")
-                        .map(line => (
-                          <>
-                            {line}
-                            <br />
-                          </>
-                        )),
+                      body: (
+                        <Form>
+                          <Body>You can only add users who are already in your organization.</Body>
+                          <Autocomplete
+                            onResultClick={result => alert("Thanks for choosing " + result.label)}
+                            value="Click me for results..."
+                            results={[
+                              { label: "Tweakin', tweakin' off that 2CB, huh?" },
+                              { label: "Is he gon' make it? TBD, huh" },
+                              { label: "Thought I was gon' run, DMC, huh?" },
+                              { label: "I done died and lived again on DMT, huh" },
+                            ]}
+                            fullWidth
+                            label="Sometimes I scare myself, myself"
+                          />
+                        </Form>
+                      ),
                     })
                   }}
                 >

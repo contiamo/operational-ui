@@ -62,15 +62,28 @@ const Content = styled("div")<Props>(({ theme, fullSize }) => ({
   padding: theme.space.element,
 
   // Ensure scrollability if content is too long
-  height: fullSize ? `calc(100% - 60px)` : `100%`, // height + padding top + padding bottom
-  overflow: "auto",
+  ...(fullSize
+    ? {
+        height: "100%", // height + padding top + padding bottom
+        overflow: "auto",
+      }
+    : {}),
 }))
 
-const ControlledModal: React.SFC<Props> = (props: Props) => (
+const ControlledModal: React.SFC<Props> = ({
+  id,
+  className,
+  contentClassName,
+  onClose,
+  fullSize,
+  title,
+  action,
+  children,
+}: Props) => (
   <>
-    <Overlay id={props.id} className={props.className} onClick={props.onClose} />
-    <Container className={props.contentClassName} fullSize={props.fullSize} title={props.title} action={props.action}>
-      <Content>{props.children}</Content>
+    <Overlay id={id} className={className} onClick={onClose} />
+    <Container className={contentClassName} fullSize={fullSize} title={title} action={action}>
+      <Content fullSize={fullSize}>{children}</Content>
     </Container>
   </>
 )
