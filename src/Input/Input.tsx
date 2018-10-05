@@ -151,7 +151,7 @@ class Input extends React.Component<InputProps, State> {
     return this.props.copy ? (
       <CopyToClipboard text={this.props.value || ""} onCopy={this.showTooltip}>
         <InputButton>
-          {this.state.showTooltip && <Tooltip left>Copied!</Tooltip>}
+          {this.state.showTooltip && <Tooltip bottom>Copied to clipboard</Tooltip>}
           <Icon name="Copy" size={16} />
         </InputButton>
       </CopyToClipboard>
