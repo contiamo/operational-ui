@@ -1,5 +1,5 @@
 import * as React from "react"
-import Icon, { IconProps } from "../Icon/Icon"
+import Icon, { IconName, IconProps } from "../Icon/Icon"
 import { darken } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
@@ -11,21 +11,24 @@ export interface Props {
   width?: string | number
   onClick?: () => void
   align?: "left" | "right"
+  iconLocation?: "left" | "right"
   item: StringOrItem
+  tabIndex: number
 }
 
-export interface IContextMenuItem {
+export interface IContextMenuItem<TValue = any> {
   label: string
   description?: string
   icon?: IconProps["name"]
   iconColor?: keyof OperationalStyleConstants["color"]
   onClick?: (item: StringOrItem) => void
+  value?: TValue
 }
 
 const Container = styled("div")<Props>(({ align, theme, onClick, condensed, width, item }) => ({
   userSelect: "none",
   label: "contextmenuitem",
-  width: width || (condensed ? 160 : 250),
+  width: width || (condensed ? 160 : "100%"),
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
@@ -73,14 +76,15 @@ const Description = styled("p")`
   overflow: hidden;
 `
 
-const ContentContainer = styled("div")`
+const ContentContainer = styled("div")<Partial<Props>>`
   line-height: ${({ theme }) => theme.font.lineHeight};
   padding: ${({ theme }) => theme.space.content}px 0;
   width: calc(100% - ${({ theme }) => theme.space.content}px);
 `
 
-const ContextMenuIcon = styled(Icon)`
+const ContextMenuIcon = styled(Icon)<{ iconlocation_: Props["iconLocation"] }>`
   flex: 0 0 auto;
+  margin-left: ${({ iconlocation_ }) => (iconlocation_ && iconlocation_ === "right" ? "auto" : 0)};
 `
 
 const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
@@ -101,11 +105,21 @@ const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
   )
 }
 
+const InPlaceIcon = (props: Props) =>
+  typeof props.item !== "string" ? (
+    <ContextMenuIcon
+      iconlocation_={props.iconLocation}
+      color={props.item.iconColor}
+      left={props.iconLocation === "left" || !props.iconLocation}
+      name={props.item.icon as IconName}
+    />
+  ) : null
+
 const ContextMenuItem: React.SFC<Props> = props => (
   <Container {...props} condensed={props.condensed}>
-    {typeof props.item !== "string" &&
-      props.item.icon && <ContextMenuIcon color={props.item.iconColor} left name={props.item.icon} />}
+    {(!props.iconLocation || props.iconLocation === "left") && <InPlaceIcon {...props} />}
     <Content value={props.item} />
+    {props.iconLocation === "right" && <InPlaceIcon {...props} />}
   </Container>
 )
 

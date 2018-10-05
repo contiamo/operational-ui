@@ -5,6 +5,7 @@ export const CardColumns = styled("div")<React.Props<{}>>(({ children, theme }) 
   display: "flex",
   flexWrap: "wrap",
   margin: -(theme.space.element / 2),
+  maxWidth: "100%",
   "& > *": {
     flexBasis: `${React.Children.count(children)}%`,
   },

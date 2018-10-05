@@ -21,28 +21,6 @@ exports[`ContextMenu Component Should render 1`] = `
         d="M320,340.187l-280,0l0,-320l280,0l0,320Zm-120,-59.999l0,-40l-120,0l0,40l120,0Zm80,-80l0,-40l-200,0l0,40l200,0Zm0,-80l0,-40l-200,0l0,40l200,0Z"
       />
     </svg>
-    <div
-      class="css-1m1l0js"
-    >
-      <div
-        class="css-eql6c9-contextmenuitem"
-        width="100%"
-      >
-        Item 1
-      </div>
-      <div
-        class="css-eql6c9-contextmenuitem"
-        width="100%"
-      >
-        Item 2
-      </div>
-      <div
-        class="css-eql6c9-contextmenuitem"
-        width="100%"
-      >
-        Item 3
-      </div>
-    </div>
   </div>
 </div>
 `;

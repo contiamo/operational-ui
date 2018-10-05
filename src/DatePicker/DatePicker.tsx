@@ -3,6 +3,7 @@ import { Icon } from "../"
 import { DefaultProps } from "../types"
 import { Label, LabelText } from "../utils/mixins"
 
+import { keyCodes } from "../utils"
 import Month from "./DatePicker.Month"
 import { Container, DatePickerCard, IconContainer, Input, MonthNav, Toggle } from "./DatePicker.styles"
 import { changeMonth, months, toDate, toYearMonthDay, validateDateString } from "./DatePicker.utils"
@@ -87,7 +88,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
 
   public componentDidMount() {
     this.keypressHandler = (ev: any) => {
-      if (ev.keyCode !== 27) {
+      if (ev.keyCode !== keyCodes.esc) {
         return
       }
 

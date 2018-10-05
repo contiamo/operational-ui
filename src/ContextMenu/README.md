@@ -1,12 +1,26 @@
 Context menus are nested menus that can expand from anywhere on a page. Their use is encouraged in the header and in the upper right corner of cards.
 
-### Usage
+### Basic Usage
 
 ```jsx
 const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
 ;<ContextMenu items={menuItems} onClick={item => alert(`clicked ${item}`)}>
   <span>Click here</span>
 </ContextMenu>
+```
+
+### Usage with Icon
+
+```jsx
+const menuItems = [{ label: "Menu 1", icon: "Search" }, "Menu 2", "Menu 3"]
+;<>
+  <ContextMenu items={menuItems} onClick={item => alert(`clicked ${item}`)}>
+    <Button>Click here for icon on left</Button>
+  </ContextMenu>
+  <ContextMenu iconLocation="right" items={menuItems} onClick={item => alert(`clicked ${item}`)}>
+    <Button color="primary">Click here for icon on right</Button>
+  </ContextMenu>
+</>
 ```
 
 #### Condensed

@@ -2,7 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-import { floatIn, readableTextColor, resetTransform } from "../utils"
+import { floatIn, keyCodes, readableTextColor, resetTransform } from "../utils"
 import { expandColor } from "../utils/constants"
 import { inputFocus, Label, LabelText } from "../utils/mixins"
 import SelectFilter from "./Select.Filter"
@@ -157,7 +157,7 @@ class Select extends React.Component<SelectProps, State> {
   }
 
   public handleEsc = (e: KeyboardEvent) => {
-    if (e.keyCode === 27) {
+    if (e.keyCode === keyCodes.esc) {
       this.close()
     }
   }
