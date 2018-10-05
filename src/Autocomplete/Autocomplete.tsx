@@ -51,11 +51,11 @@ export interface AutocompleteProps<TValue> {
   /**
    * Clear the field
    */
-  clear: InputProps["clear"]
+  clear?: InputProps["clear"]
   /**
    * A placeholder for the input field
    */
-  placeholder: InputProps["placeholder"]
+  placeholder?: InputProps["placeholder"]
   /**
    * Is a result selected?
    */
