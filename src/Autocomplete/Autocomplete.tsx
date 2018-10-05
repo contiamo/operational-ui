@@ -48,6 +48,18 @@ export interface AutocompleteProps<TValue> {
    * The value of the Search
    */
   value: string
+  /**
+   * Clear the field
+   */
+  clear: InputProps["clear"]
+  /**
+   * A placeholder for the input field
+   */
+  placeholder: InputProps["placeholder"]
+  /**
+   * Is a result selected?
+   */
+  selectedResult?: Item<TValue>
 }
 
 const Container = styled(ContextMenu)<{ fullWidth: boolean }>`
@@ -82,6 +94,9 @@ function Autocomplete<TValue>({
   value,
   onResultClick,
   hint,
+  placeholder,
+  clear,
+  selectedResult,
 }: AutocompleteProps<TValue>) {
   return (
     <Container
@@ -91,7 +106,16 @@ function Autocomplete<TValue>({
       onClick={item => onResultClick(item as IContextMenuItem<TValue>)}
     >
       {loading && <Progress bottom />}
-      <Input hint={hint} fullWidth={true} value={value} onChange={onChange} label={label} />
+      <Input
+        hint={hint}
+        fullWidth={true}
+        value={value}
+        onChange={onChange}
+        label={label}
+        placeholder={placeholder}
+        preset={Boolean(selectedResult)}
+        clear={clear}
+      />
     </Container>
   )
 }
