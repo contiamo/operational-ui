@@ -83,41 +83,57 @@ function makeItems<TValue>({ value, results, resultIcon, noResultsMessage }: Par
   return [noResultsMessage || ""]
 }
 
-function Autocomplete<TValue>({
-  fullWidth,
-  label,
-  results,
-  resultIcon,
-  loading,
-  noResultsMessage,
-  onChange,
-  value,
-  onResultClick,
-  hint,
-  placeholder,
-  clear,
-  selectedResult,
-}: AutocompleteProps<TValue>) {
-  return (
-    <Container
-      iconLocation="right"
-      fullWidth={Boolean(fullWidth)}
-      items={makeItems({ results, value, resultIcon, noResultsMessage })}
-      onClick={item => onResultClick(item as IContextMenuItem<TValue>)}
-    >
-      {loading && <Progress bottom />}
-      <Input
-        hint={hint}
-        fullWidth={true}
-        value={value}
-        onChange={onChange}
-        label={label}
-        placeholder={placeholder}
-        preset={Boolean(selectedResult)}
-        clear={clear}
-      />
-    </Container>
-  )
+const initialState = { isContextMenuOpen: false }
+
+class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, Readonly<typeof initialState>> {
+  public state = initialState
+
+  private openContextMenu = () => this.setState(() => ({ isContextMenuOpen: true }))
+  private closeContextMenu = () => this.setState(() => ({ isContextMenuOpen: false }))
+
+  public render() {
+    const {
+      fullWidth,
+      label,
+      results,
+      resultIcon,
+      loading,
+      noResultsMessage,
+      onChange,
+      value,
+      onResultClick,
+      hint,
+      placeholder,
+      clear,
+      selectedResult,
+    } = this.props
+
+    const { isContextMenuOpen } = this.state
+
+    return (
+      <Container
+        open={isContextMenuOpen}
+        iconLocation="right"
+        fullWidth={Boolean(fullWidth)}
+        items={makeItems({ results, value, resultIcon, noResultsMessage })}
+        onClick={item => onResultClick(item as IContextMenuItem<TValue>)}
+      >
+        {loading && <Progress bottom />}
+        <Input
+          onFocus={this.openContextMenu}
+          onBlur={this.closeContextMenu}
+          hint={hint}
+          fullWidth={true}
+          value={value}
+          onChange={onChange}
+          label={label}
+          placeholder={placeholder}
+          preset={Boolean(selectedResult)}
+          clear={clear}
+        />
+      </Container>
+    )
+  }
 }
 
 export default Autocomplete
