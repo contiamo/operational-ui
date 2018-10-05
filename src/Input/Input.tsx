@@ -121,7 +121,8 @@ const InputField = styled("input")<{
   preset: InputProps["preset"]
   disabled: InputProps["disabled"]
   clear: InputProps["clear"]
-}>(({ theme, disabled, isError, withIconButton, preset, clear }) => {
+  value: InputProps["value"]
+}>(({ theme, disabled, isError, withIconButton, preset, clear, value }) => {
   const { backgroundColor, opacity } = getCommonFieldStyles({ preset, disabled })(theme)
 
   return {
@@ -142,7 +143,7 @@ const InputField = styled("input")<{
     fontWeight: preset ? theme.font.weight.medium : theme.font.weight.regular,
     color: preset ? theme.color.text.dark : theme.color.text.default,
     backgroundColor,
-    ...(clear ? { borderRight: 0 } : {}),
+    ...(clear && value ? { borderRight: 0 } : {}),
     "&:focus": inputFocus({
       theme,
       isError,
@@ -332,11 +333,12 @@ class Input extends React.Component<InputProps, State> {
             autoComplete={autoComplete}
             withIconButton={withIconButton}
           />
-          {this.props.clear && (
-            <ClearButton disabled={Boolean(disabled)} preset={Boolean(preset)} onClick={this.props.clear}>
-              <Icon color="color.text.lightest" name="No" />
-            </ClearButton>
-          )}
+          {this.props.clear &&
+            this.props.value && (
+              <ClearButton disabled={Boolean(disabled)} preset={Boolean(preset)} onClick={this.props.clear}>
+                <Icon color="color.text.lightest" name="No" />
+              </ClearButton>
+            )}
         </InputFieldContainer>
         {error ? <FormFieldError>{error}</FormFieldError> : null}
       </>

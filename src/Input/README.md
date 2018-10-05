@@ -27,6 +27,36 @@ class StatefulInput extends React.Component {
 ;<StatefulInput />
 ```
 
+### Clearable Value
+
+```jsx
+initialState = { value: "Clear me..." }
+;<Input value={state.value} onChange={value => setState({ value })} clear={() => setState({ value: undefined })} />
+```
+
+### Pre-set Value
+
+```jsx
+<Input value="I came from an Autocomplete or something..." preset />
+```
+
+```jsx
+initialState = { value: "Clear me..." }
+;<Input
+  value={state.value}
+  onChange={value => setState({ value })}
+  clear={() => setState({ value: undefined })}
+  label="Phone number"
+  hint="Please use country code"
+/>
+```
+
+### With help tooltip
+
+```jsx
+<Input value="12" label="Phone number" hint="Please use country code" />
+```
+
 ### With help tooltip
 
 ```jsx
