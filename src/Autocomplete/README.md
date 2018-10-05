@@ -74,6 +74,7 @@ updateSearch = text => {
 }
 ;<div style={{ display: "flex", alignItems: "flex-start" }}>
   <Autocomplete
+    fullWidth
     value={state.search}
     loading={state.loading}
     resultIcon="Add"
@@ -82,7 +83,7 @@ updateSearch = text => {
     placeholder="Search for Pokémon..."
     selectedResult={state.chosenPokemon}
     label="Find a Pokémon..."
-    hint={`Try "Hitmon"`}
+    hint={`Try "char"`}
     clear={state.chosenPokemon && (() => setState({ search: undefined, chosenPokemon: undefined }))}
     onChange={updateSearch}
     onResultClick={result => {

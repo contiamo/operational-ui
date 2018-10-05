@@ -77,7 +77,6 @@ const InputFieldContainer = styled("div")<{
   align-items: center;
   justify-content: center;
   max-width: 100%;
-  min-width: ${inputWidth}px;
   ${({ fullWidth, withLabel, theme }) => `
     margin-right: ${withLabel ? 0 : theme.space.small}px;
     display: ${withLabel ? "flex" : "inline-flex"};
@@ -115,30 +114,44 @@ const InputField = styled("input")<{
   preset: InputProps["preset"]
   disabled: InputProps["disabled"]
   clear: InputProps["clear"]
-}>(({ theme, disabled, isError, withIconButton, preset, clear }) => ({
-  ...(withIconButton
-    ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
-    : { borderRadius: theme.borderRadius }),
-  fontSize: theme.font.size.body,
-  width: "100%", // The clear button is 40px
-  height: inputHeight,
-  label: "input",
-  flexGrow: 1,
-  padding: `${theme.space.small}px ${theme.space.medium}px`,
-  opacity: disabled ? 0.6 : 1.0,
-  font: "inherit",
-  border: "1px solid",
-  borderColor: isError ? theme.color.error : theme.color.border.default,
-  appearance: "none",
-  fontWeight: preset ? theme.font.weight.medium : theme.font.weight.regular,
-  color: preset ? theme.color.text.dark : theme.color.text.default,
-  backgroundColor: preset ? setAlpha(0.1)(theme.color.primary) : "initial",
-  ...(clear ? { paddingRight: 40 } : {}),
-  "&:focus": inputFocus({
-    theme,
-    isError,
-  }),
-}))
+}>(({ theme, disabled, isError, withIconButton, preset, clear }) => {
+  const makeBackgroundColor = () => {
+    if (disabled) {
+      return theme.color.disabled
+    }
+
+    if (preset) {
+      return setAlpha(0.1)(theme.color.primary)
+    }
+
+    return "initial"
+  }
+
+  return {
+    ...(withIconButton
+      ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
+      : { borderRadius: theme.borderRadius }),
+    fontSize: theme.font.size.body,
+    width: "100%", // The clear button is 40px
+    height: inputHeight,
+    label: "input",
+    flexGrow: 1,
+    padding: `${theme.space.small}px ${theme.space.medium}px`,
+    opacity: disabled ? 0.6 : 1.0,
+    font: "inherit",
+    border: "1px solid",
+    borderColor: isError ? theme.color.error : theme.color.border.default,
+    appearance: "none",
+    fontWeight: preset ? theme.font.weight.medium : theme.font.weight.regular,
+    color: preset ? theme.color.text.dark : theme.color.text.default,
+    backgroundColor: makeBackgroundColor(),
+    ...(clear ? { paddingRight: 40 } : {}),
+    "&:focus": inputFocus({
+      theme,
+      isError,
+    }),
+  }
+})
 
 const ClearButton = styled("div")`
   position: absolute;
@@ -185,20 +198,23 @@ class Input extends React.Component<InputProps, State> {
   }
 
   private getButtonElement = () => {
-    if (!this.props.icon && !this.props.copy) {
+    const { icon, copy, value, onIconClick } = this.props
+    const { showTooltip } = this.state
+
+    if (!icon && !copy) {
       return null
     }
 
-    return this.props.copy ? (
-      <CopyToClipboard text={this.props.value || ""} onCopy={this.showTooltip}>
+    return copy ? (
+      <CopyToClipboard text={value || ""} onCopy={this.showTooltip}>
         <InputButton>
-          {this.state.showTooltip && <Tooltip left>Copied!</Tooltip>}
+          {showTooltip && <Tooltip left>Copied!</Tooltip>}
           <Icon name="Copy" size={16} />
         </InputButton>
       </CopyToClipboard>
     ) : (
-      <InputButton onClick={this.props.onIconClick}>
-        {typeof this.props.icon === "string" ? <Icon name={this.props.icon as IconName} size={16} /> : this.props.icon}
+      <InputButton onClick={onIconClick}>
+        {typeof icon === "string" ? <Icon name={icon as IconName} size={16} /> : icon}
       </InputButton>
     )
   }
@@ -316,8 +332,8 @@ class Input extends React.Component<InputProps, State> {
             autoComplete={autoComplete}
             withIconButton={withIconButton}
           />
-          {this.props.clear &&
-            this.props.value && (
+          {clear &&
+            value && (
               <ClearButton onClick={this.props.clear}>
                 <Icon color="color.text.lightest" name="No" />
               </ClearButton>
