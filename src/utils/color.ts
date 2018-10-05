@@ -127,3 +127,8 @@ export const setBrightness = (color: string, targetBrightness: number): string =
   const brightness = c.getBrightness()
   return c.brighten((targetBrightness / brightness) * 100 - 100).toString()
 }
+
+export const setAlpha = (amount: number) => (color: string) =>
+  tinycolor(color)
+    .setAlpha(amount)
+    .toString()

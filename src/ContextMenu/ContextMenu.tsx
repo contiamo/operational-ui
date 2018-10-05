@@ -137,7 +137,7 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
     return (
       <Container {...props} align={align} onClick={this.toggle} onKeyUp={this.handleKeyPress}>
         {renderedChildren}
-        {this.state.isOpen && (
+        {(open || this.state.isOpen) && (
           <MenuContainer innerRef={node => (this.menu = node)} embedChildrenInMenu={this.props.embedChildrenInMenu}>
             {embedChildrenInMenu && renderedChildren}
             {items.map((item: string | IContextMenuItem, index: number) => {
