@@ -6,7 +6,6 @@ import Icon, { IconName } from "../Icon/Icon"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 import { DefaultProps } from "../types"
 import { setAlpha } from "../utils"
-import { OperationalStyleConstants } from "../utils/constants"
 import { FormFieldControl, FormFieldControls, FormFieldError, inputFocus, Label, LabelText } from "../utils/mixins"
 import styled from "../utils/styled"
 
@@ -22,7 +21,11 @@ export interface BaseProps extends DefaultProps {
   /** Label text, rendering the input inside a tag if specified. The `labelId` props is responsible for specifying for and id attributes. */
   label?: string
   inputRef?: (node: any) => void
-  /** Callback called when the input changes, with the new value as a string. This is used to update the value in the parent component, as per https://facebook.github.io/react/docs/forms.html#controlled-components. */
+  /**
+   * Callback called when the input changes, with the new value as a string.
+   * This is used to update the value in the parent component,
+   * as per https://facebook.github.io/react/docs/forms.html#controlled-components.
+   */
   onChange?: (newVal: string) => void
   /** Focus handler */
   onFocus?: (ev: any) => void
@@ -65,7 +68,6 @@ export type InputProps = BasePropsWithCopy | BasePropsWithoutCopy
 // Rendered height taking into account paddings, font-sizes and line-height
 const inputHeight = 36
 const inputWidth = 360
-const clearButtonSize = 40
 
 const InputFieldContainer = styled("div")<{
   fullWidth: InputProps["fullWidth"]
@@ -107,77 +109,58 @@ const InputButton = styled("div")`
   `};
 `
 
-const getCommonFieldStyles = ({ preset, disabled }: Pick<InputProps, "preset" | "disabled">) => (
-  theme: OperationalStyleConstants,
-) => ({
-  backgroundColor: preset ? setAlpha(0.1)(theme.color.primary) : "initial",
-  opacity: disabled ? 0.6 : 1.0,
-})
-
 const InputField = styled("input")<{
-  isStandalone: boolean
   isError: boolean
   withIconButton: boolean
   preset: InputProps["preset"]
   disabled: InputProps["disabled"]
   clear: InputProps["clear"]
-  value: InputProps["value"]
-}>(({ theme, disabled, isError, withIconButton, preset, clear, value }) => {
-  const { backgroundColor, opacity } = getCommonFieldStyles({ preset, disabled })(theme)
+}>(({ theme, disabled, isError, withIconButton, preset, clear }) => ({
+  ...(withIconButton
+    ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
+    : { borderRadius: theme.borderRadius }),
+  fontSize: theme.font.size.body,
+  width: "100%", // The clear button is 40px
+  height: inputHeight,
+  label: "input",
+  flexGrow: 1,
+  padding: `${theme.space.small}px ${theme.space.medium}px`,
+  opacity: disabled ? 0.6 : 1.0,
+  font: "inherit",
+  border: "1px solid",
+  borderColor: isError ? theme.color.error : theme.color.border.default,
+  appearance: "none",
+  fontWeight: preset ? theme.font.weight.medium : theme.font.weight.regular,
+  color: preset ? theme.color.text.dark : theme.color.text.default,
+  backgroundColor: preset ? setAlpha(0.1)(theme.color.primary) : "initial",
+  ...(clear ? { paddingRight: 40 } : {}),
+  "&:focus": inputFocus({
+    theme,
+    isError,
+  }),
+}))
 
-  return {
-    ...(withIconButton
-      ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
-      : { borderRadius: theme.borderRadius }),
-    fontSize: theme.font.size.body,
-    width: clear ? `calc(100% - ${clearButtonSize}px)` : "100%", // The clear button is 40px
-    height: inputHeight,
-    label: "input",
-    flexGrow: 1,
-    padding: "8px 12px",
-    opacity,
-    font: "inherit",
-    border: "1px solid",
-    borderColor: isError ? theme.color.error : theme.color.border.default,
-    appearance: "none",
-    fontWeight: preset ? theme.font.weight.medium : theme.font.weight.regular,
-    color: preset ? theme.color.text.dark : theme.color.text.default,
-    backgroundColor,
-    ...(clear && value ? { borderRight: 0 } : {}),
-    "&:focus": inputFocus({
-      theme,
-      isError,
-    }),
-  }
-})
+const ClearButton = styled("div")`
+  position: absolute;
+  top: 0; /* anchor the position to the top so the browser doesn't guess */
+  right: 0; /* not 12px but 0 because we want a _box_ to attach to the end of Input and not just an X pushed in from the right */
 
-const ClearButton = styled("div")<{
-  preset: InputProps["preset"]
-  disabled: InputProps["disabled"]
-}>(({ theme, preset, disabled }) => {
-  const { backgroundColor, opacity } = getCommonFieldStyles({ preset, disabled })(theme)
+  /* We also probably should specify the dimensions of this box */
+  width: ${inputHeight}px;
+  height: ${inputHeight}px;
 
-  return `display: flex;
+  /* Also, let's center the contents of this box */
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: ${clearButtonSize}px;
-  height: ${inputHeight}px;
-  margin-left: -1px;
-  border: 1px solid;
-  border-color: ${theme.color.border.default};
-  border-radius: ${theme.borderRadius}px;
-  border-left: 0;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  background: linear-gradient(to right, transparent 3%, ${backgroundColor} 2%);
-  opacity: ${opacity};
-  cursor: pointer;
 
-  > * {
+  cursor: pointer; /* Let the user know this is clickable */
+
+  /* We want the user to click on thix _box_, not the icon inside it */
+  > svg {
     pointer-events: none;
   }
 `
-})
 
 export const initialState = {
   showTooltip: false,
@@ -335,7 +318,7 @@ class Input extends React.Component<InputProps, State> {
           />
           {this.props.clear &&
             this.props.value && (
-              <ClearButton disabled={Boolean(disabled)} preset={Boolean(preset)} onClick={this.props.clear}>
+              <ClearButton onClick={this.props.clear}>
                 <Icon color="color.text.lightest" name="No" />
               </ClearButton>
             )}
