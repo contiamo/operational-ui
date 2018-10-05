@@ -132,7 +132,7 @@ const InputField = styled("input")<{
       ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
       : { borderRadius: theme.borderRadius }),
     fontSize: theme.font.size.body,
-    width: "100%", // The clear button is 40px
+    width: "100%",
     height: inputHeight,
     label: "input",
     flexGrow: 1,
