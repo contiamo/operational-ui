@@ -3,10 +3,11 @@ import CopyToClipboard from "react-copy-to-clipboard"
 
 import Hint from "../Hint/Hint"
 import Icon, { IconName } from "../Icon/Icon"
+import { LabelText } from "../LabelText/LabelText"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 import { DefaultProps } from "../types"
 import { setAlpha } from "../utils"
-import { FormFieldControl, FormFieldControls, FormFieldError, inputFocus, Label, LabelText } from "../utils/mixins"
+import { FormFieldControl, FormFieldControls, FormFieldError, inputFocus, Label } from "../utils/mixins"
 import styled from "../utils/styled"
 
 export interface BaseProps extends DefaultProps {
