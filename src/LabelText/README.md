@@ -8,5 +8,5 @@ This component renders label text, The `<LableText />` element is used to associ
 ## Usage
 
 ```jsx
-<LabelText>Name</LableText>
+<LabelText>Name</LabelText>
 ```
