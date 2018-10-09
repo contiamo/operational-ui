@@ -2,7 +2,7 @@ import { render } from "enzyme"
 import * as React from "react"
 import { Tree as ThemelessTree } from "../../index"
 import wrapDefaultTheme from "../../utils/wrap-default-theme"
-import { getInitialOpenPaths, togglePath } from "../Tree.utils"
+import { getDepth, getInitialOpenPaths, togglePath } from "../Tree.utils"
 
 const Tree = wrapDefaultTheme(ThemelessTree)
 
@@ -42,5 +42,16 @@ describe("Tree Component", () => {
         ],
       }),
     ).toEqual([[], [0, 0], [1]])
+  })
+  it("Calculates depth of a single-node tree", () => {
+    expect(getDepth({ label: "", childNodes: [] })).toEqual(1)
+  })
+  it("Calculates depth of a complex tree", () => {
+    expect(
+      getDepth({
+        label: "",
+        childNodes: [{ label: "", childNodes: [] }, { label: "", childNodes: [{ label: "", childNodes: [] }] }],
+      }),
+    ).toEqual(3)
   })
 })

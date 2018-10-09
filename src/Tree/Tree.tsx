@@ -6,7 +6,7 @@ import { DefaultProps } from "../types"
 import constants, { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 import { Tree as ITree } from "./Tree.types"
-import { containsPath, getInitialOpenPaths, togglePath } from "./Tree.utils"
+import { containsPath, getInitialOpenPaths, getMaxDepth, togglePath } from "./Tree.utils"
 
 export interface TreeProps extends DefaultProps {
   /** An array of tree structures */
@@ -165,12 +165,24 @@ const TreeRecursive: React.SFC<{
 
 class Tree extends React.Component<TreeProps, State> {
   public readonly state: State = {
-    openPaths: this.props.trees
-      .map((tree, index) => getInitialOpenPaths([index])(tree))
-      .reduce((current, accumulator) => [...current, ...accumulator], []),
+    openPaths: this.getOpenPaths(),
   }
 
-  public togglePath = (path: number[]) => {
+  private getOpenPaths() {
+    return this.props.trees
+      .map((tree, index) => getInitialOpenPaths([index])(tree))
+      .reduce((current, accumulator) => [...current, ...accumulator], [])
+  }
+
+  public componentDidUpdate(prevProps: TreeProps) {
+    if (getMaxDepth(this.props.trees) !== getMaxDepth(prevProps.trees)) {
+      this.setState(() => ({
+        openPaths: this.getOpenPaths(),
+      }))
+    }
+  }
+
+  private togglePath = (path: number[]) => {
     this.setState(prevState => ({
       openPaths: togglePath(path)(prevState.openPaths),
     }))
