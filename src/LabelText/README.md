@@ -8,5 +8,8 @@ This component renders label text, The `<LableText />` element is used to associ
 ## Usage
 
 ```jsx
-<LabelText>Name</LabelText>
+<LabelText for="male">Male</LabelText>
+<input type="radio" name="gender" id="male" value="male"><br>
+<LabelText for="female">Female</LabelText>
+<input type="radio" name="gender" id="female" value="female"><br>
 ```
