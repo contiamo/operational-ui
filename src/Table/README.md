@@ -58,7 +58,7 @@ const data = [
 />
 ```
 
-### With \_\_experimentalRowActions
+### With row actions
 
 ```jsx
 const data = [
@@ -106,12 +106,20 @@ const data = [
     <AvatarGroup avatars={item.collaborators} />,
   ])}
   onRowClick={(row, i) => console.log({ row, i })}
-  __experimentalRowActions={data.map(item => (
-    <>
-      <Button color="info">details</Button>
-      <Button color="error">delete</Button>
-    </>
-  ))}
+  rowActions={data.map(item => [
+    {
+      label: "Details",
+      onClick: () => {
+        console.log("Clicked details")
+      },
+    },
+    {
+      label: "Details",
+      onClick: () => {
+        console.log("Clicked delete")
+      },
+    },
+  ])}
 />
 ```
 

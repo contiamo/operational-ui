@@ -1,4 +1,5 @@
 import * as React from "react"
+import ActionMenu, { ActionMenuProps } from "../ActionMenu/ActionMenu"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
@@ -16,7 +17,7 @@ export interface TableProps extends DefaultProps {
   /**
    * Add actions on the end of each row
    */
-  __experimentalRowActions?: React.ReactNode[]
+  rowActions?: Array<ActionMenuProps["items"]>
 }
 
 const Container = styled("table")(({ theme }) => ({
@@ -83,6 +84,10 @@ const Actions = styled(Td)(({ theme }) => ({
   },
 }))
 
+const InlineActionMenu = styled(ActionMenu)`
+  display: inline-flex;
+`
+
 const EmptyView = styled(Td)(({ theme }) => ({
   color: theme.color.text.default,
   height: 50,
@@ -90,14 +95,7 @@ const EmptyView = styled(Td)(({ theme }) => ({
   textAlign: "center",
 }))
 
-const Table: React.SFC<TableProps> = ({
-  rows,
-  columns,
-  onRowClick,
-  rowActionName,
-  __experimentalRowActions,
-  ...props
-}) => {
+const Table: React.SFC<TableProps> = ({ rows, columns, onRowClick, rowActionName, rowActions, ...props }) => {
   return (
     <Container {...props}>
       <thead>
@@ -105,7 +103,7 @@ const Table: React.SFC<TableProps> = ({
           {columns.map((title, i) => (
             <Th key={i}>{title}</Th>
           ))}
-          {Boolean(__experimentalRowActions || rowActionName) && <Th />}
+          {Boolean(rowActions || rowActionName) && <Th />}
         </Tr>
       </thead>
       <tbody>
@@ -124,7 +122,16 @@ const Table: React.SFC<TableProps> = ({
                 <Td key={j}>{data}</Td>
               ))}
               {rowActionName && <Action>{rowActionName}</Action>}
-              {__experimentalRowActions && <Actions>{__experimentalRowActions[i]}</Actions>}
+              {rowActions && (
+                <Actions
+                  onClick={(ev: React.SyntheticEvent<Node>) => {
+                    // Table row click should not trigger if this action menu is manipulated
+                    ev.stopPropagation()
+                  }}
+                >
+                  <InlineActionMenu items={rowActions[i]} />
+                </Actions>
+              )}
             </Tr>
           ))
         ) : (
