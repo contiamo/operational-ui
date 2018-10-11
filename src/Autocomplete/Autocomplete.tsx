@@ -5,6 +5,7 @@ import { IContextMenuItem, IContextMenuItem as Item } from "../ContextMenu/Conte
 import Input, { InputProps } from "../Input/Input"
 import Progress from "../Progress/Progress"
 import styled from "../utils/styled"
+import { makeItems } from "./util/makeItems"
 
 export interface AutocompleteProps<TValue> {
   /**
@@ -68,29 +69,9 @@ const Container = styled(ContextMenu)<{ fullWidth: boolean }>`
   align-items: center;
 `
 
-export function makeItems<TValue>({
-  value,
-  results,
-  resultIcon,
-  noResultsMessage,
-}: Partial<AutocompleteProps<TValue>>): Array<IContextMenuItem<TValue>> {
-  if (!results || !value) {
-    return []
-  }
-
-  if (results && results.length) {
-    return results.map(result => ({
-      ...result,
-      ...(resultIcon ? { icon: result.icon || resultIcon } : { icon: result.icon }),
-    }))
-  }
-
-  return [{ label: noResultsMessage! } || { label: "" }]
-}
-
 const initialState = { isContextMenuOpen: false }
 
-class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, Readonly<typeof initialState>> {
+export class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, Readonly<typeof initialState>> {
   public state = initialState
 
   private openContextMenu = () => this.setState(() => ({ isContextMenuOpen: true }))

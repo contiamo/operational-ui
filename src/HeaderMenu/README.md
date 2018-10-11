@@ -11,20 +11,15 @@ const projectOptions = [
     label: "Contiamo",
     description: "Organization-wide content and settings",
   },
-  { key: "project1", label: "Project 1" },
-  { key: "project2", label: "Project 2" },
-  { key: "project3", label: "Project 3" },
+  { key: "project1", label: "Project 1", icon: "User" },
+  { key: "project2", label: "Project 2", icon: "Project" },
+  { key: "project3", label: "Project 3", icon: "Project" },
 ]
 
-const userOptions = [
-  { label: "My account", onClick: () => alert("Navigate to account") },
-  { label: "Logout", onClick: () => alert("Logout") },
-]
-
-initialState = { project: { key: "project1", label: "Project 1" } }
+initialState = { project: { key: "project1", label: "Project 1", icon: "Building" } }
 ;<div style={{ display: "inline-block", backgroundColor: "#3e3e3e" }}>
   <HeaderMenu items={projectOptions} onClick={project => setState(() => ({ project }))} withCaret>
-    {state.project.label}
+    <Icon left name={state.project.icon} /> {state.project.label}
   </HeaderMenu>
 </div>
 ```
