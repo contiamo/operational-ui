@@ -1,9 +1,11 @@
-This component renders label text, The `<LableText />` element is used to associate with a form field in `<input />` field. The `LabelText` tells the users the value that should be enterd in the associated input field. This is typically used within the following
+This component renders a semantic label tag. This is used internally in the following components if the label prop is specified:
 
 - Input
 - DatePicker
 - Select
 - Textarea
+
+`LabelText` is used internally, but is also exposed if you want to use it standalone with other components to achieve visual consistency with surrounding labeled input fields.
 
 ## Usage
 
