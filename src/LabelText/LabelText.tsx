@@ -2,7 +2,7 @@ import styled from "react-emotion"
 
 export const labelTextHeight = 15
 
-export const LabelText = styled("span")(({ theme }) => ({
+export const LabelText = styled("label")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
   display: "block",
   verticalAlign: "middle",
