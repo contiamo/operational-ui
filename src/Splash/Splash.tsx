@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import { readableTextColor } from "../utils"
+import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 import Animation from "./Splash.Animation"
 import OperationalLogo from "./Splash.Logo"
@@ -13,7 +14,7 @@ export interface SplashProps {
   /** Main content */
   children: React.ReactNode
   /** Backdrop color, dark enough to support white text as in the example. */
-  color: string
+  color: keyof OperationalStyleConstants["color"] | string
   /* Splash Logo */
   logo?: React.ReactElement<any> | string
 }
@@ -34,8 +35,8 @@ const Container = styled("div")<{ color: string }>`
   align-items: center;
   justify-content: center;
   transition: opacity 0.2s;
-  ${({ color }) => `
-      background-color: ${color};
+  ${({ theme, color }) => `
+      background-color: ${expandColor(theme, color) || color || theme.color.primary};
   `};
 `
 
