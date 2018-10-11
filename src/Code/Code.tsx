@@ -1,4 +1,3 @@
-import omit from "lodash/omit"
 import * as React from "react"
 import styled, { css } from "react-emotion"
 import Highlight from "react-highlight"
@@ -171,19 +170,22 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "codeTheme" | "collapsed" | 
   />
 )
 
-const Code: React.SFC<CodeProps> = ({ children, ...props }) => (
-  <Container {...omit(props, ["src", "collapsed", "shouldCollapse", "syntax"])}>
-    {props.syntax === "json" ? (
-      <StyledReactJson
-        codeTheme={props.codeTheme}
-        src={props.src}
-        collapsed={props.collapsed}
-        shouldCollapse={props.shouldCollapse}
-      />
-    ) : (
-      <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{children}</StyledHighlight>
-    )}
-  </Container>
-)
+const Code: React.SFC<CodeProps> = ({ children, ...props }) => {
+  const { src, collapsed, shouldCollapse, syntax, ...containerProps } = props
+  return (
+    <Container {...containerProps}>
+      {props.syntax === "json" ? (
+        <StyledReactJson
+          codeTheme={props.codeTheme}
+          src={props.src}
+          collapsed={props.collapsed}
+          shouldCollapse={props.shouldCollapse}
+        />
+      ) : (
+        <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{children}</StyledHighlight>
+      )}
+    </Container>
+  )
+}
 
 export default Code
