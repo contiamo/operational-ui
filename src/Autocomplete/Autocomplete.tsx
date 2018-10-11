@@ -68,19 +68,24 @@ const Container = styled(ContextMenu)<{ fullWidth: boolean }>`
   align-items: center;
 `
 
-function makeItems<TValue>({ value, results, resultIcon, noResultsMessage }: Partial<AutocompleteProps<TValue>>) {
+export function makeItems<TValue>({
+  value,
+  results,
+  resultIcon,
+  noResultsMessage,
+}: Partial<AutocompleteProps<TValue>>): Array<IContextMenuItem<TValue>> {
   if (!results || !value) {
     return []
   }
 
   if (results && results.length) {
-    return results.map(
-      (result: string | IContextMenuItem) =>
-        typeof result === "string" ? { label: result, icon: resultIcon } : { ...result, icon: resultIcon },
-    )
+    return results.map(result => ({
+      ...result,
+      ...(resultIcon ? { icon: result.icon || resultIcon } : { icon: result.icon }),
+    }))
   }
 
-  return [noResultsMessage || ""]
+  return [{ label: noResultsMessage! } || { label: "" }]
 }
 
 const initialState = { isContextMenuOpen: false }
@@ -90,6 +95,10 @@ class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, Re
 
   private openContextMenu = () => this.setState(() => ({ isContextMenuOpen: true }))
   private closeContextMenu = () => this.setState(() => ({ isContextMenuOpen: false }))
+
+  public static defaultProps = {
+    noResultsMessage: "No results found.",
+  }
 
   public render() {
     const {

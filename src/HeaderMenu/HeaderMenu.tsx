@@ -5,7 +5,7 @@ import styled from "../utils/styled"
 
 export interface HeaderMenuProps extends DefaultProps {
   /** Clickable component(s) from which menu appears  */
-  children: React.ReactNode[]
+  children: React.ReactNode | React.ReactNode[]
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
   onClick?: ContextMenuProps["onClick"]
   /** Items to display in dropdown */
