@@ -1,7 +1,8 @@
 import * as React from "react"
 import { Icon } from "../"
+import { LabelText } from "../LabelText/LabelText"
 import { DefaultProps } from "../types"
-import { Label, LabelText } from "../utils/mixins"
+import { Label } from "../utils/mixins"
 
 import { keyCodes } from "../utils"
 import Month from "./DatePicker.Month"

@@ -6,8 +6,9 @@ import styled from "../utils/styled"
 
 import Hint from "../Hint/Hint"
 import Icon from "../Icon/Icon"
+import { LabelText, labelTextHeight } from "../LabelText/LabelText"
 import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
-import { FormFieldControls, FormFieldError, inputFocus, Label, LabelText, labelTextHeight } from "../utils/mixins"
+import { FormFieldControls, FormFieldError, inputFocus, Label } from "../utils/mixins"
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
 

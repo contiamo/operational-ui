@@ -2,9 +2,10 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
+import { LabelText } from "../LabelText/LabelText"
 import { floatIn, keyCodes, readableTextColor, resetTransform } from "../utils"
 import { expandColor } from "../utils/constants"
-import { inputFocus, Label, LabelText } from "../utils/mixins"
+import { inputFocus, Label } from "../utils/mixins"
 import SelectFilter from "./Select.Filter"
 import SelectOption from "./Select.Option"
 
