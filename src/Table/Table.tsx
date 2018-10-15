@@ -11,10 +11,6 @@ export interface TableProps extends DefaultProps {
   /** Called on row click */
   onRowClick?: (row: Array<string | React.ReactNode>, index: number) => void
   /**
-   * Text to display on right on row hover
-   */
-  rowActionName?: string
-  /**
    * Add actions on the end of each row
    */
   rowActions?: Array<ActionMenuProps["items"]>
@@ -60,15 +56,6 @@ const Td = styled("td")(({ theme }) => ({
   },
 }))
 
-const Action = styled(Td)(({ theme }) => ({
-  textAlign: "right",
-  paddingRight: theme.space.content,
-  color: "transparent",
-  "tr:hover &, :hover": {
-    color: theme.color.text.action,
-  },
-}))
-
 const Actions = styled(Td)(({ theme }) => ({
   textAlign: "right",
   paddingRight: theme.space.small,
@@ -95,7 +82,7 @@ const EmptyView = styled(Td)(({ theme }) => ({
   textAlign: "center",
 }))
 
-const Table: React.SFC<TableProps> = ({ rows, columns, onRowClick, rowActionName, rowActions, ...props }) => {
+const Table: React.SFC<TableProps> = ({ rows, columns, onRowClick, rowActions, ...props }) => {
   return (
     <Container {...props}>
       <thead>
@@ -103,7 +90,7 @@ const Table: React.SFC<TableProps> = ({ rows, columns, onRowClick, rowActionName
           {columns.map((title, i) => (
             <Th key={i}>{title}</Th>
           ))}
-          {Boolean(rowActions || rowActionName) && <Th />}
+          {Boolean(rowActions) && <Th />}
         </Tr>
       </thead>
       <tbody>
@@ -121,7 +108,6 @@ const Table: React.SFC<TableProps> = ({ rows, columns, onRowClick, rowActionName
               {row.map((data, j) => (
                 <Td key={j}>{data}</Td>
               ))}
-              {rowActionName && <Action>{rowActionName}</Action>}
               {rowActions && (
                 <Actions
                   onClick={(ev: React.SyntheticEvent<Node>) => {
