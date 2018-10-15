@@ -1,5 +1,5 @@
-import { IContextMenuItem } from "../../ContextMenu/ContextMenu.Item"
-import { AutocompleteProps } from "../Autocomplete"
+import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
+import { AutocompleteProps } from "./Autocomplete"
 
 export function makeItems<TValue>({
   value,

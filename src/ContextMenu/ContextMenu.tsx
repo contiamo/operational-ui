@@ -14,7 +14,7 @@ export interface ContextMenuProps extends DefaultProps {
   /** Condensed mode */
   condensed?: boolean
   /** onClick method for all menu items */
-  onClick?: ((item: IContextMenuItem) => void)
+  onClick?: (item: IContextMenuItem) => void
   /** Handles click events anywhere outside the context menu container, including menu items. */
   onOutsideClick?: () => void
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
@@ -115,23 +115,6 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     embedChildrenInMenu: false,
   }
 
-  /**
-   * Preserve the public API: if users submit strings in props.items,
-   * store them in state as actual ContextMenuItems.
-   */
-
-  public static getDerivedStateFromProps(props: ContextMenuProps) {
-    return {
-      items: props.items.map(item => {
-        if (typeof item === "string") {
-          return { label: item }
-        } else {
-          return item
-        }
-      }),
-    }
-  }
-
   public componentDidUpdate(prevProps: ContextMenuProps) {
     if (this.state.isOpen) {
       document.addEventListener("click", this.toggle)
@@ -151,7 +134,6 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     }
 
     const { condensed, iconLocation, children, open, embedChildrenInMenu, align, width, ...props } = this.props
-    const { items } = this.state
 
     const renderedChildren = typeof children === "function" ? children(this.state.isOpen) : children
     return (
@@ -160,8 +142,10 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
         {(open || this.state.isOpen) && (
           <MenuContainer innerRef={node => (this.menu = node)} embedChildrenInMenu={this.props.embedChildrenInMenu}>
             {embedChildrenInMenu && renderedChildren}
-            {items.map((item, index: number) => {
+            {props.items.map((itemFromProps, index: number) => {
+              const item = typeof itemFromProps === "string" ? { label: itemFromProps } : itemFromProps
               const clickHandler = item.onClick ? item.onClick : this.props.onClick
+
               return (
                 <ContextMenuItem
                   tabIndex={this.state.focusedItemIndex === index ? 0 : -1} // ref "tabindex roving": https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex

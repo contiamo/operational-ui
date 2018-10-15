@@ -1,4 +1,4 @@
-import { makeItems } from "../util/makeItems"
+import { makeItems } from "../Autocomplete.utils"
 
 describe("Autocomplete", () => {
   it("should create items with an appropriate shape for usage given a value and a result set", () => {

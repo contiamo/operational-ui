@@ -5,7 +5,7 @@ import { IContextMenuItem, IContextMenuItem as Item } from "../ContextMenu/Conte
 import Input, { InputProps } from "../Input/Input"
 import Progress from "../Progress/Progress"
 import styled from "../utils/styled"
-import { makeItems } from "./util/makeItems"
+import { makeItems } from "./Autocomplete.utils"
 
 export interface AutocompleteProps<TValue> {
   /**
