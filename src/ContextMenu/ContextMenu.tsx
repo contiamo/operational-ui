@@ -37,7 +37,6 @@ export interface ContextMenuProps extends DefaultProps {
 export interface State {
   isOpen: boolean
   focusedItemIndex: number
-  items: IContextMenuItem[]
 }
 
 const Container = styled("div")(({ align }: { align: ContextMenuProps["align"] }) => ({
@@ -88,7 +87,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
 
   private handleKeyPress = ({ keyCode }: React.KeyboardEvent<HTMLDivElement>) => {
     if (keyCode === keyCodes.enter && this.props.onClick) {
-      this.props.onClick(this.state.items[this.state.focusedItemIndex])
+      this.props.onClick(this.makeItem(this.props.items[this.state.focusedItemIndex]))
       this.setState(() => ({ isOpen: false }))
       return
     }
@@ -104,10 +103,12 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     }
   }
 
+  private makeItem = (itemFromProps: ContextMenuProps["items"][-1]) =>
+    typeof itemFromProps === "string" ? { label: itemFromProps } : itemFromProps
+
   public readonly state: State = {
     isOpen: false,
     focusedItemIndex: 0,
-    items: [],
   }
 
   public static defaultProps: Partial<ContextMenuProps> = {
@@ -143,7 +144,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
           <MenuContainer innerRef={node => (this.menu = node)} embedChildrenInMenu={this.props.embedChildrenInMenu}>
             {embedChildrenInMenu && renderedChildren}
             {props.items.map((itemFromProps, index: number) => {
-              const item = typeof itemFromProps === "string" ? { label: itemFromProps } : itemFromProps
+              const item = this.makeItem(itemFromProps)
               const clickHandler = item.onClick ? item.onClick : this.props.onClick
 
               return (
