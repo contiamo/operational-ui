@@ -103,6 +103,10 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     }
   }
 
+  /**
+   * Preserve the public API: if users submit strings in props.items,
+   * convert them into actual ContextMenuItems.
+   */
   private makeItem = (itemFromProps: ContextMenuProps["items"][-1]) =>
     typeof itemFromProps === "string" ? { label: itemFromProps } : itemFromProps
 
