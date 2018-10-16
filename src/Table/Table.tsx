@@ -51,7 +51,7 @@ const Th = styled("th")(({ theme }) => ({
 }))
 
 const Td = styled("td")(({ theme }) => ({
-  verticalAlign: "center",
+  verticalAlign: "middle",
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.default,
   "&:first-child": {

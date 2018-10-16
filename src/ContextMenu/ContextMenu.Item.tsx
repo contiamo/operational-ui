@@ -3,6 +3,7 @@ import Icon, { IconName, IconProps } from "../Icon/Icon"
 import { darken } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
+import { ContextMenuProps } from "./ContextMenu"
 
 type StringOrItem = string | IContextMenuItem
 
@@ -21,7 +22,7 @@ export interface IContextMenuItem<TValue = any> {
   description?: string
   icon?: IconProps["name"]
   iconColor?: keyof OperationalStyleConstants["color"]
-  onClick?: (item: StringOrItem) => void
+  onClick?: ContextMenuProps["onClick"]
   value?: TValue
 }
 

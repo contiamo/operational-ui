@@ -1,8 +1,8 @@
 import * as React from "react"
-import styled, { keyframes } from "react-emotion"
+import { keyframes } from "react-emotion"
 import { Icon } from "../"
 import { DefaultProps } from "../types"
-import { lighten } from "../utils"
+import styled from "../utils/styled"
 
 export interface ProgressProps extends DefaultProps {
   /** Show an error instead of the progress */
@@ -26,7 +26,7 @@ const Container = styled("div")<ProgressProps>(
     backgroundColor: "transparent",
   },
   ({ theme, bottom }) => ({
-    zIndex: theme.deprecated.baseZIndex + 300,
+    zIndex: theme.zIndex.globalProgress,
     top: bottom ? "auto" : 0,
     bottom: bottom ? 0 : "auto",
   }),
@@ -44,10 +44,10 @@ const fillProgress = keyframes({
 const Bar = styled("div")<{ isError: boolean }>(({ theme, isError }) => ({
   width: "100%",
   height: 3,
-  backgroundColor: theme.deprecated.colors.info,
+  backgroundColor: theme.color.primary,
   ...(isError
     ? {
-        backgroundColor: theme.deprecated.colors.error,
+        backgroundColor: theme.color.error,
       }
     : {
         animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`,
@@ -55,37 +55,33 @@ const Bar = styled("div")<{ isError: boolean }>(({ theme, isError }) => ({
 }))
 
 const ErrorMessage = styled("div")(({ theme }) => ({
-  ...theme.deprecated.typography.body,
-  padding: `${theme.deprecated.spacing / 2}px ${theme.deprecated.spacing / 2}px`,
+  padding: `${theme.space.small}px ${theme.space.small}px`,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
   position: "relative",
-  zIndex: theme.deprecated.baseZIndex + 301,
   textAlign: "center",
-  backgroundColor: lighten(theme.deprecated.colors.error, 15),
-  color: theme.deprecated.colors.white,
+  backgroundColor: theme.color.error,
+  color: theme.color.white,
 }))
 
 const Action = styled("div")(({ theme }) => ({
   opacity: 0.7,
   display: "inline-block",
-  marginLeft: theme.deprecated.spacing,
+  marginLeft: theme.space.content,
   userSelect: "none",
   "& > *": {
     display: "inline-block",
     verticalAlign: "middle",
   },
   "& svg": {
-    width: theme.deprecated.spacing,
-    height: theme.deprecated.spacing,
-    marginRight: theme.deprecated.spacing / 4,
+    width: theme.space.content,
+    height: theme.space.content,
+    marginRight: theme.space.base,
   },
-  // Temporary hack since feather icons for refresh and close
-  // have a mismatch in size.
   ":first-of-type svg": {
-    width: (theme.deprecated.spacing * 3) / 4,
-    height: (theme.deprecated.spacing * 3) / 4,
+    width: theme.space.medium,
+    height: theme.space.medium,
   },
   ":hover": {
     opacity: 1,

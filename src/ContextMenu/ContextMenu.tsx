@@ -14,7 +14,7 @@ export interface ContextMenuProps extends DefaultProps {
   /** Condensed mode */
   condensed?: boolean
   /** onClick method for all menu items */
-  onClick?: (item?: string | IContextMenuItem) => void
+  onClick?: (item: IContextMenuItem) => void
   /** Handles click events anywhere outside the context menu container, including menu items. */
   onOutsideClick?: () => void
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
@@ -63,7 +63,7 @@ const MenuContainer = styled("div")<{
   minWidth: "fit-content",
 }))
 
-class ContextMenu extends React.Component<ContextMenuProps, State> {
+class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
   private menu: HTMLDivElement | null = null
 
   private toggle = () =>
@@ -87,7 +87,7 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
 
   private handleKeyPress = ({ keyCode }: React.KeyboardEvent<HTMLDivElement>) => {
     if (keyCode === keyCodes.enter && this.props.onClick) {
-      this.props.onClick(this.props.items[this.state.focusedItemIndex])
+      this.props.onClick(this.makeItem(this.props.items[this.state.focusedItemIndex]))
       this.setState(() => ({ isOpen: false }))
       return
     }
@@ -103,7 +103,14 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
     }
   }
 
-  public state: State = {
+  /**
+   * Preserve the public API: if users submit strings in props.items,
+   * convert them into actual ContextMenuItems.
+   */
+  private makeItem = (itemFromProps: ContextMenuProps["items"][-1]) =>
+    typeof itemFromProps === "string" ? { label: itemFromProps } : itemFromProps
+
+  public readonly state: State = {
     isOpen: false,
     focusedItemIndex: 0,
   }
@@ -131,7 +138,7 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
       throw new Error("No array of items has been provided for the ContextMenu.")
     }
 
-    const { items, condensed, iconLocation, children, open, embedChildrenInMenu, align, width, ...props } = this.props
+    const { condensed, iconLocation, children, open, embedChildrenInMenu, align, width, ...props } = this.props
 
     const renderedChildren = typeof children === "function" ? children(this.state.isOpen) : children
     return (
@@ -140,8 +147,10 @@ class ContextMenu extends React.Component<ContextMenuProps, State> {
         {(open || this.state.isOpen) && (
           <MenuContainer innerRef={node => (this.menu = node)} embedChildrenInMenu={this.props.embedChildrenInMenu}>
             {embedChildrenInMenu && renderedChildren}
-            {items.map((item: string | IContextMenuItem, index: number) => {
-              const clickHandler = (typeof item !== "string" && item.onClick) || this.props.onClick
+            {props.items.map((itemFromProps, index: number) => {
+              const item = this.makeItem(itemFromProps)
+              const clickHandler = item.onClick ? item.onClick : this.props.onClick
+
               return (
                 <ContextMenuItem
                   tabIndex={this.state.focusedItemIndex === index ? 0 : -1} // ref "tabindex roving": https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex

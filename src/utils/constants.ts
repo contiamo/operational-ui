@@ -171,6 +171,7 @@ const zIndex = {
   tooltip: 400,
   modal: 500,
   debugViewer: 1000,
+  globalProgress: 299,
 }
 
 /**

@@ -5,6 +5,7 @@ import { IContextMenuItem, IContextMenuItem as Item } from "../ContextMenu/Conte
 import Input, { InputProps } from "../Input/Input"
 import Progress from "../Progress/Progress"
 import styled from "../utils/styled"
+import { makeItems } from "./Autocomplete.utils"
 
 export interface AutocompleteProps<TValue> {
   /**
@@ -68,28 +69,17 @@ const Container = styled(ContextMenu)<{ fullWidth: boolean }>`
   align-items: center;
 `
 
-function makeItems<TValue>({ value, results, resultIcon, noResultsMessage }: Partial<AutocompleteProps<TValue>>) {
-  if (!results || !value) {
-    return []
-  }
-
-  if (results && results.length) {
-    return results.map(
-      (result: string | IContextMenuItem) =>
-        typeof result === "string" ? { label: result, icon: resultIcon } : { ...result, icon: resultIcon },
-    )
-  }
-
-  return [noResultsMessage || ""]
-}
-
 const initialState = { isContextMenuOpen: false }
 
-class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, Readonly<typeof initialState>> {
+export class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, Readonly<typeof initialState>> {
   public state = initialState
 
   private openContextMenu = () => this.setState(() => ({ isContextMenuOpen: true }))
   private closeContextMenu = () => this.setState(() => ({ isContextMenuOpen: false }))
+
+  public static defaultProps = {
+    noResultsMessage: "No results found.",
+  }
 
   public render() {
     const {
