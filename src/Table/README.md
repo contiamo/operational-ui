@@ -1,12 +1,23 @@
 Tables simply render a semantic HTML table structure based on raw data.
 
-### Usage
+### Simple usage
+
+You can render a simple use-case of the table by specifying a list of records and supplying the columns as a list of strings which would serve both as column heading and access keys for fields.
 
 ```js
-<Table columns={["Name", "Title"]} rows={[["Max", "Carpenter"], ["Moritz", "Baker"]]} />
+<Table
+  data={[{ name: "Max", profession: "Carpenter" }, { name: "Moritz", profession: "Baker" }]}
+  columns={["name", "profession"]}
+/>
 ```
 
-### With external data to format
+While this approach is convenient, it is not recommended because it makes it too easy to re-use record keys as table headings, and adds a strong coupling between data and view concerns.
+
+We suggest taking the time to think about the best way to describe the data fields and then specifying it explicitly as column headers. The following, slightly more verbose version of the API demonstrates how this can be achieved:
+
+### With explicit data formatting
+
+In this case, simple functions taking an individual record as an argument specify how cells should be rendered in a given column:
 
 ```jsx
 const data = [
@@ -45,21 +56,90 @@ const data = [
   },
 ]
 ;<Table
-  columns={["", "Name", "Last updated", "Tags", "Collaborators"]}
-  rows={data.map(item => [
-    <Icon name="Box" color="info" />,
-    item.name,
-    item.lastUpdated,
-    item.tags.map((tag, i) => <Chip key={i}>{tag}</Chip>),
-    <AvatarGroup avatars={item.collaborators} />,
-  ])}
-  onRowClick={(row, i) => console.log({ row, i })}
-  rowActionName="view details"
+  data={data}
+  columns={[
+    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+    { heading: "Name", cell: dataEntry => dataEntry.name },
+    { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
+    { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
+    { heading: "Collaborators", cell: dataEntry => <AvatarGroup avatars={dataEntry.collaborators} /> },
+  ]}
+  onRowClick={(dataEntry, i) => console.log({ dataEntry, i })}
+/>
+```
+
+### With icons
+
+```jsx
+const data = [
+  {
+    name: "Mega Deal Dev",
+    lastUpdated: "2018-06-06",
+    tags: ["agent-view", "production"],
+  },
+  {
+    name: "Mega Deal Dev",
+    lastUpdated: "2018-06-06",
+    tags: ["agent-view", "production"],
+  },
+  {
+    name: "Toy Bundle",
+    lastUpdated: "2018-06-06",
+    tags: ["agent-view", "production"],
+  },
+]
+;<Table
+  data={data}
+  icon={dataEntry => "Building"}
+  columns={[
+    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+    { heading: "Name", cell: dataEntry => dataEntry.name },
+    { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
+    { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
+  ]}
+  onRowClick={(dataEntry, i) => console.log({ dataEntry, i })}
+/>
+```
+
+### With default row action
+
+```jsx
+const data = [
+  {
+    name: "Mega Deal Dev",
+    lastUpdated: "2018-06-06",
+    tags: ["agent-view", "production"],
+  },
+  {
+    name: "Mega Deal Dev",
+    lastUpdated: "2018-06-06",
+    tags: ["agent-view", "production"],
+  },
+  {
+    name: "Toy Bundle",
+    lastUpdated: "2018-06-06",
+    tags: ["agent-view", "production"],
+  },
+]
+;<Table
+  data={data}
+  icon={dataEntry => "Building"}
+  iconColor={dataEntry => (dataEntry.name.indexOf("Mega") > -1 ? "primary" : "gray")}
+  columns={[
+    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+    { heading: "Name", cell: dataEntry => dataEntry.name },
+    { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
+    { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
+  ]}
+  onRowClick={(dataEntry, i) => console.log({ dataEntry, i })}
+  rowActionName="View Details"
 />
 ```
 
 ### With row actions
 
+Row actions are specified as a function of an individual record, returning action items conforming to the [ContextMenu](/#ContextMenu) API:
+
 ```jsx
 const data = [
   {
@@ -97,34 +177,36 @@ const data = [
   },
 ]
 ;<Table
-  columns={["", "Name", "Last updated", "Tags", "Collaborators"]}
-  rows={data.map(item => [
-    <Icon name="Box" color="info" />,
-    item.name,
-    item.lastUpdated,
-    item.tags.map((tag, i) => <Chip key={i}>{tag}</Chip>),
-    <AvatarGroup avatars={item.collaborators} />,
-  ])}
-  onRowClick={(row, i) => console.log({ row, i })}
-  rowActions={data.map(item => [
+  data={data}
+  columns={[
+    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+    { heading: "Name", cell: dataEntry => dataEntry.name },
+    { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
+    { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
+    { heading: "Collaborators", cell: dataEntry => <AvatarGroup avatars={dataEntry.collaborators} /> },
+  ]}
+  onRowClick={(dataEntry, dataEntryIndex) => console.log({ dataEntry, dataEntryIndex })}
+  rowActions={dataEntry => [
     {
       label: "Details",
       onClick: () => {
-        console.log("Clicked details")
+        console.log("Details on ", dataEntry)
       },
     },
     {
-      label: "Details",
+      label: "Delete",
       onClick: () => {
-        console.log("Clicked delete")
+        console.log("Deleting ", dataEntry)
       },
     },
-  ])}
+  ]}
 />
 ```
 
 ### Without data
 
+Tables render a default empty view if no records are specified.
+
 ```jsx
-<Table columns={["", "Name", "Last updated", "Tags", "Collaborators"]} rows={[]} />
+<Table columns={["", "Name", "Last updated", "Tags", "Collaborators"]} data={[]} />
 ```

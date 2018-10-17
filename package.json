@@ -93,7 +93,7 @@
     "@types/react-copy-to-clipboard": "^4.2.5",
     "@types/react-dom": "^16.0.6",
     "@types/react-router": "^4.0.28",
-    "@types/tinycolor2": "^1.4.0",
+    "@types/tinycolor2": "^1.4.1",
     "@types/url-regex": "^4.1.0",
     "auto-changelog": "^1.8.0",
     "danger": "^4.0.1",
