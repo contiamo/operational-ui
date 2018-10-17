@@ -68,7 +68,7 @@ export { default as Title } from "./Typography/Title"
 export { default as Small } from "./Typography/Small"
 
 // Internals components
-export { ConfirmBodyProps } from "./Internals/Confirm"
+export { ConfirmBodyProps, ConfirmOptions } from "./Internals/Confirm"
 export { Tab } from "./Internals/Tabs"
 
 // Utils
