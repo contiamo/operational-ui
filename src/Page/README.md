@@ -12,6 +12,22 @@ Here is a simple usage example:
 </Page>
 ```
 
+### Custom Colors
+
+Here's a page with a different color:
+
+```jsx
+;<Page title="My Purple Page" color="#aa00ff">
+  <Card>Hello, this is page content</Card>
+</Page>
+```
+
+```jsx
+;<Page title="My Errored Page" color="color.text.lighter">
+  <Card>Hello, this is page content</Card>
+</Page>
+```
+
 ### Properly handles grid rows
 
 Here is a simple usage example:
