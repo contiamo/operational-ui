@@ -12,8 +12,8 @@ export interface ConfirmOptions<T> {
   title: React.ReactNode
   body: React.ReactNode | React.ComponentType<ConfirmBodyProps<T>>
   fullSize?: boolean
-  cancelButton?: React.ReactElement<ButtonProps>
-  actionButton?: React.ReactElement<ButtonProps>
+  cancelButton?: React.ReactElement<ButtonProps> | ((confirmState: T) => React.ReactElement<ButtonProps>)
+  actionButton?: React.ReactElement<ButtonProps> | ((confirmState: T) => React.ReactElement<ButtonProps>)
   onConfirm?: (confirmState: T) => void
   onCancel?: (confirmState: T) => void
   state?: T
@@ -105,12 +105,20 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
               )}
             </ControlledModalContent>
             <Actions>
-              {React.cloneElement(cancelButton || <Button>Cancel</Button>, {
-                onClick: this.onCancelClick,
-              })}
-              {React.cloneElement(actionButton || <Button color="success">Confirm</Button>, {
-                onClick: this.onActionClick,
-              })}
+              {React.cloneElement(
+                typeof cancelButton === "function" ? cancelButton(state as T) : cancelButton || <Button>Cancel</Button>,
+                {
+                  onClick: this.onCancelClick,
+                },
+              )}
+              {React.cloneElement(
+                typeof actionButton === "function"
+                  ? actionButton(state as T)
+                  : actionButton || <Button color="success">Confirm</Button>,
+                {
+                  onClick: this.onActionClick,
+                },
+              )}
             </Actions>
           </ControlledModal>
         )}

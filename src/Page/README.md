@@ -555,7 +555,11 @@ const Tab = props => (
               </>
             ),
             cancelButton: <Button>Cancel</Button>,
-            actionButton: <Button color="primary">Confirm</Button>,
+            actionButton: state => (
+              <Button color="primary" disabled={state.var1 === "no"}>
+                Confirm
+              </Button>
+            ),
             onConfirm: state => alert(JSON.stringify(state, null, 2)),
           })
         }
