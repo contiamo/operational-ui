@@ -1,7 +1,6 @@
-import * as React from "react"
 import styled from "../utils/styled"
 
-const StyledLabelText = styled("label")(({ theme }) => ({
+export const LabelText = styled("label")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
   display: "block",
   verticalAlign: "middle",
@@ -10,8 +9,6 @@ const StyledLabelText = styled("label")(({ theme }) => ({
   color: theme.color.text.lightest,
   height: labelTextHeight,
 }))
-
-export const LabelText: React.SFC = props => <StyledLabelText {...props} />
 
 export const labelTextHeight = 15
 
