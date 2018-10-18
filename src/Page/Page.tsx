@@ -1,10 +1,11 @@
 import * as React from "react"
 
-import { Title } from ".."
 import Tabs, { Tab, tabsBarHeight } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps } from "../PageContent/PageContent"
 import { DefaultProps } from "../types"
+import { Title } from "../Typography/Title"
+import { readableTextColor } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
@@ -74,10 +75,13 @@ const Container = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.background.lighter,
 }))
 
-const TitleBar = styled("div")``
+const TitleBar = styled("div")<{ color: PageProps["color"] }>`
+  background-color: ${({ theme, color }) => expandColor(theme, color) || theme.color.primary};
+  color: ${({ theme, color }) =>
+    readableTextColor(expandColor(theme, color) || theme.color.primary, ["black", "white"])};
+`
 
-const TitleContainer = styled("div")<{ color: PageProps["color"] }>(({ theme, color }) => ({
-  backgroundColor: expandColor(theme, color) || theme.color.primary,
+const TitleContainer = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.space.element,
@@ -135,14 +139,13 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
         activeTabName={this.props.activeTabName}
         onTabChange={this.props.onTabChange}
         condensed={condensedTitle}
-        dark
       >
         {({ tabsBar, activeChildren }) => (
           <>
             {title && (
-              <TitleBar>
-                <TitleContainer color={color}>
-                  <Title color="white">{title}</Title>
+              <TitleBar color={color}>
+                <TitleContainer>
+                  <Title>{title}</Title>
                   {condensedTitle && tabsBar}
                   <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
                 </TitleContainer>
@@ -164,9 +167,9 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
     return (
       <>
         {title && (
-          <TitleBar>
-            <TitleContainer color={color}>
-              <Title color="white">{title}</Title>
+          <TitleBar color={color}>
+            <TitleContainer>
+              <Title>{title}</Title>
               <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
             </TitleContainer>
           </TitleBar>

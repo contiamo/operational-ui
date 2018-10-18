@@ -28,6 +28,12 @@ Here's a page with a different color:
 </Page>
 ```
 
+```jsx
+;<Page title="My White Page" color="white">
+  <Card>Hello, this is page content</Card>
+</Page>
+```
+
 ### Properly handles grid rows
 
 Here is a simple usage example:
@@ -112,6 +118,25 @@ const Tab = props => (
 )
 ;<Page
   title="Bundle detail"
+  tabs={[
+    { name: "overview", children: <Tab title="Overview" />, icon: "Search" },
+    { name: "jobs", children: <Tab title="Jobs" /> },
+    { name: "functions", children: <Tab title="Functions" /> },
+  ]}
+/>
+```
+
+### With White Tabs
+
+```jsx
+const Tab = props => (
+  <PageContent>
+    <Card title={`${props.title} Tab`} />
+  </PageContent>
+)
+;<Page
+  title="Bundle detail"
+  color="white"
   tabs={[
     { name: "overview", children: <Tab title="Overview" />, icon: "Search" },
     { name: "jobs", children: <Tab title="Jobs" /> },
