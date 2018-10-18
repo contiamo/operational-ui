@@ -15,7 +15,6 @@ export interface Props {
   activeTabName?: string
   onTabChange?: (newTabName: string) => void
   condensed?: boolean
-  dark?: boolean
   children: (childrenConfig: { tabsBar: React.ReactNode; activeChildren: React.ReactNode }) => React.ReactNode
 }
 
@@ -25,15 +24,15 @@ export interface State {
 
 export const tabsBarHeight = 40
 
-const TabsBar = styled("div")<{ condensed?: boolean; dark?: boolean }>(({ theme, condensed, dark }) => ({
+const TabsBar = styled("div")<{ condensed?: boolean }>(({ theme, condensed }) => ({
   display: "flex",
   alignItems: "flex-end",
   height: condensed ? theme.titleHeight : tabsBarHeight,
-  color: dark ? theme.color.white : theme.color.text.light,
+  color: "inherit",
   ...(condensed ? { paddingLeft: 30 } : {}),
 }))
 
-const Tab = styled("div")<{ active?: boolean; condensed?: boolean; dark?: boolean }>(({ theme, active }) => ({
+const Tab = styled("div")<{ active?: boolean; condensed?: boolean }>(({ theme, active }) => ({
   display: "flex",
   height: "100%",
   alignItems: "center",
@@ -80,7 +79,7 @@ class Tabs extends React.Component<Props, State> {
     const activeTab = this.getActiveTab()
     return this.props.children({
       tabsBar: (
-        <TabsBar condensed={this.props.condensed} dark={this.props.dark}>
+        <TabsBar condensed={this.props.condensed}>
           {this.props.tabs.filter(({ hidden }) => !hidden).map((tab, index: number) => (
             <Tab
               condensed={this.props.condensed}

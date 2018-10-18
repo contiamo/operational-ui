@@ -1,9 +1,12 @@
 import * as React from "react"
-import { Title } from ".."
+
 import Tabs, { Tab, tabsBarHeight } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps } from "../PageContent/PageContent"
 import { DefaultProps } from "../types"
+import { Title } from "../Typography/Title"
+import { readableTextColor } from "../utils"
+import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface BaseProps extends DefaultProps {
@@ -15,6 +18,8 @@ export interface BaseProps extends DefaultProps {
   actions?: React.ReactNode
   /** Actions position */
   actionsPosition?: "start" | "main" | "end"
+  /** A custom color for the page header color? */
+  color?: keyof OperationalStyleConstants["color"] | string
 }
 
 export interface PropsWithSimplePage extends BaseProps {
@@ -70,12 +75,13 @@ const Container = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.background.lighter,
 }))
 
-const TitleBar = styled("div")`
-  background-color: ${({ theme }) => theme.color.primary};
+const TitleBar = styled("div")<{ color: PageProps["color"] }>`
+  background-color: ${({ theme, color }) => expandColor(theme, color) || theme.color.primary};
+  color: ${({ theme, color }) =>
+    readableTextColor(expandColor(theme, color) || theme.color.primary, ["black", "white"])};
 `
 
 const TitleContainer = styled("div")(({ theme }) => ({
-  backgroundColor: theme.color.primary,
   display: "flex",
   alignItems: "center",
   padding: theme.space.element,
@@ -125,7 +131,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
 
   private renderPageWithTabs() {
     const tabs = this.props.tabs!
-    const { title, actions, actionsPosition, condensedTitle } = this.props
+    const { title, actions, actionsPosition, condensedTitle, color } = this.props
 
     return (
       <Tabs
@@ -133,14 +139,13 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
         activeTabName={this.props.activeTabName}
         onTabChange={this.props.onTabChange}
         condensed={condensedTitle}
-        dark
       >
         {({ tabsBar, activeChildren }) => (
           <>
             {title && (
-              <TitleBar>
+              <TitleBar color={color}>
                 <TitleContainer>
-                  <Title color="white">{title}</Title>
+                  <Title>{title}</Title>
                   {condensedTitle && tabsBar}
                   <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
                 </TitleContainer>
@@ -157,14 +162,14 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   }
 
   private renderPageWithoutTabs() {
-    const { title, actions, actionsPosition, areas, children, fill } = this.props
+    const { title, actions, actionsPosition, areas, color, children, fill } = this.props
 
     return (
       <>
         {title && (
-          <TitleBar>
+          <TitleBar color={color}>
             <TitleContainer>
-              <Title color="white">{title}</Title>
+              <Title>{title}</Title>
               <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
             </TitleContainer>
           </TitleBar>

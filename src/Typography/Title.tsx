@@ -18,7 +18,7 @@ export const Title = styled("h1")<{
   fontWeight: theme.font.weight.medium,
   lineHeight: theme.font.lineHeight,
   margin: 0,
-  color: theme.color.text[color || "default"],
+  color: color ? theme.color.text[color] : "inherit",
 }))
 
 export default Title
