@@ -1,6 +1,4 @@
-import styled from "react-emotion"
-
-export const labelTextHeight = 15
+import styled from "../utils/styled"
 
 export const LabelText = styled("label")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
@@ -11,3 +9,7 @@ export const LabelText = styled("label")(({ theme }) => ({
   color: theme.color.text.lightest,
   height: labelTextHeight,
 }))
+
+export const labelTextHeight = 15
+
+export default LabelText

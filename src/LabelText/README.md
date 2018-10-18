@@ -10,8 +10,12 @@ This component renders a semantic label tag. This is used internally in the foll
 ## Usage
 
 ```jsx
-<LabelText for="male">Male</LabelText>
-<input type="radio" name="gender" id="male" value="male"><br>
-<LabelText for="female">Female</LabelText>
-<input type="radio" name="gender" id="female" value="female"><br>
+<div>
+  <LabelText htmlFor="male">Male</LabelText>
+  <input type="radio" readOnly name="gender" id="male" value="male" />
+  <br />
+
+  <LabelText for="female">Female</LabelText>
+  <input checked type="radio" readOnly name="gender" id="female" value="female" />
+</div>
 ```
