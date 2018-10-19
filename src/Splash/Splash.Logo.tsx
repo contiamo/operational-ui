@@ -3,7 +3,7 @@ import styled from "../utils/styled"
 
 interface Props {
   size: number
-  logo: React.ReactElement<any> | string | null
+  logo?: React.ReactElement<any> | string
   color?: string
 }
 
