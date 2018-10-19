@@ -125,7 +125,7 @@ const InputField = styled("input")<{
       return setAlpha(0.1)(theme.color.primary)
     }
 
-    return "initial"
+    return theme.color.white
   }
 
   return {
