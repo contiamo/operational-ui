@@ -171,19 +171,17 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "codeTheme" | "collapsed" | 
 )
 
 const Code: React.SFC<CodeProps> = ({ children, ...props }) => {
-  const { src, collapsed, shouldCollapse, syntax, ...containerProps } = props
+  if (props.syntax === "json") {
+    const { src, codeTheme, collapsed, shouldCollapse, ...containerProps } = props
+    return (
+      <Container {...containerProps}>
+        <StyledReactJson codeTheme={codeTheme} src={src} collapsed={collapsed} shouldCollapse={shouldCollapse} />
+      </Container>
+    )
+  }
   return (
-    <Container {...containerProps}>
-      {props.syntax === "json" ? (
-        <StyledReactJson
-          codeTheme={props.codeTheme}
-          src={props.src}
-          collapsed={props.collapsed}
-          shouldCollapse={props.shouldCollapse}
-        />
-      ) : (
-        <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{children}</StyledHighlight>
-      )}
+    <Container {...props}>
+      <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{children}</StyledHighlight>
     </Container>
   )
 }
