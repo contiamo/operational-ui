@@ -86,6 +86,7 @@ const Actions = styled(Td)(({ theme }) => ({
 const IconCell = styled(Td)`
   width: 40px;
   padding: ${props => props.theme.space.base}px;
+  color: ${props => props.theme.color.text.lightest};
 `
 
 const ActionLabel = styled(Small)`
@@ -105,7 +106,16 @@ const EmptyView = styled(Td)(({ theme }) => ({
   textAlign: "center",
 }))
 
-function Table<T>({ data, columns, onRowClick, rowActionName, rowActions, icon, iconColor, ...props }: TableProps<T>) {
+function Table<T>({
+  data = [],
+  columns,
+  onRowClick,
+  rowActionName,
+  rowActions,
+  icon,
+  iconColor,
+  ...props
+}: TableProps<T>) {
   const standardizedColumns: Array<Column<T>> =
     Boolean(columns[0]) && typeof columns[0] === "string"
       ? (columns as Array<Extract<keyof T, string>>).map(columnName => ({
