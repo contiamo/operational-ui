@@ -27,7 +27,7 @@ const TreeContainer = styled("div")`
 `
 
 const TreeChildren = styled("div")`
-  margin-left: 16px;
+  margin-left: 14px;
 `
 
 const TreeItem = styled("div")<{
@@ -38,31 +38,27 @@ const TreeItem = styled("div")<{
   isRemovable: boolean
 }>`
   display: flex;
+  min-height: 24px;
   align-items: center;
-  max-width: 200px;
-  ${({ theme, hasChildren, hasTag, isTopLevel, isDisabled, isRemovable }) => `
-    padding: ${theme.space.base}px;
+  margin-bottom: 2px;
+  :last-child {
+    margin-bottom: 0px;
+  }
+  ${({ theme, hasChildren, hasTag, isTopLevel, isDisabled }) => `
+    padding: ${theme.space.base / 2}px;
     font-size: ${hasTag ? theme.font.size.fineprint : theme.font.size.small}px;
     font-weight: ${hasTag || isTopLevel ? theme.font.weight.bold : theme.font.weight.regular};
     font-family: ${hasTag ? theme.font.family.code : theme.font.family.main};
     color: ${theme.color.text.dark};
     opacity: ${isDisabled ? "0.4" : "1.0"};
-    ${
-      /** If the item can be removed, hover feedback should only be applied to the close button and not the entire item */
-      !isRemovable
-        ? ` 
-      cursor: pointer;
-      :hover {
-        background-color: ${theme.color.background.lighter};
-      }
-    `
-        : ""
+    cursor: pointer;
+    :hover {
+      background-color: ${theme.color.background.lighter};
     }
     & svg {
       color: ${theme.color.text.lightest};
     }
     & > svg:first-child {
-      margin-right: ${theme.space.base}px;
       flex-shrink: 0;
       visibility: ${hasChildren ? "visible" : "hidden"};
     }
@@ -70,42 +66,42 @@ const TreeItem = styled("div")<{
 `
 
 const TreeLabel = styled("span")`
+  padding-left: ${props => props.theme.space.base}px;
   display: inline-block;
   word-wrap: break-word;
   flex: 1;
-  /**
-   * Explicit width assignment is required here because flex positioning works unpredictably with word-wrapping:
-   * in some cases, content to the right of the tree label is pushed past the width of the container
-   * rather than the word being broken. 
-   */
-  max-width: calc(100% - 70px);
 `
 
 /**
  * This is a single-use close button with hard-coded padding to ensure the close icon inside stays readable.
  * @todo look into re-using and formalizing this element.
  */
-const IconButton = styled("div")<{ hidden_?: boolean }>`
-  cursor: pointer;
-  width: 20px;
-  height: 20px;
-  ${({ hidden_ }) => (hidden_ ? "visibility: hidden;" : "")} ${({ theme }) => `
-    border-radius: ${theme.borderRadius}px;
-    padding: ${theme.space.base}px;
-    :not(:last-child) {
-      margin-right: ${theme.space.base}px;
-    }
-  `} :hover {
-    ${({ theme }) => `background-color: ${theme.color.background.light};`};
-  }
-`
+const IconButton = styled("div")<{ hidden_?: boolean; hoverEffect?: boolean }>(({ theme, hidden_, hoverEffect }) => ({
+  cursor: "pointer",
+  width: 20,
+  height: 20,
+  padding: 4,
+  borderRadius: theme.borderRadius,
+  "& svg": {
+    cursor: "pointer",
+  },
+  ...(hidden_ ? { visibility: "hidden" } : {}),
+  ...(hoverEffect
+    ? {
+        ":hover": {
+          backgroundColor: theme.color.background.light,
+        },
+      }
+    : {}),
+}))
 
 const TreeRecursive: React.SFC<{
   tree: ITree
   path: number[]
   recursiveTogglePath: (path: number[]) => void
   openPaths: number[][]
-}> = ({ tree, path, recursiveTogglePath, openPaths }) => {
+  maxDepth: number
+}> = ({ tree, path, recursiveTogglePath, openPaths, maxDepth }) => {
   const isOpen = containsPath(path)(openPaths)
   const { label, tag, disabled, initiallyOpen, childNodes, color, onRemove, ...treeHtmlProps } = tree
   const tagColor = expandColor(constants, color) || ""
@@ -125,17 +121,16 @@ const TreeRecursive: React.SFC<{
           recursiveTogglePath(path)
         }}
       >
-        <IconButton hidden_={childNodes.length === 0}>
-          <Icon name={isOpen ? "ChevronDown" : "Add"} size={12} />
-        </IconButton>
-        {tree.tag && (
-          <SmallNameTag color={tagColor} left>
-            {tree.tag}
-          </SmallNameTag>
+        {maxDepth > 1 && (
+          <IconButton hidden_={childNodes.length === 0}>
+            <Icon name={isOpen ? "ChevronDown" : "Add"} size={12} />
+          </IconButton>
         )}
+        {tree.tag && <SmallNameTag color={tagColor}>{tree.tag}</SmallNameTag>}
         <TreeLabel>{tree.label}</TreeLabel>
         {onRemove && (
           <IconButton
+            hoverEffect
             onClick={ev => {
               ev.stopPropagation()
               onRemove()
@@ -155,6 +150,7 @@ const TreeRecursive: React.SFC<{
                 path={[...path, index]}
                 recursiveTogglePath={recursiveTogglePath}
                 openPaths={openPaths}
+                maxDepth={maxDepth}
               />
             ))}
           </TreeChildren>
@@ -199,6 +195,7 @@ class Tree extends React.Component<TreeProps, State> {
             path={[index]}
             recursiveTogglePath={this.togglePath}
             openPaths={this.state.openPaths}
+            maxDepth={getMaxDepth(trees)}
           />
         ))}
       </Container>
