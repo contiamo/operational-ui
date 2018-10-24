@@ -21,9 +21,7 @@ export const getDepth = (tree: Tree): number => {
   return 1 + (getMaxFromList(tree.childNodes.map(getDepth)) as number)
 }
 
-export const getMaxDepth = (trees: Tree[]): number | undefined => {
-  return getMaxFromList(trees.map(getDepth))
-}
+export const getMaxDepth = (trees: Tree[]): number => getMaxFromList(trees.map(getDepth)) || 0
 
 export const getInitialOpenPaths = (basePath: number[]) => (tree: Tree): number[][] => {
   return [

@@ -21,6 +21,7 @@ The tree component renders a tree structure with collapsable nodes in a filetree
             {
               label: "County",
               color: "primary",
+              onRemove: () => {},
               tag: "D",
               childNodes: [],
             },
