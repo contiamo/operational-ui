@@ -138,7 +138,7 @@ const data = [
 
 ### With row actions
 
-Row actions are specified as a function of an individual record, returning action items conforming to the [ContextMenu](/#ContextMenu) API:
+Row actions are specified as a function of an individual record, returning action items conforming to the [ContextMenu](/#ContextMenu) API. The function in the `rowActions` prop can return either the action items as an array or the `ActionMenu` node itself.
 
 ```jsx
 const data = [
@@ -176,31 +176,62 @@ const data = [
     ],
   },
 ]
-;<Table
-  data={data}
-  columns={[
-    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
-    { heading: "Name", cell: dataEntry => dataEntry.name },
-    { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
-    { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
-    { heading: "Collaborators", cell: dataEntry => <AvatarGroup avatars={dataEntry.collaborators} /> },
-  ]}
-  onRowClick={(dataEntry, dataEntryIndex) => console.log({ dataEntry, dataEntryIndex })}
-  rowActions={dataEntry => [
-    {
-      label: "Details",
-      onClick: () => {
-        console.log("Details on ", dataEntry)
+;<>
+  <Table
+    data={data}
+    columns={[
+      { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+      { heading: "Name", cell: dataEntry => dataEntry.name },
+      { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
+      { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
+      { heading: "Collaborators", cell: dataEntry => <AvatarGroup avatars={dataEntry.collaborators} /> },
+    ]}
+    onRowClick={(dataEntry, dataEntryIndex) => console.log({ dataEntry, dataEntryIndex })}
+    rowActions={dataEntry => [
+      {
+        label: "Details",
+        onClick: () => {
+          console.log("Details on ", dataEntry)
+        },
       },
-    },
-    {
-      label: "Delete",
-      onClick: () => {
-        console.log("Deleting ", dataEntry)
+      {
+        label: "Delete",
+        onClick: () => {
+          console.log("Deleting ", dataEntry)
+        },
       },
-    },
-  ]}
-/>
+    ]}
+  />
+  <Table
+    data={data}
+    columns={[
+      { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+      { heading: "Name", cell: dataEntry => dataEntry.name },
+      { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
+      { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
+      { heading: "Collaborators", cell: dataEntry => <AvatarGroup avatars={dataEntry.collaborators} /> },
+    ]}
+    onRowClick={(dataEntry, dataEntryIndex) => console.log({ dataEntry, dataEntryIndex })}
+    rowActions={dataEntry => (
+      <ActionMenu
+        items={[
+          {
+            label: "Details",
+            onClick: () => {
+              console.log("Details on ", dataEntry)
+            },
+          },
+          {
+            label: "Delete",
+            onClick: () => {
+              console.log("Deleting ", dataEntry)
+            },
+          },
+        ]}
+      />
+    )}
+  />
+</>
 ```
 
 ### Without data

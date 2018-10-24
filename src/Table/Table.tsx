@@ -16,7 +16,7 @@ export interface TableProps<T> extends DefaultProps {
   /**
    * Add actions on the end of each row
    */
-  rowActions?: (dataEntry: T) => ActionMenuProps["items"]
+  rowActions?: (dataEntry: T) => ActionMenuProps["items"] | React.ReactNode
   /** Icon name for row */
   icon?: (dataEntry: T) => IconName
   /** Icon color for row */
@@ -81,6 +81,10 @@ const Actions = styled(Td)(({ theme }) => ({
   "tr:hover &, :hover": {
     opacity: 1,
   },
+
+  "& > div": {
+    display: "inline-flex",
+  },
 }))
 
 const IconCell = styled(Td)`
@@ -93,10 +97,6 @@ const ActionLabel = styled(Small)`
   color: ${props => props.theme.color.primary};
   margin: 0;
   display: block;
-`
-
-const InlineActionMenu = styled(ActionMenu)`
-  display: inline-flex;
 `
 
 const EmptyView = styled(Td)(({ theme }) => ({
@@ -137,43 +137,56 @@ function Table<T>({
       </thead>
       <tbody>
         {data.length ? (
-          data.map((dataEntry, dataEntryIndex) => (
-            <Tr
-              hover={Boolean(data)}
-              key={dataEntryIndex}
-              onClick={() => {
-                if (onRowClick) {
-                  onRowClick(dataEntry, dataEntryIndex)
-                }
-              }}
-            >
-              {hasIcons && (
-                <IconCell>
-                  {/** Because has `hasIcon`, it is guaranteed that the `icon` function exists */}
-                  <Icon name={icon!(dataEntry)} color={iconColor && iconColor(dataEntry)} />
-                </IconCell>
-              )}
-              {standardizedColumns.map((column, columnIndex) => (
-                <Td key={columnIndex}>{column.cell(dataEntry, dataEntryIndex)}</Td>
-              ))}
-              {rowActions && (
+          data.map((dataEntry, dataEntryIndex) => {
+            const rowAction = (() => {
+              if (!rowActions) {
+                return null
+              }
+              const dataEntryRowActions = rowActions(dataEntry)
+              return (
                 <Actions
                   onClick={(ev: React.SyntheticEvent<Node>) => {
                     // Table row click should not trigger if this action menu is manipulated
                     ev.stopPropagation()
                   }}
                 >
-                  <InlineActionMenu items={rowActions(dataEntry)} />
+                  {Array.isArray(dataEntryRowActions) ? (
+                    <ActionMenu items={dataEntryRowActions as ActionMenuProps["items"]} />
+                  ) : (
+                    dataEntryRowActions
+                  )}
                 </Actions>
-              )}
-              {onRowClick &&
-                rowActionName && (
-                  <Actions>
-                    <ActionLabel>{rowActionName}</ActionLabel>
-                  </Actions>
+              )
+            })()
+            return (
+              <Tr
+                hover={Boolean(data)}
+                key={dataEntryIndex}
+                onClick={() => {
+                  if (onRowClick) {
+                    onRowClick(dataEntry, dataEntryIndex)
+                  }
+                }}
+              >
+                {hasIcons && (
+                  <IconCell>
+                    {/** Because has `hasIcon`, it is guaranteed that the `icon` function exists */}
+                    <Icon name={icon!(dataEntry)} color={iconColor && iconColor(dataEntry)} />
+                  </IconCell>
                 )}
-            </Tr>
-          ))
+                {standardizedColumns.map((column, columnIndex) => (
+                  <Td key={columnIndex}>{column.cell(dataEntry, dataEntryIndex)}</Td>
+                ))}
+                {rowAction}
+                {onRowClick &&
+                  rowActionName && (
+                    <Actions>
+                      <ActionLabel>{rowActionName}</ActionLabel>
+                    </Actions>
+                  )}
+              </Tr>
+            )
+          })
         ) : (
           <Tr>
             <EmptyView colSpan={columns.length}>There are no records available</EmptyView>
