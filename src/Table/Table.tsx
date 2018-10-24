@@ -1,22 +1,31 @@
 import * as React from "react"
+import ActionMenu, { ActionMenuProps } from "../ActionMenu/ActionMenu"
+import Icon, { IconName } from "../Icon/Icon"
 import { DefaultProps } from "../types"
+import Small from "../Typography/Small"
 import styled from "../utils/styled"
 
-export interface TableProps extends DefaultProps {
+export interface TableProps<T> extends DefaultProps {
+  data: T[]
   /** Table columns headings */
-  columns: React.ReactNode[]
-  /** Table rows as an array of cells */
-  rows: Array<Array<string | React.ReactNode>>
+  columns: Array<Column<T>> | Array<Extract<keyof T, string>>
   /** Called on row click */
-  onRowClick?: (row: Array<string | React.ReactNode>, index: number) => void
-  /**
-   * Text to display on right on row hover
-   */
+  onRowClick?: (dataEntry: T, index: number) => void
+  /** Label to show on row hover */
   rowActionName?: string
   /**
    * Add actions on the end of each row
    */
-  __experimentalRowActions?: React.ReactNode[]
+  rowActions?: (dataEntry: T) => ActionMenuProps["items"] | React.ReactNode
+  /** Icon name for row */
+  icon?: (dataEntry: T) => IconName
+  /** Icon color for row */
+  iconColor?: (dataEntry: T) => string
+}
+
+export interface Column<T> {
+  heading: React.ReactNode
+  cell: (dataEntry: T, index: number) => React.ReactNode
 }
 
 const Container = styled("table")(({ theme }) => ({
@@ -59,15 +68,6 @@ const Td = styled("td")(({ theme }) => ({
   },
 }))
 
-const Action = styled(Td)(({ theme }) => ({
-  textAlign: "right",
-  paddingRight: theme.space.content,
-  color: "transparent",
-  "tr:hover &, :hover": {
-    color: theme.color.text.action,
-  },
-}))
-
 const Actions = styled(Td)(({ theme }) => ({
   textAlign: "right",
   paddingRight: theme.space.small,
@@ -81,7 +81,23 @@ const Actions = styled(Td)(({ theme }) => ({
   "tr:hover &, :hover": {
     opacity: 1,
   },
+
+  "& > div": {
+    display: "inline-flex",
+  },
 }))
+
+const IconCell = styled(Td)`
+  width: 40px;
+  padding: ${props => props.theme.space.base}px;
+  color: ${props => props.theme.color.text.lightest};
+`
+
+const ActionLabel = styled(Small)`
+  color: ${props => props.theme.color.primary};
+  margin: 0;
+  display: block;
+`
 
 const EmptyView = styled(Td)(({ theme }) => ({
   color: theme.color.text.default,
@@ -90,43 +106,87 @@ const EmptyView = styled(Td)(({ theme }) => ({
   textAlign: "center",
 }))
 
-const Table: React.SFC<TableProps> = ({
-  rows,
+function Table<T>({
+  data = [],
   columns,
   onRowClick,
   rowActionName,
-  __experimentalRowActions,
+  rowActions,
+  icon,
+  iconColor,
   ...props
-}) => {
+}: TableProps<T>) {
+  const standardizedColumns: Array<Column<T>> =
+    Boolean(columns[0]) && typeof columns[0] === "string"
+      ? (columns as Array<Extract<keyof T, string>>).map(columnName => ({
+          heading: columnName,
+          cell: (dataEntry: T) => dataEntry[columnName],
+        }))
+      : (columns as Array<Column<T>>)
+
+  const hasIcons: boolean = Boolean(data[0]) && Boolean(icon) && Boolean(icon!(data[0]))
+
   return (
     <Container {...props}>
       <thead>
         <Tr>
-          {columns.map((title, i) => (
-            <Th key={i}>{title}</Th>
-          ))}
-          {Boolean(__experimentalRowActions || rowActionName) && <Th />}
+          {hasIcons && <Th key="-1" />}
+          {standardizedColumns.map((column, columnIndex) => <Th key={columnIndex}>{column.heading}</Th>)}
+          {Boolean(rowActions || (onRowClick && rowActionName)) && <Th key="infinity" />}
         </Tr>
       </thead>
       <tbody>
-        {rows.length ? (
-          rows.map((row, i) => (
-            <Tr
-              hover={Boolean(onRowClick)}
-              key={i}
-              onClick={() => {
-                if (onRowClick) {
-                  onRowClick(row, i)
-                }
-              }}
-            >
-              {row.map((data, j) => (
-                <Td key={j}>{data}</Td>
-              ))}
-              {rowActionName && <Action>{rowActionName}</Action>}
-              {__experimentalRowActions && <Actions>{__experimentalRowActions[i]}</Actions>}
-            </Tr>
-          ))
+        {data.length ? (
+          data.map((dataEntry, dataEntryIndex) => {
+            const rowAction = (() => {
+              if (!rowActions) {
+                return null
+              }
+              const dataEntryRowActions = rowActions(dataEntry)
+              return (
+                <Actions
+                  onClick={(ev: React.SyntheticEvent<Node>) => {
+                    // Table row click should not trigger if this action menu is manipulated
+                    ev.stopPropagation()
+                  }}
+                >
+                  {Array.isArray(dataEntryRowActions) ? (
+                    <ActionMenu items={dataEntryRowActions as ActionMenuProps["items"]} />
+                  ) : (
+                    dataEntryRowActions
+                  )}
+                </Actions>
+              )
+            })()
+            return (
+              <Tr
+                hover={Boolean(data)}
+                key={dataEntryIndex}
+                onClick={() => {
+                  if (onRowClick) {
+                    onRowClick(dataEntry, dataEntryIndex)
+                  }
+                }}
+              >
+                {hasIcons && (
+                  <IconCell>
+                    {/** Because has `hasIcon`, it is guaranteed that the `icon` function exists */}
+                    <Icon name={icon!(dataEntry)} color={iconColor && iconColor(dataEntry)} />
+                  </IconCell>
+                )}
+                {standardizedColumns.map((column, columnIndex) => (
+                  <Td key={columnIndex}>{column.cell(dataEntry, dataEntryIndex)}</Td>
+                ))}
+                {rowAction}
+                {onRowClick &&
+                  rowActionName && (
+                    <Actions>
+                      <ActionLabel>{rowActionName}</ActionLabel>
+                    </Actions>
+                  )}
+              </Tr>
+            )
+          })
         ) : (
           <Tr>
             <EmptyView colSpan={columns.length}>There are no records available</EmptyView>

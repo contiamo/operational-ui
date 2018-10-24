@@ -19,6 +19,11 @@ export interface ActionMenuProps extends DefaultProps {
 const Container = styled("div")(({ theme }) => ({
   width,
   height: 35,
+  /**
+   * `textAlign` is set explicitly for when a parent sets a text-align to right-position this container,
+   * leaving its content left-aligned.
+   */
+  textAlign: "left",
   padding: `0 ${theme.space.content}px`,
   backgroundColor: theme.color.white,
   color: theme.color.primary,

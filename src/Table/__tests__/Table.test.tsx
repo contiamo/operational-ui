@@ -7,7 +7,7 @@ const Table = wrapDefaultTheme(ThemelessTable)
 
 describe("Table Component", () => {
   it("Should render", () => {
-    const renderedComponent = render(<Table rows={[]} columns={[]} />)
+    const renderedComponent = render(<Table data={[]} columns={[]} />)
     expect(renderedComponent).toMatchSnapshot()
   })
 })
