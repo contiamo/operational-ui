@@ -6,16 +6,20 @@ import { DefaultProps } from "../types"
 import constants, { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 import { Tree as ITree } from "./Tree.types"
-import { containsPath, getInitialOpenPaths, getMaxDepth, togglePath } from "./Tree.utils"
+import { arePathsEqual, containsPath, getInitialOpenPaths, getMaxDepth, togglePath } from "./Tree.utils"
 
 export interface TreeProps extends DefaultProps {
   /** An array of tree structures */
   trees: ITree[]
+  /** A flag toggling drag-and-drop reordering of tree items */
+  onReorder?: (source: number[], target: number[]) => void
 }
 
 export interface State {
   /** Stores all open paths. E.g. if this.state.openPaths is [ [ 0 ], [ 1, 2 ] ], then the first root, and the third child of the second root are open.  */
   openPaths: number[][]
+  reorderSource?: number[]
+  reorderTarget?: number[]
 }
 
 const Container = styled("div")`
@@ -36,6 +40,7 @@ const TreeItem = styled("div")<{
   isTopLevel: boolean
   isDisabled: boolean
   isRemovable: boolean
+  isReorderDropTarget: boolean
 }>`
   display: flex;
   min-height: 24px;
@@ -44,8 +49,10 @@ const TreeItem = styled("div")<{
   :last-child {
     margin-bottom: 0px;
   }
-  ${({ theme, hasChildren, hasTag, isTopLevel, isDisabled }) => `
+  ${({ theme, hasChildren, hasTag, isTopLevel, isDisabled, isReorderDropTarget }) => `
     padding: ${theme.space.base / 2}px;
+    border-top: 2px solid;
+    border-color: ${isReorderDropTarget ? theme.color.primary : "transparent"};
     font-size: ${hasTag ? theme.font.size.fineprint : theme.font.size.small}px;
     font-weight: ${hasTag || isTopLevel ? theme.font.weight.bold : theme.font.weight.regular};
     font-family: ${hasTag ? theme.font.family.code : theme.font.family.main};
@@ -63,6 +70,12 @@ const TreeItem = styled("div")<{
       visibility: ${hasChildren ? "visible" : "hidden"};
     }
   `};
+`
+
+const FillerTreeItem = styled("div")<{ isReorderDropTarget: boolean }>`
+  height: 6px;
+  border-top: 2px solid;
+  border-color: ${props => (props.isReorderDropTarget ? props.theme.color.primary : "transparent")};
 `
 
 const TreeLabel = styled("span")`
@@ -95,13 +108,95 @@ const IconButton = styled("div")<{ hidden_?: boolean; hoverEffect?: boolean }>((
     : {}),
 }))
 
-const TreeRecursive: React.SFC<{
-  tree: ITree
-  path: number[]
-  recursiveTogglePath: (path: number[]) => void
-  openPaths: number[][]
-  maxDepth: number
-}> = ({ tree, path, recursiveTogglePath, openPaths, maxDepth }) => {
+export interface ReorderProps {
+  onReorder: TreeProps["onReorder"]
+  reorderSource?: number[]
+  reorderTarget?: number[]
+  setReorderSource: (reorderSourcePath?: number[]) => void
+  setReorderTarget: (reorderTargetPath?: number[]) => void
+}
+
+/**
+ * Computes all props related to drag-and-drop reordering, taking appropriate state values, state setters,
+ * as well as the path that the node is currently on. Note that the first argument doesn't vary from node to node,
+ * while the second indicates the current node path.
+ */
+const reorderDndProps = ({
+  onReorder,
+  reorderSource,
+  reorderTarget,
+  setReorderSource,
+  setReorderTarget,
+}: ReorderProps) => (node: { path: number[]; filler?: boolean }) =>
+  onReorder
+    ? {
+        isReorderDropTarget: Boolean(onReorder && reorderTarget && arePathsEqual(reorderTarget, node.path)),
+        ...(node.filler
+          ? {}
+          : {
+              draggable: true,
+              onDragStart: () => {
+                setReorderSource([...node.path])
+              },
+              onDragEnd: () => {
+                setReorderSource(undefined)
+              },
+            }),
+        onDragOver: (ev: React.SyntheticEvent) => {
+          ev.preventDefault()
+          // Reorder source is not available when the drag source is outside this tree, and should not be handled
+          if (!reorderSource) {
+            return
+          }
+          if (arePathsEqual(reorderSource, node.path)) {
+            return
+          }
+          if (!reorderTarget) {
+            setReorderTarget([...node.path])
+            return
+          }
+          if (arePathsEqual(reorderTarget, node.path)) {
+            return
+          }
+          setReorderTarget([...node.path])
+        },
+        onDragLeave: () => {
+          // Reorder source is not available when the drag source is outside this tree, and should not be handled
+          if (!reorderSource) {
+            return
+          }
+          setReorderTarget(undefined)
+        },
+        onDrop: () => {
+          setReorderSource(undefined)
+          setReorderTarget(undefined)
+          if (reorderSource && reorderTarget) {
+            onReorder(reorderSource, reorderTarget)
+          }
+        },
+      }
+    : {}
+
+const TreeRecursive: React.SFC<
+  {
+    tree: ITree
+    path: number[]
+    recursiveTogglePath: (path: number[]) => void
+    openPaths: number[][]
+    maxDepth: number
+  } & ReorderProps
+> = ({
+  tree,
+  path,
+  recursiveTogglePath,
+  openPaths,
+  maxDepth,
+  onReorder,
+  reorderSource,
+  reorderTarget,
+  setReorderSource,
+  setReorderTarget,
+}) => {
   const isOpen = containsPath(path)(openPaths)
   const { label, tag, disabled, initiallyOpen, childNodes, color, onRemove, ...treeHtmlProps } = tree
   const tagColor = expandColor(constants, color) || ""
@@ -114,6 +209,14 @@ const TreeRecursive: React.SFC<{
         isTopLevel={path.length < 2}
         isDisabled={Boolean(tree.disabled)}
         isRemovable={Boolean(onRemove)}
+        isReorderDropTarget={false}
+        {...reorderDndProps({
+          onReorder,
+          reorderSource,
+          reorderTarget,
+          setReorderSource,
+          setReorderTarget,
+        })({ path })}
         onClick={() => {
           if (treeHtmlProps.onClick) {
             treeHtmlProps.onClick()
@@ -141,6 +244,7 @@ const TreeRecursive: React.SFC<{
         )}
       </TreeItem>
       {isOpen &&
+        tree.childNodes.length > 0 &&
         !tree.disabled && (
           <TreeChildren>
             {tree.childNodes.map((childTree, index) => (
@@ -151,8 +255,25 @@ const TreeRecursive: React.SFC<{
                 recursiveTogglePath={recursiveTogglePath}
                 openPaths={openPaths}
                 maxDepth={maxDepth}
+                onReorder={onReorder}
+                reorderSource={reorderSource}
+                reorderTarget={reorderTarget}
+                setReorderSource={setReorderSource}
+                setReorderTarget={setReorderTarget}
               />
             ))}
+            {onReorder && (
+              <FillerTreeItem
+                isReorderDropTarget={false}
+                {...reorderDndProps({
+                  onReorder,
+                  reorderSource,
+                  setReorderSource,
+                  reorderTarget,
+                  setReorderTarget,
+                })({ path: [...path, tree.childNodes.length], filler: true })}
+              />
+            )}
           </TreeChildren>
         )}
     </TreeContainer>
@@ -184,8 +305,20 @@ class Tree extends React.Component<TreeProps, State> {
     }))
   }
 
+  private setReorderSource = (reorderSource?: number[]) => {
+    this.setState(() => ({
+      reorderSource,
+    }))
+  }
+
+  private setReorderTarget = (reorderTarget?: number[]) => {
+    this.setState(() => ({
+      reorderTarget,
+    }))
+  }
+
   public render() {
-    const { trees, ...props } = this.props
+    const { trees, onReorder, ...props } = this.props
     return (
       <Container {...props}>
         {trees.map((tree, index) => (
@@ -196,8 +329,25 @@ class Tree extends React.Component<TreeProps, State> {
             recursiveTogglePath={this.togglePath}
             openPaths={this.state.openPaths}
             maxDepth={getMaxDepth(trees)}
+            onReorder={onReorder}
+            reorderSource={this.state.reorderSource}
+            setReorderSource={this.setReorderSource}
+            reorderTarget={this.state.reorderTarget}
+            setReorderTarget={this.setReorderTarget}
           />
         ))}
+        {onReorder && (
+          <FillerTreeItem
+            isReorderDropTarget={false}
+            {...reorderDndProps({
+              onReorder,
+              reorderSource: this.state.reorderSource,
+              setReorderSource: this.setReorderSource,
+              reorderTarget: this.state.reorderTarget,
+              setReorderTarget: this.setReorderTarget,
+            })({ path: [trees.length], filler: true })}
+          />
+        )}
       </Container>
     )
   }
