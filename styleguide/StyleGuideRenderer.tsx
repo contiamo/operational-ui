@@ -30,6 +30,10 @@ const { version } = require("../package.json")
 injectGlobal({
   "#rsg-root": {
     height: "100vh",
+    overflow: "hidden",
+  },
+  "#rsg-root > div": {
+    overflow: "hidden",
   },
   // buttons style override
   [`[class^="rsg--controls-"]`]: {

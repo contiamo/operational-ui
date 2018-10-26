@@ -20,10 +20,10 @@ const ReactComponentRenderer: React.SFC<ReactComponentRendererProps> = ({
   tabBody,
 }) => (
   <Consumer>
-    {({ updateActiveComponent }) => (
+    {({ activeComponent, updateActiveComponent }) => (
       <Waypoint
-        topOffset="0"
-        bottomOffset="95%"
+        topOffset="20%"
+        bottomOffset="80%"
         onPositionChange={({ currentPosition }: { currentPosition: "inside" | "outside" }) => {
           if (currentPosition !== "inside") {
             return
@@ -35,7 +35,16 @@ const ReactComponentRenderer: React.SFC<ReactComponentRendererProps> = ({
           {heading} {/* See ./SectionHeadingRenderer.tsx */}
           {tabButtons}
           <div style={{ marginTop: 16 }}>{tabBody}</div>
-          {examples}
+          <div
+            style={{
+              border: "2px solid #F5F5F5",
+              padding: 20,
+              height: 400,
+              overflow: activeComponent === name ? "auto" : "hidden",
+            }}
+          >
+            {activeComponent === name && examples}
+          </div>
         </Card>
       </Waypoint>
     )}
