@@ -39,14 +39,19 @@ const CustomIcons = require("./Icon.Custom")
 const icons = Object.keys(CustomIcons)
 ;<div>
   <Table
-    columns={["Name", "Standalone", "In button"]}
-    rows={icons.sort().map(icon => [
-      icon,
-      <Icon name={icon} color="primary" />,
-      <Button color="primary" icon={icon}>
-        Button Label
-      </Button>,
-    ])}
+    data={icons.sort()}
+    columns={[
+      { heading: "Name", cell: icon => icon },
+      { heading: "Standalone", cell: icon => <Icon name={icon} color="primary" /> },
+      {
+        heading: "In button",
+        cell: icon => (
+          <Button color="primary" icon={icon}>
+            Button Label
+          </Button>
+        ),
+      },
+    ]}
   />
 </div>
 ```
