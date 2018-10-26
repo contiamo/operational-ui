@@ -7,6 +7,8 @@ export interface CardItemProps extends DefaultProps {
   title: string
   /** Value of the item */
   value: React.ReactNode
+  /** A flag that sets the value in monospace font, useful for displaying technical values. */
+  monospace?: boolean
 }
 
 const Container = styled("div")(({ theme }) => ({
@@ -21,17 +23,17 @@ const CardItemTitle = styled("div")(({ theme }) => ({
   textTransform: "uppercase",
 }))
 
-const CardItemBody = styled("div")(({ theme }) => ({
+const CardItemBody = styled("div")<{ monospace?: boolean }>(({ theme, monospace }) => ({
   color: theme.color.text.default,
-  fontFamily: theme.font.family.main,
+  fontFamily: monospace ? theme.font.family.code : theme.font.family.main,
   fontSize: theme.font.size.body,
   marginTop: theme.space.base,
 }))
 
-const CardItem: React.SFC<CardItemProps> = ({ title, value, children, ...props }) => (
+const CardItem: React.SFC<CardItemProps> = ({ title, value, monospace, children, ...props }) => (
   <Container {...props}>
     <CardItemTitle>{title}</CardItemTitle>
-    <CardItemBody>{children || value}</CardItemBody>
+    <CardItemBody monospace={monospace}>{children || value}</CardItemBody>
   </Container>
 )
 
