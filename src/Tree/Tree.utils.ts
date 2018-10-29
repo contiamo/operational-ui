@@ -1,6 +1,6 @@
 import { Tree } from "./Tree.types"
 
-const arePathsEqual = (path1: number[], path2: number[]) => path1.join("-") === path2.join("-")
+export const arePathsEqual = (path1: number[], path2: number[]) => path1.join("-") === path2.join("-")
 
 /**
  * Returns the largest element of an array of numbers, or undefined if the array is empty.
