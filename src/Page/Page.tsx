@@ -3,6 +3,7 @@ import * as React from "react"
 import Tabs, { Tab, tabsBarHeight } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps } from "../PageContent/PageContent"
+import Progress from "../Progress/Progress"
 import { DefaultProps } from "../types"
 import { Title } from "../Typography/Title"
 import { readableTextColor } from "../utils"
@@ -20,6 +21,8 @@ export interface BaseProps extends DefaultProps {
   actionsPosition?: "start" | "main" | "end"
   /** A custom color for the page header color? */
   color?: keyof OperationalStyleConstants["color"] | string
+  /** Toggles a top progress bar to indicate loading state */
+  loading?: boolean
 }
 
 export interface PropsWithSimplePage extends BaseProps {
@@ -118,6 +121,13 @@ const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosit
   }),
 )
 
+const FixedProgress = styled(Progress)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+`
+
 const initialState = {}
 
 class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
@@ -187,9 +197,14 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   }
 
   public render() {
-    const { tabs, fill, onTabChange, ...props } = this.props
+    const { tabs, fill, onTabChange, loading, ...props } = this.props
 
-    return <Container {...props}>{tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}</Container>
+    return (
+      <Container {...props}>
+        {loading && <FixedProgress />}
+        {tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}
+      </Container>
+    )
   }
 }
 
