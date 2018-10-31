@@ -23,7 +23,7 @@ const Container = styled("div")<{ fullWidth: ListProps["fullWidth"]; onClick: Li
   cursor: ${({ onClick }) => (onClick ? "pointer" : "initial")};
 
   :not(:last-child) {
-    border-bottom: 0;
+    margin-bottom: ${({ theme }) => theme.space.content}px;
   }
 `
 
