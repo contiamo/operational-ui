@@ -22,6 +22,10 @@ const Container = styled("div")<{ fullWidth: ListProps["fullWidth"]; onClick: Li
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "640px")};
   cursor: ${({ onClick }) => (onClick ? "pointer" : "initial")};
 
+  :hover {
+    background-color: ${({ theme }) => theme.color.background.lighter};
+  }
+
   :not(:last-child) {
     margin-bottom: ${({ theme }) => theme.space.content}px;
   }
