@@ -116,6 +116,7 @@ const Container = styled("div")(({ theme }) => ({
 
 const Content = styled("div")`
   padding: ${({ theme }) => theme.space.element}px;
+  height: 100%;
 `
 
 const SectionsContainer = styled("div")<{ stackHorizontal: boolean }>`
