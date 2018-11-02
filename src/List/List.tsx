@@ -22,8 +22,12 @@ const Container = styled("div")<{ fullWidth: ListProps["fullWidth"]; onClick: Li
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "640px")};
   cursor: ${({ onClick }) => (onClick ? "pointer" : "initial")};
 
+  :hover {
+    background-color: ${({ theme }) => theme.color.background.lighter};
+  }
+
   :not(:last-child) {
-    border-bottom: 0;
+    margin-bottom: ${({ theme }) => theme.space.content}px;
   }
 `
 
@@ -45,17 +49,20 @@ const StyledIcon = styled(Icon)`
   justify-self: flex-end;
 `
 
-const List = ({ items, fullWidth }: ListProps) =>
-  items.map(({ title, photo, description, onClick }, index) => (
-    <Container onClick={onClick} fullWidth={fullWidth} key={index}>
-      {photo && (
-        <ImageContainer>
-          <img alt={title || description} src={photo} />
-        </ImageContainer>
-      )}
-      <Body style={{ margin: 0 }}>{description}</Body>
-      {onClick && <StyledIcon right size={21} name="ChevronRight" />}
-    </Container>
-  ))
+const List: React.SFC<ListProps> = ({ items, fullWidth }) => (
+  <>
+    {items.map(({ title, photo, description, onClick }, index) => (
+      <Container onClick={onClick} fullWidth={fullWidth} key={index}>
+        {photo && (
+          <ImageContainer>
+            <img alt={title || description} src={photo} />
+          </ImageContainer>
+        )}
+        <Body style={{ margin: 0 }}>{description}</Body>
+        {onClick && <StyledIcon right size={21} name="ChevronRight" />}
+      </Container>
+    ))}
+  </>
+)
 
 export default List
