@@ -14,6 +14,10 @@ export interface BaseProps extends DefaultProps {
   activeTabName?: string
   /** Callback fired on tab change */
   onTabChange?: (newTabName: string) => void
+  /**
+   * Fill all the height of the parent.
+   */
+  fullSize?: boolean
 }
 
 export interface CardPropsWithChildrenOrData<T extends {} = {}> extends BaseProps {
@@ -114,9 +118,9 @@ const Container = styled("div")(({ theme }) => ({
   },
 }))
 
-const Content = styled("div")`
+const Content = styled("div")<{ fullSize?: boolean }>`
   padding: ${({ theme }) => theme.space.element}px;
-  height: 100%;
+  ${props => (props.fullSize ? "height: 100%" : "")};
 `
 
 const SectionsContainer = styled("div")<{ stackHorizontal: boolean }>`
@@ -156,6 +160,7 @@ function Card<T extends {}>(props: CardProps<T>) {
     tabs,
     activeTabName,
     onTabChange,
+    fullSize,
     ...rest
   } = props
 
@@ -174,7 +179,7 @@ function Card<T extends {}>(props: CardProps<T>) {
         {({ tabsBar, activeChildren }) => (
           <Container {...rest}>
             <CardHeader title={tabsBar} action={action} />
-            <Content>{activeChildren}</Content>
+            <Content fullSize={fullSize}>{activeChildren}</Content>
           </Container>
         )}
       </Tabs>
@@ -184,7 +189,7 @@ function Card<T extends {}>(props: CardProps<T>) {
   return (
     <Container {...rest}>
       {(title || action) && <CardHeader title={title} action={action} />}
-      <Content>
+      <Content fullSize={fullSize}>
         {renderData(props as CardPropsWithChildrenOrData<T>)}
         {children}
       </Content>
