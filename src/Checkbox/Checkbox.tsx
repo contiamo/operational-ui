@@ -94,9 +94,10 @@ export interface CheckboxProps {
 }
 
 const Checkbox: React.SFC<CheckboxProps> = ({ value, onChange, label, disabled }) => {
-  const uuid = Math.random()
+  const uuid = `checkbox_${Math.random()
     .toString(36)
-    .slice(2)
+    .slice(2)}`
+
   return (
     <div style={disabled ? { opacity: 0.6 } : {}}>
       <Input id={uuid} type="checkbox" checked={Boolean(value)} onChange={() => onChange(!value)} disabled={disabled} />
