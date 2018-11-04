@@ -1,4 +1,3 @@
-import uniqueId from "lodash/uniqueId"
 import * as React from "react"
 import { keyframes } from "react-emotion"
 
@@ -94,25 +93,16 @@ export interface CheckboxProps {
   disabled?: boolean
 }
 
-class Checkbox extends React.Component<CheckboxProps> {
-  private uuid = uniqueId("checkbox_")
-
-  public render() {
-    const { value, onChange, label, disabled } = this.props
-
-    return (
-      <div style={disabled ? { opacity: 0.6 } : {}}>
-        <Input
-          id={this.uuid}
-          type="checkbox"
-          checked={Boolean(value)}
-          onChange={() => onChange(!value)}
-          disabled={disabled}
-        />
-        <Label htmlFor={this.uuid}>{label}</Label>
-      </div>
-    )
-  }
+const Checkbox: React.SFC<CheckboxProps> = ({ value, onChange, label, disabled }) => {
+  const uuid = Math.random()
+    .toString(36)
+    .slice(2)
+  return (
+    <div style={disabled ? { opacity: 0.6 } : {}}>
+      <Input id={uuid} type="checkbox" checked={Boolean(value)} onChange={() => onChange(!value)} disabled={disabled} />
+      <Label htmlFor={uuid}>{label}</Label>
+    </div>
+  )
 }
 
 export default Checkbox
