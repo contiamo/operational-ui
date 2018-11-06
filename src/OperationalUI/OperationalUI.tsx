@@ -234,15 +234,16 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
   }
 
   private pushMessage = (message: IMessage) => {
-    this.setState(prevState => {
-      const previousMessageWithSamePayload = prevState.messages.find(
-        m => m.message.body === message.body && m.message.type === message.type,
-      )
+    const hasSamePayload = (m: { message: IMessage }) =>
+      m.message.body === message.body && m.message.type === message.type
 
-      if (previousMessageWithSamePayload) {
+    this.setState(prevState => {
+      const hasPreviousMessageWithSamePayload = Boolean(prevState.messages.find(hasSamePayload))
+
+      if (hasPreviousMessageWithSamePayload) {
         return {
           messages: prevState.messages.map(m => {
-            if (m.message.body === message.body && m.message.type === message.type) {
+            if (hasSamePayload(m)) {
               return { ...m, addedAt: new Date().getTime(), count: m.count + 1 }
             } else {
               return m
