@@ -165,7 +165,7 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "codeTheme" | "collapsed" | 
     }}
     theme={{ ...defaultCodeTheme, ...props.codeTheme } || defaultCodeTheme}
     displayDataTypes={false}
-    enableClipboard={false}
+    enableClipboard={true}
     name={false}
   />
 )
