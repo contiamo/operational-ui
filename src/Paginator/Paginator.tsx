@@ -1,5 +1,3 @@
-let isUserWarnedAboutDeprecation = false
-
 import * as React from "react"
 
 import Button from "../Button/Button"
@@ -11,7 +9,7 @@ export interface PaginatorProps extends DefaultProps {
   /** Function to be executed after changing page */
   onChange?: (page: PaginatorProps["page"]) => void
   /** Index of the current selected page */
-  page?: number
+  page: number
   /** Total number of items */
   itemCount: number
   /** Number of items per page */
@@ -76,7 +74,7 @@ const PaginatorControl = ({ children, itemCount, itemsPerPage, page, onChange, t
   )
 }
 
-const getRange = ({ itemCount, itemsPerPage, page }: PaginatorProps & { page: number }) => {
+const getRange = ({ page, itemCount, itemsPerPage }: PaginatorProps) => {
   const start = 1 + (page - 1) * itemsPerPage
   const end = Math.min(itemCount, page * itemsPerPage)
   return `${start}-${end}`
@@ -89,23 +87,7 @@ const Container = styled("div")(({ theme }) => ({
   alignItems: "center",
 }))
 
-const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page: explicitPage, onChange, ...props }) => {
-  const page: number = explicitPage || 1
-
-  if (!explicitPage && !isUserWarnedAboutDeprecation && process.env.NODE_ENV !== "production") {
-    isUserWarnedAboutDeprecation = true
-    /**
-     * @todo remove this in v12.
-     */
-    console.warn(`[operational-ui]: Deprecation Warning
--------------------------------------
-
-<Paginator />'s page prop is now _mandatory_, meaning in the next major
-release, your code (if TypeScript) will not compile. Please add an explicit
-\`page\` prop to your Paginator if you'd like to stay up to date.
-
-Issue: https://github.com/contiamo/operational-ui/pull/820`)
-  }
+const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, onChange, ...props }) => {
 
   const controlProps = {
     itemCount,
