@@ -50,6 +50,7 @@ export interface State {
   messages: Array<{
     message: IMessage
     addedAt: number
+    count: number
   }>
   isLoading: boolean
   error?: Error
@@ -198,16 +199,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
             value={{
               pushState,
               replaceState,
-              pushMessage: (message: IMessage) => {
-                this.setState(prevState => ({
-                  messages: [{ message, addedAt: new Date().getTime() }, ...prevState.messages],
-                }))
-
-                // If we don't yet have an interval, start one.
-                if (!this.messageTimerInterval) {
-                  this.messageTimerInterval = setInterval(() => this.removeOutdatedMessages(), 2000)
-                }
-              },
+              pushMessage: this.pushMessage,
               loading: this.state.isLoading,
               setLoading: this.setLoading,
               windowSize: this.state.windowSize,
@@ -216,7 +208,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
             <Container>
               {this.state.isLoading && <Progress />}
               <Messages>
-                {this.state.messages.map(({ message }, index) => (
+                {this.state.messages.map(({ message, count }, index) => (
                   <Message
                     key={index}
                     color={colorByMessageType(message.type)}
@@ -228,6 +220,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
                       }))
                     }
                   >
+                    {count > 1 ? `(${count}) ` : ""}
                     {message.body}
                   </Message>
                 ))}
@@ -238,6 +231,35 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
         )}
       </ThemeProvider>
     )
+  }
+
+  private pushMessage = (message: IMessage) => {
+    this.setState(prevState => {
+      const previousMessageWithSamePayload = prevState.messages.find(
+        m => m.message.body === message.body && m.message.type === message.type,
+      )
+
+      if (previousMessageWithSamePayload) {
+        return {
+          messages: prevState.messages.map(m => {
+            if (m.message.body === message.body && m.message.type === message.type) {
+              return { ...m, addedAt: new Date().getTime(), count: m.count + 1 }
+            } else {
+              return m
+            }
+          }),
+        }
+      }
+
+      return {
+        messages: [{ message, addedAt: new Date().getTime(), count: 1 }, ...prevState.messages],
+      }
+    })
+
+    // If we don't yet have an interval, start one.
+    if (!this.messageTimerInterval) {
+      this.messageTimerInterval = setInterval(() => this.removeOutdatedMessages(), 2000)
+    }
   }
 }
 
