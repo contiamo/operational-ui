@@ -13,6 +13,7 @@ export interface CardColumnProps extends DefaultProps {
 
 const Container = styled("div")<CardColumnProps>(({ theme, contentRight, flexColumn }) => ({
   label: "card-column",
+  height: "min-content",
   minWidth: 280 / 2,
   padding: theme!.space.element / 2,
   flex: "1 0",
