@@ -7,7 +7,7 @@ import styled from "../utils/styled"
 export interface ListProps {
   items: Array<{
     title?: string
-    photo: string
+    photo: string | React.ReactNode
     description: string
     onClick?: () => void
   }>
@@ -55,7 +55,7 @@ const List: React.SFC<ListProps> = ({ items, fullWidth }) => (
       <Container onClick={onClick} fullWidth={fullWidth} key={index}>
         {photo && (
           <ImageContainer>
-            <img alt={title || description} src={photo} />
+            {typeof photo === "string" ? <img alt={title || description} src={photo} /> : photo}
           </ImageContainer>
         )}
         <Body style={{ margin: 0 }}>{description}</Body>
