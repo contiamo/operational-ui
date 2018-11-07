@@ -4,10 +4,12 @@ import Icon from "../Icon/Icon"
 import Body from "../Typography/Body"
 import styled from "../utils/styled"
 
+export type ImageURL = string
+
 export interface ListProps {
   items: Array<{
     title?: string
-    photo: string
+    photo: ImageURL | React.ReactNode
     description: string
     onClick?: () => void
   }>
@@ -21,6 +23,7 @@ const Container = styled("div")<{ fullWidth: ListProps["fullWidth"]; onClick: Li
   border: 1px solid ${({ theme }) => theme.color.border.disabled};
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "640px")};
   cursor: ${({ onClick }) => (onClick ? "pointer" : "initial")};
+  background-color: ${({ theme }) => theme.color.white};
 
   :hover {
     background-color: ${({ theme }) => theme.color.background.lighter};
@@ -49,16 +52,21 @@ const StyledIcon = styled(Icon)`
   justify-self: flex-end;
 `
 
+const BodyText = styled(Body)`
+  margin: 0;
+  margin-right: ${({ theme }) => theme.space.content}px;
+`
+
 const List: React.SFC<ListProps> = ({ items, fullWidth }) => (
   <>
     {items.map(({ title, photo, description, onClick }, index) => (
       <Container onClick={onClick} fullWidth={fullWidth} key={index}>
         {photo && (
           <ImageContainer>
-            <img alt={title || description} src={photo} />
+            {typeof photo === "string" ? <img alt={title || description} src={photo} /> : photo}
           </ImageContainer>
         )}
-        <Body style={{ margin: 0 }}>{description}</Body>
+        <BodyText>{description}</BodyText>
         {onClick && <StyledIcon right size={21} name="ChevronRight" />}
       </Container>
     ))}

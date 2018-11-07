@@ -24,3 +24,24 @@ This component renders a navigable list.
   ]}
 />
 ```
+
+## With Icon
+
+```jsx
+<List
+  items={[
+    {
+      photo: <Logo color="black" name="Pantheon" />,
+      description:
+        "Pantheon is a data hub that integrates with your existing data landscape and provides a central point of access for business, data science and operational use.",
+      onClick: () => goToStep("next"),
+    },
+    {
+      photo: <Logo color="black" name="Labs" />,
+      description:
+        "Labs is a flexible, consistent, and simple data science environment enabling data scientists to seamlessly explore data and deploy models.",
+      onClick: () => alert("You chose the second item!"),
+    },
+  ]}
+/>
+```
