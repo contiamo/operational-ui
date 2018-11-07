@@ -197,7 +197,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   }
 
   public render() {
-    const { tabs, fill, onTabChange, loading, ...props } = this.props
+    const { tabs, fill, onTabChange, loading, title, ...props } = this.props
 
     return (
       <Container {...props}>
