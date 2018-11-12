@@ -36,9 +36,6 @@ const Container = styled("div")`
   flex: 1 1;
   display: block;
   position: relative;
-  ${({ theme }) => `
-    border-right: 1px solid ${theme.color.separators.default};
-  `};
 `
 
 const Overlay = styled("div")<{ overlayType: OverlayType }>`
