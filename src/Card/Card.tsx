@@ -124,8 +124,14 @@ const Content = styled("div")<{ fullSize?: boolean }>`
 `
 
 const SectionsContainer = styled("div")<{ stackHorizontal: boolean }>`
-  ${({ stackHorizontal }) => `
+  ${({ stackHorizontal, theme }) => `
     display: ${stackHorizontal ? "flex" : "block"};
+
+    /* 
+      Assume the first level down is a section
+      since this is a SectionsContainer.
+    */
+    > div { border-right: ${stackHorizontal ? `1px solid ${theme.color.separators.default}` : `none`} };	
   `};
 `
 
