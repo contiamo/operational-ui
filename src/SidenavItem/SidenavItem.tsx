@@ -35,7 +35,7 @@ const makeContainer = (type: "link" | "block") =>
     return {
       display: "flex",
       padding: `${compact ? 10 : 0}px ${compact ? 0 : theme.space.content}px`,
-      height: compact ? "auto" : 36,
+      height: compact ? "auto" : 32,
       cursor: "pointer",
       width: "100%",
       alignItems: "center",

@@ -40,8 +40,8 @@ interface ControlProps {
   type: "first" | "previous" | "next" | "last"
 }
 
-const NavigationButton = styled(Button)({
-  width: 56,
+const NavigationButton = styled(Button)<Partial<ControlProps>>(({ type }) => ({
+  width: type === "next" || type === "previous" ? 70 : 56,
   marginRight: 3,
   padding: 0,
   "& svg": {
@@ -51,7 +51,7 @@ const NavigationButton = styled(Button)({
   "& span": {
     padding: "0 3px",
   },
-})
+}))
 
 const PaginatorControl = ({ children, itemCount, itemsPerPage, page, onChange, type, isDisabled }: ControlProps) => {
   const pageChanges = {

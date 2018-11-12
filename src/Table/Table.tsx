@@ -54,6 +54,9 @@ const Th = styled("th")(({ theme }) => ({
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.lightest,
   paddingBottom: theme.space.base,
+  " > tr": {
+    height: "initial",
+  },
   "&:first-child": {
     paddingLeft: theme.space.small,
   },
@@ -131,7 +134,9 @@ function Table<T>({
       <thead>
         <Tr>
           {hasIcons && <Th key="-1" />}
-          {standardizedColumns.map((column, columnIndex) => <Th key={columnIndex}>{column.heading}</Th>)}
+          {standardizedColumns.map((column, columnIndex) => (
+            <Th key={columnIndex}>{column.heading}</Th>
+          ))}
           {Boolean(rowActions || (onRowClick && rowActionName)) && <Th key="infinity" />}
         </Tr>
       </thead>
