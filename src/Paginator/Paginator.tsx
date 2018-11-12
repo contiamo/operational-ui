@@ -68,7 +68,7 @@ const PaginatorControl = ({ children, itemCount, itemsPerPage, page, onChange, t
   }
 
   return (
-    <NavigationButton disabled={isDisabled} condensed onClick={clickHandler}>
+    <NavigationButton type={type} disabled={isDisabled} condensed onClick={clickHandler}>
       {children}
     </NavigationButton>
   )
