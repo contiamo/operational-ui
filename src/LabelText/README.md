@@ -15,7 +15,7 @@ This component renders a semantic label tag. This is used internally in the foll
   <input type="radio" readOnly name="gender" id="male" value="male" />
   <br />
 
-  <LabelText for="female">Female</LabelText>
+  <LabelText htmlFor="female">Female</LabelText>
   <input checked type="radio" readOnly name="gender" id="female" value="female" />
 </div>
 ```
