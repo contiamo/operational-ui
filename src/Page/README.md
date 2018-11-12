@@ -34,7 +34,21 @@ Here's a page with a different color:
 </Page>
 ```
 
-### Properly handles grid rows
+### Long Children
+
+Here's a case where children are too long. The card has a _hard_ max-width set to its grid area, and any text children are hyphenated.
+
+```jsx
+<Page title="My Page">
+  <Card title="Hello">
+    <Code>
+      HelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHelloHello
+    </Code>
+  </Card>
+</Page>
+```
+
+### Properly handled grid rows
 
 Here is a simple usage example:
 

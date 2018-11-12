@@ -20,9 +20,9 @@ export interface PageContentProps extends DefaultProps {
 
 const StyledPageContent = styled("div")<{ areas?: PageContentProps["areas"]; fill_?: boolean }>(props => {
   const gridTemplateColumns = {
-    main: "auto",
-    "main side": "auto 280px",
-    "side main": "280px auto",
+    main: "100%",
+    "main side": "100% 280px",
+    "side main": "280px 100%",
   }[props.areas || "main"]
 
   return {
