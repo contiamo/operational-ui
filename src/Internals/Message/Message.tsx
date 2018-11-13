@@ -14,6 +14,8 @@ export interface MessageProps extends DefaultProps {
   color?: string
   /** Called when close icon is clicked. Icon is not rendered at all if this prop is not specified. */
   onClose?: () => void
+  /** Called when message is clicked. */
+  onClick?: () => void
 }
 
 const Container = styled("div")<{ color_?: string }>(({ theme, color_ }) => {
@@ -55,7 +57,14 @@ const IconContainer = styled("div")(({ theme }) => ({
 
 export const Message: React.SFC<MessageProps> = ({ color, onClose, children, ...props }) => (
   <Container {...props} color_={color}>
-    <IconContainer onClick={onClose}>
+    <IconContainer
+      onClick={e => {
+        e.stopPropagation()
+        if (onClose) {
+          onClose()
+        }
+      }}
+    >
       <Icon name="No" />
     </IconContainer>
     {children}

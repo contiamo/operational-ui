@@ -10,6 +10,7 @@ export type MessageType = "info" | "success" | "error"
 export interface IMessage {
   body: string
   type: MessageType
+  onClick?: () => void
 }
 
 export interface Context {
