@@ -121,7 +121,9 @@ const Container = styled("div")(({ theme }) => ({
 const Content = styled("div")<{ fullSize?: boolean }>`
   padding: ${({ theme }) => theme.space.element}px;
   height: ${props => (props.fullSize ? "100%" : "auto")};
-  overflow: auto;
+  white-space: pre-wrap;
+  word-wrap: break-all;
+  hyphens: auto;
 `
 
 const SectionsContainer = styled("div")<{ stackHorizontal: boolean }>`

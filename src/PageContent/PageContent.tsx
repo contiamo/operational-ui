@@ -21,12 +21,10 @@ export interface PageContentProps extends DefaultProps {
 const sideSize = 280
 
 const StyledPageContent = styled("div")<{ areas?: PageContentProps["areas"]; fill_?: boolean }>(props => {
-  const longColumnWidth = props.fill_ ? "auto" : `calc(100% - ${sideSize - props.theme.space.element}px)`
-
   const gridTemplateColumns = {
-    main: props.fill_ ? "100%" : "1150px",
-    "main side": `${longColumnWidth} ${sideSize}px`,
-    "side main": `${sideSize}px ${longColumnWidth}`,
+    main: props.fill_ ? "100%" : "auto",
+    "main side": `auto ${sideSize}px`,
+    "side main": `${sideSize}px auto`,
   }[props.areas || "main"]
 
   return {
