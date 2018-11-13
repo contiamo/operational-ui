@@ -31,7 +31,7 @@ const whiteColor = "#fff"
  * A specialized color palette for backgrounds.
  */
 const backgroundColors = {
-  dark: "#3e3e3e",
+  dark: "#2a2e37",
   light: "#ececec",
   lighter: "#f6f6f6",
 }
@@ -113,8 +113,8 @@ const font = {
   },
   lineHeight: 1.4,
   size: {
-    /** 18px */
-    title: 18,
+    /** 16px */
+    title: 16,
 
     /** 14px */
     body: 14,
@@ -192,7 +192,7 @@ const constants = {
   shadows,
   borderRadius: 2,
   compactSidebarWidth: 90,
-  sidebarWidth: 256,
+  sidebarWidth: 220,
   titleHeight: 50,
   /**
    * This redundant type-casting is necessary to give the typescript compiler access

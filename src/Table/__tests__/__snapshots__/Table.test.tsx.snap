@@ -10,7 +10,9 @@ exports[`Table Component Should render 1`] = `
   <table
     class="css-39fsjl"
   >
-    <thead>
+    <thead
+      class="css-x4ot8q"
+    >
       <tr
         class="css-16kb41"
       />

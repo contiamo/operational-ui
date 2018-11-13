@@ -49,6 +49,12 @@ const Tr = styled("tr")<{ hover?: boolean }>(({ hover, theme }) => ({
     : {}),
 }))
 
+const Thead = styled("thead")`
+  tr {
+    height: initial;
+  }
+`
+
 const Th = styled("th")(({ theme }) => ({
   verticalAlign: "bottom",
   borderBottom: `1px solid ${theme.color.separators.default}`,
@@ -128,13 +134,15 @@ function Table<T>({
 
   return (
     <Container {...props}>
-      <thead>
+      <Thead>
         <Tr>
           {hasIcons && <Th key="-1" />}
-          {standardizedColumns.map((column, columnIndex) => <Th key={columnIndex}>{column.heading}</Th>)}
+          {standardizedColumns.map((column, columnIndex) => (
+            <Th key={columnIndex}>{column.heading}</Th>
+          ))}
           {Boolean(rowActions || (onRowClick && rowActionName)) && <Th key="infinity" />}
         </Tr>
-      </thead>
+      </Thead>
       <tbody>
         {data.length ? (
           data.map((dataEntry, dataEntryIndex) => {

@@ -92,7 +92,7 @@ const Logo: React.SFC<LogoProps> = ({ stack, name, size, color, to, ...props }) 
 }
 
 Logo.defaultProps = {
-  size: 50,
+  size: 46,
   color: "white",
   stack: false,
 }
