@@ -212,6 +212,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
                   <Message
                     key={index}
                     color={colorByMessageType(message.type)}
+                    onClick={message.onClick}
                     onClose={() =>
                       this.setState(prevState => ({
                         messages: prevState.messages.filter(
