@@ -116,7 +116,7 @@ const Container = styled("div")`
     margin: 0;
     word-break: break-all;
     hyphens: auto;
-    white-space: initial;
+    white-space: pre-wrap;
   }
 
   code {
