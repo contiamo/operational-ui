@@ -50,6 +50,7 @@ const separatorColors = {
 const textColors = {
   dark: "#333",
   default: "#545454",
+  disabled: "#c0c0c0",
   light: "#666",
   lighter: "#747474",
   lightest: "#909090",

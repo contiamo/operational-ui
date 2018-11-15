@@ -147,7 +147,7 @@ const InputField = styled("input")<{
     color: preset ? theme.color.text.dark : theme.color.text.default,
     backgroundColor: makeBackgroundColor(),
     "::placeholder": {
-      color: theme.color.border.default,
+      color: theme.color.text.disabled,
     },
     ...(clear ? { paddingRight: 40 } : {}),
     "&:focus": inputFocus({
