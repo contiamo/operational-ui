@@ -114,6 +114,9 @@ const Container = styled("div")`
     flex: 1;
     display: flex;
     margin: 0;
+    word-break: break-all;
+    hyphens: auto;
+    white-space: pre-wrap;
   }
 
   code {

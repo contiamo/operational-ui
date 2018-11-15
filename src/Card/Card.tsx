@@ -106,6 +106,7 @@ const Container = styled("div")(({ theme }) => ({
   boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.16)",
   backgroundColor: theme.color.white,
   wordWrap: "break-word",
+  wordBreak: "break-all",
   "& > img": {
     maxWidth: "100%",
   },
@@ -120,7 +121,10 @@ const Container = styled("div")(({ theme }) => ({
 
 const Content = styled("div")<{ fullSize?: boolean }>`
   padding: ${({ theme }) => theme.space.element}px;
-  ${props => (props.fullSize ? "height: 100%" : "")};
+  height: ${props => (props.fullSize ? "100%" : "auto")};
+  white-space: pre-wrap;
+  word-wrap: break-all;
+  hyphens: auto;
 `
 
 const SectionsContainer = styled("div")<{ stackHorizontal: boolean }>`

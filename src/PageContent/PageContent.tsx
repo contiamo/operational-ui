@@ -18,18 +18,20 @@ export interface PageContentProps extends DefaultProps {
   fill?: boolean
 }
 
+const sideSize = 280
+
 const StyledPageContent = styled("div")<{ areas?: PageContentProps["areas"]; fill_?: boolean }>(props => {
   const gridTemplateColumns = {
-    main: "auto",
-    "main side": "auto 280px",
-    "side main": "280px auto",
+    main: props.fill_ ? "100%" : "auto",
+    "main side": `auto ${sideSize}px`,
+    "side main": `${sideSize}px auto`,
   }[props.areas || "main"]
 
   return {
     gridTemplateColumns,
     display: "grid",
     alignItems: "start",
-    gridTemplateAreas: `"${props.areas}"`,
+    gridTemplateAreas: `"${props.areas || "main"}"`,
     gridGap: props.theme.space.element,
     width: "100%",
     height: "100%",
