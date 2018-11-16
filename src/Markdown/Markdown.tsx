@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown"
 
 import Checkbox from "../Checkbox/Checkbox"
 import Code, { DefaultCodeProps } from "../Code/Code"
-import Table from "../Table/Table"
+import Table, { Column } from "../Table/Table"
 import Body from "../Typography/Body"
 import Title from "../Typography/Title"
 import styled from "../utils/styled"
@@ -24,6 +24,13 @@ const BulletPoint = styled("div")`
 `
 
 const Markdown = ({ value: inputValue }: MarkdownProps) => {
+  /**
+   * react-markdown supports a concept of "renderers" that render
+   * specific JSX for a given piece of Markdown AST.
+   *
+   * This is the dictionary that maps bits of Markdown to our
+   * components.
+   */
   const renderers = {
     code: ({ value, language }: { value: string; language: DefaultCodeProps["syntax"] }) => (
       <Code syntax={language}>{value}</Code>
@@ -41,6 +48,24 @@ const Markdown = ({ value: inputValue }: MarkdownProps) => {
       </Body>
     ),
 
+    /**
+     * The structure of the table renderer in react-markdown
+     * may be a little concerning: it gives you a full set of Table components in the
+     * following shape:
+     *
+     * [
+     *  { ...tableHead },
+     *  { ...tableBody }
+     * ]
+     *
+     * The schemas of these objects are react components with a predictable shape.
+     * We've nailed down this version to be _exact_ in package.json so these will
+     * not change, but as far as I can see, there is no better way to render tables
+     * with this library.
+     *
+     * We looked at other libraries and also weren't able to find a clean-enough
+     * solution. :(
+     */
     table: ({ children: [tableHead, tableBody] }: { children: TableNode }) => {
       const columns = tableHead.props.children[0].props.children.map(
         columnNode => columnNode.props.children[0].props.value,
@@ -52,8 +77,7 @@ const Markdown = ({ value: inputValue }: MarkdownProps) => {
           .reduce((acc, child, index) => ({ ...acc, [columns[index] as string]: child[0].props.value }), {}),
       )
 
-      // `any` is used here because we don't know the structure of `data` from a Markdown string...
-      return <Table columns={columns as any} data={data} />
+      return <Table columns={(columns as unknown) as Array<Column<{}>>} data={data} />
     },
   }
 

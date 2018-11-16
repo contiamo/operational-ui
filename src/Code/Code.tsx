@@ -131,6 +131,7 @@ const Container = styled("div")`
     display: inline-flex;
   }
 
+  /* Push things under it down a bit */
   :not(:last-child) {
     margin-bottom: ${({ theme }) => theme.space.element}px;
   }
