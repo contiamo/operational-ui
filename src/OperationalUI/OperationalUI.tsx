@@ -68,23 +68,28 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: ${theme.deprecated.fontFamily};
+  font-family: ${theme.font.family};
   font-size: 13px;
   height: 100%;
 }
 
 body {
-  background-color: ${theme.deprecated.colors.background};
+  background-color: ${theme.color.background.lighter};
 }
 
 a:link,
 a:visited {
-  color: ${theme.deprecated.colors.info};
+  color: ${theme.color.primary};
   text-decoration: none;
 }
 
 a:hover: {
-  color: ${darken(theme.deprecated.colors.info, 5)};
+  color: ${darken(theme.color.primary, 5)};
+}
+
+ul {
+  margin: 0 0 0 ${theme.space.content}px;
+  padding: 0;
 }
 `
 

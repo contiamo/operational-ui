@@ -14,6 +14,14 @@ Install the package via npm or yarn:
 
 - npm install @operational/components
 
+## Checkbox for fun
+Here we have a checkbox because we like checkboxes and stuff.
+
+- [ ] this isn't
+- [x] in the docs
+- [ ] but the example
+- [x] is nice to have
+
 Create your first application like so:
 
 \`\`\`js

@@ -1,6 +1,7 @@
 import * as React from "react"
 import ReactMarkdown from "react-markdown"
 
+import Checkbox from "../Checkbox/Checkbox"
 import Code, { DefaultCodeProps } from "../Code/Code"
 import Table from "../Table/Table"
 import Body from "../Typography/Body"
@@ -11,6 +12,8 @@ export interface MarkdownProps {
   value: string
 }
 
+export type TableNode = Array<React.ReactElement<{ children: TableNode; value: string }>>
+
 const BulletPoint = styled("div")`
   display: inline-block;
   width: 6px;
@@ -20,8 +23,6 @@ const BulletPoint = styled("div")`
   margin-right: ${({ theme }) => theme.space.small}px;
 `
 
-export type TableNode = Array<React.ReactElement<{ children: TableNode; value: string }>>
-
 const Markdown = ({ value: inputValue }: MarkdownProps) => {
   const renderers = {
     code: ({ value, language }: { value: string; language: DefaultCodeProps["syntax"] }) => (
@@ -29,9 +30,14 @@ const Markdown = ({ value: inputValue }: MarkdownProps) => {
     ),
     heading: ({ children }: JSX.ElementChildrenAttribute) => <Title>{children}</Title>,
     paragraph: ({ children }: JSX.ElementChildrenAttribute) => <Body>{children}</Body>,
-    listItem: ({ children }: JSX.ElementChildrenAttribute) => (
+    listItem: ({ children, checked }: { children: string; checked: boolean }) => (
       <Body style={{ display: "flex", alignItems: "center" }}>
-        <BulletPoint /> {children}
+        {checked === null && (
+          <>
+            <BulletPoint /> {children}
+          </>
+        )}
+        {typeof checked === "boolean" && <Checkbox value={checked} label={children} />}
       </Body>
     ),
 
