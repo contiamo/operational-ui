@@ -37,7 +37,7 @@ const Markdown = ({ value: inputValue }: MarkdownProps) => {
     ),
     heading: ({ children }: JSX.ElementChildrenAttribute) => <Title>{children}</Title>,
     paragraph: ({ children }: JSX.ElementChildrenAttribute) => <Body>{children}</Body>,
-    listItem: ({ children, checked }: { children: string; checked: boolean }) => (
+    listItem: ({ children, checked }: { children: string; checked: boolean | null }) => (
       <Body style={{ display: "flex", alignItems: "center" }}>
         {checked === null && (
           <>
