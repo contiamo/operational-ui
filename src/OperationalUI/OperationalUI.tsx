@@ -68,7 +68,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: ${theme.font.family};
+  font-family: ${theme.font.family.main};
   font-size: 13px;
   height: 100%;
 }
