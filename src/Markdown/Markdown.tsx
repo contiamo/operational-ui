@@ -15,12 +15,13 @@ export interface MarkdownProps {
 export type TableNode = Array<React.ReactElement<{ children: TableNode; value: string }>>
 
 const BulletPoint = styled("div")`
-  display: inline-block;
   width: 6px;
   height: 6px;
   border-radius: 50%;
   background-color: currentColor;
   margin-right: ${({ theme }) => theme.space.small}px;
+  margin-top: 6px;
+  float: left;
 `
 
 const Markdown = ({ value: inputValue }: MarkdownProps) => {
@@ -38,7 +39,7 @@ const Markdown = ({ value: inputValue }: MarkdownProps) => {
     heading: ({ children }: JSX.ElementChildrenAttribute) => <Title>{children}</Title>,
     paragraph: ({ children }: JSX.ElementChildrenAttribute) => <Body>{children}</Body>,
     listItem: ({ children, checked }: { children: string; checked: boolean | null }) => (
-      <Body style={{ display: "flex", alignItems: "center" }}>
+      <Body>
         {checked === null && (
           <>
             <BulletPoint /> {children}

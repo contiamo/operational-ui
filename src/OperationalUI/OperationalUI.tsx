@@ -87,7 +87,7 @@ a:hover: {
   color: ${darken(theme.color.primary, 5)};
 }
 
-ul {
+ul, ol {
   margin: 0 0 0 ${theme.space.content}px;
   padding: 0;
 }

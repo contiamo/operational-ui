@@ -1,7 +1,7 @@
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
-export const Body = styled("p")<{
+export const Body = styled("div")<{
   color?: keyof OperationalStyleConstants["color"]["text"]
 }>(({ theme, color }) => ({
   fontSize: theme.font.size.body,
