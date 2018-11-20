@@ -57,7 +57,7 @@ const Label = styled("label")`
   line-height: 20px;
   user-select: none;
 
-  font-size: 12px;
+  font-size: ${props => props.theme.font.size}px;
   color: ${props => props.theme.color.text.default};
 
   :hover {
@@ -85,34 +85,34 @@ const Label = styled("label")`
 
 export interface CheckboxProps {
   /** The current value of the checkbox */
-  value: boolean
+  value?: boolean
   /** Callback called when the checkbox changes */
-  onChange: (value: boolean) => void
+  onChange?: (value: boolean) => void
   /** The label of the checkbox */
   label: string
   /** Disabled input */
   disabled?: boolean
 }
 
-class Checkbox extends React.Component<CheckboxProps> {
-  private uuid = uniqueId("checkbox_")
+const Checkbox: React.SFC<CheckboxProps> = ({ value, onChange, label, disabled }) => {
+  const uuid = uniqueId("checkbox_")
 
-  public render() {
-    const { value, onChange, label, disabled } = this.props
+  return (
+    <div style={disabled ? { opacity: 0.6 } : {}}>
+      <Input
+        id={uuid}
+        type="checkbox"
+        checked={Boolean(value)}
+        onChange={() => (onChange ? onChange(!value) : undefined)}
+        disabled={disabled}
+      />
+      <Label htmlFor={uuid}>{label}</Label>
+    </div>
+  )
+}
 
-    return (
-      <div style={disabled ? { opacity: 0.6 } : {}}>
-        <Input
-          id={this.uuid}
-          type="checkbox"
-          checked={Boolean(value)}
-          onChange={() => onChange(!value)}
-          disabled={disabled}
-        />
-        <Label htmlFor={this.uuid}>{label}</Label>
-      </div>
-    )
-  }
+Checkbox.defaultProps = {
+  value: false,
 }
 
 export default Checkbox

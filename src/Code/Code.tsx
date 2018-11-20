@@ -130,6 +130,11 @@ const Container = styled("div")`
   .icon-container > span {
     display: inline-flex;
   }
+
+  /* Push things under it down a bit */
+  :not(:last-child) {
+    margin-bottom: ${({ theme }) => theme.space.element}px;
+  }
 `
 
 const StyledHighlight = styled(Highlight)(({ theme }) => {
