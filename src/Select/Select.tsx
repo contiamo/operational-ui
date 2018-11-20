@@ -2,6 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
+import { inputHeight } from "../Input/Input"
 import { LabelText } from "../LabelText/LabelText"
 import { floatIn, keyCodes, readableTextColor, resetTransform } from "../utils"
 import { expandColor } from "../utils/constants"
@@ -64,7 +65,7 @@ const Container = styled("div")<Partial<SelectProps>>(({ theme, color, disabled,
     borderRadius: 4,
     width: "fit-content",
     minWidth: !naked ? 240 : "none",
-    minHeight: 20,
+    minHeight: inputHeight,
     border: naked ? 0 : "1px solid",
     borderColor: theme.color.border.default,
     opacity: disabled ? 0.5 : 1,
