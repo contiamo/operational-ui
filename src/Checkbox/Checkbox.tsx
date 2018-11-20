@@ -89,7 +89,7 @@ export interface CheckboxProps {
   /** Callback called when the checkbox changes */
   onChange?: (value: boolean) => void
   /** The label of the checkbox */
-  label?: string
+  label: string
   /** Disabled input */
   disabled?: boolean
 }
