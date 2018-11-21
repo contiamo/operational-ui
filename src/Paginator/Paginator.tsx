@@ -1,3 +1,15 @@
+/**
+ * @todo remove this in v12.
+ */
+console.warn(`[operational-ui]: Deprecation Warning
+===
+
+<Paginator />'s page prop is now _mandatory_, meaning in the next major
+release, your code (if TypeScript) will not compile. Please add an explicit
+\`page\` prop to your Paginator if you'd like to stay up to date.
+
+Issue: https://github.com/contiamo/operational-ui/pull/820`)
+
 import * as React from "react"
 
 import Button from "../Button/Button"
