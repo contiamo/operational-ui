@@ -3,22 +3,8 @@ Pagination is a predictable and expressive way to handle datasets that don't fit
 ### Usage
 
 ```jsx
-class ComponentWithPaginator extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-
-  handleChange(page) {
-    this.setState(() => ({ page }))
-  }
-
-  render() {
-    return (
-      <Paginator itemCount={258} itemsPerPage={50} page={this.state.page} onChange={page => this.handleChange(page)} />
-    )
-  }
+initialState = {
+  page: 1,
 }
-
-;<ComponentWithPaginator />
+;<Paginator itemCount={258} itemsPerPage={50} page={state.page} onChange={page => setState({ page })} />
 ```
