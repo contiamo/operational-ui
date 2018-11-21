@@ -93,8 +93,6 @@ You can have a field with a "copy to clipboard" button with the `copy` prop.
 
 ### Full Width
 
-#### With Label
-
 ```jsx
 <Input fullWidth value="Dave the Sheep" label="Hi, my name is" />
 ```
