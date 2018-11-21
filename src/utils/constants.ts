@@ -194,6 +194,7 @@ const constants = {
   borderRadius: 2,
   compactSidebarWidth: 90,
   sidebarWidth: 220,
+  topbarHeight: 42,
   titleHeight: 50,
   /**
    * This redundant type-casting is necessary to give the typescript compiler access
