@@ -1,14 +1,11 @@
 import * as React from "react"
-import CopyToClipboard from "react-copy-to-clipboard"
 
 import Hint from "../Hint/Hint"
 import Icon, { IconName } from "../Icon/Icon"
 import { LabelText } from "../LabelText/LabelText"
-import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
 import { DefaultProps } from "../types"
-import { setAlpha } from "../utils"
-import { FormFieldControl, FormFieldControls, FormFieldError, inputFocus, Label } from "../utils/mixins"
-import styled from "../utils/styled"
+import { FormFieldControl, FormFieldControls, Label } from "../utils/mixins"
+import InputField from "./Input.Field"
 
 export interface BaseProps extends DefaultProps {
   /** Text displayed when the input field has no value. */
@@ -66,287 +63,36 @@ export interface BasePropsWithoutCopy extends BaseProps {
 
 export type InputProps = BasePropsWithCopy | BasePropsWithoutCopy
 
-// Rendered height taking into account paddings, font-sizes and line-height
-const inputHeight = 36
-const inputWidth = 360
+const Input: React.SFC<InputProps> = ({ fullWidth, label, labelId, hint, onToggle, disabled, ...props }) => {
+  const forAttributeId = label && labelId
+  const Field = <InputField fullWidth={fullWidth} {...props} />
 
-const InputFieldContainer = styled("div")<{
-  fullWidth: InputProps["fullWidth"]
-  withLabel?: boolean
-}>`
-  position: relative;
-  align-items: center;
-  justify-content: center;
-  max-width: 100%;
-  ${({ fullWidth, withLabel, theme }) => `
-    margin-right: ${withLabel ? 0 : theme.space.small}px;
-    display: ${withLabel ? "flex" : "inline-flex"};
-    width: 100%;
-    max-width: ${fullWidth ? "none" : `${inputWidth}px`};
-  `};
-`
-
-const InputButton = styled("div")`
-  width: ${inputHeight}px;
-  /** Makes sure the button doesn't shrink when inside a flex container */
-  flex: 0 0 ${inputHeight}px;
-  height: ${inputHeight}px;
-  top: 0px;
-  left: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  ${({ theme }) => `
-    background-color: ${theme.color.background.lighter};
-    border-top-left-radius: ${theme.borderRadius}px;
-    border-bottom-left-radius: ${theme.borderRadius}px;
-    border: 1px solid;
-    border-color: ${theme.color.border.default};
-    color: ${theme.color.text.light};
-    &:hover {
-      background-color: ${theme.color.background.light};
-    }
-  `};
-`
-
-const InputField = styled("input")<{
-  isError: boolean
-  withIconButton: boolean
-  preset: InputProps["preset"]
-  disabled: InputProps["disabled"]
-  clear: InputProps["clear"]
-}>(({ theme, disabled, isError, withIconButton, preset, clear }) => {
-  const makeBackgroundColor = () => {
-    if (disabled) {
-      return theme.color.disabled
-    }
-
-    if (preset) {
-      return setAlpha(0.1)(theme.color.primary)
-    }
-
-    return theme.color.white
-  }
-
-  return {
-    ...(withIconButton
-      ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
-      : { borderRadius: theme.borderRadius }),
-    fontSize: theme.font.size.body,
-    width: "100%",
-    height: inputHeight,
-    label: "input",
-    flexGrow: 1,
-    padding: `${theme.space.small}px ${theme.space.medium}px`,
-    opacity: disabled ? 0.6 : 1.0,
-    font: "inherit",
-    border: "1px solid",
-    borderColor: isError ? theme.color.error : theme.color.border.default,
-    appearance: "none",
-    fontWeight: preset ? theme.font.weight.medium : theme.font.weight.regular,
-    color: preset ? theme.color.text.dark : theme.color.text.default,
-    backgroundColor: makeBackgroundColor(),
-    "::placeholder": {
-      color: theme.color.text.disabled,
-    },
-    ...(clear ? { paddingRight: 40 } : {}),
-    "&:focus": inputFocus({
-      theme,
-      isError,
-    }),
-  }
-})
-
-const ClearButton = styled("div")`
-  position: absolute;
-  top: 0; /* anchor the position to the top so the browser doesn't guess */
-  right: 0; /* not 12px but 0 because we want a _box_ to attach to the end of Input and not just an X pushed in from the right */
-
-  /* We also probably should specify the dimensions of this box */
-  width: ${inputHeight}px;
-  height: ${inputHeight}px;
-
-  /* Also, let's center the contents of this box */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer; /* Let the user know this is clickable */
-
-  /* We want the user to click on thix _box_, not the icon inside it */
-  > svg {
-    pointer-events: none;
-  }
-`
-
-export const initialState = {
-  showTooltip: false,
-}
-
-export type State = Readonly<typeof initialState>
-
-class Input extends React.Component<InputProps, State> {
-  public readonly state = initialState
-  public timeoutId: number | null = null
-
-  public showTooltip = () => {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId)
-    }
-    this.setState(() => ({ showTooltip: true }))
-
-    this.timeoutId = window.setTimeout(() => {
-      this.setState(() => ({ showTooltip: false }))
-      this.timeoutId = null
-    }, 1000)
-  }
-
-  private getButtonElement = () => {
-    const { icon, copy, value, onIconClick } = this.props
-    const { showTooltip } = this.state
-
-    if (!icon && !copy) {
-      return null
-    }
-
-    return copy ? (
-      <CopyToClipboard text={value || ""} onCopy={this.showTooltip}>
-        <InputButton>
-          {showTooltip && <Tooltip left>Copied!</Tooltip>}
-          <Icon name="Copy" size={16} />
-        </InputButton>
-      </CopyToClipboard>
-    ) : (
-      <InputButton onClick={onIconClick}>
-        {typeof icon === "string" ? <Icon name={icon as IconName} size={16} /> : icon}
-      </InputButton>
-    )
-  }
-
-  public render() {
-    const {
-      fullWidth,
-      copy,
-      icon,
-      onIconClick,
-      label,
-      labelId,
-      inputRef,
-      autoFocus,
-      name,
-      hint,
-      autoComplete,
-      onToggle,
-      disabled,
-      value,
-      type,
-      onFocus,
-      onBlur,
-      placeholder,
-      error,
-      onChange,
-      preset,
-      ...props
-    } = this.props
-
-    const forAttributeId = label && labelId
-    if (label) {
-      return (
-        <Label {...props} fullWidth={fullWidth} htmlFor={forAttributeId} left>
-          <LabelText>{label}</LabelText>
-          {(hint || onToggle) && (
-            <FormFieldControls>
-              {hint && <Hint>{hint}</Hint>}
-              {onToggle ? (
-                <FormFieldControl
-                  onClick={() => {
-                    if (onToggle) {
-                      onToggle()
-                    }
-                  }}
-                >
-                  <Icon name={disabled ? "Lock" : "Unlock"} size={12} />
-                </FormFieldControl>
-              ) : null}
-            </FormFieldControls>
-          )}
-          {this.getInputField()}
-        </Label>
-      )
-    }
-
-    return this.getInputField()
-  }
-
-  private getInputField = () => {
-    const {
-      fullWidth,
-      copy,
-      icon,
-      label,
-      inputRef,
-      autoFocus,
-      name,
-      autoComplete,
-      disabled,
-      value,
-      type,
-      onFocus,
-      onBlur,
-      placeholder,
-      error,
-      onChange,
-      preset,
-      clear,
-      labelId,
-    } = this.props
-
-    const commonInputProps = {
-      innerRef: inputRef,
-      autoFocus,
-      name,
-      disabled: Boolean(disabled),
-      value: value || "",
-      isStandalone: !Boolean(label),
-      type,
-      onFocus,
-      onBlur,
-      placeholder,
-      isError: Boolean(error),
-      onChange: (ev: React.FormEvent<HTMLInputElement>) => {
-        if (onChange) {
-          onChange(ev.currentTarget.value)
-        }
-      },
-    }
-
-    const forAttributeId = label && labelId
-    const withIconButton = Boolean(icon) || Boolean(copy)
-    const inputButtonElement = this.getButtonElement()
-
+  if (label) {
     return (
-      <>
-        <InputFieldContainer fullWidth={fullWidth} withLabel>
-          {inputButtonElement}
-          <InputField
-            {...commonInputProps}
-            clear={clear}
-            preset={Boolean(preset)}
-            id={forAttributeId}
-            autoComplete={autoComplete}
-            withIconButton={withIconButton}
-          />
-          {clear &&
-            value && (
-              <ClearButton onClick={this.props.clear}>
-                <Icon color="color.text.lightest" name="No" />
-              </ClearButton>
-            )}
-        </InputFieldContainer>
-        {error ? <FormFieldError>{error}</FormFieldError> : null}
-      </>
+      <Label fullWidth={fullWidth} htmlFor={forAttributeId} left>
+        <LabelText>{label}</LabelText>
+        {(hint || onToggle) && (
+          <FormFieldControls>
+            {hint && <Hint>{hint}</Hint>}
+            {onToggle ? (
+              <FormFieldControl
+                onClick={() => {
+                  if (onToggle) {
+                    onToggle()
+                  }
+                }}
+              >
+                <Icon name={disabled ? "Lock" : "Unlock"} size={12} />
+              </FormFieldControl>
+            ) : null}
+          </FormFieldControls>
+        )}
+        {Field}
+      </Label>
     )
   }
+
+  return Field
 }
 
 export default Input
