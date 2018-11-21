@@ -1,13 +1,13 @@
 import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
 import { DefaultProps } from "../types"
-import { isCmdEnter } from "../utils"
+import { isCmdEnter, lighten } from "../utils"
 import styled from "../utils/styled"
 
 import Hint from "../Hint/Hint"
 import Icon from "../Icon/Icon"
-import { LabelText, labelTextHeight } from "../LabelText/LabelText"
-import Tooltip from "../Tooltip/Tooltip" // Styled components appears to have an internal bug that breaks when this is imported from index.ts
+import { LabelText } from "../LabelText/LabelText"
+import Tooltip from "../Tooltip/Tooltip"
 import { FormFieldControls, FormFieldError, inputFocus, Label } from "../utils/mixins"
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
@@ -53,20 +53,45 @@ const TextareaComp = styled("textarea")<{
   resize: ResizeOptions
   height?: number
 }>(({ theme, isCode, isError, isAction, disabled, resize, height }) => {
-  const topPadding = (isAction ? 20 : 0) + theme.space.small
   return {
     height,
     resize,
     fontSize: theme.font.size.small,
     fontWeight: theme.font.weight.regular,
+    position: "relative",
     display: "block",
     width: "100%",
     minHeight: 120,
-    borderRadius: theme.borderRadius,
+    borderRadius: isAction ? `0 0 ${theme.borderRadius}px ${theme.borderRadius}px` : theme.borderRadius,
     borderColor: isError ? theme.color.error : theme.color.border.default,
-    padding: `${topPadding}px ${theme.space.medium}px ${theme.space.small}px ${theme.space.medium}px`,
+    padding: `${theme.space.small}px ${theme.space.medium}px ${theme.space.small}px ${theme.space.medium}px`,
     fontFamily: isCode ? "monospace" : "inherit",
     opacity: disabled ? 0.6 : 1.0,
+    ...(isAction ? { borderTop: 0 } : {}),
+    ":focus ~ div": {
+      borderColor: isError ? theme.color.error : theme.color.primary,
+    },
+    ":focus ~ div:after": {
+      content: "''",
+      position: "absolute",
+      left: -4,
+      right: -4,
+      ...(isError
+        ? {
+            top: 2,
+            bottom: -4,
+            borderRadius: `0 0 5px 5px`,
+            border: `3px ${lighten(theme.color.error, 60)} solid`,
+            borderTop: 0,
+          }
+        : {
+            top: -4,
+            bottom: 2,
+            borderRadius: `5px 5px 0 0`,
+            border: `3px ${lighten(theme.color.primary, 40)} solid`,
+            borderBottom: 0,
+          }),
+    },
     ":focus": inputFocus({
       theme,
       isError,
@@ -74,20 +99,20 @@ const TextareaComp = styled("textarea")<{
   }
 })
 
-const borderWidth = 1
-
-const ActionHeader = styled("div")<{ isLabel: boolean }>(({ theme, isLabel }) => ({
+const ActionHeader = styled("div")<{ isLabel: boolean }>(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
   padding: `${theme.space.base}px ${theme.space.small}px`,
   color: theme.color.text.lighter,
-  width: `calc(100% - ${2 * borderWidth}px)`,
+  width: `100%`,
   position: "absolute",
+  top: 2,
   backgroundColor: theme.color.background.lighter,
-  top: `${borderWidth + (isLabel ? labelTextHeight + theme.space.base : 0)}px`,
-  left: borderWidth,
+  borderRadius: `${theme.borderRadius}px ${theme.borderRadius}px 0 0`,
   zIndex: theme.zIndex.formFieldError,
   display: "flex",
   justifyContent: "flex-end",
+  border: `${theme.color.border.default} 1px solid`,
+  borderBottom: 0,
   /**
    * Use case: External Links typically have <Icon/>s next to them.
    */
