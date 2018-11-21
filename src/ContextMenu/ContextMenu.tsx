@@ -63,13 +63,28 @@ const MenuContainer = styled("div")<{
   minWidth: "fit-content",
 }))
 
+/**
+ * Overlay to prevent mouse events when the context menu is open
+ */
+const InvisibleOverlay = styled("div")(({ theme }) => ({
+  position: "fixed",
+  top: 0,
+  bottom: 0,
+  right: 0,
+  left: 0,
+  cursor: "default",
+  zIndex: theme.zIndex.selectOptions - 1,
+}))
+
 class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
   private menu: HTMLDivElement | null = null
 
-  private toggle = () =>
+  private toggle = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
     }))
+  }
 
   private focusElement = () => {
     if (this.menu && this.menu.querySelector('[tabindex="0"]')) {
@@ -121,12 +136,6 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
   }
 
   public componentDidUpdate(prevProps: ContextMenuProps) {
-    if (this.state.isOpen) {
-      document.addEventListener("click", this.toggle)
-    } else {
-      document.removeEventListener("click", this.toggle)
-    }
-
     // Reset focused item to first if items change.
     if (!isEqual(this.props.items, prevProps.items)) {
       this.setState(() => ({ focusedItemIndex: this.props.items.length - 1 }))
@@ -139,34 +148,37 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     }
 
     const { condensed, iconLocation, children, open, embedChildrenInMenu, align, width, ...props } = this.props
-
+    const isOpen = open || this.state.isOpen
     const renderedChildren = typeof children === "function" ? children(this.state.isOpen) : children
     return (
-      <Container {...props} align={align} onClick={this.toggle} onKeyUp={this.handleKeyPress}>
-        {renderedChildren}
-        {(open || this.state.isOpen) && (
-          <MenuContainer innerRef={node => (this.menu = node)} embedChildrenInMenu={this.props.embedChildrenInMenu}>
-            {embedChildrenInMenu && renderedChildren}
-            {props.items.map((itemFromProps, index: number) => {
-              const item = this.makeItem(itemFromProps)
-              const clickHandler = item.onClick ? item.onClick : this.props.onClick
+      <>
+        {isOpen && <InvisibleOverlay onClick={this.toggle} />}
+        <Container {...props} align={align} onClick={this.toggle} onKeyUp={this.handleKeyPress}>
+          {renderedChildren}
+          {isOpen && (
+            <MenuContainer innerRef={node => (this.menu = node)} embedChildrenInMenu={this.props.embedChildrenInMenu}>
+              {embedChildrenInMenu && renderedChildren}
+              {props.items.map((itemFromProps, index: number) => {
+                const item = this.makeItem(itemFromProps)
+                const clickHandler = item.onClick ? item.onClick : this.props.onClick
 
-              return (
-                <ContextMenuItem
-                  tabIndex={this.state.focusedItemIndex === index ? 0 : -1} // ref "tabindex roving": https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex
-                  onClick={clickHandler && (() => clickHandler(item))}
-                  key={`contextmenu-${index}`}
-                  condensed={condensed}
-                  align={align}
-                  iconLocation={iconLocation}
-                  width={width || "100%"}
-                  item={item}
-                />
-              )
-            })}
-          </MenuContainer>
-        )}
-      </Container>
+                return (
+                  <ContextMenuItem
+                    tabIndex={this.state.focusedItemIndex === index ? 0 : -1} // ref "tabindex roving": https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex
+                    onClick={clickHandler && (() => clickHandler(item))}
+                    key={`contextmenu-${index}`}
+                    condensed={condensed}
+                    align={align}
+                    iconLocation={iconLocation}
+                    width={width || "100%"}
+                    item={item}
+                  />
+                )
+              })}
+            </MenuContainer>
+          )}
+        </Container>
+      </>
     )
   }
 }
