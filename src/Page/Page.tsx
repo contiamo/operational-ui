@@ -92,12 +92,15 @@ const TitleContainer = styled("div")(({ theme }) => ({
   fontWeight: theme.font.weight.medium,
 }))
 
-const ViewContainer = styled("div")<{ isInTab?: boolean; isTitleCondensed?: boolean }>(
-  ({ theme, isInTab, isTitleCondensed }) => ({
-    height: `calc(100% - ${isInTab && !isTitleCondensed ? theme.titleHeight + tabsBarHeight : theme.titleHeight}px)`,
-    overflow: "hidden",
-    position: "relative",
-  }),
+const ViewContainer = styled("div")<{ isInTab?: boolean; isTitleCondensed?: boolean; hasTitle?: boolean }>(
+  ({ theme, isInTab, isTitleCondensed, hasTitle }) => {
+    const calculatedTitleOffset = isInTab && !isTitleCondensed ? theme.titleHeight + tabsBarHeight : theme.titleHeight
+    return {
+      height: hasTitle ? `calc(100% - ${calculatedTitleOffset}px)` : "100%",
+      overflow: "hidden",
+      position: "relative",
+    }
+  },
 )
 
 const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosition"] }>(
@@ -162,7 +165,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
                 {!condensedTitle && tabsBar}
               </TitleBar>
             )}
-            <ViewContainer isInTab isTitleCondensed={condensedTitle}>
+            <ViewContainer isInTab isTitleCondensed={condensedTitle} hasTitle={Boolean(title)}>
               {activeChildren}
             </ViewContainer>
           </>
@@ -184,7 +187,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
             </TitleContainer>
           </TitleBar>
         )}
-        <ViewContainer>
+        <ViewContainer hasTitle={Boolean(title)}>
           <PageContent areas={areas} fill={fill}>
             {modalConfirmContext => {
               const resolvedChildren = typeof children === "function" ? children(modalConfirmContext) : children
