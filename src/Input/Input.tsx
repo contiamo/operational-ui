@@ -65,7 +65,7 @@ export type InputProps = BasePropsWithCopy | BasePropsWithoutCopy
 
 const Input: React.SFC<InputProps> = ({ fullWidth, label, labelId, hint, onToggle, disabled, ...props }) => {
   const forAttributeId = label && labelId
-  const Field = <InputField fullWidth={fullWidth} {...props} />
+  const Field = <InputField fullWidth={fullWidth} disabled={disabled} {...props} />
 
   if (label) {
     return (
