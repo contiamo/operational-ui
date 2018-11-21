@@ -1,3 +1,5 @@
+let isUserWarnedAboutDeprecation = false
+
 import * as React from "react"
 
 import Button from "../Button/Button"
@@ -90,7 +92,8 @@ const Container = styled("div")(({ theme }) => ({
 const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page: explicitPage, onChange, ...props }) => {
   const page: number = explicitPage || 1
 
-  if (!explicitPage) {
+  if (!explicitPage && !isUserWarnedAboutDeprecation && process.env.NODE_ENV !== "production") {
+    isUserWarnedAboutDeprecation = true
     /**
      * @todo remove this in v12.
      */
