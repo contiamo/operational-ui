@@ -2,7 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-import { inputHeight } from "../Input/Input"
+import { height as inputHeight } from "../Input/Input.constants"
 import { LabelText } from "../LabelText/LabelText"
 import { floatIn, keyCodes, readableTextColor, resetTransform } from "../utils"
 import { expandColor } from "../utils/constants"
