@@ -24,6 +24,20 @@ const BulletPoint = styled("div")`
   float: left;
 `
 
+const Blockquote = styled("div")`
+  border-left: 3px solid ${({ theme }) => theme.color.border.default};
+  padding-left: ${({ theme }) => theme.space.content}px;
+  color: ${({ theme }) => theme.color.text.lighter};
+
+  :not(:last-child) {
+    margin-bottom: ${({ theme }) => theme.space.big}px;
+  }
+
+  div {
+    color: ${({ theme }) => theme.color.text.lighter};
+  }
+`
+
 const Markdown = ({ value: inputValue }: MarkdownProps) => {
   /**
    * react-markdown supports a concept of "renderers" that render
@@ -48,6 +62,7 @@ const Markdown = ({ value: inputValue }: MarkdownProps) => {
         {typeof checked === "boolean" && <Checkbox value={checked} label={children} />}
       </Body>
     ),
+    blockquote: ({ children }: { children: string }) => <Blockquote>{children}</Blockquote>,
 
     /**
      * The structure of the table renderer in react-markdown
