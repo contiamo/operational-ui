@@ -8,6 +8,8 @@ This component renders Markdown, Operational UI style.
 
 The \`@operational/components\` package contains _simple_, **stateless** UI building blocks - your typical input fields, buttons, cards, grids, and so on. See [demo and docs](https://operational-ui.js.org/).
 
+> This project is structured as a Labs Bundle and you can edit using the labs edit command. Due to some current discrepencies between OpenFaaS and Labs, you can not test or deploy the function via Labs, this must be done directly with OpenFaaS.
+
 ## Getting Started
 
 Install the package via npm or yarn:
