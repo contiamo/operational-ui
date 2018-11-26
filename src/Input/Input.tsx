@@ -26,9 +26,9 @@ export interface BaseProps extends DefaultProps {
    */
   onChange?: (newVal: string) => void
   /** Focus handler */
-  onFocus?: (ev: any) => void
+  onFocus?: (ev: React.FormEvent<HTMLInputElement>) => void
   /** Blur handler */
-  onBlur?: (ev: any) => void
+  onBlur?: (ev: React.FormEvent<HTMLInputElement>) => void
   type?: string
   children?: string
   autoComplete?: string

@@ -39,6 +39,10 @@ export interface TextareaProps extends DefaultProps {
   copy?: boolean
   /** cmd+enter submit handler */
   onSubmit?: () => void
+  /** Focus handler */
+  onFocus?: (ev: React.FocusEvent<HTMLTextAreaElement>) => void
+  /** Blur handler */
+  onBlur?: (ev: React.FocusEvent<HTMLTextAreaElement>) => void
 }
 
 export interface State {
@@ -174,6 +178,8 @@ class Textarea extends React.Component<TextareaProps, State> {
       copy,
       onChange,
       onSubmit,
+      onFocus,
+      onBlur,
       ...props
     } = this.props
     return (
@@ -192,6 +198,8 @@ class Textarea extends React.Component<TextareaProps, State> {
           isAction={Boolean(action || copy)}
           resize={resize!}
           height={height}
+          onFocus={onFocus}
+          onBlur={onBlur}
           onKeyDown={(ev: React.KeyboardEvent<HTMLTextAreaElement>) => {
             if (isCmdEnter(ev) && onSubmit) {
               onSubmit()
