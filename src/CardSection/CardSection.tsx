@@ -91,7 +91,7 @@ const Title = styled("div")`
     padding: 0px ${theme.space.element}px;
     font-family: ${theme.font.family.main};
     font-weight: ${theme.font.weight.bold};
-    color: ${theme.color.text.dark};
+    color: ${theme.color.text.lighter};
     font-size: ${theme.font.size.body};
     border-bottom: 1px solid ${theme.color.separators.default};
   `};
