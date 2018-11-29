@@ -39,7 +39,7 @@ export interface State {
   focusedItemIndex: number
 }
 
-const Container = styled("div")(({ align }: { align: ContextMenuProps["align"] }) => ({
+const Container = styled("div")<{ align: ContextMenuProps["align"] }>(({ theme, align }) => ({
   label: "contextmenu",
   cursor: "pointer",
   position: "relative",
@@ -47,6 +47,7 @@ const Container = styled("div")(({ align }: { align: ContextMenuProps["align"] }
   display: "flex",
   alignItems: "center",
   justifyContent: align === "left" ? "flex-start" : "flex-end",
+  zIndex: theme.zIndex.selectOptions,
 }))
 
 const MenuContainer = styled("div")<{
