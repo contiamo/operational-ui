@@ -11,6 +11,16 @@ You can render a simple use-case of the table by specifying a list of records an
 />
 ```
 
+### Simple Usage without Header
+
+```js
+<Table
+  headless
+  data={[{ name: "Max", profession: "Carpenter" }, { name: "Moritz", profession: "Baker" }]}
+  columns={["name", "profession"]}
+/>
+```
+
 While this approach is convenient, it is not recommended because it makes it too easy to re-use record keys as table headings, and adds a strong coupling between data and view concerns.
 
 We suggest taking the time to think about the best way to describe the data fields and then specifying it explicitly as column headers. The following, slightly more verbose version of the API demonstrates how this can be achieved:
