@@ -17,8 +17,8 @@ const Container = styled("div")`
   }
 `
 
-const Heading = styled("h6")`
-  margin: 0 0 ${({ theme }) => theme.space.base}px 0;
+const Heading = styled("h6")<{ hasMeta: boolean }>`
+  margin: 0 0 ${({ theme, hasMeta }) => (hasMeta ? theme.space.base : 0)}px 0;
   font-size: ${({ theme }) => theme.font.size.small}px;
   font-weight: ${({ theme }) => theme.font.weight.medium};
   color: ${({ theme }) => theme.color.text.dark};
@@ -32,7 +32,7 @@ const Meta = styled("p")`
 
 const Contact: React.SFC<ContactProps> = ({ name, meta }) => (
   <Container>
-    <Heading>{name}</Heading>
+    <Heading hasMeta={Boolean(meta)}>{name}</Heading>
     <Meta>{meta}</Meta>
   </Container>
 )
