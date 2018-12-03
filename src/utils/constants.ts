@@ -48,12 +48,19 @@ const separatorColors = {
  * A specialized color palette for typography.
  */
 const textColors = {
+  /** `#333` */
   dark: "#333",
+  /** `#545454` */
   default: "#545454",
+  /** `#c0c0c0` */
   disabled: "#c0c0c0",
+  /** `#666` */
   light: "#666",
+  /** `#747474` */
   lighter: "#747474",
+  /** `#909090` */
   lightest: "#909090",
+  /** primary color */
   action: primaryColor,
   white: whiteColor,
 }
