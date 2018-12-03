@@ -39,7 +39,7 @@ export interface State {
   focusedItemIndex: number
 }
 
-const Container = styled("div")<{ align: ContextMenuProps["align"] }>(({ theme, align }) => ({
+const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: boolean }>(({ isOpen, theme, align }) => ({
   label: "contextmenu",
   cursor: "pointer",
   position: "relative",
@@ -47,7 +47,7 @@ const Container = styled("div")<{ align: ContextMenuProps["align"] }>(({ theme, 
   display: "flex",
   alignItems: "center",
   justifyContent: align === "left" ? "flex-start" : "flex-end",
-  zIndex: theme.zIndex.selectOptions,
+  zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
 }))
 
 const MenuContainer = styled("div")<{
@@ -59,7 +59,6 @@ const MenuContainer = styled("div")<{
   maxHeight: 360,
   overflow: "auto",
   boxShadow: theme.shadows.popup,
-  zIndex: theme.zIndex.selectOptions,
   width: `calc(100% - ${theme.space.small}px)`,
   minWidth: "fit-content",
 }))
@@ -154,7 +153,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     return (
       <>
         {isOpen && <InvisibleOverlay onClick={this.toggle} />}
-        <Container {...props} align={align} onClick={this.toggle} onKeyUp={this.handleKeyPress}>
+        <Container isOpen={isOpen} {...props} align={align} onClick={this.toggle} onKeyUp={this.handleKeyPress}>
           {renderedChildren}
           {isOpen && (
             <MenuContainer innerRef={node => (this.menu = node)} embedChildrenInMenu={this.props.embedChildrenInMenu}>

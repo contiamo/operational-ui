@@ -154,7 +154,7 @@ const data = [
     ],
   },
   {
-    name: "Mega Deal Dev",
+    name: "Small deal prod",
     lastUpdated: "2018-06-06",
     tags: ["agent-view", "production"],
     collaborators: [
@@ -176,62 +176,31 @@ const data = [
     ],
   },
 ]
-;<>
-  <Table
-    data={data}
-    columns={[
-      { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
-      { heading: "Name", cell: dataEntry => dataEntry.name },
-      { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
-      { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
-      { heading: "Collaborators", cell: dataEntry => <AvatarGroup avatars={dataEntry.collaborators} /> },
-    ]}
-    onRowClick={(dataEntry, dataEntryIndex) => console.log({ dataEntry, dataEntryIndex })}
-    rowActions={dataEntry => [
-      {
-        label: "Details",
-        onClick: () => {
-          console.log("Details on ", dataEntry)
-        },
+;<Table
+  data={data}
+  columns={[
+    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+    { heading: "Name", cell: dataEntry => dataEntry.name },
+    { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
+    { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
+    { heading: "Collaborators", cell: dataEntry => <AvatarGroup avatars={dataEntry.collaborators} /> },
+  ]}
+  onRowClick={(dataEntry, dataEntryIndex) => alert("You chose " + dataEntry.name)}
+  rowActions={dataEntry => [
+    {
+      label: "Details",
+      onClick: () => {
+        alert("Details on " + dataEntry.name)
       },
-      {
-        label: "Delete",
-        onClick: () => {
-          console.log("Deleting ", dataEntry)
-        },
+    },
+    {
+      label: "Delete",
+      onClick: () => {
+        alert("Deleting " + dataEntry.name)
       },
-    ]}
-  />
-  <Table
-    data={data}
-    columns={[
-      { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
-      { heading: "Name", cell: dataEntry => dataEntry.name },
-      { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
-      { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
-      { heading: "Collaborators", cell: dataEntry => <AvatarGroup avatars={dataEntry.collaborators} /> },
-    ]}
-    onRowClick={(dataEntry, dataEntryIndex) => console.log({ dataEntry, dataEntryIndex })}
-    rowActions={dataEntry => (
-      <ActionMenu
-        items={[
-          {
-            label: "Details",
-            onClick: () => {
-              console.log("Details on ", dataEntry)
-            },
-          },
-          {
-            label: "Delete",
-            onClick: () => {
-              console.log("Deleting ", dataEntry)
-            },
-          },
-        ]}
-      />
-    )}
-  />
-</>
+    },
+  ]}
+/>
 ```
 
 ### Without data
