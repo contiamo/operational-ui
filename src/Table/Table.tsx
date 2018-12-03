@@ -21,6 +21,8 @@ export interface TableProps<T> extends DefaultProps {
   icon?: (dataEntry: T) => IconName
   /** Icon color for row */
   iconColor?: (dataEntry: T) => string
+  /** Remove the header? */
+  headless?: boolean
 }
 
 export interface Column<T> {
@@ -120,6 +122,7 @@ function Table<T>({
   rowActions,
   icon,
   iconColor,
+  headless,
   ...props
 }: TableProps<T>) {
   const standardizedColumns: Array<Column<T>> =
@@ -134,15 +137,17 @@ function Table<T>({
 
   return (
     <Container {...props}>
-      <Thead>
-        <Tr>
-          {hasIcons && <Th key="-1" />}
-          {standardizedColumns.map((column, columnIndex) => (
-            <Th key={columnIndex}>{column.heading}</Th>
-          ))}
-          {Boolean(rowActions || (onRowClick && rowActionName)) && <Th key="infinity" />}
-        </Tr>
-      </Thead>
+      {!headless && (
+        <Thead>
+          <Tr>
+            {hasIcons && <Th key="-1" />}
+            {standardizedColumns.map((column, columnIndex) => (
+              <Th key={columnIndex}>{column.heading}</Th>
+            ))}
+            {Boolean(rowActions || (onRowClick && rowActionName)) && <Th key="infinity" />}
+          </Tr>
+        </Thead>
+      )}
       <tbody>
         {data.length ? (
           data.map((dataEntry, dataEntryIndex) => {
