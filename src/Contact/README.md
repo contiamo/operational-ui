@@ -1,15 +1,18 @@
-Sometimes, we'd like to show someone's name and email address. This component lets us show a contact in a consistent way. It pairs will with an `Avatar`.
+Sometimes, we'd like to show someone's name and email address. This component lets us show a contact in a consistent way.
 
 ## Basic Usage
 
 ```jsx
 <>
-  <Contact name="Paul Heigl" meta="heigl.paul@gmail.com" />
-  <Contact name="Paul Heigl" meta="+49 173 712 9124" />
+  <Contact name="Luke Cage" meta="harlems.hero@gmail.com" />
+  <Contact name="Danny Rand" />
+  <Contact name="Matt Murdock" meta="+1 173 712 9124" />
 </>
 ```
 
 ## With Avatar
+
+In some cases, this component will be required to pair with an `Avatar`. Consider,
 
 ```jsx
 initialState = { name: "Kenye Wheelest", email: "kweezy@notformidablelabs.com" }
