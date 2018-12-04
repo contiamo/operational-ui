@@ -5,7 +5,9 @@ Sometimes, we'd like to show someone's name and email address. This component le
 ```jsx
 <>
   <Contact name="Luke Cage" meta="harlems.hero@gmail.com" />
+  <br />
   <Contact name="Danny Rand" />
+  <br />
   <Contact name="Matt Murdock" meta="+1 173 712 9124" />
 </>
 ```

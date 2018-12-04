@@ -41,6 +41,60 @@ const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
 </ContextMenu>
 ```
 
+#### Usage with React Nodes as Labels
+
+In some cases, you might want your `label` to be a little bit more clever than just a string. This example shows a `ContextMenu` with a JSX element as its `label`.
+
+```jsx
+const MyLabelContainer = ({ children, style }) => <div style={{ padding: "8px 0", ...style }}>{children}</div>
+const menuItems = [
+  {
+    label: (
+      <MyLabelContainer>
+        <Contact name="Tejas Kumar" meta="youare@cool.com" />
+      </MyLabelContainer>
+    ),
+    icon: "Add",
+  },
+  {
+    label: (
+      <MyLabelContainer>
+        <Contact name="Peter Szerzo" meta="peter@norway.com" />
+      </MyLabelContainer>
+    ),
+    icon: (
+      <div style={{ marginLeft: "auto" }}>
+        <Hint right>User already exists</Hint>
+      </div>
+    ),
+  },
+  {
+    label: (
+      <MyLabelContainer>
+        <Contact name="Sibelius Seraphini" meta="sibelius@seraphini.com" />
+      </MyLabelContainer>
+    ),
+    icon: "Add",
+  },
+  {
+    label: (
+      <MyLabelContainer>
+        <Contact
+          name={`Arnold "Governator" Schwarzennegger`}
+          meta="arnoldgovernatorschwarzennegger@thegovernmentofcalifornia.usa🇺🇸"
+        />
+      </MyLabelContainer>
+    ),
+    icon: "Add",
+  },
+]
+;<>
+  <ContextMenu iconLocation="right" items={menuItems} onClick={item => alert(`clicked ${item}`)}>
+    <Button>See Users</Button>
+  </ContextMenu>
+</>
+```
+
 #### Large number of items
 
 The context menu doesn't grow past a certain maximum height, but scrolls in its container instead.
