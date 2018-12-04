@@ -11,10 +11,8 @@ const Container = styled("div")`
   display: flex;
   flex-direction: column;
   justify-content: center;
-
-  :not(:last-child) {
-    margin-bottom: ${({ theme }) => theme.space.content}px;
-  }
+  width: 100%;
+  overflow: auto;
 `
 
 const Heading = styled("h6")<{ hasMeta: boolean }>`
@@ -22,16 +20,18 @@ const Heading = styled("h6")<{ hasMeta: boolean }>`
   font-size: ${({ theme }) => theme.font.size.small}px;
   font-weight: ${({ theme }) => theme.font.weight.medium};
   color: ${({ theme }) => theme.color.text.dark};
+  line-height: 1;
 `
 
 const Meta = styled("p")`
   margin: 0;
   font-size: ${({ theme }) => theme.font.size.fineprint}px;
   color: ${({ theme }) => theme.color.text.lightest};
+  line-height: 1;
 `
 
-const Contact: React.SFC<ContactProps> = ({ name, meta }) => (
-  <Container>
+const Contact: React.SFC<ContactProps> = ({ name, meta, ...props }) => (
+  <Container {...props}>
     <Heading hasMeta={Boolean(meta)}>{name}</Heading>
     <Meta>{meta}</Meta>
   </Container>

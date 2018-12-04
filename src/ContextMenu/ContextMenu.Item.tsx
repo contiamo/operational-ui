@@ -18,9 +18,9 @@ export interface Props {
 }
 
 export interface IContextMenuItem<TValue = any> {
-  label: string
+  label: string | React.ReactElement<any>
   description?: string
-  icon?: IconProps["name"]
+  icon?: IconProps["name"] | React.ReactElement<any>
   iconColor?: keyof OperationalStyleConstants["color"]
   onClick?: ContextMenuProps["onClick"]
   value?: TValue
@@ -106,21 +106,33 @@ const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
   )
 }
 
-const InPlaceIcon = (props: Props) =>
-  typeof props.item !== "string" ? (
-    <ContextMenuIcon
-      iconlocation_={props.iconLocation}
-      color={props.item.iconColor}
-      left={props.iconLocation === "left" || !props.iconLocation}
-      name={props.item.icon as IconName}
-    />
-  ) : null
+const icon = (props: Props) => {
+  // If item is just a string,
+  if (typeof props.item === "string") {
+    return null
+  }
+
+  // If it's an object with an icon property
+  if (typeof props.item.icon === "string") {
+    return (
+      <ContextMenuIcon
+        iconlocation_={props.iconLocation}
+        color={props.item.iconColor}
+        left={props.iconLocation === "left" || !props.iconLocation}
+        name={props.item.icon as IconName}
+      />
+    )
+  }
+
+  // If it's an object with a React Element as a property
+  return props.item.icon
+}
 
 const ContextMenuItem: React.SFC<Props> = props => (
   <Container {...props} condensed={props.condensed}>
-    {(!props.iconLocation || props.iconLocation === "left") && <InPlaceIcon {...props} />}
+    {(!props.iconLocation || props.iconLocation === "left") && icon(props)}
     <Content value={props.item} />
-    {props.iconLocation === "right" && <InPlaceIcon {...props} />}
+    {props.iconLocation === "right" && icon(props)}
   </Container>
 )
 
