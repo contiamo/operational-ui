@@ -80,14 +80,6 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
           npmPublish("next",env.NpmRegistry)
         }
       }      
-      stage ('Trigger Downstream') {
-        // Triggering downstream projects:
-        if (env.BranchLower == 'master') {
-          downstreamProjects.each {
-            triggerJob("${it}","next" )
-          }
-        } 
-      }
     }
   }
 }
