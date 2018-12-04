@@ -3,7 +3,7 @@ import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 import Icon from "../Icon/Icon"
-import DiscriminatedTooltip from "../Tooltip/Tooltip"
+import Tooltip from "../Tooltip/Tooltip"
 import { hoverTooltip } from "../utils/mixins"
 
 export interface HintProps extends DefaultProps {
@@ -31,18 +31,18 @@ const Container = styled("div")<{ left?: HintProps["left"]; right?: HintProps["r
   ...hoverTooltip,
 }))
 
-const Tooltip: React.SFC<{ position: HintProps["tooltipPosition"] }> = props => {
+const HintTooltip: React.SFC<{ position: HintProps["tooltipPosition"] }> = props => {
   switch (props.position) {
     case "right":
-      return <DiscriminatedTooltip right {...props} />
+      return <Tooltip right {...props} />
     case "top":
-      return <DiscriminatedTooltip top {...props} />
+      return <Tooltip top {...props} />
     case "bottom":
-      return <DiscriminatedTooltip bottom {...props} />
+      return <Tooltip bottom {...props} />
     case "left":
-      return <DiscriminatedTooltip left {...props} />
+      return <Tooltip left {...props} />
     case "smart":
-      return <DiscriminatedTooltip smart {...props} />
+      return <Tooltip smart {...props} />
     default:
       return null
   }
@@ -51,7 +51,7 @@ const Tooltip: React.SFC<{ position: HintProps["tooltipPosition"] }> = props => 
 const Hint: React.SFC<HintProps> = props => (
   <Container {...props}>
     <Icon name="Question" size={12} />
-    <Tooltip position={props.tooltipPosition!}>{props.children}</Tooltip>
+    <HintTooltip position={props.tooltipPosition!}>{props.children}</HintTooltip>
   </Container>
 )
 

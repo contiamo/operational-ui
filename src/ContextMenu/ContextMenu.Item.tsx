@@ -106,10 +106,10 @@ const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
   )
 }
 
-const icon = (props: Props) => {
+const ContextMenuItemIcon: React.SFC<Pick<Props, "item" | "iconLocation">> = props => {
   // If item is just a string,
   if (typeof props.item === "string") {
-    return null
+    return <></>
   }
 
   // If it's an object with an icon property
@@ -125,14 +125,16 @@ const icon = (props: Props) => {
   }
 
   // If it's an object with a React Element as a property
-  return props.item.icon
+  return <>{props.item.icon}</>
 }
 
 const ContextMenuItem: React.SFC<Props> = props => (
   <Container {...props} condensed={props.condensed}>
-    {(!props.iconLocation || props.iconLocation === "left") && icon(props)}
+    {(!props.iconLocation || props.iconLocation === "left") && (
+      <ContextMenuItemIcon iconLocation={props.iconLocation} item={props.item} />
+    )}
     <Content value={props.item} />
-    {props.iconLocation === "right" && icon(props)}
+    {props.iconLocation === "right" && <ContextMenuItemIcon iconLocation={props.iconLocation} item={props.item} />}
   </Container>
 )
 

@@ -89,7 +89,7 @@ const menuItems = [
   },
 ]
 ;<>
-  <ContextMenu iconLocation="right" items={menuItems} onClick={item => alert(`clicked ${item}`)}>
+  <ContextMenu iconLocation="right" items={menuItems} onClick={item => alert(`clicked`)}>
     <Button>See Users</Button>
   </ContextMenu>
 </>
