@@ -12,7 +12,7 @@ const Container = styled("div")`
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  overflow: auto;
+  overflow: auto hidden;
 `
 
 const Heading = styled("h6")<{ hasMeta: boolean }>`
