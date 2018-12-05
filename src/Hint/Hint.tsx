@@ -17,23 +17,46 @@ export interface HintProps extends DefaultProps {
    * Indicates that this component is right of other content, and adds an appropriate left margin.
    */
   right?: boolean
+  tooltipPosition?: "left" | "top" | "right" | "bottom" | "smart"
 }
 
 const Container = styled("div")<{ left?: HintProps["left"]; right?: HintProps["right"] }>(({ left, right, theme }) => ({
   position: "relative",
-  display: "inline-block",
+  display: "inline-flex",
   verticalAlign: "middle",
+  alignItems: "center",
   color: theme.color.text.lightest,
   marginRight: left ? theme.space.base : 0,
   marginLeft: right ? theme.space.base : 0,
   ...hoverTooltip,
 }))
 
+const HintTooltip: React.SFC<{ position: HintProps["tooltipPosition"] }> = props => {
+  switch (props.position) {
+    case "right":
+      return <Tooltip right {...props} />
+    case "top":
+      return <Tooltip top {...props} />
+    case "bottom":
+      return <Tooltip bottom {...props} />
+    case "left":
+      return <Tooltip left {...props} />
+    case "smart":
+      return <Tooltip smart {...props} />
+    default:
+      return null
+  }
+}
+
 const Hint: React.SFC<HintProps> = props => (
   <Container {...props}>
     <Icon name="Question" size={12} />
-    <Tooltip right>{props.children}</Tooltip>
+    <HintTooltip position={props.tooltipPosition!}>{props.children}</HintTooltip>
   </Container>
 )
+
+Hint.defaultProps = {
+  tooltipPosition: "left",
+}
 
 export default Hint

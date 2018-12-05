@@ -13,7 +13,7 @@ export interface TopbarSelectProps {
   /** Menu items, conforming to the ContextMenu API */
   items: ContextMenuProps["items"]
   /** Change handler */
-  onChange?: (newLabel: string) => void
+  onChange?: (newLabel: string | React.ReactElement<any>) => void
 }
 
 const TopbarSelectContainer = styled("div")`
