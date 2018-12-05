@@ -1,0 +1,13 @@
+{
+  "name": "operational-ui-lambdas",
+  "version": "0.1.0",
+  "description": "Serverless functions that help our deployment workflow",
+  "main": "index.js",
+  "repository": "https://github.com/contiamo/operational-ui",
+  "author": "Tejas Kumar",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "node-fetch": "^2.3.0"
+  }
+}
