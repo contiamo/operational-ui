@@ -1,2 +1,2 @@
 [build] 
-  functions = "lambdas/"
+  functions = "lambdas/dist"
