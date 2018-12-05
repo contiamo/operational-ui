@@ -46,7 +46,11 @@ const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
 In some cases, you might want your `label` to be a little bit more clever than just a string. This example shows a `ContextMenu` with a JSX element as its `label`.
 
 ```jsx
-const MyLabelContainer = ({ children, style }) => <div style={{ padding: "8px 0", ...style }}>{children}</div>
+/* Anything can be a label now, even some DIV you style yourself */
+const MyLabelContainer = ({ children, style }) => (
+  <div style={{ marginRight: 8, padding: "8px 0", ...style }}>{children}</div>
+)
+
 const menuItems = [
   {
     label: (
