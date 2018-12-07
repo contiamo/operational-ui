@@ -4,7 +4,6 @@ const body = {
   username: "Operational UI",
   icon_url: "https://emoji.slack-edge.com/T0G7GJQ9Z/operational/d2230b6586af99f0.png",
   text: "🚀 *Just deployed!*",
-  channel: "@tejas",
   attachments: [
     {
       fallback: "🚀 Just deployed `@operational/components@next`!",
