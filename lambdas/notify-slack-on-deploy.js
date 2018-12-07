@@ -1,10 +1,12 @@
 const { default: fetch } = require("node-fetch")
+const get = require("lodash/get")
 
 exports.handler = (event, _, callback) => {
   try {
+    console.log(JSON.stringify(event, null, 2))
     const requestBody = JSON.parse(event.body)
 
-    if (!requestBody.attachments[0].title_link.includes("deploy-preview")) {
+    if (!get(requestBody, "attachments.0.title_link", "").includes("deploy-preview")) {
       return callback(requestBody, { statusCode: 200 })
     }
 
