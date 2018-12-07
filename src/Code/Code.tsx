@@ -1,10 +1,13 @@
 import * as React from "react"
-import styled, { css } from "react-emotion"
+import CopyToClipboard from "react-copy-to-clipboard"
+import { css } from "react-emotion"
 import Highlight from "react-highlight"
 import ReactJson, { ReactJsonViewProps } from "react-json-view"
 
+import Icon from "../Icon/Icon"
 import { DefaultProps } from "../types"
 import constants from "../utils/constants"
+import styled from "../utils/styled"
 import { Languages } from "./languages"
 import styles from "./styles"
 
@@ -12,6 +15,8 @@ export interface DefaultCodeProps extends DefaultProps {
   /** Language for syntax highlighting */
   syntax?: Exclude<Languages, "json">
   children?: string | string[]
+  copyable?: boolean
+  onCopy?: () => void
 }
 
 interface JSONCodeProps extends DefaultProps {
@@ -178,17 +183,35 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "codeTheme" | "collapsed" | 
   />
 )
 
+const CodeIcon = styled(Icon)`
+  position: absolute;
+  top: ${({ theme }) => theme.space.small}px;
+  right: ${({ theme }) => theme.space.small}px;
+  cursor: pointer;
+`
+
 const Code: React.SFC<CodeProps> = ({ children, ...props }) => {
   if (props.syntax === "json") {
-    const { src, codeTheme, collapsed, shouldCollapse, ...containerProps } = props
+    const { src, codeTheme, collapsed, shouldCollapse, ...jsonContainerProps } = props
     return (
-      <Container {...containerProps}>
+      <Container {...jsonContainerProps}>
         <StyledReactJson codeTheme={codeTheme} src={src} collapsed={collapsed} shouldCollapse={shouldCollapse} />
       </Container>
     )
   }
+
+  const { copyable, onCopy, ...containerProps } = props
+
   return (
-    <Container {...props}>
+    <Container {...containerProps}>
+      {copyable && (
+        <CopyToClipboard
+          onCopy={onCopy}
+          text={(children || "") as string /* type assertion because of React.SFC's broken children type */}
+        >
+          <CodeIcon size={14} name="Copy" color="color.text.lighter" />
+        </CopyToClipboard>
+      )}
       <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{children}</StyledHighlight>
     </Container>
   )

@@ -68,3 +68,19 @@ let user = { firstName: "Jane", lastName: "User" };
 
 document.body.innerHTML = greeter(user);`}</Code>
 ```
+
+#### Copy/Paste
+
+Sometimes, you might need to quickly copy a code snippet. Here's how.
+
+```jsx
+<OperationalContext>
+  {({ pushMessage }) => (
+    <Code
+      syntax="typescript"
+      onCopy={() => pushMessage({ type: "info", body: "Successfully Copied!" })}
+      copyable
+    >{`Tuuvaquae5ieroeba5eu1Dae`}</Code>
+  )}
+</OperationalContext>
+```
