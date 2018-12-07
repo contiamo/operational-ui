@@ -185,8 +185,8 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "codeTheme" | "collapsed" | 
 
 const CodeIcon = styled(Icon)`
   position: absolute;
-  top: ${({ theme }) => theme.space.base}px;
-  right: ${({ theme }) => theme.space.base}px;
+  top: ${({ theme }) => theme.space.small}px;
+  right: ${({ theme }) => theme.space.small}px;
   cursor: pointer;
 `
 
@@ -209,7 +209,7 @@ const Code: React.SFC<CodeProps> = ({ children, ...props }) => {
           onCopy={onCopy}
           text={(children || "") as string /* type assertion because of React.SFC's broken children type */}
         >
-          <CodeIcon size={12} name="Copy" color="color.text.lighter" />
+          <CodeIcon size={14} name="Copy" color="color.text.lighter" />
         </CopyToClipboard>
       )}
       <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{children}</StyledHighlight>

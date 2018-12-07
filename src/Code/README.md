@@ -80,18 +80,7 @@ Sometimes, you might need to quickly copy a code snippet. Here's how.
       syntax="typescript"
       onCopy={() => pushMessage({ type: "info", body: "Successfully Copied!" })}
       copyable
-    >{`interface Person {
-  firstName: string;
-  lastName: string;
-}
-
-function greeter(person: Person) {
-  return "Hello, " + person.firstName + " " + person.lastName;
-}
-
-let user = { firstName: "Jane", lastName: "User" };
-
-document.body.innerHTML = greeter(user);`}</Code>
+    >{`Tuuvaquae5ieroeba5eu1Dae`}</Code>
   )}
 </OperationalContext>
 ```
