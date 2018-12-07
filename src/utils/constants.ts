@@ -31,8 +31,11 @@ const whiteColor = "#fff"
  * A specialized color palette for backgrounds.
  */
 const backgroundColors = {
+  /** `#2a2e37` */
   dark: "#2a2e37",
+  /** `#ececec` */
   light: "#ececec",
+  /** `#f6f6f6` */
   lighter: "#f6f6f6",
 }
 
@@ -40,7 +43,9 @@ const backgroundColors = {
  * A specialized color palette for separators.
  */
 const separatorColors = {
+  /** `#e8e8e8` */
   default: "#e8e8e8",
+  /** `#ececec` */
   light: "#ececec",
 }
 
@@ -69,7 +74,9 @@ const textColors = {
  * A specialized color palette for borders.
  */
 const borderColors = {
+  /** `#c0c0c0` */
   default: "#c0c0c0",
+  /** `#d8d8d8` */
   disabled: "#d8d8d8",
 }
 
@@ -82,13 +89,19 @@ const borderColors = {
  */
 const color = {
   primary: primaryColor,
+  /** `#f5f5f5` */
   disabled: "#f5f5f5",
+  /** `#ffbd41` */
   warning: "#ffbd41",
+  /** `#0c991d` */
   success: "#0c991d",
+  /** `#9a0000` */
   error: "#9a0000",
+  /** `#636363` */
   basic: "#636363",
   ghost: "hsla(0, 0%, 100%, 0.33)",
   white: whiteColor,
+  /** `#000` */
   black: "#000",
   background: backgroundColors,
   separators: separatorColors,
