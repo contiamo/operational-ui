@@ -24,6 +24,7 @@ export { default as ContextMenu, ContextMenuProps } from "./ContextMenu/ContextM
 export { default as DatePicker, DatePickerProps } from "./DatePicker/DatePicker"
 export { default as Debug } from "./Debug/Debug"
 export { default as Form } from "./Form/Form"
+export { default as Foldable, FoldableProps } from "./Foldable/Foldable"
 export { default as Grid, GridProps } from "./Grid/Grid"
 export { default as HeaderBar, HeaderBarProps } from "./HeaderBar/HeaderBar"
 export { default as HeaderMenu, HeaderMenuProps } from "./HeaderMenu/HeaderMenu"

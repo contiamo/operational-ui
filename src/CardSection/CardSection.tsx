@@ -22,6 +22,8 @@ export interface CardSectionProps extends DefaultProps, DragProps {
   actions?: ContextMenuProps["items"]
   /** Action click handler */
   onActionClick?: ContextMenuProps["onClick"]
+  /** Is this collapsed? */
+  collapsed?: boolean
 }
 
 export type DragAndDropFeedback = "validTarget" | "invalidTarget" | "dropping"
@@ -124,6 +126,7 @@ const CardSection: React.SFC<CardSectionProps> = ({
   actions,
   noHorizontalPadding,
   onActionClick,
+  collapsed,
   ...props
 }) => (
   <Container {...props}>
@@ -134,7 +137,7 @@ const CardSection: React.SFC<CardSectionProps> = ({
         {actions && <StyledActionMenu items={actions} onClick={onActionClick} />}
       </Title>
     )}
-    <Content noHorizontalPadding={noHorizontalPadding}>{children}</Content>
+    {collapsed === false && <Content noHorizontalPadding={noHorizontalPadding}>{children}</Content>}
   </Container>
 )
 
