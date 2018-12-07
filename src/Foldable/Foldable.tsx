@@ -50,12 +50,59 @@ class Foldable extends React.Component<FoldableProps, Readonly<FoldableState>> {
     document.removeEventListener("mousemove", this.handleMouseMove)
   }
 
+  /**
+   * This whole function exists to serve the following purpose:
+   *
+   * In case of [Example 2](/#!/Foldable), where we have two CardSections
+   * side-by-side, we want to watch each mouse movement on the `document` and:
+   *
+   * - if we don't have a ref to the toggler,
+   *  - return `undefined` early
+   *
+   * The rest of the function exists in order to prevent mouseleave events
+   * getting lost. If a user moves the cursor on and off a toggler RAPIDLY,
+   * the mouseleave event gets lost and the toggler stays "active" or grey
+   * forever.
+   *
+   * To fix this, we do the following:
+   *
+   * - if the toggler is STILL active, even though the cursor is NOT on it
+   *   - unset hovered state.
+   */
   private handleMouseMove = (e: Event) => {
     // If we don't have a ref to the Toggler, there's nothing to do.
     if (this.togglerRef.current === null) {
       return
     }
-    if (this.state.isTogglerHovered && !e.composedPath().includes(this.togglerRef.current)) {
+    if (
+      // Is STILL active, and
+      this.state.isTogglerHovered &&
+      !e
+
+        /**
+         * 's composedPath (the path between document and where
+         * the cursor is right now) expressed as an array of
+         * HTMLElements.
+         */
+        .composedPath()
+
+        /**
+         * Get their classNames. This is important for the
+         * next step: comparison. We can _only_ compare by
+         * className because comparing HTMLElement to HTMLElement
+         * for inclusion will not be equal in this case.
+         */
+        .map(el => (el as HTMLElement).className)
+
+        /**
+         * If all classNames between `document` and where the
+         * cursor currently is DOES NOT include a toggler but
+         * (see first condition) this.state has a toggler as
+         * ACTIVE,
+         */
+        .includes(this.togglerRef.current.className)
+    ) {
+      // Unset the hovered state because a mouseleave most likely got lost.
       this.unsetHovered()
     }
   }
