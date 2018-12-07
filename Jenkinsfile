@@ -57,9 +57,6 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
 )
 {
   node(label){
-    stage("Initialize"){
-      sh "node -v && npm -v"
-    }
     stage('Git Checkout'){
       checkout scm
       checkout ([ $class: 'GitSCM', branches: [[name: "*/${env.BranchLower}"]],         
@@ -67,6 +64,9 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
       ])
     }
     container('node') {
+      stage("Initialize"){
+        sh "node -v && npm -v"
+      }
       stage ('YARN Install'){
         try {
           sh "yarn install"

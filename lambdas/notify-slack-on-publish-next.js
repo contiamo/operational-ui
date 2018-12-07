@@ -9,7 +9,11 @@ const body = {
       fallback: "🚀 Just deployed `@operational/components@next`!",
       color: "good",
       title_link: "https://www.npmjs.com/package/@operational/components/v/next",
-      text: "A new version is available under `@operational/components@next`.",
+      text: `A new version (\`${
+        process.argv[2]
+      }\`) is available under \`@operational/components@next\`.\nBe sure to <https://github.com/contiamo/operational-ui/commit/${
+        process.argv[2].split("-")[1]
+      }|check out the commit on GitHub!>`,
       footer: "Thank you for your amazing contribution to this team.",
     },
   ],
