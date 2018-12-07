@@ -37,7 +37,7 @@ def buildWebsite(dir,command){
 }
 
 podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
-  containerTemplate(name: 'node', image: "${env.GcrPrefix}/node:10.0.0-v0.5", ttyEnabled: true, resourceRequestMemory: '10Gi', resourceRequestCpu: '3', privileged: true),
+  containerTemplate(name: 'node', image: "node:lts", ttyEnabled: true, resourceRequestMemory: '10Gi', resourceRequestCpu: '3', privileged: true),
   ],
   volumes: [
       hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),

@@ -8,6 +8,7 @@ const body = {
     {
       fallback: "🚀 Just deployed `@operational/components@next`!",
       color: "good",
+      channel: "@tejas",
       title_link: "https://www.npmjs.com/package/@operational/components/v/next",
       text: `A new version (\`${
         process.argv[2]
