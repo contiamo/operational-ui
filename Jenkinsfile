@@ -29,7 +29,7 @@ def npmPublish(tag,registry){
   #!/bin/bash
   npm whoami --registry https://${registry}
   npm version \$(npm show . version)-\$(git rev-parse --short HEAD) --no-git-tag-version --registry https://${registry} --unsafe-perm
-  npm publish --tag next --registry https://${registry} || echo "Publish failed, possibly because the SHA is the same. Continuing..."
+  npm publish --tag next --registry https://${registry} && node ./lambdas/notify-slack-on-publish-next.js || echo "Publish failed, possibly because the SHA is the same. Continuing..."
   """
 }
 def buildWebsite(dir,command){
