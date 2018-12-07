@@ -1,7 +1,7 @@
 const { default: fetch } = require("node-fetch")
 const get = require("lodash/get")
 
-exports.handler = (event, _, callback) => {
+exports.handler = async (event, _, callback) => {
   try {
     console.log(JSON.stringify(event, null, 2))
     const requestBody = JSON.parse(event.body)
@@ -10,12 +10,21 @@ exports.handler = (event, _, callback) => {
       return callback(requestBody, { statusCode: 200 })
     }
 
-    fetch(process.env.SLACK_WEBHOOK_URL, {
+    await fetch(process.env.SLACK_WEBHOOK_URL, {
       method: "POST",
       body: JSON.stringify({
         ...requestBody,
+        text: "🎉 One of my PRs now has a demo!",
         username: "Operational UI",
         icon_url: "https://emoji.slack-edge.com/T0G7GJQ9Z/operational/d2230b6586af99f0.png",
+        attachments: [
+          {
+            ...get(requestBody, "attachments.0", {}),
+            fallback: "🎉 One of my PRs now has a demo!",
+            text: "Also, the PR is <|here> if you want to review it.",
+            footer: "Thank you for your amazing contribution to this team.",
+          },
+        ],
       }),
     })
 
@@ -23,6 +32,6 @@ exports.handler = (event, _, callback) => {
   } catch (e) {
     console.log("Failed: " + JSON.stringify(event, null, 2))
     // Silently fail because this is what all great engineers do
-    callback(requestBody, { status: 200 })
+    return callback(requestBody, { status: 200 })
   }
 }
