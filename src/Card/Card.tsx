@@ -104,7 +104,7 @@ const Container = styled("div")(({ theme }) => ({
   marginBottom: theme.space.element,
   borderTop: `1px solid ${theme.color.separators.light}`,
   boxShadow: "0 1px 3px 0 rgba(0, 0, 0, 0.16)",
-  backgroundColor: theme.color.white,
+  backgroundColor: "red",
   wordWrap: "break-word",
   wordBreak: "break-all",
   "& > img": {
