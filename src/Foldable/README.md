@@ -1,4 +1,4 @@
-This component does not render UI, but instead manages state for its children, allowing them to fold and unfold. It can support cases where multiple children need to expandad/collapsed at once, or allow more fine-grained control.
+This component does not render UI, but instead manages state for its children, allowing them to fold and unfold. It can support cases where multiple children need to be expanded/collapsed at once, or allow more fine-grained control.
 
 ## Basic Usage
 
@@ -63,7 +63,7 @@ This component allows toggling multiple children's "folded" state centrally, her
 </Foldable>
 ```
 
-## Granular foldability
+## Granular Foldability
 
 This component _also_ allows you to managed folded state for individual children as well. Here's an example.
 
