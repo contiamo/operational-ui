@@ -1,13 +1,18 @@
 const { default: fetch } = require("node-fetch")
 const get = require("lodash/get")
 
-exports.handler = async (event, _, callback) => {
+const defaultResponse = {
+  statusCode: 200,
+  body: JSON.stringify({ msg: "ok" })
+}
+
+exports.handler = async (event) => {
   try {
     console.log(JSON.stringify(event, null, 2))
     const requestBody = JSON.parse(event.body)
 
     if (!get(requestBody, "attachments.0.title_link", "").includes("deploy-preview")) {
-      return callback(requestBody, { statusCode: 200 })
+      return defaultResponse
     }
 
     await fetch(process.env.SLACK_WEBHOOK_URL, {
@@ -28,10 +33,10 @@ exports.handler = async (event, _, callback) => {
       }),
     })
 
-    return callback(requestBody, { statusCode: 200 })
+    return defaultResponse
   } catch (e) {
     console.log("Failed: " + JSON.stringify(event, null, 2))
     // Silently fail because this is what all great engineers do
-    return callback(requestBody, { status: 200 })
+    return defaultResponse
   }
 }
