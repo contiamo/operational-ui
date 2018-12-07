@@ -14,7 +14,7 @@ export interface TogglerProps {
 
 const FoldableIcon = styled(Icon)`
   margin-left: auto;
-  cursor: pointer;
+  pointer-events: none;
 `
 
 /**
