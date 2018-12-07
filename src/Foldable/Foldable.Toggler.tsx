@@ -45,7 +45,11 @@ const TogglerOverlay = styled("div")<{ isHovered: boolean }>`
 const Toggler: React.SFC<TogglerProps> = ({ isFolded, isHovered: isHovered, ...props }) => (
   <TogglerOverlay isHovered={isHovered} {...props}>
     <FoldableIcon
-      color={isHovered ? "color.text.lighter" : "color.background.light"}
+      color={
+        isHovered
+          ? "color.text.lighter"
+          : "#00000022" /* <- is alpha-blended in order to be visible even on grey backgrounds as in <Group /> */
+      }
       name={isFolded ? "ChevronDown" : "ChevronUp"}
     />
   </TogglerOverlay>

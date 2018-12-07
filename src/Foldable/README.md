@@ -2,25 +2,23 @@ This component does not render UI, but instead manages state for its children, a
 
 ## Basic Usage
 
-Here's how you'd collapse a basic `CardSection`.
+Here's how you'd collapse a basic `Group`.
 
 ```jsx
 <Foldable>
   {({ Toggler, isFolded }) => (
-    <Card
-      sections={
-        <CardSection
-          collapsed={isFolded}
-          title={
-            <>
-              Section 1 <Toggler />
-            </>
-          }
-        >
-          Content 1
-        </CardSection>
+    <Group
+      icon="User"
+      iconColor="primary"
+      collapsed={isFolded}
+      title={
+        <>
+          Users <Toggler />
+        </>
       }
-    />
+    >
+      <Autocomplete fullWidth placeholder="Search for users..." />
+    </Group>
   )}
 </Foldable>
 ```
