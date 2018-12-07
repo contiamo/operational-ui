@@ -2,6 +2,8 @@ import * as React from "react"
 import Toggler, { TogglerProps } from "./Foldable.Toggler"
 
 export interface FoldableProps {
+  /** Should the foldable children be open or closed by default? */
+  initialState?: "closed" | "open"
   children: (
     { Toggler, isFolded }: { Toggler: React.ComponentType<TogglerProps>; isFolded: boolean },
   ) => React.ReactNode
@@ -28,8 +30,12 @@ interface FoldableState {
 class Foldable extends React.Component<FoldableProps, Readonly<FoldableState>> {
   private togglerRef = React.createRef<HTMLDivElement>()
 
+  public static defaultProps = {
+    initialState: "open",
+  }
+
   public readonly state: FoldableState = {
-    isFolded: false,
+    isFolded: this.props.initialState === "closed",
     isTogglerHovered: false,
   }
 

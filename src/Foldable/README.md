@@ -104,3 +104,28 @@ This component _also_ allows you to managed folded state for individual children
   }
 />
 ```
+
+## With Initial Open/Closed State
+
+It is also possible to control the initial state of this component like below. If no `initialState` is supplied, we default to everything being _open_.
+
+```jsx
+<Foldable initialState="closed">
+  {({ Toggler, isFolded }) => (
+    <Card
+      sections={
+        <CardSection
+          collapsed={isFolded}
+          title={
+            <>
+              Section 1 <Toggler />
+            </>
+          }
+        >
+          Content 1
+        </CardSection>
+      }
+    />
+  )}
+</Foldable>
+```
