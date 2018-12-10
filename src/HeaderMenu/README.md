@@ -23,3 +23,35 @@ initialState = { project: { key: "project1", label: "Project 1", icon: "Building
   </HeaderMenu>
 </div>
 ```
+
+### Behavior with Long Label
+
+```jsx
+const projectOptions = [
+  {
+    key: "project1",
+    icon: "Building",
+    iconColor: "primary",
+    label: "Contiamo is a nice place and they have a nice UI library",
+    description: "Organization-wide content and settings",
+  },
+  { key: "project1", label: "Project 1", icon: "User" },
+  { key: "project2", label: "Project 2", icon: "Project" },
+  { key: "project3", label: "Project 3", icon: "Project" },
+]
+
+initialState = {
+  project: {
+    key: "project1",
+    icon: "Building",
+    iconColor: "primary",
+    label: "Contiamo is a nice place and they have a nice UI library",
+    description: "Organization-wide content and settings",
+  },
+}
+;<div style={{ display: "inline-block", backgroundColor: "#3e3e3e" }}>
+  <HeaderMenu items={projectOptions} onClick={project => setState(() => ({ project }))} withCaret>
+    <Icon left name={state.project.icon} /> {state.project.label}
+  </HeaderMenu>
+</div>
+```
