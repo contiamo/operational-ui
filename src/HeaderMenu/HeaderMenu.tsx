@@ -25,8 +25,9 @@ const Container = styled("div")<{
   withCaret: HeaderMenuProps["withCaret"]
 }>(({ theme, align, isOpen, withCaret }) => ({
   width: 250,
-  lineHeight: "50px",
-  padding: `0 ${theme.space.content}px`,
+  lineHeight: 1,
+  padding: theme.space.content,
+  [align === "left" ? "paddingRight" : "paddingLeft"]: theme.space.element * 2, // leave room for the caret
   color: isOpen ? theme.color.white : "#ffffffcc",
   backgroundColor: isOpen ? backgroundColor : "transparent",
   boxShadow: isOpen ? boxShadow : "none",
@@ -48,7 +49,7 @@ const Container = styled("div")<{
           content: "''",
           position: "absolute",
           top: "50%",
-          [align === "left" ? "right" : "left"]: theme.space.content + theme.space.small,
+          [align === "left" ? "right" : "left"]: theme.space.content,
           width: 0,
           height: 0,
           border: "4px solid transparent",
