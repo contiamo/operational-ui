@@ -26,7 +26,7 @@ exports.handler = async (event) => {
           {
             ...get(requestBody, "attachments.0", {}),
             fallback: "🎉 One of my PRs now has a demo!",
-            text: "Also, the PR is <https://github.com/contiamo/operational-ui/pulls/"+get(requestBody, "attachments.0.title_link", "").split("-")[2]+"|here> if you want to review it.",
+            text: "Also, the PR is <https://github.com/contiamo/operational-ui/pull/"+get(requestBody, "attachments.0.title_link", "").split("-")[2]+"|here> if you want to review it.",
             footer: "Thank you for your amazing contribution to this team.",
           },
         ],
