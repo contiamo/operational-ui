@@ -127,10 +127,10 @@ class Foldable extends React.Component<FoldableProps, Readonly<FoldableState>> {
 
   public render() {
     const { children } = this.props
-    const { isFolded, isTogglerHovered } = this.state
+    const { isTogglerHovered } = this.state
 
     return children({
-      Toggler: () => (
+      Toggler: ({ onClick, isFolded }) => (
         <Toggler
           innerRef={this.togglerRef}
           onMouseEnter={e => {
@@ -142,11 +142,11 @@ class Foldable extends React.Component<FoldableProps, Readonly<FoldableState>> {
             this.unsetHovered()
           }}
           isHovered={isTogglerHovered}
-          isFolded={isFolded}
-          onClick={this.toggle}
+          isFolded={typeof isFolded === "undefined" ? this.state.isFolded : Boolean(isFolded)}
+          onClick={onClick || this.toggle}
         />
       ),
-      isFolded,
+      isFolded: this.state.isFolded,
     })
   }
 }
