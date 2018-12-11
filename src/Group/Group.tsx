@@ -6,7 +6,7 @@ import styled from "../utils/styled"
 
 interface GroupBaseProps {
   /** What is the title of this group? */
-  title?: string
+  title?: React.ReactElement<any> | string
   /** Is the group collapsed? */
   collapsed?: boolean
   /** How high should the group be? */
