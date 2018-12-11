@@ -13,6 +13,12 @@ export interface Props {
   title?: CardProps["title"]
   action?: CardProps["action"]
   fullSize?: boolean
+  /**
+   * Prevent closing the modal on overlay click if it's specify to `false`
+   *
+   * @default true
+   */
+  closeOnOverlayClick?: boolean
 }
 
 const fromTop = (fullSize: boolean) => {
@@ -79,9 +85,18 @@ const ControlledModal: React.SFC<Props> = ({
   title,
   action,
   children,
+  closeOnOverlayClick,
 }: Props) => (
   <>
-    <Overlay id={id} className={className} onClick={onClose} />
+    <Overlay
+      id={id}
+      className={className}
+      onClick={() => {
+        if (closeOnOverlayClick !== false && onClose) {
+          onClose()
+        }
+      }}
+    />
     <Container className={contentClassName} fullSize={fullSize} title={title} action={action}>
       <Content fullSize={fullSize}>{children}</Content>
     </Container>
