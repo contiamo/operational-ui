@@ -115,6 +115,7 @@ const defaultCodeTheme = {
 
 const Container = styled("div")`
   display: flex;
+  position: relative;
   pre {
     flex: 1;
     display: flex;
