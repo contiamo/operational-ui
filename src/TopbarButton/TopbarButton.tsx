@@ -26,12 +26,16 @@ const TopbarButtonContainer = styled("div")<{ disabled?: boolean }>`
   :hover {
     background-color: ${props => (props.disabled ? "transparent" : props.theme.color.background.lighter)};
   }
+  & svg {
+    /** Icons are purely presentational and click events are handled upstream */
+    pointer-events: none;
+  }
 `
 
 const TopbarButton: React.SFC<TopbarButtonProps> = ({ children, icon, onClick, ...props }) => (
   <TopbarButtonContainer onClick={props.disabled ? undefined : onClick} {...props}>
     {children}
-    {icon && <Icon right name={icon} />}
+    {icon && <Icon right name={icon} size={12} />}
   </TopbarButtonContainer>
 )
 
