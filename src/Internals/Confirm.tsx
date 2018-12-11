@@ -17,6 +17,12 @@ export interface ConfirmOptions<T> {
   onConfirm?: (confirmState: T) => void
   onCancel?: (confirmState: T) => void
   state?: T
+  /**
+   * Prevent closing the modal on overlay click if it's specify to `false`
+   *
+   * @default true
+   */
+  closeOnOverlayClick?: boolean
 }
 
 export interface State<T> {
@@ -89,14 +95,19 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
   }
 
   public render() {
-    const { actionButton, fullSize, title, cancelButton, state, body: Body } = this.state.options
+    const { actionButton, fullSize, title, cancelButton, state, body: Body, closeOnOverlayClick } = this.state.options
     const isOpen = Boolean(Body)
 
     return (
       <>
         {this.props.children(this.openConfirm.bind(this))}
         {isOpen && (
-          <ControlledModal fullSize={fullSize} title={title} onClose={this.closeConfirm}>
+          <ControlledModal
+            fullSize={fullSize}
+            title={title}
+            onClose={this.closeConfirm}
+            closeOnOverlayClick={closeOnOverlayClick}
+          >
             <ControlledModalContent fullSize={Boolean(fullSize)}>
               {typeof Body === "function" && state ? (
                 <Body setConfirmState={this.setConfirmState} confirmState={state} />
