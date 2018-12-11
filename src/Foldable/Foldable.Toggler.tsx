@@ -4,12 +4,12 @@ import Icon from "../Icon/Icon"
 import styled from "../utils/styled"
 
 export interface TogglerProps {
-  isFolded: boolean
-  isHovered: boolean
-  innerRef: React.RefObject<HTMLDivElement>
-  onMouseEnter: React.EventHandler<React.SyntheticEvent>
-  onMouseLeave: React.EventHandler<React.SyntheticEvent>
-  onClick: React.EventHandler<React.SyntheticEvent>
+  isFolded?: boolean
+  isHovered?: boolean
+  innerRef?: React.RefObject<HTMLDivElement>
+  onMouseEnter?: React.EventHandler<React.SyntheticEvent>
+  onMouseLeave?: React.EventHandler<React.SyntheticEvent>
+  onClick?: React.EventHandler<React.SyntheticEvent>
 }
 
 const FoldableIcon = styled(Icon)`
@@ -42,8 +42,8 @@ const TogglerOverlay = styled("div")<{ isHovered: boolean }>`
   background-color: ${({ isHovered }) => (isHovered ? "rgba(0, 0, 0, 0.04)" : "transparent")};
 `
 
-const Toggler: React.SFC<TogglerProps> = ({ isFolded, isHovered: isHovered, ...props }) => (
-  <TogglerOverlay isHovered={isHovered} {...props}>
+const Toggler: React.SFC<TogglerProps> = ({ isFolded, isHovered, ...props }) => (
+  <TogglerOverlay isHovered={Boolean(isHovered)} {...props}>
     <FoldableIcon
       color={
         isHovered
