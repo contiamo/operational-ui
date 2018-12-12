@@ -13,7 +13,7 @@ export interface TopbarProps {
 const TopbarContainer = styled("div")`
   width: 100%;
   height: ${props => props.theme.topbarHeight}px;
-  background-color: ${props => props.theme.color.white};
+  background-color: ${props => props.theme.color.background.lightest};
   display: flex;
   align-items: center;
   justify-content: space-between;

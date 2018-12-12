@@ -16,13 +16,26 @@ export interface TopbarSelectProps {
   onChange?: (newLabel: string | React.ReactElement<any>) => void
 }
 
-const TopbarSelectContainer = styled("div")`
+export interface State {
+  renderedWidth?: number
+}
+
+const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
   height: ${props => props.theme.topbarHeight}px;
   display: flex;
   align-items: center;
   padding: 0px ${props => props.theme.space.medium}px;
+  box-shadow: ${props => (props.isActive ? props.theme.shadows.popup : "none")};
+  border-bottom: ${props => (props.isActive ? "1px" : "0px")};
+  border-color: ${props => props.theme.color.border.default};
+  cursor: pointer;
+  background-color: ${props => (props.isActive ? props.theme.color.white : "transparent")};
   :hover {
-    background-color: ${props => props.theme.color.background.lighter};
+    background-color: ${props => (props.isActive ? props.theme.color.white : props.theme.color.background.lighter)};
+  }
+  & svg {
+    /** Icons are purely presentational and click events are handled upstream */
+    pointer-events: none;
   }
 `
 
@@ -48,24 +61,57 @@ const TopbarSelectLabel = styled("p")`
   font-weight: ${props => props.theme.font.weight.medium};
 `
 
-export const TopbarSelect: React.SFC<TopbarSelectProps> = ({ label, selected, items, onChange, ...props }) => (
-  <ContextMenu
-    condensed
-    items={items}
-    onClick={newItem => {
-      if (onChange) {
-        onChange(newItem.label)
-      }
-    }}
-  >
-    {isActive => (
-      <TopbarSelectContainer {...props}>
-        <TopbarSelectLabel>{label}</TopbarSelectLabel>
-        <TopbarSelectValue>
-          <TopbarSelectValueSpan active={Boolean(selected)}>{selected}</TopbarSelectValueSpan>
-          <Icon name={isActive ? "ChevronUp" : "ChevronDown"} size={12} />
-        </TopbarSelectValue>
-      </TopbarSelectContainer>
-    )}
-  </ContextMenu>
-)
+export class TopbarSelect extends React.Component<TopbarSelectProps, Readonly<State>> {
+  public state: State = {
+    renderedWidth: undefined,
+  }
+
+  private containerRef = React.createRef()
+
+  public componentDidMount() {
+    this.updateRenderedWidth()
+  }
+
+  public componentDidUpdate() {
+    this.updateRenderedWidth()
+  }
+
+  private updateRenderedWidth() {
+    const node = this.containerRef.current as HTMLElement
+    if (!node) {
+      return
+    }
+    const renderedWidth = node.clientWidth
+    if (renderedWidth !== this.state.renderedWidth) {
+      this.setState(() => ({
+        renderedWidth,
+      }))
+    }
+  }
+
+  public render() {
+    const { label, selected, items, onChange, ...props } = this.props
+    return (
+      <ContextMenu
+        condensed
+        items={items}
+        width={this.state.renderedWidth}
+        onClick={newItem => {
+          if (onChange) {
+            onChange(newItem.label)
+          }
+        }}
+      >
+        {isActive => (
+          <TopbarSelectContainer {...props} isActive={isActive} innerRef={this.containerRef}>
+            <TopbarSelectLabel>{label}</TopbarSelectLabel>
+            <TopbarSelectValue>
+              <TopbarSelectValueSpan active={Boolean(selected)}>{selected}</TopbarSelectValueSpan>
+              <Icon name={isActive ? "ChevronUp" : "ChevronDown"} size={12} />
+            </TopbarSelectValue>
+          </TopbarSelectContainer>
+        )}
+      </ContextMenu>
+    )
+  }
+}

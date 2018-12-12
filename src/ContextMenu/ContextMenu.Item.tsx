@@ -56,9 +56,7 @@ const Container = styled("div")<Props>(({ align, theme, onClick, condensed, widt
         cursor: "not-allowed",
         color: theme.color.text.lightest,
       }),
-  "&:not(:first-child)": {
-    borderTop: `1px solid ${theme.color.separators.default}`,
-  },
+  borderTop: `1px solid ${theme.color.separators.default}`,
   "&:last-child": {
     paddingBottom: 2,
   },

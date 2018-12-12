@@ -37,6 +37,8 @@ const backgroundColors = {
   light: "#ececec",
   /** `#f6f6f6` */
   lighter: "#f6f6f6",
+  /** `#f8f8f8` */
+  lightest: "#f8f8f8",
 }
 
 /**
