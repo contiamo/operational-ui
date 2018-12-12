@@ -66,7 +66,7 @@ class TopbarSelect extends React.Component<TopbarSelectProps, Readonly<State>> {
     renderedWidth: undefined,
   }
 
-  private containerRef = React.createRef()
+  private containerRef = React.createRef<HTMLDivElement>()
 
   public componentDidMount() {
     this.updateRenderedWidth()
@@ -77,10 +77,10 @@ class TopbarSelect extends React.Component<TopbarSelectProps, Readonly<State>> {
   }
 
   private updateRenderedWidth() {
-    const node = this.containerRef.current as HTMLElement
-    if (!node) {
+    if (!this.containerRef || this.containerRef.current === null) {
       return
     }
+    const node = this.containerRef.current
     const renderedWidth = node.clientWidth
     if (renderedWidth !== this.state.renderedWidth) {
       this.setState(() => ({

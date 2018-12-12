@@ -17,7 +17,7 @@ export interface HeaderMenuProps extends DefaultProps {
 }
 
 interface HeaderMenuState {
-  menuWidth: number
+  renderedMenuWidth: number
 }
 
 const backgroundColor = "hsla(0, 0%, 100%, 0.1)"
@@ -77,10 +77,8 @@ const Container = styled("div")<{
 }))
 
 class HeaderMenu extends React.PureComponent<HeaderMenuProps, Readonly<HeaderMenuState>> {
-  private menuNode = React.createRef<HTMLDivElement>()
-
   public readonly state: HeaderMenuState = {
-    menuWidth: 0,
+    renderedMenuWidth: 0,
   }
 
   public static defaultProps = {
@@ -88,22 +86,35 @@ class HeaderMenu extends React.PureComponent<HeaderMenuProps, Readonly<HeaderMen
     withCaret: false,
   }
 
+  private menuRef = React.createRef<HTMLDivElement>()
+
   public componentDidMount() {
-    if (this.menuNode === null) {
+    this.updateRenderedWidth()
+  }
+
+  public componentDidUpdate() {
+    this.updateRenderedWidth()
+  }
+
+  private updateRenderedWidth() {
+    if (!this.menuRef || this.menuRef.current === null) {
       return
     }
-    if (this.menuNode.current === null) {
-      return
+    const node = this.menuRef.current
+    const renderedMenuWidth = node.clientWidth
+    if (renderedMenuWidth !== this.state.renderedMenuWidth) {
+      this.setState(() => ({
+        renderedMenuWidth,
+      }))
     }
-    this.setState(() => ({ menuWidth: this.menuNode.current!.clientWidth }))
   }
 
   public render() {
     const props = this.props
     return (
-      <HeaderContextMenu width={this.state.menuWidth} {...props}>
+      <HeaderContextMenu width={this.state.renderedMenuWidth} {...props}>
         {isOpen => (
-          <Container innerRef={this.menuNode} isOpen={isOpen} align={props.align} withCaret={Boolean(props.withCaret)}>
+          <Container innerRef={this.menuRef} isOpen={isOpen} align={props.align} withCaret={Boolean(props.withCaret)}>
             {props.children}
           </Container>
         )}
