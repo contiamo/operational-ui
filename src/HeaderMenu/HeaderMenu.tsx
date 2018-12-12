@@ -16,8 +16,16 @@ export interface HeaderMenuProps extends DefaultProps {
   align?: ContextMenuProps["align"]
 }
 
+interface HeaderMenuState {
+  renderedMenuWidth: number
+}
+
 const backgroundColor = "hsla(0, 0%, 100%, 0.1)"
 const boxShadow = "0 3px 6px rgba(0, 0%, 0%, 0.3)"
+
+const HeaderContextMenu = styled(ContextMenu)`
+  height: 100%;
+`
 
 const Container = styled("div")<{
   align: HeaderMenuProps["align"]
@@ -68,21 +76,51 @@ const Container = styled("div")<{
     : {}),
 }))
 
-const HeaderMenu: React.SFC<HeaderMenuProps> = props => {
-  return (
-    <ContextMenu {...props}>
-      {isOpen => (
-        <Container isOpen={isOpen} align={props.align} withCaret={Boolean(props.withCaret)}>
-          {props.children}
-        </Container>
-      )}
-    </ContextMenu>
-  )
-}
+class HeaderMenu extends React.PureComponent<HeaderMenuProps, Readonly<HeaderMenuState>> {
+  public readonly state: HeaderMenuState = {
+    renderedMenuWidth: 0,
+  }
 
-HeaderMenu.defaultProps = {
-  align: "left",
-  withCaret: false,
+  public static defaultProps = {
+    align: "left",
+    withCaret: false,
+  }
+
+  private menuRef = React.createRef<HTMLDivElement>()
+
+  public componentDidMount() {
+    this.updateRenderedWidth()
+  }
+
+  public componentDidUpdate() {
+    this.updateRenderedWidth()
+  }
+
+  private updateRenderedWidth() {
+    if (!this.menuRef || this.menuRef.current === null) {
+      return
+    }
+    const node = this.menuRef.current
+    const renderedMenuWidth = node.clientWidth
+    if (renderedMenuWidth !== this.state.renderedMenuWidth) {
+      this.setState(() => ({
+        renderedMenuWidth,
+      }))
+    }
+  }
+
+  public render() {
+    const props = this.props
+    return (
+      <HeaderContextMenu width={this.state.renderedMenuWidth} {...props}>
+        {isOpen => (
+          <Container innerRef={this.menuRef} isOpen={isOpen} align={props.align} withCaret={Boolean(props.withCaret)}>
+            {props.children}
+          </Container>
+        )}
+      </HeaderContextMenu>
+    )
+  }
 }
 
 export default HeaderMenu
