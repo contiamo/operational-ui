@@ -52,10 +52,11 @@ const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: bool
 
 const MenuContainer = styled("div")<{
   embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
-}>(({ theme, embedChildrenInMenu }) => ({
+  align: ContextMenuProps["align"]
+}>(({ theme, align, embedChildrenInMenu }) => ({
   position: "absolute",
   top: embedChildrenInMenu ? 0 : "100%",
-  left: 0,
+  left: align === "left" ? 0 : "auto",
   maxHeight: 360,
   overflow: "auto",
   boxShadow: theme.shadows.popup,
@@ -156,7 +157,11 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
         <Container isOpen={isOpen} {...props} align={align} onClick={this.toggle} onKeyUp={this.handleKeyPress}>
           {renderedChildren}
           {isOpen && (
-            <MenuContainer innerRef={node => (this.menu = node)} embedChildrenInMenu={this.props.embedChildrenInMenu}>
+            <MenuContainer
+              align={this.props.align}
+              innerRef={node => (this.menu = node)}
+              embedChildrenInMenu={this.props.embedChildrenInMenu}
+            >
               {embedChildrenInMenu && renderedChildren}
               {props.items.map((itemFromProps, index: number) => {
                 const item = this.makeItem(itemFromProps)
