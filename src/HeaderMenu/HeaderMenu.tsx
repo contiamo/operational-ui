@@ -16,8 +16,16 @@ export interface HeaderMenuProps extends DefaultProps {
   align?: ContextMenuProps["align"]
 }
 
+interface HeaderMenuState {
+  menuWidth: number
+}
+
 const backgroundColor = "hsla(0, 0%, 100%, 0.1)"
 const boxShadow = "0 3px 6px rgba(0, 0%, 0%, 0.3)"
+
+const HeaderContextMenu = styled(ContextMenu)`
+  height: 100%;
+`
 
 const Container = styled("div")<{
   align: HeaderMenuProps["align"]
@@ -68,21 +76,40 @@ const Container = styled("div")<{
     : {}),
 }))
 
-const HeaderMenu: React.SFC<HeaderMenuProps> = props => {
-  return (
-    <ContextMenu {...props}>
-      {isOpen => (
-        <Container isOpen={isOpen} align={props.align} withCaret={Boolean(props.withCaret)}>
-          {props.children}
-        </Container>
-      )}
-    </ContextMenu>
-  )
-}
+class HeaderMenu extends React.PureComponent<HeaderMenuProps, Readonly<HeaderMenuState>> {
+  private menuNode = React.createRef<HTMLDivElement>()
 
-HeaderMenu.defaultProps = {
-  align: "left",
-  withCaret: false,
+  public readonly state: HeaderMenuState = {
+    menuWidth: 0,
+  }
+
+  public static defaultProps = {
+    align: "left",
+    withCaret: false,
+  }
+
+  public componentDidMount() {
+    if (this.menuNode === null) {
+      return
+    }
+    if (this.menuNode.current === null) {
+      return
+    }
+    this.setState(() => ({ menuWidth: this.menuNode.current!.clientWidth }))
+  }
+
+  public render() {
+    const props = this.props
+    return (
+      <HeaderContextMenu width={this.state.menuWidth} {...props}>
+        {isOpen => (
+          <Container innerRef={this.menuNode} isOpen={isOpen} align={props.align} withCaret={Boolean(props.withCaret)}>
+            {props.children}
+          </Container>
+        )}
+      </HeaderContextMenu>
+    )
+  }
 }
 
 export default HeaderMenu
