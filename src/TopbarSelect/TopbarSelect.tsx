@@ -61,7 +61,7 @@ const TopbarSelectLabel = styled("p")`
   font-weight: ${props => props.theme.font.weight.medium};
 `
 
-export class TopbarSelect extends React.Component<TopbarSelectProps, Readonly<State>> {
+class TopbarSelect extends React.Component<TopbarSelectProps, Readonly<State>> {
   public state: State = {
     renderedWidth: undefined,
   }
@@ -115,3 +115,5 @@ export class TopbarSelect extends React.Component<TopbarSelectProps, Readonly<St
     )
   }
 }
+
+export default TopbarSelect
