@@ -137,7 +137,7 @@ const CardSection: React.SFC<CardSectionProps> = ({
         {actions && <StyledActionMenu items={actions} onClick={onActionClick} />}
       </Title>
     )}
-    {collapsed === false && <Content noHorizontalPadding={noHorizontalPadding}>{children}</Content>}
+    {!collapsed && <Content noHorizontalPadding={noHorizontalPadding}>{children}</Content>}
   </Container>
 )
 
