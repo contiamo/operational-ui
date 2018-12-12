@@ -62,9 +62,13 @@ const Container = styled("div")<Props>(({ align, theme, onClick, condensed, widt
   },
 }))
 
-const Title = styled("span")`
+const Title = styled("p")`
   font-weight: bold;
   color: ${({ theme }) => theme.color.text.dark};
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 0;
+  width: 100%;
 `
 
 const Description = styled("p")`
