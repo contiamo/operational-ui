@@ -6,7 +6,7 @@ import styled from "../utils/styled"
 
 interface GroupBaseProps {
   /** What is the title of this group? */
-  title?: string
+  title?: React.ReactElement<any> | string
   /** Is the group collapsed? */
   collapsed?: boolean
   /** How high should the group be? */
@@ -48,7 +48,7 @@ const Header = styled("div")<{ collapsed: boolean }>`
   line-height: 1;
   padding: ${({ theme }) => theme.space.medium}px;
   margin: ${({ theme }) => theme.space.medium * -1}px;
-  margin-bottom: ${({ theme, collapsed }) => (collapsed ? 0 : `${theme.space.element}px`)};
+  margin-bottom: ${({ theme, collapsed }) => (collapsed ? 0 : `${theme.space.content}px`)};
   height: ${headerHeight}px; /* in order to prevent browsers from guessing */
 `
 
