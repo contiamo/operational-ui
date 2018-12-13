@@ -34,7 +34,8 @@ const Container = styled("div")<{
 }>(({ theme, align, isOpen, withCaret }) => ({
   width: 250,
   lineHeight: 1,
-  padding: theme.space.content,
+  padding: `${theme.space.content / 2}px ${theme.space.content}px`,
+  height: "100%",
   [align === "left" ? "paddingRight" : "paddingLeft"]: theme.space.element * 2, // leave room for the caret
   color: isOpen ? theme.color.white : "#ffffffcc",
   backgroundColor: isOpen ? backgroundColor : "transparent",
