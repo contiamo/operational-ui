@@ -20,10 +20,6 @@ export interface ToggleProps {
 }
 
 const Container = styled("div")`
-  button {
-    padding: 0 ${props => props.theme.space.element}px;
-  }
-
   > :not(:last-child) {
     margin-right: 0;
     border-radius: ${({ theme: { borderRadius } }) => `${borderRadius}px 0 0 ${borderRadius}px`};
@@ -36,6 +32,8 @@ const Container = styled("div")`
 `
 
 const Button = styled(BaseButton)<{ selected: boolean; condensed?: boolean }>`
+  padding: 0 ${props => props.theme.space.element}px;
+
   ${({ selected, condensed, theme: { color } }) => {
     // box-shadow from Button
     const originalBoxShadow = `0 0 0 1px ${color.border.disabled} inset`
