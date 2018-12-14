@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import BaseButton from "../Button/Button"
+import { darken } from "../utils"
 import styled from "../utils/styled"
 
 export interface Value {
@@ -31,27 +31,39 @@ const Container = styled("div")`
   }
 `
 
-const Button = styled(BaseButton)<{ selected: boolean; condensed?: boolean }>`
+const Button = styled("div")<{ selected: boolean; condensed?: boolean }>`
+  line-height: ${props => (props.condensed ? 28 : 36)}px;
+  font-size: ${props => props.theme.font.size.small}px;
+  font-weight: ${props => props.theme.font.weight.medium};
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${props => props.theme.borderRadius}px;
+  border: 0;
+  cursor: pointer;
+  outline: none;
+  margin-right: ${props => props.theme.space.small}px;
+  background-color: ${props => (props.selected ? "#F2F2F2" : props.theme.color.white)};
   padding: 0 ${props => props.theme.space.element}px;
-
-  ${({ selected, condensed, theme: { color } }) => {
-    // box-shadow from Button
+  color: ${props => (props.selected ? props.theme.color.primary : props.theme.color.text.default)};
+  box-shadow: ${({ selected, condensed, theme: { color } }) => {
     const originalBoxShadow = `0 0 0 1px ${color.border.disabled} inset`
-
     if (selected) {
       const innerShadow = condensed ? `0 0 5px 1px #B1B1B1 inset` : `0 0 7px 1px #B1B1B1 inset`
-
-      return `box-shadow: ${originalBoxShadow}, ${innerShadow}; background-color: #F2F2F2`
+      return `${originalBoxShadow}, ${innerShadow};`
     }
-    return ""
+    return originalBoxShadow
   }};
+
+  :hover {
+    background-color: ${props => darken(props.theme.color.white, 5)};
+  }
 `
 
 const Toggle: React.SFC<ToggleProps> = props => (
   <Container>
     {props.options.map(item => (
       <Button
-        textColor={item.value === props.value ? "primary" : undefined}
         selected={item.value === props.value}
         condensed={props.condensed}
         key={item.value}
