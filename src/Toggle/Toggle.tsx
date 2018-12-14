@@ -39,11 +39,9 @@ const Button = styled(BaseButton)<{ selected: boolean; condensed?: boolean }>`
     const originalBoxShadow = `0 0 0 1px ${color.border.disabled} inset`
 
     if (selected) {
-      const innerShadow = condensed
-        ? `0 0 10px 1px ${color.border.disabled} inset`
-        : `0 0 15px 2px ${color.border.disabled} inset`
+      const innerShadow = condensed ? `0 0 5px 1px #B1B1B1 inset` : `0 0 7px 1px #B1B1B1 inset`
 
-      return `box-shadow: ${originalBoxShadow}, ${innerShadow};`
+      return `box-shadow: ${originalBoxShadow}, ${innerShadow}; background-color: #F2F2F2`
     }
     return ""
   }};
