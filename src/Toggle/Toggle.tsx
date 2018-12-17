@@ -26,7 +26,7 @@ const Container = styled("div")`
   }
 
   > :not(:first-child) {
-    left: -2px; /* Merge buttons */
+    left: -1px; /* Merge buttons */
     border-radius: ${({ theme: { borderRadius } }) => `0 ${borderRadius}px ${borderRadius}px 0`};
   }
 `
@@ -49,7 +49,7 @@ const Button = styled("div")<{ selected: boolean; condensed?: boolean }>`
   box-shadow: ${({ selected, condensed, theme: { color } }) => {
     const originalBoxShadow = `0 0 0 1px ${color.border.disabled} inset`
     if (selected) {
-      const innerShadow = condensed ? `0 0 5px 1px #B1B1B1 inset` : `0 0 7px 1px #B1B1B1 inset`
+      const innerShadow = condensed ? `0 0 5px 1px #C8C8C8 inset` : `0 0 7px 1px #C8C8C8 inset`
       return `${originalBoxShadow}, ${innerShadow};`
     }
     return originalBoxShadow
