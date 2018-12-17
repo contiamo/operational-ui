@@ -64,32 +64,37 @@ const MenuContainer = styled("div")<{
   minWidth: "fit-content",
 }))
 
-/**
- * Overlay to prevent mouse events when the context menu is open
- */
-const InvisibleOverlay = styled("div")(({ theme }) => ({
-  position: "fixed",
-  top: 0,
-  bottom: 0,
-  right: 0,
-  left: 0,
-  cursor: "default",
-  zIndex: theme.zIndex.selectOptions - 1,
-}))
-
 class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
   private menu: HTMLDivElement | null = null
+  private container: HTMLDivElement | null = null
 
-  private toggle = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen,
+  public componentDidMount() {
+    document.addEventListener("click", this.onDocumentClick)
+  }
+
+  public componentWillUnmount() {
+    document.removeEventListener("click", this.onDocumentClick)
+  }
+
+  /**
+   * Handle close on-outside-click feature
+   */
+  private onDocumentClick = (ev: any) => {
+    if (this.container === null) {
+      return
+    }
+    if (this.container === ev.target || this.container.contains(ev.target)) {
+      return
+    }
+
+    this.setState(() => ({
+      isOpen: false,
     }))
   }
 
   private focusElement = () => {
-    if (this.menu && this.menu.querySelector('[tabindex="0"]')) {
-      setTimeout(() => (this.menu!.querySelector('[tabindex="0"]') as HTMLDivElement).focus())
+    if (this.menu && this.menu.querySelector(`[tabindex="0"]`)) {
+      setTimeout(() => (this.menu!.querySelector(`[tabindex="0"]`) as HTMLDivElement).focus())
     }
   }
 
@@ -152,38 +157,65 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     const isOpen = open || this.state.isOpen
     const renderedChildren = typeof children === "function" ? children(this.state.isOpen) : children
     return (
-      <>
-        {isOpen && <InvisibleOverlay onClick={this.toggle} />}
-        <Container isOpen={isOpen} {...props} align={align} onClick={this.toggle} onKeyUp={this.handleKeyPress}>
-          {renderedChildren}
-          {isOpen && (
-            <MenuContainer
-              align={this.props.align}
-              innerRef={node => (this.menu = node)}
-              embedChildrenInMenu={this.props.embedChildrenInMenu}
-            >
-              {embedChildrenInMenu && renderedChildren}
-              {props.items.map((itemFromProps, index: number) => {
-                const item = this.makeItem(itemFromProps)
-                const clickHandler = item.onClick ? item.onClick : this.props.onClick
+      <Container
+        isOpen={isOpen}
+        {...props}
+        align={align}
+        onClick={() => {
+          if (!this.state.isOpen) {
+            this.setState(() => ({
+              isOpen: true,
+            }))
+          }
+        }}
+        onKeyUp={this.handleKeyPress}
+        innerRef={node => {
+          this.container = node
+        }}
+      >
+        {renderedChildren}
+        {isOpen && (
+          <MenuContainer
+            align={this.props.align}
+            innerRef={node => {
+              this.menu = node
+            }}
+            embedChildrenInMenu={this.props.embedChildrenInMenu}
+          >
+            {embedChildrenInMenu && renderedChildren}
+            {props.items.map((itemFromProps, index: number) => {
+              const item = this.makeItem(itemFromProps)
+              const clickHandler = item.onClick ? item.onClick : this.props.onClick
 
-                return (
-                  <ContextMenuItem
-                    tabIndex={this.state.focusedItemIndex === index ? 0 : -1} // ref "tabindex roving": https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex
-                    onClick={clickHandler && (() => clickHandler(item))}
-                    key={`contextmenu-${index}`}
-                    condensed={condensed}
-                    align={align}
-                    iconLocation={iconLocation}
-                    width={width || "100%"}
-                    item={item}
-                  />
-                )
-              })}
-            </MenuContainer>
-          )}
-        </Container>
-      </>
+              return (
+                <ContextMenuItem
+                  tabIndex={this.state.focusedItemIndex === index ? 0 : -1} // ref "tabindex roving": https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex
+                  onClick={() => {
+                    /**
+                     * On item click, the context menu needs to be closed with a timeout to prevent a render loop bug
+                     * that ignores the value change.
+                     */
+                    setTimeout(() => {
+                      this.setState(() => ({
+                        isOpen: false,
+                      }))
+                    }, 50)
+                    if (clickHandler) {
+                      clickHandler(item)
+                    }
+                  }}
+                  key={`contextmenu-${index}`}
+                  condensed={condensed}
+                  align={align}
+                  iconLocation={iconLocation}
+                  width={width || "100%"}
+                  item={item}
+                />
+              )
+            })}
+          </MenuContainer>
+        )}
+      </Container>
     )
   }
 }

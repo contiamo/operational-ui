@@ -3,13 +3,22 @@ Top bars are used as lower-level navigation elements for widgets inside applicat
 ### Usage
 
 ```
-<Topbar
+initialState = {
+  selectedFruit: "apples"
+}
+
+;<Topbar
   left={
     <>
       <TopbarSelect
         label="Fruit"
-        selected={"apples"}
+        selected={state.selectedFruit}
         items={["apples", "oranges"].map(name => ({ label: name }))}
+        onChange={newSelectedFruit => {
+          setState(() => ({
+            selectedFruit: newSelectedFruit
+          }))
+        }}
       />
       <TopbarButton
         icon="No"
