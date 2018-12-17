@@ -43,7 +43,7 @@ const Button = styled("div")<{ selected: boolean; condensed?: boolean }>`
   cursor: pointer;
   outline: none;
   margin-right: ${props => props.theme.space.small}px;
-  background-color: ${props => (props.selected ? "#F2F2F2" : props.theme.color.white)};
+  background-color: ${props => (props.selected ? darken(props.theme.color.white, 5) : props.theme.color.white)};
   padding: 0 ${props => props.theme.space.element}px;
   color: ${props => (props.selected ? props.theme.color.primary : props.theme.color.text.default)};
   box-shadow: ${({ selected, condensed, theme: { color } }) => {
