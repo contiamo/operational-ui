@@ -183,14 +183,14 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
       injectGlobal(baseStylesheet(constants))
     }
     this.onSetWindowSize()
-    document.body.addEventListener("resize", this.handleResize)
+    window.addEventListener("resize", this.handleResize)
   }
 
   public componentWillUnmount() {
     if (this.messageTimerInterval) {
       clearInterval(this.messageTimerInterval)
     }
-    document.body.removeEventListener("resize", this.handleResize)
+    window.removeEventListener("resize", this.handleResize)
   }
 
   public render() {
