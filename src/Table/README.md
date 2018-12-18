@@ -220,3 +220,35 @@ Tables render a default empty view if no records are specified.
 ```jsx
 <Table columns={["", "Name", "Last updated", "Tags", "Collaborators"]} data={[]} />
 ```
+
+### With sorting
+
+Tables can be sorted by custom logic, it's totally up to you to implement the sort logic that you need.
+
+```jsx
+initialState = {
+  data: [
+    { name: "Imogen", tags: ["d3js"] },
+    { name: "Tejas", tags: ["lambda"] },
+    { name: "Fabien", tags: ["regex"] },
+    { name: "Peter", tags: ["webGL"] },
+  ],
+  nameSortedBy: undefined,
+}
+
+const sortData = order =>
+  setState({
+    data: state.data.sort((a, b) => {
+      if (order === "asc") return a.name < b.name ? -1 : 1
+      return a.name > b.name ? -1 : 1
+    }),
+    nameSortedBy: order,
+  })
+;<Table
+  data={state.data}
+  columns={[
+    { heading: "Name", cell: i => i.name, sortBy: state.nameSortedBy, onSortClick: sortData },
+    { heading: "Tags", cell: i => i.tags.map(t => <Chip key={t}>{t}</Chip>) },
+  ]}
+/>
+```
