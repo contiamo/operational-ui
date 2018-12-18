@@ -34,7 +34,7 @@ const Container = styled("div")<{ type: MessageProps["type"] }>`
     font-size: ${props => props.theme.font.size.small}px;
     margin: 0;
     margin-bottom: ${props => props.theme.space.small}px;
-    color: ${props => props.theme.color.text.default};
+    color: ${props => (props.type === "error" ? props.theme.color.error : props.theme.color.text.default)};
   }
 
   p {
