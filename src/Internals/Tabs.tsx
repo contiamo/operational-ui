@@ -1,5 +1,6 @@
 import * as React from "react"
 import Icon, { IconName } from "../Icon/Icon"
+import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
 
 export interface Tab {
@@ -8,6 +9,7 @@ export interface Tab {
   hidden?: boolean
   icon?: IconName
   iconColor?: string
+  loading?: boolean
 }
 
 export interface Props {
@@ -87,7 +89,11 @@ class Tabs extends React.Component<Props, State> {
               active={activeTab === index}
               onClick={() => this.onTabClick(index)}
             >
-              {tab.icon && <Icon name={tab.icon} size={14} color={tab.iconColor} left />}
+              {tab.loading ? (
+                <Spinner left size={14} />
+              ) : (
+                tab.icon && <Icon name={tab.icon} size={14} color={tab.iconColor} left />
+              )}
               {tab.name}
             </Tab>
           ))}
