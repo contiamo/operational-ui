@@ -28,7 +28,7 @@ export interface TableProps<T> extends DefaultProps {
 export interface Column<T> {
   heading: React.ReactNode
   cell: (dataEntry: T, index: number) => React.ReactNode
-  sortBy?: "asc" | "desc"
+  sortOrder?: "asc" | "desc"
   onSortClick?: (order: "asc" | "desc") => void
 }
 
@@ -157,10 +157,12 @@ function Table<T>({
               <Th
                 key={columnIndex}
                 sortable={Boolean(column.onSortClick)}
-                onClick={() => column.onSortClick && column.onSortClick(column.sortBy === "desc" ? "asc" : "desc")}
+                onClick={() => column.onSortClick && column.onSortClick(column.sortOrder === "desc" ? "asc" : "desc")}
               >
                 {column.heading}
-                {column.sortBy && <SortIcon size={16} name={column.sortBy === "desc" ? "CaretUp" : "CaretDown"} />}
+                {column.sortOrder && (
+                  <SortIcon size={16} name={column.sortOrder === "desc" ? "CaretUp" : "CaretDown"} />
+                )}
               </Th>
             ))}
             {Boolean(rowActions || (onRowClick && rowActionName)) && <Th key="infinity" />}
