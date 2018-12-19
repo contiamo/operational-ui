@@ -103,6 +103,7 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
         {this.props.children(this.openConfirm.bind(this))}
         {isOpen && (
           <ControlledModal
+            type="confirm"
             fullSize={fullSize}
             title={title}
             onClose={this.closeConfirm}
