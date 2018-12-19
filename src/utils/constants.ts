@@ -193,6 +193,7 @@ const zIndex = {
   formFieldError: 299,
   tooltip: 400,
   modal: 500,
+  confirm: 600,
   debugViewer: 1000,
   globalProgress: 299,
 }

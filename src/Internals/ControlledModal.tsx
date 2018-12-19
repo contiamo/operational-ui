@@ -4,10 +4,11 @@ import Card, { CardProps } from "../Card/Card"
 import Overlay from "../Internals/Overlay"
 import styled from "../utils/styled"
 
-export interface Props {
+export interface ControlledModalProps {
   id?: string
   className?: string
   contentClassName?: string
+  type?: "confirm"
   children: CardProps["children"]
   onClose?: () => void
   title?: CardProps["title"]
@@ -33,14 +34,14 @@ const fromTop = (fullSize: boolean) => {
 `
 }
 
-const Container = styled(Card)<Partial<Props>>(({ theme, fullSize }) => ({
+const Container = styled(Card)<Partial<ControlledModalProps>>(({ theme, fullSize, type }) => ({
   top: theme.space.element,
   left: fullSize ? theme.space.element : "50%",
   height: fullSize ? "100%" : "fit-content",
   animation: `${fromTop(Boolean(fullSize))} 0.2s`,
   position: "absolute",
   minWidth: 600,
-  zIndex: theme.zIndex.modal,
+  zIndex: type === "confirm" ? theme.zIndex.confirm : theme.zIndex.modal,
   maxWidth: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the screen!
 
   ...(fullSize
@@ -58,7 +59,7 @@ const Container = styled(Card)<Partial<Props>>(({ theme, fullSize }) => ({
       }),
 }))
 
-const Content = styled("div")<Props>(({ theme, fullSize }) => ({
+const Content = styled("div")<ControlledModalProps>(({ theme, fullSize }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
@@ -76,9 +77,10 @@ const Content = styled("div")<Props>(({ theme, fullSize }) => ({
     : {}),
 }))
 
-const ControlledModal: React.SFC<Props> = ({
+const ControlledModal: React.SFC<ControlledModalProps> = ({
   id,
   className,
+  type,
   contentClassName,
   onClose,
   fullSize,
@@ -86,18 +88,19 @@ const ControlledModal: React.SFC<Props> = ({
   action,
   children,
   closeOnOverlayClick,
-}: Props) => (
+}: ControlledModalProps) => (
   <>
     <Overlay
       id={id}
       className={className}
+      type={type}
       onClick={() => {
         if (closeOnOverlayClick !== false && onClose) {
           onClose()
         }
       }}
     />
-    <Container className={contentClassName} fullSize={fullSize} title={title} action={action}>
+    <Container type={type} className={contentClassName} fullSize={fullSize} title={title} action={action}>
       <Content fullSize={fullSize}>{children}</Content>
     </Container>
   </>

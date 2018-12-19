@@ -8,6 +8,7 @@
 import * as React from "react"
 
 import styled, { keyframes } from "react-emotion"
+import { ControlledModalProps } from "./ControlledModal"
 
 const fadeIn = keyframes`
   0% {
@@ -19,7 +20,7 @@ const fadeIn = keyframes`
   }
 `
 
-export const Overlay = styled("div")`
+export const Overlay = styled("div")<{ type: ControlledModalProps["type"] }>`
   position: fixed;
   top: 0;
   left: 0;
@@ -27,7 +28,7 @@ export const Overlay = styled("div")`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.6);
   animation: ${fadeIn} 0.1s ease-in;
-  z-index: ${({ theme }) => theme.zIndex.modal - 1};
+  z-index: ${({ theme, type }) => (type === "confirm" ? theme.zIndex.confirm : theme.zIndex.modal) - 1};
 `
 
 export default Overlay
