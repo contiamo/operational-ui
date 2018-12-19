@@ -68,7 +68,14 @@ const Th = styled("th")<{ sortable?: boolean }>(({ theme, sortable }) => ({
   "&:first-child": {
     paddingLeft: theme.space.small,
   },
-  cursor: sortable ? "pointer" : "default",
+  ...(sortable
+    ? {
+        ":hover": {
+          backgroundColor: theme.color.background.lighter,
+          cursor: "pointer",
+        },
+      }
+    : {}),
 }))
 
 const Td = styled("td")(({ theme }) => ({

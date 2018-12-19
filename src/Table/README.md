@@ -247,7 +247,7 @@ const sortData = order =>
 ;<Table
   data={state.data}
   columns={[
-    { heading: "Name", cell: i => i.name, sortBy: state.nameSortedBy, onSortClick: sortData },
+    { heading: "Name", cell: i => i.name, sortOrder: state.nameSortedBy, onSortClick: sortData },
     { heading: "Tags", cell: i => i.tags.map(t => <Chip key={t}>{t}</Chip>) },
   ]}
 />
