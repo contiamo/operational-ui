@@ -32,9 +32,9 @@ Top bars are used as lower-level navigation elements for widgets inside applicat
   right={
     <>
       <TopbarButton
-        icon="Save"
+        icon="Share"
       >
-        Save
+        Share
       </TopbarButton>
     </>
   }
