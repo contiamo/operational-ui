@@ -8,7 +8,7 @@ import styled from "../utils/styled"
 export interface TableProps<T> extends DefaultProps {
   data: T[]
   /** Table columns headings */
-  columns: Array<Column<T>> | Array<Extract<keyof T, string>>
+  columns: Array<Column<T> | Extract<keyof T, string>>
   /** Called on row click */
   onRowClick?: (dataEntry: T, index: number) => void
   /** Label to show on row hover */
@@ -28,6 +28,8 @@ export interface TableProps<T> extends DefaultProps {
 export interface Column<T> {
   heading: React.ReactNode
   cell: (dataEntry: T, index: number) => React.ReactNode
+  sortOrder?: "asc" | "desc"
+  onSortClick?: (order: "asc" | "desc") => void
 }
 
 const Container = styled("table")(({ theme }) => ({
@@ -39,13 +41,13 @@ const Container = styled("table")(({ theme }) => ({
   fontFamily: theme.font.family.main,
 }))
 
-const Tr = styled("tr")<{ hover?: boolean }>(({ hover, theme }) => ({
+const Tr = styled("tr")<{ hover?: boolean; clickable?: boolean }>(({ hover, theme, clickable }) => ({
   height: 50,
   ...(hover
     ? {
         ":hover": {
           backgroundColor: theme.color.background.lighter,
-          cursor: "pointer",
+          cursor: clickable ? "pointer" : "default",
         },
       }
     : {}),
@@ -57,15 +59,34 @@ const Thead = styled("thead")`
   }
 `
 
-const Th = styled("th")(({ theme }) => ({
-  verticalAlign: "bottom",
+const Th = styled("th")<{ sortable?: boolean }>(({ theme, sortable }) => ({
+  position: "relative",
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.lightest,
   paddingBottom: theme.space.base,
   "&:first-child": {
     paddingLeft: theme.space.small,
   },
+  ...(sortable
+    ? {
+        ":hover": {
+          cursor: "pointer",
+          color: theme.color.text.light,
+          svg: {
+            cursor: "pointer",
+            fill: theme.color.text.light,
+          },
+        },
+      }
+    : {}),
 }))
+
+const ThContent = styled("span")<{ sorted?: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  height: ${props => props.theme.space.medium}px;
+  ${props => props.sorted && `color: ${props.theme.color.text.light};`};
+`
 
 const Td = styled("td")(({ theme }) => ({
   verticalAlign: "middle",
@@ -94,6 +115,15 @@ const Actions = styled(Td)(({ theme }) => ({
     display: "inline-flex",
   },
 }))
+
+const SortIcon = styled(Icon)`
+  margin-left: ${props => props.theme.space.small}px;
+`
+
+const SortableIcon = styled("div")`
+  display: inline-grid;
+  grid-template-rows: 6px;
+`
 
 const IconCell = styled(Td)`
   width: 40px;
@@ -125,13 +155,16 @@ function Table<T>({
   headless,
   ...props
 }: TableProps<T>) {
-  const standardizedColumns: Array<Column<T>> =
-    Boolean(columns[0]) && typeof columns[0] === "string"
-      ? (columns as Array<Extract<keyof T, string>>).map(columnName => ({
-          heading: columnName,
-          cell: (dataEntry: T) => dataEntry[columnName],
-        }))
-      : (columns as Array<Column<T>>)
+  const standardizedColumns: Array<Column<T>> = columns.map(column => {
+    if (typeof column === "string") {
+      return {
+        heading: column,
+        cell: (dataEntry: T) => dataEntry[column],
+      }
+    } else {
+      return column
+    }
+  })
 
   const hasIcons: boolean = Boolean(data[0]) && Boolean(icon) && Boolean(icon!(data[0]))
 
@@ -142,7 +175,25 @@ function Table<T>({
           <Tr>
             {hasIcons && <Th key="-1" />}
             {standardizedColumns.map((column, columnIndex) => (
-              <Th key={columnIndex}>{column.heading}</Th>
+              <Th
+                key={columnIndex}
+                sortable={Boolean(column.onSortClick)}
+                onClick={() => column.onSortClick && column.onSortClick(column.sortOrder === "desc" ? "asc" : "desc")}
+              >
+                <ThContent sorted={Boolean(column.sortOrder)}>
+                  {column.heading}
+                  {column.onSortClick &&
+                    !column.sortOrder && (
+                      <SortableIcon>
+                        <SortIcon size={10} color="color.border.disabled" name="CaretUp" />
+                        <SortIcon size={10} color="color.border.disabled" name="CaretDown" />
+                      </SortableIcon>
+                    )}
+                  {column.sortOrder && (
+                    <SortIcon size={10} color="primary" name={column.sortOrder === "desc" ? "CaretUp" : "CaretDown"} />
+                  )}
+                </ThContent>
+              </Th>
             ))}
             {Boolean(rowActions || (onRowClick && rowActionName)) && <Th key="infinity" />}
           </Tr>
@@ -175,6 +226,7 @@ function Table<T>({
               <Tr
                 hover={Boolean(data)}
                 key={dataEntryIndex}
+                clickable={Boolean(onRowClick)}
                 onClick={() => {
                   if (onRowClick) {
                     onRowClick(dataEntry, dataEntryIndex)

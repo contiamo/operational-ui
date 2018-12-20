@@ -220,3 +220,59 @@ Tables render a default empty view if no records are specified.
 ```jsx
 <Table columns={["", "Name", "Last updated", "Tags", "Collaborators"]} data={[]} />
 ```
+
+### With sorting
+
+Tables can be sorted by custom logic, it's totally up to you to implement the sort logic that you need.
+
+```jsx
+initialState = {
+  data: [
+    { name: "Imogen", tags: ["d3js"] },
+    { name: "Tejas", tags: ["lambda"] },
+    { name: "Fabien", tags: ["regex"] },
+    { name: "Peter", tags: ["webGL"] },
+  ],
+  nameSortOrder: undefined,
+  tagSortOrder: undefined,
+}
+
+const sortData = (order, key) => {
+  if (key === "name") {
+    setState({
+      data: state.data.sort((a, b) => {
+        if (order === "asc") return a.name < b.name ? -1 : 1
+        return a.name > b.name ? -1 : 1
+      }),
+      nameSortOrder: order,
+      tagSortOrder: undefined,
+    })
+  } else {
+    setState({
+      data: state.data.sort((a, b) => {
+        if (order === "asc") return a.tags[0] < b.tags[0] ? -1 : 1
+        return a.tags[0] > b.tags[0] ? -1 : 1
+      }),
+      nameSortOrder: undefined,
+      tagSortOrder: order,
+    })
+  }
+}
+;<Table
+  data={state.data}
+  columns={[
+    {
+      heading: "Name",
+      cell: i => i.name,
+      sortOrder: state.nameSortOrder,
+      onSortClick: order => sortData(order, "name"),
+    },
+    {
+      heading: "Tags",
+      cell: i => i.tags.map(t => <Chip key={t}>{t}</Chip>),
+      sortOrder: state.tagSortOrder,
+      onSortClick: order => sortData(order, "tag"),
+    },
+  ]}
+/>
+```
