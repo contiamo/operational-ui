@@ -61,7 +61,6 @@ const Thead = styled("thead")`
 
 const Th = styled("th")<{ sortable?: boolean }>(({ theme, sortable }) => ({
   position: "relative",
-  verticalAlign: "bottom",
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.lightest,
   paddingBottom: theme.space.base,
@@ -71,12 +70,19 @@ const Th = styled("th")<{ sortable?: boolean }>(({ theme, sortable }) => ({
   ...(sortable
     ? {
         ":hover": {
-          backgroundColor: theme.color.background.lighter,
           cursor: "pointer",
+          color: theme.color.text.light,
         },
       }
     : {}),
 }))
+
+const ThContent = styled("span")<{ sorted?: boolean }>`
+  display: inline-flex;
+  align-items: center;
+  height: ${props => props.theme.space.medium}px;
+  ${props => props.sorted && `color: ${props.theme.color.text.light};`};
+`
 
 const Td = styled("td")(({ theme }) => ({
   verticalAlign: "middle",
@@ -107,8 +113,12 @@ const Actions = styled(Td)(({ theme }) => ({
 }))
 
 const SortIcon = styled(Icon)`
-  position: absolute;
-  right: ${props => props.theme.space.element}px;
+  margin-left: ${props => props.theme.space.small}px;
+`
+
+const SortableIcon = styled("div")`
+  display: inline-grid;
+  grid-template-rows: 6px;
 `
 
 const IconCell = styled(Td)`
@@ -166,10 +176,19 @@ function Table<T>({
                 sortable={Boolean(column.onSortClick)}
                 onClick={() => column.onSortClick && column.onSortClick(column.sortOrder === "desc" ? "asc" : "desc")}
               >
-                {column.heading}
-                {column.sortOrder && (
-                  <SortIcon size={16} name={column.sortOrder === "desc" ? "CaretUp" : "CaretDown"} />
-                )}
+                <ThContent sorted={Boolean(column.sortOrder)}>
+                  {column.heading}
+                  {column.onSortClick &&
+                    !column.sortOrder && (
+                      <SortableIcon>
+                        <SortIcon size={10} color="color.border.disabled" name="CaretUp" />
+                        <SortIcon size={10} color="color.border.disabled" name="CaretDown" />
+                      </SortableIcon>
+                    )}
+                  {column.sortOrder && (
+                    <SortIcon size={10} color="primary" name={column.sortOrder === "desc" ? "CaretUp" : "CaretDown"} />
+                  )}
+                </ThContent>
               </Th>
             ))}
             {Boolean(rowActions || (onRowClick && rowActionName)) && <Th key="infinity" />}
