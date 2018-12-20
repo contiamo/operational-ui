@@ -72,6 +72,10 @@ const Th = styled("th")<{ sortable?: boolean }>(({ theme, sortable }) => ({
         ":hover": {
           cursor: "pointer",
           color: theme.color.text.light,
+          svg: {
+            cursor: "pointer",
+            fill: theme.color.text.light,
+          },
         },
       }
     : {}),
