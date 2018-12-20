@@ -35,13 +35,13 @@ export interface Props {
 
 const actionsBarSize = 36
 
-const Actions = styled("div")`
+export const Actions = styled("div")`
   margin-top: ${({ theme }) => theme.space.element}px;
   align-self: flex-end;
   height: ${actionsBarSize}px;
 `
 
-const ControlledModalContent = styled("div")<{ fullSize: boolean }>(
+export const ControlledModalContent = styled("div")<{ fullSize: boolean }>(
   ({ fullSize }) =>
     fullSize
       ? {
