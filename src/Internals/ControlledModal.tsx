@@ -51,7 +51,7 @@ const Container = styled(Card)<Partial<ControlledModalProps>>(({ theme, fullSize
         width: 1110,
         display: "grid",
         gridTemplateRows: "40px 100%",
-        maxHeight: `calc(100% - ${theme.space.element * 2}px)`,
+        maxHeight: `calc(100% - ${theme.space.element * 3}px)`,
       }
     : // Regular size rules
       {
@@ -71,7 +71,7 @@ const Content = styled("div")<ControlledModalProps>(({ theme, fullSize }) => ({
   // Ensure scrollability if content is too long
   ...(fullSize
     ? {
-        height: "100%", // height + padding top + padding bottom
+        height: "100%",
         overflow: "auto",
       }
     : {}),
