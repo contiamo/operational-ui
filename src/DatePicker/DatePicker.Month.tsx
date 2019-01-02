@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Day, Days } from "./DatePicker.styles"
+import { Day, DayOfWeek, Days } from "./DatePicker.styles"
 import { daysInMonth, monthStartDay, range, toDate } from "./DatePicker.utils"
 
 export interface IDatePair {
@@ -45,6 +45,9 @@ const Month = ({ year, month, start, end, onChange, min, max }: Props) => {
     (daysInCurrentMonth + prevPlaceholderDays) % 7 === 0 ? 0 : 7 - ((daysInCurrentMonth + prevPlaceholderDays) % 7)
   return (
     <Days>
+      {["S", "M", "T", "W", "T", "F", "S"].map((dayName, index) => (
+        <DayOfWeek key={`${index}-${dayName}`}>{dayName}</DayOfWeek>
+      ))}
       {range(prevPlaceholderDays).map((_, index) => {
         const day = daysInPreviousMonth + index - prevPlaceholderDays
         const date = toDate(prevYear, prevMonth, day)
@@ -55,8 +58,8 @@ const Month = ({ year, month, start, end, onChange, min, max }: Props) => {
               start,
               end,
             })}
-            key={index}
             isPlaceholder
+            key={index}
             isDisabled={isDisabled}
             onClick={(ev: any) => {
               ev.preventDefault()

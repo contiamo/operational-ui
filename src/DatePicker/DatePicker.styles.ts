@@ -1,12 +1,3 @@
-/**
- * Having React typings in scope is necessary for styled components not using React directly, otherwise
- * botched module names like `import("eac")` show up in the .d.ts files due to a typescript compiler error.
- * See issue: https://github.com/emotion-js/emotion/issues/788
- * @todo remove this as soon as the issue is fixed.
- */
-// @ts-ignore
-import * as React from "react"
-
 import tinycolor from "tinycolor2"
 import styled from "../utils/styled"
 
@@ -117,58 +108,58 @@ const makeDayTextColor = ({
   selected,
   theme,
 }: {
-  isPlaceholder?: boolean
   isDisabled?: boolean
+  isPlaceholder?: boolean
   selected?: boolean
   theme: OperationalStyleConstants
 }) => {
   if (selected) {
     return theme.color.white
   }
-  if (isDisabled) {
-    return theme.color.text.lightest
-  }
-  if (isPlaceholder) {
+  if (isDisabled || isPlaceholder) {
     return theme.color.text.lighter
   }
   return theme.color.text.dark
 }
 
-export const Day = styled("div")<{
+const BaseDay = styled("div")(({ theme }) => ({
+  userSelect: "none",
+  width: 30,
+  height: 30,
+  marginRight: -1,
+  marginBottom: -1,
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: 3,
+  borderRadius: "50%",
+  backgroundClip: "content-box",
+  fontSize: theme.font.size.body,
+  fontWeght: theme.font.weight.regular,
+}))
+
+export const Day = styled(BaseDay)<{
   selected?: boolean
   isPlaceholder?: boolean
   isDisabled?: boolean
-}>(
-  {
-    userSelect: "none",
-    width: 30,
-    height: 30,
-    marginRight: -1,
-    marginBottom: -1,
-    cursor: "pointer",
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: 3,
-    borderRadius: "50%",
-    backgroundClip: "content-box",
+}>(({ theme, isPlaceholder, selected, isDisabled }) => ({
+  backgroundColor: selected ? theme.color.primary : "transparent",
+  color: makeDayTextColor({ isPlaceholder, isDisabled, selected, theme }),
+  cursor: isDisabled ? "not-allowed" : "pointer",
+  ":hover": {
+    backgroundColor: selected
+      ? tinycolor(theme.color.primary)
+          .darken(5)
+          .toString()
+      : isDisabled
+        ? "transparent"
+        : theme.color.background.lighter,
   },
-  ({ theme, selected, isPlaceholder, isDisabled }) => ({
-    ...theme.deprecated.typography.body,
-    backgroundColor: selected ? theme.deprecated.colors.info : "transparent",
-    color: makeDayTextColor({ isPlaceholder, isDisabled, selected, theme }),
-    cursor: isDisabled ? "not-allowed" : "pointer",
-    ":hover": {
-      backgroundColor: selected
-        ? tinycolor(theme.color.primary)
-            .darken(5)
-            .toString()
-        : isDisabled
-          ? "transparent"
-          : theme.color.background.lighter,
-    },
-  }),
-)
+}))
+
+export const DayOfWeek = styled(BaseDay)`
+  color: ${props => props.theme.color.text.lightest};
+`
 
 export const Input = styled("input")<{ isExpanded: boolean }>(({ theme, isExpanded }) => ({
   ...theme.deprecated.typography.body,
