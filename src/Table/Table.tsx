@@ -120,11 +120,6 @@ const SortIcon = styled(Icon)`
   margin-left: ${props => props.theme.space.small}px;
 `
 
-const SortableIcon = styled("div")`
-  display: inline-grid;
-  grid-template-rows: 6px;
-`
-
 const IconCell = styled(Td)`
   width: 40px;
   padding: ${props => props.theme.space.base}px;
@@ -183,14 +178,13 @@ function Table<T>({
                 <ThContent sorted={Boolean(column.sortOrder)}>
                   {column.heading}
                   {column.onSortClick &&
-                    !column.sortOrder && (
-                      <SortableIcon>
-                        <SortIcon size={10} color="color.border.disabled" name="CaretUp" />
-                        <SortIcon size={10} color="color.border.disabled" name="CaretDown" />
-                      </SortableIcon>
-                    )}
+                    !column.sortOrder && <SortIcon size={10} color="color.border.disabled" name="ChevronUpDown" />}
                   {column.sortOrder && (
-                    <SortIcon size={10} color="primary" name={column.sortOrder === "desc" ? "CaretUp" : "CaretDown"} />
+                    <SortIcon
+                      size={10}
+                      color="primary"
+                      name={column.sortOrder === "desc" ? "ChevronUp" : "ChevronDown"}
+                    />
                   )}
                 </ThContent>
               </Th>
