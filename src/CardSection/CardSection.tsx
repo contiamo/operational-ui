@@ -2,6 +2,7 @@ import * as React from "react"
 
 import ActionMenu from "../ActionMenu/ActionMenu"
 import { ContextMenuProps } from "../ContextMenu/ContextMenu"
+import Icon from "../Icon/Icon"
 import { DefaultProps, DragProps } from "../types"
 import styled from "../utils/styled"
 
@@ -24,6 +25,8 @@ export interface CardSectionProps extends DefaultProps, DragProps {
   onActionClick?: ContextMenuProps["onClick"]
   /** Is this collapsed? */
   collapsed?: boolean
+  /** Toggle collapsed state */
+  onToggle?: () => void
 }
 
 export type DragAndDropFeedback = "validTarget" | "invalidTarget" | "dropping"
@@ -84,18 +87,36 @@ const Content = styled("div")<{ noHorizontalPadding?: boolean }>`
   `};
 `
 
-const Title = styled("div")`
+const Title = styled("div")<{ withToggle?: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 36px;
-  ${({ theme }) => `
+  ${({ theme, withToggle }) => `
     padding: 0px ${theme.space.element}px;
     font-family: ${theme.font.family.main};
     font-weight: ${theme.font.weight.bold};
     color: ${theme.color.text.lighter};
     font-size: ${theme.font.size.body};
     border-bottom: 1px solid ${theme.color.separators.default};
+    ${
+      withToggle
+        ? `
+    cursor: pointer;
+    svg {
+      cursor: pointer;
+      color: ${theme.color.separators.default};
+    }
+    :hover {
+      background-color: ${theme.color.background.lightest};
+    }
+    :hover svg {
+      color: ${theme.color.separators.dark};
+    }
+    `
+        : ""
+    }
   `};
 `
 
@@ -127,13 +148,15 @@ const CardSection: React.SFC<CardSectionProps> = ({
   noHorizontalPadding,
   onActionClick,
   collapsed,
+  onToggle,
   ...props
 }) => (
   <Container {...props}>
     <Overlay overlayType={makeOverlayType(disabled, dragAndDropFeedback)} />
     {title && (
-      <Title>
+      <Title withToggle={Boolean(onToggle)} onClick={onToggle}>
         {title}
+        {onToggle && <Icon name={collapsed ? "ChevronDown" : "ChevronUp"} />}
         {actions && <StyledActionMenu items={actions} onClick={onActionClick} />}
       </Title>
     )}

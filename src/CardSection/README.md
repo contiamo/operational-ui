@@ -3,11 +3,24 @@ Card sections are flexibly stacked sub-containers designed to fit within cards. 
 ### Simple usage
 
 ```jsx
-<div style={{ width: 300 }}>
+initialState = {
+  isCollapsed: true,
+}
+;<div style={{ width: 300 }}>
   <Card
     sections={
       <>
-        <CardSection title="Section 1">Content 1</CardSection>
+        <CardSection
+          title="Section 1"
+          collapsed={state.isCollapsed}
+          onToggle={() => {
+            setState(prevState => ({
+              isCollapsed: !prevState.isCollapsed,
+            }))
+          }}
+        >
+          Content 1
+        </CardSection>
         <CardSection title="Section 2">Content2</CardSection>
       </>
     }

@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import Icon from "../Icon/Icon"
+import IconButton from "../Internals/IconButton"
 import SmallNameTag from "../Internals/SmallNameTag"
 import { DefaultProps } from "../types"
 import constants, { expandColor } from "../utils/constants"
@@ -84,29 +85,6 @@ const TreeLabel = styled("span")`
   word-wrap: break-word;
   flex: 1;
 `
-
-/**
- * This is a single-use close button with hard-coded padding to ensure the close icon inside stays readable.
- * @todo look into re-using and formalizing this element.
- */
-const IconButton = styled("div")<{ hidden_?: boolean; hoverEffect?: boolean }>(({ theme, hidden_, hoverEffect }) => ({
-  cursor: "pointer",
-  width: 20,
-  height: 20,
-  padding: 4,
-  borderRadius: theme.borderRadius,
-  "& svg": {
-    cursor: "pointer",
-  },
-  ...(hidden_ ? { visibility: "hidden" } : {}),
-  ...(hoverEffect
-    ? {
-        ":hover": {
-          backgroundColor: theme.color.background.light,
-        },
-      }
-    : {}),
-}))
 
 export interface ReorderProps {
   onReorder: TreeProps["onReorder"]
@@ -226,7 +204,7 @@ const TreeRecursive: React.SFC<
       >
         {maxDepth > 1 && (
           <IconButton hidden_={childNodes.length === 0}>
-            <Icon name={isOpen ? "ChevronDown" : "Add"} size={12} />
+            <Icon name={isOpen ? "ChevronDown" : "Add"} />
           </IconButton>
         )}
         {tree.tag && <SmallNameTag color={tagColor}>{tree.tag}</SmallNameTag>}
@@ -239,7 +217,7 @@ const TreeRecursive: React.SFC<
               onRemove()
             }}
           >
-            <Icon name="No" size={12} />
+            <Icon name="No" />
           </IconButton>
         )}
       </TreeItem>
