@@ -84,6 +84,12 @@ export const ChevronUp: React.SFC<IconProps> = ({ size, color, ...props }) => (
   </svg>
 )
 
+export const ChevronUpDown: React.SFC<IconProps> = ({ size, color, ...props }) => (
+  <svg viewBox="0 0 360 360" fill={color} width={size} height={size} {...props}>
+    <path d="M306.642,231.83l-126.642,126.642l-126.642,-126.642l28.284,-28.285l98.358,98.358l98.358,-98.358c9.428,9.428 18.856,18.857 28.284,28.285Zm0,-103.285l-28.284,28.285l-98.358,-98.358l-98.358,98.358l-28.284,-28.285l126.642,-126.642c42.214,42.214 84.428,84.428 126.642,126.642Z" />
+  </svg>
+)
+
 export const Copy: React.SFC<IconProps> = ({ size, color, ...props }) => (
   <svg viewBox="0 0 360 360" fill={color} width={size} height={size} {...props}>
     <path d="M80,160.188l-20,-0.001l0,140l140,0l0,-19.999l40,0l0,60l-220,0l0,-220.001l60,0l0,40.001Zm240,99.999l-220,0l0,-220l220,0l0,220Zm-40,-180l-140,0l0,140.001l140,0l0,-140.001Z" />
