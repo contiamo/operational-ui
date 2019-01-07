@@ -136,7 +136,7 @@ initialState = {
         </Button>
       ),
       loading: state.isTab1Loading,
-      // Icon name is not taken into consideration when loading
+      // The icon is replaced by a spinner when loading.
       icon: "Yes",
       iconColor: "success",
     },
