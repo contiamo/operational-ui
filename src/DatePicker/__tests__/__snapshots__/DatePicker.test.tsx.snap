@@ -75,199 +75,234 @@ exports[`DatePicker Component Should render 1`] = `
         class="css-1ll3uuv"
       >
         <div
-          class="css-j1b6s5"
+          class="css-1qsbqtu"
+        >
+          S
+        </div>
+        <div
+          class="css-1qsbqtu"
+        >
+          M
+        </div>
+        <div
+          class="css-1qsbqtu"
+        >
+          T
+        </div>
+        <div
+          class="css-1qsbqtu"
+        >
+          W
+        </div>
+        <div
+          class="css-1qsbqtu"
+        >
+          T
+        </div>
+        <div
+          class="css-1qsbqtu"
+        >
+          F
+        </div>
+        <div
+          class="css-1qsbqtu"
+        >
+          S
+        </div>
+        <div
+          class="css-nx0nor"
         >
           31
         </div>
         <div
-          class="css-py2ehy"
+          class="css-1cg1rt1"
         >
           1
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           2
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           3
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           4
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           5
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           6
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           7
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           8
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           9
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           10
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           11
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           12
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           13
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           14
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           15
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           16
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           17
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           18
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           19
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           20
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           21
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           22
         </div>
         <div
-          class="css-xh8exr"
+          class="css-3ve8fu"
           selected=""
         >
           23
         </div>
         <div
-          class="css-py2ehy"
+          class="css-1cg1rt1"
         >
           24
         </div>
         <div
-          class="css-py2ehy"
+          class="css-1cg1rt1"
         >
           25
         </div>
         <div
-          class="css-py2ehy"
+          class="css-1cg1rt1"
         >
           26
         </div>
         <div
-          class="css-py2ehy"
+          class="css-1cg1rt1"
         >
           27
         </div>
         <div
-          class="css-py2ehy"
+          class="css-1cg1rt1"
         >
           28
         </div>
         <div
-          class="css-py2ehy"
+          class="css-1cg1rt1"
         >
           29
         </div>
         <div
-          class="css-py2ehy"
+          class="css-1cg1rt1"
         >
           30
         </div>
         <div
-          class="css-py2ehy"
+          class="css-1cg1rt1"
         >
           31
         </div>
         <div
-          class="css-j1b6s5"
+          class="css-nx0nor"
         >
           1
         </div>
         <div
-          class="css-j1b6s5"
+          class="css-nx0nor"
         >
           2
         </div>
         <div
-          class="css-j1b6s5"
+          class="css-nx0nor"
         >
           3
         </div>
