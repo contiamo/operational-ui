@@ -9,14 +9,17 @@ export interface CardColumnProps extends DefaultProps {
   contentRight?: boolean
   /** Set the component as a flex-box column */
   flexColumn?: boolean
+  /** Force the column to be full with */
+  fullWidth?: boolean
 }
 
-const Container = styled("div")<CardColumnProps>(({ theme, contentRight, flexColumn }) => ({
+const Container = styled("div")<CardColumnProps>(({ theme, contentRight, flexColumn, fullWidth }) => ({
   label: "card-column",
   height: "min-content",
   minWidth: 280 / 2,
-  padding: theme!.space.element / 2,
-  flex: "1 0",
+  padding: theme.space.element / 2,
+  marginRight: fullWidth ? -theme.space.element : undefined,
+  flex: fullWidth ? "100%" : "1 0",
   " img": {
     maxWidth: "100%",
   },
