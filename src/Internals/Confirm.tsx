@@ -41,15 +41,18 @@ export const Actions = styled("div")`
   height: ${actionsBarSize}px;
 `
 
-export const ControlledModalContent = styled("div")<{ fullSize: boolean }>(
-  ({ fullSize }) =>
-    fullSize
-      ? {
-          height: `calc(100% - ${actionsBarSize}px)`,
-          overflow: "auto",
-        }
-      : {},
-)
+export const ControlledModalContent = styled("div")<{ fullSize: boolean }>(({ fullSize, theme }) => ({
+  // Invert control of spacing from Card to Modal
+  margin: theme.space.element * -1,
+  padding: theme.space.element,
+
+  ...(fullSize
+    ? {
+        height: `calc(100% - ${actionsBarSize}px)`,
+        overflowY: "auto",
+      }
+    : {}),
+}))
 
 export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
   public readonly state: State<T> = {
