@@ -44,6 +44,68 @@ initialState = {
 </div>
 ```
 
+### Synchronized stacking
+
+```jsx
+initialState = {
+  isCollapsed: false,
+  isHovered: false,
+}
+;<div style={{ width: 300 }}>
+  <Card
+    stackSections="horizontal"
+    sections={
+      <>
+        <CardSection
+          title="Section 1"
+          collapsed={state.isCollapsed}
+          forceToggleHoverStyles={state.isHovered}
+          onToggleMouseEnter={() => {
+            setState(() => ({
+              isHovered: true,
+            }))
+          }}
+          onToggleMouseLeave={() => {
+            setState(() => ({
+              isHovered: false,
+            }))
+          }}
+          onToggle={() => {
+            setState(prevState => ({
+              isCollapsed: !prevState.isCollapsed,
+            }))
+          }}
+        >
+          Content 1
+        </CardSection>
+        <CardSection
+          title="Section 2"
+          collapsed={state.isCollapsed}
+          forceToggleHoverStyles={state.isHovered}
+          onToggleMouseEnter={() => {
+            setState(() => ({
+              isHovered: true,
+            }))
+          }}
+          onToggleMouseLeave={() => {
+            setState(() => ({
+              isHovered: false,
+            }))
+          }}
+          onToggle={() => {
+            setState(prevState => ({
+              isCollapsed: !prevState.isCollapsed,
+            }))
+          }}
+        >
+          Content 2
+        </CardSection>
+      </>
+    }
+  />
+</div>
+```
+
 ### Actions
 
 ```jsx

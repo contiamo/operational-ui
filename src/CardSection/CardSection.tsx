@@ -27,6 +27,12 @@ export interface CardSectionProps extends DefaultProps, DragProps {
   collapsed?: boolean
   /** Toggle collapsed state */
   onToggle?: () => void
+  /** Fires when the toggle area is hovered */
+  onToggleMouseEnter?: () => void
+  /** Fires when the mouse leaves the hover area */
+  onToggleMouseLeave?: () => void
+  /** Force the toggle area to have hover styles whether they are hovered or not */
+  forceToggleHoverStyles?: boolean
 }
 
 export type DragAndDropFeedback = "validTarget" | "invalidTarget" | "dropping"
@@ -87,13 +93,13 @@ const Content = styled("div")<{ noHorizontalPadding?: boolean }>`
   `};
 `
 
-const Title = styled("div")<{ withToggle?: boolean }>`
+const Title = styled("div")<{ withToggle: boolean; forceHoverStyles: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 36px;
-  ${({ theme, withToggle }) => `
+  ${({ theme, withToggle, forceHoverStyles }) => `
     padding: 0px ${theme.space.element}px;
     font-family: ${theme.font.family.main};
     font-weight: ${theme.font.weight.bold};
@@ -104,9 +110,10 @@ const Title = styled("div")<{ withToggle?: boolean }>`
       withToggle
         ? `
     cursor: pointer;
+    background-color: ${forceHoverStyles ? theme.color.background.lightest : "transparent"};
     svg {
       cursor: pointer;
-      color: ${theme.color.separators.default};
+      color: ${forceHoverStyles ? theme.color.separators.dark : theme.color.separators.default};
     }
     :hover {
       background-color: ${theme.color.background.lightest};
@@ -149,12 +156,21 @@ const CardSection: React.SFC<CardSectionProps> = ({
   onActionClick,
   collapsed,
   onToggle,
+  onToggleMouseEnter,
+  onToggleMouseLeave,
+  forceToggleHoverStyles,
   ...props
 }) => (
   <Container {...props}>
     <Overlay overlayType={makeOverlayType(disabled, dragAndDropFeedback)} />
     {title && (
-      <Title withToggle={Boolean(onToggle)} onClick={onToggle}>
+      <Title
+        onMouseEnter={onToggleMouseEnter}
+        onMouseLeave={onToggleMouseLeave}
+        withToggle={Boolean(onToggle)}
+        forceHoverStyles={Boolean(forceToggleHoverStyles)}
+        onClick={onToggle}
+      >
         {title}
         {onToggle && <Icon name={collapsed ? "ChevronDown" : "ChevronUp"} />}
         {actions && <StyledActionMenu items={actions} onClick={onActionClick} />}
