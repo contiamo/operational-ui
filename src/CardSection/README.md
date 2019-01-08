@@ -3,11 +3,24 @@ Card sections are flexibly stacked sub-containers designed to fit within cards. 
 ### Simple usage
 
 ```jsx
-<div style={{ width: 300 }}>
+initialState = {
+  isCollapsed: true,
+}
+;<div style={{ width: 300 }}>
   <Card
     sections={
       <>
-        <CardSection title="Section 1">Content 1</CardSection>
+        <CardSection
+          title="Section 1"
+          collapsed={state.isCollapsed}
+          onToggle={() => {
+            setState(prevState => ({
+              isCollapsed: !prevState.isCollapsed,
+            }))
+          }}
+        >
+          Content 1
+        </CardSection>
         <CardSection title="Section 2">Content2</CardSection>
       </>
     }
@@ -25,6 +38,68 @@ Card sections are flexibly stacked sub-containers designed to fit within cards. 
       <>
         <CardSection title="Section 1">Content 1</CardSection>
         <CardSection title="Section 2">Content 2</CardSection>
+      </>
+    }
+  />
+</div>
+```
+
+### Synchronized stacking
+
+```jsx
+initialState = {
+  isCollapsed: false,
+  isHovered: false,
+}
+;<div style={{ width: 300 }}>
+  <Card
+    stackSections="horizontal"
+    sections={
+      <>
+        <CardSection
+          title="Section 1"
+          collapsed={state.isCollapsed}
+          forceToggleHoverStyles={state.isHovered}
+          onToggleMouseEnter={() => {
+            setState(() => ({
+              isHovered: true,
+            }))
+          }}
+          onToggleMouseLeave={() => {
+            setState(() => ({
+              isHovered: false,
+            }))
+          }}
+          onToggle={() => {
+            setState(prevState => ({
+              isCollapsed: !prevState.isCollapsed,
+            }))
+          }}
+        >
+          Content 1
+        </CardSection>
+        <CardSection
+          title="Section 2"
+          collapsed={state.isCollapsed}
+          forceToggleHoverStyles={state.isHovered}
+          onToggleMouseEnter={() => {
+            setState(() => ({
+              isHovered: true,
+            }))
+          }}
+          onToggleMouseLeave={() => {
+            setState(() => ({
+              isHovered: false,
+            }))
+          }}
+          onToggle={() => {
+            setState(prevState => ({
+              isCollapsed: !prevState.isCollapsed,
+            }))
+          }}
+        >
+          Content 2
+        </CardSection>
       </>
     }
   />

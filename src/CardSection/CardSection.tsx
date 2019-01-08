@@ -2,6 +2,7 @@ import * as React from "react"
 
 import ActionMenu from "../ActionMenu/ActionMenu"
 import { ContextMenuProps } from "../ContextMenu/ContextMenu"
+import Icon from "../Icon/Icon"
 import { DefaultProps, DragProps } from "../types"
 import styled from "../utils/styled"
 
@@ -24,6 +25,14 @@ export interface CardSectionProps extends DefaultProps, DragProps {
   onActionClick?: ContextMenuProps["onClick"]
   /** Is this collapsed? */
   collapsed?: boolean
+  /** Toggle collapsed state */
+  onToggle?: () => void
+  /** Fires when the toggle area is hovered */
+  onToggleMouseEnter?: () => void
+  /** Fires when the mouse leaves the hover area */
+  onToggleMouseLeave?: () => void
+  /** Force the toggle area to have hover styles whether they are hovered or not */
+  forceToggleHoverStyles?: boolean
 }
 
 export type DragAndDropFeedback = "validTarget" | "invalidTarget" | "dropping"
@@ -84,18 +93,37 @@ const Content = styled("div")<{ noHorizontalPadding?: boolean }>`
   `};
 `
 
-const Title = styled("div")`
+const Title = styled("div")<{ withToggle: boolean; forceHoverStyles: boolean }>`
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 36px;
-  ${({ theme }) => `
+  ${({ theme, withToggle, forceHoverStyles }) => `
     padding: 0px ${theme.space.element}px;
     font-family: ${theme.font.family.main};
     font-weight: ${theme.font.weight.bold};
     color: ${theme.color.text.lighter};
     font-size: ${theme.font.size.body};
     border-bottom: 1px solid ${theme.color.separators.default};
+    ${
+      withToggle
+        ? `
+    cursor: pointer;
+    background-color: ${forceHoverStyles ? theme.color.background.lightest : "transparent"};
+    svg {
+      cursor: pointer;
+      color: ${forceHoverStyles ? theme.color.separators.dark : theme.color.separators.default};
+    }
+    :hover {
+      background-color: ${theme.color.background.lightest};
+    }
+    :hover svg {
+      color: ${theme.color.separators.dark};
+    }
+    `
+        : ""
+    }
   `};
 `
 
@@ -127,13 +155,24 @@ const CardSection: React.SFC<CardSectionProps> = ({
   noHorizontalPadding,
   onActionClick,
   collapsed,
+  onToggle,
+  onToggleMouseEnter,
+  onToggleMouseLeave,
+  forceToggleHoverStyles,
   ...props
 }) => (
   <Container {...props}>
     <Overlay overlayType={makeOverlayType(disabled, dragAndDropFeedback)} />
     {title && (
-      <Title>
+      <Title
+        onMouseEnter={onToggleMouseEnter}
+        onMouseLeave={onToggleMouseLeave}
+        withToggle={Boolean(onToggle)}
+        forceHoverStyles={Boolean(forceToggleHoverStyles)}
+        onClick={onToggle}
+      >
         {title}
+        {onToggle && <Icon name={collapsed ? "ChevronDown" : "ChevronUp"} />}
         {actions && <StyledActionMenu items={actions} onClick={onActionClick} />}
       </Title>
     )}
