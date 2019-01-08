@@ -8,12 +8,6 @@ import styled from "../utils/styled"
 export interface BaseProps extends DefaultProps {
   /** Component containing buttons/links/actions assigned to the card */
   action?: React.ReactNode
-  /** Card tabs */
-  tabs?: Tab[]
-  /** Active tab name */
-  activeTabName?: string
-  /** Callback fired on tab change */
-  onTabChange?: (newTabName: string) => void
   /**
    * Fill all the height of the parent.
    */
@@ -82,6 +76,8 @@ export interface CardPropsWithTabs extends BaseProps {
    * This will disable any children to render `tabs[i].component` instead
    */
   tabs: Tab[]
+  /** UI to render left of tabs */
+  leftOfTabs?: React.ReactNode
   /**
    * Active tab name
    *
@@ -92,6 +88,11 @@ export interface CardPropsWithTabs extends BaseProps {
    * Send the active name tab on each tab change (in lowercase).
    */
   onTabChange?: (name: string) => void
+}
+
+// Type guard to check whether we're working with a card with tabs, detecting type correctly afterwards
+const isWithTabs = <T extends {}>(props: CardProps<T>): props is CardPropsWithTabs => {
+  return props.hasOwnProperty("tabs")
 }
 
 export type CardProps<T extends {} = {}> = CardPropsWithChildrenOrData<T> | CardPropsWithSections | CardPropsWithTabs
@@ -125,6 +126,19 @@ const Content = styled("div")<{ fullSize?: boolean }>`
   white-space: pre-wrap;
   word-wrap: break-all;
   hyphens: auto;
+`
+
+const TabsBarContainer = styled("div")`
+  display: flex;
+  align-items: center;
+`
+
+/**
+ * This extra element is necessary to prevent buttons added in the `leftOfTabs` prop to extend
+ * to full height.
+ */
+const TabsBarLeftContainer = styled("div")`
+  margin-right: 32px;
 `
 
 const SectionsContainer = styled("div")<{ stackHorizontal: boolean }>`
@@ -167,9 +181,6 @@ function Card<T extends {}>(props: CardProps<T>) {
     keys,
     children,
     action,
-    tabs,
-    activeTabName,
-    onTabChange,
     fullSize,
     ...rest
   } = props
@@ -183,12 +194,20 @@ function Card<T extends {}>(props: CardProps<T>) {
     )
   }
 
-  if (tabs) {
+  if (isWithTabs(props)) {
     return (
-      <Tabs tabs={tabs} activeTabName={activeTabName} onTabChange={onTabChange}>
+      <Tabs tabs={props.tabs} activeTabName={props.activeTabName} onTabChange={props.onTabChange}>
         {({ tabsBar, activeChildren }) => (
           <Container {...rest}>
-            <CardHeader title={tabsBar} action={action} />
+            <CardHeader
+              title={
+                <TabsBarContainer>
+                  <TabsBarLeftContainer>{props.leftOfTabs}</TabsBarLeftContainer>
+                  {tabsBar}
+                </TabsBarContainer>
+              }
+              action={props.action}
+            />
             <Content fullSize={fullSize}>{activeChildren}</Content>
           </Container>
         )}
