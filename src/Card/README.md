@@ -108,7 +108,7 @@ These features are shown in the example below:
 
 ```jsx
 initialState = {
-  activeTab: "Tab 1",
+  activeTab: "Results",
   isTab1Loading: false,
 }
 ;<Card
@@ -116,33 +116,36 @@ initialState = {
   onTabChange={newTabName => {
     setState(() => ({ activeTab: newTabName }))
   }}
+  leftOfTabs={
+    <Button
+      condensed
+      color="primary"
+      onClick={() => {
+        setState(() => ({
+          isTab1Loading: true,
+        }))
+        setTimeout(() => {
+          setState(() => ({
+            isTab1Loading: false,
+          }))
+        }, 1500)
+      }}
+    >
+      Run query
+    </Button>
+  }
   tabs={[
     {
-      name: "Tab 1",
-      children: (
-        <Button
-          onClick={() => {
-            setState(() => ({
-              isTab1Loading: true,
-            }))
-            setTimeout(() => {
-              setState(() => ({
-                isTab1Loading: false,
-              }))
-            }, 1500)
-          }}
-        >
-          Refresh
-        </Button>
-      ),
+      name: "Results",
+      children: state.isTab1Loading ? "" : "The answer is 42",
       loading: state.isTab1Loading,
       // The icon is replaced by a spinner when loading.
       icon: "Yes",
       iconColor: "success",
     },
     {
-      name: "Tab 2",
-      children: <Button>The other kind of button</Button>,
+      name: "Logs",
+      children: "Here are some logs to the calculation",
     },
   ]}
 />
@@ -160,7 +163,7 @@ initialState = {
 ```jsx
 <div style={{ display: "flex" }}>
   <div style={{ width: 200 }}>
-    <Card>zOMGWTFBBQ!!!11!!1https://github.com/contiamo/operational-ui</Card>
+    <Card>https://github.com/contiamo/operational-ui</Card>
   </div>
   <div style={{ marginLeft: 16, width: 200 }}>
     <Card title="I have a Header">
