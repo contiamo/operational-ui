@@ -18,7 +18,6 @@ const Container = styled("div")<CardColumnProps>(({ theme, contentRight, flexCol
   height: "min-content",
   minWidth: 280 / 2,
   padding: theme.space.element / 2,
-  marginRight: fullWidth ? -theme.space.element : undefined,
   flex: fullWidth ? "100%" : "1 0",
   " img": {
     maxWidth: "100%",
