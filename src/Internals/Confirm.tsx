@@ -46,7 +46,7 @@ export const ControlledModalContent = styled("div")<{ fullSize: boolean }>(
     fullSize
       ? {
           height: `calc(100% - ${actionsBarSize}px)`,
-          overflow: "auto",
+          overflowY: "auto",
         }
       : {},
 )
