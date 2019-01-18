@@ -193,7 +193,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
           <PageContent noPadding={Boolean(noPadding)} areas={areas} fill={fill}>
             {modalConfirmContext => {
               const resolvedChildren = typeof children === "function" ? children(modalConfirmContext) : children
-              return areas === "main" ? <PageArea fill_={fill}>{resolvedChildren}</PageArea> : resolvedChildren
+              return areas === "main" ? <PageArea fill={fill}>{resolvedChildren}</PageArea> : resolvedChildren
             }}
           </PageContent>
         </ViewContainer>

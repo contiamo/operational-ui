@@ -13,16 +13,22 @@ import styled from "../utils/styled"
 export interface PageAreaProps extends DefaultProps {
   /** Name of the area */
   name?: "main" | "side"
-  fill_?: boolean
+  fill?: boolean
 }
 
-export const PageArea = styled("div")<PageAreaProps>(({ name, fill_ }) => ({
+const Container = styled("div")<{ name: PageAreaProps["name"]; fill_: boolean }>(({ name, fill_ }) => ({
   gridArea: name,
   height: fill_ ? "100%" : "auto",
 }))
 
+export const PageArea: React.SFC<PageAreaProps> = ({ name, fill, children }) => (
+  <Container name={name} fill_={Boolean(fill)}>
+    {children}
+  </Container>
+)
+
 PageArea.defaultProps = {
-  fill_: false,
+  fill: false,
 }
 
 export default PageArea
