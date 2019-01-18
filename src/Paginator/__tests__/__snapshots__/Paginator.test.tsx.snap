@@ -11,13 +11,13 @@ exports[`Paginator Component Should initialize properly 1`] = `
     class="css-g700yk-paginator"
   >
     <button
-      class="css-1bcwm3d-button"
+      class="css-tq148m-button"
       type="first"
     >
       first
     </button>
     <button
-      class="css-1dxr53j-button"
+      class="css-pdfiqa-button"
       type="previous"
     >
       <svg
@@ -44,7 +44,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
        of 258
     </div>
     <button
-      class="css-1dxr53j-button"
+      class="css-pdfiqa-button"
       type="next"
     >
       <span>
@@ -63,7 +63,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
       </svg>
     </button>
     <button
-      class="css-1bcwm3d-button"
+      class="css-tq148m-button"
       type="last"
     >
       last
