@@ -98,7 +98,10 @@ const containerStyles: Interpolation<
           },
         }
       : {}),
-    marginRight: theme.space.small,
+
+    "* + &": {
+      marginLeft: theme.space.small,
+    },
   }
 }
 

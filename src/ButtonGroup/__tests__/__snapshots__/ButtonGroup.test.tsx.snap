@@ -11,7 +11,7 @@ exports[`ButtonGroup Component Should initialize properly 1`] = `
     class="css-1o7twmc-buttongroup"
   >
     <button
-      class="css-19mfxrd-button"
+      class="css-11s4t93-button"
     >
       Hello
     </button>

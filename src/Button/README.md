@@ -70,6 +70,26 @@ Using a `to` prop navigates automatically, and render proper anchor tags with hr
 <Button to="/some-url">Button One</Button>
 ```
 
+### Neighbor Behavior
+
+`Button`s placed next to other elements need to space their surroundings correctly, whereas individual `Button`s don't displace anything.
+
+```jsx
+<Card
+  action={
+    <>
+      <Button condensed>I should have a right margin</Button>
+      <Button condensed>I should not have a right margin</Button>
+    </>
+  }
+>
+  <div style={{ border: "1px solid red", width: "fit-content" }}>
+    <Button condensed>I should have a right margin</Button>
+    <Button condensed>I should not have a right margin</Button>
+  </div>
+</Card>
+```
+
 ### Full-width Buttons
 
 ```jsx
