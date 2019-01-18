@@ -13,10 +13,16 @@ import styled from "../utils/styled"
 export interface PageAreaProps extends DefaultProps {
   /** Name of the area */
   name?: "main" | "side"
+  fill_?: boolean
 }
 
-export const PageArea = styled("div")<PageAreaProps>(({ name }) => ({
+export const PageArea = styled("div")<PageAreaProps>(({ name, fill_ }) => ({
   gridArea: name,
+  height: fill_ ? "100%" : "auto",
 }))
+
+PageArea.defaultProps = {
+  fill_: false,
+}
 
 export default PageArea

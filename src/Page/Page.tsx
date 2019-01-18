@@ -23,6 +23,8 @@ export interface BaseProps extends DefaultProps {
   color?: keyof OperationalStyleConstants["color"] | string
   /** Toggles a top progress bar to indicate loading state */
   loading?: boolean
+  /** Render a page without padding */
+  noPadding?: boolean
 }
 
 export interface PropsWithSimplePage extends BaseProps {
@@ -175,7 +177,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   }
 
   private renderPageWithoutTabs() {
-    const { title, actions, actionsPosition, areas, color, children, fill } = this.props
+    const { title, actions, actionsPosition, areas, color, children, fill, noPadding } = this.props
 
     return (
       <>
@@ -188,10 +190,10 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
           </TitleBar>
         )}
         <ViewContainer hasTitle={Boolean(title)}>
-          <PageContent areas={areas} fill={fill}>
+          <PageContent noPadding={Boolean(noPadding)} areas={areas} fill={fill}>
             {modalConfirmContext => {
               const resolvedChildren = typeof children === "function" ? children(modalConfirmContext) : children
-              return areas === "main" ? <PageArea>{resolvedChildren}</PageArea> : resolvedChildren
+              return areas === "main" ? <PageArea fill_={fill}>{resolvedChildren}</PageArea> : resolvedChildren
             }}
           </PageContent>
         </ViewContainer>
