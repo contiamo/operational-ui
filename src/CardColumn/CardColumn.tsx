@@ -18,7 +18,7 @@ export interface BaseCardColumnProps extends DefaultProps {
 }
 
 export interface CardColumnPropsWithTabs extends BaseCardColumnProps {
-  /** Do we have tabs? */
+  /** Tabs for the CardColumn header */
   tabs: Tab[]
   /** What's the currently active tab? */
   activeTabName?: string

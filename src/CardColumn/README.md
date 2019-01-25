@@ -28,53 +28,30 @@ const myEndpointUrl = "https://me.now.sh/my-service"
 initialState = {
   playgroundBodyType: "CURL",
 }
+
+const tab1 = {
+  name: "CURL",
+  children: (
+    <Code syntax="bash">{`curl \\
+    '${myEndpointUrl}' \\
+    -H 'content-type: application/json' \\
+    -H "Authorization: Bearer $SERVICE_ACCOUNT_TOKEN" \\
+    -H 'accept: */*' \\
+    --data-binary '${JSON.stringify(myData, null, 2)}'`}</Code>
+  ),
+}
+
+const tab2 = {
+  name: "JSON",
+  children: <Code syntax="javascript">{JSON.stringify(myData, null, 2)}</Code>,
+}
 ;<Card title="Some Versions of Snippets">
   <CardColumns>
     <CardColumn
       title="Request Body"
       activeTabName={state.playgroundBodyType}
       onTabChange={playgroundBodyType => setState({ playgroundBodyType })}
-      tabs={[
-        {
-          name: "CURL",
-          children: (
-            <Code syntax="bash">{`curl \\
-    '${myEndpointUrl}' \\
-    -H 'content-type: application/json' \\
-    -H "Authorization: Bearer $SERVICE_ACCOUNT_TOKEN" \\
-    -H 'accept: */*' \\
-    --data-binary '${JSON.stringify(myData, null, 2)}'`}</Code>
-          ),
-        },
-        {
-          name: "JSON",
-          children: <Code syntax="javascript">{JSON.stringify(myData, null, 2)}</Code>,
-        },
-        {
-          name: "NODE.JS",
-          children: (
-            <Code syntax="javascript">{`const fetch = require("node-fetch");
-const token = "MY_TOKEN_HERE";
-
-fetch("${myEndpointUrl}", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-    Authorization: \`Bearer \${token}\`,
-    accept: "*/*",
-  },
-  body: JSON.stringify(${JSON.stringify(myData, null, 2)}
-  })
-})
-  .then(response => response.json())
-  .then(result => {
-    // Do something with the result
-    console.log(JSON.stringify(result, null, 2));
-  });
-                      `}</Code>
-          ),
-        },
-      ]}
+      tabs={[tab1, tab2]}
     />
   </CardColumns>
 </Card>
