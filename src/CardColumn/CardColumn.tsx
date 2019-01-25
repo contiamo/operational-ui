@@ -44,7 +44,7 @@ const Container = styled("div")<Pick<CardColumnProps, "contentRight" | "flexColu
     minWidth: 280 / 2,
     padding: noPadding ? 0 : theme.space.element / 2,
     flex: fullWidth ? "1 1 100%" : "1 0",
-    " img": {
+    img: {
       maxWidth: "100%",
     },
     textAlign: contentRight ? "right" : "left",
@@ -83,7 +83,7 @@ const Tab = styled("div")<{ active: boolean }>`
   padding-bottom: ${({ theme }) => theme.space.base}px;
   border-bottom: 2px solid ${({ theme, active }) => (active ? theme.color.text.lighter : "transparent")};
   text-transform: uppercase;
-  margin-bottom: -13px;
+  margin-bottom: ${({ theme }) => -(theme.space.medium + 1)}px;
   cursor: pointer;
 `
 
