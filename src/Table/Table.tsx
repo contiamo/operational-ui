@@ -23,6 +23,8 @@ export interface TableProps<T> extends DefaultProps {
   iconColor?: (dataEntry: T) => string
   /** Remove the header? */
   headless?: boolean
+  /** Fixed Layout for performance */
+  fixedLayout?: boolean
 }
 
 export interface Column<T> {
@@ -30,15 +32,17 @@ export interface Column<T> {
   cell: (dataEntry: T, index: number) => React.ReactNode
   sortOrder?: "asc" | "desc"
   onSortClick?: (order: "asc" | "desc") => void
+  width?: number
 }
 
-const Container = styled("table")(({ theme }) => ({
+const Container = styled("table")<{ fixedLayout: TableProps<any>["fixedLayout"] }>(({ theme, fixedLayout }) => ({
   width: "100%",
   backgroundColor: theme.color.white,
   textAlign: "left",
   borderCollapse: "collapse",
   fontSize: theme.font.size.small,
   fontFamily: theme.font.family.main,
+  tableLayout: fixedLayout ? "fixed" : "initial",
 }))
 
 const Tr = styled("tr")<{ hover?: boolean; clickable?: boolean }>(({ hover, theme, clickable }) => ({
@@ -88,13 +92,17 @@ const ThContent = styled("span")<{ sorted?: boolean }>`
   ${props => props.sorted && `color: ${props.theme.color.text.light};`};
 `
 
-const Td = styled("td")(({ theme }) => ({
+const Td = styled("td")<{ cellWidth?: Column<any>["width"] }>(({ theme, cellWidth }) => ({
   verticalAlign: "middle",
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.default,
+  wordBreak: "break-all",
+  wordWrap: "break-word",
+  hyphens: "auto",
   "&:first-child": {
     paddingLeft: theme.space.small,
   },
+  ...(cellWidth ? { width: cellWidth } : {}),
 }))
 
 const Actions = styled(Td)(({ theme }) => ({
@@ -148,6 +156,7 @@ function Table<T>({
   icon,
   iconColor,
   headless,
+  fixedLayout,
   ...props
 }: TableProps<T>) {
   const standardizedColumns: Array<Column<T>> = columns.map(column => {
@@ -164,7 +173,7 @@ function Table<T>({
   const hasIcons: boolean = Boolean(data[0]) && Boolean(icon) && Boolean(icon!(data[0]))
 
   return (
-    <Container {...props}>
+    <Container fixedLayout={fixedLayout} {...props}>
       {!headless && (
         <Thead>
           <Tr>
@@ -234,7 +243,9 @@ function Table<T>({
                   </IconCell>
                 )}
                 {standardizedColumns.map((column, columnIndex) => (
-                  <Td key={columnIndex}>{column.cell(dataEntry, dataEntryIndex)}</Td>
+                  <Td cellWidth={column.width} key={columnIndex}>
+                    {column.cell(dataEntry, dataEntryIndex)}
+                  </Td>
                 ))}
                 {rowAction}
                 {onRowClick &&
