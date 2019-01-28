@@ -31,7 +31,7 @@ const TabsBar = styled("div")<{ condensed?: boolean }>(({ theme, condensed }) =>
   alignItems: "flex-end",
   height: condensed ? theme.titleHeight : tabsBarHeight,
   color: "inherit",
-  ...(condensed ? { paddingLeft: 30 } : {}),
+  ...(condensed ? { paddingLeft: theme.space.element } : {}),
 }))
 
 const Tab = styled("div")<{ active?: boolean; condensed?: boolean }>(({ theme, active }) => ({
