@@ -12,6 +12,7 @@ export interface BaseProps extends DefaultProps {
    * Fill all the height of the parent.
    */
   fullSize?: boolean
+  onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
 }
 
 export interface CardPropsWithChildrenOrData<T extends {} = {}> extends BaseProps {
