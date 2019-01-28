@@ -5,8 +5,6 @@ import { DefaultProps } from "../types"
 import { darken } from "../utils"
 import styled from "../utils/styled"
 
-const width = 144
-
 export interface ActionMenuProps extends DefaultProps {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
   onClick?: ContextMenuProps["onClick"]
@@ -14,44 +12,56 @@ export interface ActionMenuProps extends DefaultProps {
   title?: string
   /** Actions to display in dropdown */
   items: ContextMenuProps["items"]
+  /** Should the title always be visible? */
+  stickyTitle?: boolean
 }
 
 const Container = styled("div")(({ theme }) => ({
-  width,
   height: 35,
   /**
    * `textAlign` is set explicitly for when a parent sets a text-align to right-position this container,
    * leaving its content left-aligned.
    */
-  textAlign: "left",
+  textAlign: "right",
   padding: `0 ${theme.space.content}px`,
   backgroundColor: theme.color.white,
-  color: theme.color.primary,
   fontWeight: theme.font.weight.medium,
   borderRadius: theme.borderRadius,
   display: "flex",
   alignItems: "center",
-  justifyContent: "space-between",
+  justifyContent: "flex-end",
   userSelect: "none",
   boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
+  cursor: "pointer",
   "&:hover": {
     backgroundColor: darken(theme.color.white, 5),
   },
 }))
 
-const TitleContainer = styled("p")({
-  width: 90,
+const TitleContainer = styled("p")(({ theme }) => ({
+  minWidth: 90,
+  width: "100%",
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
-})
+  justifySelf: "flex-start",
+  color: theme.color.primary,
+  textAlign: "left",
+}))
 
-const ActionMenu: React.SFC<ActionMenuProps> = props => (
-  <ContextMenu {...props} items={props.items} width={width} condensed embedChildrenInMenu>
+const ClickableIcon = styled(Icon)`
+  cursor: pointer;
+`
+
+const ActionMenu: React.SFC<ActionMenuProps> = ({ stickyTitle, items, title, ...props }) => (
+  <ContextMenu align="right" {...props} items={items} condensed embedChildrenInMenu>
     {isOpen => (
       <Container>
-        <TitleContainer>{props.title}</TitleContainer>
-        <Icon name={isOpen ? "ChevronUp" : "Menu"} />
+        {(isOpen || stickyTitle) && <TitleContainer>{title}</TitleContainer>}
+        <ClickableIcon
+          color={isOpen || stickyTitle ? "primary" : "color.text.lighter"}
+          name={isOpen ? "ChevronUp" : "Menu"}
+        />
       </Container>
     )}
   </ContextMenu>
