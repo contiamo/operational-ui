@@ -5,7 +5,6 @@ import { readableTextColor } from "../utils"
 import styled from "../utils/styled"
 
 export interface SidenavProps extends DefaultProps {
-  children: React.ReactElement<any> | Array<React.ReactElement<any> | boolean>
   /** Show the sidebar in compact mode */
   compact?: boolean
 }
