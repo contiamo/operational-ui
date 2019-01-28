@@ -8,7 +8,7 @@ exports[`Table Component Should render 1`] = `
     class="css-ar73w8-Messages"
   />
   <table
-    class="css-39fsjl"
+    class="css-je0z3e"
   >
     <thead
       class="css-x4ot8q"
@@ -22,7 +22,7 @@ exports[`Table Component Should render 1`] = `
         class="css-16kb41"
       >
         <td
-          class="css-1lbz3s3"
+          class="css-1umysmp"
           colspan="0"
         >
           There are no records available
