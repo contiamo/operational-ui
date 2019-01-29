@@ -11,6 +11,18 @@ You can render a simple use-case of the table by specifying a list of records an
 />
 ```
 
+### With Fixed Layout
+
+Tables perform better with a forced fixed layout, since the browser doesn't have to recalculate positions depending on the contents of the table. Here's what the same table looks like with a fixed layout.
+
+```js
+<Table
+  fixedLayout
+  data={[{ name: "Max", profession: "Carpenter" }, { name: "Moritz", profession: "Baker" }]}
+  columns={["name", "profession"]}
+/>
+```
+
 ### Simple Usage without Header
 
 ```js
@@ -72,6 +84,63 @@ const data = [
     { heading: "Name", cell: dataEntry => dataEntry.name },
     { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
     { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
+    { heading: "Collaborators", cell: dataEntry => <AvatarGroup avatars={dataEntry.collaborators} /> },
+  ]}
+  onRowClick={(dataEntry, i) => console.log({ dataEntry, i })}
+/>
+```
+
+### With custom widths per column
+
+We can customize the look of the table by specifying a `width` property on certain columns.
+
+```jsx
+const data = [
+  {
+    name: "Mega Deal Dev",
+    lastUpdated: "2018-06-06",
+    tags: ["agent-view", "production"],
+    collaborators: [
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+    ],
+  },
+  {
+    name: "Mega Deal Dev",
+    lastUpdated: "2018-06-06",
+    tags: ["agent-view", "production"],
+    collaborators: [
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+    ],
+  },
+  {
+    name: "Toy Bundle",
+    lastUpdated: "2018-06-06",
+    tags: ["agent-view", "production"],
+    collaborators: [
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+      { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+    ],
+  },
+]
+;<Table
+  data={data}
+  columns={[
+    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+    { heading: "Name", width: 600, cell: dataEntry => dataEntry.name },
+    { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
+    {
+      heading: "Tags",
+      width: 100,
+      cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>),
+    },
     { heading: "Collaborators", cell: dataEntry => <AvatarGroup avatars={dataEntry.collaborators} /> },
   ]}
   onRowClick={(dataEntry, i) => console.log({ dataEntry, i })}
