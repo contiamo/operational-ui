@@ -83,6 +83,7 @@ const ContentContainer = styled("div")<Partial<Props>>`
   line-height: ${({ theme }) => theme.font.lineHeight};
   padding: ${({ theme }) => theme.space.content}px 0;
   width: calc(100% - ${({ theme }) => theme.space.content}px);
+  font-weight: ${({ theme }) => theme.font.weight.medium};
 `
 
 const ContextMenuIcon = styled(Icon)<{ iconlocation_: Props["iconLocation"] }>`
