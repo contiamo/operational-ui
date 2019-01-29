@@ -209,7 +209,7 @@ function Table<T>({
                   }}
                 >
                   {Array.isArray(dataEntryRowActions) ? (
-                    <ActionMenu items={dataEntryRowActions as ActionMenuProps["items"]} />
+                    <ActionMenu stickyTitle items={dataEntryRowActions as ActionMenuProps["items"]} />
                   ) : (
                     dataEntryRowActions
                   )}
