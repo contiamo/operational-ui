@@ -151,6 +151,23 @@ const Tab = props => (
 />
 ```
 
+### With tabs and no title
+
+```jsx
+const Tab = props => (
+  <PageContent>
+    <Card title={`${props.title} Tab`} />
+  </PageContent>
+)
+;<Page
+  tabs={[
+    { name: "overview", children: <Tab title="Overview" />, icon: "Search" },
+    { name: "jobs", children: <Tab title="Jobs" /> },
+    { name: "functions", children: <Tab title="Functions" /> },
+  ]}
+/>
+```
+
 ### With White Tabs
 
 ```jsx

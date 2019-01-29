@@ -157,7 +157,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
       >
         {({ tabsBar, activeChildren }) => (
           <>
-            {title && (
+            {title ? (
               <TitleBar color={color}>
                 <TitleContainer>
                   <Title>{title}</Title>
@@ -166,8 +166,10 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
                 </TitleContainer>
                 {!condensedTitle && tabsBar}
               </TitleBar>
+            ) : (
+              <TitleBar color={color}>{tabsBar}</TitleBar>
             )}
-            <ViewContainer isInTab isTitleCondensed={condensedTitle} hasTitle={Boolean(title)}>
+            <ViewContainer isInTab isTitleCondensed={condensedTitle} hasTitle>
               {activeChildren}
             </ViewContainer>
           </>
