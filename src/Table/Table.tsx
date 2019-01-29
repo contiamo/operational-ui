@@ -96,13 +96,17 @@ const Td = styled("td")<{ cellWidth?: Column<any>["width"] }>(({ theme, cellWidt
   verticalAlign: "middle",
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.default,
-  wordBreak: "break-all",
-  wordWrap: "break-word",
   hyphens: "auto",
   "&:first-child": {
     paddingLeft: theme.space.small,
   },
-  ...(cellWidth ? { width: cellWidth } : {}),
+  ...(cellWidth
+    ? {
+        width: cellWidth,
+        wordBreak: "break-all",
+        wordWrap: "break-word",
+      }
+    : {}),
 }))
 
 const Actions = styled(Td)(({ theme }) => ({
