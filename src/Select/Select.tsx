@@ -32,6 +32,10 @@ export interface SelectProps extends DefaultProps {
   value: null | Value | Value[]
   /** Make the list filterable */
   filterable?: boolean
+  /**
+   * Limit the number of options displayed
+   */
+  maxOptions?: number
   /** Disable the component */
   disabled?: boolean
   /** Callback trigger on any changes */
@@ -232,7 +236,7 @@ class Select extends React.Component<SelectProps, State> {
   }
 
   public render() {
-    const { color, disabled, naked, value, options, filterable, label, onChange, ...props } = this.props
+    const { color, disabled, naked, value, options, filterable, label, onChange, maxOptions, ...props } = this.props
     const { open, search } = this.state
     const selectWithoutLabel = (
       <Container
@@ -265,20 +269,20 @@ class Select extends React.Component<SelectProps, State> {
                 />
               )}
               <OptionsList>
-                {options.map(
-                  (option: IOption) =>
-                    (option.label || String(option.value)).match(RegExp(search, "i")) && (
-                      <SelectOption
-                        key={String(option.value)}
-                        onClick={() => {
-                          this.selectOption(option)
-                        }}
-                        selected={this.isOptionSelected(option)}
-                      >
-                        {option.label || String(option.value)}
-                      </SelectOption>
-                    ),
-                )}
+                {options
+                  .filter(option => (option.label || String(option.value)).match(RegExp(search, "i")))
+                  .map(option => (
+                    <SelectOption
+                      key={String(option.value)}
+                      onClick={() => {
+                        this.selectOption(option)
+                      }}
+                      selected={this.isOptionSelected(option)}
+                    >
+                      {option.label || String(option.value)}
+                    </SelectOption>
+                  ))
+                  .slice(0, maxOptions)}
               </OptionsList>
             </Options>
           )}
