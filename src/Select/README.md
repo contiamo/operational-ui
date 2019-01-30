@@ -94,7 +94,7 @@ class ComponentWithSelect extends React.Component {
 
 If you have a huge list from the backend, you can limit the number of options displayed to avoid rendering performance issues.
 
-Just add `maxOptions=`, and it's done. Please note that without the `filterable` options enable, some options can't be select.
+Just add `maxOptions=` and it's done. Please note that without the `filterable` option enabled, some options can't be selected.
 
 ```js
 const options = [
