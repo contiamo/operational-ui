@@ -256,7 +256,7 @@ class Select extends React.Component<SelectProps, State> {
         <DisplayValue isPlaceholder={Array.isArray(value) ? value.length === 0 : !value}>
           {this.getDisplayValue()}
         </DisplayValue>
-        {options.length &&
+        {Boolean(options.length) &&
           open && (
             <Options>
               {filterable && (
