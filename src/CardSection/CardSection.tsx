@@ -104,7 +104,7 @@ const Title = styled("div")<{ withToggle: boolean; forceHoverStyles: boolean }>`
     font-family: ${theme.font.family.main};
     font-weight: ${theme.font.weight.medium};
     color: ${theme.color.text.lighter};
-    font-size: 13px;
+    font-size: ${theme.font.size.small}px;
     border-bottom: 1px solid ${theme.color.separators.default};
     ${
       withToggle
