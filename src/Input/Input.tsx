@@ -69,7 +69,7 @@ const Input: React.SFC<InputProps> = ({ fullWidth, label, labelId, hint, onToggl
 
   if (label) {
     return (
-      <Label fullWidth={fullWidth} htmlFor={forAttributeId} left>
+      <Label fullWidth={fullWidth} htmlFor={forAttributeId}>
         <LabelText>{label}</LabelText>
         {(hint || onToggle) && (
           <FormFieldControls>
