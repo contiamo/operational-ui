@@ -24,6 +24,7 @@ export interface State {
 }
 
 const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
+  line-height: 1;
   height: ${props => props.theme.topbarHeight}px;
   display: flex;
   align-items: center;
@@ -60,7 +61,7 @@ const TopbarSelectValueSpan = styled("span")<{ active?: boolean }>`
 const TopbarSelectLabel = styled("p")`
   margin: 0px ${props => props.theme.space.base}px 0px 0px;
   font-size: ${props => props.theme.font.size.fineprint}px;
-  color: ${props => props.theme.color.text.lighter};
+  color: ${props => props.theme.color.text.lightest};
   font-weight: ${props => props.theme.font.weight.medium};
 `
 
@@ -124,7 +125,7 @@ class TopbarSelect extends React.Component<TopbarSelectProps, Readonly<State>> {
             <TopbarSelectLabel>{label}</TopbarSelectLabel>
             <TopbarSelectValue>
               <TopbarSelectValueSpan active={Boolean(selected)}>{selected}</TopbarSelectValueSpan>
-              <Icon name={isActive ? "ChevronUp" : "ChevronDown"} size={12} />
+              <Icon color="color.text.lightest" name={isActive ? "CaretUp" : "CaretDown"} size={12} />
             </TopbarSelectValue>
           </TopbarSelectContainer>
         )}

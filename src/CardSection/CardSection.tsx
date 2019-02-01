@@ -89,7 +89,7 @@ const Overlay = styled("div")<{ overlayType: OverlayType }>`
 const Content = styled("div")<{ noHorizontalPadding?: boolean }>`
   display: block;
   ${({ theme, noHorizontalPadding }) => `
-    padding: ${noHorizontalPadding ? `${theme.space.element}px 0` : theme.space.element}px;
+    padding: ${noHorizontalPadding ? `${theme.space.element}px 0` : theme.space.medium}px;
   `};
 `
 
@@ -100,11 +100,11 @@ const Title = styled("div")<{ withToggle: boolean; forceHoverStyles: boolean }>`
   justify-content: space-between;
   height: 36px;
   ${({ theme, withToggle, forceHoverStyles }) => `
-    padding: 0px ${theme.space.element}px;
+    padding: 0px ${theme.space.medium}px;
     font-family: ${theme.font.family.main};
-    font-weight: ${theme.font.weight.bold};
+    font-weight: ${theme.font.weight.medium};
     color: ${theme.color.text.lighter};
-    font-size: ${theme.font.size.body};
+    font-size: ${theme.font.size.small}px;
     border-bottom: 1px solid ${theme.color.separators.default};
     ${
       withToggle
@@ -116,7 +116,7 @@ const Title = styled("div")<{ withToggle: boolean; forceHoverStyles: boolean }>`
       color: ${forceHoverStyles ? theme.color.separators.dark : theme.color.separators.default};
     }
     :hover {
-      background-color: ${theme.color.background.lightest};
+      background-color: rgba(0, 0, 0, 0.05);
     }
     :hover svg {
       color: ${theme.color.separators.dark};
@@ -172,7 +172,7 @@ const CardSection: React.SFC<CardSectionProps> = ({
         onClick={onToggle}
       >
         {title}
-        {onToggle && <Icon name={collapsed ? "ChevronDown" : "ChevronUp"} />}
+        {onToggle && <Icon size={14} name={collapsed ? "ChevronDown" : "ChevronUp"} />}
         {actions && <StyledActionMenu items={actions} onClick={onActionClick} />}
       </Title>
     )}

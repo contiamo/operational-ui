@@ -6,7 +6,7 @@ export interface TopbarButtonProps {
   /** The name of the button icon */
   icon?: IconName
   /** Button contents, typically as a string */
-  children: string
+  children: React.ReactNode
   /** Disabled flag, deactivating click events and fading out the button */
   disabled?: boolean
   /** Click handler */

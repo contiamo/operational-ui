@@ -22,6 +22,8 @@ export interface ButtonProps extends DefaultProps {
   icon?: IconName
   /** Icon position */
   iconPosition?: "start" | "end"
+  /** Icon size */
+  iconSize?: number
   /** Icon color */
   iconColor?: string
   /** Loading flag - if enabled, the text hides and a spinner appears in the center */
@@ -116,9 +118,19 @@ const ButtonSpinner = styled(Spinner)<{ containerColor?: ButtonProps["color"] }>
   color: makeColors(theme, containerColor || "").foreground,
 }))
 
-const Button: React.SFC<ButtonProps> = ({ to, children, icon, iconPosition, iconColor, color, onClick, ...props }) => {
+const Button: React.SFC<ButtonProps> = ({
+  to,
+  children,
+  icon,
+  iconPosition,
+  iconSize = 18,
+  iconColor,
+  color,
+  onClick,
+  ...props
+}) => {
   const ContainerComponent = to ? ContainerLink : Container
-  const iconProps = { name: icon!, size: 18, color: iconColor }
+  const iconProps = { name: icon!, size: iconSize, color: iconColor }
 
   return (
     <OperationalContext>
