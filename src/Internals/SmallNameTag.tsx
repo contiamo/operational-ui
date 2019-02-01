@@ -36,10 +36,10 @@ const Container = styled("div")<{
   return {
     backgroundColor,
     color: textColor,
-    fontSize: theme.font.size.fineprint,
+    fontSize: 11,
     fontWeight: theme.font.weight.bold,
-    width: 18,
-    height: 18,
+    width: 14,
+    height: 14,
     flexShrink: 0,
     borderRadius: theme.borderRadius,
     display: "inline-flex",

@@ -28,11 +28,13 @@ const Container = styled("div")`
 `
 
 const TreeContainer = styled("div")`
-  margin: 2px 0;
+  & + & {
+    margin-top: ${({ theme }) => theme.space.base}px;
+  }
 `
 
 const TreeChildren = styled("div")`
-  margin-left: 14px;
+  margin-left: ${({ theme }) => theme.space.content}px;
 `
 
 const TreeItem = styled("div")<{
@@ -42,26 +44,24 @@ const TreeItem = styled("div")<{
   isDisabled: boolean
   isRemovable: boolean
   isReorderDropTarget: boolean
+  isFirst: boolean
 }>`
   display: flex;
-  min-height: 24px;
   align-items: center;
-  margin-bottom: 2px;
+  cursor: pointer;
   :last-child {
     margin-bottom: 0px;
   }
-  ${({ theme, hasChildren, hasTag, isTopLevel, isDisabled, isReorderDropTarget }) => `
-    padding: ${theme.space.base / 2}px;
-    border-top: 2px solid;
-    border-color: ${isReorderDropTarget ? theme.color.primary : "transparent"};
-    font-size: ${hasTag ? theme.font.size.fineprint : theme.font.size.small}px;
-    font-weight: ${hasTag || isTopLevel ? theme.font.weight.bold : theme.font.weight.regular};
-    font-family: ${hasTag ? theme.font.family.code : theme.font.family.main};
+  ${({ theme, hasChildren, hasTag, isFirst, isTopLevel, isDisabled, isReorderDropTarget }) => `
+    box-shadow: ${isReorderDropTarget ? `0 -2px 0 2px ${theme.color.primary}` : "none"};
+    font-size: ${theme.font.size.fineprint}px;
+    font-weight: ${isTopLevel && !hasTag ? theme.font.weight.bold : theme.font.weight.medium};
     color: ${theme.color.text.dark};
+    margin-top: ${!isFirst && isTopLevel && hasChildren ? 8 : 0}px; 
+    margin-bottom: ${hasChildren ? 4 : 0}px;
     opacity: ${isDisabled ? "0.4" : "1.0"};
-    cursor: pointer;
     :hover {
-      background-color: ${theme.color.background.lighter};
+      background-color: rgba(0, 0, 0, 0.05);
     }
     & svg {
       color: ${theme.color.text.lightest};
@@ -159,6 +159,7 @@ const TreeRecursive: React.SFC<
   {
     tree: ITree
     path: number[]
+    isFirst: boolean
     recursiveTogglePath: (path: number[]) => void
     openPaths: number[][]
     maxDepth: number
@@ -169,6 +170,7 @@ const TreeRecursive: React.SFC<
   recursiveTogglePath,
   openPaths,
   maxDepth,
+  isFirst,
   onReorder,
   reorderSource,
   reorderTarget,
@@ -188,6 +190,7 @@ const TreeRecursive: React.SFC<
         isDisabled={Boolean(tree.disabled)}
         isRemovable={Boolean(onRemove)}
         isReorderDropTarget={false}
+        isFirst={isFirst}
         {...reorderDndProps({
           onReorder,
           reorderSource,
@@ -202,22 +205,22 @@ const TreeRecursive: React.SFC<
           recursiveTogglePath(path)
         }}
       >
-        {maxDepth > 1 && (
-          <IconButton hidden_={childNodes.length === 0}>
-            <Icon name={isOpen ? "ChevronDown" : "Add"} />
-          </IconButton>
-        )}
+        {maxDepth > 1 &&
+          childNodes.length !== 0 && (
+            <IconButton>
+              <Icon size={12} name={isOpen ? "ChevronDown" : "Add"} />
+            </IconButton>
+          )}
         {tree.tag && <SmallNameTag color={tagColor}>{tree.tag}</SmallNameTag>}
         <TreeLabel>{tree.label}</TreeLabel>
         {onRemove && (
           <IconButton
-            hoverEffect
             onClick={ev => {
               ev.stopPropagation()
               onRemove()
             }}
           >
-            <Icon name="No" />
+            <Icon size={12} name="No" />
           </IconButton>
         )}
       </TreeItem>
@@ -238,6 +241,7 @@ const TreeRecursive: React.SFC<
                 reorderTarget={reorderTarget}
                 setReorderSource={setReorderSource}
                 setReorderTarget={setReorderTarget}
+                isFirst={index === 0}
               />
             ))}
             {onReorder && (
@@ -304,6 +308,7 @@ class Tree extends React.Component<TreeProps, State> {
             key={index}
             tree={tree}
             path={[index]}
+            isFirst={index === 0}
             recursiveTogglePath={this.togglePath}
             openPaths={this.state.openPaths}
             maxDepth={getMaxDepth(trees)}
