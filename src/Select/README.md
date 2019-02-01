@@ -16,33 +16,21 @@ const options = [
   { label: "Option 8", value: "eight" },
 ]
 
-class ComponentWithSelect extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: "one",
-    }
-  }
-
-  render() {
-    return (
-      <Select
-        label="Select label"
-        value={this.state.value}
-        options={options}
-        filterable
-        placeholder="Choose an option"
-        onChange={newValue => {
-          this.setState(prevState => ({
-            value: newValue,
-          }))
-        }}
-      />
-    )
-  }
+initialState = {
+  value: "one",
 }
-
-;<ComponentWithSelect />
+;<Select
+  label="Select label"
+  value={state.value}
+  options={options}
+  filterable
+  placeholder="Choose an option"
+  onChange={newValue =>
+    setState({
+      value: newValue,
+    })
+  }
+/>
 ```
 
 ### Usage as multiselect
@@ -61,40 +49,24 @@ const options = [
   { label: "Option 8", value: "eight" },
 ]
 
-class ComponentWithSelect extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: [],
-    }
+initialState = { value: [] }
+;<Select
+  label="Select label"
+  value={state.value}
+  options={options}
+  filterable
+  placeholder="Choose an option"
+  onChange={newValue =>
+    setState({
+      value: newValue,
+    })
   }
-
-  render() {
-    return (
-      <Select
-        label="Select label"
-        value={this.state.value}
-        options={options}
-        filterable
-        placeholder="Choose an option"
-        onChange={newValue => {
-          this.setState(prevState => ({
-            value: newValue,
-          }))
-        }}
-      />
-    )
-  }
-}
-
-;<ComponentWithSelect />
+/>
 ```
 
-### With `maxOptions` param
+### With maxOptions
 
-If you have a huge list from a backend, you can limit the number of options displayed to avoid rendering performance issues.
-
-Just add `maxOptions=` and it's done. Please note that without the `filterable` option enabled, some options can't be selected.
+If you have a huge list from a backend, you can limit the number of options displayed to avoid rendering performance issues. Just add `maxOptions` and it's done. Please note that without the `filterable` option enabled, some options can't be selected.
 
 ```js
 const options = [
@@ -108,34 +80,22 @@ const options = [
   { label: "Option 8", value: "eight" },
 ]
 
-class ComponentWithSelect extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: "one",
-    }
-  }
-
-  render() {
-    return (
-      <Select
-        label="Select label"
-        value={this.state.value}
-        options={options}
-        filterable
-        maxOptions={2}
-        placeholder="Choose an option"
-        onChange={newValue => {
-          this.setState(prevState => ({
-            value: newValue,
-          }))
-        }}
-      />
-    )
-  }
+initialState = {
+  value: "one",
 }
-
-;<ComponentWithSelect />
+;<Select
+  label="Select label"
+  value={state.value}
+  options={options}
+  filterable
+  maxOptions={2}
+  placeholder="Choose an option"
+  onChange={newValue => {
+    setState({
+      value: newValue,
+    })
+  }}
+/>
 ```
 
 ### Return Value

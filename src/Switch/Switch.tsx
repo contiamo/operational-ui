@@ -7,6 +7,10 @@ export interface SwitchProps extends DefaultProps {
   on: boolean
   /** A change handler. Passes the new `on` boolean */
   onChange?: (on: boolean) => void
+  /** left value */
+  left?: string
+  /** right value */
+  right?: string
 }
 
 const width: number = 28
@@ -14,14 +18,25 @@ const height: number = 16
 const railHeight: number = 16
 
 const Container = styled("div")({
-  width,
-  height,
-  label: "switch",
-  position: "relative",
-  borderRadius: height / 2,
-  overflow: "hidden",
-  cursor: "pointer",
+  display: "inline-flex",
+  alignItems: "center",
 })
+
+const RailContainer = styled("div")<{ left?: string; right?: string }>(
+  {
+    width,
+    height,
+    label: "switch",
+    position: "relative",
+    borderRadius: height / 2,
+    overflow: "hidden",
+    cursor: "pointer",
+  },
+  ({ theme, left, right }) => ({
+    marginLeft: left ? theme.space.base : 0,
+    marginRight: right ? theme.space.base : 0,
+  }),
+)
 
 const Button = styled("div")<SwitchProps>(
   {
@@ -71,17 +86,22 @@ const Rail = styled("div")<SwitchProps>(
   }),
 )
 
-const Switch: React.SFC<SwitchProps> = ({ on, onChange, ...props }) => (
-  <Container
-    {...props}
-    onClick={() => {
-      if (onChange) {
-        onChange(!on)
-      }
-    }}
-  >
-    <Button on={on} />
-    <Rail on={on} />
+const Switch: React.SFC<SwitchProps> = ({ on, onChange, left, right, ...props }) => (
+  <Container {...props}>
+    {left}
+    <RailContainer
+      left={left}
+      right={right}
+      onClick={() => {
+        if (onChange) {
+          onChange(!on)
+        }
+      }}
+    >
+      <Button on={on} />
+      <Rail on={on} />
+    </RailContainer>
+    {right}
   </Container>
 )
 

@@ -8,7 +8,7 @@ exports[`Select Should render correctly 1`] = `
     class="css-ar73w8-Messages"
   />
   <div
-    class="css-ttbq55-select"
+    class="css-1d7wg82-select"
     placeholder="Select me"
     role="listbox"
     tabindex="-2"

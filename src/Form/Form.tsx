@@ -14,6 +14,11 @@ const Container = styled("form")(({ theme }) => ({
   "> :not(:last-child) > *": {
     marginBottom: theme.space.small,
   },
+
+  // Space between siblings inside children inside groups
+  "> * > *:not(:last-child)": {
+    marginRight: theme.space.small,
+  },
 }))
 
 const Form: React.SFC<React.FormHTMLAttributes<{}>> = props => (

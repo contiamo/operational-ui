@@ -136,6 +136,7 @@ const font = {
     main: `"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif`,
     code: "Menlo, monospace",
   },
+  /** 1.4 */
   lineHeight: 1.4,
   size: {
     /** 16px */
