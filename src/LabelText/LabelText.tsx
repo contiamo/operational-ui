@@ -8,6 +8,7 @@ export const LabelText = styled("label")(({ theme }) => ({
   fontWeight: theme.font.weight.bold,
   color: theme.color.text.lightest,
   height: labelTextHeight,
+  lineHeight: theme.font.lineHeight,
 }))
 
 export const labelTextHeight = 15
