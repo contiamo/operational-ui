@@ -89,7 +89,7 @@ const Overlay = styled("div")<{ overlayType: OverlayType }>`
 const Content = styled("div")<{ noHorizontalPadding?: boolean }>`
   display: block;
   ${({ theme, noHorizontalPadding }) => `
-    padding: ${noHorizontalPadding ? `${theme.space.element}px 0` : theme.space.small}px;
+    padding: ${noHorizontalPadding ? `${theme.space.element}px 0` : theme.space.medium}px;
   `};
 `
 
@@ -100,7 +100,7 @@ const Title = styled("div")<{ withToggle: boolean; forceHoverStyles: boolean }>`
   justify-content: space-between;
   height: 36px;
   ${({ theme, withToggle, forceHoverStyles }) => `
-    padding: 0px ${theme.space.small}px;
+    padding: 0px ${theme.space.medium}px;
     font-family: ${theme.font.family.main};
     font-weight: ${theme.font.weight.medium};
     color: ${theme.color.text.lighter};
@@ -116,7 +116,7 @@ const Title = styled("div")<{ withToggle: boolean; forceHoverStyles: boolean }>`
       color: ${forceHoverStyles ? theme.color.separators.dark : theme.color.separators.default};
     }
     :hover {
-      background-color: ${theme.color.background.lightest};
+      background-color: rgba(0, 0, 0, 0.05);
     }
     :hover svg {
       color: ${theme.color.separators.dark};
