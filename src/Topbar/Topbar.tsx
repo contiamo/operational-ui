@@ -17,7 +17,7 @@ const TopbarContainer = styled("div")`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 ${props => props.theme.space.element}px;
+  padding: 0;
   box-shadow: ${props => props.theme.shadows.card};
 `
 
