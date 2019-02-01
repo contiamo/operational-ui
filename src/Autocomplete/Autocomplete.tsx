@@ -65,8 +65,9 @@ export interface AutocompleteProps<TValue> {
 
 const Container = styled(ContextMenu)<{ fullWidth: boolean }>`
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "fit-content")};
-  display: flex;
+  display: inline-block;
   align-items: center;
+  z-index: ${({ theme }) => theme.zIndex.selectOptions - 1}; /* always be under a select's options */
 `
 
 const initialState = { isContextMenuOpen: false }
