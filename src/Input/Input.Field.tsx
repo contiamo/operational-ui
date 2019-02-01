@@ -17,8 +17,7 @@ const Container = styled("div")<{
   align-items: center;
   justify-content: center;
   max-width: 100%;
-  ${({ fullWidth, withLabel, theme }) => `
-      margin-right: ${withLabel ? 0 : theme.space.small}px;
+  ${({ fullWidth, withLabel }) => `
       display: ${withLabel ? "flex" : "inline-flex"};
       width: 100%;
       max-width: ${fullWidth ? "none" : `${width}px`};
