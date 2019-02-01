@@ -67,6 +67,23 @@ const { name, gitUrl, branch, isCreating, isValid } = {
         })
       }}
     />
+    <Autocomplete
+      value={state.search}
+      loading={state.loading}
+      results={state.data}
+      label="Find a Good Boye 🐶"
+      hint={`Try "Husky"`}
+      onResultClick={result => {
+        fetch(result.value)
+          .then(response => response.json())
+          .then(dogImage =>
+            setState({
+              search: undefined,
+              chosenDog: { ...result, value: dogImage.message[0] },
+            }),
+          )
+      }}
+    />
   </div>
   <div>
     <Input label="Branch" value={branch} />
