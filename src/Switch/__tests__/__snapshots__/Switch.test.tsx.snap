@@ -8,14 +8,18 @@ exports[`Switch Should render 1`] = `
     class="css-ar73w8-Messages"
   />
   <div
-    class="css-1bzrg5j-switch"
+    class="css-18biwo"
   >
     <div
-      class="css-ioiph6"
-    />
-    <div
-      class="css-lobscw"
-    />
+      class="css-1ra8aav-switch"
+    >
+      <div
+        class="css-ioiph6"
+      />
+      <div
+        class="css-lobscw"
+      />
+    </div>
   </div>
 </div>
 `;
