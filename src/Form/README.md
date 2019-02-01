@@ -127,7 +127,7 @@ updateSearch = text => {
       .then(results =>
         setState({
           data: results.message
-            .filter(name => ~name.indexOf(text))
+            .filter(name => name.includes(text))
             .map(breed => ({ label: breed, value: `https://dog.ceo/api/breed/${breed}/images` })),
           loading: false,
         }),
