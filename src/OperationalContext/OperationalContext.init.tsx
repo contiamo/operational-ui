@@ -43,10 +43,7 @@ const OperationalContext = React.createContext(defaultContext)
 
 const { Provider, Consumer } = OperationalContext
 
-export const useOperationalContext = () => {
-  const context = React.useContext(OperationalContext)
-  return context
-}
+export const useOperationalContext = () => React.useContext(OperationalContext)
 
 export default Consumer
 
