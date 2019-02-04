@@ -5,6 +5,7 @@ import {
   default as OperationalContextOriginal,
   IMessage,
   MessageType,
+  useOperationalContext,
   WindowSize,
 } from "./OperationalContext.init"
 
@@ -22,4 +23,4 @@ const OperationalContext: React.SFC<Props> = props => (
 
 export default OperationalContext
 
-export { Context, WindowSize, IMessage, MessageType }
+export { Context, WindowSize, IMessage, MessageType, useOperationalContext }
