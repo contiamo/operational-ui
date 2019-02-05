@@ -22,7 +22,11 @@ You can get the value of `OperationalContext` in the shape of context.
 const { useOperationalContext } = require("./OperationalContext")
 const ILookPretty = () => {
   const ctx = useOperationalContext()
-  return <p>{`The viewport is ${ctx.windowSize.width} pixels wide and ${ctx.windowSize.height} tall.`}</p>
+  return (
+    <p>
+      The viewport is {ctx.windowSize.width} pixels wide and {ctx.windowSize.height} tall.
+    </p>
+  )
 }
 ;<ILookPretty />
 ```
