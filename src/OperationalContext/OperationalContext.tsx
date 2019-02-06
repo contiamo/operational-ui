@@ -12,7 +12,7 @@ export interface Props {
  */
 const OperationalContext: React.SFC<Props> = props => {
   const ctx = useOperationalContext()
-  return <React.Fragment>{props.children({ ...ctx })}</React.Fragment>
+  return <>{props.children({ ...ctx })}</>
 }
 
 export default OperationalContext

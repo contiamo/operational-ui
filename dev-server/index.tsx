@@ -6,7 +6,7 @@
  */
 import * as React from "react"
 import { render } from "react-dom"
-import OperationalUI, { Card, CardSection, Tree, TreeProps } from "../src"
+import OperationalUI, { Card, CardSection, OperationalContext, Tree } from "../src"
 
 export interface State {
   courses: string[]
@@ -23,6 +23,13 @@ class Example extends React.Component<{}, State> {
     return (
       <OperationalUI>
         <div style={{ width: 600, height: 300, margin: 20 }}>
+          <OperationalContext>
+            {operationalContext => (
+              <p>{`The viewport is ${operationalContext.windowSize.width} pixels wide and ${
+                operationalContext.windowSize.height
+              } tall.`}</p>
+            )}
+          </OperationalContext>
           <Card>
             <Tree
               trees={this.state.courses.map(course => ({
