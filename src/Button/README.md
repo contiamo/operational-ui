@@ -79,14 +79,13 @@ Using a `to` prop navigates automatically, and render proper anchor tags with hr
   action={
     <>
       <Button condensed>I should have a right margin</Button>
-      <Button condensed>I should not have a right margin</Button>
+      <Button color="primary" condensed>
+        I should not have a right margin
+      </Button>
     </>
   }
 >
-  <div style={{ border: "1px solid red", width: "fit-content" }}>
-    <Button condensed>I should have a right margin</Button>
-    <Button condensed>I should not have a right margin</Button>
-  </div>
+  My friend is a huge chicken
 </Card>
 ```
 

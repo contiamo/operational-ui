@@ -15,7 +15,6 @@ const Container = styled("div")(({ theme }) => ({
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.body,
   fontWeight: theme.font.weight.medium,
-  label: "cardheader",
   display: "flex",
   alignItems: "center",
   backgroundColor: theme.color.background.lighter,
@@ -45,6 +44,9 @@ const Container = styled("div")(({ theme }) => ({
 const ActionsContainer = styled("div")`
   display: flex;
   align-items: center;
+  > :last-child {
+    margin-right: 0;
+  }
 `
 
 const CardHeader: React.SFC<CardHeaderProps> = ({ title, children, action, ...props }) => (

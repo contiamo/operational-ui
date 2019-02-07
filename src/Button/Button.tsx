@@ -72,7 +72,6 @@ const containerStyles: Interpolation<
   return {
     backgroundColor,
     lineHeight: `${condensed ? 28 : 36}px`,
-    label: "button",
     fontSize: theme.font.size.small,
     fontFamily: theme.font.family.main,
     fontWeight: theme.font.weight.medium,
@@ -88,6 +87,7 @@ const containerStyles: Interpolation<
     outline: "none",
     position: "relative",
     width: fullWidth ? "100%" : "initial",
+    marginRight: theme.space.small,
     // Apply styles with increased specificity to override defaults
     "&, a:link&, a:visited&": {
       textDecoration: "none",
@@ -100,10 +100,6 @@ const containerStyles: Interpolation<
           },
         }
       : {}),
-
-    "* + &": {
-      marginLeft: theme.space.small,
-    },
   }
 }
 
