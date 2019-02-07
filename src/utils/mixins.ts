@@ -20,7 +20,7 @@ export const Label = styled("label")<{ fullWidth?: boolean; left?: boolean }>(({
 
 export const FormFieldControls = styled("div")({
   position: "absolute",
-  top: 3,
+  top: -2,
   right: 0,
 })
 
@@ -41,10 +41,11 @@ export const FormFieldControl = styled("div")(({ theme }) => ({
   cursor: "pointer",
   position: "relative",
   verticalAlign: "middle",
-  display: "inline-block",
-  width: "fit-content",
+  display: "inline-flex",
+  width: 12,
   marginLeft: theme.space.base,
   color: theme.color.text.lightest,
+  height: 12,
   ...hoverTooltip,
   "& svg": {
     position: "relative",
