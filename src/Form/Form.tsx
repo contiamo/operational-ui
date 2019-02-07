@@ -4,10 +4,13 @@ import { isCmdEnter } from "../utils"
 import styled from "../utils/styled"
 
 const Container = styled("form")(({ theme }) => ({
+  "> div, > label": {
+    display: "block",
+  },
+
   // Space between groups
   "> :not(:last-child)": {
     marginBottom: 34 - theme.space.small,
-    display: "block",
   },
 
   // Space between children _inside_ groups
