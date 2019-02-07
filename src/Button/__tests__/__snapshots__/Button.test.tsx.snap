@@ -8,7 +8,7 @@ exports[`Button Component Should initialize properly 1`] = `
     class="css-ar73w8-Messages"
   />
   <button
-    class="css-11s4t93-button"
+    class="css-1po5ksq"
   >
     hi
   </button>
