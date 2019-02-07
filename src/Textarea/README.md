@@ -14,6 +14,7 @@ initialState = {
   v6: "",
   v7: "",
   v8: "",
+  v9: "",
 }
 
 const handleChange = key => value => {
@@ -38,6 +39,9 @@ const handleChange = key => value => {
   <Textarea value={state.v6} onChange={handleChange("v6")} label="disabled" disabled />
   <Textarea value={state.v7} onChange={handleChange("v7")} label="a code" code />
   <Textarea value={state.v8} onChange={handleChange("v8")} label="fixed height" height={200} />
+  <Textarea value={state.v9} onChange={handleChange("v9")} label="full width" height={200} fullWidth />
+  /* full width without a label can behave differently */
+  <Textarea value={state.v9} onChange={handleChange("v9")} height={200} fullWidth />
 </Form>
 ```
 
