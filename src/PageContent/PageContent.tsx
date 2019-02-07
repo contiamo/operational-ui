@@ -32,7 +32,7 @@ const StyledPageContent = styled("div")<{ areas?: PageContentProps["areas"]; fil
 
     return {
       gridTemplateColumns,
-      display: props.fill_ ? "block" : "grid",
+      display: "grid",
       alignItems: "start",
       gridTemplateAreas: `"${props.areas || "main"}"`,
       gridGap: props.theme.space.element,
