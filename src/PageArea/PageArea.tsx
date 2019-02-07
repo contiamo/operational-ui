@@ -7,7 +7,7 @@ export interface PageAreaProps extends DefaultProps {
   fill?: boolean
 }
 
-const PageArea = styled("div", { shouldForwardProp: prop => prop !== "fill" })<PageAreaProps>(
+export const PageArea = styled("div", { shouldForwardProp: prop => prop !== "fill" })<PageAreaProps>(
   ({ name, fill = false }) => ({
     gridArea: name,
     height: fill ? "100%" : "auto",
