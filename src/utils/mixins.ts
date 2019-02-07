@@ -14,6 +14,7 @@ export const Label = styled("label")<{ fullWidth?: boolean; left?: boolean }>(({
   display: "inline-block",
   position: "relative",
   maxWidth: fullWidth ? "none" : "360px",
+  width: fullWidth ? "100%" : "auto",
   marginRight: left ? theme.space.small : 0,
 }))
 
