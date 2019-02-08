@@ -14,6 +14,23 @@ Child components can get access to window dimensions as follows:
 </OperationalContext>
 ```
 
+### OperationalContext Hook
+
+You can get the value of `OperationalContext` in the shape of context.
+
+```jsx
+const { useOperationalContext } = require("./OperationalContext")
+const ILookPretty = () => {
+  const ctx = useOperationalContext()
+  return (
+    <p>
+      The viewport is {ctx.windowSize.width} pixels wide and {ctx.windowSize.height} tall.
+    </p>
+  )
+}
+;<ILookPretty />
+```
+
 ### Messages and Loaders
 
 You can use `OperationalUI`'s flash- and progress bar features to automatically render and manage these universal UI elements using the `pushMessage` and `setLoadingState` methods provided in context, as shown in the code snippet below:

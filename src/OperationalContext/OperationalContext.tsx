@@ -1,12 +1,6 @@
 import * as React from "react"
 
-import {
-  Context,
-  default as OperationalContextOriginal,
-  IMessage,
-  MessageType,
-  WindowSize,
-} from "./OperationalContext.init"
+import { Context, IMessage, MessageType, useOperationalContext, WindowSize } from "./OperationalContext.init"
 
 export interface Props {
   children: (operationalContext: Context) => undefined | React.ReactNode
@@ -16,10 +10,11 @@ export interface Props {
  * This component simply wraps OperationalContext in order to allow styleguidist to pick up on
  * it and display it in the documentation page.
  */
-const OperationalContext: React.SFC<Props> = props => (
-  <OperationalContextOriginal>{props.children}</OperationalContextOriginal>
-)
+const OperationalContext: React.SFC<Props> = props => {
+  const ctx = useOperationalContext()
+  return <>{props.children({ ...ctx })}</>
+}
 
 export default OperationalContext
 
-export { Context, WindowSize, IMessage, MessageType }
+export { Context, WindowSize, IMessage, MessageType, useOperationalContext }
