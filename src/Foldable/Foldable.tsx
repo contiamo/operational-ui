@@ -4,40 +4,20 @@ import Toggler, { TogglerProps } from "./Foldable.Toggler"
 export interface FoldableProps {
   /** Should the foldable children be open or closed by default? */
   initialState?: "closed" | "open"
-  children: (
-    { Toggler, isFolded }: { Toggler: React.ComponentType<TogglerProps>; isFolded: boolean },
-  ) => React.ReactNode
+  children: ({
+    Toggler,
+    isFolded,
+  }: {
+    Toggler: React.ComponentType<TogglerProps>
+    isFolded: boolean
+  }) => React.ReactNode
 }
 
-interface FoldableState {
-  isFolded: boolean
-  /**
-   * Why is isTogglerHovered on state? We need to set
-   * it on the state in order to show the toggler as
-   * "clickable" (grey background) on hover for two
-   * SEPARATE, DISTINCT DOM nodes for horizontally
-   * stacked `CardSection`s.
-   *
-   * CSS can't solve this because this component doesn't
-   * add a DOM node, so we can't style descendants.
-   *
-   * Even if we could, CardSection's headers are well-
-   * encapsulated so they're not even accessable with CSS.
-   */
-  isTogglerHovered: boolean
-}
-
-class Foldable extends React.Component<FoldableProps, Readonly<FoldableState>> {
-  private togglerRef = React.createRef<HTMLDivElement>()
-
-  public static defaultProps = {
-    initialState: "open",
-  }
-
-  public readonly state: FoldableState = {
-    isFolded: this.props.initialState === "closed",
-    isTogglerHovered: false,
-  }
+const Foldable = (props: FoldableProps) => {
+  const { initialState = "open", children } = props
+  const togglerRef = React.createRef<HTMLDivElement>()
+  const [isParentFolded, setIsFolded] = React.useState(initialState === "closed")
+  const [isTogglerHovered, setIsTogglerHovered] = React.useState(false)
 
   /**
    * Why do we listen on mouse move? Because mouse events in succession
@@ -48,13 +28,12 @@ class Foldable extends React.Component<FoldableProps, Readonly<FoldableState>> {
    * and if it's _not_ on a Toggler, set `isTogglerHovered` false on the
    * state.
    */
-  public componentDidMount() {
-    document.addEventListener("mousemove", this.handleMouseMove)
-  }
-
-  public componentWillUnmount() {
-    document.removeEventListener("mousemove", this.handleMouseMove)
-  }
+  React.useEffect(() => {
+    document.addEventListener("mousemove", handleMouseMove)
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove)
+    }
+  })
 
   /**
    * This whole function exists to serve the following purpose:
@@ -75,14 +54,14 @@ class Foldable extends React.Component<FoldableProps, Readonly<FoldableState>> {
    * - if the toggler is STILL active, even though the cursor is NOT on it
    *   - unset hovered state.
    */
-  private handleMouseMove = (e: Event) => {
+  const handleMouseMove = (e: Event) => {
     // If we don't have a ref to the Toggler, there's nothing to do.
-    if (this.togglerRef.current === null) {
+    if (togglerRef.current === null) {
       return
     }
     if (
       // Is STILL active, and
-      this.state.isTogglerHovered &&
+      isTogglerHovered &&
       !e
 
         /**
@@ -106,49 +85,44 @@ class Foldable extends React.Component<FoldableProps, Readonly<FoldableState>> {
          * (see first condition) this.state has a toggler as
          * ACTIVE,
          */
-        .includes(this.togglerRef.current.className)
+        .includes(togglerRef.current.className)
     ) {
       // Unset the hovered state because a mouseleave most likely got lost.
-      this.unsetHovered()
+      unsetHovered()
     }
   }
 
-  private toggle = () => {
-    this.setState(() => ({ isFolded: !this.state.isFolded }))
+  const toggle = () => {
+    setIsFolded(state => !state)
   }
 
-  private setHovered() {
-    this.setState(() => ({ isTogglerHovered: true }))
+  const setHovered = () => {
+    setIsTogglerHovered(true)
   }
 
-  private unsetHovered() {
-    this.setState(() => ({ isTogglerHovered: false }))
+  const unsetHovered = () => {
+    setIsTogglerHovered(true)
   }
 
-  public render() {
-    const { children } = this.props
-    const { isTogglerHovered } = this.state
-
-    return children({
-      Toggler: ({ onClick, isFolded }) => (
-        <Toggler
-          innerRef={this.togglerRef}
-          onMouseEnter={e => {
-            e.stopPropagation()
-            this.setHovered()
-          }}
-          onMouseLeave={e => {
-            e.stopPropagation()
-            this.unsetHovered()
-          }}
-          isHovered={isTogglerHovered}
-          isFolded={typeof isFolded === "undefined" ? this.state.isFolded : Boolean(isFolded)}
-          onClick={onClick || this.toggle}
-        />
-      ),
-      isFolded: this.state.isFolded,
-    })
-  }
+  return children({
+    Toggler: ({ onClick, isFolded }) => (
+      <Toggler
+        innerRef={togglerRef}
+        onMouseEnter={e => {
+          e.stopPropagation()
+          setHovered()
+        }}
+        onMouseLeave={e => {
+          e.stopPropagation()
+          unsetHovered()
+        }}
+        isHovered={isTogglerHovered}
+        isFolded={typeof isFolded === "undefined" ? isParentFolded : Boolean(isFolded)}
+        onClick={onClick || toggle}
+      />
+    ),
+    isFolded: isParentFolded,
+  })
 }
 
 export default Foldable
