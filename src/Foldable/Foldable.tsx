@@ -33,7 +33,7 @@ const Foldable = (props: FoldableProps) => {
     return () => {
       document.removeEventListener("mousemove", handleMouseMove)
     }
-  })
+  }, [])
 
   /**
    * This whole function exists to serve the following purpose:
