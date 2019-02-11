@@ -9,6 +9,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
  * @param search Search string from the url
  * @param replaceState Replace state
  * @param getPathname Get the current location pathname
+ * @param getHash Get the current location hash
  */
 export const useSyncToPathState = <T>(
   name: string,
