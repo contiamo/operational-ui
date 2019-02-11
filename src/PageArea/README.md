@@ -55,6 +55,29 @@ In this case `PageArea` is implicit
 </PageContent>
 ```
 
+### With 2 columns and custom padding
+
+```jsx
+<PageContent areas="side main" padding="small">
+  <PageArea name="main">
+    <Card title="My bundle" />
+  </PageArea>
+  <PageArea name="side">
+    <Card title="Deploy functions" />
+    <Card title="Sync" />
+    <Card title="Repository" />
+  </PageArea>
+</PageContent>
+```
+
+### With no padding
+
+```jsx
+<PageContent noPadding fill>
+  <Card title="My bundle" />
+</PageContent>
+```
+
 ### Inside tabs
 
 ```jsx
