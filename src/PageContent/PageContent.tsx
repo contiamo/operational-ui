@@ -10,7 +10,7 @@ export interface ModalConfirmContext {
   confirm: <T = undefined>(confirmOptions: ConfirmOptions<T>) => void
 }
 
-const isRenderChild = (
+const isChildFunction = (
   children: PageContentProps["children"],
 ): children is ((modalConfirmContext: ModalConfirmContext) => React.ReactNode) => typeof children === "function"
 
@@ -104,7 +104,7 @@ const PageContent = ({ children, ...props }: PageContentProps) => {
           {confirm => (
             <Container>
               <StyledPageContent {...props}>
-                {isRenderChild(children) ? children({ confirm, modal }) : children}
+                {isChildFunction(children) ? children({ confirm, modal }) : children}
               </StyledPageContent>
             </Container>
           )}
