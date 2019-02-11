@@ -5,7 +5,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
  * Create a state that is sync with url search param.
  *
  * @param name Name of your state
- * @param encoder Validate and encode the value from the url (you must return undefined if the value is not valid)
+ * @param decoder Validate and decode the value from the url (you must return undefined if the value is not valid)
  * @param search Search string from the url
  * @param replaceState Replace state
  * @param getPathname Get the current location pathname
@@ -14,7 +14,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
 export const useURLState = <T>(
   name: string,
   initialValue: T,
-  encoder: (urlParam?: any) => T | undefined,
+  decoder: (urlParam?: any) => T | undefined,
   getSearchParams = () => qs.parse(window.location.search.replace("?", "")) || {},
   replaceState: History["replaceState"] = window.history.replaceState.bind(window.history),
   getPathname = () => window.location.pathname,
@@ -24,7 +24,7 @@ export const useURLState = <T>(
   const searchValue: any = getSearchParams()[name]
 
   // Check if the value is valid, regarding the validator
-  const encodedValue = encoder(searchValue)
+  const encodedValue = decoder(searchValue)
 
   // Set the initial value
   const [value, setValue] = useState<T>(encodedValue !== undefined ? encodedValue : initialValue)

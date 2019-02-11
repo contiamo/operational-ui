@@ -4,12 +4,12 @@ It's even more convenient if this link has the state of the current page! This i
 
 Simply use `useURLState` instead of the classic `useState` and your props are automatically synchronized to the URL.
 
-Because the URL is not really the safest way to provide state to an application, you need to provide an `encoder` function that validate and parse the input from the URL to your state. You need to return `undefined` if the input is not valid.
+Because the URL is not really the safest way to provide state to an application, you need to provide an `decoder` function that validate and parse the input from the URL to your state. You need to return `undefined` if the input is not valid.
 
 ## Usage
 
 ```jsx
-const countEncoder = i => {
+const countDecoder = i => {
   if (Number.isNaN(+i)) {
     return undefined
   }
@@ -19,7 +19,7 @@ const countEncoder = i => {
 const Counter = () => {
   // this is sync with `?count={number}`
   // you can try to reload the page to see that the state is retain
-  const [count, setCount] = useURLState("count", 0, countEncoder)
+  const [count, setCount] = useURLState("count", 0, countDecoder)
 
   return (
     <>

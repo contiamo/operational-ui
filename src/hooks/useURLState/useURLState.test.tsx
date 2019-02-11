@@ -6,7 +6,7 @@ import { useURLState } from "./useURLState"
 describe("useURLState", () => {
   afterEach(cleanup)
   it("should take the initial state by default", async () => {
-    const encoder = () => undefined
+    const decoder = () => undefined
     const getSearchParams = () => ({})
     const replaceState: History["replaceState"] = () => null
     const getPathname = () => ""
@@ -16,7 +16,7 @@ describe("useURLState", () => {
       const [count, setCount] = useURLState<number>(
         "count",
         0,
-        encoder,
+        decoder,
         getSearchParams,
         replaceState,
         getPathname,
@@ -38,7 +38,7 @@ describe("useURLState", () => {
   })
 
   it("should take the value from the url if provided", () => {
-    const encoder = (i: any) => +i
+    const decoder = (i: any) => +i
     const getSearchParams = () => ({ count: 42 })
     const replaceState: History["replaceState"] = () => null
     const getPathname = () => ""
@@ -48,7 +48,7 @@ describe("useURLState", () => {
       const [count, setCount] = useURLState<number>(
         "count",
         0,
-        encoder,
+        decoder,
         getSearchParams,
         replaceState,
         getPathname,
@@ -70,7 +70,7 @@ describe("useURLState", () => {
   })
 
   it("should take the initial state if the search param is not valid", () => {
-    const encoder = () => undefined
+    const decoder = () => undefined
     const getSearchParams = () => ({ count: 42 })
     const replaceState: History["replaceState"] = () => null
     const getPathname = () => ""
@@ -80,7 +80,7 @@ describe("useURLState", () => {
       const [count, setCount] = useURLState<number>(
         "count",
         0,
-        encoder,
+        decoder,
         getSearchParams,
         replaceState,
         getPathname,
@@ -102,7 +102,7 @@ describe("useURLState", () => {
   })
 
   it("should call replaceState on state change", async () => {
-    const encoder = () => undefined
+    const decoder = () => undefined
     const getSearchParams = () => ({})
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
@@ -112,7 +112,7 @@ describe("useURLState", () => {
       const [count, setCount] = useURLState<number>(
         "count",
         0,
-        encoder,
+        decoder,
         getSearchParams,
         replaceState,
         getPathname,
@@ -137,7 +137,7 @@ describe("useURLState", () => {
   })
 
   it("should not erase previous search params", async () => {
-    const encoder = () => undefined
+    const decoder = () => undefined
     const getSearchParams = () => ({ please: "keepme" })
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
@@ -147,7 +147,7 @@ describe("useURLState", () => {
       const [count, setCount] = useURLState<number>(
         "count",
         0,
-        encoder,
+        decoder,
         getSearchParams,
         replaceState,
         getPathname,
@@ -173,7 +173,7 @@ describe("useURLState", () => {
   })
 
   it("should not erase the hash", async () => {
-    const encoder = () => undefined
+    const decoder = () => undefined
     const getSearchParams = () => ({ please: "keepme" })
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
@@ -183,7 +183,7 @@ describe("useURLState", () => {
       const [count, setCount] = useURLState<number>(
         "count",
         0,
-        encoder,
+        decoder,
         getSearchParams,
         replaceState,
         getPathname,
@@ -209,7 +209,7 @@ describe("useURLState", () => {
   })
 
   it("should deal with complex object", async () => {
-    const encoder = () => undefined
+    const decoder = () => undefined
     const getSearchParams = () => ({})
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
@@ -218,7 +218,7 @@ describe("useURLState", () => {
       const [dateRange, setDateRange] = useURLState<{ start?: string; end?: string }>(
         "dateRange",
         {},
-        encoder,
+        decoder,
         getSearchParams,
         replaceState,
         getPathname,
@@ -253,7 +253,7 @@ describe("useURLState", () => {
   })
 
   it("should not add `?` to the url if no param", async () => {
-    const encoder = () => undefined
+    const decoder = () => undefined
     const getSearchParams = () => ({})
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
@@ -262,7 +262,7 @@ describe("useURLState", () => {
       const [dateRange, setDateRange] = useURLState<{ start?: string; end?: string }>(
         "dateRange",
         {},
-        encoder,
+        decoder,
         getSearchParams,
         replaceState,
         getPathname,
