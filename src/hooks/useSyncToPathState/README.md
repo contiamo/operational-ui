@@ -1,10 +1,10 @@
-It's quite conveniant to be able to copy/past a link to somebody to show him a particular page of your application.
+It's quite convenient to be able to copy and paste a link to somebody to show them a particular page of your application.
 
-It's even more conveniant if this link have all the state of the current page! This is what this hook is made for.
+It's even more convenient if this link has the state of the current page! This is what this hook is made for.
 
-Simply use `useSyncToPathState` instead of the classic `useState` and your props is automatically sync the url.
+Simply use `useSyncToPathState` instead of the classic `useState` and your props are automatically synchronized to the URL.
 
-Because the url is not really the safest way to provide a state to an application, you need to provide an `encoder` function that validate and parse the input from the url to your state. You need to return `undefined` if the input is not valid.
+Because the URL is not really the safest way to provide state to an application, you need to provide an `encoder` function that validate and parse the input from the URL to your state. You need to return `undefined` if the input is not valid.
 
 ## Usage
 
