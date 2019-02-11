@@ -64,7 +64,7 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
 
   private updateActiveComponent = (activeComponent: string) => {
     if (this.props.hasSidebar) {
-      window.history.pushState(null, "", `#${activeComponent}`)
+      window.location.hash = activeComponent
     }
     this.setState({ activeComponent })
     return undefined
@@ -101,7 +101,8 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
                 <a href="https://twitter.com/edwardtufte/status/450076034759524352" target="_blank">
                   small effective differences
                 </a>
-              }.
+              }
+              .
             </p>
             <p>It is predictable to use, and it lets you and your team breathe. Exhales, not sighs.</p>
           </Splash>
