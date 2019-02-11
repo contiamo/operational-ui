@@ -1,9 +1,9 @@
 import React from "react"
 import { cleanup, fireEvent, render, wait } from "react-testing-library"
 
-import { useSyncToPathState } from "./useSyncToPathState"
+import { useURLState } from "./useURLState"
 
-describe("useSyncToPathState", () => {
+describe("useURLState", () => {
   afterEach(cleanup)
   it("should take the initial state by default", async () => {
     const encoder = () => undefined
@@ -13,7 +13,7 @@ describe("useSyncToPathState", () => {
     const getHash = () => ""
 
     const Counter = () => {
-      const [count, setCount] = useSyncToPathState<number>(
+      const [count, setCount] = useURLState<number>(
         "count",
         0,
         encoder,
@@ -45,7 +45,7 @@ describe("useSyncToPathState", () => {
     const getHash = () => ""
 
     const Counter = () => {
-      const [count, setCount] = useSyncToPathState<number>(
+      const [count, setCount] = useURLState<number>(
         "count",
         0,
         encoder,
@@ -77,7 +77,7 @@ describe("useSyncToPathState", () => {
     const getHash = () => ""
 
     const Counter = () => {
-      const [count, setCount] = useSyncToPathState<number>(
+      const [count, setCount] = useURLState<number>(
         "count",
         0,
         encoder,
@@ -109,7 +109,7 @@ describe("useSyncToPathState", () => {
     const getHash = () => ""
 
     const Counter = () => {
-      const [count, setCount] = useSyncToPathState<number>(
+      const [count, setCount] = useURLState<number>(
         "count",
         0,
         encoder,
@@ -144,7 +144,7 @@ describe("useSyncToPathState", () => {
     const getHash = () => ""
 
     const Counter = () => {
-      const [count, setCount] = useSyncToPathState<number>(
+      const [count, setCount] = useURLState<number>(
         "count",
         0,
         encoder,
@@ -180,7 +180,7 @@ describe("useSyncToPathState", () => {
     const getHash = () => "#myHash"
 
     const Counter = () => {
-      const [count, setCount] = useSyncToPathState<number>(
+      const [count, setCount] = useURLState<number>(
         "count",
         0,
         encoder,
@@ -215,7 +215,7 @@ describe("useSyncToPathState", () => {
     const getPathname = () => "http://myapp.com"
 
     const DatePicker = () => {
-      const [dateRange, setDateRange] = useSyncToPathState<{ start?: string; end?: string }>(
+      const [dateRange, setDateRange] = useURLState<{ start?: string; end?: string }>(
         "dateRange",
         {},
         encoder,
@@ -259,7 +259,7 @@ describe("useSyncToPathState", () => {
     const getPathname = () => "http://myapp.com"
 
     const DatePicker = () => {
-      const [dateRange, setDateRange] = useSyncToPathState<{ start?: string; end?: string }>(
+      const [dateRange, setDateRange] = useURLState<{ start?: string; end?: string }>(
         "dateRange",
         {},
         encoder,

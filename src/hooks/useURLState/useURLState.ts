@@ -11,7 +11,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
  * @param getPathname Get the current location pathname
  * @param getHash Get the current location hash
  */
-export const useSyncToPathState = <T>(
+export const useURLState = <T>(
   name: string,
   initialValue: T,
   encoder: (urlParam?: any) => T | undefined,

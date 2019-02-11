@@ -83,6 +83,6 @@ export { Tab } from "./Internals/Tabs"
 export { default as styled } from "./utils/styled"
 
 // Hooks
-export * from "./hooks/useSyncToPathState/useSyncToPathState"
+export * from "./hooks/useURLState/useURLState"
 
 export default OperationalUI
