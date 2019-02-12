@@ -13,15 +13,12 @@ describe("useURLState", () => {
     const getHash = () => ""
 
     const Counter = () => {
-      const [count, setCount] = useURLState<number>(
-        "count",
-        0,
-        decoder,
+      const [count, setCount] = useURLState<number>("count", 0, decoder, {
         getSearchParams,
         replaceState,
         getPathname,
         getHash,
-      )
+      })
 
       return (
         <>
@@ -45,15 +42,12 @@ describe("useURLState", () => {
     const getHash = () => ""
 
     const Counter = () => {
-      const [count, setCount] = useURLState<number>(
-        "count",
-        0,
-        decoder,
+      const [count, setCount] = useURLState<number>("count", 0, decoder, {
         getSearchParams,
         replaceState,
         getPathname,
         getHash,
-      )
+      })
 
       return (
         <>
@@ -77,15 +71,12 @@ describe("useURLState", () => {
     const getHash = () => ""
 
     const Counter = () => {
-      const [count, setCount] = useURLState<number>(
-        "count",
-        0,
-        decoder,
+      const [count, setCount] = useURLState<number>("count", 0, decoder, {
         getSearchParams,
         replaceState,
         getPathname,
         getHash,
-      )
+      })
 
       return (
         <>
@@ -109,15 +100,12 @@ describe("useURLState", () => {
     const getHash = () => ""
 
     const Counter = () => {
-      const [count, setCount] = useURLState<number>(
-        "count",
-        0,
-        decoder,
+      const [count, setCount] = useURLState<number>("count", 0, decoder, {
         getSearchParams,
         replaceState,
         getPathname,
         getHash,
-      )
+      })
 
       return (
         <>
@@ -144,15 +132,12 @@ describe("useURLState", () => {
     const getHash = () => ""
 
     const Counter = () => {
-      const [count, setCount] = useURLState<number>(
-        "count",
-        0,
-        decoder,
+      const [count, setCount] = useURLState<number>("count", 0, decoder, {
         getSearchParams,
         replaceState,
         getPathname,
         getHash,
-      )
+      })
 
       return (
         <>
@@ -180,15 +165,12 @@ describe("useURLState", () => {
     const getHash = () => "#myHash"
 
     const Counter = () => {
-      const [count, setCount] = useURLState<number>(
-        "count",
-        0,
-        decoder,
+      const [count, setCount] = useURLState<number>("count", 0, decoder, {
         getSearchParams,
         replaceState,
         getPathname,
         getHash,
-      )
+      })
 
       return (
         <>
@@ -213,16 +195,15 @@ describe("useURLState", () => {
     const getSearchParams = () => ({})
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
+    const getHash = () => ""
 
     const DatePicker = () => {
-      const [dateRange, setDateRange] = useURLState<{ start?: string; end?: string }>(
-        "dateRange",
-        {},
-        decoder,
+      const [dateRange, setDateRange] = useURLState<{ start?: string; end?: string }>("dateRange", {}, decoder, {
         getSearchParams,
         replaceState,
         getPathname,
-      )
+        getHash,
+      })
 
       return (
         <>
@@ -257,16 +238,15 @@ describe("useURLState", () => {
     const getSearchParams = () => ({})
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
+    const getHash = () => ""
 
     const DatePicker = () => {
-      const [dateRange, setDateRange] = useURLState<{ start?: string; end?: string }>(
-        "dateRange",
-        {},
-        decoder,
+      const [dateRange, setDateRange] = useURLState<{ start?: string; end?: string }>("dateRange", {}, decoder, {
         getSearchParams,
         replaceState,
         getPathname,
-      )
+        getHash,
+      })
 
       return (
         <>

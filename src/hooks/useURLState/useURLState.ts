@@ -2,23 +2,29 @@ import qs from "qs"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 
 /**
+ * Bunch of method that depends on `window`
+ *
+ * This is mostly for testing purpose but can also be used for SSR.
+ */
+const options = {
+  getSearchParams: () => qs.parse(window.location.search.replace("?", "")) || {},
+  getHash: () => window.location.hash,
+  getPathname: () => window.location.pathname,
+  replaceState: window.history.replaceState.bind(window.history),
+}
+
+/**
  * Create a state that is sync with url search param.
  *
  * @param name Name of your state
  * @param decoder Validate and decode the value from the url (you must return undefined if the value is not valid)
- * @param search Search string from the url
- * @param replaceState Replace state
- * @param getPathname Get the current location pathname
- * @param getHash Get the current location hash
+ * @param options `window` dependent methods
  */
 export const useURLState = <T>(
   name: string,
   initialValue: T,
-  decoder: (urlParam?: any) => T | undefined,
-  getSearchParams = () => qs.parse(window.location.search.replace("?", "")) || {},
-  replaceState: History["replaceState"] = window.history.replaceState.bind(window.history),
-  getPathname = () => window.location.pathname,
-  getHash = () => window.location.hash,
+  decoder: (value: any) => T | undefined = val => val,
+  { getSearchParams, getHash, getPathname, replaceState } = options,
 ): [T, Dispatch<SetStateAction<T>>] => {
   // Retrieve the value from the url search param
   const searchValue: any = getSearchParams()[name]
