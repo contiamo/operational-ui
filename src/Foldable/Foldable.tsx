@@ -101,7 +101,7 @@ const Foldable = (props: FoldableProps) => {
   }
 
   const unsetHovered = () => {
-    setIsTogglerHovered(true)
+    setIsTogglerHovered(false)
   }
 
   return children({
