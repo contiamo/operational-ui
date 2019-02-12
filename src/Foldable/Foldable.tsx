@@ -13,8 +13,7 @@ export interface FoldableProps {
   }) => React.ReactNode
 }
 
-const Foldable = (props: FoldableProps) => {
-  const { initialState = "open", children } = props
+const Foldable = ({ initialState = "open", children }: FoldableProps) => {
   const togglerRef = React.createRef<HTMLDivElement>()
   const [isParentFolded, setIsFolded] = React.useState(initialState === "closed")
   const [isTogglerHovered, setIsTogglerHovered] = React.useState(false)
