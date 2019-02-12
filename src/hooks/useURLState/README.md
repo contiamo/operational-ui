@@ -9,12 +9,7 @@ Because the URL is not really the safest way to provide state to an application,
 ## Usage
 
 ```jsx
-const countDecoder = i => {
-  if (Number.isNaN(+i)) {
-    return undefined
-  }
-  return +i
-}
+const countDecoder = i => (isNaN(+i) ? undefined : +i)
 
 const Counter = () => {
   // this is sync with `?count={number}`
