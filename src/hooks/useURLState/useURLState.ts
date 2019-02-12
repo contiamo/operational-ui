@@ -7,11 +7,18 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
  * This is mostly for testing purpose but can also be used for SSR.
  */
 const options = {
-  getSearchParams: () => qs.parse(window.location.search.replace("?", "")) || {},
+  getSearch: () => window.location.search,
   getHash: () => window.location.hash,
   getPathname: () => window.location.pathname,
   replaceState: window.history.replaceState.bind(window.history),
 }
+
+/**
+ * Parse the search to object.
+ *
+ * @param search
+ */
+const getSearchParams = (search: string) => qs.parse(search.replace("?", "")) || {}
 
 /**
  * Create a state that is sync with url search param.
@@ -24,10 +31,10 @@ export const useURLState = <T>(
   name: string,
   initialValue: T,
   decoder: (value: any) => T | undefined = val => val,
-  { getSearchParams, getHash, getPathname, replaceState } = options,
+  { getHash, getPathname, replaceState, getSearch } = options,
 ): [T, Dispatch<SetStateAction<T>>] => {
   // Retrieve the value from the url search param
-  const searchValue: any = getSearchParams()[name]
+  const searchValue: any = getSearchParams(getSearch())[name]
 
   // Check if the value is valid, regarding the validator
   const encodedValue = decoder(searchValue)
@@ -37,7 +44,7 @@ export const useURLState = <T>(
 
   // Update the url search param on state update
   useEffect(() => {
-    const params = getSearchParams()
+    const params = getSearchParams(getSearch())
     params[name] = value
     const search = `?${qs.stringify(params)}`
     replaceState({}, "", `${getPathname()}${search === "?" ? "" : search}${getHash()}`)

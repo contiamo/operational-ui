@@ -7,14 +7,14 @@ describe("useURLState", () => {
   afterEach(cleanup)
   it("should take the initial state by default", async () => {
     const decoder = () => undefined
-    const getSearchParams = () => ({})
+    const getSearch = () => ""
     const replaceState: History["replaceState"] = () => null
     const getPathname = () => ""
     const getHash = () => ""
 
     const Counter = () => {
       const [count, setCount] = useURLState<number>("count", 0, decoder, {
-        getSearchParams,
+        getSearch,
         replaceState,
         getPathname,
         getHash,
@@ -36,14 +36,14 @@ describe("useURLState", () => {
 
   it("should take the value from the url if provided", () => {
     const decoder = (i: any) => +i
-    const getSearchParams = () => ({ count: 42 })
+    const getSearch = () => "?count=42"
     const replaceState: History["replaceState"] = () => null
     const getPathname = () => ""
     const getHash = () => ""
 
     const Counter = () => {
       const [count, setCount] = useURLState<number>("count", 0, decoder, {
-        getSearchParams,
+        getSearch,
         replaceState,
         getPathname,
         getHash,
@@ -65,14 +65,14 @@ describe("useURLState", () => {
 
   it("should take the initial state if the search param is not valid", () => {
     const decoder = () => undefined
-    const getSearchParams = () => ({ count: 42 })
+    const getSearch = () => "?count=42"
     const replaceState: History["replaceState"] = () => null
     const getPathname = () => ""
     const getHash = () => ""
 
     const Counter = () => {
       const [count, setCount] = useURLState<number>("count", 0, decoder, {
-        getSearchParams,
+        getSearch,
         replaceState,
         getPathname,
         getHash,
@@ -94,14 +94,14 @@ describe("useURLState", () => {
 
   it("should call replaceState on state change", async () => {
     const decoder = () => undefined
-    const getSearchParams = () => ({})
+    const getSearch = () => ""
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
     const getHash = () => ""
 
     const Counter = () => {
       const [count, setCount] = useURLState<number>("count", 0, decoder, {
-        getSearchParams,
+        getSearch,
         replaceState,
         getPathname,
         getHash,
@@ -126,14 +126,14 @@ describe("useURLState", () => {
 
   it("should not erase previous search params", async () => {
     const decoder = () => undefined
-    const getSearchParams = () => ({ please: "keepme" })
+    const getSearch = () => "?please=keepme"
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
     const getHash = () => ""
 
     const Counter = () => {
       const [count, setCount] = useURLState<number>("count", 0, decoder, {
-        getSearchParams,
+        getSearch,
         replaceState,
         getPathname,
         getHash,
@@ -159,14 +159,14 @@ describe("useURLState", () => {
 
   it("should not erase the hash", async () => {
     const decoder = () => undefined
-    const getSearchParams = () => ({ please: "keepme" })
+    const getSearch = () => "?please=keepme"
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
     const getHash = () => "#myHash"
 
     const Counter = () => {
       const [count, setCount] = useURLState<number>("count", 0, decoder, {
-        getSearchParams,
+        getSearch,
         replaceState,
         getPathname,
         getHash,
@@ -192,14 +192,14 @@ describe("useURLState", () => {
 
   it("should deal with complex object", async () => {
     const decoder = () => undefined
-    const getSearchParams = () => ({})
+    const getSearch = () => ""
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
     const getHash = () => ""
 
     const DatePicker = () => {
       const [dateRange, setDateRange] = useURLState<{ start?: string; end?: string }>("dateRange", {}, decoder, {
-        getSearchParams,
+        getSearch,
         replaceState,
         getPathname,
         getHash,
@@ -235,14 +235,14 @@ describe("useURLState", () => {
 
   it("should not add `?` to the url if no param", async () => {
     const decoder = () => undefined
-    const getSearchParams = () => ({})
+    const getSearch = () => ""
     const replaceState = jest.fn()
     const getPathname = () => "http://myapp.com"
     const getHash = () => ""
 
     const DatePicker = () => {
       const [dateRange, setDateRange] = useURLState<{ start?: string; end?: string }>("dateRange", {}, decoder, {
-        getSearchParams,
+        getSearch,
         replaceState,
         getPathname,
         getHash,
