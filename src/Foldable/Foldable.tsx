@@ -14,7 +14,7 @@ export interface FoldableProps {
 }
 
 const Foldable = ({ initialState = "open", children }: FoldableProps) => {
-  const togglerRef = React.createRef<HTMLDivElement>()
+  const togglerRef = React.useRef<HTMLDivElement>(null)
   const [isParentFolded, setIsFolded] = React.useState(initialState === "closed")
   const [isTogglerHovered, setIsTogglerHovered] = React.useState(false)
 
@@ -29,10 +29,8 @@ const Foldable = ({ initialState = "open", children }: FoldableProps) => {
    */
   React.useEffect(() => {
     document.addEventListener("mousemove", handleMouseMove)
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove)
-    }
-  }, [])
+    return () => document.removeEventListener("mousemove", handleMouseMove)
+  })
 
   /**
    * This whole function exists to serve the following purpose:
@@ -91,17 +89,11 @@ const Foldable = ({ initialState = "open", children }: FoldableProps) => {
     }
   }
 
-  const toggle = () => {
-    setIsFolded(state => !state)
-  }
+  const toggle = () => setIsFolded(prevState => !prevState)
 
-  const setHovered = () => {
-    setIsTogglerHovered(true)
-  }
+  const setHovered = () => setIsTogglerHovered(true)
 
-  const unsetHovered = () => {
-    setIsTogglerHovered(false)
-  }
+  const unsetHovered = () => setIsTogglerHovered(false)
 
   return children({
     Toggler: ({ onClick, isFolded }) => (
