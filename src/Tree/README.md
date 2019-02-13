@@ -106,7 +106,7 @@ Certain nodes in the tree can be highlighted like so.
 
 ### Reordering
 
-Tree items can be reordered using drag-and-drop. For this feature, we recommend using [react-beautiful-dnd]() from our friends at [Atlassian]() since we use it internally. Optionally, remove the `draggable` prop on the Tree component and add your own `onDragStart|End|...` properties to child nodes if you'd like to use native HTML drag/drop features.
+Tree items can be reordered using drag-and-drop. For this feature, we recommend using [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd) from our friends at [Atlassian](https://www.atlassian.com/) since we use it internally. Optionally, remove the `draggable` prop on the Tree component and add your own `onDragStart|End|...` properties to child nodes if you'd like to use native HTML drag/drop features.
 
 ```jsx
 initialState = {
