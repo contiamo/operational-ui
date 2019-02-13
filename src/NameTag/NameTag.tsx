@@ -1,10 +1,10 @@
 import * as React from "react"
-import { DefaultProps } from "../types"
-import styled from "../utils/styled"
 
+import { DefaultProps } from "../types"
 import { readableTextColor } from "../utils"
 import { colorMapper } from "../utils/color"
 import { expandColor } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface NameTagProps extends DefaultProps {
   /** Background color */
@@ -58,7 +58,7 @@ const Container = styled("div", {
 })
 
 const NameTag: React.SFC<NameTagProps> = ({ condensed, children, ...props }) => (
-  <Container {...props} condensed={Boolean(condensed)} assignColor={!Boolean(props.color)}>
+  <Container {...props} condensed={Boolean(condensed)} assignColor={!props.color}>
     {children || ""}
   </Container>
 )
