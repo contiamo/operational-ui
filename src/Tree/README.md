@@ -37,10 +37,6 @@ The tree component renders a tree structure with collapsable nodes in a filetree
           label: "Limited Liability Company",
           tag: "D",
           childNodes: [],
-          draggable: true,
-          onDragStart: ev => {
-            ev.dataTransfer.effectAllowed = "move"
-          },
         },
         {
           label: "Inc.",
@@ -95,9 +91,6 @@ Certain nodes in the tree can be highlighted like so.
           tag: "D",
           childNodes: [],
           highlight: true,
-          onDragStart: ev => {
-            ev.dataTransfer.effectAllowed = "move"
-          },
         },
         {
           label: "Inc.",
@@ -113,11 +106,7 @@ Certain nodes in the tree can be highlighted like so.
 
 ### Reordering
 
-Tree items can be reordered using drag-and-drop. The API for this feature is low-level and assumes that the tree nodes are generated from data available in a different shape in state, making it dangerous and error-prone to update based on a readily reordered set of nodes.
-
-Instead, it provides the paths of the source and target where the nodes are inserted. The client would have to do the actual state update themselves, which is fairly straightforward for a simple flat list, and doable for more complicated use-cases (beware of edge cases).
-
-In the future, this library may provide helpers or sample code to deal with reordering with less boilerplate.
+Tree items can be reordered using drag-and-drop. For this feature, we recommend using [react-beautiful-dnd]() from our friends at [Atlassian]() since we use it internally. Optionally, remove the `draggable` prop on the Tree component and add your own `onDragStart|End|...` properties to child nodes if you'd like to use native HTML drag/drop features.
 
 ```jsx
 initialState = {
