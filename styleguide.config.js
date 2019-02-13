@@ -12,6 +12,7 @@ module.exports = {
       ignore: [
         "/**/*test*",
         "**/Internals/**",
+        "**/hooks/**",
         "**/utils/**",
         "**/Typography/**",
         "**/Debug/makeRows*",
@@ -19,6 +20,7 @@ module.exports = {
       ],
     },
     { name: "Typography", components: "src/Typography/*.tsx" },
+    { name: "React Hooks", components: "src/hooks/**/*.ts" },
   ],
   theme: {
     fontFamily: {
