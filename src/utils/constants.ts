@@ -167,7 +167,7 @@ const font = {
  * A container of space-related constants to be
  * used throughout Operational UI.
  */
-const space = {
+export const space = {
   /** Base space is `4px` */
   base: 4,
 
