@@ -24,7 +24,7 @@ const getSearchParams = (search: string) => qs.parse(search.replace("?", "")) ||
  * Create a state that is sync with url search param.
  *
  * @param name Name of your state
- * @param decoder Validate and decode the value from the url (you must return undefined if the value is not valid)
+ * @param decoder Validate and decode the value from the url 
  * @param options `window` dependent methods
  */
 export const useURLState = <T>(
