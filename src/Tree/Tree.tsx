@@ -13,6 +13,7 @@ export interface Tree {
   disabled?: boolean
   color?: string
   onClick?: (node: Tree) => void
+  onRemove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   innerRef?: (element?: HTMLElement | null | undefined) => any
 }
 

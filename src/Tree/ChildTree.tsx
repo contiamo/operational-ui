@@ -1,7 +1,8 @@
 import * as React from "react"
 
+import Icon from "../Icon/Icon"
 import NameTag from "../NameTag/NameTag"
-import { Container, Header, Label, TreeIcon } from "./styledComponents"
+import { Container, DeleteNode, Header, Label, TreeIcon } from "./styledComponents"
 import Tree, { TreeProps } from "./Tree"
 
 type Props = TreeProps["trees"][-1]
@@ -16,6 +17,7 @@ const ChildTree: React.SFC<Props> = ({
   innerRef,
   childNodes = [],
   onClick: onNodeClick,
+  onRemove,
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
@@ -38,6 +40,11 @@ const ChildTree: React.SFC<Props> = ({
           </NameTag>
         )}
         <Label hasChildren={hasChildren}>{label}</Label>
+        {onRemove && (
+          <DeleteNode onClick={onRemove}>
+            <Icon size={12} name="No" />
+          </DeleteNode>
+        )}
       </Header>
       {childNodes && isOpen && <Tree trees={childNodes} />}
     </Container>

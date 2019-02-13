@@ -38,6 +38,23 @@ export const Container = styled("div")<{ hasChildren: boolean; disabled: boolean
   }
 `
 
+export const DeleteNode = styled("div")`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  width: 14px;
+  height: 14px;
+  background-color: rgba(0, 0, 0, 0.05);
+  color: ${({ theme }) => theme.color.text.lighter};
+  cursor: pointer;
+
+  :hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+`
+
 export const TreeIcon = styled(Icon)`
   margin-right: ${({ theme }) => theme.space.base}px;
 `
