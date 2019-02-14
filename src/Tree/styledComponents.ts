@@ -2,22 +2,20 @@ import Icon from "../Icon/Icon"
 import { darken } from "../utils"
 import styled from "../utils/styled"
 
-const highlightColor = "#fff26666"
-
 export const Header = styled("div")<{ highlight: boolean }>`
   display: flex;
   align-items: center;
   margin-top: 0;
   margin-bottom: ${({ theme }) => theme.space.base}px;
   cursor: pointer;
-  background-color: ${({ highlight }) => (highlight ? highlightColor : "none")};
-  outline: ${({ theme, highlight }) => (highlight ? `${theme.space.base}px solid ${highlightColor}` : "none")};
+  background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
+  outline: ${({ theme, highlight }) => (highlight ? `${theme.space.base}px solid ${theme.color.highlight}` : "none")};
 
   :hover {
     background-color: ${({ theme, highlight }) =>
-      highlight ? darken(highlightColor, 20) : theme.color.background.lighter};
+      highlight ? darken(theme.color.highlight, 20) : theme.color.background.lighter};
     outline: ${({ theme, highlight }) =>
-      `${theme.space.base}px solid ${highlight ? darken(highlightColor, 20) : theme.color.background.lighter};`};
+      `${theme.space.base}px solid ${highlight ? darken(theme.color.highlight, 20) : theme.color.background.lighter};`};
   }
 `
 

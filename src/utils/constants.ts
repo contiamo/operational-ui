@@ -105,6 +105,8 @@ const color = {
   basic: "#636363",
   ghost: "hsla(0, 0%, 100%, 0.33)",
   white: whiteColor,
+  /** `#fff26666` */
+  highlight: "#fff26666",
   /** `#000` */
   black: "#000",
   background: backgroundColors,
@@ -236,7 +238,7 @@ const constants = {
 /*
  * Expands a color expressed either as a custom hex value
  * or a color key to pick from within the style constants object.
-*/
+ */
 export const expandColor = (
   theme: OperationalStyleConstants,
   colorToBeExpanded?: keyof OperationalStyleConstants["color"] | string,
