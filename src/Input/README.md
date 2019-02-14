@@ -1,30 +1,50 @@
 ### Usage
 
 ```jsx
-class StatefulInput extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: "",
-    }
-  }
-  render() {
-    return (
-      <Input
-        placeholder="Name here"
-        inputId="input-id"
-        label="Name"
-        name="forForms"
-        value={this.state.value}
-        onChange={value => {
-          this.setState(prevState => ({ value }))
-        }}
-      />
-    )
-  }
+initialState = {
+  value: "",
 }
-
-;<StatefulInput />
+;<Form>
+  <Input
+    value={state.value}
+    onChange={value => {
+      setState(prevState => ({ value }))
+    }}
+  />
+  <Input
+    placeholder="Name here"
+    value={state.value}
+    onChange={value => {
+      setState(prevState => ({ value }))
+    }}
+  />
+  <Input
+    placeholder="flying-monkeys"
+    label="Username"
+    value={state.value}
+    onChange={value => {
+      setState(prevState => ({ value }))
+    }}
+  />
+  <Input
+    type="password"
+    placeholder="Security to the max! 🔒"
+    label="Password"
+    name="password"
+    value={state.value}
+    onChange={value => {
+      setState(prevState => ({ value }))
+    }}
+  />
+  <Input
+    value={state.value}
+    label="Phone number"
+    hint="Your phone number is a wonderful construct that people can call you on. Phones are great. We love phones."
+    onChange={value => {
+      setState(prevState => ({ value }))
+    }}
+  />
+</Form>
 ```
 
 ### Clearable Value
@@ -40,65 +60,53 @@ initialState = { value: "Clear me..." }
 <Input value="I came from an Autocomplete or something..." preset />
 ```
 
-### With help tooltip
+### With Locked State
 
 ```jsx
-<Input value="12" label="Phone number" hint="Please use country code" />
+initialState = { isInputLocked: true }
+;<Input
+  value="My Storage Unit"
+  label="Database Name"
+  onToggle={() => setState({ isInputLocked: !state.isInputLocked })}
+  disabled={state.isInputLocked}
+  hint={state.isInputLocked ? "Click the lock to change this" : "This value can now be changed"}
+/>
 ```
 
-### In a small container
+### With an Error
 
 ```jsx
-<div style={{ width: 100, marginBottom: 16 }}>
-  <Input value="12" label="Phone number" hint="Please use country code" />
-</div>
-<div style={{ width: 100 }}>
-  <Input value="12" label="Phone number" hint="Please use country code" icon="Play" onIconClick={() => {}} />
-</div>
+<Form>
+  <div>
+    <Input id="help-usa" label="Orange Man" value="Build the wall!" error="Nope, unity." />
+    <Input id="error-without-label" value="Hate hate hate" error="Too negative. Love." />
+  </div>
+</Form>
 ```
 
-### With toggle state
-
-```jsx
-<Input value="Database Name" label="Name" onToggle={() => {}} disabled={true} hint="This value cannot be changed" />
-```
-
-### With Error
-
-```jsx
-<Input value="12" label="Phone number" hint="Please use country code" error="Must be less than 12 characters" />
-```
-
-### With button
+### With an Action Button
 
 ```jsx
 <Input
-  value="12"
-  label="Phone number"
-  hint="Please use country code"
+  value="JNAPE92"
+  label="Employee ID"
   icon="User"
   onIconClick={() => {
-    console.log("clicked icon")
+    alert("You have clicked on JNAPE92!")
   }}
 />
 ```
 
-### With `copy` option
+### Copyable Input
 
 You can have a field with a "copy to clipboard" button with the `copy` prop.
 
 ```jsx
-<Input value="go to my clipboard!" label="Something to save" copy />
+<Input value="j08wejf08wejg01j3401jg" label="Your API Token" copy />
 ```
 
 ### Full Width
 
 ```jsx
-<Input fullWidth value="Dave the Sheep" label="Hi, my name is" />
-```
-
-#### Without a Label
-
-```jsx
-<Input fullWidth value="I feel naked" />
+<Input fullWidth value="Dave the Sheep" label="Hi, My Name is" />
 ```
