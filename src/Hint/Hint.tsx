@@ -18,6 +18,7 @@ export interface HintProps extends DefaultProps {
    */
   right?: boolean
   tooltipPosition?: "left" | "top" | "right" | "bottom" | "smart"
+  textId?: string
 }
 
 const Container = styled("div")<{ left?: HintProps["left"]; right?: HintProps["right"] }>(({ left, right, theme }) => ({
@@ -31,7 +32,7 @@ const Container = styled("div")<{ left?: HintProps["left"]; right?: HintProps["r
   ...hoverTooltip,
 }))
 
-const HintTooltip: React.SFC<{ position: HintProps["tooltipPosition"] }> = props => {
+const HintTooltip: React.SFC<{ position: HintProps["tooltipPosition"]; textId: HintProps["textId"] }> = props => {
   switch (props.position) {
     case "right":
       return <Tooltip right {...props} />
@@ -51,7 +52,9 @@ const HintTooltip: React.SFC<{ position: HintProps["tooltipPosition"] }> = props
 const Hint: React.SFC<HintProps> = props => (
   <Container {...props}>
     <Icon name="Question" size={12} />
-    <HintTooltip position={props.tooltipPosition!}>{props.children}</HintTooltip>
+    <HintTooltip position={props.tooltipPosition!} textId={props.textId}>
+      {props.children}
+    </HintTooltip>
   </Container>
 )
 
