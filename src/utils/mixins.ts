@@ -55,6 +55,9 @@ export const FormFieldControl = styled("div")(({ theme }) => ({
   ":hover": {
     color: theme.color.text.default,
   },
+  " *": {
+    pointerEvents: "none",
+  },
 }))
 
 export const FormFieldError = styled("div")(({ theme }) => ({
