@@ -11,7 +11,7 @@ export interface DefaultProps {
 export interface DragProps {
   draggable?: boolean
   onDragStart?: (ev: React.DragEvent<HTMLDivElement>) => void
-  onDragEnd?: (event: React.DragEvent<HTMLDivElement>) => void
+  onDragEnd?: (ev: React.DragEvent<HTMLDivElement>) => void
   onDragEnter?: (ev: React.DragEvent<HTMLDivElement>) => void
   onDragExit?: (ev: React.DragEvent<HTMLDivElement>) => void
   onDragLeave?: (ev: React.DragEvent<HTMLDivElement>) => void
