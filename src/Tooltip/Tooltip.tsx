@@ -1,5 +1,6 @@
-import * as React from "react"
+import React, { useEffect, useRef, useState } from "react"
 
+import useWindowSize from "../hooks/useWindowSize/useWindowSize"
 import { DefaultProps } from "../types"
 import Container, { Position } from "./Tooltip.Container"
 
@@ -83,6 +84,47 @@ export interface State {
   singleLineTextWidth: number
 }
 
+const getPosition = (props: TooltipProps) => {
+  let position = "right" as Position
+
+  if (props.left) {
+    position = "left"
+  }
+  if (props.right) {
+    position = "right"
+  }
+  if (props.bottom) {
+    position = "bottom"
+  }
+  if (props.top) {
+    position = "top"
+  }
+
+  return position
+}
+
+const getDisplayPosition = (windowSize: { width: number; height: number }, state: State, props: TooltipProps) => {
+  let position = getPosition(props)
+
+  /** Swap the positions of tooltips in case they are clipped in this particular viewport */
+  if (props.smart) {
+    if (state.bbLeft < 0 && position === "left") {
+      position = "right"
+    }
+    if (state.bbTop < 0 && position === "top") {
+      position = "bottom"
+    }
+    if (state.bbRight > windowSize.width && position === "right") {
+      position = "left"
+    }
+    if (state.bbBottom > windowSize.height && position === "bottom") {
+      position = "top"
+    }
+  }
+
+  return position
+}
+
 /*
  * This class name is used as a selector when customizing the opacity for tooltips
  * that are only displayed when a particular parent of theirs is hovered.
@@ -92,119 +134,61 @@ export interface State {
  */
 export const dangerousTooltipContainerClassName = "operational-ui-tooltip"
 
-class Tooltip extends React.Component<TooltipProps, State> {
-  public state = {
+const Tooltip: React.SFC<TooltipProps> = props => {
+  const containerNode = useRef<HTMLElement>(null)
+  const offScreenWidthTestNode = useRef<HTMLElement>(null)
+  const [state, setState] = useState<State>({
     bbTop: 0,
     bbLeft: 0,
     bbRight: 0,
     bbBottom: 0,
     singleLineTextWidth: 0,
-  }
+  })
 
-  public containerNode?: HTMLElement
-  public offScreenWidthTestNode?: HTMLElement
-
-  public setDomProperties() {
-    if (!this.offScreenWidthTestNode || !this.containerNode) {
+  useEffect(() => {
+    if (!offScreenWidthTestNode.current || !containerNode.current) {
       return
     }
-    const bbOffScreen = this.offScreenWidthTestNode.getBoundingClientRect()
-    const bbRect = this.containerNode.getBoundingClientRect()
-    this.setState({
+
+    const bbOffScreen = offScreenWidthTestNode.current.getBoundingClientRect()
+    const bbRect = containerNode.current.getBoundingClientRect()
+    setState({
       bbTop: bbRect.top,
       bbBottom: bbRect.bottom,
       bbLeft: bbRect.left,
       bbRight: bbRect.right,
       singleLineTextWidth: bbOffScreen.width,
     })
-  }
+  }, [])
 
-  public componentDidMount() {
-    this.setDomProperties()
-  }
+  const windowSize = useWindowSize()
+  const displayPosition = getDisplayPosition(windowSize, state, props)
 
-  public getPosition() {
-    let position: Position = "right"
-
-    if (this.props.left) {
-      position = "left"
-    }
-
-    if (this.props.right) {
-      position = "right"
-    }
-
-    if (this.props.bottom) {
-      position = "bottom"
-    }
-
-    if (this.props.top) {
-      position = "top"
-    }
-
-    return position
-  }
-
-  public getDisplayPosition() {
-    // TODO: Refactor with `useWindowSize` hook
-    const windowSize = { width: window.innerWidth, height: window.innerHeight }
-
-    let position: Position = this.getPosition()
-
-    /** Swap the positions of tooltips in case they are clipped in this particular viewport */
-    if (this.props.smart) {
-      if (this.state.bbLeft < 0 && String(position) === "left") {
-        position = "right"
-      }
-
-      if (this.state.bbTop < 0 && String(position) === "top") {
-        position = "bottom"
-      }
-
-      if (this.state.bbRight > windowSize.width && String(position) === "right") {
-        position = "left"
-      }
-
-      if (this.state.bbBottom > windowSize.height && String(position) === "bottom") {
-        position = "top"
-      }
-    }
-
-    return position
-  }
-
-  public render() {
-    const displayPosition = this.getDisplayPosition()
-    return (
-      <>
-        {/* Test node rendered to determine how wide the text is if it were written in a single line.
-         * Note that the position is set arbitrarily since it does not influence text width.
-         */}
-        <Container
-          position="bottom"
-          offScreenWidthTest
-          singleLineTextWidth={this.state.singleLineTextWidth}
-          innerRef={node => {
-            this.offScreenWidthTestNode = node
-          }}
-        >
-          {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
-          <p>{this.props.children}</p>
-        </Container>
-        <Container
-          className={dangerousTooltipContainerClassName}
-          singleLineTextWidth={this.state.singleLineTextWidth}
-          position={displayPosition}
-          innerRef={node => {
-            this.containerNode = node
-          }}
-        >
-          {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
-          <p>{this.props.children}</p>
-        </Container>
-      </>
-    )
-  }
+  return (
+    <>
+      {/* Test node rendered to determine how wide the text is if it were written in a single line.
+       * Note that the position is set arbitrarily since it does not influence text width.
+       */}
+      <Container
+        position="bottom"
+        offScreenWidthTest
+        singleLineTextWidth={state.singleLineTextWidth}
+        innerRef={offScreenWidthTestNode}
+      >
+        {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
+        <p>{props.children}</p>
+      </Container>
+      <Container
+        className={dangerousTooltipContainerClassName}
+        singleLineTextWidth={state.singleLineTextWidth}
+        position={displayPosition}
+        innerRef={containerNode}
+      >
+        {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
+        <p>{props.children}</p>
+      </Container>
+    </>
+  )
 }
 
 export default Tooltip
