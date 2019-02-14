@@ -2,6 +2,7 @@ import { keyframes } from "@emotion/core"
 
 import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
 import { lighten } from "../utils"
+import styled from "../utils/styled"
 import { OperationalStyleConstants } from "./constants"
 import styled from "./styled"
 
