@@ -35,6 +35,9 @@ const Button = styled("div")`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  * {
+    pointer-events: none;
+  }
   ${({ theme }) => `
     background-color: ${theme.color.background.lighter};
     border-top-left-radius: ${theme.borderRadius}px;
