@@ -58,7 +58,7 @@ export const FormFieldControl = styled("div")(({ theme }) => ({
 export const FormFieldError = styled("div")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
   color: theme.color.error,
-  padding: `${theme.space.base / 2}px ${theme.space.element}px`,
+  padding: `${theme.space.base / 2}px ${theme.space.medium}px`,
   marginBottom: 0,
   width: "100%",
   borderBottomLeftRadius: theme.borderRadius,
