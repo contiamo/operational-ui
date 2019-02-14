@@ -151,7 +151,7 @@ const font = {
     /** 12px */
     fineprint: 12,
 
-    /** 12px */
+    /** 11px */
     tiny: 11,
   },
   weight: {
