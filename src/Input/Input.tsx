@@ -1,7 +1,7 @@
-import nanoid from "nanoid"
 import * as React from "react"
 
 import Hint from "../Hint/Hint"
+import { useUniqueId } from "../hooks/useUniqueId"
 import Icon, { IconName } from "../Icon/Icon"
 import { LabelText } from "../LabelText/LabelText"
 import { DefaultProps } from "../types"
@@ -79,12 +79,14 @@ const Input: React.SFC<InputProps> = ({
   disabled,
   ...props
 }) => {
+  const uniqueId = useUniqueId(id)
+
   const Field = (
     <InputField
       hint={hint}
       tabIndex={tabIndex}
       label={label}
-      id={id}
+      id={uniqueId}
       fullWidth={fullWidth}
       disabled={disabled}
       {...props}
@@ -93,11 +95,11 @@ const Input: React.SFC<InputProps> = ({
 
   if (label) {
     return (
-      <Label fullWidth={fullWidth} id={id ? `input-label-${id}` : `input-label-${label}`}>
+      <Label fullWidth={fullWidth} id={uniqueId ? `input-label-${uniqueId}` : `input-label-${label}`}>
         <LabelText>{label}</LabelText>
         {(hint || onToggle) && (
           <FormFieldControls>
-            {hint && <Hint textId={`input-hint-${id}`}>{hint}</Hint>}
+            {hint && <Hint textId={`input-hint-${uniqueId}`}>{hint}</Hint>}
             {onToggle && (
               <FormFieldControl
                 onClick={() => {
@@ -117,10 +119,6 @@ const Input: React.SFC<InputProps> = ({
   }
 
   return Field
-}
-
-Input.defaultProps = {
-  id: nanoid(),
 }
 
 export default Input
