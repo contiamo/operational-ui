@@ -1,8 +1,8 @@
-import nanoid from "nanoid"
 import * as React from "react"
 
 import ContextMenu from "../ContextMenu/ContextMenu"
 import { IContextMenuItem, IContextMenuItem as Item } from "../ContextMenu/ContextMenu.Item"
+import { useUniqueId } from "../hooks/useUniqueId"
 import Input, { InputProps } from "../Input/Input"
 import Progress from "../Progress/Progress"
 import styled from "../utils/styled"
@@ -89,7 +89,7 @@ export function Autocomplete<T>({
   ...inputProps
 }: AutocompleteProps<T>) {
   const [isContextMenuOpen, setIsContextMenuOpen] = React.useState(false)
-  const autocompleteId = React.useRef(id || nanoid())
+  const uniqueId = useUniqueId(id)
 
   return (
     <Container
@@ -101,7 +101,7 @@ export function Autocomplete<T>({
     >
       {loading && <Progress bottom />}
       <Input
-        id={autocompleteId.current}
+        id={uniqueId}
         tabIndex={tabIndex}
         onFocus={() => setIsContextMenuOpen(true)}
         onBlur={() => setIsContextMenuOpen(false)}
