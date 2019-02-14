@@ -76,6 +76,7 @@
     "emotion-theming": "^10.0.7",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
+    "nanoid": "^2.0.1",
     "node-fetch": "^2.3.0",
     "qs": "6.6.0",
     "react": "^16.8.1",

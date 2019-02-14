@@ -8,6 +8,10 @@ import styled from "../utils/styled"
 import { makeItems } from "./Autocomplete.utils"
 
 export interface AutocompleteProps<TValue> {
+  /** The ID for this element, for accessibility et al */
+  id?: string
+  /** Helps with ordering keyboard navigation */
+  tabIndex?: number | string
   /**
    * Label text, rendering the input inside a tag if specified.
    * The `labelId` props is responsible for specifying for and id attributes.
@@ -84,6 +88,8 @@ export class Autocomplete<TValue> extends React.Component<AutocompleteProps<TVal
   public render() {
     const {
       fullWidth,
+      id,
+      tabIndex,
       results,
       resultIcon,
       loading,
@@ -106,6 +112,8 @@ export class Autocomplete<TValue> extends React.Component<AutocompleteProps<TVal
       >
         {loading && <Progress bottom />}
         <Input
+          id={id}
+          tabIndex={tabIndex}
           onFocus={this.openContextMenu}
           onBlur={this.closeContextMenu}
           fullWidth={true}
