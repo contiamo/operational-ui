@@ -11,17 +11,14 @@ const width = 360
 
 const Container = styled("div")<{
   fullWidth: InputProps["fullWidth"]
-  withLabel?: boolean
+  withLabel: boolean
 }>`
   position: relative;
   align-items: center;
   justify-content: center;
-  max-width: 100%;
-  ${({ fullWidth, withLabel }) => `
-      display: ${withLabel ? "flex" : "inline-flex"};
-      width: 100%;
-      max-width: ${fullWidth ? "none" : `${width}px`};
-    `};
+  display: inline-flex;
+  width: 100%;
+  max-width: ${({ fullWidth }) => (fullWidth ? "none" : `${width}px`)};
 `
 
 const Field = styled("input")<{
@@ -95,6 +92,8 @@ const ClearButton = styled("div")`
 `
 
 const InputField: React.SFC<InputProps> = ({
+  id,
+  hint,
   fullWidth,
   inputRef,
   autoFocus,
@@ -110,14 +109,12 @@ const InputField: React.SFC<InputProps> = ({
   onChange,
   preset,
   label,
-  labelId,
   clear,
   icon,
   copy,
   onIconClick,
 }) => {
   const shouldShowIconButton = Boolean(icon) || Boolean(copy)
-  const forAttributeId = label && labelId
 
   const renderButton = () => {
     if (copy === true) {
@@ -128,40 +125,40 @@ const InputField: React.SFC<InputProps> = ({
   }
 
   return (
-    <>
-      <Container fullWidth={fullWidth} withLabel>
-        {shouldShowIconButton && renderButton()}
-        <Field
-          innerRef={inputRef}
-          autoFocus={autoFocus}
-          name={name}
-          disabled={Boolean(disabled)}
-          value={value || ""}
-          type={type}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          placeholder={placeholder}
-          isError={Boolean(error)}
-          onChange={(ev: React.FormEvent<HTMLInputElement>) => {
-            if (onChange) {
-              onChange(ev.currentTarget.value)
-            }
-          }}
-          clear={clear}
-          preset={Boolean(preset)}
-          id={forAttributeId}
-          withIconButton={shouldShowIconButton}
-          autoComplete={autoComplete}
-        />
-        {clear &&
-          value && (
-            <ClearButton onClick={clear}>
-              <Icon color="color.text.lightest" name="No" />
-            </ClearButton>
-          )}
-      </Container>
+    <Container fullWidth={fullWidth} withLabel={Boolean(label)}>
+      {shouldShowIconButton && renderButton()}
+      <Field
+        aria-labelledby={label ? `input-label-${id}` : undefined}
+        aria-describedby={hint ? `input-hint-${id}` : undefined}
+        aria-label={label}
+        innerRef={inputRef}
+        autoFocus={autoFocus}
+        name={name}
+        disabled={Boolean(disabled)}
+        value={value || ""}
+        type={type}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        placeholder={placeholder}
+        isError={Boolean(error)}
+        onChange={(ev: React.FormEvent<HTMLInputElement>) => {
+          if (onChange) {
+            onChange(ev.currentTarget.value)
+          }
+        }}
+        clear={clear}
+        preset={Boolean(preset)}
+        id={`input-field-${id}`}
+        withIconButton={shouldShowIconButton}
+        autoComplete={autoComplete}
+      />
+      {clear && value && (
+        <ClearButton onClick={clear}>
+          <Icon color="color.text.lightest" name="No" />
+        </ClearButton>
+      )}
       {error ? <FormFieldError>{error}</FormFieldError> : null}
-    </>
+    </Container>
   )
 }
 
