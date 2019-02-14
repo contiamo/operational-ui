@@ -16,8 +16,8 @@ export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstant
 export const Label = styled("label")<{ fullWidth?: boolean; left?: boolean }>(({ fullWidth, theme, left }) => ({
   display: "inline-block",
   position: "relative",
+  width: "100%",
   maxWidth: fullWidth ? "none" : "360px",
-  width: fullWidth ? "100%" : "auto",
   marginRight: left ? theme.space.small : 0,
 }))
 

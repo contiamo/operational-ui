@@ -1,3 +1,4 @@
+import nanoid from "nanoid"
 import * as React from "react"
 
 import Hint from "../Hint/Hint"
@@ -8,6 +9,10 @@ import { FormFieldControl, FormFieldControls, Label } from "../utils/mixins"
 import InputField from "./Input.Field"
 
 export interface BaseProps extends DefaultProps {
+  /** The ID for this element, for accessibility et al */
+  id?: string
+  /** Helps with ordering keyboard navigation */
+  tabIndex?: number | string
   /** Text displayed when the input field has no value. */
   placeholder?: string
   /** The name used to refer to the input, for forms. */
@@ -63,18 +68,37 @@ export interface BasePropsWithoutCopy extends BaseProps {
 
 export type InputProps = BasePropsWithCopy | BasePropsWithoutCopy
 
-const Input: React.SFC<InputProps> = ({ fullWidth, label, labelId, hint, onToggle, disabled, ...props }) => {
-  const forAttributeId = label && labelId
-  const Field = <InputField fullWidth={fullWidth} disabled={disabled} {...props} />
+const Input: React.SFC<InputProps> = ({
+  id,
+  tabIndex,
+  fullWidth,
+  label,
+  labelId,
+  hint,
+  onToggle,
+  disabled,
+  ...props
+}) => {
+  const Field = (
+    <InputField
+      hint={hint}
+      tabIndex={tabIndex}
+      label={label}
+      id={id}
+      fullWidth={fullWidth}
+      disabled={disabled}
+      {...props}
+    />
+  )
 
   if (label) {
     return (
-      <Label fullWidth={fullWidth} htmlFor={forAttributeId}>
+      <Label fullWidth={fullWidth} id={id ? `input-label-${id}` : `input-label-${label}`}>
         <LabelText>{label}</LabelText>
         {(hint || onToggle) && (
           <FormFieldControls>
-            {hint && <Hint>{hint}</Hint>}
-            {onToggle ? (
+            {hint && <Hint textId={`input-hint-${id}`}>{hint}</Hint>}
+            {onToggle && (
               <FormFieldControl
                 onClick={() => {
                   if (onToggle) {
@@ -84,7 +108,7 @@ const Input: React.SFC<InputProps> = ({ fullWidth, label, labelId, hint, onToggl
               >
                 <Icon name={disabled ? "Lock" : "Unlock"} size={12} />
               </FormFieldControl>
-            ) : null}
+            )}
           </FormFieldControls>
         )}
         {Field}
@@ -93,6 +117,10 @@ const Input: React.SFC<InputProps> = ({ fullWidth, label, labelId, hint, onToggl
   }
 
   return Field
+}
+
+Input.defaultProps = {
+  id: nanoid(),
 }
 
 export default Input
