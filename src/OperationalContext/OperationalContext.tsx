@@ -1,10 +1,5 @@
 import * as React from "react"
 
-export interface WindowSize {
-  width: number
-  height: number
-}
-
 export type MessageType = "info" | "success" | "error"
 
 export interface IMessage {
@@ -17,7 +12,6 @@ export interface Context {
   pushState?: (url: string) => void
   replaceState?: (url: string) => void
   pushMessage: (message: IMessage) => void
-  windowSize: WindowSize
   loading: boolean
   setLoading: (isLoading: boolean) => void
 }
@@ -31,10 +25,6 @@ const defaultContext: Context = {
   pushState: undefined,
   replaceState: undefined,
   pushMessage: (_: IMessage) => void 0,
-  windowSize: {
-    width: 1080,
-    height: 640,
-  },
   loading: false,
   setLoading: (_: boolean) => void 0,
 }

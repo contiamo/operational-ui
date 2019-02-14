@@ -1,6 +1,5 @@
 import * as React from "react"
 
-import OperationalContext from "../OperationalContext/OperationalContext"
 import { DefaultProps } from "../types"
 import Container, { Position } from "./Tooltip.Container"
 
@@ -146,7 +145,10 @@ class Tooltip extends React.Component<TooltipProps, State> {
     return position
   }
 
-  public getDisplayPosition(windowSize: { width: number; height: number }) {
+  public getDisplayPosition() {
+    // TODO: Refactor with `useWindowSize` hook
+    const windowSize = { width: window.innerWidth, height: window.innerHeight }
+
     let position: Position = this.getPosition()
 
     /** Swap the positions of tooltips in case they are clipped in this particular viewport */
@@ -172,41 +174,35 @@ class Tooltip extends React.Component<TooltipProps, State> {
   }
 
   public render() {
+    const displayPosition = this.getDisplayPosition()
     return (
-      <OperationalContext>
-        {operationalContext => {
-          const displayPosition = this.getDisplayPosition(operationalContext.windowSize)
-          return (
-            <>
-              {/* Test node rendered to determine how wide the text is if it were written in a single line.
-            * Note that the position is set arbitrarily since it does not influence text width.
-            */}
-              <Container
-                position="bottom"
-                offScreenWidthTest
-                singleLineTextWidth={this.state.singleLineTextWidth}
-                innerRef={node => {
-                  this.offScreenWidthTestNode = node
-                }}
-              >
-                {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
-                <p>{this.props.children}</p>
-              </Container>
-              <Container
-                className={dangerousTooltipContainerClassName}
-                singleLineTextWidth={this.state.singleLineTextWidth}
-                position={displayPosition}
-                innerRef={node => {
-                  this.containerNode = node
-                }}
-              >
-                {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
-                <p>{this.props.children}</p>
-              </Container>
-            </>
-          )
-        }}
-      </OperationalContext>
+      <>
+        {/* Test node rendered to determine how wide the text is if it were written in a single line.
+         * Note that the position is set arbitrarily since it does not influence text width.
+         */}
+        <Container
+          position="bottom"
+          offScreenWidthTest
+          singleLineTextWidth={this.state.singleLineTextWidth}
+          innerRef={node => {
+            this.offScreenWidthTestNode = node
+          }}
+        >
+          {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
+          <p>{this.props.children}</p>
+        </Container>
+        <Container
+          className={dangerousTooltipContainerClassName}
+          singleLineTextWidth={this.state.singleLineTextWidth}
+          position={displayPosition}
+          innerRef={node => {
+            this.containerNode = node
+          }}
+        >
+          {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
+          <p>{this.props.children}</p>
+        </Container>
+      </>
     )
   }
 }

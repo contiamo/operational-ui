@@ -1,19 +1,5 @@
 The `OperationalContext` component provides utility methods and data that can be used inside `OperationalUI`:
 
-### Window size
-
-Child components can get access to window dimensions as follows:
-
-```jsx
-<OperationalContext>
-  {operationalContext => (
-    <p>{`The viewport is ${operationalContext.windowSize.width} pixels wide and ${
-      operationalContext.windowSize.height
-    } tall.`}</p>
-  )}
-</OperationalContext>
-```
-
 ### OperationalContext Hook
 
 You can get the value of `OperationalContext` in the shape of context.
@@ -22,11 +8,7 @@ You can get the value of `OperationalContext` in the shape of context.
 const { useOperationalContext } = require("./OperationalContext")
 const ILookPretty = () => {
   const ctx = useOperationalContext()
-  return (
-    <p>
-      The viewport is {ctx.windowSize.width} pixels wide and {ctx.windowSize.height} tall.
-    </p>
-  )
+  return ctx.loading ? <Spinner /> : <p>My app is loaded!</p>
 }
 ;<ILookPretty />
 ```
