@@ -1,6 +1,7 @@
 import styled from "../utils/styled"
 
-export const LabelText = styled("label")(({ theme }) => ({
+// This is a span because it goes _inside_ a <label>
+export const LabelText = styled("span")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
   display: "block",
   verticalAlign: "middle",
@@ -9,6 +10,7 @@ export const LabelText = styled("label")(({ theme }) => ({
   color: theme.color.text.lightest,
   height: labelTextHeight,
   lineHeight: theme.font.lineHeight,
+  userSelect: "none",
 }))
 
 export const labelTextHeight = 15
