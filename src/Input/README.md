@@ -36,14 +36,16 @@ initialState = {
       setState(prevState => ({ value }))
     }}
   />
-  <Input
-    value={state.value}
-    label="Phone number"
-    hint="Your phone number is a wonderful construct that people can call you on. Phones are great. We love phones."
-    onChange={value => {
-      setState(prevState => ({ value }))
-    }}
-  />
+  <div>
+    <Input
+      value={state.value}
+      label="Phone number"
+      hint="Your phone number is a wonderful construct that people can call you on. Phones are great. We love phones."
+      onChange={value => {
+        setState(prevState => ({ value }))
+      }}
+    />
+  </div>
 </Form>
 ```
 
