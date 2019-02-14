@@ -1,3 +1,4 @@
+import nanoid from "nanoid"
 import * as React from "react"
 
 import ContextMenu from "../ContextMenu/ContextMenu"
@@ -65,6 +66,7 @@ export interface AutocompleteProps<TValue> {
    * Is a result selected?
    */
   selectedResult?: Item<TValue>
+  children?: never
 }
 
 const Container = styled(ContextMenu)<{ fullWidth: boolean }>`
@@ -73,56 +75,42 @@ const Container = styled(ContextMenu)<{ fullWidth: boolean }>`
   align-items: center;
 `
 
-const initialState = { isContextMenuOpen: false }
+export function Autocomplete<T>({
+  id,
+  fullWidth,
+  tabIndex,
+  results,
+  resultIcon,
+  loading,
+  noResultsMessage = "No Results Found",
+  onResultClick,
+  selectedResult,
+  children,
+  ...inputProps
+}: AutocompleteProps<T>) {
+  const [isContextMenuOpen, setIsContextMenuOpen] = React.useState(false)
+  const autocompleteId = React.useRef(id || nanoid())
 
-export class Autocomplete<TValue> extends React.Component<AutocompleteProps<TValue>, Readonly<typeof initialState>> {
-  public state = initialState
-
-  private openContextMenu = () => this.setState(() => ({ isContextMenuOpen: true }))
-  private closeContextMenu = () => this.setState(() => ({ isContextMenuOpen: false }))
-
-  public static defaultProps = {
-    noResultsMessage: "No results found.",
-  }
-
-  public render() {
-    const {
-      fullWidth,
-      id,
-      tabIndex,
-      results,
-      resultIcon,
-      loading,
-      noResultsMessage,
-      onResultClick,
-      selectedResult,
-      children,
-      ...inputProps
-    } = this.props
-
-    const { isContextMenuOpen } = this.state
-
-    return (
-      <Container
-        open={isContextMenuOpen}
-        iconLocation="right"
-        fullWidth={Boolean(fullWidth)}
-        items={makeItems({ results, value: this.props.value, resultIcon, noResultsMessage })}
-        onClick={item => onResultClick(item as IContextMenuItem<TValue>)}
-      >
-        {loading && <Progress bottom />}
-        <Input
-          id={id}
-          tabIndex={tabIndex}
-          onFocus={this.openContextMenu}
-          onBlur={this.closeContextMenu}
-          fullWidth={true}
-          preset={Boolean(selectedResult)}
-          {...inputProps}
-        />
-      </Container>
-    )
-  }
+  return (
+    <Container
+      open={isContextMenuOpen}
+      iconLocation="right"
+      fullWidth={Boolean(fullWidth)}
+      items={makeItems({ results, value: inputProps.value, resultIcon, noResultsMessage })}
+      onClick={item => onResultClick(item as IContextMenuItem<T>)}
+    >
+      {loading && <Progress bottom />}
+      <Input
+        id={autocompleteId.current}
+        tabIndex={tabIndex}
+        onFocus={() => setIsContextMenuOpen(true)}
+        onBlur={() => setIsContextMenuOpen(false)}
+        fullWidth={true}
+        preset={Boolean(selectedResult)}
+        {...inputProps}
+      />
+    </Container>
+  )
 }
 
 export default Autocomplete
