@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react"
+import * as React from "react"
 
 import useWindowSize from "../hooks/useWindowSize/useWindowSize"
 import { DefaultProps } from "../types"
@@ -75,7 +75,7 @@ export interface BottomProps extends BaseProps {
 
 export type TooltipProps = TopProps | LeftProps | RightProps | BottomProps | SmartProps
 
-export interface State {
+interface State {
   // bbTop is an abbreviation of boundingBoxTop
   bbTop: number
   bbBottom: number
@@ -135,9 +135,9 @@ const getDisplayPosition = (windowSize: { width: number; height: number }, state
 export const dangerousTooltipContainerClassName = "operational-ui-tooltip"
 
 const Tooltip: React.SFC<TooltipProps> = props => {
-  const containerNode = useRef<HTMLElement>(null)
-  const offScreenWidthTestNode = useRef<HTMLElement>(null)
-  const [state, setState] = useState<State>({
+  const containerNode = React.useRef<HTMLElement>(null)
+  const offScreenWidthTestNode = React.useRef<HTMLElement>(null)
+  const [state, setState] = React.useState<State>({
     bbTop: 0,
     bbLeft: 0,
     bbRight: 0,
@@ -145,7 +145,7 @@ const Tooltip: React.SFC<TooltipProps> = props => {
     singleLineTextWidth: 0,
   })
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!offScreenWidthTestNode.current || !containerNode.current) {
       return
     }
