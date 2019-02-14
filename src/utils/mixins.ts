@@ -1,6 +1,8 @@
-import styled, { keyframes } from "react-emotion"
+import { keyframes } from "react-emotion"
+
 import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
 import { lighten } from "../utils"
+import styled from "../utils/styled"
 import { OperationalStyleConstants } from "./constants"
 
 export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
