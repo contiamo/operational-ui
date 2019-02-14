@@ -16,6 +16,7 @@ export interface BaseProps extends DefaultProps {
   children?: React.ReactNode
   /** Smart-positioned tooltip, with positioning reversed so it doesn't flow out of the window's bounding box. Currently works for left and top-positioned tooltips. */
   smart?: boolean
+  textId?: string
 }
 
 export interface TopProps extends BaseProps {
@@ -185,7 +186,7 @@ const Tooltip: React.SFC<TooltipProps> = props => {
         ref={containerNode}
       >
         {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
-        <p>{props.children}</p>
+        <p id={props.textId}>{props.children}</p>
       </Container>
     </>
   )
