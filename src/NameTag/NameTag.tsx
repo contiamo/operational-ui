@@ -1,10 +1,10 @@
 import * as React from "react"
-import { DefaultProps } from "../types"
-import styled from "../utils/styled"
 
+import { DefaultProps } from "../types"
 import { readableTextColor } from "../utils"
 import { colorMapper } from "../utils/color"
 import { expandColor } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface NameTagProps extends DefaultProps {
   /** Background color */
@@ -21,26 +21,33 @@ export interface NameTagProps extends DefaultProps {
    * Children to this component are expected to be a plain string
    */
   children?: string
+  /** Is it condensed? */
+  condensed?: boolean
 }
 
-const Container = styled("div")<{
-  color_?: NameTagProps["color"]
+const shouldForwardProp = (prop: string) => !["color", "left", "assignColor", "condensed"].includes(prop)
+
+const Container = styled("div", {
+  shouldForwardProp,
+})<{
+  color?: NameTagProps["color"]
   left?: NameTagProps["left"]
   right?: NameTagProps["right"]
   children: string
   assignColor: boolean
-}>(({ theme, color_, left, right, children, assignColor }) => {
+  condensed: boolean
+}>(({ theme, color, left, right, children, assignColor, condensed }) => {
   const backgroundColor = assignColor
     ? colorMapper(theme.color.palette)(children)
-    : expandColor(theme, color_) || theme.color.primary
+    : expandColor(theme, color) || theme.color.primary
   const textColor = readableTextColor(backgroundColor, [theme.color.white, theme.color.black])
   return {
     backgroundColor,
     color: textColor,
-    fontSize: theme.font.size.small,
+    fontSize: condensed ? theme.font.size.tiny : theme.font.size.small,
     fontWeight: theme.font.weight.bold,
-    width: 28,
-    height: 20,
+    width: condensed ? 14 : 28,
+    height: condensed ? 14 : 20,
     borderRadius: theme.borderRadius,
     display: "inline-flex",
     alignItems: "center",
@@ -50,8 +57,8 @@ const Container = styled("div")<{
   }
 })
 
-const NameTag: React.SFC<NameTagProps> = ({ color, children, ...props }) => (
-  <Container {...props} color_={color} assignColor={Boolean(!color)}>
+const NameTag: React.SFC<NameTagProps> = ({ condensed, children, ...props }) => (
+  <Container {...props} condensed={Boolean(condensed)} assignColor={!props.color}>
     {children || ""}
   </Container>
 )
