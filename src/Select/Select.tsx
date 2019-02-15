@@ -17,15 +17,9 @@ export interface IOption {
   value: Value
 }
 
-const displayOption = (opt: IOption): string => {
-  if (opt.label) {
-    return opt.label
-  }
-
-  return String(opt.value)
-}
-
 export interface SelectProps extends DefaultProps {
+  /** The ID of this Select field */
+  id?: string
   /** Options available */
   options: IOption[]
   /** Current value */
@@ -50,10 +44,12 @@ export interface SelectProps extends DefaultProps {
   naked?: boolean
 }
 
-export interface State {
-  open: boolean
-  updating: boolean
-  search: string
+const displayOption = (opt: IOption): string => {
+  if (opt.label) {
+    return opt.label
+  }
+
+  return String(opt.value)
 }
 
 const Container = styled("div")<Partial<SelectProps>>(({ theme, color, disabled, naked }) => {
@@ -137,166 +133,163 @@ const OptionsList = styled("div")({
   overflow: "auto",
 })
 
-class Select extends React.Component<SelectProps, State> {
-  public state: State = {
-    open: false,
-    updating: false,
-    search: "",
-  }
-
-  public containerNode?: Node
-
-  public static defaultProps: Partial<SelectProps> = {
-    placeholder: "No entries selected",
-    naked: false,
-  }
+const Select: React.FC<SelectProps> = ({
+  value,
+  placeholder,
+  options,
+  id,
+  label,
+  color,
+  disabled,
+  className,
+  children,
+  filterable,
+  maxOptions,
+  naked,
+  onChange,
+  ...props
+}) => {
+  const containerNode = React.useRef(null)
+  const [open, setOpen] = React.useState(false)
+  // const [updating, setUpdating] = React.useState(false)
+  const [search, setSearch] = React.useState("")
 
   // This implements "click outside to close" behavior
-  public handleClick = (ev: MouseEvent): void => {
+  const handleClick = React.useCallback((ev: MouseEvent): void => {
     // if we're clicking on the Select itself,
-    if (this.containerNode && this.containerNode.contains(ev.target as Node)) {
+    if (containerNode.current && (containerNode.current as any).contains(ev.target as Node)) {
       return
     }
 
     // if we're clicking outside,
-    this.close()
-  }
+    setOpen(false)
+  }, [])
 
-  public handleEsc = (e: KeyboardEvent) => {
+  const close = React.useCallback(() => {
+    setOpen(false)
+  }, [])
+
+  const handleEsc = React.useCallback((e: KeyboardEvent) => {
     if (e.keyCode === keyCodes.esc) {
-      this.close()
+      close()
     }
-  }
+  }, [])
 
-  public componentDidUpdate() {
-    if (this.state.open) {
-      document.addEventListener("click", this.handleClick)
-      document.addEventListener("keyup", this.handleEsc)
+  React.useEffect(() => {
+    if (open) {
+      document.addEventListener("click", handleClick)
+      document.addEventListener("keyup", handleEsc)
     } else {
-      document.removeEventListener("click", this.handleClick)
-      document.removeEventListener("keyup", this.handleEsc)
+      document.removeEventListener("click", handleClick)
+      document.removeEventListener("keyup", handleEsc)
     }
-  }
+  }, [open])
 
-  public getDisplayValue(): string | undefined {
-    const { placeholder } = this.props
-
-    if (!this.props.value) {
+  const getDisplayValue = (): string | undefined => {
+    if (!value) {
       return placeholder
     }
 
-    if (!Array.isArray(this.props.value)) {
-      const displayedOption = this.props.options.filter(option => option.value === this.props.value)[0]
+    if (!Array.isArray(value)) {
+      const displayedOption = options.filter(option => option.value === value)[0]
       return displayedOption ? displayOption(displayedOption) : placeholder
     }
 
-    const listDisplay = this.props.options
-      .map(option => ((this.props.value as Value[]).indexOf(option.value) > -1 ? displayOption(option) : null))
+    const listDisplay = options
+      .map(option => ((value as Value[]).indexOf(option.value) > -1 ? displayOption(option) : null))
       .filter(a => !!a)
       .join(", ")
-    return listDisplay === "" ? this.props.placeholder || "" : listDisplay
+    return listDisplay === "" ? placeholder || "" : listDisplay
   }
 
-  public selectOption(option: IOption) {
-    const { onChange } = this.props
-
+  const selectOption = React.useCallback((option: IOption) => {
     if (!onChange) {
       return
     }
 
-    if (!Array.isArray(this.props.value)) {
-      this.setState({
-        open: false,
-      })
-      onChange(this.props.value === option.value ? null : option.value)
+    if (!Array.isArray(value)) {
+      setOpen(false)
+      onChange(value === option.value ? null : option.value)
       return
     }
 
-    const optionIndex: number = this.props.value.indexOf(option.value)
+    const optionIndex: number = value.indexOf(option.value)
 
     if (optionIndex < 0) {
-      onChange([...this.props.value, option.value], option.value)
+      onChange([...value, option.value], option.value)
     } else {
-      onChange([...this.props.value.slice(0, optionIndex), ...this.props.value.slice(optionIndex + 1)], option.value)
+      onChange([...value.slice(0, optionIndex), ...value.slice(optionIndex + 1)], option.value)
     }
-  }
+  }, [])
 
-  public isOptionSelected(option: IOption) {
-    if (!Array.isArray(this.props.value)) {
-      return this.props.value === option.value
+  const isOptionSelected = React.useCallback((option: IOption) => {
+    if (!Array.isArray(value)) {
+      return value === option.value
     }
 
-    return this.props.value.indexOf(option.value) > -1
-  }
+    return value.indexOf(option.value) > -1
+  }, [])
 
-  public close() {
-    this.setState(() => ({
-      open: false,
-    }))
-  }
+  const toggle = React.useCallback(() => {
+    setOpen(!open)
+  }, [])
 
-  public render() {
-    const { color, disabled, naked, value, options, filterable, label, onChange, maxOptions, ...props } = this.props
-    const { open, search } = this.state
-    const selectWithoutLabel = (
-      <Container
-        {...props}
-        color={color}
-        disabled={disabled}
-        naked={naked}
-        innerRef={(containerNode: HTMLElement) => (this.containerNode = containerNode)}
-        role="listbox"
-        tabIndex={-2}
-        onClick={() => {
-          this.setState(prevState => ({
-            open: !prevState.open,
-          }))
-        }}
-      >
-        <DisplayValue isPlaceholder={Array.isArray(value) ? value.length === 0 : !value}>
-          {this.getDisplayValue()}
-        </DisplayValue>
-        {Boolean(options.length) &&
-          open && (
-            <Options>
-              {filterable && (
-                <SelectFilter
-                  onChange={(filterValue: string) => {
-                    this.setState({
-                      search: filterValue,
-                    })
-                  }}
-                />
-              )}
-              <OptionsList>
-                {options
-                  .filter(option => (option.label || String(option.value)).match(RegExp(search, "i")))
-                  .map(option => (
-                    <SelectOption
-                      key={String(option.value)}
-                      onClick={() => {
-                        this.selectOption(option)
-                      }}
-                      selected={this.isOptionSelected(option)}
-                    >
-                      {option.label || String(option.value)}
-                    </SelectOption>
-                  ))
-                  .slice(0, maxOptions)}
-              </OptionsList>
-            </Options>
+  const selectWithoutLabel = (
+    <Container
+      {...props}
+      color={color}
+      disabled={disabled}
+      naked={naked}
+      innerRef={containerNode}
+      role="listbox"
+      tabIndex={-2}
+      onClick={toggle}
+    >
+      <DisplayValue isPlaceholder={Array.isArray(value) ? value.length === 0 : !value}>
+        {getDisplayValue()}
+      </DisplayValue>
+      {Boolean(options.length) && open && (
+        <Options>
+          {filterable && (
+            <SelectFilter
+              onChange={(filterValue: string) => {
+                setSearch(filterValue)
+              }}
+            />
           )}
-      </Container>
-    )
-    return label ? (
-      <Label {...props}>
-        <LabelText>{label}</LabelText>
-        {selectWithoutLabel}
-      </Label>
-    ) : (
-      selectWithoutLabel
-    )
-  }
+          <OptionsList>
+            {options
+              .filter(option => (option.label || String(option.value)).match(RegExp(search, "i")))
+              .map(option => (
+                <SelectOption
+                  key={String(option.value)}
+                  onClick={() => {
+                    selectOption(option)
+                  }}
+                  selected={isOptionSelected(option)}
+                >
+                  {option.label || String(option.value)}
+                </SelectOption>
+              ))
+              .slice(0, maxOptions)}
+          </OptionsList>
+        </Options>
+      )}
+    </Container>
+  )
+  return label ? (
+    <Label {...props}>
+      <LabelText>{label}</LabelText>
+      {selectWithoutLabel}
+    </Label>
+  ) : (
+    selectWithoutLabel
+  )
+}
+
+Select.defaultProps = {
+  placeholder: "No entries selected",
+  naked: false,
 }
 
 export default Select
