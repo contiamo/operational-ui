@@ -7,5 +7,5 @@ export const useUniqueId = (defaultId: string | null = null) => {
     // @ts-ignore this is not read-only
     id.current = nanoid()
   }
-  return id.current
+  return id.current as string
 }
