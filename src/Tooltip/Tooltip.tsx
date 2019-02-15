@@ -180,7 +180,7 @@ const Tooltip: React.SFC<TooltipProps> = props => {
         <p>{props.children}</p>
       </Container>
       <Container
-        aria-role="tooltip"
+        role="tooltip"
         className={dangerousTooltipContainerClassName}
         singleLineTextWidth={state.singleLineTextWidth}
         position={displayPosition}
