@@ -5,7 +5,7 @@ export const isWhite = (color: string) =>
 
 // Maps strings deterministally to the same color. Avoids similar strings ending up with the same color.
 export const colorMapper = (colors: string[]) => {
-  return (str: string) => colors[hash32FNV1aUTF(str) % colors.length]
+  return (str: string) => colors[hash32FNV1aUTF(String(str)) % colors.length]
 }
 
 /*

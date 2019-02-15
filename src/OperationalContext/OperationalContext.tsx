@@ -1,20 +1,38 @@
 import * as React from "react"
 
-import { Context, IMessage, MessageType, useOperationalContext, WindowSize } from "./OperationalContext.init"
+export type MessageType = "info" | "success" | "error"
 
-export interface Props {
-  children: (operationalContext: Context) => undefined | React.ReactNode
+export interface IMessage {
+  body: string
+  type: MessageType
+  onClick?: () => void
+}
+
+export interface Context {
+  pushState?: (url: string) => void
+  replaceState?: (url: string) => void
+  pushMessage: (message: IMessage) => void
+  loading: boolean
+  setLoading: (isLoading: boolean) => void
 }
 
 /**
- * This component simply wraps OperationalContext in order to allow styleguidist to pick up on
- * it and display it in the documentation page.
+ * Defining a default context value here, used below when instantiating
+ * the context consumer and provider below in order for context to be
+ * correctly detected throughout the application.
  */
-const OperationalContext: React.SFC<Props> = props => {
-  const ctx = useOperationalContext()
-  return <>{props.children({ ...ctx })}</>
+const defaultContext: Context = {
+  pushState: undefined,
+  replaceState: undefined,
+  pushMessage: (_: IMessage) => void 0,
+  loading: false,
+  setLoading: (_: boolean) => void 0,
 }
 
-export default OperationalContext
+const ctx = React.createContext(defaultContext)
 
-export { Context, WindowSize, IMessage, MessageType, useOperationalContext }
+export const { Consumer: OperationalContext, Provider } = ctx
+
+export const useOperationalContext = () => React.useContext(ctx)
+
+export default OperationalContext

@@ -2,7 +2,7 @@ import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
 
 import Icon, { IconName } from "../Icon/Icon"
-import OperationalContext from "../OperationalContext/OperationalContext.init"
+import OperationalContext from "../OperationalContext/OperationalContext"
 import styled from "../utils/styled"
 import { height } from "./Input.constants"
 

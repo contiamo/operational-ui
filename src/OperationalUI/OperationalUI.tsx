@@ -1,15 +1,12 @@
 import { injectGlobal } from "emotion"
 import { ThemeProvider } from "emotion-theming"
-import { Cancelable } from "lodash"
-import debounce from "lodash/debounce"
 import merge from "lodash/merge"
 import * as React from "react"
 
 import ErrorBoundary from "../Internals/ErrorBoundary"
 import Message from "../Internals/Message/Message"
 import Messages from "../Internals/Messages/Messages"
-import { IMessage, MessageType, WindowSize } from "../OperationalContext/OperationalContext"
-import { Provider } from "../OperationalContext/OperationalContext.init"
+import { IMessage, MessageType, Provider } from "../OperationalContext/OperationalContext"
 import Progress from "../Progress/Progress"
 import { darken, DeepPartial } from "../utils"
 import constants, { OperationalStyleConstants } from "../utils/constants"
@@ -46,7 +43,6 @@ export interface OperationalUIProps {
 }
 
 export interface State {
-  windowSize: WindowSize
   messages: Array<{
     message: IMessage
     addedAt: number
@@ -117,10 +113,6 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
   }
 
   public state: State = {
-    windowSize: {
-      width: 0,
-      height: 0,
-    },
     messages: [],
     isLoading: false,
   }
@@ -152,23 +144,8 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     }
   }
 
-  /**
-   * Explicit typing is required here in order to give the typescript compiler access to typings
-   * used to work out type definitions for the debounce method.
-   * @todo look into making this unnecessary.
-   */
-  public handleResize: (() => void) & Cancelable = debounce(() => {
-    this.onSetWindowSize()
-  }, 200)
-
   public setLoading = (isLoading: boolean) => {
     this.setState(() => ({ isLoading }))
-  }
-
-  public onSetWindowSize = () => {
-    this.setState(() => ({
-      windowSize: { width: window.innerWidth, height: window.innerHeight },
-    }))
   }
 
   public componentDidCatch(error: Error) {
@@ -182,15 +159,12 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     if (!this.props.noBaseStyles) {
       injectGlobal(baseStylesheet(constants))
     }
-    this.onSetWindowSize()
-    window.addEventListener("resize", this.handleResize)
   }
 
   public componentWillUnmount() {
     if (this.messageTimerInterval) {
       clearInterval(this.messageTimerInterval)
     }
-    window.removeEventListener("resize", this.handleResize)
   }
 
   public render() {
@@ -207,7 +181,6 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
               pushMessage: this.pushMessage,
               loading: this.state.isLoading,
               setLoading: this.setLoading,
-              windowSize: this.state.windowSize,
             }}
           >
             <Container>

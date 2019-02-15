@@ -196,10 +196,12 @@ function Card<T extends {}>(props: CardProps<T>) {
   }
 
   if (isWithTabs(props)) {
+    const { onTabChange, ...otherProps } = props
+
     return (
-      <Tabs tabs={props.tabs} activeTabName={props.activeTabName} onTabChange={props.onTabChange}>
+      <Tabs tabs={props.tabs} activeTabName={props.activeTabName} onTabChange={onTabChange}>
         {({ tabsBar, activeChildren }) => (
-          <Container {...rest}>
+          <Container {...otherProps}>
             <CardHeader
               title={
                 <TabsBarContainer>
