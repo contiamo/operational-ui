@@ -74,13 +74,17 @@ document.body.innerHTML = greeter(user);`}</Code>
 Sometimes, you might need to quickly copy a code snippet. Here's how.
 
 ```jsx
-<OperationalContext>
-  {({ pushMessage }) => (
+const { useOperationalContext } = require("../OperationalContext/OperationalContext")
+const ComponentWithCode = () => {
+  const { pushMessage } = useOperationalContext()
+  return (
     <Code
       syntax="typescript"
       onCopy={() => pushMessage({ type: "info", body: "Successfully Copied!" })}
       copyable
     >{`Tuuvaquae5ieroeba5eu1Dae`}</Code>
-  )}
-</OperationalContext>
+  )
+}
+
+;<ComponentWithCode />
 ```

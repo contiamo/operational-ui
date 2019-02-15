@@ -29,10 +29,10 @@ const defaultContext: Context = {
   setLoading: (_: boolean) => void 0,
 }
 
-const OperationalContext = React.createContext(defaultContext)
+const ctx = React.createContext(defaultContext)
 
-export const { Provider, Consumer } = OperationalContext
+export const { Consumer: OperationalContext, Provider } = ctx
 
-export const useOperationalContext = () => React.useContext(OperationalContext)
+export const useOperationalContext = () => React.useContext(ctx)
 
-export default Consumer
+export default OperationalContext

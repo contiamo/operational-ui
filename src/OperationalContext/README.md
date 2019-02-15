@@ -1,30 +1,21 @@
 The `OperationalContext` component provides utility methods and data that can be used inside `OperationalUI`:
 
-### OperationalContext Hook
-
-You can get the value of `OperationalContext` in the shape of context.
-
-```jsx
-const { useOperationalContext } = require("./OperationalContext")
-const ILookPretty = () => {
-  const ctx = useOperationalContext()
-  return ctx.loading ? <Spinner /> : <p>My app is loaded!</p>
-}
-;<ILookPretty />
-```
-
 ### Messages and Loaders
 
 You can use `OperationalUI`'s flash- and progress bar features to automatically render and manage these universal UI elements using the `pushMessage` and `setLoadingState` methods provided in context, as shown in the code snippet below:
 
 ```jsx
-<OperationalContext>
-  {operationalContext => (
+const { useOperationalContext } = require("./OperationalContext")
+
+const ComponentWithContext = () => {
+  const { pushMessage, setLoading, loading } = useOperationalContext()
+
+  return (
     <div style={{ padding: 20 }}>
       <Button
         color="primary"
         onClick={() => {
-          operationalContext.pushMessage({
+          pushMessage({
             body: "Info message",
             type: "info",
           })
@@ -35,7 +26,7 @@ You can use `OperationalUI`'s flash- and progress bar features to automatically 
       <Button
         color="success"
         onClick={() => {
-          operationalContext.pushMessage({
+          pushMessage({
             body: "Success message",
             type: "success",
           })
@@ -46,7 +37,7 @@ You can use `OperationalUI`'s flash- and progress bar features to automatically 
       <Button
         color="error"
         onClick={() => {
-          operationalContext.pushMessage({
+          pushMessage({
             body: "Error message",
             type: "error",
           })
@@ -56,12 +47,14 @@ You can use `OperationalUI`'s flash- and progress bar features to automatically 
       </Button>
       <Button
         onClick={() => {
-          operationalContext.setLoading(!operationalContext.loading)
+          setLoading(!loading)
         }}
       >
         Toggle loading state
       </Button>
     </div>
-  )}
-</OperationalContext>
+  )
+}
+
+;<ComponentWithContext />
 ```
