@@ -1,24 +1,30 @@
 import * as React from "react"
 import { Draggable, Droppable, DropResult, ResponderProvided } from "react-beautiful-dnd"
-
 import styled from "../utils/styled"
 import ChildTree from "./ChildTree"
 
-export interface Tree {
+export interface TreeData<Meta> {
   label: string
   highlight?: boolean
-  childNodes?: Tree[]
+  childNodes?: Array<TreeData<Meta>>
   initiallyOpen?: boolean
   tag?: string
   disabled?: boolean
   color?: string
-  onClick?: (node: Tree) => void
+  meta?: Meta
+  /**
+   * @todo move those properties from TreeData to TreeSharedProps
+   */
   onRemove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+}
+
+export interface TreeSharedProps<Meta> {
+  onClick?: (node: TreeData<Meta>) => void
   innerRef?: (element?: HTMLElement | null) => any
 }
 
-export interface TreeProps {
-  trees: Tree[]
+export interface TreeProps<Meta> extends TreeSharedProps<Meta> {
+  trees: Array<TreeData<Meta>>
   draggable?: boolean
   onDrop?: (result: DropResult, provided: ResponderProvided) => void
   id?: string
@@ -31,7 +37,7 @@ const Container = styled("div")`
   }
 `
 
-const Tree: React.SFC<TreeProps> = ({ trees, id, draggable }) => {
+export default function Tree<Meta = any>({ trees, id, draggable, onClick }: TreeProps<Meta>) {
   const isLowestLevel = trees.some(tree => !tree.childNodes || !tree.childNodes.length)
 
   /**
@@ -43,7 +49,7 @@ const Tree: React.SFC<TreeProps> = ({ trees, id, draggable }) => {
     return (
       <Container>
         {trees.map((treeData, index) => (
-          <ChildTree key={index} {...treeData} />
+          <ChildTree key={index} {...treeData} onClick={onClick} />
         ))}
       </Container>
     )
@@ -61,6 +67,7 @@ const Tree: React.SFC<TreeProps> = ({ trees, id, draggable }) => {
                   {...treeData}
                   {...draggableProvided.draggableProps}
                   {...draggableProvided.dragHandleProps}
+                  onClick={onClick}
                 />
               )}
             </Draggable>
@@ -70,5 +77,3 @@ const Tree: React.SFC<TreeProps> = ({ trees, id, draggable }) => {
     </Droppable>
   )
 }
-
-export default Tree

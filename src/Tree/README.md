@@ -135,3 +135,59 @@ const { DragDropContext } = require("react-beautiful-dnd")
   />
 </DragDropContext>
 ```
+
+### Handling clicks and passing meta data
+
+```jsx
+<Tree
+  onClick={({ meta }) => meta.id && alert(`meta.id: ${meta.id}`)}
+  trees={[
+    {
+      label: "Store",
+      childNodes: [
+        {
+          label: "Region",
+          meta: { id: 2 },
+          initiallyOpen: true,
+          childNodes: [
+            {
+              label: "City",
+              meta: { id: 3 },
+              tag: "D",
+              disabled: true,
+              childNodes: [],
+            },
+            {
+              label: "County",
+              meta: { id: 4 },
+              color: "primary",
+              onRemove: () => {},
+              tag: "D",
+              childNodes: [],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Legal Entity",
+      initiallyOpen: true,
+      childNodes: [
+        {
+          label: "Limited Liability Company",
+          meta: { id: 6 },
+          tag: "D",
+          childNodes: [],
+        },
+        {
+          label: "Inc.",
+          meta: { id: 7 },
+          tag: "D",
+          color: "#2C363F",
+          childNodes: [],
+        },
+      ],
+    },
+  ]}
+/>
+```

@@ -1,37 +1,41 @@
 import * as React from "react"
-
 import Icon from "../Icon/Icon"
 import NameTag from "../NameTag/NameTag"
 import { Container, DeleteNode, Header, Label, TreeIcon } from "./styledComponents"
-import Tree, { TreeProps } from "./Tree"
+import Tree, { TreeData, TreeSharedProps } from "./Tree"
 
-type Props = TreeProps["trees"][-1]
+export type ChildTreeProps<Meta> = TreeData<Meta> & TreeSharedProps<Meta>
 
-const ChildTree: React.SFC<Props> = ({
-  initiallyOpen,
-  highlight,
-  tag,
-  label,
-  color,
-  disabled,
-  innerRef,
-  childNodes = [],
-  onClick: onNodeClick,
-  onRemove,
-  ...props
-}) => {
+export default function ChildTree<Meta = any>(props: ChildTreeProps<Meta>) {
+  const {
+    initiallyOpen,
+    highlight,
+    tag,
+    label,
+    color,
+    disabled,
+    innerRef,
+    childNodes = [],
+    onClick,
+    onRemove,
+    ...restProps
+  } = props
+
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
   const toggle = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
     if (childNodes && childNodes.length) {
       setIsOpen(!isOpen)
     }
+    if (onClick) {
+      onClick(props)
+    }
   }
 
-  const hasChildren = Boolean(childNodes && childNodes.length)
+  const hasChildren = childNodes.length > 0
 
   return (
-    <Container innerRef={innerRef} disabled={Boolean(disabled)} hasChildren={hasChildren} {...props}>
+    <Container innerRef={innerRef} disabled={Boolean(disabled)} hasChildren={hasChildren} {...restProps}>
       <Header onClick={toggle} highlight={Boolean(highlight)}>
         {hasChildren && <TreeIcon color="color.text.lightest" size={12} left name={isOpen ? "ChevronDown" : "Add"} />}
         {!hasChildren && tag && (
@@ -46,9 +50,7 @@ const ChildTree: React.SFC<Props> = ({
           </DeleteNode>
         )}
       </Header>
-      {childNodes && isOpen && <Tree trees={childNodes} />}
+      {hasChildren && isOpen && <Tree trees={childNodes} onClick={onClick} />}
     </Container>
   )
 }
-
-export default ChildTree
