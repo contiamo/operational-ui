@@ -6,6 +6,7 @@ module.exports = {
   title: "Operational UI",
   propsParser,
   sections: [
+    { name: "Hooks", components: "src/use*/*.ts" },
     {
       name: "Components",
       components: "src/**/*.tsx",
@@ -20,7 +21,6 @@ module.exports = {
       ],
     },
     { name: "Typography", components: "src/Typography/*.tsx" },
-    { name: "React Hooks", components: "src/hooks/**/*.ts" },
   ],
   theme: {
     fontFamily: {

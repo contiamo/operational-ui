@@ -1,7 +1,7 @@
 import * as React from "react"
 
-import useWindowSize from "../hooks/useWindowSize/useWindowSize"
 import { DefaultProps } from "../types"
+import useWindowSize from "../useWindowSize"
 import Container, { Position } from "./Tooltip.Container"
 
 /**
