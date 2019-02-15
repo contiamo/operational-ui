@@ -1,7 +1,7 @@
 import React from "react"
 import { cleanup, fireEvent, render, wait } from "react-testing-library"
 
-import { useURLState } from "./useURLState"
+import { useURLState } from "."
 
 describe("useURLState", () => {
   afterEach(cleanup)

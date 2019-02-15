@@ -2,9 +2,9 @@ It's quite convenient to be able to copy and paste a link to somebody to show th
 
 It's even more convenient if this link has the state of the current page! This is what this hook is made for.
 
-Disclaimer: when we say synchronized, we don't mean two way binding. It will read the initial state from the URL on component mount, but afterwards, this hook's internal state will be source of truth. 
+Disclaimer: when we say synchronized, we don't mean two way binding. It will read the initial state from the URL on component mount, but afterwards, this hook's internal state will be source of truth.
 
-This is ok most of the time because we use `replaceState` and there is no way from user's point of view to change the URL without triggering a page reload. 
+This is ok most of the time because we use `replaceState` and there is no way from user's point of view to change the URL without triggering a page reload.
 
 The only edge case to be aware of here is when you use `useURLState` with `pushState`. In this case, you will need to make sure that this hook lives inside a valid router context.
 
