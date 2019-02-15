@@ -32,7 +32,7 @@ const Container = styled("div")`
 `
 
 const Tree: React.SFC<TreeProps> = ({ trees, id, draggable }) => {
-  const isLowestLevel = trees.filter(tree => !tree.childNodes || !tree.childNodes.length).length
+  const isLowestLevel = trees.some(tree => !tree.childNodes || !tree.childNodes.length)
 
   /**
    * If this is a category with children, no drag and drop
