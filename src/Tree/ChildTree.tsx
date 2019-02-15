@@ -32,7 +32,15 @@ const ChildTree: React.SFC<Props> = ({
 
   return (
     <Container innerRef={innerRef} disabled={Boolean(disabled)} hasChildren={hasChildren} {...props}>
-      <Header onClick={toggle} highlight={Boolean(highlight)}>
+      <Header
+        onClick={e => {
+          toggle(e)
+          if (onNodeClick) {
+            onNodeClick()
+          }
+        }}
+        highlight={Boolean(highlight)}
+      >
         {hasChildren && <TreeIcon color="color.text.lightest" size={12} left name={isOpen ? "ChevronDown" : "Add"} />}
         {!hasChildren && tag && (
           <NameTag condensed left color={color}>

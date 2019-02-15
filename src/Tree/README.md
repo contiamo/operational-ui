@@ -19,9 +19,10 @@ The tree component renders a tree structure with collapsable nodes in a filetree
               childNodes: [],
             },
             {
-              label: "County",
+              label: "Country",
               color: "primary",
-              onRemove: () => {},
+              onClick: () => alert("country was clicked"),
+              onRemove: () => alert("node is removed"),
               tag: "D",
               childNodes: [],
             },
@@ -72,7 +73,7 @@ Certain nodes in the tree can be highlighted like so.
               childNodes: [],
             },
             {
-              label: "County",
+              label: "Country",
               color: "primary",
               onRemove: () => {},
               tag: "D",
