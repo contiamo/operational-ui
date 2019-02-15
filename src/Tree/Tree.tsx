@@ -14,7 +14,7 @@ export interface Tree {
   color?: string
   onClick?: (node: Tree) => void
   onRemove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
-  innerRef?: (element?: HTMLElement | null | undefined) => any
+  innerRef?: (element?: HTMLElement | null) => any
 }
 
 export interface TreeProps {
