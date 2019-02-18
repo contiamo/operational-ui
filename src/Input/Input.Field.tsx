@@ -113,6 +113,8 @@ const InputField: React.SFC<InputProps> = ({
   icon,
   copy,
   onIconClick,
+  tabIndex,
+  ...props
 }) => {
   const shouldShowIconButton = Boolean(icon) || Boolean(copy)
 
@@ -151,6 +153,7 @@ const InputField: React.SFC<InputProps> = ({
         id={`input-field-${id}`}
         withIconButton={shouldShowIconButton}
         autoComplete={autoComplete}
+        {...props}
       />
       {clear && value && (
         <ClearButton onClick={clear}>
