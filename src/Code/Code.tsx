@@ -14,7 +14,7 @@ import styles from "./styles"
 export interface DefaultCodeProps extends DefaultProps {
   /** Language for syntax highlighting */
   syntax?: Exclude<Languages, "json">
-  children?: string | string[]
+  children: string
   copyable?: boolean
   onCopy?: () => void
 }
