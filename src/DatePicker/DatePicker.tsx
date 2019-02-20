@@ -144,7 +144,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
       <Container
         {...props}
         className={isStandalone ? className : undefined}
-        innerRef={(node: React.ReactNode) => {
+        ref={(node: React.ReactNode) => {
           this.containerNode = node
         }}
         isExpanded={isExpanded}
@@ -168,7 +168,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
           isExpanded={this.state.isExpanded}
           id={domId}
           readOnly
-          innerRef={(node: HTMLElement) => {
+          ref={(node: HTMLInputElement) => {
             this.inputNode = node
           }}
           value={[start, end].filter(s => !!s).join(" - ")}

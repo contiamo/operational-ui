@@ -5,7 +5,7 @@ import Code from "../Code/Code"
 import styled from "../utils/styled"
 import { DebugProps } from "./Debug"
 
-const DebugJSONViewer = styled(Code)`
+const DebugJSONViewer = styled(Code)<{ children: string | string[] | undefined }>`
   color: white;
   max-width: 50vw;
 `
@@ -31,6 +31,7 @@ export function makeRowsFromConfig<T>(inputValuesProp: DebugProps<T>["values"]) 
                 }}
                 syntax="json"
                 src={value}
+                children={undefined}
               />
             </td>
           </tr>

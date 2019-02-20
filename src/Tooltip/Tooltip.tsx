@@ -135,8 +135,8 @@ const getDisplayPosition = (windowSize: { width: number; height: number }, state
 export const dangerousTooltipContainerClassName = "operational-ui-tooltip"
 
 const Tooltip: React.SFC<TooltipProps> = props => {
-  const containerNode = React.useRef<HTMLElement>(null)
-  const offScreenWidthTestNode = React.useRef<HTMLElement>(null)
+  const containerNode = React.useRef<HTMLDivElement>(null)
+  const offScreenWidthTestNode = React.useRef<HTMLDivElement>(null)
   const [state, setState] = React.useState<State>({
     bbTop: 0,
     bbLeft: 0,
@@ -173,7 +173,7 @@ const Tooltip: React.SFC<TooltipProps> = props => {
         position="bottom"
         offScreenWidthTest
         singleLineTextWidth={state.singleLineTextWidth}
-        innerRef={offScreenWidthTestNode}
+        ref={offScreenWidthTestNode}
       >
         {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
         <p>{props.children}</p>
@@ -182,7 +182,7 @@ const Tooltip: React.SFC<TooltipProps> = props => {
         className={dangerousTooltipContainerClassName}
         singleLineTextWidth={state.singleLineTextWidth}
         position={displayPosition}
-        innerRef={containerNode}
+        ref={containerNode}
       >
         {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
         <p>{props.children}</p>

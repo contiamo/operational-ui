@@ -56,46 +56,48 @@ export interface State {
   search: string
 }
 
-const Container = styled("div")<Partial<SelectProps>>(({ theme, color, disabled, naked }) => {
-  const backgroundColor = naked ? "transparent" : expandColor(theme, color) || theme.color.white
-  const dropdownArrowWidth = 56
-  return {
-    backgroundColor,
-    label: "select",
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-    padding: `${theme.space.small}px ${dropdownArrowWidth}px ${theme.space.small}px ${theme.space.content}px`,
-    borderRadius: 4,
-    width: "fit-content",
-    minWidth: !naked ? 200 : "none",
-    minHeight: inputHeight,
-    border: naked ? 0 : "1px solid",
-    borderColor: theme.color.border.default,
-    opacity: disabled ? 0.5 : 1,
-    cursor: "pointer",
-    color: readableTextColor(backgroundColor, ["black", "white"]),
-    outline: "none",
-    pointerEvents: disabled ? "none" : "all",
-    // downward caret.
-    "&::after": {
-      content: "''",
-      position: "absolute",
-      top: "50%",
-      right: theme.space.small,
-      width: 0,
-      height: 0,
-      border: "4px solid transparent",
-      borderTopColor: theme.color.border.default,
-      transform: "translateY(calc(-50% + 2px))",
-    },
-    "&:focus":
-      !naked &&
-      inputFocus({
-        theme,
-      }),
-  }
-})
+const Container = styled("div")<{ color?: string; disabled: boolean; naked: boolean }>(
+  ({ theme, color, disabled, naked }) => {
+    const backgroundColor = naked ? "transparent" : expandColor(theme, color) || theme.color.white
+    const dropdownArrowWidth = 56
+    return {
+      backgroundColor,
+      label: "select",
+      position: "relative",
+      display: "flex",
+      alignItems: "center",
+      padding: `${theme.space.small}px ${dropdownArrowWidth}px ${theme.space.small}px ${theme.space.content}px`,
+      borderRadius: 4,
+      width: "fit-content",
+      minWidth: !naked ? 200 : "none",
+      minHeight: inputHeight,
+      border: naked ? 0 : "1px solid",
+      borderColor: theme.color.border.default,
+      opacity: disabled ? 0.5 : 1,
+      cursor: "pointer",
+      color: readableTextColor(backgroundColor, ["black", "white"]),
+      outline: "none",
+      pointerEvents: disabled ? "none" : "all",
+      // downward caret.
+      "&::after": {
+        content: "''",
+        position: "absolute",
+        top: "50%",
+        right: theme.space.small,
+        width: 0,
+        height: 0,
+        border: "4px solid transparent",
+        borderTopColor: theme.color.border.default,
+        transform: "translateY(calc(-50% + 2px))",
+      },
+      "&:focus":
+        !naked &&
+        inputFocus({
+          theme,
+        }),
+    }
+  },
+)
 
 const DisplayValue = styled("div")<{ isPlaceholder: boolean }>(({ theme, isPlaceholder }) => {
   if (isPlaceholder) {
@@ -242,9 +244,9 @@ class Select extends React.Component<SelectProps, State> {
       <Container
         {...props}
         color={color}
-        disabled={disabled}
-        naked={naked}
-        innerRef={(containerNode: HTMLElement) => (this.containerNode = containerNode)}
+        disabled={Boolean(disabled)}
+        naked={Boolean(naked)}
+        ref={(containerNode: HTMLDivElement) => (this.containerNode = containerNode)}
         role="listbox"
         tabIndex={-2}
         onClick={() => {

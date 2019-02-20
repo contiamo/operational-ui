@@ -38,7 +38,7 @@ const RailContainer = styled("div")<{ left?: string; right?: string }>(
   }),
 )
 
-const Button = styled("div")<SwitchProps>(
+const Button = styled("div")<{ on: boolean }>(
   {
     height,
     transition: "transform .3s",
@@ -57,7 +57,7 @@ const Button = styled("div")<SwitchProps>(
   }),
 )
 
-const Rail = styled("div")<SwitchProps>(
+const Rail = styled("div")<{ on: boolean }>(
   {
     width,
     height: railHeight,

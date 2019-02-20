@@ -52,7 +52,7 @@ const Tree: React.SFC<TreeProps> = ({ trees, id, draggable }) => {
   return (
     <Droppable droppableId={id || "tree"}>
       {droppableProvided => (
-        <Container innerRef={droppableProvided.innerRef} {...droppableProvided.droppableProps}>
+        <Container ref={droppableProvided.innerRef} {...droppableProvided.droppableProps}>
           {trees.map((treeData, index) => (
             <Draggable key={index} draggableId={treeData.label} index={index}>
               {draggableProvided => (
