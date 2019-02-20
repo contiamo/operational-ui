@@ -21,12 +21,7 @@ export interface DatePickerProps extends DefaultProps {
   /** End date in the format YYYY-MM-DD. */
   end?: string
   /** Triggered every time the start or end dates change. `undefined` values clear start or end values. */
-  onChange?: (
-    date: {
-      start?: string
-      end?: string
-    },
-  ) => void
+  onChange?: (date: { start?: string; end?: string }) => void
   /** Placeholder text when no dates selected */
   placeholder?: string
 }

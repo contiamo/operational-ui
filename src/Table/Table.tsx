@@ -190,8 +190,9 @@ function Table<T>({
               >
                 <ThContent sorted={Boolean(column.sortOrder)}>
                   {column.heading}
-                  {column.onSortClick &&
-                    !column.sortOrder && <SortIcon size={10} color="color.border.disabled" name="ChevronUpDown" />}
+                  {column.onSortClick && !column.sortOrder && (
+                    <SortIcon size={10} color="color.border.disabled" name="ChevronUpDown" />
+                  )}
                   {column.sortOrder && (
                     <SortIcon
                       size={10}
@@ -252,12 +253,11 @@ function Table<T>({
                   </Td>
                 ))}
                 {rowAction}
-                {onRowClick &&
-                  rowActionName && (
-                    <Actions>
-                      <ActionLabel>{rowActionName}</ActionLabel>
-                    </Actions>
-                  )}
+                {onRowClick && rowActionName && (
+                  <Actions>
+                    <ActionLabel>{rowActionName}</ActionLabel>
+                  </Actions>
+                )}
               </Tr>
             )
           })

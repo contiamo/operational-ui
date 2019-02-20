@@ -1,17 +1,17 @@
-import * as React from "react";
+import * as React from "react"
 
-import Icon from "../Icon/Icon";
-import { FormFieldError, inputFocus, setAlpha } from "../utils";
-import styled from "../utils/styled";
-import { InputProps } from "./Input";
-import InputButton from "./Input.Button";
-import { height } from "./Input.constants";
+import Icon from "../Icon/Icon"
+import { FormFieldError, inputFocus, setAlpha } from "../utils"
+import styled from "../utils/styled"
+import { InputProps } from "./Input"
+import InputButton from "./Input.Button"
+import { height } from "./Input.constants"
 
-const width = 360;
+const width = 360
 
 const Container = styled("div")<{
-  fullWidth: InputProps["fullWidth"];
-  withLabel?: boolean;
+  fullWidth: InputProps["fullWidth"]
+  withLabel?: boolean
 }>`
   position: relative;
   align-items: center;
@@ -22,26 +22,26 @@ const Container = styled("div")<{
       width: 100%;
       max-width: ${fullWidth ? "none" : `${width}px`};
     `};
-`;
+`
 
 const Field = styled("input")<{
-  isError: boolean;
-  withIconButton: boolean;
-  preset: InputProps["preset"];
-  disabled: InputProps["disabled"];
-  clear: InputProps["clear"];
+  isError: boolean
+  withIconButton: boolean
+  preset: InputProps["preset"]
+  disabled: InputProps["disabled"]
+  clear: InputProps["clear"]
 }>(({ theme, disabled, isError, withIconButton, preset, clear }) => {
   const makeBackgroundColor = () => {
     if (disabled) {
-      return theme.color.disabled;
+      return theme.color.disabled
     }
 
     if (preset) {
-      return setAlpha(0.1)(theme.color.primary);
+      return setAlpha(0.1)(theme.color.primary)
     }
 
-    return theme.color.white;
-  };
+    return theme.color.white
+  }
 
   return {
     ...(withIconButton
@@ -69,8 +69,8 @@ const Field = styled("input")<{
       theme,
       isError,
     }),
-  };
-});
+  }
+})
 
 const ClearButton = styled("div")`
   position: absolute;
@@ -92,7 +92,7 @@ const ClearButton = styled("div")`
   > svg {
     pointer-events: none;
   }
-`;
+`
 
 const InputField: React.SFC<InputProps> = ({
   fullWidth,
@@ -116,16 +116,16 @@ const InputField: React.SFC<InputProps> = ({
   copy,
   onIconClick,
 }) => {
-  const shouldShowIconButton = Boolean(icon) || Boolean(copy);
-  const forAttributeId = label && labelId;
+  const shouldShowIconButton = Boolean(icon) || Boolean(copy)
+  const forAttributeId = label && labelId
 
   const renderButton = () => {
     if (copy === true) {
-      return <InputButton value={value || ""} copy={copy} />;
+      return <InputButton value={value || ""} copy={copy} />
     } else {
-      return <InputButton onIconClick={onIconClick} icon={icon} copy={false} />;
+      return <InputButton onIconClick={onIconClick} icon={icon} copy={false} />
     }
-  };
+  }
 
   return (
     <>
@@ -144,7 +144,7 @@ const InputField: React.SFC<InputProps> = ({
           isError={Boolean(error)}
           onChange={(ev: React.FormEvent<HTMLInputElement>) => {
             if (onChange) {
-              onChange(ev.currentTarget.value);
+              onChange(ev.currentTarget.value)
             }
           }}
           clear={clear}
@@ -161,7 +161,7 @@ const InputField: React.SFC<InputProps> = ({
       </Container>
       {error ? <FormFieldError>{error}</FormFieldError> : null}
     </>
-  );
-};
+  )
+}
 
-export default InputField;
+export default InputField

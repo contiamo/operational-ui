@@ -152,8 +152,8 @@ export const Day = styled(BaseDay)<{
           .darken(5)
           .toString()
       : isDisabled
-        ? "transparent"
-        : theme.color.background.lighter,
+      ? "transparent"
+      : theme.color.background.lighter,
   },
 }))
 

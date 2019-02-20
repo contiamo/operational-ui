@@ -1,16 +1,16 @@
-import { keyframes } from "@emotion/core";
+import { keyframes } from "@emotion/core"
 
-import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip";
-import { lighten } from "../utils";
-import { OperationalStyleConstants } from "./constants";
-import styled from "./styled";
+import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
+import { lighten } from "../utils"
+import { OperationalStyleConstants } from "./constants"
+import styled from "./styled"
 
 export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
   outline: 0,
   border: "1px solid",
   borderColor: isError ? theme.color.error : theme.color.primary,
   boxShadow: `0 0 0 3px ${isError ? lighten(theme.color.error, 60) : lighten(theme.color.primary, 40)}`,
-});
+})
 
 export const Label = styled("label")<{ fullWidth?: boolean; left?: boolean }>(({ fullWidth, theme, left }) => ({
   display: "inline-block",
@@ -18,13 +18,13 @@ export const Label = styled("label")<{ fullWidth?: boolean; left?: boolean }>(({
   maxWidth: fullWidth ? "none" : "360px",
   width: fullWidth ? "100%" : "auto",
   marginRight: left ? theme.space.small : 0,
-}));
+}))
 
 export const FormFieldControls = styled("div")({
   position: "absolute",
   top: -2,
   right: 0,
-});
+})
 
 export const hoverTooltip: {} = {
   [`.${dangerousTooltipContainerClassName}`]: {
@@ -37,7 +37,7 @@ export const hoverTooltip: {} = {
       pointerEvents: "all",
     },
   },
-};
+}
 
 export const FormFieldControl = styled("div")(({ theme }) => ({
   cursor: "pointer",
@@ -55,7 +55,7 @@ export const FormFieldControl = styled("div")(({ theme }) => ({
   ":hover": {
     color: theme.color.text.default,
   },
-}));
+}))
 
 export const FormFieldError = styled("div")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
@@ -75,7 +75,7 @@ export const FormFieldError = styled("div")(({ theme }) => ({
   bottom: 2,
   left: 0,
   zIndex: theme.zIndex.formFieldError,
-}));
+}))
 
 export const floatIn = keyframes({
   from: {
@@ -86,13 +86,13 @@ export const floatIn = keyframes({
     opacity: 1,
     transform: "translate3d(0, 0, 0)",
   },
-});
+})
 
 export const resetTransform = keyframes({
   to: {
     transform: "none",
   },
-});
+})
 
 export const spin = keyframes({
   from: {
@@ -101,4 +101,4 @@ export const spin = keyframes({
   to: {
     transform: "rotate(359deg)",
   },
-});
+})

@@ -8,8 +8,8 @@ import * as React from "react"
  * const Comp: React.SFC<Props> = props => (
  *   <div />
  * )
- * 
- * export default deprecate<Props>(props => [ 
+ *
+ * export default deprecate<Props>(props => [
  *   ...[ "Your component is deprecated" ],
  *   ...(props.oldProp ? [ "oldProp is deprecated, use newProp instead" ] : [])
  * ])(Comp)

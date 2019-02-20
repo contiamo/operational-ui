@@ -256,36 +256,35 @@ class Select extends React.Component<SelectProps, State> {
         <DisplayValue isPlaceholder={Array.isArray(value) ? value.length === 0 : !value}>
           {this.getDisplayValue()}
         </DisplayValue>
-        {Boolean(options.length) &&
-          open && (
-            <Options>
-              {filterable && (
-                <SelectFilter
-                  onChange={(filterValue: string) => {
-                    this.setState({
-                      search: filterValue,
-                    })
-                  }}
-                />
-              )}
-              <OptionsList>
-                {options
-                  .filter(option => (option.label || String(option.value)).match(RegExp(search, "i")))
-                  .map(option => (
-                    <SelectOption
-                      key={String(option.value)}
-                      onClick={() => {
-                        this.selectOption(option)
-                      }}
-                      selected={this.isOptionSelected(option)}
-                    >
-                      {option.label || String(option.value)}
-                    </SelectOption>
-                  ))
-                  .slice(0, maxOptions)}
-              </OptionsList>
-            </Options>
-          )}
+        {Boolean(options.length) && open && (
+          <Options>
+            {filterable && (
+              <SelectFilter
+                onChange={(filterValue: string) => {
+                  this.setState({
+                    search: filterValue,
+                  })
+                }}
+              />
+            )}
+            <OptionsList>
+              {options
+                .filter(option => (option.label || String(option.value)).match(RegExp(search, "i")))
+                .map(option => (
+                  <SelectOption
+                    key={String(option.value)}
+                    onClick={() => {
+                      this.selectOption(option)
+                    }}
+                    selected={this.isOptionSelected(option)}
+                  >
+                    {option.label || String(option.value)}
+                  </SelectOption>
+                ))
+                .slice(0, maxOptions)}
+            </OptionsList>
+          </Options>
+        )}
       </Container>
     )
     return label ? (
