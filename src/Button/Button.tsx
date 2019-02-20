@@ -80,7 +80,7 @@ const Button: React.SFC<ButtonProps> = ({
 }) => {
   const iconProps = { name: icon!, size: iconSize, color: iconColor }
 
-  const Container = styled(to ? "button" : "a")<{
+  const Container = styled(to ? "a" : "button")<{
     condensed?: ButtonProps["condensed"]
     loading?: ButtonProps["loading"]
     fullWidth?: ButtonProps["fullWidth"]
