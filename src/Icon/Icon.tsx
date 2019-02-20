@@ -34,7 +34,7 @@ export interface CommunIconProps extends DefaultProps {
 }
 
 export interface OperationalUIIconProps extends CommunIconProps {
-  name?: "OperationalUI"
+  name: "OperationalUI"
   /**
    * OperationalUI needs this prop to animate the inner circle.
    * All other icons should ignore it.
