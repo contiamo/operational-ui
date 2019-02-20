@@ -5,16 +5,16 @@ exports[`ButtonGroup Component Should initialize properly 1`] = `
   class="css-ftf61z"
 >
   <div
-    class="css-ar73w8-Messages"
+    class="css-16holpz-Messages"
   />
   <div
-    class="css-1o7twmc-buttongroup"
+    class="css-f3sa0o-buttongroup"
   >
-    <button
+    <a
       class="css-1po5ksq"
     >
       Hello
-    </button>
+    </a>
   </div>
 </div>
 `;

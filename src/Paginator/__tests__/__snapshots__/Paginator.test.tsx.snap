@@ -5,18 +5,18 @@ exports[`Paginator Component Should initialize properly 1`] = `
   class="css-ftf61z"
 >
   <div
-    class="css-ar73w8-Messages"
+    class="css-16holpz-Messages"
   />
   <div
-    class="css-g700yk-paginator"
+    class="css-1te9eab-paginator"
   >
-    <button
+    <a
       class="css-m2novv"
       type="first"
     >
       first
-    </button>
-    <button
+    </a>
+    <a
       class="css-ln8rrk"
       type="previous"
     >
@@ -34,7 +34,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
       <span>
         prev
       </span>
-    </button>
+    </a>
     <div
       class="css-1fzcbye"
     >
@@ -43,7 +43,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
       </span>
        of 258
     </div>
-    <button
+    <a
       class="css-ln8rrk"
       type="next"
     >
@@ -61,13 +61,13 @@ exports[`Paginator Component Should initialize properly 1`] = `
           d="M278.284,180.187l-154.142,154.143l-28.284,-28.285l125.858,-125.858l-125.858,-125.857l28.284,-28.285c51.381,51.381 102.762,102.762 154.142,154.142Z"
         />
       </svg>
-    </button>
-    <button
+    </a>
+    <a
       class="css-m2novv"
       type="last"
     >
       last
-    </button>
+    </a>
   </div>
 </div>
 `;

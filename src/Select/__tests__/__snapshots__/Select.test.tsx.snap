@@ -5,10 +5,10 @@ exports[`Select Should render correctly 1`] = `
   class="css-ftf61z"
 >
   <div
-    class="css-ar73w8-Messages"
+    class="css-16holpz-Messages"
   />
   <div
-    class="css-1d7wg82-select"
+    class="css-izrwc2-select"
     placeholder="Select me"
     role="listbox"
     tabindex="-2"
