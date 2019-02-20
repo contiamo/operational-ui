@@ -43,7 +43,7 @@ export interface OperationalUIIconProps extends CommunIconProps {
 }
 
 export interface PantheonIconProps extends CommunIconProps {
-  name?: "Pantheon"
+  name: "Pantheon"
   /** Use the colored version of the logo (works for `name = Pantheon` only) */
   colored?: boolean
 }
