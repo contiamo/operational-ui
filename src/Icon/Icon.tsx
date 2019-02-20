@@ -29,7 +29,7 @@ export interface CommunIconProps extends DefaultProps {
    * Icon name.
    * For OperationalUI brand icons, use the values `OperationalUI`, `Labs`, `Components`, `Blocks` and `Visualizations`
    */
-  name?: IconName
+  name: IconName
   onClick?: (e: React.MouseEvent) => void
 }
 
