@@ -5,7 +5,7 @@ import Code from "../Code/Code"
 import styled from "../utils/styled"
 import { DebugProps } from "./Debug"
 
-const DebugJSONViewer = styled(Code)<{ children: string | string[] | undefined }>`
+const DebugJSONViewer = styled(Code)<{ children?: string | string[] }>`
   color: white;
   max-width: 50vw;
 `
