@@ -38,7 +38,7 @@ module.exports = {
     TabButtonRenderer: join(__dirname, "styleguide/TabButtonRenderer"),
   },
   context: {
-    styled: "react-emotion",
+    styled: "@emotion/styled",
   },
   dangerouslyUpdateWebpackConfig(webpackConfig, env) {
     webpackConfig.output = {

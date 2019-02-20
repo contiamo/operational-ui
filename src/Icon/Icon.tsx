@@ -85,7 +85,7 @@ const IconComp = styled(Icon)<Pick<CommunIconProps, "left" | "right" | "onClick"
   }),
 )
 
-export const IconJSX: React.SFC<IconProps> = props => <IconComp {...props} />
+const IconJSX: React.SFC<IconProps> = props => <IconComp {...props} />
 
 IconJSX.defaultProps = {
   size: 18,

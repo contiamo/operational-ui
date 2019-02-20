@@ -14,7 +14,7 @@ const ChildTree: React.SFC<Props> = ({
   label,
   color,
   disabled,
-  innerRef,
+  forwardRef,
   childNodes = [],
   onClick: onNodeClick,
   onRemove,
@@ -31,7 +31,7 @@ const ChildTree: React.SFC<Props> = ({
   const hasChildren = Boolean(childNodes && childNodes.length)
 
   return (
-    <Container ref={innerRef} disabled={Boolean(disabled)} hasChildren={hasChildren} {...props}>
+    <Container ref={forwardRef} disabled={Boolean(disabled)} hasChildren={hasChildren} {...props}>
       <Header
         onClick={e => {
           toggle(e)

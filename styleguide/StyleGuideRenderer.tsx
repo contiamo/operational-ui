@@ -1,4 +1,4 @@
-import { injectGlobal } from "emotion"
+import { Global } from "@emotion/core"
 import * as React from "react"
 import styled from "../src/utils/styled"
 
@@ -26,22 +26,6 @@ export interface StyleGuideRendererProps {
  */
 /* tslint:disable:no-var-requires */
 const { version } = require("../package.json")
-
-injectGlobal({
-  "#rsg-root": {
-    height: "100vh",
-  },
-  // buttons style override
-  [`[class^="rsg--controls-"]`]: {
-    marginTop: constants.space.content,
-  },
-  ".rsg--spacing-7": {
-    margin: 0,
-  },
-  ".rsg--tab-14": {
-    marginTop: constants.space.content,
-  },
-})
 
 const Version = styled("div")`
   font-size: 16px;
@@ -75,6 +59,25 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
     const { isSplashVisible } = this.state
     return (
       <OperationalUI>
+        <Global
+          styles={`
+  #rsg-root {
+    height: 100vh;
+  }
+
+  // buttons style override
+  [class^="rsg--controls-"] {
+    margin-top: 16px;
+  }
+
+  .rsg--spacing-7 {
+    margin: 0;
+  }
+
+  .rsg--tab-14: {
+    marginTop: constants.space.content,
+  }`}
+        />
         {isSplashVisible ? (
           <Splash
             color="#005f96"
