@@ -121,7 +121,7 @@ class TopbarSelect extends React.Component<TopbarSelectProps, Readonly<State>> {
         }}
       >
         {isActive => (
-          <TopbarSelectContainer {...props} isActive={isActive} innerRef={this.containerRef}>
+          <TopbarSelectContainer {...props} isActive={isActive} ref={this.containerRef}>
             <TopbarSelectLabel>{label}</TopbarSelectLabel>
             <TopbarSelectValue>
               <TopbarSelectValueSpan active={Boolean(selected)}>{selected}</TopbarSelectValueSpan>

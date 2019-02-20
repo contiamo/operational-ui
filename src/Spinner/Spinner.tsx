@@ -1,7 +1,9 @@
+import { keyframes } from "@emotion/core"
 import * as React from "react"
-import styled, { keyframes } from "react-emotion"
+
 import { DefaultProps } from "../types"
 import { expandColor } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface SpinnerProps extends DefaultProps {
   id?: string
@@ -72,18 +74,20 @@ const Container = styled("div")<{
  * This additional container is introduced to make transforms set on the main container from the outside
  * (e.g. `styled` helper) do not mess up the rotation origin.
  */
-const AnimationContainer = styled("div")(({ bounce, size }: { bounce?: boolean; size?: number }) => ({
-  margin: 0,
-  lineHeight: 0,
-  width: size || defaultSize,
-  height: size || defaultSize,
-  transformOrigin: "center center",
-  /*
-   * When the bounce animation is used, animation properties are set on the individual bouncing squares,
-   * therefore no animation is set on the container.
-   */
-  animation: bounce ? "none" : `${spinKeyframes} 1.5s infinite linear`,
-}))
+const AnimationContainer = styled("div")<{ bounce: SpinnerProps["bounce"]; size: SpinnerProps["size"] }>(
+  ({ bounce, size }: { bounce?: boolean; size?: number }) => ({
+    margin: 0,
+    lineHeight: 0,
+    width: size || defaultSize,
+    height: size || defaultSize,
+    transformOrigin: "center center",
+    /*
+     * When the bounce animation is used, animation properties are set on the individual bouncing squares,
+     * therefore no animation is set on the container.
+     */
+    animation: bounce ? "none" : `${spinKeyframes} 1.5s infinite linear`,
+  }),
+)
 
 const RegularSpinner = (_: { color?: SpinnerProps["color"] }) => (
   <svg viewBox="0 0 360 360">

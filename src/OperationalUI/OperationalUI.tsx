@@ -1,4 +1,4 @@
-import { injectGlobal } from "emotion"
+import { Global } from "@emotion/core"
 import { ThemeProvider } from "emotion-theming"
 import merge from "lodash/merge"
 import * as React from "react"
@@ -70,7 +70,7 @@ body {
 }
 
 body {
-  background-color: ${theme.color.background.lighter};
+  background-color: white;
 }
 
 a:link,
@@ -155,12 +155,6 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     }
   }
 
-  public componentDidMount() {
-    if (!this.props.noBaseStyles) {
-      injectGlobal(baseStylesheet(constants))
-    }
-  }
-
   public componentWillUnmount() {
     if (this.messageTimerInterval) {
       clearInterval(this.messageTimerInterval)
@@ -183,6 +177,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
               setLoading: this.setLoading,
             }}
           >
+            {!this.props.noBaseStyles && <Global styles={baseStylesheet(merge(constants, theme))} />}
             <Container>
               {this.state.isLoading && <Progress />}
               <Messages>

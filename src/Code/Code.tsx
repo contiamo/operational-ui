@@ -1,6 +1,6 @@
+import { css } from "@emotion/core"
 import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
-import { css } from "react-emotion"
 import Highlight from "react-highlight"
 import ReactJson, { ReactJsonViewProps } from "react-json-view"
 
@@ -143,7 +143,7 @@ const Container = styled("div")`
   }
 `
 
-const StyledHighlight = styled(Highlight)(({ theme }) => {
+const StyledHighlight = styled(Highlight)<{ className: CodeProps["syntax"] }>(({ theme }) => {
   return {
     margin: 0,
     border: "1px solid rgba(20, 153, 206, 0.1)",
@@ -213,7 +213,14 @@ const Code: React.SFC<CodeProps> = ({ children, ...props }) => {
           <CodeIcon size={14} name="Copy" color="color.text.lighter" />
         </CopyToClipboard>
       )}
-      <StyledHighlight className={`${css(styles)} ${props.syntax}`}>{children}</StyledHighlight>
+      <StyledHighlight
+        css={css`
+          ${styles}
+        `}
+        className={props.syntax}
+      >
+        {children}
+      </StyledHighlight>
     </Container>
   )
 }

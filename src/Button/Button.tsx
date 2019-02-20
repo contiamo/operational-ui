@@ -1,5 +1,4 @@
 import * as React from "react"
-import styled, { Interpolation, Themed } from "react-emotion"
 
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
@@ -7,6 +6,7 @@ import Spinner from "../Spinner/Spinner"
 import { DefaultProps } from "../types"
 import { darken, isModifiedEvent, isOutsideLink, isWhite, readableTextColor } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
+import styled from "../utils/styled"
 
 export interface ButtonProps extends DefaultProps {
   /** Invoked when you click on the button */
@@ -59,53 +59,6 @@ const makeColors = (theme: OperationalStyleConstants, color: string) => {
   }
 }
 
-const containerStyles: Interpolation<
-  Themed<
-    Pick<ButtonProps, "disabled" | "condensed" | "fullWidth" | "textColor" | "loading"> & {
-      onClick: (ev: React.SyntheticEvent<React.ReactNode>) => void
-      color_?: string
-    },
-    OperationalStyleConstants
-  >
-> = ({ theme, color_, disabled, condensed, loading, fullWidth, textColor }) => {
-  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color_ || "")
-  return {
-    backgroundColor,
-    lineHeight: `${condensed ? 28 : 36}px`,
-    fontSize: theme.font.size.small,
-    fontFamily: theme.font.family.main,
-    fontWeight: theme.font.weight.medium,
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    padding: `0 ${condensed ? theme.space.medium : theme.space.element}px`,
-    borderRadius: theme.borderRadius,
-    border: 0,
-    boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.border.disabled} inset` : "none",
-    cursor: disabled ? "not-allowed" : "pointer",
-    opacity: disabled ? 0.6 : 1.0,
-    outline: "none",
-    position: "relative",
-    width: fullWidth ? "100%" : "initial",
-    marginRight: theme.space.small,
-    // Apply styles with increased specificity to override defaults
-    "&, a:link&, a:visited&": {
-      textDecoration: "none",
-      color: loading ? "transparent" : expandColor(theme, textColor) || foregroundColor,
-    },
-    ...(!disabled
-      ? {
-          ":hover": {
-            backgroundColor: darken(backgroundColor, 5),
-          },
-        }
-      : {}),
-  }
-}
-
-const Container = styled("button")(containerStyles)
-const ContainerLink = styled("a")(containerStyles)
-
 const ButtonSpinner = styled(Spinner)<{ containerColor?: ButtonProps["color"] }>(({ theme, containerColor }) => ({
   position: "absolute",
   top: "50%",
@@ -125,13 +78,55 @@ const Button: React.SFC<ButtonProps> = ({
   onClick,
   ...props
 }) => {
-  const ContainerComponent = to ? ContainerLink : Container
   const iconProps = { name: icon!, size: iconSize, color: iconColor }
+
+  const Container = styled(to ? "button" : "a")<{
+    condensed?: ButtonProps["condensed"]
+    loading?: ButtonProps["loading"]
+    fullWidth?: ButtonProps["fullWidth"]
+    textColor?: ButtonProps["textColor"]
+    disabled?: ButtonProps["disabled"]
+    color_?: ButtonProps["color"]
+  }>(({ theme, color_, disabled, condensed, loading, fullWidth, textColor }) => {
+    const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color_ || "")
+    return {
+      backgroundColor,
+      lineHeight: `${condensed ? 28 : 36}px`,
+      fontSize: theme.font.size.small,
+      fontFamily: theme.font.family.main,
+      fontWeight: theme.font.weight.medium,
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: `0 ${condensed ? theme.space.medium : theme.space.element}px`,
+      borderRadius: theme.borderRadius,
+      border: 0,
+      boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.border.disabled} inset` : "none",
+      cursor: disabled ? "not-allowed" : "pointer",
+      opacity: disabled ? 0.6 : 1.0,
+      outline: "none",
+      position: "relative",
+      width: fullWidth ? "100%" : "initial",
+      marginRight: theme.space.small,
+      // Apply styles with increased specificity to override defaults
+      "&, a:link&, a:visited&": {
+        textDecoration: "none",
+        color: loading ? "transparent" : expandColor(theme, textColor) || foregroundColor,
+      },
+      ...(!disabled
+        ? {
+            ":hover": {
+              backgroundColor: darken(backgroundColor, 5),
+            },
+          }
+        : {}),
+    }
+  })
 
   return (
     <OperationalContext>
       {ctx => (
-        <ContainerComponent
+        <Container
           {...props}
           color_={color}
           href={to}
@@ -156,7 +151,7 @@ const Button: React.SFC<ButtonProps> = ({
           {children}
           {icon && iconPosition === "end" && <Icon right {...iconProps} />}
           {props.loading && <ButtonSpinner containerColor={color} />}
-        </ContainerComponent>
+        </Container>
       )}
     </OperationalContext>
   )

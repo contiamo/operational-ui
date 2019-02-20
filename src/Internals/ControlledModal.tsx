@@ -1,5 +1,5 @@
+import { keyframes } from "@emotion/core"
 import * as React from "react"
-import { keyframes } from "react-emotion"
 import Card, { CardProps } from "../Card/Card"
 import Overlay from "../Internals/Overlay"
 import styled from "../utils/styled"
@@ -34,32 +34,34 @@ const fromTop = (fullSize: boolean) => {
 `
 }
 
-const Container = styled(Card)<Partial<ControlledModalProps>>(({ theme, fullSize, type }) => ({
-  top: theme.space.element,
-  left: fullSize ? theme.space.element : "50%",
-  height: fullSize ? "100%" : "fit-content",
-  animation: `${fromTop(Boolean(fullSize))} 0.2s`,
-  position: "absolute",
-  minWidth: 600,
-  zIndex: type === "confirm" ? theme.zIndex.confirm : theme.zIndex.modal,
-  maxWidth: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the screen!
+const Container = styled(Card)<{ fullSize: boolean; type: ControlledModalProps["type"] }>(
+  ({ theme, fullSize, type }) => ({
+    top: theme.space.element,
+    left: fullSize ? theme.space.element : "50%",
+    height: fullSize ? "100%" : "fit-content",
+    animation: `${fromTop(Boolean(fullSize))} 0.2s`,
+    position: "absolute",
+    minWidth: 600,
+    zIndex: type === "confirm" ? theme.zIndex.confirm : theme.zIndex.modal,
+    maxWidth: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the screen!
 
-  ...(fullSize
-    ? // Full-size specific rules
-      {
-        border: 0,
-        width: 1110,
-        display: "grid",
-        gridTemplateRows: "40px 100%",
-        maxHeight: `calc(100% - ${theme.space.element * 3}px)`,
-      }
-    : // Regular size rules
-      {
-        transform: "translate(-50%, 0)",
-      }),
-}))
+    ...(fullSize
+      ? // Full-size specific rules
+        {
+          border: 0,
+          width: 1110,
+          display: "grid",
+          gridTemplateRows: "40px 100%",
+          maxHeight: `calc(100% - ${theme.space.element * 3}px)`,
+        }
+      : // Regular size rules
+        {
+          transform: "translate(-50%, 0)",
+        }),
+  }),
+)
 
-const Content = styled("div")<ControlledModalProps>(({ theme, fullSize }) => ({
+const Content = styled("div")<{ fullSize: boolean }>(({ theme, fullSize }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
@@ -100,8 +102,8 @@ const ControlledModal: React.SFC<ControlledModalProps> = ({
         }
       }}
     />
-    <Container type={type} className={contentClassName} fullSize={fullSize} title={title} action={action}>
-      <Content fullSize={fullSize}>{children}</Content>
+    <Container type={type} className={contentClassName} fullSize={Boolean(fullSize)} title={title} action={action}>
+      <Content fullSize={Boolean(fullSize)}>{children}</Content>
     </Container>
   </>
 )
