@@ -1,6 +1,5 @@
 import urlRegex from "url-regex"
 
-export { default as deprecate } from "./deprecate"
 export * from "./mixins"
 export * from "./color"
 export { default as wrapDefaultTheme } from "./wrap-default-theme"

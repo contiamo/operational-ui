@@ -271,5 +271,3 @@ export const expandColor = (
 export type OperationalStyleConstants = Readonly<typeof constants>
 
 export default constants
-
-export { expandColor as deprecatedExpandColor } from "./constants/deprecatedTheme"
