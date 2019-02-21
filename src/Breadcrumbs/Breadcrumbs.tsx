@@ -20,7 +20,7 @@ const Container = styled("div")({
 
 const Slash = styled("span")(({ theme }) => ({
   display: "inline-block",
-  margin: theme.space.medium,
+  margin: `0 ${theme.space.medium}px`,
   color: theme.color.text.lightest,
   ":first-child": {
     marginLeft: 0,
