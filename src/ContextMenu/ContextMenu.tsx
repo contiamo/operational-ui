@@ -74,7 +74,7 @@ const InvisibleOverlay = styled("div")(({ theme }) => ({
   right: 0,
   left: 0,
   cursor: "default",
-  zIndex: theme.zIndex.selectOptions - 1,
+  zIndex: theme.zIndex.selectOptions + 1,
 }))
 
 class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
