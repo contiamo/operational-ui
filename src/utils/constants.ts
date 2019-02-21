@@ -1,5 +1,4 @@
 import get from "lodash/get"
-import { operational } from "./constants/deprecatedTheme"
 
 /**
  * # Operational UI's styling constants.
@@ -196,14 +195,26 @@ export const space = {
  * One zIndex to rule them all
  */
 const zIndex = {
+  /** `0` */
   default: 0,
+  /** `300` */
   selectOptions: 300,
+  /** `299` */
   formFieldError: 299,
+  /** `400` */
   tooltip: 400,
+  /** `500` */
   modal: 500,
+  /** `600` */
   confirm: 600,
+  /** `1000` */
   debugViewer: 1000,
+  /** `299` */
   globalProgress: 299,
+  /** `2000` */
+  messages: 2000,
+  /** `100` */
+  switch: 100,
 }
 
 /**
@@ -227,7 +238,6 @@ const constants = {
   sidebarWidth: 220,
   topbarHeight: 42,
   titleHeight: 50,
-  deprecated: operational,
 }
 
 /*
@@ -241,7 +251,7 @@ export const expandColor = (
   if (!colorToBeExpanded) {
     return null
   }
-  if (colorToBeExpanded.includes(".")) {
+  if (String(colorToBeExpanded).includes(".")) {
     return get(theme, colorToBeExpanded, "red")
   }
   const hexRegEx = /(^#[0-9A-F]{6}$)|(^#[0-9A-F]{8}$)|(^#[0-9A-F]{4}$)|(^#[0-9A-F]{3}$)|currentColor/i

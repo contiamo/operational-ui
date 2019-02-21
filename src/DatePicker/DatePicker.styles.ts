@@ -24,17 +24,16 @@ export const DatePickerCard = styled("div")<{ isExpanded: boolean }>(
     left: 0,
   },
   ({ theme, isExpanded }) => ({
-    backgroundColor: theme.deprecated.colors.white,
+    backgroundColor: theme.color.white,
     display: isExpanded ? "block" : "none",
-    boxShadow: theme.deprecated.shadows.popup,
-    borderRadius: theme.deprecated.borderRadius,
+    boxShadow: theme.shadows.popup,
+    borderRadius: theme.borderRadius,
     // Push down the card to the bottom of the input field,
     // plus the twice the size of the outside focus shadow.
     top: inputHeight + 6,
-    padding: `${(theme.deprecated.spacing * 3) / 4}px ${theme.deprecated.spacing}px ${(theme.deprecated.spacing * 4) /
-      3}px`,
+    padding: theme.space.content,
     width: inputDefaultWidth,
-    zIndex: theme.deprecated.baseZIndex + 1000,
+    zIndex: theme.zIndex.selectOptions,
   }),
 )
 
@@ -43,24 +42,24 @@ export const Toggle = styled("div")(({ theme }) => ({
   cursor: "pointer",
   top: 1,
   right: 1,
-  borderTopRightRadius: theme.deprecated.borderRadius,
-  borderBottomRightRadius: theme.deprecated.borderRadius,
+  borderTopRightRadius: theme.borderRadius,
+  borderBottomRightRadius: theme.borderRadius,
   width: inputHeight - 2,
   height: inputHeight - 2,
   fontSize: 10,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  zIndex: theme.deprecated.baseZIndex + 1000,
-  color: theme.deprecated.colors.inputBorder,
+  zIndex: theme.zIndex.selectOptions,
+  color: theme.color.text.default,
   borderLeft: "1px solid",
-  borderColor: theme.deprecated.colors.inputBorder,
+  borderColor: theme.color.border.default,
   "& svg": {
     position: "relative",
     pointerEvents: "none",
   },
   ":hover": {
-    backgroundColor: theme.deprecated.colors.lighterBackground,
+    backgroundColor: theme.color.background.lighter,
   },
 }))
 
@@ -73,7 +72,6 @@ export const MonthNav = styled("div")(({ theme }) => ({
     display: "inline-block",
   },
   "& > span": {
-    ...theme.deprecated.typography.body,
     userSelect: "none",
     width: 120,
     textAlign: "center",
@@ -162,10 +160,9 @@ export const DayOfWeek = styled(BaseDay)`
 `
 
 export const Input = styled("input")<{ isExpanded: boolean }>(({ theme, isExpanded }) => ({
-  ...theme.deprecated.typography.body,
   userSelect: "none",
-  borderRadius: theme.deprecated.borderRadius,
-  padding: (theme.deprecated.spacing * 2) / 3,
+  borderRadius: theme.borderRadius,
+  padding: theme.space.element / 3,
   height: inputHeight,
   cursor: "pointer",
   border: "1px solid",
@@ -194,11 +191,11 @@ export const ClearButton = styled("div")(({ theme }) => ({
   right: -inputHeight + 1,
   opacity: 0.3,
   textAlign: "center",
-  zIndex: theme.deprecated.baseZIndex + 100,
+  zIndex: theme.zIndex.selectOptions,
   "&:hover": {
     opacity: 1,
     "& svg": {
-      stroke: theme.deprecated.colors.warning,
+      stroke: theme.color.warning,
     },
   },
 }))

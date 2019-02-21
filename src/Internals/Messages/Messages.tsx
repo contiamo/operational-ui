@@ -6,18 +6,19 @@ export interface MessagesProps extends DefaultProps {
   children?: React.ReactNode
 }
 
-const Container = styled("div")(({ theme }) => ({
-  label: "Messages",
-  position: "fixed",
-  zIndex: theme.deprecated.baseZIndex + 500,
-  bottom: 2 * theme.deprecated.spacing,
-  right: 2 * theme.deprecated.spacing,
-  "& > *": {
-    width: 400,
-    height: "auto",
-    marginTop: theme.deprecated.spacing / 2,
-  },
-}))
+const Container = styled("div")(({ theme }) => {
+  return {
+    position: "fixed",
+    zIndex: theme.zIndex.messages,
+    bottom: theme.space.element,
+    right: theme.space.element,
+    "& > *": {
+      width: 400,
+      height: "auto",
+      marginTop: theme.space.element,
+    },
+  }
+})
 
 const Messages: React.SFC<MessagesProps> = ({ children, ...props }) => <Container {...props}>{children}</Container>
 

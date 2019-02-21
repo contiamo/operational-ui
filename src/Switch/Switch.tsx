@@ -51,9 +51,9 @@ const Button = styled("div")<{ on: boolean }>(
   },
   ({ on, theme }) => ({
     transform: `translate3d(${on ? width - height : 0}px, 0, 0)`,
-    backgroundColor: theme.deprecated.colors.white,
-    border: `1px solid ${on ? theme.deprecated.colors.info : theme.deprecated.colors.gray}`,
-    zIndex: theme.deprecated.baseZIndex + 2,
+    backgroundColor: theme.color.white,
+    border: `1px solid ${on ? theme.color.primary : theme.color.border.default}`,
+    zIndex: theme.zIndex.switch,
   }),
 )
 
@@ -69,8 +69,8 @@ const Rail = styled("div")<{ on: boolean }>(
     overflow: "hidden",
   },
   ({ on, theme }) => ({
-    backgroundColor: theme.deprecated.colors.gray,
-    zIndex: theme.deprecated.baseZIndex,
+    backgroundColor: theme.color.text.default,
+    zIndex: theme.zIndex.switch,
     "&:after": {
       content: `" "`,
       position: "absolute",
@@ -78,10 +78,10 @@ const Rail = styled("div")<{ on: boolean }>(
       height: "100%",
       top: 0,
       left: -height / 2,
-      backgroundColor: theme.deprecated.colors.info,
+      backgroundColor: theme.color.background.lightest,
       transition: "transform .3s",
       transform: `translate3d(${on ? "0" : "-100%"}, 0, 0)`,
-      zIndex: theme.deprecated.baseZIndex - 1,
+      zIndex: theme.zIndex.switch,
     },
   }),
 )
