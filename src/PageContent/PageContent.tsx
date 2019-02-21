@@ -12,7 +12,7 @@ export interface ModalConfirmContext {
 
 const isChildFunction = (
   children: PageContentProps["children"],
-): children is ((modalConfirmContext: ModalConfirmContext) => React.ReactNode) => typeof children === "function"
+): children is (modalConfirmContext: ModalConfirmContext) => React.ReactNode => typeof children === "function"
 
 export interface BasePageContentProps extends DefaultProps {
   /** Children to render, you */

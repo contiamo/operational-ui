@@ -132,7 +132,7 @@ const InputField: React.SFC<InputProps> = ({
       <Container fullWidth={fullWidth} withLabel>
         {shouldShowIconButton && renderButton()}
         <Field
-          innerRef={inputRef}
+          ref={inputRef}
           autoFocus={autoFocus}
           name={name}
           disabled={Boolean(disabled)}
@@ -153,12 +153,11 @@ const InputField: React.SFC<InputProps> = ({
           withIconButton={shouldShowIconButton}
           autoComplete={autoComplete}
         />
-        {clear &&
-          value && (
-            <ClearButton onClick={clear}>
-              <Icon color="color.text.lightest" name="No" />
-            </ClearButton>
-          )}
+        {clear && value && (
+          <ClearButton onClick={clear}>
+            <Icon color="color.text.lightest" name="No" />
+          </ClearButton>
+        )}
       </Container>
       {error ? <FormFieldError>{error}</FormFieldError> : null}
     </>

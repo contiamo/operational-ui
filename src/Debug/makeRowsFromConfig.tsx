@@ -31,6 +31,7 @@ export function makeRowsFromConfig<T>(inputValuesProp: DebugProps<T>["values"]) 
                 }}
                 syntax="json"
                 src={value}
+                children={undefined} // needed because of weird typing from react
               />
             </td>
           </tr>

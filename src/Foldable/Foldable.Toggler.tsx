@@ -6,7 +6,6 @@ import styled from "../utils/styled"
 export interface TogglerProps {
   isFolded?: boolean
   isHovered?: boolean
-  innerRef?: React.RefObject<HTMLDivElement>
   onMouseEnter?: React.EventHandler<React.SyntheticEvent>
   onMouseLeave?: React.EventHandler<React.SyntheticEvent>
   onClick?: React.EventHandler<React.SyntheticEvent>

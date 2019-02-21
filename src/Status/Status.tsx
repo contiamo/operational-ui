@@ -29,9 +29,11 @@ const getColorFromProps = ({
 }: StatusProps & { theme: OperationalStyleConstants }): string => {
   if (state) {
     return (
-      new Map<LatestProps["state"], string>(
-        [["error", theme.color.error], ["running", theme.color.warning], ["success", theme.color.success]],
-      ).get(state) || "#989898"
+      new Map<LatestProps["state"], string>([
+        ["error", theme.color.error],
+        ["running", theme.color.warning],
+        ["success", theme.color.success],
+      ]).get(state) || "#989898"
     )
   }
 

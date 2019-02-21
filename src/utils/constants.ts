@@ -1,5 +1,5 @@
 import get from "lodash/get"
-import { operational, Theme } from "./constants/deprecatedTheme"
+import { operational } from "./constants/deprecatedTheme"
 
 /**
  * # Operational UI's styling constants.
@@ -227,12 +227,7 @@ const constants = {
   sidebarWidth: 220,
   topbarHeight: 42,
   titleHeight: 50,
-  /**
-   * This redundant type-casting is necessary to give the typescript compiler access
-   * to the `Theme` interface and prevent it from doing incorrect imports for it.
-   * @todo look into making this unnecessary.
-   */
-  deprecated: operational as Theme,
+  deprecated: operational,
 }
 
 /*

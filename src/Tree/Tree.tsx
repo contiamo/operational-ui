@@ -14,7 +14,7 @@ export interface Tree {
   color?: string
   onClick?: () => void
   onRemove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
-  innerRef?: (element?: HTMLElement | null) => any
+  forwardRef?: (element?: HTMLElement | null) => any
 }
 
 export interface TreeProps {
@@ -52,12 +52,12 @@ const Tree: React.SFC<TreeProps> = ({ trees, id, draggable }) => {
   return (
     <Droppable droppableId={id || "tree"}>
       {droppableProvided => (
-        <Container innerRef={droppableProvided.innerRef} {...droppableProvided.droppableProps}>
+        <Container ref={droppableProvided.innerRef} {...droppableProvided.droppableProps}>
           {trees.map((treeData, index) => (
             <Draggable key={index} draggableId={treeData.label} index={index}>
               {draggableProvided => (
                 <ChildTree
-                  innerRef={draggableProvided.innerRef}
+                  forwardRef={draggableProvided.innerRef}
                   {...treeData}
                   {...draggableProvided.draggableProps}
                   {...draggableProvided.dragHandleProps}

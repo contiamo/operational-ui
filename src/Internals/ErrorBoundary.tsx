@@ -73,7 +73,9 @@ const ErrorBoundary: React.SFC<ErrorBoundaryProps> = ({ environment, error }) =>
         </>
       ) : (
         <p>
-          An unexpected error occured.<br />Please check back later.
+          An unexpected error occured.
+          <br />
+          Please check back later.
         </p>
       )}
     </Splash>

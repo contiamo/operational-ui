@@ -159,7 +159,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
           {isOpen && (
             <MenuContainer
               align={this.props.align}
-              innerRef={node => (this.menu = node)}
+              ref={node => (this.menu = node)}
               embedChildrenInMenu={this.props.embedChildrenInMenu}
             >
               {embedChildrenInMenu && renderedChildren}

@@ -7,7 +7,8 @@
 // @ts-ignore
 import * as React from "react"
 
-import styled, { keyframes } from "react-emotion"
+import { keyframes } from "@emotion/core"
+import styled from "../utils/styled"
 import { ControlledModalProps } from "./ControlledModal"
 
 const fadeIn = keyframes`

@@ -46,7 +46,6 @@ export interface PantheonIconProps extends CommunIconProps {
   name: "Pantheon"
   /** Use the colored version of the logo (works for `name = Pantheon` only) */
   colored?: boolean
-  color?: never
 }
 
 export interface OtherIconProps extends CommunIconProps {
@@ -57,6 +56,9 @@ export interface OtherIconProps extends CommunIconProps {
 export type IconProps = OtherIconProps | OperationalUIIconProps | PantheonIconProps
 
 const Icon: React.SFC<IconProps> = ({ left, right, color, name, ...props }) => {
+  if (!name) {
+    return <>"No Icon Specified"</>
+  }
   const iconColor: string = expandColor(constants, color) || "currentColor"
 
   const TypedCustomIcons: { [key: string]: React.SFC<{ size?: number; color?: string }> } = CustomIcons
@@ -74,13 +76,19 @@ const Icon: React.SFC<IconProps> = ({ left, right, color, name, ...props }) => {
   return null
 }
 
-Icon.defaultProps = {
+const IconComp = styled(Icon)<Pick<CommunIconProps, "left" | "right" | "onClick">>(
+  ({ left, right, theme, onClick }) => ({
+    marginLeft: right ? theme.space.small : 0,
+    marginRight: left ? theme.space.small : 0,
+    cursor: Boolean(onClick) ? "pointer" : "default",
+    transition: "fill .075s ease",
+  }),
+)
+
+const IconJSX: React.SFC<IconProps> = props => <IconComp {...props} />
+
+IconJSX.defaultProps = {
   size: 18,
 }
 
-export default styled(Icon)<IconProps>(({ left, right, theme, onClick }) => ({
-  marginLeft: right ? theme.space.small : 0,
-  marginRight: left ? theme.space.small : 0,
-  cursor: Boolean(onClick) ? "pointer" : "default",
-  transition: "fill .075s ease",
-}))
+export default IconJSX

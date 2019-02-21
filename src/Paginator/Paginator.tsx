@@ -88,7 +88,6 @@ const Container = styled("div")(({ theme }) => ({
 }))
 
 const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, onChange, ...props }) => {
-
   const controlProps = {
     itemCount,
     itemsPerPage,

@@ -1,5 +1,5 @@
+import { keyframes } from "@emotion/core"
 import * as React from "react"
-import { keyframes } from "react-emotion"
 import { Icon } from "../"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"

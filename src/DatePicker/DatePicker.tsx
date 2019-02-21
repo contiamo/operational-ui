@@ -21,12 +21,7 @@ export interface DatePickerProps extends DefaultProps {
   /** End date in the format YYYY-MM-DD. */
   end?: string
   /** Triggered every time the start or end dates change. `undefined` values clear start or end values. */
-  onChange?: (
-    date: {
-      start?: string
-      end?: string
-    },
-  ) => void
+  onChange?: (date: { start?: string; end?: string }) => void
   /** Placeholder text when no dates selected */
   placeholder?: string
 }
@@ -149,7 +144,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
       <Container
         {...props}
         className={isStandalone ? className : undefined}
-        innerRef={(node: React.ReactNode) => {
+        ref={(node: React.ReactNode) => {
           this.containerNode = node
         }}
         isExpanded={isExpanded}
@@ -173,7 +168,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
           isExpanded={this.state.isExpanded}
           id={domId}
           readOnly
-          innerRef={(node: HTMLElement) => {
+          ref={(node: HTMLInputElement) => {
             this.inputNode = node
           }}
           value={[start, end].filter(s => !!s).join(" - ")}

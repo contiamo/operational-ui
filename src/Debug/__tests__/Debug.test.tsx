@@ -63,7 +63,7 @@ Array [
       <td
         colSpan={2}
       >
-        <Styled(Code)
+        <ForwardRef(render)
           codeTheme={
             Object {
               "base00": "transparent",

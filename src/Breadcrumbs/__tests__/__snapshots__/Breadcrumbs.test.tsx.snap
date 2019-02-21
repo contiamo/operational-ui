@@ -5,10 +5,10 @@ exports[`Breadcrumbs Component Should initialize properly 1`] = `
   class="css-ftf61z"
 >
   <div
-    class="css-ar73w8-Messages"
+    class="css-16holpz-Messages"
   />
   <div
-    class="css-og215-breadcrumbs"
+    class="css-1cv420n-breadcrumbs"
   >
     <span
       class="css-udjxb6"
@@ -16,7 +16,7 @@ exports[`Breadcrumbs Component Should initialize properly 1`] = `
       /
     </span>
     <span
-      class="css-uysxol-breadcrumb"
+      class="css-15jkw83-breadcrumb"
     >
       <span
         class="css-0"
@@ -34,7 +34,7 @@ exports[`Breadcrumbs Component Should initialize properly 1`] = `
       /
     </span>
     <span
-      class="css-uysxol-breadcrumb"
+      class="css-15jkw83-breadcrumb"
     >
       <span
         class="css-0"

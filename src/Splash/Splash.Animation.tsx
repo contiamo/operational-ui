@@ -1,5 +1,6 @@
 import * as React from "react"
-import styled from "react-emotion"
+
+import styled from "../utils/styled"
 
 export interface Props {
   size?: number
@@ -33,7 +34,7 @@ const bounce = (coord: number): number => {
   return coord
 }
 
-const Container = styled("div")(({ size }: { size: number }) => ({
+const Container = styled("div")<{ size: number }>(({ size }: { size: number }) => ({
   width: size,
   height: size,
   position: "absolute",
@@ -42,7 +43,7 @@ const Container = styled("div")(({ size }: { size: number }) => ({
   transform: "translate3d(-50%, -50%, 0)",
 }))
 
-const Box = styled("div")(({ x, y }: { x: number; y: number }) => ({
+const Box = styled("div")<{ x: number; y: number }>(({ x, y }) => ({
   position: "absolute",
   transition: "all 0.5s ease-in-out",
   top: `calc(${(x / (squares - 1)) * 100}% + 4px)`,

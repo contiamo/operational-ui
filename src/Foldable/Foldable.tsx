@@ -34,7 +34,6 @@ const Foldable = ({ initialState = "open", children }: FoldableProps) => {
   return children({
     Toggler: ({ onClick, isFolded }) => (
       <Toggler
-        innerRef={togglerRef}
         onMouseEnter={e => {
           e.stopPropagation()
           setIsTogglerHovered(true)

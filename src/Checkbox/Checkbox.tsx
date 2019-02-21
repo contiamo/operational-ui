@@ -1,6 +1,6 @@
+import { keyframes } from "@emotion/core"
 import uniqueId from "lodash/uniqueId"
 import * as React from "react"
-import { keyframes } from "react-emotion"
 
 import styled from "../utils/styled"
 

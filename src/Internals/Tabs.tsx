@@ -82,21 +82,23 @@ class Tabs extends React.Component<Props, State> {
     return this.props.children({
       tabsBar: (
         <TabsBar condensed={this.props.condensed}>
-          {this.props.tabs.filter(({ hidden }) => !hidden).map((tab, index: number) => (
-            <Tab
-              condensed={this.props.condensed}
-              key={index}
-              active={activeTab === index}
-              onClick={() => this.onTabClick(index)}
-            >
-              {tab.loading ? (
-                <Spinner left size={14} />
-              ) : (
-                tab.icon && <Icon name={tab.icon} size={14} color={tab.iconColor} left />
-              )}
-              {tab.name}
-            </Tab>
-          ))}
+          {this.props.tabs
+            .filter(({ hidden }) => !hidden)
+            .map((tab, index: number) => (
+              <Tab
+                condensed={this.props.condensed}
+                key={index}
+                active={activeTab === index}
+                onClick={() => this.onTabClick(index)}
+              >
+                {tab.loading ? (
+                  <Spinner left size={14} />
+                ) : (
+                  tab.icon && <Icon name={tab.icon} size={14} color={tab.iconColor} left />
+                )}
+                {tab.name}
+              </Tab>
+            ))}
         </TabsBar>
       ),
       activeChildren: this.props.tabs[activeTab].children,

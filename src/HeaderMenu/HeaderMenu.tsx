@@ -132,7 +132,7 @@ class HeaderMenu extends React.PureComponent<HeaderMenuProps, Readonly<HeaderMen
     return (
       <HeaderContextMenu width={this.state.renderedMenuWidth} {...props}>
         {isOpen => (
-          <Container innerRef={this.menuRef} isOpen={isOpen} align={props.align} withCaret={Boolean(props.withCaret)}>
+          <Container ref={this.menuRef} isOpen={isOpen} align={props.align} withCaret={Boolean(props.withCaret)}>
             {props.children}
           </Container>
         )}
