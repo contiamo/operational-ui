@@ -4,7 +4,7 @@ Tables simply render a semantic HTML table structure based on raw data.
 
 You can render a simple use-case of the table by specifying a list of records and supplying the columns as a list of strings which would serve both as column heading and access keys for fields.
 
-```js
+```jsx
 <Table
   data={[{ name: "Max", profession: "Carpenter" }, { name: "Moritz", profession: "Baker" }]}
   columns={["name", "profession"]}
@@ -15,7 +15,7 @@ You can render a simple use-case of the table by specifying a list of records an
 
 Tables perform better with a forced fixed layout, since the browser doesn't have to recalculate positions depending on the contents of the table. Here's what the same table looks like with a fixed layout.
 
-```js
+```jsx
 <Table
   fixedLayout
   data={[{ name: "Max", profession: "Carpenter" }, { name: "Moritz", profession: "Baker" }]}
@@ -25,7 +25,7 @@ Tables perform better with a forced fixed layout, since the browser doesn't have
 
 ### Simple Usage without Header
 
-```js
+```jsx
 <Table
   headless
   data={[{ name: "Max", profession: "Carpenter" }, { name: "Moritz", profession: "Baker" }]}

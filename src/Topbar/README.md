@@ -2,40 +2,21 @@ Top bars are used as lower-level navigation elements for widgets inside applicat
 
 ### Usage
 
-```
+```jsx
 <Topbar
   left={
     <>
-      <TopbarSelect
-        label="Fruit"
-        selected={"apples"}
-        items={["apples", "oranges"].map(name => ({ label: name }))}
-      />
-      <TopbarButton
-        icon="No"
-      >
-        Clear
-      </TopbarButton>
-      <TopbarButton
-        icon="Undo"
-      >
-        Undo
-      </TopbarButton>
-      <TopbarButton
-        icon="Redo"
-        disabled
-      >
+      <TopbarSelect label="Fruit" selected={"apples"} items={["apples", "oranges"].map(name => ({ label: name }))} />
+      <TopbarButton icon="No">Clear</TopbarButton>
+      <TopbarButton icon="Undo">Undo</TopbarButton>
+      <TopbarButton icon="Redo" disabled>
         Redo
       </TopbarButton>
     </>
   }
   right={
     <>
-      <TopbarButton
-        icon="Share"
-      >
-        Share
-      </TopbarButton>
+      <TopbarButton icon="Share">Share</TopbarButton>
     </>
   }
 />
