@@ -2,9 +2,9 @@ import * as React from "react"
 
 import ContextMenu from "../ContextMenu/ContextMenu"
 import { IContextMenuItem, IContextMenuItem as Item } from "../ContextMenu/ContextMenu.Item"
-import { useUniqueId } from "../hooks/useUniqueId"
 import Input, { InputProps } from "../Input/Input"
 import Progress from "../Progress/Progress"
+import { useUniqueId } from "../useUniqueId"
 import styled from "../utils/styled"
 import { makeItems } from "./Autocomplete.utils"
 
