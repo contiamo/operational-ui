@@ -65,7 +65,7 @@ const TextareaComp = styled("textarea")<{
   return {
     height,
     resize,
-    fontSize: theme.font.size.small,
+    fontSize: theme.font.size.body,
     fontWeight: theme.font.weight.regular,
     position: "relative",
     display: "block",
@@ -74,7 +74,7 @@ const TextareaComp = styled("textarea")<{
     borderRadius: isAction ? `0 0 ${theme.borderRadius}px ${theme.borderRadius}px` : theme.borderRadius,
     borderColor: isError ? theme.color.error : theme.color.border.default,
     padding: `${theme.space.small}px ${theme.space.medium}px ${theme.space.small}px ${theme.space.medium}px`,
-    fontFamily: isCode ? "monospace" : "inherit",
+    fontFamily: isCode ? "monospace" : theme.font.family.main,
     opacity: disabled ? 0.6 : 1.0,
     ...(isAction ? { borderTop: 0 } : {}),
     ":focus ~ div": {
@@ -203,7 +203,7 @@ const Textarea: React.FC<TextareaProps> = ({
           {action}
           {copy && (
             <CopyToClipboard text={value} onCopy={() => pushMessage({ type: "success", body: "Successfully Copied" })}>
-              <div>
+              <div role="button" aria-label="Copy to Clipboard">
                 <Icon size={8} name="Copy" />
                 <a>Copy to clipboard</a>
               </div>
