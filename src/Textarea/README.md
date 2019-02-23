@@ -25,7 +25,7 @@ const handleChange = key => value => {
 }
 ;<Form>
   <div>
-    <Textarea value={state.v0} onChange={handleChange("v1")} />
+    <Textarea value={state.v0} onChange={handleChange("v0")} />
   </div>
   <div>
     <Textarea value={state.v1} onChange={handleChange("v1")} label="simple" />
