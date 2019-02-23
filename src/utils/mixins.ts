@@ -4,7 +4,6 @@ import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
 import { lighten } from "../utils"
 import styled from "../utils/styled"
 import { OperationalStyleConstants } from "./constants"
-import styled from "./styled"
 
 export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
   outline: 0,
