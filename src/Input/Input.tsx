@@ -1,10 +1,10 @@
 import * as React from "react"
 
 import Hint from "../Hint/Hint"
-import { useUniqueId } from "../hooks/useUniqueId"
 import Icon, { IconName } from "../Icon/Icon"
 import { LabelText } from "../LabelText/LabelText"
 import { DefaultProps } from "../types"
+import { useUniqueId } from "../useUniqueId"
 import { FormFieldControl, FormFieldControls, Label } from "../utils/mixins"
 import InputField from "./Input.Field"
 
