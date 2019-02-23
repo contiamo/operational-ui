@@ -48,7 +48,9 @@ const StatefulSidenav = () => {
 ### Compact Mode
 
 ```jsx
-<Sidenav compact>
+import * as React from "react"
+import { Sidenav, SidenavHeader, SidenavItem } from "@operational/components"
+;<Sidenav compact>
   <SidenavHeader condensed icon="Home" label="Project Home" />
   <SidenavHeader label="The Prize">
     <SidenavItem label="Overview" icon="Function" />
@@ -66,7 +68,9 @@ const StatefulSidenav = () => {
 ### With an item placed at the bottom
 
 ```jsx
-<div style={{ height: 600 }}>
+import * as React from "react"
+import { Sidenav, SidenavHeader, SidenavItem } from "@operational/components"
+;<div style={{ height: 600 }}>
   <Sidenav compact>
     <SidenavHeader label="Let It Snow">
       <SidenavItem label="Steak" icon="Jobs" />

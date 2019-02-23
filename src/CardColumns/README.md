@@ -3,7 +3,9 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 ### Usage
 
 ```jsx
-<Card title="Bundle information">
+import * as React from "react"
+import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@operational/components"
+;<Card title="Bundle information">
   <p>Here is the information available about this bundle.</p>
   <CardColumns>
     <CardColumn title="Contributors">
@@ -23,7 +25,9 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 ### With a smaller card
 
 ```jsx
-<div style={{ width: 280 }}>
+import * as React from "react"
+import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@operational/components"
+;<div style={{ width: 280 }}>
   <Card title="Bundle information">
     <p>Here is the information available about this bundle.</p>
     <CardColumns>
@@ -45,7 +49,9 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 ### With an image
 
 ```jsx
-<div style={{ width: 280 }}>
+import * as React from "react"
+import { Card, CardColumns, CardColumn, Chip } from "@operational/components"
+;<div style={{ width: 280 }}>
   <Card title="Bundle information">
     <p>Here is the information available about this bundle.</p>
     <CardColumns>
@@ -64,7 +70,9 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 ### With content on the right
 
 ```jsx
-<Card title="Playground">
+import * as React from "react"
+import { Card, CardColumns, CardColumn, Textarea, Code, Button } from "@operational/components"
+;<Card title="Playground">
   <CardColumns>
     <CardColumn title="Input">
       <Textarea code value="hello-word" />
@@ -97,7 +105,9 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 ### With flexColumn
 
 ```jsx
-<Card title="Playground">
+import * as React from "react"
+import { Card, CardColumns, CardColumn, Textarea, Code, Button } from "@operational/components"
+;<Card title="Playground">
   <CardColumns>
     <CardColumn title="Input">
       <Textarea code value="hello-word" fullWidth />

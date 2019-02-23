@@ -3,7 +3,9 @@ The tree component renders a tree structure with collapsable nodes in a filetree
 ### Usage
 
 ```jsx
-<Tree
+import * as React from "react"
+import { Tree } from "@operational/components"
+;<Tree
   trees={[
     {
       label: "Store",
@@ -56,7 +58,9 @@ The tree component renders a tree structure with collapsable nodes in a filetree
 Certain nodes in the tree can be highlighted like so.
 
 ```jsx
-<Tree
+import * as React from "react"
+import { Tree } from "@operational/components"
+;<Tree
   trees={[
     {
       label: "Store",
@@ -103,36 +107,4 @@ Certain nodes in the tree can be highlighted like so.
     },
   ]}
 />
-```
-
-### Reordering
-
-Tree items can be reordered using drag-and-drop. For this feature, we recommend using [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd) from our friends at [Atlassian](https://www.atlassian.com/) since we use it internally. Optionally, remove the `draggable` prop on the Tree component and add your own `onDragStart|End|...` properties to child nodes if you'd like to use native HTML drag/drop features.
-
-```jsx
-initialState = {
-  courses: ["Appetizer", "Soup", "Spaghetti", "Cake"],
-}
-
-const reorder = (result, startIndex, endIndex) => {
-  const [removed] = result.splice(startIndex, 1)
-  result.splice(endIndex, 0, removed)
-  return result
-}
-
-const remove = i => list => list.filter((_, j) => i !== j)
-
-const { DragDropContext } = require("react-beautiful-dnd")
-
-;<DragDropContext
-  onDragEnd={result => setState({ courses: reorder(state.courses, result.source.index, result.destination.index) })}
->
-  <Tree
-    draggable
-    trees={state.courses.map(course => ({
-      tag: "C",
-      label: course,
-    }))}
-  />
-</DragDropContext>
 ```

@@ -3,7 +3,9 @@ This component displays an indicator of status.
 ### Usage
 
 ```jsx
-<div style={{ maxWidth: 200 }}>
+import * as React from "react"
+import { Card, Status } from "@operational/components"
+;<div style={{ maxWidth: 200 }}>
   <Card>
     <Status state="success">Deployed</Status>
   </Card>

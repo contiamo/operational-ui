@@ -5,7 +5,9 @@ Cards are used to group and lay out content on the interface - in fact, non-scro
 Simply add any content inside the card.
 
 ```jsx
-<Card>
+import * as React from "react"
+import { Card } from "@operational/components"
+;<Card>
   <p>Here is a bare card with custom padding.</p>
   <img alt="Cat" src="https://images.unsplash.com/photo-1491485880348-85d48a9e5312?w=500" />
 </Card>
@@ -14,7 +16,9 @@ Simply add any content inside the card.
 ### With title & action
 
 ```jsx
-<Card
+import * as React from "react"
+import { Card, SimpleLink } from "@operational/components"
+;<Card
   title="Functions"
   action={
     <>
@@ -33,6 +37,9 @@ Simply add any content inside the card.
 ### With data and title
 
 ```jsx
+import * as React from "react"
+import { Card } from "@operational/components"
+
 const myData = {
   deployedSha: "oiuhaeg",
   deployed: "last Friday",
@@ -45,6 +52,9 @@ const myData = {
 ### With a title formatter
 
 ```jsx
+import * as React from "react"
+import { Card } from "@operational/components"
+
 const myData = {
   deployedSha: "oiuhaeg",
   deployed: "last Friday",
@@ -57,6 +67,9 @@ const myData = {
 ### With value formatters
 
 ```jsx
+import * as React from "react"
+import { Card, Status } from "@operational/components"
+
 const myData = {
   deployedSha: "oiuhaeg",
   deployed: "last Friday",
@@ -83,6 +96,9 @@ const myData = {
 ### With `keys`
 
 ```jsx
+import * as React from "react"
+import { Card } from "@operational/components"
+
 const myData = {
   deployedSha: "oiuhaeg",
   deployed: "last Friday",
@@ -154,20 +170,26 @@ const MyComponent = () => {
 ### Stacked Cards
 
 ```jsx
-<Card title="Hello">Hi, I'm a Tourist 🇫🇷</Card>
-<Card>I'm a local</Card>
+import * as React from "react"
+import { Card } from "@operational/components"
+;<>
+  <Card title="Hello">Hi, I'm a Tourist 🇫🇷</Card>
+  <Card>I'm a local</Card>
+</>
 ```
 
 ### With overflowy content
 
 ```jsx
-<div style={{ display: "flex" }}>
+import * as React from "react"
+import { Card, CardItem } from "@operational/components"
+;<div style={{ display: "flex" }}>
   <div style={{ width: 200 }}>
     <Card>https://github.com/contiamo/operational-ui</Card>
   </div>
   <div style={{ marginLeft: 16, width: 200 }}>
     <Card title="I have a Header">
-      <CardItem title="Hello">loremipsumdolorsitametconseceteuradispicingelit</CardItem>
+      <CardItem title="Hello" value="loremipsumdolorsitametconseceteuradispicingelit" />
     </Card>
   </div>
 </div>

@@ -3,7 +3,9 @@ Top bars are used as lower-level navigation elements for widgets inside applicat
 ### Usage
 
 ```jsx
-<Topbar
+import * as React from "react"
+import { Topbar, TopbarSelect, TopbarButton } from "@operational/components"
+;<Topbar
   left={
     <>
       <TopbarSelect label="Fruit" selected={"apples"} items={["apples", "oranges"].map(name => ({ label: name }))} />

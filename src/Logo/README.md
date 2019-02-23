@@ -5,7 +5,9 @@ This component provides brand logos for use out of the box. It is typically used
 #### With Colors
 
 ```jsx
-<div style={{ display: "flex", justifyContent: "space-around" }}>
+import * as React from "react"
+import { Logo } from "@operational/components"
+;<div style={{ display: "flex", justifyContent: "space-around" }}>
   <Logo name="Contiamo" color="primary" />
   <Logo name="Pantheon" color="error" />
   <Logo name="Labs" color="success" />
@@ -16,11 +18,15 @@ This component provides brand logos for use out of the box. It is typically used
 #### With size
 
 ```jsx
-<Logo color="black" size={200} name="Contiamo" />
+import * as React from "react"
+import { Logo } from "@operational/components"
+;<Logo color="black" size={200} name="Contiamo" />
 ```
 
 #### Stacked
 
 ```jsx
-<Logo size={100} color="#747474" name="ContiamoStacked" />
+import * as React from "react"
+import { Logo } from "@operational/components"
+;<Logo size={100} color="#747474" name="ContiamoStacked" />
 ```

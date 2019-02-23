@@ -22,6 +22,9 @@ import { Card, CardColumns, CardColumn } from "@operational/components"
 Card columns can be used with tabs when required. Here's how.
 
 ```jsx
+import * as React from "react"
+import { Card, CardColumns, CardColumn, Code } from "@operational/components"
+
 const myData = {
   _page: 1,
   _pageSize: 1,

@@ -5,7 +5,10 @@ along with a symbol for the button that will be displayed if click behavior is d
 ### Usage
 
 ```jsx
-<div style={{ display: "flex" }}>
+import * as React from "react"
+import { Chip } from "@operational/components"
+
+;<div style={{ display: "flex" }}>
   <Chip>Default color</Chip>
   <Chip
     color="basic"

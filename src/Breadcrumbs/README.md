@@ -3,7 +3,10 @@ Breadcrumbs are typically a series of links showing the path to a particular pag
 ### Usage
 
 ```jsx
-<Breadcrumbs>
+import * as React from "react"
+import { Breadcrumbs, Breadcrumb } from "@operational/components"
+
+;<Breadcrumbs>
   <Breadcrumb>Home</Breadcrumb>
   <Breadcrumb>Page 1</Breadcrumb>
   <Breadcrumb>Subpage 1</Breadcrumb>
@@ -15,7 +18,10 @@ Breadcrumbs are typically a series of links showing the path to a particular pag
 Using a `to` prop navigates automatically, and render proper anchor tags with hrefs. See `OperationalUI` docs for a one-time configuration you need to do to have pushstate navigation working out-of-the-box.
 
 ```jsx
-<Breadcrumbs>
+import * as React from "react"
+import { Breadcrumbs, Breadcrumb } from "@operational/components"
+
+;<Breadcrumbs>
   <Breadcrumb to="/some-url">Home</Breadcrumb>
   <Breadcrumb>Page 1</Breadcrumb>
   <Breadcrumb>Subpage 1</Breadcrumb>

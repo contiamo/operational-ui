@@ -3,7 +3,9 @@ Simple links combine a short label and an icon to create colored links that are 
 ### Usage
 
 ```jsx
-<>
+import * as React from "react"
+import { SimpleLink } from "@operational/components"
+;<>
   <SimpleLink left icon="Open">
     Default
   </SimpleLink>

@@ -3,9 +3,11 @@ If used within the button group component, the library takes care to remove inte
 ### Simple buttons group
 
 ```jsx
-<ButtonGroup>
+import * as React from "react"
+import { ButtonGroup, Button } from "@operational/components"
+;<ButtonGroup>
   <Button>Group 1</Button>
-  <Button active>Group 2</Button>
+  <Button>Group 2</Button>
   <Button>Group 3</Button>
 </ButtonGroup>
 ```
@@ -15,7 +17,9 @@ If used within the button group component, the library takes care to remove inte
 Buttons can be condensed, and further grouped to achieve, among other things, this paginator-style look:
 
 ```jsx
-<ButtonGroup>
+import * as React from "react"
+import { ButtonGroup, Button } from "@operational/components"
+;<ButtonGroup>
   <Button condensed>1</Button>
   <Button condensed color="success">
     2

@@ -1,7 +1,9 @@
 ### More advanced case
 
 ```jsx
-<Page>
+import * as React from "react"
+import { Page, PageAreas, PageArea, Card, Body } from "@operational/components"
+;<Page>
   <PageAreas areas="main side">
     <Card title="main">
       <Body>this is a short text</Body>

@@ -3,12 +3,14 @@ This component renders a navigable list.
 ## Usage
 
 ```jsx
-<List
+import * as React from "react"
+import { List } from "@operational/components"
+;<List
   items={[
     {
       photo: "https://placehold.it/140x60",
       description: "We will ask you to authenticate yourself with OAuth.",
-      onClick: () => goToStep("next"),
+      onClick: () => alert("next!"),
     },
     {
       photo: "https://placehold.it/140x60",
@@ -28,13 +30,15 @@ This component renders a navigable list.
 ## With Icon
 
 ```jsx
-<List
+import * as React from "react"
+import { List, Logo } from "@operational/components"
+;<List
   items={[
     {
       photo: <Logo color="black" name="Pantheon" />,
       description:
         "Pantheon is a data hub that integrates with your existing data landscape and provides a central point of access for business, data science and operational use.",
-      onClick: () => goToStep("next"),
+      onClick: () => alert("next!"),
     },
     {
       photo: <Logo color="black" name="Labs" />,

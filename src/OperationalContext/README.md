@@ -5,7 +5,8 @@ The `OperationalContext` component provides utility methods and data that can be
 You can use `OperationalUI`'s flash- and progress bar features to automatically render and manage these universal UI elements using the `pushMessage` and `setLoadingState` methods provided in context, as shown in the code snippet below:
 
 ```jsx
-const { useOperationalContext } = require("./OperationalContext")
+import * as React from "react"
+import { Button, useOperationalContext } from "@operational/components"
 
 const ComponentWithContext = () => {
   const { pushMessage, setLoading, loading } = useOperationalContext()

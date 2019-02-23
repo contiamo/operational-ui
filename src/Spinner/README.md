@@ -4,8 +4,10 @@ Spinners are used to indicate loading state in a smaller element, such as a card
 
 Spinners render in custom sizes and colors.
 
-```js
-<>
+```jsx
+import * as React from "react"
+import { Spinner } from "@operational/components"
+;<>
   <Spinner />
   <br />
   <Spinner color="primary" />
@@ -20,8 +22,10 @@ Spinners render in custom sizes and colors.
 
 In addition to the regular spinning animation, there is a bouncing one that is designed to indicate that data already displayed on the page is being updated.
 
-```js
-<>
+```jsx
+import * as React from "react"
+import { Spinner } from "@operational/components"
+;<>
   <Spinner bounce />
   <br />
   <Spinner color="success" bounce />
@@ -32,8 +36,10 @@ In addition to the regular spinning animation, there is a bouncing one that is d
 
 ### Fun mode
 
-```js
-<div style={{ position: "relative" }}>
+```jsx
+import * as React from "react"
+import { Spinner, Logo } from "@operational/components"
+;<div style={{ position: "relative" }}>
   <svg width="365" height="185">
     <rect x="70" y="10" width="220" height="130" fill="transparent" rx="150" stroke="#1499cc" strokeWidth="10" />
     <rect x="10" y="70" width="340" height="80" fill="#1499cc" rx="30" />

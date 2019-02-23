@@ -5,23 +5,41 @@ This component lays out an opinionated application frame with side navigation, a
 This is an example of a basic layout. Overflowing side and main sections scroll independently.
 
 ```jsx
+import * as React from "react"
+import {
+  Sidenav,
+  Avatar,
+  SidenavHeader,
+  SidenavItem,
+  Layout,
+  HeaderBar,
+  HeaderMenu,
+  Page,
+  Button,
+  Card,
+  Form,
+  Body,
+  Logo,
+  Autocomplete,
+} from "@operational/components"
+
 const sidebar = (
   <Sidenav>
     <SidenavHeader condensed icon="Home" label="Project Home" />
     <SidenavHeader label="The Prize" active>
-      <SidenavItem label="The First Prize" icon="Settings" />
-      <SidenavItem label="The Second Prize" icon="Settings" />
-      <SidenavItem label="The Third Prize" icon="Settings" />
+      <SidenavItem label="The First Prize" icon="Admin" />
+      <SidenavItem label="The Second Prize" icon="Building" />
+      <SidenavItem label="The Third Prize" icon="CaretLeft" />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon="Settings" />
-      <SidenavItem label="The Second Prize" icon="Settings" />
-      <SidenavItem label="The Third Prize" icon="Settings" />
+      <SidenavItem label="The First Prize" icon="Database" />
+      <SidenavItem label="The Second Prize" icon="EmptyCircle" />
+      <SidenavItem label="The Third Prize" icon="Function" />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon="Settings" />
-      <SidenavItem label="The Second Prize" icon="Settings" />
-      <SidenavItem label="The Third Prize" icon="Settings" />
+      <SidenavItem label="The First Prize" icon="Grid" />
+      <SidenavItem label="The Second Prize" icon="Home" />
+      <SidenavItem label="The Third Prize" icon="Jobs" />
     </SidenavHeader>
   </Sidenav>
 )
@@ -35,22 +53,12 @@ const sidebar = (
       <HeaderBar
         logo={<Logo name="Contiamo" />}
         main={
-          <HeaderMenu
-            withCaret
-            items={[
-              { key: "project1", label: "Project 1" },
-              { key: "project2", label: "Project 2" },
-              { key: "project3", label: "Project 3" },
-            ]}
-          >
+          <HeaderMenu withCaret items={[{ label: "Project 1" }, { label: "Project 2" }, { label: "Project 3" }]}>
             Project 1
           </HeaderMenu>
         }
         end={
-          <HeaderMenu
-            items={[{ key: "account", label: "My account" }, { key: "log-out", label: "Log out" }]}
-            align="right"
-          >
+          <HeaderMenu items={[{ label: "Log out" }]} align="right">
             Imogen Mason <Avatar name="Imogen Mason" />
           </HeaderMenu>
         }
@@ -85,6 +93,7 @@ const sidebar = (
                         <Form>
                           <Body>You can only add users who are already in your organization.</Body>
                           <Autocomplete
+                            onChange={() => console.log("autocomplete changed")}
                             onResultClick={result => alert("Thanks for choosing " + result.label)}
                             value="Click me for results..."
                             results={[
@@ -215,23 +224,41 @@ Revealing the layers to my soul
 This is an example of a basic layout _without_ a page title. Content at the bottom should be correctly visible.
 
 ```jsx
+import * as React from "react"
+import {
+  Sidenav,
+  Avatar,
+  SidenavHeader,
+  SidenavItem,
+  Layout,
+  HeaderBar,
+  HeaderMenu,
+  Page,
+  Button,
+  Card,
+  Form,
+  Body,
+  Logo,
+  Autocomplete,
+} from "@operational/components"
+
 const sidebar = (
   <Sidenav>
     <SidenavHeader condensed icon="Home" label="Project Home" />
     <SidenavHeader label="The Prize" active>
-      <SidenavItem label="The First Prize" icon="Settings" />
-      <SidenavItem label="The Second Prize" icon="Settings" />
-      <SidenavItem label="The Third Prize" icon="Settings" />
+      <SidenavItem label="The First Prize" icon="Admin" />
+      <SidenavItem label="The Second Prize" icon="Building" />
+      <SidenavItem label="The Third Prize" icon="CaretLeft" />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon="Settings" />
-      <SidenavItem label="The Second Prize" icon="Settings" />
-      <SidenavItem label="The Third Prize" icon="Settings" />
+      <SidenavItem label="The First Prize" icon="Database" />
+      <SidenavItem label="The Second Prize" icon="EmptyCircle" />
+      <SidenavItem label="The Third Prize" icon="Function" />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon="Settings" />
-      <SidenavItem label="The Second Prize" icon="Settings" />
-      <SidenavItem label="The Third Prize" icon="Settings" />
+      <SidenavItem label="The First Prize" icon="Grid" />
+      <SidenavItem label="The Second Prize" icon="Home" />
+      <SidenavItem label="The Third Prize" icon="Jobs" />
     </SidenavHeader>
   </Sidenav>
 )
@@ -245,22 +272,12 @@ const sidebar = (
       <HeaderBar
         logo={<Logo name="Contiamo" />}
         main={
-          <HeaderMenu
-            withCaret
-            items={[
-              { key: "project1", label: "Project 1" },
-              { key: "project2", label: "Project 2" },
-              { key: "project3", label: "Project 3" },
-            ]}
-          >
+          <HeaderMenu withCaret items={[{ label: "Project 1" }, { label: "Project 2" }, { label: "Project 3" }]}>
             Project 1
           </HeaderMenu>
         }
         end={
-          <HeaderMenu
-            items={[{ key: "account", label: "My account" }, { key: "log-out", label: "Log out" }]}
-            align="right"
-          >
+          <HeaderMenu items={[{ label: "Log out" }]} align="right">
             Imogen Mason <Avatar name="Imogen Mason" />
           </HeaderMenu>
         }
@@ -294,6 +311,7 @@ const sidebar = (
                         <Form>
                           <Body>You can only add users who are already in your organization.</Body>
                           <Autocomplete
+                            onChange={() => console.log("autocomplete changed")}
                             onResultClick={result => alert("Thanks for choosing " + result.label)}
                             value="Click me for results..."
                             results={[
@@ -422,12 +440,30 @@ Revealing the layers to my soul
 ### Example with Compact Sidenav
 
 ```jsx
+import * as React from "react"
+import {
+  Sidenav,
+  Avatar,
+  SidenavHeader,
+  SidenavItem,
+  Layout,
+  HeaderBar,
+  HeaderMenu,
+  Page,
+  Button,
+  Card,
+  Form,
+  Body,
+  Logo,
+  Autocomplete,
+} from "@operational/components"
+
 const sidebar = (
   <Sidenav compact>
     <SidenavHeader label="Use cases">
-      <SidenavItem label="Overview" icon="Home" />
-      <SidenavItem label="Use Cases" icon="Search" />
-      <SidenavItem label="Guides" icon="Document" />
+      <SidenavItem label="The First Prize" icon="Admin" />
+      <SidenavItem label="The Second Prize" icon="Building" />
+      <SidenavItem label="The Third Prize" icon="CaretLeft" />
     </SidenavHeader>
     <SidenavItem active end label="Other Guy" icon="User" />
     <SidenavItem end label="Admin" icon="Jobs" />
@@ -443,22 +479,12 @@ const sidebar = (
       <HeaderBar
         logo={<Logo name="Contiamo" />}
         main={
-          <HeaderMenu
-            withCaret
-            items={[
-              { key: "project1", label: "Project 1" },
-              { key: "project2", label: "Project 2" },
-              { key: "project3", label: "Project 3" },
-            ]}
-          >
+          <HeaderMenu withCaret items={[{ label: "Project 1" }, { label: "Project 2" }, { label: "Project 3" }]}>
             Project 1
           </HeaderMenu>
         }
         end={
-          <HeaderMenu
-            items={[{ key: "account", label: "My account" }, { key: "log-out", label: "Log out" }]}
-            align="right"
-          >
+          <HeaderMenu items={[{ label: "Log out" }]} align="right">
             Imogen Mason <Avatar name="Imogen Mason" />
           </HeaderMenu>
         }
@@ -501,18 +527,36 @@ const sidebar = (
 ### Loading Data
 
 ```jsx
+import * as React from "react"
+import {
+  Sidenav,
+  Avatar,
+  SidenavHeader,
+  SidenavItem,
+  Layout,
+  HeaderBar,
+  HeaderMenu,
+  Page,
+  Button,
+  Card,
+  Form,
+  Body,
+  Logo,
+  Autocomplete,
+} from "@operational/components"
+
 const sidebar = (
   <Sidenav>
     <SidenavHeader condensed icon="Home" label="Project Home" />
     <SidenavHeader label="The Prize" active>
-      <SidenavItem label="The First Prize" icon="Settings" />
-      <SidenavItem label="The Second Prize" icon="Settings" />
-      <SidenavItem label="The Third Prize" icon="Settings" />
+      <SidenavItem label="The First Prize" icon="Admin" />
+      <SidenavItem label="The Second Prize" icon="Building" />
+      <SidenavItem label="The Third Prize" icon="CaretLeft" />
     </SidenavHeader>
-    <SidenavHeader label="Let It Snow">
-      <SidenavItem label="The First Prize" icon="Settings" />
-      <SidenavItem label="The Second Prize" icon="Settings" />
-      <SidenavItem label="The Third Prize" icon="Settings" />
+    <SidenavHeader label="Let It Snow" active>
+      <SidenavItem label="The First Prize" icon="Database" />
+      <SidenavItem label="The Second Prize" icon="EmptyCircle" />
+      <SidenavItem label="The Third Prize" icon="Function" />
     </SidenavHeader>
   </Sidenav>
 )
@@ -524,22 +568,12 @@ const sidebar = (
       <HeaderBar
         logo={<Logo name="Contiamo" />}
         main={
-          <HeaderMenu
-            withCaret
-            items={[
-              { key: "project1", label: "Project 1" },
-              { key: "project2", label: "Project 2" },
-              { key: "project3", label: "Project 3" },
-            ]}
-          >
+          <HeaderMenu withCaret items={[{ label: "Project 1" }, { label: "Project 2" }, { label: "Project 3" }]}>
             Project 1
           </HeaderMenu>
         }
         end={
-          <HeaderMenu
-            items={[{ key: "account", label: "My account" }, { key: "log-out", label: "Log out" }]}
-            align="right"
-          >
+          <HeaderMenu items={[{ label: "Log out" }]} align="right">
             Imogen Mason <Avatar name="Imogen Mason" />
           </HeaderMenu>
         }

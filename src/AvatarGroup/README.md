@@ -1,6 +1,8 @@
 ### Display a group of avatars
 
 ```jsx
+import * as React from "react"
+import { AvatarGroup } from "@operational/components"
 const avatars = [
   {
     name: "Peter Pan",
@@ -27,6 +29,8 @@ const avatars = [
 ### Provide a custom onMoreClick action
 
 ```jsx
+import * as React from "react"
+import { AvatarGroup } from "@operational/components"
 const avatars = [
   {
     name: "Peter Pan",
@@ -50,6 +54,8 @@ const avatars = [
 ### Use the medium size
 
 ```jsx
+import * as React from "react"
+import { AvatarGroup } from "@operational/components"
 const avatars = [
   {
     name: "Peter Pan",
@@ -73,6 +79,8 @@ const avatars = [
 ### Customize how many avatars is on screen
 
 ```jsx
+import * as React from "react"
+import { AvatarGroup } from "@operational/components"
 const avatars = [
   {
     name: "Peter Pan",
@@ -98,6 +106,8 @@ const avatars = [
 ### Should also work with the old API
 
 ```jsx
+import * as React from "react"
+import { AvatarGroup, Avatar } from "@operational/components"
 const avatars = [
   {
     name: "Peter Pan",
@@ -113,5 +123,9 @@ const avatars = [
   { name: "Captain Hook" },
   { name: "Mr. Smee" },
 ]
-;<AvatarGroup>{avatars.map(({ name, photo }, i) => <Avatar key={i} name={name} photo={photo} />)}</AvatarGroup>
+;<AvatarGroup>
+  {avatars.map(({ name, photo }, i) => (
+    <Avatar key={i} name={name} photo={photo} />
+  ))}
+</AvatarGroup>
 ```

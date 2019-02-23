@@ -5,7 +5,9 @@ The way to give more structure to your page
 In this case `PageArea` is implicit
 
 ```jsx
-<PageContent>
+import * as React from "react"
+import { PageContent, Card } from "@operational/components"
+;<PageContent>
   <Card title="Bundles" />
 </PageContent>
 ```
@@ -13,7 +15,9 @@ In this case `PageArea` is implicit
 ### With 2 columns
 
 ```jsx
-<PageContent areas="main side">
+import * as React from "react"
+import { PageContent, PageArea, Card } from "@operational/components"
+;<PageContent areas="main side">
   <PageArea name="main">
     <Card title="My bundle" />
   </PageArea>
@@ -28,7 +32,9 @@ In this case `PageArea` is implicit
 ### With 2 columns (reverse areas)
 
 ```jsx
-<PageContent areas="side main">
+import * as React from "react"
+import { PageContent, PageArea, Card } from "@operational/components"
+;<PageContent areas="side main">
   <PageArea name="main">
     <Card title="My bundle">I'm in the right!</Card>
   </PageArea>
@@ -43,7 +49,9 @@ In this case `PageArea` is implicit
 ### With 2 columns and full width
 
 ```jsx
-<PageContent areas="side main" fill>
+import * as React from "react"
+import { PageContent, PageArea, Card } from "@operational/components"
+;<PageContent areas="side main" fill>
   <PageArea name="main">
     <Card title="My bundle" />
   </PageArea>
@@ -58,7 +66,9 @@ In this case `PageArea` is implicit
 ### With 2 columns and custom padding
 
 ```jsx
-<PageContent areas="side main" padding="small">
+import * as React from "react"
+import { PageContent, PageArea, Card } from "@operational/components"
+;<PageContent areas="side main" padding="small">
   <PageArea name="main">
     <Card title="My bundle" />
   </PageArea>
@@ -73,7 +83,9 @@ In this case `PageArea` is implicit
 ### With no padding
 
 ```jsx
-<PageContent noPadding fill>
+import * as React from "react"
+import { PageContent, Card } from "@operational/components"
+;<PageContent noPadding fill>
   <Card title="My bundle" />
 </PageContent>
 ```
@@ -81,6 +93,9 @@ In this case `PageArea` is implicit
 ### Inside tabs
 
 ```jsx
+import * as React from "react"
+import { PageContent, Page, PageArea, Card } from "@operational/components"
+
 const Overview = () => (
   <PageContent areas="side main" fill>
     <PageArea name="main">
@@ -93,5 +108,5 @@ const Overview = () => (
     </PageArea>
   </PageContent>
 )
-;<Page title="Bundle detail" compactHeader tabs={[{ name: "overview", children: <Overview /> }]} />
+;<Page title="Bundle detail" tabs={[{ name: "overview", children: <Overview /> }]} />
 ```

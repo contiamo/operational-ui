@@ -2,16 +2,17 @@ Main wrapper for Operational UI, required at the top level of the application. S
 
 ### Classic example
 
-```jsx static
-<OperationalUI>
-  <App />
-</OperationalUI>
-```
+```jsx
+import * as React from "react"
+import OperationalUI, { Button } from "@operational/components"
 
-### With personal theme example
+const App: React.FC = () => (
+  <div>
+    Hi, I'm an Operational App! <Button color="primary">Cool!</Button>
+  </div>
+)
 
-```jsx static
-<OperationalUI theme={myTheme}>
+;<OperationalUI>
   <App />
 </OperationalUI>
 ```
@@ -21,7 +22,10 @@ Main wrapper for Operational UI, required at the top level of the application. S
 To set up routing that is automatically wired up to the `to` props of all nested linking components such as `Button`, `Breadcrumb`,`SidenavHeader` and `SidenavItem`, you only need to supply a single prop on this one component:
 
 ```jsx
-class RoutingComponent extends React.Component {
+import * as React from "react"
+import OperationalUI, { Button } from "@operational/components"
+
+class RoutingComponent extends React.Component<{}, { path: string }> {
   constructor(props) {
     super(props)
     // Set the initial path instate

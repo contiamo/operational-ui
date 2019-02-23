@@ -3,7 +3,9 @@ The progress element is used for larger loading sections, most typically the ent
 ### Usage in a div
 
 ```jsx
-<div style={{ width: 300, height: 240, border: "1px solid #adadad", padding: 20, position: "relative" }}>
+import * as React from "react"
+import { Progress } from "@operational/components"
+;<div style={{ width: 300, height: 240, border: "1px solid #adadad", padding: 20, position: "relative" }}>
   While I patiently wait for my data, this progress bar assures me that things will be ok.
   <Progress />
 </div>
@@ -12,7 +14,9 @@ The progress element is used for larger loading sections, most typically the ent
 ### With error
 
 ```jsx
-<div style={{ width: 300, height: 240, border: "1px solid #adadad", padding: 20, position: "relative" }}>
+import * as React from "react"
+import { Progress } from "@operational/components"
+;<div style={{ width: 300, height: 240, border: "1px solid #adadad", padding: 20, position: "relative" }}>
   While I patiently wait for my data, this progress bar assures me that things will be ok.
   <Progress error="oh no" />
 </div>

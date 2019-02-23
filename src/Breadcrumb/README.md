@@ -3,7 +3,10 @@ The `Breadcrumb` component is nested inside the `<Breadcrumbs/>` to provide brea
 ### Usage
 
 ```jsx
-<Breadcrumb>Home</Breadcrumb>
+import * as React from "react"
+import { Breadcrumb } from "@operational/components"
+
+;<Breadcrumb>Home</Breadcrumb>
 ```
 
 ### Usage with links
@@ -11,5 +14,8 @@ The `Breadcrumb` component is nested inside the `<Breadcrumbs/>` to provide brea
 Using a `to` prop navigates automatically, and render proper anchor tags with hrefs. See `OperationalUI` docs for a one-time configuration you need to do to have pushstate navigation working out-of-the-box.
 
 ```jsx
-<Breadcrumb to="/some-url">Home</Breadcrumb>
+import * as React from "react"
+import { Breadcrumb } from "@operational/components"
+
+;<Breadcrumb to="/some-url">Home</Breadcrumb>
 ```

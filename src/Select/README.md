@@ -5,6 +5,9 @@ The Select component presents users with a list of information with single-choic
 If the component is used with a string `value` prop, it behaves as a single select. Every time the value is changed, the options pop-up closes automatically.
 
 ```jsx
+import * as React from "react"
+import { Select } from "@operational/components"
+
 const options = [
   { label: "Option 1", value: "one" },
   { label: "Option 2", value: "two" },
@@ -39,6 +42,9 @@ const MyComponent = () => {
 Using an array prop in the `value` makes the component work as multiselect. The pop-up stays open so that additional values may be added.
 
 ```jsx
+import * as React from "react"
+import { Select } from "@operational/components"
+
 const options = [
   { label: "Option 1", value: "one" },
   { label: "Option 2", value: "two" },
@@ -72,6 +78,9 @@ const MyOtherComponent = () => {
 If you have a huge list from a backend, you can limit the number of options displayed to avoid rendering performance issues. Just add `maxOptions` and it's done. Please note that without the `filterable` option enabled, some options can't be selected.
 
 ```jsx
+import * as React from "react"
+import { Select } from "@operational/components"
+
 const options = [
   { label: "Option 1", value: "one" },
   { label: "Option 2", value: "two" },

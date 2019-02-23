@@ -1,5 +1,7 @@
 ### Usage
 
 ```jsx
-<ResourceName>my-function-name</ResourceName>
+import * as React from "react"
+import { ResourceName } from "@operational/components"
+;<ResourceName>my-function-name</ResourceName>
 ```

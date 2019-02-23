@@ -3,7 +3,10 @@ Context menus are nested menus that can expand from anywhere on a page. Their us
 ### Basic Usage
 
 ```jsx
-const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
+import * as React from "react"
+import { ContextMenu, ContextMenuProps } from "@operational/components"
+
+const menuItems: ContextMenuProps["items"] = ["Menu 1", "Menu 2", "Menu 3"]
 ;<ContextMenu items={menuItems} onClick={item => alert(`clicked ${item}`)}>
   <span>Click here</span>
 </ContextMenu>
@@ -12,7 +15,10 @@ const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
 ### Usage with Icon
 
 ```jsx
-const menuItems = [{ label: "Menu 1", icon: "Search" }, "Menu 2", "Menu 3"]
+import * as React from "react"
+import { ContextMenu, ContextMenuProps, Button } from "@operational/components"
+
+const menuItems: ContextMenuProps["items"] = [{ label: "Menu 1", icon: "Search" }, "Menu 2", "Menu 3"]
 ;<>
   <ContextMenu items={menuItems} onClick={item => alert(`clicked ${item}`)}>
     <Button>Click here for icon on left</Button>
@@ -26,7 +32,10 @@ const menuItems = [{ label: "Menu 1", icon: "Search" }, "Menu 2", "Menu 3"]
 #### Condensed
 
 ```jsx
-const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
+import * as React from "react"
+import { ContextMenu, ContextMenuProps } from "@operational/components"
+
+const menuItems: ContextMenuProps["items"] = ["Menu 1", "Menu 2", "Menu 3"]
 ;<ContextMenu condensed items={menuItems} onClick={() => alert("clicked")}>
   <span>Click here</span>
 </ContextMenu>
@@ -35,7 +44,10 @@ const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
 #### Styling based on open state
 
 ```jsx
-const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
+import * as React from "react"
+import { ContextMenu, ContextMenuProps } from "@operational/components"
+
+const menuItems: ContextMenuProps["items"] = ["Menu 1", "Menu 2", "Menu 3"]
 ;<ContextMenu condensed items={menuItems} onClick={() => alert("clicked")}>
   {isOpen => <span>{`I am ${isOpen ? "open" : "closed"}`}</span>}
 </ContextMenu>
@@ -46,12 +58,15 @@ const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
 In some cases, you might want your `label` to be a little bit more clever than just a string. This example shows a `ContextMenu` with a JSX element as its `label`.
 
 ```jsx
+import * as React from "react"
+import { ContextMenu, ContextMenuProps, Contact, Hint, Button } from "@operational/components"
+
 /* Anything can be a label now, even some DIV you style yourself */
-const MyLabelContainer = ({ children, style }) => (
+const MyLabelContainer: React.FC<{ style?: React.CSSProperties }> = ({ children, style }) => (
   <div style={{ marginRight: 8, padding: "8px 0", ...style }}>{children}</div>
 )
 
-const menuItems = [
+const menuItems: ContextMenuProps["items"] = [
   {
     label: (
       <MyLabelContainer>
@@ -104,7 +119,10 @@ const menuItems = [
 The context menu doesn't grow past a certain maximum height, but scrolls in its container instead.
 
 ```jsx
-const menuItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(item => `Menu ${item}`)
+import * as React from "react"
+import { ContextMenu, ContextMenuProps } from "@operational/components"
+
+const menuItems: ContextMenuProps["items"] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(item => `Menu ${item}`)
 ;<ContextMenu condensed items={menuItems} onClick={() => alert("clicked")}>
   Many options may be selected here
 </ContextMenu>

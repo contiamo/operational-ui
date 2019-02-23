@@ -3,17 +3,11 @@ A component that displays information intended to convey meaningful information 
 ## Usage
 
 ```jsx
-const { styled } = require("../")
-const UnfloatedDebug = styled(Debug)({
-  /**
-   * Remove the following line to see the _actual_
-   * behavior, with drag & drop.
-   */
-
-  position: "static",
-})
-;<UnfloatedDebug
+import * as React from "react"
+import { Debug } from "@operational/components"
+;<Debug
   title="Operational UI"
+  style={{ position: "static" }}
   values={{
     version: "8.1.0",
     built: "2018-09-14 19:30:00",

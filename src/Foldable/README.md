@@ -5,7 +5,9 @@ This component does not render UI, but instead manages state for its children, a
 Here's how you'd collapse a basic `Group`.
 
 ```jsx
-<Foldable>
+import * as React from "react"
+import { Foldable, Group, Autocomplete } from "@operational/components"
+;<Foldable>
   {({ Toggler, isFolded }) => (
     <Group
       icon="User"
@@ -34,7 +36,9 @@ Here's how you'd collapse a basic `Group`.
 This component allows toggling multiple children's "folded" state centrally, here's what that looks like, in case of `CardSection`s that would need to be controlled from one location.
 
 ```jsx
-<Foldable>
+import * as React from "react"
+import { Foldable, Card, CardSection } from "@operational/components"
+;<Foldable>
   {({ Toggler, isFolded }) => (
     <Card
       stackSections="horizontal"
@@ -72,7 +76,9 @@ This component allows toggling multiple children's "folded" state centrally, her
 This component _also_ allows you to managed folded state for individual children as well. Here's an example.
 
 ```jsx
-<Card
+import * as React from "react"
+import { Card, Foldable, CardSection } from "@operational/components"
+;<Card
   sections={
     <>
       <Foldable>
@@ -114,7 +120,9 @@ This component _also_ allows you to managed folded state for individual children
 It is also possible to control the initial state of this component like below. If no `initialState` is supplied, we default to everything being _open_.
 
 ```jsx
-<Foldable initialState="closed">
+import * as React from "react"
+import { Foldable, Card, CardSection } from "@operational/components"
+;<Foldable initialState="closed">
   {({ Toggler, isFolded }) => (
     <Card
       sections={
