@@ -17,7 +17,13 @@ Here's how you'd collapse a basic `Group`.
         </>
       }
     >
-      <Autocomplete fullWidth placeholder="Search for users..." />
+      <Autocomplete
+        value="controlled"
+        onChange={e => console.log("clicked", e)}
+        onResultClick={() => console.log("clicked")}
+        fullWidth
+        placeholder="Search for users..."
+      />
     </Group>
   )}
 </Foldable>
@@ -133,74 +139,88 @@ It is also possible to control the initial state of this component like below. I
 In some cases, you'd want a one component's `isFolded` property to be aware of its surroundings. We might solve this with local component state in React as so.
 
 ```jsx
-initialState = {
-  active: 0,
+import * as React from "react"
+import { Foldable, Group, Autocomplete } from "@operational/components"
+
+const MyComponent = () => {
+  const [active, setActive] = React.useState(0)
+
+  return (
+    <div style={{ maxWidth: 430 }}>
+      <Foldable>
+        {({ Toggler }) => {
+          const isFolded = active !== 0
+          return (
+            <Group
+              minHeight={400}
+              collapsed={isFolded}
+              title={
+                <>
+                  Cat <Toggler onClick={() => setActive(0)} isFolded={isFolded} />
+                </>
+              }
+              icon="User"
+              iconColor="primary"
+            >
+              <Autocomplete
+                value="controlled"
+                onChange={e => console.log("clicked", e)}
+                onResultClick={() => console.log("clicked")}
+                fullWidth
+                placeholder="Search for users..."
+              />
+            </Group>
+          )
+        }}
+      </Foldable>
+
+      <div style={{ height: 8 }} />
+
+      <Foldable initialState="closed">
+        {({ Toggler }) => {
+          const isFolded = active !== 1
+          return (
+            <Group
+              collapsed={isFolded}
+              title={
+                <>
+                  Cats <Toggler onClick={() => setActive(1)} isFolded={isFolded} />
+                </>
+              }
+              icon="Users"
+              iconColor="primary"
+            >
+              <img alt="Cats" src="https://media.giphy.com/media/NSU8FiU2QXYc0/giphy.gif" />
+            </Group>
+          )
+        }}
+      </Foldable>
+
+      <div style={{ height: 8 }} />
+
+      <Foldable initialState="closed">
+        {({ Toggler }) => {
+          const isFolded = active !== 2
+
+          return (
+            <Group
+              collapsed={isFolded}
+              title={
+                <>
+                  Cat in Suit <Toggler onClick={() => setActive(2)} isFolded={isFolded} />
+                </>
+              }
+              icon="Jobs"
+              iconColor="color.text.lighter"
+            >
+              <img alt="Cat in Suit" src="https://media.giphy.com/media/L0HAj70HJ3A6A/giphy.gif" />
+            </Group>
+          )
+        }}
+      </Foldable>
+    </div>
+  )
 }
-;<div style={{ maxWidth: 430 }}>
-  <Foldable>
-    {({ Toggler }) => {
-      const isFolded = state.active !== 0
-      return (
-        <Group
-          minHeight={400}
-          collapsed={isFolded}
-          title={
-            <>
-              Cat <Toggler onClick={() => setState({ active: 0 })} isFolded={isFolded} />
-            </>
-          }
-          icon="User"
-          iconColor="primary"
-        >
-          <Autocomplete fullWidth placeholder="Start typing a cat name..." />
-        </Group>
-      )
-    }}
-  </Foldable>
 
-  <div style={{ height: 8 }} />
-
-  <Foldable initialState="closed">
-    {({ Toggler }) => {
-      const isFolded = state.active !== 1
-      return (
-        <Group
-          collapsed={isFolded}
-          title={
-            <>
-              Cats <Toggler onClick={() => setState({ active: 1 })} isFolded={isFolded} />
-            </>
-          }
-          icon="Users"
-          iconColor="primary"
-        >
-          <img alt="Cats" src="https://media.giphy.com/media/NSU8FiU2QXYc0/giphy.gif" />
-        </Group>
-      )
-    }}
-  </Foldable>
-
-  <div style={{ height: 8 }} />
-
-  <Foldable initialState="closed">
-    {({ Toggler }) => {
-      const isFolded = state.active !== 2
-
-      return (
-        <Group
-          collapsed={isFolded}
-          title={
-            <>
-              Cat in Suit <Toggler onClick={() => setState({ active: 2 })} isFolded={isFolded} />
-            </>
-          }
-          icon="Jobs"
-          iconColor="color.text.lighter"
-        >
-          <img alt="Cat in Suit" src="https://media.giphy.com/media/L0HAj70HJ3A6A/giphy.gif" />
-        </Group>
-      )
-    }}
-  </Foldable>
-</div>
+;<MyComponent />
 ```
