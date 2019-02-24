@@ -1,81 +1,104 @@
 ### Usage
 
 ```jsx
-class StatefulInput extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      value: "",
-    }
-  }
-  render() {
-    return (
+import * as React from "react"
+import { Form, Input } from "@operational/components"
+
+const MyComponent = () => {
+  const [value, setValue] = React.useState("")
+  return (
+    <Form>
+      <Input value={value} onChange={setValue} />
+      <Input placeholder="Name here" value={value} onChange={setValue} />
+      <Input placeholder="flying-monkeys" label="Username" value={value} onChange={setValue} />
       <Input
-        placeholder="Name here"
-        inputId="input-id"
-        label="Name"
-        name="forForms"
-        value={this.state.value}
-        onChange={value => {
-          this.setState(prevState => ({ value }))
-        }}
+        type="password"
+        placeholder="Security to the max! 🔒"
+        label="Password"
+        name="password"
+        value={value}
+        onChange={setValue}
       />
-    )
-  }
+      <div>
+        <Input
+          label="Phone number"
+          hint="Your phone number is a wonderful construct that people can call you on. Phones are great. We love phones."
+          value={value}
+          onChange={setValue}
+        />
+      </div>
+    </Form>
+  )
 }
 
-;<StatefulInput />
+;<MyComponent />
 ```
 
 ### Clearable Value
 
 ```jsx
-initialState = { value: "Clear me..." }
-;<Input value={state.value} onChange={value => setState({ value })} clear={() => setState({ value: undefined })} />
+import * as React from "react"
+import { Input } from "@operational/components"
+
+const MyOtherComponent = () => {
+  const [value, setValue] = React.useState("Clear me...")
+  return <Input value={value} onChange={setValue} clear={() => setValue("")} />
+}
+
+;<MyOtherComponent />
 ```
 
 ### Pre-set Value
 
 ```jsx
-<Input value="I came from an Autocomplete or something..." preset />
-```
-
-### With help tooltip
-
-```jsx
-<Input value="12" label="Phone number" hint="Please use country code" />
+import * as React from "react"
+import { Input } from "@operational/components"
+;<Input value="I came from an Autocomplete or something..." preset />
 ```
 
 ### In a small container
 
 ```jsx
-<div style={{ width: 100, marginBottom: 16 }}>
-  <Input value="12" label="Phone number" hint="Please use country code" />
-</div>
-<div style={{ width: 100 }}>
-  <Input value="12" label="Phone number" hint="Please use country code" icon="Play" onIconClick={() => {}} />
-</div>
+import * as React from "react"
+import { Input } from "@operational/components"
+
+const MyThirdComponent = () => {
+  const [isInputLocked, setIsInputLocked] = React.useState(true)
+  return (
+    <Input
+      value="My Storage Unit"
+      label="Database Name"
+      onToggle={() => setIsInputLocked(!isInputLocked)}
+      disabled={isInputLocked}
+      hint={isInputLocked ? "Click the lock to change this" : "This value can now be changed"}
+    />
+  )
+}
+
+;<MyThirdComponent />
 ```
 
 ### With toggle state
 
 ```jsx
-<Input value="Database Name" label="Name" onToggle={() => {}} disabled={true} hint="This value cannot be changed" />
+import * as React from "react"
+import { Form, Input } from "@operational/components"
+;<Form>
+  <div>
+    <Input id="help-usa" label="Orange Man" value="Build the wall!" error="Nope, unity." />
+    <Input id="error-without-label" value="Hate hate hate" error="Too negative. Love." />
+  </div>
+</Form>
 ```
 
 ### With Error
 
 ```jsx
-<Input value="12" label="Phone number" hint="Please use country code" error="Must be less than 12 characters" />
-```
-
-### With button
-
-```jsx
-<Input
-  value="12"
-  label="Phone number"
-  hint="Please use country code"
+import * as React from "react"
+import { Input } from "@operational/components"
+;<Input
+  value="JNAPE92"
+  label="Employee ID"
   icon="User"
   onIconClick={() => {
     console.log("clicked icon")
@@ -88,17 +111,15 @@ initialState = { value: "Clear me..." }
 You can have a field with a "copy to clipboard" button with the `copy` prop.
 
 ```jsx
-<Input value="go to my clipboard!" label="Something to save" copy />
+import * as React from "react"
+import { Input } from "@operational/components"
+;<Input value="j08wejf08wejg01j3401jg" label="Your API Token" copy />
 ```
 
 ### Full Width
 
 ```jsx
-<Input fullWidth value="Dave the Sheep" label="Hi, my name is" />
-```
-
-#### Without a Label
-
-```jsx
-<Input fullWidth value="I feel naked" />
+import * as React from "react"
+import { Input } from "@operational/components"
+;<Input fullWidth value="Dave the Sheep" label="Hi, My Name is" />
 ```
