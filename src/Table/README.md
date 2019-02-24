@@ -295,53 +295,60 @@ Tables render a default empty view if no records are specified.
 Tables can be sorted by custom logic, it's totally up to you to implement the sort logic that you need.
 
 ```jsx
-initialState = {
-  data: [
+import * as React from "react"
+import { Table, Chip } from "@operational/components"
+
+const MyComponent = () => {
+  const [data, setData] = React.useState([
     { name: "Imogen", tags: ["d3js"] },
     { name: "Tejas", tags: ["lambda"] },
     { name: "Fabien", tags: ["regex"] },
     { name: "Peter", tags: ["webGL"] },
-  ],
-  nameSortOrder: undefined,
-  tagSortOrder: undefined,
+  ])
+  const [nameSortOrder, setNameSortOrder] = React.useState(undefined)
+  const [tagSortOrder, setTagSortOrder] = React.useState(undefined)
+
+  const sortData = (order, key) => {
+    if (key === "name") {
+      setData(
+        data.sort((a, b) => {
+          if (order === "asc") return a.name < b.name ? -1 : 1
+          return a.name > b.name ? -1 : 1
+        }),
+      )
+      setNameSortOrder(order)
+      setTagSortOrder(undefined)
+    } else {
+      setData(
+        data.sort((a, b) => {
+          if (order === "asc") return a.tags[0] < b.tags[0] ? -1 : 1
+          return a.tags[0] > b.tags[0] ? -1 : 1
+        }),
+      )
+      setNameSortOrder(undefined)
+      setTagSortOrder(order)
+    }
+  }
+  return (
+    <Table
+      data={data}
+      columns={[
+        {
+          heading: "Name",
+          cell: i => i.name,
+          sortOrder: nameSortOrder,
+          onSortClick: order => sortData(order, "name"),
+        },
+        {
+          heading: "Tags",
+          cell: i => i.tags.map(t => <Chip key={t}>{t}</Chip>),
+          sortOrder: tagSortOrder,
+          onSortClick: order => sortData(order, "tag"),
+        },
+      ]}
+    />
+  )
 }
 
-const sortData = (order, key) => {
-  if (key === "name") {
-    setState({
-      data: state.data.sort((a, b) => {
-        if (order === "asc") return a.name < b.name ? -1 : 1
-        return a.name > b.name ? -1 : 1
-      }),
-      nameSortOrder: order,
-      tagSortOrder: undefined,
-    })
-  } else {
-    setState({
-      data: state.data.sort((a, b) => {
-        if (order === "asc") return a.tags[0] < b.tags[0] ? -1 : 1
-        return a.tags[0] > b.tags[0] ? -1 : 1
-      }),
-      nameSortOrder: undefined,
-      tagSortOrder: order,
-    })
-  }
-}
-;<Table
-  data={state.data}
-  columns={[
-    {
-      heading: "Name",
-      cell: i => i.name,
-      sortOrder: state.nameSortOrder,
-      onSortClick: order => sortData(order, "name"),
-    },
-    {
-      heading: "Tags",
-      cell: i => i.tags.map(t => <Chip key={t}>{t}</Chip>),
-      sortOrder: state.tagSortOrder,
-      onSortClick: order => sortData(order, "tag"),
-    },
-  ]}
-/>
+;<MyComponent />
 ```
