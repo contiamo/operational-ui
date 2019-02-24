@@ -107,48 +107,48 @@ Cards support tabs the same way (and with the exact same API) that `Page` compon
 These features are shown in the example below:
 
 ```jsx
-initialState = {
-  activeTab: "Results",
-  isTab1Loading: false,
+import * as React from "react"
+import { Card, Button } from "@operational/components"
+
+const MyComponent = () => {
+  const [activeTab, setActiveTab] = React.useState("Results")
+  const [isTab1Loading, setIsTab1Loading] = React.useState(false)
+
+  React.useEffect(() => {
+    if (isTab1Loading) {
+      const timeout = setTimeout(() => setIsTab1Loading(false), 1500)
+      return () => clearTimeout(timeout)
+    }
+  }, [isTab1Loading])
+
+  return (
+    <Card
+      activeTabName={activeTab}
+      onTabChange={setActiveTab}
+      leftOfTabs={
+        <Button condensed color="primary" onClick={() => setIsTab1Loading(true)}>
+          Run query
+        </Button>
+      }
+      tabs={[
+        {
+          name: "Results",
+          children: isTab1Loading ? "" : "The answer is 42",
+          loading: isTab1Loading,
+          // The icon is replaced by a spinner when loading.
+          icon: "Yes",
+          iconColor: "success",
+        },
+        {
+          name: "Logs",
+          children: "Here are some logs to the calculation",
+        },
+      ]}
+    />
+  )
 }
-;<Card
-  activeTabName={state.activeTab}
-  onTabChange={newTabName => {
-    setState(() => ({ activeTab: newTabName }))
-  }}
-  leftOfTabs={
-    <Button
-      condensed
-      color="primary"
-      onClick={() => {
-        setState(() => ({
-          isTab1Loading: true,
-        }))
-        setTimeout(() => {
-          setState(() => ({
-            isTab1Loading: false,
-          }))
-        }, 1500)
-      }}
-    >
-      Run query
-    </Button>
-  }
-  tabs={[
-    {
-      name: "Results",
-      children: state.isTab1Loading ? "" : "The answer is 42",
-      loading: state.isTab1Loading,
-      // The icon is replaced by a spinner when loading.
-      icon: "Yes",
-      iconColor: "success",
-    },
-    {
-      name: "Logs",
-      children: "Here are some logs to the calculation",
-    },
-  ]}
-/>
+
+;<MyComponent />
 ```
 
 ### Stacked Cards
