@@ -7,7 +7,9 @@ Box for displaying formatted code snippets.
 **Default**
 
 ```jsx
-<Code
+import * as React from "react"
+import { Code } from "@operational/components"
+;<Code
   syntax="json"
   src={{
     properties: {
@@ -34,7 +36,9 @@ Box for displaying formatted code snippets.
 Extract from: https://github.com/mac-s-g/react-json-view
 
 ```jsx
-<Code
+import * as React from "react"
+import { Code } from "@operational/components"
+;<Code
   syntax="json"
   src={{
     properties: {
@@ -55,7 +59,9 @@ Extract from: https://github.com/mac-s-g/react-json-view
 #### TypeScript
 
 ```jsx
-<Code syntax="typescript">{`interface Person {
+import * as React from "react"
+import { Code } from "@operational/components"
+;<Code syntax="typescript">{`interface Person {
   firstName: string;
   lastName: string;
 }
@@ -74,7 +80,9 @@ document.body.innerHTML = greeter(user);`}</Code>
 Sometimes, you might need to quickly copy a code snippet. Here's how.
 
 ```jsx
-const { useOperationalContext } = require("../OperationalContext/OperationalContext")
+import * as React from "react"
+import { Code, useOperationalContext } from "@operational/components"
+
 const ComponentWithCode = () => {
   const { pushMessage } = useOperationalContext()
   return (
