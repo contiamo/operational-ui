@@ -589,6 +589,8 @@ const Tab = props => (
 `Page` components support rendering an opinionated confirm box through a method in its context.
 
 ```jsx
+import * as React from "react"
+import { Page, Card, Button, Input, Body, CardColumns, CardColumn, CardItem } from "@operational/components"
 ;<Page title="Advanced case">
   {({ confirm }) => (
     <Card title="With internal state management">
