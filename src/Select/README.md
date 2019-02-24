@@ -16,21 +16,22 @@ const options = [
   { label: "Option 8", value: "eight" },
 ]
 
-initialState = {
-  value: "one",
+const MyComponent = () => {
+  const [value, setValue] = React.useState<string | number | React.ReactText[]>("one")
+
+  return (
+    <Select
+      label="Select label"
+      value={value}
+      options={options}
+      filterable
+      placeholder="Choose an option"
+      onChange={setValue}
+    />
+  )
 }
-;<Select
-  label="Select label"
-  value={state.value}
-  options={options}
-  filterable
-  placeholder="Choose an option"
-  onChange={newValue =>
-    setState({
-      value: newValue,
-    })
-  }
-/>
+
+;<MyComponent />
 ```
 
 ### Usage as multiselect
@@ -49,19 +50,21 @@ const options = [
   { label: "Option 8", value: "eight" },
 ]
 
-initialState = { value: [] }
-;<Select
-  label="Select label"
-  value={state.value}
-  options={options}
-  filterable
-  placeholder="Choose an option"
-  onChange={newValue =>
-    setState({
-      value: newValue,
-    })
-  }
-/>
+const MyOtherComponent = () => {
+  const [value, setValue] = React.useState<string | number | React.ReactText[]>([])
+  return (
+    <Select
+      label="Select label"
+      value={value}
+      options={options}
+      filterable
+      placeholder="Choose an option"
+      onChange={setValue}
+    />
+  )
+}
+
+;<MyOtherComponent />
 ```
 
 ### With maxOptions
@@ -80,22 +83,22 @@ const options = [
   { label: "Option 8", value: "eight" },
 ]
 
-initialState = {
-  value: "one",
+const MyThirdComponent = () => {
+  const [value, setValue] = React.useState<string | number | React.ReactText[]>("one")
+  return (
+    <Select
+      label="Select label"
+      value={value}
+      options={options}
+      filterable
+      maxOptions={2}
+      placeholder="Choose an option"
+      onChange={setValue}
+    />
+  )
 }
-;<Select
-  label="Select label"
-  value={state.value}
-  options={options}
-  filterable
-  maxOptions={2}
-  placeholder="Choose an option"
-  onChange={newValue => {
-    setState({
-      value: newValue,
-    })
-  }}
-/>
+
+;<MyThirdComponent />
 ```
 
 ### Return Value
@@ -104,7 +107,9 @@ The value prop passed to select is is either an `Option` object, or an Array of 
 array, the component automatically becomes a multi-select. The shape of an Option object is described below.
 
 ```js
-const option = {
+import { SelectProps } from "@operational/components";
+
+const option: SelectProps["options"][-1] = {
   label: "any_string",
   value: "Any String",
 }
