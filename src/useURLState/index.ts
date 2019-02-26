@@ -1,5 +1,6 @@
 import qs from "qs"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { isClient } from "../utils/isClient"
 
 const noop = () => ""
 
@@ -8,20 +9,19 @@ const noop = () => ""
  *
  * This is mostly for testing purpose but can also be used for SSR.
  */
-const options =
-  typeof window !== "undefined"
-    ? {
-        getSearch: () => window.location.search,
-        getHash: () => window.location.hash,
-        getPathname: () => window.location.pathname,
-        replaceState: window.history.replaceState.bind(window.history),
-      }
-    : {
-        getSearch: noop,
-        getHash: noop,
-        getPathname: noop,
-        replaceState: noop,
-      }
+const options = isClient()
+  ? {
+      getSearch: () => window.location.search,
+      getHash: () => window.location.hash,
+      getPathname: () => window.location.pathname,
+      replaceState: window.history.replaceState.bind(window.history),
+    }
+  : {
+      getSearch: noop,
+      getHash: noop,
+      getPathname: noop,
+      replaceState: noop,
+    }
 
 /**
  * Parse the search to object.

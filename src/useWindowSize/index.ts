@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
+import { isClient } from "../utils/isClient"
 
 /**
  * Get the window size.
  */
 export const useWindowSize = () => {
-  if (typeof window === "undefined") {
+  if (isClient()) {
     // tslint:disable-next-line:no-console
     console.error("Unsupported: window is undefined")
     return { width: -1, height: -1 }
