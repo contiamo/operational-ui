@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react"
 // tslint:disable-next-line
 const noop = () => {}
 
-export const useInterval = (callback: () => void, delay: number | null, immediate?: boolean) => {
+export function useInterval(callback: () => void, delay: number | null, immediate?: boolean) {
   const savedCallback = useRef(noop)
 
   // Remember the latest callback.
