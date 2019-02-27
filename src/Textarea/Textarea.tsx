@@ -37,6 +37,8 @@ export interface TextareaProps extends DefaultProps {
   resize?: ResizeOptions
   /** Copy text to clipboard on click */
   copy?: boolean
+  /** Text for a placeholder */
+  placeholder?: string
   /** cmd+enter submit handler */
   onSubmit?: () => void
   /** Focus handler */
@@ -180,6 +182,7 @@ class Textarea extends React.Component<TextareaProps, State> {
       onSubmit,
       onFocus,
       onBlur,
+      placeholder,
       ...props
     } = this.props
     return (
@@ -211,6 +214,7 @@ class Textarea extends React.Component<TextareaProps, State> {
             }
             onChange(e.target.value)
           }}
+          placeholder={placeholder}
         />
         {(this.props.action || this.props.copy) && (
           <ActionHeader isLabel={Boolean(label)}>

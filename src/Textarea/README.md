@@ -5,6 +5,8 @@ A textarea field, with optional label, hint and error.
 The following snippet show the text area with various visual additions handling fixed heights, errors and hints.
 
 ```jsx
+json = JSON.stringify({ test: 123 }, null, 2)
+
 initialState = {
   v1: "",
   v2: "",
@@ -28,6 +30,7 @@ const handleChange = key => value => {
     <Textarea value={state.v6} onChange={handleChange("v6")} label="disabled" disabled />
     <Textarea value={state.v7} onChange={handleChange("v7")} label="a code" code />
     <Textarea value={state.v8} onChange={handleChange("v8")} label="fixed height" height={200} />
+    <Textarea value={state.v8} onChange={handleChange("v8")} label="with placeholder" placeholder={json} />
   </div>
   <div>
     <Textarea copy value={state.v2} onChange={handleChange("v2")} label="with copying" />
