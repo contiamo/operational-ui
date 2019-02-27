@@ -1,8 +1,10 @@
-import * as React from "react"
-
+import React, { useState } from "react"
+import useInterval from "../useInterval"
+import useWindowSize from "../useWindowSize"
 import styled from "../utils/styled"
 
 export interface Props {
+  fullscreen?: boolean
   size?: number
 }
 
@@ -34,73 +36,75 @@ const bounce = (coord: number): number => {
   return coord
 }
 
-const Container = styled("div")<{ size: number }>(({ size }: { size: number }) => ({
-  width: size,
-  height: size,
+const Container = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate3d(-50%, -50%, 0)",
-}))
+})
 
-const Box = styled("div")<{ x: number; y: number }>(({ x, y }) => ({
+/// Move highly highly dynamic style out of css-js to prevent uneeded classname generation
+
+const Box = styled("div")({
   position: "absolute",
   transition: "all 0.5s ease-in-out",
-  top: `calc(${(x / (squares - 1)) * 100}% + 4px)`,
-  left: `calc(${(y / (squares - 1)) * 100}% + 4px)`,
+
   borderRadius: 6,
   width: `calc(${100 / (squares - 1)}% - 8px)`,
   height: `calc(${100 / (squares - 1)}% - 8px)`,
   backgroundColor: "rgba(255, 255, 255, 0.06)",
-}))
+})
 
-class Animation extends React.Component<Props, State> {
-  public state = {
-    animationStep: 0,
-    coordinates: Array.apply(null, { length: boxes })
-      .map(Number.call, Number)
-      .map(() => ({ x: integerRandom(squares), y: integerRandom(squares) })),
+const initialState = {
+  animationStep: 0,
+  coordinates: Array.apply(null, Array(boxes))
+    .map((_: any, i: number) => i) // Fixes typescript Error
+    .map(() => ({ x: integerRandom(squares), y: integerRandom(squares) })),
+}
+
+const Animation: React.FC<Props> = ({ fullscreen, size }) => {
+  let containerSize = size || 600
+
+  if (fullscreen) {
+    const windowSize = useWindowSize()
+    containerSize = Math.max(windowSize.width, windowSize.height) - 20
   }
 
-  public animationInterval?: number
-
-  // Shift the coordinate of every third tile in a random direction.
-  // Each animation shifts a different set of tiles.
-  public shiftSomeTiles() {
-    this.setState(prevState => ({
-      animationStep: prevState.animationStep + 1,
-      coordinates: prevState.coordinates.map((coord: { x: number; y: number }, index: number) => {
-        if (index % 3 === prevState.animationStep % 3) {
-          const dx = integerRandom(3) - 1
-          const dy = integerRandom(3) - 1
-          return {
-            x: bounce(coord.x + dx),
-            y: bounce(coord.y - dy),
+  const [state, updateAnimation] = useState<State>(initialState)
+  useInterval(
+    () => {
+      updateAnimation({
+        animationStep: state.animationStep + 1,
+        coordinates: state.coordinates.map((coord: { x: number; y: number }, index: number) => {
+          if (index % 3 === state.animationStep % 3) {
+            const dx = integerRandom(3) - 1
+            const dy = integerRandom(3) - 1
+            return {
+              x: bounce(coord.x + dx),
+              y: bounce(coord.y - dy),
+            }
           }
-        }
-        return coord
-      }),
-    }))
-  }
+          return coord
+        }),
+      })
+    },
+    5000,
+    true,
+  )
 
-  public componentDidMount() {
-    this.animationInterval = window.setInterval(this.shiftSomeTiles.bind(this), 5000)
-  }
-
-  public componentWillUnmount() {
-    clearInterval(this.animationInterval)
-  }
-
-  public render() {
-    const size = this.props.size || 600
-    return (
-      <Container size={size}>
-        {this.state.coordinates.map((coord: { x: number; y: number }, index: number) => (
-          <Box key={index} x={coord.x} y={coord.y} />
-        ))}
-      </Container>
-    )
-  }
+  return (
+    <Container style={{ width: containerSize, height: containerSize }}>
+      {state.coordinates.map((coord: { x: number; y: number }, index: number) => (
+        <Box
+          key={index}
+          style={{
+            top: `${(coord.x / (squares - 1)) * 100}%`,
+            left: `${(coord.y / (squares - 1)) * 100}%`,
+          }}
+        />
+      ))}
+    </Container>
+  )
 }
 
 export default Animation
