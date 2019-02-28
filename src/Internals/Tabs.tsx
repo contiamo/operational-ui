@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { useCallback, useState } from "react"
 import Icon, { IconName } from "../Icon/Icon"
 import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
@@ -17,7 +17,7 @@ export interface Props {
   activeTabName?: string
   onTabChange?: (newTabName: string) => void
   condensed?: boolean
-  children: (childrenConfig: { tabsBar: React.ReactNode; activeChildren: React.ReactNode }) => React.ReactNode
+  children: (childrenConfig: { tabsBar: React.ReactNode; activeChildren: React.ReactNode }) => JSX.Element
 }
 
 export interface State {
@@ -54,56 +54,44 @@ const Tab = styled("div")<{ active?: boolean; condensed?: boolean }>(({ theme, a
   },
 }))
 
-class Tabs extends React.Component<Props, State> {
-  public state = {
-    activeTab: 0,
+const Tabs = ({ onTabChange, tabs, activeTabName, condensed, children }: Props) => {
+  let initTab = 0
+  if (activeTabName) {
+    const index = tabs.findIndex(({ name }) => name === activeTabName)
+    initTab = index === -1 ? 0 : index
   }
 
-  private onTabClick(index: number) {
-    this.setState(() => ({ activeTab: index }))
-    if (this.props.onTabChange) {
-      this.props.onTabChange(this.props.tabs[index].name)
-    }
-  }
+  const [activeTab, setActiveTab] = useState(initTab)
 
-  private getActiveTab(): number {
-    let activeTab: number
-    if (this.props.activeTabName) {
-      const index = this.props.tabs.findIndex(({ name }) => name === this.props.activeTabName)
-      activeTab = index === -1 ? 0 : index
-    } else {
-      activeTab = this.state.activeTab
-    }
-    return activeTab
-  }
+  const onTabClick = useCallback(
+    (index: number) => {
+      setActiveTab(index)
+      if (onTabChange) {
+        onTabChange(tabs[index].name)
+      }
+    },
+    [onTabChange, tabs],
+  )
 
-  public render() {
-    const activeTab = this.getActiveTab()
-    return this.props.children({
-      tabsBar: (
-        <TabsBar condensed={this.props.condensed}>
-          {this.props.tabs
-            .filter(({ hidden }) => !hidden)
-            .map((tab, index: number) => (
-              <Tab
-                condensed={this.props.condensed}
-                key={index}
-                active={activeTab === index}
-                onClick={() => this.onTabClick(index)}
-              >
-                {tab.loading ? (
-                  <Spinner left size={14} />
-                ) : (
-                  tab.icon && <Icon name={tab.icon} size={14} color={tab.iconColor} left />
-                )}
-                {tab.name}
-              </Tab>
-            ))}
-        </TabsBar>
-      ),
-      activeChildren: this.props.tabs[activeTab].children,
-    })
-  }
+  return children({
+    tabsBar: (
+      <TabsBar condensed={condensed}>
+        {tabs
+          .filter(({ hidden }) => !hidden)
+          .map((tab, index: number) => (
+            <Tab condensed={condensed} key={index} active={activeTab === index} onClick={() => onTabClick(index)}>
+              {tab.loading ? (
+                <Spinner left size={14} />
+              ) : (
+                tab.icon && <Icon name={tab.icon} size={14} color={tab.iconColor} left />
+              )}
+              {tab.name}
+            </Tab>
+          ))}
+      </TabsBar>
+    ),
+    activeChildren: tabs[activeTab].children,
+  })
 }
 
 export default Tabs
