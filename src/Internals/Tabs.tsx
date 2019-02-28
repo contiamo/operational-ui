@@ -17,7 +17,7 @@ export interface Props {
   activeTabName?: string
   onTabChange?: (newTabName: string) => void
   condensed?: boolean
-  children: (childrenConfig: { tabsBar: React.ReactNode; activeChildren: React.ReactNode }) => JSX.Element
+  children: (childrenConfig: { tabsBar: React.ReactNode; activeChildren: React.ReactNode }) => JSX.Element | null /// https://github.com/Microsoft/TypeScript/issues/21699
 }
 
 export interface State {
@@ -55,13 +55,15 @@ const Tab = styled("div")<{ active?: boolean; condensed?: boolean }>(({ theme, a
 }))
 
 const Tabs = ({ onTabChange, tabs, activeTabName, condensed, children }: Props) => {
-  let initTab = 0
-  if (activeTabName) {
-    const index = tabs.findIndex(({ name }) => name === activeTabName)
-    initTab = index === -1 ? 0 : index
-  }
-
-  const [activeTab, setActiveTab] = useState(initTab)
+  // Need to check if we need activeTabName can change after first render
+  // https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
+  const [activeTab, setActiveTab] = useState(() => {
+    if (activeTabName) {
+      const index = tabs.findIndex(({ name }) => name === activeTabName)
+      return index === -1 ? 0 : index
+    }
+    return 0
+  })
 
   const onTabClick = useCallback(
     (index: number) => {
