@@ -1,10 +1,9 @@
-import React, { useState } from "react"
+import React, { useCallback, useState } from "react"
 import useInterval from "../useInterval"
-import useWindowSize from "../useWindowSize"
 import styled from "../utils/styled"
 
 export interface Props {
-  fullscreen?: boolean
+  isFullscreen?: boolean
   size?: number
 }
 
@@ -36,19 +35,30 @@ const bounce = (coord: number): number => {
   return coord
 }
 
+// css Hack so we dont need to worry about max(window.height,window.width)
+const FullScreenWrap = styled("div")({
+  position: "absolute",
+  width: "100%",
+  ":after": {
+    content: "''",
+    display: "block",
+    paddingBottom: "100%",
+  },
+})
+
 const Container = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate3d(-50%, -50%, 0)",
+  width: "100%",
+  height: "100%",
 })
 
 /// Move highly highly dynamic style out of css-js to prevent uneeded classname generation
-
 const Box = styled("div")({
   position: "absolute",
   transition: "all 0.5s ease-in-out",
-
   borderRadius: 6,
   width: `calc(${100 / (squares - 1)}% - 8px)`,
   height: `calc(${100 / (squares - 1)}% - 8px)`,
@@ -57,20 +67,15 @@ const Box = styled("div")({
 
 const initialState = {
   animationStep: 0,
-  coordinates: Array.apply(null, Array(boxes))
-    .map((_: any, i: number) => i) // Fixes typescript Error
-    .map(() => ({ x: integerRandom(squares), y: integerRandom(squares) })),
+  coordinates: Array.from(Array(boxes), (_, index) => index).map(() => ({
+    x: integerRandom(squares),
+    y: integerRandom(squares),
+  })),
 }
 
-const Animation: React.FC<Props> = ({ fullscreen, size }) => {
-  let containerSize = size || 600
-
-  if (fullscreen) {
-    const windowSize = useWindowSize()
-    containerSize = Math.max(windowSize.width, windowSize.height) - 20
-  }
-
+const Animation: React.FC<Props> = ({ isFullscreen, size = 600 }) => {
   const [state, updateAnimation] = useState<State>(initialState)
+
   useInterval(
     () => {
       updateAnimation({
@@ -92,8 +97,20 @@ const Animation: React.FC<Props> = ({ fullscreen, size }) => {
     true,
   )
 
+  const Wrap = useCallback(
+    ({ children }) =>
+      isFullscreen ? (
+        <FullScreenWrap>
+          <Container>{children}</Container>
+        </FullScreenWrap>
+      ) : (
+        <Container style={{ width: size, height: size }}>{children}</Container>
+      ),
+    [isFullscreen, size],
+  )
+
   return (
-    <Container style={{ width: containerSize, height: containerSize }}>
+    <Wrap>
       {state.coordinates.map((coord: { x: number; y: number }, index: number) => (
         <Box
           key={index}
@@ -103,7 +120,7 @@ const Animation: React.FC<Props> = ({ fullscreen, size }) => {
           }}
         />
       ))}
-    </Container>
+    </Wrap>
   )
 }
 

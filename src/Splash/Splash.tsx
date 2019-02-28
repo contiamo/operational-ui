@@ -2,7 +2,6 @@ import * as React from "react"
 
 import { readableTextColor } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
-
 import styled from "../utils/styled"
 import Animation from "./Splash.Animation"
 import OperationalLogo from "./Splash.Logo"
@@ -93,7 +92,7 @@ const Static = styled("div")`
 const Splash: React.FC<SplashProps> = ({ color, logo, children, title, actions }) => {
   return (
     <Container color={color}>
-      <Animation fullscreen />
+      <Animation isFullscreen />
       <Content color={color}>
         <TitleBar>
           <OperationalLogo size={110} logo={logo} />
