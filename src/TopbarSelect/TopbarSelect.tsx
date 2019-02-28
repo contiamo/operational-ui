@@ -1,9 +1,9 @@
-import { Cancelable } from "lodash"
-import debounce from "lodash/debounce"
-import * as React from "react"
+import React, { useRef, useState } from "react"
 
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import Icon from "../Icon/Icon"
+import useDebouncedCallback from "../useDebouncedCallback"
+import useEventListener from "../useEventListener"
 import styled from "../utils/styled"
 
 export interface TopbarSelectProps {
@@ -17,10 +17,6 @@ export interface TopbarSelectProps {
   items: ContextMenuProps["items"]
   /** Change handler */
   onChange?: (newLabel: string | React.ReactElement<any>) => void
-}
-
-export interface State {
-  renderedWidth?: number
 }
 
 const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
@@ -65,73 +61,48 @@ const TopbarSelectLabel = styled("p")`
   font-weight: ${props => props.theme.font.weight.medium};
 `
 
-class TopbarSelect extends React.Component<TopbarSelectProps, Readonly<State>> {
-  public state: State = {
-    renderedWidth: undefined,
-  }
+const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSelectProps) => {
+  const [containerWidth, setContainerWidth] = useState(0)
 
-  private containerRef = React.createRef<HTMLDivElement>()
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  public componentDidMount() {
-    this.updateRenderedWidth()
-    window.addEventListener("resize", this.handleResize)
-  }
-
-  public componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize)
-  }
-
-  public componentDidUpdate() {
-    this.updateRenderedWidth()
-  }
-
-  /**
-   * Explicit typing is required here in order to give the typescript compiler access to typings
-   * used to work out type definitions for the debounce method.
-   * @todo look into making this unnecessary.
-   */
-  public handleResize: (() => void) & Cancelable = debounce(() => {
-    this.updateRenderedWidth()
-  }, 200)
-
-  private updateRenderedWidth() {
-    if (!this.containerRef || this.containerRef.current === null) {
+  const updateContainerWidth = () => {
+    if (!containerRef.current) {
       return
     }
-    const node = this.containerRef.current
-    const renderedWidth = node.clientWidth
-    if (renderedWidth !== this.state.renderedWidth) {
-      this.setState(() => ({
-        renderedWidth,
-      }))
+
+    if (containerRef.current.clientWidth !== containerWidth) {
+      setContainerWidth(containerRef.current.clientWidth)
     }
   }
 
-  public render() {
-    const { label, selected, items, onChange, ...props } = this.props
-    return (
-      <ContextMenu
-        condensed
-        items={items}
-        width={this.state.renderedWidth}
-        onClick={newItem => {
-          if (onChange) {
-            onChange(newItem.label)
-          }
-        }}
-      >
-        {isActive => (
-          <TopbarSelectContainer {...props} isActive={isActive} ref={this.containerRef}>
-            <TopbarSelectLabel>{label}</TopbarSelectLabel>
-            <TopbarSelectValue>
-              <TopbarSelectValueSpan active={Boolean(selected)}>{selected}</TopbarSelectValueSpan>
-              <Icon color="color.text.lightest" name={isActive ? "CaretUp" : "CaretDown"} size={12} />
-            </TopbarSelectValue>
-          </TopbarSelectContainer>
-        )}
-      </ContextMenu>
-    )
-  }
+  const debouncedUpdateRenderedWidth = useDebouncedCallback(updateContainerWidth, 100, [
+    // containerRef.current,
+  ])
+  useEventListener("resize", debouncedUpdateRenderedWidth)
+
+  return (
+    <ContextMenu
+      condensed
+      items={items}
+      width={containerWidth}
+      onClick={newItem => {
+        if (onChange) {
+          onChange(newItem.label)
+        }
+      }}
+    >
+      {isActive => (
+        <TopbarSelectContainer {...props} isActive={isActive} ref={containerRef}>
+          <TopbarSelectLabel>{label}</TopbarSelectLabel>
+          <TopbarSelectValue>
+            <TopbarSelectValueSpan active={Boolean(selected)}>{selected}</TopbarSelectValueSpan>
+            <Icon color="color.text.lightest" name={isActive ? "CaretUp" : "CaretDown"} size={12} />
+          </TopbarSelectValue>
+        </TopbarSelectContainer>
+      )}
+    </ContextMenu>
+  )
 }
 
 export default TopbarSelect
