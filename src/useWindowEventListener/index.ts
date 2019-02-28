@@ -1,17 +1,17 @@
 import { useEffect } from "react"
 
 /**
- * useWindowEventListener
+ * Hook version of window.addEventListener.
  */
 function useWindowEventListener<K extends keyof GlobalEventHandlersEventMap>(
-  key: K,
-  cb: EventListenerOrEventListenerObject,
-  addEventListenerOptions?: AddEventListenerOptions,
-  removeEventListenerOptions?: EventListenerOptions,
+  type: K,
+  listener: EventListenerOrEventListenerObject,
+  addOptions?: AddEventListenerOptions,
+  removeOptions?: EventListenerOptions,
 ) {
   useEffect(() => {
-    window.addEventListener(key, cb, addEventListenerOptions)
-    return () => window.removeEventListener(key, cb, removeEventListenerOptions)
+    window.addEventListener(type, listener, addOptions)
+    return () => window.removeEventListener(type, listener, removeOptions)
   }, [])
 }
 
