@@ -1,11 +1,11 @@
 import { useEffect } from "react"
 
 /**
- * useEventListener
+ * useWindowEventListener
  */
-function useEventListener<K extends keyof GlobalEventHandlersEventMap>(
+function useWindowEventListener<K extends keyof GlobalEventHandlersEventMap>(
   key: K,
-  cb: (e: any) => void,
+  cb: EventListenerOrEventListenerObject,
   addEventListenerOptions?: AddEventListenerOptions,
   removeEventListenerOptions?: EventListenerOptions,
 ) {
@@ -15,4 +15,4 @@ function useEventListener<K extends keyof GlobalEventHandlersEventMap>(
   }, [])
 }
 
-export default useEventListener
+export default useWindowEventListener

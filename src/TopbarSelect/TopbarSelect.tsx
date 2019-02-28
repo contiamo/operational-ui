@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import Icon from "../Icon/Icon"
 import useDebouncedCallback from "../useDebouncedCallback"
-import useEventListener from "../useEventListener"
+import useWindowEventListener from "../useWindowEventListener"
 import styled from "../utils/styled"
 
 export interface TopbarSelectProps {
@@ -79,7 +79,7 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
   const debouncedUpdateRenderedWidth = useDebouncedCallback(updateContainerWidth, 100, [
     // containerRef.current,
   ])
-  useEventListener("resize", debouncedUpdateRenderedWidth)
+  useWindowEventListener("resize", debouncedUpdateRenderedWidth)
 
   return (
     <ContextMenu
