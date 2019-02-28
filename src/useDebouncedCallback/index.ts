@@ -5,7 +5,7 @@ type AnyFunc = (...args: any[]) => any
 type ArgumentTypes<F extends AnyFunc> = F extends (...args: infer A) => any ? A : never
 
 /**
- * debouncedCB hook.
+ * useDebounced Callback wraps a callback within useCallback and returns
  */
 
 export function useDebouncedCallback<T extends AnyFunc>(callback: T, delay: number, deps: DependencyList) {

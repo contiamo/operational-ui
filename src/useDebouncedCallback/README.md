@@ -1,11 +1,26 @@
 ## Usage
 
-TODO
+useDebouncedCallbacks- debounces callbacks
 
 ```jsx
-const MyComponent = () => {
-  return <>TODO</>
+//import useDebouncedCallbacks from '@operational/ui/src/useDebouncedCallbacks';
+const MyComponent = ({ defaultValue }) => {
+  const [value, setValue] = useState(defaultValue)
+  // Debounce callback
+  const debouncedCallback = useDebouncedCallback(
+    v => {
+      setValue(v)
+    },
+    2000,
+    [],
+  )
+  return (
+    <div>
+      <input defaultValue={defaultValue} onChange={e => debouncedCallback(e.target.value)} />
+      <p>Debounced value: {value}</p>
+    </div>
+  )
 }
 
-;<MyComponent />
+;<MyComponent defaultValue={1} />
 ```

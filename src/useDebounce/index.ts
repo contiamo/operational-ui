@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 // ref https://dev.to/gabe_ragland/debouncing-with-react-hooks-jci
 
 /**
- * debounce hook.
+ * debounce hook - debounces values
  */
 export function useDebounce<T>(value: T, delay: number) {
   // State and setters for debounced value
@@ -26,8 +26,7 @@ export function useDebounce<T>(value: T, delay: number) {
     return () => {
       clearTimeout(handler)
     }
-  }, // Only re-call effect if value changes
-  // You could also add the "delay" var to inputs array if you ...
+  }, // You could also add the "delay" var to inputs array if you ... // Only re-call effect if value changes
   // ... need to be able to change that dynamically.
   [value, delay])
 
