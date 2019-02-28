@@ -10,7 +10,7 @@ export interface ModalOptions {
 export type State = Partial<ModalOptions>
 
 export interface Props {
-  children: (modal: (options: ModalOptions) => void) => JSX.Element
+  children: (modal: (options: ModalOptions) => void) => React.ReactNode
 }
 
 export const Modal = ({ children }: Props) => {
