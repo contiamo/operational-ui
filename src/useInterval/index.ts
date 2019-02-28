@@ -6,12 +6,15 @@ import { useEffect, useRef } from "react"
 const noop = () => {}
 
 /**
- * useInterval
+ * Hook version of setInterval. Pass null to the delay to cancel an execution.
  */
 export function useInterval(callback: () => void, delay: number | null, immediate?: boolean) {
   const savedCallback = useRef(noop)
 
   // Remember the latest callback.
+  // useEffect has no second argument so it will be executed after each render
+  // but we don't want to change this value directly in the body of the render function, 
+  // because render should be pure function
   useEffect(() => {
     savedCallback.current = callback
   })
@@ -29,7 +32,7 @@ export function useInterval(callback: () => void, delay: number | null, immediat
       return undefined
     }
     const tick = () => savedCallback.current()
-    const id = setInterval(tick, delay)
+  const id = setInterval(() => savedCallback.current(), delay)
     return () => clearInterval(id)
   }, [delay])
 }

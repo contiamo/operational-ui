@@ -13,7 +13,7 @@ const MyComponent: React.FC<{ fn: () => void; delay: number | null; immediate?: 
   immediate,
 }) => {
   useInterval(fn, delay, immediate)
-  return <span>A Interval is running </span>
+  return <span>An Interval is running </span>
 }
 
 describe("useInterval", () => {
