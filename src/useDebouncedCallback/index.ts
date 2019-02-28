@@ -1,22 +1,27 @@
-import { useCallback, useEffect, useRef } from "react"
+import { DependencyList, useCallback, useEffect, useRef } from "react"
+
+type AnyFunc = (...args: any[]) => any
+
+type ArgumentTypes<F extends AnyFunc> = F extends (...args: infer A) => any ? A : never
 
 /**
  * debouncedCB hook.
  */
-export function useDebouncedCallback(callback: (...args: any[]) => void, delay: any, deps: React.DependencyList) {
+
+export function useDebouncedCallback<T extends AnyFunc>(callback: T, delay: number, deps: DependencyList) {
   const fnTimeoutHandler = useRef<any>(null)
   const debouncedFn = useCallback(callback, deps)
 
   useEffect(
     () => () => {
-      clearTimeout(fnTimeoutHandler.current!)
+      clearTimeout(fnTimeoutHandler.current)
     },
     [],
   )
 
-  return (...args: any[]) => {
-    clearTimeout(fnTimeoutHandler.current!)
-    fnTimeoutHandler.current! = setTimeout(() => {
+  return (...args: ArgumentTypes<T>) => {
+    clearTimeout(fnTimeoutHandler.current)
+    fnTimeoutHandler.current = setTimeout(() => {
       debouncedFn(...args)
     }, delay)
   }
