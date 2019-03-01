@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, { useState } from "react"
 import Icon, { IconName } from "../Icon/Icon"
 import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
@@ -65,15 +65,12 @@ const Tabs = ({ onTabChange, tabs, activeTabName, condensed, children }: Props) 
     return 0
   })
 
-  const onTabClick = useCallback(
-    (index: number) => {
-      setActiveTab(index)
-      if (onTabChange) {
-        onTabChange(tabs[index].name)
-      }
-    },
-    [onTabChange, tabs],
-  )
+  const onTabClick = (index: number) => {
+    setActiveTab(index)
+    if (onTabChange) {
+      onTabChange(tabs[index].name)
+    }
+  }
 
   return (
     <>
