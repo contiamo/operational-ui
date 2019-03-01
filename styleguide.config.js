@@ -1,10 +1,23 @@
 // styleguide.config.js
-const { join } = require("path")
-const { parse: propsParser } = require("react-docgen-typescript")
+const { join, resolve } = require("path")
+const reactDocgenTypescript = require("react-docgen-typescript")
 
 module.exports = {
   title: "Operational UI",
-  propsParser,
+
+  propsParser: reactDocgenTypescript.withDefaultConfig({
+    propFilter(prop) {
+      if (prop.parent) {
+        return !prop.parent.fileName.includes("node_modules")
+      }
+
+      return true
+    },
+  }).parse,
+  pagePerSection: true,
+  moduleAliases: {
+    "@operational/components": resolve(__dirname, "src"),
+  },
   sections: [
     { name: "Hooks", components: "src/use*/*.ts" },
     {
@@ -19,8 +32,23 @@ module.exports = {
         "**/Debug/makeRows*",
         "**/*.*.{ts,tsx}",
       ],
+      sectionDepth: 1,
     },
-    { name: "Typography", components: "src/Typography/*.tsx" },
+    // {
+    //   name: "Components",
+    //   components: ["src/Card/*.tsx","src/Button/*.tsx"],
+    //   ignore: [
+    //     "/**/*test*",
+    //     "**/Internals/**",
+    //     "**/hooks/**",
+    //     "**/utils/**",
+    //     "**/Typography/**",
+    //     "**/Debug/makeRows*",
+    //     "**/*.*.{ts,tsx}",
+    //   ],
+    //   sectionDepth: 1,
+    // },
+    { name: "Typography", components: "src/Typography/*.tsx", sectionDepth: 1 },
   ],
   theme: {
     fontFamily: {
@@ -29,13 +57,13 @@ module.exports = {
   },
   styleguideComponents: {
     Wrapper: join(__dirname, "styleguide/Wrapper"),
-    StyleGuideRenderer: join(__dirname, "styleguide/StyleGuideRenderer"),
-    TableOfContentsRenderer: join(__dirname, "styleguide/TableOfContentsRenderer"),
-    ComponentsListRenderer: join(__dirname, "styleguide/ComponentsListRenderer"),
-    ReactComponentRenderer: join(__dirname, "styleguide/ReactComponentRenderer"),
-    SectionHeadingRenderer: join(__dirname, "styleguide/SectionHeadingRenderer"),
-    HeadingRenderer: join(__dirname, "styleguide/HeadingRenderer"),
-    TabButtonRenderer: join(__dirname, "styleguide/TabButtonRenderer"),
+    // StyleGuideRenderer: join(__dirname, "styleguide/StyleGuideRenderer"),
+    // TableOfContentsRenderer: join(__dirname, "styleguide/TableOfContentsRenderer"),
+    // ComponentsListRenderer: join(__dirname, "styleguide/ComponentsListRenderer"),
+    // ReactComponentRenderer: join(__dirname, "styleguide/ReactComponentRenderer"),
+    // SectionHeadingRenderer: join(__dirname, "styleguide/SectionHeadingRenderer"),
+    //  HeadingRenderer: join(__dirname, "styleguide/HeadingRenderer"),
+    // TabButtonRenderer: join(__dirname, "styleguide/TabButtonRenderer"),
   },
   context: {
     styled: "@emotion/styled",

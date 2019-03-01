@@ -6,7 +6,7 @@ Menus that drop down from the header bar, i.e. project selectors, and user menus
 import * as React from "react"
 import { HeaderMenu, Icon, IconName, ContextMenuProps } from "@operational/components"
 
-const projectOptions: ContextMenuProps["items"] = [
+const projectOptions = [
   {
     icon: "Building",
     iconColor: "primary" as "primary",
