@@ -4,8 +4,11 @@ import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface HugeCatPictureProps {
+  /** How big the picture should be */
   size: number
+  /** The color of the border */
   borderColor?: string
+  /** Should the cat spin?  */
   spin?: boolean
 }
 
@@ -27,6 +30,7 @@ const Container = styled("div")<HugeCatPictureProps>`
   overflow: hidden;
   display: flex;
   align-items: center;
+  background-color: white;
   justify-content: center;
   animation: ${({ spin }) => (spin ? `${spinAnimation.name} 3s infinite linear;` : "")};
   > img {
