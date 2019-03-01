@@ -1,4 +1,4 @@
-import { noop } from "lodash"
+import noop from "lodash/noop"
 import { useEffect, useRef } from "react"
 
 // From: https://overreacted.io/making-setinterval-declarative-with-react-hooks/
