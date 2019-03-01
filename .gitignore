@@ -9,3 +9,4 @@ dist
 build
 lib
 test-results.json
+.history
