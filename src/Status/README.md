@@ -24,18 +24,24 @@ import { Card, Status } from "@operational/components"
 ### Deprecated API
 
 ```jsx
-<div style={{ maxWidth: 200 }}>
+import * as React from "react"
+import { Card, Status } from "@operational/components"
+;<div style={{ maxWidth: 200 }}>
   <Card>
-    <Status success />Deployed
+    <Status success />
+    Deployed
   </Card>
   <Card>
-    <Status running />Running
+    <Status running />
+    Running
   </Card>
   <Card>
-    <Status error />Offline
+    <Status error />
+    Offline
   </Card>
   <Card>
-    <Status />Neutral
+    <Status />
+    Neutral
   </Card>
 </div>
 ```
