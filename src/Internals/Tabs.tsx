@@ -71,7 +71,8 @@ const Tabs = ({ onTabChange, tabs, activeTabName, condensed, children }: Props) 
       onTabChange(tabs[index].name)
     }
   }
-
+  // Work around: wrap return in fragment- to prevent type error and not having to change childrens return type
+  // https://github.com/Microsoft/TypeScript/issues/21699
   return (
     <>
       {children({
