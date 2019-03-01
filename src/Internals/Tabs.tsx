@@ -17,7 +17,7 @@ export interface Props {
   activeTabName?: string
   onTabChange?: (newTabName: string) => void
   condensed?: boolean
-  children: (childrenConfig: { tabsBar: React.ReactNode; activeChildren: React.ReactNode }) => JSX.Element | null /// https://github.com/Microsoft/TypeScript/issues/21699
+  children: (childrenConfig: { tabsBar: React.ReactNode; activeChildren: React.ReactNode }) => React.ReactNode
 }
 
 export interface State {
@@ -75,25 +75,29 @@ const Tabs = ({ onTabChange, tabs, activeTabName, condensed, children }: Props) 
     [onTabChange, tabs],
   )
 
-  return children({
-    tabsBar: (
-      <TabsBar condensed={condensed}>
-        {tabs
-          .filter(({ hidden }) => !hidden)
-          .map((tab, index: number) => (
-            <Tab condensed={condensed} key={index} active={activeTab === index} onClick={() => onTabClick(index)}>
-              {tab.loading ? (
-                <Spinner left size={14} />
-              ) : (
-                tab.icon && <Icon name={tab.icon} size={14} color={tab.iconColor} left />
-              )}
-              {tab.name}
-            </Tab>
-          ))}
-      </TabsBar>
-    ),
-    activeChildren: tabs[activeTab].children,
-  })
+  return (
+    <>
+      {children({
+        tabsBar: (
+          <TabsBar condensed={condensed}>
+            {tabs
+              .filter(({ hidden }) => !hidden)
+              .map((tab, index: number) => (
+                <Tab condensed={condensed} key={index} active={activeTab === index} onClick={() => onTabClick(index)}>
+                  {tab.loading ? (
+                    <Spinner left size={14} />
+                  ) : (
+                    tab.icon && <Icon name={tab.icon} size={14} color={tab.iconColor} left />
+                  )}
+                  {tab.name}
+                </Tab>
+              ))}
+          </TabsBar>
+        ),
+        activeChildren: tabs[activeTab].children,
+      })}
+    </>
+  )
 }
 
 export default Tabs
