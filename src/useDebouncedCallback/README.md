@@ -1,26 +1,26 @@
 ## Usage
 
-useDebouncedCallbacks- debounces callbacks
+Similar to UseDebounce but a debounced Callback is returned and you can do prelim calculations prior to setting the Value.
 
 ```jsx
 //import useDebouncedCallbacks from '@operational/ui/src/useDebouncedCallbacks';
-const MyComponent = ({ defaultValue }) => {
+function UseDebouncedCBExample({ defaultValue }) {
   const [value, setValue] = useState(defaultValue)
-  // Debounce callback
-  const debouncedCallback = useDebouncedCallback(
-    v => {
-      setValue(v)
+  const debouncedFunction = useDebouncedCallback(
+    value => {
+      setValue(value)
     },
     2000,
     [],
   )
+
   return (
     <div>
-      <input defaultValue={defaultValue} onChange={e => debouncedCallback(e.target.value)} />
+      <input defaultValue={defaultValue} onChange={e => debouncedFunction(e.target.value)} />
       <p>Debounced value: {value}</p>
     </div>
   )
 }
 
-;<MyComponent defaultValue={1} />
+;<UseDebouncedCBExample defaultValue="Hello world" />
 ```

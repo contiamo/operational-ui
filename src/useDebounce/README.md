@@ -1,21 +1,22 @@
-## Usage
+Creates a debounced [state,setState] method that delays setting the new state until after desired milliseconds have elapsed since the last time an attempt to update the state was made.
 
-useDebounce- debounces values
+## Basic Usage
 
 ```jsx
-//import useDebounce from "@operational/ui/src/useDebounce"
+import React, { useState, useEffect } from "react"
 
-const MyComponent = () => {
-  const [text, setText] = useState('defaultValue');
-  const debouncedText = useDebounce(text, 1000);
+const MyComponent = ({ defaultValue }) => {
+  const [value, setValue] = useState(defaultValue)
+  const debouncedText = useDebounce(value, 2000)
 
   return (
     <div>
-      <input defaultValue={'defaultValue'} onChange={(e) => {
-        setText(e.target.value);
-      }} />
+      <input defaultValue={defaultValue} onChange={e => setValue(e.target.value)} />
       <p>Debounced value: {debouncedText}</p>
-    </div>)
+      <p>Current value: {value}</p>
+    </div>
+  )
+}
 
-;<MyComponent/>
+;<MyComponent defaultValue="Hello world" />
 ```
