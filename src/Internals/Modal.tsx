@@ -16,8 +16,8 @@ export interface Props {
 export const Modal = ({ children }: Props) => {
   const [options, setOptions] = useState<State>({})
 
-  const openModal = useCallback((newoptions: ModalOptions) => {
-    setOptions(newoptions)
+  const openModal = useCallback((newOptions: ModalOptions) => {
+    setOptions(newOptions)
   }, [])
 
   const closeModal = useCallback(() => {
