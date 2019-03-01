@@ -76,9 +76,8 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
     }
   }
 
-  const debouncedUpdateRenderedWidth = useDebouncedCallback(updateContainerWidth, 100, [
-    // containerRef.current,
-  ])
+  const debouncedUpdateRenderedWidth = useDebouncedCallback(updateContainerWidth, 100, [])
+
   useWindowEventListener("resize", debouncedUpdateRenderedWidth)
 
   return (
