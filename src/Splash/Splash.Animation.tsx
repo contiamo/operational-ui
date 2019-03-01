@@ -35,7 +35,8 @@ const bounce = (coord: number): number => {
   return coord
 }
 
-// css Hack so we dont need to worry about max(window.height,window.width)
+// css Hack so we dont need to worry about max(window.height,window.width)- Only needed when fullscreen is enabled
+// https://spin.atomicobject.com/2015/07/14/css-responsive-square/
 const FullScreenWrap = styled("div")({
   position: "absolute",
   width: "100%",
@@ -96,7 +97,7 @@ const Animation: React.FC<Props> = ({ isFullscreen, size = 600 }) => {
     5000,
     true,
   )
-
+  // Only will change if isFullscreen or size changes, a workaround from not having to set outter container width and height to max(window.height,window.width)
   const Wrap = useCallback(
     ({ children }) =>
       isFullscreen ? (
