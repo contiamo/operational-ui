@@ -36,16 +36,16 @@ const MyComponent = () => {
   // Fetch a dog breed when a user clicks a dog
   React.useEffect(() => {
     fetch(dogToFetch)
-            .then(response => response.json())
-            .then(dogImage => {
-              setText("")
-              setChosenDog({ value: dogImage.message[0] })
-            })
+      .then(response => response.json())
+      .then(dogImage => {
+        setText("")
+        setChosenDog({ value: dogImage.message[0] })
+      })
   }, [dogToFetch])
 
   return (
     <div style={{ display: "flex", alignItems: "flex-start" }}>
-      <Autocomplete<string>
+      <Autocomplete
         value={text}
         loading={loading}
         results={data}
