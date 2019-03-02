@@ -1,4 +1,4 @@
-import { Global } from "@emotion/core"
+import { css, Global } from "@emotion/core"
 import * as React from "react"
 import styled from "../src/utils/styled"
 
@@ -7,7 +7,6 @@ import constants from "../src/utils/constants"
 
 export interface StyleGuideRendererState {
   isSplashVisible: boolean
-  activeComponent: string
 }
 
 export interface StyleGuideRendererProps {
@@ -33,25 +32,11 @@ const Version = styled("div")`
   margin-right: ${constants.space.content}px;
 `
 
-const { Provider, Consumer } = React.createContext({
-  activeComponent: "",
-  updateActiveComponent: (_: string) => undefined,
-})
-
 const Header = () => <HeaderBar logo={<Logo name="OperationalUI" />} end={<Version>v{version}</Version>} />
 
 class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readonly<StyleGuideRendererState>> {
   public readonly state = {
     isSplashVisible: !Boolean(window.location.hash),
-    activeComponent: "",
-  }
-
-  private updateActiveComponent = (activeComponent: string) => {
-    if (this.props.hasSidebar) {
-      window.location.hash = activeComponent
-    }
-    this.setState({ activeComponent })
-    return undefined
   }
 
   public render() {
@@ -60,24 +45,26 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
     return (
       <OperationalUI>
         <Global
-          styles={`
-  #rsg-root {
-    height: 100vh;
-  }
+          styles={css`
+            #rsg-root {
+              height: 100vh;
+            }
 
-  // buttons style override
-  [class^="rsg--controls-"] {
-    margin-top: 16px;
-  }
+            // buttons style override
+            [class^="rsg--controls-"] {
+              margin-top: 16px;
+            }
 
-  .rsg--spacing-7 {
-    margin: 0;
-  }
+            .rsg--spacing-7 {
+              margin: 0;
+            }
 
-  .rsg--tab-14: {
-    marginTop: constants.space.content,
-  }`}
+            .rsg--tab-14: {
+              margintop: constants.space.content;
+            }
+          `}
         />
+
         {isSplashVisible ? (
           <Splash
             color="#005f96"
@@ -109,28 +96,17 @@ class StyleGuideRenderer extends React.Component<StyleGuideRendererProps, Readon
             </p>
             <p>It is predictable to use, and it lets you and your team breathe. Exhales, not sighs.</p>
           </Splash>
+        ) : hasSidebar ? (
+          <Layout header={<Header />} sidenav={toc} main={<Page title="Components">{children}</Page>} />
         ) : (
-          <Provider
-            value={{
-              activeComponent: this.state.activeComponent,
-              updateActiveComponent: this.updateActiveComponent,
-            }}
-          >
-            {hasSidebar ? (
-              <Layout header={<Header />} sidenav={toc} main={<Page title="Components">{children}</Page>} />
-            ) : (
-              <>
-                <Header />
-                <Page fill>{children}</Page>
-              </>
-            )}
-          </Provider>
+          <>
+            <Header />
+            <Page fill>{children}</Page>
+          </>
         )}
       </OperationalUI>
     )
   }
 }
-
-export { Consumer }
 
 export default StyleGuideRenderer
