@@ -46,79 +46,80 @@ const sidebar = (
 
 // Container must set the height explicitly.
 // This component will set height to 100%.
-;<div style={{ height: 600 }}>
-  <Layout
-    sidenav={sidebar}
-    header={
-      <HeaderBar
-        logo={<Logo name="Contiamo" />}
-        main={
-          <HeaderMenu withCaret items={[{ label: "Project 1" }, { label: "Project 2" }, { label: "Project 3" }]}>
-            Project 1
-          </HeaderMenu>
-        }
-        end={
-          <HeaderMenu items={[{ label: "Log out" }]} align="right">
-            Imogen Mason <Avatar name="Imogen Mason" />
-          </HeaderMenu>
-        }
-      />
-    }
-    main={
-      <Page
-        title="Page Title"
-        actions={
-          <Button condensed color="ghost">
-            Help
-          </Button>
-        }
-      >
-        {({ confirm, modal }) => (
-          <>
-            {Array(10)
-              .fill("Hello!!!!")
-              .map((value, i) => (
-                <Card key={i}>{value}</Card>
-              ))}
+const Example = () => (
+  <div style={{ height: 600 }}>
+    <Layout
+      sidenav={sidebar}
+      header={
+        <HeaderBar
+          logo={<Logo name="Contiamo" />}
+          main={
+            <HeaderMenu withCaret items={[{ label: "Project 1" }, { label: "Project 2" }, { label: "Project 3" }]}>
+              Project 1
+            </HeaderMenu>
+          }
+          end={
+            <HeaderMenu items={[{ label: "Log out" }]} align="right">
+              Imogen Mason <Avatar name="Imogen Mason" />
+            </HeaderMenu>
+          }
+        />
+      }
+      main={
+        <Page
+          title="Page Title"
+          actions={
+            <Button condensed color="ghost">
+              Help
+            </Button>
+          }
+        >
+          {({ confirm, modal }) => (
+            <>
+              {Array(10)
+                .fill("Hello!!!!")
+                .map((value, i) => (
+                  <Card key={i}>{value}</Card>
+                ))}
 
-            <Card title="Partial Kanye Lyrics">
-              <div>
-                <Button
-                  color="#314865"
-                  textColor="#2bda64"
-                  onClick={() => {
-                    confirm({
-                      title: "Yikes",
-                      body: (
-                        <Form>
-                          <Body>You can only add users who are already in your organization.</Body>
-                          <Autocomplete
-                            onChange={() => console.log("autocomplete changed")}
-                            onResultClick={result => alert("Thanks for choosing " + result.label)}
-                            value="Click me for results..."
-                            results={[
-                              { label: "Tweakin', tweakin' off that 2CB, huh?" },
-                              { label: "Is he gon' make it? TBD, huh" },
-                              { label: "Thought I was gon' run, DMC, huh?" },
-                              { label: "I done died and lived again on DMT, huh" },
-                            ]}
-                            fullWidth
-                            label="Sometimes I scare myself, myself"
-                          />
-                        </Form>
-                      ),
-                    })
-                  }}
-                >
-                  Open a Confirm
-                </Button>
-                <Button
-                  color="#f89663"
-                  onClick={() => {
-                    confirm({
-                      fullSize: true,
-                      title: "Waves",
-                      body: `Turn it up!
+              <Card title="Partial Kanye Lyrics">
+                <div>
+                  <Button
+                    color="#314865"
+                    textColor="#2bda64"
+                    onClick={() => {
+                      confirm({
+                        title: "Yikes",
+                        body: (
+                          <Form>
+                            <Body>You can only add users who are already in your organization.</Body>
+                            <Autocomplete
+                              onChange={() => console.log("autocomplete changed")}
+                              onResultClick={result => alert("Thanks for choosing " + result.label)}
+                              value="Click me for results..."
+                              results={[
+                                { label: "Tweakin', tweakin' off that 2CB, huh?" },
+                                { label: "Is he gon' make it? TBD, huh" },
+                                { label: "Thought I was gon' run, DMC, huh?" },
+                                { label: "I done died and lived again on DMT, huh" },
+                              ]}
+                              fullWidth
+                              label="Sometimes I scare myself, myself"
+                            />
+                          </Form>
+                        ),
+                      })
+                    }}
+                  >
+                    Open a Confirm
+                  </Button>
+                  <Button
+                    color="#f89663"
+                    onClick={() => {
+                      confirm({
+                        fullSize: true,
+                        title: "Waves",
+                        body: `Turn it up!
 Waves don't die
 Let me crash here for the moment
 I don't need to own it
@@ -131,25 +132,25 @@ Bird can't fly in a cage (turn it up!)
 Even when somebody go away (turn it up!)
 The feelings don't really go away
 That's just the wave (yeah)`
-                        .split("\n")
-                        .map(line => (
-                          <>
-                            {line}
-                            <br />
-                          </>
-                        )),
-                    })
-                  }}
-                >
-                  Open a full-size Confirm
-                </Button>
-                <Button
-                  color="#613f90"
-                  textColor="#fb059e"
-                  onClick={() => {
-                    modal({
-                      title: "Stronger",
-                      body: `N-now th-that that don't kill me
+                          .split("\n")
+                          .map(line => (
+                            <>
+                              {line}
+                              <br />
+                            </>
+                          )),
+                      })
+                    }}
+                  >
+                    Open a full-size Confirm
+                  </Button>
+                  <Button
+                    color="#613f90"
+                    textColor="#fb059e"
+                    onClick={() => {
+                      modal({
+                        title: "Stronger",
+                        body: `N-now th-that that don't kill me
 Can only make me stronger
 I need you to hurry up now
 'Cause I can't wait much longer
@@ -159,25 +160,25 @@ Man I've been waiting all night now
 That's how long I been on ya
 I need you right now
 Let's get lost tonight`
-                        .split("\n")
-                        .map(line => (
-                          <>
-                            {line}
-                            <br />
-                          </>
-                        )),
-                    })
-                  }}
-                >
-                  Open a Modal
-                </Button>
-                <Button
-                  color="#f89663"
-                  onClick={() => {
-                    modal({
-                      fullSize: true,
-                      title: "FML",
-                      body: `I been waiting for a minute
+                          .split("\n")
+                          .map(line => (
+                            <>
+                              {line}
+                              <br />
+                            </>
+                          )),
+                      })
+                    }}
+                  >
+                    Open a Modal
+                  </Button>
+                  <Button
+                    color="#f89663"
+                    onClick={() => {
+                      modal({
+                        fullSize: true,
+                        title: "FML",
+                        body: `I been waiting for a minute
 For my lady
 I been living without limits
 As far as my business
@@ -197,26 +198,29 @@ Revealing the layers to my soul, my soul
 The layers to my soul
 Revealing the layers to my soul
 `
-                        .split("\n")
-                        .map(line => (
-                          <>
-                            {line}
-                            <br />
-                          </>
-                        )),
-                    })
-                  }}
-                >
-                  Open a full-size Modal
-                </Button>
-              </div>
-            </Card>
-          </>
-        )}
-      </Page>
-    }
-  />
-</div>
+                          .split("\n")
+                          .map(line => (
+                            <>
+                              {line}
+                              <br />
+                            </>
+                          )),
+                      })
+                    }}
+                  >
+                    Open a full-size Modal
+                  </Button>
+                </div>
+              </Card>
+            </>
+          )}
+        </Page>
+      }
+    />
+  </div>
+)
+
+;<Example />
 ```
 
 ### Without a Page Title
@@ -265,78 +269,79 @@ const sidebar = (
 
 // Container must set the height explicitly.
 // This component will set height to 100%.
-;<div style={{ height: 600 }}>
-  <Layout
-    sidenav={sidebar}
-    header={
-      <HeaderBar
-        logo={<Logo name="Contiamo" />}
-        main={
-          <HeaderMenu withCaret items={[{ label: "Project 1" }, { label: "Project 2" }, { label: "Project 3" }]}>
-            Project 1
-          </HeaderMenu>
-        }
-        end={
-          <HeaderMenu items={[{ label: "Log out" }]} align="right">
-            Imogen Mason <Avatar name="Imogen Mason" />
-          </HeaderMenu>
-        }
-      />
-    }
-    main={
-      <Page
-        actions={
-          <Button condensed color="ghost">
-            Help
-          </Button>
-        }
-      >
-        {({ confirm, modal }) => (
-          <>
-            {Array(10)
-              .fill("Hello!!!!")
-              .map((value, i) => (
-                <Card key={i}>{value}</Card>
-              ))}
+const Example = () => (
+  <div style={{ height: 600 }}>
+    <Layout
+      sidenav={sidebar}
+      header={
+        <HeaderBar
+          logo={<Logo name="Contiamo" />}
+          main={
+            <HeaderMenu withCaret items={[{ label: "Project 1" }, { label: "Project 2" }, { label: "Project 3" }]}>
+              Project 1
+            </HeaderMenu>
+          }
+          end={
+            <HeaderMenu items={[{ label: "Log out" }]} align="right">
+              Imogen Mason <Avatar name="Imogen Mason" />
+            </HeaderMenu>
+          }
+        />
+      }
+      main={
+        <Page
+          actions={
+            <Button condensed color="ghost">
+              Help
+            </Button>
+          }
+        >
+          {({ confirm, modal }) => (
+            <>
+              {Array(10)
+                .fill("Hello!!!!")
+                .map((value, i) => (
+                  <Card key={i}>{value}</Card>
+                ))}
 
-            <Card title="Partial Kanye Lyrics">
-              <div>
-                <Button
-                  color="#314865"
-                  textColor="#2bda64"
-                  onClick={() => {
-                    confirm({
-                      title: "Yikes",
-                      body: (
-                        <Form>
-                          <Body>You can only add users who are already in your organization.</Body>
-                          <Autocomplete
-                            onChange={() => console.log("autocomplete changed")}
-                            onResultClick={result => alert("Thanks for choosing " + result.label)}
-                            value="Click me for results..."
-                            results={[
-                              { label: "Tweakin', tweakin' off that 2CB, huh?" },
-                              { label: "Is he gon' make it? TBD, huh" },
-                              { label: "Thought I was gon' run, DMC, huh?" },
-                              { label: "I done died and lived again on DMT, huh" },
-                            ]}
-                            fullWidth
-                            label="Sometimes I scare myself, myself"
-                          />
-                        </Form>
-                      ),
-                    })
-                  }}
-                >
-                  Open a Confirm
-                </Button>
-                <Button
-                  color="#f89663"
-                  onClick={() => {
-                    confirm({
-                      fullSize: true,
-                      title: "Waves",
-                      body: `Turn it up!
+              <Card title="Partial Kanye Lyrics">
+                <div>
+                  <Button
+                    color="#314865"
+                    textColor="#2bda64"
+                    onClick={() => {
+                      confirm({
+                        title: "Yikes",
+                        body: (
+                          <Form>
+                            <Body>You can only add users who are already in your organization.</Body>
+                            <Autocomplete
+                              onChange={() => console.log("autocomplete changed")}
+                              onResultClick={result => alert("Thanks for choosing " + result.label)}
+                              value="Click me for results..."
+                              results={[
+                                { label: "Tweakin', tweakin' off that 2CB, huh?" },
+                                { label: "Is he gon' make it? TBD, huh" },
+                                { label: "Thought I was gon' run, DMC, huh?" },
+                                { label: "I done died and lived again on DMT, huh" },
+                              ]}
+                              fullWidth
+                              label="Sometimes I scare myself, myself"
+                            />
+                          </Form>
+                        ),
+                      })
+                    }}
+                  >
+                    Open a Confirm
+                  </Button>
+                  <Button
+                    color="#f89663"
+                    onClick={() => {
+                      confirm({
+                        fullSize: true,
+                        title: "Waves",
+                        body: `Turn it up!
 Waves don't die
 Let me crash here for the moment
 I don't need to own it
@@ -349,25 +354,25 @@ Bird can't fly in a cage (turn it up!)
 Even when somebody go away (turn it up!)
 The feelings don't really go away
 That's just the wave (yeah)`
-                        .split("\n")
-                        .map(line => (
-                          <>
-                            {line}
-                            <br />
-                          </>
-                        )),
-                    })
-                  }}
-                >
-                  Open a full-size Confirm
-                </Button>
-                <Button
-                  color="#613f90"
-                  textColor="#fb059e"
-                  onClick={() => {
-                    modal({
-                      title: "Stronger",
-                      body: `N-now th-that that don't kill me
+                          .split("\n")
+                          .map(line => (
+                            <>
+                              {line}
+                              <br />
+                            </>
+                          )),
+                      })
+                    }}
+                  >
+                    Open a full-size Confirm
+                  </Button>
+                  <Button
+                    color="#613f90"
+                    textColor="#fb059e"
+                    onClick={() => {
+                      modal({
+                        title: "Stronger",
+                        body: `N-now th-that that don't kill me
 Can only make me stronger
 I need you to hurry up now
 'Cause I can't wait much longer
@@ -377,25 +382,25 @@ Man I've been waiting all night now
 That's how long I been on ya
 I need you right now
 Let's get lost tonight`
-                        .split("\n")
-                        .map(line => (
-                          <>
-                            {line}
-                            <br />
-                          </>
-                        )),
-                    })
-                  }}
-                >
-                  Open a Modal
-                </Button>
-                <Button
-                  color="#f89663"
-                  onClick={() => {
-                    modal({
-                      fullSize: true,
-                      title: "FML",
-                      body: `I been waiting for a minute
+                          .split("\n")
+                          .map(line => (
+                            <>
+                              {line}
+                              <br />
+                            </>
+                          )),
+                      })
+                    }}
+                  >
+                    Open a Modal
+                  </Button>
+                  <Button
+                    color="#f89663"
+                    onClick={() => {
+                      modal({
+                        fullSize: true,
+                        title: "FML",
+                        body: `I been waiting for a minute
 For my lady
 I been living without limits
 As far as my business
@@ -415,26 +420,29 @@ Revealing the layers to my soul, my soul
 The layers to my soul
 Revealing the layers to my soul
 `
-                        .split("\n")
-                        .map(line => (
-                          <>
-                            {line}
-                            <br />
-                          </>
-                        )),
-                    })
-                  }}
-                >
-                  Open a full-size Modal
-                </Button>
-              </div>
-            </Card>
-          </>
-        )}
-      </Page>
-    }
-  />
-</div>
+                          .split("\n")
+                          .map(line => (
+                            <>
+                              {line}
+                              <br />
+                            </>
+                          )),
+                      })
+                    }}
+                  >
+                    Open a full-size Modal
+                  </Button>
+                </div>
+              </Card>
+            </>
+          )}
+        </Page>
+      }
+    />
+  </div>
+)
+
+;<Example />
 ```
 
 ### Example with Compact Sidenav
