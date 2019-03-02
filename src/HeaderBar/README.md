@@ -8,11 +8,7 @@ Below is the most common usage, across all of our apps at Contiamo.
 import * as React from "react"
 import { HeaderBar, Logo, HeaderMenu, Avatar, ContextMenuProps } from "@operational/components"
 
-const projects: ContextMenuProps["items"] = [
-  { label: "Project 1" },
-  { label: "Project 2" },
-  { label: "Project 3" },
-]
+const projects = [{ label: "Project 1" }, { label: "Project 2" }, { label: "Project 3" }]
 ;<HeaderBar
   logo={<Logo name="Contiamo" />}
   main={
