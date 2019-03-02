@@ -4,9 +4,9 @@ Main wrapper for Operational UI, required at the top level of the application. S
 
 ```jsx
 import * as React from "react"
-import OperationalUI, { Button } from "@operational/components"
+import { Button } from "@operational/components"
 
-const App: React.FC = () => (
+const App = () => (
   <div>
     Hi, I'm an Operational App! <Button color="primary">Cool!</Button>
   </div>
@@ -23,9 +23,9 @@ To set up routing that is automatically wired up to the `to` props of all nested
 
 ```jsx
 import * as React from "react"
-import OperationalUI, { Button } from "@operational/components"
+import { Button } from "@operational/components"
 
-class RoutingComponent extends React.Component<{}, { path: string }> {
+class RoutingComponent extends React.Component {
   constructor(props) {
     super(props)
     // Set the initial path instate
