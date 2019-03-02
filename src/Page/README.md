@@ -402,7 +402,7 @@ const Tab = props => (
   </PageContent>
 )
 
-class Router extends React.Component<{}, { tabName: string }> {
+class Router extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -454,7 +454,7 @@ const Tab = props => (
   </PageContent>
 )
 
-class Router extends React.Component<{}, { tabName: string }> {
+class Router extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

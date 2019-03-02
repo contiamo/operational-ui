@@ -20,7 +20,7 @@ const options = [
 ]
 
 const MyComponent = () => {
-  const [value, setValue] = React.useState<string | number | React.ReactText[]>("one")
+  const [value, setValue] = React.useState("one")
 
   return (
     <Select
@@ -57,7 +57,7 @@ const options = [
 ]
 
 const MyOtherComponent = () => {
-  const [value, setValue] = React.useState<string | number | React.ReactText[]>([])
+  const [value, setValue] = React.useState([])
   return (
     <Select
       label="Select label"
@@ -93,7 +93,7 @@ const options = [
 ]
 
 const MyThirdComponent = () => {
-  const [value, setValue] = React.useState<string | number | React.ReactText[]>("one")
+  const [value, setValue] = React.useState("one")
   return (
     <Select
       label="Select label"
@@ -115,8 +115,8 @@ const MyThirdComponent = () => {
 The value prop passed to select is is either an `Option` object, or an Array of `Option` objects. If it is an
 array, the component automatically becomes a multi-select. The shape of an Option object is described below.
 
-```js
-import { SelectProps } from "@operational/components";
+```ts
+import { SelectProps } from "@operational/components"
 
 const option: SelectProps["options"][-1] = {
   label: "any_string",
