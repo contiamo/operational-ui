@@ -9,7 +9,7 @@ import { HeaderMenu, Icon, IconName, ContextMenuProps } from "@operational/compo
 const projectOptions = [
   {
     icon: "Building",
-    iconColor: "primary" as "primary",
+    iconColor: "primary",
     label: "Contiamo",
     description: "Organization-wide content and settings",
   },
@@ -20,7 +20,7 @@ const projectOptions = [
     icon: "Project",
     label: "Contiamo is a nice place and they have a nice UI library",
     description: "Organization-wide content and settings",
-  }
+  },
 ]
 
 const MyComponent = () => {
@@ -29,7 +29,11 @@ const MyComponent = () => {
   return (
     <div style={{ display: "inline-block", height: 40, backgroundColor: "#3e3e3e" }}>
       <HeaderMenu items={projectOptions} onClick={setProject} withCaret>
-        {typeof project !== "string" && <><Icon left name={project.icon as IconName} /> {project.label}</>}
+        {typeof project !== "string" && (
+          <>
+            <Icon left name={project.icon} /> {project.label}
+          </>
+        )}
       </HeaderMenu>
     </div>
   )
