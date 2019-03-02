@@ -1,9 +1,5 @@
 import * as React from "react"
-// import Waypoint from "react-waypoint"
-
 import { Card } from "../src"
-
-// import { Consumer } from "./StyleGuideRenderer"
 
 export interface ReactComponentRendererProps {
   name: string
