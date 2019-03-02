@@ -12,7 +12,10 @@ Because the URL is not really the safest way to provide state to an application,
 
 ## Usage
 
-```jsx
+// disable Example since its messing up website routes
+
+```ts
+import { Button } from "@operational/components"
 const countDecoder = i => (isNaN(+i) ? undefined : +i)
 
 const Counter = () => {
@@ -22,12 +25,11 @@ const Counter = () => {
 
   return (
     <>
-      <Title>{count}</Title>
+      <h3>{count}</h3>
       <Button onClick={() => setCount(count + 1)} children="up" />
       <Button onClick={() => setCount(count - 1)} children="down" />
     </>
   )
 }
-
 ;<Counter />
 ```
