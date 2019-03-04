@@ -1,5 +1,4 @@
-import * as React from "react"
-
+import React, { useCallback, useState } from "react"
 import ControlledModal from "./ControlledModal"
 
 export interface ModalOptions {
@@ -8,47 +7,33 @@ export interface ModalOptions {
   body: React.ReactNode | ((close: () => void) => React.ReactNode)
 }
 
-export interface State {
-  options: Partial<ModalOptions>
-}
+export type State = Partial<ModalOptions>
 
 export interface Props {
   children: (modal: (options: ModalOptions) => void) => React.ReactNode
 }
 
-export class Modal extends React.Component<Props, Readonly<State>> {
-  public readonly state: State = {
-    options: {},
-  }
+export const Modal = ({ children }: Props) => {
+  const [options, setOptions] = useState<State>({})
 
-  public openModal = (options: ModalOptions) => {
-    this.setState({ options })
-  }
+  const openModal = useCallback((newOptions: ModalOptions) => {
+    setOptions(newOptions)
+  }, [])
 
-  public closeModal = () => {
-    this.setState({ options: {} })
-  }
+  const closeModal = useCallback(() => {
+    setOptions({})
+  }, [])
 
-  public render() {
-    const isOpen = Boolean(this.state.options.body)
-
-    return (
-      <>
-        {this.props.children(this.openModal)}
-        {isOpen && (
-          <ControlledModal
-            fullSize={this.state.options.fullSize}
-            title={this.state.options.title}
-            onClose={this.closeModal}
-          >
-            {typeof this.state.options.body === "function"
-              ? this.state.options.body(this.closeModal)
-              : this.state.options.body}
-          </ControlledModal>
-        )}
-      </>
-    )
-  }
+  return (
+    <>
+      {children(openModal)}
+      {Boolean(options.body) && (
+        <ControlledModal fullSize={options.fullSize} title={options.title} onClose={closeModal}>
+          {typeof options.body === "function" ? options.body(closeModal) : options.body}
+        </ControlledModal>
+      )}
+    </>
+  )
 }
 
 export default Modal
