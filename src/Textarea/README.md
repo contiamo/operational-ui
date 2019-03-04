@@ -5,6 +5,8 @@ A textarea field, with optional label, hint and error.
 The following snippet show the text area with various visual additions handling fixed heights, errors and hints.
 
 ```jsx
+import { Form, Textarea, Icon } from "@operational/components"
+
 json = JSON.stringify({ test: 123 }, null, 2)
 
 initialState = {
@@ -19,42 +21,8 @@ initialState = {
   v9: "",
 }
 
-  return (
-    <Form>
-      <div>
-        <Textarea value={v0} onChange={setV0} />
-      </div>
-      <div>
-        <Textarea value={v1} onChange={setV1} label="simple" />
-        <Textarea value={v4} onChange={setV4} label="with error" error="oh no!" />
-        <Textarea value={v5} onChange={setV5} label="with hint" hint="this is a hint" />
-        <Textarea label="disabled" disabled />
-        <Textarea value={v7} onChange={setV7} label="a code" code />
-        <Textarea value={v8} onChange={setV8} label="fixed height" height={200} />
-      </div>
-      <div>
-        <Textarea copy value={v2} onChange={setV2} label="with copying" />
-        <Textarea
-          value={v3}
-          onChange={setV3}
-          label="with actions"
-          action={
-            <div>
-              <Icon size={8} name="Open" />
-              <a href="#textarea">More information</a>
-            </div>
-          }
-        />
-      </div>
-      <div>
-        <Textarea value={v10} onChange={setV10} label="full width" fullWidth />
-      </div>
-      <div>
-        {/* full width without a label can behave differently */}
-        <Textarea value={v9} onChange={setV9} fullWidth />
-      </div>
-    </Form>
-  )
+const handleChange = key => value => {
+  setState(() => ({ [key]: value }))
 }
 ;<Form>
   <div>
