@@ -82,8 +82,6 @@ function MyComp() {
     setInvert2(!inverted2)
   }, 10000)
 
-  // Make it faster every second!
-
   return (
     <>
       <div
