@@ -71,6 +71,7 @@ const Th = styled("th")<{ sortable?: boolean }>(({ theme, sortable }) => ({
   "&:first-child": {
     paddingLeft: theme.space.small,
   },
+  paddingRight: theme.space.small,
   ...(sortable
     ? {
         ":hover": {
@@ -100,6 +101,7 @@ const Td = styled("td")<{ cellWidth?: Column<any>["width"] }>(({ theme, cellWidt
   "&:first-child": {
     paddingLeft: theme.space.small,
   },
+  paddingRight: theme.space.small,
   ...(cellWidth
     ? {
         width: cellWidth,
