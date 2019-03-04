@@ -1,9 +1,7 @@
-import React, { useRef, useState } from "react"
+import React, { useLayoutEffect, useRef, useState } from "react"
 
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import Icon from "../Icon/Icon"
-import useDebouncedCallback from "../useDebouncedCallback"
-import useWindowEventListener from "../useWindowEventListener"
 import styled from "../utils/styled"
 
 export interface TopbarSelectProps {
@@ -66,19 +64,11 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
 
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const updateContainerWidth = () => {
-    if (!containerRef.current) {
-      return
-    }
-
-    if (containerRef.current.clientWidth !== containerWidth) {
+  useLayoutEffect(() => {
+    if (containerRef.current) {
       setContainerWidth(containerRef.current.clientWidth)
     }
-  }
-
-  const debouncedUpdateRenderedWidth = useDebouncedCallback(updateContainerWidth, 100, [])
-
-  useWindowEventListener("resize", debouncedUpdateRenderedWidth)
+  })
 
   return (
     <ContextMenu
