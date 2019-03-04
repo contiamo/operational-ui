@@ -3,11 +3,12 @@ import { useEffect } from "react"
 /**
  * Hook version of window.addEventListener.
  */
-function useWindowEventListener<K extends keyof GlobalEventHandlersEventMap>(
+
+function useWindowEventListener<K extends keyof WindowEventMap>(
   type: K,
-  listener: EventListenerOrEventListenerObject,
-  addOptions?: AddEventListenerOptions,
-  removeOptions?: EventListenerOptions,
+  listener: (ev: WindowEventMap[K]) => any,
+  addOptions?: boolean | AddEventListenerOptions,
+  removeOptions?: boolean | EventListenerOptions,
 ) {
   useEffect(() => {
     window.addEventListener(type, listener, addOptions)
