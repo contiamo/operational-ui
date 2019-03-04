@@ -1,9 +1,11 @@
 // styleguide.config.js
 const { join, resolve } = require("path")
 const { parse: propsParser } = require("react-docgen-typescript")
+const { version } = require("./package.json")
 
 module.exports = {
   title: "Operational UI",
+  version,
   propsParser,
   pagePerSection: true,
   moduleAliases: {
@@ -11,7 +13,7 @@ module.exports = {
   },
   sections: [
     /// Should add an Intro Page to be first loaded after splash
-    { name: "Hooks", components: "src/use*/*.ts" },
+    { name: "Hooks", components: "src/use*/*.ts", sectionDepth: 1 },
     {
       name: "Components",
       components: "src/**/*.tsx",
