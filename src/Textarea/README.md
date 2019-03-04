@@ -5,20 +5,19 @@ A textarea field, with optional label, hint and error.
 The following snippet show the text area with various visual additions handling fixed heights, errors and hints.
 
 ```jsx
-import * as React from "react"
-import { Textarea, Form, Icon } from "@operational/components"
+json = JSON.stringify({ test: 123 }, null, 2)
 
-const MyComponent = () => {
-  const [v0, setV0] = React.useState("")
-  const [v1, setV1] = React.useState("")
-  const [v2, setV2] = React.useState("")
-  const [v3, setV3] = React.useState("")
-  const [v4, setV4] = React.useState("")
-  const [v5, setV5] = React.useState("")
-  const [v7, setV7] = React.useState("")
-  const [v8, setV8] = React.useState("")
-  const [v9, setV9] = React.useState("")
-  const [v10, setV10] = React.useState("")
+initialState = {
+  v1: "",
+  v2: "",
+  v3: "",
+  v4: "",
+  v5: "",
+  v6: "",
+  v7: "",
+  v8: "",
+  v9: "",
+}
 
   return (
     <Form>
@@ -57,8 +56,38 @@ const MyComponent = () => {
     </Form>
   )
 }
-
-;<MyComponent />
+;<Form>
+  <div>
+    <Textarea value={state.v1} onChange={handleChange("v1")} label="simple" />
+    <Textarea value={state.v4} onChange={handleChange("v4")} label="with error" error="oh no!" />
+    <Textarea value={state.v5} onChange={handleChange("v5")} label="with hint" hint="this is a hint" />
+    <Textarea value={state.v6} onChange={handleChange("v6")} label="disabled" disabled />
+    <Textarea value={state.v7} onChange={handleChange("v7")} label="a code" code />
+    <Textarea value={state.v8} onChange={handleChange("v8")} label="fixed height" height={200} />
+    <Textarea value={state.v8} onChange={handleChange("v8")} label="with placeholder" placeholder={json} />
+  </div>
+  <div>
+    <Textarea copy value={state.v2} onChange={handleChange("v2")} label="with copying" />
+    <Textarea
+      value={state.v3}
+      onChange={handleChange("v3")}
+      label="with actions"
+      action={
+        <div>
+          <Icon size={8} name="Open" />
+          <a href="#textarea">More information</a>
+        </div>
+      }
+    />
+  </div>
+  <div>
+    <Textarea value={state.v9} onChange={handleChange("v9")} label="full width" fullWidth />
+  </div>
+  <div>
+    {/* full width without a label can behave differently */}
+    <Textarea value={state.v9} onChange={handleChange("v9")} fullWidth />
+  </div>
+</Form>
 ```
 
 ### Submitting
