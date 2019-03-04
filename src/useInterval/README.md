@@ -1,6 +1,6 @@
-Hook version of setInterval.
+An implementation of `setInterval` with Hooks.
 
-### Referece
+### Reference
 
 [Making setInterval Declarative with React Hooks](https://overreacted.io/making-setinterval-declarative-with-react-hooks/).
 
@@ -61,12 +61,11 @@ function Counter() {
 
 #### Immediate argument
 
-If you need your callback to be delayed for an extended period of time, but you want it to trigger imediatley upon mounting, then pass in immediate.
+If you need your callback to be delayed for an extended period of time, but you want it to trigger immediately upon mounting, then pass in immediate as the third argument.
 
 ```jsx
 function MyComp() {
   const [inverted, setInvert] = useState(false)
-
   const [inverted2, setInvert2] = useState(false)
 
   // Invert colors Immediately
@@ -86,14 +85,14 @@ function MyComp() {
   // Make it faster every second!
 
   return (
-    <div>
+    <>
       <div
         style={{
           background: inverted ? "navy" : "white",
           color: inverted ? "white" : "navy",
         }}
       >
-        <h3> This immediatly gets inverted with navy BG </h3>
+        <h3>This immediately gets inverted with a navy background</h3>
       </div>
 
       <div
@@ -102,7 +101,7 @@ function MyComp() {
           color: inverted2 ? "white" : "navy",
         }}
       >
-        <h3> This needs to wait for delay to pass to make Navy </h3>
+        <h3>This needs to wait for the delay to pass to fire</h3>
       </div>
     </div>
   )
