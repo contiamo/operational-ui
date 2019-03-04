@@ -55,8 +55,7 @@ const Tab = styled("div")<{ active?: boolean; condensed?: boolean }>(({ theme, a
 }))
 
 const Tabs = ({ onTabChange, tabs, activeTabName, condensed, children }: Props) => {
-  // Need to check if we need activeTabName can change after first render
-  // https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
+  // Using a prop to intialize state: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
   const [activeTab, setActiveTab] = useState(() => {
     if (activeTabName) {
       const index = tabs.findIndex(({ name }) => name === activeTabName)
