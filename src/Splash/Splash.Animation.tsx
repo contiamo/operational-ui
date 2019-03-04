@@ -97,31 +97,24 @@ const Animation: React.FC<Props> = ({ isFullscreen, size = 600 }) => {
     5000,
     true,
   )
-  // Only will change if isFullscreen or size changes, a workaround from not having to set outter container width and height to max(window.height,window.width)
-  const Wrap = useCallback(
-    ({ children }) =>
-      isFullscreen ? (
-        <FullScreenWrap>
-          <Container>{children}</Container>
-        </FullScreenWrap>
-      ) : (
-        <Container style={{ width: size, height: size }}>{children}</Container>
-      ),
-    [isFullscreen, size],
-  )
 
-  return (
-    <Wrap>
-      {state.coordinates.map((coord: { x: number; y: number }, index: number) => (
-        <Box
-          key={index}
-          style={{
-            top: `${(coord.x / (squares - 1)) * 100}%`,
-            left: `${(coord.y / (squares - 1)) * 100}%`,
-          }}
-        />
-      ))}
-    </Wrap>
+  const children = state.coordinates.map((coord: { x: number; y: number }, index: number) => (
+    <Box
+      key={index}
+      style={{
+        top: `${(coord.x / (squares - 1)) * 100}%`,
+        left: `${(coord.y / (squares - 1)) * 100}%`,
+      }}
+    />
+  ))
+
+  // Only will change if isFullscreen or size changes, a workaround from not having to set outter container width and height to max(window.height,window.width)
+  return isFullscreen ? (
+    <FullScreenWrap>
+      <Container>{children}</Container>
+    </FullScreenWrap>
+  ) : (
+    <Container style={{ width: size, height: size }}>{children}</Container>
   )
 }
 
