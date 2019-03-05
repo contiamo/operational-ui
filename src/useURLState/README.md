@@ -12,10 +12,8 @@ Because the URL is not really the safest way to provide state to an application,
 
 ## Usage
 
-// disable Example since its messing up website routes
-
-```ts
-import { Button } from "@operational/components"
+```jsx
+import { Button, useURLState } from "@operational/components"
 const countDecoder = i => (isNaN(+i) ? undefined : +i)
 
 const Counter = () => {
