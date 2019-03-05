@@ -8,8 +8,7 @@ export const CardColumns = styled("div")<React.Props<{}> & { columns?: number }>
     flexWrap: "wrap",
     margin: -(theme.space.element / 2),
     "& > *": {
-      // !important required for flexColumn
-      flexBasis: `calc(100% / ${columns}) !important`,
+      flexBasis: `calc(100% / ${columns})`,
       maxWidth: `calc(100% / ${columns})`,
     },
   }
