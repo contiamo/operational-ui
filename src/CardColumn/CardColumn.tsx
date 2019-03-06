@@ -9,8 +9,6 @@ export interface BaseCardColumnProps extends DefaultProps {
   title?: string
   /** Align the content to the right */
   contentRight?: boolean
-  /** Set the component as a flex-box column */
-  flexColumn?: boolean
   /** Force the column to be full with */
   fullWidth?: boolean
   /** Remove padding */
@@ -37,24 +35,17 @@ export interface CardColumnPropsWithoutTabs extends BaseCardColumnProps {
 
 export type CardColumnProps = CardColumnPropsWithTabs | CardColumnPropsWithoutTabs
 
-const Container = styled("div")<Pick<CardColumnProps, "contentRight" | "flexColumn" | "fullWidth" | "noPadding">>(
-  ({ theme, contentRight, flexColumn, fullWidth, noPadding }) => ({
+const Container = styled("div")<Pick<CardColumnProps, "contentRight" | "fullWidth" | "noPadding">>(
+  ({ theme, contentRight, fullWidth, noPadding }) => ({
     label: "card-column",
     height: "min-content",
     minWidth: 280 / 2,
     padding: noPadding ? 0 : theme.space.element / 2,
-    flex: fullWidth ? "1 1 100%" : "1 0",
+    ...(fullWidth ? { flex: "1 1 100%", maxWidth: "100%" } : {}),
     img: {
       maxWidth: "100%",
     },
     textAlign: contentRight ? "right" : "left",
-    ...(flexColumn
-      ? {
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: contentRight ? "flex-end" : "flex-start",
-        }
-      : {}),
   }),
 )
 

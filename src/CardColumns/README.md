@@ -94,34 +94,41 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 </Card>
 ```
 
-### With flexColumn
+### With an exact number of columns
 
 ```jsx
-<Card title="Playground">
-  <CardColumns>
-    <CardColumn title="Input">
-      <Textarea code value="hello-word" fullWidth />
+<Card title="Bundle information">
+  <p>Here is the information available about this bundle.</p>
+  <CardColumns columns={3}>
+    <CardColumn title="Contributors">
+      <AvatarGroup>
+        <Avatar name="Alice Bernoulli" />
+        <Avatar name="Clarence Dermot" />
+      </AvatarGroup>
     </CardColumn>
-    <CardColumn title="Schema" flexColumn>
-      <Code
-        syntax="json"
-        src={{
-          items: {
-            type: "integer",
-          },
-          type: "array",
-        }}
-      />
+    <CardColumn title="Tags">
+      <Chip>agent-view</Chip>
+      <Chip>production</Chip>
     </CardColumn>
   </CardColumns>
-  <CardColumns>
-    <CardColumn>
-      <Button color="primary">Send Request</Button>
+</Card>
+```
+
+Columns will always wrap and overflow if their containing element is not wide enough for them.
+
+```jsx
+<Card title="Bundle information">
+  <p>Here is the information available about this bundle.</p>
+  <CardColumns columns={3} style={{ width: "200px" }}>
+    <CardColumn title="Contributors">
+      <AvatarGroup>
+        <Avatar name="Alice Bernoulli" />
+        <Avatar name="Clarence Dermot" />
+      </AvatarGroup>
     </CardColumn>
-    <CardColumn contentRight>
-      <Button color="grey" icon="Open">
-        curl/code
-      </Button>
+    <CardColumn title="Tags">
+      <Chip>agent-view</Chip>
+      <Chip>production</Chip>
     </CardColumn>
   </CardColumns>
 </Card>
