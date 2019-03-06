@@ -94,7 +94,7 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 </Card>
 ```
 
-### With columns param
+### With an exact number of columns
 
 ```jsx
 <Card title="Bundle information">
