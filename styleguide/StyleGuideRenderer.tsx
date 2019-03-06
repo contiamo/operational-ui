@@ -38,7 +38,15 @@ const SplashScreen = ({ setSplash }: { setSplash: React.Dispatch<React.SetStateA
     title="Operational UI"
     actions={
       <>
-        <Button onClick={() => setSplash(false)}>Docs</Button>
+        <Button
+          onClick={() => {
+            setSplash(false)
+            // @ts-ignore
+            window.location = "/#/Components/ActionMenu"
+          }}
+        >
+          Docs
+        </Button>
         <Button to="https://github.com/contiamo/operational-ui/">GitHub</Button>
       </>
     }
