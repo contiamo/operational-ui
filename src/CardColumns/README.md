@@ -113,3 +113,23 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
   </CardColumns>
 </Card>
 ```
+
+If there is not enough space to place required number of columns, columns will wrap
+
+```jsx
+<Card title="Bundle information">
+  <p>Here is the information available about this bundle.</p>
+  <CardColumns columns={3} style={{ width: "200px" }}>
+    <CardColumn title="Contributors">
+      <AvatarGroup>
+        <Avatar name="Alice Bernoulli" />
+        <Avatar name="Clarence Dermot" />
+      </AvatarGroup>
+    </CardColumn>
+    <CardColumn title="Tags">
+      <Chip>agent-view</Chip>
+      <Chip>production</Chip>
+    </CardColumn>
+  </CardColumns>
+</Card>
+```
