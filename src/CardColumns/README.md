@@ -114,7 +114,7 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 </Card>
 ```
 
-If there is not enough space to place required number of columns, columns will wrap
+Columns will always wrap and overflow if their containing element is not wide enough for them.
 
 ```jsx
 <Card title="Bundle information">
