@@ -8,29 +8,24 @@ export const Container = styled("div")<{ hasChildren: boolean; disabled: boolean
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "all")};
   user-select: none;
-
-  & + & {
-    margin-top: ${({ theme, hasChildren }) => (hasChildren ? theme.space.small : theme.space.base)}px;
-  }
+  margin-bottom: -${({ theme }) => theme.space.base}px;
 `
 
 const Header = styled("div")<{
   highlight: boolean
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
 }>`
+  label: TreeItem;
   display: flex;
   align-items: center;
-  margin-top: 0;
-  margin-bottom: ${({ theme }) => theme.space.base}px;
   cursor: ${({ onClick }) => (onClick ? "pointer" : "inherit")};
   background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
-  outline: ${({ theme, highlight }) => (highlight ? `${theme.space.base}px solid ${theme.color.highlight}` : "none")};
+  padding: ${({ theme }) => theme.space.base}px;
+  border-radius: 2px;
 
   :hover {
     background-color: ${({ theme, highlight }) =>
       highlight ? darken(theme.color.highlight, 20) : theme.color.background.lighter};
-    outline: ${({ theme, highlight }) =>
-      `${theme.space.base}px solid ${highlight ? darken(theme.color.highlight, 20) : theme.color.background.lighter};`};
   }
 `
 
