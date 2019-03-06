@@ -41,8 +41,8 @@ const SplashScreen = ({ setSplash }: { setSplash: React.Dispatch<React.SetStateA
         <Button
           onClick={() => {
             setSplash(false)
-            // @ts-ignore
-            window.location = "/#/Components/ActionMenu"
+
+            window.location.hash = "#/Components/ActionMenu"
           }}
         >
           Docs
