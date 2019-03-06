@@ -15,9 +15,6 @@ export function useInterval(callback: () => void, delay: number | null, immediat
   // useEffect has no second argument so it will be executed after each render
   // but we don't want to change this value directly in the body of the render function,
   // because render should be pure function
-  // useEffect has no second argument so it will be executed after each render
-  // but we don't want to change this value directly in the body of the render function,
-  // because render should be pure function
 
   // After every render, save the latest callback into our ref.
   useEffect(() => {
