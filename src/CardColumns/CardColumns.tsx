@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "../utils/styled"
 
 export type CardColumnsProps = React.Props<{}> & {
-  /** Force exact number of columns */
+  /** Render an exact number of columns */
   columns?: number
 }
 
