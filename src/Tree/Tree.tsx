@@ -1,6 +1,5 @@
 import * as React from "react"
 import { Draggable, Droppable, DropResult, ResponderProvided } from "react-beautiful-dnd"
-
 import styled from "../utils/styled"
 import ChildTree from "./ChildTree"
 
@@ -55,14 +54,16 @@ const Tree: React.SFC<TreeProps> = ({ trees, id, draggable }) => {
         <Container ref={droppableProvided.innerRef} {...droppableProvided.droppableProps}>
           {trees.map((treeData, index) => (
             <Draggable key={index} draggableId={treeData.label} index={index}>
-              {draggableProvided => (
-                <ChildTree
-                  forwardRef={draggableProvided.innerRef}
-                  {...treeData}
-                  {...draggableProvided.draggableProps}
-                  {...draggableProvided.dragHandleProps}
-                />
-              )}
+              {draggableProvided => {
+                return (
+                  <ChildTree
+                    forwardRef={draggableProvided.innerRef}
+                    {...treeData}
+                    {...draggableProvided.draggableProps}
+                    {...draggableProvided.dragHandleProps}
+                  />
+                )
+              }}
             </Draggable>
           ))}
         </Container>
