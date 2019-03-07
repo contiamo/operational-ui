@@ -7,10 +7,7 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
   <p>Here is the information available about this bundle.</p>
   <CardColumns>
     <CardColumn title="Contributors">
-      <AvatarGroup>
-        <Avatar name="Alice Bernoulli" />
-        <Avatar name="Clarence Dermot" />
-      </AvatarGroup>
+      <AvatarGroup avatars={[{ name: "Alice Bernoulli" }, { name: "Clarence Dermot" }]} />
     </CardColumn>
     <CardColumn title="Tags">
       <Chip>agent-view</Chip>
@@ -28,10 +25,7 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
     <p>Here is the information available about this bundle.</p>
     <CardColumns>
       <CardColumn title="Contributors">
-        <AvatarGroup>
-          <Avatar name="Alice Bernoulli" />
-          <Avatar name="Clarence Dermot" />
-        </AvatarGroup>
+        <AvatarGroup avatars={[{ name: "Alice Bernoulli" }, { name: "Clarence Dermot" }]} />
       </CardColumn>
       <CardColumn title="Tags">
         <Chip>agent-view</Chip>
@@ -96,15 +90,22 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 
 ### With an exact number of columns
 
+Change the following to `columns={4}` on line 3 to see the columns shift.
+
 ```jsx
 <Card title="Bundle information">
   <p>Here is the information available about this bundle.</p>
   <CardColumns columns={3}>
     <CardColumn title="Contributors">
-      <AvatarGroup>
-        <Avatar name="Alice Bernoulli" />
-        <Avatar name="Clarence Dermot" />
-      </AvatarGroup>
+      <AvatarGroup avatars={[{ name: "Alice Bernoulli" }, { name: "Clarence Dermot" }]} />
+    </CardColumn>
+    <CardColumn title="Tags">
+      <Chip>agent-view</Chip>
+      <Chip>production</Chip>
+    </CardColumn>
+    <CardColumn title="Tags">
+      <Chip>agent-view</Chip>
+      <Chip>production</Chip>
     </CardColumn>
     <CardColumn title="Tags">
       <Chip>agent-view</Chip>
@@ -121,10 +122,7 @@ Columns will always wrap and overflow if their containing element is not wide en
   <p>Here is the information available about this bundle.</p>
   <CardColumns columns={3} style={{ width: "200px" }}>
     <CardColumn title="Contributors">
-      <AvatarGroup>
-        <Avatar name="Alice Bernoulli" />
-        <Avatar name="Clarence Dermot" />
-      </AvatarGroup>
+      <AvatarGroup avatars={[{ name: "Alice Bernoulli" }, { name: "Clarence Dermot" }]} />
     </CardColumn>
     <CardColumn title="Tags">
       <Chip>agent-view</Chip>
