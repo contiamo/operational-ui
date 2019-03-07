@@ -87,8 +87,8 @@ const Input: React.SFC<InputProps> = ({
       id={uniqueId}
       fullWidth={fullWidth}
       disabled={disabled}
-      aria-labelledby={label ? `input-label-${id}` : undefined}
-      aria-describedby={hint ? `input-hint-${id}` : undefined}
+      aria-labelledby={label ? `input-label-${uniqueId}` : undefined}
+      aria-describedby={hint ? `input-hint-${uniqueId}` : undefined}
       aria-label={label}
       {...props}
     />
