@@ -5,7 +5,7 @@ import Hint from "../Hint/Hint"
 import Icon from "../Icon/Icon"
 import { LabelText } from "../LabelText/LabelText"
 import { useOperationalContext } from "../OperationalContext/OperationalContext"
-import { DefaultProps } from "../types"
+import { DefaultInputProps, DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
 import { isCmdEnter, lighten } from "../utils"
 import { FormFieldControls, FormFieldError, inputFocus, Label } from "../utils/mixins"
@@ -13,7 +13,7 @@ import styled from "../utils/styled"
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
 
-export interface TextareaProps extends DefaultProps {
+export interface TextareaProps extends DefaultProps, DefaultInputProps {
   /** What is the identifier of this textarea? */
   id?: string
   /** Controlled value of the field */
@@ -159,6 +159,7 @@ const Textarea: React.FC<TextareaProps> = ({
   code = false,
   copy = false,
   resize = "vertical",
+  tabIndex,
   ...props
 }) => {
   const { pushMessage } = useOperationalContext()
@@ -185,6 +186,7 @@ const Textarea: React.FC<TextareaProps> = ({
         resize={resize}
         height={height}
         onFocus={onFocus}
+        tabIndex={tabIndex}
         onBlur={onBlur}
         onKeyDown={(ev: React.KeyboardEvent<HTMLTextAreaElement>) => {
           if (isCmdEnter(ev) && onSubmit) {
