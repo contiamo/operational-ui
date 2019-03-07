@@ -39,8 +39,8 @@ const Container = styled("div")<{ gridType: string }>(({ theme, gridType }) => (
   display: "grid",
   alignItems: "flex-start",
   padding: theme.space.content,
-  gridColumnGap: theme.space.content,
-  gridRowGap: theme.space.content,
+  gridColumnGap: theme.space.element,
+  gridRowGap: theme.space.element,
   ...getGridCSSProperties(gridType),
 }))
 
