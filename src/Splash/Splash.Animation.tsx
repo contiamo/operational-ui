@@ -108,7 +108,7 @@ const Animation: React.FC<Props> = ({ isFullscreen, size = 600 }) => {
     />
   ))
 
-  // Only will change if isFullscreen or size changes, a workaround from not having to set outter container width and height to max(window.height,window.width)
+  // Only will change if isFullscreen or size changes, a workaround from not having to set outer container width and height to max(window.height, window.width)
   return isFullscreen ? (
     <FullScreenWrap>
       <Container>{children}</Container>
