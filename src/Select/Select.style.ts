@@ -75,7 +75,6 @@ const Options = styled("div")(
 )
 
 const OptionsList = styled("div")({
-  // whole number + 3/4 ratio here ensures options don't get cut off
   maxHeight: 200,
   overflow: "auto",
 })
