@@ -57,9 +57,6 @@ const Overlay = styled("div")<{ overlayType: OverlayType }>`
   width: 100%;
   height: 100%;
   pointer-events: none;
-  ${({ theme }) => `
-    z-index: ${theme.zIndex.tooltip};
-  `};
   ${({ theme, overlayType }) => {
     switch (overlayType) {
       case "noOverlay":
@@ -163,7 +160,6 @@ const CardSection: React.SFC<CardSectionProps> = ({
   ...props
 }) => (
   <Container {...props} disabled={disabled}>
-    <Overlay overlayType={makeOverlayType(disabled, dragAndDropFeedback)} />
     {title && (
       <Title
         onMouseEnter={onToggleMouseEnter}
@@ -178,6 +174,7 @@ const CardSection: React.SFC<CardSectionProps> = ({
       </Title>
     )}
     {!collapsed && <Content noHorizontalPadding={noHorizontalPadding}>{children}</Content>}
+    <Overlay overlayType={makeOverlayType(disabled, dragAndDropFeedback)} />
   </Container>
 )
 
