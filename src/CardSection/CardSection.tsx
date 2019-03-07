@@ -43,10 +43,11 @@ export type OverlayType = "noOverlay" | "disabled" | DragAndDropFeedback
  * The flex rule only kicks in when the parent is flex-positioned in case
  * sections are stacked horizontally.
  */
-const Container = styled("div")`
+const Container = styled("div")<{ disabled?: boolean }>`
   flex: 1 1;
   display: block;
   position: relative;
+  pointer-events: ${({ disabled }) => (disabled ? "none" : "inherit")};
 `
 
 const Overlay = styled("div")<{ overlayType: OverlayType }>`
@@ -161,7 +162,7 @@ const CardSection: React.SFC<CardSectionProps> = ({
   forceToggleHoverStyles,
   ...props
 }) => (
-  <Container {...props}>
+  <Container {...props} disabled={disabled}>
     <Overlay overlayType={makeOverlayType(disabled, dragAndDropFeedback)} />
     {title && (
       <Title
