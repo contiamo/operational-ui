@@ -46,7 +46,6 @@ export const Toggle = styled("div")(({ theme }) => ({
   borderBottomRightRadius: theme.borderRadius,
   width: inputHeight - 2,
   height: inputHeight - 2,
-  fontSize: 10,
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -133,7 +132,7 @@ const BaseDay = styled("div")(({ theme }) => ({
   borderRadius: "50%",
   backgroundClip: "content-box",
   fontSize: theme.font.size.body,
-  fontWeght: theme.font.weight.regular,
+  fontWeight: theme.font.weight.regular,
 }))
 
 export const Day = styled(BaseDay)<{
@@ -169,6 +168,7 @@ export const Input = styled("input")<{ isExpanded: boolean }>(({ theme, isExpand
   borderColor: "rgb(208, 217, 229)",
   width: "100%",
   position: "relative",
+  fontSize: theme.font.size.small,
   "&:focus": mixins.inputFocus({
     theme,
   }),
