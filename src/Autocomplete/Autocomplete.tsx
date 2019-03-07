@@ -4,15 +4,14 @@ import ContextMenu from "../ContextMenu/ContextMenu"
 import { IContextMenuItem, IContextMenuItem as Item } from "../ContextMenu/ContextMenu.Item"
 import Input, { InputProps } from "../Input/Input"
 import Progress from "../Progress/Progress"
+import { DefaultInputProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
 import styled from "../utils/styled"
 import { makeItems } from "./Autocomplete.utils"
 
-export interface AutocompleteProps<TValue> {
+export interface AutocompleteProps<TValue> extends DefaultInputProps {
   /** The ID for this element, for accessibility et al */
   id?: string
-  /** Helps with ordering keyboard navigation */
-  tabIndex?: number | string
   /**
    * Label text, rendering the input inside a tag if specified.
    * The `labelId` props is responsible for specifying for and id attributes.
