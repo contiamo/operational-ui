@@ -1,8 +1,8 @@
+import noop from "lodash/noop"
 import qs from "qs"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
-import { isClient } from "../utils/isClient"
 
-const noop = () => ""
+import { isClient } from "../utils/isClient"
 
 /**
  * Bunch of method that depends on `window`
@@ -44,7 +44,7 @@ export const useURLState = <T>(
   { getHash, getPathname, replaceState, getSearch } = options,
 ): [T, Dispatch<SetStateAction<T>>] => {
   // Retrieve the value from the url search param
-  const searchValue: any = getSearchParams(getSearch())[name]
+  const searchValue: any = getSearchParams(getSearch() || "")[name]
 
   // Check if the value is valid, regarding the validator
   const encodedValue = decoder(searchValue)
@@ -54,7 +54,7 @@ export const useURLState = <T>(
 
   // Update the url search param on state update
   useEffect(() => {
-    const params = getSearchParams(getSearch())
+    const params = getSearchParams(getSearch() || "")
     params[name] = value
     const search = `?${qs.stringify(params)}`
     replaceState({}, "", `${getPathname()}${search === "?" ? "" : search}${getHash()}`)

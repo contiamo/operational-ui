@@ -21,9 +21,9 @@ describe("useURLState", () => {
 <div
   data-testid="result"
 >
-  -1
+  1024
   x
-  -1
+  768
 </div>
 `)
   })
@@ -34,9 +34,9 @@ describe("useURLState", () => {
 <div
   data-testid="result"
 >
-  -1
+  1024
   x
-  -1
+  768
 </div>
 `)
     act(() => {
@@ -51,9 +51,9 @@ describe("useURLState", () => {
 <div
   data-testid="result"
 >
-  -1
+  200
   x
-  -1
+  500
 </div>
 `)
   })

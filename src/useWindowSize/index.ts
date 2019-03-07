@@ -5,9 +5,7 @@ import { isClient } from "../utils/isClient"
  * Get the window size.
  */
 export const useWindowSize = () => {
-  if (isClient()) {
-    // tslint:disable-next-line:no-console
-    console.error("Unsupported: window is undefined")
+  if (!isClient()) {
     return { width: -1, height: -1 }
   }
   const [windowSize, setWindowSize] = useState({

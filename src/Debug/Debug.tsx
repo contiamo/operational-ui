@@ -3,6 +3,7 @@ import CopyToClipboard from "react-copy-to-clipboard"
 
 import Icon from "../Icon/Icon"
 import Tooltip from "../Tooltip/Tooltip"
+import { isClient } from "../utils/isClient"
 import styled from "../utils/styled"
 import { makeRowsFromConfig } from "./makeRowsFromConfig"
 
@@ -94,14 +95,12 @@ class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
 
   public dragStart = (event: React.DragEvent) => {
     event.persist()
-    if (window) {
-      const style = window.getComputedStyle(event.currentTarget, null)
+    const style = window.getComputedStyle(event.currentTarget, null)
 
-      this.setState(() => ({
-        contextLeft: parseInt(style.getPropertyValue("left"), 10) - event.clientX,
-        contextTop: parseInt(style.getPropertyValue("top"), 10) - event.clientY,
-      }))
-    }
+    this.setState(() => ({
+      contextLeft: parseInt(style.getPropertyValue("left"), 10) - event.clientX,
+      contextTop: parseInt(style.getPropertyValue("top"), 10) - event.clientY,
+    }))
   }
 
   public drop = (event: React.DragEvent) => {
@@ -150,7 +149,7 @@ class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
           <Title>{debugTitle}</Title>
           <Icons>
             <CopyToClipboard
-              text={JSON.stringify({ currentUrl: window ? window.location.href : "", debug: values }, null, 2)}
+              text={JSON.stringify({ currentUrl: isClient() ? window.location.href : "", debug: values }, null, 2)}
               onCopy={this.showCopyFeedback}
             >
               <Icon onClick={e => e.stopPropagation()} name="Copy" />

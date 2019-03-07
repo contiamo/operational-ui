@@ -94,15 +94,11 @@ class HeaderMenu extends React.PureComponent<HeaderMenuProps, Readonly<HeaderMen
 
   public componentDidMount() {
     this.updateRenderedWidth()
-    if (window) {
-      window.addEventListener("resize", this.handleResize)
-    }
+    window.addEventListener("resize", this.handleResize)
   }
 
   public componentWillUnmount() {
-    if (window) {
-      window.removeEventListener("resize", this.handleResize)
-    }
+    window.removeEventListener("resize", this.handleResize)
   }
 
   public componentDidUpdate() {
