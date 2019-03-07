@@ -33,7 +33,7 @@ const Container = styled("div")`
 
 const Button = styled("div")<{ selected: boolean; condensed?: boolean }>`
   line-height: ${props => (props.condensed ? 28 : 36)}px;
-  font-size: ${props => props.theme.font.size.small}px;
+  font-size: ${props => props.theme.font.size.fineprint}px;
   font-weight: ${props => props.theme.font.weight.medium};
   display: inline-flex;
   align-items: center;
