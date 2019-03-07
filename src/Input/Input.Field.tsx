@@ -120,9 +120,9 @@ const InputField: React.SFC<InputProps> = ({
 
   const renderButton = () => {
     if (copy === true) {
-      return <InputButton value={value || ""} copy={copy} />
+      return <InputButton tabIndex={tabIndex} value={value || ""} copy={copy} />
     } else {
-      return <InputButton onIconClick={onIconClick} icon={icon} copy={false} />
+      return <InputButton tabIndex={tabIndex} onIconClick={onIconClick} icon={icon} copy={false} />
     }
   }
 
@@ -130,9 +130,6 @@ const InputField: React.SFC<InputProps> = ({
     <Container fullWidth={fullWidth} withLabel={Boolean(label)}>
       {shouldShowIconButton && renderButton()}
       <Field
-        aria-labelledby={label ? `input-label-${id}` : undefined}
-        aria-describedby={hint ? `input-hint-${id}` : undefined}
-        aria-label={label}
         ref={inputRef}
         autoFocus={autoFocus}
         name={name}

@@ -3,16 +3,14 @@ import * as React from "react"
 import Hint from "../Hint/Hint"
 import Icon, { IconName } from "../Icon/Icon"
 import { LabelText } from "../LabelText/LabelText"
-import { DefaultProps } from "../types"
+import { DefaultInputProps, DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
 import { FormFieldControl, FormFieldControls, Label } from "../utils/mixins"
 import InputField from "./Input.Field"
 
-export interface BaseProps extends DefaultProps {
+export interface BaseProps extends DefaultProps, DefaultInputProps {
   /** The ID for this element, for accessibility et al */
   id?: string
-  /** Helps with ordering keyboard navigation */
-  tabIndex?: number | string
   /** Text displayed when the input field has no value. */
   placeholder?: string
   /** The name used to refer to the input, for forms. */
@@ -89,6 +87,9 @@ const Input: React.SFC<InputProps> = ({
       id={uniqueId}
       fullWidth={fullWidth}
       disabled={disabled}
+      aria-labelledby={label ? `input-label-${id}` : undefined}
+      aria-describedby={hint ? `input-hint-${id}` : undefined}
+      aria-label={label}
       {...props}
     />
   )
