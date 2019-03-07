@@ -32,6 +32,8 @@ const whiteColor = "#fff"
 const backgroundColors = {
   /** `#2a2e37` */
   dark: "#2a2e37",
+  /** `#999` */
+  mediumDark: "#999",
   /** `#ececec` */
   light: "#ececec",
   /** `#f6f6f6` */
