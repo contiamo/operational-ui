@@ -160,20 +160,22 @@ initialState = {
 }
 ;<div style={{ width: 600, height: 300, margin: 20 }}>
   <Card>
-    <Tree
-      trees={state.itemsInSource.map(item => ({
-        label: item,
-        draggable: true,
-        onDragStart: ev => {
-          setState(() => ({ dragSource: item }))
-        },
-        onDragEnd: ev => {
-          setState(() => ({ dragSource: undefined }))
-        },
-        tag: "C",
-        childNodes: [],
-      }))}
-    />
+    <CardSection>
+      <Tree
+        trees={state.itemsInSource.map(item => ({
+          label: item,
+          draggable: true,
+          onDragStart: ev => {
+            setState(() => ({ dragSource: item }))
+          },
+          onDragEnd: ev => {
+            setState(() => ({ dragSource: undefined }))
+          },
+          tag: "C",
+          childNodes: [],
+        }))}
+      />
+    </CardSection>
   </Card>
   <Card
     stackSections="horizontal"
