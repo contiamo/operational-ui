@@ -4,7 +4,6 @@ import { cleanup, render } from "react-testing-library"
 import useInterval, { useInterval as namedHook } from "."
 
 // ref https://github.com/Hermanya/use-interval/blob/master/src/test.tsx
-
 beforeEach(cleanup)
 
 const MyComponent: React.FC<{ fn: () => void; delay: number | null; immediate?: boolean }> = ({
