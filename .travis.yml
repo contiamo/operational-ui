@@ -1,12 +1,12 @@
 language: node_js
 node_js:
-- stable
+  - "11.10.1"
 notifications:
   email: false
 before_install:
-- npm i -g yarn
+  - npm i -g yarn
 env:
   matrix:
-  - JEST_MAX_WORKERS: 4
+    - JEST_MAX_WORKERS: 4
 script:
-- yarn ci
+  - yarn ci
