@@ -6,6 +6,7 @@ This is an example of a basic layout. Overflowing side and main sections scroll 
 
 ```jsx
 import * as React from "react"
+// prettier-ignore
 import {
   Sidenav,
   Avatar,
@@ -20,7 +21,7 @@ import {
   Form,
   Body,
   Logo,
-  Autocomplete,
+  Autocomplete
 } from "@operational/components"
 
 const sidebar = (
@@ -229,6 +230,7 @@ This is an example of a basic layout _without_ a page title. Content at the bott
 
 ```jsx
 import * as React from "react"
+// prettier-ignore
 import {
   Sidenav,
   Avatar,
@@ -243,8 +245,7 @@ import {
   Form,
   Body,
   Logo,
-  Autocomplete,
-} from "@operational/components"
+  Autocomplete} from "@operational/components"
 
 const sidebar = (
   <Sidenav>
@@ -449,6 +450,7 @@ Revealing the layers to my soul
 
 ```jsx
 import * as React from "react"
+// prettier-ignore
 import {
   Sidenav,
   Avatar,
@@ -460,11 +462,7 @@ import {
   Page,
   Button,
   Card,
-  Form,
-  Body,
-  Logo,
-  Autocomplete,
-} from "@operational/components"
+  Logo} from "@operational/components"
 
 const sidebar = (
   <Sidenav compact>
@@ -536,6 +534,7 @@ const sidebar = (
 
 ```jsx
 import * as React from "react"
+// prettier-ignore
 import {
   Sidenav,
   Avatar,
@@ -546,12 +545,8 @@ import {
   HeaderMenu,
   Page,
   Button,
-  Card,
-  Form,
-  Body,
-  Logo,
-  Autocomplete,
-} from "@operational/components"
+  Card, 
+  Logo} from "@operational/components"
 
 const sidebar = (
   <Sidenav>
