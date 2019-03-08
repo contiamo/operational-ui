@@ -10,7 +10,7 @@ An implementation of `setInterval` with Hooks.
 
 ```jsx
 function BasicCounter() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = React.useState(0)
 
   useInterval(() => {
     setCount(count + 1)
@@ -28,17 +28,20 @@ Example, we can have a delay of one interval be controlled by another:
 
 ```jsx
 function Counter() {
-  const [delay, setDelay] = useState(1000)
-  const [count, setCount] = useState(0)
+  const [start, setStart] = React.useState(false)
+  const [delay, setDelay] = React.useState(1000)
+  const [count, setCount] = React.useState(0)
 
   // Increment the counter.
   useInterval(() => {
-    setCount(count + 1)
+    if (start) {
+      setCount(count + 1)
+    }
   }, delay)
 
   // Make it faster every second!
   useInterval(() => {
-    if (delay > 10) {
+    if (delay > 10 && start) {
       setDelay(delay / 2)
     }
   }, 1000)
@@ -49,6 +52,7 @@ function Counter() {
 
   return (
     <>
+      <button onClick={() => setStart(!start)}>Toggle Counter!</button>
       <h1>Counter: {count}</h1>
       <h4>Delay: {delay}</h4>
       <button onClick={handleReset}>Reset delay</button>
@@ -65,8 +69,8 @@ If you need your callback to be delayed for an extended period of time, but you 
 
 ```jsx
 function MyComp() {
-  const [inverted, setInvert] = useState(false)
-  const [inverted2, setInvert2] = useState(false)
+  const [inverted, setInvert] = React.useState(false)
+  const [inverted2, setInvert2] = React.useState(false)
 
   // Invert colors Immediately
   useInterval(
@@ -83,7 +87,7 @@ function MyComp() {
   }, 10000)
 
   return (
-    <>
+    <div>
       <div
         style={{
           background: inverted ? "navy" : "white",
