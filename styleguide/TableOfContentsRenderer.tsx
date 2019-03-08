@@ -7,7 +7,7 @@ export interface TableOfContentsRendererProps {
   onSearchTermChange: (newVal: string) => void
 }
 
-// Dont pass Input in RenderProps-(<SideNavHeader label={<Input/>} />) makes Compnent rerender and loses input focus
+// Don't pass Input in RenderProps-(<SideNavHeader label={<Input/>} />) makes Component rerender and lose input focus
 // Temporarily- manually configure like a SideNavHeader
 // Another example why All presentational components should also be exported.
 
