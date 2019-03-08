@@ -4,6 +4,8 @@ const { parse: propsParser } = require("react-docgen-typescript")
 const { version } = require("./package.json")
 const { styles, theme } = require("./styleguide/styles.js")
 const { sections } = require("./styleguide/sections.js")
+const path = require("path")
+const fs = require("fs")
 
 module.exports = {
   title: "Operational UI",
@@ -31,6 +33,23 @@ module.exports = {
   },
   context: {
     styled: "@emotion/styled",
+  },
+
+  skipComponentsWithoutExample: true,
+  getExampleFilename(componentPath) {
+    const { dir, base, ext, name: fileName } = path.parse(componentPath)
+    const folderName = path.basename(dir)
+
+    if (fileName === "index" || fileName === folderName) return path.join(dir, "README.md")
+    const maybeMD = path.join(dir, fileName + ".md")
+
+    try {
+      if (fs.existsSync(maybeMD)) {
+        return maybeMD
+      }
+    } catch (err) {
+      return null
+    }
   },
   dangerouslyUpdateWebpackConfig(webpackConfig, env) {
     webpackConfig.output = {
