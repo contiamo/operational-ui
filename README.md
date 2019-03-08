@@ -12,7 +12,7 @@ Install the package via npm or yarn:
 
 Create your first application like so:
 
-```js
+```js static
 import * as React from "react"
 import { Button, OperationalUI } from "@operational/components"
 

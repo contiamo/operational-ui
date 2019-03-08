@@ -2,39 +2,22 @@
 const { join, resolve } = require("path")
 const { parse: propsParser } = require("react-docgen-typescript")
 const { version } = require("./package.json")
+const { styles, theme } = require("./styleguide/styles.js")
+const { sections } = require("./styleguide/sections.js")
 
 module.exports = {
   title: "Operational UI",
   version,
   propsParser,
+  styles,
+  theme,
+  sections,
   pagePerSection: true,
+  template: {
+    favicon: "./styleguide/favicon.ico",
+  },
   moduleAliases: {
     "@operational/components": resolve(__dirname, "src"),
-  },
-  sections: [
-    /// Should add an Intro Page to be first loaded after splash
-    { name: "Hooks", components: "src/use*/*.ts", sectionDepth: 1 },
-    {
-      name: "Components",
-      components: "src/**/*.tsx",
-      ignore: [
-        "/**/*test*",
-        "**/Internals/**",
-        "**/hooks/**",
-        "**/utils/**",
-        "**/Typography/**",
-        "**/Debug/makeRows*",
-        "**/*.*.{ts,tsx}",
-      ],
-      sectionDepth: 1,
-    },
-
-    { name: "Typography", components: "src/Typography/*.tsx", sectionDepth: 1 },
-  ],
-  theme: {
-    fontFamily: {
-      base: "inherit",
-    },
   },
   styleguideComponents: {
     Wrapper: join(__dirname, "styleguide/Wrapper"),
