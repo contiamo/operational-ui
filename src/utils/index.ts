@@ -37,17 +37,24 @@ export const getInitials = (name: string): string => {
 }
 
 export const keyCodes = {
-  /** 38 */
-  up: 38,
-
-  /** 40 */
-  down: 40,
-
-  /** 13 */
+  backspace: 8,
+  tab: 9,
+  clear: 12,
   enter: 13,
-
-  /** 27 */
+  return: 13,
+  capsLock: 20,
   esc: 27,
+  space: 32,
+  left: 37,
+  up: 38,
+  right: 39,
+  down: 40,
+  del: 46,
+  ins: 45,
+  pageup: 33,
+  pagedown: 34,
+  end: 35,
+  home: 36,
 }
 
 /**
