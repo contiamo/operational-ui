@@ -4,13 +4,13 @@
 const useRef = require("react").useRef
 
 const Component1 = () => {
-  const scope = useRef(null)
-  useHotkey(scope, { key: "enter" }, () => {
+  const container = useRef(null)
+  useHotkey(container, { key: "enter" }, () => {
     alert("⏎")
   })
 
   return (
-    <div ref={scope}>
+    <div ref={container}>
       <Input value="Some value..." label="Set focus in me and hit ⏎" />
     </div>
   )
@@ -25,13 +25,13 @@ const Component1 = () => {
 const useRef = require("react").useRef
 
 const Component2 = () => {
-  const scope = useRef(null)
-  useHotkey(scope, { key: "p", ctrl: true, shift: true }, () => {
+  const container = useRef(null)
+  useHotkey(container, { key: "p", ctrl: true, shift: true }, () => {
     alert("Ctrl + Shift + P")
   })
 
   return (
-    <div ref={scope}>
+    <div ref={container}>
       <Input value="Some value..." label="Set focus in me and hit Ctrl + Shift + P" />
     </div>
   )

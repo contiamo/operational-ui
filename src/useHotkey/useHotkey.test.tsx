@@ -21,7 +21,7 @@ describe("useHotkey", () => {
 
     fireEvent.keyDown(rendered, { key: "t" })
 
-    expect(callback.mock.calls.length).toBe(1)
+    expect(callback).toBeCalledTimes(1)
   })
 
   it("keydown registering is case-insensitive", async () => {
@@ -43,8 +43,8 @@ describe("useHotkey", () => {
     fireEvent.keyDown(rendered, { key: "D" })
     fireEvent.keyDown(rendered, { key: "d" })
 
-    expect(callbackP.mock.calls.length).toBe(2)
-    expect(callbackD.mock.calls.length).toBe(2)
+    expect(callbackP).toBeCalledTimes(2)
+    expect(callbackD).toBeCalledTimes(2)
   })
 
   it("handles key modifiers", async () => {
@@ -71,53 +71,53 @@ describe("useHotkey", () => {
 
     // No reaction to event without key modifiers
     fireEvent(rendered, new KeyboardEvent("keydown", { key: "o" }))
-    expect(callbackCtrl.mock.calls.length).toBe(0)
-    expect(callbackShift.mock.calls.length).toBe(0)
-    expect(callbackAlt.mock.calls.length).toBe(0)
-    expect(callbackMeta.mock.calls.length).toBe(0)
-    expect(callbackAll.mock.calls.length).toBe(0)
+    expect(callbackCtrl).toBeCalledTimes(0)
+    expect(callbackShift).toBeCalledTimes(0)
+    expect(callbackAlt).toBeCalledTimes(0)
+    expect(callbackMeta).toBeCalledTimes(0)
+    expect(callbackAll).toBeCalledTimes(0)
 
     // Ctrl
     fireEvent(rendered, new KeyboardEvent("keydown", { key: "o", ctrlKey: true }))
-    expect(callbackCtrl.mock.calls.length).toBe(1)
-    expect(callbackShift.mock.calls.length).toBe(0)
-    expect(callbackAlt.mock.calls.length).toBe(0)
-    expect(callbackMeta.mock.calls.length).toBe(0)
-    expect(callbackAll.mock.calls.length).toBe(0)
+    expect(callbackCtrl).toBeCalledTimes(1)
+    expect(callbackShift).toBeCalledTimes(0)
+    expect(callbackAlt).toBeCalledTimes(0)
+    expect(callbackMeta).toBeCalledTimes(0)
+    expect(callbackAll).toBeCalledTimes(0)
 
     // Shift
     fireEvent(rendered, new KeyboardEvent("keydown", { key: "o", shiftKey: true }))
-    expect(callbackCtrl.mock.calls.length).toBe(1)
-    expect(callbackShift.mock.calls.length).toBe(1)
-    expect(callbackAlt.mock.calls.length).toBe(0)
-    expect(callbackMeta.mock.calls.length).toBe(0)
-    expect(callbackAll.mock.calls.length).toBe(0)
+    expect(callbackCtrl).toBeCalledTimes(1)
+    expect(callbackShift).toBeCalledTimes(1)
+    expect(callbackAlt).toBeCalledTimes(0)
+    expect(callbackMeta).toBeCalledTimes(0)
+    expect(callbackAll).toBeCalledTimes(0)
 
     // Alt
     fireEvent(rendered, new KeyboardEvent("keydown", { key: "o", altKey: true }))
-    expect(callbackCtrl.mock.calls.length).toBe(1)
-    expect(callbackShift.mock.calls.length).toBe(1)
-    expect(callbackAlt.mock.calls.length).toBe(1)
-    expect(callbackMeta.mock.calls.length).toBe(0)
-    expect(callbackAll.mock.calls.length).toBe(0)
+    expect(callbackCtrl).toBeCalledTimes(1)
+    expect(callbackShift).toBeCalledTimes(1)
+    expect(callbackAlt).toBeCalledTimes(1)
+    expect(callbackMeta).toBeCalledTimes(0)
+    expect(callbackAll).toBeCalledTimes(0)
 
     // Meta
     fireEvent(rendered, new KeyboardEvent("keydown", { key: "o", metaKey: true }))
-    expect(callbackCtrl.mock.calls.length).toBe(1)
-    expect(callbackShift.mock.calls.length).toBe(1)
-    expect(callbackAlt.mock.calls.length).toBe(1)
-    expect(callbackMeta.mock.calls.length).toBe(1)
-    expect(callbackAll.mock.calls.length).toBe(0)
+    expect(callbackCtrl).toBeCalledTimes(1)
+    expect(callbackShift).toBeCalledTimes(1)
+    expect(callbackAlt).toBeCalledTimes(1)
+    expect(callbackMeta).toBeCalledTimes(1)
+    expect(callbackAll).toBeCalledTimes(0)
 
     // All modifiers together
     fireEvent(
       rendered,
       new KeyboardEvent("keydown", { key: "o", ctrlKey: true, shiftKey: true, altKey: true, metaKey: true }),
     )
-    expect(callbackCtrl.mock.calls.length).toBe(2)
-    expect(callbackShift.mock.calls.length).toBe(2)
-    expect(callbackAlt.mock.calls.length).toBe(2)
-    expect(callbackMeta.mock.calls.length).toBe(2)
-    expect(callbackAll.mock.calls.length).toBe(1)
+    expect(callbackCtrl).toBeCalledTimes(2)
+    expect(callbackShift).toBeCalledTimes(2)
+    expect(callbackAlt).toBeCalledTimes(2)
+    expect(callbackMeta).toBeCalledTimes(2)
+    expect(callbackAll).toBeCalledTimes(1)
   })
 })
