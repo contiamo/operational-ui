@@ -3,6 +3,7 @@ import CopyToClipboard from "react-copy-to-clipboard"
 
 import Icon from "../Icon/Icon"
 import Tooltip from "../Tooltip/Tooltip"
+import { isClient } from "../utils/isClient"
 import styled from "../utils/styled"
 import { makeRowsFromConfig } from "./makeRowsFromConfig"
 
@@ -148,7 +149,7 @@ class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
           <Title>{debugTitle}</Title>
           <Icons>
             <CopyToClipboard
-              text={JSON.stringify({ currentUrl: window.location.href, debug: values }, null, 2)}
+              text={JSON.stringify({ currentUrl: isClient() ? window.location.href : "", debug: values }, null, 2)}
               onCopy={this.showCopyFeedback}
             >
               <Icon onClick={e => e.stopPropagation()} name="Copy" />
