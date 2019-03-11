@@ -1,8 +1,9 @@
-import * as React from "react"
-
+import React, { useState } from "react"
+import useInterval from "../useInterval"
 import styled from "../utils/styled"
 
 export interface Props {
+  isFullscreen?: boolean
   size?: number
 }
 
@@ -34,73 +35,87 @@ const bounce = (coord: number): number => {
   return coord
 }
 
-const Container = styled("div")<{ size: number }>(({ size }: { size: number }) => ({
-  width: size,
-  height: size,
+// css Hack so we dont need to worry about max(window.height,window.width)- Only needed when fullscreen is enabled
+// https://spin.atomicobject.com/2015/07/14/css-responsive-square/
+const FullScreenWrap = styled("div")({
+  position: "absolute",
+  width: "100%",
+  ":after": {
+    content: "''",
+    display: "block",
+    paddingBottom: "100%",
+  },
+})
+
+const Container = styled("div")({
   position: "absolute",
   top: "50%",
   left: "50%",
   transform: "translate3d(-50%, -50%, 0)",
-}))
+  width: "100%",
+  height: "100%",
+})
 
-const Box = styled("div")<{ x: number; y: number }>(({ x, y }) => ({
+/// Move highly highly dynamic style out of css-js to prevent uneeded classname generation
+const Box = styled("div")({
   position: "absolute",
   transition: "all 0.5s ease-in-out",
-  top: `calc(${(x / (squares - 1)) * 100}% + 4px)`,
-  left: `calc(${(y / (squares - 1)) * 100}% + 4px)`,
   borderRadius: 6,
   width: `calc(${100 / (squares - 1)}% - 8px)`,
   height: `calc(${100 / (squares - 1)}% - 8px)`,
   backgroundColor: "rgba(255, 255, 255, 0.06)",
-}))
+})
 
-class Animation extends React.Component<Props, State> {
-  public state = {
-    animationStep: 0,
-    coordinates: Array.apply(null, { length: boxes })
-      .map(Number.call, Number)
-      .map(() => ({ x: integerRandom(squares), y: integerRandom(squares) })),
-  }
+const initialState = {
+  animationStep: 0,
+  coordinates: Array.from(Array(boxes), (_, index) => index).map(() => ({
+    x: integerRandom(squares),
+    y: integerRandom(squares),
+  })),
+}
 
-  public animationInterval?: number
+const Animation: React.FC<Props> = ({ isFullscreen, size = 600 }) => {
+  const [state, updateAnimation] = useState<State>(initialState)
 
-  // Shift the coordinate of every third tile in a random direction.
-  // Each animation shifts a different set of tiles.
-  public shiftSomeTiles() {
-    this.setState(prevState => ({
-      animationStep: prevState.animationStep + 1,
-      coordinates: prevState.coordinates.map((coord: { x: number; y: number }, index: number) => {
-        if (index % 3 === prevState.animationStep % 3) {
-          const dx = integerRandom(3) - 1
-          const dy = integerRandom(3) - 1
-          return {
-            x: bounce(coord.x + dx),
-            y: bounce(coord.y - dy),
+  useInterval(
+    () => {
+      updateAnimation({
+        animationStep: state.animationStep + 1,
+        coordinates: state.coordinates.map((coord: { x: number; y: number }, index: number) => {
+          if (index % 3 === state.animationStep % 3) {
+            const dx = integerRandom(3) - 1
+            const dy = integerRandom(3) - 1
+            return {
+              x: bounce(coord.x + dx),
+              y: bounce(coord.y - dy),
+            }
           }
-        }
-        return coord
-      }),
-    }))
-  }
+          return coord
+        }),
+      })
+    },
+    5000,
+    true,
+  )
 
-  public componentDidMount() {
-    this.animationInterval = window.setInterval(this.shiftSomeTiles.bind(this), 5000)
-  }
+  const children = state.coordinates.map((coord: { x: number; y: number }, index: number) => (
+    <Box
+      key={index}
+      style={{
+        top: `${(coord.x / (squares - 1)) * 100}%`,
+        left: `${(coord.y / (squares - 1)) * 100}%`,
+      }}
+    />
+  ))
 
-  public componentWillUnmount() {
-    clearInterval(this.animationInterval)
-  }
-
-  public render() {
-    const size = this.props.size || 600
-    return (
-      <Container size={size}>
-        {this.state.coordinates.map((coord: { x: number; y: number }, index: number) => (
-          <Box key={index} x={coord.x} y={coord.y} />
-        ))}
-      </Container>
-    )
-  }
+  // Only will change if isFullscreen or size changes, a workaround from not having to set outer container width and height to max(window.height, window.width)
+  return isFullscreen ? (
+    <FullScreenWrap>
+      <Container>{children}</Container>
+    </FullScreenWrap>
+  ) : (
+    <Container style={{ width: size, height: size }}>{children}</Container>
+  )
 }
 
 export default Animation

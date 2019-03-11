@@ -89,47 +89,22 @@ const Static = styled("div")`
   }
 `
 
-class Splash extends React.Component<SplashProps, Readonly<State>> {
-  public readonly state = {
-    animationSize: Math.max(window.innerWidth, window.innerHeight),
-  }
-
-  public static defaultProps = {
-    color: "#fff",
-  }
-
-  public handleResize = () => {
-    this.setState({
-      animationSize: Math.max(window.innerWidth, window.innerHeight) as number,
-    })
-  }
-
-  public componentDidMount() {
-    window.addEventListener("resize", this.handleResize)
-  }
-
-  public componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize)
-  }
-
-  public render() {
-    const { logo, color } = this.props
-    return (
-      <Container color={color}>
-        <Animation size={this.state.animationSize} />
-        <Content color={color}>
-          <TitleBar>
-            <OperationalLogo size={110} logo={logo} />
-            <TitleBarContent>
-              <h1>{this.props.title}</h1>
-              <div>{this.props.actions}</div>
-            </TitleBarContent>
-          </TitleBar>
-          <Static>{this.props.children}</Static>
-        </Content>
-      </Container>
-    )
-  }
+const Splash: React.FC<SplashProps> = ({ color, logo, children, title, actions }) => {
+  return (
+    <Container color={color}>
+      <Animation isFullscreen />
+      <Content color={color}>
+        <TitleBar>
+          <OperationalLogo size={110} logo={logo} />
+          <TitleBarContent>
+            <h1>{title}</h1>
+            <div>{actions}</div>
+          </TitleBarContent>
+        </TitleBar>
+        <Static>{children}</Static>
+      </Content>
+    </Container>
+  )
 }
 
 export default Splash
