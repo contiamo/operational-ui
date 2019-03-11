@@ -85,5 +85,6 @@ export { default as styled } from "./utils/styled"
 // Hooks
 export * from "./useURLState"
 export * from "./useWindowSize"
+export * from "./useUniqueId"
 
 export default OperationalUI

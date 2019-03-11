@@ -1,18 +1,21 @@
 import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
-import { DefaultProps } from "../types"
-import { isCmdEnter, lighten } from "../utils"
-import styled from "../utils/styled"
 
 import Hint from "../Hint/Hint"
 import Icon from "../Icon/Icon"
 import { LabelText } from "../LabelText/LabelText"
-import Tooltip from "../Tooltip/Tooltip"
+import { useOperationalContext } from "../OperationalContext/OperationalContext"
+import { DefaultInputProps, DefaultProps } from "../types"
+import { useUniqueId } from "../useUniqueId"
+import { isCmdEnter, lighten } from "../utils"
 import { FormFieldControls, FormFieldError, inputFocus, Label } from "../utils/mixins"
+import styled from "../utils/styled"
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
 
-export interface TextareaProps extends DefaultProps {
+export interface TextareaProps extends DefaultProps, DefaultInputProps {
+  /** What is the identifier of this textarea? */
+  id?: string
   /** Controlled value of the field */
   value: string
   /** Label of the field */
@@ -62,7 +65,7 @@ const TextareaComp = styled("textarea")<{
   return {
     height,
     resize,
-    fontSize: theme.font.size.small,
+    fontSize: theme.font.size.body,
     fontWeight: theme.font.weight.regular,
     position: "relative",
     display: "block",
@@ -71,7 +74,7 @@ const TextareaComp = styled("textarea")<{
     borderRadius: isAction ? `0 0 ${theme.borderRadius}px ${theme.borderRadius}px` : theme.borderRadius,
     borderColor: isError ? theme.color.error : theme.color.border.default,
     padding: `${theme.space.small}px ${theme.space.medium}px ${theme.space.small}px ${theme.space.medium}px`,
-    fontFamily: isCode ? "monospace" : "inherit",
+    fontFamily: isCode ? "monospace" : theme.font.family.main,
     opacity: disabled ? 0.6 : 1.0,
     ...(isAction ? { borderTop: 0 } : {}),
     ":focus ~ div": {
@@ -139,101 +142,80 @@ const ActionHeader = styled("div")<{ isLabel: boolean }>(({ theme }) => ({
   },
 }))
 
-class Textarea extends React.Component<TextareaProps, State> {
-  public timeoutId: number | null = null
+const Textarea: React.FC<TextareaProps> = ({
+  id,
+  fullWidth,
+  label,
+  hint,
+  value,
+  error,
+  action,
+  height,
+  onChange,
+  onSubmit,
+  onFocus,
+  onBlur,
+  disabled = false,
+  code = false,
+  copy = false,
+  resize = "vertical",
+  tabIndex,
+  ...props
+}) => {
+  const { pushMessage } = useOperationalContext()
+  const uniqueId = useUniqueId(id)
 
-  public state = {
-    showTooltip: false,
-  }
-
-  public static defaultProps: Partial<TextareaProps> = {
-    copy: false,
-    code: false,
-    disabled: false,
-    resize: "vertical",
-  }
-
-  public showTooltip = () => {
-    if (this.timeoutId) {
-      clearTimeout(this.timeoutId)
-    }
-    this.setState(() => ({ showTooltip: true }))
-
-    this.timeoutId = window.setTimeout(() => {
-      this.setState(() => ({ showTooltip: false }))
-      this.timeoutId = null
-    }, 1000)
-  }
-
-  public render() {
-    const {
-      fullWidth,
-      resize,
-      label,
-      hint,
-      disabled,
-      code,
-      value,
-      error,
-      action,
-      height,
-      copy,
-      onChange,
-      onSubmit,
-      onFocus,
-      onBlur,
-      placeholder,
-      ...props
-    } = this.props
-    return (
-      <Label {...props} fullWidth={fullWidth}>
-        {label && <LabelText>{label}</LabelText>}
-        {hint && (
-          <FormFieldControls>
-            <Hint>{hint}</Hint>
-          </FormFieldControls>
-        )}
-        <TextareaComp
-          disabled={disabled!}
-          isCode={code!}
-          value={value}
-          isError={Boolean(error)}
-          isAction={Boolean(action || copy)}
-          resize={resize!}
-          height={height}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onKeyDown={(ev: React.KeyboardEvent<HTMLTextAreaElement>) => {
-            if (isCmdEnter(ev) && onSubmit) {
-              onSubmit()
-            }
-          }}
-          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-            if (!onChange) {
-              return
-            }
-            onChange(e.target.value)
-          }}
-          placeholder={placeholder}
-        />
-        {(this.props.action || this.props.copy) && (
-          <ActionHeader isLabel={Boolean(label)}>
-            {action}
-            {copy && (
-              <CopyToClipboard text={value} onCopy={this.showTooltip}>
-                <div>
-                  {this.state.showTooltip && <Tooltip right>Copied!</Tooltip>}
-                  <Icon size={8} name="Copy" />
-                  <a>Copy to clipboard</a>
-                </div>
-              </CopyToClipboard>
-            )}
-          </ActionHeader>
-        )}
-        {error && <FormFieldError>{error}</FormFieldError>}
-      </Label>
-    )
-  }
+  return (
+    <Label id={`textarea-label-${uniqueId}`} {...props} fullWidth={fullWidth}>
+      {label && <LabelText>{label}</LabelText>}
+      {hint && (
+        <FormFieldControls>
+          <Hint textId={`textarea-hint-${uniqueId}`}>{hint}</Hint>
+        </FormFieldControls>
+      )}
+      <TextareaComp
+        id={`textarea-field-${uniqueId}`}
+        aria-label={label ? label : undefined}
+        aria-labelledby={`textarea-label-${uniqueId}`}
+        aria-describedby={hint ? `textarea-hint-${uniqueId}` : undefined}
+        disabled={disabled}
+        isCode={code}
+        value={value}
+        isError={Boolean(error)}
+        isAction={Boolean(action || copy)}
+        resize={resize}
+        height={height}
+        onFocus={onFocus}
+        tabIndex={tabIndex}
+        onBlur={onBlur}
+        onKeyDown={(ev: React.KeyboardEvent<HTMLTextAreaElement>) => {
+          if (isCmdEnter(ev) && onSubmit) {
+            onSubmit()
+          }
+        }}
+        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+          if (!onChange) {
+            return
+          }
+          onChange(e.target.value)
+        }}
+      />
+      {(action || copy) && (
+        <ActionHeader isLabel={Boolean(label)}>
+          {action}
+          {copy && (
+            <CopyToClipboard text={value} onCopy={() => pushMessage({ type: "success", body: "Successfully Copied" })}>
+              <div role="button" aria-label="Copy to Clipboard">
+                <Icon size={8} name="Copy" />
+                <a>Copy to clipboard</a>
+              </div>
+            </CopyToClipboard>
+          )}
+        </ActionHeader>
+      )}
+      {error && <FormFieldError>{error}</FormFieldError>}
+    </Label>
+  )
 }
 
 export default Textarea

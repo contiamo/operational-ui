@@ -8,6 +8,11 @@ export interface DefaultProps {
   className?: string
 }
 
+export interface DefaultInputProps {
+  /** Helps with ordering keyboard navigation */
+  tabIndex?: number
+}
+
 export interface DragProps {
   draggable?: boolean
   onDragStart?: (ev: React.DragEvent<HTMLDivElement>) => void

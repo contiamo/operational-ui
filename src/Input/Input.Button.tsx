@@ -3,11 +3,13 @@ import CopyToClipboard from "react-copy-to-clipboard"
 
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
+import { inputFocus } from "../utils"
 import styled from "../utils/styled"
 import { height } from "./Input.constants"
 
 interface InputButtonBaseProps {
   onIconClick?: () => void
+  tabIndex?: number
 }
 
 interface InputButtonPropsWithoutCopy extends InputButtonBaseProps {
@@ -24,7 +26,7 @@ interface InputButtonPropsWithCopy extends InputButtonBaseProps {
 
 export type InputButtonProps = InputButtonPropsWithoutCopy | InputButtonPropsWithCopy
 
-const Button = styled("div")`
+const Button = styled("button")`
   width: ${height}px;
   /** Makes sure the button doesn't shrink when inside a flex container */
   flex: 0 0 ${height}px;
@@ -35,6 +37,16 @@ const Button = styled("div")`
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
+  :focus {
+    ${inputFocus}
+    border: 1px solid ${({ theme }) => theme.color.primary};
+  }
+
+  /* Don't respond to children's pointer-events */
+  * {
+    pointer-events: none;
+  }
   ${({ theme }) => `
     background-color: ${theme.color.background.lighter};
     border-top-left-radius: ${theme.borderRadius}px;
@@ -48,7 +60,7 @@ const Button = styled("div")`
   `};
 `
 
-const InputButton: React.SFC<InputButtonProps> = ({ icon, copy, value, onIconClick }) => {
+const InputButton: React.SFC<InputButtonProps> = ({ tabIndex, icon, copy, value, onIconClick }) => {
   if (!icon && !copy) {
     return null
   }
@@ -57,7 +69,7 @@ const InputButton: React.SFC<InputButtonProps> = ({ icon, copy, value, onIconCli
     <OperationalContext>
       {({ pushMessage }) => (
         <CopyToClipboard text={value || ""} onCopy={() => pushMessage({ body: "Copied to clipboard", type: "info" })}>
-          <Button>
+          <Button tabIndex={tabIndex}>
             <Icon name="Copy" size={16} />
           </Button>
         </CopyToClipboard>

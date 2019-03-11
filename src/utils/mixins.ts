@@ -2,8 +2,8 @@ import { keyframes } from "@emotion/core"
 
 import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
 import { lighten } from "../utils"
+import styled from "../utils/styled"
 import { OperationalStyleConstants } from "./constants"
-import styled from "./styled"
 
 export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
   outline: 0,
@@ -15,8 +15,8 @@ export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstant
 export const Label = styled("label")<{ fullWidth?: boolean; left?: boolean }>(({ fullWidth, theme, left }) => ({
   display: "inline-block",
   position: "relative",
+  width: "100%",
   maxWidth: fullWidth ? "none" : "360px",
-  width: fullWidth ? "100%" : "auto",
   marginRight: left ? theme.space.small : 0,
 }))
 
@@ -55,12 +55,15 @@ export const FormFieldControl = styled("div")(({ theme }) => ({
   ":hover": {
     color: theme.color.text.default,
   },
+  " *": {
+    pointerEvents: "none",
+  },
 }))
 
 export const FormFieldError = styled("div")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
   color: theme.color.error,
-  padding: `${theme.space.base / 2}px ${theme.space.element}px`,
+  padding: `${theme.space.base / 2}px ${theme.space.medium}px`,
   marginBottom: 0,
   width: "100%",
   borderBottomLeftRadius: theme.borderRadius,
