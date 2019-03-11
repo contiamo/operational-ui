@@ -1,16 +1,16 @@
-import { MutableRefObject, useEffect } from "react"
+import { RefObject, useEffect } from "react"
 
 export interface Key {
   /** Keyboard key value */
   key: string
   /** Optional Ctrl / ⌃ key */
-  withCtrl?: boolean
+  ctrl?: boolean
   /** Optional Shift key */
-  withShift?: false
+  shift?: boolean
   /** Optional Alt / ⌥ key */
-  withAlt?: boolean
+  alt?: boolean
   /** Optional meta ⌘ / ⊞ key */
-  withMeta?: boolean
+  meta?: boolean
 }
 
 /**
@@ -21,7 +21,7 @@ export interface Key {
  * @param callback- a callback to be invoked when the hotkey is hit
  *
  */
-export function useHotkey(scope: MutableRefObject<HTMLElement>, hotkey: Key, callback: () => void) {
+export function useHotkey(scope: RefObject<HTMLElement>, hotkey: Key, callback: () => void) {
   useEffect(() => {
     const addKeyBinding = (): void => {
       if (scope.current) {
@@ -40,19 +40,19 @@ export function useHotkey(scope: MutableRefObject<HTMLElement>, hotkey: Key, cal
         return
       }
 
-      if (hotkey.withCtrl && !event.ctrlKey) {
+      if (hotkey.ctrl && !event.ctrlKey) {
         return
       }
 
-      if (hotkey.withShift && !event.shiftKey) {
+      if (hotkey.shift && !event.shiftKey) {
         return
       }
 
-      if (hotkey.withAlt && !event.altKey) {
+      if (hotkey.alt && !event.altKey) {
         return
       }
 
-      if (hotkey.withMeta && !event.metaKey) {
+      if (hotkey.meta && !event.metaKey) {
         return
       }
 

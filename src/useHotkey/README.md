@@ -26,7 +26,7 @@ const useRef = require("react").useRef
 
 const Component2 = () => {
   const scope = useRef(null)
-  useHotkey(scope, { key: "p", withCtrl: true, withShift: true }, () => {
+  useHotkey(scope, { key: "p", ctrl: true, shift: true }, () => {
     alert("Ctrl + Shift + P")
   })
 
