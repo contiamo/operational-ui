@@ -1,105 +1,41 @@
-## Usage
-
-This hook can be used to assign a callback to some keystroke
+### Assign a callback to some keystroke
 
 ```jsx
 const useRef = require("react").useRef
-const keyCodes = require("../utils").keyCodes
 
-const Component = () => {
-  const scope1 = useRef(null)
-  useHotkey(scope1, keyCodes.enter, () => {
+const Component1 = () => {
+  const scope = useRef(null)
+  useHotkey(scope, { key: "enter" }, () => {
     alert("⏎")
   })
 
-  const scope2 = useRef(null)
-  useHotkey(
-    scope2,
-    keyCodes.enter,
-    () => {
-      alert("⌘ + ⏎")
-    },
-    false,
-    false,
-    false,
-    true,
-  )
-
-  const scope3 = useRef(null)
-  useHotkey(scope3, keyCodes.esc, () => {
-    alert("Esc")
-  })
-
-  const scope4 = useRef(null)
-  useHotkey(
-    scope4,
-    80,
-    () => {
-      alert("Ctrl + P")
-    },
-    true,
-  )
-
-  useHotkey(
-    scope4,
-    84,
-    () => {
-      alert("Alt + T")
-    },
-    false,
-    false,
-    true,
-  )
-
-  useHotkey(
-    scope4,
-    79,
-    () => {
-      alert("Shift + O")
-    },
-    false,
-    true,
-  )
-
-  const scope5 = useRef(null)
-  useHotkey(
-    scope5,
-    keyCodes.backspace,
-    () => {
-      alert("Ctrl + Shift + Alt + ⌫")
-    },
-    true,
-    true,
-    true,
-  )
-
   return (
-    <Form>
-      <div ref={scope1}>
-        <Input value="Some value..." label="Set focus in me and hit ⏎" />
-      </div>
-
-      <div ref={scope2}>
-        <Input value="Some value..." label="Set focus in me and hit ⌘ + ⏎" />
-      </div>
-
-      <div ref={scope3}>
-        <Input value="Some value..." label="Set focus in me and hit Esc" />
-      </div>
-
-      <div ref={scope4}>
-        <Input
-          value="Multiple keystrokes work here..."
-          label="Set focus in me and hit Ctrl + P, Shift + O, Alt (option) + T"
-        />
-      </div>
-
-      <div ref={scope5}>
-        <Input value="Multiple key modifiers required here..." label="Set focus in me and hit Ctrl + Shift + Alt + ⌫" />
-      </div>
-    </Form>
+    <div ref={scope}>
+      <Input value="Some value..." label="Set focus in me and hit ⏎" />
+    </div>
   )
 }
 
-;<Component />
+;<Component1 />
+```
+
+### Can be used with key modifiers
+
+```jsx
+const useRef = require("react").useRef
+
+const Component2 = () => {
+  const scope = useRef(null)
+  useHotkey(scope, { key: "p", withCtrl: true, withShift: true }, () => {
+    alert("Ctrl + Shift + P")
+  })
+
+  return (
+    <div ref={scope}>
+      <Input value="Some value..." label="Set focus in me and hit Ctrl + Shift + P" />
+    </div>
+  )
+}
+
+;<Component2 />
 ```

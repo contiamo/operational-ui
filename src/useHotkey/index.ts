@@ -1,29 +1,27 @@
 import { MutableRefObject, useEffect } from "react"
 
-/**
- * Hook for linking some hotkey to a callback function
- */
+export interface Key {
+  /** Keyboard key value */
+  key: string
+  /** Optional Ctrl / ⌃ key */
+  withCtrl?: boolean
+  /** Optional Shift key */
+  withShift?: false
+  /** Optional Alt / ⌥ key */
+  withAlt?: boolean
+  /** Optional meta ⌘ / ⊞ key */
+  withMeta?: boolean
+}
 
 /**
- * Create a state that is sync with url search param.
+ * Hook for linking some hotkey to a callback function
  *
  * @param scope - A ref to an HTMLElement, scoping the hotkey binding
- * @param keyCode - numeric code of the keyboard key
+ * @param key - hotkey definition object
  * @param callback- a callback to be invoked when the hotkey is hit
- * @param withCtrl - optional Ctrl / ⌃ key
- * @param withShift - optional Shift key
- * @param withAlt - optional Alt / ⌥ key
- * @param withMeta - optional meta ⌘ / ⊞ key
+ *
  */
-export function useHotkey(
-  scope: MutableRefObject<HTMLElement>,
-  keyCode: number,
-  callback: undefined | (() => void),
-  withCtrl?: boolean,
-  withShift?: boolean,
-  withAlt?: boolean,
-  withMeta?: boolean,
-) {
+export function useHotkey(scope: MutableRefObject<HTMLElement>, hotkey: Key, callback: () => void) {
   useEffect(() => {
     const addKeyBinding = (): void => {
       if (scope.current) {
@@ -38,27 +36,23 @@ export function useHotkey(
     }
 
     const keyDownHandler = (event: KeyboardEvent): void => {
-      if (event.keyCode !== keyCode) {
+      if (event.key.toLowerCase() !== hotkey.key.toLowerCase()) {
         return
       }
 
-      if (!callback) {
+      if (hotkey.withCtrl && !event.ctrlKey) {
         return
       }
 
-      if (withCtrl && !event.ctrlKey) {
+      if (hotkey.withShift && !event.shiftKey) {
         return
       }
 
-      if (withShift && !event.shiftKey) {
+      if (hotkey.withAlt && !event.altKey) {
         return
       }
 
-      if (withAlt && !event.altKey) {
-        return
-      }
-
-      if (withMeta && !event.metaKey) {
+      if (hotkey.withMeta && !event.metaKey) {
         return
       }
 
