@@ -2,16 +2,6 @@ Context menus are nested menus that can expand from anywhere on a page. Their us
 
 ### Basic Usage
 
-```ts
-import * as React from "react"
-import { ContextMenu, ContextMenuProps } from "@operational/components"
-
-const menuItems: ContextMenuProps["items"] = ["Menu 1", "Menu 2", "Menu 3"]
-;<ContextMenu items={menuItems} onClick={item => alert(`clicked ${item}`)}>
-  <span>Click here</span>
-</ContextMenu>
-```
-
 ```jsx
 import * as React from "react"
 import { ContextMenu, ContextMenuProps } from "@operational/components"

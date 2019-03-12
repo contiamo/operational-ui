@@ -22,6 +22,7 @@ module.exports = {
     "@operational/components": resolve(__dirname, "src"),
   },
   styleguideComponents: {
+    SectionRenderer: join(__dirname, "styleguide/SectionRenderer"),
     Wrapper: join(__dirname, "styleguide/Wrapper"),
     StyleGuideRenderer: join(__dirname, "styleguide/StyleGuideRenderer"),
     TableOfContentsRenderer: join(__dirname, "styleguide/TableOfContentsRenderer"),
