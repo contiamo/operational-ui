@@ -5,7 +5,7 @@ exports[`Switch Should render 1`] = `
   class="css-ftf61z"
 >
   <div
-    class="css-16holpz-Messages"
+    class="css-p29iif"
   />
   <div
     class="css-18biwo"
@@ -14,10 +14,10 @@ exports[`Switch Should render 1`] = `
       class="css-1nz7xkz-switch"
     >
       <div
-        class="css-ioiph6"
+        class="css-5ncay3"
       />
       <div
-        class="css-lobscw"
+        class="css-1sgkyz1"
       />
     </div>
   </div>

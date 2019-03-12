@@ -1,5 +1,5 @@
 import { floatIn, readableTextColor, resetTransform } from "../utils"
-import { deprecatedExpandColor } from "../utils/constants"
+import { expandColor } from "../utils/constants"
 import * as mixins from "../utils/mixins"
 import styled from "../utils/styled"
 
@@ -12,21 +12,20 @@ const Container = styled("div")<{
   tabIndex?: number
   onClick?: () => void
 }>(({ theme, color, disabled }) => {
-  const backgroundColor = deprecatedExpandColor(theme.deprecated, color) || theme.deprecated.colors.white
+  const backgroundColor = expandColor(theme, color) || theme.color.white
   return {
     backgroundColor,
     label: "select",
     position: "relative",
     display: "flex",
     alignItems: "center",
-    padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 2) / 3 + 40}px ${theme.deprecated
-      .spacing / 2}px ${(theme.deprecated.spacing * 2) / 3}px `,
+    padding: theme.space.content,
     borderRadius: 4,
     width: "fit-content",
     minWidth: 240,
     minHeight: 20,
     border: "1px solid",
-    borderColor: theme.deprecated.colors.inputBorder,
+    borderColor: theme.color.border.default,
     opacity: disabled ? 0.5 : 1,
     cursor: "pointer",
     color: readableTextColor(backgroundColor, ["black", "white"]),
@@ -37,11 +36,11 @@ const Container = styled("div")<{
       content: "''",
       position: "absolute",
       top: "50%",
-      right: theme.deprecated.spacing / 2,
+      right: theme.space.content,
       width: 0,
       height: 0,
       border: "4px solid transparent",
-      borderTopColor: theme.deprecated.colors.gray,
+      borderTopColor: theme.color.border.disabled,
       transform: "translateY(calc(-50% + 2px))",
     },
     "&:focus": mixins.inputFocus({
@@ -51,7 +50,7 @@ const Container = styled("div")<{
 })
 
 const DisplayValue = styled("div")<{ isPlaceholder: boolean }>(({ theme, isPlaceholder }) => ({
-  color: isPlaceholder ? theme.deprecated.colors.gray : theme.deprecated.colors.black,
+  color: isPlaceholder ? theme.color.border.disabled : theme.color.black,
 }))
 
 const Options = styled("div")(
@@ -70,15 +69,14 @@ const Options = styled("div")(
     ${resetTransform} .15s forwards ease`,
   },
   ({ theme }) => ({
-    boxShadow: theme.deprecated.shadows.popup,
-    zIndex: theme.deprecated.baseZIndex + 300,
+    boxShadow: theme.shadows.popup,
+    zIndex: theme.zIndex.selectOptions,
   }),
 )
 
-const OptionsList = styled("div")(({ theme }) => ({
-  // whole number + 3/4 ratio here ensures options don't get cut off
-  maxHeight: theme.deprecated.spacing * 12.75,
+const OptionsList = styled("div")({
+  maxHeight: 200,
   overflow: "auto",
-}))
+})
 
 export { Container, Options, OptionsList, DisplayValue }
