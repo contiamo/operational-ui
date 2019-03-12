@@ -108,7 +108,7 @@ const defaultCodeTheme = {
   base0E: "#2aa198",
 
   /**
-   * Deprecated, Opening/Closing Embedded Language Tags, e.g. <?php ?>
+   * Opening/Closing Embedded Language Tags, e.g. <?php ?>
    */
   base0F: "#268bd2",
 }

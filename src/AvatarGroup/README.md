@@ -103,29 +103,3 @@ const avatars = [
 </>
 ```
 
-### Should also work with the old API
-
-```jsx
-import * as React from "react"
-import { AvatarGroup, Avatar } from "@operational/components"
-const avatars = [
-  {
-    name: "Peter Pan",
-    photo: "https://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
-  },
-  { name: "Wendy Darling" },
-  { name: "John Darling" },
-  { name: "Micheal Darling" },
-  { name: "George Darling" },
-  { name: "Tiger Lily" },
-  { name: "Tinker Bell" },
-  { name: "The Crocodile" },
-  { name: "Captain Hook" },
-  { name: "Mr. Smee" },
-]
-;<AvatarGroup>
-  {avatars.map(({ name, photo }, i) => (
-    <Avatar key={i} name={name} photo={photo} />
-  ))}
-</AvatarGroup>
-```

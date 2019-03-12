@@ -14,7 +14,7 @@ const Container = styled("div")(({ theme }) => {
     label: "selectfilter",
     "& > input": {
       width: "100%",
-      padding: `${theme.deprecated.spacing / 2}px ${(theme.deprecated.spacing * 3) / 4}px`,
+      padding: theme.space.small,
       border: 0,
       outline: "none",
       font: "inherit",

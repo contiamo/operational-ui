@@ -85,7 +85,7 @@ const myData = {
     repo: val => val.split(".com")[1],
     status: val => (
       <div>
-        <Status success={val === "deployed"} />
+        <Status state={val === "deployed" ? "success" : undefined} />
         {val}
       </div>
     ),

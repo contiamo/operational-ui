@@ -22,12 +22,6 @@ export interface SidenavHeaderProps extends DefaultProps {
   active?: boolean
   /** Callback called when the active state changes */
   onToggle?: (newActiveState: boolean) => void
-  /**
-   * Expanded state
-   *
-   * @deprecated this prop is ignored as per design decision (all sidenavs are expanded)
-   */
-  expanded?: boolean
   /** Click handler */
   onClick?: () => void
   /** Close handler (via chevron button on the top right) */

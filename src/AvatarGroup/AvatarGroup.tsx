@@ -9,9 +9,9 @@ export interface AvatarItem {
 }
 
 export interface AvatarGroupProps extends DefaultProps {
-  children?: React.ReactNode
+  children?: never
   /** Avatars list */
-  avatars?: AvatarItem[]
+  avatars: AvatarItem[]
   /** Maximum number of avatars to display */
   maximumToDisplay?: number
   /** More button handler */
@@ -29,9 +29,7 @@ const GroupedAvatar = styled(Avatar)({
 })
 
 const AvatarGroup: React.SFC<AvatarGroupProps> = ({ avatars, size, onMoreClick, ...props }) => {
-  const avatarsToDisplay = avatars
-    ? avatars.map((avatar, i) => <GroupedAvatar addBorder size={size} key={i} {...avatar} />)
-    : props.children
+  const avatarsToDisplay = avatars.map((avatar, i) => <GroupedAvatar addBorder size={size} key={i} {...avatar} />)
   const count = React.Children.count(avatarsToDisplay)
   const mustSlice = props.maximumToDisplay! < count
 

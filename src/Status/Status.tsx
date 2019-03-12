@@ -21,13 +21,9 @@ export interface LatestProps extends DefaultProps {
 export type StatusProps = DeprecatedProps | LatestProps
 
 const getColorFromProps = ({
-  running,
-  success,
-  error,
   state,
   theme,
 }: StatusProps & { theme: OperationalStyleConstants }): string => {
-  if (state) {
     return (
       new Map<LatestProps["state"], string>([
         ["error", theme.color.error],
@@ -35,22 +31,7 @@ const getColorFromProps = ({
         ["success", theme.color.success],
       ]).get(state) || "#989898"
     )
-  }
 
-  // deprecated api bellow
-  if (running) {
-    return theme.color.warning
-  }
-
-  if (success) {
-    return theme.color.success
-  }
-
-  if (error) {
-    return theme.color.error
-  }
-
-  return "#989898"
 }
 
 const StatusDot = styled("div")<StatusProps>(props => ({

@@ -9,10 +9,7 @@ import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@opera
   <p>Here is the information available about this bundle.</p>
   <CardColumns>
     <CardColumn title="Contributors">
-      <AvatarGroup>
-        <Avatar name="Alice Bernoulli" />
-        <Avatar name="Clarence Dermot" />
-      </AvatarGroup>
+      <AvatarGroup avatars={[{ name: "Alice Bernoulli" }, { name: "Clarence Dermot" }]} />
     </CardColumn>
     <CardColumn title="Tags">
       <Chip>agent-view</Chip>
@@ -32,10 +29,7 @@ import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@opera
     <p>Here is the information available about this bundle.</p>
     <CardColumns>
       <CardColumn title="Contributors">
-        <AvatarGroup>
-          <Avatar name="Alice Bernoulli" />
-          <Avatar name="Clarence Dermot" />
-        </AvatarGroup>
+        <AvatarGroup avatars={[{ name: "Alice Bernoulli" }, { name: "Clarence Dermot" }]} />
       </CardColumn>
       <CardColumn title="Tags">
         <Chip>agent-view</Chip>
@@ -104,6 +98,8 @@ import { Card, CardColumns, CardColumn, Textarea, Code, Button } from "@operatio
 
 ### With an exact number of columns
 
+Change the following to `columns={4}` on line 3 to see the columns shift.
+
 ```jsx
 import * as React from "react"
 import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@operational/components"
@@ -111,10 +107,15 @@ import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@opera
   <p>Here is the information available about this bundle.</p>
   <CardColumns columns={3}>
     <CardColumn title="Contributors">
-      <AvatarGroup>
-        <Avatar name="Alice Bernoulli" />
-        <Avatar name="Clarence Dermot" />
-      </AvatarGroup>
+      <AvatarGroup avatars={[{ name: "Alice Bernoulli" }, { name: "Clarence Dermot" }]} />
+    </CardColumn>
+    <CardColumn title="Tags">
+      <Chip>agent-view</Chip>
+      <Chip>production</Chip>
+    </CardColumn>
+    <CardColumn title="Tags">
+      <Chip>agent-view</Chip>
+      <Chip>production</Chip>
     </CardColumn>
     <CardColumn title="Tags">
       <Chip>agent-view</Chip>
@@ -132,10 +133,7 @@ import { Card, AvatarGroup, CardColumn, Avatar, Chip } from "@operational/compon
   <p>Here is the information available about this bundle.</p>
   <CardColumns columns={3} style={{ width: "200px" }}>
     <CardColumn title="Contributors">
-      <AvatarGroup>
-        <Avatar name="Alice Bernoulli" />
-        <Avatar name="Clarence Dermot" />
-      </AvatarGroup>
+      <AvatarGroup avatars={[{ name: "Alice Bernoulli" }, { name: "Clarence Dermot" }]} />
     </CardColumn>
     <CardColumn title="Tags">
       <Chip>agent-view</Chip>

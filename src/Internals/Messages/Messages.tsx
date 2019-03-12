@@ -7,15 +7,14 @@ export interface MessagesProps extends DefaultProps {
 }
 
 const Container = styled("div")(({ theme }) => ({
-  label: "Messages",
   position: "fixed",
-  zIndex: theme.deprecated.baseZIndex + 500,
-  bottom: 2 * theme.deprecated.spacing,
-  right: 2 * theme.deprecated.spacing,
+  zIndex: theme.zIndex.messages,
+  bottom: theme.space.element,
+  right: theme.space.element,
   "& > *": {
     width: 400,
     height: "auto",
-    marginTop: theme.deprecated.spacing / 2,
+    marginTop: theme.space.small,
   },
 }))
 

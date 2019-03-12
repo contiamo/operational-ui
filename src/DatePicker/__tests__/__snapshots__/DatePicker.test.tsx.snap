@@ -5,13 +5,13 @@ exports[`DatePicker Component Should render 1`] = `
   class="css-ftf61z"
 >
   <div
-    class="css-16holpz-Messages"
+    class="css-p29iif"
   />
   <div
     class="css-hbollr-datepicker"
   >
     <div
-      class="css-1ep6wuz"
+      class="css-u1sxrl"
     >
       <svg
         class="css-qdx4tx"
@@ -26,16 +26,16 @@ exports[`DatePicker Component Should render 1`] = `
       </svg>
     </div>
     <input
-      class="css-1pftij"
+      class="css-1lhdl44"
       placeholder="Pick a date"
       readonly=""
       value="2018-01-02 - 2018-01-23"
     />
     <div
-      class="css-1cu73am"
+      class="css-17y4r9v"
     >
       <div
-        class="css-1d4gmau"
+        class="css-rjp1ph"
       >
         <div
           class="css-1yzl3rb"
@@ -75,234 +75,234 @@ exports[`DatePicker Component Should render 1`] = `
         class="css-1ll3uuv"
       >
         <div
-          class="css-1qsbqtu"
+          class="css-vnoc3q"
         >
           S
         </div>
         <div
-          class="css-1qsbqtu"
+          class="css-vnoc3q"
         >
           M
         </div>
         <div
-          class="css-1qsbqtu"
+          class="css-vnoc3q"
         >
           T
         </div>
         <div
-          class="css-1qsbqtu"
+          class="css-vnoc3q"
         >
           W
         </div>
         <div
-          class="css-1qsbqtu"
+          class="css-vnoc3q"
         >
           T
         </div>
         <div
-          class="css-1qsbqtu"
+          class="css-vnoc3q"
         >
           F
         </div>
         <div
-          class="css-1qsbqtu"
+          class="css-vnoc3q"
         >
           S
         </div>
         <div
-          class="css-nx0nor"
+          class="css-1yy6nlh"
         >
           31
         </div>
         <div
-          class="css-1cg1rt1"
+          class="css-juqq08"
         >
           1
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           2
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           3
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           4
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           5
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           6
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           7
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           8
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           9
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           10
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           11
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           12
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           13
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           14
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           15
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           16
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           17
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           18
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           19
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           20
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           21
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           22
         </div>
         <div
-          class="css-3ve8fu"
+          class="css-15rlvsz"
           selected=""
         >
           23
         </div>
         <div
-          class="css-1cg1rt1"
+          class="css-juqq08"
         >
           24
         </div>
         <div
-          class="css-1cg1rt1"
+          class="css-juqq08"
         >
           25
         </div>
         <div
-          class="css-1cg1rt1"
+          class="css-juqq08"
         >
           26
         </div>
         <div
-          class="css-1cg1rt1"
+          class="css-juqq08"
         >
           27
         </div>
         <div
-          class="css-1cg1rt1"
+          class="css-juqq08"
         >
           28
         </div>
         <div
-          class="css-1cg1rt1"
+          class="css-juqq08"
         >
           29
         </div>
         <div
-          class="css-1cg1rt1"
+          class="css-juqq08"
         >
           30
         </div>
         <div
-          class="css-1cg1rt1"
+          class="css-juqq08"
         >
           31
         </div>
         <div
-          class="css-nx0nor"
+          class="css-1yy6nlh"
         >
           1
         </div>
         <div
-          class="css-nx0nor"
+          class="css-1yy6nlh"
         >
           2
         </div>
         <div
-          class="css-nx0nor"
+          class="css-1yy6nlh"
         >
           3
         </div>
