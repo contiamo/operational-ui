@@ -3,37 +3,26 @@ The splash component can be used to render a simple animated splash screen for a
 ### Usage
 
 ```jsx
-const initialState = {
-  isOpen: false,
+import * as React from "react"
+import { Splash, Button } from "@operational/components"
+
+const MyComponent = () => {
+  const [isOpen, setIsOpen] = React.useState(false)
+
+  return isOpen ? (
+    <Splash
+      color="primary"
+      title="My Interesting Project"
+      actions={<Button onClick={() => setIsOpen(false)}>Dismiss this window</Button>}
+    >
+      <p>I made a software project. Do you like it?</p>
+    </Splash>
+  ) : (
+    <Button color="primary" onClick={() => setIsOpen(true)}>
+      Open splash
+    </Button>
+  )
 }
 
-state.isOpen ? (
-  <Splash
-    title="My Interesting Project"
-    actions={
-      <Button
-        onClick={() => {
-          setState(() => ({
-            isOpen: false,
-          }))
-        }}
-      >
-        Dismiss this window
-      </Button>
-    }
-  >
-    <p>I made a software project. It is interesting for the following reasons:</p>
-  </Splash>
-) : (
-  <Button
-    color="primary"
-    onClick={() => {
-      setState(() => ({
-        isOpen: true,
-      }))
-    }}
-  >
-    Open splash
-  </Button>
-)
+;<MyComponent />
 ```

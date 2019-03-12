@@ -1,65 +1,45 @@
 Sidenavs render a two-level hierarchical navigation element comprised of headers and items.
 
-### Usage
-
-<!-- -->
-
-Typical usage includes `to` props to navigate and to manage highlighted/active state automatically.
-
 ```jsx
-class StatefulSidenav extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      activeHeaders: [1, 3],
-    }
-  }
+import * as React from "react"
+import { Sidenav, SidenavHeader, SidenavItem } from "@operational/components"
 
-  toggle(index) {
-    this.setState(prevState => ({
-      activeHeaders: prevState.activeHeaders.includes(index)
-        ? prevState.activeHeaders.filter(headerIndex => headerIndex !== index)
-        : [...prevState.activeHeaders, index],
-    }))
-  }
+const StatefulSidenav = () => {
+  const [activeHeaders, setActiveHeaders] = React.useState([1, 3])
 
-  render() {
-    return (
-      <div style={{ height: 400 }}>
-        <Sidenav>
-          <SidenavHeader condensed icon="Home" label="Project Home" />
-          <SidenavHeader
-            label="The Prize"
-            active={this.state.activeHeaders.includes(1)}
-            onToggle={this.toggle.bind(this, 1)}
-          >
-            <SidenavItem label="The First Prize" compactLabel="First" icon="Add" />
-            <SidenavItem label="The Second Prize" compactLabel="Second" icon="Admin" />
-            <SidenavItem label="No Short Label" icon="Bundle" />
-          </SidenavHeader>
-          <SidenavHeader
-            label="Let It Snow"
-            active={this.state.activeHeaders.includes(2)}
-            onToggle={this.toggle.bind(this, 2)}
-          >
-            <SidenavItem label="The Fourth Prize" compactLabel="Fourth" icon="Catalog" />
-            <SidenavItem label="The Fifth Prize" compactLabel="Fifth" icon="ChevronDown" />
-            {/* No Icon case */}
-            <SidenavItem label="The Sixth Prize" compactLabel="Sixth" />
-          </SidenavHeader>
-          <SidenavHeader
-            label="Let It Snow"
-            active={this.state.activeHeaders.includes(3)}
-            onToggle={this.toggle.bind(this, 3)}
-          >
-            <SidenavItem label="The Seventh Prize" compactLabel="Seventh" icon="Document" />
-            <SidenavItem label="The Eighth Prize" compactLabel="Eighth" icon="Endpoint" />
-            <SidenavItem label="The Ninth Prize" compactLabel="Ninth" icon="Entity" />
-          </SidenavHeader>
-        </Sidenav>
-      </div>
-    )
-  }
+  const toggle = React.useCallback(
+    index =>
+      setActiveHeaders(
+        activeHeaders.indexOf(index) > -1
+          ? activeHeaders.filter(headerIndex => headerIndex !== index)
+          : [...activeHeaders, index],
+      ),
+    [activeHeaders],
+  )
+
+  return (
+    <div style={{ height: 400 }}>
+      <Sidenav>
+        <SidenavHeader condensed icon="Home" label="Project Home" />
+        <SidenavHeader label="The Prize" active={activeHeaders.indexOf(1) > -1} onToggle={() => toggle(1)}>
+          <SidenavItem label="The First Prize" compactLabel="First" icon="Add" />
+          <SidenavItem label="The Second Prize" compactLabel="Second" icon="Admin" />
+          <SidenavItem label="No Short Label" icon="Bundle" />
+        </SidenavHeader>
+        <SidenavHeader label="Let It Snow" active={activeHeaders.indexOf(2) > -1} onToggle={() => toggle(2)}>
+          <SidenavItem label="The Fourth Prize" compactLabel="Fourth" icon="Catalog" />
+          <SidenavItem label="The Fifth Prize" compactLabel="Fifth" icon="ChevronDown" />
+          {/* No Icon case */}
+          <SidenavItem label="The Sixth Prize" compactLabel="Sixth" />
+        </SidenavHeader>
+        <SidenavHeader label="Let It Snow" active={activeHeaders.indexOf(3) > -1} onToggle={() => toggle(3)}>
+          <SidenavItem label="The Seventh Prize" compactLabel="Seventh" icon="Document" />
+          <SidenavItem label="The Eighth Prize" compactLabel="Eighth" icon="Endpoint" />
+          <SidenavItem label="The Ninth Prize" compactLabel="Ninth" icon="Entity" />
+        </SidenavHeader>
+      </Sidenav>
+    </div>
+  )
 }
 
 ;<StatefulSidenav />
@@ -68,7 +48,9 @@ class StatefulSidenav extends React.Component {
 ### Compact Mode
 
 ```jsx
-<Sidenav compact>
+import * as React from "react"
+import { Sidenav, SidenavHeader, SidenavItem } from "@operational/components"
+;<Sidenav compact>
   <SidenavHeader condensed icon="Home" label="Project Home" />
   <SidenavHeader label="The Prize">
     <SidenavItem label="Overview" icon="Function" />
@@ -86,7 +68,9 @@ class StatefulSidenav extends React.Component {
 ### With an item placed at the bottom
 
 ```jsx
-<div style={{ height: 600 }}>
+import * as React from "react"
+import { Sidenav, SidenavHeader, SidenavItem } from "@operational/components"
+;<div style={{ height: 600 }}>
   <Sidenav compact>
     <SidenavHeader label="Let It Snow">
       <SidenavItem label="Steak" icon="Jobs" />

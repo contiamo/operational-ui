@@ -1,4 +1,4 @@
-import styled from "../utils/styled"
+import styled from "../../utils/styled"
 
 export const FinePrint = styled("p")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,

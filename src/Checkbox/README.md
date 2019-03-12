@@ -1,17 +1,27 @@
 ### Usage
 
 ```jsx
-initialState = {
-  value: true,
+import * as React from "react"
+import { Checkbox } from "@operational/components"
+
+const MyComponent = () => {
+  const [value, setValue] = React.useState(true)
+  return <Checkbox label="I'm awesome" onChange={setValue} value={value} />
 }
-;<Checkbox label="I'm awesome" onChange={value => setState({ value })} value={state.value} />
+
+;<MyComponent />
 ```
 
 ### Disabled version
 
 ```jsx
-initialState = {
-  value: true,
+import * as React from "react"
+import { Checkbox } from "@operational/components"
+
+const MyOtherComponent = () => {
+  const [value, setValue] = React.useState(true)
+  return <Checkbox disabled label="I'm awesome" onChange={setValue} value={value} />
 }
-;<Checkbox disabled label="I'm awesome" onChange={value => setState({ value })} value={state.value} />
+
+;<MyOtherComponent />
 ```

@@ -1,5 +1,5 @@
-import { OperationalStyleConstants } from "../utils/constants"
-import styled from "../utils/styled"
+import { OperationalStyleConstants } from "../../utils/constants"
+import styled from "../../utils/styled"
 
 export const Body = styled("div")<{
   color?: keyof OperationalStyleConstants["color"]["text"]

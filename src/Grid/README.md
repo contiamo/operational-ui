@@ -8,7 +8,10 @@ If you have other special needs, we recommend using the CSS grid directly, as th
 ### Usage
 
 ```jsx
-<Grid type="2x2">
+import * as React from "react"
+import { Grid, Card } from "@operational/components"
+
+;<Grid type="2x2">
   <Card>One</Card>
   <Card>Two</Card>
   <Card>Three</Card>

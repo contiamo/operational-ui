@@ -10,7 +10,10 @@ This component renders a semantic label tag. This is used internally in the foll
 ## Usage
 
 ```jsx
-<div>
+import * as React from "react"
+import { LabelText } from "@operational/components"
+
+;<div>
   <LabelText htmlFor="male">Male</LabelText>
   <input type="radio" readOnly name="gender" id="male" value="male" />
   <br />

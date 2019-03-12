@@ -1,6 +1,8 @@
 ### Display a group of avatars
 
 ```jsx
+import * as React from "react"
+import { AvatarGroup } from "@operational/components"
 const avatars = [
   {
     name: "Peter Pan",
@@ -27,6 +29,8 @@ const avatars = [
 ### Provide a custom onMoreClick action
 
 ```jsx
+import * as React from "react"
+import { AvatarGroup } from "@operational/components"
 const avatars = [
   {
     name: "Peter Pan",
@@ -50,6 +54,8 @@ const avatars = [
 ### Use the medium size
 
 ```jsx
+import * as React from "react"
+import { AvatarGroup } from "@operational/components"
 const avatars = [
   {
     name: "Peter Pan",
@@ -73,6 +79,8 @@ const avatars = [
 ### Customize how many avatars is on screen
 
 ```jsx
+import * as React from "react"
+import { AvatarGroup } from "@operational/components"
 const avatars = [
   {
     name: "Peter Pan",
@@ -94,3 +102,4 @@ const avatars = [
   <AvatarGroup avatars={avatars} maximumToDisplay={8} />
 </>
 ```
+

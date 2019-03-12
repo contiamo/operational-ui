@@ -1,7 +1,8 @@
 ### Assign a callback to some keystroke
 
 ```jsx
-const useRef = require("react").useRef
+import React, { useRef } from "react"
+import { Input } from "@operational/components"
 
 const Component1 = () => {
   const container = useRef(null)
@@ -22,7 +23,8 @@ const Component1 = () => {
 ### Can be used with key modifiers
 
 ```jsx
-const useRef = require("react").useRef
+import React, { useRef } from "react"
+import { Input } from "@operational/components"
 
 const Component2 = () => {
   const container = useRef(null)

@@ -3,11 +3,15 @@ See `Sidenav` for usage examples in a broader context.
 ### Basic Usage
 
 ```jsx
-<SidenavItem label="My Account" icon="User" />
+import * as React from "react"
+import { SidenavItem } from "@operational/components"
+;<SidenavItem label="My Account" icon="User" />
 ```
 
 ### Active State
 
 ```jsx
-<SidenavItem label="My Account" icon="User" active />
+import * as React from "react"
+import { SidenavItem } from "@operational/components"
+;<SidenavItem label="My Account" icon="User" active />
 ```

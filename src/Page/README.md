@@ -7,6 +7,8 @@ This component is typically used inside a layout component along with a sidenav.
 Here is a simple usage example:
 
 ```jsx
+import * as React from "react"
+import { Page, Card } from "@operational/components"
 ;<Page title="Settings Page">
   <Card>Hello, this is page content</Card>
 </Page>
@@ -17,18 +19,24 @@ Here is a simple usage example:
 Here's a page with a different color:
 
 ```jsx
+import * as React from "react"
+import { Page, Card } from "@operational/components"
 ;<Page title="My Purple Page" color="#aa00ff">
   <Card>Hello, this is page content</Card>
 </Page>
 ```
 
 ```jsx
+import * as React from "react"
+import { Page, Card } from "@operational/components"
 ;<Page title="My Errored Page" color="color.text.lighter">
   <Card>Hello, this is page content</Card>
 </Page>
 ```
 
 ```jsx
+import * as React from "react"
+import { Page, Card } from "@operational/components"
 ;<Page title="My White Page" color="white">
   <Card>Hello, this is page content</Card>
 </Page>
@@ -39,7 +47,9 @@ Here's a page with a different color:
 Here's a case where children are too long. The card has a _hard_ max-width set to its grid area, and any text children are hyphenated.
 
 ```jsx
-<Page title="My Page">
+import * as React from "react"
+import { Page, Card, CardColumns, CardColumn, Code } from "@operational/components"
+;<Page title="My Page">
   <Card title="Hello">
     <CardColumns>
       <CardColumn title="Really Friendly Code">
@@ -64,6 +74,8 @@ Here's a case where children are too long. The card has a _hard_ max-width set t
 Here is a simple usage example:
 
 ```jsx
+import * as React from "react"
+import { Page, Card } from "@operational/components"
 ;<div style={{ height: 400 }}>
   <Page title="Settings Page">
     {Array(2)
@@ -80,6 +92,8 @@ Here is a simple usage example:
 Here is a simple usage example:
 
 ```jsx
+import * as React from "react"
+import { Page, Card } from "@operational/components"
 ;<div style={{ height: 200 }}>
   <Page title="Settings Page">
     {Array(50)
@@ -94,6 +108,9 @@ Here is a simple usage example:
 ### With actions
 
 ```jsx
+import * as React from "react"
+import { Button, Page, Card } from "@operational/components"
+
 /* Always use condensed buttons in page actions */
 const actions = (
   <Button condensed icon="Open" color="ghost">
@@ -108,6 +125,9 @@ const actions = (
 ### With actions on start
 
 ```jsx
+import * as React from "react"
+import { Button, Page, Card } from "@operational/components"
+
 /* Always use condensed buttons in page actions */
 const actions = (
   <Button condensed icon="Open" color="ghost">
@@ -122,6 +142,9 @@ const actions = (
 ### With actions on end
 
 ```jsx
+import * as React from "react"
+import { Button, Page, Card } from "@operational/components"
+
 /* Always use condensed buttons in page actions */
 const actions = (
   <Button condensed icon="Open" color="ghost">
@@ -136,6 +159,9 @@ const actions = (
 ### With tabs
 
 ```jsx
+import * as React from "react"
+import { PageContent, Card, Page } from "@operational/components"
+
 const Tab = props => (
   <PageContent>
     <Card title={`${props.title} Tab`} />
@@ -154,6 +180,9 @@ const Tab = props => (
 ### With tabs and no title
 
 ```jsx
+import * as React from "react"
+import { PageContent, Card, Page } from "@operational/components"
+
 const Tab = props => (
   <PageContent>
     <Card title={`${props.title} Tab`} />
@@ -171,6 +200,9 @@ const Tab = props => (
 ### With White Tabs
 
 ```jsx
+import * as React from "react"
+import { PageContent, Card, Page } from "@operational/components"
+
 const Tab = props => (
   <PageContent>
     <Card title={`${props.title} Tab`} />
@@ -190,6 +222,9 @@ const Tab = props => (
 ### Sticky Header with Tabs
 
 ```jsx
+import * as React from "react"
+import { PageContent, Card, Page, Button } from "@operational/components"
+
 const TabContent = props => (
   <PageContent areas="side main">
     {Array(50)
@@ -219,6 +254,9 @@ const TabContent = props => (
 ### With tabs and handlers
 
 ```jsx
+import * as React from "react"
+import { PageContent, Card, Page } from "@operational/components"
+
 const Tab = props => (
   <PageContent>
     <Card title={`${props.title} Tab`}>The tabs are not working because nothing update `activeTabName`!</Card>
@@ -239,6 +277,9 @@ const Tab = props => (
 ### With condensed title bar
 
 ```jsx
+import * as React from "react"
+import { PageContent, Card, HeaderMenu, Page } from "@operational/components"
+
 const Tab = props => (
   <PageContent>
     <Card title={props.title}>The tabs are not working because nothing update `activeTabName`!</Card>
@@ -274,6 +315,9 @@ const actions = (
 ### With condensed title bar and actions on start
 
 ```jsx
+import * as React from "react"
+import { PageContent, Card, HeaderMenu, Page } from "@operational/components"
+
 const Tab = props => (
   <PageContent>
     <Card title={props.title}>The tabs are not working because nothing update `activeTabName`!</Card>
@@ -310,6 +354,9 @@ const actions = (
 ### With condensed title bar and actions on end
 
 ```jsx
+import * as React from "react"
+import { PageContent, Card, HeaderMenu, Page } from "@operational/components"
+
 const Tab = props => (
   <PageContent>
     <Card title={props.title}>The tabs are not working because nothing update `activeTabName`!</Card>
@@ -346,6 +393,9 @@ const actions = (
 ### With activeTabName controlled (classically with a router)
 
 ```jsx
+import * as React from "react"
+import { PageContent, Card, Button, Page } from "@operational/components"
+
 const Tab = props => (
   <PageContent>
     <Card title={`${props.title} Tab`} />
@@ -395,6 +445,9 @@ class Router extends React.Component {
 ### With hidden tab
 
 ```jsx
+import * as React from "react"
+import { PageContent, Card, Button, Page } from "@operational/components"
+
 const Tab = props => (
   <PageContent>
     <Card title={`${props.title} Tab`} />
@@ -446,6 +499,8 @@ class Router extends React.Component {
 ### With different layout
 
 ```jsx
+import * as React from "react"
+import { Page, PageArea, Card } from "@operational/components"
 ;<Page title="Side on left!" areas="side main" fill>
   <PageArea name="side">
     <Card title="Side part">I'm on the side part</Card>
@@ -459,6 +514,9 @@ class Router extends React.Component {
 ### With dropdown menu
 
 ```jsx
+import * as React from "react"
+import { HeaderMenu, Page, Card } from "@operational/components"
+
 const options = [
   { label: "Payroll", onClick: () => {} },
   { label: "All Databases", onClick: () => {} },
@@ -483,7 +541,9 @@ const actions = (
 `Page` components support rendering an opinionated confirm box through a method in its context.
 
 ```jsx
-<Page title="Delete the internet">
+import * as React from "react"
+import { Page, Card, Button } from "@operational/components"
+;<Page title="Delete the internet">
   {({ confirm }) => (
     <Card title="The red button">
       <p>
@@ -523,6 +583,9 @@ const actions = (
 `Page` components support rendering an opinionated confirm box through a method in its context.
 
 ```jsx
+import * as React from "react"
+import { Page, PageContent, Card, Button } from "@operational/components"
+
 const Tab = props => (
   <PageContent>
     {({ confirm }) => (
@@ -589,6 +652,8 @@ const Tab = props => (
 `Page` components support rendering an opinionated confirm box through a method in its context.
 
 ```jsx
+import * as React from "react"
+import { Page, Card, Button, Input, Body, CardColumns, CardColumn, CardItem } from "@operational/components"
 ;<Page title="Advanced case">
   {({ confirm }) => (
     <Card title="With internal state management">
@@ -659,7 +724,9 @@ const Tab = props => (
 Modals are a more flexible alternative to the confirm box, that may contain anything, and are not tied to the cancel and confirm button structure.
 
 ```jsx
-<Page title="With a modal">
+import * as React from "react"
+import { Page, Card, Button } from "@operational/components"
+;<Page title="With a modal">
   {({ confirm, modal }) => (
     <Card
       action={
@@ -711,7 +778,9 @@ Modals are a more flexible alternative to the confirm box, that may contain anyt
 ### Render a confirm in a modal
 
 ```jsx
-<Page title="Confirmation in modal">
+import * as React from "react"
+import { Page, Card, Button } from "@operational/components"
+;<Page title="Confirmation in modal">
   {({ confirm, modal }) => (
     <Card
       action={
@@ -762,8 +831,4 @@ Modals are a more flexible alternative to the confirm box, that may contain anyt
     </Card>
   )}
 </Page>
-```
-
-```
-
 ```

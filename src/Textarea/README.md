@@ -5,6 +5,8 @@ A textarea field, with optional label, hint and error.
 The following snippet show the text area with various visual additions handling fixed heights, errors and hints.
 
 ```jsx
+import { Form, Textarea, Icon } from "@operational/components"
+
 json = JSON.stringify({ test: 123 }, null, 2)
 
 initialState = {
@@ -65,16 +67,20 @@ const handleChange = key => value => {
 Text areas detect a `cmd+enter` submit through an `onSubmit` prop, like so:
 
 ```jsx
-initialState = {
-  value: "Type something",
-  submittedValue: undefined,
+import * as React from "react"
+import { Textarea } from "@operational/components"
+
+const MyOtherComponent = () => {
+  const [value, setValue] = React.useState("Type something")
+  const [submittedValue, setSubmittedValue] = React.useState(undefined)
+
+  return (
+    <>
+      <Textarea value={value} onChange={setValue} onSubmit={() => setSubmittedValue(value)} />
+      {submittedValue ? <p>Submitted: {submittedValue}</p> : <p>Submit by hitting cmd+enter</p>}
+    </>
+  )
 }
-;<>
-  <Textarea
-    value={state.value}
-    onChange={newValue => setState(() => ({ value: newValue }))}
-    onSubmit={() => setState(prevState => ({ submittedValue: prevState.value }))}
-  />
-  {state.submittedValue ? <p>Submitted: {state.submittedValue}</p> : <p>Submit by hitting cmd+enter</p>}
-</>
+
+;<MyOtherComponent />
 ```

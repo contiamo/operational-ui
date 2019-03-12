@@ -5,7 +5,9 @@ Tables simply render a semantic HTML table structure based on raw data.
 You can render a simple use-case of the table by specifying a list of records and supplying the columns as a list of strings which would serve both as column heading and access keys for fields.
 
 ```jsx
-<Table
+import * as React from "react"
+import { Table } from "@operational/components"
+;<Table
   data={[{ name: "Max", profession: "Carpenter" }, { name: "Moritz", profession: "Baker" }]}
   columns={["name", "profession"]}
 />
@@ -16,7 +18,9 @@ You can render a simple use-case of the table by specifying a list of records an
 Tables perform better with a forced fixed layout, since the browser doesn't have to recalculate positions depending on the contents of the table. Here's what the same table looks like with a fixed layout.
 
 ```jsx
-<Table
+import * as React from "react"
+import { Table } from "@operational/components"
+;<Table
   fixedLayout
   data={[{ name: "Max", profession: "Carpenter" }, { name: "Moritz", profession: "Baker" }]}
   columns={["name", "profession"]}
@@ -26,7 +30,9 @@ Tables perform better with a forced fixed layout, since the browser doesn't have
 ### Simple Usage without Header
 
 ```jsx
-<Table
+import * as React from "react"
+import { Table } from "@operational/components"
+;<Table
   headless
   data={[{ name: "Max", profession: "Carpenter" }, { name: "Moritz", profession: "Baker" }]}
   columns={["name", "profession"]}
@@ -42,6 +48,9 @@ We suggest taking the time to think about the best way to describe the data fiel
 In this case, simple functions taking an individual record as an argument specify how cells should be rendered in a given column:
 
 ```jsx
+import * as React from "react"
+import { Table, Icon, Chip, AvatarGroup } from "@operational/components"
+
 const data = [
   {
     name: "Mega Deal Dev",
@@ -80,7 +89,7 @@ const data = [
 ;<Table
   data={data}
   columns={[
-    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+    { heading: "", cell: dataEntry => <Icon name="Bundle" color="primary" /> },
     { heading: "Name", cell: dataEntry => dataEntry.name },
     { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
     { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
@@ -95,6 +104,9 @@ const data = [
 We can customize the look of the table by specifying a `width` property on certain columns.
 
 ```jsx
+import * as React from "react"
+import { Table, Chip, AvatarGroup, Icon } from "@operational/components"
+
 const data = [
   {
     name: "Mega Deal Dev",
@@ -133,7 +145,7 @@ const data = [
 ;<Table
   data={data}
   columns={[
-    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+    { heading: "", cell: dataEntry => <Icon name="Bundle" color="primary" /> },
     { heading: "Name", width: 600, cell: dataEntry => dataEntry.name },
     { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
     {
@@ -150,6 +162,9 @@ const data = [
 ### With icons
 
 ```jsx
+import * as React from "react"
+import { Table, Icon, Chip } from "@operational/components"
+
 const data = [
   {
     name: "Mega Deal Dev",
@@ -171,7 +186,7 @@ const data = [
   data={data}
   icon={dataEntry => "Building"}
   columns={[
-    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+    { heading: "", cell: dataEntry => <Icon name="Bundle" color="primary" /> },
     { heading: "Name", cell: dataEntry => dataEntry.name },
     { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
     { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
@@ -183,6 +198,9 @@ const data = [
 ### With default row action
 
 ```jsx
+import * as React from "react"
+import { Table, Icon, Chip } from "@operational/components"
+
 const data = [
   {
     name: "Mega Deal Dev",
@@ -205,7 +223,7 @@ const data = [
   icon={dataEntry => "Building"}
   iconColor={dataEntry => (dataEntry.name.indexOf("Mega") > -1 ? "primary" : "gray")}
   columns={[
-    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+    { heading: "", cell: dataEntry => <Icon name="Bundle" color="primary" /> },
     { heading: "Name", cell: dataEntry => dataEntry.name },
     { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
     { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
@@ -220,6 +238,9 @@ const data = [
 Row actions are specified as a function of an individual record, returning action items conforming to the [ContextMenu](/#ContextMenu) API. The function in the `rowActions` prop can return either the action items as an array or the `ActionMenu` node itself.
 
 ```jsx
+import * as React from "react"
+import { Table, Chip, AvatarGroup, Icon } from "@operational/components"
+
 const data = [
   {
     name: "Mega Deal Dev",
@@ -258,7 +279,7 @@ const data = [
 ;<Table
   data={data}
   columns={[
-    { heading: "", cell: dataEntry => <Icon name="Box" color="info" /> },
+    { heading: "", cell: dataEntry => <Icon name="Bundle" color="primary" /> },
     { heading: "Name", cell: dataEntry => dataEntry.name },
     { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
     { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
@@ -287,7 +308,9 @@ const data = [
 Tables render a default empty view if no records are specified.
 
 ```jsx
-<Table columns={["", "Name", "Last updated", "Tags", "Collaborators"]} data={[]} />
+import * as React from "react"
+import { Table } from "@operational/components"
+;<Table columns={["", "Name", "Last updated", "Tags", "Collaborators"]} data={[]} />
 ```
 
 ### With sorting
@@ -295,53 +318,60 @@ Tables render a default empty view if no records are specified.
 Tables can be sorted by custom logic, it's totally up to you to implement the sort logic that you need.
 
 ```jsx
-initialState = {
-  data: [
+import * as React from "react"
+import { Table, Chip } from "@operational/components"
+
+const MyComponent = () => {
+  const [data, setData] = React.useState([
     { name: "Imogen", tags: ["d3js"] },
     { name: "Tejas", tags: ["lambda"] },
     { name: "Fabien", tags: ["regex"] },
     { name: "Peter", tags: ["webGL"] },
-  ],
-  nameSortOrder: undefined,
-  tagSortOrder: undefined,
+  ])
+  const [nameSortOrder, setNameSortOrder] = React.useState(undefined)
+  const [tagSortOrder, setTagSortOrder] = React.useState(undefined)
+
+  const sortData = (order, key) => {
+    if (key === "name") {
+      setData(
+        data.sort((a, b) => {
+          if (order === "asc") return a.name < b.name ? -1 : 1
+          return a.name > b.name ? -1 : 1
+        }),
+      )
+      setNameSortOrder(order)
+      setTagSortOrder(undefined)
+    } else {
+      setData(
+        data.sort((a, b) => {
+          if (order === "asc") return a.tags[0] < b.tags[0] ? -1 : 1
+          return a.tags[0] > b.tags[0] ? -1 : 1
+        }),
+      )
+      setNameSortOrder(undefined)
+      setTagSortOrder(order)
+    }
+  }
+  return (
+    <Table
+      data={data}
+      columns={[
+        {
+          heading: "Name",
+          cell: i => i.name,
+          sortOrder: nameSortOrder,
+          onSortClick: order => sortData(order, "name"),
+        },
+        {
+          heading: "Tags",
+          cell: i => i.tags.map(t => <Chip key={t}>{t}</Chip>),
+          sortOrder: tagSortOrder,
+          onSortClick: order => sortData(order, "tag"),
+        },
+      ]}
+    />
+  )
 }
 
-const sortData = (order, key) => {
-  if (key === "name") {
-    setState({
-      data: state.data.sort((a, b) => {
-        if (order === "asc") return a.name < b.name ? -1 : 1
-        return a.name > b.name ? -1 : 1
-      }),
-      nameSortOrder: order,
-      tagSortOrder: undefined,
-    })
-  } else {
-    setState({
-      data: state.data.sort((a, b) => {
-        if (order === "asc") return a.tags[0] < b.tags[0] ? -1 : 1
-        return a.tags[0] > b.tags[0] ? -1 : 1
-      }),
-      nameSortOrder: undefined,
-      tagSortOrder: order,
-    })
-  }
-}
-;<Table
-  data={state.data}
-  columns={[
-    {
-      heading: "Name",
-      cell: i => i.name,
-      sortOrder: state.nameSortOrder,
-      onSortClick: order => sortData(order, "name"),
-    },
-    {
-      heading: "Tags",
-      cell: i => i.tags.map(t => <Chip key={t}>{t}</Chip>),
-      sortOrder: state.tagSortOrder,
-      onSortClick: order => sortData(order, "tag"),
-    },
-  ]}
-/>
+;<MyComponent />
 ```

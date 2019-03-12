@@ -3,7 +3,9 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 ### Usage
 
 ```jsx
-<Card title="Bundle information">
+import * as React from "react"
+import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@operational/components"
+;<Card title="Bundle information">
   <p>Here is the information available about this bundle.</p>
   <CardColumns>
     <CardColumn title="Contributors">
@@ -20,7 +22,9 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 ### With a smaller card
 
 ```jsx
-<div style={{ width: 280 }}>
+import * as React from "react"
+import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@operational/components"
+;<div style={{ width: 280 }}>
   <Card title="Bundle information">
     <p>Here is the information available about this bundle.</p>
     <CardColumns>
@@ -39,7 +43,9 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 ### With an image
 
 ```jsx
-<div style={{ width: 280 }}>
+import * as React from "react"
+import { Card, CardColumns, CardColumn, Chip } from "@operational/components"
+;<div style={{ width: 280 }}>
   <Card title="Bundle information">
     <p>Here is the information available about this bundle.</p>
     <CardColumns>
@@ -58,7 +64,9 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 ### With content on the right
 
 ```jsx
-<Card title="Playground">
+import * as React from "react"
+import { Card, CardColumns, CardColumn, Textarea, Code, Button } from "@operational/components"
+;<Card title="Playground">
   <CardColumns>
     <CardColumn title="Input">
       <Textarea code value="hello-word" />
@@ -93,7 +101,9 @@ The `CardColumns` component is used as a wrapper around groups of `CardColumn` c
 Change the following to `columns={4}` on line 3 to see the columns shift.
 
 ```jsx
-<Card title="Bundle information">
+import * as React from "react"
+import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@operational/components"
+;<Card title="Bundle information">
   <p>Here is the information available about this bundle.</p>
   <CardColumns columns={3}>
     <CardColumn title="Contributors">
@@ -118,7 +128,8 @@ Change the following to `columns={4}` on line 3 to see the columns shift.
 Columns will always wrap and overflow if their containing element is not wide enough for them.
 
 ```jsx
-<Card title="Bundle information">
+import { Card, AvatarGroup, CardColumn, Avatar, Chip } from "@operational/components"
+;<Card title="Bundle information">
   <p>Here is the information available about this bundle.</p>
   <CardColumns columns={3} style={{ width: "200px" }}>
     <CardColumn title="Contributors">

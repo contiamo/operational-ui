@@ -3,7 +3,9 @@ A simple component to display a message
 ### Usage
 
 ```jsx
-<>
+import * as React from "react"
+import { Message } from "@operational/components"
+;<>
   <Message type="info" body="This is an informative message" title="Info" />
   <Message type="warning" body="This is a warning message" title="Warning" />
   <Message type="error" body="This is an error message" title="Error" />

@@ -3,7 +3,9 @@ Sometimes, we'd like to show someone's name and email address. This component le
 ## Basic Usage
 
 ```jsx
-<>
+import * as React from "react"
+import { Contact } from "@operational/components"
+;<>
   <Contact name="Luke Cage" meta="harlems.hero@gmail.com" />
   <br />
   <Contact name="Danny Rand" />
@@ -17,9 +19,14 @@ Sometimes, we'd like to show someone's name and email address. This component le
 In some cases, this component will be required to pair with an `Avatar`. Consider,
 
 ```jsx
-initialState = { name: "Kenye Wheelest", email: "kweezy@notformidablelabs.com" }
+import * as React from "react"
+import { Contact, Avatar } from "@operational/components"
+
+const name = "Kenye Wheelest"
 ;<div style={{ display: "flex" }}>
-  <Avatar style={{ marginRight: 8 }} name={state.name} />
-  <Contact name={state.name} meta={state.email} />
+  <div style={{ marginRight: 8 }}>
+    <Avatar name={name} />
+  </div>
+  <Contact name={name} meta="kweezy@notformidablelabs.com" />
 </div>
 ```

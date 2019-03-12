@@ -3,7 +3,9 @@ This component renders Markdown, Operational UI style.
 # Basic Usage
 
 ```jsx
-<Markdown
+import * as React from "react"
+import { Markdown } from "@operational/components"
+;<Markdown
   value={`# Operational UI Components
 
 The \`@operational/components\` package contains _simple_, **stateless** UI building blocks - your typical input fields, buttons, cards, grids, and so on. See [demo and docs](https://operational-ui.js.org/).
@@ -59,7 +61,9 @@ No chickens were harmed in the making of this table. ❤️
 Here's another Markdown case, just for fun.
 
 ```jsx
-<Markdown
+import * as React from "react"
+import { Markdown } from "@operational/components"
+;<Markdown
   value={`### An h3 header ###
 
 Now a nested list:
