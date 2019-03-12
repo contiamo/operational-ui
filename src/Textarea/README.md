@@ -10,6 +10,7 @@ import { Form, Textarea, Icon } from "@operational/components"
 json = JSON.stringify({ test: 123 }, null, 2)
 
 initialState = {
+  v0: "",
   v1: "",
   v2: "",
   v3: "",
@@ -25,6 +26,9 @@ const handleChange = key => value => {
   setState(() => ({ [key]: value }))
 }
 ;<Form>
+  <div>
+    <Textarea value={state.v0} onChange={handleChange("v0")} />
+  </div>
   <div>
     <Textarea value={state.v1} onChange={handleChange("v1")} label="simple" />
     <Textarea value={state.v4} onChange={handleChange("v4")} label="with error" error="oh no!" />

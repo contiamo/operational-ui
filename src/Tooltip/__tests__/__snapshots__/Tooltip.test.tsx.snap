@@ -16,6 +16,7 @@ exports[`Tooltip Component Should intialize without problems 1`] = `
   </div>
   <div
     class="operational-ui-tooltip css-1c004wu-tooltip"
+    role="tooltip"
   >
     <p>
       Hello

@@ -3,11 +3,14 @@ import * as React from "react"
 import Hint from "../Hint/Hint"
 import Icon, { IconName } from "../Icon/Icon"
 import { LabelText } from "../LabelText/LabelText"
-import { DefaultProps } from "../types"
+import { DefaultInputProps, DefaultProps } from "../types"
+import { useUniqueId } from "../useUniqueId"
 import { FormFieldControl, FormFieldControls, Label } from "../utils/mixins"
 import InputField from "./Input.Field"
 
-export interface BaseProps extends DefaultProps {
+export interface BaseProps extends DefaultProps, DefaultInputProps {
+  /** The ID for this element, for accessibility et al */
+  id?: string
   /** Text displayed when the input field has no value. */
   placeholder?: string
   /** The name used to refer to the input, for forms. */
@@ -63,18 +66,42 @@ export interface BasePropsWithoutCopy extends BaseProps {
 
 export type InputProps = BasePropsWithCopy | BasePropsWithoutCopy
 
-const Input: React.SFC<InputProps> = ({ fullWidth, label, labelId, hint, onToggle, disabled, ...props }) => {
-  const forAttributeId = label && labelId
-  const Field = <InputField fullWidth={fullWidth} disabled={disabled} {...props} />
+const Input: React.SFC<InputProps> = ({
+  id,
+  tabIndex,
+  fullWidth,
+  label,
+  labelId,
+  hint,
+  onToggle,
+  disabled,
+  ...props
+}) => {
+  const uniqueId = useUniqueId(id)
+
+  const Field = (
+    <InputField
+      hint={hint}
+      tabIndex={tabIndex}
+      label={label}
+      id={uniqueId}
+      fullWidth={fullWidth}
+      disabled={disabled}
+      aria-labelledby={label ? `input-label-${uniqueId}` : undefined}
+      aria-describedby={hint ? `input-hint-${uniqueId}` : undefined}
+      aria-label={label}
+      {...props}
+    />
+  )
 
   if (label) {
     return (
-      <Label fullWidth={fullWidth} htmlFor={forAttributeId}>
+      <Label fullWidth={fullWidth} id={uniqueId ? `input-label-${uniqueId}` : `input-label-${label}`}>
         <LabelText>{label}</LabelText>
         {(hint || onToggle) && (
           <FormFieldControls>
-            {hint && <Hint>{hint}</Hint>}
-            {onToggle ? (
+            {hint && <Hint textId={`input-hint-${uniqueId}`}>{hint}</Hint>}
+            {onToggle && (
               <FormFieldControl
                 onClick={() => {
                   if (onToggle) {
@@ -84,7 +111,7 @@ const Input: React.SFC<InputProps> = ({ fullWidth, label, labelId, hint, onToggl
               >
                 <Icon name={disabled ? "Lock" : "Unlock"} size={12} />
               </FormFieldControl>
-            ) : null}
+            )}
           </FormFieldControls>
         )}
         {Field}

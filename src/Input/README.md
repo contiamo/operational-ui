@@ -8,23 +8,23 @@ const MyComponent = () => {
   const [value, setValue] = React.useState("")
   return (
     <Form>
-      <Input value={value} onChange={setValue} />
-      <Input placeholder="Name here" value={value} onChange={setValue} />
-      <Input placeholder="flying-monkeys" label="Username" value={value} onChange={setValue} />
+      <Input value={state.value} onChange={value => setState(value)} />
+      <Input placeholder="Name here" value={state.value} onChange={value => setState(value)} />
+      <Input placeholder="flying-monkeys" label="Username" value={state.value} onChange={value => setState(value)} />
       <Input
         type="password"
         placeholder="Security to the max! 🔒"
         label="Password"
         name="password"
-        value={value}
-        onChange={setValue}
+        value={state.value}
+        onChange={value => setState(value)}
       />
       <div>
         <Input
+          value={state.value}
           label="Phone number"
           hint="Your phone number is a wonderful construct that people can call you on. Phones are great. We love phones."
-          value={value}
-          onChange={setValue}
+          onChange={value => setState(value)}
         />
       </div>
     </Form>
@@ -48,41 +48,31 @@ const MyOtherComponent = () => {
 ;<MyOtherComponent />
 ```
 
-### Pre-set Value
-
-```jsx
-import * as React from "react"
-import { Input } from "@operational/components"
-;<Input value="I came from an Autocomplete or something..." preset />
-```
-
-### In a small container
+### With Locked State
 
 ```jsx
 import * as React from "react"
 import { Input } from "@operational/components"
 
-const MyThirdComponent = () => {
-  const [isInputLocked, setIsInputLocked] = React.useState(true)
+const MyComponent = () => {
+  const [isInputLocked, setInputLocked] = React.useState(true)
   return (
     <Input
-      value="My Storage Unit"
-      label="Database Name"
-      onToggle={() => setIsInputLocked(!isInputLocked)}
-      disabled={isInputLocked}
-      hint={isInputLocked ? "Click the lock to change this" : "This value can now be changed"}
-    />
-  )
-}
+    value="My Storage Unit"
+  label="Database Name"
+  onToggle={() => setState(!isInputLocked)}
+  disabled={isInputLocked}
+  hint={isInputLocked ? "Click the lock to change this" : "This value can now be changed"}
+/>)
 
-;<MyThirdComponent />
+;<MyComponent />
 ```
 
-### With toggle state
+### With an Error
 
 ```jsx
 import * as React from "react"
-import { Form, Input } from "@operational/components"
+import { Input, Form } from "@operational/components"
 ;<Form>
   <div>
     <Input id="help-usa" label="Orange Man" value="Build the wall!" error="Nope, unity." />
@@ -91,22 +81,20 @@ import { Form, Input } from "@operational/components"
 </Form>
 ```
 
-### With Error
+### With an Action Button
 
 ```jsx
-import * as React from "react"
-import { Input } from "@operational/components"
-;<Input
+<Input
   value="JNAPE92"
   label="Employee ID"
   icon="User"
   onIconClick={() => {
-    console.log("clicked icon")
+    alert("You have clicked on JNAPE92!")
   }}
 />
 ```
 
-### With `copy` option
+### Copyable Input
 
 You can have a field with a "copy to clipboard" button with the `copy` prop.
 

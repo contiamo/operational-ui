@@ -1,17 +1,27 @@
+import noop from "lodash/noop"
 import qs from "qs"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
+
+import { isClient } from "../utils/isClient"
 
 /**
  * Bunch of method that depends on `window`
  *
  * This is mostly for testing purpose but can also be used for SSR.
  */
-const options = {
-  getSearch: () => window.location.search,
-  getHash: () => window.location.hash,
-  getPathname: () => window.location.pathname,
-  replaceState: window.history.replaceState.bind(window.history),
-}
+const options = isClient()
+  ? {
+      getSearch: () => window.location.search,
+      getHash: () => window.location.hash,
+      getPathname: () => window.location.pathname,
+      replaceState: window.history.replaceState.bind(window.history),
+    }
+  : {
+      getSearch: noop,
+      getHash: noop,
+      getPathname: noop,
+      replaceState: noop,
+    }
 
 /**
  * Parse the search to object.
@@ -34,7 +44,7 @@ export const useURLState = <T>(
   { getHash, getPathname, replaceState, getSearch } = options,
 ): [T, Dispatch<SetStateAction<T>>] => {
   // Retrieve the value from the url search param
-  const searchValue: any = getSearchParams(getSearch())[name]
+  const searchValue: any = getSearchParams(getSearch() || "")[name]
 
   // Check if the value is valid, regarding the validator
   const encodedValue = decoder(searchValue)
@@ -44,7 +54,7 @@ export const useURLState = <T>(
 
   // Update the url search param on state update
   useEffect(() => {
-    const params = getSearchParams(getSearch())
+    const params = getSearchParams(getSearch() || "")
     params[name] = value
     const search = `?${qs.stringify(params)}`
     replaceState({}, "", `${getPathname()}${search === "?" ? "" : search}${getHash()}`)
