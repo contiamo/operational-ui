@@ -29,14 +29,14 @@ const handleChange = key => value => {
   <div>
     <Textarea value={state.v0} onChange={handleChange("v0")} />
   </div>
-  <div>
+  <div style={{ verticalAlign: "top" }}>
     <Textarea value={state.v1} onChange={handleChange("v1")} label="simple" />
     <Textarea value={state.v4} onChange={handleChange("v4")} label="with error" error="oh no!" />
     <Textarea value={state.v5} onChange={handleChange("v5")} label="with hint" hint="this is a hint" />
     <Textarea value={state.v6} onChange={handleChange("v6")} label="disabled" disabled />
     <Textarea value={state.v7} onChange={handleChange("v7")} label="a code" code />
     <Textarea value={state.v8} onChange={handleChange("v8")} label="fixed height" height={200} />
-    <Textarea value={state.v8} onChange={handleChange("v8")} label="with placeholder" placeholder={json} />
+    <Textarea value={state.v9} onChange={handleChange("v8")} label="with placeholder" placeholder={json} />
   </div>
   <div>
     <Textarea copy value={state.v2} onChange={handleChange("v2")} label="with copying" />
