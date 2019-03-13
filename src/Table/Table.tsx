@@ -218,12 +218,7 @@ function Table<T>({
               }
               const dataEntryRowActions = rowActions(dataEntry)
               return (
-                <Actions
-                  onClick={(ev: React.SyntheticEvent<Node>) => {
-                    // Table row click should not trigger if this action menu is manipulated
-                    ev.stopPropagation()
-                  }}
-                >
+                <Actions>
                   {Array.isArray(dataEntryRowActions) ? (
                     <ActionMenu stickyTitle items={dataEntryRowActions as ActionMenuProps["items"]} />
                   ) : (
