@@ -8,7 +8,7 @@ import { useOperationalContext } from "../OperationalContext/OperationalContext"
 import { DefaultInputProps, DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
 import { isCmdEnter, lighten } from "../utils"
-import { FormFieldControls, FormFieldError, inputFocus, Label } from "../utils/mixins"
+import { FormFieldControls, Label } from "../utils/mixins"
 import styled from "../utils/styled"
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
@@ -56,72 +56,36 @@ export interface State {
 
 const TextareaComp = styled("textarea")<{
   isCode: boolean
-  isError: boolean
-  isAction: boolean
   disabled: boolean
   resize: ResizeOptions
   height?: number
-}>(({ theme, isCode, isError, isAction, disabled, resize, height }) => {
+}>(({ theme, isCode, resize, height }) => {
   return {
     height,
     resize,
     fontSize: theme.font.size.body,
     fontWeight: theme.font.weight.regular,
-    position: "relative",
     display: "block",
     width: "100%",
     minHeight: 120,
-    borderRadius: isAction ? `0 0 ${theme.borderRadius}px ${theme.borderRadius}px` : theme.borderRadius,
-    borderColor: isError ? theme.color.error : theme.color.border.default,
-    padding: `${theme.space.small}px ${theme.space.medium}px ${theme.space.small}px ${theme.space.medium}px`,
+    padding: `${theme.space.small}px ${theme.space.medium}px`,
     fontFamily: isCode ? "monospace" : theme.font.family.main,
-    opacity: disabled ? 0.6 : 1.0,
-    ...(isAction ? { borderTop: 0 } : {}),
-    ":focus ~ div": {
-      borderColor: isError ? theme.color.error : theme.color.primary,
-    },
-    ":focus ~ div:after": {
-      content: "''",
-      position: "absolute",
-      left: -4,
-      right: -4,
-      ...(isError
-        ? {
-            top: 2,
-            bottom: -4,
-            borderRadius: `0 0 5px 5px`,
-            border: `3px ${lighten(theme.color.error, 60)} solid`,
-            borderTop: 0,
-          }
-        : {
-            top: -4,
-            bottom: 2,
-            borderRadius: `5px 5px 0 0`,
-            border: `3px ${lighten(theme.color.primary, 40)} solid`,
-            borderBottom: 0,
-          }),
-    },
-    ":focus": inputFocus({
-      theme,
-      isError,
-    }),
+    outline: "none",
+    border: "none",
+    borderRadius: theme.borderRadius - 1,
   }
 })
 
-const ActionHeader = styled("div")<{ isLabel: boolean }>(({ theme }) => ({
+const ActionHeader = styled("div")(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
-  padding: `${theme.space.base}px ${theme.space.small}px`,
   color: theme.color.text.lighter,
-  width: `100%`,
-  position: "absolute",
-  top: 2,
   backgroundColor: theme.color.background.lighter,
-  borderRadius: `${theme.borderRadius}px ${theme.borderRadius}px 0 0`,
-  zIndex: theme.zIndex.formFieldError,
+  padding: `${theme.space.base}px ${theme.space.small}px`,
+  width: `100%`,
   display: "flex",
   justifyContent: "flex-end",
-  border: `${theme.color.border.default} 1px solid`,
-  borderBottom: 0,
+  borderTopLeftRadius: theme.borderRadius - 1,
+  borderTopRightRadius: theme.borderRadius - 1,
   /**
    * Use case: External Links typically have <Icon/>s next to them.
    */
@@ -142,6 +106,31 @@ const ActionHeader = styled("div")<{ isLabel: boolean }>(({ theme }) => ({
   },
 }))
 
+const Outline = styled("div")<{
+  error: boolean
+  disabled: boolean
+  focus: boolean
+}>(({ theme, error, focus, disabled }) => ({
+  boxShadow: focus
+    ? `0 0 0 3px ${error ? lighten(theme.color.error, 60) : lighten(theme.color.primary, 40)}`
+    : "initial",
+  borderRadius: `2px`,
+  border: `${theme.color.border.default} 1px solid`,
+  borderColor: error ? theme.color.error : theme.color.border.default,
+  opacity: disabled ? 0.6 : 1.0,
+}))
+
+const FormFieldError = styled("div")(({ theme }) => ({
+  fontSize: theme.font.size.fineprint,
+  color: theme.color.error,
+  padding: `${theme.space.base / 2}px ${theme.space.medium}px`,
+  marginBottom: 0,
+  width: "100%",
+  borderBottomLeftRadius: theme.borderRadius - 1,
+  borderBottomRightRadius: theme.borderRadius - 1,
+  backgroundColor: lighten(theme.color.error, 60),
+}))
+
 const Textarea: React.FC<TextareaProps> = ({
   id,
   fullWidth,
@@ -160,10 +149,25 @@ const Textarea: React.FC<TextareaProps> = ({
   copy = false,
   resize = "vertical",
   tabIndex,
+  placeholder,
   ...props
 }) => {
   const { pushMessage } = useOperationalContext()
   const uniqueId = useUniqueId(id)
+  const [focus, setFocus] = React.useState(false)
+
+  const focusHandler = (ev: React.FocusEvent<HTMLTextAreaElement>) => {
+    setFocus(true)
+    if (onFocus) {
+      onFocus(ev)
+    }
+  }
+  const blurHandler = (ev: React.FocusEvent<HTMLTextAreaElement>) => {
+    setFocus(false)
+    if (onBlur) {
+      onBlur(ev)
+    }
+  }
 
   return (
     <Label id={`textarea-label-${uniqueId}`} {...props} fullWidth={fullWidth}>
@@ -173,47 +177,51 @@ const Textarea: React.FC<TextareaProps> = ({
           <Hint textId={`textarea-hint-${uniqueId}`}>{hint}</Hint>
         </FormFieldControls>
       )}
-      <TextareaComp
-        id={`textarea-field-${uniqueId}`}
-        aria-label={label ? label : undefined}
-        aria-labelledby={`textarea-label-${uniqueId}`}
-        aria-describedby={hint ? `textarea-hint-${uniqueId}` : undefined}
-        disabled={disabled}
-        isCode={code}
-        value={value}
-        isError={Boolean(error)}
-        isAction={Boolean(action || copy)}
-        resize={resize}
-        height={height}
-        onFocus={onFocus}
-        tabIndex={tabIndex}
-        onBlur={onBlur}
-        onKeyDown={(ev: React.KeyboardEvent<HTMLTextAreaElement>) => {
-          if (isCmdEnter(ev) && onSubmit) {
-            onSubmit()
-          }
-        }}
-        onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-          if (!onChange) {
-            return
-          }
-          onChange(e.target.value)
-        }}
-      />
-      {(action || copy) && (
-        <ActionHeader isLabel={Boolean(label)}>
-          {action}
-          {copy && (
-            <CopyToClipboard text={value} onCopy={() => pushMessage({ type: "success", body: "Successfully Copied" })}>
-              <div role="button" aria-label="Copy to Clipboard">
-                <Icon size={8} name="Copy" />
-                <a>Copy to clipboard</a>
-              </div>
-            </CopyToClipboard>
-          )}
-        </ActionHeader>
-      )}
-      {error && <FormFieldError>{error}</FormFieldError>}
+      <Outline focus={focus} error={Boolean(error)} disabled={disabled}>
+        {(action || copy) && (
+          <ActionHeader>
+            {action}
+            {copy && (
+              <CopyToClipboard
+                text={value}
+                onCopy={() => pushMessage({ type: "success", body: "Successfully Copied" })}
+              >
+                <div role="button" aria-label="Copy to Clipboard">
+                  <Icon size={8} name="Copy" />
+                  <a>Copy to clipboard</a>
+                </div>
+              </CopyToClipboard>
+            )}
+          </ActionHeader>
+        )}
+        <TextareaComp
+          id={`textarea-field-${uniqueId}`}
+          aria-label={label ? label : undefined}
+          aria-labelledby={`textarea-label-${uniqueId}`}
+          aria-describedby={hint ? `textarea-hint-${uniqueId}` : undefined}
+          disabled={disabled}
+          isCode={code}
+          value={value}
+          resize={resize}
+          height={height}
+          tabIndex={tabIndex}
+          placeholder={placeholder}
+          onFocus={focusHandler}
+          onBlur={blurHandler}
+          onKeyDown={(ev: React.KeyboardEvent<HTMLTextAreaElement>) => {
+            if (isCmdEnter(ev) && onSubmit) {
+              onSubmit()
+            }
+          }}
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            if (!onChange) {
+              return
+            }
+            onChange(e.target.value)
+          }}
+        />
+        {error && <FormFieldError>{error}</FormFieldError>}
+      </Outline>
     </Label>
   )
 }

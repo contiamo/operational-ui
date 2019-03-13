@@ -36,7 +36,7 @@ const handleChange = key => value => {
     <Textarea value={state.v6} onChange={handleChange("v6")} label="disabled" disabled />
     <Textarea value={state.v7} onChange={handleChange("v7")} label="a code" code />
     <Textarea value={state.v8} onChange={handleChange("v8")} label="fixed height" height={200} />
-    <Textarea value={state.v8} onChange={handleChange("v8")} label="with placeholder" placeholder={json} />
+    <Textarea value={state.v9} onChange={handleChange("v8")} label="with placeholder" placeholder={json} />
   </div>
   <div>
     <Textarea copy value={state.v2} onChange={handleChange("v2")} label="with copying" />
