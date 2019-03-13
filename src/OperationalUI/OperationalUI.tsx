@@ -173,6 +173,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
               pushState,
               replaceState,
               pushMessage: this.pushMessage,
+              clearMessages: this.clearMessages,
               loading: this.state.isLoading,
               setLoading: this.setLoading,
             }}
@@ -235,6 +236,12 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     if (!this.messageTimerInterval) {
       this.messageTimerInterval = setInterval(() => this.removeOutdatedMessages(), 2000)
     }
+  }
+
+  private clearMessages = () => {
+    this.setState({
+      messages: [],
+    })
   }
 }
 

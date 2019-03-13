@@ -14,6 +14,7 @@ export interface Context {
   pushMessage: (message: IMessage) => void
   loading: boolean
   setLoading: (isLoading: boolean) => void
+  clearMessages: () => void
 }
 
 /**
@@ -24,9 +25,10 @@ export interface Context {
 const defaultContext: Context = {
   pushState: undefined,
   replaceState: undefined,
-  pushMessage: (_: IMessage) => void 0,
+  pushMessage: (_: IMessage) => undefined,
+  clearMessages: () => undefined,
   loading: false,
-  setLoading: (_: boolean) => void 0,
+  setLoading: (_: boolean) => undefined,
 }
 
 const ctx = React.createContext(defaultContext)
