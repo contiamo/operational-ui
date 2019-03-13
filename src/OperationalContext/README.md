@@ -9,7 +9,7 @@ import * as React from "react"
 import { Button, useOperationalContext } from "@operational/components"
 
 const ComponentWithContext = () => {
-  const { pushMessage, setLoading, loading } = useOperationalContext()
+  const { pushMessage, setLoading, loading, clearMessages } = useOperationalContext()
 
   return (
     <div style={{ padding: 20 }}>
@@ -45,6 +45,9 @@ const ComponentWithContext = () => {
         }}
       >
         Create an error message
+      </Button>
+      <Button color="grey" onClick={() => clearMessages()}>
+        Clear messages
       </Button>
       <Button
         onClick={() => {
