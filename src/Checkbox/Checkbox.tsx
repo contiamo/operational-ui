@@ -94,7 +94,7 @@ export interface CheckboxProps {
   disabled?: boolean
 }
 
-const Checkbox: React.SFC<CheckboxProps> = ({ value, onChange, label, disabled }) => {
+const Checkbox: React.FC<CheckboxProps> = ({ value, onChange, label, disabled, ...props }) => {
   const uuid = uniqueId("checkbox_")
 
   return (
@@ -105,6 +105,7 @@ const Checkbox: React.SFC<CheckboxProps> = ({ value, onChange, label, disabled }
         checked={Boolean(value)}
         onChange={() => (onChange ? onChange(!value) : undefined)}
         disabled={disabled}
+        {...props}
       />
       <Label htmlFor={uuid}>{label}</Label>
     </div>
