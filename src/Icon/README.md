@@ -40,7 +40,7 @@ import { Icon } from "@operational/components"
 ```jsx
 import * as React from "react"
 import { Icon, Table, ResourceName, Input } from "@operational/components"
-import * as icons from "@operational/components/Icon/Icon.custom"
+import * as icons from "@operational/components/Icon/Icon.Custom"
 
 const MyComponent = () => {
   const [filter, setFilter] = React.useState("")
