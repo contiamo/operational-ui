@@ -73,7 +73,7 @@
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
     "case": "^1.5.5",
-    "emotion-theming": "^10.0.7",
+    "emotion-theming": "^10.0.9",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "nanoid": "^2.0.1",
