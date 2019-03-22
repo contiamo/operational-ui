@@ -1,13 +1,9 @@
 #!/usr/bin/env groovy
-def label = "jenkins-node-${UUID.randomUUID().toString()}"
+def lib = new contiamo.Methods()
+lib.setEnvVars()
 
-env.K8sCloud = "kubernetes"
-env.GcpProject = "dev-and-test-env"
-env.GcrRegion = "eu.gcr.io"
-env.GcrPrefix = "${env.GcrRegion}/${env.GcpProject}"
-env.BranchLower = env.BRANCH_NAME.toLowerCase()
-env.NpmRegistry = "registry.npmjs.com"
-env.NpmEmail = "contiamo@contiamo.com"
+def label = env.JenkinsSlaveName
+echo "Slave pod name: "+label
 
 /////// List all the downstream projects here:///////
 def downstreamProjects = ["labs-ui","pantheon-ui"]
@@ -19,7 +15,7 @@ def triggerJob(job,branch){
 def npmLogin(registry,user,pass,email){
   sh """
   #!/bin/bash
-  sed s/REGISTRY_PLACEHOLDER/${registry}/g -i /usr/local/bin/npm-login.sh  
+  sed s/REGISTRY_PLACEHOLDER/${registry}/g -i /usr/local/bin/npm-login.sh
   /usr/local/bin/npm-login.sh ${user} ${pass} ${email}
   npm config set //$registry/:always-auth=true
   """
@@ -37,7 +33,7 @@ def buildWebsite(dir,command){
 }
 
 podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
-  containerTemplate(name: 'node', image: "${env.GcrPrefix}/node:10.0.0-v0.5", ttyEnabled: true, resourceRequestMemory: '1Gi', privileged: true),
+  containerTemplate(name: 'node', image: "${env.GcrPrefix}/node:10.0.0-v0.5", ttyEnabled: true, nodeSelector: "group=highmem", privileged: true),
   ],
   volumes: [
       hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
@@ -56,33 +52,37 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
   ]
 )
 {
-  node(label){
-    stage('Git Checkout'){
-      checkout scm
-      checkout ([ $class: 'GitSCM', branches: [[name: "*/${env.BranchLower}"]],         
-        extensions: [[$class: 'LocalBranch', localBranch: env.BranchLower]], 
-      ])
-    }
-    container('node') {
-      stage("Initialize"){
-        sh "node -v && npm -v"
+  timestamps {
+    ansiColor('xterm') {
+      node(label){
+        stage('Git Checkout'){
+          checkout scm
+          checkout ([ $class: 'GitSCM', branches: [[name: "*/${env.BranchLower}"]],
+            extensions: [[$class: 'LocalBranch', localBranch: env.BranchLower]],
+          ])
+        }
+        container('node') {
+          stage("Initialize"){
+            sh "node -v && npm -v"
+          }
+          stage ('YARN Install'){
+            try {
+              sh "yarn install"
+            } catch(e) {
+              error("Failed while running npm install. Error: ${e}")
+            }
+          }
+          stage ('NPM Publish Next Tag') {
+            npmLogin(env.NpmRegistry,"\${NPM_USER}","\${NPM_PASS}",env.NpmEmail)
+            try {
+              npmPublish("next",env.NpmRegistry)
+            } catch(e) {
+              println("Error publishing artefacts. Error: ${e}. Trying again...")
+              npmPublish("next",env.NpmRegistry)
+            }
+          }
+        }
       }
-      stage ('YARN Install'){
-        try {
-          sh "yarn install"
-        } catch(e) {
-          error("Failed while running npm install. Error: ${e}")
-        }
-      }      
-      stage ('NPM Publish Next Tag') {
-        npmLogin(env.NpmRegistry,"\${NPM_USER}","\${NPM_PASS}",env.NpmEmail)
-        try {
-          npmPublish("next",env.NpmRegistry)
-        } catch(e) {
-          println("Error publishing artefacts. Error: ${e}. Trying again...")
-          npmPublish("next",env.NpmRegistry)
-        }
-      }      
     }
   }
 }
