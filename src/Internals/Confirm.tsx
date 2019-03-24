@@ -119,7 +119,7 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
                 Body
               )}
             </ControlledModalContent>
-            <Actions>
+            <Actions data-cy="confirm__actions">
               {cancelButton !== null &&
                 React.cloneElement(
                   typeof cancelButton === "function"
