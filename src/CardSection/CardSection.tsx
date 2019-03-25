@@ -174,7 +174,7 @@ const CardSection: React.SFC<CardSectionProps> = ({
       >
         {title}
         {onToggle && <Icon size={14} name={collapsed ? "ChevronDown" : "ChevronUp"} />}
-        {actions && <StyledActionMenu items={actions} onClick={onActionClick} />}
+        {actions && <StyledActionMenu data-cy="card-section__action-menu" items={actions} onClick={onActionClick} />}
       </Title>
     )}
     {!collapsed && <Content noHorizontalPadding={noHorizontalPadding}>{children}</Content>}
