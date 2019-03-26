@@ -73,6 +73,7 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
             }
           }
           stage ('NPM Publish Next Tag') {
+            env.NpmRegistry = "https://registry.npmjs.org"
             npmLogin(env.NpmRegistry,"\${NPM_USER}","\${NPM_PASS}",env.NpmEmail)
             try {
               npmPublish("next",env.NpmRegistry)
