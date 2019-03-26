@@ -84,7 +84,7 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
           }
           if (env.BranchLower == "master") {
             lib.haveAword('yellow',"Triggering downstream build")
-            stage('Trigger Pantheon UI'){
+            stage('Trigger Contiamo UI'){
               build(job: '../contiamo-ui/master', wait: false, parameters: [
                 [$class: 'StringParameterValue', name: 'UPDATE', value: "operational-ui" ]
               ])
