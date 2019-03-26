@@ -22,7 +22,7 @@ const Container = styled("div")<ProgressProps>(
     overflowX: "hidden",
     textAlign: "center",
     left: 0,
-    position: "absolute",
+    position: "fixed",
     backgroundColor: "transparent",
   },
   ({ theme, bottom }) => ({
