@@ -72,6 +72,7 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
               error("Failed while running npm install. Error: ${e}")
             }
           }
+          env.NpmRegistry = "registry.npmjs.org"
           stage ('NPM Publish Next Tag') {
             env.NpmRegistry = "registry.npmjs.org"
             npmLogin(env.NpmRegistry,"\${NPM_USER}","\${NPM_PASS}",env.NpmEmail)
@@ -80,6 +81,14 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
             } catch(e) {
               println("Error publishing artefacts. Error: ${e}. Trying again...")
               npmPublish("next",env.NpmRegistry)
+            }
+          }
+          if (env.BranchLower == "master") {
+            lib.haveAword('yellow',"Triggering downstream build")
+            stage('Trigger Contiamo UI'){
+              build(job: '../contiamo-ui/master', wait: false, parameters: [
+                [$class: 'StringParameterValue', name: 'UPDATE', value: "operational-ui" ]
+              ])
             }
           }
         }
