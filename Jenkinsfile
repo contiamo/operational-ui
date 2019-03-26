@@ -23,9 +23,9 @@ def npmLogin(registry,user,pass,email){
 def npmPublish(tag,registry){
   sh """
   #!/bin/bash
-  npm whoami --registry ${registry}
-  npm version \$(npm show . version)-\$(git rev-parse --short HEAD) --no-git-tag-version --registry ${registry} --unsafe-perm
-  (npm publish --tag next --registry ${registry} && node ./lambdas/notify-slack-on-publish-next.js \$(npm show . version)-\$(git rev-parse --short HEAD)) || echo "Publish failed, possibly because the SHA is the same. Continuing..."
+  npm whoami --registry https://${registry}
+  npm version \$(npm show . version)-\$(git rev-parse --short HEAD) --no-git-tag-version --registry https://${registry} --unsafe-perm
+  (npm publish --tag next --registry https://${registry} && node ./lambdas/notify-slack-on-publish-next.js \$(npm show . version)-\$(git rev-parse --short HEAD)) || echo "Publish failed, possibly because the SHA is the same. Continuing..."
   """
 }
 def buildWebsite(dir,command){
@@ -73,7 +73,7 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
             }
           }
           stage ('NPM Publish Next Tag') {
-            env.NpmRegistry = "https://registry.npmjs.org"
+            env.NpmRegistry = "registry.npmjs.org"
             npmLogin(env.NpmRegistry,"\${NPM_USER}","\${NPM_PASS}",env.NpmEmail)
             try {
               npmPublish("next",env.NpmRegistry)
