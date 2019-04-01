@@ -1,6 +1,6 @@
 import { Omit } from "emotion-theming/types/helper"
 import * as React from "react"
-import { Draggable, DraggableProps, Droppable, DroppableProps } from "react-beautiful-dnd"
+import { Draggable, DraggableProps, Droppable, DroppableProps, DroppableStateSnapshot } from "react-beautiful-dnd"
 import styled from "../utils/styled"
 import ChildTree from "./ChildTree"
 
@@ -33,6 +33,7 @@ export type Tree = TreeWithChildren | TreeWithoutChildren
 export interface TreeProps {
   trees: Tree[]
   droppableProps?: Omit<DroppableProps, "children">
+  placeholder?: React.ComponentType<DroppableStateSnapshot>
 }
 
 const Container = styled("div")`
@@ -42,8 +43,8 @@ const Container = styled("div")`
   }
 `
 
-const Tree: React.SFC<TreeProps> = ({ trees, droppableProps }) => {
-  const isLowestLevel = trees.some(tree => !tree.childNodes || !tree.childNodes.length)
+const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder }) => {
+  const isLowestLevel = trees.length === 0 || trees.some(tree => !tree.childNodes || !tree.childNodes.length)
 
   /**
    * If this is a category with children, no drag and drop
@@ -61,23 +62,29 @@ const Tree: React.SFC<TreeProps> = ({ trees, droppableProps }) => {
 
   return (
     <Droppable {...droppableProps}>
-      {droppableProvided => (
+      {(droppableProvided, droppableSnapshot) => (
         <Container ref={droppableProvided.innerRef} {...droppableProvided.droppableProps}>
-          {trees.map((treeData, index) => (
-            <Draggable key={index} {...treeData.draggableProps || { draggableId: treeData.label }} index={index}>
-              {draggableProvided => {
-                return (
-                  <ChildTree
-                    forwardRef={draggableProvided.innerRef}
-                    {...treeData}
-                    {...draggableProvided.draggableProps}
-                    {...draggableProvided.dragHandleProps}
-                  />
-                )
-              }}
-            </Draggable>
-          ))}
-          {droppableProvided.placeholder}
+          {trees.length ? (
+            <>
+              {trees.map((treeData, index) => (
+                <Draggable key={index} {...treeData.draggableProps || { draggableId: treeData.label }} index={index}>
+                  {draggableProvided => {
+                    return (
+                      <ChildTree
+                        forwardRef={draggableProvided.innerRef}
+                        {...treeData}
+                        {...draggableProvided.draggableProps}
+                        {...draggableProvided.dragHandleProps}
+                      />
+                    )
+                  }}
+                </Draggable>
+              ))}
+              {droppableProvided.placeholder}
+            </>
+          ) : (
+            placeholder && React.createElement(placeholder, droppableSnapshot)
+          )}
         </Container>
       )}
     </Droppable>
