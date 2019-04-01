@@ -13,6 +13,7 @@ const ChildTree: React.SFC<Props> = ({
   disabled,
   forwardRef,
   childNodes = [],
+  droppableProps,
   onClick,
   onRemove,
   ...props
@@ -44,7 +45,7 @@ const ChildTree: React.SFC<Props> = ({
         color={color}
         onRemove={onRemove}
       />
-      {hasChildren && isOpen && <Tree trees={childNodes} />}
+      {hasChildren && isOpen && <Tree trees={childNodes} droppableProps={droppableProps} />}
     </Container>
   )
 }
