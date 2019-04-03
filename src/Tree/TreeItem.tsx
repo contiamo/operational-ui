@@ -14,11 +14,12 @@ export const Container = styled("div")<{ hasChildren: boolean; disabled: boolean
 const Header = styled("div")<{
   highlight: boolean
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
+  cursor?: string
 }>`
   label: TreeItem;
   display: flex;
   align-items: center;
-  cursor: ${({ onClick }) => (onClick ? "pointer" : "inherit")};
+  cursor: ${({ onClick, cursor }) => cursor || (onClick ? "pointer" : "inherit")};
   background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
   padding: ${({ theme }) => theme.space.base}px;
   border-radius: 2px;
@@ -63,6 +64,7 @@ interface TreeItemProps {
   label: string
   tag?: string
   color?: string
+  cursor?: string
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   onRemove?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
@@ -76,8 +78,9 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   onRemove,
   hasChildren,
   isOpen,
+  cursor,
 }) => (
-  <Header onClick={onNodeClick} highlight={Boolean(highlight)}>
+  <Header onClick={onNodeClick} highlight={Boolean(highlight)} cursor={cursor}>
     {hasChildren && <TreeIcon color="color.text.lightest" size={12} left name={isOpen ? "ChevronDown" : "Add"} />}
     {!hasChildren && tag && (
       <NameTag condensed left color={color}>

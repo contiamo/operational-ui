@@ -12,6 +12,7 @@ interface BaseTree {
   disabled?: boolean
   color?: string
   onClick?: () => void
+  cursor?: string
   onRemove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   forwardRef?: (element?: HTMLElement | null) => any
 }
@@ -80,11 +81,11 @@ const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder }) => {
                   }}
                 </Draggable>
               ))}
-              {droppableProvided.placeholder}
             </>
           ) : (
             placeholder && React.createElement(placeholder, droppableSnapshot)
           )}
+          {droppableProvided.placeholder}
         </Container>
       )}
     </Droppable>

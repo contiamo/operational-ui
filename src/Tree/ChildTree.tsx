@@ -16,6 +16,7 @@ const ChildTree: React.SFC<Props> = ({
   droppableProps,
   onClick,
   onRemove,
+  cursor,
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
@@ -44,6 +45,7 @@ const ChildTree: React.SFC<Props> = ({
         label={label}
         color={color}
         onRemove={onRemove}
+        cursor={cursor}
       />
       {hasChildren && isOpen && <Tree trees={childNodes} droppableProps={droppableProps} />}
     </Container>
