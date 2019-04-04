@@ -133,6 +133,10 @@ const FixedProgress = styled(Progress)`
   width: 100vw;
 `
 
+const PageTitle = styled(Title)`
+  margin: 0;
+`
+
 const initialState = {}
 
 class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
@@ -160,7 +164,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
             {title ? (
               <TitleBar color={color}>
                 <TitleContainer>
-                  <Title>{title}</Title>
+                  <PageTitle>{title}</PageTitle>
                   {condensedTitle && tabsBar}
                   <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
                 </TitleContainer>
@@ -186,7 +190,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
         {title && (
           <TitleBar color={color}>
             <TitleContainer>
-              <Title>{title}</Title>
+              <PageTitle>{title}</PageTitle>
               <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
             </TitleContainer>
           </TitleBar>

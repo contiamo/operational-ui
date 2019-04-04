@@ -8,7 +8,7 @@ export const Title = styled("h1")<{
   fontFamily: theme.font.family.main,
   fontWeight: theme.font.weight.medium,
   lineHeight: theme.font.lineHeight,
-  margin: 0,
+  margin: `0 0 ${theme.space.element}px`,
   color: color ? theme.color.text[color] : "inherit",
 }))
 
