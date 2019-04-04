@@ -34,7 +34,7 @@ const fromTop = (fullSize: boolean) => {
 `
 }
 
-const Container = styled(Card)<{ fullSize: boolean; type: ControlledModalProps["type"] }>(
+export const ModalContainer = styled(Card)<{ fullSize: boolean; type?: ControlledModalProps["type"] }>(
   ({ theme, fullSize, type }) => ({
     top: theme.space.element,
     left: fullSize ? theme.space.element : "50%",
@@ -102,9 +102,9 @@ const ControlledModal: React.SFC<ControlledModalProps> = ({
         }
       }}
     />
-    <Container type={type} className={contentClassName} fullSize={Boolean(fullSize)} title={title} action={action}>
+    <ModalContainer type={type} className={contentClassName} fullSize={Boolean(fullSize)} title={title} action={action}>
       <Content fullSize={Boolean(fullSize)}>{children}</Content>
-    </Container>
+    </ModalContainer>
   </>
 )
 
