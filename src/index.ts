@@ -67,6 +67,7 @@ export { default as Topbar, TopbarProps } from "./Topbar/Topbar"
 export { default as TopbarButton, TopbarButtonProps } from "./TopbarButton/TopbarButton"
 export { default as TopbarSelect, TopbarSelectProps } from "./TopbarSelect/TopbarSelect"
 export { default as Tree, TreeProps } from "./Tree/Tree"
+export { default as TourModal, TourModalProps } from "./TourModal/TourModal"
 export { default as LabelText } from "./LabelText/LabelText"
 
 // Typography components
