@@ -4,7 +4,7 @@ import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import Spinner from "../Spinner/Spinner"
 import { DefaultProps } from "../types"
-import { darken, isModifiedEvent, isOutsideLink, isWhite, readableTextColor } from "../utils"
+import { darken, inputFocus, isModifiedEvent, isOutsideLink, isWhite, readableTextColor } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
@@ -115,6 +115,9 @@ const Button: React.SFC<ButtonProps> = ({
       "&, a:link&, a:visited&": {
         textDecoration: "none",
         color: loading ? "transparent" : expandColor(theme, textColor) || foregroundColor,
+      },
+      ":focus": {
+        ...inputFocus({ theme, isError: color === "error" }),
       },
       ...(!disabled
         ? {
