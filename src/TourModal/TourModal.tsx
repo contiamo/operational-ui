@@ -90,8 +90,6 @@ const TourModal: React.FC<TourModalProps> = ({
     }
   })
 
-  const QuitButton = <SimpleLink onClick={onQuit}>{messages.quit}</SimpleLink>
-
   return (
     <>
       <TourOverlay />
@@ -100,21 +98,16 @@ const TourModal: React.FC<TourModalProps> = ({
           {image && (
             <LeftColumn>
               {image}
-              {center && onQuit && QuitButton}
+              {center && onQuit && <SimpleLink onClick={onQuit}>{messages.quit}</SimpleLink>}
             </LeftColumn>
           )}
           <ChildrenContainer>
             {children}
 
             <Actions center={center || false}>
-              {!center && onQuit && QuitButton}
+              {!center && onQuit && <Button onClick={onQuit}>{messages.quit}</Button>}
               {onContinue && (
-                <Button
-                  aria-label={isLast ? messages.finish : messages.continue}
-                  tabIndex={2}
-                  onClick={onContinue}
-                  color="primary"
-                >
+                <Button aria-label={isLast ? messages.finish : messages.continue} onClick={onContinue} color="primary">
                   {isLast ? messages.finish : messages.continue}
                 </Button>
               )}
