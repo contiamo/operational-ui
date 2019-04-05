@@ -35,7 +35,7 @@ const Box = styled<
   flex-direction: column;
   border-radius: 2px;
   cursor: ${({ onClick }) => (Boolean(onClick) ? "pointer" : "initial")};
-  padding: 0 ${({ theme }) => theme.space.content}px;
+  padding: 0 ${({ theme }) => theme.space.small}px;
   text-align: center;
   word-wrap: break-word;
 

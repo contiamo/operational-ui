@@ -48,7 +48,7 @@ const Actions = styled("div")<{ center: boolean }>`
 
 const Container = styled(Card)<{ center: boolean }>`
   position: fixed;
-  padding: ${({ theme }) => theme.space.small}px;
+  padding: ${({ theme }) => theme.space.content}px;
   top: ${({ center }) => (center ? "50%" : "auto")};
   right: ${({ center }) => (center ? 0 : "40px")};
   bottom: ${({ center }) => (center ? "auto" : "40px")};
