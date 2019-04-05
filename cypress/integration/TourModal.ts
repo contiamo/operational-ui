@@ -34,6 +34,8 @@ describe("Tour Modal", () => {
 
         cy.get("body")
           .tab()
+          .tab()
+          .tab()
           .click()
 
         cy.get('[data-cy="operational-ui-TourModal"]').should("not.exist")
@@ -46,6 +48,9 @@ describe("Tour Modal", () => {
           .click()
 
         cy.get("body")
+          .tab()
+          .tab()
+          .tab()
           .tab()
           .click()
 
@@ -87,6 +92,8 @@ describe("Tour Modal", () => {
 
         cy.get("body")
           .tab()
+          .tab()
+          .tab()
           .click()
 
         cy.get('[data-cy="operational-ui-TourModal"]').should("not.exist")
@@ -99,6 +106,9 @@ describe("Tour Modal", () => {
           .click()
 
         cy.get("body")
+          .tab()
+          .tab()
+          .tab()
           .tab()
           .click()
 
