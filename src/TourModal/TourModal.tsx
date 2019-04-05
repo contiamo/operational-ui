@@ -3,6 +3,8 @@ import * as React from "react"
 import Button from "../Button/Button"
 import Card from "../Card/Card"
 import Overlay from "../Internals/Overlay"
+import SimpleLink from "../SimpleLink/SimpleLink"
+import { useHotkey } from "../useHotkey"
 import styled from "../utils/styled"
 
 export interface TourModalProps {
@@ -11,6 +13,11 @@ export interface TourModalProps {
   isLast?: boolean
   center?: boolean
   image?: React.ReactNode
+  messages?: {
+    quit: string
+    finish: string
+    continue: string
+  }
 }
 
 const Actions = styled("div")<{ center: boolean }>`
@@ -58,8 +65,27 @@ const TourOverlay = styled(Overlay)`
   animation: none;
 `
 
-const TourModal: React.FC<TourModalProps> = ({ center, image, children, onQuit, onContinue, isLast }) => {
-  const QuitButton = <Button onClick={onQuit}>Quit the Tour</Button>
+const TourModal: React.FC<TourModalProps> = ({
+  center,
+  image,
+  children,
+  onQuit,
+  onContinue,
+  isLast,
+  messages = { quit: "Quit the Tour", finish: "Finish", continue: "Continue" },
+}) => {
+  const body = React.useRef(document.body)
+  useHotkey(body, { key: "Escape" }, () => {
+    if (onQuit) {
+      onQuit()
+    }
+  })
+
+  const QuitButton = (
+    <SimpleLink onClick={onQuit} tabIndex={1}>
+      {messages.quit}
+    </SimpleLink>
+  )
 
   return (
     <>
@@ -78,8 +104,13 @@ const TourModal: React.FC<TourModalProps> = ({ center, image, children, onQuit, 
             <Actions center={center || false}>
               {!center && onQuit && QuitButton}
               {onContinue && (
-                <Button onClick={onContinue} color="primary">
-                  {isLast ? "Finish" : "Continue"}
+                <Button
+                  aria-label={isLast ? messages.finish : messages.continue}
+                  tabIndex={2}
+                  onClick={onContinue}
+                  color="primary"
+                >
+                  {isLast ? messages.finish : messages.continue}
                 </Button>
               )}
             </Actions>
