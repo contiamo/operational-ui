@@ -6,7 +6,7 @@ describe("Tour Modal", () => {
   describe("Full Screen Example", () => {
     it("should render correctly", () => {
       cy.contains("View Full Example").click()
-      cy.get(`[data-cy="operational-ui-TourModal"]`).then(el => console.dir(el))
+      cy.get(`[data-cy="operational-ui-TourModal"]`)
     })
     it("should alert on click", () => {
       cy.contains("Continue")
