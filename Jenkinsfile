@@ -69,6 +69,13 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
               error("Failed while running npm install. Error: ${e}")
             }
           }
+          stage ('Test'){
+            try {
+              sh "yarn ci"
+            } catch(e) {
+              error("Failed while running npm ci. Error: ${e}")
+            }
+          }
           env.NpmRegistry = "registry.npmjs.org"
           stage ('NPM Publish Next Tag') {
             env.NpmRegistry = "registry.npmjs.org"
