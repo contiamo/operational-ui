@@ -7,9 +7,7 @@ import SimpleLink from "../SimpleLink/SimpleLink"
 import { useHotkey } from "../useHotkey"
 import styled from "../utils/styled"
 
-export interface TourModalProps {
-  /** What happens when the modal closes? */
-  onQuit: () => void
+interface TourModalBaseProps {
   /** What happens when a user clicks "continue"? */
   onContinue: () => void
   /** Are we on the last item in the tour? */
@@ -28,6 +26,19 @@ export interface TourModalProps {
     continue: string
   }
 }
+
+interface TourModalPropsLast extends TourModalBaseProps {
+  isLast: true
+  onQuit?: never
+}
+
+interface TourModalPropsNotLast extends TourModalBaseProps {
+  isLast?: false
+  /** What happens when the modal closes? */
+  onQuit: () => void
+}
+
+export type TourModalProps = TourModalPropsLast | TourModalPropsNotLast
 
 const Actions = styled("div")<{ center: boolean }>`
   display: flex;
@@ -85,7 +96,7 @@ const TourModal: React.FC<TourModalProps> = ({
 }) => {
   const body = React.useRef(document.body)
   useHotkey(body, { key: "Escape" }, () => {
-    if (onQuit) {
+    if (onQuit && !isLast) {
       onQuit()
     }
   })
