@@ -21,14 +21,15 @@
     "build:styleguide": "styleguidist build",
     "build:package": "rimraf lib && tsc -d",
     "watch": "npm run build:package -- -w",
-    "test": "jest --outputFile test-results.json --json --maxWorkers=$JEST_MAX_WORKERS",
+    "test": "run-p test:*",
+    "test:unit": "jest --outputFile test-results.json --json --maxWorkers=$JEST_MAX_WORKERS",
     "test:e2e": "cypress run",
     "preversion": "npm run build",
     "version": "auto-changelog && git add CHANGELOG.md",
     "precommit": "lint-staged",
     "danger:ci": "danger ci",
     "danger": "[ ! -z $DANGER_GITHUB_API_TOKEN ] && run-p danger:* || echo \"Skipping Danger for External Contributor\"",
-    "ci": "run-p test && run-p danger build"
+    "ci": "npm run test && run-p danger build"
   },
   "lint-staged": {
     "*.(js|jsx|json|md)": [
