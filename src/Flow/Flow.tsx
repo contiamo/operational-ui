@@ -8,8 +8,11 @@ import { inputFocus } from "../utils"
 import styled from "../utils/styled"
 
 export interface FlowProps {
+  /** An array of items in the Flow */
   items: IContextMenuItem[]
+  /** Display in condensed mode? */
   condensed?: boolean
+  /** Which item is currently active? */
   activeItemIndex?: number
 }
 

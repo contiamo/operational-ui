@@ -8,14 +8,23 @@ import { useHotkey } from "../useHotkey"
 import styled from "../utils/styled"
 
 export interface TourModalProps {
-  onQuit?: () => void
+  /** What happens when the modal closes? */
+  onQuit: () => void
+  /** What happens when a user clicks "continue"? */
   onContinue: () => void
+  /** Are we on the last item in the tour? */
   isLast?: boolean
+  /** Is this modal center stage? */
   center?: boolean
+  /** A picture that will be displayed in center-stage mode */
   image?: React.ReactNode
+  /** Text messages for buttons */
   messages?: {
+    /** Default: "Quit the Tour" */
     quit: string
+    /** Default: "Finish" */
     finish: string
+    /** Default: "Continue" */
     continue: string
   }
 }
@@ -81,11 +90,7 @@ const TourModal: React.FC<TourModalProps> = ({
     }
   })
 
-  const QuitButton = (
-    <SimpleLink onClick={onQuit} tabIndex={1}>
-      {messages.quit}
-    </SimpleLink>
-  )
+  const QuitButton = <SimpleLink onClick={onQuit}>{messages.quit}</SimpleLink>
 
   return (
     <>
