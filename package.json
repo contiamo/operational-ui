@@ -22,7 +22,7 @@
     "build:package": "rimraf lib && tsc -d",
     "watch": "npm run build:package -- -w",
     "test": "run-p test:*",
-    "test:unit": "jest --outputFile test-results.json --json --maxWorkers=$JEST_MAX_WORKERS",
+    "test:unit": "jest",
     "test:e2e": "cypress run",
     "preversion": "npm run build",
     "version": "auto-changelog && git add CHANGELOG.md",
