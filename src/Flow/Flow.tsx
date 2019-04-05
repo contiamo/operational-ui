@@ -2,12 +2,12 @@ import React from "react"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 import Icon from "../Icon/Icon"
 import { Body } from "../Typography/Body"
-import constants, { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface FlowProps {
   items: IContextMenuItem[]
-  iconColor?: string
+  condensed?: boolean
+  activeItemIndex?: number
 }
 
 const Container = styled("div")`
@@ -16,15 +16,18 @@ const Container = styled("div")`
   margin-bottom: ${({ theme }) => theme.space.element}px;
 `
 
-const Box = styled<"div", { onClick: FlowProps["items"][-1]["onClick"] }>("div")`
-  width: 120px;
-  height: 80px;
-  border: 1px solid ${({ theme }) => theme.color.border.disabled};
+const Box = styled<
+  "div",
+  { isActive: boolean; condensed: FlowProps["condensed"]; onClick: FlowProps["items"][-1]["onClick"] }
+>("div")`
+  width: ${({ condensed }) => (condensed ? 32 : 120)}px;
+  height: ${({ condensed }) => (condensed ? 32 : 80)}px;
+  border: 1px solid ${({ theme, isActive }) => (isActive ? theme.color.primary : theme.color.border.disabled)};
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  border-radius: 2;
+  border-radius: 2px;
   cursor: ${({ onClick }) => (Boolean(onClick) ? "pointer" : "initial")};
 
   :hover {
@@ -45,33 +48,44 @@ const NextArrow = styled("div")`
   margin: 0 0 0 ${({ theme }) => theme.space.small}px;
 `
 
-const Flow: React.FC<FlowProps> = ({ items, iconColor }) => (
+const getIconColor = (currentIndex: number, activeItemIndex?: number) => {
+  if (typeof activeItemIndex === "undefined") {
+    return "primary"
+  }
+
+  if (currentIndex === activeItemIndex) {
+    return "primary"
+  }
+
+  return "color.border.default"
+}
+
+const Flow: React.FC<FlowProps> = ({ items, condensed, activeItemIndex }) => (
   <Container>
     {items.map((item, index) => (
-      <>
+      <React.Fragment key={index}>
         <Box
-          key={index}
-          onClick={() => {
-            if (item.onClick) {
-              item.onClick(item)
-            }
-          }}
+          isActive={activeItemIndex === index}
+          condensed={Boolean(condensed)}
+          onClick={
+            Boolean(item.onClick)
+              ? () => {
+                  if (item.onClick) {
+                    item.onClick(item)
+                  }
+                }
+              : undefined
+          }
         >
-          {item.icon ? (
-            typeof item.icon === "string" ? (
-              <Icon
-                size={22}
-                name={item.icon}
-                color={expandColor(constants, item.iconColor || iconColor) || undefined}
-              />
-            ) : (
-              item.icon
-            )
-          ) : null}
-          <Label>{item.label}</Label>
+          {item.icon && typeof item.icon === "string" ? (
+            <Icon size={condensed ? 16 : 22} name={item.icon} color={getIconColor(index, activeItemIndex)} />
+          ) : (
+            item.icon
+          )}
+          {!condensed && <Label>{item.label}</Label>}
         </Box>
         {index !== items.length - 1 && <NextArrow />}
-      </>
+      </React.Fragment>
     ))}
   </Container>
 )
