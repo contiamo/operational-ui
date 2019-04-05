@@ -1,3 +1,4 @@
 {
-  "baseUrl": "http://localhost:6060"
+  "baseUrl": "http://localhost:6060",
+  "supportFile": "cypress/support/index.ts"
 }
