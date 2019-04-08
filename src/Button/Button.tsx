@@ -4,7 +4,7 @@ import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import Spinner from "../Spinner/Spinner"
 import { DefaultProps } from "../types"
-import { darken, isModifiedEvent, isOutsideLink, isWhite, readableTextColor } from "../utils"
+import { darken, inputFocus, isModifiedEvent, isOutsideLink, isWhite, readableTextColor } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
@@ -34,6 +34,8 @@ export interface ButtonProps extends DefaultProps {
   condensed?: boolean
   /** Should the button fill its container? */
   fullWidth?: boolean
+  /** What is the tab index, for accessibility? */
+  tabIndex?: number
   children?: React.ReactNode
 }
 
@@ -76,6 +78,7 @@ const Button: React.SFC<ButtonProps> = ({
   iconColor,
   color,
   onClick,
+  tabIndex,
   ...props
 }) => {
   const iconProps = { name: icon!, size: iconSize, color: iconColor }
@@ -113,6 +116,9 @@ const Button: React.SFC<ButtonProps> = ({
         textDecoration: "none",
         color: loading ? "transparent" : expandColor(theme, textColor) || foregroundColor,
       },
+      ":focus": {
+        ...inputFocus({ theme, isError: color === "error" }),
+      },
       ...(!disabled
         ? {
             ":hover": {
@@ -128,6 +134,9 @@ const Button: React.SFC<ButtonProps> = ({
       {ctx => (
         <Container
           {...props}
+          role="button"
+          aria-label={typeof children === "string" ? children : undefined}
+          tabIndex={tabIndex}
           color_={color}
           href={to}
           onClick={(ev: React.SyntheticEvent<React.ReactNode>) => {

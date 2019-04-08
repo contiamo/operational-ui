@@ -21,14 +21,15 @@
     "build:styleguide": "styleguidist build",
     "build:package": "rimraf lib && tsc -d",
     "watch": "npm run build:package -- -w",
-    "test": "jest --outputFile test-results.json --json --maxWorkers=$JEST_MAX_WORKERS",
-    "test:watch": "jest --watch",
+    "test": "run-p test:*",
+    "test:unit": "jest",
+    "test:e2e": "cypress run",
     "preversion": "npm run build",
     "version": "auto-changelog && git add CHANGELOG.md",
     "precommit": "lint-staged",
     "danger:ci": "danger ci",
     "danger": "[ ! -z $DANGER_GITHUB_API_TOKEN ] && run-p danger:* || echo \"Skipping Danger for External Contributor\"",
-    "ci": "run-s test && run-p danger build"
+    "ci": "npm run test:unit && run-p danger build"
   },
   "lint-staged": {
     "*.(js|jsx|json|md)": [
@@ -92,8 +93,8 @@
     "url-regex": "^4.1.1"
   },
   "devDependencies": {
+    "@bahmutov/add-typescript-to-cypress": "^2.0.0",
     "@cypress/webpack-preprocessor": "^4.0.3",
-    "@types/cypress": "^1.1.3",
     "@types/enzyme": "^3.1.12",
     "@types/jest": "^23.3.0",
     "@types/lodash": "^4.14.115",
@@ -108,6 +109,7 @@
     "auto-changelog": "^1.8.0",
     "babel-loader": "^8.0.4",
     "cypress": "^3.2.0",
+    "cypress-plugin-tab": "^1.0.0",
     "danger": "^4.0.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",

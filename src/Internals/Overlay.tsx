@@ -12,7 +12,7 @@ const fadeIn = keyframes`
   }
 `
 
-export const Overlay = styled("div")<{ type: ControlledModalProps["type"] }>`
+export const Overlay = styled("div")<{ type?: ControlledModalProps["type"] }>`
   position: fixed;
   top: 0;
   left: 0;

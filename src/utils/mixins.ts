@@ -7,7 +7,6 @@ import { OperationalStyleConstants } from "./constants"
 
 export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
   outline: 0,
-  border: "1px solid",
   borderColor: isError ? theme.color.error : theme.color.primary,
   boxShadow: `0 0 0 3px ${isError ? lighten(theme.color.error, 60) : lighten(theme.color.primary, 40)}`,
 })

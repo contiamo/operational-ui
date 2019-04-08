@@ -3,7 +3,7 @@ import * as React from "react"
 import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { DefaultProps } from "../types"
-import { darken, isModifiedEvent, isOutsideLink } from "../utils"
+import { darken, inputFocus, isModifiedEvent, isOutsideLink } from "../utils"
 import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 
@@ -28,34 +28,40 @@ export interface SimpleLinkProps extends DefaultProps {
 }
 
 const SimpleLink: React.SFC<SimpleLinkProps> = ({ to, children, icon, color, onClick, left, right, ...props }) => {
-  const Container = styled(to ? "a" : "p")<{ color_?: string; left_?: boolean; right_?: boolean }>(
-    ({ theme, color_, left_, right_ }) => {
-      const actualColor = color_ ? expandColor(theme, color_) || color_ : theme.color.primary
-      const hoverColor = darken(actualColor, 5)
-      return {
-        actualColor,
-        marginTop: 0,
-        marginBottom: 0,
-        marginLeft: right_ ? theme.space.base : 0,
-        marginRight: left_ ? theme.space.base : 0,
-        fontSize: theme.font.size.fineprint,
-        fontFamily: theme.font.family.main,
-        fontWeight: theme.font.weight.medium,
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        borderRadius: theme.borderRadius,
-        border: 0,
-        outline: "none",
-        position: "relative",
-        ":hover": {
-          color: hoverColor,
-        },
-        "& > svg": {
-          marginLeft: theme.space.base,
-        },
-      }
-    },
+  const Container = React.memo(
+    styled(to ? "a" : "button")<{ color_?: string; left_?: boolean; right_?: boolean }>(
+      ({ theme, color_, left_, right_ }) => {
+        const actualColor = color_ ? expandColor(theme, color_) || color_ : theme.color.primary
+        const hoverColor = darken(actualColor, 5)
+        return {
+          actualColor,
+          marginTop: 0,
+          marginBottom: 0,
+          marginLeft: right_ ? theme.space.base : 0,
+          marginRight: left_ ? theme.space.base : 0,
+          fontSize: theme.font.size.fineprint,
+          fontFamily: theme.font.family.main,
+          fontWeight: theme.font.weight.medium,
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: theme.borderRadius,
+          border: 0,
+          outline: "none",
+          position: "relative",
+          cursor: "pointer",
+          ":focus": {
+            ...inputFocus({ theme, isError: false }),
+          },
+          ":hover": {
+            color: hoverColor,
+          },
+          "& > svg": {
+            marginLeft: theme.space.base,
+          },
+        }
+      },
+    ),
   )
 
   return (
@@ -67,6 +73,8 @@ const SimpleLink: React.SFC<SimpleLinkProps> = ({ to, children, icon, color, onC
           right_={right}
           color_={color}
           href={to}
+          role="button"
+          aria-label={typeof children === "string" ? children : undefined}
           onClick={(ev: React.SyntheticEvent<React.ReactNode>) => {
             if (onClick) {
               onClick()

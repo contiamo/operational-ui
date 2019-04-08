@@ -56,10 +56,7 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
     ansiColor('xterm') {
       node(label){
         stage('Git Checkout'){
-          checkout scm
-          checkout ([ $class: 'GitSCM', branches: [[name: "*/${env.BranchLower}"]],
-            extensions: [[$class: 'LocalBranch', localBranch: env.BranchLower]],
-          ])
+          lib.gitCheckout()
         }
         container('node') {
           stage("Initialize"){
@@ -70,6 +67,13 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
               sh "yarn install"
             } catch(e) {
               error("Failed while running npm install. Error: ${e}")
+            }
+          }
+          stage ('Test'){
+            try {
+              sh "yarn ci"
+            } catch(e) {
+              error("Failed while running npm ci. Error: ${e}")
             }
           }
           env.NpmRegistry = "registry.npmjs.org"

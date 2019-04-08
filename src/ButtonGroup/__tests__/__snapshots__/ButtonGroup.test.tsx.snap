@@ -11,7 +11,9 @@ exports[`ButtonGroup Component Should initialize properly 1`] = `
     class="css-f3sa0o-buttongroup"
   >
     <button
-      class="css-1po5ksq"
+      aria-label="Hello"
+      class="css-30mlbu"
+      role="button"
     >
       Hello
     </button>
