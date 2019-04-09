@@ -49,3 +49,17 @@ import { Avatar } from "@operational/components"
   <Avatar photo="https://thecatapi.com/api/images/get?format=src&size=small" name="Franklin Green" />
 </div>
 ```
+
+### Should not shrink with long neighbors
+
+```jsx
+import * as React from "react"
+import { HeaderMenu, Icon, HeaderBar } from "@operational/components"
+;<HeaderBar
+  end={
+    <HeaderMenu items={[{ label: "Hello" }, { label: "Merci" }]} onClick={() => alert("sup")} withCaret>
+      <Avatar showName name="Franklingreenchimichangaroosevelt Aaron Theodore Knettle" />
+    </HeaderMenu>
+  }
+/>
+```
