@@ -229,7 +229,7 @@ function Table<T>({
             })()
             return (
               <Tr
-                hover={Boolean(data)}
+                hover={Boolean(onRowClick)}
                 key={dataEntryIndex}
                 clickable={Boolean(onRowClick)}
                 onClick={() => {
