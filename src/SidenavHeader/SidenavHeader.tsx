@@ -27,6 +27,7 @@ export interface SidenavHeaderProps extends DefaultProps {
   /** Close handler (via chevron button on the top right) */
   onClose?: () => void
   children?: React.ReactNode
+  /** Should the header be small? */
   compact?: SidenavProps["compact"]
 }
 
@@ -39,22 +40,25 @@ const makeContainer = (type: "link" | "block") =>
     borderBottomColor: theme.color.separators.default,
   }))
 
-const Content = styled("div")<{ isCondensed: boolean; isActive: boolean; compact: SidenavHeaderProps["compact"] }>(
-  ({ theme, isCondensed, compact, isActive }) => ({
-    textDecoration: "none",
-    cursor: "pointer",
-    position: "relative",
-    display: compact ? "none" : "flex",
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "center",
-    height: isCondensed ? 60 : 73,
-    overflow: "hidden",
-    padding: `0 ${theme.space.content}px`,
-    width: "100%",
-    marginBottom: isActive ? -26 : 0,
-  }),
-)
+const Content = styled("div")<{
+  onClick: SidenavHeaderProps["onClick"]
+  isCondensed: boolean
+  isActive: boolean
+  compact: SidenavHeaderProps["compact"]
+}>(({ theme, onClick, isCondensed, compact, isActive }) => ({
+  textDecoration: "none",
+  cursor: Boolean(onClick) ? "pointer" : "initial",
+  position: "relative",
+  display: compact ? "none" : "flex",
+  flexDirection: "column",
+  alignItems: "flex-start",
+  justifyContent: "center",
+  height: isCondensed ? 60 : 73,
+  overflow: "hidden",
+  padding: `0 ${theme.space.content}px`,
+  width: "100%",
+  marginBottom: isActive ? -26 : 0,
+}))
 
 const LabelText = styled("div")<{ isActive: boolean; compact: SidenavHeaderProps["compact"] }>`
   position: relative;
@@ -77,9 +81,9 @@ const ItemsContainer = styled("div")({
   position: "relative",
 })
 
-const CloseButton = styled("div")(({ theme }) => ({
+const CloseButton = styled("div")(({ theme, onClick }) => ({
   position: "absolute",
-  cursor: "pointer",
+  cursor: onClick ? "pointer" : "initial",
   display: "none",
   alignItems: "center",
   justifyContent: "center",
