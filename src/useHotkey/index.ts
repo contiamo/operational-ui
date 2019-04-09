@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from "react"
+import { RefObject, useEffect, useRef } from "react"
 
 export interface Key {
   /** Keyboard key value */
@@ -22,6 +22,11 @@ export interface Key {
  *
  */
 export function useHotkey(containerNode: RefObject<HTMLElement>, hotkey: Key, callback: () => void) {
+  const callbackRef = useRef(callback)
+  useEffect(() => {
+    callbackRef.current = callback
+  }, [callback])
+
   useEffect(() => {
     const addKeyBinding = (): void => {
       if (containerNode.current) {
@@ -57,7 +62,7 @@ export function useHotkey(containerNode: RefObject<HTMLElement>, hotkey: Key, ca
       }
 
       event.stopPropagation()
-      callback()
+      callbackRef.current()
     }
 
     addKeyBinding()
