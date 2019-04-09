@@ -71,20 +71,16 @@ const Picture = styled("div")<{
       : null
     const backgroundColor = assignedBackgroundColor || fixedBackgroundColor
     const textColor = readableTextColor(backgroundColor, [theme.color.text.default, "white"])
+    const sizeInPixels = size === "medium" ? 48 : 32
+    const fontSizeInPixels = size === "medium" ? 13 : 11
 
     // Calculate sizes based on the state of the size prop
-    const sizes =
-      size === "medium"
-        ? {
-            fontSize: 13,
-            width: 48,
-            height: 48,
-          }
-        : {
-            fontSize: 11,
-            width: 32,
-            height: 32,
-          }
+    const sizes = {
+      fontSize: fontSizeInPixels,
+      width: sizeInPixels,
+      height: sizeInPixels,
+      flex: `0 0 ${sizeInPixels}px`,
+    }
 
     // Calculate background based on the state of the photo prop
     const background = photo
