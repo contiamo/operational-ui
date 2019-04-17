@@ -45,9 +45,9 @@
   "peerDependencies": {
     "emotion": "^9.2.5",
     "react": "^16.8.0",
+    "react-beautiful-dnd": "^11.0.0",
     "react-dom": "^16.8.0",
-    "react-emotion": "^9.2.5",
-    "react-beautiful-dnd": "^11.0.0"
+    "react-emotion": "^9.2.5"
   },
   "jest": {
     "setupFiles": [
@@ -96,7 +96,7 @@
   "devDependencies": {
     "@bahmutov/add-typescript-to-cypress": "^2.0.0",
     "@cypress/webpack-preprocessor": "^4.0.3",
-    "@operational/styleguide": "^0.1.0",
+    "@operational/styleguide": "^0.1.1",
     "@types/enzyme": "^3.1.12",
     "@types/jest": "^23.3.0",
     "@types/lodash": "^4.14.115",
@@ -135,5 +135,8 @@
     "tslint-plugin-blank-line": "^0.0.8",
     "typescript": "3.1.0-dev.20180803",
     "webpack": "^4.16.2"
+  },
+  "alias": {
+    "@operational/components": "../../../lib/index.js"
   }
 }
