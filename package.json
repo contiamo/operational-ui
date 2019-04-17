@@ -81,7 +81,7 @@
     "nanoid": "^2.0.1",
     "node-fetch": "^2.3.0",
     "qs": "6.6.0",
-    "react": "^16.8.1",
+    "react": "^16.8.6",
     "react-beautiful-dnd": "^11.0.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.8.1",
