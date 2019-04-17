@@ -92,7 +92,6 @@ ul, ol {
 const Container = styled("div")`
   position: relative;
   min-height: 60px;
-  height: 100%;
 `
 
 const colorByMessageType = (type: MessageType): string => {
