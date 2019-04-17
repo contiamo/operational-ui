@@ -135,8 +135,5 @@
     "tslint-plugin-blank-line": "^0.0.8",
     "typescript": "3.1.0-dev.20180803",
     "webpack": "^4.16.2"
-  },
-  "alias": {
-    "@operational/components": "../../../lib/index.js"
   }
 }
