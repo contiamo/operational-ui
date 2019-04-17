@@ -1304,10 +1304,10 @@
     tinycolor2 "^1.4.1"
     url-regex "^4.1.1"
 
-"@operational/styleguide@^0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@operational/styleguide/-/styleguide-0.1.1.tgz#a4b27d6d5e4440159e7cd7d377198f998f9e5580"
-  integrity sha512-7KtvZtURmmBqyK2d+FtNKHya4sRKuLWmoaR+3Vd2GbPRW87qcwNWo3lV2YUzPD6Y0wiyTUUrQyvHjgKRJ0W+eQ==
+"@operational/styleguide@^0.1.2":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@operational/styleguide/-/styleguide-0.1.2.tgz#b0762323045d418eb103119da4c5843c8dbd9759"
+  integrity sha512-IMU9OgvolrJs46RoGEV9xztHc1tZ6vlwuwl7EuG7tNARWaJF2J/2KTjTAMoThL3LpDndtT2VLrUeF8OzaWPiWQ==
   dependencies:
     "@emotion/core" "^10.0.7"
     "@operational/components" "^14.0.0"
