@@ -15,10 +15,10 @@
   ],
   "scripts": {
     "dev": "parcel dev-server/index.html",
-    "start": "styleguidist server",
+    "start": "operational-styleguide start ./src",
     "build": "run-p build:*",
     "build:lambdas": "netlify-lambda build lambdas",
-    "build:styleguide": "styleguidist build",
+    "build:styleguide": "operational-styleguide start ./src",
     "build:package": "rimraf lib && tsc -d",
     "watch": "npm run build:package -- -w",
     "test": "run-p test:*",
@@ -96,6 +96,7 @@
   "devDependencies": {
     "@bahmutov/add-typescript-to-cypress": "^2.0.0",
     "@cypress/webpack-preprocessor": "^4.0.3",
+    "@operational/styleguide": "^0.1.0",
     "@types/enzyme": "^3.1.12",
     "@types/jest": "^23.3.0",
     "@types/lodash": "^4.14.115",
@@ -125,7 +126,6 @@
     "parcel-bundler": "^1.9.7",
     "prettier": "^1.13.7",
     "react-docgen-typescript": "^1.12.3",
-    "react-styleguidist": "^9.0.1",
     "react-testing-library": "5.6.0",
     "rimraf": "^2.6.2",
     "ts-jest": "^24.0.0",
