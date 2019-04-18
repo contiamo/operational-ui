@@ -69,6 +69,53 @@ const ButtonSpinner = styled(Spinner)<{ containerColor?: ButtonProps["color"] }>
   color: makeColors(theme, containerColor || "").foreground,
 }))
 
+const BaseButton = styled<"button" | "a">("button")<{
+  condensed?: ButtonProps["condensed"]
+  loading?: ButtonProps["loading"]
+  fullWidth?: ButtonProps["fullWidth"]
+  textColor?: ButtonProps["textColor"]
+  disabled?: ButtonProps["disabled"]
+  color_?: ButtonProps["color"]
+  as?: "button" | "a"
+}>(({ theme, color_, disabled, condensed, loading, fullWidth, textColor }) => {
+  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color_ || "")
+  return {
+    backgroundColor,
+    lineHeight: `${condensed ? 28 : 36}px`,
+    fontSize: theme.font.size.small,
+    fontFamily: theme.font.family.main,
+    fontWeight: theme.font.weight.medium,
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: `0 ${condensed ? theme.space.medium : theme.space.element}px`,
+    borderRadius: theme.borderRadius,
+    border: 0,
+    boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.border.disabled} inset` : "none",
+    cursor: disabled ? "not-allowed" : "pointer",
+    opacity: disabled ? 0.6 : 1.0,
+    outline: "none",
+    position: "relative",
+    width: fullWidth ? "100%" : "initial",
+    marginRight: theme.space.small,
+    // Apply styles with increased specificity to override defaults
+    "&, a:link&, a:visited&": {
+      textDecoration: "none",
+      color: loading ? "transparent" : expandColor(theme, textColor) || foregroundColor,
+    },
+    ":focus": {
+      ...inputFocus({ theme, isError: color_ === "error" }),
+    },
+    ...(!disabled
+      ? {
+          ":hover": {
+            backgroundColor: darken(backgroundColor, 5),
+          },
+        }
+      : {}),
+  }
+})
+
 const Button: React.SFC<ButtonProps> = ({
   to,
   children,
@@ -83,57 +130,12 @@ const Button: React.SFC<ButtonProps> = ({
 }) => {
   const iconProps = { name: icon!, size: iconSize, color: iconColor }
 
-  const Container = styled(to ? "a" : "button")<{
-    condensed?: ButtonProps["condensed"]
-    loading?: ButtonProps["loading"]
-    fullWidth?: ButtonProps["fullWidth"]
-    textColor?: ButtonProps["textColor"]
-    disabled?: ButtonProps["disabled"]
-    color_?: ButtonProps["color"]
-  }>(({ theme, color_, disabled, condensed, loading, fullWidth, textColor }) => {
-    const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color_ || "")
-    return {
-      backgroundColor,
-      lineHeight: `${condensed ? 28 : 36}px`,
-      fontSize: theme.font.size.small,
-      fontFamily: theme.font.family.main,
-      fontWeight: theme.font.weight.medium,
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: `0 ${condensed ? theme.space.medium : theme.space.element}px`,
-      borderRadius: theme.borderRadius,
-      border: 0,
-      boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.border.disabled} inset` : "none",
-      cursor: disabled ? "not-allowed" : "pointer",
-      opacity: disabled ? 0.6 : 1.0,
-      outline: "none",
-      position: "relative",
-      width: fullWidth ? "100%" : "initial",
-      marginRight: theme.space.small,
-      // Apply styles with increased specificity to override defaults
-      "&, a:link&, a:visited&": {
-        textDecoration: "none",
-        color: loading ? "transparent" : expandColor(theme, textColor) || foregroundColor,
-      },
-      ":focus": {
-        ...inputFocus({ theme, isError: color_ === "error" }),
-      },
-      ...(!disabled
-        ? {
-            ":hover": {
-              backgroundColor: darken(backgroundColor, 5),
-            },
-          }
-        : {}),
-    }
-  })
-
   return (
     <OperationalContext>
       {ctx => (
-        <Container
+        <BaseButton
           {...props}
+          as={to ? "a" : undefined}
           role="button"
           aria-label={typeof children === "string" ? children : undefined}
           tabIndex={tabIndex}
@@ -160,7 +162,7 @@ const Button: React.SFC<ButtonProps> = ({
           {children}
           {icon && iconPosition === "end" && <Icon right {...iconProps} />}
           {props.loading && <ButtonSpinner containerColor={color} />}
-        </Container>
+        </BaseButton>
       )}
     </OperationalContext>
   )
