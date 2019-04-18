@@ -117,7 +117,7 @@ const Button: React.SFC<ButtonProps> = ({
         color: loading ? "transparent" : expandColor(theme, textColor) || foregroundColor,
       },
       ":focus": {
-        ...inputFocus({ theme, isError: color === "error" }),
+        ...inputFocus({ theme, isError: color_ === "error" }),
       },
       ...(!disabled
         ? {
