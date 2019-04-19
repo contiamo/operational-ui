@@ -18,7 +18,7 @@
     "start": "operational-styleguide start ./src",
     "build": "run-p build:*",
     "build:lambdas": "netlify-lambda build lambdas",
-    "build:styleguide": "operational-styleguide build ./src",
+    "build:styleguide": "tsc -d && operational-styleguide build ./src",
     "build:package": "rimraf lib && tsc -d",
     "watch": "npm run build:package -- -w",
     "test": "run-p test:*",
