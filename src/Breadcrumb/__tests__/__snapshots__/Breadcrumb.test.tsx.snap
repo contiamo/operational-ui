@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SidenavItem Component Should initialize properly 1`] = `
+<div
+  class="css-ftf61z"
+>
+  <div
+    class="css-p29iif"
+  />
+  <a
+    class="css-12lan97-breadcrumb"
+    href="/some-url"
+  >
+    <span
+      class="css-0"
+    >
+      Home
+    </span>
+  </a>
+</div>
+`;
