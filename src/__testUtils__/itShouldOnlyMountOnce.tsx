@@ -1,21 +1,28 @@
 import { mount } from "enzyme"
 import * as React from "react"
 
-class Child extends React.Component<{ mockFN: jest.Mock }> {
-  public componentWillMount() {
-    this.props.mockFN()
-  }
+/**
+ * This calls the passed function on every `componentDidMount`
+ *
+ * We can use hooks here because were cool.
+ *
+ */
 
-  public render() {
-    return <div />
-  }
+function Child({ mockFN }: { mockFN: jest.Mock }) {
+  React.useEffect(() => {
+    mockFN()
+  }, [])
+
+  return <div />
 }
 
-// tslint:disable-next-line: max-classes-per-file
-class TestWrapper extends React.Component<{ comp: React.Factory<{ count: number }> }, { count: number }> {
-  constructor(props: any) {
-    super(props)
-    this.state = { count: 1 }
+/**
+ * Must be a class in order to update state with enzyme.
+ * We use this re-render its child on every state change
+ */
+class TestWrapper extends React.Component<{ comp: React.FunctionComponent<{ count: number }> }, { count: number }> {
+  public state = {
+    count: 1,
   }
 
   public render() {
@@ -23,15 +30,19 @@ class TestWrapper extends React.Component<{ comp: React.Factory<{ count: number 
   }
 }
 
-/// Component must allow children props
-
-export const itShouldOnlyMountOnce = (
-  componentName: string,
-  Component: React.FunctionComponent<{ children: React.ReactNode }>,
-) => {
+/**
+ * A test hack to checks if a component does not re-mount on every render
+ * This since we dont have access to lifecycle methods of the component we want to check,
+ * we pass a child with a tracker because if the parent node unmounts, all its children unmount.
+ *
+ * Therefore, **we can only use this test for components that accept any children**.
+ *
+ *  ![TestHack](https://media1.tenor.com/images/7da78fe87cf5a457fbec3406e82d6cb3/tenor.gif)
+ */
+export const itShouldOnlyMountOnce = (componentName: string, Component: React.FunctionComponent<any>) => {
   const mockFn = jest.fn()
 
-  const Inner = ({ count }: any) => {
+  const Inner = ({ count }: { count: number }) => {
     return (
       <React.Fragment>
         <button>Count:{count}</button>
