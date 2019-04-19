@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SidenavItem Component Should initialize properly 1`] = `
+<div
+  class="css-ftf61z"
+>
+  <div
+    class="css-p29iif"
+  />
+  <div
+    class=" css-12bcoq9"
+  >
+    <span
+      class="css-vmq0l9"
+    >
+      <svg
+        class="css-qdx4tx"
+        fill="currentColor"
+        height="18"
+        viewBox="0 0 360 360"
+        width="18"
+      >
+        <path
+          d="M300,280.187c0,-21.217 -8.429,-41.565 -23.431,-56.568c-15.003,-15.003 -35.352,-23.432 -56.569,-23.432c-25.742,0 -54.258,0 -80,0c-21.217,0 -41.566,8.429 -56.569,23.432c-15.002,15.003 -23.431,35.351 -23.431,56.568c0,22.032 0,40 0,40l240,0c0,0 0,-17.968 0,-40Zm-120,-240c41.394,0 75,33.607 75,75c0,41.394 -33.606,75 -75,75c-41.394,0 -75,-33.606 -75,-75c0,-41.393 33.606,-75 75,-75Z"
+        />
+      </svg>
+    </span>
+    <span
+      class="css-2fwnbf"
+    >
+      My Account
+    </span>
+  </div>
+</div>
+`;

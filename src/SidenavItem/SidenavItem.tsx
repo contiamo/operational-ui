@@ -26,47 +26,47 @@ export interface SidenavItemProps extends DefaultProps {
 
 const getIconSize = (compact = false) => (compact ? 30 : 18)
 
-const makeContainer = (type: "link" | "block") =>
-  styled(type === "link" ? "a" : "div")<{
-    compact: SidenavHeaderProps["compact"]
-    isActive: SidenavHeaderProps["active"]
-    end_: boolean
-  }>(({ theme, compact, isActive, end_ }) => {
-    return {
-      display: "flex",
-      padding: `${compact ? 10 : 0}px ${compact ? 0 : theme.space.content}px`,
-      height: compact ? "auto" : 32,
-      cursor: "pointer",
-      width: "100%",
-      alignItems: "center",
-      flexDirection: compact ? "column" : "row",
-      justifyContent: compact ? "center" : "flex-start",
-      whiteSpace: "nowrap",
-      userSelect: "none",
-      fontSize: theme.font.size.body,
+const BaseSidenavItem = styled<"div" | "a">("div")<{
+  compact: SidenavHeaderProps["compact"]
+  isActive: SidenavHeaderProps["active"]
+  end_: boolean
+  as?: "button" | "a"
+}>(({ theme, compact, isActive, end_ }) => {
+  return {
+    display: "flex",
+    padding: `${compact ? 10 : 0}px ${compact ? 0 : theme.space.content}px`,
+    height: compact ? "auto" : 32,
+    cursor: "pointer",
+    width: "100%",
+    alignItems: "center",
+    flexDirection: compact ? "column" : "row",
+    justifyContent: compact ? "center" : "flex-start",
+    whiteSpace: "nowrap",
+    userSelect: "none",
+    fontSize: theme.font.size.body,
+    color: isActive ? theme.color.primary : theme.color.text.lightest,
+    fontWeight: theme.font.weight.regular,
+    boxShadow: isActive && compact ? `2px 0 0 inset ${theme.color.primary}` : "none",
+    marginTop: end_ ? "auto" : 0,
+    alignSelf: end_ ? "flex-end" : "flex-start",
+
+    // This allows stacking of `end` SidenavItems.
+    ...(end_ ? { "& + .operational-ui__sidenav-item_end": { marginTop: 0 } } : {}),
+
+    // Specificity is piled up here to override default styles
+    "a:link&, a:visited&": {
+      textDecoration: "none",
       color: isActive ? theme.color.primary : theme.color.text.lightest,
-      fontWeight: theme.font.weight.regular,
-      boxShadow: isActive && compact ? `2px 0 0 inset ${theme.color.primary}` : "none",
-      marginTop: end_ ? "auto" : 0,
-      alignSelf: end_ ? "flex-end" : "flex-start",
-
-      // This allows stacking of `end` SidenavItems.
-      ...(end_ ? { "& + .operational-ui__sidenav-item_end": { marginTop: 0 } } : {}),
-
-      // Specificity is piled up here to override default styles
-      "a:link&, a:visited&": {
-        textDecoration: "none",
-        color: isActive ? theme.color.primary : theme.color.text.lightest,
-      },
-      "&:hover": {
-        backgroundColor: theme.color.background.lighter,
-        color: isActive ? theme.color.primary : theme.color.text.dark,
-      },
-      "&:last-child": {
-        marginBottom: end_ ? 0 : theme.space.content,
-      },
-    }
-  })
+    },
+    "&:hover": {
+      backgroundColor: theme.color.background.lighter,
+      color: isActive ? theme.color.primary : theme.color.text.dark,
+    },
+    "&:last-child": {
+      marginBottom: end_ ? 0 : theme.space.content,
+    },
+  }
+})
 
 const IconContainer = styled("span")<{ compact: SidenavItemProps["compact"] }>(({ compact, theme }) => {
   const iconSize = getIconSize(compact)
@@ -115,14 +115,15 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
   compactLabel,
   end,
   className,
+  children,
   ...props
 }) => {
-  const Container = to ? makeContainer("link") : makeContainer("block")
   const isActive = Boolean(active)
   return (
     <OperationalContext>
       {ctx => (
-        <Container
+        <BaseSidenavItem
+          as={to ? "a" : undefined}
           {...props}
           className={end ? "operational-ui__sidenav-item_end" : ""}
           end_={Boolean(end)}
@@ -149,7 +150,8 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
           <Label hasIcon={Boolean(icon)} compact={compact}>
             {compact ? compactLabel || label : label}
           </Label>
-        </Container>
+          {children}
+        </BaseSidenavItem>
       )}
     </OperationalContext>
   )
