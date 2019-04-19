@@ -31,14 +31,15 @@ export interface SidenavHeaderProps extends DefaultProps {
   compact?: SidenavProps["compact"]
 }
 
-const makeContainer = (type: "link" | "block") =>
-  styled(type === "link" ? "a" : "div")<{ compact: SidenavHeaderProps["compact"] }>(({ theme, compact }) => ({
+const SidenavHeaderBase = styled<"div" | "a">("div")<{ as?: "div" | "a"; compact: SidenavHeaderProps["compact"] }>(
+  ({ theme, compact }) => ({
     label: "sidenavheader",
     textDecoration: "none",
     width: "100%",
     borderBottom: compact ? 0 : "1px solid",
     borderBottomColor: theme.color.separators.default,
-  }))
+  }),
+)
 
 const Content = styled("div")<{
   onClick: SidenavHeaderProps["onClick"]
@@ -133,14 +134,14 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
 
   // Actual `to` prop should invalidate if the element has sublinks and is active
   const href = isActive && hasChildLinks ? undefined : to
-  const Container = href ? makeContainer("link") : makeContainer("block")
 
   return (
     <OperationalContext>
       {ctx => {
         return (
-          <Container
+          <SidenavHeaderBase
             {...props}
+            as={href ? "a" : undefined}
             compact={compact}
             href={href}
             onClick={(ev: React.SyntheticEvent<Node>) => {
@@ -206,7 +207,7 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
                 })}
               </ItemsContainer>
             )}
-          </Container>
+          </SidenavHeaderBase>
         )
       }}
     </OperationalContext>
