@@ -3,7 +3,7 @@ import * as React from "react"
 
 /**
  * This calls the passed function on every `componentDidMount`
- *
+ * This is how we track is the parent un-mounts.
  * We can use hooks here because were cool.
  *
  */
@@ -18,7 +18,7 @@ function Child({ mockFN }: { mockFN: jest.Mock }) {
 
 /**
  * Must be a class in order to update state with enzyme.
- * We use this re-render its child on every state change
+ * We use this to re-render its child on every state change
  */
 class TestWrapper extends React.Component<{ comp: React.FunctionComponent<{ count: number }> }, { count: number }> {
   public state = {
@@ -32,8 +32,8 @@ class TestWrapper extends React.Component<{ comp: React.FunctionComponent<{ coun
 
 /**
  * A test hack to checks if a component does not re-mount on every render
- * This since we dont have access to lifecycle methods of the component we want to check,
- * we pass a child with a tracker because if the parent node unmounts, all its children unmount.
+ * Need this since we dont have access to life-cycle methods of the component we want to check,
+ * we pass a child with a tracker because if the parent node un-mounts, all its children un-mount.
  *
  * Therefore, **we can only use this test for components that accept any children**.
  *
