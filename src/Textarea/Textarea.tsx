@@ -28,6 +28,8 @@ export interface TextareaProps extends DefaultProps, DefaultInputProps {
   height?: number
   /** Text for a hint */
   hint?: string
+  /** Automatically focus the input on page load */
+  autoFocus?: boolean
   /** Error text */
   error?: string
   /** Should the input fill its container? */
@@ -58,11 +60,13 @@ const TextareaComp = styled("textarea")<{
   isCode: boolean
   disabled: boolean
   resize: ResizeOptions
+  autoFocus: boolean
   height?: number
-}>(({ theme, isCode, resize, height }) => {
+}>(({ theme, isCode, resize, autoFocus, height }) => {
   return {
     height,
     resize,
+    autofocus: autoFocus,
     fontSize: theme.font.size.body,
     fontWeight: theme.font.weight.regular,
     display: "block",
@@ -138,6 +142,7 @@ const Textarea: React.FC<TextareaProps> = ({
   label,
   hint,
   value,
+  autoFocus,
   error,
   action,
   height,
@@ -203,6 +208,7 @@ const Textarea: React.FC<TextareaProps> = ({
           disabled={disabled}
           isCode={code}
           value={value}
+          autoFocus={autoFocus ? true : false}
           resize={resize}
           height={height}
           tabIndex={tabIndex}
