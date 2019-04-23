@@ -4,16 +4,16 @@ Operational's SVG icon set packaged as a single component.
 
 ```jsx
 import * as React from "react"
-import { Icon } from "@operational/components"
+import { Icon, ICONS } from "@operational/components"
 ;<>
-  <Icon name="Add" size={36} />
-  <Icon name="Function" size={36} />
-  <Icon name="Funnel" size={36} color="#00bb00" />
-  <Icon name="Bundle" size={36} color="error" />
+  <Icon name={ICONS.Add} size={36} />
+  <Icon name={ICONS.Function} size={36} />
+  <Icon name={ICONS.Funnel} size={36} color="#00bb00" />
+  <Icon name={ICONS.Bundle} size={36} color="error" />
   <p>And here some brand icons:</p>
-  <Icon name="OperationalUI" size={36} />
-  <Icon name="Pantheon" size={36} colored />
-  <Icon name="Labs" size={36} />
+  <Icon name={ICONS.OperationalUI} size={36} />
+  <Icon name={ICONS.Pantheon} size={36} colored />
+  <Icon name={ICONS.Labs} size={36} />
 </>
 ```
 
@@ -21,17 +21,17 @@ import { Icon } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { Icon } from "@operational/components"
+import { Icon, ICONS } from "@operational/components"
 ;<div style={{ display: "flex", alignItems: "center" }}>
-  <Icon name="Add" left /> Play that song!
+  <Icon name={ICONS.Add} left /> Play that song!
 </div>
 ```
 
 ```jsx
 import * as React from "react"
-import { Icon } from "@operational/components"
+import { Icon, ICONS } from "@operational/components"
 ;<div style={{ display: "flex", alignItems: "center" }}>
-  I'm on the right! <Icon name="Document" right />
+  I'm on the right! <Icon name={ICONS.Document} right />
 </div>
 ```
 
@@ -39,19 +39,14 @@ import { Icon } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { Icon, Table, ResourceName, Input } from "@operational/components"
-import * as icons from "@operational/components/Icon/Icon.Custom"
+import { Icon, Table, ResourceName, Input, allIcons } from "@operational/components"
 
 const MyComponent = () => {
   const [filter, setFilter] = React.useState("")
-  const [filteredIcons, setFilteredIcons] = React.useState(icons)
+  const [filteredIcons, setFilteredIcons] = React.useState(allIcons)
 
   React.useEffect(() => {
-    setFilteredIcons(
-      Object.entries(icons)
-        .filter(([iconName, iconElement]) => iconName.toLowerCase().includes(filter.toLowerCase()))
-        .reduce((acc, [iconName, iconElement]) => ({ [iconName]: iconElement, ...acc }), {}),
-    )
+    setFilteredIcons(allIcons.filter(iconName => iconName.toLowerCase().includes(filter.toLowerCase())))
   }, [filter])
 
   return (
@@ -68,7 +63,7 @@ const MyComponent = () => {
       </div>
       <Table
         fixedLayout
-        data={Object.keys(filteredIcons)}
+        data={filteredIcons}
         columns={[
           {
             heading: "Name",

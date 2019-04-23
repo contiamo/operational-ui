@@ -1,59 +1,22 @@
 import * as React from "react"
 import styled from "../utils/styled"
 
-import { DefaultProps } from "../types"
 import constants, { expandColor } from "../utils/constants"
-import BrandIcons, { BrandIconName } from "./Icon.Brand"
-import * as CustomIcons from "./Icon.Custom"
+import BrandIcons from "./Icon.Brand"
+import * as CustomIconsMap from "./Icon.Custom"
+import { BRAND_ICON, CommunIconProps, CUSTOM_ICON, CustomIconsData, IconProps, ICONS } from "./types"
 
-export type IconName = BrandIconName | keyof typeof CustomIcons
+export { IconProps, IconName, BRAND_ICON, CUSTOM_ICON, ICONS } from "./types"
 
-export interface CommunIconProps extends DefaultProps {
-  /**
-   * Size
-   *
-   * @default 18 for regular icons, 32 for brand icons
-   */
-  size?: number
-  /** Icon color, specified as a hex, or a color name (info, success, warning, error) */
-  color?: string
-  /**
-   * Indicates that this component is left of other content, and adds an appropriate right margin.
-   */
-  left?: boolean
-  /**
-   * Indicates that this component is right of other content, and adds an appropriate left margin.
-   */
-  right?: boolean
-  /**
-   * Icon name.
-   * For OperationalUI brand icons, use the values `OperationalUI`, `Labs`, `Components`, `Blocks` and `Visualizations`
-   */
-  name: IconName
-  onClick?: (e: React.MouseEvent) => void
-}
+export const allIcons: ICONS[] = Object.values(ICONS)
 
-export interface OperationalUIIconProps extends CommunIconProps {
-  name: "OperationalUI"
-  /**
-   * OperationalUI needs this prop to animate the inner circle.
-   * All other icons should ignore it.
-   */
-  rotation?: number
-}
+export const allBrandIcons = [ICONS.Contiamo, ICONS.OperationalUI, ICONS.Pantheon, ICONS.Labs] as BRAND_ICON[]
 
-export interface PantheonIconProps extends CommunIconProps {
-  name: "Pantheon"
-  /** Use the colored version of the logo (works for `name = Pantheon` only) */
-  colored?: boolean
-}
+export const allCustomIcons = allIcons.filter(v => !allBrandIcons.includes(v as BRAND_ICON)) as CUSTOM_ICON[]
 
-export interface OtherIconProps extends CommunIconProps {
-  colored?: never
-  rotation?: never
-}
+export const isCustomIcon = (value: string): value is CUSTOM_ICON => allCustomIcons.includes(value as CUSTOM_ICON)
 
-export type IconProps = OtherIconProps | OperationalUIIconProps | PantheonIconProps
+export const isBrandIcon = (value: string): value is BRAND_ICON => allBrandIcons.includes(value as BRAND_ICON)
 
 const Icon: React.SFC<IconProps> = ({ left, right, color, name, ...props }) => {
   if (!name) {
@@ -61,14 +24,14 @@ const Icon: React.SFC<IconProps> = ({ left, right, color, name, ...props }) => {
   }
   const iconColor: string = expandColor(constants, color) || "currentColor"
 
-  const TypedCustomIcons: { [key: string]: React.SFC<{ size?: number; color?: string }> } = CustomIcons
+  const TypedCustomIcons: CustomIconsData = CustomIconsMap
 
-  if (TypedCustomIcons[name]) {
+  if (isCustomIcon(name)) {
     const Comp = TypedCustomIcons[name]
     return <Comp {...props} size={props.size || 18} color={iconColor} />
   }
 
-  if (BrandIcons[name]) {
+  if (isBrandIcon(name)) {
     const Comp = BrandIcons[name]
     return <Comp {...props} size={props.size || 32} color={iconColor} />
   }
