@@ -6,9 +6,9 @@ Operational's SVG icon set packaged as a single component.
 import * as React from "react"
 import { Icon, ICONS } from "@operational/components"
 ;<>
-  <Icon name={ICONS.Add} size={36} />
-  <Icon name={ICONS.Function} size={36} />
-  <Icon name={ICONS.Funnel} size={36} color="#00bb00" />
+  <Icon name="Add" size={36} />
+  <Icon name="Function" size={36} />
+  <Icon name="Funnel" size={36} color="#00bb00" />
   <Icon name={ICONS.Bundle} size={36} color="error" />
   <p>And here some brand icons:</p>
   <Icon name={ICONS.OperationalUI} size={36} />
@@ -23,7 +23,7 @@ import { Icon, ICONS } from "@operational/components"
 import * as React from "react"
 import { Icon, ICONS } from "@operational/components"
 ;<div style={{ display: "flex", alignItems: "center" }}>
-  <Icon name={ICONS.Add} left /> Play that song!
+  <Icon name="Add" left /> Play that song!
 </div>
 ```
 
