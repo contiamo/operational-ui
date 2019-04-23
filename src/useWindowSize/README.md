@@ -3,7 +3,8 @@
 This hook is used to get the window size and updates an element that uses it, providing the current size of the viewport.
 
 ```jsx
-import { Chip } from "@operational/components"
+import { Chip, useWindowSize } from "@operational/components"
+import * as React from "react"
 const MyComponent = () => {
   const { width, height } = useWindowSize()
 
