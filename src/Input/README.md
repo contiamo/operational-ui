@@ -1,6 +1,7 @@
 ### Usage
 
 ```jsx
+import * as React from "react"
 import { Form, Input } from "@operational/components"
 
 const MyComponent = () => {
@@ -85,7 +86,9 @@ import { Input, Form } from "@operational/components"
 ### With an Action Button
 
 ```jsx
-<Input
+import * as React from "react"
+import { Input } from "@operational/components"
+;<Input
   value="JNAPE92"
   label="Employee ID"
   icon="User"

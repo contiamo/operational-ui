@@ -4,7 +4,7 @@ Main wrapper for Operational UI, required at the top level of the application. S
 
 ```jsx
 import * as React from "react"
-import { Button } from "@operational/components"
+import { Button, OperationalUI } from "@operational/components"
 
 const App = () => (
   <div>
@@ -23,7 +23,7 @@ To set up routing that is automatically wired up to the `to` props of all nested
 
 ```jsx
 import * as React from "react"
-import { Button } from "@operational/components"
+import { Button, OperationalUI } from "@operational/components"
 
 class RoutingComponent extends React.Component {
   constructor(props) {

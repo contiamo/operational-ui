@@ -1,6 +1,6 @@
 # Usage
 
-```js
+```jsx
 import React from "react"
 import { Flow } from "@operational/components"
 ;<Flow
@@ -33,7 +33,7 @@ import { Flow } from "@operational/components"
 
 To condense your items, simply add a condensed prop!
 
-```js
+```jsx
 import React from "react"
 import { Flow } from "@operational/components"
 ;<Flow
@@ -62,7 +62,7 @@ import { Flow } from "@operational/components"
 
 `Flow` components can be controlled, and do things on click &mdash; like navigating to a new page or similar like so.
 
-```js
+```jsx
 import React from "react"
 import { Flow, Title } from "@operational/components"
 
