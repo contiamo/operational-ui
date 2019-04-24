@@ -2,7 +2,8 @@ import * as React from "react"
 import tinycolor from "tinycolor2"
 import { Icon, IconName } from "../"
 import { DefaultProps } from "../types"
-import { expandColor } from "../utils/constants"
+import { inputFocus } from "../utils"
+import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface ChipProps extends DefaultProps {
@@ -17,67 +18,90 @@ export interface ChipProps extends DefaultProps {
   children: React.ReactNode
 }
 
+const height = 20
+
 const Container = styled("div")<{ color_?: string }>(({ theme, color_ }) => {
   const backgroundColor = tinycolor(expandColor(theme, color_) || theme.color.primary)
     .setAlpha(0.1)
     .toString()
   return {
     backgroundColor,
+    border: 0,
+    padding: 0,
     fontSize: theme.font.size.small,
     fontWeight: theme.font.weight.medium,
     label: "chip",
     position: "relative",
-    height: theme.space.element,
+    height,
     display: "inline-flex",
     alignItems: "center",
     boxSizing: "border-box",
     width: "fit-content",
     borderRadius: 2,
-    overflow: "hidden",
     color: theme.color.text.default,
     margin: `0px ${theme.space.small}px 0px 0px`,
   }
 })
 
-const Content = styled("div")(({ theme, onClick }) => ({
-  height: "100%",
-  display: "flex",
-  alignItems: "center",
-  padding: `0px ${theme.space.base}px`,
-  cursor: Boolean(onClick) ? "pointer" : "initial",
+const getHoverStyle = (
+  theme: OperationalStyleConstants,
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
+) => ({
   ...(Boolean(onClick)
     ? {
         "&:hover": {
           backgroundColor: "rgba(0, 0, 0, 0.1)",
         },
+        "&:focus": inputFocus({ theme }),
       }
     : {}),
-}))
+})
 
-const Action = styled("div")(({ theme, onClick }) => {
+const Content = styled<"div" | "button">("div")<{ as?: "div" | "button"; onClick: ChipProps["onClick"] }>(
+  ({ theme, onClick }) => ({
+    height,
+    display: "flex",
+    backgroundColor: "transparent",
+    font: "inherit",
+    color: "inherit",
+    border: 0,
+    alignItems: "center",
+    padding: `0px ${theme.space.base}px`,
+    cursor: Boolean(onClick) ? "pointer" : "initial",
+    ...getHoverStyle(theme, onClick),
+  }),
+)
+
+const Action = styled("button")(({ theme, onClick }) => {
   return {
+    border: 0,
+    backgroundColor: "transparent",
+    font: "inherit",
+    color: "inherit",
+    padding: 0,
     borderLeft: `1px solid ${theme.color.ghost}`,
     width: theme.space.element,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    height: "100%",
+    height,
     cursor: Boolean(onClick) ? "pointer" : "initial",
-    ...(Boolean(onClick)
-      ? {
-          "&:hover": {
-            backgroundColor: "rgba(0, 0, 0, 0.1)",
-          },
-        }
-      : {}),
+    ...getHoverStyle(theme, onClick),
   }
 })
 
 const Chip: React.SFC<ChipProps> = ({ onClick, onIconClick, icon, children, ...props }) => (
   <Container color_={props.color} {...props}>
-    <Content onClick={onClick}>{children}</Content>
+    <Content
+      aria-label={typeof children === "string" ? children : undefined}
+      role={Boolean(onClick) ? "button" : undefined}
+      as={Boolean(onClick) ? "button" : "div"}
+      onClick={onClick}
+    >
+      {children}
+    </Content>
     {onIconClick && (
-      <Action onClick={onIconClick}>
+      <Action aria-label={typeof icon === "string" ? icon : undefined} role="button" onClick={onIconClick}>
         {typeof icon === "string" ? <Icon name={icon as IconName} size={12} /> : icon}
       </Action>
     )}
