@@ -43,7 +43,7 @@ const Container = styled("div")<{ color_?: string }>(({ theme, color_ }) => {
   }
 })
 
-const getHoverStyle = (
+const getInteractiveStyle = (
   theme: OperationalStyleConstants,
   onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void,
 ) => ({
@@ -68,7 +68,7 @@ const Content = styled<"div" | "button">("div")<{ as?: "div" | "button"; onClick
     alignItems: "center",
     padding: `0px ${theme.space.base}px`,
     cursor: Boolean(onClick) ? "pointer" : "initial",
-    ...getHoverStyle(theme, onClick),
+    ...getInteractiveStyle(theme, onClick),
   }),
 )
 
@@ -86,7 +86,7 @@ const Action = styled("button")(({ theme, onClick }) => {
     justifyContent: "center",
     height,
     cursor: Boolean(onClick) ? "pointer" : "initial",
-    ...getHoverStyle(theme, onClick),
+    ...getInteractiveStyle(theme, onClick),
   }
 })
 
