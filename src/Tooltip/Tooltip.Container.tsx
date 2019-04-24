@@ -110,7 +110,7 @@ export const Container = styled("div")<{
       top: 0,
       left: -32,
       display: "block",
-      width: -32,
+      width: 32,
       height: "100%",
     },
     // They say behind every great tooltip is a great caret.
