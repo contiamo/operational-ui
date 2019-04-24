@@ -28,6 +28,8 @@ export interface TextareaProps extends DefaultProps, DefaultInputProps {
   height?: number
   /** Text for a hint */
   hint?: string
+  /** Automatically focus the input on page load */
+  autoFocus?: boolean
   /** Error text */
   error?: string
   /** Should the input fill its container? */
@@ -58,11 +60,13 @@ const TextareaComp = styled("textarea")<{
   isCode: boolean
   disabled: boolean
   resize: ResizeOptions
+  autoFocus?: boolean
   height?: number
-}>(({ theme, isCode, resize, height }) => {
+}>(({ theme, isCode, resize, autoFocus, height, ...props }) => {
   return {
     height,
     resize,
+    autofocus: autoFocus,
     fontSize: theme.font.size.body,
     fontWeight: theme.font.weight.regular,
     display: "block",
@@ -74,6 +78,7 @@ const TextareaComp = styled("textarea")<{
     border: "none",
     // There's an white subpixel if it's theme.borderRadius and no noticeable regression if -1
     borderRadius: theme.borderRadius - 1,
+    ...props,
   }
 })
 
@@ -138,6 +143,7 @@ const Textarea: React.FC<TextareaProps> = ({
   label,
   hint,
   value,
+  autoFocus,
   error,
   action,
   height,
@@ -171,7 +177,7 @@ const Textarea: React.FC<TextareaProps> = ({
   }
 
   return (
-    <Label id={`textarea-label-${uniqueId}`} {...props} fullWidth={fullWidth}>
+    <Label id={`textarea-label-${uniqueId}`} fullWidth={fullWidth}>
       {label && <LabelText>{label}</LabelText>}
       {hint && (
         <FormFieldControls>
@@ -203,6 +209,7 @@ const Textarea: React.FC<TextareaProps> = ({
           disabled={disabled}
           isCode={code}
           value={value}
+          autoFocus={autoFocus}
           resize={resize}
           height={height}
           tabIndex={tabIndex}
@@ -220,6 +227,7 @@ const Textarea: React.FC<TextareaProps> = ({
             }
             onChange(e.target.value)
           }}
+          {...props}
         />
         {error && <FormFieldError>{error}</FormFieldError>}
       </Outline>
