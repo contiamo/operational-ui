@@ -45,9 +45,9 @@
   "peerDependencies": {
     "emotion": "^9.2.5",
     "react": "^16.8.0",
+    "react-beautiful-dnd": "^11.0.0",
     "react-dom": "^16.8.0",
-    "react-emotion": "^9.2.5",
-    "react-beautiful-dnd": "^11.0.0"
+    "react-emotion": "^9.2.5"
   },
   "jest": {
     "setupFiles": [
@@ -107,7 +107,7 @@
     "@types/react-router": "^4.0.28",
     "@types/tinycolor2": "^1.4.1",
     "@types/url-regex": "^4.1.0",
-    "auto-changelog": "^1.8.0",
+    "auto-changelog": "^1.13.0",
     "babel-loader": "^8.0.4",
     "cypress": "^3.2.0",
     "cypress-plugin-tab": "^1.0.0",
