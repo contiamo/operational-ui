@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { DefaultProps } from "../types"
 import useWindowSize from "../useWindowSize"
+import styled from "../utils/styled"
 import Container, { Position } from "./Tooltip.Container"
 
 /**
@@ -135,6 +136,26 @@ const getDisplayPosition = (windowSize: { width: number; height: number }, state
  */
 export const dangerousTooltipContainerClassName = "operational-ui-tooltip"
 
+const SizeRestriction = styled("div")`
+  max-height: 80vh;
+  max-width: 80vw;
+  overflow: auto;
+  width: fit-content;
+  height: 100%;
+
+  img {
+    max-width: 100%;
+  }
+
+  p {
+    font-size: ${({ theme }) => theme.font.size.tiny}px;
+    line-height: 1.3;
+    margin: 0;
+    padding: 2px 6px;
+    text-align: center;
+  }
+`
+
 const Tooltip: React.SFC<TooltipProps> = props => {
   const containerNode = React.useRef<HTMLDivElement>(null)
   const offScreenWidthTestNode = React.useRef<HTMLDivElement>(null)
@@ -186,8 +207,10 @@ const Tooltip: React.SFC<TooltipProps> = props => {
         position={displayPosition}
         ref={containerNode}
       >
-        {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
-        <p id={props.textId}>{props.children}</p>
+        <SizeRestriction>
+          {/* Wrapping in a paragraph tag is necessary in order to have Safari read the correct single line width. */}
+          <p id={props.textId}>{props.children}</p>
+        </SizeRestriction>
       </Container>
     </>
   )

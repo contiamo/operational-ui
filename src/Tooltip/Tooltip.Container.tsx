@@ -88,13 +88,6 @@ export const Container = styled("div")<{
     zIndex: theme.zIndex.tooltip,
     borderRadius: 2,
     boxShadow: "0 2px 6px rgba(0, 0, 0, .15)",
-    "& > p": {
-      fontSize: 11,
-      lineHeight: 1.3,
-      margin: 0,
-      padding: "2px 6px",
-      textAlign: "center",
-    },
     ...(offScreenWidthTest
       ? {
           width: "fit-content",
@@ -117,7 +110,7 @@ export const Container = styled("div")<{
       top: 0,
       left: -32,
       display: "block",
-      width: -32,
+      width: 32,
       height: "100%",
     },
     // They say behind every great tooltip is a great caret.
