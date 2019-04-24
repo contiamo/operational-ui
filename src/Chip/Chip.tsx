@@ -33,24 +33,28 @@ const Container = styled("div")<{ color_?: string }>(({ theme, color_ }) => {
     boxSizing: "border-box",
     width: "fit-content",
     borderRadius: 2,
-    cursor: "pointer",
     overflow: "hidden",
     color: theme.color.text.default,
     margin: `0px ${theme.space.small}px 0px 0px`,
   }
 })
 
-const Content = styled("div")(({ theme }) => ({
+const Content = styled("div")(({ theme, onClick }) => ({
   height: "100%",
   display: "flex",
   alignItems: "center",
   padding: `0px ${theme.space.base}px`,
-  "&:hover": {
-    backgroundColor: "rgba(0, 0, 0, 0.1)",
-  },
+  cursor: Boolean(onClick) ? "pointer" : "initial",
+  ...(Boolean(onClick)
+    ? {
+        "&:hover": {
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
+        },
+      }
+    : {}),
 }))
 
-const Action = styled("div")(({ theme }) => {
+const Action = styled("div")(({ theme, onClick }) => {
   return {
     borderLeft: `1px solid ${theme.color.ghost}`,
     width: theme.space.element,
@@ -58,9 +62,14 @@ const Action = styled("div")(({ theme }) => {
     alignItems: "center",
     justifyContent: "center",
     height: "100%",
-    "&:hover": {
-      backgroundColor: "rgba(0, 0, 0, 0.1)",
-    },
+    cursor: Boolean(onClick) ? "pointer" : "initial",
+    ...(Boolean(onClick)
+      ? {
+          "&:hover": {
+            backgroundColor: "rgba(0, 0, 0, 0.1)",
+          },
+        }
+      : {}),
   }
 })
 
