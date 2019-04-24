@@ -569,6 +569,14 @@
     core-js "^2.5.7"
     regenerator-runtime "^0.12.0"
 
+"@babel/polyfill@^7.4.3":
+  version "7.4.3"
+  resolved "https://registry.yarnpkg.com/@babel/polyfill/-/polyfill-7.4.3.tgz#332dc6f57b718017c3a8b37b4eea8aa6eeac1187"
+  integrity sha512-rkv8WIvJshA5Ev8iNMGgz5WZkRtgtiPexiT7w5qevGTuT7ZBfM3de9ox1y9JR5/OXb/sWGBbWlHNa7vQKqku3Q==
+  dependencies:
+    core-js "^2.6.5"
+    regenerator-runtime "^0.13.2"
+
 "@babel/preset-env@^7.0.0":
   version "7.3.1"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.3.1.tgz#389e8ca6b17ae67aaf9a2111665030be923515db"
@@ -1854,18 +1862,18 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-auto-changelog@^1.8.0:
-  version "1.11.0"
-  resolved "https://registry.yarnpkg.com/auto-changelog/-/auto-changelog-1.11.0.tgz#c302aa534892ee77df242862cd21717f51b1c54f"
-  integrity sha512-WvG2WBbPPYqAkqlF2SSKktdQ0jhOG37GvybrJxUKv4uxp/KVzqC0+ptgbcUJAbaFyLGEApbTtGS36K5vSC2jGQ==
+auto-changelog@^1.13.0:
+  version "1.13.0"
+  resolved "https://registry.yarnpkg.com/auto-changelog/-/auto-changelog-1.13.0.tgz#d082444d1ae9411e4ab83b6e82ed0fcb95f7d471"
+  integrity sha512-djreNOUH6i09Lkm/A3oDApJjSrphUb8dxnyCan8CVEN1uHrD02NlraZic9VdPu37ZYcf1lqYNLjuwT5CFZxtPw==
   dependencies:
-    "@babel/polyfill" "^7.0.0"
-    commander "^2.19.0"
+    "@babel/polyfill" "^7.4.3"
+    commander "^2.20.0"
     handlebars "^4.0.12"
     lodash.uniqby "^4.7.0"
     node-fetch "^2.3.0"
     parse-github-url "^1.0.2"
-    semver "^5.6.0"
+    semver "^6.0.0"
 
 autoprefixer@^6.3.1:
   version "6.7.7"
@@ -3524,6 +3532,11 @@ commander@2.15.1:
 commander@^2.11.0, commander@^2.12.1, commander@^2.14.1, commander@^2.17.1, commander@^2.18.0, commander@^2.19.0, commander@^2.9.0:
   version "2.19.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
+
+commander@^2.20.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
+  integrity sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ==
 
 commander@~2.1.0:
   version "2.1.0"
@@ -11296,6 +11309,11 @@ semver-compare@^1.0.0:
   version "5.6.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.6.0.tgz#7e74256fbaa49c75aa7c7a205cc22799cac80004"
   integrity sha512-RS9R6R35NYgQn++fkDWaOmqGoj4Ek9gGs+DPxNUZKuwE183xjJroKvyo1IzVFeXvUrvmALy6FWD5xrdJT25gMg==
+
+semver@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/semver/-/semver-6.0.0.tgz#05e359ee571e5ad7ed641a6eec1e547ba52dea65"
+  integrity sha512-0UewU+9rFapKFnlbirLi3byoOuhrSsli/z/ihNnvM24vgF+8sNBiI1LZPBSH9wJKUwaUbw+s3hToDLCXkrghrQ==
 
 send@0.16.2:
   version "0.16.2"
