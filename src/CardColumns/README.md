@@ -128,7 +128,8 @@ import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@opera
 Columns will always wrap and overflow if their containing element is not wide enough for them.
 
 ```jsx
-import { Card, AvatarGroup, CardColumn, Avatar, Chip } from "@operational/components"
+import * as React from "react"
+import { Card, CardColumns, AvatarGroup, CardColumn, Avatar, Chip } from "@operational/components"
 ;<Card title="Bundle information">
   <p>Here is the information available about this bundle.</p>
   <CardColumns columns={3} style={{ width: "200px" }}>
