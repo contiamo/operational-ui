@@ -115,7 +115,7 @@ This tree component have `Droppable` and `Draggable` implemented from [react-bea
 
 To offer the most flexibility as possible in your drag & drop implementation, we are just spreading `draggableProps` and `droppableProps`.
 
-```jsx
+```js
 import * as React from "react"
 import { Button, Card, Tree, Title } from "@operational/components"
 import { DragDropContext } from "react-beautiful-dnd"
