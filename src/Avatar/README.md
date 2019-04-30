@@ -54,7 +54,7 @@ import { Avatar } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { HeaderMenu, Icon, HeaderBar } from "@operational/components"
+import { Avatar, HeaderMenu, Icon, HeaderBar } from "@operational/components"
 ;<HeaderBar
   end={
     <HeaderMenu items={[{ label: "Hello" }, { label: "Merci" }]} onClick={() => alert("sup")} withCaret>
