@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Icon, { IconName } from "../Icon/Icon"
 import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
@@ -54,15 +54,20 @@ const Tab = styled("div")<{ active?: boolean; condensed?: boolean }>(({ theme, a
   },
 }))
 
+const getTabIndexByName = (tabs: Tab[], tabName?: string): number => {
+  if (tabName) {
+    const index = tabs.findIndex(({ name }) => name === tabName)
+    return index === -1 ? 0 : index
+  }
+  return 0
+}
+
 const Tabs = ({ onTabChange, tabs, activeTabName, condensed, children }: Props) => {
-  // Using a prop to intialize state: https://reactjs.org/docs/hooks-reference.html#lazy-initial-state
-  const [activeTab, setActiveTab] = useState(() => {
-    if (activeTabName) {
-      const index = tabs.findIndex(({ name }) => name === activeTabName)
-      return index === -1 ? 0 : index
-    }
-    return 0
-  })
+  const activeTabIndex = getTabIndexByName(tabs, activeTabName)
+  const [activeTab, setActiveTab] = useState(activeTabIndex)
+  useEffect(() => {
+    setActiveTab(activeTabIndex)
+  }, [activeTabIndex])
 
   const onTabClick = (index: number) => {
     setActiveTab(index)
