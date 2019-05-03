@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import Icon, { IconName } from "../Icon/Icon"
 import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
@@ -69,12 +69,16 @@ const Tabs = ({ onTabChange, tabs, activeTabName, condensed, children }: Props) 
     setActiveTab(activeTabIndex)
   }, [activeTabIndex])
 
-  const onTabClick = (index: number) => {
-    setActiveTab(index)
-    if (onTabChange) {
-      onTabChange(tabs[index].name)
-    }
-  }
+  const onTabClick = useCallback(
+    (index: number) => {
+      setActiveTab(index)
+      if (onTabChange) {
+        onTabChange(tabs[index].name)
+      }
+    },
+    [onTabChange, tabs, setActiveTab],
+  )
+
   // Work around: wrap return in fragment- to prevent type error and not having to change childrens return type
   // https://github.com/Microsoft/TypeScript/issues/21699
   return (
