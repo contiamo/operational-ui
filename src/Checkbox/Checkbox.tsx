@@ -4,6 +4,19 @@ import * as React from "react"
 
 import styled from "../utils/styled"
 
+export interface CheckboxProps {
+  /** The current value of the checkbox */
+  value?: boolean
+  /** Callback called when the checkbox changes */
+  onChange?: (value: boolean) => void
+  /** The label of the checkbox */
+  label: string
+  /** Disabled input */
+  disabled?: boolean
+  /** Shall we make ourselves smaller? */
+  condensed?: boolean
+}
+
 const toggleCheckboxAnimation = keyframes`
   0% {
     opacity: 0;
@@ -80,19 +93,6 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
     border: solid 1px #c0c0c0;
   }
 `
-
-export interface CheckboxProps {
-  /** The current value of the checkbox */
-  value?: boolean
-  /** Callback called when the checkbox changes */
-  onChange?: (value: boolean) => void
-  /** The label of the checkbox */
-  label: string
-  /** Disabled input */
-  disabled?: boolean
-  /** Shall we make ourselves smaller? */
-  condensed?: boolean
-}
 
 const Checkbox: React.FC<CheckboxProps> = ({ value, onChange, label, disabled, condensed, ...props }) => {
   const uuid = uniqueId("checkbox_")
