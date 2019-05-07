@@ -83,6 +83,8 @@ const borderColors = {
   default: "#c0c0c0",
   /** `#d8d8d8` */
   disabled: "#d8d8d8",
+  /** `#eee` */
+  invisible: "#eee",
 }
 
 /**
