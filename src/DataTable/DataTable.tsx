@@ -1,10 +1,7 @@
 import * as React from "react"
-import IconJSX from "../Icon/Icon"
 import styled from "../utils/styled"
 
 export interface DataTableProps<T> {
-  editMode: boolean
-  onAddClick: () => void
   rows: Array<{
     isHeading?: boolean
     isDisabled?: boolean
@@ -12,9 +9,9 @@ export interface DataTableProps<T> {
   }>
 }
 
-const Container = styled("div")<{ isEditMode: boolean }>`
+const Container = styled("div")`
   width: fit-content;
-  box-shadow: ${({ isEditMode, theme }) => (isEditMode ? "0 0 1px 1px inset " + theme.color.border.invisible : "none")};
+  box-shadow: ${({ theme }) => "0 0 1px 1px inset " + theme.color.border.invisible};
 `
 
 const Table = styled("table")`
@@ -68,9 +65,9 @@ const EditButton = styled(Cell)`
   }
 `
 
-export function DataTable<T extends P[], P = any>({ rows, editMode, onAddClick }: DataTableProps<T>) {
+export function DataTable<T extends P[], P = any>({ rows }: DataTableProps<T>) {
   return (
-    <Container isEditMode={editMode}>
+    <Container>
       <Table>
         {rows.map(({ isHeading, isDisabled, cells }, rowIndex) => (
           <Row isDisabled={isDisabled} isHeading={isHeading} key={rowIndex}>
@@ -79,11 +76,6 @@ export function DataTable<T extends P[], P = any>({ rows, editMode, onAddClick }
                 <Value>{cellValue}</Value>
               </Cell>
             ))}
-            {editMode && rowIndex === 0 && (
-              <EditButton onClick={onAddClick} rowSpan={3}>
-                <IconJSX color="primary" name="Add" />
-              </EditButton>
-            )}
           </Row>
         ))}
       </Table>
