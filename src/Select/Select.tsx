@@ -4,7 +4,7 @@ import styled from "../utils/styled"
 
 import { height as inputHeight } from "../Input/Input.constants"
 import { LabelText } from "../LabelText/LabelText"
-import { floatIn, keyCodes, readableTextColor, resetTransform } from "../utils"
+import { floatIn, keyCodes, resetTransform } from "../utils"
 import { expandColor } from "../utils/constants"
 import { inputFocus, Label } from "../utils/mixins"
 import SelectFilter from "./Select.Filter"
@@ -75,7 +75,6 @@ const Container = styled("div")<{ color?: string; disabled: boolean; naked: bool
       borderColor: theme.color.border.default,
       opacity: disabled ? 0.5 : 1,
       cursor: "pointer",
-      color: readableTextColor(backgroundColor, ["black", "white"]),
       outline: "none",
       pointerEvents: disabled ? "none" : "all",
       // downward caret.
@@ -88,7 +87,7 @@ const Container = styled("div")<{ color?: string; disabled: boolean; naked: bool
         height: 0,
         border: "4px solid transparent",
         borderTopColor: theme.color.border.default,
-        transform: `translateY(calc(-50%${ naked ? '' : ' +2px'}))`,
+        transform: `translateY(calc(-50%${naked ? "" : " +2px"}))`,
       },
       "&:focus":
         !naked &&
