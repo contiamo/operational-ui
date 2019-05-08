@@ -36,7 +36,7 @@ const toggleCheckboxAnimation = keyframes`
 // ref: https://codersblock.com/blog/checkbox-trickery-with-css/
 const Input = styled("input")<{ condensed: CheckboxProps["condensed"] }>`
   position: absolute;
-   left: -100vw;
+  left: -100vw;
 
   :checked + label::after {
     content: "";
@@ -66,8 +66,8 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
   height: ${({ condensed }) => (condensed ? 13 : 20)}px;
   display: block;
   margin-bottom: ${({ theme, condensed }) => (condensed ? 0 : theme.space.small)}px;
-  padding-left: ${({ condensed }) => (condensed ? 19 : 32)}px;
-  line-height: 20px;
+  padding-left: ${({ condensed }) => (condensed ? 22 : 32)}px;
+  line-height: ${({ condensed }) => (condensed ? 13 : 20)}px;
   user-select: none;
   font-size: ${({ theme, condensed }) => (condensed ? theme.font.size.small : theme.font.size.body)}px;
 
