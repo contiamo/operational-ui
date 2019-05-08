@@ -2,26 +2,18 @@
 
 ```jsx
 import * as React from "react"
-import { Checkbox } from "@operational/components"
+import { Checkbox, Form } from "@operational/components"
 
 const MyComponent = () => {
   const [value, setValue] = React.useState(true)
-  return <Checkbox label="I'm awesome" onChange={setValue} value={value} />
+  return (
+    <Form>
+      <Checkbox label="I'm like cheese" onChange={setValue} value={value} />
+      <Checkbox disabled label="I'm like chicken" onChange={setValue} value={value} />
+      <Checkbox condensed label="mini me is mini" onChange={setValue} value={value} />
+    </Form>
+  )
 }
 
 ;<MyComponent />
-```
-
-### Disabled version
-
-```jsx
-import * as React from "react"
-import { Checkbox } from "@operational/components"
-
-const MyOtherComponent = () => {
-  const [value, setValue] = React.useState(true)
-  return <Checkbox disabled label="I'm awesome" onChange={setValue} value={value} />
-}
-
-;<MyOtherComponent />
 ```
