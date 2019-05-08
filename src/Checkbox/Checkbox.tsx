@@ -42,11 +42,11 @@ const Input = styled("input")<{ condensed: CheckboxProps["condensed"] }>`
     content: "";
     display: block;
     width: ${({ condensed }) => (condensed ? 3 : 5)}px;
-    height: ${({ condensed }) => (condensed ? 7 : 10)}px;
+    height: ${({ condensed }) => (condensed ? 7 : 11)}px;
     position: absolute;
-    left: ${({ condensed }) => (condensed ? 4 : 7)}px;
+    left: ${({ condensed }) => (condensed ? 4 : 6)}px;
     margin: 0 auto;
-    top: ${({ condensed }) => (condensed ? 2 : 4)}px;
+    top: 2px;
     transform: rotate(45deg);
     border-right: 2px solid ${props => props.theme.color.primary};
     border-bottom: 2px solid ${props => props.theme.color.primary};
