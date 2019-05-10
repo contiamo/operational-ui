@@ -1,4 +1,6 @@
 import * as React from "react"
+import IconJSX from "../Icon/Icon"
+import { setAlpha } from "../utils"
 import styled from "../utils/styled"
 
 export interface DataTableProps<T> {
@@ -11,6 +13,18 @@ export interface DataTableProps<T> {
 
   /** How much shall we restrict the height? */
   height?: number
+
+  /** Shall we add columns? */
+  onAddColumn?: () => void
+
+  /** Shall we remove columns? */
+  onRemoveColumn?: (columnIndex: number) => void
+
+  /** Are we viewing a subset? */
+  pageSize?: number
+
+  /** Fetch more */
+  onFetch?: () => void
 }
 
 const Container = styled("div")`
@@ -46,15 +60,39 @@ const Row = styled("tr")<{
       : ""}
 `
 
+const deleteButtonTag = "button"
+
 const Cell = styled<"td" | "th">("td")<{ as: "td" | "th"; isHeading: boolean }>`
+  position: relative;
   border: 1px solid;
   border-top-color: ${({ theme }) => theme.color.border.medium};
   border-bottom-color: ${({ theme }) => theme.color.border.medium};
   border-left-color: ${({ theme }) => theme.color.border.lightest};
   border-right-color: ${({ theme }) => theme.color.border.lightest};
   font-family: ${({ theme, isHeading }) => (isHeading ? theme.font.family.main : theme.font.family.code)};
+  font-weight: 400;
   padding: 0;
   height: 36px;
+  color: ${({ theme, isHeading }) => (!isHeading ? theme.color.text.default : theme.color.text.dark)};
+
+  :hover ${deleteButtonTag} {
+    display: flex;
+  }
+`
+
+const DeleteButton = styled(deleteButtonTag)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  padding-right: ${({ theme }) => theme.space.content}px;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: ${({ theme }) => setAlpha(0.04)(theme.color.primary)};
+  cursor: pointer;
+  display: none;
 `
 
 const Value = styled("div")`
@@ -65,25 +103,39 @@ const Value = styled("div")`
   padding: 10px ${({ theme }) => theme.space.content}px;
 `
 
-const dataToRow = ({ isHeading, isDisabled, cells }: DataTableProps<any[]>["rows"][-1], rowIndex: number) => (
+const dataToRow = ({ onRemoveColumn }: Partial<DataTableProps<any>>) => (
+  { isHeading, isDisabled, cells }: DataTableProps<any[]>["rows"][-1],
+  rowIndex: number,
+) => (
   <Row isDisabled={isDisabled} isHeading={isHeading} key={rowIndex}>
     {cells.map((cellValue, cellIndex) => (
       <Cell isHeading={Boolean(isHeading)} as={isHeading ? "th" : "td"} key={rowIndex * cellIndex}>
         <Value>{cellValue}</Value>
+        {Boolean(onRemoveColumn) && rowIndex === 0 && isHeading && (
+          <DeleteButton
+            onClick={() => {
+              if (onRemoveColumn) {
+                onRemoveColumn(cellIndex)
+              }
+            }}
+          >
+            <IconJSX aria-label="Remove Column" name="No" color="primary" />
+          </DeleteButton>
+        )}
       </Cell>
     ))}
   </Row>
 )
 
-export function DataTable<T extends P[], P = any>({ rows, height }: DataTableProps<T>) {
+export function DataTable<T extends P[], P = any>({ rows, height, onRemoveColumn }: DataTableProps<T>) {
   const headers = rows.filter(row => row.isHeading)
   const regularRows = rows.filter(row => !row.isHeading)
 
   return (
     <Container>
       <Table>
-        <thead>{headers.map(dataToRow)}</thead>
-        <TableBody height={height}>{regularRows.map(dataToRow)}</TableBody>
+        <thead>{headers.map(dataToRow({ onRemoveColumn }))}</thead>
+        <TableBody height={height}>{regularRows.map(dataToRow({ onRemoveColumn }))}</TableBody>
       </Table>
     </Container>
   )
