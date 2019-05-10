@@ -41,15 +41,15 @@ const Input = styled("input")<{ condensed: CheckboxProps["condensed"] }>`
   :checked + label::after {
     content: "";
     display: block;
-    width: ${({ condensed }) => (condensed ? 3 : 5)}px;
-    height: ${({ condensed }) => (condensed ? 7 : 11)}px;
+    width: ${({ condensed }) => (condensed ? 4 : 5)}px;
+    height: ${({ condensed }) => (condensed ? 6 : 11)}px;
     position: absolute;
-    left: ${({ condensed }) => (condensed ? 4 : 6)}px;
+    left: ${({ condensed }) => (condensed ? 3 : 6)}px;
     margin: 0 auto;
-    top: 2px;
+    top: 1px;
     transform: rotate(45deg);
-    border-right: 2px solid ${props => props.theme.color.primary};
-    border-bottom: 2px solid ${props => props.theme.color.primary};
+    border-right: ${({ condensed, theme }) => `${condensed ? 1 : 2}px solid ${theme.color.primary}`};
+    border-bottom: ${({ condensed, theme }) => `${condensed ? 1 : 2}px solid ${theme.color.primary}`};
     cursor: pointer;
     animation: ${toggleCheckboxAnimation} 0.2s ease forwards;
   }
@@ -66,10 +66,11 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
   height: ${({ condensed }) => (condensed ? 13 : 20)}px;
   display: block;
   margin-bottom: ${({ theme, condensed }) => (condensed ? 0 : theme.space.small)}px;
-  padding-left: ${({ condensed }) => (condensed ? 22 : 32)}px;
+  padding-left: ${({ condensed }) => (condensed ? 18 : 32)}px;
   line-height: ${({ condensed }) => (condensed ? 13 : 20)}px;
   user-select: none;
   font-size: ${({ theme, condensed }) => (condensed ? theme.font.size.small : theme.font.size.body)}px;
+  font-weight: 400;
 
   :hover {
     color: ${props => props.theme.color.primary};
@@ -86,8 +87,8 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
     display: block;
     top: 0;
     left: 0;
-    width: ${({ condensed }) => (condensed ? 12 : 18)}px;
-    height: ${({ condensed }) => (condensed ? 12 : 18)}px;
+    width: ${({ condensed }) => (condensed ? 10 : 18)}px;
+    height: ${({ condensed }) => (condensed ? 10 : 18)}px;
     border-radius: ${props => props.theme.borderRadius}px;
     background-color: #f2f2f2;
     border: solid 1px #c0c0c0;
