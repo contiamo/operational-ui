@@ -4,6 +4,19 @@ import * as React from "react"
 
 import styled from "../utils/styled"
 
+export interface CheckboxProps {
+  /** The current value of the checkbox */
+  value?: boolean
+  /** Callback called when the checkbox changes */
+  onChange?: (value: boolean) => void
+  /** The label of the checkbox */
+  label: string
+  /** Disabled input */
+  disabled?: boolean
+  /** Shall we make ourselves smaller? */
+  condensed?: boolean
+}
+
 const toggleCheckboxAnimation = keyframes`
   0% {
     opacity: 0;
@@ -21,17 +34,17 @@ const toggleCheckboxAnimation = keyframes`
 `
 
 // ref: https://codersblock.com/blog/checkbox-trickery-with-css/
-const Input = styled("input")`
+const Input = styled("input")<{ condensed: CheckboxProps["condensed"] }>`
   position: absolute;
-  left: -9999px;
+  left: -100vw;
 
   :checked + label::after {
     content: "";
     display: block;
-    width: 5px;
-    height: 10px;
+    width: ${({ condensed }) => (condensed ? 3 : 5)}px;
+    height: ${({ condensed }) => (condensed ? 7 : 11)}px;
     position: absolute;
-    left: 7px;
+    left: ${({ condensed }) => (condensed ? 4 : 6)}px;
     margin: 0 auto;
     top: 2px;
     transform: rotate(45deg);
@@ -47,18 +60,16 @@ const Input = styled("input")`
   }
 `
 
-const Label = styled("label")`
+const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
   position: relative;
   cursor: pointer;
-  height: 20px;
+  height: ${({ condensed }) => (condensed ? 13 : 20)}px;
   display: block;
-  margin-bottom: 10px;
-  padding-left: 32px;
-  line-height: 20px;
+  margin-bottom: ${({ theme, condensed }) => (condensed ? 0 : theme.space.small)}px;
+  padding-left: ${({ condensed }) => (condensed ? 22 : 32)}px;
+  line-height: ${({ condensed }) => (condensed ? 13 : 20)}px;
   user-select: none;
-
-  font-size: ${props => props.theme.font.size}px;
-  color: ${props => props.theme.color.text.default};
+  font-size: ${({ theme, condensed }) => (condensed ? theme.font.size.small : theme.font.size.body)}px;
 
   :hover {
     color: ${props => props.theme.color.primary};
@@ -75,31 +86,21 @@ const Label = styled("label")`
     display: block;
     top: 0;
     left: 0;
-    width: 18px;
-    height: 18px;
+    width: ${({ condensed }) => (condensed ? 12 : 18)}px;
+    height: ${({ condensed }) => (condensed ? 12 : 18)}px;
     border-radius: ${props => props.theme.borderRadius}px;
     background-color: #f2f2f2;
     border: solid 1px #c0c0c0;
   }
 `
 
-export interface CheckboxProps {
-  /** The current value of the checkbox */
-  value?: boolean
-  /** Callback called when the checkbox changes */
-  onChange?: (value: boolean) => void
-  /** The label of the checkbox */
-  label: string
-  /** Disabled input */
-  disabled?: boolean
-}
-
-const Checkbox: React.FC<CheckboxProps> = ({ value, onChange, label, disabled, ...props }) => {
+const Checkbox: React.FC<CheckboxProps> = ({ value, onChange, label, disabled, condensed, ...props }) => {
   const uuid = uniqueId("checkbox_")
 
   return (
     <div style={disabled ? { opacity: 0.6 } : {}}>
       <Input
+        condensed={condensed}
         id={uuid}
         type="checkbox"
         checked={Boolean(value)}
@@ -107,7 +108,9 @@ const Checkbox: React.FC<CheckboxProps> = ({ value, onChange, label, disabled, .
         disabled={disabled}
         {...props}
       />
-      <Label htmlFor={uuid}>{label}</Label>
+      <Label condensed={condensed} htmlFor={uuid}>
+        {label}
+      </Label>
     </div>
   )
 }
