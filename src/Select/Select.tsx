@@ -86,7 +86,7 @@ const Container = styled("div")<{ color?: string; disabled: boolean; naked: bool
         width: 0,
         height: 0,
         border: "4px solid transparent",
-        borderTopColor: theme.color.border.default,
+        borderTopColor: theme.color.black,
         transform: `translateY(calc(-50%${naked ? "" : " +2px"}))`,
       },
       "&:focus":
