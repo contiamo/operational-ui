@@ -40,6 +40,8 @@ const backgroundColors = {
   lighter: "#f6f6f6",
   /** `#f8f8f8` */
   lightest: "#f8f8f8",
+  /** `#fafbfc` */
+  gentle: "#fafbfc",
 }
 
 /**
@@ -85,6 +87,10 @@ const borderColors = {
   disabled: "#d8d8d8",
   /** `#eee` */
   invisible: "#eee",
+  /** `#eee` */
+  medium: "#e5e5e5",
+  /** `#f3f3f3` */
+  lightest: "#f3f3f3",
 }
 
 /**
