@@ -3,6 +3,7 @@
 ```jsx
 import { DataTable, DataTableSelect, ResourceName, Checkbox } from "@operational/components"
 ;<DataTable
+  onRemoveColumn={columnIndex => alert(`LOL you tried to remove ${columnIndex}!`)}
   rows={[
     {
       isHeading: true,
@@ -28,7 +29,6 @@ import { DataTable, DataTableSelect, ResourceName, Checkbox } from "@operational
     },
     {
       isHeading: true,
-      isDisabled: true,
       cells: [
         <>
           <Checkbox checked condensed /> is required
