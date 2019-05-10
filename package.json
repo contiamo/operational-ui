@@ -75,7 +75,7 @@
     "@emotion/core": "^10.0.7",
     "@emotion/styled": "^10.0.7",
     "case": "^1.5.5",
-    "emotion-theming": "^10.0.9",
+    "emotion-theming": "^10.0.10",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "nanoid": "^2.0.1",
@@ -90,6 +90,7 @@
     "react-json-view": "^1.19.1",
     "react-markdown": "4.0.3",
     "react-waypoint": "^8.0.3",
+    "react-window": "^1.8.1",
     "tinycolor2": "^1.4.1",
     "url-regex": "^4.1.1"
   },
