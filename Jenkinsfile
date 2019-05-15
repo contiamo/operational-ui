@@ -32,7 +32,7 @@ def buildWebsite(dir,command){
   sh "cd ${dir} && yarn ${command} && cd -"
 }
 
-podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
+podTemplate(cloud: "${env.K8sCloud}", label: label, serviceAccount: "jenkins", containers: [
   containerTemplate(name: 'node', image: "${env.GcrPrefix}/node:10.0.0-v0.5", ttyEnabled: true, nodeSelector: "group=highmem", privileged: true),
   containerTemplate(name: 'build-utils', image: "${env.GcrPrefix}/build-utils:0.0.8", ttyEnabled: true, nodeSelector: "group=highmem", privileged: true)
   ],
