@@ -32,8 +32,9 @@ def buildWebsite(dir,command){
   sh "cd ${dir} && yarn ${command} && cd -"
 }
 
-podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
+podTemplate(cloud: "${env.K8sCloud}", label: label, serviceAccount: "jenkins", containers: [
   containerTemplate(name: 'node', image: "${env.GcrPrefix}/node:10.0.0-v0.5", ttyEnabled: true, nodeSelector: "group=highmem", privileged: true),
+  containerTemplate(name: 'build-utils', image: "${env.GcrPrefix}/build-utils:0.0.8", ttyEnabled: true, nodeSelector: "group=highmem", privileged: true)
   ],
   volumes: [
       hostPathVolume(mountPath: '/var/run/docker.sock', hostPath: '/var/run/docker.sock'),
@@ -55,46 +56,55 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, containers: [
   timestamps {
     ansiColor('xterm') {
       node(label){
-        stage('Git Checkout'){
-          lib.gitCheckout()
-        }
-        container('node') {
-          stage("Initialize"){
-            sh "node -v && npm -v"
+        try {
+          stage('Git Checkout'){
+            lib.gitCheckout()
           }
-          stage ('YARN Install'){
-            try {
-              sh "yarn install"
-            } catch(e) {
-              error("Failed while running npm install. Error: ${e}")
+          container('node') {
+            stage("Initialize"){
+              sh "node -v && npm -v"
             }
-          }
-          stage ('Test'){
-            try {
-              sh "yarn ci"
-            } catch(e) {
-              error("Failed while running npm ci. Error: ${e}")
+            stage ('YARN Install'){
+              try {
+                sh "yarn install"
+              } catch(e) {
+                error("Failed while running npm install. Error: ${e}")
+              }
             }
-          }
-          env.NpmRegistry = "registry.npmjs.org"
-          stage ('NPM Publish Next Tag') {
+            stage ('Test'){
+              try {
+                sh "yarn ci"
+              } catch(e) {
+                error("Failed while running npm ci. Error: ${e}")
+              }
+            }
             env.NpmRegistry = "registry.npmjs.org"
-            npmLogin(env.NpmRegistry,"\${NPM_USER}","\${NPM_PASS}",env.NpmEmail)
-            try {
-              npmPublish("next",env.NpmRegistry)
-            } catch(e) {
-              println("Error publishing artefacts. Error: ${e}. Trying again...")
-              npmPublish("next",env.NpmRegistry)
+            stage ('NPM Publish Next Tag') {
+              env.NpmRegistry = "registry.npmjs.org"
+              npmLogin(env.NpmRegistry,"\${NPM_USER}","\${NPM_PASS}",env.NpmEmail)
+              try {
+                npmPublish("next",env.NpmRegistry)
+              } catch(e) {
+                println("Error publishing artefacts. Error: ${e}. Trying again...")
+                npmPublish("next",env.NpmRegistry)
+              }
+            }
+            if (env.BranchLower == "master") {
+              lib.haveAword('yellow',"Triggering downstream build")
+              stage('Trigger Contiamo UI'){
+                build(job: '../contiamo-ui/master', wait: false, parameters: [
+                  [$class: 'StringParameterValue', name: 'UPDATE', value: "operational-ui" ]
+                ])
+              }
             }
           }
-          if (env.BranchLower == "master") {
-            lib.haveAword('yellow',"Triggering downstream build")
-            stage('Trigger Contiamo UI'){
-              build(job: '../contiamo-ui/master', wait: false, parameters: [
-                [$class: 'StringParameterValue', name: 'UPDATE', value: "operational-ui" ]
-              ])
-            }
+        } catch(Exception e) {
+          container('build-utils'){
+            lib.postToSlackV3(colour: "danger", channel: "frontend", title: "${env.JobNameWithoutBranch} build failed", message: "Build URL: ${env.BUILD_URL}/console")
           }
+          errorMessage = e.toString()
+          println(errorMessage)
+          error("Pipeline failed")
         }
       }
     }
