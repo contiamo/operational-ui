@@ -100,7 +100,7 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, serviceAccount: "jenkins", c
           }
         } catch(Exception e) {
           container('build-utils'){
-            lib.postToSlackV3(colour: "danger", channel: "greg", title: "${env.JobNameWithoutBranch} build failed", message: "Build URL: ${env.BUILD_URL}/console")
+            lib.postToSlackV3(colour: "danger", channel: "frontend", title: "${env.JobNameWithoutBranch} build failed", message: "Build URL: ${env.BUILD_URL}/console")
           }
           errorMessage = e.toString()
           println(errorMessage)
