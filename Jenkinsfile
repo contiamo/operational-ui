@@ -57,9 +57,6 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, serviceAccount: "jenkins", c
     ansiColor('xterm') {
       node(label){
         try {
-          stage("Test Fails"){
-            sh "jfuyfkuyfk"
-          }
           stage('Git Checkout'){
             lib.gitCheckout()
           }
