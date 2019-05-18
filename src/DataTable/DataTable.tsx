@@ -3,12 +3,16 @@ import { FixedSizeList, ListChildComponentProps } from "react-window"
 
 import Message from "../Internals/Message/Message"
 import styled from "../utils/styled"
+import { truncate } from "../utils/truncate"
 
 export interface DataTableProps<T, P> {
   columns: T[][]
 
   /** A collection of rows for the table */
   rows: P[][]
+
+  /** Maximum character length in cells before truncation. Default `40`. */
+  maxCharactersInCell?: number
 
   /** How high is each row? Default `30px` */
   rowHeight?: number
@@ -63,6 +67,7 @@ const defaultProps = {
   footer: null,
   height: 500,
   cellWidth: "1fr",
+  maxCharactersInCell: 40,
 }
 
 export function DataTable<P, T>({
@@ -72,6 +77,7 @@ export function DataTable<P, T>({
   footer = defaultProps.footer,
   height = defaultProps.height,
   cellWidth = defaultProps.cellWidth,
+  maxCharactersInCell = defaultProps.maxCharactersInCell,
 }: DataTableProps<T, P>) {
   if (rows.length && rows[0].length !== columns[0].length) {
     return (
@@ -87,7 +93,7 @@ export function DataTable<P, T>({
       React.memo(({ style, index }) => (
         <Row isEven={index % 2 === 0} style={{ ...style, height: rowHeight }} cellWidth={cellWidth} numCells={numCells}>
           {rows[index].map(cell => (
-            <Cell height={rowHeight}>{cell}</Cell>
+            <Cell height={rowHeight}>{truncate(maxCharactersInCell)(cell)}</Cell>
           ))}
         </Row>
       )),
