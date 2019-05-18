@@ -1,144 +1,127 @@
 import * as React from "react"
-import IconJSX from "../Icon/Icon"
-import { setAlpha } from "../utils"
+import { FixedSizeList, ListChildComponentProps } from "react-window"
+
+import Message from "../Internals/Message/Message"
 import styled from "../utils/styled"
 
-export interface DataTableProps<T> {
+export interface DataTableProps<T, P> {
+  columns: T[][]
+
   /** A collection of rows for the table */
-  rows: Array<{
-    isHeading?: boolean
-    isDisabled?: boolean
-    cells: T
-  }>
+  rows: P[][]
+
+  /** How high is each row? Default `30px` */
+  rowHeight?: number
+
+  /** Shall we include a footer? */
+  footer?: React.ReactNode
 
   /** How much shall we restrict the height? */
   height?: number
 
-  /** Shall we add columns? */
-  onAddColumn?: () => void
-
-  /** Shall we remove columns? */
-  onRemoveColumn?: (columnIndex: number) => void
-
-  /** Are we viewing a subset? */
-  pageSize?: number
-
-  /** Fetch more */
-  onFetch?: () => void
+  /** How wide is each cell? Default `1fr` */
+  cellWidth?: string
 }
 
 const Container = styled("div")`
-  width: fit-content;
-  box-shadow: ${({ theme }) => "0 0 1px 1px inset " + theme.color.border.invisible};
-`
-
-const TableBody = styled("tbody", { shouldForwardProp: prop => prop !== "height" })<{ height?: number }>`
-  height: ${({ height }) => height + "px" || "auto"};
-  overflow: auto;
-`
-
-const Table = styled("table")`
-  border-collapse: collapse;
-  table-layout: fixed;
-  border-spacing: 0;
-`
-
-const Row = styled("tr")<{
-  isDisabled: DataTableProps<unknown>["rows"][-1]["isDisabled"]
-  isHeading: DataTableProps<unknown>["rows"][-1]["isHeading"]
-}>`
-  opacity: ${({ isDisabled }) => (isDisabled ? 0.4 : 1)};
-  pointer-events: ${({ isDisabled }) => (isDisabled ? 0.4 : 1)};
-
-  /* Heading styles */
-  ${({ isHeading, theme }) =>
-    isHeading
-      ? `
-    background-color: ${theme.color.background.gentle};
-    color: ${theme.color.text.dark};
-  `
-      : ""}
-`
-
-const deleteButtonTag = "button"
-
-const Cell = styled<"td" | "th">("td")<{ as: "td" | "th"; isHeading: boolean }>`
-  position: relative;
-  border: 1px solid;
-  border-top-color: ${({ theme }) => theme.color.border.medium};
-  border-bottom-color: ${({ theme }) => theme.color.border.medium};
-  border-left-color: ${({ theme }) => theme.color.border.lightest};
-  border-right-color: ${({ theme }) => theme.color.border.lightest};
-  font-family: ${({ theme, isHeading }) => (isHeading ? theme.font.family.main : theme.font.family.code)};
-  font-weight: 400;
-  padding: 0;
-  height: 36px;
-  color: ${({ theme, isHeading }) => (!isHeading ? theme.color.text.default : theme.color.text.dark)};
-
-  :hover ${deleteButtonTag} {
-    display: flex;
-  }
-`
-
-const DeleteButton = styled(deleteButtonTag)`
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  border: 0;
-  padding-right: ${({ theme }) => theme.space.content}px;
-  justify-content: flex-end;
-  align-items: center;
-  background-color: ${({ theme }) => setAlpha(0.04)(theme.color.primary)};
-  cursor: pointer;
-  display: none;
+  border: 1px solid ${({ theme }) => theme.color.border.medium};
 `
 
-const Value = styled("div")`
+const HeadersContainer = styled("div")`
+  border-bottom: 1px solid ${({ theme }) => theme.color.border.gentle};
+`
+
+const Row = styled("div")<{ numCells: number; cellWidth: string; isHeading?: boolean; isEven?: boolean }>`
+  display: grid;
+  grid-template-columns: repeat(${({ numCells, cellWidth }) => `${numCells}, ${cellWidth}`});
+  background-color: ${({ theme, isHeading, isEven }) =>
+    isHeading ? theme.color.background.gentle : isEven ? theme.color.background.almostWhite : theme.color.white};
+`
+
+const Cell = styled("div")<{ height: number; isHeading?: boolean }>`
+  position: relative;
   display: flex;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 10px ${({ theme }) => theme.space.content}px;
+  box-shadow: 0 0 0 0.5px
+    ${({ theme, isHeading }) => (isHeading ? theme.color.border.gentle : theme.color.border.medium)};
+  height: ${({ height }) => height}px;
+  font-family: ${({ theme }) => theme.font.family.code};
+  font-weight: ${({ theme, isHeading }) => (isHeading ? theme.font.weight.bold : theme.font.weight.regular)};
+  padding: ${({ theme }) => theme.space.content}px;
+  color: ${({ theme, isHeading }) => (!isHeading ? theme.color.text.default : theme.color.text.dark)};
 `
 
-const dataToRow = ({ onRemoveColumn }: Partial<DataTableProps<any>>) => (
-  { isHeading, isDisabled, cells }: DataTableProps<any[]>["rows"][-1],
-  rowIndex: number,
-) => (
-  <Row isDisabled={isDisabled} isHeading={isHeading} key={rowIndex}>
-    {cells.map((cellValue, cellIndex) => (
-      <Cell isHeading={Boolean(isHeading)} as={isHeading ? "th" : "td"} key={rowIndex * cellIndex}>
-        <Value>{cellValue}</Value>
-        {Boolean(onRemoveColumn) && rowIndex === 0 && isHeading && (
-          <DeleteButton
-            onClick={() => {
-              if (onRemoveColumn) {
-                onRemoveColumn(cellIndex)
-              }
-            }}
-          >
-            <IconJSX aria-label="Remove Column" name="No" color="primary" />
-          </DeleteButton>
-        )}
-      </Cell>
-    ))}
-  </Row>
-)
+/**
+ * @todo
+ * - [ ] handle keys
+ * - [ ] add tests
+ */
 
-export function DataTable<T extends P[], P = any>({ rows, height, onRemoveColumn }: DataTableProps<T>) {
-  const headers = rows.filter(row => row.isHeading)
-  const regularRows = rows.filter(row => !row.isHeading)
+const defaultProps = {
+  rowHeight: 30,
+  footer: null,
+  height: 500,
+  cellWidth: "1fr",
+}
+
+export function DataTable<P, T>({
+  columns,
+  rows,
+  rowHeight = defaultProps.rowHeight,
+  footer = defaultProps.footer,
+  height = defaultProps.height,
+  cellWidth = defaultProps.cellWidth,
+}: DataTableProps<T, P>) {
+  if (rows.length && rows[0].length !== columns[0].length) {
+    return (
+      <Message color="error">
+        Invalid data: `rows` have different cardinality than `columns`. Please check both props and try again.
+      </Message>
+    )
+  }
+
+  const numCells = React.useMemo(() => columns[0].length, [columns])
+  const VirtualRow: React.FC<ListChildComponentProps> = React.useMemo(
+    () =>
+      React.memo(({ style, index }) => (
+        <Row isEven={index % 2 === 0} style={{ ...style, height: rowHeight }} cellWidth={cellWidth} numCells={numCells}>
+          {rows[index].map(cell => (
+            <Cell height={rowHeight}>{cell}</Cell>
+          ))}
+        </Row>
+      )),
+    [rows],
+  )
 
   return (
     <Container>
-      <Table>
-        <thead>{headers.map(dataToRow({ onRemoveColumn }))}</thead>
-        <TableBody height={height}>{regularRows.map(dataToRow({ onRemoveColumn }))}</TableBody>
-      </Table>
+      <HeadersContainer>
+        {columns.map(headerRow => (
+          <Row isHeading numCells={numCells} cellWidth={cellWidth}>
+            {headerRow.map(cell => (
+              <Cell height={rowHeight} isHeading>
+                {cell}
+              </Cell>
+            ))}
+          </Row>
+        ))}
+      </HeadersContainer>
+      <FixedSizeList
+        style={{ overflow: "overlay" }}
+        itemCount={rows.length}
+        itemSize={rowHeight}
+        height={height || 500}
+        width="100%"
+      >
+        {VirtualRow}
+      </FixedSizeList>
+      {footer}
     </Container>
   )
 }
 
-export default DataTable
+// @ts-ignore this only exists for styleguidist/ts-docgen
+DataTable.defaultProps = defaultProps
+
+export default React.memo(DataTable)
