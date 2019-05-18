@@ -9,7 +9,8 @@ const StyledSelect = styled(Select)`
   background: transparent;
   border: 0;
   font-weight: 400;
-  width: calc(100% + ${({ theme }) => -theme.space.content * 2}px);
+  width: calc(100% + ${({ theme }) => theme.space.content * 2}px);
+  max-width: none;
 ` // * 2 for left _and_ right.
 
 export const DataTableSelect: React.FC<SelectProps> = props => <StyledSelect {...props} />
