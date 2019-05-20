@@ -48,7 +48,7 @@ Leaving this prefix off will prevent your PR from being included in the release.
 
 At any given time `master` branch points to the latest development iteration of the library.
 
-Hot fixes, new features, documentation anything related is handled on a separate branch. Once it’s been thoroughly tested out. It is then merged with the `master` branch.
+Bug fixes, new features, documentation anything related is handled on a separate branch. Once it’s been thoroughly tested out. It is then merged with the `master` branch.
 
 ## License
 
