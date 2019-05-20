@@ -23,3 +23,7 @@ const App = () => (
   </OperationalUI>
 )
 ```
+
+## Contributing
+
+To get started contributing, please check out our [contributing guidelines](CONTRIBUTING.md).
