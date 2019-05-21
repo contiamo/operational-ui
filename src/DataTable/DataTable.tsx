@@ -33,11 +33,16 @@ const Container = styled("div", { shouldForwardProp: prop => prop !== "width" })
   border: 1px solid ${({ theme }) => theme.color.border.medium};
 `
 
-const TableContainer = styled("div")<{ numColumns: number; numRows: number; columnWidth: string; rowHeight: number }>`
+const TableContainer = styled("div")<{
+  numColumns: number
+  numHeaders: number
+  columnWidth: string
+  rowHeight: number
+}>`
   display: grid;
   border-bottom: ${({ theme }) => `1px solid ${theme.color.border.gentle}`};
   grid-template-columns: repeat(${({ numColumns, columnWidth }) => `${numColumns}, ${columnWidth}`});
-  grid-template-rows: repeat(${({ numRows, rowHeight }) => `${numRows}, ${rowHeight}px`});
+  grid-template-rows: repeat(${({ numHeaders, rowHeight }) => `${numHeaders}, ${rowHeight}px`});
 `
 
 const Row = styled("div")<{ numCells: number; cellWidth: string; isEven?: boolean }>`
@@ -46,11 +51,14 @@ const Row = styled("div")<{ numCells: number; cellWidth: string; isEven?: boolea
   background-color: ${({ theme, isEven }) => (isEven ? theme.color.background.almostWhite : theme.color.white)};
 `
 
-const Cell = styled("div", { shouldForwardProp: prop => prop !== "height" })<{ height: number; cell: number }>`
+const Cell = styled("div", { shouldForwardProp: prop => !["height", "cell"].includes(prop) })<{
+  height: number
+  cell: number
+}>`
   position: relative;
   display: flex;
   align-items: center;
-  box-shadow: 0 0 0 0.5px ${({ theme }) => theme.color.border.medium};
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.color.border.medium};
   height: ${({ height }) => height}px;
   font-family: ${({ theme }) => theme.font.family.code};
   font-weight: ${({ theme }) => theme.font.weight.regular};
@@ -58,6 +66,7 @@ const Cell = styled("div", { shouldForwardProp: prop => prop !== "height" })<{ h
   color: ${({ theme }) => theme.color.text.default};
   grid-column: ${({ cell }) => cell};
   overflow: overlay;
+  background-color: inherit;
 `
 
 const HeaderRow = styled("div")<{ rowHeight: number; numHeaders: number }>`
@@ -108,7 +117,7 @@ export function DataTable<P, T>({
         <TableContainer
           {...rest}
           numColumns={columns.length}
-          numRows={rows.length}
+          numHeaders={columns[0].length}
           columnWidth={cellWidth}
           rowHeight={rowHeight}
         >
