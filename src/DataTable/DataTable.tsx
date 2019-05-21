@@ -12,7 +12,7 @@ export interface DataTableProps<T, P> {
   rows: P[][]
 
   /** How high is each row (in pixels)? */
-  rowHeight?: number
+  rowHeight?: "regular" | "compact" | number
 
   /** Shall we include a footer? */
   footer?: React.ReactNode
@@ -33,7 +33,7 @@ const Container = styled("div", { shouldForwardProp: prop => prop !== "width" })
   border: 1px solid ${({ theme }) => theme.color.border.medium};
 `
 
-const TableContainer = styled("div")<{
+const HeadersContainer = styled("div")<{
   numColumns: number
   numHeaders: number
   columnWidth: string
@@ -65,14 +65,14 @@ const Cell = styled("div", { shouldForwardProp: prop => !["height", "cell"].incl
   padding: 0 ${({ theme }) => theme.space.content}px;
   color: ${({ theme }) => theme.color.text.default};
   grid-column: ${({ cell }) => cell};
-  overflow: overlay;
   background-color: inherit;
+  overflow: hidden;
 `
 
-const HeaderRow = styled("div")<{ rowHeight: number; numHeaders: number }>`
+const HeaderRow = styled("div")<{ rowHeight: number }>`
   left: 0;
   width: 100%;
-  height: ${({ rowHeight, numHeaders }) => rowHeight * numHeaders}px;
+  height: ${({ rowHeight }) => rowHeight}px;
   position: sticky;
   grid-row: 1;
   top: 0;
@@ -96,7 +96,7 @@ const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: number }>`
 export function DataTable<P, T>({
   columns,
   rows,
-  rowHeight = 30,
+  rowHeight: initialRowHeight = 35,
   footer = null,
   height = 500,
   width = "100%",
@@ -111,40 +111,48 @@ export function DataTable<P, T>({
     )
   }
 
+  const rowHeight: number = React.useMemo(() => {
+    switch (initialRowHeight) {
+      case "compact":
+        return 22
+      case "regular":
+        return 35
+      default:
+        return initialRowHeight
+    }
+  }, [initialRowHeight])
+
   const Table = React.useMemo(
     () =>
       React.memo(({ children, ...rest }) => (
-        <TableContainer
-          {...rest}
-          numColumns={columns.length}
-          numHeaders={columns[0].length}
-          columnWidth={cellWidth}
-          rowHeight={rowHeight}
-        >
-          {columns.map((headerRow, columnHeaderIndex) => (
-            <HeaderRow
-              key={`op-column-header-${columnHeaderIndex}-${performance.now()}`}
-              numHeaders={columns[0].length}
-              rowHeight={rowHeight}
-            >
-              {headerRow.map((cell, cellIndex) => (
-                <HeaderCell
-                  cell={cellIndex + 1}
-                  key={`op-column-header-cell-${columnHeaderIndex}-${cellIndex}-${performance.now()}`}
-                  height={rowHeight}
-                >
-                  {cell}
-                </HeaderCell>
-              ))}
-            </HeaderRow>
-          ))}
-
+        <>
+          <HeadersContainer
+            {...rest}
+            numColumns={columns.length}
+            numHeaders={columns[0].length}
+            columnWidth={cellWidth}
+            rowHeight={rowHeight}
+          >
+            {columns.map((headerRow, columnHeaderIndex) => (
+              <HeaderRow key={`op-column-header-${columnHeaderIndex}-${performance.now()}`} rowHeight={rowHeight}>
+                {headerRow.map((cell, cellIndex) => (
+                  <HeaderCell
+                    cell={cellIndex + 1}
+                    key={`op-column-header-cell-${columnHeaderIndex}-${cellIndex}-${performance.now()}`}
+                    height={rowHeight}
+                  >
+                    {cell}
+                  </HeaderCell>
+                ))}
+              </HeaderRow>
+            ))}
+          </HeadersContainer>
           <DataWrapper numHeaders={columns[0].length} rowHeight={rowHeight}>
             {children}
           </DataWrapper>
-        </TableContainer>
+        </>
       )),
-    [columns, rows],
+    [columns, rows, rowHeight],
   )
 
   const numCells = React.useMemo(() => rows[0].length, [rows])
@@ -160,7 +168,7 @@ export function DataTable<P, T>({
             ))}
         </Row>
       )),
-    [rows],
+    [rows, rowHeight],
   )
 
   return (
