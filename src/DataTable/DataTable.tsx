@@ -54,7 +54,7 @@ const Cell = styled("div", { shouldForwardProp: prop => prop !== "height" })<{ h
   height: ${({ height }) => height}px;
   font-family: ${({ theme }) => theme.font.family.code};
   font-weight: ${({ theme }) => theme.font.weight.regular};
-  padding: ${({ theme }) => theme.space.content}px;
+  padding: 0 ${({ theme }) => theme.space.content}px;
   color: ${({ theme }) => theme.color.text.default};
   grid-column: ${({ cell }) => cell};
   overflow: overlay;
@@ -81,8 +81,7 @@ const HeaderCell = styled(Cell)`
 const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: number }>`
   position: absolute;
   width: 100%;
-  top: ${({ numHeaders, rowHeight }) => numHeaders * rowHeight + numHeaders * 2}px
-    /* ^ 1px border top and bottom per cell */;
+  top: ${({ numHeaders, rowHeight }) => numHeaders * rowHeight}px;
 `
 
 export function DataTable<P, T>({
