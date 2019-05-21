@@ -3,7 +3,7 @@
 ```jsx
 import { Title, DataTable, DataTableSelect, DataTableFooter, Checkbox } from "@operational/components"
 const getNewRows = (lastIndex = 0) =>
-  Array.from({ length: (lastIndex || 1) * 10 }, (_, i) => [i + lastIndex + 1, Math.random(), Math.random()])
+  Array.from({ length: (lastIndex || 1) * 10 }, (_, i) => [`Cell ${i + lastIndex + 1}`, Math.random(), Math.random()])
 
 const MyComponent = () => {
   const [rows, setRows] = React.useState(getNewRows())
@@ -32,7 +32,11 @@ const MyComponent = () => {
         ]}
         rows={rows}
         footer={
-          <DataTableFooter onClick={() => setRows([...rows, ...getNewRows(rows[rows.length - 1][0])])}>
+          <DataTableFooter
+            onClick={() =>
+              setRows([...rows, ...getNewRows(parseInt(rows[rows.length - 1][0].replace("Cell ", ""), 10))])
+            }
+          >
             Add more rows
           </DataTableFooter>
         }
