@@ -72,7 +72,7 @@ const rowsReducer = (rows, action) => {
 }
 
 const MyComponent = () => {
-  const [rows, rowsDispatch] = React.useReducer(rowsReducer, [["hello"], ["hello"], ["hello"], ["hello"], ["hello"]])
+  const [rows, rowsDispatch] = React.useReducer(rowsReducer, Array.from({ length: 100 }, () => ["hello"]))
   const [columns, columnsDispatch] = React.useReducer(columnsReducer, [["Tejas", "nothing"]])
 
   const makeColumn = React.useCallback(
@@ -92,7 +92,9 @@ const MyComponent = () => {
 
   return (
     <>
-      <DataTable height={200} columns={columns} rows={rows} />
+      <div style={{ width: "100%", overflowX: "auto" }}>
+        <DataTable height={200} columns={columns} rows={rows} />
+      </div>
       <button
         onClick={() => {
           columnsDispatch({ type: "[add column]", column: makeColumn() })
