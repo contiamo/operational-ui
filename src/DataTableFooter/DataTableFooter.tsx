@@ -7,7 +7,6 @@ const Container = styled("div")<{ onClick?: (e: React.MouseEvent) => void }>`
   justify-content: center;
   padding: ${({ theme }) => theme.space.small}px;
   color: ${({ onClick, theme }) => (Boolean(onClick) ? theme.color.primary : "inherit")};
-  font-weight: ${({ onClick, theme }) => (Boolean(onClick) ? theme.font.weight.bold : theme.font.weight.regular)};
   cursor: ${({ onClick }) => (Boolean(onClick) ? "pointer" : "initial")};
   border-top: 1px solid ${({ theme }) => theme.color.border.gentle};
 `
