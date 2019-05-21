@@ -66,7 +66,6 @@ const Cell = styled("div", { shouldForwardProp: prop => !["height", "cell"].incl
   color: ${({ theme }) => theme.color.text.default};
   grid-column: ${({ cell }) => cell};
   background-color: inherit;
-  overflow: hidden;
 `
 
 const HeaderRow = styled("div")<{ rowHeight: number }>`
