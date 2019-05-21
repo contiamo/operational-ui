@@ -46,7 +46,7 @@ const Row = styled("div")<{ numCells: number; cellWidth: string; isEven?: boolea
   background-color: ${({ theme, isEven }) => (isEven ? theme.color.background.almostWhite : theme.color.white)};
 `
 
-const Cell = styled("div", { shouldForwardProp: prop => prop !== "height" })<{ height: number }>`
+const Cell = styled("div", { shouldForwardProp: prop => prop !== "height" })<{ height: number; cell: number }>`
   position: relative;
   display: flex;
   align-items: center;
@@ -56,6 +56,8 @@ const Cell = styled("div", { shouldForwardProp: prop => prop !== "height" })<{ h
   font-weight: ${({ theme }) => theme.font.weight.regular};
   padding: ${({ theme }) => theme.space.content}px;
   color: ${({ theme }) => theme.color.text.default};
+  grid-column: ${({ cell }) => cell};
+  overflow: overlay;
 `
 
 const HeaderRow = styled("div")<{ rowHeight: number; numHeaders: number }>`
@@ -118,6 +120,7 @@ export function DataTable<P, T>({
             >
               {headerRow.map((cell, cellIndex) => (
                 <HeaderCell
+                  cell={cellIndex + 1}
                   key={`op-column-header-cell-${columnHeaderIndex}-${cellIndex}-${performance.now()}`}
                   height={rowHeight}
                 >
@@ -141,8 +144,8 @@ export function DataTable<P, T>({
       React.memo(({ style, index }) => (
         <Row isEven={index % 2 === 0} style={{ ...style, height: rowHeight }} cellWidth={cellWidth} numCells={numCells}>
           {rows[index] &&
-            rows[index].map(cell => (
-              <Cell key={`op-row-${index}-${performance.now()}`} height={rowHeight}>
+            rows[index].map((cell, cellIndex) => (
+              <Cell key={`op-row-${cellIndex}-${performance.now()}`} cell={cellIndex + 1} height={rowHeight}>
                 {cell}
               </Cell>
             ))}
