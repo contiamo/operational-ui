@@ -75,7 +75,7 @@ const HeaderCell = styled(Cell)`
   color: ${({ theme }) => theme.color.text.dark};
   height: ${({ height }) => height}px;
   font-weight: ${({ theme }) => theme.font.weight.bold};
-  box-shadow: 0 0 0 0.5px ${({ theme }) => theme.color.border.gentle};
+  box-shadow: 0 0 0 1px ${({ theme }) => theme.color.border.gentle};
 `
 
 const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: number }>`
