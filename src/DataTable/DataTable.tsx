@@ -83,22 +83,14 @@ const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: number }>`
     /* ^ 1px border top and bottom per cell */;
 `
 
-const defaultProps = {
-  rowHeight: 30,
-  footer: null,
-  height: "500px",
-  cellWidth: "1fr",
-  width: "100%",
-}
-
 export function DataTable<P, T>({
   columns,
   rows,
-  rowHeight = defaultProps.rowHeight,
-  footer = defaultProps.footer,
-  height = defaultProps.height,
-  width = defaultProps.width,
-  cellWidth = defaultProps.cellWidth,
+  rowHeight = 30,
+  footer = null,
+  height = "500px",
+  width = "1fr",
+  cellWidth = "100%",
 }: DataTableProps<T, P>) {
   if (rows.length && rows[0].length !== columns.length) {
     return (
