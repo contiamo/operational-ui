@@ -18,7 +18,7 @@ export interface DataTableProps<T, P> {
   footer?: React.ReactNode
 
   /** How much shall we restrict the height? */
-  height?: string
+  height?: number
 
   /** How much shall we restrict the width? Default: unlimited */
   width?: string
@@ -89,7 +89,7 @@ export function DataTable<P, T>({
   rows,
   rowHeight = 30,
   footer = null,
-  height = "500px",
+  height = 500,
   width = "100%",
   cellWidth = "1fr",
 }: DataTableProps<T, P>) {
