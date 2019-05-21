@@ -3,7 +3,11 @@
 ```jsx
 import { Title, DataTable, DataTableSelect, DataTableFooter, Checkbox } from "@operational/components"
 const getNewRows = (lastIndex = 0) =>
-  Array.from({ length: (lastIndex || 1) * 10 }, (_, i) => [`Cell ${i + lastIndex + 1}`, Math.random(), Math.random()])
+  Array.from({ length: lastIndex > 1000000 ? 1 : (lastIndex || 1) * 10 }, (_, i) => [
+    `Cell ${i + lastIndex + 1}`,
+    Math.random(),
+    Math.random(),
+  ])
 
 const MyComponent = () => {
   const [rows, setRows] = React.useState(getNewRows())
