@@ -96,7 +96,8 @@ export function DataTable<P, T>({
   if (rows.length && rows[0].length !== columns.length) {
     return (
       <Message color="error">
-        Invalid data: `rows` have different cardinality than `columns`. Please check both props and try again.
+        Invalid data: `rows` have different cardinality ({rows[0].length}) than `columns` ({columns.length}). Please
+        check both props and try again.
       </Message>
     )
   }
