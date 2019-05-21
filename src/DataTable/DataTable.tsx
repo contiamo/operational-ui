@@ -89,8 +89,8 @@ export function DataTable<P, T>({
   rowHeight = 30,
   footer = null,
   height = "500px",
-  width = "1fr",
-  cellWidth = "100%",
+  width = "100%",
+  cellWidth = "1fr",
 }: DataTableProps<T, P>) {
   if (rows.length && rows[0].length !== columns.length) {
     return (
