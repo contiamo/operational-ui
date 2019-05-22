@@ -32,9 +32,8 @@ export interface DataTableProps<T, P> {
 }
 
 const Container = styled("div", { shouldForwardProp: prop => prop !== "width" })<{ width: string }>`
-  position: relative;
   width: ${({ width }) => width};
-  border: 1px solid ${({ theme }) => theme.color.border.medium};
+  overflow: visible;
 `
 
 const HeadersContainer = styled("div")<{
@@ -44,7 +43,6 @@ const HeadersContainer = styled("div")<{
   rowHeight: number
 }>`
   display: grid;
-  border-bottom: ${({ theme }) => `1px solid ${theme.color.border.gentle}`};
   grid-template-columns: repeat(${({ numColumns, columnWidth }) => `${numColumns}, ${columnWidth}`});
   grid-template-rows: repeat(${({ numHeaders, rowHeight }) => `${numHeaders}, ${rowHeight}px`});
 `
@@ -57,12 +55,17 @@ const Row = styled("div")<{ numCells: number; cellWidth: string }>`
 const Cell = styled("div", { shouldForwardProp: prop => !["isEvenRow", "height", "cell"].includes(prop) })<{
   height: number
   cell: number
+  rowIndex: number
   isEvenRow?: boolean
 }>`
   position: relative;
   display: flex;
   align-items: center;
-  box-shadow: 0 0 0 1px ${({ theme }) => theme.color.border.medium};
+  border-top: 0;
+  border-left: ${({ cell }) => (cell === 1 ? "1px solid" : 0)};
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  border-color: ${({ theme }) => theme.color.border.medium};
   height: ${({ height }) => height}px;
   font-family: ${({ theme }) => theme.font.family.code};
   font-weight: ${({ theme }) => theme.font.weight.regular};
@@ -83,11 +86,13 @@ const HeaderRow = styled("div")<{ rowHeight: number }>`
 `
 
 const HeaderCell = styled(Cell)`
-  background-color: ${({ theme }) => theme.color.background.gentle};
+  position: relative;
+  background-color: ${({ theme }) => theme.color.background.light};
   color: ${({ theme }) => theme.color.text.dark};
   height: ${({ height }) => height}px;
   font-weight: ${({ theme }) => theme.font.weight.bold};
-  box-shadow: 0 0 0 1px ${({ theme }) => theme.color.border.gentle};
+  border-top: ${({ rowIndex }) => (rowIndex === 0 ? "1px solid" : 0)};
+  border-color: ${({ theme }) => theme.color.border.default};
 `
 
 const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: number }>`
@@ -137,12 +142,13 @@ export function DataTable<P, T>({
             columnWidth={cellWidth}
             rowHeight={rowHeight}
           >
-            {columns.map((headerRow, columnHeaderIndex) => (
-              <HeaderRow key={`op-column-header-${columnHeaderIndex}`} rowHeight={rowHeight}>
+            {columns.map((headerRow, rowIndex) => (
+              <HeaderRow key={`op-column-header-${rowIndex}`} rowHeight={rowHeight}>
                 {headerRow.map((cell, cellIndex) => (
                   <HeaderCell
-                    cell={cellIndex + 1}
-                    key={`op-column-header-cell-${columnHeaderIndex}-${cellIndex}`}
+                    rowIndex={cellIndex}
+                    cell={rowIndex + 1}
+                    key={`op-column-header-cell-${rowIndex}-${cellIndex}`}
                     height={rowHeight}
                   >
                     {truncate(maxCharactersInCell)(cell)}
@@ -167,6 +173,7 @@ export function DataTable<P, T>({
           {rows[index] &&
             rows[index].map((cell, cellIndex) => (
               <Cell
+                rowIndex={index}
                 isEvenRow={index % 2 === 0}
                 key={`op-row-${index}-cell-${cellIndex}`}
                 cell={cellIndex + 1}
