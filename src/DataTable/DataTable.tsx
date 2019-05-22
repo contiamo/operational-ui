@@ -5,12 +5,12 @@ import Message from "../Internals/Message/Message"
 import styled from "../utils/styled"
 import { truncate } from "../utils/truncate"
 
-export interface DataTableProps<T, P> {
+export interface DataTableProps<Columns, Rows> {
   /* The columns of our table. They are an array of header layers. */
-  columns: T[][]
+  columns: Columns
 
   /** A collection of rows for the table */
-  rows: P[][]
+  rows: Rows
 
   /** How high is each row (in pixels)? */
   rowHeight?: "regular" | "compact" | number
@@ -101,7 +101,7 @@ const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: number }>`
   top: ${({ numHeaders, rowHeight }) => numHeaders * rowHeight}px;
 `
 
-export function DataTable<P, T>({
+export function DataTable<Columns extends any[][], Rows extends any[][]>({
   columns,
   rows,
   rowHeight: initialRowHeight = 35,
@@ -110,7 +110,7 @@ export function DataTable<P, T>({
   width = "100%",
   cellWidth = "1fr",
   maxCharactersInCell = 30,
-}: DataTableProps<T, P>) {
+}: DataTableProps<Columns, Rows>) {
   if (rows.length && rows[0].length !== columns.length) {
     return (
       <Message color="error">
