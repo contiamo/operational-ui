@@ -5,7 +5,7 @@ export const truncate = (length: number) => (thingToTruncate: any) => {
     if (stringifiedValue.length === truncatedValue.length) {
       return thingToTruncate
     } else {
-      return truncatedValue + "..."
+      return truncatedValue + "…"
     }
   }
 
