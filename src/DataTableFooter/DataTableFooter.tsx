@@ -8,7 +8,7 @@ const Container = styled("div")<{ onClick?: (e: React.MouseEvent) => void }>`
   padding: ${({ theme }) => theme.space.small}px;
   color: ${({ onClick, theme }) => (Boolean(onClick) ? theme.color.primary : "inherit")};
   cursor: ${({ onClick }) => (Boolean(onClick) ? "pointer" : "initial")};
-  border-top: 1px solid ${({ theme }) => theme.color.border.gentle};
+  border: 1px solid ${({ theme }) => theme.color.border.disabled};
 `
 
 export const DataTableFooter: React.FC = props => <Container {...props} />
