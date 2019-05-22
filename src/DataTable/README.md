@@ -79,7 +79,7 @@ const MyComponent = () => {
 ## Dynamic Columns
 
 ```jsx
-import { DataTable, DataTableSelect, Checkbox } from "@operational/components"
+import { Button, DataTable, DataTableSelect, Checkbox } from "@operational/components"
 
 const columnsReducer = (columns, action) => {
   switch (action.type) {
@@ -124,18 +124,19 @@ const MyComponent = () => {
 
   return (
     <>
-      <div style={{ width: "100%", overflowX: "auto" }}>
-        {/* Use cellWidth to ensure cell sizes */}
-        <DataTable cellWidth="200px" height={200} columns={columns} rows={rows} />
-      </div>
-      <button
+      <Button
+        color="primary"
         onClick={() => {
           columnsDispatch({ type: "[add column]", column: makeColumn() })
           rowsDispatch({ type: "[add column]" })
         }}
       >
         Add Column
-      </button>
+      </Button>
+      <div style={{ marginTop: 32, width: "100%", overflowX: "auto" }}>
+        {/* Use cellWidth to ensure cell sizes */}
+        <DataTable cellWidth="200px" height={200} columns={columns} rows={rows} />
+      </div>
     </>
   )
 }
