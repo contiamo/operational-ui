@@ -10,8 +10,26 @@ const getNewRows = (lastIndex = 0) =>
   ])
 
 const Age = () => {
-  const [age, setAge] = React.useState()
-  return <DataTableInput placeholder="Age..." value={age} onChange={setAge} />
+  const [age, setAge] = React.useState(new Date().getFullYear() - 1993)
+  const [isError, setIsError] = React.useState(false)
+
+  React.useEffect(() => {
+    if (Number.isNaN(Number(age))) {
+      setIsError(true)
+      return
+    }
+
+    setIsError(false)
+  }, [age])
+
+  return (
+    <DataTableInput
+      error={isError ? "Only numbers please!" : undefined}
+      placeholder="Age..."
+      value={age}
+      onChange={setAge}
+    />
+  )
 }
 
 const MyComponent = () => {
