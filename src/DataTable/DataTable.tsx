@@ -20,7 +20,7 @@ export interface DataTableProps<T, P> {
   /** How much shall we restrict the height? */
   height?: number
 
-  /** How much shall we restrict the width? Default: unlimited */
+  /** How much shall we restrict the width? Default: `unlimited` */
   width?: string
 
   /** How wide is each cell? Default `1fr` */
