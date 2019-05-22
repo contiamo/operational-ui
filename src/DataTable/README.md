@@ -19,7 +19,7 @@ const MyComponent = () => {
         height={200}
         columns={[
           [
-            "Name",
+            "I am so long I am the longest the longest of the long LOL look how long I am my mom said I would never be long but I really am the longest KOBE BRYANT AINT GOT NOTHING ON ME HOMIE",
             <DataTableSelect options={[{ label: "Yes", value: "Yes" }]} value="Yes" />,
             <Checkbox condensed label="is required" />,
           ],
