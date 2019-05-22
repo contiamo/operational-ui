@@ -1,13 +1,18 @@
 ## Basic Usage
 
 ```jsx
-import { Title, DataTable, DataTableSelect, DataTableFooter, Checkbox } from "@operational/components"
+import { Title, DataTable, DataTableSelect, DataTableInput, DataTableFooter, Checkbox } from "@operational/components"
 const getNewRows = (lastIndex = 0) =>
   Array.from({ length: lastIndex > 1000000 ? 1 : (lastIndex || 1) * 10 }, (_, i) => [
     `Cell ${i + lastIndex + 1}`,
     Math.random(),
     Math.random(),
   ])
+
+const Age = () => {
+  const [age, setAge] = React.useState()
+  return <DataTableInput placeholder="Age..." value={age} onChange={setAge} />
+}
 
 const MyComponent = () => {
   const [rows, setRows] = React.useState(getNewRows())
@@ -24,7 +29,8 @@ const MyComponent = () => {
             <Checkbox condensed label="is required" />,
           ],
           [
-            "Age",
+            ,
+            <Age />,
             <DataTableSelect options={[{ label: "Yes", value: "Yes" }]} value="Yes" />,
             <Checkbox condensed label="is required" />,
           ],
