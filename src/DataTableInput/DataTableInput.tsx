@@ -13,6 +13,6 @@ const StyledInput = styled(Input)`
   max-width: none;
 ` as typeof Input
 
-export const DataTableSelect: React.FC<InputProps> = props => <StyledInput {...props} />
+export const DataTableInput: React.FC<InputProps> = props => <StyledInput {...props} />
 
-export default DataTableSelect
+export default DataTableInput
