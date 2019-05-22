@@ -13,7 +13,7 @@ export const truncate = (length: number) => (thingToTruncate: any) => {
 
   if (!didWarn && process.env.NODE_ENV !== "development") {
     console.warn(
-      "Attempting to truncate something that is noxt a JS primitive: this will fail for functions, objects and arrays. Please reconsider the item you are truncating:",
+      "Attempting to truncate something that is not a JS primitive: this will fail for functions, objects and arrays. Please reconsider the item you are truncating:",
       thingToTruncate,
     )
     didWarn = true
