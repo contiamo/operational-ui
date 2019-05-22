@@ -101,7 +101,8 @@ const MyComponent = () => {
   return (
     <>
       <div style={{ width: "100%", overflowX: "auto" }}>
-        <DataTable height={200} columns={columns} rows={rows} />
+        {/* Use cellWidth to ensure cell sizes */}
+        <DataTable cellWidth="200px" height={200} columns={columns} rows={rows} />
       </div>
       <button
         onClick={() => {
