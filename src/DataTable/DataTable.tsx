@@ -133,11 +133,11 @@ export function DataTable<P, T>({
             rowHeight={rowHeight}
           >
             {columns.map((headerRow, columnHeaderIndex) => (
-              <HeaderRow key={`op-column-header-${columnHeaderIndex}-${performance.now()}`} rowHeight={rowHeight}>
+              <HeaderRow key={`op-column-header-${columnHeaderIndex}`} rowHeight={rowHeight}>
                 {headerRow.map((cell, cellIndex) => (
                   <HeaderCell
                     cell={cellIndex + 1}
-                    key={`op-column-header-cell-${columnHeaderIndex}-${cellIndex}-${performance.now()}`}
+                    key={`op-column-header-cell-${columnHeaderIndex}-${cellIndex}`}
                     height={rowHeight}
                   >
                     {cell}
@@ -158,10 +158,16 @@ export function DataTable<P, T>({
   const VirtualRow: React.FC<ListChildComponentProps> = React.useMemo(
     () =>
       React.memo(({ style, index }) => (
-        <Row isEven={index % 2 === 0} style={{ ...style, height: rowHeight }} cellWidth={cellWidth} numCells={numCells}>
+        <Row
+          key={`op-row-${index}`}
+          isEven={index % 2 === 0}
+          style={{ ...style, height: rowHeight }}
+          cellWidth={cellWidth}
+          numCells={numCells}
+        >
           {rows[index] &&
             rows[index].map((cell, cellIndex) => (
-              <Cell key={`op-row-${cellIndex}-${performance.now()}`} cell={cellIndex + 1} height={rowHeight}>
+              <Cell key={`op-row-${index}-cell-${cellIndex}`} cell={cellIndex + 1} height={rowHeight}>
                 {cell}
               </Cell>
             ))}
