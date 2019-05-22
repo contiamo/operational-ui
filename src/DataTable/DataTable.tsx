@@ -3,6 +3,7 @@ import { FixedSizeList, ListChildComponentProps } from "react-window"
 
 import Message from "../Internals/Message/Message"
 import styled from "../utils/styled"
+import { truncate } from "../utils/truncate"
 
 export interface DataTableProps<T, P> {
   /* The columns of our table. They are an array of header layers. */
@@ -25,6 +26,9 @@ export interface DataTableProps<T, P> {
 
   /** How wide is each cell? Default `1fr` */
   cellWidth?: string
+
+  /** Max characters in cell */
+  maxCharactersInCell?: number
 }
 
 const Container = styled("div", { shouldForwardProp: prop => prop !== "width" })<{ width: string }>`
@@ -45,15 +49,15 @@ const HeadersContainer = styled("div")<{
   grid-template-rows: repeat(${({ numHeaders, rowHeight }) => `${numHeaders}, ${rowHeight}px`});
 `
 
-const Row = styled("div")<{ numCells: number; cellWidth: string; isEven?: boolean }>`
+const Row = styled("div")<{ numCells: number; cellWidth: string }>`
   display: grid;
   grid-template-columns: repeat(${({ numCells, cellWidth }) => `${numCells}, ${cellWidth}`});
-  background-color: ${({ theme, isEven }) => (isEven ? theme.color.background.almostWhite : theme.color.white)};
 `
 
-const Cell = styled("div", { shouldForwardProp: prop => !["height", "cell"].includes(prop) })<{
+const Cell = styled("div", { shouldForwardProp: prop => !["isEvenRow", "height", "cell"].includes(prop) })<{
   height: number
   cell: number
+  isEvenRow?: boolean
 }>`
   position: relative;
   display: flex;
@@ -65,7 +69,7 @@ const Cell = styled("div", { shouldForwardProp: prop => !["height", "cell"].incl
   padding: 0 ${({ theme }) => theme.space.content}px;
   color: ${({ theme }) => theme.color.text.default};
   grid-column: ${({ cell }) => cell};
-  background-color: inherit;
+  background-color: ${({ theme, isEvenRow }) => (isEvenRow ? theme.color.background.almostWhite : theme.color.white)};
 `
 
 const HeaderRow = styled("div")<{ rowHeight: number }>`
@@ -100,6 +104,7 @@ export function DataTable<P, T>({
   height = 500,
   width = "100%",
   cellWidth = "1fr",
+  maxCharactersInCell = 30,
 }: DataTableProps<T, P>) {
   if (rows.length && rows[0].length !== columns.length) {
     return (
@@ -140,7 +145,7 @@ export function DataTable<P, T>({
                     key={`op-column-header-cell-${columnHeaderIndex}-${cellIndex}`}
                     height={rowHeight}
                   >
-                    {cell}
+                    {truncate(maxCharactersInCell)(cell)}
                   </HeaderCell>
                 ))}
               </HeaderRow>
@@ -158,17 +163,16 @@ export function DataTable<P, T>({
   const VirtualRow: React.FC<ListChildComponentProps> = React.useMemo(
     () =>
       React.memo(({ style, index }) => (
-        <Row
-          key={`op-row-${index}`}
-          isEven={index % 2 === 0}
-          style={{ ...style, height: rowHeight }}
-          cellWidth={cellWidth}
-          numCells={numCells}
-        >
+        <Row key={`op-row-${index}`} style={{ ...style, height: rowHeight }} cellWidth={cellWidth} numCells={numCells}>
           {rows[index] &&
             rows[index].map((cell, cellIndex) => (
-              <Cell key={`op-row-${index}-cell-${cellIndex}`} cell={cellIndex + 1} height={rowHeight}>
-                {cell}
+              <Cell
+                isEvenRow={index % 2 === 0}
+                key={`op-row-${index}-cell-${cellIndex}`}
+                cell={cellIndex + 1}
+                height={rowHeight}
+              >
+                {truncate(maxCharactersInCell)(cell)}
               </Cell>
             ))}
         </Row>
@@ -179,7 +183,6 @@ export function DataTable<P, T>({
   return (
     <Container width={width}>
       <FixedSizeList
-        style={{ minWidth: "max-content" }}
         itemCount={rows.length}
         itemSize={rowHeight}
         height={height}
