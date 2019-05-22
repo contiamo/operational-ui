@@ -6,7 +6,7 @@ describe("Truncate", () => {
   })
 
   it("should return a truncated string if it can", () => {
-    expect(truncate(5)("Je m'appelle Claude")).toEqual("Je m'...")
+    expect(truncate(5)("Je m'appelle Claude")).toEqual("Je m'…")
   })
 
   it("should warn and return the thing if its not a primitive", () => {
