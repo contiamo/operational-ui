@@ -2,8 +2,9 @@ import * as React from "react"
 import { FixedSizeList, ListChildComponentProps } from "react-window"
 
 import Message from "../Internals/Message/Message"
-import styled from "../utils/styled"
 import { truncate } from "../utils/truncate"
+import { Cell, Container, DataWrapper, HeaderCell, HeaderRow, HeadersContainer, Row } from "./DataTable.styled"
+import { defaultRowHeight, getRowHeight } from "./DataTable.util"
 
 export interface DataTableProps<Columns, Rows> {
   /* The columns of our table. They are an array of header layers. */
@@ -31,80 +32,10 @@ export interface DataTableProps<Columns, Rows> {
   maxCharactersInCell?: number
 }
 
-const Container = styled("div", { shouldForwardProp: prop => prop !== "width" })<{ width: string }>`
-  width: ${({ width }) => width};
-  overflow: visible;
-`
-
-const HeadersContainer = styled("div")<{
-  numColumns: number
-  numHeaders: number
-  columnWidth: string
-  rowHeight: number
-}>`
-  display: grid;
-  grid-template-columns: repeat(${({ numColumns, columnWidth }) => `${numColumns}, ${columnWidth}`});
-  grid-template-rows: repeat(${({ numHeaders, rowHeight }) => `${numHeaders}, ${rowHeight}px`});
-`
-
-const Row = styled("div")<{ numCells: number; cellWidth: string }>`
-  display: grid;
-  grid-template-columns: repeat(${({ numCells, cellWidth }) => `${numCells}, ${cellWidth}`});
-`
-
-const Cell = styled("div", { shouldForwardProp: prop => !["isEvenRow", "height", "cell"].includes(prop) })<{
-  height: number
-  cell: number
-  rowIndex: number
-  isEvenRow?: boolean
-}>`
-  position: relative;
-  display: flex;
-  align-items: center;
-  border-top: 0;
-  border-left: ${({ cell }) => (cell === 1 ? "1px solid" : 0)};
-  border-bottom: 1px solid;
-  border-right: 1px solid;
-  border-color: ${({ theme }) => theme.color.border.medium};
-  height: ${({ height }) => height}px;
-  font-family: ${({ theme }) => theme.font.family.code};
-  font-weight: ${({ theme }) => theme.font.weight.regular};
-  padding: 0 ${({ theme }) => theme.space.content}px;
-  color: ${({ theme }) => theme.color.text.default};
-  grid-column: ${({ cell }) => cell};
-  background-color: ${({ theme, isEvenRow }) => (isEvenRow ? theme.color.background.almostWhite : theme.color.white)};
-`
-
-const HeaderRow = styled("div")<{ rowHeight: number }>`
-  left: 0;
-  width: 100%;
-  height: ${({ rowHeight }) => rowHeight}px;
-  position: sticky;
-  grid-row: 1;
-  top: 0;
-  z-index: 100;
-`
-
-const HeaderCell = styled(Cell)`
-  position: relative;
-  background-color: ${({ theme }) => theme.color.background.light};
-  color: ${({ theme }) => theme.color.text.dark};
-  height: ${({ height }) => height}px;
-  font-weight: ${({ theme }) => theme.font.weight.bold};
-  border-top: ${({ rowIndex }) => (rowIndex === 0 ? "1px solid" : 0)};
-  border-color: ${({ theme }) => theme.color.border.default};
-`
-
-const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: number }>`
-  position: absolute;
-  width: 100%;
-  top: ${({ numHeaders, rowHeight }) => numHeaders * rowHeight}px;
-`
-
 export function DataTable<Columns extends any[][], Rows extends any[][]>({
   columns,
   rows,
-  rowHeight: initialRowHeight = 35,
+  rowHeight: initialRowHeight = defaultRowHeight,
   footer = null,
   height = 500,
   width = "100%",
@@ -120,16 +51,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
     )
   }
 
-  const rowHeight: number = React.useMemo(() => {
-    switch (initialRowHeight) {
-      case "compact":
-        return 22
-      case "regular":
-        return 35
-      default:
-        return initialRowHeight
-    }
-  }, [initialRowHeight])
+  const rowHeight = React.useMemo(() => getRowHeight(initialRowHeight), [initialRowHeight])
 
   const Table = React.useMemo(
     () =>
@@ -140,14 +62,15 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
             numColumns={columns.length}
             numHeaders={columns[0].length}
             columnWidth={cellWidth}
-            rowHeight={rowHeight}
+            rowHeight={initialRowHeight}
           >
             {columns.map((headerRow, rowIndex) => (
-              <HeaderRow key={`op-column-header-${rowIndex}`} rowHeight={rowHeight}>
+              <HeaderRow rowHeight={initialRowHeight} key={`op-column-header-${rowIndex}`}>
                 {headerRow.map((cell, cellIndex) => (
                   <HeaderCell
                     rowIndex={cellIndex}
                     cell={rowIndex + 1}
+                    rowHeight={initialRowHeight}
                     key={`op-column-header-cell-${rowIndex}-${cellIndex}`}
                     height={rowHeight}
                   >
@@ -157,7 +80,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
               </HeaderRow>
             ))}
           </HeadersContainer>
-          <DataWrapper numHeaders={columns[0].length} rowHeight={rowHeight}>
+          <DataWrapper numHeaders={columns[0].length} rowHeight={initialRowHeight}>
             {children}
           </DataWrapper>
         </>
