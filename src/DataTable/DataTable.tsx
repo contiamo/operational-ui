@@ -30,6 +30,9 @@ export interface DataTableProps<Columns, Rows> {
 
   /** Max characters in cell */
   maxCharactersInCell?: number
+
+  /** A classname for all your custom CSS ~hacks~ needs */
+  className?: string
 }
 
 export function DataTable<Columns extends any[][], Rows extends any[][]>({
@@ -41,6 +44,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   width = "100%",
   cellWidth = "1fr",
   maxCharactersInCell = 30,
+  className,
 }: DataTableProps<Columns, Rows>) {
   if (rows.length && rows[0].length !== columns.length) {
     return (
@@ -65,7 +69,11 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
             rowHeight={initialRowHeight}
           >
             {columns.map((headerRow, rowIndex) => (
-              <HeaderRow rowHeight={initialRowHeight} key={`op-column-header-${rowIndex}`}>
+              <HeaderRow
+                data-cy="operational-ui__DataTable-row-header"
+                rowHeight={initialRowHeight}
+                key={`op-column-header-${rowIndex}`}
+              >
                 {headerRow.map((cell, cellIndex) => (
                   <HeaderCell
                     rowIndex={cellIndex}
@@ -92,7 +100,13 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   const VirtualRow: React.FC<ListChildComponentProps> = React.useMemo(
     () =>
       React.memo(({ style, index }) => (
-        <Row key={`op-row-${index}`} style={{ ...style, height: rowHeight }} cellWidth={cellWidth} numCells={numCells}>
+        <Row
+          data-cy="operational-ui__DataTable-row"
+          key={`op-row-${index}`}
+          style={{ ...style, height: rowHeight }}
+          cellWidth={cellWidth}
+          numCells={numCells}
+        >
           {rows[index] &&
             rows[index].map((cell, cellIndex) => (
               <Cell
@@ -111,7 +125,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   )
 
   return (
-    <Container width={width}>
+    <Container width={width} className={className}>
       <FixedSizeList
         itemCount={rows.length}
         itemSize={rowHeight}

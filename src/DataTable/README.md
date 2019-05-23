@@ -85,6 +85,7 @@ const MyComponent = () => {
     <>
       <Title>Showing {Intl.NumberFormat().format(rows.length)} rows</Title>
       <DataTable
+        className="hola-amigo"
         height={200}
         columns={[
           [
