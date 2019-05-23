@@ -1,9 +1,15 @@
 ## Basic Usage
 
+Our DataTable is used to render tabular data structures. For a basic use case, give it `rows` and `columns`.
+
+- `columns` is an array (X) of arrays (Y), where X contains a column, and Y contains a stack of headers in each column.
+- `rows` is an array (A) of arrays (B), where A is the entire row, and B is a single cell.
+
+Additionally, supply a `height` prop to limit the height of the table.
+
 ```jsx
 import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operational/components"
 ;<DataTable
-  height={225}
   columns={[
     [
       "I am so long I am the longest the longest of the long LOL look how long I am my mom said I would never be long but I really am the longest KOBE BRYANT AINT GOT NOTHING ON ME HOMIE",
@@ -22,6 +28,8 @@ import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operation
 ```
 
 ## Compact mode
+
+Sometimes, we wish to render a _lot_ more data and have more of it visible. For this, we set `rowHeight="compact"` to enable compact mode.
 
 ```jsx
 import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operational/components"
@@ -56,6 +64,10 @@ import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operation
 ```
 
 ## With cumulative data
+
+The value of this component is that it uses a technique called **windowing** (or virtual scrolling). Click "Add more rows" in this example and add millions. It should (and does) scroll fast and smoothly, without hanging or crashing the browser.
+
+This is made possible by [react-window](https://github.com/bvaughn/react-window) from [Brian Vaughn](https://twitter.com/brian_d_vaughn) on the [React](https://reactjs.org/) team. Thanks, Brian! 🎉
 
 ```jsx
 import { Title, DataTable, DataTableSelect, DataTableFooter, Checkbox } from "@operational/components"
@@ -109,85 +121,9 @@ const MyComponent = () => {
 ;<MyComponent />
 ```
 
-## With an Input in cells
-
-```jsx
-import { Title, DataTable, DataTableSelect, DataTableInput, DataTableFooter, Checkbox } from "@operational/components"
-const getNewRows = (lastIndex = 0) =>
-  Array.from({ length: lastIndex > 1000000 ? 1 : (lastIndex || 1) * 10 }, (_, i) => [
-    `Cell ${i + lastIndex + 1}`,
-    Math.random(),
-    Math.random(),
-  ])
-
-const Age = () => {
-  const [age, setAge] = React.useState(new Date().getFullYear() - 1993)
-  const [isError, setIsError] = React.useState(false)
-
-  React.useEffect(() => {
-    if (Number.isNaN(Number(age))) {
-      setIsError(true)
-      return
-    }
-
-    setIsError(false)
-  }, [age])
-
-  return (
-    <DataTableInput
-      error={isError ? "Only numbers please!" : undefined}
-      placeholder="Age..."
-      value={age}
-      onChange={setAge}
-    />
-  )
-}
-
-const MyComponent = () => {
-  const [rows, setRows] = React.useState(getNewRows())
-
-  return (
-    <>
-      <Title>Showing {Intl.NumberFormat().format(rows.length)} rows</Title>
-      <DataTable
-        height={200}
-        columns={[
-          [
-            "I am so long I am the longest the longest of the long LOL look how long I am my mom said I would never be long but I really am the longest KOBE BRYANT AINT GOT NOTHING ON ME HOMIE",
-            <DataTableSelect options={[{ label: "Yes", value: "Yes" }]} value="Yes" />,
-            <Checkbox condensed label="is required" />,
-          ],
-          [
-            ,
-            <Age />,
-            <DataTableSelect options={[{ label: "Yes", value: "Yes" }]} value="Yes" />,
-            <Checkbox condensed label="is required" />,
-          ],
-          [
-            "Years of Employment",
-            <DataTableSelect options={[{ label: "Yes", value: "Yes" }]} value="Yes" />,
-            <Checkbox condensed label="is required" />,
-          ],
-        ]}
-        rows={rows}
-        footer={
-          <DataTableFooter
-            onClick={() =>
-              setRows([...rows, ...getNewRows(parseInt(rows[rows.length - 1][0].replace("Cell ", ""), 10))])
-            }
-          >
-            Add more rows
-          </DataTableFooter>
-        }
-      />
-    </>
-  )
-}
-
-;<MyComponent />
-```
-
 ## Dynamic Columns
+
+When defining data sources in our product, we sometimes need to manually describe a schema. This is how `DataTable` allows us to model and define a schema.
 
 ```jsx
 import { Button, DataTable, DataTableSelect, Checkbox } from "@operational/components"
