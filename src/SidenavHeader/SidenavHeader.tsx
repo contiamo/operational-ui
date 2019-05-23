@@ -6,6 +6,7 @@ import { SidenavItemProps } from "../SidenavItem/SidenavItem"
 import { DefaultProps } from "../types"
 import { isModifiedEvent, isOutsideLink } from "../utils"
 import styled from "../utils/styled"
+import { truncate } from "../utils/truncate"
 
 export interface SidenavHeaderProps extends DefaultProps {
   /** Main label for the header */
@@ -114,13 +115,6 @@ const Summary = styled("div")<{ isActive: boolean; compact: SidenavHeaderProps["
     visibility: ${compact || isActive ? "hidden" : "visible"};
   `};
 `
-
-const truncate = (maxLength: number) => (text: string) => {
-  if (text.length < maxLength) {
-    return text
-  }
-  return text.slice(0, maxLength) + "..."
-}
 
 const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, compact, ...props }) => {
   const isActive = Boolean(active) || Boolean(compact)
