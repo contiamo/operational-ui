@@ -77,7 +77,7 @@ const Input: React.SFC<InputProps> = ({
   hint,
   onToggle,
   disabled,
-  errorComponent: errorElement,
+  errorComponent,
   ...props
 }) => {
   const uniqueId = useUniqueId(id)
@@ -93,7 +93,7 @@ const Input: React.SFC<InputProps> = ({
       aria-labelledby={label ? `input-label-${uniqueId}` : undefined}
       aria-describedby={hint ? `input-hint-${uniqueId}` : undefined}
       aria-label={label}
-      errorComponent={errorElement}
+      errorComponent={errorComponent}
       {...props}
     />
   )
