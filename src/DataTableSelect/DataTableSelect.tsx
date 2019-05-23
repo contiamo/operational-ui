@@ -8,7 +8,7 @@ const StyledSelect = styled(Select)`
   min-height: 0;
   background: transparent;
   border: 0;
-  font-weight: 400;
+  font-weight: ${({ theme }) => theme.font.weight.regular};
   width: calc(100% + ${({ theme }) => theme.space.content * 2}px); /* 2 for left _and_ right. */
   max-width: none;
 `
