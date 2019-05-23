@@ -15,4 +15,7 @@ describe("DataTable: row height calculation", () => {
   it("should return a custom height for a header if given a custom hiehgt", () => {
     expect(getHeaderRowHeight(10e4)).toEqual(10e4)
   })
+  it("should return the default when given nothing", () => {
+    expect(getHeaderRowHeight(undefined)).toEqual(defaultRowHeight)
+  })
 })
