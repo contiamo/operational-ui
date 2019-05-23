@@ -82,6 +82,71 @@ import { Input, Form } from "@operational/components"
 </Form>
 ```
 
+### With a custom Error component
+
+We allow swapping out our default error components (shown above) with custom components that receive the error message via props. We use this in the [`DataTableInput`](/#!/DataTableInput) component and its example.
+
+```jsx
+import * as React from "react"
+import { Input, Form, styled } from "@operational/components"
+
+const getRandomBetween = (x, y) => Math.floor(Math.random() * y) + x
+
+const makeErrorStyles = ({ left, top, size }) => ({
+  position: "absolute",
+  top: `${top}px`,
+  left: `${left}px`,
+  width: `${size}px`,
+  height: `${size}px`,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize: 20,
+  fontWeight: 600,
+  borderRadius: "50%",
+  background: "red",
+  color: "white",
+})
+
+;<Form>
+  <div style={{ position: "relative" }}>
+    <Input
+      errorComponent={({ errorMessage }) => (
+        <div
+          style={makeErrorStyles({
+            left: getRandomBetween(0, 500),
+            size: getRandomBetween(50, 75),
+            top: getRandomBetween(0, 10),
+          })}
+        >
+          {errorMessage}
+        </div>
+      )}
+      id="help-usa"
+      label="Orange Man"
+      value="Build the wall!"
+      error="NO"
+    />
+    <Input
+      errorComponent={({ errorMessage }) => (
+        <div
+          style={makeErrorStyles({
+            left: getRandomBetween(0, 500),
+            size: getRandomBetween(50, 75),
+            top: getRandomBetween(0, 10),
+          })}
+        >
+          {errorMessage}
+        </div>
+      )}
+      id="error-without-label"
+      value="Hate hate hate"
+      error="ERROR"
+    />
+  </div>
+</Form>
+```
+
 ### With an Action Button
 
 ```jsx
