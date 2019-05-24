@@ -50,7 +50,7 @@ const HintTooltip: React.SFC<{ position: HintProps["tooltipPosition"]; textId: H
 }
 
 const Hint: React.SFC<HintProps> = props => (
-  <Container {...props}>
+  <Container aria-label={typeof props.children === "string" ? props.children : undefined} {...props}>
     <Icon name="Question" size={12} />
     <HintTooltip position={props.tooltipPosition!} textId={props.textId}>
       {props.children}

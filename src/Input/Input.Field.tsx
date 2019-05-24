@@ -114,6 +114,7 @@ const InputField: React.SFC<InputProps> = ({
   copy,
   onIconClick,
   tabIndex,
+  errorComponent: ErrorComponent,
   ...props
 }) => {
   const shouldShowIconButton = Boolean(icon) || Boolean(copy)
@@ -127,38 +128,41 @@ const InputField: React.SFC<InputProps> = ({
   }
 
   return (
-    <Container fullWidth={fullWidth} withLabel={Boolean(label)}>
-      {shouldShowIconButton && renderButton()}
-      <Field
-        ref={inputRef}
-        autoFocus={autoFocus}
-        name={name}
-        disabled={Boolean(disabled)}
-        value={value || ""}
-        type={type}
-        onFocus={onFocus}
-        onBlur={onBlur}
-        placeholder={placeholder}
-        isError={Boolean(error)}
-        onChange={(ev: React.FormEvent<HTMLInputElement>) => {
-          if (onChange) {
-            onChange(ev.currentTarget.value)
-          }
-        }}
-        clear={clear}
-        preset={Boolean(preset)}
-        id={`input-field-${id}`}
-        withIconButton={shouldShowIconButton}
-        autoComplete={autoComplete}
-        {...props}
-      />
-      {clear && value && (
-        <ClearButton onClick={clear}>
-          <Icon color="color.text.lightest" name="No" />
-        </ClearButton>
-      )}
-      {error ? <FormFieldError>{error}</FormFieldError> : null}
-    </Container>
+    <>
+      <Container fullWidth={fullWidth} withLabel={Boolean(label)}>
+        {shouldShowIconButton && renderButton()}
+        <Field
+          ref={inputRef}
+          autoFocus={autoFocus}
+          name={name}
+          disabled={Boolean(disabled)}
+          value={value || ""}
+          type={type}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          placeholder={placeholder}
+          isError={Boolean(error)}
+          onChange={(ev: React.FormEvent<HTMLInputElement>) => {
+            if (onChange) {
+              onChange(ev.currentTarget.value)
+            }
+          }}
+          clear={clear}
+          preset={Boolean(preset)}
+          id={`input-field-${id}`}
+          withIconButton={shouldShowIconButton}
+          autoComplete={autoComplete}
+          {...props}
+        />
+        {clear && value && (
+          <ClearButton onClick={clear}>
+            <Icon color="color.text.lightest" name="No" />
+          </ClearButton>
+        )}
+        {error && !ErrorComponent ? <FormFieldError>{error}</FormFieldError> : null}
+      </Container>
+      {error && ErrorComponent ? <ErrorComponent errorMessage={error} /> : null}
+    </>
   )
 }
 

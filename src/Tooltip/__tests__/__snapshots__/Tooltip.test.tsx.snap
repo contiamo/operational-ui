@@ -8,19 +8,23 @@ exports[`Tooltip Component Should intialize without problems 1`] = `
     class="css-p29iif"
   />
   <div
-    class="css-i79moz-tooltip"
+    class="css-13tbggj-tooltip"
   >
     <p>
       Hello
     </p>
   </div>
   <div
-    class="operational-ui-tooltip css-1c004wu-tooltip"
+    class="operational-ui-tooltip css-4y245i-tooltip"
     role="tooltip"
   >
-    <p>
-      Hello
-    </p>
+    <div
+      class="css-1xo88wf"
+    >
+      <p>
+        Hello
+      </p>
+    </div>
   </div>
 </div>
 `;

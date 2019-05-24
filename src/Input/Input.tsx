@@ -48,6 +48,8 @@ export interface BaseProps extends DefaultProps, DefaultInputProps {
   preset?: boolean
   /** Clear the input */
   clear?: () => void
+  /** An alternative element in which to render errors */
+  errorComponent?: React.FC<{ errorMessage: string }>
 }
 
 export interface BasePropsWithCopy extends BaseProps {
@@ -75,6 +77,7 @@ const Input: React.SFC<InputProps> = ({
   hint,
   onToggle,
   disabled,
+  errorComponent,
   ...props
 }) => {
   const uniqueId = useUniqueId(id)
@@ -90,6 +93,7 @@ const Input: React.SFC<InputProps> = ({
       aria-labelledby={label ? `input-label-${uniqueId}` : undefined}
       aria-describedby={hint ? `input-hint-${uniqueId}` : undefined}
       aria-label={label}
+      errorComponent={errorComponent}
       {...props}
     />
   )
