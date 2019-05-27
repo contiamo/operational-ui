@@ -1,15 +1,17 @@
-import { mount } from "enzyme"
 import * as React from "react"
+
+import { mount } from "enzyme"
 import { itShouldOnlyMountOnce } from "../../__testUtils__/itShouldOnlyMountOnce"
-import { Button as ThemelessButton } from "../../index"
+import { SimpleLink as ThemelessSimpleLink } from "../../index"
 import wrapDefaultTheme from "../../utils/wrap-default-theme"
 
-const Button = wrapDefaultTheme(ThemelessButton)
+const SimpleLink = wrapDefaultTheme(ThemelessSimpleLink)
 
-describe("Button Component", () => {
-  const wrapper = mount(<Button data-testid="1">hi</Button>)
+describe("SimpleLink Component", () => {
+  const wrapper = mount(<SimpleLink data-testid="1">hi</SimpleLink>)
 
-  itShouldOnlyMountOnce("Button", Button)
+  itShouldOnlyMountOnce("SimpleLink", SimpleLink)
+
   it("should have a 'button' tag without 'to' props", () => {
     expect(wrapper.find(`button[data-testid="1"]`).exists()).toBeTruthy()
   })
