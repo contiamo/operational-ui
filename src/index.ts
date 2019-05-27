@@ -74,6 +74,8 @@ export { default as TopbarSelect, TopbarSelectProps } from "./TopbarSelect/Topba
 export { default as Tree, TreeProps } from "./Tree/Tree"
 export { default as TourModal, TourModalProps } from "./TourModal/TourModal"
 export { default as LabelText } from "./LabelText/LabelText"
+export { default as Accordion, AccordionProps } from "./Accordion/Accordion"
+export { default as AccordionSection, AccordionSectionProps } from "./AccordionSection/AccordionSection"
 
 // Typography components
 export { default as FinePrint } from "./Typography/FinePrint"
