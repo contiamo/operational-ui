@@ -1,10 +1,8 @@
-/**
- * See https://www.w3.org/TR/wai-aria-practices/examples/accordion/accordion.html
- */
 import * as React from "react"
 import { heightOfAccordionHeader } from "../Accordion/Accordion"
 import Icon from "../Icon/Icon"
 import { DefaultProps } from "../types"
+import { useUniqueId } from "../useUniqueId"
 import styled from "../utils/styled"
 
 export interface AccordionSectionProps extends DefaultProps {
@@ -18,7 +16,6 @@ export interface AccordionSectionProps extends DefaultProps {
 
 const Container = styled("div")<{ expanded: boolean }>`
   label: AccordionSection;
-  ${({ expanded }) => (expanded ? "" : "")};
   overflow: hidden;
 `
 
@@ -29,25 +26,26 @@ const Header = styled("div", { shouldForwardProp: () => true })<{ tabindex: numb
   cursor: pointer;
   ${({ theme }) => `
     font-family: ${theme.font.family.main};
-    font-weight: ${theme.font.weight.medium};
-    color: ${theme.color.text.lighter};
+    font-weight: ${theme.font.weight.bold};
+    color: ${theme.color.text.dark};
     font-size: ${theme.font.size.small}px;
     border-bottom: 1px solid ${theme.color.separators.default};
   `}
   :focus {
     outline: none;
-    border: 2px solid blue;
-    padding: 9px 18px;
+    /* need to fix those */
+    border: 2px solid #bfcbd2;
+    border-top: 3px solid #bfcbd2;
+    border-bottom: 3px solid #bfcbd2;
+    padding: 8px 18px;
   }
   height: ${heightOfAccordionHeader};
+  padding: 10px 20px;
+  line-height: 15px;
   /* need to fix those */
-  font-weight: bold;
   border-bottom: solid 1px #bfcbd2;
   border-top: solid 1px #bfcbd2;
-  padding: 10px 20px;
   background: #f2f4f6;
-  line-height: 15px;
-  color: #333333;
 `
 
 Header.defaultProps = { role: "button", "aria-disabled": false }
@@ -75,8 +73,9 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   expanded = false,
   toggleExpanded,
 }) => {
-  const titleId = `accordion-heading-${id}`
-  const contentId = `accordion-panel-${id}`
+  const uniqueId = useUniqueId(id)
+  const titleId = `accordion-heading-${uniqueId}`
+  const contentId = `accordion-panel-${uniqueId}`
 
   return (
     <Container expanded={expanded}>
@@ -97,5 +96,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
     </Container>
   )
 }
+
+export type AccordionSectionElement = React.ReactElement<AccordionSectionProps, typeof AccordionSection>
 
 export default AccordionSection
