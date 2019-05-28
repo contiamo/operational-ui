@@ -13,11 +13,12 @@ export interface AccordionSectionProps extends DefaultProps {
   toggleExpanded?: () => void
 }
 
-const Container = styled("div")<{ expanded: boolean }>`
+const Container = styled("div")<{ expanded: boolean; focus: boolean }>`
   label: AccordionSection;
   overflow: hidden;
   display: grid;
   grid-template-rows: ${({ theme }) => `${theme.space.element * 2}px calc(100% - ${theme.space.element * 2}px)`};
+  ${({ focus, theme }) => (focus ? `box-shadow: ${theme.shadows.focus}; z-index: 2;` : "")}
 `
 
 const Header = styled("div")<{ expanded: boolean }>(({ theme, expanded }) => ({
@@ -39,10 +40,6 @@ const Header = styled("div")<{ expanded: boolean }>(({ theme, expanded }) => ({
   lineHeight: 1,
   ":focus": {
     outline: "none",
-    border: `2px solid ${theme.color.separators.default}`,
-    borderTop: `3px solid ${theme.color.separators.default}`,
-    borderBottom: `3px solid ${theme.color.separators.default}`,
-    padding: "8px 18px",
   },
 }))
 
@@ -75,9 +72,10 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   const uniqueId = useUniqueId(id)
   const titleId = `accordion-heading-${uniqueId}`
   const contentId = `accordion-panel-${uniqueId}`
+  const [focus, setFocus] = React.useState(false)
 
   return (
-    <Container expanded={expanded}>
+    <Container expanded={expanded} focus={focus}>
       <Header
         id={titleId}
         aria-controls={contentId}
@@ -86,6 +84,8 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         onClick={toggleExpanded}
         onKeyPress={toggleExpanded}
         expanded={expanded}
+        onFocus={() => setFocus(true)}
+        onBlur={() => setFocus(false)}
       >
         {title}
         <Chevron name={expanded ? "ChevronUp" : "ChevronDown"} />
