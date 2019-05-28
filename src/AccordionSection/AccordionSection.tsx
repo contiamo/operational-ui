@@ -9,7 +9,7 @@ export interface AccordionSectionProps extends DefaultProps {
   title: React.ReactNode
   children: React.ReactNode
   id?: string
-  tabindex?: number
+  tabIndex?: number
   expanded?: boolean
   toggleExpanded?: () => void
 }
@@ -19,7 +19,7 @@ const Container = styled("div")<{ expanded: boolean }>`
   overflow: hidden;
 `
 
-const Header = styled("div", { shouldForwardProp: () => true })<{ tabindex: number }>`
+const Header = styled("div")<{ tabIndex: number }>`
   label: AccordionHeader;
   display: flex;
   justify-content: space-between;

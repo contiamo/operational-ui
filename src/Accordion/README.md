@@ -1,6 +1,6 @@
 ## Accordion
 
-Accordion component impelmented (mostly) according to [WAI-ARIA specification](https://www.w3.org/TR/wai-aria-practices/examples/accordion/accordion.html). By default takes all available hegith and divides it between opes sections equally.
+Accordion component implemented (mostly) according to [WAI-ARIA specification](https://www.w3.org/TR/wai-aria-practices/examples/accordion/accordion.html). By default takes all available height and divides it between opes sections equally.
 
 ### Simple usage
 
