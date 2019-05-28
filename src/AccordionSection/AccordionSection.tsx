@@ -13,15 +13,16 @@ export interface AccordionSectionProps extends DefaultProps {
   toggleExpanded?: () => void
 }
 
-const Container = styled("div")<{ expanded: boolean; focus: boolean }>`
+const Container = styled("div")<{ expanded: boolean }>`
   label: AccordionSection;
   overflow: hidden;
   display: grid;
   grid-template-rows: ${({ theme }) => `${theme.space.element * 2}px calc(100% - ${theme.space.element * 2}px)`};
-  ${({ focus, theme }) => (focus ? `box-shadow: ${theme.shadows.focus}; z-index: 2;` : "")}
+  position: relative;
 `
 
 const Header = styled("div")<{ expanded: boolean }>(({ theme, expanded }) => ({
+  cursor: "pointer",
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.body,
   fontWeight: theme.font.weight.medium,
@@ -31,7 +32,9 @@ const Header = styled("div")<{ expanded: boolean }>(({ theme, expanded }) => ({
   color: theme.color.text.dark,
   flex: "0 0 auto", // Make sure it stays the same size if other parts of the card push it
   borderTop: `1px solid ${theme.color.separators.default}`,
-  borderBottom: expanded ? `1px solid ${theme.color.separators.default}` : undefined,
+  borderBottom: expanded
+    ? `1px solid ${theme.color.separators.default}`
+    : `1px solid ${theme.color.background.lighter}`,
 
   // This ensures that the card header text and card controls are placed in opposite corners.
   justifyContent: "space-between",
@@ -59,6 +62,17 @@ const Chevron = styled(Icon)`
   align-content: flex-end;
 `
 
+const Focus = styled("div")`
+  label: AccordionFocus;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
+`
+
 Chevron.defaultProps = { size: 14 }
 
 const AccordionSection: React.FC<AccordionSectionProps> = ({
@@ -72,10 +86,10 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   const uniqueId = useUniqueId(id)
   const titleId = `accordion-heading-${uniqueId}`
   const contentId = `accordion-panel-${uniqueId}`
-  const [focus, setFocus] = React.useState(false)
+  const [hasFocus, setHasFocus] = React.useState(false)
 
   return (
-    <Container expanded={expanded} focus={focus}>
+    <Container expanded={expanded}>
       <Header
         id={titleId}
         aria-controls={contentId}
@@ -84,8 +98,8 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         onClick={toggleExpanded}
         onKeyPress={toggleExpanded}
         expanded={expanded}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
+        onFocus={() => setHasFocus(true)}
+        onBlur={() => setHasFocus(false)}
       >
         {title}
         <Chevron name={expanded ? "ChevronUp" : "ChevronDown"} />
@@ -93,6 +107,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
       <Panel id={contentId} aria-labelledby={titleId} hidden={!expanded}>
         {children}
       </Panel>
+      {hasFocus ? <Focus /> : null}
     </Container>
   )
 }
