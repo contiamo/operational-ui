@@ -11,6 +11,7 @@ export interface AccordionSectionProps extends DefaultProps {
   tabIndex?: number
   expanded?: boolean
   toggleExpanded?: () => void
+  isMousRef?: React.MutableRefObject<boolean>
 }
 
 const Container = styled("div")<{ expanded: boolean }>`
@@ -32,9 +33,7 @@ const Header = styled("div")<{ expanded: boolean }>(({ theme, expanded }) => ({
   color: theme.color.text.dark,
   flex: "0 0 auto", // Make sure it stays the same size if other parts of the card push it
   borderTop: `1px solid ${theme.color.separators.default}`,
-  borderBottom: expanded
-    ? `1px solid ${theme.color.separators.default}`
-    : `1px solid ${theme.color.background.lighter}`,
+  borderBottom: `1px solid ${expanded ? theme.color.separators.default : theme.color.background.lighter}`,
 
   // This ensures that the card header text and card controls are placed in opposite corners.
   justifyContent: "space-between",
@@ -82,6 +81,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   tabIndex = 0,
   expanded = false,
   toggleExpanded,
+  isMousRef,
 }) => {
   const uniqueId = useUniqueId(id)
   const titleId = `accordion-heading-${uniqueId}`
@@ -98,7 +98,11 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         onClick={toggleExpanded}
         onKeyPress={toggleExpanded}
         expanded={expanded}
-        onFocus={() => setHasFocus(true)}
+        onFocus={() => {
+          if (isMousRef && !isMousRef.current) {
+            setHasFocus(true)
+          }
+        }}
         onBlur={() => setHasFocus(false)}
       >
         {title}

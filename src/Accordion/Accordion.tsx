@@ -27,16 +27,29 @@ const Accordion = ({ children }: AccordionProps) => {
   const [expandedSections, setExpandedSections] = React.useState(() =>
     React.Children.map(children, child => Boolean(child.props.expanded)),
   )
+  // this ref is used to detect if visitor uses mouse or keyboard
+  // and show focuse state in case of keyboard
+  const isMousRef = React.useRef(false)
+
   /**
    * We use `React.cloneElement`, but it is possible to accomplish with `React.Context` as well
    */
   return (
-    <Container sections={expandedSections}>
+    <Container
+      sections={expandedSections}
+      onMouseDown={() => {
+        isMousRef.current = true
+      }}
+      onKeyDown={() => {
+        isMousRef.current = false
+      }}
+    >
       {React.Children.map(children, (child, i) =>
         React.cloneElement(child, {
           ...child.props,
           expanded: expandedSections[i],
           toggleExpanded: () => setExpandedSections(updateArray(expandedSections, i, !expandedSections[i])),
+          isMousRef,
         }),
       )}
     </Container>
