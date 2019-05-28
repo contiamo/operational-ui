@@ -7,7 +7,6 @@ import styled from "../utils/styled"
 export interface AccordionSectionProps extends DefaultProps {
   title: React.ReactNode
   children: React.ReactNode
-  id?: string
   tabIndex?: number
   expanded?: boolean
   toggleExpanded?: () => void
@@ -82,6 +81,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   expanded = false,
   toggleExpanded,
   isMousRef,
+  className,
 }) => {
   const uniqueId = useUniqueId(id)
   const titleId = `accordion-heading-${uniqueId}`
@@ -89,7 +89,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   const [hasFocus, setHasFocus] = React.useState(false)
 
   return (
-    <Container expanded={expanded}>
+    <Container expanded={expanded} className={className}>
       <Header
         id={titleId}
         aria-controls={contentId}

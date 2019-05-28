@@ -28,12 +28,8 @@ const MyComponent = () => (
         Content 1<br />
         Content 1<br />
       </AccordionSection>
-      <AccordionSection title="Section 2" expanded>
-        Content 2
-      </AccordionSection>
-      <AccordionSection title="Section 3" expanded>
-        Content 3
-      </AccordionSection>
+      <AccordionSection title="Section 2">Content 2</AccordionSection>
+      <AccordionSection title="Section 3">Content 3</AccordionSection>
     </Accordion>
   </div>
 )

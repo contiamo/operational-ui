@@ -23,7 +23,7 @@ const Container = styled("div")<{ sections: boolean[] }>`
   border-top: none;
 `
 
-const Accordion = ({ children }: AccordionProps) => {
+const Accordion = ({ children, ...rest }: AccordionProps) => {
   const [expandedSections, setExpandedSections] = React.useState(() =>
     React.Children.map(children, child => Boolean(child.props.expanded)),
   )
@@ -43,6 +43,8 @@ const Accordion = ({ children }: AccordionProps) => {
       onKeyDown={() => {
         isMousRef.current = false
       }}
+      data-cy="operational-ui__Accordion"
+      {...rest}
     >
       {React.Children.map(children, (child, i) =>
         React.cloneElement(child, {
