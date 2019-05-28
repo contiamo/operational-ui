@@ -50,7 +50,8 @@ const Panel = styled("div")`
   label: AccordionPanel;
   overflow: auto;
   height: 100%;
-  padding: 10px 20px;
+  padding: ${({ theme }) => theme.space.element}px;
+  background-color: ${({ theme }) => theme.color.white};
 `
 
 Panel.defaultProps = { role: "region" }
