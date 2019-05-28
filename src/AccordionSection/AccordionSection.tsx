@@ -16,6 +16,8 @@ export interface AccordionSectionProps extends DefaultProps {
 const Container = styled("div")<{ expanded: boolean }>`
   label: AccordionSection;
   overflow: hidden;
+  display: grid;
+  grid-template-rows: ${({ theme }) => `${theme.space.element * 2}px calc(100% - ${theme.space.element * 2}px)`};
 `
 
 const Header = styled("div")<{ expanded: boolean }>(({ theme, expanded }) => ({
