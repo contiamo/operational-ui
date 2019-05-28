@@ -1,5 +1,5 @@
 import * as React from "react"
-import { heightOfAccordionHeader } from "../Accordion/Accordion"
+// import { heightOfAccordionHeader } from "../Accordion/Accordion"
 import Icon from "../Icon/Icon"
 import { DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
@@ -19,33 +19,31 @@ const Container = styled("div")<{ expanded: boolean }>`
   overflow: hidden;
 `
 
-const Header = styled("div")<{ tabIndex: number }>`
-  label: AccordionHeader;
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  ${({ theme }) => `
-    font-family: ${theme.font.family.main};
-    font-weight: ${theme.font.weight.bold};
-    color: ${theme.color.text.dark};
-    font-size: ${theme.font.size.small}px;
-    border-bottom: 1px solid ${theme.color.separators.default};
-    :focus {
-      outline: none;
-      /* need to fix those */
-      border: 2px solid ${theme.color.separators.default};
-      border-top: 3px solid ${theme.color.separators.default};
-      border-bottom: 3px solid ${theme.color.separators.default};
-      padding: 8px 18px;
-    }
-    border-bottom: solid 1px ${theme.color.separators.default};
-    border-top: solid 1px ${theme.color.separators.default};
-    background: ${theme.color.background.lighter};
-  `}
-  height: ${heightOfAccordionHeader};
-  padding: 10px 20px;
-  line-height: 15px;
-`
+const Header = styled("div")<{ expanded: boolean }>(({ theme, expanded }) => ({
+  fontFamily: theme.font.family.main,
+  fontSize: theme.font.size.body,
+  fontWeight: theme.font.weight.medium,
+  display: "flex",
+  alignItems: "center",
+  backgroundColor: theme.color.background.lighter,
+  color: theme.color.text.dark,
+  flex: "0 0 auto", // Make sure it stays the same size if other parts of the card push it
+  borderTop: `1px solid ${theme.color.separators.default}`,
+  borderBottom: expanded ? `1px solid ${theme.color.separators.default}` : undefined,
+
+  // This ensures that the card header text and card controls are placed in opposite corners.
+  justifyContent: "space-between",
+  height: theme.space.element * 2,
+  padding: `0 ${theme.space.element}px`,
+  lineHeight: 1,
+  ":focus": {
+    outline: "none",
+    border: `2px solid ${theme.color.separators.default}`,
+    borderTop: `3px solid ${theme.color.separators.default}`,
+    borderBottom: `3px solid ${theme.color.separators.default}`,
+    padding: "8px 18px",
+  },
+}))
 
 Header.defaultProps = { role: "button", "aria-disabled": false }
 
@@ -85,6 +83,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         tabIndex={tabIndex}
         onClick={toggleExpanded}
         onKeyPress={toggleExpanded}
+        expanded={expanded}
       >
         {title}
         <Chevron name={expanded ? "ChevronUp" : "ChevronDown"} />

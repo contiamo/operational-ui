@@ -13,16 +13,14 @@ export interface AccordionProps extends DefaultProps {
 const updateArray: <T>(arr: T[], pos: number, newValue: T) => T[] = (arr, pos, newValue) =>
   Object.assign([], arr, { [pos]: newValue })
 
-export const heightOfAccordionHeader = "36px"
-
 const Container = styled("div")<{ sections: boolean[] }>`
   label: Accordion;
   height: 100%;
   display: grid;
-  grid-template-rows: ${({ sections }) =>
-    sections.map(expanded => (expanded ? "1fr" : heightOfAccordionHeader)).join(" ")};
-  border-left: solid 1px ${({ theme }) => theme.color.separators.default};
-  border-right: solid 1px ${({ theme }) => theme.color.separators.default};
+  grid-template-rows: ${({ theme, sections }) =>
+    sections.map(expanded => (expanded ? "1fr" : `${theme.space.element * 2}px`)).join(" ")};
+  border: solid 1px ${({ theme }) => theme.color.separators.default};
+  border-top: none;
 `
 
 const Accordion = ({ children }: AccordionProps) => {
