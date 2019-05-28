@@ -1,5 +1,4 @@
 import * as React from "react"
-// import { heightOfAccordionHeader } from "../Accordion/Accordion"
 import Icon from "../Icon/Icon"
 import { DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
