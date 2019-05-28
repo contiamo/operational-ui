@@ -69,7 +69,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   title,
   children,
   id,
-  tabindex = 0,
+  tabIndex = 0,
   expanded = false,
   toggleExpanded,
 }) => {
@@ -83,7 +83,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         id={titleId}
         aria-controls={contentId}
         aria-expanded={expanded}
-        tabindex={tabindex}
+        tabIndex={tabIndex}
         onClick={toggleExpanded}
         onKeyPress={toggleExpanded}
       >
