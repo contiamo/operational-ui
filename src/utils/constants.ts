@@ -36,8 +36,8 @@ const backgroundColors = {
   mediumDark: "#999",
   /** `#ececec` */
   light: "#ececec",
-  /** `#f6f6f6` */
-  lighter: "#f6f6f6",
+  /** `#f2f4f6` */
+  lighter: "#f2f4f6",
   /** `#f8f8f8` */
   lightest: "#f8f8f8",
   /** `#fcfcfc` */
@@ -50,8 +50,8 @@ const backgroundColors = {
 const separatorColors = {
   /** `#aaaaaa` */
   dark: "#aaaaaa",
-  /** `#e8e8e8` */
-  default: "#e8e8e8",
+  /** `#bfcbd2` */
+  default: "#bfcbd2",
   /** `#ececec` */
   light: "#ececec",
 }

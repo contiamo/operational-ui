@@ -21,9 +21,8 @@ const Container = styled("div")<{ sections: boolean[] }>`
   display: grid;
   grid-template-rows: ${({ sections }) =>
     sections.map(expanded => (expanded ? "1fr" : heightOfAccordionHeader)).join(" ")};
-  /* need to fix those */
-  border-left: solid 1px #bfcbd2;
-  border-right: solid 1px #bfcbd2;
+  border-left: solid 1px ${({ theme }) => theme.color.separators.default};
+  border-right: solid 1px ${({ theme }) => theme.color.separators.default};
 `
 
 const Accordion = ({ children }: AccordionProps) => {

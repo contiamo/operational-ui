@@ -18,7 +18,7 @@ const Container = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   backgroundColor: theme.color.background.lighter,
-  color: theme.color.text.lighter,
+  color: theme.color.text.dark,
   flex: "0 0 auto", // Make sure it stays the same size if other parts of the card push it
   borderBottom: `1px solid ${theme.color.separators.default}`,
 
