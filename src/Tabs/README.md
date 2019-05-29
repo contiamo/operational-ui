@@ -47,13 +47,16 @@ const MyComponent = () => {
       key: 3,
     },
   ])
+  const [active, setActive] = React.useState(0)
+
   const onClose = index => {
     const newTabs = [...tabs]
     newTabs.splice(index, 1)
+    if (index === active && index >= newTabs.length) {
+      setActive(newTabs.length - 1)
+    }
     setTabs(newTabs)
   }
-
-  const [active, setActive] = React.useState(0)
 
   return <Tabs tabs={tabs} active={active} onActivate={setActive} onClose={onClose} />
 }

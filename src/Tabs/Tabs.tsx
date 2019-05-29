@@ -35,7 +35,7 @@ TabList.defaultProps = {
 
 const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boolean }>`
   cursor: pointer;
-  background-color: #bfcbd2;
+  background-color: #d8d8d8;
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   ${({ first }) => (first ? "" : "border-left: none;")}
   ${props => (props["aria-selected"] ? "border-bottom: none; background-color: #f2f4f6;" : "")}
@@ -70,7 +70,7 @@ TabPanel.defaultProps = {
 
 const Tabs = ({ tabs, active, onClose, onActivate, label }: TabsProps) => {
   if (!Number.isInteger(active) || active < 0 || active >= tabs.length) {
-    active = active < 0 ? tabs.length - 1 : 0
+    active = active > 0 ? tabs.length - 1 : 0
     console.warn("active tab is out of bound, fall-back to closest value")
   }
 
@@ -83,7 +83,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, label }: TabsProps) => {
       activeTab.current.focus()
       userAction.current = false
     }
-  }, [active])
+  }, [active, tabs])
 
   return (
     <Container>
@@ -113,7 +113,6 @@ const Tabs = ({ tabs, active, onClose, onActivate, label }: TabsProps) => {
               onActivate(tabs.length - 1)
               break
             case "Delete":
-              // TODO: activate to closest tab
               onClose(active)
               break
           }
@@ -142,8 +141,8 @@ const Tabs = ({ tabs, active, onClose, onActivate, label }: TabsProps) => {
             <Icon
               size={14}
               name="No"
-              onClick={() => {
-                userAction.current = true
+              onMouseDown={e => {
+                e.stopPropagation()
                 onClose(i)
               }}
             />
