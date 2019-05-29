@@ -38,7 +38,8 @@ const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boole
   background-color: #d8d8d8;
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   ${({ first }) => (first ? "" : "border-left: none;")}
-  ${props => (props["aria-selected"] ? "border-bottom: none; background-color: #f2f4f6;" : "")}
+  ${props =>
+    props["aria-selected"] ? "border-bottom: 1px solid #f2f4f6; background-color: #f2f4f6;" : ""}
 
   min-width: 180px;
   flex-grow: 1;
@@ -126,10 +127,6 @@ const Tabs = ({ tabs, active, onClose, onActivate, label }: TabsProps) => {
             aria-controls={`TabPanel${key}`}
             id={`TabHeader${key}`}
             key={key}
-            onClick={() => {
-              userAction.current = true
-              onActivate(i)
-            }}
             onFocus={() => {
               userAction.current = true
               onActivate(i)
