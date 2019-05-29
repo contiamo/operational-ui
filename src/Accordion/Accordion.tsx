@@ -85,7 +85,7 @@ const Focus = styled("div")`
 const Accordion = ({ sections, onToggle, ...rest }: AccordionProps) => {
   // this ref is used to detect if visitor uses mouse or keyboard
   // and show focuse state in case of keyboard
-  const isMousRef = React.useRef(false)
+  const isMouseRef = React.useRef(false)
 
   return (
     <Container
