@@ -86,6 +86,7 @@ const Accordion = ({ sections, onToggle, ...rest }: AccordionProps) => {
   // this ref is used to detect if visitor uses mouse or keyboard
   // and show focuse state in case of keyboard
   const isMouseRef = React.useRef(false)
+  const [focusIndex, setFocusIndex] = React.useState<number | null>(null)
 
   return (
     <Container
@@ -102,7 +103,10 @@ const Accordion = ({ sections, onToggle, ...rest }: AccordionProps) => {
       {sections.map(({ title, content, expanded, key }, i) => {
         const titleId = `accordion-heading-${key}`
         const contentId = `accordion-panel-${key}`
-        const [hasFocus, setHasFocus] = React.useState(false)
+        const toggle = () => {
+          isMouseRef.current = false
+          onToggle(i)
+        }
 
         return (
           <AccordionSection expanded={expanded} key={key}>
@@ -111,15 +115,15 @@ const Accordion = ({ sections, onToggle, ...rest }: AccordionProps) => {
               aria-controls={contentId}
               aria-expanded={expanded}
               tabIndex={0}
-              onClick={() => onToggle(i)}
-              onKeyPress={() => onToggle(i)}
+              onClick={toggle}
+              onKeyPress={toggle}
               expanded={expanded}
               onFocus={() => {
-                if (isMouseRef && !isMouseRef.current) {
-                  setHasFocus(true)
+                if (!isMouseRef.current) {
+                  setFocusIndex(i)
                 }
               }}
-              onBlur={() => setHasFocus(false)}
+              onBlur={() => setFocusIndex(null)}
             >
               {title}
               <Chevron name={expanded ? "ChevronUp" : "ChevronDown"} />
@@ -127,7 +131,7 @@ const Accordion = ({ sections, onToggle, ...rest }: AccordionProps) => {
             <Panel id={contentId} aria-labelledby={titleId} hidden={!expanded}>
               {expanded && content()}
             </Panel>
-            {hasFocus ? <Focus /> : null}
+            {focusIndex === i ? <Focus /> : null}
           </AccordionSection>
         )
       })}
