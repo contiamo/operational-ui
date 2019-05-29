@@ -12,7 +12,7 @@ export interface Section {
 }
 
 export interface AccordionProps extends DefaultProps {
-  children: never
+  children?: never
   onToggle: (sectionIndex: number) => void
   sections: Section[]
 }

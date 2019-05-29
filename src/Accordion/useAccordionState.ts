@@ -1,7 +1,12 @@
 import * as React from "react"
 import { Section } from "./Accordion"
 
-export const useAccordionState = (sections: Section[]) => {
+/**
+ * `sections` is intial state, the same way as argument in `useState`
+ *
+ * @param sections Section[]
+ */
+export const useAccordionState = (sections: Section[]): [Section[], (index: number) => void] => {
   const [stateSections, updateSections] = React.useState(sections)
 
   const onToggle = React.useCallback(
