@@ -52,8 +52,8 @@ const separatorColors = {
   dark: "#768f9e",
   /** `#bfcbd2` */
   default: "#bfcbd2",
-  /** `#c3cfd5` */
-  light: "#c3cfd5",
+  /** `#d7dfe3` */
+  light: "#d7dfe3",
 }
 
 /**
