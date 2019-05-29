@@ -36,8 +36,8 @@ const backgroundColors = {
   mediumDark: "#999",
   /** `#ececec` */
   light: "#ececec",
-  /** `#f6f6f6` */
-  lighter: "#f6f6f6",
+  /** `#f2f4f6` */
+  lighter: "#f2f4f6",
   /** `#f8f8f8` */
   lightest: "#f8f8f8",
   /** `#fcfcfc` */
@@ -48,12 +48,12 @@ const backgroundColors = {
  * A specialized color palette for separators.
  */
 const separatorColors = {
-  /** `#aaaaaa` */
-  dark: "#aaaaaa",
-  /** `#e8e8e8` */
-  default: "#e8e8e8",
-  /** `#ececec` */
-  light: "#ececec",
+  /** `#768f9e` */
+  dark: "#768f9e",
+  /** `#bfcbd2` */
+  default: "#bfcbd2",
+  /** `#d7dfe3` */
+  light: "#d7dfe3",
 }
 
 /**
@@ -232,9 +232,11 @@ const zIndex = {
  */
 const shadows = {
   pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
-  card: "0px 1px 5px #d3d1d1",
+  topBar: "0px 1px 5px #d3d1d1",
   focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
+  insetFocus: "inset 0 0 0px 2px #1499ce",
   popup: "0 3px 12px rgba(0, 0, 0, .15)",
+  card: "0 1px 3px 0 rgba(191, 203, 210, 0.9)",
 }
 
 const constants = {

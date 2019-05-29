@@ -11,7 +11,7 @@ exports[`DatePicker Component Should render 1`] = `
     class="css-hbollr-datepicker"
   >
     <div
-      class="css-u1sxrl"
+      class="css-1i3ebus"
     >
       <svg
         class="css-qdx4tx"
@@ -38,7 +38,7 @@ exports[`DatePicker Component Should render 1`] = `
         class="css-rjp1ph"
       >
         <div
-          class="css-1yzl3rb"
+          class="css-kaz4mx"
         >
           <svg
             class="css-qdx4tx"
@@ -56,7 +56,7 @@ exports[`DatePicker Component Should render 1`] = `
           January, 2018
         </span>
         <div
-          class="css-1yzl3rb"
+          class="css-kaz4mx"
         >
           <svg
             class="css-qdx4tx"
@@ -110,12 +110,12 @@ exports[`DatePicker Component Should render 1`] = `
           S
         </div>
         <div
-          class="css-1yy6nlh"
+          class="css-1uhreit"
         >
           31
         </div>
         <div
-          class="css-juqq08"
+          class="css-1u3r8e4"
         >
           1
         </div>
@@ -252,57 +252,57 @@ exports[`DatePicker Component Should render 1`] = `
           23
         </div>
         <div
-          class="css-juqq08"
+          class="css-1u3r8e4"
         >
           24
         </div>
         <div
-          class="css-juqq08"
+          class="css-1u3r8e4"
         >
           25
         </div>
         <div
-          class="css-juqq08"
+          class="css-1u3r8e4"
         >
           26
         </div>
         <div
-          class="css-juqq08"
+          class="css-1u3r8e4"
         >
           27
         </div>
         <div
-          class="css-juqq08"
+          class="css-1u3r8e4"
         >
           28
         </div>
         <div
-          class="css-juqq08"
+          class="css-1u3r8e4"
         >
           29
         </div>
         <div
-          class="css-juqq08"
+          class="css-1u3r8e4"
         >
           30
         </div>
         <div
-          class="css-juqq08"
+          class="css-1u3r8e4"
         >
           31
         </div>
         <div
-          class="css-1yy6nlh"
+          class="css-1uhreit"
         >
           1
         </div>
         <div
-          class="css-1yy6nlh"
+          class="css-1uhreit"
         >
           2
         </div>
         <div
-          class="css-1yy6nlh"
+          class="css-1uhreit"
         >
           3
         </div>
