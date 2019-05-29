@@ -91,10 +91,10 @@ const Accordion = ({ sections, onToggle, ...rest }: AccordionProps) => {
     <Container
       sections={sections}
       onMouseDown={() => {
-        isMousRef.current = true
+        isMouseRef.current = true
       }}
       onKeyDown={() => {
-        isMousRef.current = false
+        isMouseRef.current = false
       }}
       data-cy="operational-ui__Accordion"
       {...rest}
@@ -115,7 +115,7 @@ const Accordion = ({ sections, onToggle, ...rest }: AccordionProps) => {
               onKeyPress={() => onToggle(i)}
               expanded={expanded}
               onFocus={() => {
-                if (isMousRef && !isMousRef.current) {
+                if (isMouseRef && !isMouseRef.current) {
                   setHasFocus(true)
                 }
               }}
