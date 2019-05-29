@@ -1,5 +1,6 @@
 import * as React from "react"
 import Icon from "../Icon/Icon"
+import { SectionHeader } from "../Internals/SectionHeader"
 import { DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
 import styled from "../utils/styled"
@@ -27,7 +28,7 @@ const Container = styled("div")<{ expanded: boolean }>`
   position: relative;
 `
 
-const Header = styled("div")<{ expanded: boolean }>(({ theme, expanded }) => ({
+const Header = styled(SectionHeader)<{ expanded: boolean }>(({ theme, expanded }) => ({
   cursor: "pointer",
   borderTop: `1px solid ${theme.color.separators.default}`,
   borderBottom: `1px solid ${expanded ? theme.color.separators.default : theme.color.background.lighter}`,
@@ -35,24 +36,6 @@ const Header = styled("div")<{ expanded: boolean }>(({ theme, expanded }) => ({
   ":focus": {
     outline: "none",
   },
-
-  // this is copy paste from CardHeader Container
-  // TODO: fix `height: theme.space.element` * 2 and `padding: 0 ${theme.space.element}px`
-
-  fontFamily: theme.font.family.main,
-  fontSize: theme.font.size.body,
-  fontWeight: theme.font.weight.medium,
-  display: "flex",
-  alignItems: "center",
-  backgroundColor: theme.color.background.lighter,
-  color: theme.color.text.dark,
-  flex: "0 0 auto", // Make sure it stays the same size if other parts of the card push it
-
-  // This ensures that the card header text and card controls are placed in opposite corners.
-  justifyContent: "space-between",
-  height: theme.space.element * 2,
-  padding: `0 ${theme.space.element}px`,
-  lineHeight: 1,
 }))
 
 Header.defaultProps = { role: "button", "aria-disabled": false }
