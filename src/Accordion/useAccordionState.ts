@@ -11,6 +11,9 @@ export const useAccordionState = (initialSections: Section[]): [Section[], (inde
 
   const onToggle = React.useCallback(
     index => {
+      if (index < 0 || index >= stateSections.length) {
+        throw new Error(`index out of bounds: ${index}`)
+      }
       const newSections = [...stateSections]
       newSections[index] = {
         ...newSections[index],
