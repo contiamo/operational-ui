@@ -48,12 +48,12 @@ const backgroundColors = {
  * A specialized color palette for separators.
  */
 const separatorColors = {
-  /** `#aaaaaa` */
-  dark: "#aaaaaa",
+  /** `#768f9e` */
+  dark: "#768f9e",
   /** `#bfcbd2` */
   default: "#bfcbd2",
-  /** `#ececec` */
-  light: "#ececec",
+  /** `#c3cfd5` */
+  light: "#c3cfd5",
 }
 
 /**
