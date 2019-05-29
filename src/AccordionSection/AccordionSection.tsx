@@ -15,14 +15,30 @@ export interface AccordionSectionProps extends DefaultProps {
 
 const Container = styled("div")<{ expanded: boolean }>`
   label: AccordionSection;
+  /* to make sure it respects parrent grid's row height */
   overflow: hidden;
+  /* to fix overflow: hidden above, otherwise header can disappear */
   display: grid;
-  grid-template-rows: ${({ theme }) => `${theme.space.element * 2}px calc(100% - ${theme.space.element * 2}px)`};
+  grid-template-rows: ${({ theme }) => {
+    const headerHeight = theme.space.element * 2
+    return `${headerHeight}px calc(100% - ${headerHeight}px)`
+  }};
+  /* for Focus */
   position: relative;
 `
 
 const Header = styled("div")<{ expanded: boolean }>(({ theme, expanded }) => ({
   cursor: "pointer",
+  borderTop: `1px solid ${theme.color.separators.default}`,
+  borderBottom: `1px solid ${expanded ? theme.color.separators.default : theme.color.background.lighter}`,
+  // disable browser focus to customise focus state
+  ":focus": {
+    outline: "none",
+  },
+
+  // this is copy paste from CardHeader Container
+  // TODO: fix `height: theme.space.element` * 2 and `padding: 0 ${theme.space.element}px`
+
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.body,
   fontWeight: theme.font.weight.medium,
@@ -31,23 +47,19 @@ const Header = styled("div")<{ expanded: boolean }>(({ theme, expanded }) => ({
   backgroundColor: theme.color.background.lighter,
   color: theme.color.text.dark,
   flex: "0 0 auto", // Make sure it stays the same size if other parts of the card push it
-  borderTop: `1px solid ${theme.color.separators.default}`,
-  borderBottom: `1px solid ${expanded ? theme.color.separators.default : theme.color.background.lighter}`,
 
   // This ensures that the card header text and card controls are placed in opposite corners.
   justifyContent: "space-between",
   height: theme.space.element * 2,
   padding: `0 ${theme.space.element}px`,
   lineHeight: 1,
-  ":focus": {
-    outline: "none",
-  },
 }))
 
 Header.defaultProps = { role: "button", "aria-disabled": false }
 
 const Panel = styled("div")`
   label: AccordionPanel;
+  /* we need it because of overflow: hidden; above */
   overflow: auto;
   height: 100%;
   padding: ${({ theme }) => theme.space.element}px;
@@ -67,6 +79,7 @@ const Focus = styled("div")`
   height: 100%;
   top: 0;
   left: 0;
+  /* we show it above other elements so that shadow would be visible, but we disable all events for it */
   pointer-events: none;
   ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
 `
