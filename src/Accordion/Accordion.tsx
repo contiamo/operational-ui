@@ -1,42 +1,95 @@
 import * as React from "react"
-import { AccordionSectionElement } from "../AccordionSection/AccordionSection"
+import Icon from "../Icon/Icon"
+import { SectionHeader } from "../Internals/SectionHeader"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-export interface AccordionProps extends DefaultProps {
-  children: AccordionSectionElement[]
+export interface Section {
+  title: React.ReactNode
+  content: () => React.ReactNode
+  expanded: boolean
+  key: string | number
 }
 
-/**
- * update array without mutation
- */
-const updateArray: <T>(arr: T[], pos: number, newValue: T) => T[] = (arr, pos, newValue) =>
-  Object.assign([], arr, { [pos]: newValue })
+export interface AccordionProps extends DefaultProps {
+  children: never
+  onToggle: (sectionIndex: number) => void
+  sections: Section[]
+}
 
-const Container = styled("div")<{ sections: boolean[] }>`
+const Container = styled("div")<{ sections: Section[] }>`
   label: Accordion;
   height: 100%;
   display: grid;
   grid-template-rows: ${({ theme, sections }) =>
-    sections.map(expanded => (expanded ? "1fr" : `${theme.space.element * 2}px`)).join(" ")};
+    sections.map(({ expanded }) => (expanded ? "1fr" : `${theme.space.element * 2}px`)).join(" ")};
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   border-top: none;
 `
 
-const Accordion = ({ children, ...rest }: AccordionProps) => {
-  const [expandedSections, setExpandedSections] = React.useState(() =>
-    React.Children.map(children, child => Boolean(child.props.expanded)),
-  )
+const AccordionSection = styled("div")<{ expanded: boolean }>`
+  label: AccordionSection;
+  /* to make sure it respects parrent grid's row height */
+  overflow: hidden;
+  /* to fix overflow: hidden above, otherwise header can disappear */
+  display: grid;
+  grid-template-rows: ${({ theme }) => {
+    const headerHeight = theme.space.element * 2
+    return `${headerHeight}px calc(100% - ${headerHeight}px)`
+  }};
+  /* for Focus */
+  position: relative;
+`
+
+const Header = styled(SectionHeader)<{ expanded: boolean }>(({ theme, expanded }) => ({
+  cursor: "pointer",
+  borderTop: `1px solid ${theme.color.separators.default}`,
+  borderBottom: `1px solid ${expanded ? theme.color.separators.default : theme.color.background.lighter}`,
+  // disable browser focus to customise focus state
+  ":focus": {
+    outline: "none",
+  },
+}))
+
+Header.defaultProps = { role: "button", "aria-disabled": false }
+
+const Panel = styled("div")`
+  label: AccordionPanel;
+  /* we need it because of overflow: hidden; above */
+  overflow: auto;
+  height: 100%;
+  padding: ${({ theme }) => theme.space.element}px;
+  background-color: ${({ theme }) => theme.color.white};
+`
+
+Panel.defaultProps = { role: "region" }
+
+const Chevron = styled(Icon)`
+  align-content: flex-end;
+`
+
+Chevron.defaultProps = { size: 14 }
+
+const Focus = styled("div")`
+  label: AccordionFocus;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  /* we show it above other elements so that shadow would be visible, but we disable all events for it */
+  pointer-events: none;
+  ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
+`
+
+const Accordion = ({ sections, onToggle, ...rest }: AccordionProps) => {
   // this ref is used to detect if visitor uses mouse or keyboard
   // and show focuse state in case of keyboard
   const isMousRef = React.useRef(false)
 
-  /**
-   * We use `React.cloneElement`, but it is possible to accomplish with `React.Context` as well
-   */
   return (
     <Container
-      sections={expandedSections}
+      sections={sections}
       onMouseDown={() => {
         isMousRef.current = true
       }}
@@ -46,14 +99,38 @@ const Accordion = ({ children, ...rest }: AccordionProps) => {
       data-cy="operational-ui__Accordion"
       {...rest}
     >
-      {React.Children.map(children, (child, i) =>
-        React.cloneElement(child, {
-          ...child.props,
-          expanded: expandedSections[i],
-          toggleExpanded: () => setExpandedSections(updateArray(expandedSections, i, !expandedSections[i])),
-          isMousRef,
-        }),
-      )}
+      {sections.map(({ title, content, expanded, key }, i) => {
+        const titleId = `accordion-heading-${key}`
+        const contentId = `accordion-panel-${key}`
+        const [hasFocus, setHasFocus] = React.useState(false)
+
+        return (
+          <AccordionSection expanded={expanded} key={key}>
+            <Header
+              id={titleId}
+              aria-controls={contentId}
+              aria-expanded={expanded}
+              tabIndex={0}
+              onClick={() => onToggle(i)}
+              onKeyPress={() => onToggle(i)}
+              expanded={expanded}
+              onFocus={() => {
+                if (isMousRef && !isMousRef.current) {
+                  setHasFocus(true)
+                }
+              }}
+              onBlur={() => setHasFocus(false)}
+            >
+              {title}
+              <Chevron name={expanded ? "ChevronUp" : "ChevronDown"} />
+            </Header>
+            <Panel id={contentId} aria-labelledby={titleId} hidden={!expanded}>
+              {expanded && content()}
+            </Panel>
+            {hasFocus ? <Focus /> : null}
+          </AccordionSection>
+        )
+      })}
     </Container>
   )
 }
