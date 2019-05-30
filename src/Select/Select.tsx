@@ -19,6 +19,7 @@ export interface SelectProps extends DefaultProps {
   value: null | Value | Value[]
   /** Make the list filterable */
   filterable?: boolean
+  /** Limit the number of options displayed */
   maxOptions?: number
   /** Disable the component */
   disabled?: boolean
@@ -60,6 +61,13 @@ const SelectInput = styled(Input)`
   border-bottom-right-radius: 0;
 `
 
+const FilterInput = styled(Input)`
+  border: 0;
+  margin: ${({ theme }) => -theme.space.content}px;
+  border-radius: 0;
+  height: auto;
+`
+
 const DropdownButton = styled("div")<{ isOpen: boolean }>`
   display: flex;
   align-items: center;
@@ -78,7 +86,36 @@ const DropdownButton = styled("div")<{ isOpen: boolean }>`
   }
 `
 
-export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
+export const Select: React.FC<SelectProps> = ({ options, value, onChange, filterable }) => {
+  const [filter, setFilter] = React.useState("")
+
+  const filterOptions = React.useCallback(
+    (options: SelectProps["options"]) =>
+      options.filter(option => {
+        const filterPattern = new RegExp(filter, "ig")
+        return String(option.label).match(filterPattern) || String(option.value).match(filterPattern)
+      }),
+    [filter],
+  )
+
+  const prependFilter = React.useCallback(
+    (items: IContextMenuItem[]): IContextMenuItem[] => [
+      {
+        label: (
+          <FilterInput
+            onClick={e => e.stopPropagation()}
+            fullWidth
+            placeholder="Filter..."
+            value={filter}
+            onChange={setFilter}
+          />
+        ),
+      },
+      ...items,
+    ],
+    [filter],
+  )
+
   const isOptionSelected = React.useCallback(
     option => {
       if (!Array.isArray(value)) {
@@ -106,7 +143,7 @@ export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
 
   const items = React.useMemo(
     () =>
-      options.map(
+      filterOptions(options).map(
         (option): IContextMenuItem => ({
           ...option,
           onClick: () => {
@@ -124,7 +161,7 @@ export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
             : {}),
         }),
       ),
-    [options, value],
+    [options, value, filter],
   )
 
   const getDisplayValue = React.useCallback(() => {
@@ -136,7 +173,7 @@ export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
   }, [value])
 
   return (
-    <ContextMenu keepOpenOnItemClick={Array.isArray(value)} items={items}>
+    <ContextMenu keepOpenOnItemClick={Array.isArray(value)} items={filterable ? prependFilter(items) : items}>
       {isOpen => (
         <Container>
           <Combobox>
