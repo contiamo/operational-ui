@@ -79,17 +79,17 @@ podTemplate(cloud: "${env.K8sCloud}", label: label, serviceAccount: "jenkins", c
               }
             }
             env.NpmRegistry = "registry.npmjs.org"
-            stage ('NPM Publish Next Tag') {
-              env.NpmRegistry = "registry.npmjs.org"
-              npmLogin(env.NpmRegistry,"\${NPM_USER}","\${NPM_PASS}",env.NpmEmail)
-              try {
-                npmPublish("next",env.NpmRegistry)
-              } catch(e) {
-                println("Error publishing artefacts. Error: ${e}. Trying again...")
-                npmPublish("next",env.NpmRegistry)
-              }
-            }
             if (env.BranchLower == "master") {
+              stage ('NPM Publish Next Tag') {
+                env.NpmRegistry = "registry.npmjs.org"
+                npmLogin(env.NpmRegistry,"\${NPM_USER}","\${NPM_PASS}",env.NpmEmail)
+                try {
+                  npmPublish("next",env.NpmRegistry)
+                } catch(e) {
+                  println("Error publishing artefacts. Error: ${e}. Trying again...")
+                  npmPublish("next",env.NpmRegistry)
+                }
+              }
               lib.haveAword('yellow',"Triggering downstream build")
               stage('Trigger Contiamo UI'){
                 build(job: '../contiamo-ui/master', wait: false, parameters: [
