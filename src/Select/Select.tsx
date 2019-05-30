@@ -1,9 +1,9 @@
 import * as React from "react"
 import { DefaultProps } from "../types"
-import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 import ContextMenu from "../ContextMenu/ContextMenu"
 import styled from "../utils/styled"
 import Input from "../Input/Input"
+import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 
 export type Value = number | string
 
@@ -19,9 +19,6 @@ export interface SelectProps extends DefaultProps {
   value: null | Value | Value[]
   /** Make the list filterable */
   filterable?: boolean
-  /**
-   * Limit the number of options displayed
-   */
   maxOptions?: number
   /** Disable the component */
   disabled?: boolean
@@ -82,6 +79,17 @@ const DropdownButton = styled("div")<{ isOpen: boolean }>`
 `
 
 export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
+  const isOptionSelected = React.useCallback(
+    option => {
+      if (!Array.isArray(value)) {
+        return value === option.value
+      }
+
+      return value.includes(option.value)
+    },
+    [value],
+  )
+
   const items = React.useMemo(
     () =>
       options.map(
@@ -93,9 +101,16 @@ export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
             }
           },
           label: option.label ? option.label : "",
+          ...(isOptionSelected(option)
+            ? {
+                icon: "Yes",
+                iconColor: "primary",
+                iconLocation: "right",
+              }
+            : {}),
         }),
       ),
-    [options],
+    [options, value],
   )
 
   return (
