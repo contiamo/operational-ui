@@ -4,6 +4,8 @@ const { parse: propsParser } = require("react-docgen-typescript")
 const { version } = require("./package.json")
 const { styles, theme } = require("./styleguide/styles.js")
 const { sections } = require("./styleguide/sections.js")
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
+
 const path = require("path")
 const fs = require("fs")
 
@@ -38,7 +40,7 @@ module.exports = {
 
   skipComponentsWithoutExample: true,
   getExampleFilename(componentPath) {
-    const { dir, base, ext, name: fileName } = path.parse(componentPath)
+    const { dir, name: fileName } = path.parse(componentPath)
     const folderName = path.basename(dir)
 
     if (fileName === "index" || fileName === folderName) return path.join(dir, "README.md")
@@ -62,6 +64,16 @@ module.exports = {
     resolve: {
       extensions: [".js", ".tsx", ".ts"],
     },
+    plugins: [
+      new ForkTsCheckerWebpackPlugin({
+        memoryLimit: require("os").totalmem() / 1024 / 1024,
+      }),
+    ],
+    optimization: {
+      removeAvailableModules: false,
+      removeEmptyChunks: false,
+      splitChunks: false,
+    },
     module: {
       rules: [
         {
@@ -69,6 +81,7 @@ module.exports = {
           use: {
             loader: "ts-loader",
             options: {
+              transpileOnly: true, // don't type-check on the main thread
               compilerOptions: {
                 declaration: false,
               },
