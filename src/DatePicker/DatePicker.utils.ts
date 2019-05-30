@@ -18,10 +18,7 @@ export const months: string[] = [
 /** A range of numbers pre-filled in an array
  * range(5) -> [ 0, 1, 2, 3, 4 ]
  */
-export const range = (n: number): number[] =>
-  Array.apply(null, {
-    length: n,
-  }).map((_: number, i: number): number => i)
+export const range = (length: number) => Array.from({ length }, (_, i) => i)
 
 export const changeMonth = (
   diff: number,
