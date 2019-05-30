@@ -3,12 +3,13 @@ import styled from "../utils/styled"
 
 import { DefaultProps } from "../types"
 import constants, { expandColor } from "../utils/constants"
-import BrandIcons, { BrandIconName } from "./Icon.Brand"
+import { BrandIcons } from "./Icon.Brand"
 import * as CustomIcons from "./Icon.Custom"
 
+export type BrandIconName = "OperationalUI" | "Pantheon" | "Labs" | "Contiamo"
 export type IconName = BrandIconName | keyof typeof CustomIcons
 
-export interface CommunIconProps extends DefaultProps {
+export interface CommonIconProps extends DefaultProps {
   /**
    * Size
    *
@@ -27,13 +28,14 @@ export interface CommunIconProps extends DefaultProps {
   right?: boolean
   /**
    * Icon name.
-   * For OperationalUI brand icons, use the values `OperationalUI`, `Labs`, `Components`, `Blocks` and `Visualizations`
+   * For OperationalUI brand icons, use the values `OperationalUI`, `Labs`, `Pantheon`, and `Contiamo`.
    */
   name: IconName
   onClick?: (e: React.MouseEvent) => void
+  children?: never
 }
 
-export interface OperationalUIIconProps extends CommunIconProps {
+export interface OperationalUIIconProps extends CommonIconProps {
   name: "OperationalUI"
   /**
    * OperationalUI needs this prop to animate the inner circle.
@@ -42,13 +44,13 @@ export interface OperationalUIIconProps extends CommunIconProps {
   rotation?: number
 }
 
-export interface PantheonIconProps extends CommunIconProps {
+export interface PantheonIconProps extends CommonIconProps {
   name: "Pantheon"
   /** Use the colored version of the logo (works for `name = Pantheon` only) */
   colored?: boolean
 }
 
-export interface OtherIconProps extends CommunIconProps {
+export interface OtherIconProps extends CommonIconProps {
   colored?: never
   rotation?: never
 }
@@ -57,8 +59,9 @@ export type IconProps = OtherIconProps | OperationalUIIconProps | PantheonIconPr
 
 const Icon: React.SFC<IconProps> = ({ left, right, color, name, ...props }) => {
   if (!name) {
-    return <>"No Icon Specified"</>
+    return <>No Icon Specified</>
   }
+
   const iconColor: string = expandColor(constants, color) || "currentColor"
 
   const TypedCustomIcons: { [key: string]: React.SFC<{ size?: number; color?: string }> } = CustomIcons
@@ -73,10 +76,15 @@ const Icon: React.SFC<IconProps> = ({ left, right, color, name, ...props }) => {
     return <Comp {...props} size={props.size || 32} color={iconColor} />
   }
 
+  if (BrandIcons[name]) {
+    const Comp = BrandIcons[name]
+    return <Comp {...props} size={props.size || 32} color={iconColor} />
+  }
+
   return null
 }
 
-const IconComp = styled(Icon)<Pick<CommunIconProps, "left" | "right" | "onClick">>(
+const IconComp = styled(Icon)<Pick<CommonIconProps, "left" | "right" | "onClick">>(
   ({ left, right, theme, onClick }) => ({
     marginLeft: right ? theme.space.small : 0,
     marginRight: left ? theme.space.small : 0,
