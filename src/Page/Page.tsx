@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Tabs, { Tab, tabsBarHeight } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
-import PageContent, { PageContentProps } from "../PageContent/PageContent"
+import PageContent, { PageContentProps, isChildFunction } from "../PageContent/PageContent"
 import Progress from "../Progress/Progress"
 import { DefaultProps } from "../types"
 import { Title } from "../Typography/Title"
@@ -198,7 +198,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
         <ViewContainer hasTitle={Boolean(title)}>
           <PageContent noPadding={Boolean(noPadding)} areas={areas} fill={fill}>
             {modalConfirmContext => {
-              const resolvedChildren = typeof children === "function" ? children(modalConfirmContext) : children
+              const resolvedChildren = isChildFunction(children) ? children(modalConfirmContext) : children
               return areas === "main" ? <PageArea fill={fill}>{resolvedChildren}</PageArea> : resolvedChildren
             }}
           </PageContent>
