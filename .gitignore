@@ -11,3 +11,4 @@ lib
 test-results.json
 *.mp4
 cypress/screenshots
+.tsbuildinfo
