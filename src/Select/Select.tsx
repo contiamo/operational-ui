@@ -4,6 +4,7 @@ import ContextMenu from "../ContextMenu/ContextMenu"
 import Input from "../Input/Input"
 import styled from "../utils/styled"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
+import { expandColor } from "../utils/constants"
 import LabelText from "../LabelText/LabelText"
 
 export type Value = number | string
@@ -38,9 +39,10 @@ export interface SelectProps extends DefaultProps {
 
 const borderRadius = 2
 
-const Container = styled("div")<{ disabled: boolean }>`
+const Container = styled("div")<{ disabled: boolean; color?: string }>`
   display: flex;
   flex-direction: column;
+  color: ${({ theme, color }) => expandColor(theme, color)};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `
@@ -98,6 +100,7 @@ export const Select: React.FC<SelectProps> = ({
   value,
   onChange,
   placeholder,
+  color,
   disabled,
   filterable,
 }) => {
@@ -198,7 +201,7 @@ export const Select: React.FC<SelectProps> = ({
       items={filterable ? prependFilter(items) : items}
     >
       {isOpen => (
-        <Container disabled={Boolean(disabled)}>
+        <Container disabled={Boolean(disabled)} color={color}>
           {label && <LabelText>{label}</LabelText>}
           <Combobox>
             <SelectInput disabled={disabled} placeholder={placeholder} readOnly value={getDisplayValue()} />
