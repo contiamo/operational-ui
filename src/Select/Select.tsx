@@ -4,6 +4,7 @@ import ContextMenu from "../ContextMenu/ContextMenu"
 import Input from "../Input/Input"
 import styled from "../utils/styled"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
+import LabelText from "../LabelText/LabelText"
 
 export type Value = number | string
 
@@ -92,6 +93,7 @@ DropdownButton.defaultProps = { role: "button", "aria-disabled": false, "aria-la
 
 export const Select: React.FC<SelectProps> = ({
   options,
+  label,
   maxOptions,
   value,
   onChange,
@@ -197,6 +199,7 @@ export const Select: React.FC<SelectProps> = ({
     >
       {isOpen => (
         <Container disabled={Boolean(disabled)}>
+          {label && <LabelText>{label}</LabelText>}
           <Combobox>
             <SelectInput disabled={disabled} placeholder={placeholder} readOnly value={getDisplayValue()} />
             <DropdownButton isOpen={isOpen} />
