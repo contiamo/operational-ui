@@ -135,8 +135,6 @@
     "rimraf": "^2.6.2",
     "ts-jest": "^24.0.0",
     "ts-loader": "^4.4.2",
-    "tslint-config-prettier": "^1.13.0",
-    "tslint-plugin-blank-line": "^0.0.8",
     "typescript": "^3.6.0-dev.20190530",
     "webpack": "^4.16.2"
   }
