@@ -159,13 +159,16 @@ const objectKeys = <T extends {}>(x: T) => Object.keys(x) as Array<keyof T>
  * Render card items corresponding to the specified data.
  */
 function renderData<T extends {}>(props: CardPropsWithChildrenOrData<T>) {
-  const { keyFormatter, valueFormatters = {}, data, keys, sortKeys } = props
+  const { keyFormatter, valueFormatters, data, keys, sortKeys } = props
   const _keys = keys ? keys : objectKeys(data || {}).sort(sortKeys)
   const titles = keyFormatter ? _keys.map(keyFormatter) : _keys
   const values = _keys.map(i => {
-    const valueFormatter = valueFormatters[i]
     const value = data ? data[i] : undefined
-    return valueFormatter ? valueFormatter(value!) : value
+    if (valueFormatters && value !== undefined) {
+      const valueFormatter = valueFormatters[i]
+      return valueFormatter ? valueFormatter(value) : value
+    }
+    return value
   })
   return data && titles.map((cardItemTitle, i) => <CardItem key={i} value={values[i]} title={cardItemTitle} />)
 }
