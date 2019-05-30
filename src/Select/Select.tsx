@@ -37,9 +37,11 @@ export interface SelectProps extends DefaultProps {
 
 const borderRadius = 2
 
-const Container = styled("div")`
+const Container = styled("div")<{ disabled: boolean }>`
   display: flex;
   flex-direction: column;
+  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `
 
 const Combobox = styled("div")`
@@ -86,7 +88,9 @@ const DropdownButton = styled("div")<{ isOpen: boolean }>`
   }
 `
 
-export const Select: React.FC<SelectProps> = ({ options, maxOptions, value, onChange, filterable }) => {
+DropdownButton.defaultProps = { role: "button", "aria-disabled": false, "aria-label": "Expand" }
+
+export const Select: React.FC<SelectProps> = ({ options, maxOptions, value, onChange, disabled, filterable }) => {
   const [filter, setFilter] = React.useState("")
 
   const truncateOptions = React.useCallback(
@@ -178,11 +182,15 @@ export const Select: React.FC<SelectProps> = ({ options, maxOptions, value, onCh
   }, [value])
 
   return (
-    <ContextMenu keepOpenOnItemClick={Array.isArray(value)} items={filterable ? prependFilter(items) : items}>
+    <ContextMenu
+      disabled={disabled}
+      keepOpenOnItemClick={Array.isArray(value)}
+      items={filterable ? prependFilter(items) : items}
+    >
       {isOpen => (
-        <Container>
+        <Container disabled={Boolean(disabled)}>
           <Combobox>
-            <SelectInput readOnly value={getDisplayValue()} />
+            <SelectInput disabled={disabled} readOnly value={getDisplayValue()} />
             <DropdownButton isOpen={isOpen} />
           </Combobox>
         </Container>
