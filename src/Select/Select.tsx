@@ -86,8 +86,13 @@ const DropdownButton = styled("div")<{ isOpen: boolean }>`
   }
 `
 
-export const Select: React.FC<SelectProps> = ({ options, value, onChange, filterable }) => {
+export const Select: React.FC<SelectProps> = ({ options, maxOptions, value, onChange, filterable }) => {
   const [filter, setFilter] = React.useState("")
+
+  const truncateOptions = React.useCallback(
+    (options: SelectProps["options"]) => (maxOptions ? options.slice(0, maxOptions) : options),
+    [maxOptions],
+  )
 
   const filterOptions = React.useCallback(
     (options: SelectProps["options"]) =>
@@ -143,7 +148,7 @@ export const Select: React.FC<SelectProps> = ({ options, value, onChange, filter
 
   const items = React.useMemo(
     () =>
-      filterOptions(options).map(
+      truncateOptions(filterOptions(options)).map(
         (option): IContextMenuItem => ({
           ...option,
           onClick: () => {
@@ -161,7 +166,7 @@ export const Select: React.FC<SelectProps> = ({ options, value, onChange, filter
             : {}),
         }),
       ),
-    [options, value, filter],
+    [options, value, filter, maxOptions],
   )
 
   const getDisplayValue = React.useCallback(() => {
