@@ -1,8 +1,8 @@
 import * as React from "react"
 import { DefaultProps } from "../types"
 import ContextMenu from "../ContextMenu/ContextMenu"
-import styled from "../utils/styled"
 import Input from "../Input/Input"
+import styled from "../utils/styled"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 
 export type Value = number | string
@@ -90,6 +90,20 @@ export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
     [value],
   )
 
+  const getNewValue = React.useCallback(
+    (newValue: Value) => {
+      if (Array.isArray(value) && !value.includes(newValue)) {
+        return [...value, newValue]
+      }
+      if (Array.isArray(value) && value.includes(newValue)) {
+        const newValueIndex = value.indexOf(newValue)
+        return [...value.slice(0, newValueIndex), ...value.slice(newValueIndex + 1)]
+      }
+      return newValue
+    },
+    [value],
+  )
+
   const items = React.useMemo(
     () =>
       options.map(
@@ -97,7 +111,7 @@ export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
           ...option,
           onClick: () => {
             if (onChange) {
-              onChange(option.value, option.value)
+              onChange(getNewValue(option.value), option.value)
             }
           },
           label: option.label ? option.label : "",
@@ -113,12 +127,20 @@ export const Select: React.FC<SelectProps> = ({ options, value, onChange }) => {
     [options, value],
   )
 
+  const getDisplayValue = React.useCallback(() => {
+    if (Array.isArray(value)) {
+      return value.join(", ")
+    }
+
+    return String(value)
+  }, [value])
+
   return (
-    <ContextMenu items={items}>
+    <ContextMenu keepOpenOnItemClick={Array.isArray(value)} items={items}>
       {isOpen => (
         <Container>
           <Combobox>
-            <SelectInput value={String(value)} />
+            <SelectInput readOnly value={getDisplayValue()} />
             <DropdownButton isOpen={isOpen} />
           </Combobox>
         </Container>
