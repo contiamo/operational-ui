@@ -15,7 +15,9 @@
   ],
   "scripts": {
     "dev": "parcel dev-server/index.html",
-    "start": "styleguidist server",
+    "start": "run-s start:*",
+    "start:update-ts": "yarn add typescript@next -D || (echo \"You don't have yarn. Please install yarn to use this package from https://yarnpkg.com/\"; exit 1;)",
+    "start:styleguidist": "styleguidist server",
     "build": "run-p build:*",
     "build:lambdas": "netlify-lambda build lambdas",
     "build:styleguide": "styleguidist build",
