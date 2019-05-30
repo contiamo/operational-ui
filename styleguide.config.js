@@ -64,11 +64,7 @@ module.exports = {
     resolve: {
       extensions: [".js", ".tsx", ".ts"],
     },
-    plugins: [
-      new ForkTsCheckerWebpackPlugin({
-        memoryLimit: require("os").totalmem() / 1024 / 1024,
-      }),
-    ],
+    plugins: [new ForkTsCheckerWebpackPlugin()],
     optimization: {
       removeAvailableModules: false,
       removeEmptyChunks: false,
