@@ -39,6 +39,9 @@ export interface State {
   focusedItemIndex: number
 }
 
+const isChildAFunction = (children: ContextMenuProps["children"]): children is (isActive: boolean) => React.ReactNode =>
+  typeof children === "function"
+
 const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: boolean }>(({ isOpen, theme, align }) => ({
   label: "contextmenu",
   cursor: "pointer",
@@ -150,7 +153,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
 
     const { condensed, iconLocation, children, open, embedChildrenInMenu, align, width, ...props } = this.props
     const isOpen = open || this.state.isOpen
-    const renderedChildren = typeof children === "function" ? children(this.state.isOpen) : children
+    const renderedChildren = isChildAFunction(children) ? children(this.state.isOpen) : children
     return (
       <>
         {isOpen && <InvisibleOverlay onClick={this.toggle} />}
