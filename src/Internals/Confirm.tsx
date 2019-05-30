@@ -30,10 +30,16 @@ export interface State<T> {
 }
 
 export interface Props {
-  children: (confirm: <T>(options: ConfirmOptions<T>) => void) => React.ReactNode
+  children: (confirm: <T, P = ConfirmOptions<T>>(options: P) => void) => React.ReactNode
 }
 
 const actionsBarSize = 36
+
+function isBodyAFunction<T>(
+  component: ConfirmOptions<T>["body"],
+): component is React.ComponentType<ConfirmBodyProps<T>> {
+  return typeof component === "function"
+}
 
 export const Actions = styled("div")`
   margin-top: ${({ theme }) => theme.space.element}px;
@@ -59,7 +65,7 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
     options: {},
   }
 
-  private openConfirm(options: ConfirmOptions<T>) {
+  private openConfirm(options: Partial<ConfirmOptions<T>>) {
     this.setState({ options })
   }
 
@@ -103,7 +109,7 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
 
     return (
       <>
-        {this.props.children(this.openConfirm.bind(this))}
+        {this.props.children(this.openConfirm)}
         {isOpen && (
           <ControlledModal
             type="confirm"
@@ -113,7 +119,7 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
             closeOnOverlayClick={closeOnOverlayClick}
           >
             <ControlledModalContent fullSize={Boolean(fullSize)}>
-              {typeof Body === "function" && state ? (
+              {isBodyAFunction(Body) && state ? (
                 <Body setConfirmState={this.setConfirmState} confirmState={state} />
               ) : (
                 Body
