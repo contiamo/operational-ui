@@ -90,7 +90,15 @@ const DropdownButton = styled("div")<{ isOpen: boolean }>`
 
 DropdownButton.defaultProps = { role: "button", "aria-disabled": false, "aria-label": "Expand" }
 
-export const Select: React.FC<SelectProps> = ({ options, maxOptions, value, onChange, disabled, filterable }) => {
+export const Select: React.FC<SelectProps> = ({
+  options,
+  maxOptions,
+  value,
+  onChange,
+  placeholder,
+  disabled,
+  filterable,
+}) => {
   const [filter, setFilter] = React.useState("")
 
   const truncateOptions = React.useCallback(
@@ -190,7 +198,7 @@ export const Select: React.FC<SelectProps> = ({ options, maxOptions, value, onCh
       {isOpen => (
         <Container disabled={Boolean(disabled)}>
           <Combobox>
-            <SelectInput disabled={disabled} readOnly value={getDisplayValue()} />
+            <SelectInput disabled={disabled} placeholder={placeholder} readOnly value={getDisplayValue()} />
             <DropdownButton isOpen={isOpen} />
           </Combobox>
         </Container>
