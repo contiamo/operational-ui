@@ -17,7 +17,6 @@ export const colorMapper = (colors: string[]) => {
  * This FNV-1a hash algorithm, often simply called "fnv", disperses hashes throughout
  * the 32-bit hash space with very good dispersion and is very fast.
  */
-/* tslint:disable:no-bitwise */
 function hash32FNV1aUTF(str: string) {
   let c
   let i
