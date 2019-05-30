@@ -26,7 +26,7 @@
     "test:e2e": "cypress run",
     "preversion": "npm run build",
     "version": "auto-changelog -u && git add CHANGELOG.md",
-    "precommit": "lint-staged",
+    "precommit": "tsc && lint-staged",
     "danger:ci": "danger ci",
     "danger": "[ ! -z $DANGER_GITHUB_API_TOKEN ] && run-p danger:* || echo \"Skipping Danger for External Contributor\"",
     "ci": "npm run test:unit && run-p danger build"
