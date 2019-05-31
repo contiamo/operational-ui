@@ -41,11 +41,15 @@ const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boole
   ${props =>
     props["aria-selected"] ? "border-bottom: 1px solid #f2f4f6; background-color: #f2f4f6;" : ""}
 
-  min-width: 180px;
+  max-width: 180px;
   flex-grow: 1;
   :focus {
     /* TODO: style focus state */
   }
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `
 
 TabHeader.defaultProps = {
@@ -56,7 +60,7 @@ TabHeader.defaultProps = {
 
 const TabContainer = styled("div")`
   border: solid 1px ${({ theme }) => theme.color.separators.default};
-  border-top: none;
+  margin-top: -1px;
 `
 
 const TabPanel = styled("div")`
