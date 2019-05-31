@@ -40,18 +40,18 @@ TabList.defaultProps = {
 const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boolean; addButton?: boolean }>`
   cursor: pointer;
   font-weight: normal;
-  background-color: #d9dfe3;
+  background-color: ${({ theme }) => theme.color.background.light};
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   ${({ first }) => (first ? "" : "border-left: none;")}
   ${props =>
     props["aria-selected"]
       ? `border-bottom: 1px solid ${props.theme.color.background.lighter}; 
          background-color: ${props.theme.color.background.lighter};
-         color: #1499ce;
+         color: ${props.theme.color.primary};
          font-weight: bold;`
       : ""}
 
-  max-width: ${({ addButton }) => (addButton ? "55px" : "180px")};
+  ${({ addButton }) => (addButton ? "max-width: 55px; min-width: 55px;" : "max-width: 180px;")}
   flex-grow: 1;
   :focus {
     outline: none;
