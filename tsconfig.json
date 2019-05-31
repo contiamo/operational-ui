@@ -9,7 +9,6 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "noImplicitAny": true,
-    "baseUrl": "src",
     "jsx": "react",
     "lib": ["dom", "es2016", "dom.iterable", "scripthost", "es2017.object"],
     "strict": true,
