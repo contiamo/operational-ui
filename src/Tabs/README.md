@@ -21,6 +21,7 @@ const MyComponent = () => {
         </div>
       ),
       key: 0,
+      icon: "Olap",
     },
     {
       title: "tab 2",

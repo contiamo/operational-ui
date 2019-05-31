@@ -57,6 +57,7 @@ const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boole
     ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
   }
 
+  font-weight: normal;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
