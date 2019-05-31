@@ -170,7 +170,7 @@ export const Select: React.FC<SelectProps> = ({
   )
 
   const isOptionSelected = React.useCallback(
-    option => {
+    (option: IOption) => {
       if (!Array.isArray(value)) {
         return value === option.value
       }
@@ -205,13 +205,7 @@ export const Select: React.FC<SelectProps> = ({
             }
           },
           label: option.label ? option.label : "",
-          ...(isOptionSelected(option)
-            ? {
-                icon: "Yes",
-                iconColor: "primary",
-                iconLocation: "right",
-              }
-            : {}),
+          isActive: isOptionSelected(option),
         }),
       ),
     [options, value, filter, maxOptions],

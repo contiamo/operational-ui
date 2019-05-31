@@ -199,6 +199,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
 
                 return (
                   <ContextMenuItem
+                    isActive={item.isActive}
                     tabIndex={this.state.focusedItemIndex === index ? 0 : -1} // ref "tabindex roving": https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex
                     onClick={e => {
                       if (keepOpenOnItemClick) {

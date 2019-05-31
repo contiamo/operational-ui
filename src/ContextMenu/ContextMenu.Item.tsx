@@ -1,5 +1,5 @@
 import * as React from "react"
-import { lighten, inputFocus } from "../utils"
+import { lighten } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 import { ContextMenuProps } from "./ContextMenu"
@@ -15,6 +15,7 @@ export interface Props {
   iconLocation?: "left" | "right"
   item: StringOrItem
   tabIndex: number
+  isActive?: boolean
 }
 
 export interface IContextMenuItem<TValue = any> {
@@ -24,47 +25,56 @@ export interface IContextMenuItem<TValue = any> {
   iconColor?: keyof OperationalStyleConstants["color"]
   onClick?: ContextMenuProps["onClick"]
   value?: TValue
+  isActive?: boolean
 }
 
-const Container = styled("div")<Props>(({ align, theme, onClick, condensed, width, item }) => ({
-  userSelect: "none",
-  label: "contextmenuitem",
-  width: width || (condensed ? 160 : "100%"),
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  backgroundColor: theme.color.white,
-  lineHeight: `${condensed ? 35 : 44}px`,
-  padding: `0 ${theme.space.content}px`,
-  textAlign: align,
-  display: "flex",
-  alignItems: "center",
-  ":focus": {
-    ...inputFocus({ theme }),
-  },
-  ...(Boolean(typeof item !== "string" && item.description)
-    ? {
-        borderBottom: `1px solid ${theme.color.border.default}`,
-      }
-    : {}),
-  ...(!!onClick
-    ? {
-        cursor: "pointer",
-        color: theme.color.text.default,
-        "&:hover": {
-          backgroundColor: lighten(theme.color.primary, 50),
-          color: theme.color.primary,
-        },
-      }
-    : {
-        cursor: "not-allowed",
-        color: theme.color.text.lightest,
-      }),
-  borderTop: `1px solid ${theme.color.border.default}`,
-  "&:last-child": {
-    paddingBottom: 2,
-  },
-}))
+const Container = styled("div")<Props>(({ align, theme, onClick, isActive, condensed, width, item }) => {
+  const activeShadow = `0 0 0 1px ${theme.color.primary} inset`
+
+  return {
+    userSelect: "none",
+    label: "contextmenuitem",
+    width: width || (condensed ? 160 : "100%"),
+    whiteSpace: "nowrap",
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    backgroundColor: theme.color.white,
+    lineHeight: `${condensed ? 35 : 44}px`,
+    padding: `0 ${theme.space.content}px`,
+    textAlign: align,
+    display: "flex",
+    alignItems: "center",
+    fontWeight: isActive ? theme.font.weight.bold : theme.font.weight.medium,
+    boxShadow: isActive ? activeShadow : "none",
+    ":focus": {
+      boxShadow: activeShadow,
+      outline: "none",
+    },
+    ...(Boolean(typeof item !== "string" && item.description)
+      ? {
+          borderBottom: `1px solid ${theme.color.border.default}`,
+        }
+      : {}),
+    ...(!!onClick
+      ? {
+          cursor: "pointer",
+          color: theme.color.text.default,
+          "&:hover": {
+            backgroundColor: lighten(theme.color.primary, 50),
+            color: theme.color.primary,
+          },
+        }
+      : {
+          cursor: "not-allowed",
+          color: theme.color.text.lightest,
+        }),
+    color: isActive ? theme.color.primary : theme.color.text.default,
+    borderTop: `1px solid ${theme.color.border.default}`,
+    "&:last-child": {
+      paddingBottom: 2,
+    },
+  }
+})
 
 Container.defaultProps = { role: "button", "aria-disabled": false, "aria-hidden": false, "aria-invalid": false }
 
@@ -89,7 +99,6 @@ const ContentContainer = styled("div")`
   line-height: ${({ theme }) => theme.font.lineHeight};
   padding: ${({ theme }) => theme.space.content}px 0;
   width: calc(100% - ${({ theme }) => theme.space.content}px);
-  font-weight: ${({ theme }) => theme.font.weight.medium};
 `
 
 const ContextMenuIconBase = styled("div")<{ iconlocation_: Props["iconLocation"] }>`
