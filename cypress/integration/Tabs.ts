@@ -10,16 +10,13 @@ describe("Tabs", () => {
     cy.visit("/#!/Tabs")
   })
 
-  it("opens section if you click corresponding header", () => {
+  it("Opens corresponding tab when you click header", () => {
     cy.get("[data-cy=operational-ui__Tabs]")
       .find("[role=tabpanel]")
       .last()
       .should("have.attr", "hidden")
 
-    cy.get("[data-cy=operational-ui__Tabs]")
-      .find("[role=tab]")
-      .last()
-      .click()
+    cy.contains("tab 4").click()
 
     cy.get("[data-cy=operational-ui__Tabs]")
       .find("[role=tabpanel]")
@@ -27,13 +24,12 @@ describe("Tabs", () => {
       .should("not.have.attr", "hidden")
   })
 
-  it("closes section if you click `x` icon in corresponding header", () => {
+  it("`x` icon closes corresponding tab", () => {
     cy.get("[data-cy=operational-ui__Tabs]")
       .find("[role=tabpanel]")
       .should("have.length", 4)
 
-    cy.get("[data-cy=operational-ui__Tabs]")
-      .find("[role=tab]")
+    cy.contains("tab 4")
       .find("svg")
       .last()
       .click()
@@ -41,16 +37,15 @@ describe("Tabs", () => {
     cy.get("[data-cy=operational-ui__Tabs]")
       .find("[role=tabpanel]")
       .should("have.length", 3)
-    cy.focused().should("have.length", 0)
   })
 
-  it("tab gets on currently selected tab", () => {
+  it("Focus gets on currently selected tab", () => {
     skipStyleguidistLinks().tab() // Selected header in Tabs
 
     cy.focused().contains("tab 3")
   })
 
-  it("home button moves focus to the first tab", () => {
+  it("Home Key moves focus to the first tab", () => {
     cy.focused().contains("tab 3")
 
     cy.focused().type("{home}")
@@ -62,7 +57,7 @@ describe("Tabs", () => {
       .should("not.have.attr", "hidden")
   })
 
-  it("end button moves focus to the last tab", () => {
+  it("End key moves focus to the last tab", () => {
     cy.focused().contains("tab 1")
 
     cy.focused().type("{end}")
@@ -74,7 +69,7 @@ describe("Tabs", () => {
       .should("not.have.attr", "hidden")
   })
 
-  it("right arrow moves focus to the next tab", () => {
+  it("Right arrow key moves focus to the next tab", () => {
     cy.focused().contains("tab 3")
 
     cy.focused().type("{rightarrow}")
@@ -86,7 +81,7 @@ describe("Tabs", () => {
       .should("not.have.attr", "hidden")
   })
 
-  it("left arrow moves focus to the previous tab", () => {
+  it("Left arrow key moves focus to the previous tab", () => {
     cy.focused().contains("tab 1")
 
     cy.focused().type("{leftarrow}")
@@ -98,7 +93,7 @@ describe("Tabs", () => {
       .should("not.have.attr", "hidden")
   })
 
-  it("delete button coloses tab", () => {
+  it("Delete key coloses tab", () => {
     cy.get("[data-cy=operational-ui__Tabs]")
       .find("[role=tabpanel]")
       .should("have.length", 3)
@@ -110,5 +105,33 @@ describe("Tabs", () => {
       .find("[role=tabpanel]")
       .should("have.length", 2)
     cy.focused().contains("tab 2")
+  })
+
+  it("Add button adds tab", () => {
+    cy.get("[data-cy=operational-ui__Tabs]")
+      .find("[role=tabpanel]")
+      .should("have.length", 2)
+
+    cy.get("[data-cy=operational-ui__Tabs]")
+      .find("[role=tab]")
+      .last()
+      .click()
+
+    cy.get("[data-cy=operational-ui__Tabs]")
+      .find("[role=tabpanel]")
+      .should("have.length", 3)
+  })
+
+  it("Enter key adds tab", () => {
+    cy.get("[data-cy=operational-ui__Tabs]")
+      .find("[role=tabpanel]")
+      .should("have.length", 3)
+
+    cy.focused().type("{Enter}")
+
+    cy.get("[data-cy=operational-ui__Tabs]")
+      .find("[role=tabpanel]")
+      .should("have.length", 4)
+    cy.focused().contains("tab 4")
   })
 })

@@ -64,9 +64,26 @@ const MyComponent = () => {
     setTabs(newTabs)
   }
 
+  const onInsert = index => {
+    const newTabs = [
+      ...tabs,
+      {
+        title: `tab ${tabs.length + 1}`,
+        content: () => (
+          <div>
+            <p>Lorem ipsum {tabs.length + 1}</p>
+          </div>
+        ),
+        key: tabs.length,
+      },
+    ]
+    setTabs(newTabs)
+    setActive(newTabs.length - 1)
+  }
+
   return (
     <div style={{ height: "200px" }}>
-      <Tabs tabs={tabs} active={active} onActivate={setActive} onClose={onClose} />
+      <Tabs tabs={tabs} active={active} onActivate={setActive} onClose={onClose} onInsert={onInsert} />
     </div>
   )
 }
