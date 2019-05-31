@@ -36,6 +36,8 @@ export interface SelectProps extends DefaultProps {
   label?: string
   /** Should the Select be rendered with a full box style? */
   naked?: boolean
+  /** We never have children */
+  children: never
   /** Custom Option */
   customOption?: string
 }
@@ -110,6 +112,7 @@ export const Select: React.FC<SelectProps> = ({
   filterable,
   id,
   customOption,
+  ...rest
 }) => {
   const uniqueId = useUniqueId(id)
   const [filter, setFilter] = React.useState("")
@@ -242,7 +245,7 @@ export const Select: React.FC<SelectProps> = ({
       {isOpen => (
         <Container id={uniqueId} disabled={Boolean(disabled)} color={color}>
           {label && <LabelText>{label}</LabelText>}
-          <Combobox naked={Boolean(naked)}>
+          <Combobox {...rest} naked={Boolean(naked)}>
             <SelectInput
               disabled={disabled}
               placeholder={placeholder}
