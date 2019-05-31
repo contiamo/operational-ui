@@ -8,7 +8,7 @@ import { expandColor } from "../utils/constants"
 import LabelText from "../LabelText/LabelText"
 import { useUniqueId } from "../useUniqueId"
 
-export type Value = number | string
+export type Value = number | symbol | string
 
 export interface IOption {
   label?: string
@@ -36,6 +36,8 @@ export interface SelectProps extends DefaultProps {
   label?: string
   /** Should the Select be rendered with a full box style? */
   naked?: boolean
+  /** Custom Option */
+  customOption?: string
 }
 
 const borderRadius = 2
@@ -107,9 +109,30 @@ export const Select: React.FC<SelectProps> = ({
   disabled,
   filterable,
   id,
+  customOption,
 }) => {
   const uniqueId = useUniqueId(id)
   const [filter, setFilter] = React.useState("")
+  const [customInputValue, setCustomInputValue] = React.useState("")
+  const customInputSymbol = React.useMemo(() => Symbol("custom input"), [])
+
+  const appendCustomOption = React.useCallback(
+    (options: IContextMenuItem[]): IContextMenuItem[] => {
+      return [
+        ...options,
+        {
+          label: String(customOption),
+          value: customInputSymbol,
+          onClick: () => {
+            if (onChange) {
+              onChange(customInputValue, customInputSymbol)
+            }
+          },
+        },
+      ]
+    },
+    [customOption, customInputValue],
+  )
 
   const truncateOptions = React.useCallback(
     (options: SelectProps["options"]) => (maxOptions ? options.slice(0, maxOptions) : options),
@@ -192,24 +215,51 @@ export const Select: React.FC<SelectProps> = ({
   )
 
   const getDisplayValue = React.useCallback(() => {
+    if (value === customInputSymbol) {
+      return customInputValue
+    }
+
     if (Array.isArray(value)) {
       return value.join(", ")
     }
 
     return String(value)
-  }, [value])
+  }, [customInputValue, customInputSymbol, value])
 
   return (
     <ContextMenu
       disabled={disabled}
       keepOpenOnItemClick={Array.isArray(value)}
-      items={filterable ? prependFilter(items) : items}
+      items={
+        // I'm sorry, I'll refactor.
+        customOption
+          ? appendCustomOption(filterable ? prependFilter(items) : items)
+          : filterable
+          ? prependFilter(items)
+          : items
+      }
     >
       {isOpen => (
         <Container id={uniqueId} disabled={Boolean(disabled)} color={color}>
           {label && <LabelText>{label}</LabelText>}
           <Combobox naked={Boolean(naked)}>
-            <SelectInput disabled={disabled} placeholder={placeholder} readOnly value={getDisplayValue()} />
+            <SelectInput
+              disabled={disabled}
+              placeholder={placeholder}
+              readOnly={value !== customInputValue}
+              onClick={e => {
+                if (value === customInputValue) {
+                  e.stopPropagation()
+                }
+              }}
+              value={getDisplayValue()}
+              onChange={newValue => {
+                setCustomInputValue(newValue)
+                if (onChange) {
+                  onChange(newValue)
+                }
+              }}
+            />
             <DropdownButton isOpen={isOpen} />
           </Combobox>
         </Container>

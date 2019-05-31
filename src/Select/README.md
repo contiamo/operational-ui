@@ -184,6 +184,37 @@ const MyComponent = () => {
 ;<MyComponent />
 ```
 
+### With a Custom Input
+
+```jsx
+import * as React from "react"
+import { Select } from "@operational/components"
+
+const options = [
+  { label: "Option 1", value: "one" },
+  { label: "Option 2", value: "two" },
+  { label: "Option 3", value: "three" },
+]
+
+const MyComponent = () => {
+  const [value, setValue] = React.useState("one")
+
+  return (
+    <Select
+      value={value}
+      options={options}
+      label="Custom Input"
+      filterable
+      placeholder="Choose an option"
+      customOption="Custom..."
+      onChange={setValue}
+    />
+  )
+}
+
+;<MyComponent />
+```
+
 ### Return Value
 
 The value prop passed to select is is either an `Option` object, or an Array of `Option` objects. If it is an
