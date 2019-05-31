@@ -6,6 +6,7 @@ import styled from "../utils/styled"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 import { expandColor } from "../utils/constants"
 import LabelText from "../LabelText/LabelText"
+import { useUniqueId } from "../useUniqueId"
 
 export type Value = number | string
 
@@ -105,7 +106,9 @@ export const Select: React.FC<SelectProps> = ({
   color,
   disabled,
   filterable,
+  id,
 }) => {
+  const uniqueId = useUniqueId(id)
   const [filter, setFilter] = React.useState("")
 
   const truncateOptions = React.useCallback(
@@ -203,7 +206,7 @@ export const Select: React.FC<SelectProps> = ({
       items={filterable ? prependFilter(items) : items}
     >
       {isOpen => (
-        <Container disabled={Boolean(disabled)} color={color}>
+        <Container id={uniqueId} disabled={Boolean(disabled)} color={color}>
           {label && <LabelText>{label}</LabelText>}
           <Combobox naked={Boolean(naked)}>
             <SelectInput disabled={disabled} placeholder={placeholder} readOnly value={getDisplayValue()} />
