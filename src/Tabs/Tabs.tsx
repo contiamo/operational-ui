@@ -53,9 +53,8 @@ const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boole
   max-width: ${({ addButton }) => (addButton ? "55px" : "180px")};
   flex-grow: 1;
   :focus {
-    /* hack to prevent hiding of outline by neighbour element */
-    transform: rotate(360deg);
-    /* TODO: style focus state */
+    outline: none;
+    ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
   }
 
   overflow: hidden;
@@ -77,6 +76,10 @@ const TabContainer = styled("div")`
 const TabPanel = styled("div")`
   padding: ${({ theme }) => theme.space.element}px;
   background-color: ${({ theme }) => theme.color.background.lighter};
+  :focus {
+    outline: none;
+    ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
+  }
 `
 
 TabPanel.defaultProps = {
