@@ -1,5 +1,5 @@
 import * as React from "react"
-import { darken } from "../utils"
+import { lighten, inputFocus } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 import { ContextMenuProps } from "./ContextMenu"
@@ -10,7 +10,7 @@ type StringOrItem = string | IContextMenuItem
 export interface Props {
   condensed?: boolean
   width?: string | number
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   align?: "left" | "right"
   iconLocation?: "left" | "right"
   item: StringOrItem
@@ -39,9 +39,12 @@ const Container = styled("div")<Props>(({ align, theme, onClick, condensed, widt
   textAlign: align,
   display: "flex",
   alignItems: "center",
+  ":focus": {
+    ...inputFocus({ theme }),
+  },
   ...(Boolean(typeof item !== "string" && item.description)
     ? {
-        borderBottom: `1px solid ${theme.color.separators.default}`,
+        borderBottom: `1px solid ${theme.color.border.default}`,
       }
     : {}),
   ...(!!onClick
@@ -49,18 +52,21 @@ const Container = styled("div")<Props>(({ align, theme, onClick, condensed, widt
         cursor: "pointer",
         color: theme.color.text.default,
         "&:hover": {
-          backgroundColor: darken(theme.color.white, 2),
+          backgroundColor: lighten(theme.color.primary, 50),
+          color: theme.color.primary,
         },
       }
     : {
         cursor: "not-allowed",
         color: theme.color.text.lightest,
       }),
-  borderTop: `1px solid ${theme.color.separators.default}`,
+  borderTop: `1px solid ${theme.color.border.default}`,
   "&:last-child": {
     paddingBottom: 2,
   },
 }))
+
+Container.defaultProps = { role: "button", "aria-disabled": false, "aria-hidden": false, "aria-invalid": false }
 
 const Title = styled("p")`
   font-weight: bold;
@@ -79,7 +85,7 @@ const Description = styled("p")`
   overflow: hidden;
 `
 
-const ContentContainer = styled("div")<Partial<Props>>`
+const ContentContainer = styled("div")`
   line-height: ${({ theme }) => theme.font.lineHeight};
   padding: ${({ theme }) => theme.space.content}px 0;
   width: calc(100% - ${({ theme }) => theme.space.content}px);
