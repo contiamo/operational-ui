@@ -31,6 +31,7 @@ const Container = styled("div")`
 const TabList = styled("div")`
   display: flex;
   height: ${({ theme }) => theme.space.element * 2}px;
+  overflow-x: auto;
 `
 
 TabList.defaultProps = {
