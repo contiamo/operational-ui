@@ -85,7 +85,7 @@ const Icon: React.SFC<IconProps> = ({ left, right, color, name, ...props }) => {
   return null
 }
 
-const IconComp = styled(Icon)<Pick<CommunIconProps, "left" | "right" | "onClick" | "onMouseDown">>(
+const IconComp = styled(Icon)<Pick<CommonIconProps, "left" | "right" | "onClick" | "onMouseDown">>(
   ({ left, right, theme, onClick, onMouseDown }) => ({
     marginLeft: right ? theme.space.small : 0,
     marginRight: left ? theme.space.small : 0,

@@ -11,9 +11,12 @@ import { Tabs } from "@operational/components"
 const MyComponent = () => {
   const [tabs, setTabs] = React.useState([
     {
-      title: "tab 1",
+      title: "tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1",
       content: () => (
         <div>
+          <p>Lorem ipsum 1</p>
+          <p>Lorem ipsum 1</p>
+          <p>Lorem ipsum 1</p>
           <p>Lorem ipsum 1</p>
           <p>Lorem ipsum 1</p>
           <p>Lorem ipsum 1</p>
@@ -21,7 +24,6 @@ const MyComponent = () => {
         </div>
       ),
       key: 0,
-      icon: "Olap",
     },
     {
       title: "tab 2",
@@ -31,6 +33,7 @@ const MyComponent = () => {
         </div>
       ),
       key: 1,
+      icon: "Olap",
     },
     {
       title: "tab 3",
@@ -81,7 +84,14 @@ const MyComponent = () => {
 
   return (
     <div style={{ height: "200px" }}>
-      <Tabs tabs={tabs} active={active} onActivate={setActive} onClose={onClose} onInsert={onInsert} />
+      <Tabs
+        tabs={tabs}
+        active={active}
+        onActivate={setActive}
+        onClose={onClose}
+        onInsert={onInsert}
+        style={{ height: "100%" }}
+      />
     </div>
   )
 }

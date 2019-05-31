@@ -5,7 +5,7 @@ import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 export interface Tab {
-  title: React.ReactNode
+  title: string
   content: () => React.ReactNode
   key: string | number
   icon?: IconName
@@ -19,10 +19,13 @@ export interface TabsProps extends DefaultProps {
   onInsert?: (tabIndex: number) => void
   children?: never
   label?: string
+  style?: React.CSSProperties
 }
 
 const Container = styled("div")`
   label: Tabs;
+  display: grid;
+  grid-template-rows: ${({ theme }) => `${theme.space.element * 2}px 1fr`};
 `
 
 const TabList = styled("div")`
@@ -36,18 +39,16 @@ TabList.defaultProps = {
 
 const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boolean; addButton?: boolean }>`
   cursor: pointer;
-  /* 
-    we have similar color across the code base: rgba(0, 0, 0, 0.1); 
-    as well we use this color for borders of disabled elements 
-  */
-  background-color: #d8d8d8;
+  font-weight: normal;
+  background-color: #d9dfe3;
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   ${({ first }) => (first ? "" : "border-left: none;")}
   ${props =>
     props["aria-selected"]
-      ? `border-bottom: 1px solid ${props.theme.color.background.lighter}; background-color: ${
-          props.theme.color.background.lighter
-        };`
+      ? `border-bottom: 1px solid ${props.theme.color.background.lighter}; 
+         background-color: ${props.theme.color.background.lighter};
+         color: #1499ce;
+         font-weight: bold;`
       : ""}
 
   max-width: ${({ addButton }) => (addButton ? "55px" : "180px")};
@@ -56,11 +57,7 @@ const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boole
     outline: none;
     ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
   }
-
-  font-weight: normal;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  z-index: 1;
 `
 
 TabHeader.defaultProps = {
@@ -72,15 +69,18 @@ TabHeader.defaultProps = {
 const TabContainer = styled("div")`
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   margin-top: -1px;
+  overflow: hidden;
+  background-color: ${({ theme }) => theme.color.background.lighter};
 `
 
 const TabPanel = styled("div")`
   padding: ${({ theme }) => theme.space.element}px;
-  background-color: ${({ theme }) => theme.color.background.lighter};
   :focus {
     outline: none;
     ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
   }
+  height: 100%;
+  overflow: auto;
 `
 
 TabPanel.defaultProps = {
@@ -88,7 +88,28 @@ TabPanel.defaultProps = {
   tabIndex: 0,
 }
 
-const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label }: TabsProps) => {
+// We need this one so that icon and title both would be aligned to the left
+const TitleIconWrapper = styled("div")`
+  display: flex;
+  max-width: 120px;
+`
+
+// we need this one to show ellipsis if title is to long
+const TitleWrapper = styled("span")`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`
+
+const LeftIcon = styled(Icon)`
+  color: #0b6285;
+  margin-right: 8px;
+`
+LeftIcon.defaultProps = {
+  size: 14,
+}
+
+const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style }: TabsProps) => {
   if (!Number.isInteger(active) || active < 0 || active >= tabs.length) {
     active = active > 0 ? tabs.length - 1 : 0
     console.warn("active tab is out of bound, fall-back to closest value")
@@ -106,7 +127,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label }: TabsProps)
   }, [active, tabs])
 
   return (
-    <Container data-cy="operational-ui__Tabs">
+    <Container data-cy="operational-ui__Tabs" style={style}>
       <TabList
         aria-label={label}
         onKeyDown={e => {
@@ -170,8 +191,10 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label }: TabsProps)
             }}
             ref={i === active ? activeTab : undefined}
           >
-            {icon && <Icon size={14} name={icon} />}
-            {title}
+            <TitleIconWrapper>
+              {icon && <LeftIcon name={icon} />}
+              <TitleWrapper title={title}>{title}</TitleWrapper>
+            </TitleIconWrapper>
             {onClose && (
               <Icon
                 size={14}
