@@ -186,6 +186,10 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style }: Tab
             aria-controls={`TabPanel${key}`}
             id={`TabHeader${key}`}
             key={key}
+            onClick={() => {
+              userAction.current = true
+              onActivate(i)
+            }}
             onFocus={() => {
               userAction.current = true
               onActivate(i)
