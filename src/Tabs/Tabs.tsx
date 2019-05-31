@@ -36,12 +36,21 @@ TabList.defaultProps = {
 
 const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boolean; addButton?: boolean }>`
   cursor: pointer;
+  /* 
+    we have similar color across the code base: rgba(0, 0, 0, 0.1); 
+    as well we use this color for borders of disabled elements 
+  */
   background-color: #d8d8d8;
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   ${({ first }) => (first ? "" : "border-left: none;")}
-  ${props => (props["aria-selected"] ? "border-bottom: 1px solid #f2f4f6; background-color: #f2f4f6;" : "")}
-  ${({ addButton }) => (addButton ? "max-width: 55px;" : "max-width: 180px;")}
+  ${props =>
+    props["aria-selected"]
+      ? `border-bottom: 1px solid ${props.theme.color.background.lighter}; background-color: ${
+          props.theme.color.background.lighter
+        };`
+      : ""}
 
+  max-width: ${({ addButton }) => (addButton ? "55px" : "180px")};
   flex-grow: 1;
   :focus {
     /* hack to prevent hiding of outline by neighbour element */
@@ -67,7 +76,7 @@ const TabContainer = styled("div")`
 
 const TabPanel = styled("div")`
   padding: ${({ theme }) => theme.space.element}px;
-  background-color: #f2f4f6;
+  background-color: ${({ theme }) => theme.color.background.lighter};
 `
 
 TabPanel.defaultProps = {

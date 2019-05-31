@@ -11,12 +11,9 @@ import { Tabs } from "@operational/components"
 const MyComponent = () => {
   const [tabs, setTabs] = React.useState([
     {
-      title: "tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1",
+      title: "tab 1",
       content: () => (
         <div>
-          <p>Lorem ipsum 1</p>
-          <p>Lorem ipsum 1</p>
-          <p>Lorem ipsum 1</p>
           <p>Lorem ipsum 1</p>
           <p>Lorem ipsum 1</p>
           <p>Lorem ipsum 1</p>
