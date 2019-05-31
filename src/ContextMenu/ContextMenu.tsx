@@ -6,6 +6,7 @@ import styled from "../utils/styled"
 
 import { keyCodes } from "../utils"
 import ContextMenuItem, { IContextMenuItem } from "./ContextMenu.Item"
+import noop = require("lodash/noop")
 
 export interface ContextMenuProps extends DefaultProps {
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
@@ -27,6 +28,8 @@ export interface ContextMenuProps extends DefaultProps {
   align?: "left" | "right"
   /** Custom width */
   width?: number
+  /* Is the child disabled? */
+  disabled?: boolean
   /**
    * Whether to include the click element in the context menu styling.
    * Only recommended when the click element is the same width as the context menu.
@@ -53,18 +56,23 @@ const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: bool
   zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
 }))
 
+const rowHeight = 40
+
 const MenuContainer = styled("div")<{
   embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
+  numRows: number
   align: ContextMenuProps["align"]
-}>(({ theme, align, embedChildrenInMenu }) => ({
+}>(({ theme, numRows, align, embedChildrenInMenu }) => ({
   position: "absolute",
   top: embedChildrenInMenu ? 0 : "100%",
   left: align === "left" ? 0 : "auto",
   maxHeight: 360,
   overflow: "auto",
   boxShadow: theme.shadows.popup,
-  width: `calc(100% - ${theme.space.small}px)`,
+  width: "100%",
   minWidth: "fit-content",
+  display: "grid",
+  gridTemplateRows: `repeat(${numRows}, ${rowHeight}px)`,
 }))
 
 /**
@@ -151,29 +159,55 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
       throw new Error("No array of items has been provided for the ContextMenu.")
     }
 
-    const { condensed, iconLocation, children, open, embedChildrenInMenu, align, width, ...props } = this.props
+    const {
+      keepOpenOnItemClick,
+      condensed,
+      iconLocation,
+      children,
+      open,
+      embedChildrenInMenu,
+      align,
+      disabled,
+      items,
+      width,
+      ...props
+    } = this.props
     const isOpen = open || this.state.isOpen
     const renderedChildren = isChildAFunction(children) ? children(this.state.isOpen) : children
     return (
       <>
         {isOpen && <InvisibleOverlay onClick={this.toggle} />}
-        <Container isOpen={isOpen} {...props} align={align} onClick={this.toggle} onKeyUp={this.handleKeyPress}>
+        <Container
+          isOpen={isOpen}
+          {...props}
+          align={align}
+          onClick={e => (disabled ? noop() : this.toggle(e))}
+          onKeyUp={this.handleKeyPress}
+        >
           {renderedChildren}
           {isOpen && (
             <MenuContainer
+              numRows={items.length}
               align={this.props.align}
               ref={node => (this.menu = node)}
               embedChildrenInMenu={this.props.embedChildrenInMenu}
             >
               {embedChildrenInMenu && renderedChildren}
-              {props.items.map((itemFromProps, index: number) => {
+              {items.map((itemFromProps, index: number) => {
                 const item = this.makeItem(itemFromProps)
                 const clickHandler = item.onClick ? item.onClick : this.props.onClick
 
                 return (
                   <ContextMenuItem
                     tabIndex={this.state.focusedItemIndex === index ? 0 : -1} // ref "tabindex roving": https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex
-                    onClick={clickHandler && (() => clickHandler(item))}
+                    onClick={e => {
+                      if (keepOpenOnItemClick) {
+                        e.stopPropagation()
+                      }
+                      if (clickHandler) {
+                        return clickHandler(item)
+                      }
+                    }}
                     key={`contextmenu-${index}`}
                     condensed={condensed}
                     align={align}
