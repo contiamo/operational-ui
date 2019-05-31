@@ -81,8 +81,8 @@ const textColors = {
  * A specialized color palette for borders.
  */
 const borderColors = {
-  /** `#c0c0c0` */
-  default: "#c0c0c0",
+  /** `#ddd` */
+  default: "#ddd",
   /** `#d8d8d8` */
   disabled: "#d8d8d8",
   /** `#eee` */
