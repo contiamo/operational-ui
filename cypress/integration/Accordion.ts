@@ -1,10 +1,13 @@
 describe("Accordion", () => {
+  const skipStyleguidistLinks = () =>
+    cy
+      .get("body")
+      .tab() // Show all components
+      .tab() // Props & methods
+      .tab() // link in the readme
+
   before(() => {
     cy.visit("/#!/Accordion")
-  })
-
-  it("should exist", () => {
-    cy.get("[data-cy=operational-ui__Accordion]")
   })
 
   it("opens section if you click corresponding header", () => {
@@ -47,10 +50,7 @@ describe("Accordion", () => {
       .first()
       .should("not.have.attr", "hidden")
 
-    cy.get("body")
-      .tab() // Show all components
-      .tab() // Props & methods
-      .tab() // link
+    skipStyleguidistLinks()
       .tab() // First header in Accordion
       .type(" ")
 
@@ -66,10 +66,7 @@ describe("Accordion", () => {
       .first()
       .should("have.attr", "hidden")
 
-    cy.get("body")
-      .tab()
-      .tab()
-      .tab()
+    skipStyleguidistLinks()
       .tab()
       .type(" ")
 

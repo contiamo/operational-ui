@@ -91,13 +91,14 @@ const Tabs = ({ tabs, active, onClose, onActivate, label }: TabsProps) => {
   }, [active, tabs])
 
   return (
-    <Container>
+    <Container data-cy="operational-ui__Tabs">
       <TabList
         aria-label={label}
         onKeyDown={e => {
           userAction.current = true
           switch (e.key) {
             case "ArrowRight":
+              e.preventDefault()
               if (active + 1 >= tabs.length) {
                 onActivate(0)
               } else {
@@ -105,6 +106,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, label }: TabsProps) => {
               }
               break
             case "ArrowLeft":
+              e.preventDefault()
               if (active - 1 < 0) {
                 onActivate(tabs.length - 1)
               } else {
@@ -112,9 +114,11 @@ const Tabs = ({ tabs, active, onClose, onActivate, label }: TabsProps) => {
               }
               break
             case "Home":
+              e.preventDefault()
               onActivate(0)
               break
             case "End":
+              e.preventDefault()
               onActivate(tabs.length - 1)
               break
             case "Delete":

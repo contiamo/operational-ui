@@ -37,13 +37,13 @@ const MyComponent = () => {
     {
       key: 2,
       title: "Section 2",
-      expanded: true,
+      expanded: false,
       content: () => <>Content 2</>,
     },
     {
       key: 3,
       title: "Section 3",
-      expanded: true,
+      expanded: false,
       content: () => <>Content 3</>,
     },
   ])
