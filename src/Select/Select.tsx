@@ -47,12 +47,13 @@ const Container = styled("div")<{ disabled: boolean; color?: string }>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `
 
-const Combobox = styled("div")`
+const Combobox = styled("div")<{ naked: boolean }>`
   display: grid;
   grid-template-columns: auto 40px;
   grid-gap: 1px;
   align-items: stretch;
   border: 1px solid ${({ theme }) => theme.color.border.default};
+  border-width: ${({ naked }) => (naked ? 0 : 1)}px;
   border-radius: ${borderRadius}px;
 `
 
@@ -98,6 +99,7 @@ export const Select: React.FC<SelectProps> = ({
   label,
   maxOptions,
   value,
+  naked,
   onChange,
   placeholder,
   color,
@@ -203,7 +205,7 @@ export const Select: React.FC<SelectProps> = ({
       {isOpen => (
         <Container disabled={Boolean(disabled)} color={color}>
           {label && <LabelText>{label}</LabelText>}
-          <Combobox>
+          <Combobox naked={Boolean(naked)}>
             <SelectInput disabled={disabled} placeholder={placeholder} readOnly value={getDisplayValue()} />
             <DropdownButton isOpen={isOpen} />
           </Combobox>

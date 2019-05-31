@@ -110,6 +110,44 @@ const MyThirdComponent = () => {
 ;<MyThirdComponent />
 ```
 
+### Naked
+
+```jsx
+import * as React from "react"
+import { Select } from "@operational/components"
+
+const options = [
+  { label: "Option 1", value: "one" },
+  { label: "Option 2", value: "two" },
+  { label: "Option 3", value: "three" },
+  { label: "Option 4", value: "four" },
+  { label: "Option 5", value: "five" },
+  { label: "Option 6", value: "six" },
+  { label: "Option 7", value: "seven" },
+  { label: "Option 8", value: "eight" },
+]
+
+const MyComponent = () => {
+  const [value, setValue] = React.useState("one")
+
+  return (
+    <div style={{ width: "100%", background: "#666" }}>
+      <Select
+        color="white"
+        value={value}
+        naked
+        options={options}
+        filterable
+        placeholder="Choose an option"
+        onChange={setValue}
+      />
+    </div>
+  )
+}
+
+;<MyComponent />
+```
+
 ### Disabled
 
 ```jsx
