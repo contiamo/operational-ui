@@ -1,14 +1,17 @@
 import * as React from "react"
 import { IconProps, OperationalUIIconProps, PantheonIconProps } from "./Icon"
 
-export type Props = Pick<IconProps, Exclude<keyof IconProps, "name">>
-export type BrandIconName = "OperationalUI" | "Pantheon" | "Labs" | "Contiamo"
+type RemoveName<T> = Pick<T, Exclude<keyof T, "name">>
+type Props = RemoveName<IconProps>
 
-export interface BrandIcons {
-  [key: string]: React.SFC<Props> | React.SFC<OperationalUIIconProps> | React.SFC<PantheonIconProps>
+export interface IBrandIcons {
+  [key: string]:
+    | React.SFC<Props>
+    | React.SFC<RemoveName<OperationalUIIconProps>>
+    | React.SFC<RemoveName<PantheonIconProps>>
 }
 
-const OperationalUI: React.SFC<OperationalUIIconProps> = ({ rotation, size, color, ...props }) => {
+const OperationalUI: React.SFC<RemoveName<OperationalUIIconProps>> = ({ rotation, size, color, ...props }) => {
   return (
     <svg
       width={size}
@@ -52,7 +55,7 @@ const Labs: React.SFC<Props> = ({ size, color, ...props }) => {
   )
 }
 
-const Pantheon: React.SFC<PantheonIconProps> = ({ size, colored, ...props }) => (
+const Pantheon: React.SFC<RemoveName<PantheonIconProps>> = ({ size, colored, ...props }) => (
   <svg viewBox="0 0 565.18 565.18" width={size} height={size} {...props}>
     <title>Pantheon-Logo-CMYK</title>
     <g fill={colored ? "#344fa0" : "currentColor"}>
@@ -128,11 +131,9 @@ const Pantheon: React.SFC<PantheonIconProps> = ({ size, colored, ...props }) => 
   </svg>
 )
 
-const BrandIcons: BrandIcons = {
+export const BrandIcons: IBrandIcons = {
   OperationalUI,
   Contiamo,
   Labs,
   Pantheon,
 }
-
-export default BrandIcons

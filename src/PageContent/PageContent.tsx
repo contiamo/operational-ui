@@ -7,10 +7,10 @@ import styled from "../utils/styled"
 
 export interface ModalConfirmContext {
   modal: (modalOptions: ModalOptions) => void
-  confirm: <T = undefined>(confirmOptions: ConfirmOptions<T>) => void
+  confirm: <T>(confirmOptions: ConfirmOptions<T>) => void
 }
 
-const isChildFunction = (
+export const isChildFunction = (
   children: PageContentProps["children"],
 ): children is (modalConfirmContext: ModalConfirmContext) => React.ReactNode => typeof children === "function"
 
