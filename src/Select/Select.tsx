@@ -15,11 +15,9 @@ export interface IOption {
   value: Value
 }
 
-export interface SelectProps extends DefaultProps {
+export interface BaseSelectProps extends DefaultProps {
   /** Options available */
   options: IOption[]
-  /** Current value */
-  value: null | Value | Value[]
   /** Make the list filterable */
   filterable?: boolean
   /** Limit the number of options displayed */
@@ -37,10 +35,24 @@ export interface SelectProps extends DefaultProps {
   /** Should the Select be rendered with a full box style? */
   naked?: boolean
   /** We never have children */
-  children: never
+  children?: never
+}
+
+export interface SelectPropsWithCustomOption extends BaseSelectProps {
   /** Custom Option */
   customOption?: string
+  /** Current value */
+  value: null | Value
 }
+
+export interface SelectPropsWithMultiSelect extends BaseSelectProps {
+  /** Custom Option */
+  customOption?: never
+  /** Current value */
+  value: null | Value | Value[]
+}
+
+export type SelectProps = SelectPropsWithCustomOption | SelectPropsWithMultiSelect
 
 const borderRadius = 2
 
@@ -121,6 +133,12 @@ export const Select: React.FC<SelectProps> = ({
 
   const appendCustomOption = React.useCallback(
     (options: IContextMenuItem[]): IContextMenuItem[] => {
+      if (Array.isArray(value) && process.env.NODE_ENV === "production") {
+        console.trace(
+          "⚠️ Cannot show custom option with a multi-select Select component. Please either choose to have a single value, or remove the `customOption` property from your `Select` component.",
+        )
+        return options
+      }
       return [
         ...options,
         {
@@ -134,7 +152,7 @@ export const Select: React.FC<SelectProps> = ({
         },
       ]
     },
-    [customOption, customInputValue],
+    [customOption, customInputValue, value],
   )
 
   const truncateOptions = React.useCallback(
