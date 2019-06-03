@@ -1,115 +1,22 @@
 import * as React from "react"
-import { DefaultProps } from "../types"
+
 import ContextMenu from "../ContextMenu/ContextMenu"
-import Input from "../Input/Input"
-import styled from "../utils/styled"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
-import { expandColor } from "../utils/constants"
 import LabelText from "../LabelText/LabelText"
 import { useUniqueId } from "../useUniqueId"
-
-export type Value = number | symbol | string
-
-export interface IOption {
-  label?: string
-  value: Value
-}
-
-export interface BaseSelectProps extends DefaultProps {
-  /** Options available */
-  options: IOption[]
-  /** Make the list filterable */
-  filterable?: boolean
-  /** Limit the number of options displayed */
-  maxOptions?: number
-  /** Disable the component */
-  disabled?: boolean
-  /** Callback trigger on any changes */
-  onChange?: (newValue: null | Value | Value[], changedItem?: Value) => void
-  /** Text color */
-  color?: string
-  /** Text to display when no active selection */
-  placeholder?: string
-  /** Label text */
-  label?: string
-  /** Should the Select be rendered with a full box style? */
-  naked?: boolean
-  /** We never have children */
-  children?: never
-}
-
-export interface SelectPropsWithCustomOption extends BaseSelectProps {
-  /** Custom Option */
-  customOption?: string
-  /** Current value */
-  value: null | Value
-}
-
-export interface SelectPropsWithMultiSelect extends BaseSelectProps {
-  /** Custom Option */
-  customOption?: never
-  /** Current value */
-  value: null | Value | Value[]
-}
-
-export type SelectProps = SelectPropsWithCustomOption | SelectPropsWithMultiSelect
-
-const borderRadius = 2
-
-const Container = styled("div")<{ disabled: boolean; color?: string }>`
-  display: flex;
-  flex-direction: column;
-  color: ${({ theme, color }) => expandColor(theme, color)};
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
-`
-
-const Combobox = styled("div")<{ naked: boolean }>`
-  display: grid;
-  grid-template-columns: auto 40px;
-  grid-gap: 1px;
-  align-items: stretch;
-  border: 1px solid ${({ theme }) => theme.color.border.default};
-  border-width: ${({ naked }) => (naked ? 0 : 1)}px;
-  border-radius: ${borderRadius}px;
-`
-
-const SelectInput = styled(Input)`
-  width: fit-content;
-  border: 0;
-  background: transparent;
-  color: currentColor;
-  cursor: inherit;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-`
-
-const FilterInput = styled(Input)`
-  border: 0;
-  margin: ${({ theme }) => -theme.space.content}px;
-  border-radius: 0;
-  height: auto;
-`
-
-const DropdownButton = styled("div")<{ isOpen: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 0 1px ${({ theme, isOpen }) => (isOpen ? theme.color.primary : "transparent")};
-  border-top-right-radius: ${borderRadius}px;
-  border-bottom-right-radius: ${borderRadius}px;
-
-  ::after {
-    content: "";
-    width: 0;
-    height: 0;
-    border: 4px solid transparent;
-    border-top-color: ${({ theme, isOpen }) => (isOpen ? theme.color.primary : theme.color.border.default)};
-    transform: ${({ isOpen }) => (isOpen ? `translateY(-2px) rotate(180deg)` : `translateY(2px)`)};
-  }
-`
-
-DropdownButton.defaultProps = { role: "button", "aria-disabled": false, "aria-label": "Expand" }
+import { FilterInput, Combobox, Container, DropdownButton, SelectInput } from "./Select.styled"
+import { SelectProps } from "./Select.types"
+import {
+  truncateList,
+  appendOption,
+  customInputSymbol,
+  filterList,
+  getDisplayValue,
+  getNewValue,
+  isOptionSelected,
+  prependFilter,
+  optionsToContextMenuItems,
+} from "./Select.util"
 
 export const Select: React.FC<SelectProps> = ({
   options,
@@ -129,131 +36,72 @@ export const Select: React.FC<SelectProps> = ({
   const uniqueId = useUniqueId(id)
   const [filter, setFilter] = React.useState("")
   const [customInputValue, setCustomInputValue] = React.useState("")
-  const customInputSymbol = React.useMemo(() => Symbol("custom input"), [])
 
   const appendCustomOption = React.useCallback(
     (options: IContextMenuItem[]): IContextMenuItem[] => {
+      // We can't have a multiselect _and_ a custom option.
       if (Array.isArray(value) && process.env.NODE_ENV === "production") {
         console.trace(
           "⚠️ Cannot show custom option with a multi-select Select component. Please either choose to have a single value, or remove the `customOption` property from your `Select` component.",
         )
         return options
       }
-      return [
-        ...options,
-        {
-          label: String(customOption),
-          value: customInputSymbol,
-          onClick: () => {
-            if (onChange) {
-              onChange(customInputValue, customInputSymbol)
-            }
-          },
+
+      return appendOption({
+        label: String(customOption),
+        value: customInputSymbol,
+        onClick: () => {
+          if (onChange) {
+            onChange(customInputValue, customInputSymbol)
+          }
         },
-      ]
+      })(options)
     },
     [customOption, customInputValue, value],
   )
 
-  const truncateOptions = React.useCallback(
-    (options: SelectProps["options"]) => (maxOptions ? options.slice(0, maxOptions) : options),
-    [maxOptions],
-  )
-
-  const filterOptions = React.useCallback(
-    (options: SelectProps["options"]) =>
-      options.filter(option => {
-        const filterPattern = new RegExp(filter, "ig")
-        return String(option.label).match(filterPattern) || String(option.value).match(filterPattern)
-      }),
+  const filterComponent = React.useMemo(
+    () => (
+      <FilterInput
+        onClick={e => e.stopPropagation()}
+        fullWidth
+        placeholder="Filter..."
+        value={filter}
+        onChange={setFilter}
+      />
+    ),
     [filter],
   )
 
-  const prependFilter = React.useCallback(
-    (items: IContextMenuItem[]): IContextMenuItem[] => [
-      {
-        label: (
-          <FilterInput
-            onClick={e => e.stopPropagation()}
-            fullWidth
-            placeholder="Filter..."
-            value={filter}
-            onChange={setFilter}
-          />
-        ),
+  const items = React.useMemo(() => {
+    const initialOptions = options
+    const filteredOptions = filterList(filter)(initialOptions)
+    const truncatedOptions = truncateList(maxOptions)(filteredOptions)
+    const contextMenuItems = optionsToContextMenuItems(option => ({
+      onClick: () => {
+        if (onChange) {
+          onChange(getNewValue(value)(option.value), option.value)
+        }
       },
-      ...items,
-    ],
-    [filter],
-  )
+      label: option.label ? option.label : "",
+      isActive: isOptionSelected(value)(option),
+    }))(truncatedOptions)
 
-  const isOptionSelected = React.useCallback(
-    (option: IOption) => {
-      if (!Array.isArray(value)) {
-        return value === option.value
-      }
-
-      return value.includes(option.value)
-    },
-    [value],
-  )
-
-  const getNewValue = React.useCallback(
-    (newValue: Value) => {
-      if (Array.isArray(value) && !value.includes(newValue)) {
-        return [...value, newValue]
-      }
-      if (Array.isArray(value) && value.includes(newValue)) {
-        const newValueIndex = value.indexOf(newValue)
-        return [...value.slice(0, newValueIndex), ...value.slice(newValueIndex + 1)]
-      }
-      return newValue
-    },
-    [value],
-  )
-
-  const items = React.useMemo(
-    () =>
-      truncateOptions(filterOptions(options)).map(
-        (option): IContextMenuItem => ({
-          ...option,
-          onClick: () => {
-            if (onChange) {
-              onChange(getNewValue(option.value), option.value)
-            }
-          },
-          label: option.label ? option.label : "",
-          isActive: isOptionSelected(option),
-        }),
-      ),
-    [options, value, filter, maxOptions],
-  )
-
-  const getDisplayValue = React.useCallback(() => {
-    if (value === customInputSymbol) {
-      return customInputValue
-    }
-
-    if (Array.isArray(value)) {
-      return value.join(", ")
-    }
-
-    return String(value)
-  }, [customInputValue, customInputSymbol, value])
+    return ([
+      [
+        Boolean(filterable) && Boolean(customOption),
+        appendCustomOption(prependFilter({ label: filterComponent })(contextMenuItems)),
+      ],
+      [Boolean(filterable) && !Boolean(customOption), prependFilter({ label: filterComponent })(contextMenuItems)],
+      [!Boolean(filterable) && Boolean(customOption), appendCustomOption(contextMenuItems)],
+    ] as Array<[boolean, IContextMenuItem[]]>).reduce(
+      (acc, [condition, value]) => (condition ? value : acc),
+      contextMenuItems,
+    )
+  }, [options, value, filter, maxOptions, filterable, customOption])
 
   return (
-    <ContextMenu
-      disabled={disabled}
-      keepOpenOnItemClick={Array.isArray(value)}
-      items={
-        // I'm sorry, I'll refactor.
-        customOption
-          ? appendCustomOption(filterable ? prependFilter(items) : items)
-          : filterable
-          ? prependFilter(items)
-          : items
-      }
-    >
+    <ContextMenu disabled={disabled} keepOpenOnItemClick={Array.isArray(value)} items={items}>
       {isOpen => (
         <Container id={uniqueId} disabled={Boolean(disabled)} color={color}>
           {label && <LabelText>{label}</LabelText>}
@@ -267,7 +115,7 @@ export const Select: React.FC<SelectProps> = ({
                   e.stopPropagation()
                 }
               }}
-              value={getDisplayValue()}
+              value={getDisplayValue(value, customInputValue, customInputSymbol)}
               onChange={newValue => {
                 setCustomInputValue(newValue)
                 if (onChange) {
