@@ -1,5 +1,6 @@
 import * as React from "react"
-import Select, { SelectProps } from "../Select/Select"
+import Select from "../Select/Select"
+import { SelectProps } from "../Select/Select.types"
 import styled from "../utils/styled"
 
 const StyledSelect = styled(Select)`
