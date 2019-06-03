@@ -106,7 +106,7 @@ const TitleWrapper = styled("span")`
 `
 
 const TabIcon = styled("span")`
-  margin-right: 8px;
+  margin-right: ${({theme}) => theme.space.small}px;
 `
 
 const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }: TabsProps) => {
