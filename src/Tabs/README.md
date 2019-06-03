@@ -6,7 +6,7 @@ Tabs component implemented according to [WAI-ARIA specification](https://www.w3.
 
 ```jsx
 import * as React from "react"
-import { Tabs } from "@operational/components"
+import { Tabs, Icon } from "@operational/components"
 
 const MyComponent = () => {
   const [tabs, setTabs] = React.useState([
@@ -33,7 +33,7 @@ const MyComponent = () => {
         </div>
       ),
       key: 1,
-      icon: "Olap",
+      icon: <Icon size={14} name="Olap" />,
     },
     {
       title: "tab 3",

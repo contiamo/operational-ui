@@ -1,5 +1,5 @@
 import * as React from "react"
-import Icon, { IconName } from "../Icon/Icon"
+import Icon from "../Icon/Icon"
 import { SectionHeader } from "../Internals/SectionHeader"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
@@ -10,7 +10,7 @@ export interface Tab {
   title: string
   content: () => React.ReactNode
   key: string | number
-  icon?: IconName
+  icon: React.ReactNode
 }
 
 export interface TabsProps extends DefaultProps {
@@ -105,13 +105,9 @@ const TitleWrapper = styled("span")`
   text-overflow: ellipsis;
 `
 
-const LeftIcon = styled(Icon)`
-  color: #0b6285;
+const TabIcon = styled("span")`
   margin-right: 8px;
 `
-LeftIcon.defaultProps = {
-  size: 14,
-}
 
 const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }: TabsProps) => {
   if (!Number.isInteger(active) || active < 0 || active >= tabs.length) {
@@ -203,7 +199,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
               ref={i === active ? activeTab : undefined}
             >
               <TitleIconWrapper>
-                {icon && <LeftIcon name={icon} />}
+                {icon && <TabIcon>{icon}</TabIcon>}
                 <TitleWrapper title={title}>{title}</TitleWrapper>
               </TitleIconWrapper>
               {onClose && (
