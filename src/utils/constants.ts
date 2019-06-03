@@ -245,6 +245,11 @@ const constants = {
   zIndex,
   color,
   shadows,
+  /**
+   * The round borders on things like cards.
+   *
+   * Default is `2`.
+   */
   borderRadius: 2,
   compactSidebarWidth: 90,
   sidebarWidth: 220,
