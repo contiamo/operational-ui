@@ -3,6 +3,9 @@ import Icon, { IconName } from "../Icon/Icon"
 import { SectionHeader } from "../Internals/SectionHeader"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
+import { useUniqueId } from "../useUniqueId"
+
+const noop = () => undefined
 
 export interface Tab {
   title: string
@@ -20,6 +23,7 @@ export interface TabsProps extends DefaultProps {
   children?: never
   label?: string
   style?: React.CSSProperties
+  id?: string
 }
 
 const Container = styled("div")`
@@ -110,11 +114,13 @@ LeftIcon.defaultProps = {
   size: 14,
 }
 
-const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style }: TabsProps) => {
+const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }: TabsProps) => {
   if (!Number.isInteger(active) || active < 0 || active >= tabs.length) {
     active = active > 0 ? tabs.length - 1 : 0
-    console.warn("active tab is out of bound, fall-back to closest value")
+    if (process.env.NODE_ENV !== "production")
+      console.warn("Active tab is out of bounds, falling back to closest value.")
   }
+  const uid = useUniqueId(id)
 
   // track if action was triggered by user or not
   // we need this to activate focus in case action was triggered by user, but not if it was re-render
@@ -127,111 +133,116 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style }: Tab
     }
   }, [active, tabs])
 
+  const onKeyDown = React.useCallback(
+    (event: React.KeyboardEvent) => {
+      userAction.current = true
+      switch (event.key) {
+        case "ArrowRight":
+          event.preventDefault()
+          if (active + 1 >= tabs.length) {
+            onActivate(0)
+          } else {
+            onActivate(active + 1)
+          }
+          break
+        case "ArrowLeft":
+          event.preventDefault()
+          if (active - 1 < 0) {
+            onActivate(tabs.length - 1)
+          } else {
+            onActivate(active - 1)
+          }
+          break
+        case "Home":
+          event.preventDefault()
+          onActivate(0)
+          break
+        case "End":
+          event.preventDefault()
+          onActivate(tabs.length - 1)
+          break
+        case "Delete":
+          event.preventDefault()
+          if (onClose) {
+            onClose(active)
+          }
+          break
+        case "Enter":
+          // There is no insert on some modern keyboards.
+          // You can use `fn` + `enter` to get it on Mac keyboard, it will be reported as Enter.
+          // Can be differentiated from enter using this check `e.nativeEvent.code === "NumpadEnter"`
+          // WAI ARIA specification doesn't provide recommendations for this case,
+          // so let's use Enter `¯\_(ツ)_/¯`
+          event.preventDefault()
+          if (onInsert) {
+            onInsert(active)
+          }
+          break
+      }
+    },
+    [active, onActivate, onInsert],
+  )
+
   return (
     <Container data-cy="operational-ui__Tabs" style={style}>
-      <TabList
-        aria-label={label}
-        onKeyDown={e => {
-          userAction.current = true
-          switch (e.key) {
-            case "ArrowRight":
-              e.preventDefault()
-              if (active + 1 >= tabs.length) {
-                onActivate(0)
-              } else {
-                onActivate(active + 1)
-              }
-              break
-            case "ArrowLeft":
-              e.preventDefault()
-              if (active - 1 < 0) {
-                onActivate(tabs.length - 1)
-              } else {
-                onActivate(active - 1)
-              }
-              break
-            case "Home":
-              e.preventDefault()
-              onActivate(0)
-              break
-            case "End":
-              e.preventDefault()
-              onActivate(tabs.length - 1)
-              break
-            case "Delete":
-              e.preventDefault()
-              if (onClose) {
-                onClose(active)
-              }
-              break
-            case "Enter":
-              // There is no insert on some modern keyboards.
-              // You can use `fn` + `enter` to get it on Mac keyboard, it will be reported as Enter.
-              // Can be differentiated from enter using this check `e.nativeEvent.code === "NumpadEnter"`
-              // WAI ARIA specification doesn't provide recommendations for this case,
-              // so let's use Enter `¯\_(ツ)_/¯`
-              e.preventDefault()
-              if (onInsert) {
-                onInsert(active)
-              }
-              break
+      <TabList aria-label={label} onKeyDown={onKeyDown}>
+        {tabs.map(({ key, title, icon }, i) => {
+          const onClick = () => {
+            userAction.current = true
+            onActivate(i)
           }
-        }}
-      >
-        {tabs.map(({ key, title, icon }, i) => (
-          <TabHeader
-            tabIndex={i === active ? 0 : -1}
-            first={i === 0}
-            aria-selected={i === active}
-            aria-controls={`TabPanel${key}`}
-            id={`TabHeader${key}`}
-            key={key}
-            onClick={() => {
-              userAction.current = true
-              onActivate(i)
-            }}
-            onFocus={() => {
-              userAction.current = true
-              onActivate(i)
-            }}
-            ref={i === active ? activeTab : undefined}
-          >
-            <TitleIconWrapper>
-              {icon && <LeftIcon name={icon} />}
-              <TitleWrapper title={title}>{title}</TitleWrapper>
-            </TitleIconWrapper>
-            {onClose && (
-              <Icon
-                size={14}
-                name="No"
-                onMouseDown={e => {
-                  e.stopPropagation()
-                  onClose(i)
-                }}
-              />
-            )}
-          </TabHeader>
-        ))}
+          return (
+            <TabHeader
+              tabIndex={i === active ? 0 : -1}
+              first={i === 0}
+              aria-selected={i === active}
+              aria-controls={`TabPanel-${uid}-${key}`}
+              id={`TabHeader-${uid}-${key}`}
+              key={key}
+              onClick={onClick}
+              onFocus={onClick}
+              ref={i === active ? activeTab : undefined}
+            >
+              <TitleIconWrapper>
+                {icon && <LeftIcon name={icon} />}
+                <TitleWrapper title={title}>{title}</TitleWrapper>
+              </TitleIconWrapper>
+              {onClose && (
+                <Icon
+                  size={14}
+                  name="No"
+                  onMouseDown={e => {
+                    e.stopPropagation()
+                    onClose(i)
+                  }}
+                />
+              )}
+            </TabHeader>
+          )
+        })}
         {onInsert && (
           <TabHeader
             tabIndex={-1}
             first={false}
             aria-selected={false}
-            aria-controls={``}
-            id={`TabAddHeader`}
             addButton={true}
             onMouseDown={e => {
               e.preventDefault()
               onInsert(tabs.length - 1)
             }}
           >
-            <Icon size={14} name="Add" onMouseDown={() => undefined} />
+            <Icon size={14} name="Add" onMouseDown={noop} />
           </TabHeader>
         )}
       </TabList>
       <TabContainer>
         {tabs.map(({ key, content }, i) => (
-          <TabPanel hidden={i !== active} id={`TabPanel${key}`} aria-labelledby={`TabHeader${key}`} key={key}>
+          <TabPanel
+            hidden={i !== active}
+            id={`TabPanel-${uid}-${key}`}
+            aria-labelledby={`TabHeader-${uid}-${key}`}
+            key={key}
+          >
             {i === active && content()}
           </TabPanel>
         ))}

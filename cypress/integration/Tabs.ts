@@ -1,11 +1,6 @@
-describe("Tabs", () => {
-  const skipStyleguidistLinks = () =>
-    cy
-      .get("body")
-      .tab() // Show all components
-      .tab() // Props & methods
-      .tab() // link in the readme
+import { tabPastStyleguidistLinks } from "../support/helpers"
 
+describe("Tabs", () => {
   before(() => {
     cy.visit("/#!/Tabs")
   })
@@ -40,7 +35,7 @@ describe("Tabs", () => {
   })
 
   it("Focus gets on currently selected tab", () => {
-    skipStyleguidistLinks().tab() // Selected header in Tabs
+    tabPastStyleguidistLinks().tab() // Selected header in Tabs
 
     cy.focused().contains("tab 3")
   })
@@ -49,6 +44,7 @@ describe("Tabs", () => {
     cy.focused().contains("tab 3")
 
     cy.focused().type("{home}")
+    cy.wait(50) // we need to wait a bit because focus switch doesn't happen immediately
 
     cy.focused().contains("tab 1")
     cy.get("[data-cy=operational-ui__Tabs]")
@@ -61,6 +57,7 @@ describe("Tabs", () => {
     cy.focused().contains("tab 1")
 
     cy.focused().type("{end}")
+    cy.wait(50) // we need to wait a bit because focus switch doesn't happen immediately
 
     cy.focused().contains("tab 3")
     cy.get("[data-cy=operational-ui__Tabs]")
@@ -73,6 +70,7 @@ describe("Tabs", () => {
     cy.focused().contains("tab 3")
 
     cy.focused().type("{rightarrow}")
+    cy.wait(50) // we need to wait a bit because focus switch doesn't happen immediately
 
     cy.focused().contains("tab 1")
     cy.get("[data-cy=operational-ui__Tabs]")
@@ -85,6 +83,7 @@ describe("Tabs", () => {
     cy.focused().contains("tab 1")
 
     cy.focused().type("{leftarrow}")
+    cy.wait(50) // we need to wait a bit because focus switch doesn't happen immediately
 
     cy.focused().contains("tab 3")
     cy.get("[data-cy=operational-ui__Tabs]")
@@ -93,7 +92,7 @@ describe("Tabs", () => {
       .should("not.have.attr", "hidden")
   })
 
-  it("Delete key coloses tab", () => {
+  it("Delete key closes tab", () => {
     cy.get("[data-cy=operational-ui__Tabs]")
       .find("[role=tabpanel]")
       .should("have.length", 3)

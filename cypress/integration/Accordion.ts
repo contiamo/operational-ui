@@ -1,11 +1,6 @@
-describe("Accordion", () => {
-  const skipStyleguidistLinks = () =>
-    cy
-      .get("body")
-      .tab() // Show all components
-      .tab() // Props & methods
-      .tab() // link in the readme
+import { tabPastStyleguidistLinks } from "../support/helpers"
 
+describe("Accordion", () => {
   before(() => {
     cy.visit("/#!/Accordion")
   })
@@ -50,7 +45,7 @@ describe("Accordion", () => {
       .first()
       .should("not.have.attr", "hidden")
 
-    skipStyleguidistLinks()
+    tabPastStyleguidistLinks()
       .tab() // First header in Accordion
       .type(" ")
 
@@ -66,7 +61,7 @@ describe("Accordion", () => {
       .first()
       .should("have.attr", "hidden")
 
-    skipStyleguidistLinks()
+    tabPastStyleguidistLinks()
       .tab()
       .type(" ")
 
