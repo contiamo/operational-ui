@@ -56,31 +56,37 @@ const MyComponent = () => {
   ])
   const [active, setActive] = React.useState(0)
 
-  const onClose = index => {
-    const newTabs = [...tabs]
-    newTabs.splice(index, 1)
-    if (index === active && index >= newTabs.length) {
-      setActive(newTabs.length - 1)
-    }
-    setTabs(newTabs)
-  }
+  const onClose = React.useCallback(
+    index => {
+      const newTabs = [...tabs]
+      newTabs.splice(index, 1)
+      if (index === active && index >= newTabs.length) {
+        setActive(newTabs.length - 1)
+      }
+      setTabs(newTabs)
+    },
+    [tabs, setActive, setTabs],
+  )
 
-  const onInsert = index => {
-    const newTabs = [
-      ...tabs,
-      {
-        title: `tab ${tabs.length + 1}`,
-        content: () => (
-          <div>
-            <p>Lorem ipsum {tabs.length + 1}</p>
-          </div>
-        ),
-        key: tabs.length,
-      },
-    ]
-    setTabs(newTabs)
-    setActive(newTabs.length - 1)
-  }
+  const onInsert = React.useCallback(
+    index => {
+      const newTabs = [
+        ...tabs,
+        {
+          title: `tab ${tabs.length + 1}`,
+          content: () => (
+            <div>
+              <p>Lorem ipsum {tabs.length + 1}</p>
+            </div>
+          ),
+          key: tabs.length,
+        },
+      ]
+      setTabs(newTabs)
+      setActive(newTabs.length - 1)
+    },
+    [tabs, setActive, setTabs],
+  )
 
   return (
     <div style={{ height: "200px" }}>

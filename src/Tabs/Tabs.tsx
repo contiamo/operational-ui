@@ -4,8 +4,7 @@ import { SectionHeader } from "../Internals/SectionHeader"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 import { useUniqueId } from "../useUniqueId"
-
-const noop = () => undefined
+import noop from "lodash/noop"
 
 export interface Tab {
   title: string
