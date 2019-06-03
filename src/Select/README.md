@@ -188,7 +188,7 @@ const MyComponent = () => {
 
 ```jsx
 import * as React from "react"
-import { Select } from "@operational/components"
+import { Select, Form } from "@operational/components"
 
 const options = [
   { label: "Option 1", value: "one" },
@@ -197,18 +197,30 @@ const options = [
 ]
 
 const MyComponent = () => {
-  const [value, setValue] = React.useState("one")
+  const [value1, setValue1] = React.useState("one")
+  const [value2, setValue2] = React.useState("one")
 
   return (
-    <Select
-      value={value}
-      options={options}
-      label="Custom Input"
-      filterable
-      placeholder="Choose an option"
-      customOption="Custom..."
-      onChange={setValue}
-    />
+    <Form>
+      <Select
+        value={value1}
+        options={options}
+        label="Custom Input"
+        filterable
+        placeholder="Choose an option"
+        customOption="Custom..."
+        onChange={setValue1}
+      />
+      <Select
+        value={value2}
+        options={options}
+        label="Custom Input"
+        filterable
+        placeholder="Choose an option"
+        customOption="Custom..."
+        onChange={setValue2}
+      />
+    </Form>
   )
 }
 
