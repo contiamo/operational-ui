@@ -98,7 +98,7 @@ export const Select: React.FC<SelectProps> = ({
       (acc, [condition, value]) => (condition ? value : acc),
       contextMenuItems,
     )
-  }, [options, value, filter, maxOptions, filterable, customOption])
+  }, [options, value, filter, maxOptions, filterable, customOption, onChange])
 
   return (
     <ContextMenu disabled={disabled} keepOpenOnItemClick={Array.isArray(value)} items={items}>
