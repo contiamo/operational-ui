@@ -32,6 +32,7 @@ export interface CommonIconProps extends DefaultProps {
    */
   name: IconName
   onClick?: (e: React.MouseEvent) => void
+  onMouseDown?: (e: React.MouseEvent) => void
   children?: never
 }
 
@@ -84,11 +85,11 @@ const Icon: React.SFC<IconProps> = ({ left, right, color, name, ...props }) => {
   return null
 }
 
-const IconComp = styled(Icon)<Pick<CommonIconProps, "left" | "right" | "onClick">>(
-  ({ left, right, theme, onClick }) => ({
+const IconComp = styled(Icon)<Pick<CommonIconProps, "left" | "right" | "onClick" | "onMouseDown">>(
+  ({ left, right, theme, onClick, onMouseDown }) => ({
     marginLeft: right ? theme.space.small : 0,
     marginRight: left ? theme.space.small : 0,
-    cursor: Boolean(onClick) ? "pointer" : "default",
+    cursor: Boolean(onClick) || Boolean(onMouseDown) ? "pointer" : "default",
     transition: "fill .075s ease",
   }),
 )

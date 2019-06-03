@@ -76,6 +76,7 @@ export { default as TourModal, TourModalProps } from "./TourModal/TourModal"
 export { default as LabelText } from "./LabelText/LabelText"
 export { default as Accordion, AccordionProps } from "./Accordion/Accordion"
 export { useAccordionState } from "./Accordion/useAccordionState"
+export { default as Tabs, TabsProps } from "./Tabs/Tabs"
 
 // Typography components
 export { default as FinePrint } from "./Typography/FinePrint"

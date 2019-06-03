@@ -1,10 +1,8 @@
+import { tabPastStyleguidistLinks } from "../support/helpers"
+
 describe("Accordion", () => {
   before(() => {
     cy.visit("/#!/Accordion")
-  })
-
-  it("should exist", () => {
-    cy.get("[data-cy=operational-ui__Accordion]")
   })
 
   it("opens section if you click corresponding header", () => {
@@ -47,10 +45,7 @@ describe("Accordion", () => {
       .first()
       .should("not.have.attr", "hidden")
 
-    cy.get("body")
-      .tab() // Show all components
-      .tab() // Props & methods
-      .tab() // link
+    tabPastStyleguidistLinks()
       .tab() // First header in Accordion
       .type(" ")
 
@@ -66,10 +61,7 @@ describe("Accordion", () => {
       .first()
       .should("have.attr", "hidden")
 
-    cy.get("body")
-      .tab()
-      .tab()
-      .tab()
+    tabPastStyleguidistLinks()
       .tab()
       .type(" ")
 
