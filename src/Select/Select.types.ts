@@ -31,7 +31,7 @@ export interface BaseSelectProps extends DefaultProps {
 }
 
 export interface SelectPropsWithCustomOption extends BaseSelectProps {
-  /** Custom Option */
+  /** A pseudo-option that allows a user to supply a custom value. */
   customOption?: string
   /** Current value */
   value: null | Value
