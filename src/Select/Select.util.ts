@@ -28,12 +28,13 @@ export const isOptionSelected = (value: any) => (option: IOption) => {
 }
 
 export const getNewValue = (value: any) => (newValue: Value) => {
-  if (Array.isArray(value) && !value.includes(newValue)) {
-    return [...value, newValue]
-  }
-  if (Array.isArray(value) && value.includes(newValue)) {
+  if (Array.isArray(value)) {
     const newValueIndex = value.indexOf(newValue)
-    return [...value.slice(0, newValueIndex), ...value.slice(newValueIndex + 1)]
+    if (newValueIndex === -1) {
+      return [...value, newValue]
+    } else {
+      return [...value.slice(0, newValueIndex), ...value.slice(newValueIndex + 1)]
+    }
   }
   return newValue
 }
