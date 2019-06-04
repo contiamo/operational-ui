@@ -1,12 +1,11 @@
 import { isEqual } from "lodash"
 import * as React from "react"
+import noop from "lodash/noop"
 
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-
 import { keyCodes } from "../utils"
 import ContextMenuItem, { IContextMenuItem } from "./ContextMenu.Item"
-import noop = require("lodash/noop")
 
 export interface ContextMenuProps extends DefaultProps {
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
