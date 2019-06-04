@@ -50,7 +50,7 @@ const Container = styled("div")<Props>(({ align, theme, onClick, isActive, conde
       boxShadow: activeShadow,
       outline: "none",
     },
-    ...(Boolean(typeof item !== "string" && item.description)
+    ...(typeof item !== "string" && Boolean(item.description)
       ? {
           borderBottom: `1px solid ${theme.color.border.default}`,
         }
