@@ -28,6 +28,8 @@ export const SelectInput = styled(Input)`
   cursor: inherit;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `
 
 export const FilterInput = styled(Input)`
