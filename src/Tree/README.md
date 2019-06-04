@@ -8,7 +8,8 @@ import { Tree } from "@operational/components"
 ;<Tree
   trees={[
     {
-      label: "Store",
+      label: "ERP",
+      tag: "OR",
       childNodes: [
         {
           label: "Region",
@@ -16,7 +17,7 @@ import { Tree } from "@operational/components"
           childNodes: [
             {
               label: "City",
-              tag: "D",
+              icon: "Olap",
               disabled: true,
               childNodes: [],
             },
@@ -25,7 +26,7 @@ import { Tree } from "@operational/components"
               color: "primary",
               onClick: () => alert("country was clicked"),
               onRemove: () => alert("node is removed"),
-              tag: "D",
+              icon: "Olap",
               childNodes: [],
             },
           ],
@@ -34,16 +35,17 @@ import { Tree } from "@operational/components"
     },
     {
       label: "Legal Entity",
+      tag: "D2",
       initiallyOpen: true,
       childNodes: [
         {
           label: "Limited Liability Company",
-          tag: "D",
+          icon: "Olap",
           childNodes: [],
         },
         {
           label: "Inc.",
-          tag: "D",
+          icon: "Olap",
           color: "#2C363F",
           childNodes: [],
         },

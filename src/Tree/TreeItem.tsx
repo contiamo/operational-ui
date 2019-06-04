@@ -32,7 +32,7 @@ const Header = styled("div")<{
 
 const Label = styled("div")<{ hasChildren: boolean }>`
   overflow-wrap: break-word;
-  font-size: ${({ theme }) => theme.font.size.fineprint}px;
+  font-size: ${({ theme }) => theme.font.size.small}px;
   font-weight: ${({ theme, hasChildren }) => (hasChildren ? theme.font.weight.bold : theme.font.weight.medium)};
   color: ${({ theme }) => theme.color.text.dark};
 `
@@ -88,7 +88,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       React.createElement((isOpen ? ChevronDown : Add) as IconComponentType, {
         size: 12,
         left: true,
-        color: "color.text.lightest",
+        color: "color.text.action",
       })}
     {!hasChildren && tag && (
       <NameTag condensed left color={color}>
