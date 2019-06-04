@@ -1,6 +1,5 @@
 import { isEqual } from "lodash"
 import * as React from "react"
-import noop from "lodash/noop"
 
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
@@ -180,7 +179,11 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
           isOpen={isOpen}
           {...props}
           align={align}
-          onClick={e => (disabled ? noop() : this.toggle(e))}
+          onClick={e => {
+            if (!disabled) {
+              this.toggle(e)
+            }
+          }}
           onKeyUp={this.handleKeyPress}
         >
           {renderedChildren}
