@@ -176,8 +176,8 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
       <>
         {isOpen && <InvisibleOverlay onClick={this.toggle} />}
         <Container
-          isOpen={isOpen}
           {...props}
+          isOpen={isOpen}
           align={align}
           onClick={e => {
             if (!disabled) {
