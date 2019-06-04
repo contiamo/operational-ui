@@ -255,7 +255,7 @@ const constants = {
   borderRadius: 2,
   compactSidebarWidth: 90,
   sidebarWidth: 220,
-  topbarHeight: 42,
+  topbarHeight: 48,
   titleHeight: 50,
 }
 

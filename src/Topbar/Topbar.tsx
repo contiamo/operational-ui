@@ -13,21 +13,18 @@ export interface TopbarProps {
 const TopbarContainer = styled("div")`
   width: 100%;
   height: ${props => props.theme.topbarHeight}px;
-  background-color: ${props => props.theme.color.background.lightest};
+  background-color: ${props => props.theme.color.background.lighter};
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0;
-  box-shadow: ${props => props.theme.shadows.topBar};
+  border: 1px solid ${props => props.theme.color.border.default};
 `
 
 const TopbarSection = styled("div")`
   display: flex;
   height: 100%;
   align-items: center;
-  & > :not(:last-child) {
-    border-right: 1px solid ${({ theme }) => theme.color.separators.default};
-  }
 `
 
 const Topbar: React.SFC<TopbarProps> = ({ left, right, ...props }) => (

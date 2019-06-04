@@ -9,23 +9,28 @@ export interface TopbarButtonProps {
   children: React.ReactNode
   /** Disabled flag, deactivating click events and fading out the button */
   disabled?: boolean
-  /** Click handler */
+  /** Click and key press handler */
   onClick?: () => void
+  /** makes button smaller, as well changes background and border 🤷 */
+  inline?: boolean
+  /** makes button to use primary color, can be used for main action on the page */
+  primary?: boolean
 }
 
-const TopbarButtonContainer = styled("div")<{ disabled?: boolean }>`
-  height: 100%;
+const TopbarButtonContainer = styled("button")<{ disabled?: boolean; inline?: boolean; primary?: boolean }>`
+  height: ${({ inline }) => (inline ? "36px" : "100%")};
+  border-radius: ${({ inline, theme }) => (inline ? theme.borderRadius : "0")}px;
+  padding: 0px ${({ inline, theme }) => (inline ? theme.space.element : theme.space.medium)}px;
+  border: ${({ inline, primary, theme }) => (inline && !primary ? `1px solid ${theme.color.text.dark}` : "none")};
+  background: ${({ inline, primary, theme }) =>
+    primary ? theme.color.primary : inline ? theme.color.white : "transparent"};
+  color: ${({ inline, primary, theme }) =>
+    primary ? theme.color.white : inline ? theme.color.text.dark : theme.color.text.lighter};
   display: flex;
   align-items: center;
   cursor: ${props => (props.disabled ? "auto" : "pointer")};
-  background-color: transparent;
   opacity: ${props => (props.disabled ? 0.6 : 1)};
-  font-size: ${props => props.theme.font.size.fineprint}px;
-  color: ${props => props.theme.color.text.lighter};
-  padding: 0px ${props => props.theme.space.medium}px;
-  :hover {
-    background-color: ${props => (props.disabled ? "transparent" : props.theme.color.background.lighter)};
-  }
+  font-size: ${props => props.theme.font.size.small}px;
   & svg {
     /** Icons are purely presentational and click events are handled upstream */
     pointer-events: none;
@@ -33,7 +38,12 @@ const TopbarButtonContainer = styled("div")<{ disabled?: boolean }>`
 `
 
 const TopbarButton: React.SFC<TopbarButtonProps> = ({ children, icon: Icon, onClick, ...props }) => (
-  <TopbarButtonContainer onClick={props.disabled ? undefined : onClick} {...props}>
+  <TopbarButtonContainer
+    {...props}
+    onClick={props.disabled ? undefined : onClick}
+    aria-disabled={props.disabled}
+    tabIndex={props.disabled ? -1 : undefined}
+  >
     {children}
     {Icon && <Icon right size={12} />}
   </TopbarButtonContainer>
