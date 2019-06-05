@@ -12,6 +12,9 @@ const StyledSelect = styled(Select)`
   font-weight: ${({ theme }) => theme.font.weight.regular};
   width: calc(100% + ${({ theme }) => theme.space.content * 2}px); /* 2 for left _and_ right. */
   max-width: none;
+  > div {
+    width: 100%;
+  }
 `
 
 export const DataTableSelect: React.FC<SelectProps> = props => <StyledSelect {...props} />
