@@ -18,11 +18,22 @@ describe("Select Components", () => {
     cy.tab({ shift: true })
     cy.get('[data-cy="basic-select"]').type("{uparrow}")
   })
+  it("should not lose focus when choosing something", () => {
+    cy.get('[data-cy="basic-select"]')
+      .focused()
+      .type("{downarrow}{downarrow}{downarrow}{downarrow}{downarrow}{uparrow} ")
+
+    cy.get('[data-cy="basic-select"]')
+      .type("{downarrow}")
+      .contains("Option 8")
+      .type(" ")
+    cy.get('[data-cy="basic-select"] input[value="eight"]')
+  })
   it("should be selectable via keyboard up/down", () => {
     cy.get('[data-cy="basic-select"]')
       .focused()
       .type("{downarrow}{downarrow}{downarrow}{downarrow}{downarrow}{uparrow} ")
-    cy.get('[data-cy="basic-select"] input[value="four"]')
+    cy.get('[data-cy="basic-select"] input[value="three"]')
   })
   it("should be selectable via keyboard home", () => {
     cy.get('[data-cy="basic-select"]')
@@ -87,7 +98,7 @@ describe("Select Components", () => {
       .type(" ")
       .focused()
       .type("{end} ")
-    cy.get('[data-cy="custom-select"] input').type("holaamigocomoestas")
+    cy.focused().type("holaamigocomoestas")
     cy.get('[data-cy="custom-select"]')
       .type(" ")
       .focused()
@@ -95,7 +106,7 @@ describe("Select Components", () => {
     cy.get('[data-cy="custom-select"]')
       .type(" ")
       .focused()
-      .type("{end} ")
+      .type("{downarrow}{end} ")
     cy.get('[data-cy="custom-select"] input[value="holaamigocomoestas"]')
   })
   it("should not be accessible when disabled", () => {
@@ -105,5 +116,12 @@ describe("Select Components", () => {
       .should("not.exist")
 
     cy.get('[data-cy="disabled-select"] [role="option"]').should("not.exist")
+  })
+  it("should allow only one open at a time", () => {
+    cy.get('[data-cy="basic-select"]')
+      .type("{downarrow}")
+      .tab()
+      .contains("Option 4")
+      .should("not.exist")
   })
 })
