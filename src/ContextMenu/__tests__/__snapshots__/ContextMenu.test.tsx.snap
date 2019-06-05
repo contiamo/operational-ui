@@ -8,7 +8,10 @@ exports[`ContextMenu Component Should render 1`] = `
     class="css-p29iif"
   />
   <div
-    class="css-lra4z2-contextmenu"
+    aria-activedescendant="operational-ui__ContextMenuItem-F-0"
+    aria-disabled="false"
+    aria-expanded="false"
+    class="css-ca9nj2-contextmenu"
   >
     <svg
       fill="currentColor"
