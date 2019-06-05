@@ -28,6 +28,8 @@ export interface BaseSelectProps extends DefaultProps {
   naked?: boolean
   /** We never have children */
   children?: never
+  /** Shall the component be full width? */
+  fullWidth?: boolean
 }
 
 export interface SelectPropsWithCustomOption extends BaseSelectProps {

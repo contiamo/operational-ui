@@ -31,6 +31,7 @@ export const Select: React.FC<SelectProps> = ({
   filterable,
   id,
   customOption,
+  fullWidth,
   tabIndex = 0,
   ...rest
 }) => {
@@ -124,6 +125,7 @@ export const Select: React.FC<SelectProps> = ({
     >
       {isOpen => (
         <Listbox
+          fullWidth={fullWidth}
           ref={containerRef}
           aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
           aria-activedescendant={String(value) || undefined}

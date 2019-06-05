@@ -2,13 +2,14 @@ import styled from "../utils/styled"
 import { expandColor } from "../utils/constants"
 import Input from "../Input/Input"
 
-export const Listbox = styled("div")<{ disabled: boolean; color?: string }>`
+export const Listbox = styled("div")<{ disabled: boolean; color?: string; fullWidth?: boolean }>`
   display: flex;
   flex-direction: column;
   color: ${({ theme, color }) => expandColor(theme, color)};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   outline: none;
+  width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
 `
 
 Listbox.defaultProps = {
@@ -48,6 +49,7 @@ export const FilterInput = styled(Input)`
   margin: ${({ theme }) => -theme.space.content}px;
   border-radius: 0;
   height: auto;
+  max-width: none;
 `
 
 export const DropdownButton = styled("div")<{ isOpen: boolean }>`
