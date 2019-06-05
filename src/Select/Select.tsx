@@ -40,7 +40,7 @@ export const Select: React.FC<SelectProps> = ({
   const appendCustomOption = React.useCallback(
     (options: IContextMenuItem[]): IContextMenuItem[] => {
       // We can't have a multiselect _and_ a custom option.
-      if (Array.isArray(value) && process.env.NODE_ENV === "production") {
+      if (Array.isArray(value) && process.env.NODE_ENV !== "production") {
         console.trace(
           "⚠️ Cannot show custom option with a multi-select Select component. Please either choose to have a single value, or remove the `customOption` property from your `Select` component.",
         )
