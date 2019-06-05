@@ -65,7 +65,7 @@ const MenuContainer = styled("div")<{
   position: "absolute",
   top: embedChildrenInMenu ? 0 : "100%",
   left: align === "left" ? 0 : "auto",
-  maxHeight: 360,
+  maxHeight: "50vh",
   overflow: "auto",
   boxShadow: theme.shadows.popup,
   width: "100%",
