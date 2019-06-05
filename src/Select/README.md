@@ -1,6 +1,6 @@
 The Select component presents users with a list of information with single-choice or multiple-choice options. Select elements can have options filled onClick, and also support filters.
 
-It implements the specification for a **Collapsible Dropdown Listbox Example** according to [WAI-ARIA v1.1](https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html).
+It implements the specification for a **Collapsible Dropdown Listbox** according to [WAI-ARIA v1.1](https://www.w3.org/TR/wai-aria-practices/examples/listbox/listbox-collapsible.html).
 
 ### Basic usage
 
