@@ -8,13 +8,13 @@ import { FilterInput, Combobox, Container, DropdownButton, SelectInput } from ".
 import { SelectProps } from "./Select.types"
 import {
   truncateList,
-  appendOption,
+  appendItem,
   customInputSymbol,
   filterList,
   getDisplayValue,
   getNewValue,
   isOptionSelected,
-  prependFilter,
+  prependItem,
   optionsToContextMenuItems,
 } from "./Select.util"
 
@@ -47,7 +47,7 @@ export const Select: React.FC<SelectProps> = ({
         return options
       }
 
-      return appendOption({
+      return appendItem({
         label: String(customOption),
         value: customInputSymbol,
         onClick: () => {
@@ -86,12 +86,12 @@ export const Select: React.FC<SelectProps> = ({
 
     // Case 1: It's both filterable _and_ has a custom option
     if (Boolean(filterable) && Boolean(customOption)) {
-      return appendCustomOption(prependFilter({ label: filterComponent })(contextMenuItems))
+      return appendCustomOption(prependItem({ label: filterComponent })(contextMenuItems))
     }
 
     // Case 2: It's filterable and no custom option
     if (Boolean(filterable) && !Boolean(customOption)) {
-      return prependFilter({ label: filterComponent })(contextMenuItems)
+      return prependItem({ label: filterComponent })(contextMenuItems)
     }
 
     // Case 3, It has a custom option but is not filterable

@@ -1,9 +1,10 @@
 import { IOption, SelectProps, Value } from "./Select.types"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 
-export const appendOption = (newOption: IContextMenuItem) => (
-  existingOptions: IContextMenuItem[],
-): IContextMenuItem[] => [...existingOptions, newOption]
+export const appendItem = (newItem: IContextMenuItem) => (existingItems: IContextMenuItem[]): IContextMenuItem[] => [
+  ...existingItems,
+  newItem,
+]
 
 export const truncateList = (maxLength?: number) => (options: SelectProps["options"]) =>
   maxLength ? options.slice(0, maxLength) : options
@@ -14,7 +15,7 @@ export const filterList = (filter: string) => (options: SelectProps["options"]) 
     return String(option.label).match(filterPattern) || String(option.value).match(filterPattern)
   })
 
-export const prependFilter = (filterItem: IContextMenuItem) => (items: IContextMenuItem[]): IContextMenuItem[] => [
+export const prependItem = (filterItem: IContextMenuItem) => (items: IContextMenuItem[]): IContextMenuItem[] => [
   filterItem,
   ...items,
 ]
@@ -43,8 +44,8 @@ export const customInputSymbol = Symbol("custom input")
 
 export const getDisplayValue = (
   internalValue: Value | Value[] | null,
-  customInputValue: Value,
-  customInputSymbol: symbol,
+  customInputValue?: Value,
+  customInputSymbol?: symbol,
 ): string => {
   if (internalValue === customInputSymbol) {
     return String(customInputValue)
@@ -54,16 +55,20 @@ export const getDisplayValue = (
     return internalValue.join(", ")
   }
 
+  if (internalValue === null) {
+    return ""
+  }
+
   return String(internalValue)
 }
 
-export const optionsToContextMenuItems = (overrides: (option: IOption) => Partial<IContextMenuItem>) => (
+export const optionsToContextMenuItems = (overrides?: (option: IOption) => Partial<IContextMenuItem>) => (
   options: IOption[],
 ) =>
   options.map(
     (option): IContextMenuItem => ({
       ...option,
       label: option.label || "", // It's optional in one but required in the other
-      ...overrides(option),
+      ...(overrides ? overrides(option) : {}),
     }),
   )
