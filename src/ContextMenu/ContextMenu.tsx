@@ -147,9 +147,22 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
         return
 
       case "ArrowUp":
+        e.preventDefault() // prevent document scroll.
+        if (this.state.isOpen) {
+          this.setState(this.onUpPress)
+        } else {
+          this.setState(() => ({ isOpen: true }))
+        }
+        this.focusElement()
+        return
+
       case "ArrowDown":
         e.preventDefault() // prevent document scroll.
-        this.setState(key === "ArrowUp" ? this.onUpPress : this.onDownPress)
+        if (this.state.isOpen) {
+          this.setState(this.onDownPress)
+        } else {
+          this.setState(() => ({ isOpen: true }))
+        }
         this.focusElement()
         return
 
