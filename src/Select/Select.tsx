@@ -63,6 +63,7 @@ export const Select: React.FC<SelectProps> = ({
   const filterComponent = React.useMemo(
     () => (
       <FilterInput
+        autoFocus
         onClick={e => e.stopPropagation()}
         fullWidth
         placeholder="Filter..."
@@ -79,11 +80,6 @@ export const Select: React.FC<SelectProps> = ({
     const filteredOptions = filterList(filter)(initialOptions)
     const truncatedOptions = truncateList(maxOptions)(filteredOptions)
     const contextMenuItems = optionsToContextMenuItems(option => ({
-      onClick: () => {
-        if (onChange) {
-          onChange(getNewValue(value)(option.value), option.value)
-        }
-      },
       label: option.label ? option.label : "",
       isActive: isOptionSelected(value)(option),
     }))(truncatedOptions)
@@ -108,7 +104,16 @@ export const Select: React.FC<SelectProps> = ({
   }, [options, value, filter, maxOptions, filterable, customOption, onChange])
 
   return (
-    <ContextMenu disabled={disabled} keepOpenOnItemClick={Array.isArray(value)} items={items}>
+    <ContextMenu
+      onClick={item => {
+        if (onChange) {
+          onChange(getNewValue(value)(item.value), item.value)
+        }
+      }}
+      disabled={disabled}
+      keepOpenOnItemClick={Array.isArray(value)}
+      items={items}
+    >
       {isOpen => (
         <Container id={uniqueId} disabled={Boolean(disabled)} color={color}>
           {label && <LabelText>{label}</LabelText>}
