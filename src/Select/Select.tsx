@@ -116,11 +116,15 @@ export const Select: React.FC<SelectProps> = ({
   return (
     <ContextMenu
       onClick={item => {
+        console.log(value, item.value, customInputValue)
         if (onChange) {
           onChange(getNewValue(value)(item.value), item.value)
         }
-        if (containerRef.current) {
+        if (containerRef.current && item.value !== customInputSymbol) {
           containerRef.current.focus()
+        }
+        if (item.value === customInputSymbol && inputRef.current) {
+          inputRef.current.focus()
         }
       }}
       disabled={disabled}
@@ -148,7 +152,7 @@ export const Select: React.FC<SelectProps> = ({
               inputRef={inputRef}
               disabled={disabled}
               placeholder={placeholder}
-              readOnly={value !== customInputValue}
+              readOnly={getDisplayValue(value, customInputValue, customInputSymbol) !== customInputValue}
               value={getDisplayValue(value, customInputValue, customInputSymbol)}
               id={`operational-ui__Select-Input-${uniqueId}`}
               onClick={e => {
