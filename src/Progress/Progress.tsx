@@ -23,10 +23,16 @@ const Container = styled("div")<ProgressProps>(
     overflowX: "hidden",
     textAlign: "center",
     left: 0,
-    backgroundColor: "transparent",
   },
   ({ theme, bottom, inline }) => ({
-    position: inline ? "block" : "fixed",
+    ...(inline ? {
+      backgroundColor: theme.color.background.light,
+      borderRadius: 2,
+      position: "block",
+    } : {
+      backgroundColor: "transparent",
+      position: "fixed",
+    }),
     zIndex: theme.zIndex.globalProgress,
     top: bottom ? "auto" : 0,
     bottom: bottom ? 0 : "auto",
@@ -45,10 +51,8 @@ const fillProgress = keyframes({
 const Bar = styled("div")<Pick<ProgressProps, "percentage">>(({ percentage, theme }) => ({
   width: "100%",
   height: 3,
-  backgroundColor: theme.color.background.light,
   position: "relative",
   ...(typeof percentage !== "undefined" ? {
-    backgroundColor: theme.color.background.light,
     ":after": {
       content: `""`,
       position: "absolute",
