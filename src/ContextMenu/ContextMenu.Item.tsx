@@ -147,14 +147,27 @@ const ContextMenuItemIcon: React.SFC<Pick<Props, "item" | "iconLocation">> = pro
   return <>{props.item.icon}</>
 }
 
-const ContextMenuItem: React.SFC<Props> = props => (
-  <Container {...props} condensed={props.condensed}>
-    {(!props.iconLocation || props.iconLocation === "left") && (
-      <ContextMenuItemIcon iconLocation={props.iconLocation} item={props.item} />
-    )}
-    <Content value={props.item} />
-    {props.iconLocation === "right" && <ContextMenuItemIcon iconLocation={props.iconLocation} item={props.item} />}
-  </Container>
-)
+const ContextMenuItem: React.SFC<Props> = props => {
+  const handleKeyPress = React.useCallback(e => {
+    switch (e.key) {
+      case "Enter":
+      case "Space":
+      case " ":
+        if (props.onClick) {
+          e.preventDefault()
+          props.onClick(e)
+        }
+    }
+  }, [])
+  return (
+    <Container {...props} onKeyDown={handleKeyPress} condensed={props.condensed}>
+      {(!props.iconLocation || props.iconLocation === "left") && (
+        <ContextMenuItemIcon iconLocation={props.iconLocation} item={props.item} />
+      )}
+      <Content value={props.item} />
+      {props.iconLocation === "right" && <ContextMenuItemIcon iconLocation={props.iconLocation} item={props.item} />}
+    </Container>
+  )
+}
 
 export default ContextMenuItem
