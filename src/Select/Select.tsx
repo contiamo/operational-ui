@@ -73,6 +73,7 @@ export const Select: React.FC<SelectProps> = ({
     [filter],
   )
 
+  /** Get a list of items to feed to the ContextMenu */
   const items = React.useMemo(() => {
     const initialOptions = options
     const filteredOptions = filterList(filter)(initialOptions)
@@ -87,17 +88,23 @@ export const Select: React.FC<SelectProps> = ({
       isActive: isOptionSelected(value)(option),
     }))(truncatedOptions)
 
-    return ([
-      [
-        Boolean(filterable) && Boolean(customOption),
-        appendCustomOption(prependFilter({ label: filterComponent })(contextMenuItems)),
-      ],
-      [Boolean(filterable) && !Boolean(customOption), prependFilter({ label: filterComponent })(contextMenuItems)],
-      [!Boolean(filterable) && Boolean(customOption), appendCustomOption(contextMenuItems)],
-    ] as Array<[boolean, IContextMenuItem[]]>).reduce(
-      (acc, [condition, value]) => (condition ? value : acc),
-      contextMenuItems,
-    )
+    // Case 1: It's both filterable _and_ has a custom option
+    if (Boolean(filterable) && Boolean(customOption)) {
+      return appendCustomOption(prependFilter({ label: filterComponent })(contextMenuItems))
+    }
+
+    // Case 2: It's filterable and no custom option
+    if (Boolean(filterable) && !Boolean(customOption)) {
+      return prependFilter({ label: filterComponent })(contextMenuItems)
+    }
+
+    // Case 3, It has a custom option but is not filterable
+    if (!Boolean(filterable) && Boolean(customOption)) {
+      return appendCustomOption(contextMenuItems)
+    }
+
+    // Default case, it's just a normal set of items
+    return contextMenuItems
   }, [options, value, filter, maxOptions, filterable, customOption, onChange])
 
   return (
