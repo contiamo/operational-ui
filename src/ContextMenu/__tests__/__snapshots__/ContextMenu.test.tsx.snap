@@ -24,5 +24,10 @@ exports[`ContextMenu Component Should render 1`] = `
       />
     </svg>
   </div>
+  <div
+    aria-hidden="true"
+    role="button"
+    tabindex="-1"
+  />
 </div>
 `;
