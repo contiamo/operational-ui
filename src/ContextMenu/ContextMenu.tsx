@@ -1,5 +1,6 @@
 import { isEqual } from "lodash"
 import * as React from "react"
+import nanoid from "nanoid"
 
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
@@ -88,6 +89,7 @@ const InvisibleOverlay = styled("div")(({ theme }) => ({
 
 class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
   private menu: HTMLDivElement | null = null
+  private uniqueId = this.props.id || (nanoid()[0] as string)
 
   private toggle = (e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>) => {
     e.stopPropagation()
@@ -214,6 +216,9 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
         {isOpen && <InvisibleOverlay onClick={this.toggle} />}
         <Container
           {...props}
+          aria-activedescendant={`operational-ui__ContextMenuItem-${this.uniqueId}-${this.state.focusedItemIndex}`}
+          aria-disabled={Boolean(disabled)}
+          aria-expanded={isOpen}
           isOpen={isOpen}
           align={align}
           onClick={e => {
@@ -238,6 +243,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
 
                 return (
                   <ContextMenuItem
+                    id={`operational-ui__ContextMenuItem-${this.uniqueId}-${index}`}
                     isActive={item.isActive}
                     tabIndex={this.state.focusedItemIndex === index ? 0 : -1} // ref "tabindex roving": https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex
                     onClick={e => {

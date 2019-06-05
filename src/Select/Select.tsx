@@ -115,13 +115,16 @@ export const Select: React.FC<SelectProps> = ({
       keepOpenOnItemClick={Array.isArray(value)}
       items={items}
       tabIndex={tabIndex}
+      aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
       {...rest}
     >
       {isOpen => (
         <Listbox
           aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
-          id={`operational-ui__Select-${uniqueId}`}
+          aria-activedescendant={String(value) || undefined}
           disabled={Boolean(disabled)}
+          aria-expanded={isOpen}
+          id={`operational-ui__Select-${uniqueId}`}
           color={color}
         >
           {label && <LabelText id={`operational-ui__Select-Label-${uniqueId}`}>{label}</LabelText>}

@@ -16,6 +16,7 @@ export interface Props {
   item: StringOrItem
   tabIndex: number
   isActive?: boolean
+  id?: string
 }
 
 export interface IContextMenuItem<TValue = any> {
