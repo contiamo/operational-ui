@@ -19,7 +19,7 @@ export const prependFilter = (filterItem: IContextMenuItem) => (items: IContextM
   ...items,
 ]
 
-export const isOptionSelected = (value: any) => (option: IOption) => {
+export const isOptionSelected = (value: Value | Value[] | null) => (option: IOption) => {
   if (!Array.isArray(value)) {
     return value === option.value
   }
@@ -27,7 +27,7 @@ export const isOptionSelected = (value: any) => (option: IOption) => {
   return value.includes(option.value)
 }
 
-export const getNewValue = (value: any) => (newValue: Value) => {
+export const getNewValue = (value: Value | Value[] | null) => (newValue: Value) => {
   if (Array.isArray(value)) {
     const newValueIndex = value.indexOf(newValue)
     if (newValueIndex === -1) {
@@ -41,9 +41,13 @@ export const getNewValue = (value: any) => (newValue: Value) => {
 
 export const customInputSymbol = Symbol("custom input")
 
-export const getDisplayValue = (internalValue: any, customInputValue: any, customInputSymbol: symbol) => {
+export const getDisplayValue = (
+  internalValue: Value | Value[] | null,
+  customInputValue: Value,
+  customInputSymbol: symbol,
+): string => {
   if (internalValue === customInputSymbol) {
-    return customInputValue
+    return String(customInputValue)
   }
 
   if (Array.isArray(internalValue)) {
