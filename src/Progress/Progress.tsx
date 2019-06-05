@@ -25,14 +25,15 @@ const Container = styled("div")<ProgressProps>(
     left: 0,
   },
   ({ theme, bottom, inline }) => ({
-    ...(inline ? {
-      backgroundColor: theme.color.background.light,
-      borderRadius: 2,
-      position: "block",
-    } : {
-      backgroundColor: "transparent",
-      position: "fixed",
-    }),
+    ...(inline
+      ? {
+          backgroundColor: theme.color.background.light,
+          borderRadius: 2,
+        }
+      : {
+          backgroundColor: "transparent",
+          position: "fixed",
+        }),
     zIndex: theme.zIndex.globalProgress,
     top: bottom ? "auto" : 0,
     bottom: bottom ? 0 : "auto",
@@ -52,20 +53,22 @@ const Bar = styled("div")<Pick<ProgressProps, "percentage">>(({ percentage, them
   width: "100%",
   height: 3,
   position: "relative",
-  ...(typeof percentage !== "undefined" ? {
-    ":after": {
-      content: `""`,
-      position: "absolute",
-      top: 0,
-      left: 0,
-      backgroundColor: theme.color.primary,
-      width: `${percentage}%`,
-      height: "100%"
-    }
-  } : {
-    animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`,
-    backgroundColor: theme.color.primary,
-  }),
+  ...(typeof percentage !== "undefined"
+    ? {
+        ":after": {
+          content: `""`,
+          position: "absolute",
+          top: 0,
+          left: 0,
+          backgroundColor: theme.color.primary,
+          width: `${percentage}%`,
+          height: "100%",
+        },
+      }
+    : {
+        animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`,
+        backgroundColor: theme.color.primary,
+      }),
 }))
 
 const Progress: React.SFC<ProgressProps> = ({ onRetry, onClose, percentage, ...props }) => (
