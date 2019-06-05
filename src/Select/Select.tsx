@@ -39,6 +39,13 @@ export const Select: React.FC<SelectProps> = ({
   const [filter, setFilter] = React.useState("")
   const [customInputValue, setCustomInputValue] = React.useState("")
   const containerRef = React.useRef<HTMLDivElement>(null)
+  const inputRef = React.useMemo(() => React.createRef<HTMLInputElement>(), [])
+
+  React.useEffect(() => {
+    if (value === customInputValue && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [value, customInputValue])
 
   const appendCustomOption = React.useCallback(
     (options: IContextMenuItem[]): IContextMenuItem[] => {
@@ -138,6 +145,7 @@ export const Select: React.FC<SelectProps> = ({
           {label && <LabelText id={`operational-ui__Select-Label-${uniqueId}`}>{label}</LabelText>}
           <Combobox naked={Boolean(naked)}>
             <SelectInput
+              inputRef={inputRef}
               disabled={disabled}
               placeholder={placeholder}
               readOnly={value !== customInputValue}

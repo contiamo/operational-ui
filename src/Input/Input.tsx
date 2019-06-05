@@ -22,7 +22,7 @@ export interface BaseProps extends DefaultProps, DefaultInputProps, Omit<React.I
   labelId?: string
   /** Label text, rendering the input inside a tag if specified. The `labelId` props is responsible for specifying for and id attributes. */
   label?: string
-  inputRef?: (node: any) => void
+  inputRef?: React.RefObject<HTMLInputElement>
   /**
    * Callback called when the input changes, with the new value as a string.
    * This is used to update the value in the parent component,
