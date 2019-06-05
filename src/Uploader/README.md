@@ -5,7 +5,7 @@ The uploader element is used to upload files to the platform, usually data files
 ```jsx
 import * as React from "react"
 import { Uploader } from "@operational/components"
-;<Uploader currentState="initial" />
+;<Uploader currentState="initial" onFileSelect={console.log} />
 ```
 
 ### Drag-over state
@@ -13,7 +13,7 @@ import { Uploader } from "@operational/components"
 ```jsx
 import * as React from "react"
 import { Uploader } from "@operational/components"
-;<Uploader currentState="dragOver" onMouseUp={console.log}/>
+;<Uploader currentState="dragOver" onMouseUp={console.log} />
 ```
 
 ### Uploading state
@@ -21,7 +21,7 @@ import { Uploader } from "@operational/components"
 ```jsx
 import * as React from "react"
 import { Uploader } from "@operational/components"
-;<Uploader currentState="uploading"/>
+;<Uploader currentState="uploading" />
 ```
 
 ### Completed state
@@ -37,5 +37,5 @@ import { Uploader } from "@operational/components"
 ```jsx
 import * as React from "react"
 import { Uploader } from "@operational/components"
-;<Uploader currentState="error" clickHandler={console.log}/>
+;<Uploader currentState="error" clickHandler={console.log} />
 ```
