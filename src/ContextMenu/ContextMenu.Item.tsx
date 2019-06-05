@@ -76,7 +76,7 @@ const Container = styled("div")<Props>(({ align, theme, onClick, isActive, conde
   }
 })
 
-Container.defaultProps = { role: "button", "aria-disabled": false, "aria-hidden": false, "aria-invalid": false }
+Container.defaultProps = { role: "option", "aria-disabled": false, "aria-hidden": false, "aria-invalid": false }
 
 const Title = styled("p")`
   font-weight: bold;

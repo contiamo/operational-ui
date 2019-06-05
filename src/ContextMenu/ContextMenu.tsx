@@ -51,6 +51,7 @@ const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: bool
   alignItems: "center",
   justifyContent: align === "left" ? "flex-start" : "flex-end",
   zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
+  outline: "none",
 }))
 
 const rowHeight = 40
@@ -88,7 +89,7 @@ const InvisibleOverlay = styled("div")(({ theme }) => ({
 class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
   private menu: HTMLDivElement | null = null
 
-  private toggle = (e: React.MouseEvent<HTMLDivElement>) => {
+  private toggle = (e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>) => {
     e.stopPropagation()
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
@@ -106,28 +107,61 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     focusedItemIndex: this.state.focusedItemIndex === 0 ? this.props.items.length - 1 : this.state.focusedItemIndex - 1,
   })
 
+  private onHomePress = () => ({
+    focusedItemIndex: 0,
+  })
+
   private onDownPress = () => ({
     focusedItemIndex: this.state.focusedItemIndex === this.props.items.length - 1 ? 0 : this.state.focusedItemIndex + 1,
   })
 
+  private onEndPress = () => ({
+    focusedItemIndex: this.props.items.length - 1,
+  })
+
   private handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
     const { key } = e
-    if ((key === "Enter" || key === "Space" || key === " ") && this.props.onClick) {
-      e.preventDefault() // prevent document scroll.
-      this.props.onClick(this.makeItem(this.props.items[this.state.focusedItemIndex]))
-      this.setState(() => ({ isOpen: false }))
-      return
-    }
 
-    if (key === "Escape") {
-      this.setState(() => ({ isOpen: false }))
-      return
-    }
+    switch (key) {
+      case "Enter":
+      case "Space":
+      case " ":
+        if (this.props.onClick && !this.props.disabled) {
+          e.preventDefault() // prevent document scroll.
+          if (!this.state.isOpen) {
+            this.toggle(e)
+            return
+          }
+          this.props.onClick(this.makeItem(this.props.items[this.state.focusedItemIndex]))
+          if (!this.props.keepOpenOnItemClick) {
+            this.setState(() => ({ isOpen: false }))
+          }
+          return
+        }
+        return
 
-    if (["ArrowUp", "ArrowDown"].includes(key)) {
-      e.preventDefault() // prevent document scroll.
-      this.setState(key === "ArrowUp" ? this.onUpPress : this.onDownPress)
-      this.focusElement()
+      case "Escape":
+        this.setState(() => ({ isOpen: false }))
+        return
+
+      case "ArrowUp":
+      case "ArrowDown":
+        e.preventDefault() // prevent document scroll.
+        this.setState(key === "ArrowUp" ? this.onUpPress : this.onDownPress)
+        this.focusElement()
+        return
+
+      case "Home":
+        e.preventDefault()
+        this.setState(this.onHomePress)
+        this.focusElement()
+        return
+
+      case "End":
+        e.preventDefault()
+        this.setState(this.onEndPress)
+        this.focusElement()
+        return
     }
   }
 
