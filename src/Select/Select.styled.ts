@@ -23,7 +23,7 @@ export const Combobox = styled("div")<{ naked: boolean }>`
   grid-template-columns: auto 40px;
   grid-gap: 1px;
   align-items: stretch;
-  border: 1px solid ${({ theme }) => theme.color.border.default};
+  border: 1px solid ${({ theme }) => theme.color.border.select};
   border-width: ${({ naked }) => (naked ? 0 : 1)}px;
   border-radius: ${({ theme }) => theme.borderRadius}px;
 
@@ -68,7 +68,7 @@ export const DropdownButton = styled("div")<{ isOpen: boolean }>`
     width: 0;
     height: 0;
     border: 4px solid transparent;
-    border-top-color: ${({ theme, isOpen }) => (isOpen ? theme.color.primary : theme.color.border.default)};
+    border-top-color: ${({ theme, isOpen }) => (isOpen ? theme.color.primary : theme.color.border.select)};
     transform: ${({ isOpen }) => (isOpen ? `translateY(-2px) rotate(180deg)` : `translateY(2px)`)};
   }
 `
