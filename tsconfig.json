@@ -14,9 +14,7 @@
     "strict": true,
     "downlevelIteration": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "incremental": true,
-    "tsBuildInfoFile": ".tsbuildinfo"
+    "noUnusedParameters": true
   },
   "include": ["src"]
 }
