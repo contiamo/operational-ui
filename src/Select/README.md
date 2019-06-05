@@ -255,7 +255,7 @@ const MyComponent = () => {
         label="Custom Input"
         placeholder="Choose an option"
         customOption="Custom..."
-        onChange={setValue1}
+        onChange={newValue => setValue1(newValue)}
       />
       <Select
         value={value2}
@@ -264,7 +264,7 @@ const MyComponent = () => {
         filterable
         placeholder="Choose an option"
         customOption="Custom..."
-        onChange={setValue2}
+        onChange={newValue => setValue2(newValue)}
       />
     </Form>
   )
