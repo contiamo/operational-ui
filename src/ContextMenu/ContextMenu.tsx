@@ -281,6 +281,13 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
             </MenuContainer>
           )}
         </Container>
+        {/* Element to close an open select when blurring it so only one can be open at a time */}
+        <div
+          tabIndex={this.state.isOpen ? 0 : -1}
+          role="button"
+          onFocus={() => this.setState(() => ({ isOpen: false }))}
+          aria-hidden="true"
+        />
       </>
     )
   }
