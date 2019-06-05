@@ -216,7 +216,9 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
         {isOpen && <InvisibleOverlay onClick={this.toggle} />}
         <Container
           {...props}
-          aria-activedescendant={`operational-ui__ContextMenuItem-${this.uniqueId}-${this.state.focusedItemIndex}`}
+          aria-activedescendant={
+            isOpen ? `operational-ui__ContextMenuItem-${this.uniqueId}-${this.state.focusedItemIndex}` : undefined
+          }
           aria-disabled={Boolean(disabled)}
           aria-expanded={isOpen}
           isOpen={isOpen}

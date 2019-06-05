@@ -8,7 +8,6 @@ exports[`ContextMenu Component Should render 1`] = `
     class="css-p29iif"
   />
   <div
-    aria-activedescendant="operational-ui__ContextMenuItem-F-0"
     aria-disabled="false"
     aria-expanded="false"
     class="css-ca9nj2-contextmenu"
