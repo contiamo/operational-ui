@@ -139,7 +139,6 @@ export const Select: React.FC<SelectProps> = ({
           fullWidth={fullWidth}
           ref={containerRef}
           aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
-          aria-activedescendant={String(value) || undefined}
           aria-disabled={Boolean(disabled)}
           disabled={Boolean(disabled)}
           aria-expanded={isOpen}
