@@ -8,6 +8,7 @@ export const Listbox = styled("div")<{ disabled: boolean; color?: string }>`
   color: ${({ theme, color }) => expandColor(theme, color)};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
+  outline: none;
 `
 
 Listbox.defaultProps = {

@@ -37,6 +37,7 @@ export const Select: React.FC<SelectProps> = ({
   const uniqueId = useUniqueId(id)
   const [filter, setFilter] = React.useState("")
   const [customInputValue, setCustomInputValue] = React.useState("")
+  const containerRef = React.useRef<HTMLDivElement>(null)
 
   const appendCustomOption = React.useCallback(
     (options: IContextMenuItem[]): IContextMenuItem[] => {
@@ -110,6 +111,9 @@ export const Select: React.FC<SelectProps> = ({
         if (onChange) {
           onChange(getNewValue(value)(item.value), item.value)
         }
+        if (containerRef.current) {
+          containerRef.current.focus()
+        }
       }}
       disabled={disabled}
       keepOpenOnItemClick={Array.isArray(value)}
@@ -120,8 +124,10 @@ export const Select: React.FC<SelectProps> = ({
     >
       {isOpen => (
         <Listbox
+          ref={containerRef}
           aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
           aria-activedescendant={String(value) || undefined}
+          aria-disabled={Boolean(disabled)}
           disabled={Boolean(disabled)}
           aria-expanded={isOpen}
           id={`operational-ui__Select-${uniqueId}`}
