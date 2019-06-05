@@ -51,7 +51,6 @@ const DragOverContentContainer = styled("div")(({ theme }) => ({
 const UploadingContentContainer = styled("div")(({ theme }) => ({
   color: theme.color.text.lighter,
   "& div": {
-    width: 196,
     display: "inline-flex",
   },
 }))
@@ -86,7 +85,7 @@ const DragOverContent: React.SFC = ({}) => <DragOverContentContainer>Drop your f
 
 const UploadingContent: React.SFC<Pick<UploaderProps, "percentage">> = ({ percentage }) => (
   <UploadingContentContainer>
-    <Progress inline percentage={percentage} />
+    <Progress inline percentage={percentage} width={196} />
     <p>Uploading...</p>
   </UploadingContentContainer>
 )

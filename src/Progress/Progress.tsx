@@ -14,25 +14,32 @@ export interface ProgressProps extends DefaultProps {
   inline?: boolean
   /** Progress as percentage */
   percentage?: number
+  /** Explicit bar width for inline only. Default: 100%. Minimum: 64px.  */
+  width?: number
+}
+
+function validWidth(width: number): number {
+  return width > 64 ? width : 64
 }
 
 const Container = styled("div")<ProgressProps>(
   {
     label: "progress",
-    width: "100%",
     overflowX: "hidden",
     textAlign: "center",
     left: 0,
   },
-  ({ theme, bottom, inline }) => ({
+  ({ theme, bottom, inline, width }) => ({
     ...(inline
       ? {
           backgroundColor: theme.color.background.light,
           borderRadius: 2,
+          width: width ? `${validWidth(width)}px` : "100%",
         }
       : {
           backgroundColor: "transparent",
           position: "fixed",
+          width: "100%",
         }),
     zIndex: theme.zIndex.globalProgress,
     top: bottom ? "auto" : 0,
