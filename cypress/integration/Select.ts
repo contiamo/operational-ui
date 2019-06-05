@@ -9,7 +9,14 @@ describe("Select Components", () => {
     Cypress.on("uncaught:exception", () => {
       return false
     })
-    cy.get('[data-cy="basic-select"]').type(" ")
+    cy.get('[data-cy="basic-select"]')
+      .type(" ")
+      .tab()
+      .tab({ shift: true })
+    cy.get('[data-cy="basic-select"]').type("{downarrow}")
+    cy.tab()
+    cy.tab({ shift: true })
+    cy.get('[data-cy="basic-select"]').type("{uparrow}")
   })
   it("should be selectable via keyboard up/down", () => {
     cy.get('[data-cy="basic-select"]')
