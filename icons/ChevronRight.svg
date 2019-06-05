@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.83 16.41">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <title>ChevronRight</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M.5,16.41a.5.5,0,0,1-.4-.8l5.48-7.4L.1.8A.5.5,0,0,1,.2.1.5.5,0,0,1,.9.2l5.93,8-5.93,8A.51.51,0,0,1,.5,16.41Z"/>
+    </g>
+  </g>
+</svg>

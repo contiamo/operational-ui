@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.07 16">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <title>Organization</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <rect class="cls-1" x="2.66" y="2.78" width="1.64" height="1.64"/>
+      <rect class="cls-1" x="5.76" y="2.78" width="1.64" height="1.64"/>
+      <rect class="cls-1" x="2.66" y="5.59" width="1.64" height="1.64"/>
+      <rect class="cls-1" x="5.76" y="5.59" width="1.64" height="1.64"/>
+      <rect class="cls-1" x="2.66" y="8.4" width="1.64" height="1.64"/>
+      <rect class="cls-1" x="5.76" y="8.4" width="1.64" height="1.64"/>
+      <path class="cls-1" d="M9.1,0H1A1,1,0,0,0,0,1V15a1,1,0,0,0,1,1H9.1a1,1,0,0,0,1-1V1A1,1,0,0,0,9.1,0Zm0,15H6.51V12.2H3.57V15H1L1,1l8.1,0Z"/>
+    </g>
+  </g>
+</svg>

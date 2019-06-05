@@ -12,3 +12,6 @@ test-results.json
 *.mp4
 cypress/screenshots
 .tsbuildinfo
+
+# Auto-generated icons
+src/Icon/*.ts*

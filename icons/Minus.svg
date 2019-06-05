@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.01 1.5">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <title>Minus</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M10.26,1.5H.75A.76.76,0,0,1,0,.75.76.76,0,0,1,.75,0h9.51A.76.76,0,0,1,11,.75.76.76,0,0,1,10.26,1.5Z"/>
+    </g>
+  </g>
+</svg>

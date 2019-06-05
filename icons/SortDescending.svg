@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.04 11.77">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <title>SortDescending</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M4.15,11.45a1,1,0,0,1-1.46,0L.27,8.86a1,1,0,0,1,0-1.41,1,1,0,0,1,1.41,0l.69.73V1a1,1,0,0,1,2,0V8.23l.69-.73a1,1,0,0,1,1.41,0,1,1,0,0,1,.05,1.41Z"/>
+      <path class="cls-1" d="M16,2H9.61a1,1,0,0,1,0-2H16a1,1,0,0,1,0,2Z"/>
+      <path class="cls-1" d="M9.61,4.88H14a1,1,0,0,1,0,2H9.61a1,1,0,0,1,0-2Z"/>
+      <path class="cls-1" d="M9.61,9.77H12a1,1,0,0,1,0,2H9.61a1,1,0,0,1,0-2Z"/>
+    </g>
+  </g>
+</svg>
