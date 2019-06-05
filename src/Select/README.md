@@ -24,12 +24,12 @@ const MyComponent = () => {
 
   return (
     <Select
-      label="Select label"
+      id="basic"
+      label="Basic"
+      data-cy="basic-select"
       value={value}
       options={options}
-      filterable
-      placeholder="Choose an option"
-      onChange={setValue}
+      onChange={newValue => setValue(newValue)}
     />
   )
 }
@@ -60,6 +60,41 @@ const MyOtherComponent = () => {
   const [value, setValue] = React.useState([])
   return (
     <Select
+      data-cy="multi-select"
+      label="Select label"
+      value={value}
+      options={options}
+      placeholder="Choose an option"
+      onChange={setValue}
+    />
+  )
+}
+
+;<MyOtherComponent />
+```
+
+### Filterable
+
+```jsx
+import * as React from "react"
+import { Select } from "@operational/components"
+
+const options = [
+  { label: "Option 1", value: "one" },
+  { label: "Option 2", value: "two" },
+  { label: "Option 3", value: "three" },
+  { label: "Option 4", value: "four" },
+  { label: "Option 5", value: "five" },
+  { label: "Option 6", value: "six" },
+  { label: "Option 7", value: "seven" },
+  { label: "Option 8", value: "eight" },
+]
+
+const MyThirdComponent = () => {
+  const [value, setValue] = React.useState("one")
+  return (
+    <Select
+      data-cy="filterable-select"
       label="Select label"
       value={value}
       options={options}
@@ -70,7 +105,7 @@ const MyOtherComponent = () => {
   )
 }
 
-;<MyOtherComponent />
+;<MyThirdComponent />
 ```
 
 ### With maxOptions
@@ -96,6 +131,7 @@ const MyThirdComponent = () => {
   const [value, setValue] = React.useState("one")
   return (
     <Select
+      data-cy="maxOptions-select"
       label="Select label"
       value={value}
       options={options}
@@ -170,11 +206,11 @@ const MyComponent = () => {
 
   return (
     <Select
+      data-cy="disabled-select"
       disabled
       value={value}
       options={options}
       label="Disabled"
-      filterable
       placeholder="Choose an option"
       onChange={setValue}
     />
@@ -203,10 +239,10 @@ const MyComponent = () => {
   return (
     <Form>
       <Select
+        data-cy="custom-select"
         value={value1}
         options={options}
         label="Custom Input"
-        filterable
         placeholder="Choose an option"
         customOption="Custom..."
         onChange={setValue1}
