@@ -38,7 +38,7 @@ export interface SelectPropsWithCustomOption extends BaseSelectProps {
 }
 
 export interface SelectPropsWithMultiSelect extends BaseSelectProps {
-  /** Custom Option */
+  /** We cannot have a custom option in a multi-selectable Select component */
   customOption?: never
   /** Current value */
   value: null | Value | Value[]
