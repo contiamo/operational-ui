@@ -4,7 +4,7 @@ import ContextMenu from "../ContextMenu/ContextMenu"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 import LabelText from "../LabelText/LabelText"
 import { useUniqueId } from "../useUniqueId"
-import { FilterInput, Combobox, Container, DropdownButton, SelectInput } from "./Select.styled"
+import { FilterInput, Combobox, Listbox, DropdownButton, SelectInput } from "./Select.styled"
 import { SelectProps } from "./Select.types"
 import {
   truncateList,
@@ -31,6 +31,7 @@ export const Select: React.FC<SelectProps> = ({
   filterable,
   id,
   customOption,
+  tabIndex = 0,
   ...rest
 }) => {
   const uniqueId = useUniqueId(id)
@@ -113,21 +114,29 @@ export const Select: React.FC<SelectProps> = ({
       disabled={disabled}
       keepOpenOnItemClick={Array.isArray(value)}
       items={items}
+      tabIndex={tabIndex}
+      {...rest}
     >
       {isOpen => (
-        <Container id={uniqueId} disabled={Boolean(disabled)} color={color}>
-          {label && <LabelText>{label}</LabelText>}
-          <Combobox {...rest} naked={Boolean(naked)}>
+        <Listbox
+          aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
+          id={`operational-ui__Select-${uniqueId}`}
+          disabled={Boolean(disabled)}
+          color={color}
+        >
+          {label && <LabelText id={`operational-ui__Select-Label-${uniqueId}`}>{label}</LabelText>}
+          <Combobox naked={Boolean(naked)}>
             <SelectInput
               disabled={disabled}
               placeholder={placeholder}
               readOnly={value !== customInputValue}
+              value={getDisplayValue(value, customInputValue, customInputSymbol)}
+              id={`operational-ui__Select-Input-${uniqueId}`}
               onClick={e => {
                 if (value === customInputValue) {
                   e.stopPropagation()
                 }
               }}
-              value={getDisplayValue(value, customInputValue, customInputSymbol)}
               onChange={newValue => {
                 setCustomInputValue(newValue)
                 if (onChange) {
@@ -137,7 +146,7 @@ export const Select: React.FC<SelectProps> = ({
             />
             <DropdownButton isOpen={isOpen} />
           </Combobox>
-        </Container>
+        </Listbox>
       )}
     </ContextMenu>
   )

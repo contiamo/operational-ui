@@ -2,13 +2,17 @@ import styled from "../utils/styled"
 import { expandColor } from "../utils/constants"
 import Input from "../Input/Input"
 
-export const Container = styled("div")<{ disabled: boolean; color?: string }>`
+export const Listbox = styled("div")<{ disabled: boolean; color?: string }>`
   display: flex;
   flex-direction: column;
   color: ${({ theme, color }) => expandColor(theme, color)};
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
 `
+
+Listbox.defaultProps = {
+  role: "listbox",
+}
 
 export const Combobox = styled("div")<{ naked: boolean }>`
   display: grid;
@@ -18,6 +22,11 @@ export const Combobox = styled("div")<{ naked: boolean }>`
   border: 1px solid ${({ theme }) => theme.color.border.default};
   border-width: ${({ naked }) => (naked ? 0 : 1)}px;
   border-radius: ${({ theme }) => theme.borderRadius}px;
+  outline: none;
+
+  :focus {
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
+  }
 `
 
 export const SelectInput = styled(Input)`
@@ -46,6 +55,9 @@ export const DropdownButton = styled("div")<{ isOpen: boolean }>`
   box-shadow: 0 0 0 1px ${({ theme, isOpen }) => (isOpen ? theme.color.primary : "transparent")};
   border-top-right-radius: ${({ theme }) => theme.borderRadius}px;
   border-bottom-right-radius: ${({ theme }) => theme.borderRadius}px;
+  :focus {
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
+  }
 
   ::after {
     content: "";
