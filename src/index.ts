@@ -78,6 +78,7 @@ export { default as LabelText } from "./LabelText/LabelText"
 export { default as Accordion, AccordionProps } from "./Accordion/Accordion"
 export { useAccordionState } from "./Accordion/useAccordionState"
 export { default as Tabs, TabsProps } from "./Tabs/Tabs"
+export { default as Uploader } from "./Uploader/Uploader"
 
 // Typography components
 export { default as FinePrint } from "./Typography/FinePrint"
