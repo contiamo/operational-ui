@@ -3,7 +3,6 @@ import * as React from "react"
 
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-import { keyCodes } from "../utils"
 import ContextMenuItem, { IContextMenuItem } from "./ContextMenu.Item"
 
 export interface ContextMenuProps extends DefaultProps {
@@ -93,6 +92,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     e.stopPropagation()
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
+      focusedItemIndex: -1, // reset focus on open and close
     }))
   }
 
@@ -110,20 +110,23 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     focusedItemIndex: this.state.focusedItemIndex === this.props.items.length - 1 ? 0 : this.state.focusedItemIndex + 1,
   })
 
-  private handleKeyPress = ({ keyCode }: React.KeyboardEvent<HTMLDivElement>) => {
-    if (keyCode === keyCodes.enter && this.props.onClick) {
+  private handleKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const { key } = e
+    if ((key === "Enter" || key === "Space" || key === " ") && this.props.onClick) {
+      e.preventDefault() // prevent document scroll.
       this.props.onClick(this.makeItem(this.props.items[this.state.focusedItemIndex]))
       this.setState(() => ({ isOpen: false }))
       return
     }
 
-    if (keyCode === keyCodes.esc) {
+    if (key === "Escape") {
       this.setState(() => ({ isOpen: false }))
       return
     }
 
-    if ([keyCodes.up, keyCodes.down].includes(keyCode)) {
-      this.setState(keyCode === keyCodes.up ? this.onUpPress : this.onDownPress)
+    if (["ArrowUp", "ArrowDown"].includes(key)) {
+      e.preventDefault() // prevent document scroll.
+      this.setState(key === "ArrowUp" ? this.onUpPress : this.onDownPress)
       this.focusElement()
     }
   }
@@ -184,7 +187,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
               this.toggle(e)
             }
           }}
-          onKeyUp={this.handleKeyPress}
+          onKeyDown={this.handleKeyPress}
         >
           {renderedChildren}
           {isOpen && (
