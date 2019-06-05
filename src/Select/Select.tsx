@@ -136,7 +136,7 @@ export const Select: React.FC<SelectProps> = ({
     >
       {isOpen => (
         <Listbox
-          fullWidth={fullWidth}
+          fullWidth={Boolean(fullWidth)}
           ref={containerRef}
           aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
           aria-disabled={Boolean(disabled)}
@@ -149,6 +149,7 @@ export const Select: React.FC<SelectProps> = ({
           <Combobox naked={Boolean(naked)}>
             <SelectInput
               inputRef={inputRef}
+              fullWidth={fullWidth}
               disabled={disabled}
               placeholder={placeholder}
               readOnly={getDisplayValue(value, customInputValue, customInputSymbol) !== customInputValue}

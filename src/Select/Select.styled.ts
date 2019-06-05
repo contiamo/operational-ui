@@ -2,7 +2,7 @@ import styled from "../utils/styled"
 import { expandColor } from "../utils/constants"
 import Input from "../Input/Input"
 
-export const Listbox = styled("div")<{ disabled: boolean; color?: string; fullWidth?: boolean }>`
+export const Listbox = styled("div")<{ disabled: boolean; color?: string; fullWidth: boolean }>`
   display: flex;
   flex-direction: column;
   color: ${({ theme, color }) => expandColor(theme, color)};
