@@ -60,7 +60,7 @@ const Container = styled("div")<Props>(({ align, theme, onClick, isActive, conde
       ? {
           cursor: "pointer",
           color: theme.color.text.default,
-          "&:hover": {
+          "&:hover, :focus": {
             backgroundColor: lighten(theme.color.primary, 50),
             color: theme.color.primary,
           },
