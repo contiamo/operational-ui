@@ -49,7 +49,11 @@ export const getDisplayValue = (internalValue: Value | Value[] | null) => (optio
 
   const valueExistsInOptions = options.find(option => option.value === internalValue)
   if (valueExistsInOptions) {
-    return valueExistsInOptions.label || ""
+    return valueExistsInOptions.label || String(valueExistsInOptions.value)
+  }
+
+  if (internalValue === null) {
+    return ""
   }
 
   return String(internalValue)
@@ -61,7 +65,7 @@ export const optionsToContextMenuItems = (overrides?: (option: IOption) => Parti
   options.map(
     (option): IContextMenuItem => ({
       ...option,
-      label: option.label || "", // It's optional in one but required in the other
+      label: option.label || String(option.value), // fall back to the value if no label
       ...(overrides ? overrides(option) : {}),
     }),
   )

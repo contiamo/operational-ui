@@ -7,12 +7,13 @@ import {
   optionsToContextMenuItems,
   prependItem,
   truncateList,
+  getOptionFromItem,
 } from "../Select.util"
 import { IOption } from "../Select.types"
 
 describe("Select component utilities", () => {
   const defaultOptionValue = "🇪🇸🌍 queso"
-  const myOptions: IOption[] = [{ label: "Hola Mundo", value: defaultOptionValue }]
+  const myOptions: IOption[] = [{ label: "Hola Mundo", value: defaultOptionValue }, { value: "NO LABEL LOL" }]
   const longTestOptions: IOption[] = [
     ...Array.from({ length: 100 }, (_, index) => ({ label: String(index), value: index })),
     ...myOptions,
@@ -21,12 +22,14 @@ describe("Select component utilities", () => {
     { value: "my name is earl", label: "Baloney" },
     { value: "what's your name", label: "Pastrami" },
     { value: "follow @hackSultan", label: "Cheese" },
+    { value: "Fabien is cool" },
   ]
 
   it("should convert options to context menu items", () => {
     const mockFn = jest.fn
     expect(optionsToContextMenuItems(() => ({ onClick: mockFn }))(myOptions)).toEqual([
       { label: "Hola Mundo", value: defaultOptionValue, onClick: mockFn },
+      { label: "NO LABEL LOL", value: "NO LABEL LOL", onClick: mockFn },
     ])
   })
 
@@ -34,11 +37,13 @@ describe("Select component utilities", () => {
     expect(prependItem({ icon: "Add", label: "Sup" })(optionsToContextMenuItems()(myOptions))).toEqual([
       { icon: "Add", label: "Sup" },
       { label: "Hola Mundo", value: defaultOptionValue },
+      { label: "NO LABEL LOL", value: "NO LABEL LOL" },
     ])
   })
   it("should append an option to an existing list of options", () => {
     expect(appendItem({ icon: "Add", label: "Sup" })(optionsToContextMenuItems()(myOptions))).toEqual([
       { label: "Hola Mundo", value: defaultOptionValue },
+      { label: "NO LABEL LOL", value: "NO LABEL LOL" },
       { icon: "Add", label: "Sup" },
     ])
   })
@@ -51,6 +56,9 @@ describe("Select component utilities", () => {
   })
   it("should truncate a list of options", () => {
     expect(truncateList(2)(longTestOptions)).toEqual([{ label: "0", value: 0 }, { label: "1", value: 1 }])
+  })
+  it("should give back unchanged options if maxOptions doesn't exist", () => {
+    expect(truncateList()(longTestOptions)).toEqual(longTestOptions)
   })
   it("should truncate a list of options while respecting filters", () => {
     expect(truncateList(2)(filterList("hol")(longTestOptions))).toEqual([
@@ -72,6 +80,12 @@ describe("Select component utilities", () => {
   it("should get a display value from a numeric value", () => {
     expect(getDisplayValue(4)(longTestOptions)).toEqual("4")
   })
+  it("should get a display value from a custom value", () => {
+    expect(getDisplayValue("THIS IS CUSTOM DATA WOAH")(longTestOptions)).toEqual("THIS IS CUSTOM DATA WOAH")
+  })
+  it("should display the actual internal value from an option without a label", () => {
+    expect(getDisplayValue("Fabien is cool")(longTestOptions)).toEqual("Fabien is cool")
+  })
   it("should get a changed value when a basic value changes", () => {
     expect(getNewValue("cheese")("hola")).toEqual("hola")
   })
@@ -88,5 +102,11 @@ describe("Select component utilities", () => {
   it("should be able to tell if multi-select options are selected", () => {
     expect(isOptionSelected(["chickens", "cheese"])({ label: "I am not a chicken", value: "what's up" })).toEqual(false)
     expect(isOptionSelected(["chickens", "cheese"])({ label: "I am not a chicken", value: "chickens" })).toEqual(true)
+  })
+  it("should retreive select IOptions from IContextMenuItems", () => {
+    expect(getOptionFromItem(myOptions)(optionsToContextMenuItems()(myOptions)[0])).toEqual({
+      label: "Hola Mundo",
+      value: "🇪🇸🌍 queso",
+    })
   })
 })
