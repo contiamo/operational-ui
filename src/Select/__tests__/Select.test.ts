@@ -104,7 +104,9 @@ describe("Select component utilities", () => {
     expect(isOptionSelected(["chickens", "cheese"])({ label: "I am not a chicken", value: "chickens" })).toEqual(true)
   })
   it("should retreive select IOptions from IContextMenuItems", () => {
-    expect(getOptionFromItem(myOptions)(optionsToContextMenuItems()(myOptions)[0])).toEqual({
+    expect(
+      getOptionFromItem(optionsToContextMenuItems()(myOptions))(optionsToContextMenuItems()(myOptions)[0]),
+    ).toEqual({
       label: "Hola Mundo",
       value: "🇪🇸🌍 queso",
     })

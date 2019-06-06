@@ -9,7 +9,6 @@ import { SelectProps, IOption } from "./Select.types"
 import {
   truncateList,
   appendItem,
-  customInputSymbol,
   filterList,
   getDisplayValue,
   getNewValue,
@@ -105,18 +104,16 @@ export const Select: React.FC<SelectProps> = ({
     return contextMenuItems
   }, [options, value, filter, maxOptions, filterable, customOption, onChange])
 
-  console.log(value, customInputSymbol, value === customInputSymbol)
-
   return (
     <ContextMenu
       onClick={item => {
         if (onChange) {
-          onChange(getNewValue(value)(item.value), getOptionFromItem(options)(item))
+          onChange(getNewValue(value)(item.value), getOptionFromItem(items)(item))
         }
-        if (containerRef.current && item.value !== customInputSymbol) {
+        if (containerRef.current) {
           containerRef.current.focus()
         }
-        if (item.value === customInputSymbol && inputRef.current) {
+        if (inputRef.current) {
           inputRef.current.focus()
         }
       }}

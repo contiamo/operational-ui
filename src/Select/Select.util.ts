@@ -37,8 +37,6 @@ export const getNewValue = (value: Value | Value[] | null) => (newValue: Value) 
   return newValue
 }
 
-export const customInputSymbol = Symbol("custom input")
-
 export const getDisplayValue = (internalValue: Value | Value[] | null) => (options: IOption[]): string => {
   if (Array.isArray(internalValue)) {
     return options
@@ -70,5 +68,12 @@ export const optionsToContextMenuItems = (overrides?: (option: IOption) => Parti
     }),
   )
 
-export const getOptionFromItem = (options: IOption[]) => (item: IContextMenuItem) =>
-  options.find(option => option.value === item.value)
+export const getOptionFromItem = (haystack: IContextMenuItem[]) => (needle: IContextMenuItem): IOption | undefined => {
+  const result = haystack.find(item => needle.label === item.label)
+
+  if (result) {
+    return { label: result.label || result.value, value: result.value }
+  }
+
+  return undefined
+}
