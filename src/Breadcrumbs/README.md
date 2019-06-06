@@ -5,7 +5,6 @@ Breadcrumbs are typically a series of links showing the path to a particular pag
 ```jsx
 import * as React from "react"
 import { Breadcrumbs, Breadcrumb } from "@operational/components"
-
 ;<Breadcrumbs>
   <Breadcrumb>Home</Breadcrumb>
   <Breadcrumb>Page 1</Breadcrumb>
@@ -20,10 +19,19 @@ Using a `to` prop navigates automatically, and render proper anchor tags with hr
 ```jsx
 import * as React from "react"
 import { Breadcrumbs, Breadcrumb } from "@operational/components"
-
 ;<Breadcrumbs>
   <Breadcrumb to="/some-url">Home</Breadcrumb>
   <Breadcrumb>Page 1</Breadcrumb>
   <Breadcrumb>Subpage 1</Breadcrumb>
+</Breadcrumbs>
+```
+
+### Single level
+
+```jsx
+import * as React from "react"
+import { Breadcrumbs, Breadcrumb } from "@operational/components"
+;<Breadcrumbs>
+  <Breadcrumb to="/some-url">Home</Breadcrumb>
 </Breadcrumbs>
 ```

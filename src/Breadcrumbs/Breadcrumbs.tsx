@@ -1,6 +1,7 @@
 import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
+import Icon from "../Icon/Icon"
 
 export interface BreadcrumbsProps extends DefaultProps {
   /** Children as `Breadcrumb` elements */
@@ -9,6 +10,8 @@ export interface BreadcrumbsProps extends DefaultProps {
 
 const Container = styled("div")({
   label: "breadcrumbs",
+  verticalSlign: "middle",
+
   "& > *": {
     display: "inline-block",
   },
@@ -27,17 +30,36 @@ const Slash = styled("span")(({ theme }) => ({
   },
 }))
 
+const flatMap = (nodes: React.ReactNode[], map: (x: React.ReactNode, i: number) => React.ReactNode[]) =>
+  nodes.reduce(
+    (acc: React.ReactNode[], node, i) => {
+      acc.push(...map(node, i))
+      return acc
+    },
+    [] as React.ReactNode[],
+  )
+
 /**
  * Intersperse slashes between the children (`<Breadcrumb />` elements)
  * Curried first argument is necessary to give unique auto-incrementing
  *  keys to the slash elements.
  */
-
-const intersperseSlashes = (index: number) => ([head, ...tail]: React.ReactNode[]): React.ReactNode[] =>
-  head ? [<Slash key={`divider-${index}`}>/</Slash>, head, ...intersperseSlashes(index + 1)(tail)] : []
+const intersperseSlashes = (nodes: React.ReactNode[]) =>
+  flatMap(nodes, (node, index) => {
+    if (nodes.length === 1) {
+      return [
+        <Slash key={`divider-${index}`}>
+          <Icon name="ChevronLeft" size={12} />
+        </Slash>,
+        node,
+      ]
+    } else {
+      return index === 0 ? [node] : [<Slash key={`divider-${index}`}>/</Slash>, node]
+    }
+  })
 
 const Breadcrumbs: React.SFC<BreadcrumbsProps> = props => (
-  <Container {...props}>{intersperseSlashes(0)(React.Children.toArray(props.children))}</Container>
+  <Container {...props}>{intersperseSlashes(React.Children.toArray(props.children))}</Container>
 )
 
 export default Breadcrumbs
