@@ -73,8 +73,9 @@ const Step = styled("li")<{ stepState: StepState; number: number; color: Stepper
   :last-child {
       flex: 0 1 0;
   }
-
 `
+
+Step.defaultProps = { role: "tab" }
 
 const StepLabel = styled("div")`
   min-width: fit-content;
@@ -95,9 +96,12 @@ const Stepper: React.SFC<StepperProps> = props => {
   const { steps, stepColor, onStepChange, activeSlideIndex } = props
   return (
     <>
-      <Steps>
+      <Steps data-cy="operational-ui__Stepper-steps">
         {steps.map(({ title }, index) => (
           <Step
+            data-cy={`operational-ui__Stepper-step-${index}`}
+            tabIndex={index === activeSlideIndex ? 0 : -1}
+            aria-selected={index === activeSlideIndex}
             key={index}
             stepState={getStepState(index, activeSlideIndex)}
             number={index + 1}
@@ -112,7 +116,7 @@ const Stepper: React.SFC<StepperProps> = props => {
           </Step>
         ))}
       </Steps>
-      <StepContent>{steps[activeSlideIndex!].content}</StepContent>
+      <StepContent data-cy="operational-ui__Stepper-content">{steps[activeSlideIndex!].content}</StepContent>
     </>
   )
 }

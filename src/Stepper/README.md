@@ -11,6 +11,7 @@ const MyComponent = () => {
 
   return (
     <Stepper
+      data-cy="operational-ui__Stepper"
       activeSlideIndex={activeSlideIndex}
       onStepChange={setActiveSlideIndex}
       steps={[
