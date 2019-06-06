@@ -3,7 +3,7 @@ import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import { DefaultProps } from "../types"
 import { darken } from "../utils"
 import styled from "../utils/styled"
-import { IconChevronUp, IconHamburgerMenu } from "../Icon/Icon"
+import { ChevronUpIcon, HamburgerMenuIcon } from "../Icon/Icon"
 
 export interface ActionMenuProps extends DefaultProps {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
@@ -56,7 +56,7 @@ const ActionMenu: React.SFC<ActionMenuProps> = ({ stickyTitle, items, title, ...
       return (
         <Container>
           {(isOpen || stickyTitle) && <TitleContainer>{title}</TitleContainer>}
-          {isOpen ? <IconChevronUp color={iconColor} /> : <IconHamburgerMenu color={iconColor} />}
+          {isOpen ? <ChevronUpIcon color={iconColor} /> : <HamburgerMenuIcon color={iconColor} />}
         </Container>
       )
     }}

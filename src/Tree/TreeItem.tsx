@@ -2,7 +2,7 @@ import React from "react"
 import NameTag from "../NameTag/NameTag"
 import { darken } from "../utils"
 import styled from "../utils/styled"
-import { IconCaretDown, IconPlus, IconNo, IconComponentType } from "../Icon/Icon"
+import { CaretDownIcon, PlusIcon, NoIcon, IconComponentType } from "../Icon/Icon"
 
 export const Container = styled("div")<{ hasChildren: boolean; disabled: boolean }>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
@@ -57,8 +57,8 @@ const TreeIcon = styled("div")`
   margin-right: ${({ theme }) => theme.space.base}px;
 `
 
-const ChevronDown = TreeIcon.withComponent(IconCaretDown)
-const Add = TreeIcon.withComponent(IconPlus)
+const ChevronDown = TreeIcon.withComponent(CaretDownIcon)
+const Add = TreeIcon.withComponent(PlusIcon)
 
 interface TreeItemProps {
   highlight: boolean
@@ -98,7 +98,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     <Label hasChildren={hasChildren}>{label}</Label>
     {onRemove && (
       <DeleteNode onClick={onRemove}>
-        <IconNo size={12} />
+        <NoIcon size={12} />
       </DeleteNode>
     )}
   </Header>

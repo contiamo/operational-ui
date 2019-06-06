@@ -4,7 +4,7 @@ import CopyToClipboard from "react-copy-to-clipboard"
 import Highlight from "react-highlight"
 import ReactJson, { ReactJsonViewProps } from "react-json-view"
 
-import { IconCopy } from "../Icon/Icon"
+import { CopyIcon } from "../Icon/Icon"
 import { DefaultProps } from "../types"
 import constants from "../utils/constants"
 import styled from "../utils/styled"
@@ -184,7 +184,7 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "codeTheme" | "collapsed" | 
   />
 )
 
-const CodeIcon = styled(IconCopy)`
+const CodeIcon = styled(CopyIcon)`
   position: absolute;
   top: ${({ theme }) => theme.space.small}px;
   right: ${({ theme }) => theme.space.small}px;

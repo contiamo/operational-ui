@@ -77,7 +77,7 @@ export const MonthNav = styled("div")(({ theme }) => ({
   },
 }))
 
-export const IconContainer = styled("div")<{ disabled?: boolean }>(
+export const ContainerIcon = styled("div")<{ disabled?: boolean }>(
   ({ theme, disabled }): {} => ({
     width: 20,
     height: 20,

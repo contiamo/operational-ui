@@ -4,7 +4,7 @@ import { DefaultProps } from "../../types"
 import styled from "../../utils/styled"
 
 import { expandColor } from "../../utils/constants"
-import { IconNo } from "../../Icon/Icon"
+import { NoIcon } from "../../Icon/Icon"
 
 export interface MessageProps extends DefaultProps {
   className?: string
@@ -65,7 +65,7 @@ export const Message: React.SFC<MessageProps> = ({ color, onClose, children, ...
         }
       }}
     >
-      <IconNo />
+      <NoIcon />
     </IconContainer>
     {children}
   </Container>

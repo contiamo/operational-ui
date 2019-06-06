@@ -4,14 +4,14 @@ Top bars are used as lower-level navigation elements for widgets inside applicat
 
 ```jsx
 import * as React from "react"
-import { Topbar, TopbarSelect, TopbarButton, IconNo, IconUndo, IconRedo } from "@operational/components"
+import { Topbar, TopbarSelect, TopbarButton, NoIcon, UndoIcon, RedoIcon } from "@operational/components"
 ;<Topbar
   left={
     <>
       <TopbarSelect label="Fruit" selected={"apples"} items={["apples", "oranges"].map(name => ({ label: name }))} />
-      <TopbarButton icon={IconNo}>Clear</TopbarButton>
-      <TopbarButton icon={IconUndo}>Undo</TopbarButton>
-      <TopbarButton icon={IconRedo} disabled>
+      <TopbarButton icon={NoIcon}>Clear</TopbarButton>
+      <TopbarButton icon={UndoIcon}>Undo</TopbarButton>
+      <TopbarButton icon={RedoIcon} disabled>
         Redo
       </TopbarButton>
     </>

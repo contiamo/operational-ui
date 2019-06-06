@@ -3,7 +3,7 @@ import ActionMenu, { ActionMenuProps } from "../ActionMenu/ActionMenu"
 import { DefaultProps } from "../types"
 import Small from "../Typography/Small"
 import styled from "../utils/styled"
-import { IconComponentType, IconChevronDown, IconChevronUpDown, IconChevronUp } from "../Icon/Icon"
+import { IconComponentType, ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon } from "../Icon/Icon"
 
 export interface TableProps<T> extends DefaultProps {
   data: T[]
@@ -130,7 +130,7 @@ const Actions = styled(Td)(({ theme }) => ({
   },
 }))
 
-const IconCell = styled(Td)`
+const CellIcon = styled(Td)`
   width: 40px;
   padding: ${props => props.theme.space.base}px;
   color: ${props => props.theme.color.text.lightest};
@@ -172,14 +172,14 @@ function Table<T>({
     }
   })
 
-  const hasIcons = Boolean(data[0] && icon && icon(data[0]))
+  const hassIcon = Boolean(data[0] && icon && icon(data[0]))
 
   return (
     <Container fixedLayout={fixedLayout} {...props}>
       {!headless && (
         <Thead>
           <Tr>
-            {hasIcons && <Th key="-1" />}
+            {hassIcon && <Th key="-1" />}
             {standardizedColumns.map((column, columnIndex) => (
               <Th
                 key={columnIndex}
@@ -189,13 +189,13 @@ function Table<T>({
                 <ThContent sorted={Boolean(column.sortOrder)}>
                   {column.heading}
                   {column.onSortClick && !column.sortOrder && (
-                    <IconChevronUpDown right size={10} color="color.border.disabled" />
+                    <ChevronUpDownIcon right size={10} color="color.border.disabled" />
                   )}
                   {column.sortOrder &&
                     (column.sortOrder === "desc" ? (
-                      <IconChevronUp right size={10} color="primary" />
+                      <ChevronUpIcon right size={10} color="primary" />
                     ) : (
-                      <IconChevronDown right size={10} color="primary" />
+                      <ChevronDownIcon right size={10} color="primary" />
                     ))}
                 </ThContent>
               </Th>
@@ -233,11 +233,11 @@ function Table<T>({
                   }
                 }}
               >
-                {hasIcons && (
-                  <IconCell>
+                {hassIcon && (
+                  <CellIcon>
                     {/** Because has `hasIcon`, it is guaranteed that the `icon` function exists */}
                     {React.createElement(icon!(dataEntry), { color: iconColor && iconColor(dataEntry) })}
-                  </IconCell>
+                  </CellIcon>
                 )}
                 {standardizedColumns.map((column, columnIndex) => (
                   <Td cellWidth={column.width} key={columnIndex}>

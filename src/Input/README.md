@@ -150,12 +150,12 @@ const makeErrorStyles = ({ left, top, size }) => ({
 ### With an Action Button
 
 ```jsx
-import { IconUser } from "@operational/components"
+import { UserIcon } from "@operational/components"
 ;<Input
   value="JNAPE92"
   label="Employee ID"
-  icon={IconUser}
-  onIconClick={() => {
+  icon={UserIcon}
+  onClickIcon={() => {
     alert("You have clicked on JNAPE92!")
   }}
 />

@@ -6,7 +6,7 @@ import { DefaultProps } from "../types"
 import { isModifiedEvent, isOutsideLink } from "../utils"
 import styled from "../utils/styled"
 import { truncate } from "../utils/truncate"
-import { IconComponentType, IconChevronUp, IconChevronDown } from "../Icon/Icon"
+import { IconComponentType, ChevronUpIcon, ChevronDownIcon } from "../Icon/Icon"
 
 export interface SidenavHeaderProps extends DefaultProps {
   /** Main label for the header */
@@ -182,7 +182,7 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
                   }
                 }}
               >
-                {active ? <IconChevronUp /> : <IconChevronDown />}
+                {active ? <ChevronUpIcon /> : <ChevronDownIcon />}
               </CloseButton>
             )}
             {isActive && (

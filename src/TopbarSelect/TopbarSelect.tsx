@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from "react"
 
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import styled from "../utils/styled"
-import { IconCaretUp, IconCaretDown } from "../Icon/Icon"
+import { CaretUpIcon, CaretDownIcon } from "../Icon/Icon"
 
 export interface TopbarSelectProps {
   /** A label added right before displaying the selected value */
@@ -32,7 +32,7 @@ const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
     background-color: ${props => (props.isActive ? props.theme.color.white : props.theme.color.background.lighter)};
   }
   & svg {
-    /** Icons are purely presentational and click events are handled upstream */
+    /** sIcon are purely presentational and click events are handled upstream */
     pointer-events: none;
   }
 `
@@ -86,7 +86,7 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
           <TopbarSelectLabel>{label}</TopbarSelectLabel>
           <TopbarSelectValue>
             <TopbarSelectValueSpan active={Boolean(selected)}>{selected}</TopbarSelectValueSpan>
-            {React.createElement(isActive ? IconCaretUp : IconCaretDown, { size: 12, color: "color.text.lightest" })}
+            {React.createElement(isActive ? CaretUpIcon : CaretDownIcon, { size: 12, color: "color.text.lightest" })}
           </TopbarSelectValue>
         </TopbarSelectContainer>
       )}

@@ -9,7 +9,7 @@ import { useUniqueId } from "../useUniqueId"
 import { isCmdEnter, lighten } from "../utils"
 import { FormFieldControls, Label } from "../utils/mixins"
 import styled from "../utils/styled"
-import { IconCopy } from "../Icon/Icon"
+import { CopyIcon } from "../Icon/Icon"
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
 
@@ -194,7 +194,7 @@ const Textarea: React.FC<TextareaProps> = ({
                 onCopy={() => pushMessage({ type: "success", body: "Successfully Copied" })}
               >
                 <div role="button" aria-label="Copy to Clipboard">
-                  <IconCopy size={8} />
+                  <CopyIcon size={8} />
                   <a>Copy to clipboard</a>
                 </div>
               </CopyToClipboard>

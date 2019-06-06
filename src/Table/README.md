@@ -49,7 +49,7 @@ In this case, simple functions taking an individual record as an argument specif
 
 ```jsx
 import * as React from "react"
-import { Table, IconOlap, Chip, AvatarGroup } from "@operational/components"
+import { Table, OlapIcon, Chip, AvatarGroup } from "@operational/components"
 
 const data = [
   {
@@ -89,7 +89,7 @@ const data = [
 ;<Table
   data={data}
   columns={[
-    { heading: "", cell: dataEntry => <IconOlap color="primary" /> },
+    { heading: "", cell: dataEntry => <OlapIcon color="primary" /> },
     { heading: "Name", cell: dataEntry => dataEntry.name },
     { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
     { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
@@ -105,7 +105,7 @@ We can customize the look of the table by specifying a `width` property on certa
 
 ```jsx
 import * as React from "react"
-import { Table, Chip, AvatarGroup, IconOlap } from "@operational/components"
+import { Table, Chip, AvatarGroup, OlapIcon } from "@operational/components"
 
 const data = [
   {
@@ -145,7 +145,7 @@ const data = [
 ;<Table
   data={data}
   columns={[
-    { heading: "", cell: dataEntry => <IconOlap color="primary" /> },
+    { heading: "", cell: dataEntry => <OlapIcon color="primary" /> },
     { heading: "Name", width: 600, cell: dataEntry => dataEntry.name },
     { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
     {
@@ -163,7 +163,7 @@ const data = [
 
 ```jsx
 import * as React from "react"
-import { Table, IconProject, Chip } from "@operational/components"
+import { Table, ProjectIcon, Chip } from "@operational/components"
 
 const data = [
   {
@@ -184,9 +184,9 @@ const data = [
 ]
 ;<Table
   data={data}
-  icon={dataEntry => IconProject}
+  icon={dataEntry => ProjectIcon}
   columns={[
-    { heading: "", cell: dataEntry => <IconProject color="primary" /> },
+    { heading: "", cell: dataEntry => <ProjectIcon color="primary" /> },
     { heading: "Name", cell: dataEntry => dataEntry.name },
     { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
     { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
@@ -199,7 +199,7 @@ const data = [
 
 ```jsx
 import * as React from "react"
-import { Table, IconProject, Chip } from "@operational/components"
+import { Table, ProjectIcon, Chip } from "@operational/components"
 
 const data = [
   {
@@ -220,10 +220,10 @@ const data = [
 ]
 ;<Table
   data={data}
-  icon={dataEntry => IconProject}
+  icon={dataEntry => ProjectIcon}
   iconColor={dataEntry => (dataEntry.name.indexOf("Mega") > -1 ? "primary" : "gray")}
   columns={[
-    { heading: "", cell: dataEntry => <IconProject color="primary" /> },
+    { heading: "", cell: dataEntry => <ProjectIcon color="primary" /> },
     { heading: "Name", cell: dataEntry => dataEntry.name },
     { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
     { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
@@ -239,7 +239,7 @@ Row actions are specified as a function of an individual record, returning actio
 
 ```jsx
 import * as React from "react"
-import { Table, Chip, AvatarGroup, IconFunction } from "@operational/components"
+import { Table, Chip, AvatarGroup, FunctionIcon } from "@operational/components"
 
 const data = [
   {
@@ -279,7 +279,7 @@ const data = [
 ;<Table
   data={data}
   columns={[
-    { heading: "", cell: dataEntry => <IconFunction color="primary" /> },
+    { heading: "", cell: dataEntry => <FunctionIcon color="primary" /> },
     { heading: "Name", cell: dataEntry => dataEntry.name },
     { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
     { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },

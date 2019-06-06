@@ -5,7 +5,7 @@ import styled from "../utils/styled"
 import { InputProps } from "./Input"
 import InputButton from "./Input.Button"
 import { height } from "./Input.constants"
-import { IconNo } from "../Icon/Icon"
+import { NoIcon } from "../Icon/Icon"
 
 const width = 360
 
@@ -23,11 +23,11 @@ const Container = styled("div")<{
 
 const Field = styled("input")<{
   isError: boolean
-  withIconButton: boolean
+  withButtonIcon: boolean
   preset: InputProps["preset"]
   disabled: InputProps["disabled"]
   clear: InputProps["clear"]
-}>(({ theme, disabled, isError, withIconButton, preset, clear }) => {
+}>(({ theme, disabled, isError, withButtonIcon, preset, clear }) => {
   const makeBackgroundColor = () => {
     if (disabled) {
       return theme.color.disabled
@@ -41,7 +41,7 @@ const Field = styled("input")<{
   }
 
   return {
-    ...(withIconButton
+    ...(withButtonIcon
       ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
       : { borderRadius: theme.borderRadius }),
     fontSize: theme.font.size.body,
@@ -112,25 +112,25 @@ const InputField: React.SFC<InputProps> = ({
   clear,
   icon,
   copy,
-  onIconClick,
+  onClickIcon,
   tabIndex,
   errorComponent: ErrorComponent,
   ...props
 }) => {
-  const shouldShowIconButton = Boolean(icon) || Boolean(copy)
+  const shouldShowButtonIcon = Boolean(icon) || Boolean(copy)
 
   const renderButton = () => {
     if (copy === true) {
       return <InputButton tabIndex={tabIndex} value={value || ""} copy={copy} />
     } else {
-      return <InputButton tabIndex={tabIndex} onIconClick={onIconClick} icon={icon} copy={false} />
+      return <InputButton tabIndex={tabIndex} onClickIcon={onClickIcon} icon={icon} copy={false} />
     }
   }
 
   return (
     <>
       <Container fullWidth={fullWidth} withLabel={Boolean(label)}>
-        {shouldShowIconButton && renderButton()}
+        {shouldShowButtonIcon && renderButton()}
         <Field
           ref={inputRef}
           autoFocus={autoFocus}
@@ -150,13 +150,13 @@ const InputField: React.SFC<InputProps> = ({
           clear={clear}
           preset={Boolean(preset)}
           id={`input-field-${id}`}
-          withIconButton={shouldShowIconButton}
+          withButtonIcon={shouldShowButtonIcon}
           autoComplete={autoComplete}
           {...props}
         />
         {clear && value && (
           <ClearButton onClick={clear}>
-            <IconNo />
+            <NoIcon />
           </ClearButton>
         )}
         {error && !ErrorComponent ? <FormFieldError>{error}</FormFieldError> : null}

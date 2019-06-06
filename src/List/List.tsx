@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Body from "../Typography/Body"
 import styled from "../utils/styled"
-import { IconChevronRight } from "../Icon/Icon"
+import { ChevronRightIcon } from "../Icon/Icon"
 
 export type ImageURL = string
 
@@ -44,7 +44,7 @@ const ImageContainer = styled("div")`
   }
 `
 
-const StyledIcon = styled(IconChevronRight)`
+const StyledIcon = styled(ChevronRightIcon)`
   fill: ${({ theme }) => theme.color.border.default};
   width: 24px;
   flex: 0 0 30px;

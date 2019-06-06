@@ -6,16 +6,16 @@ import {
   Sidenav,
   SidenavHeader,
   SidenavItem,
-  IconAdd,
-  IconHome,
-  IconAddTable,
-  IconAdmin,
-  IconBinary,
-  IconDataSource,
-  IconDate,
-  IconChevronDown,
-  IconDocument,
-  IconDimension,
+  AddIcon,
+  HomeIcon,
+  AddTableIcon,
+  AdminIcon,
+  BinaryIcon,
+  DataSourceIcon,
+  DateIcon,
+  ChevronDownIcon,
+  DocumentIcon,
+  DimensionIcon,
 } from "@operational/components"
 
 const StatefulSidenav = () => {
@@ -34,22 +34,22 @@ const StatefulSidenav = () => {
   return (
     <div style={{ height: 400 }}>
       <Sidenav>
-        <SidenavHeader condensed icon={IconHome} label="Project Home" />
+        <SidenavHeader condensed icon={HomeIcon} label="Project Home" />
         <SidenavHeader label="The Prize" active={activeHeaders.indexOf(1) > -1} onToggle={() => toggle(1)}>
-          <SidenavItem label="The First Prize" compactLabel="First" icon={IconAdd} />
-          <SidenavItem label="The Second Prize" compactLabel="Second" icon={IconAdmin} />
-          <SidenavItem label="No Short Label" icon={IconBinary} />
+          <SidenavItem label="The First Prize" compactLabel="First" icon={AddIcon} />
+          <SidenavItem label="The Second Prize" compactLabel="Second" icon={AdminIcon} />
+          <SidenavItem label="No Short Label" icon={BinaryIcon} />
         </SidenavHeader>
         <SidenavHeader label="Let It Snow" active={activeHeaders.indexOf(2) > -1} onToggle={() => toggle(2)}>
-          <SidenavItem label="The Fourth Prize" compactLabel="Fourth" icon={IconDataSource} />
-          <SidenavItem label="The Fifth Prize" compactLabel="Fifth" icon={IconChevronDown} />
+          <SidenavItem label="The Fourth Prize" compactLabel="Fourth" icon={DataSourceIcon} />
+          <SidenavItem label="The Fifth Prize" compactLabel="Fifth" icon={ChevronDownIcon} />
           {/* No Icon case */}
           <SidenavItem label="The Sixth Prize" compactLabel="Sixth" />
         </SidenavHeader>
         <SidenavHeader label="Let It Snow" active={activeHeaders.indexOf(3) > -1} onToggle={() => toggle(3)}>
-          <SidenavItem label="The Seventh Prize" compactLabel="Seventh" icon={IconDocument} />
-          <SidenavItem label="The Eighth Prize" compactLabel="Eighth" icon={IconDimension} />
-          <SidenavItem label="The Ninth Prize" compactLabel="Ninth" icon={IconDate} />
+          <SidenavItem label="The Seventh Prize" compactLabel="Seventh" icon={DocumentIcon} />
+          <SidenavItem label="The Eighth Prize" compactLabel="Eighth" icon={DimensionIcon} />
+          <SidenavItem label="The Ninth Prize" compactLabel="Ninth" icon={DateIcon} />
         </SidenavHeader>
       </Sidenav>
     </div>
@@ -67,24 +67,24 @@ import {
   Sidenav,
   SidenavHeader,
   SidenavItem,
-  IconHome,
-  IconFunction,
-  IconDocument,
-  IconPadlock,
-  IconNo,
-  IconYes,
+  HomeIcon,
+  FunctionIcon,
+  DocumentIcon,
+  PadlockIcon,
+  NoIcon,
+  YesIcon,
 } from "@operational/components"
 ;<Sidenav compact>
-  <SidenavHeader condensed icon={IconHome} label="Project Home" />
+  <SidenavHeader condensed icon={HomeIcon} label="Project Home" />
   <SidenavHeader label="The Prize">
-    <SidenavItem label="Overview" icon={IconFunction} />
-    <SidenavItem label="Use Cases" icon={IconDocument} />
-    <SidenavItem label="Guides" icon={IconHome} />
+    <SidenavItem label="Overview" icon={FunctionIcon} />
+    <SidenavItem label="Use Cases" icon={DocumentIcon} />
+    <SidenavItem label="Guides" icon={HomeIcon} />
   </SidenavHeader>
   <SidenavHeader label="Let It Snow">
-    <SidenavItem label="Steak" icon={IconYes} />
-    <SidenavItem label="Frites" active icon={IconPadlock} />
-    <SidenavItem label="Rum" icon={IconNo} />
+    <SidenavItem label="Steak" icon={YesIcon} />
+    <SidenavItem label="Frites" active icon={PadlockIcon} />
+    <SidenavItem label="Rum" icon={NoIcon} />
   </SidenavHeader>
 </Sidenav>
 ```
@@ -93,14 +93,14 @@ import {
 
 ```jsx
 import * as React from "react"
-import { Sidenav, SidenavHeader, SidenavItem, IconLogs, IconPadlock, IconNo } from "@operational/components"
+import { Sidenav, SidenavHeader, SidenavItem, LogsIcon, PadlockIcon, NoIcon } from "@operational/components"
 ;<div style={{ height: 600 }}>
   <Sidenav compact>
     <SidenavHeader label="Let It Snow">
-      <SidenavItem label="Steak" icon={IconLogs} />
-      <SidenavItem label="Frites" active icon={IconPadlock} />
+      <SidenavItem label="Steak" icon={LogsIcon} />
+      <SidenavItem label="Frites" active icon={PadlockIcon} />
     </SidenavHeader>
-    <SidenavItem end label="Rum" icon={IconNo} />
+    <SidenavItem end label="Rum" icon={NoIcon} />
   </Sidenav>
 </div>
 ```

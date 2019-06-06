@@ -6,29 +6,29 @@ along with a symbol for the button that will be displayed if click behavior is d
 
 ```jsx
 import * as React from "react"
-import { Chip, IconNo } from "@operational/components"
+import { Chip, NoIcon } from "@operational/components"
 ;<div style={{ display: "flex" }}>
   <Chip>Default color</Chip>
   <Chip
     color="basic"
-    icon={IconNo}
-    onIconClick={() => window.alert("Buonasera")}
+    icon={NoIcon}
+    onClickIcon={() => window.alert("Buonasera")}
     onClick={() => window.alert("Good evening!")}
   >
     With icon
   </Chip>
   <Chip
     color="success"
-    icon={IconNo}
-    onIconClick={() => window.alert("Buonasera")}
+    icon={NoIcon}
+    onClickIcon={() => window.alert("Buonasera")}
     onClick={() => window.alert("Good evening!")}
   >
     Ciao!
   </Chip>
   <Chip
     color="error"
-    icon={IconNo}
-    onIconClick={() => window.alert("Buonasera")}
+    icon={NoIcon}
+    onClickIcon={() => window.alert("Buonasera")}
     onClick={() => window.alert("Good evening!")}
   >
     Hello!

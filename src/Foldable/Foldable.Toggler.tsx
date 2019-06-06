@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import styled from "../utils/styled"
-import { IconChevronDown, IconChevronUp } from "../Icon/Icon"
+import { ChevronDownIcon, ChevronUpIcon } from "../Icon/Icon"
 
 export interface TogglerProps {
   isFolded?: boolean
@@ -11,7 +11,7 @@ export interface TogglerProps {
   onClick?: React.EventHandler<React.SyntheticEvent>
 }
 
-const FoldableIconBase = styled("div")`
+const FoldableBaseIcon = styled("div")`
   margin-left: auto;
   pointer-events: none;
 `
@@ -42,7 +42,7 @@ const TogglerOverlay = styled("div")<{ isHovered: boolean }>`
 `
 
 const Toggler: React.SFC<TogglerProps> = ({ isFolded, isHovered, ...props }) => {
-  const FoldableIcon = FoldableIconBase.withComponent(isFolded ? IconChevronDown : IconChevronUp)
+  const FoldableIcon = FoldableBaseIcon.withComponent(isFolded ? ChevronDownIcon : ChevronUpIcon)
 
   return (
     <TogglerOverlay isHovered={Boolean(isHovered)} {...props}>

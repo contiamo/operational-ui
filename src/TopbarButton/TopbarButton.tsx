@@ -27,7 +27,7 @@ const TopbarButtonContainer = styled("div")<{ disabled?: boolean }>`
     background-color: ${props => (props.disabled ? "transparent" : props.theme.color.background.lighter)};
   }
   & svg {
-    /** Icons are purely presentational and click events are handled upstream */
+    /** sIcon are purely presentational and click events are handled upstream */
     pointer-events: none;
   }
 `

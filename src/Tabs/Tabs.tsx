@@ -4,7 +4,7 @@ import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 import { useUniqueId } from "../useUniqueId"
 import noop from "lodash/noop"
-import { IconNo, IconAdd } from "../Icon/Icon"
+import { NoIcon, AddIcon } from "../Icon/Icon"
 
 export interface Tab {
   title: string
@@ -93,7 +93,7 @@ TabPanel.defaultProps = {
 }
 
 // We need this one so that icon and title both would be aligned to the left
-const TitleIconWrapper = styled("div")`
+const TitleWrapperIcon = styled("div")`
   display: flex;
   max-width: 120px;
 `
@@ -198,12 +198,12 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
               onFocus={onClick}
               ref={i === active ? activeTab : undefined}
             >
-              <TitleIconWrapper>
+              <TitleWrapperIcon>
                 {icon && <TabIcon>{icon}</TabIcon>}
                 <TitleWrapper title={title}>{title}</TitleWrapper>
-              </TitleIconWrapper>
+              </TitleWrapperIcon>
               {onClose && (
-                <IconNo
+                <NoIcon
                   size={14}
                   onMouseDown={e => {
                     e.stopPropagation()
@@ -225,7 +225,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
               onInsert(tabs.length - 1)
             }}
           >
-            <IconAdd size={14} onMouseDown={noop} />
+            <AddIcon size={14} onMouseDown={noop} />
           </TabHeader>
         )}
       </TabList>

@@ -6,7 +6,7 @@ import { DefaultInputProps, DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
 import { FormFieldControl, FormFieldControls, Label } from "../utils/mixins"
 import InputField from "./Input.Field"
-import { IconPadlock, IconUnlock, IconComponentType } from "../Icon/Icon"
+import { PadlockIcon, UnlockIcon, IconComponentType } from "../Icon/Icon"
 
 export interface BaseProps extends DefaultProps, DefaultInputProps {
   /** The ID for this element, for accessibility et al */
@@ -54,7 +54,7 @@ export interface BaseProps extends DefaultProps, DefaultInputProps {
 
 export interface BasePropsWithCopy extends BaseProps {
   copy: true
-  onIconClick?: never
+  onClickIcon?: never
   icon?: never
 }
 
@@ -63,7 +63,7 @@ export interface BasePropsWithoutCopy extends BaseProps {
   /** Icon to display in an adjacent icon button */
   icon?: IconComponentType | React.ReactNode
   /** Click handler on the icon */
-  onIconClick?: () => void
+  onClickIcon?: () => void
 }
 
 export type InputProps = BasePropsWithCopy | BasePropsWithoutCopy
@@ -113,7 +113,7 @@ const Input: React.SFC<InputProps> = ({
                   }
                 }}
               >
-                {disabled ? <IconPadlock size={12} /> : <IconUnlock size={12} />}
+                {disabled ? <PadlockIcon size={12} /> : <UnlockIcon size={12} />}
               </FormFieldControl>
             )}
           </FormFieldControls>

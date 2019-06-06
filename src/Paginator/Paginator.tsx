@@ -3,7 +3,7 @@ import * as React from "react"
 import Button from "../Button/Button"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-import { IconChevronRight, IconChevronLeft } from "../Icon/Icon"
+import { ChevronRightIcon, ChevronLeftIcon } from "../Icon/Icon"
 
 export interface PaginatorProps extends DefaultProps {
   /** Function to be executed after changing page */
@@ -103,7 +103,7 @@ const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, o
         first
       </PaginatorControl>
       <PaginatorControl type="previous" {...controlProps} isDisabled={isFirstDisabled}>
-        <IconChevronLeft size={11} />
+        <ChevronLeftIcon size={11} />
         <span>prev</span>
       </PaginatorControl>
       <PaginatorSpan key={page}>
@@ -111,7 +111,7 @@ const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, o
       </PaginatorSpan>
       <PaginatorControl type="next" {...controlProps} isDisabled={isLastDisabled}>
         <span>next</span>
-        <IconChevronRight size={11} />
+        <ChevronRightIcon size={11} />
       </PaginatorControl>
       <PaginatorControl type="last" {...controlProps} isDisabled={isLastDisabled}>
         last

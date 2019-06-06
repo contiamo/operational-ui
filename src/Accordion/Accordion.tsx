@@ -2,7 +2,7 @@ import * as React from "react"
 import { SectionHeader } from "../Internals/SectionHeader"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-import { IconChevronUp, IconChevronDown } from "../Icon/Icon"
+import { ChevronUpIcon, ChevronDownIcon } from "../Icon/Icon"
 
 export interface Section {
   title: React.ReactNode
@@ -120,7 +120,7 @@ const Accordion = ({ sections, onToggle, ...rest }: AccordionProps) => {
               onBlur={() => setFocusIndex(null)}
             >
               {title}
-              {expanded ? <IconChevronUp /> : <IconChevronDown />}
+              {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
             </Header>
             <Panel id={contentId} aria-labelledby={titleId} hidden={!expanded}>
               {expanded && content()}

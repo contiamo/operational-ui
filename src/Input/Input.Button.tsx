@@ -5,10 +5,10 @@ import OperationalContext from "../OperationalContext/OperationalContext"
 import { inputFocus } from "../utils"
 import styled from "../utils/styled"
 import { height } from "./Input.constants"
-import { IconComponentType, IconCopy } from "../Icon/Icon"
+import { IconComponentType, CopyIcon } from "../Icon/Icon"
 
 interface InputButtonBaseProps {
-  onIconClick?: () => void
+  onClickIcon?: () => void
   tabIndex?: number
 }
 
@@ -60,7 +60,7 @@ const Button = styled("button")`
   `};
 `
 
-const InputButton: React.SFC<InputButtonProps> = ({ tabIndex, icon: Icon, copy, value, onIconClick }) => {
+const InputButton: React.SFC<InputButtonProps> = ({ tabIndex, icon: Icon, copy, value, onClickIcon }) => {
   if (!Icon && !copy) {
     return null
   }
@@ -70,13 +70,13 @@ const InputButton: React.SFC<InputButtonProps> = ({ tabIndex, icon: Icon, copy, 
       {({ pushMessage }) => (
         <CopyToClipboard text={value || ""} onCopy={() => pushMessage({ body: "Copied to clipboard", type: "info" })}>
           <Button tabIndex={tabIndex}>
-            <IconCopy size={16} />
+            <CopyIcon size={16} />
           </Button>
         </CopyToClipboard>
       )}
     </OperationalContext>
   ) : (
-    <Button onClick={onIconClick}>
+    <Button onClick={onClickIcon}>
       {typeof Icon === "function" ? React.createElement(Icon as IconComponentType, { size: 16 }) : Icon}
     </Button>
   )

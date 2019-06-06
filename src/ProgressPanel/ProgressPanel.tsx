@@ -4,7 +4,7 @@ import styled from "../utils/styled"
 
 import Spinner from "../Spinner/Spinner"
 import constants, { OperationalStyleConstants } from "../utils/constants"
-import { IconYes, IconNo, IconEmptyCircle } from "../Icon/Icon"
+import { YesIcon, NoIcon, EmptyCircleIcon } from "../Icon/Icon"
 
 export type Status = "waiting" | "todo" | "running" | "success" | "failure" | "done" | "failed"
 
@@ -27,21 +27,21 @@ const getVariation = (status: Status, theme: OperationalStyleConstants = constan
       return {
         iconColor: theme.color.success,
         textColor: theme.color.text.default,
-        icon: <IconYes left />,
+        icon: <YesIcon left />,
       }
     case "failure":
     case "failed":
       return {
         iconColor: theme.color.error,
         textColor: theme.color.text.default,
-        icon: <IconNo left />,
+        icon: <NoIcon left />,
       }
     case "waiting":
     case "todo":
       return {
         iconColor: theme.color.text.lightest,
         textColor: theme.color.text.lighter,
-        icon: <IconEmptyCircle left />,
+        icon: <EmptyCircleIcon left />,
       }
     case "running":
       return {

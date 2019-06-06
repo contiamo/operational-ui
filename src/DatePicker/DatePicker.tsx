@@ -1,12 +1,12 @@
 import * as React from "react"
-import { IconChevronLeft, IconChevronRight, IconNo } from "../Icon/Icon"
+import { ChevronLeftIcon, ChevronRightIcon, NoIcon } from "../Icon/Icon"
 import { LabelText } from "../LabelText/LabelText"
 import { DefaultProps } from "../types"
 import { Label } from "../utils/mixins"
 
 import { keyCodes } from "../utils"
 import Month from "./DatePicker.Month"
-import { Container, DatePickerCard, IconContainer, Input, MonthNav, Toggle } from "./DatePicker.styles"
+import { Container, DatePickerCard, ContainerIcon, Input, MonthNav, Toggle } from "./DatePicker.styles"
 import { changeMonth, months, toDate, toYearMonthDay, validateDateString } from "./DatePicker.utils"
 
 export interface DatePickerProps extends DefaultProps {
@@ -161,7 +161,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
               }
             }}
           >
-            <IconNo size={14} />
+            <NoIcon size={14} />
           </Toggle>
         )}
         <Input
@@ -188,7 +188,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
         />
         <DatePickerCard isExpanded={isExpanded}>
           <MonthNav>
-            <IconContainer
+            <ContainerIcon
               disabled={!canGoToPreviousMonth}
               onClick={(ev: any) => {
                 ev.preventDefault()
@@ -198,10 +198,10 @@ class DatePicker extends React.Component<DatePickerProps, State> {
                 this.changeMonth(-1)
               }}
             >
-              <IconChevronLeft size={12} />
-            </IconContainer>
+              <ChevronLeftIcon size={12} />
+            </ContainerIcon>
             <span>{`${months[month]}, ${year}`}</span>
-            <IconContainer
+            <ContainerIcon
               disabled={!canGoToNextMonth}
               onClick={(ev: any) => {
                 ev.preventDefault()
@@ -211,8 +211,8 @@ class DatePicker extends React.Component<DatePickerProps, State> {
                 this.changeMonth(+1)
               }}
             >
-              <IconChevronRight size={12} />
-            </IconContainer>
+              <ChevronRightIcon size={12} />
+            </ContainerIcon>
           </MonthNav>
           <Month start={start} end={end} min={min} max={max} year={year} month={month} onChange={onChange} />
         </DatePickerCard>

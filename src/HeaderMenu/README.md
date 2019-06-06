@@ -4,20 +4,20 @@ Menus that drop down from the header bar, i.e. project selectors, and user menus
 
 ```jsx
 import * as React from "react"
-import { HeaderMenu, ContextMenuProps, IconOrganization, IconProject, IconUser } from "@operational/components"
+import { HeaderMenu, ContextMenuProps, OrganizationIcon, ProjectIcon, UserIcon } from "@operational/components"
 
 const projectOptions = [
   {
-    icon: IconOrganization,
+    icon: OrganizationIcon,
     iconColor: "primary",
     label: "Contiamo",
     description: "Organization-wide content and settings",
   },
-  { label: "Project 1", icon: IconProject },
-  { label: "Project 2", icon: IconProject },
-  { label: "Project 3", icon: IconProject },
+  { label: "Project 1", icon: ProjectIcon },
+  { label: "Project 2", icon: ProjectIcon },
+  { label: "Project 3", icon: ProjectIcon },
   {
-    icon: IconProject,
+    icon: ProjectIcon,
     label: "Contiamo is a nice place and they have a nice UI library",
     description: "Organization-wide content and settings",
   },

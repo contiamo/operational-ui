@@ -12,19 +12,19 @@ import { SidenavHeader } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { SidenavHeader, IconUser } from "@operational/components"
-;<SidenavHeader label="Chapter One" icon={IconUser} />
+import { SidenavHeader, UserIcon } from "@operational/components"
+;<SidenavHeader label="Chapter One" icon={UserIcon} />
 ```
 
 ### Usage with items
 
 ```jsx
 import * as React from "react"
-import { SidenavHeader, SidenavItem, IconCaretUp, IconChevronLeft, IconUser } from "@operational/components"
+import { SidenavHeader, SidenavItem, CaretUpIcon, ChevronLeftIcon, UserIcon } from "@operational/components"
 ;<SidenavHeader active label="Chapter One">
-  <SidenavItem icon={IconCaretUp} label="Settings" />
-  <SidenavItem icon={IconChevronLeft} label="Code" />
-  <SidenavItem icon={IconUser} label="Account" />
+  <SidenavItem icon={CaretUpIcon} label="Settings" />
+  <SidenavItem icon={ChevronLeftIcon} label="Code" />
+  <SidenavItem icon={UserIcon} label="Account" />
 </SidenavHeader>
 ```
 

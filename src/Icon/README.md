@@ -1,15 +1,15 @@
-Operational's SVG icon set packaged as a single component.
+Operational's SVG Icon set packaged as a single component.
 
 ### Usage
 
 ```jsx
 import * as React from "react"
-import { IconAdd, IconFunction, IconOlap } from "@operational/components"
+import { AddIcon, FunctionIcon, OlapIcon } from "@operational/components"
 ;<>
-  <IconAdd size={36} />
-  <IconFunction size={36} />
-  <IconOlap size={36} color="#00bb00" />
-  <IconOlap size={36} color="error" />
+  <AddIcon size={36} />
+  <FunctionIcon size={36} />
+  <OlapIcon size={36} color="#00bb00" />
+  <OlapIcon size={36} color="error" />
 </>
 ```
 
@@ -17,25 +17,25 @@ import { IconAdd, IconFunction, IconOlap } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { IconAdd } from "@operational/components"
+import { AddIcon } from "@operational/components"
 ;<div style={{ display: "flex", alignItems: "center" }}>
-  <IconAdd left /> Play that song!
+  <AddIcon left /> Play that song!
 </div>
 ```
 
 ```jsx
 import * as React from "react"
-import { IconDocument } from "@operational/components"
+import { DocumentIcon } from "@operational/components"
 ;<div style={{ display: "flex", alignItems: "center" }}>
-  I'm on the right! <IconDocument right />
+  I'm on the right! <DocumentIcon right />
 </div>
 ```
 
-#### All Icons
+#### All sIcon
 
 ```jsx
 import * as React from "react"
-import { Table, ResourceName, Input, IconSearch, Code, useOperationalContext } from "@operational/components"
+import { Table, ResourceName, Input, SearchIcon, Code, useOperationalContext } from "@operational/components"
 import * as Icon from "@operational/components/Icon/Icon"
 
 const MyComponent = () => {
@@ -55,9 +55,9 @@ const MyComponent = () => {
         }}
       >
         <Input
-          icon={IconSearch}
+          Icon={SearchIcon}
           label="Search"
-          placeholder="Filter Icons..."
+          placeholder="Filter sIcon..."
           type="text"
           value={filter}
           onChange={value => setFilter(value)}
@@ -78,7 +78,7 @@ const MyComponent = () => {
         columns={[
           {
             heading: "Name",
-            cell: i => <ResourceName>{i.name.slice("Icon".length)}</ResourceName>,
+            cell: i => <ResourceName>{i.name.slice(0, -"Icon".length)}</ResourceName>,
             width: 200,
           },
           {

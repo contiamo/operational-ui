@@ -77,9 +77,9 @@ const run = () => {
         },
         template,
       },
-      { componentName: `Icon${name}` },
+      { componentName: `${name}Icon` },
     )
-    writeFileSync(join(outputFolder, `Icon${name}.tsx`), output)
+    writeFileSync(join(outputFolder, `Icon.${name}.tsx`), output)
     progressBar.tick()
   })
 
@@ -119,7 +119,7 @@ ${files
   .map(fileName => {
     const { name } = parse(fileName)
 
-    return `export * from "./Icon${name}";`
+    return `export * from "./Icon.${name}";`
   })
   .join("\n")}
   `

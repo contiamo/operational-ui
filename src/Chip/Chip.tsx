@@ -12,8 +12,8 @@ export interface ChipProps extends DefaultProps {
   /** Handle clicks on the chip's body. This is never triggered when the icon bar is clicked. When an icon is not specified, however, this basically turns into a full element click handler. */
   onClick?: () => void
   /** Handle clicks on the chip's icon area on the right. */
-  onIconClick?: () => void
-  /** The name of the icon shown in the right icon bar area of the chip. A typical use here would be the `X` icon for closing the chip. Note that this icon is only displayed if there is an `onIconClick` prop present.  */
+  onClickIcon?: () => void
+  /** The name of the icon shown in the right icon bar area of the chip. A typical use here would be the `X` icon for closing the chip. Note that this icon is only displayed if there is an `onClickIcon` prop present.  */
   icon?: IconComponentType | React.ReactNode
   children: React.ReactNode
 }
@@ -90,7 +90,7 @@ const Action = styled("button")(({ theme, onClick }) => {
   }
 })
 
-const Chip: React.SFC<ChipProps> = ({ onClick, onIconClick, icon: Icon, children, ...props }) => (
+const Chip: React.SFC<ChipProps> = ({ onClick, onClickIcon, icon: Icon, children, ...props }) => (
   <Container color_={props.color} {...props}>
     <Content
       aria-label={typeof children === "string" ? children : undefined}
@@ -100,8 +100,8 @@ const Chip: React.SFC<ChipProps> = ({ onClick, onIconClick, icon: Icon, children
     >
       {children}
     </Content>
-    {onIconClick && (
-      <Action aria-label={typeof Icon === "function" ? Icon.name : undefined} role="button" onClick={onIconClick}>
+    {onClickIcon && (
+      <Action aria-label={typeof Icon === "function" ? Icon.name : undefined} role="button" onClick={onClickIcon}>
         {typeof Icon === "function" ? <Icon size={12} /> : Icon}
       </Action>
     )}

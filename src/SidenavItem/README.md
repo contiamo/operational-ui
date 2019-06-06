@@ -4,14 +4,14 @@ See `Sidenav` for usage examples in a broader context.
 
 ```jsx
 import * as React from "react"
-import { SidenavItem, IconUser } from "@operational/components"
-;<SidenavItem label="My Account" icon={IconUser} />
+import { SidenavItem, UserIcon } from "@operational/components"
+;<SidenavItem label="My Account" icon={UserIcon} />
 ```
 
 ### Active State
 
 ```jsx
 import * as React from "react"
-import { SidenavItem, IconUser } from "@operational/components"
-;<SidenavItem label="My Account" icon={IconUser} active />
+import { SidenavItem, UserIcon } from "@operational/components"
+;<SidenavItem label="My Account" icon={UserIcon} active />
 ```

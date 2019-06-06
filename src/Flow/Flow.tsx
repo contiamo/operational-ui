@@ -64,7 +64,7 @@ const FlowIconBase = styled("div")`
   pointer-events: none;
 `
 
-const getIconColor = (currentIndex: number, activeItemIndex?: number, iconColor?: string) => {
+const getColorIcon = (currentIndex: number, activeItemIndex?: number, iconColor?: string) => {
   if (iconColor) {
     return iconColor
   }
@@ -107,7 +107,7 @@ const Flow: React.FC<FlowProps> = ({ items, condensed, activeItemIndex }) => (
             }
           >
             {item.icon && (
-              <FlowIcon size={condensed ? 16 : 22} color={getIconColor(index, activeItemIndex, item.iconColor)} />
+              <FlowIcon size={condensed ? 16 : 22} color={getColorIcon(index, activeItemIndex, item.iconColor)} />
             )}
             {!condensed && <Label>{item.label}</Label>}
           </Box>
