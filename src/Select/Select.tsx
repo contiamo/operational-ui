@@ -116,7 +116,6 @@ export const Select: React.FC<SelectProps> = ({
   return (
     <ContextMenu
       onClick={item => {
-        console.log(value, item.value, customInputValue)
         if (onChange) {
           onChange(getNewValue(value)(item.value), item.value)
         }
@@ -152,8 +151,8 @@ export const Select: React.FC<SelectProps> = ({
               fullWidth={fullWidth}
               disabled={disabled}
               placeholder={placeholder}
-              readOnly={getDisplayValue(value, customInputValue, customInputSymbol) !== customInputValue}
-              value={getDisplayValue(value, customInputValue, customInputSymbol)}
+              readOnly={getDisplayValue(value, customInputValue, customInputSymbol)(options) !== customInputValue}
+              value={getDisplayValue(value, customInputValue, customInputSymbol)(options)}
               id={`operational-ui__Select-Input-${uniqueId}`}
               onClick={e => {
                 if (value === customInputValue) {

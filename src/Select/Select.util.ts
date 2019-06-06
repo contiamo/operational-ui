@@ -43,20 +43,27 @@ export const getDisplayValue = (
   internalValue: Value | Value[] | null,
   customInputValue?: Value,
   customInputSymbol?: symbol,
-): string => {
-  if (internalValue === customInputSymbol) {
+) => (options: IOption[]): string => {
+  // Symbol in initial case, value after it has changed
+  if (internalValue === customInputSymbol || internalValue === customInputValue) {
     return String(customInputValue)
   }
 
   if (Array.isArray(internalValue)) {
-    return internalValue.join(", ")
+    return options
+      .filter(option => internalValue.includes(option.value))
+      .map(option => option.label)
+      .join(", ")
   }
 
   if (internalValue === null) {
     return ""
   }
 
-  return String(internalValue)
+  return options
+    .filter(option => option.value === internalValue)
+    .map(option => option.label)
+    .join("")
 }
 
 export const optionsToContextMenuItems = (overrides?: (option: IOption) => Partial<IContextMenuItem>) => (

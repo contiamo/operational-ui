@@ -18,6 +18,9 @@ describe("Select component utilities", () => {
     ...myOptions,
     ...myOptions,
     ...myOptions,
+    { value: "my name is earl", label: "Baloney" },
+    { value: "what's your name", label: "Pastrami" },
+    { value: "follow @hackSultan", label: "Cheese" },
   ]
 
   it("should convert options to context menu items", () => {
@@ -57,21 +60,21 @@ describe("Select component utilities", () => {
   })
   it("should get a display value from a custom input value", () => {
     const customInputSymbol = Symbol("lol")
-    expect(getDisplayValue(customInputSymbol, "hello", customInputSymbol)).toEqual("hello")
+    expect(getDisplayValue(customInputSymbol, "hello", customInputSymbol)(longTestOptions)).toEqual("hello")
   })
   it("should get a display value from a multi-select value", () => {
-    expect(getDisplayValue(["my name is earl", "what's your name", "follow @hackSultan"])).toEqual(
-      "my name is earl, what's your name, follow @hackSultan",
+    expect(getDisplayValue(["my name is earl", "what's your name", "follow @hackSultan"])(longTestOptions)).toEqual(
+      "Baloney, Pastrami, Cheese",
     )
   })
   it("should get a display value from a value that is null or not yet initialized", () => {
-    expect(getDisplayValue(null)).toEqual("")
+    expect(getDisplayValue(null)(longTestOptions)).toEqual("")
   })
   it("should get a display value from a primitive string value", () => {
-    expect(getDisplayValue("cheese is my friend")).toEqual("cheese is my friend")
+    expect(getDisplayValue("my name is earl")(longTestOptions)).toEqual("Baloney")
   })
   it("should get a display value from a numeric value", () => {
-    expect(getDisplayValue(4)).toEqual("4")
+    expect(getDisplayValue(4)(longTestOptions)).toEqual("4")
   })
   it("should get a changed value when a basic value changes", () => {
     expect(getNewValue("cheese")("hola")).toEqual("hola")
