@@ -46,13 +46,6 @@ describe("Select component utilities", () => {
       { label: "Hola Mundo", value: defaultOptionValue },
     ])
   })
-  it("should filter an existing list of options based on their value", () => {
-    expect(filterList("ques")(longTestOptions)).toEqual([
-      { label: "Hola Mundo", value: defaultOptionValue },
-      { label: "Hola Mundo", value: defaultOptionValue },
-      { label: "Hola Mundo", value: defaultOptionValue },
-    ])
-  })
   it("should truncate a list of options", () => {
     expect(truncateList(2)(longTestOptions)).toEqual([{ label: "0", value: 0 }, { label: "1", value: 1 }])
   })
