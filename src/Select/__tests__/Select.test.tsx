@@ -86,4 +86,8 @@ describe("Select component utilities", () => {
     expect(isOptionSelected("chickens")({ label: "I am not a chicken", value: "what's up" })).toEqual(false)
     expect(isOptionSelected("chickens")({ label: "I am not a chicken", value: "chickens" })).toEqual(true)
   })
+  it("should be able to tell if multi-select options are selected", () => {
+    expect(isOptionSelected(["chickens", "cheese"])({ label: "I am not a chicken", value: "what's up" })).toEqual(false)
+    expect(isOptionSelected(["chickens", "cheese"])({ label: "I am not a chicken", value: "chickens" })).toEqual(true)
+  })
 })
