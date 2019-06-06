@@ -73,6 +73,11 @@ const Step = styled("li")<{ stepState: StepState; number: number; color: Stepper
   :last-child {
       flex: 0 1 0;
   }
+
+  :focus {
+    outline: none;
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
+  }
 `
 
 Step.defaultProps = { role: "tab" }
