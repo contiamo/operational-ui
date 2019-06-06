@@ -17,7 +17,7 @@ export interface BaseSelectProps extends DefaultProps {
   /** Disable the component */
   disabled?: boolean
   /** Callback trigger on any changes */
-  onChange?: (newValue: null | Value | Value[], changedItem?: Value) => void
+  onChange?: (newValue: null | Value | Value[], changedItem?: IOption) => void
   /** Text color */
   color?: string
   /** Text to display when no active selection */
@@ -34,7 +34,7 @@ export interface BaseSelectProps extends DefaultProps {
 
 export interface SelectPropsWithCustomOption extends BaseSelectProps {
   /** A pseudo-option that allows a user to supply a custom value. */
-  customOption?: string
+  customOption?: IOption
   /** Current value */
   value: null | Value
 }
@@ -42,6 +42,8 @@ export interface SelectPropsWithCustomOption extends BaseSelectProps {
 export interface SelectPropsWithMultiSelect extends BaseSelectProps {
   /** We cannot have a custom option in a multi-selectable Select component */
   customOption?: never
+  /** The value of the pseudo-option that allows a user to supply a custom value. */
+  customOptionValue?: never
   /** Current value */
   value: null | Value | Value[]
 }

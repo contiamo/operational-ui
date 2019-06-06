@@ -4,11 +4,11 @@ It implements the specification for a **Collapsible Dropdown Listbox** according
 
 ### Basic usage
 
-If the component is used with a string `value` prop, it behaves as a single select. Every time the value is changed, the options pop-up closes automatically.
+If the component is used with a string `value` prop, it behaves as a single select. Every time the value is changed, the options pop-up closes automatically. The `onChange` handler gives you the new value, and the option that was clicked as arguments. It is of the shape `(newValue: Value, changed: IOption) => void`.
 
 ```jsx
 import * as React from "react"
-import { Select } from "@operational/components"
+import { Select, Code } from "@operational/components"
 
 const options = [
   { label: "Option 1", value: "one" },
@@ -23,16 +23,30 @@ const options = [
 
 const MyComponent = () => {
   const [value, setValue] = React.useState("one")
+  const [lastChanged, setLastChanged] = React.useState(null)
 
   return (
-    <Select
-      id="basic"
-      label="Basic"
-      data-cy="basic-select"
-      value={value}
-      options={options}
-      onChange={newValue => setValue(newValue)}
-    />
+    <>
+      <Select
+        id="basic"
+        label="Basic"
+        data-cy="basic-select"
+        value={value}
+        options={options}
+        onChange={(newValue, lastChanged) => {
+          setValue(newValue)
+          setLastChanged(lastChanged)
+        }}
+      />
+      <Code>
+        {`
+Current value: ${value}
+Last changed option: 
+
+${JSON.stringify(lastChanged, null, 2)}
+      `}
+      </Code>
+    </>
   )
 }
 
@@ -142,7 +156,7 @@ const MyThirdComponent = () => {
       filterable
       maxOptions={2}
       placeholder="Choose an option"
-      onChange={setValue}
+      onChange={newValue => setValue(newValue)}
     />
   )
 }
@@ -234,7 +248,7 @@ In case of offering users a choice CSV delimiters, we have a few predefined idea
 
 ```jsx
 import * as React from "react"
-import { Select, Form } from "@operational/components"
+import { Select, Form, Code } from "@operational/components"
 
 const options = [
   { label: "Option 1", value: "one" },
@@ -243,29 +257,35 @@ const options = [
 ]
 
 const MyComponent = () => {
-  const [value1, setValue1] = React.useState("one")
-  const [value2, setValue2] = React.useState("one")
+  const [value, setValue] = React.useState("one")
+  const [lastChanged, setLastChanged] = React.useState(null)
+  const [customOptionValue, setCustomOptionValue] = React.useState("chickens")
 
   return (
     <Form>
       <Select
         data-cy="custom-select"
-        value={value1}
+        value={value}
         options={options}
         label="Custom Input"
         placeholder="Choose an option"
-        customOption="Custom..."
-        onChange={newValue => setValue1(newValue)}
+        customOption={{ label: "Custom...", value: customOptionValue }}
+        onChange={(newValue, lastChanged) => {
+          setValue(newValue)
+          if (lastChanged && lastChanged.label === "Custom...") {
+            setCustomOptionValue(newValue)
+          }
+          setLastChanged(lastChanged)
+        }}
       />
-      <Select
-        value={value2}
-        options={options}
-        label="Custom Input"
-        filterable
-        placeholder="Choose an option"
-        customOption="Custom..."
-        onChange={newValue => setValue2(newValue)}
-      />
+      <Code>
+        {`
+Current value: ${String(value)}
+Last changed option:
+
+${JSON.stringify(lastChanged, null, 2)}
+      `}
+      </Code>
     </Form>
   )
 }

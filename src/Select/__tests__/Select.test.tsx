@@ -58,10 +58,6 @@ describe("Select component utilities", () => {
       { label: "Hola Mundo", value: defaultOptionValue },
     ])
   })
-  it("should get a display value from a custom input value", () => {
-    const customInputSymbol = Symbol("lol")
-    expect(getDisplayValue(customInputSymbol, "hello", customInputSymbol)(longTestOptions)).toEqual("hello")
-  })
   it("should get a display value from a multi-select value", () => {
     expect(getDisplayValue(["my name is earl", "what's your name", "follow @hackSultan"])(longTestOptions)).toEqual(
       "Baloney, Pastrami, Cheese",

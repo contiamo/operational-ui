@@ -39,16 +39,7 @@ export const getNewValue = (value: Value | Value[] | null) => (newValue: Value) 
 
 export const customInputSymbol = Symbol("custom input")
 
-export const getDisplayValue = (
-  internalValue: Value | Value[] | null,
-  customInputValue?: Value,
-  customInputSymbol?: symbol,
-) => (options: IOption[]): string => {
-  // Symbol in initial case, value after it has changed
-  if (internalValue === customInputSymbol || internalValue === customInputValue) {
-    return String(customInputValue)
-  }
-
+export const getDisplayValue = (internalValue: Value | Value[] | null) => (options: IOption[]): string => {
   if (Array.isArray(internalValue)) {
     return options
       .filter(option => internalValue.includes(option.value))
@@ -56,14 +47,12 @@ export const getDisplayValue = (
       .join(", ")
   }
 
-  if (internalValue === null) {
-    return ""
+  const valueExistsInOptions = options.find(option => option.value === internalValue)
+  if (valueExistsInOptions) {
+    return valueExistsInOptions.label || ""
   }
 
-  return options
-    .filter(option => option.value === internalValue)
-    .map(option => option.label)
-    .join("")
+  return String(internalValue)
 }
 
 export const optionsToContextMenuItems = (overrides?: (option: IOption) => Partial<IContextMenuItem>) => (
@@ -76,3 +65,6 @@ export const optionsToContextMenuItems = (overrides?: (option: IOption) => Parti
       ...(overrides ? overrides(option) : {}),
     }),
   )
+
+export const getOptionFromItem = (options: IOption[]) => (item: IContextMenuItem) =>
+  options.find(option => option.value === item.value)

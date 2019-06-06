@@ -5,7 +5,7 @@ import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 import LabelText from "../LabelText/LabelText"
 import { useUniqueId } from "../useUniqueId"
 import { FilterInput, Combobox, Listbox, DropdownButton, SelectInput } from "./Select.styled"
-import { SelectProps } from "./Select.types"
+import { SelectProps, IOption } from "./Select.types"
 import {
   truncateList,
   appendItem,
@@ -16,6 +16,7 @@ import {
   isOptionSelected,
   prependItem,
   optionsToContextMenuItems,
+  getOptionFromItem,
 } from "./Select.util"
 
 export const Select: React.FC<SelectProps> = ({
@@ -37,18 +38,17 @@ export const Select: React.FC<SelectProps> = ({
 }) => {
   const uniqueId = useUniqueId(id)
   const [filter, setFilter] = React.useState("")
-  const [customInputValue, setCustomInputValue] = React.useState("")
   const containerRef = React.useRef<HTMLDivElement>(null)
   const inputRef = React.useMemo(() => React.createRef<HTMLInputElement>(), [])
 
   React.useEffect(() => {
-    if (value === customInputValue && inputRef.current) {
+    if (customOption && value === customOption.value && inputRef.current) {
       inputRef.current.focus()
     }
-  }, [value, customInputValue])
+  }, [value, customOption])
 
   const appendCustomOption = React.useCallback(
-    (options: IContextMenuItem[]): IContextMenuItem[] => {
+    (optionToAppend: IOption) => (options: IContextMenuItem[]): IContextMenuItem[] => {
       // We can't have a multiselect _and_ a custom option.
       if (Array.isArray(value) && process.env.NODE_ENV !== "production") {
         console.trace(
@@ -57,17 +57,9 @@ export const Select: React.FC<SelectProps> = ({
         return options
       }
 
-      return appendItem({
-        label: String(customOption),
-        value: customInputSymbol,
-        onClick: () => {
-          if (onChange) {
-            onChange(customInputValue, customInputSymbol)
-          }
-        },
-      })(options)
+      return appendItem(optionsToContextMenuItems()([optionToAppend])[0])(options)
     },
-    [customOption, customInputValue, value],
+    [customOption, value],
   )
 
   const filterComponent = React.useMemo(
@@ -95,29 +87,31 @@ export const Select: React.FC<SelectProps> = ({
     }))(truncatedOptions)
 
     // Case 1: It's both filterable _and_ has a custom option
-    if (Boolean(filterable) && Boolean(customOption)) {
-      return appendCustomOption(prependItem({ label: filterComponent })(contextMenuItems))
+    if (filterable && customOption !== undefined) {
+      return appendCustomOption(customOption)(prependItem({ label: filterComponent })(contextMenuItems))
     }
 
     // Case 2: It's filterable and no custom option
-    if (Boolean(filterable) && !Boolean(customOption)) {
-      return prependItem({ label: filterComponent })(contextMenuItems)
+    if (filterable && customOption === undefined) {
+      return prependItem({ label: filterComponent, value: options[0].value })(contextMenuItems)
     }
 
     // Case 3, It has a custom option but is not filterable
-    if (!Boolean(filterable) && Boolean(customOption)) {
-      return appendCustomOption(contextMenuItems)
+    if (!filterable && customOption !== undefined) {
+      return appendCustomOption(customOption)(contextMenuItems)
     }
 
     // Default case, it's just a normal set of items
     return contextMenuItems
   }, [options, value, filter, maxOptions, filterable, customOption, onChange])
 
+  console.log(value, customInputSymbol, value === customInputSymbol)
+
   return (
     <ContextMenu
       onClick={item => {
         if (onChange) {
-          onChange(getNewValue(value)(item.value), item.value)
+          onChange(getNewValue(value)(item.value), getOptionFromItem(options)(item))
         }
         if (containerRef.current && item.value !== customInputSymbol) {
           containerRef.current.focus()
@@ -131,6 +125,7 @@ export const Select: React.FC<SelectProps> = ({
       items={items}
       tabIndex={disabled ? -1 : tabIndex}
       aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
+      initialFocusedItemIndex={options.findIndex(option => option.value === value)}
       {...rest}
     >
       {isOpen => (
@@ -149,20 +144,20 @@ export const Select: React.FC<SelectProps> = ({
             <SelectInput
               inputRef={inputRef}
               fullWidth={fullWidth}
+              tabIndex={customOption ? 0 : -1}
               disabled={disabled}
               placeholder={placeholder}
-              readOnly={getDisplayValue(value, customInputValue, customInputSymbol)(options) !== customInputValue}
-              value={getDisplayValue(value, customInputValue, customInputSymbol)(options)}
+              readOnly={customOption ? customOption.value !== value : true}
+              value={getDisplayValue(value)(options)}
               id={`operational-ui__Select-Input-${uniqueId}`}
               onClick={e => {
-                if (value === customInputValue) {
+                if (customOption && value === customOption.value) {
                   e.stopPropagation()
                 }
               }}
               onChange={newValue => {
-                setCustomInputValue(newValue)
                 if (onChange) {
-                  onChange(newValue)
+                  onChange(newValue, customOption)
                 }
               }}
             />

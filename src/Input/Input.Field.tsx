@@ -144,6 +144,7 @@ const InputField: React.SFC<InputProps> = ({
           isError={Boolean(error)}
           onChange={(ev: React.FormEvent<HTMLInputElement>) => {
             if (onChange) {
+              ev.stopPropagation()
               onChange(ev.currentTarget.value)
             }
           }}
@@ -152,6 +153,7 @@ const InputField: React.SFC<InputProps> = ({
           id={`input-field-${id}`}
           withIconButton={shouldShowIconButton}
           autoComplete={autoComplete}
+          tabIndex={tabIndex}
           {...props}
         />
         {clear && value && (

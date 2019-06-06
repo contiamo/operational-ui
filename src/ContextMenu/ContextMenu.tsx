@@ -1,4 +1,3 @@
-import { isEqual } from "lodash"
 import * as React from "react"
 import nanoid from "nanoid"
 
@@ -33,6 +32,8 @@ export interface ContextMenuProps extends DefaultProps {
    * Only recommended when the click element is the same width as the context menu.
    */
   embedChildrenInMenu?: boolean
+  /** Where do we start focus from? */
+  initialFocusedItemIndex?: number
 }
 
 export interface State {
@@ -91,13 +92,10 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
   private menu: HTMLDivElement | null = null
   private uniqueId = this.props.id || nanoid()
 
-  private toggle = (e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>) => {
-    e.stopPropagation()
+  private toggle = () =>
     this.setState(prevState => ({
       isOpen: !prevState.isOpen,
-      focusedItemIndex: -1, // reset focus on open and close
     }))
-  }
 
   private focusElement = () => {
     if (this.menu && this.menu.querySelector('[tabindex="0"]')) {
@@ -126,19 +124,17 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
 
     switch (key) {
       case "Enter":
-      case "Space":
-      case " ":
-        if (this.props.onClick && !this.props.disabled) {
-          e.preventDefault() // prevent document scroll.
-          if (!this.state.isOpen) {
-            this.toggle(e)
-            return
+        e.preventDefault() // prevent document scroll.
+        e.stopPropagation()
+        if (!this.state.isOpen) {
+          this.toggle()
+        } else {
+          if (this.props.onClick && !this.props.disabled) {
+            this.props.onClick(this.makeItem(this.props.items[this.state.focusedItemIndex]))
           }
-          this.props.onClick(this.makeItem(this.props.items[this.state.focusedItemIndex]))
           if (!this.props.keepOpenOnItemClick) {
             this.setState(() => ({ isOpen: false }))
           }
-          return
         }
         return
 
@@ -189,19 +185,12 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
 
   public readonly state: State = {
     isOpen: false,
-    focusedItemIndex: 0,
+    focusedItemIndex: this.props.initialFocusedItemIndex || 0,
   }
 
   public static defaultProps: Partial<ContextMenuProps> = {
     align: "left",
     embedChildrenInMenu: false,
-  }
-
-  public componentDidUpdate(prevProps: ContextMenuProps) {
-    // Reset focused item to first if items change.
-    if (!isEqual(this.props.items, prevProps.items)) {
-      this.setState(() => ({ focusedItemIndex: this.props.items.length - 1 }))
-    }
   }
 
   public render() {
@@ -236,9 +225,9 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
           aria-expanded={isOpen}
           isOpen={isOpen}
           align={align}
-          onClick={e => {
+          onClick={() => {
             if (!disabled) {
-              this.toggle(e)
+              this.toggle()
             }
           }}
           onKeyDown={this.handleKeyPress}
