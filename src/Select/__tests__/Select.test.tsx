@@ -50,7 +50,7 @@ describe("Select component utilities", () => {
     expect(truncateList(2)(longTestOptions)).toEqual([{ label: "0", value: 0 }, { label: "1", value: 1 }])
   })
   it("should truncate a list of options while respecting filters", () => {
-    expect(truncateList(2)(filterList("que")(longTestOptions))).toEqual([
+    expect(truncateList(2)(filterList("hol")(longTestOptions))).toEqual([
       { label: "Hola Mundo", value: defaultOptionValue },
       { label: "Hola Mundo", value: defaultOptionValue },
     ])
