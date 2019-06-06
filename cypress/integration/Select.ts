@@ -68,7 +68,7 @@ describe("Select Components", () => {
     cy.get('[data-cy="filterable-select"]')
       .type(" ")
       .focused()
-      .type("eig{downarrow}{downarrow} ")
+      .type("8{downarrow}{downarrow} ")
     cy.get('[data-cy="filterable-select"] input[value="eight"]')
   })
   it("should truncate max options", () => {
@@ -90,7 +90,7 @@ describe("Select Components", () => {
     cy.get('[data-cy="maxOptions-select"]')
       .type(" ")
       .focused()
-      .type("eigh{downarrow}{downarrow}{downarrow}{downarrow} ")
+      .type("8{downarrow}{downarrow}{downarrow}{downarrow} ")
     cy.get('[data-cy="maxOptions-select"] input[value="eight"]')
   })
   it("should support a custom option", () => {
