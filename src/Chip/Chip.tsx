@@ -1,6 +1,6 @@
 import * as React from "react"
 import tinycolor from "tinycolor2"
-import { Icon, IconName } from "../"
+import { IconComponentType } from "../Icon/Icon"
 import { DefaultProps } from "../types"
 import { inputFocus } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
@@ -14,7 +14,7 @@ export interface ChipProps extends DefaultProps {
   /** Handle clicks on the chip's icon area on the right. */
   onIconClick?: () => void
   /** The name of the icon shown in the right icon bar area of the chip. A typical use here would be the `X` icon for closing the chip. Note that this icon is only displayed if there is an `onIconClick` prop present.  */
-  icon?: IconName | React.ReactNode
+  icon?: IconComponentType | React.ReactNode
   children: React.ReactNode
 }
 
@@ -90,7 +90,7 @@ const Action = styled("button")(({ theme, onClick }) => {
   }
 })
 
-const Chip: React.SFC<ChipProps> = ({ onClick, onIconClick, icon, children, ...props }) => (
+const Chip: React.SFC<ChipProps> = ({ onClick, onIconClick, icon: Icon, children, ...props }) => (
   <Container color_={props.color} {...props}>
     <Content
       aria-label={typeof children === "string" ? children : undefined}
@@ -101,8 +101,8 @@ const Chip: React.SFC<ChipProps> = ({ onClick, onIconClick, icon, children, ...p
       {children}
     </Content>
     {onIconClick && (
-      <Action aria-label={typeof icon === "string" ? icon : undefined} role="button" onClick={onIconClick}>
-        {typeof icon === "string" ? <Icon name={icon as IconName} size={12} /> : icon}
+      <Action aria-label={typeof Icon === "function" ? Icon.name : undefined} role="button" onClick={onIconClick}>
+        {typeof Icon === "function" ? <Icon size={12} /> : Icon}
       </Action>
     )}
   </Container>

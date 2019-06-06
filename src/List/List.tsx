@@ -1,8 +1,8 @@
 import * as React from "react"
 
-import Icon from "../Icon/Icon"
 import Body from "../Typography/Body"
 import styled from "../utils/styled"
+import { IconChevronRight } from "../Icon/Icon"
 
 export type ImageURL = string
 
@@ -44,7 +44,7 @@ const ImageContainer = styled("div")`
   }
 `
 
-const StyledIcon = styled(Icon)`
+const StyledIcon = styled(IconChevronRight)`
   fill: ${({ theme }) => theme.color.border.default};
   width: 24px;
   flex: 0 0 30px;
@@ -67,7 +67,7 @@ const List: React.SFC<ListProps> = ({ items, fullWidth }) => (
           </ImageContainer>
         )}
         <BodyText>{description}</BodyText>
-        {onClick && <StyledIcon right size={21} name="ChevronRight" />}
+        {onClick && <StyledIcon right size={21} />}
       </Container>
     ))}
   </>

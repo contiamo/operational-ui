@@ -1,9 +1,9 @@
 import * as React from "react"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
-import Icon from "../Icon/Icon"
 import { DefaultProps } from "../types"
 import { darken } from "../utils"
 import styled from "../utils/styled"
+import { IconChevronUp, IconHamburgerMenu } from "../Icon/Icon"
 
 export interface ActionMenuProps extends DefaultProps {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
@@ -49,21 +49,17 @@ const TitleContainer = styled("p")(({ theme }) => ({
   textAlign: "left",
 }))
 
-const ClickableIcon = styled(Icon)`
-  cursor: pointer;
-`
-
 const ActionMenu: React.SFC<ActionMenuProps> = ({ stickyTitle, items, title, ...props }) => (
   <ContextMenu align="right" {...props} items={items} condensed embedChildrenInMenu>
-    {isOpen => (
-      <Container>
-        {(isOpen || stickyTitle) && <TitleContainer>{title}</TitleContainer>}
-        <ClickableIcon
-          color={isOpen || stickyTitle ? "primary" : "color.text.lighter"}
-          name={isOpen ? "ChevronUp" : "Menu"}
-        />
-      </Container>
-    )}
+    {isOpen => {
+      const iconColor = isOpen || stickyTitle ? "primary" : "color.text.lighter"
+      return (
+        <Container>
+          {(isOpen || stickyTitle) && <TitleContainer>{title}</TitleContainer>}
+          {isOpen ? <IconChevronUp color={iconColor} /> : <IconHamburgerMenu color={iconColor} />}
+        </Container>
+      )
+    }}
   </ContextMenu>
 )
 

@@ -1,13 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react"
-import Icon, { IconName } from "../Icon/Icon"
 import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
+import { IconComponentType } from "../Icon/Icon"
 
 export interface Tab {
   name: string
   children: React.ReactNode
   hidden?: boolean
-  icon?: IconName
+  icon?: IconComponentType
   iconColor?: string
   loading?: boolean
 }
@@ -93,7 +93,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, condensed, children }: Props) 
                   {tab.loading ? (
                     <Spinner left size={14} />
                   ) : (
-                    tab.icon && <Icon name={tab.icon} size={14} color={tab.iconColor} left />
+                    tab.icon && React.createElement(tab.icon, { size: 14, color: tab.iconColor, left: true })
                   )}
                   {tab.name}
                 </Tab>

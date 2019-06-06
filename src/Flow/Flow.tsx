@@ -2,7 +2,6 @@ import { kebab } from "case"
 import * as React from "react"
 
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
-import Icon from "../Icon/Icon"
 import { Body } from "../Typography/Body"
 import { inputFocus } from "../utils"
 import styled from "../utils/styled"
@@ -61,7 +60,7 @@ const NextArrow = styled("div")`
   margin: 0 0 0 ${({ theme }) => theme.space.small}px;
 `
 
-const FlowIcon = styled(Icon)`
+const FlowIconBase = styled("div")`
   pointer-events: none;
 `
 
@@ -83,41 +82,39 @@ const getIconColor = (currentIndex: number, activeItemIndex?: number, iconColor?
 
 const Flow: React.FC<FlowProps> = ({ items, condensed, activeItemIndex }) => (
   <Container>
-    {items.map((item, index) => (
-      <React.Fragment key={index}>
-        <Box
-          aria-label={typeof item.label === "string" ? item.label : undefined}
-          role={item.onClick ? "button" : undefined}
-          tabIndex={0}
-          data-cy={`operational-ui__flow flow__box box-${
-            typeof item.label === "string" ? kebab(item.label) : kebab(item.description || "")
-          }`}
-          isActive={activeItemIndex === index}
-          condensed={Boolean(condensed)}
-          onClick={
-            Boolean(item.onClick)
-              ? () => {
-                  if (item.onClick) {
-                    item.onClick(item)
+    {items.map((item, index) => {
+      const FlowIcon = item.icon ? FlowIconBase.withComponent(item.icon) : FlowIconBase
+
+      return (
+        <React.Fragment key={index}>
+          <Box
+            aria-label={typeof item.label === "string" ? item.label : undefined}
+            role={item.onClick ? "button" : undefined}
+            tabIndex={0}
+            data-cy={`operational-ui__flow flow__box box-${
+              typeof item.label === "string" ? kebab(item.label) : kebab(item.description || "")
+            }`}
+            isActive={activeItemIndex === index}
+            condensed={Boolean(condensed)}
+            onClick={
+              Boolean(item.onClick)
+                ? () => {
+                    if (item.onClick) {
+                      item.onClick(item)
+                    }
                   }
-                }
-              : undefined
-          }
-        >
-          {item.icon && typeof item.icon === "string" ? (
-            <FlowIcon
-              size={condensed ? 16 : 22}
-              name={item.icon}
-              color={getIconColor(index, activeItemIndex, item.iconColor)}
-            />
-          ) : (
-            item.icon
-          )}
-          {!condensed && <Label>{item.label}</Label>}
-        </Box>
-        {index !== items.length - 1 && <NextArrow />}
-      </React.Fragment>
-    ))}
+                : undefined
+            }
+          >
+            {item.icon && (
+              <FlowIcon size={condensed ? 16 : 22} color={getIconColor(index, activeItemIndex, item.iconColor)} />
+            )}
+            {!condensed && <Label>{item.label}</Label>}
+          </Box>
+          {index !== items.length - 1 && <NextArrow />}
+        </React.Fragment>
+      )
+    })}
   </Container>
 )
 

@@ -2,7 +2,7 @@
 
 ```jsx
 import * as React from "react"
-import { TourModal, Button, Title, Body, Icon } from "@operational/components"
+import { TourModal, Button, Title, Body, Logo } from "@operational/components"
 
 const MyComponent = () => {
   const [isTourRunning, setIsTourRunning] = React.useState(false)
@@ -10,7 +10,7 @@ const MyComponent = () => {
   return isTourRunning ? (
     <TourModal
       center
-      image={<Icon size={70} name="Contiamo" />}
+      image={<Logo size={70} name="ContiamoStacked" color="black" />}
       onQuit={() => setIsTourRunning(false)}
       onContinue={() => {
         alert("Just kidding!")

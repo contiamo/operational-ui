@@ -16,9 +16,9 @@ const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
 
 ```jsx
 import * as React from "react"
-import { ContextMenu, ContextMenuProps, Button } from "@operational/components"
+import { ContextMenu, ContextMenuProps, Button, IconSearch } from "@operational/components"
 
-const menuItems = [{ label: "Menu 1", icon: "Search" }, "Menu 2", "Menu 3"]
+const menuItems = [{ label: "Menu 1", icon: IconSearch }, "Menu 2", "Menu 3"]
 ;<>
   <ContextMenu items={menuItems} onClick={item => alert(`clicked ${item}`)}>
     <Button>Click here for icon on left</Button>

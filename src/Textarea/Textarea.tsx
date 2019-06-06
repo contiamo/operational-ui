@@ -2,7 +2,6 @@ import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
 
 import Hint from "../Hint/Hint"
-import Icon from "../Icon/Icon"
 import { LabelText } from "../LabelText/LabelText"
 import { useOperationalContext } from "../OperationalContext/OperationalContext"
 import { DefaultInputProps, DefaultProps } from "../types"
@@ -10,6 +9,7 @@ import { useUniqueId } from "../useUniqueId"
 import { isCmdEnter, lighten } from "../utils"
 import { FormFieldControls, Label } from "../utils/mixins"
 import styled from "../utils/styled"
+import { IconCopy } from "../Icon/Icon"
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
 
@@ -194,7 +194,7 @@ const Textarea: React.FC<TextareaProps> = ({
                 onCopy={() => pushMessage({ type: "success", body: "Successfully Copied" })}
               >
                 <div role="button" aria-label="Copy to Clipboard">
-                  <Icon size={8} name="Copy" />
+                  <IconCopy size={8} />
                   <a>Copy to clipboard</a>
                 </div>
               </CopyToClipboard>

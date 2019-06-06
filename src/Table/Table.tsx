@@ -1,9 +1,9 @@
 import * as React from "react"
 import ActionMenu, { ActionMenuProps } from "../ActionMenu/ActionMenu"
-import Icon, { IconName } from "../Icon/Icon"
 import { DefaultProps } from "../types"
 import Small from "../Typography/Small"
 import styled from "../utils/styled"
+import { IconComponentType, IconChevronDown, IconChevronUpDown, IconChevronUp } from "../Icon/Icon"
 
 export interface TableProps<T> extends DefaultProps {
   data: T[]
@@ -18,7 +18,7 @@ export interface TableProps<T> extends DefaultProps {
    */
   rowActions?: (dataEntry: T) => ActionMenuProps["items"] | React.ReactNode
   /** Icon name for row */
-  icon?: (dataEntry: T) => IconName
+  icon?: (dataEntry: T) => IconComponentType
   /** Icon color for row */
   iconColor?: (dataEntry: T) => string
   /** Remove the header? */
@@ -130,10 +130,6 @@ const Actions = styled(Td)(({ theme }) => ({
   },
 }))
 
-const SortIcon = styled(Icon)`
-  margin-left: ${props => props.theme.space.small}px;
-`
-
 const IconCell = styled(Td)`
   width: 40px;
   padding: ${props => props.theme.space.base}px;
@@ -176,7 +172,7 @@ function Table<T>({
     }
   })
 
-  const hasIcons: boolean = Boolean(data[0]) && Boolean(icon) && Boolean(icon!(data[0]))
+  const hasIcons = Boolean(data[0] && icon && icon(data[0]))
 
   return (
     <Container fixedLayout={fixedLayout} {...props}>
@@ -193,15 +189,14 @@ function Table<T>({
                 <ThContent sorted={Boolean(column.sortOrder)}>
                   {column.heading}
                   {column.onSortClick && !column.sortOrder && (
-                    <SortIcon size={10} color="color.border.disabled" name="ChevronUpDown" />
+                    <IconChevronUpDown right size={10} color="color.border.disabled" />
                   )}
-                  {column.sortOrder && (
-                    <SortIcon
-                      size={10}
-                      color="primary"
-                      name={column.sortOrder === "desc" ? "ChevronUp" : "ChevronDown"}
-                    />
-                  )}
+                  {column.sortOrder &&
+                    (column.sortOrder === "desc" ? (
+                      <IconChevronUp right size={10} color="primary" />
+                    ) : (
+                      <IconChevronDown right size={10} color="primary" />
+                    ))}
                 </ThContent>
               </Th>
             ))}
@@ -241,7 +236,7 @@ function Table<T>({
                 {hasIcons && (
                   <IconCell>
                     {/** Because has `hasIcon`, it is guaranteed that the `icon` function exists */}
-                    <Icon name={icon!(dataEntry)} color={iconColor && iconColor(dataEntry)} />
+                    {React.createElement(icon!(dataEntry), { color: iconColor && iconColor(dataEntry) })}
                   </IconCell>
                 )}
                 {standardizedColumns.map((column, columnIndex) => (

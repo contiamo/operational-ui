@@ -1,12 +1,12 @@
 import * as React from "react"
 
 import Hint from "../Hint/Hint"
-import Icon, { IconName } from "../Icon/Icon"
 import { LabelText } from "../LabelText/LabelText"
 import { DefaultInputProps, DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
 import { FormFieldControl, FormFieldControls, Label } from "../utils/mixins"
 import InputField from "./Input.Field"
+import { IconPadlock, IconUnlock, IconComponentType } from "../Icon/Icon"
 
 export interface BaseProps extends DefaultProps, DefaultInputProps {
   /** The ID for this element, for accessibility et al */
@@ -61,7 +61,7 @@ export interface BasePropsWithCopy extends BaseProps {
 export interface BasePropsWithoutCopy extends BaseProps {
   copy?: false
   /** Icon to display in an adjacent icon button */
-  icon?: IconName | React.ReactNode
+  icon?: IconComponentType | React.ReactNode
   /** Click handler on the icon */
   onIconClick?: () => void
 }
@@ -113,7 +113,7 @@ const Input: React.SFC<InputProps> = ({
                   }
                 }}
               >
-                <Icon name={disabled ? "Lock" : "Unlock"} size={12} />
+                {disabled ? <IconPadlock size={12} /> : <IconUnlock size={12} />}
               </FormFieldControl>
             )}
           </FormFieldControls>

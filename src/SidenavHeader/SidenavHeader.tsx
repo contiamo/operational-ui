@@ -1,5 +1,4 @@
 import * as React from "react"
-import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { SidenavProps } from "../Sidenav/Sidenav"
 import { SidenavItemProps } from "../SidenavItem/SidenavItem"
@@ -7,6 +6,7 @@ import { DefaultProps } from "../types"
 import { isModifiedEvent, isOutsideLink } from "../utils"
 import styled from "../utils/styled"
 import { truncate } from "../utils/truncate"
+import { IconComponentType, IconChevronUp, IconChevronDown } from "../Icon/Icon"
 
 export interface SidenavHeaderProps extends DefaultProps {
   /** Main label for the header */
@@ -14,7 +14,7 @@ export interface SidenavHeaderProps extends DefaultProps {
   /** Navigation property à la react-router <Link/> */
   to?: string
   /** Specifies an icon to render on the left of the label, displayed only if the `condensed` option is used. */
-  icon?: IconName | React.ReactNode
+  icon?: IconComponentType | React.ReactNode
   /** Color used in highlights and the side strip (hex or named color from `theme.colors`) */
   color?: string
   /** Condensed option  */
@@ -162,7 +162,9 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
             >
               <LabelText compact={compact} isActive={isActive}>
                 {props.label}
-                {props.icon && <Icon name={props.icon as IconName} right />}
+                {props.icon && typeof props.icon === "function"
+                  ? React.createElement(props.icon as IconComponentType, { right: true })
+                  : props.icon}
               </LabelText>
               {!props.condensed && (
                 <Summary compact={compact} isActive={isActive}>
@@ -173,14 +175,14 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
             {childSidenavItems.length > 0 && (
               <CloseButton
                 onClick={(ev: React.SyntheticEvent<Node>) => {
-                  // Prevent clicks on parent in order to avoid conflicting behavior
+                  // Prevent clicks on parent in order to avoid conflicting behvavior
                   ev.stopPropagation()
                   if (onToggle) {
                     onToggle(!active)
                   }
                 }}
               >
-                <Icon name={active ? "ChevronUp" : "ChevronDown"} />
+                {active ? <IconChevronUp /> : <IconChevronDown />}
               </CloseButton>
             )}
             {isActive && (

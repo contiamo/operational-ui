@@ -5,7 +5,6 @@ The `Breadcrumb` component is nested inside the `<Breadcrumbs/>` to provide brea
 ```jsx
 import * as React from "react"
 import { Breadcrumb } from "@operational/components"
-
 ;<Breadcrumb>Home</Breadcrumb>
 ```
 
@@ -16,6 +15,12 @@ Using a `to` prop navigates automatically, and render proper anchor tags with hr
 ```jsx
 import * as React from "react"
 import { Breadcrumb } from "@operational/components"
-
 ;<Breadcrumb to="/some-url">Home</Breadcrumb>
+```
+
+### Usage with icons
+
+```jsx
+import { HomeIcon } from "@operational/components"
+;<Breadcrumb icon={HomeIcon}>Home</Breadcrumb>
 ```

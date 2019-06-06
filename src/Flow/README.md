@@ -2,27 +2,27 @@
 
 ```js
 import React from "react"
-import { Flow } from "@operational/components"
+import { Flow, IconYes, IconUser, IconUndo } from "@operational/components"
 ;<Flow
   items={[
     {
       label: "Yes",
-      icon: "Yes",
+      icon: IconYes,
       iconColor: "primary",
     },
     {
       label: "People",
-      icon: "Users",
+      icon: IconUser,
       iconColor: "primary",
     },
     {
       label: "History",
-      icon: "Undo",
+      icon: IconUndo,
       iconColor: "primary",
     },
     {
       label: "Troy",
-      icon: "User",
+      icon: IconUser,
       iconColor: "primary",
     },
   ]}
@@ -35,23 +35,23 @@ To condense your items, simply add a condensed prop!
 
 ```js
 import React from "react"
-import { Flow } from "@operational/components"
+import { Flow, IconSync, IconUnlock, IconPhysicalTable, IconSortDescending } from "@operational/components"
 ;<Flow
   condensed
   items={[
     {
-      icon: "Unlock",
+      icon: IconUnlock,
     },
     {
-      icon: "Sync",
+      icon: IconSync,
       iconColor: "#fa0",
     },
     {
-      icon: "Sql",
+      icon: IconPhysicalTable,
       iconColor: "#0af",
     },
     {
-      icon: "SortDescending",
+      icon: IconSortDescending,
       iconColor: "#f0f",
     },
   ]}
@@ -64,7 +64,15 @@ import { Flow } from "@operational/components"
 
 ```js
 import React from "react"
-import { Flow, Title } from "@operational/components"
+import {
+  Flow,
+  Title,
+  IconSortAscending,
+  IconShare,
+  IconSearch,
+  IconVirtualDatabase,
+  IconSortDescending,
+} from "@operational/components"
 
 const MyComponent = () => {
   const [route, setRoute] = React.useState(0)
@@ -77,19 +85,19 @@ const MyComponent = () => {
         activeItemIndex={route}
         items={[
           {
-            icon: "SortAscending",
+            icon: IconSortAscending,
             onClick: () => setRoute(0),
           },
           {
-            icon: "Share",
+            icon: IconShare,
             onClick: () => setRoute(1),
           },
           {
-            icon: "Search",
+            icon: IconSearch,
             onClick: () => setRoute(2),
           },
           {
-            icon: "Schema",
+            icon: IconVirtualDatabase,
             onClick: () => setRoute(3),
           },
         ]}
@@ -99,22 +107,22 @@ const MyComponent = () => {
         items={[
           {
             label: "Loss",
-            icon: "SortDescending",
+            icon: IconSortDescending,
             onClick: () => setRoute(0),
           },
           {
             label: "Atoms",
-            icon: "Share",
+            icon: IconShare,
             onClick: () => setRoute(1),
           },
           {
             label: "Discover",
-            icon: "Search",
+            icon: IconSearch,
             onClick: () => setRoute(2),
           },
           {
             label: "Network",
-            icon: "Schema",
+            icon: IconVirtualDatabase,
             onClick: () => setRoute(3),
           },
         ]}

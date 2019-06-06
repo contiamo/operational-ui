@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Icon } from "../"
+import { IconChevronLeft, IconChevronRight, IconNo } from "../Icon/Icon"
 import { LabelText } from "../LabelText/LabelText"
 import { DefaultProps } from "../types"
 import { Label } from "../utils/mixins"
@@ -161,7 +161,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
               }
             }}
           >
-            <Icon name="No" size={14} />
+            <IconNo size={14} />
           </Toggle>
         )}
         <Input
@@ -198,7 +198,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
                 this.changeMonth(-1)
               }}
             >
-              <Icon name="ChevronLeft" size={12} />
+              <IconChevronLeft size={12} />
             </IconContainer>
             <span>{`${months[month]}, ${year}`}</span>
             <IconContainer
@@ -211,7 +211,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
                 this.changeMonth(+1)
               }}
             >
-              <Icon name="ChevronRight" size={12} />
+              <IconChevronRight size={12} />
             </IconContainer>
           </MonthNav>
           <Month start={start} end={end} min={min} max={max} year={year} month={month} onChange={onChange} />

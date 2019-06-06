@@ -2,9 +2,9 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
-import Icon from "../Icon/Icon"
 import Tooltip from "../Tooltip/Tooltip"
 import { hoverTooltip } from "../utils/mixins"
+import { IconHelp } from "../Icon/Icon"
 
 export interface HintProps extends DefaultProps {
   className?: string
@@ -51,7 +51,7 @@ const HintTooltip: React.SFC<{ position: HintProps["tooltipPosition"]; textId: H
 
 const Hint: React.SFC<HintProps> = props => (
   <Container aria-label={typeof props.children === "string" ? props.children : undefined} {...props}>
-    <Icon name="Question" size={12} />
+    <IconHelp size={12} />
     <HintTooltip position={props.tooltipPosition!} textId={props.textId}>
       {props.children}
     </HintTooltip>

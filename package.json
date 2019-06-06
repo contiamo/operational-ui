@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "dev": "parcel dev-server/index.html",
-    "start": "run-s start:*",
+    "start": "run-p start:*",
     "start:styleguidist": "styleguidist server",
     "start:icons": "ts-node -P tsconfig.node.json build-icons.ts --watch",
     "build": "run-p build:*",

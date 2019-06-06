@@ -1,8 +1,8 @@
 import React, { useLayoutEffect, useRef, useState } from "react"
 
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
-import Icon from "../Icon/Icon"
 import styled from "../utils/styled"
+import { IconCaretUp, IconCaretDown } from "../Icon/Icon"
 
 export interface TopbarSelectProps {
   /** A label added right before displaying the selected value */
@@ -86,7 +86,7 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
           <TopbarSelectLabel>{label}</TopbarSelectLabel>
           <TopbarSelectValue>
             <TopbarSelectValueSpan active={Boolean(selected)}>{selected}</TopbarSelectValueSpan>
-            <Icon color="color.text.lightest" name={isActive ? "CaretUp" : "CaretDown"} size={12} />
+            {React.createElement(isActive ? IconCaretUp : IconCaretDown, { size: 12, color: "color.text.lightest" })}
           </TopbarSelectValue>
         </TopbarSelectContainer>
       )}

@@ -1,10 +1,10 @@
 import * as React from "react"
-import Icon from "../Icon/Icon"
 import { SectionHeader } from "../Internals/SectionHeader"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 import { useUniqueId } from "../useUniqueId"
 import noop from "lodash/noop"
+import { IconNo, IconAdd } from "../Icon/Icon"
 
 export interface Tab {
   title: string
@@ -106,7 +106,7 @@ const TitleWrapper = styled("span")`
 `
 
 const TabIcon = styled("span")`
-  margin-right: ${({theme}) => theme.space.small}px;
+  margin-right: ${({ theme }) => theme.space.small}px;
 `
 
 const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }: TabsProps) => {
@@ -203,9 +203,8 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
                 <TitleWrapper title={title}>{title}</TitleWrapper>
               </TitleIconWrapper>
               {onClose && (
-                <Icon
+                <IconNo
                   size={14}
-                  name="No"
                   onMouseDown={e => {
                     e.stopPropagation()
                     onClose(i)
@@ -226,7 +225,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
               onInsert(tabs.length - 1)
             }}
           >
-            <Icon size={14} name="Add" onMouseDown={noop} />
+            <IconAdd size={14} onMouseDown={noop} />
           </TabHeader>
         )}
       </TabList>

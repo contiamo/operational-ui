@@ -4,7 +4,7 @@ import CopyToClipboard from "react-copy-to-clipboard"
 import Highlight from "react-highlight"
 import ReactJson, { ReactJsonViewProps } from "react-json-view"
 
-import Icon from "../Icon/Icon"
+import { IconCopy } from "../Icon/Icon"
 import { DefaultProps } from "../types"
 import constants from "../utils/constants"
 import styled from "../utils/styled"
@@ -184,7 +184,7 @@ const StyledReactJson = (props: Pick<JSONCodeProps, "codeTheme" | "collapsed" | 
   />
 )
 
-const CodeIcon = styled(Icon)`
+const CodeIcon = styled(IconCopy)`
   position: absolute;
   top: ${({ theme }) => theme.space.small}px;
   right: ${({ theme }) => theme.space.small}px;
@@ -210,7 +210,7 @@ const Code: React.SFC<CodeProps> = ({ children, ...props }) => {
           onCopy={onCopy}
           text={(children || "") as string /* type assertion because of React.SFC's broken children type */}
         >
-          <CodeIcon size={14} name="Copy" color="color.text.lighter" />
+          <CodeIcon size={14} color="color.text.lighter" />
         </CopyToClipboard>
       )}
       <StyledHighlight

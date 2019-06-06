@@ -1,7 +1,7 @@
 import * as React from "react"
 
-import Icon from "../Icon/Icon"
 import styled from "../utils/styled"
+import { IconChevronDown, IconChevronUp } from "../Icon/Icon"
 
 export interface TogglerProps {
   isFolded?: boolean
@@ -11,7 +11,7 @@ export interface TogglerProps {
   onClick?: React.EventHandler<React.SyntheticEvent>
 }
 
-const FoldableIcon = styled(Icon)`
+const FoldableIconBase = styled("div")`
   margin-left: auto;
   pointer-events: none;
 `
@@ -41,17 +41,20 @@ const TogglerOverlay = styled("div")<{ isHovered: boolean }>`
   background-color: ${({ isHovered }) => (isHovered ? "rgba(0, 0, 0, 0.04)" : "transparent")};
 `
 
-const Toggler: React.SFC<TogglerProps> = ({ isFolded, isHovered, ...props }) => (
-  <TogglerOverlay isHovered={Boolean(isHovered)} {...props}>
-    <FoldableIcon
-      color={
-        isHovered
-          ? "color.text.lighter"
-          : "#00000022" /* <- is alpha-blended in order to be visible even on grey backgrounds as in <Group /> */
-      }
-      name={isFolded ? "ChevronDown" : "ChevronUp"}
-    />
-  </TogglerOverlay>
-)
+const Toggler: React.SFC<TogglerProps> = ({ isFolded, isHovered, ...props }) => {
+  const FoldableIcon = FoldableIconBase.withComponent(isFolded ? IconChevronDown : IconChevronUp)
+
+  return (
+    <TogglerOverlay isHovered={Boolean(isHovered)} {...props}>
+      <FoldableIcon
+        color={
+          isHovered
+            ? "color.text.lighter"
+            : "#00000022" /* <- is alpha-blended in order to be visible even on grey backgrounds as in <Group /> */
+        }
+      />
+    </TogglerOverlay>
+  )
+}
 
 export default Toggler

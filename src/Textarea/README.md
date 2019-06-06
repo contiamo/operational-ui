@@ -5,7 +5,7 @@ A textarea field, with optional label, hint and error.
 The following snippet show the text area with various visual additions handling fixed heights, errors and hints.
 
 ```jsx
-import { Form, Textarea, Icon } from "@operational/components"
+import { Form, Textarea, IconOpen } from "@operational/components"
 
 json = JSON.stringify({ test: 123 }, null, 2)
 
@@ -46,7 +46,7 @@ const handleChange = key => value => {
       label="with actions"
       action={
         <div>
-          <Icon size={8} name="Open" />
+          <IconOpen size={8} />
           <a href="#textarea">More information</a>
         </div>
       }

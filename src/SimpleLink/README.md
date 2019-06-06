@@ -4,18 +4,18 @@ Simple links combine a short label and an icon to create colored links that are 
 
 ```jsx
 import * as React from "react"
-import { SimpleLink } from "@operational/components"
+import { SimpleLink, IconOpen } from "@operational/components"
 ;<>
-  <SimpleLink left icon="Open">
+  <SimpleLink left icon={IconOpen}>
     Default
   </SimpleLink>
-  <SimpleLink left icon="Open" color="success">
+  <SimpleLink left icon={IconOpen} color="success">
     Success
   </SimpleLink>
-  <SimpleLink left icon="Open" color="#000000">
+  <SimpleLink left icon={IconOpen} color="#000000">
     Custom color
   </SimpleLink>
-  <SimpleLink left to="https://github.com" icon="Open">
+  <SimpleLink left to="https://github.com" icon={IconOpen}>
     With link
   </SimpleLink>
 </>

@@ -1,11 +1,11 @@
 import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
 
-import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { inputFocus } from "../utils"
 import styled from "../utils/styled"
 import { height } from "./Input.constants"
+import { IconComponentType, IconCopy } from "../Icon/Icon"
 
 interface InputButtonBaseProps {
   onIconClick?: () => void
@@ -14,7 +14,7 @@ interface InputButtonBaseProps {
 
 interface InputButtonPropsWithoutCopy extends InputButtonBaseProps {
   copy: false
-  icon: React.ReactNode | IconName
+  icon: IconComponentType | React.ReactNode
   value?: never
 }
 
@@ -60,8 +60,8 @@ const Button = styled("button")`
   `};
 `
 
-const InputButton: React.SFC<InputButtonProps> = ({ tabIndex, icon, copy, value, onIconClick }) => {
-  if (!icon && !copy) {
+const InputButton: React.SFC<InputButtonProps> = ({ tabIndex, icon: Icon, copy, value, onIconClick }) => {
+  if (!Icon && !copy) {
     return null
   }
 
@@ -70,14 +70,14 @@ const InputButton: React.SFC<InputButtonProps> = ({ tabIndex, icon, copy, value,
       {({ pushMessage }) => (
         <CopyToClipboard text={value || ""} onCopy={() => pushMessage({ body: "Copied to clipboard", type: "info" })}>
           <Button tabIndex={tabIndex}>
-            <Icon name="Copy" size={16} />
+            <IconCopy size={16} />
           </Button>
         </CopyToClipboard>
       )}
     </OperationalContext>
   ) : (
     <Button onClick={onIconClick}>
-      {typeof icon === "string" ? <Icon name={icon as IconName} size={16} /> : icon}
+      {typeof Icon === "function" ? React.createElement(Icon as IconComponentType, { size: 16 }) : Icon}
     </Button>
   )
 }

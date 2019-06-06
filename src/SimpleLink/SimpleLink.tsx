@@ -1,11 +1,11 @@
 import * as React from "react"
 
-import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { DefaultProps } from "../types"
 import { darken, inputFocus, isModifiedEvent, isOutsideLink } from "../utils"
 import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
+import { IconComponentType } from "../Icon/Icon"
 
 export interface SimpleLinkProps extends DefaultProps {
   /** Invoked when you click on the button */
@@ -23,7 +23,7 @@ export interface SimpleLinkProps extends DefaultProps {
    */
   right?: boolean
   /** Icon to display on right or left of button (optional) */
-  icon?: IconName
+  icon?: IconComponentType
   children?: React.ReactNode
 }
 
@@ -64,7 +64,16 @@ const BaseSimpleLink = styled<"a" | "button">("button")<{
   }
 })
 
-const SimpleLink: React.SFC<SimpleLinkProps> = ({ to, children, icon, color, onClick, left, right, ...props }) => {
+const SimpleLink: React.SFC<SimpleLinkProps> = ({
+  to,
+  children,
+  icon: Icon,
+  color,
+  onClick,
+  left,
+  right,
+  ...props
+}) => {
   return (
     <OperationalContext>
       {ctx => (
@@ -89,7 +98,7 @@ const SimpleLink: React.SFC<SimpleLinkProps> = ({ to, children, icon, color, onC
           }}
         >
           {children}
-          {icon && <Icon right name={icon} size={12} />}
+          {Icon && <Icon right size={12} />}
         </BaseSimpleLink>
       )}
     </OperationalContext>
