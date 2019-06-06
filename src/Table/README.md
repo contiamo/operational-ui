@@ -163,7 +163,7 @@ const data = [
 
 ```jsx
 import * as React from "react"
-import { Table, ProjectIcon, Chip } from "@operational/components"
+import { Table, ProjectIcon, OrganizationIcon, Chip } from "@operational/components"
 
 const data = [
   {
@@ -184,7 +184,7 @@ const data = [
 ]
 ;<Table
   data={data}
-  icon={dataEntry => ProjectIcon}
+  icon={dataEntry => OrganizationIcon}
   columns={[
     { heading: "", cell: dataEntry => <ProjectIcon color="primary" /> },
     { heading: "Name", cell: dataEntry => dataEntry.name },
@@ -199,7 +199,7 @@ const data = [
 
 ```jsx
 import * as React from "react"
-import { Table, ProjectIcon, Chip } from "@operational/components"
+import { Table, OrganizationIcon, ProjectIcon, Chip } from "@operational/components"
 
 const data = [
   {
@@ -220,7 +220,7 @@ const data = [
 ]
 ;<Table
   data={data}
-  icon={dataEntry => ProjectIcon}
+  icon={dataEntry => OrganizationIcon}
   iconColor={dataEntry => (dataEntry.name.indexOf("Mega") > -1 ? "primary" : "gray")}
   columns={[
     { heading: "", cell: dataEntry => <ProjectIcon color="primary" /> },
