@@ -10,7 +10,7 @@ const MyComponent = () => {
   return isTourRunning ? (
     <TourModal
       center
-      image={<Logo size={70} name="ContiamoStacked" color="black" />}
+      image={<Logo size={70} name="ContiamoAlone" color="black" />}
       onQuit={() => setIsTourRunning(false)}
       onContinue={() => {
         alert("Just kidding!")
