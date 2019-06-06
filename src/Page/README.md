@@ -14,34 +14,6 @@ import { Page, Card } from "@operational/components"
 </Page>
 ```
 
-### Custom Colors
-
-Here's a page with a different color:
-
-```jsx
-import * as React from "react"
-import { Page, Card } from "@operational/components"
-;<Page title="My Purple Page" color="#aa00ff">
-  <Card>Hello, this is page content</Card>
-</Page>
-```
-
-```jsx
-import * as React from "react"
-import { Page, Card } from "@operational/components"
-;<Page title="My Errored Page" color="color.text.lighter">
-  <Card>Hello, this is page content</Card>
-</Page>
-```
-
-```jsx
-import * as React from "react"
-import { Page, Card } from "@operational/components"
-;<Page title="My White Page" color="white">
-  <Card>Hello, this is page content</Card>
-</Page>
-```
-
 ### Long Children
 
 Here's a case where children are too long. The card has a _hard_ max-width set to its grid area, and any text children are hyphenated.
@@ -111,47 +83,12 @@ import { Page, Card } from "@operational/components"
 import * as React from "react"
 import { Button, Page, Card } from "@operational/components"
 
-/* Always use condensed buttons in page actions */
 const actions = (
-  <Button condensed icon="Open" color="ghost">
+  <Button color="primary" icon="Open">
     Go somewhere else
   </Button>
 )
 ;<Page title="Settings Page" actions={actions}>
-  <Card>Hello, this is page content</Card>
-</Page>
-```
-
-### With actions on start
-
-```jsx
-import * as React from "react"
-import { Button, Page, Card } from "@operational/components"
-
-/* Always use condensed buttons in page actions */
-const actions = (
-  <Button condensed icon="Open" color="ghost">
-    Go somewhere else
-  </Button>
-)
-;<Page title="Settings Page" actions={actions} actionsPosition="start">
-  <Card>Hello, this is page content</Card>
-</Page>
-```
-
-### With actions on end
-
-```jsx
-import * as React from "react"
-import { Button, Page, Card } from "@operational/components"
-
-/* Always use condensed buttons in page actions */
-const actions = (
-  <Button condensed icon="Open" color="ghost">
-    Go somewhere else
-  </Button>
-)
-;<Page title="Settings Page" actions={actions} actionsPosition="end">
   <Card>Hello, this is page content</Card>
 </Page>
 ```
@@ -197,28 +134,6 @@ const Tab = props => (
 />
 ```
 
-### With White Tabs
-
-```jsx
-import * as React from "react"
-import { PageContent, Card, Page } from "@operational/components"
-
-const Tab = props => (
-  <PageContent>
-    <Card title={`${props.title} Tab`} />
-  </PageContent>
-)
-;<Page
-  title="Bundle detail"
-  color="white"
-  tabs={[
-    { name: "overview", children: <Tab title="Overview" />, icon: "Search" },
-    { name: "jobs", children: <Tab title="Jobs" /> },
-    { name: "functions", children: <Tab title="Functions" /> },
-  ]}
-/>
-```
-
 ### Sticky Header with Tabs
 
 ```jsx
@@ -236,11 +151,7 @@ const TabContent = props => (
 )
 ;<div style={{ height: 200 }}>
   <Page
-    actions={
-      <Button condensed icon="Open" color="ghost">
-        Go somewhere else
-      </Button>
-    }
+    actions={<Button icon="Open">Go somewhere else</Button>}
     title="Bundle detail"
     tabs={[
       { name: "overview", children: <TabContent /> },
@@ -271,122 +182,6 @@ const Tab = props => (
     { name: "jobs", children: <Tab title="Jobs" /> },
     { name: "functions", children: <Tab title="Functions" /> },
   ]}
-/>
-```
-
-### With condensed title bar
-
-```jsx
-import * as React from "react"
-import { PageContent, Card, HeaderMenu, Page } from "@operational/components"
-
-const Tab = props => (
-  <PageContent>
-    <Card title={props.title}>The tabs are not working because nothing update `activeTabName`!</Card>
-  </PageContent>
-)
-const options = [
-  { label: "Payroll", onClick: () => {} },
-  { label: "All Databases", onClick: () => {} },
-  { label: "Sales - Germany only", onClick: () => {} },
-  { label: "Sales - global", onClick: () => {} },
-  { label: "Reporting", onClick: () => {} },
-  { label: "Logistics", onClick: () => {} },
-]
-const actions = (
-  <HeaderMenu items={options} withCaret>
-    Sales / Foodmart
-  </HeaderMenu>
-)
-;<Page
-  title="Bundle detail"
-  condensedTitle
-  activeTabName="sql"
-  onTabChange={console.log}
-  tabs={[
-    { name: "olap", children: <Tab title="OLAP" /> },
-    { name: "entity", children: <Tab title="Entity" /> },
-    { name: "sql", children: <Tab title="SQL" /> },
-  ]}
-  actions={actions}
-/>
-```
-
-### With condensed title bar and actions on start
-
-```jsx
-import * as React from "react"
-import { PageContent, Card, HeaderMenu, Page } from "@operational/components"
-
-const Tab = props => (
-  <PageContent>
-    <Card title={props.title}>The tabs are not working because nothing update `activeTabName`!</Card>
-  </PageContent>
-)
-const options = [
-  { label: "Payroll", onClick: () => {} },
-  { label: "All Databases", onClick: () => {} },
-  { label: "Sales - Germany only", onClick: () => {} },
-  { label: "Sales - global", onClick: () => {} },
-  { label: "Reporting", onClick: () => {} },
-  { label: "Logistics", onClick: () => {} },
-]
-const actions = (
-  <HeaderMenu items={options} withCaret>
-    Sales / Foodmart
-  </HeaderMenu>
-)
-;<Page
-  title="Bundle detail"
-  condensedTitle
-  activeTabName="sql"
-  onTabChange={console.log}
-  tabs={[
-    { name: "olap", children: <Tab title="OLAP" /> },
-    { name: "entity", children: <Tab title="Entity" /> },
-    { name: "sql", children: <Tab title="SQL" /> },
-  ]}
-  actions={actions}
-  actionsPosition="start"
-/>
-```
-
-### With condensed title bar and actions on end
-
-```jsx
-import * as React from "react"
-import { PageContent, Card, HeaderMenu, Page } from "@operational/components"
-
-const Tab = props => (
-  <PageContent>
-    <Card title={props.title}>The tabs are not working because nothing update `activeTabName`!</Card>
-  </PageContent>
-)
-const options = [
-  { label: "Payroll", onClick: () => {} },
-  { label: "All Databases", onClick: () => {} },
-  { label: "Sales - Germany only", onClick: () => {} },
-  { label: "Sales - global", onClick: () => {} },
-  { label: "Reporting", onClick: () => {} },
-  { label: "Logistics", onClick: () => {} },
-]
-const actions = (
-  <HeaderMenu items={options} withCaret>
-    Sales / Foodmart
-  </HeaderMenu>
-)
-;<Page
-  title="Bundle detail"
-  condensedTitle
-  activeTabName="sql"
-  onTabChange={console.log}
-  tabs={[
-    { name: "olap", children: <Tab title="OLAP" /> },
-    { name: "entity", children: <Tab title="Entity" /> },
-    { name: "sql", children: <Tab title="SQL" /> },
-  ]}
-  actions={actions}
-  actionsPosition="end"
 />
 ```
 

@@ -6,10 +6,10 @@ export const Title = styled("h1")<{
 }>(({ theme, color }) => ({
   fontSize: theme.font.size.title,
   fontFamily: theme.font.family.main,
-  fontWeight: theme.font.weight.medium,
+  fontWeight: theme.font.weight.bold,
   lineHeight: theme.font.lineHeight,
-  margin: `0 0 ${theme.space.element}px`,
-  color: color ? theme.color.text[color] : "inherit",
+  margin: 0,
+  color: theme.color.text[color ? color : "dark"],
 }))
 
 export default Title

@@ -6,8 +6,6 @@ import PageContent, { PageContentProps, isChildFunction } from "../PageContent/P
 import Progress from "../Progress/Progress"
 import { DefaultProps } from "../types"
 import { Title } from "../Typography/Title"
-import { readableTextColor } from "../utils"
-import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface BaseProps extends DefaultProps {
@@ -17,10 +15,6 @@ export interface BaseProps extends DefaultProps {
   title?: string
   /** Page actions, typically `condensed button` component inside a fragment */
   actions?: React.ReactNode
-  /** Actions position */
-  actionsPosition?: "start" | "main" | "end"
-  /** A custom color for the page header color? */
-  color?: keyof OperationalStyleConstants["color"] | string
   /** Toggles a top progress bar to indicate loading state */
   loading?: boolean
   /** Render a page without padding */
@@ -80,12 +74,6 @@ const Container = styled("div")(({ theme }) => ({
   backgroundColor: theme.color.background.lighter,
 }))
 
-const TitleBar = styled("div")<{ color: PageProps["color"] }>`
-  background-color: ${({ theme, color }) => expandColor(theme, color) || theme.color.primary};
-  color: ${({ theme, color }) =>
-    readableTextColor(expandColor(theme, color) || theme.color.primary, ["black", "white"])};
-`
-
 const TitleContainer = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -105,26 +93,11 @@ const ViewContainer = styled("div")<{ isInTab?: boolean; isTitleCondensed?: bool
   },
 )
 
-const ActionsContainer = styled("div")<{ actionPosition: PageProps["actionsPosition"] }>(
-  ({ theme, actionPosition }) => ({
-    ...(actionPosition === "start"
-      ? {
-          order: -1,
-          // Deal with the button margin (theme.space.small)
-          marginRight: theme.space.element - theme.space.small,
-        }
-      : {
-          marginLeft: theme.space.element,
-        }),
-    ...(actionPosition === "end"
-      ? {
-          flexGrow: 1,
-          display: "flex",
-          justifyContent: "flex-end",
-        }
-      : {}),
-  }),
-)
+const ActionsContainer = styled("div")`
+  display: flex;
+  flex-grow: 1;
+  justify-content: flex-end;
+`
 
 const FixedProgress = styled(Progress)`
   position: fixed;
@@ -133,24 +106,19 @@ const FixedProgress = styled(Progress)`
   width: 100vw;
 `
 
-const PageTitle = styled(Title)`
-  margin: 0;
-`
-
 const initialState = {}
 
 class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   public static defaultProps: Partial<PageProps> = {
     areas: "main",
     fill: false,
-    actionsPosition: "main",
   }
 
   public readonly state = initialState
 
   private renderPageWithTabs() {
     const tabs = this.props.tabs!
-    const { title, actions, actionsPosition, condensedTitle, color } = this.props
+    const { title, actions, condensedTitle } = this.props
 
     return (
       <Tabs
@@ -162,16 +130,16 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
         {({ tabsBar, activeChildren }) => (
           <>
             {title ? (
-              <TitleBar color={color}>
+              <>
                 <TitleContainer>
-                  <PageTitle>{title}</PageTitle>
+                  <Title>{title}</Title>
                   {condensedTitle && tabsBar}
-                  <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
+                  <ActionsContainer>{actions}</ActionsContainer>
                 </TitleContainer>
                 {!condensedTitle && tabsBar}
-              </TitleBar>
+              </>
             ) : (
-              <TitleBar color={color}>{tabsBar}</TitleBar>
+              tabsBar
             )}
             <ViewContainer isInTab isTitleCondensed={condensedTitle} hasTitle>
               {activeChildren}
@@ -183,17 +151,15 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
   }
 
   private renderPageWithoutTabs() {
-    const { title, actions, actionsPosition, areas, color, children, fill, noPadding } = this.props
+    const { title, actions, areas, children, fill, noPadding } = this.props
 
     return (
       <>
         {title && (
-          <TitleBar color={color}>
-            <TitleContainer>
-              <PageTitle>{title}</PageTitle>
-              <ActionsContainer actionPosition={actionsPosition}>{actions}</ActionsContainer>
-            </TitleContainer>
-          </TitleBar>
+          <TitleContainer>
+            <Title>{title}</Title>
+            <ActionsContainer>{actions}</ActionsContainer>
+          </TitleContainer>
         )}
         <ViewContainer hasTitle={Boolean(title)}>
           <PageContent noPadding={Boolean(noPadding)} areas={areas} fill={fill}>
