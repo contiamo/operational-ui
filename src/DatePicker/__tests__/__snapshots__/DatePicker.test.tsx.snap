@@ -14,14 +14,14 @@ exports[`DatePicker Component Should render 1`] = `
       class="css-1i3ebus"
     >
       <svg
-        class="css-qdx4tx"
         fill="currentColor"
         height="14"
-        viewBox="0 0 360 360"
+        style="margin-left:0;margin-right:0;cursor:default;transition:fill .075s ease"
+        viewBox="0 0 9.47 9.47"
         width="14"
       >
         <path
-          d="M180,151.903l105.858,-105.858c9.428,9.428 18.856,18.856 28.284,28.285l-105.858,105.857l105.858,105.858l-28.284,28.285l-105.858,-105.858l-105.858,105.858l-28.284,-28.285l105.858,-105.858l-105.858,-105.857l28.284,-28.285l105.858,105.858Z"
+          d="M5.44 4.74L9.33.85a.5.5 0 0 0 0-.7.5.5 0 0 0-.71 0L4.74 4 .85.15a.48.48 0 0 0-.7 0 .48.48 0 0 0 0 .7L4 4.74.15 8.62a.5.5 0 0 0 .35.85.5.5 0 0 0 .35-.14l3.89-3.89 3.88 3.89a.52.52 0 0 0 .38.14.54.54 0 0 0 .36-.14.51.51 0 0 0 0-.71z"
         />
       </svg>
     </div>
@@ -41,14 +41,14 @@ exports[`DatePicker Component Should render 1`] = `
           class="css-kaz4mx"
         >
           <svg
-            class="css-qdx4tx"
             fill="currentColor"
             height="12"
-            viewBox="0 0 360 360"
+            style="margin-left:0;margin-right:0;cursor:default;transition:fill .075s ease"
+            viewBox="0 0 6.83 16.41"
             width="12"
           >
             <path
-              d="M264.142,54.33l-125.858,125.858l125.858,125.857l-28.284,28.285l-154.142,-154.142l154.142,-154.143c9.428,9.428 18.856,18.857 28.284,28.285Z"
+              d="M6.33 16.41a.51.51 0 0 1-.4-.2L0 8.21 5.93.2a.5.5 0 1 1 .8.6L1.24 8.21l5.49 7.4a.5.5 0 0 1-.4.8z"
             />
           </svg>
         </div>
@@ -59,14 +59,14 @@ exports[`DatePicker Component Should render 1`] = `
           class="css-kaz4mx"
         >
           <svg
-            class="css-qdx4tx"
             fill="currentColor"
             height="12"
-            viewBox="0 0 360 360"
+            style="margin-left:0;margin-right:0;cursor:default;transition:fill .075s ease"
+            viewBox="0 0 6.83 16.41"
             width="12"
           >
             <path
-              d="M278.284,180.187l-154.142,154.143l-28.284,-28.285l125.858,-125.858l-125.858,-125.857l28.284,-28.285c51.381,51.381 102.762,102.762 154.142,154.142Z"
+              d="M.5 16.41a.5.5 0 0 1-.4-.8l5.48-7.4L.1.8A.5.5 0 0 1 .2.1a.5.5 0 0 1 .7.1l5.93 8-5.93 8a.51.51 0 0 1-.4.21z"
             />
           </svg>
         </div>
