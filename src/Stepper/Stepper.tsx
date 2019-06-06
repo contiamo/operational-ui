@@ -93,13 +93,13 @@ function getStepState(index: number, activeIndex?: number): StepState {
 }
 
 const Stepper: React.SFC<StepperProps> = props => {
-  const { steps, stepColor, onStepChange, activeSlideIndex } = props
+  const { steps, stepColor, onStepChange, activeSlideIndex, ...rest } = props
   return (
-    <>
+    <div data-cy="operational-ui__Stepper" {...rest}>
       <Steps data-cy="operational-ui__Stepper-steps">
         {steps.map(({ title }, index) => (
           <Step
-            data-cy={`operational-ui__Stepper-step-${index}`}
+            data-cy={`operational-ui__Stepper__step-${index}`}
             tabIndex={index === activeSlideIndex ? 0 : -1}
             aria-selected={index === activeSlideIndex}
             key={index}
@@ -117,7 +117,7 @@ const Stepper: React.SFC<StepperProps> = props => {
         ))}
       </Steps>
       <StepContent data-cy="operational-ui__Stepper-content">{steps[activeSlideIndex!].content}</StepContent>
-    </>
+    </div>
   )
 }
 

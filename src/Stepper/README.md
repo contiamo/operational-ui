@@ -11,34 +11,38 @@ const MyComponent = () => {
 
   return (
     <Stepper
-      data-cy="operational-ui__Stepper"
       activeSlideIndex={activeSlideIndex}
       onStepChange={setActiveSlideIndex}
       steps={[
         {
           title: "Select Your Git Provider",
           content: (
-            <List
-              items={[
-                {
-                  photo: "https://placehold.it/140x60",
-                  description: "We will ask you to authenticate yourself with OAuth.",
-                  onClick: () => setActiveSlideIndex(1),
-                },
-                {
-                  photo: "https://placehold.it/140x60",
-                  description: "We will ask you to authenticate yourself with OAuth.",
-                  onClick: () => alert("You chose the second item!"),
-                },
-                {
-                  title: "Manual Setup",
-                  photo: "https://placehold.it/140x60",
-                  description:
-                    "Provide the URL to any accessible git repository and set up the required keys for access.",
-                  onClick: () => alert("You chose the third item!"),
-                },
-              ]}
-            />
+            <Body>
+              <List
+                items={[
+                  {
+                    photo: "https://placehold.it/140x60",
+                    description: "We will ask you to authenticate yourself with OAuth.",
+                    onClick: () => setActiveSlideIndex(1),
+                  },
+                  {
+                    photo: "https://placehold.it/140x60",
+                    description: "We will ask you to authenticate yourself with OAuth.",
+                    onClick: () => alert("You chose the second item!"),
+                  },
+                  {
+                    title: "Manual Setup",
+                    photo: "https://placehold.it/140x60",
+                    description:
+                      "Provide the URL to any accessible git repository and set up the required keys for access.",
+                    onClick: () => alert("You chose the third item!"),
+                  },
+                ]}
+              />
+              <Button color="primary" onClick={() => setActiveSlideIndex(1)}>
+                Next
+              </Button>
+            </Body>
           ),
         },
         {
