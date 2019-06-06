@@ -9,7 +9,7 @@ export const Listbox = styled("div")<{ disabled: boolean; color?: string; fullWi
   cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   outline: none;
-  width: ${({ fullWidth }) => (fullWidth ? "100%" : "auto")};
+  width: ${({ fullWidth }) => (fullWidth ? "100%" : "initial")};
 `
 
 Listbox.defaultProps = {
@@ -18,9 +18,11 @@ Listbox.defaultProps = {
   tabIndex: -1,
 }
 
+const dropdownButtonWidth = 40
+
 export const Combobox = styled("div")<{ naked: boolean }>`
   display: grid;
-  grid-template-columns: auto 40px;
+  grid-template-columns: calc(100% - ${dropdownButtonWidth}px) ${dropdownButtonWidth}px;
   grid-gap: 1px;
   align-items: stretch;
   border: 1px solid ${({ theme }) => theme.color.border.select};
@@ -33,7 +35,7 @@ export const Combobox = styled("div")<{ naked: boolean }>`
 `
 
 export const SelectInput = styled(Input)`
-  width: fit-content;
+  width: inherit;
   border: 0;
   background: transparent;
   color: currentColor;
