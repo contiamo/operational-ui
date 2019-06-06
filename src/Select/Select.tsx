@@ -130,7 +130,7 @@ export const Select: React.FC<SelectProps> = ({
       disabled={disabled}
       keepOpenOnItemClick={Array.isArray(value)}
       items={items}
-      tabIndex={tabIndex}
+      tabIndex={disabled ? -1 : tabIndex}
       aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
       {...rest}
     >
