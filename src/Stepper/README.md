@@ -40,7 +40,7 @@ const MyComponent = () => {
                 ]}
               />
               <Button color="primary" onClick={() => setActiveSlideIndex(1)}>
-                Next
+                Go to Step 2
               </Button>
             </Body>
           ),
