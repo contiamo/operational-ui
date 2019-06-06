@@ -2,7 +2,9 @@ The uploader element is used to upload files to the platform, usually data files
 
 The contents displayed by the Uploader are fully determined by the user.
 
-### Initial
+### Initial with drag-over effect
+
+Drag a file to see the effect.
 
 ```jsx
 import * as React from "react"
@@ -20,31 +22,46 @@ const InitialContentContainer = styled("div")(({ theme }) => ({
   },
 }))
 
-;<Uploader>
-  <InitialContentContainer>
-    Drop your file here
-    <br />
-    or
-    <br />
-    <label htmlFor="browse">browse files</label>
-    <input onChange={console.log} id="browse" type="file" />
-  </InitialContentContainer>
-</Uploader>
-```
-
-### Drag-over state
-
-```jsx
-import * as React from "react"
-import { Uploader, styled } from "@operational/components"
-
 const DragOverContentContainer = styled("div")(({ theme }) => ({
   color: theme.color.primary,
 }))
 
-;<Uploader dragging onMouseUp={console.log}>
-  <DragOverContentContainer>Drop your file here</DragOverContentContainer>
-</Uploader>
+const MyComponent = () => {
+  const [isDragging, setIsDragging] = React.useState(false)
+  const [isFileListOpen, setIsFileListOpen] = React.useState(false)
+
+  React.useEffect(() => {
+    const dragListener = () => setIsDragging(true)
+    const dragEndListener = () => setIsDragging(false)
+
+    document.addEventListener("drag", dragListener)
+    document.addEventListener("dragend", dragEndListener)
+
+    return () => {
+      document.removeEventListener("drag", dragListener)
+      document.removeEventListener("dragend", dragListener)
+    }
+  }, [])
+
+  return (
+    <Uploader dragActive={isDragging}>
+      {isDragging ? (
+        <DragOverContentContainer>Drop your file here</DragOverContentContainer>
+      ) : (
+        <InitialContentContainer>
+          Drop your file here
+          <br />
+          or
+          <br />
+          <label htmlFor="browse">browse files</label>
+          <input id="browse" type="file" />
+        </InitialContentContainer>
+      )}
+    </Uploader>
+  )
+}
+
+;<MyComponent />
 ```
 
 ### Uploading state
