@@ -25,13 +25,19 @@ const Steps = styled("ul")`
   justify-content: space-between;
 `
 
-const Step = styled("li")<{ isActive: boolean; number: number; color: StepperProps["stepColor"] }>`
+type StepState = "inactive" | "active" | "completed"
+
+const Step = styled("li")<{ stepState: StepState; number: number; color: StepperProps["stepColor"] }>`
   display: flex;
   align-items: center;
-    font-weight: ${({ theme, isActive }) => (isActive ? "bold" : theme.font.weight.regular)};
+    font-weight: ${({ theme, stepState }) => (stepState === "active" ? "bold" : theme.font.weight.regular)};
   flex: 1 0 auto;
   font-size: ${({ theme }) => theme.font.size.body}px;
-  color: ${({ theme, isActive }) => (isActive ? theme.color.text.dark : theme.color.text.lighter)};
+  color: ${({ theme, stepState }) => {
+    if (stepState === "active") return theme.color.text.dark
+    if (stepState === "completed") return theme.color.text.lighter
+    return theme.color.text.lightest
+  }};
   cursor: pointer;
 
   /* Number with circles */
@@ -45,7 +51,11 @@ const Step = styled("li")<{ isActive: boolean; number: number; color: StepperPro
     font-weight: ${({ theme }) => theme.font.weight.bold};
     font-size: ${({ theme }) => theme.font.size.body}px;
     box-sizing: border-box;
-    background: ${({ theme, color, isActive }) => (isActive ? expandColor(theme, color) : theme.color.border.default)};
+    background: ${({ theme, color, stepState }) => {
+      if (stepState === "active") return expandColor(theme, color)
+      if (stepState === "completed") return theme.color.text.lightest
+      return theme.color.border.disabled
+    }};
     margin-right: ${({ theme }) => theme.space.small}px;
     border-radius: 50%;
     color: white;
@@ -74,6 +84,13 @@ const StepLabel = styled("div")`
   overflow: hidden;
 `
 
+function getStepState(index: number, activeIndex?: number): StepState {
+  if (activeIndex === undefined) return "inactive"
+  if (index < activeIndex) return "completed"
+  if (index === activeIndex) return "active"
+  return "inactive"
+}
+
 const Stepper: React.SFC<StepperProps> = props => {
   const { steps, stepColor, onStepChange, activeSlideIndex } = props
   return (
@@ -82,7 +99,7 @@ const Stepper: React.SFC<StepperProps> = props => {
         {steps.map(({ title }, index) => (
           <Step
             key={index}
-            isActive={activeSlideIndex === index}
+            stepState={getStepState(index, activeSlideIndex)}
             number={index + 1}
             color={stepColor}
             onClick={() => {
