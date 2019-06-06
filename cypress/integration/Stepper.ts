@@ -1,6 +1,6 @@
 import { tabPastStyleguidistLinks } from "../support/helpers"
 
-describe("Steeper", () => {
+describe("Stepper", () => {
   beforeEach(() => {
     cy.visit("/#!/Stepper")
   })
