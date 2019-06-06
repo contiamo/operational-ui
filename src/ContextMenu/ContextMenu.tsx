@@ -89,7 +89,7 @@ const InvisibleOverlay = styled("div")(({ theme }) => ({
 
 class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
   private menu: HTMLDivElement | null = null
-  private uniqueId = this.props.id || (nanoid()[0] as string)
+  private uniqueId = this.props.id || nanoid()
 
   private toggle = (e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>) => {
     e.stopPropagation()
