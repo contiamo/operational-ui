@@ -19,7 +19,7 @@ const outputFolder = program.output || "./src/Icon"
 
 // Make sure the output folder is clean
 if (program.clean) {
-  rimraf.sync(outputFolder)
+  rimraf.sync(`${outputFolder}/*.tsx`)
 }
 
 // Ensure the output folder exists

@@ -70,7 +70,7 @@ import {
   HomeIcon,
   FunctionIcon,
   DocumentIcon,
-  PadlockIcon,
+  LockIcon,
   NoIcon,
   YesIcon,
 } from "@operational/components"
@@ -83,7 +83,7 @@ import {
   </SidenavHeader>
   <SidenavHeader label="Let It Snow">
     <SidenavItem label="Steak" icon={YesIcon} />
-    <SidenavItem label="Frites" active icon={PadlockIcon} />
+    <SidenavItem label="Frites" active icon={LockIcon} />
     <SidenavItem label="Rum" icon={NoIcon} />
   </SidenavHeader>
 </Sidenav>
@@ -93,12 +93,12 @@ import {
 
 ```jsx
 import * as React from "react"
-import { Sidenav, SidenavHeader, SidenavItem, LogsIcon, PadlockIcon, NoIcon } from "@operational/components"
+import { Sidenav, SidenavHeader, SidenavItem, LogsIcon, LockIcon, NoIcon } from "@operational/components"
 ;<div style={{ height: 600 }}>
   <Sidenav compact>
     <SidenavHeader label="Let It Snow">
       <SidenavItem label="Steak" icon={LogsIcon} />
-      <SidenavItem label="Frites" active icon={PadlockIcon} />
+      <SidenavItem label="Frites" active icon={LockIcon} />
     </SidenavHeader>
     <SidenavItem end label="Rum" icon={NoIcon} />
   </Sidenav>
