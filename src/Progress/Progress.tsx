@@ -18,10 +18,6 @@ export interface ProgressProps extends DefaultProps {
   width?: number
 }
 
-function validWidth(width: number): number {
-  return width > 64 ? width : 64
-}
-
 const Container = styled("div")<ProgressProps>(
   {
     label: "progress",
@@ -34,7 +30,8 @@ const Container = styled("div")<ProgressProps>(
       ? {
           backgroundColor: theme.color.background.light,
           borderRadius: 2,
-          width: width ? `${validWidth(width)}px` : "100%",
+          width: width ? width : "100%",
+          minWidth: 64,
         }
       : {
           backgroundColor: "transparent",
