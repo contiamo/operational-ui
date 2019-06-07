@@ -12,6 +12,7 @@ exports[`ContextMenu Component Should render 1`] = `
     aria-expanded="false"
     aria-haspopup="listbox"
     class="css-ca9nj2-contextmenu"
+    role="listbox"
   >
     <svg
       fill="currentColor"
