@@ -5,6 +5,7 @@ import { join, parse, sep } from "path"
 import * as ProgressBar from "progress"
 import * as program from "commander"
 import * as chokidar from "chokidar"
+import * as base64Img from "base64-img"
 
 program
   .version(require("./package.json").version)
@@ -54,23 +55,35 @@ const run = (iconPath?: string) => {
    * ref: https://www.smooth-code.com/open-source/svgr/docs/typescript/
    */
   function template({ template }, opts, { componentName, jsx }) {
-    const typeScriptTpl = template.smart({ plugins: ["typescript"] })
-    return typeScriptTpl.ast`
+    const typeScriptTpl = template.smart(
+      `
     import * as React from "react";
     import constants, { expandColor } from "../utils/constants";
     import { IconProps } from "./Icon";
-    export const ${componentName} = ({size = 18, color, left, right, ...props}: React.SVGProps<SVGSVGElement> & IconProps) => {
+    
+    /**
+     * {{previewImage}}
+     */
+    export const COMPONENT_NAME = ({size = 18, color, left, right, ...props}: IconProps) => {
       const iconColor: string = expandColor(constants, color) || "currentColor";
       const style = {
-        marginLeft: right ? 8 : 0, // theme.space.small
-        marginRight: left ? 8 : 0, // theme.space.small
+        // theme.space.small
+        marginLeft: right ? 8 : 0,
+        // theme.space.small
+        marginRight: left ? 8 : 0,
         cursor: Boolean(props.onClick) ? "pointer" : "default",
         transition: "fill .075s ease"
       };
-  
-      return ${jsx}
+    
+      return JSX
     };
-  `
+    `,
+      { plugins: ["typescript"], preserveComments: true },
+    )
+    return typeScriptTpl({
+      COMPONENT_NAME: componentName,
+      JSX: jsx,
+    })
   }
 
   // Copy everything into this repository
@@ -93,7 +106,11 @@ const run = (iconPath?: string) => {
       },
       { componentName: `${name}Icon` },
     )
-    writeFileSync(join(outputFolder, `Icon.${name}.tsx`), output)
+
+    // Add a preview in the documentation
+    const preview = base64Img.base64Sync(join(inputFolder, fileName))
+    const previewImage = `![${name}Icon](${preview}) `
+    writeFileSync(join(outputFolder, `Icon.${name}.tsx`), output.replace("{{previewImage}}", previewImage))
     progressBar.tick()
   })
 
@@ -104,7 +121,7 @@ const run = (iconPath?: string) => {
   // Create Icon.ts
   const index = `import React from "react"
 
-export interface IconPropsBase {
+export interface IconPropsBase extends React.SVGProps<SVGSVGElement>{
   /**
    * Size
    *
