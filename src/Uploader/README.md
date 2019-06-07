@@ -13,9 +13,10 @@ import { Uploader, styled } from "@operational/components"
 const InitialContentContainer = styled("div")(({ theme }) => ({
   lineHeight: "18px",
   textAlign: "center",
-  position: "relative",
-  top: "50%",
-  transform: "translate(0, -50%)",
+  display: "flex",
+  height: "100%",
+  flexDirection: "column",
+  justifyContent: "center",
   "& label": {
     color: theme.color.primary,
     fontWeight: theme.font.weight.bold,
@@ -28,9 +29,10 @@ const InitialContentContainer = styled("div")(({ theme }) => ({
 
 const DragOverContentContainer = styled("div")(({ theme }) => ({
   textAlign: "center",
-  position: "relative",
-  top: "50%",
-  transform: "translate(0, -50%)",
+  display: "flex",
+  height: "100%",
+  flexDirection: "column",
+  justifyContent: "center",
 }))
 
 const MyComponent = () => {
@@ -79,13 +81,11 @@ import { Progress, Uploader } from "@operational/components"
 
 const UploadingContentContainer = styled("div")(({ theme }) => ({
   color: theme.color.text.lighter,
-  textAlign: "center",
-  position: "relative",
-  top: "50%",
-  transform: "translate(0, -50%)",
-  "& div": {
-    display: "inline-flex",
-  },
+  alignItems: "center",
+  display: "flex",
+  height: "100%",
+  flexDirection: "column",
+  justifyContent: "center",
 }))
 
 ;<Uploader>
@@ -106,9 +106,10 @@ const CompletedContentContainer = styled("div")(({ theme }) => ({
   color: theme.color.primary,
   fontWeight: theme.font.weight.bold,
   textAlign: "center",
-  position: "relative",
-  top: "50%",
-  transform: "translate(0, -50%)",
+  display: "flex",
+  height: "100%",
+  flexDirection: "column",
+  justifyContent: "center",
 }))
 
 ;<Uploader>
@@ -126,9 +127,10 @@ const ErrorContentContainer = styled("div")(({ theme }) => ({
   color: theme.color.error,
   lineHeight: "22px",
   textAlign: "center",
-  position: "relative",
-  top: "50%",
-  transform: "translate(0, -50%)",
+  display: "flex",
+  height: "100%",
+  flexDirection: "column",
+  justifyContent: "center",
   "& span": {
     color: theme.color.primary,
     fontWeight: theme.font.weight.bold,

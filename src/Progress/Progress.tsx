@@ -23,7 +23,6 @@ const Container = styled("div")<ProgressProps>(
     label: "progress",
     overflowX: "hidden",
     textAlign: "center",
-    left: 0,
   },
   ({ theme, bottom, inline, width }) => ({
     ...(inline
@@ -37,10 +36,11 @@ const Container = styled("div")<ProgressProps>(
           backgroundColor: "transparent",
           position: "fixed",
           width: "100%",
+          top: bottom ? "auto" : 0,
+          bottom: bottom ? 0 : "auto",
+          left: 0,
         }),
     zIndex: theme.zIndex.globalProgress,
-    top: bottom ? "auto" : 0,
-    bottom: bottom ? 0 : "auto",
   }),
 )
 
