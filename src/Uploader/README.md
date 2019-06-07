@@ -37,21 +37,39 @@ const DragOverContentContainer = styled("div")(({ theme }) => ({
 
 const MyComponent = () => {
   const [isDragging, setIsDragging] = React.useState(false)
+  // Target is cached when dragenter is fired.
+  // When dragleave is fired, if the event target is the same as the cached target,
+  // this means the file has been dragged outside the browser.
+  const cachedTarget = React.useRef(null)
 
   React.useEffect(() => {
-    const dragListener = () => setIsDragging(true)
+    const dragEnterListener = e => {
+      cachedTarget.current = e.target
+    }
+
+    const dragLeaveListener = e => {
+      if (e.target === cachedTarget.current) {
+        setIsDragging(false)
+      }
+    }
+
     const dragDropListener = e => {
       e.preventDefault()
       setIsDragging(false)
     }
-    const dragOverListener = e => e.preventDefault()
+    const dragOverListener = e => {
+      e.preventDefault()
+      setIsDragging(true)
+    }
 
-    document.addEventListener("dragenter", dragListener)
+    document.addEventListener("dragenter", dragEnterListener)
+    document.addEventListener("dragleave", dragLeaveListener)
     document.addEventListener("dragover", dragOverListener)
     document.addEventListener("drop", dragDropListener)
 
     return () => {
-      document.removeEventListener("dragenter", dragListener)
+      document.removeEventListener("dragenter", dragEnterListener)
+      document.removeEventListener("dragleave", dragLeaveListener)
       document.removeEventListener("dragover", dragOverListener)
       document.removeEventListener("drop", dragDropListener)
     }
