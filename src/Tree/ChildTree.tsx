@@ -9,6 +9,8 @@ const ChildTree: React.SFC<Props> = ({
   highlight,
   tag,
   label,
+  icon,
+  iconColor,
   color,
   disabled,
   forwardRef,
@@ -44,6 +46,8 @@ const ChildTree: React.SFC<Props> = ({
         tag={tag}
         label={label}
         color={color}
+        icon={icon}
+        iconColor={iconColor}
         onRemove={onRemove}
         cursor={cursor}
       />

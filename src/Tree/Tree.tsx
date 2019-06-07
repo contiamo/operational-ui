@@ -3,6 +3,7 @@ import * as React from "react"
 import { Draggable, DraggableProps, Droppable, DroppableProps, DroppableStateSnapshot } from "react-beautiful-dnd"
 import styled from "../utils/styled"
 import ChildTree from "./ChildTree"
+import { IconComponentType } from "../Icon/Icon"
 
 interface BaseTree {
   label: string
@@ -11,6 +12,8 @@ interface BaseTree {
   tag?: string
   disabled?: boolean
   color?: string
+  icon?: IconComponentType
+  iconColor?: string
   onClick?: () => void
   cursor?: string
   onRemove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void

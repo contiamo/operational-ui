@@ -2,7 +2,7 @@ import React from "react"
 import NameTag from "../NameTag/NameTag"
 import { darken } from "../utils"
 import styled from "../utils/styled"
-import { CaretDownIcon, PlusIcon, NoIcon, IconComponentType } from "../Icon/Icon"
+import { PlusIcon, NoIcon, MinusIcon, IconComponentType } from "../Icon/Icon"
 
 export const Container = styled("div")<{ hasChildren: boolean; disabled: boolean }>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
@@ -53,19 +53,14 @@ const DeleteNode = styled("div")`
   }
 `
 
-const TreeIcon = styled("div")`
-  margin-right: ${({ theme }) => theme.space.base}px;
-`
-
-const ChevronDown = TreeIcon.withComponent(CaretDownIcon)
-const Add = TreeIcon.withComponent(PlusIcon)
-
 interface TreeItemProps {
   highlight: boolean
   hasChildren: boolean
   isOpen: boolean
   label: string
   tag?: string
+  icon?: IconComponentType
+  iconColor?: string
   color?: string
   cursor?: string
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
@@ -75,6 +70,8 @@ interface TreeItemProps {
 const TreeItem: React.SFC<TreeItemProps> = ({
   highlight,
   tag,
+  icon,
+  iconColor,
   label,
   color,
   onNodeClick,
@@ -85,16 +82,17 @@ const TreeItem: React.SFC<TreeItemProps> = ({
 }) => (
   <Header onClick={onNodeClick} highlight={Boolean(highlight)} cursor={cursor}>
     {hasChildren &&
-      React.createElement((isOpen ? ChevronDown : Add) as IconComponentType, {
-        size: 12,
+      React.createElement(isOpen ? MinusIcon : PlusIcon, {
+        size: 11,
         left: true,
         color: "color.text.action",
       })}
-    {!hasChildren && tag && (
+    {tag && (
       <NameTag condensed left color={color}>
         {tag}
       </NameTag>
     )}
+    {icon && React.createElement(icon, { size: 12, left: true, color: iconColor || "color.text.lighter" })}
     <Label hasChildren={hasChildren}>{label}</Label>
     {onRemove && (
       <DeleteNode onClick={onRemove}>

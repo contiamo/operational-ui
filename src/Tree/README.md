@@ -4,7 +4,7 @@ The tree component renders a tree structure with collapsable nodes in a filetree
 
 ```jsx
 import * as React from "react"
-import { Tree } from "@operational/components"
+import { Tree, OlapIcon } from "@operational/components"
 ;<Tree
   trees={[
     {
@@ -17,7 +17,8 @@ import { Tree } from "@operational/components"
           childNodes: [
             {
               label: "City",
-              icon: "Olap",
+              icon: OlapIcon,
+              iconColor: "primary",
               disabled: true,
               childNodes: [],
             },
@@ -26,7 +27,7 @@ import { Tree } from "@operational/components"
               color: "primary",
               onClick: () => alert("country was clicked"),
               onRemove: () => alert("node is removed"),
-              icon: "Olap",
+              icon: OlapIcon,
               childNodes: [],
             },
           ],
@@ -40,12 +41,12 @@ import { Tree } from "@operational/components"
       childNodes: [
         {
           label: "Limited Liability Company",
-          icon: "Olap",
+          icon: OlapIcon,
           childNodes: [],
         },
         {
           label: "Inc.",
-          icon: "Olap",
+          icon: OlapIcon,
           color: "#2C363F",
           childNodes: [],
         },
