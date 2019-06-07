@@ -150,8 +150,8 @@ const font = {
   /** 1.4 */
   lineHeight: 1.4,
   size: {
-    /** 16px */
-    title: 16,
+    /** 20px */
+    title: 20,
 
     /** 14px */
     body: 14,
