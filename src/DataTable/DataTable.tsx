@@ -134,6 +134,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
         innerElementType={Table}
         /** can't use data-cy or any other prop because of react-window */
         className="operational-ui__DataTable--virtual-scroller"
+        style={{ willChange: undefined }}
       >
         {VirtualRow}
       </FixedSizeList>
