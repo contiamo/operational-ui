@@ -54,7 +54,10 @@ const Step = styled("div")<{ stepState: StepState; number: number; color: Steppe
   
   /** Ball with number in it */
   ::before {
-    content: '${({ number }) => number}';
+    content: '${({ number, stepState }) => {
+      if (stepState === "completed") return "✓"
+      return number
+    }}';
     position: relative;
     display: flex;
     align-items: center;
