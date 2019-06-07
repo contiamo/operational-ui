@@ -10,7 +10,6 @@ import {
   getOptionFromItem,
 } from "../Select.util"
 import { IOption } from "../Select.types"
-import { AddIcon } from "../../Icon/Icon"
 
 describe("Select component utilities", () => {
   const defaultOptionValue = "🇪🇸🌍 queso"
@@ -35,17 +34,17 @@ describe("Select component utilities", () => {
   })
 
   it("should prepend an option to an existing list of options", () => {
-    expect(prependItem({ icon: AddIcon, label: "Sup" })(optionsToContextMenuItems()(myOptions))).toEqual([
-      { icon: "Add", label: "Sup" },
+    expect(prependItem({ label: "Sup" })(optionsToContextMenuItems()(myOptions))).toEqual([
+      { label: "Sup" },
       { label: "Hola Mundo", value: defaultOptionValue },
       { label: "NO LABEL LOL", value: "NO LABEL LOL" },
     ])
   })
   it("should append an option to an existing list of options", () => {
-    expect(appendItem({ icon: AddIcon, label: "Sup" })(optionsToContextMenuItems()(myOptions))).toEqual([
+    expect(appendItem({ label: "Sup" })(optionsToContextMenuItems()(myOptions))).toEqual([
       { label: "Hola Mundo", value: defaultOptionValue },
       { label: "NO LABEL LOL", value: "NO LABEL LOL" },
-      { icon: "Add", label: "Sup" },
+      { label: "Sup" },
     ])
   })
   it("should filter an existing list of options based on their label", () => {
