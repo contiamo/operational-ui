@@ -39,7 +39,7 @@ Steps.displayName = "Steps"
 const ballSize = 24
 const translateY = ballSize / 2
 
-const Step = styled("div")<{ stepState: StepState; number: number; color: StepperProps["stepColor"] }>`
+const Step = styled("li")<{ stepState: StepState; number: number; color: StepperProps["stepColor"] }>`
   position: relative;
   width: 100%;
   color: ${({ theme, stepState }) => {
@@ -51,6 +51,11 @@ const Step = styled("div")<{ stepState: StepState; number: number; color: Steppe
     stepState === "active" ? theme.font.weight.bold : theme.font.weight.regular};
   text-align: center;
   overflow: hidden;
+
+  :focus {
+    outline: 0;
+    box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
+  }
   
   /** Ball with number in it */
   ::before {
@@ -96,14 +101,13 @@ const Step = styled("div")<{ stepState: StepState; number: number; color: Steppe
     width: 50%;
   }
 
-:first-of-type::after {
-  transform: translate(50%, ${translateY}px)
-}
+  :first-of-type::after {
+    transform: translate(50%, ${translateY}px)
+  }
 
-:last-of-type::after {
-  transform: translate(-50%, ${translateY}px)
-}
-
+  :last-of-type::after {
+    transform: translate(-50%, ${translateY}px)
+  }
 `
 Step.defaultProps = { role: "tab" }
 Step.displayName = "Step"
