@@ -53,6 +53,7 @@ const Step = styled("li")<{ stepState: StepState; number: number; color: Stepper
   overflow: hidden;
 
   :focus {
+    // TODO: Use common mixin
     outline: 0;
     box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
   }
@@ -73,8 +74,8 @@ const Step = styled("li")<{ stepState: StepState; number: number; color: Stepper
     border-radius: 50%;
     background-color: ${({ theme, stepState }) => {
       if (stepState === "active") return theme.color.primary
-      if (stepState === "completed") return theme.color.text.lighter
-      return theme.color.text.lightest
+      if (stepState === "completed") return theme.color.text.lightest
+      return theme.color.border.default
     }};
     font-weight: ${({ theme }) => theme.font.weight.regular};
     color: ${({ theme }) => theme.color.white};
