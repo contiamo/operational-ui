@@ -1,7 +1,7 @@
 import svgr from "@svgr/core"
 import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync } from "fs"
 import * as rimraf from "rimraf"
-import { join, parse } from "path"
+import { join, parse, sep } from "path"
 import * as ProgressBar from "progress"
 import * as program from "commander"
 import * as chokidar from "chokidar"
@@ -27,12 +27,26 @@ if (!existsSync(outputFolder)) {
   mkdirSync(outputFolder)
 }
 
-const run = () => {
-  console.clear()
-  const files = readdirSync(inputFolder).filter(i => /\.svg$/.exec(i))
+/**
+ * Main function.
+ *
+ * @param iconPath Given icon path on watch mode
+ */
+const run = (iconPath?: string) => {
+  const files = readdirSync(inputFolder).filter(i => {
+    if (!/\.svg$/.exec(i)) return false
+    if (iconPath && iconPath.split(sep)[1] !== i) return false
+    return true
+  })
 
   // Create a progress bar for a pretty output
-  const progressBar = new ProgressBar("  creating icons react components [:bar] :percent", files.length)
+  const progressBar = iconPath
+    ? {
+        tick() {
+          console.log(`  ${iconPath.split(sep)[1]} was recompiled!`)
+        },
+      }
+    : new ProgressBar("  creating icons react components [:bar] :percent", files.length)
 
   /**
    * Component template.
@@ -83,6 +97,10 @@ const run = () => {
     progressBar.tick()
   })
 
+  // Don't update the index if we are in watch mode
+  // This prevent to break the components summary
+  if (iconPath) return
+
   // Create Icon.ts
   const index = `import React from "react"
 
@@ -122,6 +140,10 @@ ${files
     return `export * from "./Icon.${name}";`
   })
   .join("\n")}
+
+// Hack to have \`Icon\` name in the documentation #styleguidist
+const Icon: React.SFC = () => null;
+export default Icon
   `
 
   writeFileSync(join(outputFolder, "Icon.tsx"), index)
