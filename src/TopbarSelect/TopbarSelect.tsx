@@ -32,7 +32,7 @@ const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
     background-color: ${props => (props.isActive ? props.theme.color.white : props.theme.color.background.lighter)};
   }
   & svg {
-    /** sIcon are purely presentational and click events are handled upstream */
+    /** Icons are purely presentational and click events are handled upstream */
     pointer-events: none;
   }
 `

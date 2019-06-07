@@ -172,14 +172,14 @@ function Table<T>({
     }
   })
 
-  const hassIcon = Boolean(data[0] && icon && icon(data[0]))
+  const hasIcons = Boolean(data[0] && icon && icon(data[0]))
 
   return (
     <Container fixedLayout={fixedLayout} {...props}>
       {!headless && (
         <Thead>
           <Tr>
-            {hassIcon && <Th key="-1" />}
+            {hasIcons && <Th key="-1" />}
             {standardizedColumns.map((column, columnIndex) => (
               <Th
                 key={columnIndex}
@@ -233,7 +233,7 @@ function Table<T>({
                   }
                 }}
               >
-                {hassIcon && (
+                {hasIcons && (
                   <CellIcon>
                     {/** Because has `hasIcon`, it is guaranteed that the `icon` function exists */}
                     {React.createElement(icon!(dataEntry), { color: iconColor && iconColor(dataEntry) })}

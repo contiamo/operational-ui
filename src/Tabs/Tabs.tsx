@@ -93,7 +93,7 @@ TabPanel.defaultProps = {
 }
 
 // We need this one so that icon and title both would be aligned to the left
-const TitleWrapperIcon = styled("div")`
+const TitleIconWrapper = styled("div")`
   display: flex;
   max-width: 120px;
 `
@@ -198,10 +198,10 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
               onFocus={onClick}
               ref={i === active ? activeTab : undefined}
             >
-              <TitleWrapperIcon>
+              <TitleIconWrapper>
                 {icon && <TabIcon>{icon}</TabIcon>}
                 <TitleWrapper title={title}>{title}</TitleWrapper>
-              </TitleWrapperIcon>
+              </TitleIconWrapper>
               {onClose && (
                 <NoIcon
                   size={14}

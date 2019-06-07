@@ -1,4 +1,4 @@
-Operational's SVG Icon set packaged as a single component.
+Operational's SVG icon set packaged as a single component.
 
 ### Usage
 
@@ -31,7 +31,7 @@ import { DocumentIcon } from "@operational/components"
 </div>
 ```
 
-#### All sIcon
+#### All Icons
 
 ```jsx
 import * as React from "react"
@@ -57,7 +57,7 @@ const MyComponent = () => {
         <Input
           Icon={SearchIcon}
           label="Search"
-          placeholder="Filter sIcon..."
+          placeholder="Filter Icons..."
           type="text"
           value={filter}
           onChange={value => setFilter(value)}

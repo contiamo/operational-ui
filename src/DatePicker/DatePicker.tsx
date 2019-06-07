@@ -6,7 +6,7 @@ import { Label } from "../utils/mixins"
 
 import { keyCodes } from "../utils"
 import Month from "./DatePicker.Month"
-import { Container, DatePickerCard, ContainerIcon, Input, MonthNav, Toggle } from "./DatePicker.styles"
+import { Container, DatePickerCard, IconContainer, Input, MonthNav, Toggle } from "./DatePicker.styles"
 import { changeMonth, months, toDate, toYearMonthDay, validateDateString } from "./DatePicker.utils"
 
 export interface DatePickerProps extends DefaultProps {
@@ -188,7 +188,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
         />
         <DatePickerCard isExpanded={isExpanded}>
           <MonthNav>
-            <ContainerIcon
+            <IconContainer
               disabled={!canGoToPreviousMonth}
               onClick={(ev: any) => {
                 ev.preventDefault()
@@ -199,9 +199,9 @@ class DatePicker extends React.Component<DatePickerProps, State> {
               }}
             >
               <ChevronLeftIcon size={12} />
-            </ContainerIcon>
+            </IconContainer>
             <span>{`${months[month]}, ${year}`}</span>
-            <ContainerIcon
+            <IconContainer
               disabled={!canGoToNextMonth}
               onClick={(ev: any) => {
                 ev.preventDefault()
@@ -212,7 +212,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
               }}
             >
               <ChevronRightIcon size={12} />
-            </ContainerIcon>
+            </IconContainer>
           </MonthNav>
           <Month start={start} end={end} min={min} max={max} year={year} month={month} onChange={onChange} />
         </DatePickerCard>

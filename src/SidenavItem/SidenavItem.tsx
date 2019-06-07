@@ -24,7 +24,7 @@ export interface SidenavItemProps extends DefaultProps {
   end?: boolean
 }
 
-const getSizeIcon = (compact = false) => (compact ? 30 : 18)
+const getIconSize = (compact = false) => (compact ? 30 : 18)
 
 const BaseSidenavItem = styled<"div" | "a">("div")<{
   compact: SidenavHeaderProps["compact"]
@@ -68,8 +68,8 @@ const BaseSidenavItem = styled<"div" | "a">("div")<{
   }
 })
 
-const ContainerIcon = styled("span")<{ compact: SidenavItemProps["compact"] }>(({ compact, theme }) => {
-  const iconSize = getSizeIcon(compact)
+const IconContainer = styled("span")<{ compact: SidenavItemProps["compact"] }>(({ compact, theme }) => {
+  const iconSize = getIconSize(compact)
   return {
     width: iconSize,
     height: iconSize,
@@ -143,9 +143,9 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
           isActive={isActive}
         >
           {Icon && (
-            <ContainerIcon compact={compact}>
-              <Icon size={getSizeIcon(compact)} />
-            </ContainerIcon>
+            <IconContainer compact={compact}>
+              <Icon size={getIconSize(compact)} />
+            </IconContainer>
           )}
           <Label hasIcon={Boolean(Icon)} compact={compact}>
             {compact ? compactLabel || label : label}
