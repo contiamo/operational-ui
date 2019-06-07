@@ -30,7 +30,7 @@ const Container = styled("div")<{ selected: boolean }>(({ theme, selected }) => 
   }
 })
 
-const ContainerIcon = styled("div")(({ theme }) => {
+const IconContainer = styled("div")(({ theme }) => {
   const size = 18
   return {
     display: "flex",
@@ -68,9 +68,9 @@ const SelectOption = (props: Props) => (
   >
     {props.children}
     {props.selected ? (
-      <ContainerIcon>
+      <IconContainer>
         <YesIcon size={10} />
-      </ContainerIcon>
+      </IconContainer>
     ) : null}
   </Container>
 )

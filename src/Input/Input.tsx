@@ -54,7 +54,7 @@ export interface BaseProps extends DefaultProps, DefaultInputProps {
 
 export interface BasePropsWithCopy extends BaseProps {
   copy: true
-  onClickIcon?: never
+  onIconClick?: never
   icon?: never
 }
 
@@ -63,7 +63,7 @@ export interface BasePropsWithoutCopy extends BaseProps {
   /** Icon to display in an adjacent icon button */
   icon?: IconComponentType | React.ReactNode
   /** Click handler on the icon */
-  onClickIcon?: () => void
+  onIconClick?: () => void
 }
 
 export type InputProps = BasePropsWithCopy | BasePropsWithoutCopy

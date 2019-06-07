@@ -23,11 +23,11 @@ const Container = styled("div")<{
 
 const Field = styled("input")<{
   isError: boolean
-  withButtonIcon: boolean
+  withIconButton: boolean
   preset: InputProps["preset"]
   disabled: InputProps["disabled"]
   clear: InputProps["clear"]
-}>(({ theme, disabled, isError, withButtonIcon, preset, clear }) => {
+}>(({ theme, disabled, isError, withIconButton, preset, clear }) => {
   const makeBackgroundColor = () => {
     if (disabled) {
       return theme.color.disabled
@@ -41,7 +41,7 @@ const Field = styled("input")<{
   }
 
   return {
-    ...(withButtonIcon
+    ...(withIconButton
       ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
       : { borderRadius: theme.borderRadius }),
     fontSize: theme.font.size.body,
@@ -112,25 +112,25 @@ const InputField: React.SFC<InputProps> = ({
   clear,
   icon,
   copy,
-  onClickIcon,
+  onIconClick,
   tabIndex,
   errorComponent: ErrorComponent,
   ...props
 }) => {
-  const shouldShowButtonIcon = Boolean(icon) || Boolean(copy)
+  const shouldShowIconButton = Boolean(icon) || Boolean(copy)
 
   const renderButton = () => {
     if (copy === true) {
       return <InputButton tabIndex={tabIndex} value={value || ""} copy={copy} />
     } else {
-      return <InputButton tabIndex={tabIndex} onClickIcon={onClickIcon} icon={icon} copy={false} />
+      return <InputButton tabIndex={tabIndex} onIconClick={onIconClick} icon={icon} copy={false} />
     }
   }
 
   return (
     <>
       <Container fullWidth={fullWidth} withLabel={Boolean(label)}>
-        {shouldShowButtonIcon && renderButton()}
+        {shouldShowIconButton && renderButton()}
         <Field
           ref={inputRef}
           autoFocus={autoFocus}
@@ -150,7 +150,7 @@ const InputField: React.SFC<InputProps> = ({
           clear={clear}
           preset={Boolean(preset)}
           id={`input-field-${id}`}
-          withButtonIcon={shouldShowButtonIcon}
+          withIconButton={shouldShowIconButton}
           autoComplete={autoComplete}
           {...props}
         />

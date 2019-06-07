@@ -12,7 +12,7 @@ import { Chip, NoIcon } from "@operational/components"
   <Chip
     color="basic"
     icon={NoIcon}
-    onClickIcon={() => window.alert("Buonasera")}
+    onIconClick={() => window.alert("Buonasera")}
     onClick={() => window.alert("Good evening!")}
   >
     With icon
@@ -20,7 +20,7 @@ import { Chip, NoIcon } from "@operational/components"
   <Chip
     color="success"
     icon={NoIcon}
-    onClickIcon={() => window.alert("Buonasera")}
+    onIconClick={() => window.alert("Buonasera")}
     onClick={() => window.alert("Good evening!")}
   >
     Ciao!
@@ -28,7 +28,7 @@ import { Chip, NoIcon } from "@operational/components"
   <Chip
     color="error"
     icon={NoIcon}
-    onClickIcon={() => window.alert("Buonasera")}
+    onIconClick={() => window.alert("Buonasera")}
     onClick={() => window.alert("Good evening!")}
   >
     Hello!

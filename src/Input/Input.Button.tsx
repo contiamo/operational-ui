@@ -8,7 +8,7 @@ import { height } from "./Input.constants"
 import { IconComponentType, CopyIcon } from "../Icon/Icon"
 
 interface InputButtonBaseProps {
-  onClickIcon?: () => void
+  onIconClick?: () => void
   tabIndex?: number
 }
 
@@ -60,7 +60,7 @@ const Button = styled("button")`
   `};
 `
 
-const InputButton: React.SFC<InputButtonProps> = ({ tabIndex, icon: Icon, copy, value, onClickIcon }) => {
+const InputButton: React.SFC<InputButtonProps> = ({ tabIndex, icon: Icon, copy, value, onIconClick }) => {
   if (!Icon && !copy) {
     return null
   }
@@ -76,7 +76,7 @@ const InputButton: React.SFC<InputButtonProps> = ({ tabIndex, icon: Icon, copy, 
       )}
     </OperationalContext>
   ) : (
-    <Button onClick={onClickIcon}>
+    <Button onClick={onIconClick}>
       {typeof Icon === "function" ? React.createElement(Icon as IconComponentType, { size: 16 }) : Icon}
     </Button>
   )

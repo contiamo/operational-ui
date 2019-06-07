@@ -175,7 +175,7 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
             {childSidenavItems.length > 0 && (
               <CloseButton
                 onClick={(ev: React.SyntheticEvent<Node>) => {
-                  // Prevent clicks on parent in order to avoid conflicting behvavior
+                  // Prevent clicks on parent in order to avoid conflicting behavior
                   ev.stopPropagation()
                   if (onToggle) {
                     onToggle(!active)

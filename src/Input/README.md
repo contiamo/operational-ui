@@ -155,7 +155,7 @@ import { UserIcon } from "@operational/components"
   value="JNAPE92"
   label="Employee ID"
   icon={UserIcon}
-  onClickIcon={() => {
+  onIconClick={() => {
     alert("You have clicked on JNAPE92!")
   }}
 />
