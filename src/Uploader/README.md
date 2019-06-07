@@ -37,18 +37,23 @@ const DragOverContentContainer = styled("div")(({ theme }) => ({
 
 const MyComponent = () => {
   const [isDragging, setIsDragging] = React.useState(false)
-  const [isFileListOpen, setIsFileListOpen] = React.useState(false)
 
   React.useEffect(() => {
     const dragListener = () => setIsDragging(true)
-    const dragEndListener = () => setIsDragging(false)
+    const dragDropListener = e => {
+      e.preventDefault()
+      setIsDragging(false)
+    }
+    const dragOverListener = e => e.preventDefault()
 
-    document.addEventListener("drag", dragListener)
-    document.addEventListener("dragend", dragEndListener)
+    document.addEventListener("dragenter", dragListener)
+    document.addEventListener("dragover", dragOverListener)
+    document.addEventListener("drop", dragDropListener)
 
     return () => {
-      document.removeEventListener("drag", dragListener)
-      document.removeEventListener("dragend", dragListener)
+      document.removeEventListener("dragenter", dragListener)
+      document.removeEventListener("dragover", dragOverListener)
+      document.removeEventListener("drop", dragDropListener)
     }
   }, [])
 
