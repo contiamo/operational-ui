@@ -137,13 +137,18 @@ export const Select: React.FC<SelectProps> = ({
           color={color}
         >
           {label && <LabelText id={`operational-ui__Select-Label-${uniqueId}`}>{label}</LabelText>}
-          <Combobox naked={Boolean(naked)}>
+          <Combobox
+            isOpen={isOpen}
+            hasCustomOption={customOption ? customOption.value === value : false}
+            naked={Boolean(naked)}
+          >
             <SelectInput
               inputRef={inputRef}
               fullWidth={fullWidth}
               tabIndex={customOption ? 0 : -1}
               disabled={disabled}
               placeholder={placeholder}
+              hasCustomOption={customOption ? customOption.value === value : false}
               readOnly={customOption ? customOption.value !== value : true}
               value={getDisplayValue(value)(options)}
               id={`operational-ui__Select-Input-${uniqueId}`}
@@ -158,7 +163,11 @@ export const Select: React.FC<SelectProps> = ({
                 }
               }}
             />
-            <DropdownButton isOpen={isOpen} />
+            <DropdownButton
+              naked={Boolean(naked)}
+              hasCustomOption={customOption ? customOption.value === value : false}
+              isOpen={isOpen}
+            />
           </Combobox>
         </Listbox>
       )}

@@ -13,28 +13,29 @@ export const Listbox = styled("div")<{ disabled: boolean; color?: string; fullWi
 `
 
 Listbox.defaultProps = {
-  role: "listbox",
-  "aria-haspopup": "listbox",
   tabIndex: -1,
 }
 
 const dropdownButtonWidth = 40
 
-export const Combobox = styled("div")<{ naked: boolean }>`
+export const Combobox = styled("div")<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean }>`
   display: grid;
   grid-template-columns: calc(100% - ${dropdownButtonWidth}px) ${dropdownButtonWidth}px;
   grid-gap: 1px;
   align-items: stretch;
-  border: 1px solid ${({ theme }) => theme.color.border.select};
+  border: 1px solid
+    ${({ theme, isOpen, hasCustomOption }) =>
+      !hasCustomOption && isOpen ? theme.color.primary : theme.color.border.select};
   border-width: ${({ naked }) => (naked ? 0 : 1)}px;
   border-radius: ${({ theme }) => theme.borderRadius}px;
+  background-color: ${({ isOpen, naked }) => (!naked && isOpen ? "white" : "transparent")};
 
   :focus {
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
+    border-color: ${({ theme }) => theme.color.primary};
   }
 `
 
-export const SelectInput = styled(Input)`
+export const SelectInput = styled(Input)<{ hasCustomOption: boolean }>`
   width: inherit;
   border: 0;
   background: transparent;
@@ -44,6 +45,10 @@ export const SelectInput = styled(Input)`
   border-bottom-right-radius: 0;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  :focus {
+    box-shadow: ${({ hasCustomOption, theme }) => (hasCustomOption ? "0 0 0 1px " + theme.color.primary : "none")};
+  }
 `
 
 export const FilterInput = styled(Input)`
@@ -54,15 +59,18 @@ export const FilterInput = styled(Input)`
   max-width: none;
 `
 
-export const DropdownButton = styled("div")<{ isOpen: boolean }>`
+export const DropdownButton = styled("div")<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 0 1px ${({ theme, isOpen }) => (isOpen ? theme.color.primary : "transparent")};
+  margin: -1px 0;
+  border: 1px solid
+    ${({ theme, isOpen, hasCustomOption }) => (hasCustomOption && isOpen ? theme.color.primary : "transparent")};
   border-top-right-radius: ${({ theme }) => theme.borderRadius}px;
   border-bottom-right-radius: ${({ theme }) => theme.borderRadius}px;
+
   :focus {
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
+    border-color: ${({ theme }) => theme.color.primary};
   }
 
   ::after {
@@ -70,7 +78,8 @@ export const DropdownButton = styled("div")<{ isOpen: boolean }>`
     width: 0;
     height: 0;
     border: 4px solid transparent;
-    border-top-color: ${({ theme, isOpen }) => (isOpen ? theme.color.primary : theme.color.border.select)};
+    border-top-color: ${({ theme, isOpen, naked }) =>
+      !naked ? (isOpen ? theme.color.primary : theme.color.text.default) : "currentColor"};
     transform: ${({ isOpen }) => (isOpen ? `translateY(-2px) rotate(180deg)` : `translateY(2px)`)};
   }
 `
