@@ -24,6 +24,7 @@
     "build:styleguide": "styleguidist build",
     "build:package": "rimraf lib && tsc -d",
     "watch": "npm run build:package -- -w",
+    "pretest": "npm run build:icons",
     "test": "run-p test:*",
     "test:unit": "jest",
     "test:e2e": "cypress run",
