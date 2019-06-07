@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import Icon, { IconName } from "../Icon/Icon"
+import { IconComponentType } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import Spinner from "../Spinner/Spinner"
 import { DefaultProps } from "../types"
@@ -19,7 +19,7 @@ export interface ButtonProps extends DefaultProps {
   /** Button color theme (hex or named color from `theme.color`) */
   textColor?: keyof OperationalStyleConstants["color"] | string
   /** Icon to display on right or left of button (optional) */
-  icon?: IconName
+  icon?: IconComponentType
   /** Icon position */
   iconPosition?: "start" | "end"
   /** Icon size */
@@ -119,7 +119,7 @@ const BaseButton = styled<"button" | "a">("button")<{
 const Button: React.SFC<ButtonProps> = ({
   to,
   children,
-  icon,
+  icon: Icon,
   iconPosition,
   iconSize = 18,
   iconColor,
@@ -128,7 +128,7 @@ const Button: React.SFC<ButtonProps> = ({
   tabIndex,
   ...props
 }) => {
-  const iconProps = { name: icon!, size: iconSize, color: iconColor }
+  const iconProps = { size: iconSize, color: iconColor }
 
   return (
     <OperationalContext>
@@ -158,9 +158,9 @@ const Button: React.SFC<ButtonProps> = ({
           }}
           title={props.loading && children === String(children) ? String(children) : undefined}
         >
-          {icon && iconPosition === "start" && <Icon left {...iconProps} />}
+          {Icon && iconPosition === "start" && <Icon left {...iconProps} />}
           {children}
-          {icon && iconPosition === "end" && <Icon right {...iconProps} />}
+          {Icon && iconPosition === "end" && <Icon right {...iconProps} />}
           {props.loading && <ButtonSpinner containerColor={color} />}
         </BaseButton>
       )}

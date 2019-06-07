@@ -1,5 +1,5 @@
 import * as React from "react"
-import Icon, { IconName } from "../Icon/Icon"
+import { IconComponentType } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { DefaultProps } from "../types"
 import { darken, isModifiedEvent, isOutsideLink } from "../utils"
@@ -11,7 +11,7 @@ export interface BreadcrumbProps extends DefaultProps {
   to?: string
   onClick?: (ev?: React.SyntheticEvent<React.ReactNode>) => void
   children?: React.ReactNode
-  icon?: IconName
+  icon?: IconComponentType
 }
 
 const containerStyles = {
@@ -35,7 +35,7 @@ const ContainerLink = styled("a")(containerStyles, ({ theme }: { theme: Operatio
 
 const Content = styled("span")()
 
-const Breadcrumb: React.SFC<BreadcrumbProps> = ({ to, icon, onClick, ...props }) => {
+const Breadcrumb: React.SFC<BreadcrumbProps> = ({ to, icon: Icon, onClick, ...props }) => {
   const ContainerComponent: any = to ? ContainerLink : Container
   return (
     <OperationalContext>
@@ -54,7 +54,7 @@ const Breadcrumb: React.SFC<BreadcrumbProps> = ({ to, icon, onClick, ...props })
           }}
         >
           <Content>{props.children}</Content>
-          {icon && <Icon name={icon} size={12} />}
+          {Icon && <Icon size={12} />}
         </ContainerComponent>
       )}
     </OperationalContext>

@@ -6,7 +6,7 @@ Using buttons is as simple as including the component with a text node as a chil
 
 ```jsx
 import * as React from "react"
-import { Button } from "@operational/components"
+import { Button, OpenIcon, MeasureIcon } from "@operational/components"
 ;<>
   <div style={{ marginBottom: 10 }}>
     <Button>Default</Button>
@@ -46,17 +46,17 @@ import { Button } from "@operational/components"
     </Button>
   </div>
   <div style={{ marginBottom: 10 }}>
-    <Button color="grey" icon="Open">
+    <Button color="grey" icon={OpenIcon}>
       Icon
     </Button>
-    <Button color="success" icon="Labs">
+    <Button color="success" icon={MeasureIcon}>
       Icon
     </Button>
     <Button loading>Loading</Button>
     <Button color="primary" loading>
       Loading
     </Button>
-    <Button condensed icon="Open">
+    <Button condensed icon={OpenIcon}>
       Icon
     </Button>
     <Button condensed loading>
@@ -64,10 +64,10 @@ import { Button } from "@operational/components"
     </Button>
   </div>
   <div style={{ marginBottom: 10 }}>
-    <Button iconPosition="start" color="grey" icon="Open">
+    <Button iconPosition="start" color="grey" icon={OpenIcon}>
       Icon
     </Button>
-    <Button iconPosition="start" color="success" icon="Labs">
+    <Button iconPosition="start" color="success" icon={MeasureIcon}>
       Icon
     </Button>
     <Button iconPosition="start" loading>
@@ -76,7 +76,7 @@ import { Button } from "@operational/components"
     <Button iconPosition="start" color="primary" loading>
       Loading
     </Button>
-    <Button iconPosition="start" condensed icon="Open" iconColor="success">
+    <Button iconPosition="start" condensed icon={OpenIcon} iconColor="success">
       Icon
     </Button>
     <Button iconPosition="start" condensed loading>
@@ -84,10 +84,10 @@ import { Button } from "@operational/components"
     </Button>
   </div>
   <div style={{ marginBottom: 10 }}>
-    <Button disabled color="grey" icon="Open">
+    <Button disabled color="grey" icon={OpenIcon}>
       Icon
     </Button>
-    <Button disabled color="success" icon="Labs">
+    <Button disabled color="success" icon={MeasureIcon}>
       Icon
     </Button>
     <Button disabled loading>
@@ -96,7 +96,7 @@ import { Button } from "@operational/components"
     <Button disabled color="primary" loading>
       Loading
     </Button>
-    <Button disabled condensed icon="Open">
+    <Button disabled condensed icon={OpenIcon}>
       Icon
     </Button>
     <Button disabled condensed loading>
@@ -105,10 +105,10 @@ import { Button } from "@operational/components"
   </div>
   <div style={{ backgroundColor: "#1499ce", padding: 5 }}>
     <Button color="ghost">Ghost</Button>
-    <Button color="ghost" icon="Open">
+    <Button color="ghost" icon={OpenIcon}>
       Ghost with icon
     </Button>
-    <Button color="ghost" icon="Open" condensed>
+    <Button color="ghost" icon={OpenIcon} condensed>
       Ghost condensed
     </Button>
   </div>
@@ -116,10 +116,10 @@ import { Button } from "@operational/components"
     <Button disabled color="ghost">
       Ghost
     </Button>
-    <Button disabled color="ghost" icon="Open">
+    <Button disabled color="ghost" icon={OpenIcon}>
       Ghost with icon
     </Button>
-    <Button disabled color="ghost" icon="Open" condensed>
+    <Button disabled color="ghost" icon={OpenIcon} condensed>
       Ghost condensed
     </Button>
   </div>

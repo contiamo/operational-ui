@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <title>Checkbox</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <g>
+        <path class="cls-1" d="M16,0H1A1,1,0,0,0,0,1V16a1,1,0,0,0,1,1H16a1,1,0,0,0,1-1V1A1,1,0,0,0,16,0Zm0,16H1V1H16Z"/>
+        <path class="cls-1" d="M5.29,13.08a.75.75,0,0,0,1.06,0L14.45,5a.75.75,0,0,0-1.06-1.06L5.82,11.49,3.61,9.28a.75.75,0,0,0-1.06,0,.74.74,0,0,0,0,1.06Z"/>
+      </g>
+    </g>
+  </g>
+</svg>

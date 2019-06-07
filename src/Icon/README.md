@@ -4,16 +4,12 @@ Operational's SVG icon set packaged as a single component.
 
 ```jsx
 import * as React from "react"
-import { Icon } from "@operational/components"
+import { AddIcon, FunctionIcon, OlapIcon } from "@operational/components"
 ;<>
-  <Icon name="Add" size={36} />
-  <Icon name="Function" size={36} />
-  <Icon name="Funnel" size={36} color="#00bb00" />
-  <Icon name="Bundle" size={36} color="error" />
-  <p>And here some brand icons:</p>
-  <Icon name="OperationalUI" size={36} />
-  <Icon name="Pantheon" size={36} colored />
-  <Icon name="Labs" size={36} />
+  <AddIcon size={36} />
+  <FunctionIcon size={36} />
+  <OlapIcon size={36} color="#00bb00" />
+  <OlapIcon size={36} color="error" />
 </>
 ```
 
@@ -21,17 +17,17 @@ import { Icon } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { Icon } from "@operational/components"
+import { AddIcon } from "@operational/components"
 ;<div style={{ display: "flex", alignItems: "center" }}>
-  <Icon name="Add" left /> Play that song!
+  <AddIcon left /> Play that song!
 </div>
 ```
 
 ```jsx
 import * as React from "react"
-import { Icon } from "@operational/components"
+import { DocumentIcon } from "@operational/components"
 ;<div style={{ display: "flex", alignItems: "center" }}>
-  I'm on the right! <Icon name="Document" right />
+  I'm on the right! <DocumentIcon right />
 </div>
 ```
 
@@ -39,44 +35,68 @@ import { Icon } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { Icon, Table, ResourceName, Input } from "@operational/components"
-import * as icons from "@operational/components/Icon/Icon.Custom"
+import { Table, ResourceName, Input, SearchIcon, Code, useOperationalContext } from "@operational/components"
+import * as Icon from "@operational/components/Icon/Icon"
 
 const MyComponent = () => {
   const [filter, setFilter] = React.useState("")
-  const [filteredIcons, setFilteredIcons] = React.useState(icons)
-
-  React.useEffect(() => {
-    setFilteredIcons(
-      Object.entries(icons)
-        .filter(([iconName, iconElement]) => iconName.toLowerCase().includes(filter.toLowerCase()))
-        .reduce((acc, [iconName, iconElement]) => ({ [iconName]: iconElement, ...acc }), {}),
-    )
-  }, [filter])
+  const [color, setColor] = React.useState("")
+  const [size, setSize] = React.useState(18)
+  const { pushMessage } = useOperationalContext()
 
   return (
     <>
-      <div style={{ marginBottom: 16 }}>
+      <div
+        style={{
+          marginBottom: 16,
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr 1fr",
+          gridGap: 8,
+        }}
+      >
         <Input
-          icon="Search"
+          Icon={SearchIcon}
+          label="Search"
           placeholder="Filter Icons..."
           type="text"
           value={filter}
           onChange={value => setFilter(value)}
-          fullWidth
+        />
+        <Input placeholder="Color" type="text" label="Color" value={color} onChange={value => setColor(value)} />
+        <Input
+          placeholder="Size"
+          type="number"
+          label="Size"
+          value={size.toString()}
+          onChange={value => setSize(+value)}
         />
       </div>
       <Table
-        fixedLayout
-        data={Object.keys(filteredIcons)}
+        data={Object.keys(Icon)
+          .filter(name => !name.startsWith("_") && name.toLowerCase().includes(filter.toLowerCase()))
+          .map(name => ({ name }))}
         columns={[
           {
             heading: "Name",
-            cell: iconName => <ResourceName>{iconName}</ResourceName>,
+            cell: i => <ResourceName>{i.name.slice(0, -"Icon".length)}</ResourceName>,
+            width: 200,
+          },
+          {
+            heading: "Component Name",
+            cell: i => (
+              <Code
+                syntax="typescript"
+                copyable
+                onCopy={() => pushMessage({ type: "info", body: "Successfully Copied!" })}
+              >
+                {`<${i.name}${color ? ` color="${color}"` : ""} size={${size}}/>`}
+              </Code>
+            ),
+            width: 400,
           },
           {
             heading: "Icon",
-            cell: iconName => <Icon name={iconName} />,
+            cell: i => React.createElement(Icon[i.name], { color, size, right: true }),
           },
         ]}
       />

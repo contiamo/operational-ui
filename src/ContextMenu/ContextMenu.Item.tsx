@@ -1,9 +1,9 @@
 import * as React from "react"
-import Icon, { IconName, IconProps } from "../Icon/Icon"
 import { darken } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 import { ContextMenuProps } from "./ContextMenu"
+import { IconComponentType } from "../Icon/Icon"
 
 type StringOrItem = string | IContextMenuItem
 
@@ -20,7 +20,7 @@ export interface Props {
 export interface IContextMenuItem<TValue = any> {
   label: string | React.ReactElement<any>
   description?: string
-  icon?: IconProps["name"] | React.ReactElement<any>
+  icon?: IconComponentType
   iconColor?: keyof OperationalStyleConstants["color"]
   onClick?: ContextMenuProps["onClick"]
   value?: TValue
@@ -86,7 +86,7 @@ const ContentContainer = styled("div")<Partial<Props>>`
   font-weight: ${({ theme }) => theme.font.weight.medium};
 `
 
-const ContextMenuIcon = styled(Icon)<{ iconlocation_: Props["iconLocation"] }>`
+const ContextMenuIconBase = styled("div")<{ iconlocation_: Props["iconLocation"] }>`
   flex: 0 0 auto;
   margin-left: ${({ iconlocation_ }) => (iconlocation_ && iconlocation_ === "right" ? "auto" : 0)};
 `
@@ -116,13 +116,13 @@ const ContextMenuItemIcon: React.SFC<Pick<Props, "item" | "iconLocation">> = pro
   }
 
   // If it's an object with an icon property
-  if (typeof props.item.icon === "string") {
+  if (typeof props.item.icon === "function") {
+    const ContextMenuIcon = ContextMenuIconBase.withComponent(props.item.icon)
     return (
       <ContextMenuIcon
         iconlocation_={props.iconLocation}
         color={props.item.iconColor}
         left={props.iconLocation === "left" || !props.iconLocation}
-        name={props.item.icon as IconName}
       />
     )
   }

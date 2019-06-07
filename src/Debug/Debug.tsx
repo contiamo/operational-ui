@@ -1,11 +1,11 @@
 import * as React from "react"
 import CopyToClipboard from "react-copy-to-clipboard"
 
-import Icon from "../Icon/Icon"
 import Tooltip from "../Tooltip/Tooltip"
 import { isClient } from "../utils/isClient"
 import styled from "../utils/styled"
 import { makeRowsFromConfig } from "./makeRowsFromConfig"
+import { CopyIcon, ChevronDownIcon, ChevronUpIcon } from "../Icon/Icon"
 
 export interface DebugProps<T extends {}> {
   title: string
@@ -152,9 +152,9 @@ class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
               text={JSON.stringify({ currentUrl: isClient() ? window.location.href : "", debug: values }, null, 2)}
               onCopy={this.showCopyFeedback}
             >
-              <Icon onClick={e => e.stopPropagation()} name="Copy" />
+              <CopyIcon onClick={e => e.stopPropagation()} />
             </CopyToClipboard>
-            <Icon name={isExpanded ? "ChevronUp" : "ChevronDown"} />
+            {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
             {copied && <Tooltip top>Copied</Tooltip>}
           </Icons>
         </Header>

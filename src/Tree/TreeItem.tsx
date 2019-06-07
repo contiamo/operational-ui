@@ -1,8 +1,8 @@
 import React from "react"
-import Icon from "../Icon/Icon"
 import NameTag from "../NameTag/NameTag"
 import { darken } from "../utils"
 import styled from "../utils/styled"
+import { CaretDownIcon, PlusIcon, NoIcon, IconComponentType } from "../Icon/Icon"
 
 export const Container = styled("div")<{ hasChildren: boolean; disabled: boolean }>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
@@ -53,9 +53,12 @@ const DeleteNode = styled("div")`
   }
 `
 
-const TreeIcon = styled(Icon)`
+const TreeIcon = styled("div")`
   margin-right: ${({ theme }) => theme.space.base}px;
 `
+
+const ChevronDown = TreeIcon.withComponent(CaretDownIcon)
+const Add = TreeIcon.withComponent(PlusIcon)
 
 interface TreeItemProps {
   highlight: boolean
@@ -81,7 +84,12 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   cursor,
 }) => (
   <Header onClick={onNodeClick} highlight={Boolean(highlight)} cursor={cursor}>
-    {hasChildren && <TreeIcon color="color.text.lightest" size={12} left name={isOpen ? "ChevronDown" : "Add"} />}
+    {hasChildren &&
+      React.createElement((isOpen ? ChevronDown : Add) as IconComponentType, {
+        size: 12,
+        left: true,
+        color: "color.text.lightest",
+      })}
     {!hasChildren && tag && (
       <NameTag condensed left color={color}>
         {tag}
@@ -90,7 +98,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     <Label hasChildren={hasChildren}>{label}</Label>
     {onRemove && (
       <DeleteNode onClick={onRemove}>
-        <Icon size={12} name="No" />
+        <NoIcon size={12} />
       </DeleteNode>
     )}
   </Header>

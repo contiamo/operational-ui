@@ -1,8 +1,8 @@
 import * as React from "react"
-import Icon from "../Icon/Icon"
 import { SectionHeader } from "../Internals/SectionHeader"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
+import { ChevronUpIcon, ChevronDownIcon } from "../Icon/Icon"
 
 export interface Section {
   title: React.ReactNode
@@ -64,12 +64,6 @@ const Panel = styled("div")`
 
 Panel.defaultProps = { role: "region" }
 
-const Chevron = styled(Icon)`
-  align-content: flex-end;
-`
-
-Chevron.defaultProps = { size: 14 }
-
 const Focus = styled("div")`
   label: AccordionFocus;
   position: absolute;
@@ -126,7 +120,7 @@ const Accordion = ({ sections, onToggle, ...rest }: AccordionProps) => {
               onBlur={() => setFocusIndex(null)}
             >
               {title}
-              <Chevron name={expanded ? "ChevronUp" : "ChevronDown"} />
+              {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
             </Header>
             <Panel id={contentId} aria-labelledby={titleId} hidden={!expanded}>
               {expanded && content()}

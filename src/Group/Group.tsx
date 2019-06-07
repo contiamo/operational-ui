@@ -1,8 +1,8 @@
 import * as React from "react"
 
-import Icon, { IconName } from "../Icon/Icon"
 import Body from "../Typography/Body"
 import styled from "../utils/styled"
+import { IconComponentType } from "../Icon/Icon"
 
 interface GroupBaseProps {
   /** What is the title of this group? */
@@ -12,12 +12,12 @@ interface GroupBaseProps {
   /** How high should the group be? */
   minHeight?: number
   /** Which icon do we associate with this group? */
-  icon?: IconName
+  icon?: IconComponentType
 }
 
 interface GroupPropsWithIcon extends GroupBaseProps {
   /** Which icon do we associate with this group? */
-  icon: IconName
+  icon: IconComponentType
   /** What color would we like the icon to be? */
   iconColor?: string
 }
@@ -58,11 +58,11 @@ const HeaderText = styled(Body)<{ hasIcon: boolean }>`
   color: ${({ theme }) => theme.color.text.lighter};
 `
 
-const Group: React.SFC<GroupProps> = ({ title, icon, iconColor, children, collapsed, minHeight }) => (
+const Group: React.SFC<GroupProps> = ({ title, icon: Icon, iconColor, children, collapsed, minHeight }) => (
   <Container minHeight={minHeight!} collapsed={Boolean(collapsed)}>
-    {(title || icon) && (
+    {(title || Icon) && (
       <Header collapsed={Boolean(collapsed)}>
-        {icon && <Icon color={iconColor} name={icon} />} <HeaderText hasIcon={Boolean(icon)}>{title}</HeaderText>
+        {Icon && <Icon color={iconColor} />} <HeaderText hasIcon={Boolean(Icon)}>{title}</HeaderText>
       </Header>
     )}
     {collapsed === false && children}

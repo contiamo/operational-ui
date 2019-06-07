@@ -21,26 +21,33 @@ import {
   Form,
   Body,
   Logo,
-  Autocomplete
+  Autocomplete,
+  AdminIcon,
+  HomeIcon,
+  CaretLeftIcon,
+  DataSourceIcon,
+  EmptyCircleIcon,
+  OrganizationIcon,
+  FunctionIcon,
 } from "@operational/components"
 
 const sidebar = (
   <Sidenav>
-    <SidenavHeader condensed icon="Home" label="Project Home" />
+    <SidenavHeader condensed icon={HomeIcon} label="Project Home" />
     <SidenavHeader label="The Prize" active>
-      <SidenavItem label="The First Prize" icon="Admin" />
-      <SidenavItem label="The Second Prize" icon="Building" />
-      <SidenavItem label="The Third Prize" icon="CaretLeft" />
+      <SidenavItem label="The First Prize" icon={AdminIcon} />
+      <SidenavItem label="The Second Prize" icon={OrganizationIcon} />
+      <SidenavItem label="The Third Prize" icon={CaretLeftIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon="Database" />
-      <SidenavItem label="The Second Prize" icon="EmptyCircle" />
-      <SidenavItem label="The Third Prize" icon="Function" />
+      <SidenavItem label="The First Prize" icon={DataSourceIcon} />
+      <SidenavItem label="The Second Prize" icon={EmptyCircleIcon} />
+      <SidenavItem label="The Third Prize" icon={FunctionIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon="Grid" />
-      <SidenavItem label="The Second Prize" icon="Home" />
-      <SidenavItem label="The Third Prize" icon="Jobs" />
+      <SidenavItem label="The First Prize" icon={DataSourceIcon} />
+      <SidenavItem label="The Second Prize" icon={HomeIcon} />
+      <SidenavItem label="The Third Prize" icon={FunctionIcon} />
     </SidenavHeader>
   </Sidenav>
 )
@@ -245,25 +252,34 @@ import {
   Form,
   Body,
   Logo,
-  Autocomplete} from "@operational/components"
+  Autocomplete,
+  HomeIcon,
+  AdminIcon,
+  OrganizationIcon,
+  CaretLeftIcon,
+  DataSourceIcon, 
+  EmptyCircleIcon,
+  FunctionIcon,
+  VirtualDatabaseIcon,
+  CollectionsIcon} from "@operational/components"
 
 const sidebar = (
   <Sidenav>
-    <SidenavHeader condensed icon="Home" label="Project Home" />
+    <SidenavHeader condensed icon={HomeIcon} label="Project Home" />
     <SidenavHeader label="The Prize" active>
-      <SidenavItem label="The First Prize" icon="Admin" />
-      <SidenavItem label="The Second Prize" icon="Building" />
-      <SidenavItem label="The Third Prize" icon="CaretLeft" />
+      <SidenavItem label="The First Prize" icon={AdminIcon} />
+      <SidenavItem label="The Second Prize" icon={OrganizationIcon} />
+      <SidenavItem label="The Third Prize" icon={CaretLeftIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon="Database" />
-      <SidenavItem label="The Second Prize" icon="EmptyCircle" />
-      <SidenavItem label="The Third Prize" icon="Function" />
+      <SidenavItem label="The First Prize" icon={DataSourceIcon} />
+      <SidenavItem label="The Second Prize" icon={EmptyCircleIcon} />
+      <SidenavItem label="The Third Prize" icon={FunctionIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon="Grid" />
-      <SidenavItem label="The Second Prize" icon="Home" />
-      <SidenavItem label="The Third Prize" icon="Jobs" />
+      <SidenavItem label="The First Prize" icon={VirtualDatabaseIcon} />
+      <SidenavItem label="The Second Prize" icon={HomeIcon} />
+      <SidenavItem label="The Third Prize" icon={CollectionsIcon} />
     </SidenavHeader>
   </Sidenav>
 )
@@ -462,17 +478,23 @@ import {
   Page,
   Button,
   Card,
-  Logo} from "@operational/components"
+  Logo,
+  AdminIcon,
+  OrganizationIcon,
+  CaretLeftIcon,
+  UserIcon,
+  DataSourceIcon
+  } from "@operational/components"
 
 const sidebar = (
   <Sidenav compact>
     <SidenavHeader label="Use cases">
-      <SidenavItem label="The First Prize" icon="Admin" />
-      <SidenavItem label="The Second Prize" icon="Building" />
-      <SidenavItem label="The Third Prize" icon="CaretLeft" />
+      <SidenavItem label="The First Prize" icon={AdminIcon} />
+      <SidenavItem label="The Second Prize" icon={OrganizationIcon} />
+      <SidenavItem label="The Third Prize" icon={CaretLeftIcon} />
     </SidenavHeader>
-    <SidenavItem active end label="Other Guy" icon="User" />
-    <SidenavItem end label="Admin" icon="Jobs" />
+    <SidenavItem active end label="Other Guy" icon={UserIcon} />
+    <SidenavItem end label="Admin" icon={DataSourceIcon} />
   </Sidenav>
 )
 
@@ -546,20 +568,28 @@ import {
   Page,
   Button,
   Card, 
-  Logo} from "@operational/components"
+  Logo,
+  AdminIcon,
+  OrganizationIcon,
+  CaretLeftIcon,
+  DataSourceIcon,
+  EmptyCircleIcon,
+  FunctionIcon,
+  HomeIcon,
+  } from "@operational/components"
 
 const sidebar = (
   <Sidenav>
-    <SidenavHeader condensed icon="Home" label="Project Home" />
+    <SidenavHeader condensed icon={HomeIcon} label="Project Home" />
     <SidenavHeader label="The Prize" active>
-      <SidenavItem label="The First Prize" icon="Admin" />
-      <SidenavItem label="The Second Prize" icon="Building" />
-      <SidenavItem label="The Third Prize" icon="CaretLeft" />
+      <SidenavItem label="The First Prize" icon={AdminIcon} />
+      <SidenavItem label="The Second Prize" icon={OrganizationIcon} />
+      <SidenavItem label="The Third Prize" icon={CaretLeftIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon="Database" />
-      <SidenavItem label="The Second Prize" icon="EmptyCircle" />
-      <SidenavItem label="The Third Prize" icon="Function" />
+      <SidenavItem label="The First Prize" icon={DataSourceIcon} />
+      <SidenavItem label="The Second Prize" icon={EmptyCircleIcon} />
+      <SidenavItem label="The Third Prize" icon={FunctionIcon} />
     </SidenavHeader>
   </Sidenav>
 )

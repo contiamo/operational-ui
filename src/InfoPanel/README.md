@@ -16,7 +16,7 @@ import { Card, InfoPanel } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { Card, InfoPanel, Icon } from "@operational/components"
+import { Card, InfoPanel, OpenIcon } from "@operational/components"
 ;<div style={{ display: "flex" }}>
   <Card style={{ width: 320 }} title="An InfoPanel with Long Running Info">
     <InfoPanel loading>
@@ -26,7 +26,7 @@ import { Card, InfoPanel, Icon } from "@operational/components"
       <br />
       <br />
       <a href="/#!/InfoPanel">
-        see deployment logs <Icon size={12} name="Open" />
+        see deployment logs <OpenIcon size={12} />
       </a>
     </InfoPanel>
   </Card>

@@ -1,7 +1,7 @@
 import * as React from "react"
-import { Icon } from "../"
 import { darken } from "../utils"
 import styled from "../utils/styled"
+import { YesIcon } from "../Icon/Icon"
 
 export interface Props {
   id?: number | string
@@ -69,7 +69,7 @@ const SelectOption = (props: Props) => (
     {props.children}
     {props.selected ? (
       <IconContainer>
-        <Icon name="Yes" size={10} />
+        <YesIcon size={10} />
       </IconContainer>
     ) : null}
   </Container>

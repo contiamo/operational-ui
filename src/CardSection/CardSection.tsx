@@ -2,7 +2,7 @@ import * as React from "react"
 
 import ActionMenu from "../ActionMenu/ActionMenu"
 import { ContextMenuProps } from "../ContextMenu/ContextMenu"
-import Icon from "../Icon/Icon"
+import { ChevronUpIcon, ChevronDownIcon } from "../Icon/Icon"
 import { DefaultProps, DragProps } from "../types"
 import styled from "../utils/styled"
 
@@ -173,7 +173,7 @@ const CardSection: React.SFC<CardSectionProps> = ({
         onClick={onToggle}
       >
         {title}
-        {onToggle && <Icon size={14} name={collapsed ? "ChevronDown" : "ChevronUp"} />}
+        {onToggle && (collapsed ? <ChevronDownIcon size={14} /> : <ChevronUpIcon size={14} />)}
         {actions && <StyledActionMenu data-cy="card-section__action-menu" items={actions} onClick={onActionClick} />}
       </Title>
     )}

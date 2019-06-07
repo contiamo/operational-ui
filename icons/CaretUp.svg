@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12.41 6.7">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <title>CaretUp_1</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M11.91,6.7a.5.5,0,0,1-.35-.15L6.21,1.2.85,6.55a.48.48,0,0,1-.7,0,.48.48,0,0,1,0-.7L5.85.14a.51.51,0,0,1,.71,0l5.71,5.71a.5.5,0,0,1,0,.7A.51.51,0,0,1,11.91,6.7Z"/>
+    </g>
+  </g>
+</svg>

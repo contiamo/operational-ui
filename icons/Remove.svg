@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <title>Remove</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M8.5,17A8.5,8.5,0,1,1,17,8.5,8.51,8.51,0,0,1,8.5,17Zm0-16A7.5,7.5,0,1,0,16,8.5,7.5,7.5,0,0,0,8.5,1Z"/>
+      <path class="cls-1" d="M13.25,9.25H3.75a.75.75,0,0,1,0-1.5h9.5a.75.75,0,0,1,0,1.5Z"/>
+    </g>
+  </g>
+</svg>

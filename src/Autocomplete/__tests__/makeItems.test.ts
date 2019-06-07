@@ -1,4 +1,5 @@
 import { makeItems } from "../Autocomplete.utils"
+import { NoIcon, AddIcon } from "../../Icon/Icon"
 
 describe("Autocomplete", () => {
   it("should create items with an appropriate shape for usage given a value and a result set", () => {
@@ -9,7 +10,7 @@ describe("Autocomplete", () => {
         results: [
           { label: "Hi" },
           { label: "How", value: "are" },
-          { label: "you", icon: "Add" },
+          { label: "you", icon: AddIcon },
           {
             label: "you",
             onClick: mockOnClick,
@@ -19,7 +20,7 @@ describe("Autocomplete", () => {
     ).toEqual([
       { label: "Hi" },
       { label: "How", value: "are" },
-      { label: "you", icon: "Add" },
+      { label: "you", icon: AddIcon },
       {
         label: "you",
         onClick: mockOnClick,
@@ -32,11 +33,11 @@ describe("Autocomplete", () => {
     expect(
       makeItems({
         value: "Something",
-        resultIcon: "No",
+        resultIcon: NoIcon,
         results: [
           { label: "Hi" },
           { label: "How", value: "are" },
-          { label: "you", icon: "Add" },
+          { label: "you", icon: AddIcon },
           {
             label: "you",
             onClick: mockOnClick,
@@ -44,11 +45,11 @@ describe("Autocomplete", () => {
         ],
       }),
     ).toEqual([
-      { icon: "No", label: "Hi" },
-      { icon: "No", label: "How", value: "are" },
-      { icon: "Add", label: "you" },
+      { icon: NoIcon, label: "Hi" },
+      { icon: NoIcon, label: "How", value: "are" },
+      { icon: AddIcon, label: "you" },
       {
-        icon: "No",
+        icon: NoIcon,
         label: "you",
         onClick: mockOnClick,
       },

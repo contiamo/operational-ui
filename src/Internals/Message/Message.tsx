@@ -3,8 +3,8 @@ import tinycolor from "tinycolor2"
 import { DefaultProps } from "../../types"
 import styled from "../../utils/styled"
 
-import { Icon } from "../../"
 import { expandColor } from "../../utils/constants"
+import { NoIcon } from "../../Icon/Icon"
 
 export interface MessageProps extends DefaultProps {
   className?: string
@@ -65,7 +65,7 @@ export const Message: React.SFC<MessageProps> = ({ color, onClose, children, ...
         }
       }}
     >
-      <Icon name="No" />
+      <NoIcon />
     </IconContainer>
     {children}
   </Container>

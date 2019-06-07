@@ -1,10 +1,10 @@
 import * as React from "react"
-import Icon, { IconName } from "../Icon/Icon"
 import styled from "../utils/styled"
+import { IconComponentType } from "../Icon/Icon"
 
 export interface TopbarButtonProps {
   /** The name of the button icon */
-  icon?: IconName
+  icon?: IconComponentType
   /** Button contents, typically as a string */
   children: React.ReactNode
   /** Disabled flag, deactivating click events and fading out the button */
@@ -32,10 +32,10 @@ const TopbarButtonContainer = styled("div")<{ disabled?: boolean }>`
   }
 `
 
-const TopbarButton: React.SFC<TopbarButtonProps> = ({ children, icon, onClick, ...props }) => (
+const TopbarButton: React.SFC<TopbarButtonProps> = ({ children, icon: Icon, onClick, ...props }) => (
   <TopbarButtonContainer onClick={props.disabled ? undefined : onClick} {...props}>
     {children}
-    {icon && <Icon right name={icon} size={12} />}
+    {Icon && <Icon right size={12} />}
   </TopbarButtonContainer>
 )
 

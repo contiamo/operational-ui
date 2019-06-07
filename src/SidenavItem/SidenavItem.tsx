@@ -1,10 +1,10 @@
 import * as React from "react"
-import Icon, { IconName } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { SidenavHeaderProps } from "../SidenavHeader/SidenavHeader"
 import { DefaultProps } from "../types"
 import { isModifiedEvent, isOutsideLink } from "../utils"
 import styled from "../utils/styled"
+import { IconComponentType } from "../Icon/Icon"
 
 export interface SidenavItemProps extends DefaultProps {
   /** What should we do on click? */
@@ -14,7 +14,7 @@ export interface SidenavItemProps extends DefaultProps {
   /** Is it currently active? */
   active?: boolean
   /** An Icon for the menu item */
-  icon?: IconName
+  icon?: IconComponentType
   /** A label for the item when the containing sidenav is full */
   label: string
   /** A label for the item when the containing sidenav is compact */
@@ -109,7 +109,7 @@ const Label = styled("span")<{ compact: SidenavHeaderProps["compact"]; hasIcon: 
 const SidenavItem: React.SFC<SidenavItemProps> = ({
   to,
   active,
-  icon,
+  icon: Icon,
   label,
   compact,
   compactLabel,
@@ -142,12 +142,12 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
           }}
           isActive={isActive}
         >
-          {icon && (
+          {Icon && (
             <IconContainer compact={compact}>
-              <Icon name={icon} size={getIconSize(compact)} />
+              <Icon size={getIconSize(compact)} />
             </IconContainer>
           )}
-          <Label hasIcon={Boolean(icon)} compact={compact}>
+          <Label hasIcon={Boolean(Icon)} compact={compact}>
             {compact ? compactLabel || label : label}
           </Label>
           {children}

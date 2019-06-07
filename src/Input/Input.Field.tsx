@@ -1,11 +1,11 @@
 import * as React from "react"
 
-import Icon from "../Icon/Icon"
 import { FormFieldError, inputFocus, setAlpha } from "../utils"
 import styled from "../utils/styled"
 import { InputProps } from "./Input"
 import InputButton from "./Input.Button"
 import { height } from "./Input.constants"
+import { NoIcon } from "../Icon/Icon"
 
 const width = 360
 
@@ -156,7 +156,7 @@ const InputField: React.SFC<InputProps> = ({
         />
         {clear && value && (
           <ClearButton onClick={clear}>
-            <Icon color="color.text.lightest" name="No" />
+            <NoIcon />
           </ClearButton>
         )}
         {error && !ErrorComponent ? <FormFieldError>{error}</FormFieldError> : null}
