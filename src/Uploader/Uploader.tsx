@@ -3,7 +3,7 @@ import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 import { setAlpha } from "../utils"
 
-interface UploaderProps extends DefaultProps {
+export interface UploaderProps extends DefaultProps {
   dragActive: boolean
 }
 
