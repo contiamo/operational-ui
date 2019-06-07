@@ -14,12 +14,14 @@ export interface StepperProps {
 const circleSize = 24
 
 const StepContent = styled("div")`
+  label: StepContent;
   height: 100%;
   width: 100%;
 `
 StepContent.displayName = "StepContent"
 
 const Steps = styled("ul")`
+  label: Steps;
   display: flex;
   margin: 0 0 ${({ theme }) => theme.space.big}px;
   padding: 0;
@@ -31,6 +33,7 @@ Steps.displayName = "Steps"
 type StepState = "inactive" | "active" | "completed"
 
 const Step = styled("li")<{ stepState: StepState; number: number; color: StepperProps["stepColor"] }>`
+  label: Step;
   display: flex;
   align-items: center;
     font-weight: ${({ theme, stepState }) => (stepState === "active" ? "bold" : theme.font.weight.regular)};
@@ -85,6 +88,7 @@ Step.defaultProps = { role: "tab" }
 Step.displayName = "Step"
 
 const StepLabel = styled("div")`
+  label: StepLabel;
   min-width: fit-content;
   white-space: pre;
   max-width: 100%;
