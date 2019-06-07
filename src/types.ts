@@ -6,6 +6,8 @@ import * as React from "react"
 export interface DefaultProps {
   id?: string
   className?: string
+  /** The tab index of this component for a11y. */
+  tabIndex?: number
 }
 
 export interface DefaultInputProps {

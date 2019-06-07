@@ -83,6 +83,8 @@ const textColors = {
 const borderColors = {
   /** `#c0c0c0` */
   default: "#c0c0c0",
+  /** `#ddd` */
+  select: "#ddd",
   /** `#d8d8d8` */
   disabled: "#d8d8d8",
   /** `#eee` */
@@ -245,6 +247,11 @@ const constants = {
   zIndex,
   color,
   shadows,
+  /**
+   * The round borders on things like cards.
+   *
+   * Default is `2`.
+   */
   borderRadius: 2,
   compactSidebarWidth: 90,
   sidebarWidth: 220,

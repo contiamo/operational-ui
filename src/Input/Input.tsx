@@ -8,7 +8,8 @@ import { FormFieldControl, FormFieldControls, Label } from "../utils/mixins"
 import InputField from "./Input.Field"
 import { LockIcon, UnlockIcon, IconComponentType } from "../Icon/Icon"
 
-export interface BaseProps extends DefaultProps, DefaultInputProps {
+// The `any` here relates to the onChange prop that we omit in favor of our own
+export interface BaseProps extends DefaultProps, DefaultInputProps, Omit<React.InputHTMLAttributes<any>, "onChange"> {
   /** The ID for this element, for accessibility et al */
   id?: string
   /** Text displayed when the input field has no value. */
@@ -21,7 +22,7 @@ export interface BaseProps extends DefaultProps, DefaultInputProps {
   labelId?: string
   /** Label text, rendering the input inside a tag if specified. The `labelId` props is responsible for specifying for and id attributes. */
   label?: string
-  inputRef?: (node: any) => void
+  inputRef?: React.RefObject<HTMLInputElement>
   /**
    * Callback called when the input changes, with the new value as a string.
    * This is used to update the value in the parent component,
@@ -50,6 +51,8 @@ export interface BaseProps extends DefaultProps, DefaultInputProps {
   clear?: () => void
   /** An alternative element in which to render errors */
   errorComponent?: React.FC<{ errorMessage: string }>
+  /** Is the input read-only? */
+  readOnly?: boolean
 }
 
 export interface BasePropsWithCopy extends BaseProps {

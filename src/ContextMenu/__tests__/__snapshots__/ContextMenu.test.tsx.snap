@@ -8,7 +8,11 @@ exports[`ContextMenu Component Should render 1`] = `
     class="css-p29iif"
   />
   <div
-    class="css-lra4z2-contextmenu"
+    aria-disabled="false"
+    aria-expanded="false"
+    aria-haspopup="listbox"
+    class="css-ca9nj2-contextmenu"
+    role="listbox"
   >
     <svg
       fill="currentColor"
@@ -22,5 +26,10 @@ exports[`ContextMenu Component Should render 1`] = `
       />
     </svg>
   </div>
+  <div
+    aria-hidden="true"
+    role="button"
+    tabindex="-1"
+  />
 </div>
 `;

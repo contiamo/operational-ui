@@ -12,14 +12,14 @@ exports[`Paginator Component Should initialize properly 1`] = `
   >
     <button
       aria-label="first"
-      class="css-1486t3g"
+      class="css-1g5f3py"
       role="button"
       type="first"
     >
       first
     </button>
     <button
-      class="css-1pidliq"
+      class="css-14s3rhr"
       role="button"
       type="previous"
     >
@@ -47,7 +47,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
        of 258
     </div>
     <button
-      class="css-1pidliq"
+      class="css-14s3rhr"
       role="button"
       type="next"
     >
@@ -68,7 +68,7 @@ exports[`Paginator Component Should initialize properly 1`] = `
     </button>
     <button
       aria-label="last"
-      class="css-1486t3g"
+      class="css-1g5f3py"
       role="button"
       type="last"
     >
