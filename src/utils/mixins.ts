@@ -5,6 +5,11 @@ import { lighten } from "../utils"
 import styled from "../utils/styled"
 import { OperationalStyleConstants } from "./constants"
 
+export const newInputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
+  outline: 0,
+  boxShadow: `0 0 0 1px ${isError ? theme.color.error : theme.color.primary} inset`,
+})
+
 export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
   outline: 0,
   borderColor: isError ? theme.color.error : theme.color.primary,

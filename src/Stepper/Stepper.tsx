@@ -2,6 +2,7 @@ import * as React from "react"
 
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
+import { newInputFocus } from "../utils"
 
 export interface StepperProps {
   steps: Array<{ title: string; content: React.ReactNode }>
@@ -16,6 +17,7 @@ const StepContent = styled("div")`
   height: 100%;
   width: 100%;
 `
+StepContent.displayName = "StepContent"
 
 const Steps = styled("ul")`
   display: flex;
@@ -24,6 +26,7 @@ const Steps = styled("ul")`
   list-style-type: none;
   justify-content: space-between;
 `
+Steps.displayName = "Steps"
 
 type StepState = "inactive" | "active" | "completed"
 
@@ -75,12 +78,11 @@ const Step = styled("li")<{ stepState: StepState; number: number; color: Stepper
   }
 
   :focus {
-    outline: none;
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
+    ${newInputFocus}
   }
 `
-
 Step.defaultProps = { role: "tab" }
+Step.displayName = "Step"
 
 const StepLabel = styled("div")`
   min-width: fit-content;
@@ -89,6 +91,7 @@ const StepLabel = styled("div")`
   text-overflow: ellipsis;
   overflow: hidden;
 `
+StepLabel.displayName = "StepLabel"
 
 function getStepState(index: number, activeIndex?: number): StepState {
   if (activeIndex === undefined) return "inactive"
@@ -97,7 +100,7 @@ function getStepState(index: number, activeIndex?: number): StepState {
   return "inactive"
 }
 
-const Stepper: React.SFC<StepperProps> = props => {
+const Stepper: React.FC<StepperProps> = props => {
   const { steps, stepColor, onStepChange, activeSlideIndex, ...rest } = props
   return (
     <div data-cy="operational-ui__Stepper" {...rest}>
