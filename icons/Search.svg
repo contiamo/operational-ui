@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.86 17.25">
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16.86 17.25">
   <defs>
     <style>
       .cls-1 {
-        fill: #231f20;
+        fill: white;
       }
     </style>
   </defs>
