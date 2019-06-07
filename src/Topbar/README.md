@@ -14,7 +14,7 @@ import {
   UndoIcon,
   RedoIcon,
   SaveIcon,
-  PlayIcon
+  PlayIcon,
 } from "@operational/components"
 
 const Label = styled("div")`
@@ -45,10 +45,10 @@ const Grid = styled("div")`
   }
   right={
     <Grid>
-      <TopbarButton inline icon={SaveIcon}>
+      <TopbarButton flavor="inline" icon={SaveIcon}>
         Save as …
       </TopbarButton>
-      <TopbarButton inline primary icon={PlayIcon}>
+      <TopbarButton flavor="inline-fill" icon={PlayIcon}>
         View results
       </TopbarButton>
     </Grid>

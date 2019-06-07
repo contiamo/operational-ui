@@ -11,21 +11,30 @@ export interface TopbarButtonProps {
   disabled?: boolean
   /** Click and key press handler */
   onClick?: () => void
-  /** makes button smaller, as well changes background and border 🤷 */
-  inline?: boolean
-  /** makes button to use primary color, can be used for main action on the page */
-  primary?: boolean
+  /**
+   * `"basic"` - default
+   * `"inline"` - make button smaller with border and text of the same color
+   * `"inline-fill"` - make button smaller with solid background
+   */
+  flavor?: "basic" | "inline" | "inline-fill"
 }
 
-const TopbarButtonContainer = styled("button")<{ disabled?: boolean; inline?: boolean; primary?: boolean }>`
-  height: ${({ inline }) => (inline ? "36px" : "100%")};
-  border-radius: ${({ inline, theme }) => (inline ? theme.borderRadius : "0")}px;
-  padding: 0px ${({ inline, theme }) => (inline ? theme.space.element : theme.space.medium)}px;
-  border: ${({ inline, primary, theme }) => (inline && !primary ? `1px solid ${theme.color.text.dark}` : "none")};
-  background: ${({ inline, primary, theme }) =>
-    primary ? theme.color.primary : inline ? theme.color.white : "transparent"};
-  color: ${({ inline, primary, theme }) =>
-    primary ? theme.color.white : inline ? theme.color.text.dark : theme.color.text.lighter};
+const TopbarButtonContainer = styled("button")<{ disabled?: boolean; flavor: TopbarButtonProps["flavor"] }>`
+  height: ${({ flavor }) => (flavor === "inline" || flavor === "inline-fill" ? "36px" : "100%")};
+  border-radius: ${({ flavor, theme }) =>
+    flavor === "inline" || flavor === "inline-fill" ? theme.borderRadius : "0"}px;
+  padding: 0px
+    ${({ flavor, theme }) =>
+      flavor === "inline" || flavor === "inline-fill" ? theme.space.element : theme.space.medium}px;
+  border: ${({ flavor, theme }) => (flavor === "inline" ? `1px solid ${theme.color.text.dark}` : "none")};
+  background: ${({ flavor, theme }) =>
+    flavor === "inline-fill" ? theme.color.primary : flavor === "inline" ? theme.color.white : "transparent"};
+  color: ${({ flavor, theme }) =>
+    flavor === "inline-fill"
+      ? theme.color.white
+      : flavor === "inline"
+      ? theme.color.text.dark
+      : theme.color.text.lighter};
   display: flex;
   align-items: center;
   cursor: ${props => (props.disabled ? "auto" : "pointer")};
@@ -37,9 +46,10 @@ const TopbarButtonContainer = styled("button")<{ disabled?: boolean; inline?: bo
   }
 `
 
-const TopbarButton: React.SFC<TopbarButtonProps> = ({ children, icon: Icon, onClick, ...props }) => (
+const TopbarButton: React.SFC<TopbarButtonProps> = ({ children, icon: Icon, onClick, flavor, ...props }) => (
   <TopbarButtonContainer
     {...props}
+    flavor={flavor}
     onClick={props.disabled ? undefined : onClick}
     aria-disabled={props.disabled}
     tabIndex={props.disabled ? -1 : undefined}

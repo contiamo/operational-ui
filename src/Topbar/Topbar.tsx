@@ -18,7 +18,7 @@ const TopbarContainer = styled("div")`
   align-items: center;
   justify-content: space-between;
   padding: 0;
-  border: 1px solid ${props => props.theme.color.border.default};
+  border-bottom: 1px solid ${props => props.theme.color.border.default};
 `
 
 const TopbarSection = styled("div")`
