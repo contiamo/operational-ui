@@ -140,11 +140,7 @@ ${files
     return `export * from "./Icon.${name}";`
   })
   .join("\n")}
-
-// Hack to have \`Icon\` name in the documentation #styleguidist
-const Icon: React.SFC = () => null;
-export default Icon
-  `
+`
 
   writeFileSync(join(outputFolder, "Icon.tsx"), index)
 }
