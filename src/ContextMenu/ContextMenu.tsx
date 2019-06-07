@@ -232,6 +232,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
             }
           }}
           onKeyDown={this.handleKeyPress}
+          role="listbox"
         >
           {renderedChildren}
           {isOpen && (
@@ -240,7 +241,6 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
               align={this.props.align}
               ref={node => (this.menu = node)}
               embedChildrenInMenu={this.props.embedChildrenInMenu}
-              role="listbox"
             >
               {embedChildrenInMenu && renderedChildren}
               {items.map((itemFromProps, index: number) => {
