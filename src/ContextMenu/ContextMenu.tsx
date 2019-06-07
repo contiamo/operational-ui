@@ -217,6 +217,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
       <>
         {isOpen && <InvisibleOverlay onClick={this.toggle} />}
         <Container
+          aria-haspopup="listbox"
           {...props}
           aria-activedescendant={
             isOpen ? `operational-ui__ContextMenuItem-${this.uniqueId}-${this.state.focusedItemIndex}` : undefined
@@ -239,6 +240,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
               align={this.props.align}
               ref={node => (this.menu = node)}
               embedChildrenInMenu={this.props.embedChildrenInMenu}
+              role="listbox"
             >
               {embedChildrenInMenu && renderedChildren}
               {items.map((itemFromProps, index: number) => {

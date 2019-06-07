@@ -149,7 +149,7 @@ const ContextMenuItemIcon: React.SFC<Pick<Props, "item" | "iconLocation">> = pro
 
 const ContextMenuItem: React.SFC<Props> = props => {
   return (
-    <Container {...props} condensed={props.condensed}>
+    <Container role="option" {...props} condensed={props.condensed}>
       {(!props.iconLocation || props.iconLocation === "left") && (
         <ContextMenuItemIcon iconLocation={props.iconLocation} item={props.item} />
       )}
