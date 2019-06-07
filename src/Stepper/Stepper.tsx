@@ -110,7 +110,6 @@ const Step = styled("li")<{ stepState: StepState; number: number; color: Stepper
     transform: translate(-50%, ${translateY}px)
   }
 `
-Step.defaultProps = { role: "tab" }
 Step.displayName = "Step"
 
 function getStepState(index: number, activeIndex?: number): StepState {
@@ -124,12 +123,11 @@ const Stepper: React.FC<StepperProps> = props => {
   const { steps, stepColor, onStepChange, activeSlideIndex, ...rest } = props
   return (
     <div data-cy="operational-ui__Stepper" {...rest}>
-      <Steps steps={steps.length} data-cy="operational-ui__Stepper-steps">
+      <Steps steps={steps.length} data-cy="operational-ui__Stepper-steps" aria-orientation="horizontal" role="tablist">
         {steps.map(({ title }, index) => (
           <Step
             data-cy={`operational-ui__Stepper__step-${index}`}
             tabIndex={index === activeSlideIndex ? 0 : -1}
-            aria-selected={index === activeSlideIndex}
             key={index}
             stepState={getStepState(index, activeSlideIndex)}
             number={index + 1}
@@ -139,6 +137,10 @@ const Stepper: React.FC<StepperProps> = props => {
                 onStepChange(index)
               }
             }}
+            role="tab"
+            aria-selected={index === activeSlideIndex}
+            aria-setsize={steps.length}
+            aria-posinset={index + 1}
           >
             {title}
           </Step>
