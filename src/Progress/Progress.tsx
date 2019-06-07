@@ -29,7 +29,7 @@ const Container = styled("div")<ProgressProps>(
     ...(inline
       ? {
           backgroundColor: theme.color.background.light,
-          borderRadius: 2,
+          borderRadius: theme.borderRadius,
           width: width ? width : "100%",
           minWidth: 64,
         }

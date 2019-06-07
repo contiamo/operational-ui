@@ -10,16 +10,11 @@ interface UploaderProps extends DefaultProps {
 const Container = styled("div")<Pick<UploaderProps, "dragActive">>(({ dragActive, theme }) => ({
   width: 400,
   height: 108,
-  textAlign: "center",
-  "& div": {
-    position: "relative",
-    top: "50%",
-    transform: "translate(0, -50%)",
-  },
   ...(dragActive
     ? {
         backgroundColor: setAlpha(0.05)(theme.color.primary),
         border: `1px solid ${theme.color.primary}`,
+        color: theme.color.primary,
       }
     : {
         backgroundColor: theme.color.background.lightest,
@@ -28,7 +23,9 @@ const Container = styled("div")<Pick<UploaderProps, "dragActive">>(({ dragActive
 }))
 
 const Uploader: React.SFC<UploaderProps> = ({ dragActive, ...props }) => (
-  <Container dragActive={dragActive}>{props.children}</Container>
+  <Container {...props} dragActive={dragActive}>
+    {props.children}
+  </Container>
 )
 
 export default Uploader
