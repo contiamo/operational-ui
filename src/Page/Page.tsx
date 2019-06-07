@@ -29,7 +29,6 @@ export interface PropsWithSimplePage extends BaseProps {
   tabs?: never
   activeTabName?: never
   onTabChange?: never
-  condensedTitle?: never
 }
 
 export interface PropsWithComplexPage extends BaseProps {
@@ -40,7 +39,6 @@ export interface PropsWithComplexPage extends BaseProps {
   tabs?: never
   activeTabName?: never
   onTabChange?: never
-  condensedTitle?: never
 }
 
 export interface PropsWithTabs extends BaseProps {
@@ -62,8 +60,6 @@ export interface PropsWithTabs extends BaseProps {
   children?: never
   areas?: never
   fill?: never
-  /** Condensed option */
-  condensedTitle?: boolean
 }
 
 export type PageProps = PropsWithSimplePage | PropsWithComplexPage | PropsWithTabs
@@ -82,16 +78,14 @@ const TitleContainer = styled("div")(({ theme }) => ({
   fontWeight: theme.font.weight.medium,
 }))
 
-const ViewContainer = styled("div")<{ isInTab?: boolean; isTitleCondensed?: boolean; hasTitle?: boolean }>(
-  ({ theme, isInTab, isTitleCondensed, hasTitle }) => {
-    const calculatedTitleOffset = isInTab && !isTitleCondensed ? theme.titleHeight + tabsBarHeight : theme.titleHeight
-    return {
-      height: hasTitle ? `calc(100% - ${calculatedTitleOffset}px)` : "100%",
-      overflow: "hidden",
-      position: "relative",
-    }
-  },
-)
+const ViewContainer = styled("div")<{ isInTab?: boolean; hasTitle?: boolean }>(({ theme, isInTab, hasTitle }) => {
+  const calculatedTitleOffset = isInTab ? theme.titleHeight + tabsBarHeight : theme.titleHeight
+  return {
+    height: hasTitle ? `calc(100% - ${calculatedTitleOffset}px)` : "100%",
+    overflow: "hidden",
+    position: "relative",
+  }
+})
 
 const ActionsContainer = styled("div")`
   display: flex;
@@ -118,30 +112,24 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
 
   private renderPageWithTabs() {
     const tabs = this.props.tabs!
-    const { title, actions, condensedTitle } = this.props
+    const { title, actions } = this.props
 
     return (
-      <Tabs
-        tabs={tabs}
-        activeTabName={this.props.activeTabName}
-        onTabChange={this.props.onTabChange}
-        condensed={condensedTitle}
-      >
+      <Tabs tabs={tabs} activeTabName={this.props.activeTabName} onTabChange={this.props.onTabChange}>
         {({ tabsBar, activeChildren }) => (
           <>
             {title ? (
               <>
                 <TitleContainer>
                   <Title>{title}</Title>
-                  {condensedTitle && tabsBar}
                   <ActionsContainer>{actions}</ActionsContainer>
                 </TitleContainer>
-                {!condensedTitle && tabsBar}
+                {tabsBar}
               </>
             ) : (
               tabsBar
             )}
-            <ViewContainer isInTab isTitleCondensed={condensedTitle} hasTitle>
+            <ViewContainer isInTab hasTitle>
               {activeChildren}
             </ViewContainer>
           </>
