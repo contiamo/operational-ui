@@ -47,4 +47,16 @@ describe("Stepper", () => {
 
     cy.contains("Go Back to the First Slide") // We are at the first step of the Stepper
   })
+
+  it("allows navigation with left and right arrows and Enter key", () => {
+    cy.get("[data-cy=operational-ui__Stepper]")
+      .find("[role=tab]")
+      .first()
+      .type("{rightarrow}{rightarrow}")
+      .focused()
+      .contains("Select Repositories") // Step 3
+      .type("{enter}")
+      .tab()
+      .contains("Next slide")
+  })
 })
