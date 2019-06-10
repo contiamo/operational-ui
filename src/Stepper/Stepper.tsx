@@ -1,5 +1,6 @@
 import * as React from "react"
 import { OperationalStyleConstants } from "../utils/constants"
+import { useHotkey } from "../useHotkey"
 import styled from "../utils/styled"
 
 export interface StepperProps {
@@ -119,24 +120,68 @@ function getStepState(index: number, activeIndex?: number): StepState {
   return "inactive"
 }
 
+const getNextTabIndex = (current: number, lastIndex: number) => {
+  if (current + 1 > lastIndex) return 0
+  return current + 1
+}
+
+const getPreviousTabIndex = (current: number, lastIndex: number) => {
+  if (current - 1 < 0) return lastIndex
+  return current - 1
+}
+
 const Stepper: React.FC<StepperProps> = props => {
   const { steps, stepColor, onStepChange, activeSlideIndex, ...rest } = props
+
+  const clickHandler = React.useCallback(
+    (activeIndex: number) => {
+      if (onStepChange) {
+        onStepChange(activeIndex)
+        setFocusedTabIndex(activeIndex)
+      }
+    },
+    [onStepChange],
+  )
+
+  const [focusedTabIndex, setFocusedTabIndex] = React.useState(0)
+
+  const hotkeyScope = React.useRef(null)
+  useHotkey(hotkeyScope, { key: "ArrowLeft" }, () => {
+    setFocusedTabIndex(getPreviousTabIndex(focusedTabIndex, steps.length - 1))
+  })
+  useHotkey(hotkeyScope, { key: "ArrowRight" }, () => {
+    setFocusedTabIndex(getNextTabIndex(focusedTabIndex, steps.length - 1))
+  })
+  useHotkey(hotkeyScope, { key: "Enter" }, () => {
+    clickHandler(focusedTabIndex)
+  })
+
+  const focusedTab = React.useRef<HTMLLIElement>(null)
+  React.useEffect(() => {
+    if (focusedTab.current) {
+      focusedTab.current.focus()
+    }
+  })
+
   return (
     <div data-cy="operational-ui__Stepper" {...rest}>
-      <Steps steps={steps.length} data-cy="operational-ui__Stepper-steps" aria-orientation="horizontal" role="tablist">
+      <Steps
+        ref={hotkeyScope}
+        steps={steps.length}
+        data-cy="operational-ui__Stepper-steps"
+        aria-orientation="horizontal"
+        role="tablist"
+      >
         {steps.map(({ title }, index) => (
           <Step
             data-cy={`operational-ui__Stepper__step-${index}`}
-            tabIndex={index === activeSlideIndex ? 0 : -1}
+            ref={index === focusedTabIndex ? focusedTab : undefined}
+            tabIndex={index === focusedTabIndex ? 0 : -1}
             key={index}
             stepState={getStepState(index, activeSlideIndex)}
             number={index + 1}
             color={stepColor}
-            onClick={() => {
-              if (onStepChange) {
-                onStepChange(index)
-              }
-            }}
+            onClick={() => clickHandler(index)}
             role="tab"
             aria-selected={index === activeSlideIndex}
             aria-setsize={steps.length}
