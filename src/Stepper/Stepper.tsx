@@ -53,11 +53,11 @@ const Step = styled("li")<{ stepState: StepState; number: number; color: Stepper
   overflow: hidden;
 
   :focus {
-    // TODO: Use common mixin
+    // TODO: Use common mixin instead
     outline: 0;
     box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
   }
-  
+
   /** Ball with number in it */
   ::before {
     content: '${({ number, stepState }) => {
@@ -103,11 +103,11 @@ const Step = styled("li")<{ stepState: StepState; number: number; color: Stepper
   }
 
   :first-of-type::after {
-    transform: translate(50%, ${translateY}px)
+    transform: translate(50%, ${translateY}px);
   }
 
   :last-of-type::after {
-    transform: translate(-50%, ${translateY}px)
+    transform: translate(-50%, ${translateY}px);
   }
 `
 Step.displayName = "Step"
@@ -146,7 +146,9 @@ const Stepper: React.FC<StepperProps> = props => {
           </Step>
         ))}
       </Steps>
-      <StepContent data-cy="operational-ui__Stepper-content">{steps[activeSlideIndex!].content}</StepContent>
+      <StepContent data-cy="operational-ui__Stepper-content" role="tabpanel">
+        {steps[activeSlideIndex!].content}
+      </StepContent>
     </div>
   )
 }
