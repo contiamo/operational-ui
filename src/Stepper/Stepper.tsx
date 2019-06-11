@@ -131,6 +131,11 @@ const getPreviousTabIndex = (current: number, lastIndex: number) => {
 const Stepper: React.FC<StepperProps> = props => {
   const { steps, stepColor, onStepChange, activeSlideIndex, ...rest } = props
 
+  const [focusedTab, setFocusedTab] = React.useState({
+    index: 0,
+    shouldFocus: false,
+  })
+
   const clickHandler = React.useCallback(
     (activeIndex: number) => {
       if (onStepChange) {
@@ -140,31 +145,32 @@ const Stepper: React.FC<StepperProps> = props => {
     [onStepChange],
   )
 
-  const [focusedTabIndex, setFocusedTabIndex] = React.useState(0)
-
   const hotkeyScope = React.useRef(null)
   useHotkey(hotkeyScope, { key: "ArrowLeft" }, () => {
-    setFocusedTabIndex(getPreviousTabIndex(focusedTabIndex, steps.length - 1))
+    const index = getPreviousTabIndex(focusedTab.index, steps.length - 1)
+    setFocusedTab({ index, shouldFocus: true })
   })
   useHotkey(hotkeyScope, { key: "ArrowRight" }, () => {
-    setFocusedTabIndex(getNextTabIndex(focusedTabIndex, steps.length - 1))
+    const index = getNextTabIndex(focusedTab.index, steps.length - 1)
+    setFocusedTab({ index, shouldFocus: true })
   })
   useHotkey(hotkeyScope, { key: "Enter" }, () => {
-    clickHandler(focusedTabIndex)
+    clickHandler(focusedTab.index)
   })
 
   // Set actual focus on each render
-  const focusedTab = React.useRef<HTMLLIElement>(null)
+  const focusedTabRef = React.useRef<HTMLLIElement>(null)
   React.useEffect(() => {
-    if (focusedTab.current) {
-      focusedTab.current.focus()
+    if (focusedTabRef.current && focusedTab.shouldFocus) {
+      focusedTabRef.current.focus()
+      setFocusedTab({ ...focusedTab, shouldFocus: false })
     }
-  })
+  }, [focusedTab])
 
   // Set focus to the current slide if the value has changed
   React.useEffect(() => {
     if (activeSlideIndex !== undefined) {
-      setFocusedTabIndex(activeSlideIndex)
+      setFocusedTab({ index: activeSlideIndex, shouldFocus: false })
     }
   }, [activeSlideIndex])
 
@@ -183,8 +189,8 @@ const Stepper: React.FC<StepperProps> = props => {
           return (
             <Step
               data-cy={`operational-ui__Stepper__step-${index}`}
-              ref={index === focusedTabIndex ? focusedTab : undefined}
-              tabIndex={index === focusedTabIndex ? 0 : -1}
+              ref={index === focusedTab.index ? focusedTabRef : undefined}
+              tabIndex={index === focusedTab.index ? 0 : -1}
               key={index}
               stepState={stepState}
               color={stepColor}
