@@ -51,7 +51,7 @@ const ChildTree: React.SFC<Props> = ({
         onRemove={onRemove}
         cursor={cursor}
       />
-      {hasChildren && isOpen && <Tree trees={childNodes} droppableProps={droppableProps} />}
+      {hasChildren && isOpen && <Tree trees={childNodes} droppableProps={droppableProps} _extraOffset={Boolean(tag)} />}
     </Container>
   )
 }

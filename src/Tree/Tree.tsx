@@ -38,16 +38,17 @@ export interface TreeProps {
   trees: Tree[]
   droppableProps?: Omit<DroppableProps, "children">
   placeholder?: React.ComponentType<DroppableStateSnapshot>
+  _extraOffset?: boolean // internal props to deal with the extra offset (tag)
 }
 
-const Container = styled("div")`
+const Container = styled("div")<{ _extraOffset: boolean }>`
   user-select: none;
-  & & {
-    margin-left: ${({ theme }) => theme.space.content}px;
+  & {
+    margin-left: ${({ _extraOffset }) => (_extraOffset ? 42 : 16)}px;
   }
 `
 
-const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder }) => {
+const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder, _extraOffset }) => {
   const isLowestLevel = trees.length === 0 || trees.some(tree => !tree.childNodes || !tree.childNodes.length)
 
   /**
@@ -56,7 +57,7 @@ const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder }) => {
    */
   if (!isLowestLevel || !droppableProps) {
     return (
-      <Container>
+      <Container _extraOffset={Boolean(_extraOffset)}>
         {trees.map((treeData, index) => (
           <ChildTree key={index} {...treeData} />
         ))}
@@ -67,7 +68,11 @@ const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder }) => {
   return (
     <Droppable {...droppableProps}>
       {(droppableProvided, droppableSnapshot) => (
-        <Container ref={droppableProvided.innerRef} {...droppableProvided.droppableProps}>
+        <Container
+          ref={droppableProvided.innerRef}
+          {...droppableProvided.droppableProps}
+          _extraOffset={Boolean(_extraOffset)}
+        >
           {trees.length ? (
             <>
               {trees.map((treeData, index) => (

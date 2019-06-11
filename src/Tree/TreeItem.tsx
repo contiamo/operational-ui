@@ -88,11 +88,16 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         color: "color.text.action",
       })}
     {tag && (
-      <NameTag condensed left color={color}>
+      <NameTag condensed left color={color} {...{ style: { marginLeft: 2 } }}>
         {tag}
       </NameTag>
     )}
-    {icon && React.createElement(icon, { size: 12, left: true, color: iconColor || "color.text.lighter" })}
+    {icon &&
+      React.createElement(icon, {
+        size: 12,
+        color: iconColor || "color.text.lighter",
+        style: { marginLeft: 3, marginRight: 8 },
+      })}
     <Label hasChildren={hasChildren}>{label}</Label>
     {onRemove && (
       <DeleteNode onClick={onRemove}>
