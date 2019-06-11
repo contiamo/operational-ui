@@ -2,6 +2,7 @@ import * as React from "react"
 import { OperationalStyleConstants } from "../utils/constants"
 import { useHotkey } from "../useHotkey"
 import styled from "../utils/styled"
+import { YesIcon } from "../Icon/Icon"
 
 export interface StepperProps {
   steps: Array<{ title: string; content: React.ReactNode }>
@@ -40,7 +41,7 @@ Steps.displayName = "Steps"
 const ballSize = 24
 const translateY = ballSize / 2
 
-const Step = styled("li")<{ stepState: StepState; number: number; color: StepperProps["stepColor"] }>`
+const Step = styled("li")<{ stepState: StepState; color: StepperProps["stepColor"] }>`
   position: relative;
   width: 100%;
   color: ${({ theme, stepState }) => {
@@ -57,38 +58,6 @@ const Step = styled("li")<{ stepState: StepState; number: number; color: Stepper
     // TODO: Use common mixin instead
     outline: 0;
     box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
-  }
-
-  /** Ball with number in it */
-  ::before {
-    content: '${({ number, stepState }) => {
-      if (stepState === "completed") return ""
-      return number
-    }}';
-    background: ${({ stepState }) => {
-      if (stepState === "completed")
-        return `url('data:image/svg+xml;utf8,
-                <svg viewBox="0 0 360 360" transform="translate(2,2)" width="16" height="16" fill="white" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M343.142,83.33l-214.142,214.142l-114.142,-114.142l28.284,-28.285l85.858,85.858l185.858,-185.858c9.428,9.428 18.856,18.857 28.284,28.285Z" />
-                </svg>') no-repeat;`
-      return ""
-    }};
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto ${({ theme }) => theme.space.small}px;
-    width: ${ballSize}px;
-    height: ${ballSize}px;
-    border-radius: 50%;
-    background-color: ${({ theme, stepState }) => {
-      if (stepState === "active") return theme.color.primary
-      if (stepState === "completed") return theme.color.text.lightest
-      return theme.color.border.default
-    }};
-    font-weight: ${({ theme }) => theme.font.weight.regular};
-    color: ${({ theme }) => theme.color.white};
-    z-index: 1;
   }
 
   /** Separator line */
@@ -120,6 +89,25 @@ const Step = styled("li")<{ stepState: StepState; number: number; color: Stepper
   }
 `
 Step.displayName = "Step"
+
+const Ball = styled("div")<{ stepState: StepState }>`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto ${({ theme }) => theme.space.small}px;
+  width: ${ballSize}px;
+  height: ${ballSize}px;
+  border-radius: 50%;
+  background-color: ${({ theme, stepState }) => {
+    if (stepState === "active") return theme.color.primary
+    if (stepState === "completed") return theme.color.text.lightest
+    return theme.color.border.default
+  }};
+  font-weight: ${({ theme }) => theme.font.weight.regular};
+  color: ${({ theme }) => theme.color.white};
+  z-index: 1;
+}`
 
 function getStepState(index: number, activeIndex?: number): StepState {
   if (activeIndex === undefined) return "inactive"
@@ -187,24 +175,28 @@ const Stepper: React.FC<StepperProps> = props => {
         aria-orientation="horizontal"
         role="tablist"
       >
-        {steps.map(({ title }, index) => (
-          <Step
-            data-cy={`operational-ui__Stepper__step-${index}`}
-            ref={index === focusedTabIndex ? focusedTab : undefined}
-            tabIndex={index === focusedTabIndex ? 0 : -1}
-            key={index}
-            stepState={getStepState(index, activeSlideIndex)}
-            number={index + 1}
-            color={stepColor}
-            onClick={() => clickHandler(index)}
-            role="tab"
-            aria-selected={index === activeSlideIndex}
-            aria-setsize={steps.length}
-            aria-posinset={index + 1}
-          >
-            {title}
-          </Step>
-        ))}
+        {steps.map(({ title }, index) => {
+          const stepState = getStepState(index, activeSlideIndex)
+          const number = index + 1
+          return (
+            <Step
+              data-cy={`operational-ui__Stepper__step-${index}`}
+              ref={index === focusedTabIndex ? focusedTab : undefined}
+              tabIndex={index === focusedTabIndex ? 0 : -1}
+              key={index}
+              stepState={stepState}
+              color={stepColor}
+              onClick={() => clickHandler(index)}
+              role="tab"
+              aria-selected={index === activeSlideIndex}
+              aria-setsize={steps.length}
+              aria-posinset={number}
+            >
+              <Ball stepState={stepState}>{stepState === "completed" ? <YesIcon size={11} /> : number}</Ball>
+              {title}
+            </Step>
+          )
+        })}
       </Steps>
       <StepContent data-cy="operational-ui__Stepper-content" role="tabpanel">
         {steps[activeSlideIndex!].content}
