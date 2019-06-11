@@ -3,6 +3,7 @@ import { OperationalStyleConstants } from "../utils/constants"
 import { useHotkey } from "../useHotkey"
 import styled from "../utils/styled"
 import { YesIcon } from "../Icon/Icon"
+import * as mixins from "../utils/mixins"
 
 export interface StepperProps {
   steps: Array<{ title: string; content: React.ReactNode }>
@@ -55,9 +56,10 @@ const Step = styled("li")<{ stepState: StepState; color: StepperProps["stepColor
   overflow: hidden;
 
   :focus {
-    // TODO: Use common mixin instead
-    outline: 0;
-    box-shadow: 0 0 0 1px ${({ theme }) => theme.color.primary};
+    ${({ theme }) =>
+      mixins.inputFocus({
+        theme,
+      })}
   }
 
   /** Separator line */
