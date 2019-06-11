@@ -52,11 +52,22 @@ describe("Stepper", () => {
     cy.get("[data-cy=operational-ui__Stepper]")
       .find("[role=tab]")
       .first()
+      .wait(1000)
       .type("{rightarrow}{rightarrow}")
       .focused()
       .contains("Select Repositories") // Step 3
       .type("{enter}")
+
+    cy.get('[data-cy="operational-ui__Stepper-content"]').contains("Step 3: anything goes")
+
+    cy.focused()
       .tab()
-      .contains("Next slide")
+      .tab({ shift: true })
+      .type("{leftarrow}{leftarrow}")
+      .focused()
+      .contains("Select Your Git Provider")
+      .type("{enter}")
+
+    cy.get('[data-cy="operational-ui__Stepper-content"]').contains("Go to Step 2")
   })
 })

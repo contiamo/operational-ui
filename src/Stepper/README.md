@@ -61,7 +61,7 @@ const MyComponent = () => {
           content: (
             <Card
               action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
-              title="Anything goes"
+              title="Step 3: anything goes"
             >
               Any content goes in here and it should just work.
             </Card>
