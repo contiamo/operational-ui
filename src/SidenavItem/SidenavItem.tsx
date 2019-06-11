@@ -26,7 +26,7 @@ export interface SidenavItemProps extends DefaultProps {
   dark?: boolean
 }
 
-const getIconSize = (compact = false) => (compact ? 30 : 18)
+const getIconSize = (compact = false) => (compact ? 24 : 18)
 
 const BaseSidenavItem = styled<"div" | "a">("div")<{
   compact: SidenavHeaderProps["compact"]
