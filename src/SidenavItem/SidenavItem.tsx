@@ -91,7 +91,6 @@ const Label = styled("span")<{ compact: SidenavHeaderProps["compact"]; hasIcon: 
           fontSize: 11,
           fontWeight: theme.font.weight.medium,
           lineHeight: 1.18,
-          textTransform: "uppercase",
           width: "100%",
           wordBreak: "break-all",
           wordWrap: "break-word",
