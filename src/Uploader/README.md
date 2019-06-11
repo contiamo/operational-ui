@@ -27,6 +27,7 @@ const MyComponent = () => {
   // Target is cached when dragenter is fired.
   // When dragleave is fired, if the event target is the same as the cached target,
   // this means the file has been dragged outside the browser.
+  // More info here: https://timcchang.com/blog/react-hook-custom-drag-and-drop-ui/
   const cachedTarget = React.useRef(null)
 
   React.useEffect(() => {
