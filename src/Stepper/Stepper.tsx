@@ -62,9 +62,17 @@ const Step = styled("li")<{ stepState: StepState; number: number; color: Stepper
   /** Ball with number in it */
   ::before {
     content: '${({ number, stepState }) => {
-      if (stepState === "completed") return "✓"
+      if (stepState === "completed") return ""
       return number
     }}';
+    background: ${({ stepState }) => {
+      if (stepState === "completed")
+        return `url('data:image/svg+xml;utf8,
+                <svg viewBox="0 0 360 360" transform="translate(2,2)" width="16" height="16" fill="white" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M343.142,83.33l-214.142,214.142l-114.142,-114.142l28.284,-28.285l85.858,85.858l185.858,-185.858c9.428,9.428 18.856,18.857 28.284,28.285Z" />
+                </svg>') no-repeat;`
+      return ""
+    }};
     position: relative;
     display: flex;
     align-items: center;
