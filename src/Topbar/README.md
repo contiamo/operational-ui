@@ -45,10 +45,10 @@ const Grid = styled("div")`
   }
   right={
     <Grid>
-      <TopbarButton flavor="inline" icon={SaveIcon}>
+      <TopbarButton flavor="outline" icon={SaveIcon}>
         Save as …
       </TopbarButton>
-      <TopbarButton flavor="inline-fill" icon={PlayIcon}>
+      <TopbarButton flavor="filled" icon={PlayIcon}>
         View results
       </TopbarButton>
     </Grid>

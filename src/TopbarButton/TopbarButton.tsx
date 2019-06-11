@@ -13,26 +13,26 @@ export interface TopbarButtonProps {
   onClick?: () => void
   /**
    * `"basic"` - default
-   * `"inline"` - make button smaller with border and text of the same color
-   * `"inline-fill"` - make button smaller with solid background
+   * `"outline"` - make button smaller with border and text of the same color
+   * `"filled"` - make button smaller with solid background
    */
-  flavor?: "basic" | "inline" | "inline-fill"
+  flavor?: "basic" | "outline" | "filled"
 }
 
 const TopbarButtonContainer = styled("button")<{ disabled?: boolean; flavor: TopbarButtonProps["flavor"] }>`
-  height: ${({ flavor }) => (flavor === "inline" || flavor === "inline-fill" ? "36px" : "100%")};
+  height: ${({ flavor }) => (flavor === "outline" || flavor === "filled" ? "36px" : "100%")};
   border-radius: ${({ flavor, theme }) =>
-    flavor === "inline" || flavor === "inline-fill" ? theme.borderRadius : "0"}px;
+    flavor === "outline" || flavor === "filled" ? theme.borderRadius : "0"}px;
   padding: 0px
     ${({ flavor, theme }) =>
-      flavor === "inline" || flavor === "inline-fill" ? theme.space.element : theme.space.medium}px;
-  border: ${({ flavor, theme }) => (flavor === "inline" ? `1px solid ${theme.color.text.dark}` : "none")};
+      flavor === "outline" || flavor === "filled" ? theme.space.element : theme.space.medium}px;
+  border: ${({ flavor, theme }) => (flavor === "outline" ? `1px solid ${theme.color.text.dark}` : "none")};
   background: ${({ flavor, theme }) =>
-    flavor === "inline-fill" ? theme.color.primary : flavor === "inline" ? theme.color.white : "transparent"};
+    flavor === "filled" ? theme.color.primary : flavor === "outline" ? theme.color.white : "transparent"};
   color: ${({ flavor, theme }) =>
-    flavor === "inline-fill"
+    flavor === "filled"
       ? theme.color.white
-      : flavor === "inline"
+      : flavor === "outline"
       ? theme.color.text.dark
       : theme.color.text.lighter};
   display: flex;
