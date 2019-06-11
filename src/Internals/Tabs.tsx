@@ -48,8 +48,6 @@ const Tab = styled("div")<{ active?: boolean }>(({ theme, active }) => ({
   display: "flex",
   width: 150,
   height: "100%",
-  alignItems: "center",
-  justifyContent: "center",
   backgroundColor: active ? "inherit" : theme.color.background.lighter,
   color: active ? theme.color.text.action : "currentColor",
   zIndex: 2,
@@ -68,6 +66,14 @@ const Tab = styled("div")<{ active?: boolean }>(({ theme, active }) => ({
     cursor: "pointer",
     opacity: 1,
   },
+}))
+
+const TabName = styled("p")(() => ({
+  width: "100%",
+  whiteSpace: "nowrap",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  textAlign: "center",
 }))
 
 const getTabIndexByName = (tabs: Tab[], tabName?: string): number => {
@@ -111,7 +117,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
                   ) : (
                     tab.icon && React.createElement(tab.icon, { size: 14, color: tab.iconColor, left: true })
                   )}
-                  {tab.name}
+                  {<TabName>{tab.name}</TabName>}
                 </Tab>
               ))}
           </TabsBar>

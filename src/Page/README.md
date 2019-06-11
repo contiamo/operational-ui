@@ -109,7 +109,7 @@ const Tab = props => (
   tabs={[
     { name: "overview", children: <Tab title="Overview" />, icon: "Search" },
     { name: "jobs", children: <Tab title="Jobs" /> },
-    { name: "functions", children: <Tab title="Functions" /> },
+    { name: "functions and more text to check label truncation", children: <Tab title="Functions" /> },
   ]}
 />
 ```
