@@ -55,10 +55,11 @@ const ChildTree: React.SFC<Props> = ({
       />
       {hasChildren && isOpen && (
         <Tree
+          _isChild
+          _hasParentTag={Boolean(tag)}
           trees={childNodes}
           searchWords={searchWords}
           droppableProps={droppableProps}
-          _extraOffset={Boolean(tag)}
         />
       )}
     </Container>

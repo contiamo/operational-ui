@@ -39,17 +39,19 @@ export interface TreeProps {
   searchWords?: string[]
   droppableProps?: Omit<DroppableProps, "children">
   placeholder?: React.ComponentType<DroppableStateSnapshot>
-  _extraOffset?: boolean // internal props to deal with the extra offset (tag)
+  _hasParentTag?: boolean // internal props to deal with the extra offset (tag)
+  _isChild?: boolean
 }
 
-const Container = styled("div")<{ _extraOffset: boolean }>`
+const Container = styled("div")<{ isChild: boolean; _hasParentTag: boolean }>`
   user-select: none;
   & {
-    margin-left: ${({ _extraOffset }) => (_extraOffset ? 42 : 16)}px;
+    margin-left: ${({ _hasParentTag, theme, isChild }) =>
+      isChild === false ? 0 : _hasParentTag ? 42 : theme.space.content}px;
   }
 `
 
-const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder, searchWords, _extraOffset }) => {
+const Tree: React.SFC<TreeProps> = ({ _isChild, trees, droppableProps, placeholder, searchWords, _hasParentTag }) => {
   const isLowestLevel = trees.length === 0 || trees.some(tree => !tree.childNodes || !tree.childNodes.length)
 
   /**
@@ -58,7 +60,7 @@ const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder, search
    */
   if (!isLowestLevel || !droppableProps) {
     return (
-      <Container _extraOffset={Boolean(_extraOffset)}>
+      <Container isChild={Boolean(_isChild)} _hasParentTag={Boolean(_hasParentTag)}>
         {trees.map((treeData, index) => (
           <ChildTree key={index} {...treeData} searchWords={searchWords} />
         ))}
@@ -70,9 +72,10 @@ const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder, search
     <Droppable {...droppableProps}>
       {(droppableProvided, droppableSnapshot) => (
         <Container
+          isChild={Boolean(_isChild)}
           ref={droppableProvided.innerRef}
           {...droppableProvided.droppableProps}
-          _extraOffset={Boolean(_extraOffset)}
+          _hasParentTag={Boolean(_hasParentTag)}
         >
           {trees.length ? (
             <>
