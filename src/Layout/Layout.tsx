@@ -7,7 +7,7 @@ export interface LayoutProps extends DefaultProps {
   /** Side navigation, see `Sidenav` component */
   sidenav: React.ReactNode
   /** Header content, see `Page` component */
-  header: React.ReactNode
+  header?: React.ReactNode
   /** Main content, see `Page` component */
   main: React.ReactNode
   /** Sets whether a loading progress bar should be rendered */
@@ -28,7 +28,7 @@ const Container = styled("div")({
  * On these children, row and column positions are set explicitly to prevent layout bugs
  * originating from child ordering and CSS properties set on the children.
  */
-const GridContainer = styled("div")(
+const GridContainer = styled("div")<{ hasHeader: boolean }>(
   {
     position: "relative",
     display: "grid",
@@ -36,41 +36,37 @@ const GridContainer = styled("div")(
     height: "100%",
     overflow: "hidden",
   },
-  ({ theme }) => ({
-    gridTemplateRows: `${theme.titleHeight}px 100%`,
+  ({ theme, hasHeader }) => ({
+    gridTemplateRows: hasHeader ? `${theme.titleHeight}px 100%` : "100%",
     gridTemplateColumns: `min-content`,
   }),
 )
 
-const Main = styled("div")(({ theme }) => ({
+const Main = styled("div")<{ hasHeader: boolean }>(({ theme, hasHeader }) => ({
   overflow: "hidden",
-  gridColumnEnd: "span 1",
-  gridColumnStart: "2",
-  gridRowStart: "2",
-  gridRowEnd: "span 1",
-  height: `calc(100% - ${theme.titleHeight}px)`, // FORCE a height that is the page - the logo so that children with 100% have context
+  gridColumn: "2",
+  height: hasHeader ? `calc(100% - ${theme.titleHeight}px)` : "100%", // FORCE a height that is the page - the logo so that children with 100% have context
   backgroundColor: theme.color.white,
 }))
 
-const Side = styled(Main)({
-  gridColumnStart: "1",
+const Side = styled(Main)<{ hasHeader: boolean }>({
+  gridColumn: "1",
 })
 
 const Header = styled("div")({
   height: "100%",
-  gridColumnStart: "1",
+  gridColumn: 1,
   gridColumnEnd: "span 2",
-  gridRowStart: "1",
-  gridRowEnd: "span 1",
+  gridRow: 1,
 })
 
 const Layout: React.SFC<LayoutProps> = ({ loading, header, sidenav, main, ...props }) => (
   <Container {...props}>
     {loading && <Progress />}
-    <GridContainer>
-      <Header>{header}</Header>
-      <Side>{sidenav}</Side>
-      <Main>{main}</Main>
+    <GridContainer hasHeader={Boolean(header)}>
+      {Boolean(header) && <Header>{header}</Header>}
+      <Side hasHeader={Boolean(header)}>{sidenav}</Side>
+      <Main hasHeader={Boolean(header)}>{main}</Main>
     </GridContainer>
   </Container>
 )

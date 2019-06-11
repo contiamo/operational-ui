@@ -487,13 +487,13 @@ import {
   } from "@operational/components"
 
 const sidebar = (
-  <Sidenav compact>
-    <SidenavHeader label="Use cases">
-      <SidenavItem label="The First Prize" icon={AdminIcon} />
-      <SidenavItem label="The Second Prize" icon={OrganizationIcon} />
-      <SidenavItem label="The Third Prize" icon={CaretLeftIcon} />
+  <Sidenav compact dark>
+    <SidenavHeader label="Use">
+      <SidenavItem label="First" icon={AdminIcon} />
+      <SidenavItem label="Second" icon={OrganizationIcon} />
+      <SidenavItem label="Third" icon={CaretLeftIcon} />
     </SidenavHeader>
-    <SidenavItem active end label="Other Guy" icon={UserIcon} />
+    <SidenavItem active end label="Other" icon={UserIcon} />
     <SidenavItem end label="Admin" icon={DataSourceIcon} />
   </Sidenav>
 )
@@ -503,21 +503,6 @@ const sidebar = (
 ;<div style={{ height: 600 }}>
   <Layout
     sidenav={sidebar}
-    header={
-      <HeaderBar
-        logo={<Logo name="Contiamo" />}
-        main={
-          <HeaderMenu withCaret items={[{ label: "Project 1" }, { label: "Project 2" }, { label: "Project 3" }]}>
-            Project 1
-          </HeaderMenu>
-        }
-        end={
-          <HeaderMenu items={[{ label: "Log out" }]} align="right">
-            Imogen Mason <Avatar name="Imogen Mason" />
-          </HeaderMenu>
-        }
-      />
-    }
     main={
       <Page
         title="Page Title"
