@@ -36,6 +36,7 @@ export type Tree = TreeWithChildren | TreeWithoutChildren
 
 export interface TreeProps {
   trees: Tree[]
+  searchWords?: string[]
   droppableProps?: Omit<DroppableProps, "children">
   placeholder?: React.ComponentType<DroppableStateSnapshot>
   _extraOffset?: boolean // internal props to deal with the extra offset (tag)
@@ -48,7 +49,7 @@ const Container = styled("div")<{ _extraOffset: boolean }>`
   }
 `
 
-const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder, _extraOffset }) => {
+const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder, searchWords, _extraOffset }) => {
   const isLowestLevel = trees.length === 0 || trees.some(tree => !tree.childNodes || !tree.childNodes.length)
 
   /**
@@ -59,7 +60,7 @@ const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder, _extra
     return (
       <Container _extraOffset={Boolean(_extraOffset)}>
         {trees.map((treeData, index) => (
-          <ChildTree key={index} {...treeData} />
+          <ChildTree key={index} {...treeData} searchWords={searchWords} />
         ))}
       </Container>
     )
@@ -81,6 +82,7 @@ const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder, _extra
                     return (
                       <ChildTree
                         forwardRef={draggableProvided.innerRef}
+                        searchWords={searchWords}
                         {...treeData}
                         {...draggableProvided.draggableProps}
                         {...draggableProvided.dragHandleProps}

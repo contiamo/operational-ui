@@ -2,7 +2,7 @@ import * as React from "react"
 import Tree, { TreeProps } from "./Tree"
 import TreeItem, { Container } from "./TreeItem"
 
-type Props = TreeProps["trees"][-1]
+type Props = TreeProps["trees"][-1] & { searchWords?: string[] }
 
 const ChildTree: React.SFC<Props> = ({
   initiallyOpen,
@@ -19,6 +19,7 @@ const ChildTree: React.SFC<Props> = ({
   onClick,
   onRemove,
   cursor,
+  searchWords,
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
@@ -39,6 +40,7 @@ const ChildTree: React.SFC<Props> = ({
   return (
     <Container ref={forwardRef} disabled={Boolean(disabled)} hasChildren={hasChildren} {...props}>
       <TreeItem
+        searchWords={searchWords}
         onNodeClick={onNodeClick}
         highlight={Boolean(highlight)}
         hasChildren={hasChildren}
@@ -51,7 +53,14 @@ const ChildTree: React.SFC<Props> = ({
         onRemove={onRemove}
         cursor={cursor}
       />
-      {hasChildren && isOpen && <Tree trees={childNodes} droppableProps={droppableProps} _extraOffset={Boolean(tag)} />}
+      {hasChildren && isOpen && (
+        <Tree
+          trees={childNodes}
+          searchWords={searchWords}
+          droppableProps={droppableProps}
+          _extraOffset={Boolean(tag)}
+        />
+      )}
     </Container>
   )
 }

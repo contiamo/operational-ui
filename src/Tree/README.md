@@ -112,6 +112,71 @@ import { Tree } from "@operational/components"
 />
 ```
 
+### With higlighted search
+
+```jsx
+import * as React from "react"
+import { Tree, Input } from "@operational/components"
+const Example = () => {
+  const [filter, setFilter] = React.useState("liability")
+
+  return (
+    <>
+      <Input value={filter} onChange={setFilter} label="Search" />
+      <br />
+      <Tree
+        searchWords={filter.split(" ")}
+        trees={[
+          {
+            label: "Store",
+            childNodes: [
+              {
+                label: "Region",
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "City",
+                    tag: "D",
+                    disabled: true,
+                    childNodes: [],
+                  },
+                  {
+                    label: "Country",
+                    color: "primary",
+                    onRemove: () => {},
+                    tag: "D",
+                    childNodes: [],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            label: "Legal Entity",
+            initiallyOpen: true,
+            childNodes: [
+              {
+                label: "Limited Liability Company",
+                tag: "D",
+                childNodes: [],
+              },
+              {
+                label: "Inc.",
+                tag: "D",
+                color: "#2C363F",
+                childNodes: [],
+              },
+            ],
+          },
+        ]}
+      />
+    </>
+  )
+}
+
+;<Example />
+```
+
 ### With react-beautiful-dnd
 
 This tree component have `Droppable` and `Draggable` implemented from [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd/).

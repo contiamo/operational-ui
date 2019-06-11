@@ -3,6 +3,8 @@ import NameTag from "../NameTag/NameTag"
 import { darken } from "../utils"
 import styled from "../utils/styled"
 import { PlusIcon, NoIcon, MinusIcon, IconComponentType } from "../Icon/Icon"
+import Highlighter from "react-highlight-words"
+import constants from "../utils/constants"
 
 export const Container = styled("div")<{ hasChildren: boolean; disabled: boolean }>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
@@ -55,6 +57,7 @@ const DeleteNode = styled("div")`
 
 interface TreeItemProps {
   highlight: boolean
+  searchWords?: string[]
   hasChildren: boolean
   isOpen: boolean
   label: string
@@ -79,6 +82,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   hasChildren,
   isOpen,
   cursor,
+  searchWords = [],
 }) => (
   <Header onClick={onNodeClick} highlight={Boolean(highlight)} cursor={cursor}>
     {hasChildren &&
@@ -98,7 +102,13 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         color: iconColor || "color.text.lighter",
         style: { marginLeft: 3, marginRight: 8 },
       })}
-    <Label hasChildren={hasChildren}>{label}</Label>
+    <Label hasChildren={hasChildren}>
+      <Highlighter
+        textToHighlight={label}
+        highlightStyle={{ color: constants.color.text.action, backgroundColor: "transparent", fontWeight: "bold" }}
+        searchWords={searchWords}
+      />
+    </Label>
     {onRemove && (
       <DeleteNode onClick={onRemove}>
         <NoIcon size={12} />
