@@ -12,11 +12,6 @@ import { Uploader, styled } from "@operational/components"
 
 const InitialContentContainer = styled("div")(({ theme }) => ({
   lineHeight: "18px",
-  textAlign: "center",
-  display: "flex",
-  height: "100%",
-  flexDirection: "column",
-  justifyContent: "center",
   "& label": {
     color: theme.color.primary,
     fontWeight: theme.font.weight.bold,
@@ -25,14 +20,6 @@ const InitialContentContainer = styled("div")(({ theme }) => ({
   "& input": {
     display: "none",
   },
-}))
-
-const DragOverContentContainer = styled("div")(({ theme }) => ({
-  textAlign: "center",
-  display: "flex",
-  height: "100%",
-  flexDirection: "column",
-  justifyContent: "center",
 }))
 
 const MyComponent = () => {
@@ -78,7 +65,7 @@ const MyComponent = () => {
   return (
     <Uploader dragActive={isDragging}>
       {isDragging ? (
-        <DragOverContentContainer>Drop your file here</DragOverContentContainer>
+        <>Drop your file here</>
       ) : (
         <InitialContentContainer>
           Drop your file here
@@ -102,20 +89,13 @@ const MyComponent = () => {
 import * as React from "react"
 import { Progress, Uploader } from "@operational/components"
 
-const UploadingContentContainer = styled("div")(({ theme }) => ({
+const UploadingText = styled("p")(({ theme }) => ({
   color: theme.color.text.lighter,
-  alignItems: "center",
-  display: "flex",
-  height: "100%",
-  flexDirection: "column",
-  justifyContent: "center",
 }))
 
 ;<Uploader>
-  <UploadingContentContainer>
-    <Progress inline width={196} />
-    <p>Uploading...</p>
-  </UploadingContentContainer>
+  <Progress inline width={196} />
+  <UploadingText>Uploading...</UploadingText>
 </Uploader>
 ```
 
@@ -125,18 +105,13 @@ const UploadingContentContainer = styled("div")(({ theme }) => ({
 import * as React from "react"
 import { Uploader } from "@operational/components"
 
-const CompletedContentContainer = styled("div")(({ theme }) => ({
+const CompletedText = styled("p")(({ theme }) => ({
   color: theme.color.primary,
   fontWeight: theme.font.weight.bold,
-  textAlign: "center",
-  display: "flex",
-  height: "100%",
-  flexDirection: "column",
-  justifyContent: "center",
 }))
 
 ;<Uploader>
-  <CompletedContentContainer>Completed</CompletedContentContainer>
+  <CompletedText>Completed</CompletedText>
 </Uploader>
 ```
 
@@ -146,14 +121,9 @@ const CompletedContentContainer = styled("div")(({ theme }) => ({
 import * as React from "react"
 import { Uploader } from "@operational/components"
 
-const ErrorContentContainer = styled("div")(({ theme }) => ({
+const ErrorContentContainer = styled("p")(({ theme }) => ({
   color: theme.color.error,
   lineHeight: "22px",
-  textAlign: "center",
-  display: "flex",
-  height: "100%",
-  flexDirection: "column",
-  justifyContent: "center",
   "& span": {
     color: theme.color.primary,
     fontWeight: theme.font.weight.bold,

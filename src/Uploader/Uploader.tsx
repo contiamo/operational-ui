@@ -10,6 +10,11 @@ export interface UploaderProps extends DefaultProps {
 const Container = styled("div")<Pick<UploaderProps, "dragActive">>(({ dragActive, theme }) => ({
   width: 400,
   height: 108,
+  textAlign: "center",
+  alignItems: "center",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
   ...(dragActive
     ? {
         backgroundColor: setAlpha(0.05)(theme.color.primary),
