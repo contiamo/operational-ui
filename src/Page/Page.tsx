@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import Tabs, { Tab, tabsBarHeight } from "../Internals/Tabs"
+import Tabs, { Tab, tabsBarHeight, tabsBarMargin } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps, isChildFunction } from "../PageContent/PageContent"
 import Progress from "../Progress/Progress"
@@ -79,7 +79,7 @@ const TitleContainer = styled("div")(({ theme }) => ({
 }))
 
 const ViewContainer = styled("div")<{ isInTab?: boolean; hasTitle?: boolean }>(({ theme, isInTab, hasTitle }) => {
-  const calculatedTitleOffset = isInTab ? theme.titleHeight + tabsBarHeight : theme.titleHeight
+  const calculatedTitleOffset = isInTab ? theme.titleHeight + tabsBarHeight + tabsBarMargin * 2 : theme.titleHeight
   return {
     height: hasTitle ? `calc(100% - ${calculatedTitleOffset}px)` : "100%",
     overflow: "hidden",

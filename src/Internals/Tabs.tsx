@@ -24,6 +24,7 @@ export interface State {
 }
 
 export const tabsBarHeight = 48
+export const tabsBarMargin = 20
 
 const TabsBar = styled("div")(({ theme }) => ({
   display: "flex",
@@ -31,7 +32,7 @@ const TabsBar = styled("div")(({ theme }) => ({
   height: tabsBarHeight,
   color: "inherit",
   position: "inherit",
-  margin: theme.space.element,
+  margin: tabsBarMargin,
   "&::before": {
     content: "''",
     display: "block",

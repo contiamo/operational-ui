@@ -149,7 +149,7 @@ const TabContent = props => (
       ))}
   </PageContent>
 )
-;<div style={{ height: 200 }}>
+;<div style={{ height: 300 }}>
   <Page
     actions={<Button icon="Open">Go somewhere else</Button>}
     title="Bundle detail"
