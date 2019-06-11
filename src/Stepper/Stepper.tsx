@@ -137,7 +137,6 @@ const Stepper: React.FC<StepperProps> = props => {
     (activeIndex: number) => {
       if (onStepChange) {
         onStepChange(activeIndex)
-        setFocusedTabIndex(activeIndex)
       }
     },
     [onStepChange],
@@ -156,12 +155,20 @@ const Stepper: React.FC<StepperProps> = props => {
     clickHandler(focusedTabIndex)
   })
 
+  // Set actual focus on each render
   const focusedTab = React.useRef<HTMLLIElement>(null)
   React.useEffect(() => {
     if (focusedTab.current) {
       focusedTab.current.focus()
     }
   })
+
+  // Set focus to the current slide if the value has changed
+  React.useEffect(() => {
+    if (activeSlideIndex !== undefined) {
+      setFocusedTabIndex(activeSlideIndex)
+    }
+  }, [activeSlideIndex])
 
   return (
     <div data-cy="operational-ui__Stepper" {...rest}>
