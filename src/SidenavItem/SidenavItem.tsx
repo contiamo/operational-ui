@@ -22,16 +22,19 @@ export interface SidenavItemProps extends DefaultProps {
   compact?: SidenavHeaderProps["compact"]
   /** Should we place this at the bottom of its sidenav? */
   end?: boolean
+  /** Render a dark sidenav item */
+  dark?: boolean
 }
 
-const getIconSize = (compact = false) => (compact ? 30 : 18)
+const getIconSize = (compact = false) => (compact ? 24 : 18)
 
 const BaseSidenavItem = styled<"div" | "a">("div")<{
   compact: SidenavHeaderProps["compact"]
   isActive: SidenavHeaderProps["active"]
   end_: boolean
+  dark?: boolean
   as?: "button" | "a"
-}>(({ theme, compact, isActive, end_ }) => {
+}>(({ theme, compact, isActive, dark, end_ }) => {
   return {
     display: "flex",
     padding: `${compact ? 10 : 0}px ${compact ? 0 : theme.space.content}px`,
@@ -44,11 +47,11 @@ const BaseSidenavItem = styled<"div" | "a">("div")<{
     whiteSpace: "nowrap",
     userSelect: "none",
     fontSize: theme.font.size.body,
-    color: isActive ? theme.color.primary : theme.color.text.lightest,
+    color: isActive ? theme.color.primary : "currentColor",
     fontWeight: theme.font.weight.regular,
-    boxShadow: isActive && compact ? `2px 0 0 inset ${theme.color.primary}` : "none",
     marginTop: end_ ? "auto" : 0,
     alignSelf: end_ ? "flex-end" : "flex-start",
+    backgroundColor: isActive ? theme.color.white : "initial",
 
     // This allows stacking of `end` SidenavItems.
     ...(end_ ? { "& + .operational-ui__sidenav-item_end": { marginTop: 0 } } : {}),
@@ -56,14 +59,11 @@ const BaseSidenavItem = styled<"div" | "a">("div")<{
     // Specificity is piled up here to override default styles
     "a:link&, a:visited&": {
       textDecoration: "none",
-      color: isActive ? theme.color.primary : theme.color.text.lightest,
+      color: isActive ? theme.color.primary : "currentColor",
     },
     "&:hover": {
-      backgroundColor: theme.color.background.lighter,
-      color: isActive ? theme.color.primary : theme.color.text.dark,
-    },
-    "&:last-child": {
-      marginBottom: end_ ? 0 : theme.space.content,
+      backgroundColor: !isActive && dark ? theme.color.black : theme.color.background.lighter,
+      color: isActive ? theme.color.primary : "currentColor",
     },
   }
 })
@@ -91,8 +91,6 @@ const Label = styled("span")<{ compact: SidenavHeaderProps["compact"]; hasIcon: 
           fontSize: 11,
           fontWeight: theme.font.weight.medium,
           lineHeight: 1.18,
-          color: theme.color.text.lighter,
-          textTransform: "uppercase",
           width: "100%",
           wordBreak: "break-all",
           wordWrap: "break-word",

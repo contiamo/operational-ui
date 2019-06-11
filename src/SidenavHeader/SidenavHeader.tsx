@@ -30,17 +30,21 @@ export interface SidenavHeaderProps extends DefaultProps {
   children?: React.ReactNode
   /** Should the header be small? */
   compact?: SidenavProps["compact"]
+  /** Render a dark sidenav header */
+  dark?: boolean
 }
 
-const SidenavHeaderBase = styled<"div" | "a">("div")<{ as?: "div" | "a"; compact: SidenavHeaderProps["compact"] }>(
-  ({ theme, compact }) => ({
-    label: "sidenavheader",
-    textDecoration: "none",
-    width: "100%",
-    borderBottom: compact ? 0 : "1px solid",
-    borderBottomColor: theme.color.separators.default,
-  }),
-)
+const SidenavHeaderBase = styled<"div" | "a">("div")<{
+  as?: "div" | "a"
+  compact: SidenavHeaderProps["compact"]
+  dark?: SidenavHeaderProps["dark"]
+}>(({ theme, compact, dark }) => ({
+  label: "sidenavheader",
+  textDecoration: "none",
+  width: "100%",
+  borderBottom: compact ? 0 : "1px solid",
+  borderBottomColor: dark ? theme.color.black : theme.color.separators.default,
+}))
 
 const Content = styled("div")<{
   onClick: SidenavHeaderProps["onClick"]
@@ -72,7 +76,6 @@ const LabelText = styled("div")<{ isActive: boolean; compact: SidenavHeaderProps
   user-select: none;
   margin: 0;
   ${({ theme }) => `
-    color: ${theme.color.text.dark};
     font-size: ${theme.font.size.body}px;
   `};
 `
@@ -103,21 +106,25 @@ const CloseButton = styled("div")(({ theme, onClick }) => ({
   },
 }))
 
-const Summary = styled("div")<{ isActive: boolean; compact: SidenavHeaderProps["compact"] }>`
+const Summary = styled("div")<{
+  isActive: boolean
+  compact: SidenavHeaderProps["compact"]
+  dark?: SidenavHeaderProps["dark"]
+}>`
   display: block;
   font-weight: normal;
   text-transform: none;
   user-select: none;
   margin-top: 4px;
-  ${({ theme, isActive, compact }) => `
+  ${({ theme, isActive, compact, dark }) => `
     font-size: ${theme.font.size.fineprint}px;
-    color: ${theme.color.text.lightest};
+    color: ${dark ? theme.color.white : theme.color.text.lightest};
     left: ${theme.space.content}px;
     visibility: ${compact || isActive ? "hidden" : "visible"};
   `};
 `
 
-const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, compact, ...props }) => {
+const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, compact, dark, ...props }) => {
   const isActive = Boolean(active) || Boolean(compact)
 
   // The implementation of this component relies on the fact that it only has valid
@@ -137,6 +144,7 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
             {...props}
             as={href ? "a" : undefined}
             compact={compact}
+            dark={dark}
             href={href}
             onClick={(ev: React.SyntheticEvent<Node>) => {
               if (props.onClick) {
@@ -167,7 +175,7 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
                   : props.icon}
               </LabelText>
               {!props.condensed && (
-                <Summary compact={compact} isActive={isActive}>
+                <Summary dark={dark} compact={compact} isActive={isActive}>
                   {truncate(24)(childSidenavItems.map(child => child.props.label).join(", "))}
                 </Summary>
               )}
@@ -199,7 +207,7 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
                   }
 
                   const typedChild = child as React.ReactElement<SidenavItemProps>
-                  return { ...typedChild, props: { ...typedChild.props, compact } }
+                  return { ...typedChild, props: { ...typedChild.props, compact, dark } }
                 })}
               </ItemsContainer>
             )}
