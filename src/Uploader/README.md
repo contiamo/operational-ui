@@ -66,7 +66,7 @@ const MyComponent = () => {
   return (
     <Uploader dragActive={isDragging}>
       {isDragging ? (
-        <>Drop your file here</>
+        "Drop your file here"
       ) : (
         <InitialContentContainer>
           Drop your file here
