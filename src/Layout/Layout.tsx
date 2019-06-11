@@ -49,7 +49,7 @@ const Main = styled("div")<{ hasHeader: boolean }>(({ theme, hasHeader }) => ({
   backgroundColor: theme.color.white,
 }))
 
-const Side = styled(Main)<{ hasHeader: boolean }>({
+const Side = styled(Main)({
   gridColumn: "1",
 })
 
