@@ -31,7 +31,7 @@ const TabsBar = styled("div")(({ theme }) => ({
   height: tabsBarHeight,
   color: "inherit",
   position: "inherit",
-  marginBottom: theme.space.content,
+  margin: theme.space.element,
   "&::before": {
     content: "''",
     display: "block",
