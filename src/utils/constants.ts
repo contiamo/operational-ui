@@ -104,6 +104,8 @@ const borderColors = {
  */
 const color = {
   primary: primaryColor,
+  /** `#292e37` */
+  primaryDark: "#292e37",
   /** `#f5f5f5` */
   disabled: "#f5f5f5",
   /** `#ffbd41` */
