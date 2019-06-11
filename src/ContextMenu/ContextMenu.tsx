@@ -54,7 +54,6 @@ const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: bool
     alignItems: "center",
     justifyContent: align === "left" ? "flex-start" : "flex-end",
     zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
-    ...(tabIndex === undefined && { outline: "none" }),
   }),
 )
 
@@ -125,7 +124,6 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     const { key } = e
 
     switch (key) {
-      case " ":
       case "Enter":
         e.preventDefault() // prevent document scroll.
         e.stopPropagation()
