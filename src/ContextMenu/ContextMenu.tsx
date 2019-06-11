@@ -44,8 +44,8 @@ export interface State {
 const isChildAFunction = (children: ContextMenuProps["children"]): children is (isActive: boolean) => React.ReactNode =>
   typeof children === "function"
 
-const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: boolean; tabIndex?: number }>(
-  ({ isOpen, theme, align, tabIndex }) => ({
+const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: boolean }>(
+  ({ isOpen, theme, align }) => ({
     label: "contextmenu",
     cursor: "pointer",
     position: "relative",
