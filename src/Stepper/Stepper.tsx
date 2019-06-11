@@ -3,7 +3,7 @@ import { OperationalStyleConstants } from "../utils/constants"
 import { useHotkey } from "../useHotkey"
 import styled from "../utils/styled"
 import { YesIcon } from "../Icon/Icon"
-import * as mixins from "../utils/mixins"
+import { inputFocus } from "../utils/mixins"
 
 export interface StepperProps {
   steps: Array<{ title: string; content: React.ReactNode }>
@@ -57,7 +57,7 @@ const Step = styled("li")<{ stepState: StepState; color: StepperProps["stepColor
 
   :focus {
     ${({ theme }) =>
-      mixins.inputFocus({
+      inputFocus({
         theme,
       })}
   }
