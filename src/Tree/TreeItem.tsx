@@ -19,7 +19,7 @@ const Header = styled("div")<{
   background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
   padding: ${({ theme }) => theme.space.base}px;
   border-radius: 2px;
-  padding-left: ${({ theme, level }) => theme.space.content * level}px;
+  padding-left: ${({ theme, level }) => theme.space.element * level}px;
 
   :hover {
     background-color: ${({ theme, highlight }) =>
@@ -66,10 +66,6 @@ interface TreeItemProps {
   onRemove?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
-const PushedNameTag = styled(NameTag)`
-  margin-left: 4px;
-`
-
 const TreeItem: React.SFC<TreeItemProps> = ({
   highlight,
   tag,
@@ -93,15 +89,15 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         color: "color.text.action",
       })}
     {tag && (
-      <PushedNameTag condensed left color={color}>
+      <NameTag condensed left color={color}>
         {tag}
-      </PushedNameTag>
+      </NameTag>
     )}
     {icon &&
       React.createElement(icon, {
         size: 12,
         color: iconColor || "color.text.lighter",
-        style: { marginLeft: 3, marginRight: 8 },
+        style: { marginLeft: 0, marginRight: 8 },
       })}
     <Label hasChildren={hasChildren}>
       <Highlighter
