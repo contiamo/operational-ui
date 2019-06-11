@@ -16,7 +16,6 @@ export interface Props {
   tabs: Tab[]
   activeTabName?: string
   onTabChange?: (newTabName: string) => void
-  condensed?: boolean
   children: (childrenConfig: { tabsBar: React.ReactNode; activeChildren: React.ReactNode }) => React.ReactNode
 }
 
@@ -24,30 +23,46 @@ export interface State {
   activeTab: number
 }
 
-export const tabsBarHeight = 40
+export const tabsBarHeight = 48
 
-const TabsBar = styled("div")<{ condensed?: boolean }>(({ theme, condensed }) => ({
+const TabsBar = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "flex-end",
-  height: condensed ? theme.titleHeight : tabsBarHeight,
+  height: tabsBarHeight,
   color: "inherit",
-  ...(condensed ? { paddingLeft: theme.space.element } : {}),
+  position: "inherit",
+  marginBottom: theme.space.content,
+  "&::before": {
+    content: "''",
+    display: "block",
+    position: "absolute",
+    width: "100%",
+    top: tabsBarHeight - 1,
+    left: 0,
+    borderBottom: `1px solid ${theme.color.border.default}`,
+  },
 }))
 
-const Tab = styled("div")<{ active?: boolean; condensed?: boolean }>(({ theme, active }) => ({
+const Tab = styled("div")<{ active?: boolean }>(({ theme, active }) => ({
   display: "flex",
+  width: 150,
   height: "100%",
   alignItems: "center",
   justifyContent: "center",
-  color: "currentColor",
-  opacity: active ? 1 : 0.8,
-  textTransform: "uppercase",
+  backgroundColor: active ? "inherit" : theme.color.background.lighter,
+  color: active ? theme.color.text.action : "currentColor",
+  zIndex: 2,
+  textTransform: "capitalize",
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.small,
-  fontWeight: theme.font.weight.medium,
+  fontWeight: active ? theme.font.weight.bold : theme.font.weight.regular,
   padding: `0px ${theme.space.element}px`,
-  borderBottom: "2px solid",
-  borderBottomColor: active ? "currentColor" : "transparent",
+  border: `1px solid ${theme.color.border.default}`,
+  borderBottomColor: active ? "white" : "border.default",
+  borderRightWidth: 0,
+  ":last-child": {
+    borderRightWidth: 1,
+  },
   ":hover": {
     cursor: "pointer",
     opacity: 1,
@@ -62,7 +77,7 @@ const getTabIndexByName = (tabs: Tab[], tabName?: string): number => {
   return 0
 }
 
-const Tabs = ({ onTabChange, tabs, activeTabName, condensed, children }: Props) => {
+const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
   const activeTabIndex = getTabIndexByName(tabs, activeTabName)
   const [activeTab, setActiveTab] = useState(activeTabIndex)
   useEffect(() => {
@@ -85,11 +100,11 @@ const Tabs = ({ onTabChange, tabs, activeTabName, condensed, children }: Props) 
     <>
       {children({
         tabsBar: (
-          <TabsBar condensed={condensed}>
+          <TabsBar>
             {tabs
               .filter(({ hidden }) => !hidden)
               .map((tab, index: number) => (
-                <Tab condensed={condensed} key={index} active={activeTab === index} onClick={() => onTabClick(index)}>
+                <Tab key={index} active={activeTab === index} onClick={() => onTabClick(index)}>
                   {tab.loading ? (
                     <Spinner left size={14} />
                   ) : (

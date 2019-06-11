@@ -67,7 +67,7 @@ export type PageProps = PropsWithSimplePage | PropsWithComplexPage | PropsWithTa
 const Container = styled("div")(({ theme }) => ({
   height: "100%",
   position: "relative",
-  backgroundColor: theme.color.background.lighter,
+  backgroundColor: theme.color.white,
 }))
 
 const TitleContainer = styled("div")(({ theme }) => ({
