@@ -4,12 +4,39 @@ Top bars are used as lower-level navigation elements for widgets inside applicat
 
 ```jsx
 import * as React from "react"
-import { Topbar, TopbarSelect, TopbarButton, NoIcon, UndoIcon, RedoIcon } from "@operational/components"
+import {
+  Topbar,
+  TopbarSelect,
+  TopbarButton,
+  TopbarSeparator,
+  styles,
+  NoIcon,
+  UndoIcon,
+  RedoIcon,
+  SaveIcon,
+  PlayIcon,
+} from "@operational/components"
+
+const Label = styled("div")`
+  padding: 0 8px 0 16px;
+  font-weight: bold;
+`
+
+const Grid = styled("div")`
+  grid-template-columns: auto auto;
+  display: grid;
+  grid-gap: 20px;
+  padding-right: 20px;
+`
+
 ;<Topbar
   left={
     <>
+      <Label>Editor</Label>
+      <TopbarSeparator />
       <TopbarSelect label="Fruit" selected={"apples"} items={["apples", "oranges"].map(name => ({ label: name }))} />
       <TopbarButton icon={NoIcon}>Clear</TopbarButton>
+      <TopbarSeparator />
       <TopbarButton icon={UndoIcon}>Undo</TopbarButton>
       <TopbarButton icon={RedoIcon} disabled>
         Redo
@@ -17,9 +44,14 @@ import { Topbar, TopbarSelect, TopbarButton, NoIcon, UndoIcon, RedoIcon } from "
     </>
   }
   right={
-    <>
-      <TopbarButton icon="Share">Share</TopbarButton>
-    </>
+    <Grid>
+      <TopbarButton flavor="outline" icon={SaveIcon}>
+        Save as …
+      </TopbarButton>
+      <TopbarButton flavor="filled" icon={PlayIcon}>
+        View results
+      </TopbarButton>
+    </Grid>
   }
 />
 ```

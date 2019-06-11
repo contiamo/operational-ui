@@ -44,17 +44,18 @@ export interface State {
 const isChildAFunction = (children: ContextMenuProps["children"]): children is (isActive: boolean) => React.ReactNode =>
   typeof children === "function"
 
-const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: boolean }>(({ isOpen, theme, align }) => ({
-  label: "contextmenu",
-  cursor: "pointer",
-  position: "relative",
-  width: "fit-content",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: align === "left" ? "flex-start" : "flex-end",
-  zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
-  outline: "none",
-}))
+const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: boolean }>(
+  ({ isOpen, theme, align }) => ({
+    label: "contextmenu",
+    cursor: "pointer",
+    position: "relative",
+    width: "fit-content",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: align === "left" ? "flex-start" : "flex-end",
+    zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
+  }),
+)
 
 const rowHeight = 40
 
