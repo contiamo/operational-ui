@@ -19,7 +19,6 @@ interface BaseTree {
   onRemove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   forwardRef?: (element?: HTMLElement | null) => any
 }
-
 interface TreeWithChildren extends BaseTree {
   childNodes?: Tree[]
   draggableProps?: never
@@ -39,19 +38,14 @@ export interface TreeProps {
   searchWords?: string[]
   droppableProps?: Omit<DroppableProps, "children">
   placeholder?: React.ComponentType<DroppableStateSnapshot>
-  _hasParentTag?: boolean // internal props to deal with the extra offset (tag)
-  _isChild?: boolean
+  _level?: number
 }
 
-const Container = styled("div")<{ isChild: boolean; _hasParentTag: boolean }>`
+const Container = styled("div")`
   user-select: none;
-  & {
-    margin-left: ${({ _hasParentTag, theme, isChild }) =>
-      isChild === false ? 0 : _hasParentTag ? 42 : theme.space.content}px;
-  }
 `
 
-const Tree: React.SFC<TreeProps> = ({ _isChild, trees, droppableProps, placeholder, searchWords, _hasParentTag }) => {
+const Tree: React.SFC<TreeProps> = ({ _level = 0, trees, droppableProps, placeholder, searchWords }) => {
   const isLowestLevel = trees.length === 0 || trees.some(tree => !tree.childNodes || !tree.childNodes.length)
 
   /**
@@ -60,9 +54,9 @@ const Tree: React.SFC<TreeProps> = ({ _isChild, trees, droppableProps, placehold
    */
   if (!isLowestLevel || !droppableProps) {
     return (
-      <Container isChild={Boolean(_isChild)} _hasParentTag={Boolean(_hasParentTag)}>
+      <Container>
         {trees.map((treeData, index) => (
-          <ChildTree key={index} {...treeData} searchWords={searchWords} />
+          <ChildTree level={_level} key={index} {...treeData} searchWords={searchWords} />
         ))}
       </Container>
     )
@@ -71,12 +65,7 @@ const Tree: React.SFC<TreeProps> = ({ _isChild, trees, droppableProps, placehold
   return (
     <Droppable {...droppableProps}>
       {(droppableProvided, droppableSnapshot) => (
-        <Container
-          isChild={Boolean(_isChild)}
-          ref={droppableProvided.innerRef}
-          {...droppableProvided.droppableProps}
-          _hasParentTag={Boolean(_hasParentTag)}
-        >
+        <Container ref={droppableProvided.innerRef} {...droppableProvided.droppableProps}>
           {trees.length ? (
             <>
               {trees.map((treeData, index) => (
@@ -84,6 +73,7 @@ const Tree: React.SFC<TreeProps> = ({ _isChild, trees, droppableProps, placehold
                   {draggableProvided => {
                     return (
                       <ChildTree
+                        level={_level}
                         forwardRef={draggableProvided.innerRef}
                         searchWords={searchWords}
                         {...treeData}

@@ -6,17 +6,11 @@ import { PlusIcon, NoIcon, MinusIcon, IconComponentType } from "../Icon/Icon"
 import Highlighter from "react-highlight-words"
 import constants from "../utils/constants"
 
-export const Container = styled("div")<{ hasChildren: boolean; disabled: boolean }>`
-  opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
-  pointer-events: ${({ disabled }) => (disabled ? "none" : "inherit")};
-  user-select: none;
-  margin-bottom: -${({ theme }) => theme.space.base}px;
-`
-
 const Header = styled("div")<{
   highlight: boolean
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   cursor?: string
+  level: number
 }>`
   label: TreeItem;
   display: flex;
@@ -25,6 +19,7 @@ const Header = styled("div")<{
   background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
   padding: ${({ theme }) => theme.space.base}px;
   border-radius: 2px;
+  padding-left: ${({ theme, level }) => theme.space.content * level}px;
 
   :hover {
     background-color: ${({ theme, highlight }) =>
@@ -56,6 +51,7 @@ const DeleteNode = styled("div")`
 `
 
 interface TreeItemProps {
+  level: number
   highlight: boolean
   searchWords?: string[]
   hasChildren: boolean
@@ -70,6 +66,10 @@ interface TreeItemProps {
   onRemove?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
+const PushedNameTag = styled(NameTag)`
+  margin-left: 4px;
+`
+
 const TreeItem: React.SFC<TreeItemProps> = ({
   highlight,
   tag,
@@ -81,10 +81,11 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   onRemove,
   hasChildren,
   isOpen,
+  level,
   cursor,
   searchWords = [],
 }) => (
-  <Header onClick={onNodeClick} highlight={Boolean(highlight)} cursor={cursor}>
+  <Header level={level} onClick={onNodeClick} highlight={Boolean(highlight)} cursor={cursor}>
     {hasChildren &&
       React.createElement(isOpen ? MinusIcon : PlusIcon, {
         size: 11,
@@ -92,9 +93,9 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         color: "color.text.action",
       })}
     {tag && (
-      <NameTag condensed left color={color} {...{ style: { marginLeft: 2 } }}>
+      <PushedNameTag condensed left color={color}>
         {tag}
-      </NameTag>
+      </PushedNameTag>
     )}
     {icon &&
       React.createElement(icon, {
