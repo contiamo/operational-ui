@@ -87,6 +87,7 @@ import * as React from "react"
 import {
   Sidenav,
   SidenavHeader,
+  SidenavSeparator,
   SidenavItem,
   HomeIcon,
   FunctionIcon,
@@ -101,10 +102,12 @@ import {
     <SidenavHeader label="The Prize">
       <SidenavItem label="Overview" icon={FunctionIcon} />
       <SidenavItem label="Use Cases" icon={DocumentIcon} />
+      <SidenavSeparator />
       <SidenavItem label="Guides" icon={HomeIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow">
       <SidenavItem label="Steak" icon={YesIcon} />
+      <SidenavSeparator />
       <SidenavItem label="Frites" active icon={LockIcon} />
       <SidenavItem label="Rum" icon={NoIcon} />
     </SidenavHeader>
@@ -116,10 +119,12 @@ import {
     <SidenavHeader label="The Prize">
       <SidenavItem label="Overview" icon={FunctionIcon} />
       <SidenavItem label="Use Cases" icon={DocumentIcon} />
+      <SidenavSeparator />
       <SidenavItem label="Guides" icon={HomeIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow">
       <SidenavItem label="Steak" icon={YesIcon} />
+      <SidenavSeparator />
       <SidenavItem label="Frites" active icon={LockIcon} />
       <SidenavItem label="Rum" icon={NoIcon} />
     </SidenavHeader>
