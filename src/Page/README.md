@@ -649,7 +649,12 @@ const ControlledModalTest = () => {
   ) : (
     <MyPage>
       <PageContent>
-        <ControlledModal fullSize title={"Add Table"}>
+        <ControlledModal
+          closeOnOverlayClick
+          onClose={() => setControlledModalRunning(false)}
+          fullSize
+          title={"Add Table"}
+        >
           <ControlledModalContent fullSize>
             <Stepper
               activeSlideIndex={activeSlideIndex}
