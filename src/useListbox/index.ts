@@ -20,7 +20,7 @@ import { useRef, useState, useEffect, useCallback } from "react"
  * parts involving state and multiselect capabilities.
  */
 export const useListbox = (numberOfOptions: number) => {
-  const containerRef = useRef<HTMLElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen] = useState(false)
   const [focusedOptionIndex, setFocusedOptionIndex] = useState()
 
@@ -160,5 +160,5 @@ export const useListbox = (numberOfOptions: number) => {
       tabIndex: getChildTabIndex(childItemIndex),
       role: "option",
     }),
-  ]
+  ] as const
 }
