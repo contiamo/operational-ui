@@ -5,6 +5,7 @@ import styled from "../utils/styled"
 import { useUniqueId } from "../useUniqueId"
 import noop from "lodash/noop"
 import { NoIcon, PlusIcon, ChevronLeftIcon, ChevronRightIcon } from "../Icon/Icon"
+import { ScrollButton } from "./ScrollButton"
 
 export interface Tab {
   title: string
@@ -37,6 +38,7 @@ const TabList = styled("div")`
   overflow-x: hidden;
   max-width: calc(100% - 110px);
   scroll-behavior: smooth;
+  border-left: solid 1px ${({ theme }) => theme.color.separators.default};
 `
 
 TabList.defaultProps = {
@@ -47,12 +49,17 @@ const TabScroll = styled("div")`
   display: flex;
 `
 
-const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boolean; addButton?: boolean }>`
+const TabHeader = styled(SectionHeader)<{
+  first: boolean
+  "aria-selected": boolean
+  addButton?: boolean
+  as?: React.FC<any> | string
+}>`
   cursor: pointer;
   font-weight: normal;
   background-color: ${({ theme }) => theme.color.background.light};
   border: solid 1px ${({ theme }) => theme.color.separators.default};
-  ${({ first }) => (first ? "" : "border-left: none;")}
+  border-left: none;
   ${props =>
     props["aria-selected"]
       ? `border-bottom: 1px solid ${props.theme.color.background.lighter}; 
@@ -72,7 +79,6 @@ const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boole
 
 TabHeader.defaultProps = {
   role: "tab",
-  // @ts-ignore styled components TS definitions doesn't like `as` prop, but it works just fine
   as: "button",
 }
 
@@ -120,6 +126,7 @@ const ScrollButtons = styled("div")`
   right: 0;
   width: 110px;
   display: flex;
+  border-left: solid 1px ${({ theme }) => theme.color.separators.default};
 `
 
 const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }: TabsProps) => {
@@ -266,17 +273,31 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
                 onInsert(tabs.length - 1)
               }}
             >
-              <PlusIcon size={14} onMouseDown={noop} />
+              <PlusIcon size={14} onClick={noop} />
             </TabHeader>
           )}
         </TabScroll>
       </TabList>
       <ScrollButtons>
-        <TabHeader tabIndex={-1} first={true} aria-selected={false} addButton={true} onMouseDown={scrollLeft}>
-          <ChevronLeftIcon size={14} onMouseDown={noop} />
+        <TabHeader
+          as={ScrollButton}
+          tabIndex={-1}
+          first={true}
+          aria-selected={false}
+          addButton={true}
+          onClick={scrollLeft}
+        >
+          <ChevronLeftIcon size={14} onClick={noop} />
         </TabHeader>
-        <TabHeader tabIndex={-1} first={false} aria-selected={false} addButton={true} onMouseDown={scrollRight}>
-          <ChevronRightIcon size={14} onMouseDown={noop} />
+        <TabHeader
+          as={ScrollButton}
+          tabIndex={-1}
+          first={false}
+          aria-selected={false}
+          addButton={true}
+          onClick={scrollRight}
+        >
+          <ChevronRightIcon size={14} onClick={noop} />
         </TabHeader>
       </ScrollButtons>
       <TabContainer>
