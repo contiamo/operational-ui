@@ -29,41 +29,40 @@ const TabsBar = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "flex-end",
   height: tabsBarHeight,
-  color: "inherit",
-  position: "inherit",
+  position: "relative",
   margin: `0 ${theme.space.element}px`,
   "&::before": {
     content: "''",
     display: "block",
     position: "absolute",
     width: "100%",
+    height: 0,
     top: tabsBarHeight - 1,
     left: 0,
-    borderBottom: `1px solid ${theme.color.border.default}`,
+    borderBottom: `1px solid ${theme.color.border.select}`,
   },
 }))
 
 const Tab = styled("div")<{ active?: boolean }>(({ theme, active }) => ({
-  display: "flex",
   width: 150,
   height: "100%",
-  backgroundColor: active ? "inherit" : theme.color.background.lighter,
-  color: active ? theme.color.text.action : "currentColor",
-  zIndex: 2,
-  textTransform: "capitalize",
+  display: "flex",
+  alignItems: "center",
+  backgroundColor: active ? theme.color.white : theme.color.background.lighter,
+  color: active ? theme.color.text.action : theme.color.text.dark,
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.small,
   fontWeight: active ? theme.font.weight.bold : theme.font.weight.regular,
   padding: `0px ${theme.space.element}px`,
-  border: `1px solid ${theme.color.border.default}`,
-  borderBottomColor: active ? "white" : "border.default",
+  border: `1px solid ${theme.color.border.select}`,
+  zIndex: 2,
+  borderBottomColor: active ? theme.color.white : theme.color.border.select,
   borderRightWidth: 0,
   ":last-child": {
     borderRightWidth: 1,
   },
   ":hover": {
     cursor: "pointer",
-    opacity: 1,
   },
 }))
 
@@ -116,7 +115,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
                   ) : (
                     tab.icon && React.createElement(tab.icon, { size: 14, color: tab.iconColor, left: true })
                   )}
-                  {<TabName>{tab.name}</TabName>}
+                  <TabName>{tab.name}</TabName>
                 </Tab>
               ))}
           </TabsBar>
