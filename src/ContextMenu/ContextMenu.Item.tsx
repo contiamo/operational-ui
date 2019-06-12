@@ -10,7 +10,7 @@ type StringOrItem = string | IContextMenuItem
 export interface Props {
   condensed?: boolean
   width?: string | number
-  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
+  onClick?: (e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>) => void
   align?: "left" | "right"
   iconLocation?: "left" | "right"
   item: StringOrItem
@@ -102,9 +102,12 @@ const ContentContainer = styled("div")`
   width: calc(100% - ${({ theme }) => theme.space.content}px);
 `
 
-const ContextMenuIconBase = styled("div")<{ iconlocation_: Props["iconLocation"] }>`
-  flex: 0 0 auto;
-  margin-left: ${({ iconlocation_ }) => (iconlocation_ && iconlocation_ === "right" ? "auto" : 0)};
+const ContextMenuIconBase = styled("div", { shouldForwardProp: prop => prop !== "iconLocation" })<{
+  iconLocation: Props["iconLocation"]
+}>`
+  flex: 0 1 auto;
+  height: 100%;
+  margin-left: ${({ iconLocation }) => (iconLocation && iconLocation === "right" ? "auto" : 0)};
 `
 
 const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
@@ -125,36 +128,44 @@ const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
   )
 }
 
-const ContextMenuItemIcon: React.SFC<Pick<Props, "item" | "iconLocation">> = props => {
+const ContextMenuItemIcon: React.SFC<Pick<Props, "item" | "iconLocation">> = ({ iconLocation, item }) => {
   // If item is just a string,
-  if (typeof props.item === "string") {
+  if (typeof item === "string") {
     return <></>
   }
 
   // If it's an object with an icon property
-  if (typeof props.item.icon === "function") {
-    const ContextMenuIcon = ContextMenuIconBase.withComponent(props.item.icon)
+  if (typeof item.icon === "function") {
     return (
-      <ContextMenuIcon
-        iconlocation_={props.iconLocation}
-        color={props.item.iconColor}
-        left={props.iconLocation === "left" || !props.iconLocation}
-      />
+      <ContextMenuIconBase iconLocation={iconLocation}>
+        {React.createElement(item.icon, {
+          left: iconLocation === "left" || !iconLocation,
+        })}
+      </ContextMenuIconBase>
     )
   }
 
   // If it's an object with a React Element as a property
-  return <>{props.item.icon}</>
+  return <>{item.icon}</>
 }
 
-const ContextMenuItem: React.SFC<Props> = props => {
+const ContextMenuItem: React.SFC<Props> = ({ iconLocation, item, onClick, condensed, ...props }) => {
   return (
-    <Container role="option" {...props} condensed={props.condensed}>
-      {(!props.iconLocation || props.iconLocation === "left") && (
-        <ContextMenuItemIcon iconLocation={props.iconLocation} item={props.item} />
-      )}
-      <Content value={props.item} />
-      {props.iconLocation === "right" && <ContextMenuItemIcon iconLocation={props.iconLocation} item={props.item} />}
+    <Container
+      {...props}
+      onKeyDown={e => {
+        e.preventDefault()
+        if (e.key === " " && onClick) {
+          onClick(e)
+        }
+      }}
+      onClick={onClick}
+      condensed={condensed}
+      item={item}
+    >
+      {(!iconLocation || iconLocation === "left") && <ContextMenuItemIcon iconLocation={iconLocation} item={item} />}
+      <Content value={item} />
+      {iconLocation === "right" && <ContextMenuItemIcon iconLocation={iconLocation} item={item} />}
     </Container>
   )
 }
