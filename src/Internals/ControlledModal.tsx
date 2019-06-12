@@ -36,9 +36,14 @@ const fromTop = (fullSize: boolean) => {
 
 export const ModalContainer = styled(Card)<{ fullSize: boolean; type?: ControlledModalProps["type"] }>(
   ({ theme, fullSize, type }) => ({
+    label: "ModalContainer",
     top: theme.space.element,
     left: fullSize ? theme.space.element : "50%",
-    height: fullSize ? "100%" : "fit-content",
+    // minHeight: "400px",
+    // height: "fit-content",
+    maxHeight: `calc(100% - ${theme.space.element * 3}px)`,
+    overflow: "hidden",
+
     animation: `${fromTop(Boolean(fullSize))} 0.2s`,
     position: "absolute",
     minWidth: 600,
@@ -52,28 +57,40 @@ export const ModalContainer = styled(Card)<{ fullSize: boolean; type?: Controlle
           width: 1110,
           display: "grid",
           gridTemplateRows: "40px 100%",
-          maxHeight: `calc(100% - ${theme.space.element * 3}px)`,
+          // minHeight: "400px",
+          // minHeight: "400px",
+          // height: "fit-content",
+          // maxHeight: `calc(100% - ${theme.space.element * 3}px)`,
         }
       : // Regular size rules
         {
           transform: "translate(-50%, 0)",
+          // height: "fit-content",
         }),
   }),
 )
 
 const Content = styled("div")<{ fullSize: boolean }>(({ theme, fullSize }) => ({
+  label: "Content",
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
 
   // Invert control of spacing from Card to Modal
   margin: theme.space.element * -1,
+  //
+  //
+  // marginTop: theme.space.element * -1,
+  // marginLeft: theme.space.element * -1,
+  // marginRight: theme.space.element * -1,
   padding: theme.space.element,
 
   // Ensure scrollability if content is too long
   ...(fullSize
     ? {
-        height: "100%",
+        minHeight: "400px",
+        // maxHeight: `calc(100% - ${theme.space.element * 2}px)`,
+        maxHeight: "100%",
         overflow: "auto",
       }
     : {}),
