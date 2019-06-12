@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import Tabs, { Tab, tabsBarHeight, tabsBarMargin } from "../Internals/Tabs"
+import Tabs, { Tab } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps, isChildFunction } from "../PageContent/PageContent"
 import Progress from "../Progress/Progress"
@@ -67,6 +67,8 @@ export type PageProps = PropsWithSimplePage | PropsWithComplexPage | PropsWithTa
 const Container = styled("div")(({ theme }) => ({
   height: "100%",
   position: "relative",
+  display: "grid",
+  gridRowGap: theme.space.element,
   backgroundColor: theme.color.white,
 }))
 
@@ -78,14 +80,10 @@ const TitleContainer = styled("div")(({ theme }) => ({
   fontWeight: theme.font.weight.medium,
 }))
 
-const ViewContainer = styled("div")<{ isInTab?: boolean; hasTitle?: boolean }>(({ theme, isInTab, hasTitle }) => {
-  const calculatedTitleOffset = isInTab ? theme.titleHeight + tabsBarHeight + tabsBarMargin * 2 : theme.titleHeight
-  return {
-    height: hasTitle ? `calc(100% - ${calculatedTitleOffset}px)` : "100%",
-    overflow: "hidden",
-    position: "relative",
-  }
-})
+const ViewContainer = styled("div")`
+  overflow: hidden;
+  position: relative;
+`
 
 const ActionsContainer = styled("div")`
   display: flex;
@@ -129,9 +127,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
             ) : (
               tabsBar
             )}
-            <ViewContainer isInTab hasTitle>
-              {activeChildren}
-            </ViewContainer>
+            <ViewContainer>{activeChildren}</ViewContainer>
           </>
         )}
       </Tabs>
@@ -149,7 +145,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
             <ActionsContainer>{actions}</ActionsContainer>
           </TitleContainer>
         )}
-        <ViewContainer hasTitle={Boolean(title)}>
+        <ViewContainer>
           <PageContent noPadding={Boolean(noPadding)} areas={areas} fill={fill}>
             {modalConfirmContext => {
               const resolvedChildren = isChildFunction(children) ? children(modalConfirmContext) : children
