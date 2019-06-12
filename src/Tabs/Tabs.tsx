@@ -4,7 +4,7 @@ import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 import { useUniqueId } from "../useUniqueId"
 import noop from "lodash/noop"
-import { NoIcon, AddIcon } from "../Icon/Icon"
+import { NoIcon, PlusIcon, ChevronLeftIcon, ChevronRightIcon } from "../Icon/Icon"
 
 export interface Tab {
   title: string
@@ -34,12 +34,18 @@ const Container = styled("div")`
 const TabList = styled("div")`
   display: flex;
   height: ${({ theme }) => theme.space.element * 2}px;
-  overflow-x: auto;
+  overflow-x: hidden;
+  max-width: calc(100% - 110px);
+  scroll-behavior: smooth;
 `
 
 TabList.defaultProps = {
   role: "tablist",
 }
+
+const TabScroll = styled("div")`
+  display: flex;
+`
 
 const TabHeader = styled(SectionHeader)<{ first: boolean; "aria-selected": boolean; addButton?: boolean }>`
   cursor: pointer;
@@ -107,6 +113,13 @@ const TitleWrapper = styled("span")`
 
 const TabIcon = styled("span")`
   margin-right: ${({ theme }) => theme.space.small}px;
+`
+
+const ScrollButtons = styled("div")`
+  position: absolute;
+  right: 0;
+  width: 110px;
+  display: flex;
 `
 
 const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }: TabsProps) => {
@@ -178,57 +191,94 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
     [active, onActivate, onInsert],
   )
 
+  const tabListRef = React.useRef<HTMLDivElement>(null)
+  const tabScrollRef = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    if (tabListRef.current && tabScrollRef.current) {
+      if (tabListRef.current.getBoundingClientRect().width < tabScrollRef.current.getBoundingClientRect().width) {
+        // console.log("enable scroll")
+      } else {
+        // console.log("disable scroll")
+      }
+    }
+  }, [tabs])
+
+  const scrollLeft = React.useCallback(e => {
+    e.preventDefault()
+    if (tabListRef.current) {
+      tabListRef.current.scrollLeft = tabListRef.current.scrollLeft - 100
+    }
+  }, [])
+
+  const scrollRight = React.useCallback(e => {
+    e.preventDefault()
+    if (tabListRef.current) {
+      tabListRef.current.scrollLeft = tabListRef.current.scrollLeft + 100
+    }
+  }, [])
+
   return (
     <Container data-cy="operational-ui__Tabs" style={style}>
-      <TabList aria-label={label} onKeyDown={onKeyDown}>
-        {tabs.map(({ key, title, icon }, i) => {
-          const onClick = () => {
-            userAction.current = true
-            onActivate(i)
-          }
-          return (
+      <TabList aria-label={label} onKeyDown={onKeyDown} ref={tabListRef}>
+        <TabScroll ref={tabScrollRef}>
+          {tabs.map(({ key, title, icon }, i) => {
+            const onClick = () => {
+              userAction.current = true
+              onActivate(i)
+            }
+            return (
+              <TabHeader
+                tabIndex={i === active ? 0 : -1}
+                first={i === 0}
+                aria-selected={i === active}
+                aria-controls={`TabPanel-${uid}-${key}`}
+                id={`TabHeader-${uid}-${key}`}
+                key={key}
+                onClick={onClick}
+                onFocus={onClick}
+                ref={i === active ? activeTab : undefined}
+              >
+                <TitleIconWrapper>
+                  {icon && <TabIcon>{icon}</TabIcon>}
+                  <TitleWrapper title={title}>{title}</TitleWrapper>
+                </TitleIconWrapper>
+                {onClose && (
+                  <NoIcon
+                    size={9}
+                    onMouseDown={e => {
+                      e.stopPropagation()
+                      onClose(i)
+                    }}
+                  />
+                )}
+              </TabHeader>
+            )
+          })}
+          {onInsert && (
             <TabHeader
-              tabIndex={i === active ? 0 : -1}
-              first={i === 0}
-              aria-selected={i === active}
-              aria-controls={`TabPanel-${uid}-${key}`}
-              id={`TabHeader-${uid}-${key}`}
-              key={key}
-              onClick={onClick}
-              onFocus={onClick}
-              ref={i === active ? activeTab : undefined}
+              tabIndex={-1}
+              first={false}
+              aria-selected={false}
+              addButton={true}
+              onMouseDown={e => {
+                e.preventDefault()
+                onInsert(tabs.length - 1)
+              }}
             >
-              <TitleIconWrapper>
-                {icon && <TabIcon>{icon}</TabIcon>}
-                <TitleWrapper title={title}>{title}</TitleWrapper>
-              </TitleIconWrapper>
-              {onClose && (
-                <NoIcon
-                  size={14}
-                  onMouseDown={e => {
-                    e.stopPropagation()
-                    onClose(i)
-                  }}
-                />
-              )}
+              <PlusIcon size={14} onMouseDown={noop} />
             </TabHeader>
-          )
-        })}
-        {onInsert && (
-          <TabHeader
-            tabIndex={-1}
-            first={false}
-            aria-selected={false}
-            addButton={true}
-            onMouseDown={e => {
-              e.preventDefault()
-              onInsert(tabs.length - 1)
-            }}
-          >
-            <AddIcon size={14} onMouseDown={noop} />
-          </TabHeader>
-        )}
+          )}
+        </TabScroll>
       </TabList>
+      <ScrollButtons>
+        <TabHeader tabIndex={-1} first={true} aria-selected={false} addButton={true} onMouseDown={scrollLeft}>
+          <ChevronLeftIcon size={14} onMouseDown={noop} />
+        </TabHeader>
+        <TabHeader tabIndex={-1} first={false} aria-selected={false} addButton={true} onMouseDown={scrollRight}>
+          <ChevronRightIcon size={14} onMouseDown={noop} />
+        </TabHeader>
+      </ScrollButtons>
       <TabContainer>
         {tabs.map(({ key, content }, i) => (
           <TabPanel
