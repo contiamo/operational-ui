@@ -39,12 +39,12 @@ export const ModalContainer = styled(Card)<{ fullSize: boolean; type?: Controlle
     label: "ModalContainer",
     top: theme.space.element,
     left: fullSize ? theme.space.element : "50%",
-    maxHeight: `calc(100% - ${theme.space.element * 3}px)`,
     animation: `${fromTop(Boolean(fullSize))} 0.2s`,
     position: "absolute",
     minWidth: 600,
     zIndex: type === "confirm" ? theme.zIndex.confirm : theme.zIndex.modal,
     maxWidth: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the screen!
+    maxHeight: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the page!
     overflow: "hidden",
 
     ...(fullSize
