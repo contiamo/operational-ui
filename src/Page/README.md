@@ -627,3 +627,200 @@ import { Page, Card, Button } from "@operational/components"
   )}
 </Page>
 ```
+
+## With Controlled Modal
+
+```jsx
+import * as React from "react"
+import ControlledModal from "../Internals/ControlledModal"
+import { Actions, List, Body, SimpleLink, Card, Button, Stepper, ControlledModalContent } from "../index"
+import PageContent from "../PageContent/PageContent"
+
+const MyPage = styled("div")`
+  height: 800px;
+`
+
+const ControlledModalTest = () => {
+  const [isControlledModalRunning, setControlledModalRunning] = React.useState(false)
+  const [activeSlideIndex, setActiveSlideIndex] = React.useState(0)
+
+  return !isControlledModalRunning ? (
+    <Button onClick={() => setControlledModalRunning(true)}>Open Controlled Modal</Button>
+  ) : (
+    <MyPage>
+      <PageContent>
+        <ControlledModal fullSize title={"Add Table"}>
+          <ControlledModalContent fullSize>
+            <Stepper
+              activeSlideIndex={activeSlideIndex}
+              onStepChange={setActiveSlideIndex}
+              steps={[
+                {
+                  title: "Select Your Git Provider",
+                  content: (
+                    <Body>
+                      <List
+                        items={[
+                          {
+                            photo: "https://placehold.it/140x60",
+                            description: "We will ask you to authenticate yourself with OAuth.",
+                            onClick: () => setActiveSlideIndex(1),
+                          },
+                          {
+                            photo: "https://placehold.it/140x60",
+                            description: "We will ask you to authenticate yourself with OAuth.",
+                            onClick: () => alert("You chose the second item!"),
+                          },
+                          {
+                            title: "Manual Setup",
+                            photo: "https://placehold.it/140x60",
+                            description:
+                              "Provide the URL to any accessible git repository and set up the required keys for access.",
+                            onClick: () => alert("You chose the third item!"),
+                          },
+                        ]}
+                      />
+                      <Button color="primary" onClick={() => setActiveSlideIndex(1)}>
+                        Go to Step 2
+                      </Button>
+                    </Body>
+                  ),
+                },
+                {
+                  title: "Authenticate",
+                  content: <Body>Welcome to Step 2! </Body>,
+                },
+                {
+                  title: "Select Repositories",
+                  content: (
+                    <>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                      <Card
+                        action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
+                        title="Step 3: anything goes"
+                      >
+                        Any content goes in here and it should just work.
+                      </Card>
+                    </>
+                  ),
+                },
+                {
+                  title: "Import",
+                  content: (
+                    <>
+                      <Body>Well, that was nice, now let's go back.</Body>
+                      <Button color="primary" onClick={() => setActiveSlideIndex(0)}>
+                        Go Back to the First Slide
+                      </Button>
+                    </>
+                  ),
+                },
+              ]}
+            />
+          </ControlledModalContent>
+          <Actions>
+            <Button onClick={() => setControlledModalRunning(false)}>Close</Button>
+          </Actions>
+        </ControlledModal>
+      </PageContent>
+    </MyPage>
+  )
+}
+
+;<ControlledModalTest />
+```
