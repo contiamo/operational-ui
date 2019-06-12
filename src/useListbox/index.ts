@@ -123,21 +123,34 @@ export const useListbox = (numberOfOptions: number) => {
     [isOpen, getNextOptionIndex, numberOfOptions],
   )
 
+  const handleClick = useCallback(
+    e => {
+      const node = containerRef.current
+      if (e.target === node) {
+        setIsOpen(!isOpen)
+      }
+    },
+    [isOpen],
+  )
+
   useEffect(() => {
     const node = containerRef.current
 
     if (node) {
       node.addEventListener("keydown", handleKeyDown)
+      node.addEventListener("click", handleClick)
     }
     return () => {
       if (node) {
         node.removeEventListener("keydown", handleKeyDown)
+        node.removeEventListener("click", handleClick)
       }
     }
   }, [handleKeyDown])
 
   return [
     isOpen,
+    setIsOpen,
     {
       ref: containerRef,
       tabIndex: 0,
