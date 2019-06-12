@@ -123,7 +123,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
         <BaseSidenavItem
           as={to ? "a" : undefined}
           {...props}
-          className={end ? "operational-ui__sidenav-item_end" : ""}
+          className={`${className}${end ? " operational-ui__sidenav-item_end" : ""}`}
           end_={Boolean(end)}
           compact={compact}
           href={to}
