@@ -25,7 +25,7 @@
     "test": "run-p test:*",
     "test:unit": "jest",
     "test:e2e": "cypress run",
-    "preversion": "npm run build",
+    "preversion": "npm run build:package",
     "version": "auto-changelog -u && git add CHANGELOG.md",
     "precommit": "tsc && lint-staged",
     "ci": "npm run build:icons && npm run test:unit"
