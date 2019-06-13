@@ -7,7 +7,7 @@ export const ScrollButton: React.FC<{ onClick: any }> = ({ children, onClick, ..
       type="button"
       onMouseDown={e => {
         onClick(e)
-        isDown.current = setInterval(() => onClick(e), 100) as any
+        isDown.current = setInterval(() => onClick(), 100) as any
       }}
       onMouseUp={() => {
         isDown.current && clearTimeout(isDown.current)

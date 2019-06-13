@@ -33,7 +33,7 @@ const MyComponent = () => {
         </div>
       ),
       key: 1,
-      icon: <OlapIcon size={14} />,
+      icon: <OlapIcon size={12} />,
     },
     {
       title: "tab 3",

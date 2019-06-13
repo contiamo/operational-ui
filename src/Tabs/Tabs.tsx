@@ -3,7 +3,6 @@ import { SectionHeader } from "../Internals/SectionHeader"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 import { useUniqueId } from "../useUniqueId"
-import noop from "lodash/noop"
 import { NoIcon, PlusIcon, ChevronLeftIcon, ChevronRightIcon } from "../Icon/Icon"
 import { ScrollButton } from "./ScrollButton"
 
@@ -70,9 +69,16 @@ const TabHeader = styled(SectionHeader)<{
 
   ${({ addButton }) => (addButton ? "max-width: 55px; min-width: 55px;" : "max-width: 180px;")}
   flex-grow: 1;
+  & svg {
+    pointer-events: none;
+  }
   :focus {
     outline: none;
-    ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
+    box-shadow: ${({ theme }) => theme.shadows.insetFocus};
+  }
+  :disabled {
+    color: ${({ theme }) => theme.color.disabled};
+    cursor: not-allowed;
   }
   z-index: 1;
 `
@@ -115,6 +121,7 @@ const TitleWrapper = styled("span")`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-right: ${({ theme }) => theme.space.small}px;
 `
 
 const TabIcon = styled("span")`
@@ -211,15 +218,15 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
     }
   }, [tabs])
 
-  const scrollLeft = React.useCallback(e => {
-    e.preventDefault()
+  const scrollLeft = React.useCallback(event => {
+    event && event.preventDefault() // so the button won't get focus when clicked
     if (tabListRef.current) {
       tabListRef.current.scrollLeft = tabListRef.current.scrollLeft - 100
     }
   }, [])
 
-  const scrollRight = React.useCallback(e => {
-    e.preventDefault()
+  const scrollRight = React.useCallback(event => {
+    event && event.preventDefault() // so the button won't get focus when clicked
     if (tabListRef.current) {
       tabListRef.current.scrollLeft = tabListRef.current.scrollLeft + 100
     }
@@ -270,10 +277,11 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
               addButton={true}
               onMouseDown={e => {
                 e.preventDefault()
+                userAction.current = true
                 onInsert(tabs.length - 1)
               }}
             >
-              <PlusIcon size={14} onClick={noop} />
+              <PlusIcon size={12} />
             </TabHeader>
           )}
         </TabScroll>
@@ -287,7 +295,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
           addButton={true}
           onClick={scrollLeft}
         >
-          <ChevronLeftIcon size={14} onClick={noop} />
+          <ChevronLeftIcon size={14} />
         </TabHeader>
         <TabHeader
           as={ScrollButton}
@@ -297,7 +305,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
           addButton={true}
           onClick={scrollRight}
         >
-          <ChevronRightIcon size={14} onClick={noop} />
+          <ChevronRightIcon size={14} />
         </TabHeader>
       </ScrollButtons>
       <TabContainer>
