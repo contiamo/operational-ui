@@ -83,7 +83,7 @@ const MenuContainer = styled("div")<{
 /**
  * Overlay to prevent mouse events when the context menu is open
  */
-const InvisibleOverlay = styled("div")(({ theme }) => ({
+export const InvisibleOverlay = styled("div")(({ theme }) => ({
   position: "fixed",
   top: 0,
   bottom: 0,
@@ -133,7 +133,14 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
 
   return (
     <>
-      {isOpen && <InvisibleOverlay onClick={() => setIsOpen(false)} />}
+      {isOpen && (
+        <InvisibleOverlay
+          onClick={e => {
+            e.stopPropagation()
+            setIsOpen(false)
+          }}
+        />
+      )}
       <Container
         {...props}
         {...containerProps}
@@ -141,7 +148,8 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         aria-expanded={isOpen}
         isOpen={isOpen}
         side={align}
-        onClick={() => {
+        onClick={e => {
+          e.stopPropagation()
           if (!disabled) {
             setIsOpen(!isOpen)
           }
@@ -149,7 +157,12 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
       >
         {renderedChildren}
         {isOpen && (
-          <MenuContainer condensed={Boolean(condensed)} numRows={items.length} align={align} embedChildrenInMenu={embedChildrenInMenu}>
+          <MenuContainer
+            condensed={Boolean(condensed)}
+            numRows={items.length}
+            align={align}
+            embedChildrenInMenu={embedChildrenInMenu}
+          >
             {embedChildrenInMenu && renderedChildren}
             {items.map((itemFromProps, index: number) => {
               const item = makeItem(itemFromProps)
