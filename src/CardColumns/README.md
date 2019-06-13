@@ -27,11 +27,11 @@ import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@opera
 ;<div style={{ width: 280 }}>
   <Card title="Bundle information">
     <p>Here is the information available about this bundle.</p>
-    <CardColumns>
-      <CardColumn title="Contributors" fullWidth>
+    <CardColumns columns={1}>
+      <CardColumn title="Contributors">
         <AvatarGroup avatars={[{ name: "Alice Bernoulli" }, { name: "Clarence Dermot" }]} />
       </CardColumn>
-      <CardColumn title="Tags" fullWidth>
+      <CardColumn title="Tags">
         <Chip>agent-view</Chip>
         <Chip>production</Chip>
       </CardColumn>
@@ -48,11 +48,11 @@ import { Card, CardColumns, CardColumn, Chip } from "@operational/components"
 ;<div style={{ width: 280 }}>
   <Card title="Bundle information">
     <p>Here is the information available about this bundle.</p>
-    <CardColumns>
-      <CardColumn title="Contributors" fullWidth>
+    <CardColumns columns={1}>
+      <CardColumn title="Contributors">
         <img src="https://i.imgflip.com/1g4xbh.jpg" />
       </CardColumn>
-      <CardColumn title="Tags" fullWidth>
+      <CardColumn title="Tags">
         <Chip>agent-view</Chip>
         <Chip>production</Chip>
       </CardColumn>
