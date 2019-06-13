@@ -23,7 +23,6 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
   ...props
 }) => {
   const isActive = Boolean(active)
-  const childItemsRef = React.useRef<HTMLDivElement>(null)
   const [isOpen, setIsOpen, parentProps, getChildProps] = useListbox(items ? items.length : 0)
   const ctx = useOperationalContext()
 
@@ -93,7 +92,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
       {compact ? compactLabel || label : label}
       {!compact && items && <Caret isOpen={isOpen} />}
       {items && isOpen && (
-        <Popout ref={childItemsRef}>
+        <Popout>
           {items.map((item, index) => (
             <SidenavItem
               items={item.items}
