@@ -142,6 +142,8 @@ import { PageContent, Card, Page, Button } from "@operational/components"
 
 const TabContent = props => (
   <PageContent areas="side main">
+    <h1>{props.title}</h1>
+    <h1>Column 2</h1>
     {Array(50)
       .fill("Hello, this is page content")
       .map((text, index) => (
@@ -154,9 +156,9 @@ const TabContent = props => (
     actions={<Button icon="Open">Go somewhere else</Button>}
     title="Bundle detail"
     tabs={[
-      { name: "overview", children: <TabContent /> },
-      { name: "jobs", children: <TabContent /> },
-      { name: "functions", children: <TabContent /> },
+      { name: "overview", children: <TabContent title="overview" /> },
+      { name: "jobs", children: <TabContent title="jobs" /> },
+      { name: "functions", children: <TabContent title="functions" /> },
     ]}
     activeTabName={"jobs"}
   />

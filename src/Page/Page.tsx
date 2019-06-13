@@ -127,7 +127,9 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
             ) : (
               tabsBar
             )}
-            <ViewContainer>{activeChildren}</ViewContainer>
+            <ViewContainer role="tabpanel" aria-labelledby={this.props.activeTabName} tabIndex={0}>
+              {activeChildren}
+            </ViewContainer>
           </>
         )}
       </Tabs>

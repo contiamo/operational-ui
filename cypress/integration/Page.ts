@@ -9,7 +9,11 @@ describe("Page", () => {
       .tab()
       .tab()
       .tab()
+
     cy.focused().contains("jobs")
+    cy.get("body")
+      .find("[role=tabpanel]")
+      .contains("jobs")
   })
 
   it("Right arrow key moves focus to the next tab", () => {
@@ -19,11 +23,17 @@ describe("Page", () => {
     cy.wait(50) // we need to wait a bit because focus switch doesn't happen immediately
 
     cy.focused().contains("functions")
+    cy.get("body")
+      .find("[role=tabpanel]")
+      .contains("functions")
 
     cy.focused().type("{rightarrow}")
     cy.wait(50) // we need to wait a bit because focus switch doesn't happen immediately
 
     cy.focused().contains("overview")
+    cy.get("body")
+      .find("[role=tabpanel]")
+      .contains("overview")
   })
 
   it("Left arrow key moves focus to the previous tab", () => {
@@ -33,11 +43,17 @@ describe("Page", () => {
     cy.wait(50) // we need to wait a bit because focus switch doesn't happen immediately
 
     cy.focused().contains("functions")
+    cy.get("body")
+      .find("[role=tabpanel]")
+      .contains("functions")
 
     cy.focused().type("{leftarrow}")
     cy.wait(50) // we need to wait a bit because focus switch doesn't happen immediately
 
     cy.focused().contains("jobs")
+    cy.get("body")
+      .find("[role=tabpanel]")
+      .contains("jobs")
   })
 
   it("Home Key moves focus to the first tab", () => {
@@ -47,6 +63,9 @@ describe("Page", () => {
     cy.wait(50) // we need to wait a bit because focus switch doesn't happen immediately
 
     cy.focused().contains("overview")
+    cy.get("body")
+      .find("[role=tabpanel]")
+      .contains("overview")
   })
 
   it("End key moves focus to the last tab", () => {
@@ -56,5 +75,8 @@ describe("Page", () => {
     cy.wait(50) // we need to wait a bit because focus switch doesn't happen immediately
 
     cy.focused().contains("functions")
+    cy.get("body")
+      .find("[role=tabpanel]")
+      .contains("functions")
   })
 })
