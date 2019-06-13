@@ -16,7 +16,6 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
   compactLabel,
   end,
   className,
-  children,
   items,
   onClick,
   dark,
@@ -30,7 +29,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
     e => {
       e.stopPropagation()
       if (onClick) {
-        onClick()
+        onClick(e)
       }
 
       if (!isModifiedEvent(e) && ctx.pushState && to && !isOutsideLink(to)) {
@@ -42,7 +41,8 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
   )
 
   const handleClickOnNestedItem = React.useCallback(
-    item => () => {
+    item => (e: React.MouseEvent) => {
+      e.preventDefault()
       if (item.onClick) {
         item.onClick(item)
       }
@@ -76,7 +76,6 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
       compact={Boolean(compact)}
       as={Boolean(to) ? "a" : "div"}
       className={`${className || ""}${end ? " operational-ui__sidenav-item_end" : ""}`}
-      end={Boolean(end)}
       onMouseEnter={() => Boolean(items) && setIsOpen(true)}
       onMouseLeave={() => Boolean(items) && setIsOpen(false)}
       hasOnClick={Boolean(onClick)}

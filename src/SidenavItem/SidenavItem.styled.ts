@@ -1,13 +1,10 @@
 import styled from "../utils/styled"
 
-export const compactSidenavItemHeight = 84
-
 export const StyledSidenavItem = styled("div", {
   shouldForwardProp: prop =>
-    !["isDark", "hasIcon", "hasItems", "compact", "hasOnClick", "as", "end", "isActive"].includes(prop),
+    !["isDark", "hasIcon", "hasItems", "compact", "hasOnClick", "as", "isActive"].includes(prop),
 })<{
   as: "a" | "div"
-  end: boolean
   isActive: boolean
   isDark: boolean
   compact: boolean
@@ -20,15 +17,19 @@ export const StyledSidenavItem = styled("div", {
   grid-template-rows: ${({ compact }) => (compact ? "40px min-content" : "auto")};
   text-align: ${({ compact }) => (compact ? "center" : "initial")};
   align-items: center;
-  padding: ${({ theme }) => theme.space.content}px;
+  padding: ${({ compact, theme }) => (compact ? `${theme.space.small}px 0` : `${theme.space.content}px`)};
   font-size: ${({ theme, compact }) => (compact ? theme.font.size.tiny : theme.font.size.body)}px;
-  min-height: ${({ compact }) => (compact ? compactSidenavItemHeight : 48)}px;
+  min-height: min-content;
   width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  word-wrap: break-word;
+  hyphens: auto;
   background: ${({ theme, isActive, isDark }) =>
     isActive ? theme.color.white : isDark ? theme.color.primaryDark : theme.color.white};
   color: ${({ theme, isActive, isDark }) =>
     isActive ? theme.color.primary : isDark ? theme.color.white : theme.color.text.default};
-  margin-top: ${({ end }) => (end ? "auto" : "0px")};
   cursor: ${({ hasOnClick }) => (hasOnClick ? "pointer" : "initial")};
   grid-template-columns: ${({ hasItems, hasIcon, compact }) => {
     if (!compact) {

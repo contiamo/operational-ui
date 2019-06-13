@@ -1,6 +1,5 @@
 import * as React from "react"
 import styled from "../utils/styled"
-import { compactSidenavItemHeight } from "./SidenavItem.styled"
 
 export interface SidenavPopoutProps {
   ref?: React.RefObject<HTMLDivElement>
@@ -51,7 +50,7 @@ export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children }) => {
       const rect = node.getBoundingClientRect()
       setLeft(`${rect.left}px`)
       if (rect.top > window.innerHeight / 2) {
-        setTop(`${rect.top - rect.height + compactSidenavItemHeight}px`)
+        setTop(`${rect.top - (rect.height - (node.parentElement ? node.parentElement.clientHeight : 0))}px`)
         setAlignment("flex-end")
       } else {
         setTop(`${rect.top}px`)

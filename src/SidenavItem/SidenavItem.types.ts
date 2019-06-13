@@ -5,7 +5,7 @@ import { DefaultProps } from "../types"
 
 export interface SidenavItemProps extends DefaultProps, React.BaseHTMLAttributes<HTMLDivElement> {
   /** What should we do on click? */
-  onClick?: () => void
+  onClick?: (e: React.MouseEvent) => void
   /** Navigation property à la react-router <Link/> */
   to?: string
   /** Is it currently active? */
