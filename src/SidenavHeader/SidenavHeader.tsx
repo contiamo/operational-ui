@@ -1,7 +1,7 @@
 import * as React from "react"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { SidenavProps } from "../Sidenav/Sidenav"
-import { SidenavItemProps } from "../SidenavItem/SidenavItem"
+import { SidenavItemProps } from "../SidenavItem/SidenavItem.types"
 import { DefaultProps } from "../types"
 import { isModifiedEvent, isOutsideLink } from "../utils"
 import styled from "../utils/styled"
