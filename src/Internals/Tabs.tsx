@@ -158,7 +158,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
     <>
       {children({
         tabsBar: (
-          <TabsBar role={"tablist"} onKeyDown={onKeyDown}>
+          <TabsBar role="tablist" onKeyDown={onKeyDown}>
             {tabs
               .filter(({ hidden }) => !hidden)
               .map((tab, index: number) => {
@@ -166,7 +166,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
                 return (
                   <SingleTab
                     key={index}
-                    role={"tab"}
+                    role="tab"
                     active={isActive}
                     aria-selected={isActive}
                     tabIndex={isActive ? 0 : -1}
