@@ -10,7 +10,7 @@ export interface FoldableProps {
   }: {
     Toggler: React.ComponentType<TogglerProps>
     isFolded: boolean
-  }) => React.ReactNode
+  }) => React.ReactElement
 }
 
 const Foldable = ({ initialState = "open", children }: FoldableProps) => {
