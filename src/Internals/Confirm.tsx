@@ -69,7 +69,7 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
     options: {},
   }
 
-  private openConfirm(options: Partial<ConfirmOptions<T>>) {
+  private openConfirm = (options: Partial<ConfirmOptions<T>>) => {
     this.setState({ options })
   }
 
