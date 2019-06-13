@@ -158,6 +158,7 @@ const TabContent = props => (
       { name: "jobs", children: <TabContent /> },
       { name: "functions", children: <TabContent /> },
     ]}
+    activeTabName={"jobs"}
   />
 </div>
 ```

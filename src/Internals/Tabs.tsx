@@ -135,17 +135,17 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
           break
         case "Home":
           event.preventDefault()
-          newIndex = tabs.length - 1
+          newIndex = 0
           tabElements[newIndex].focus()
-          // Activate last tab
+          // Activate first tab
           onTabClick(newIndex)
           break
         case "End":
           event.preventDefault()
-          newIndex = 0
+          newIndex = tabs.length - 1
           tabElements[newIndex].focus()
-          // Activate first tab
-          onTabClick(0)
+          // Activate last tab
+          onTabClick(newIndex)
           break
       }
     },
