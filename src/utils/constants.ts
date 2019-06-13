@@ -168,6 +168,9 @@ const font = {
 
     /** 11px */
     tiny: 11,
+
+    /** 10px */
+    tag: 10,
   },
   weight: {
     /** 400 */

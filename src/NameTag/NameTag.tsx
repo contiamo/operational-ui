@@ -41,12 +41,14 @@ const Container = styled("div", {
     ? colorMapper(theme.color.palette)(children)
     : expandColor(theme, color) || theme.color.primary
   const textColor = readableTextColor(backgroundColor, [theme.color.white, theme.color.black])
+
   return {
     backgroundColor,
     color: textColor,
-    fontSize: condensed ? theme.font.size.tiny : theme.font.size.small,
+    fontSize: condensed ? theme.font.size.tag : theme.font.size.small,
     fontWeight: theme.font.weight.bold,
-    width: condensed ? 14 : 28,
+    fontStretch: "condensed",
+    width: condensed ? 16 : 28,
     height: condensed ? 14 : 20,
     borderRadius: theme.borderRadius,
     display: "inline-flex",
