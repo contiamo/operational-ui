@@ -20,10 +20,6 @@ import { useRef, useState, useEffect, useCallback } from "react"
  * parts involving state and multiselect capabilities.
  */
 export const useListbox = (numberOfOptions: number) => {
-  if (numberOfOptions < 1) {
-    return [false, () => {}, {}, () => {}] as const
-  }
-
   const containerRef = useRef<HTMLDivElement>(null)
   const [isOpen, _setIsOpen] = useState(false)
   const [focusedOptionIndex, setFocusedOptionIndex] = useState()
@@ -167,6 +163,10 @@ export const useListbox = (numberOfOptions: number) => {
     },
     [focusedOptionIndex],
   )
+
+  if (numberOfOptions < 1) {
+    return [false, () => {}, {}, () => {}] as const
+  }
 
   return [
     isOpen,
