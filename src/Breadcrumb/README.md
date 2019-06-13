@@ -7,14 +7,14 @@ Using a `to` prop navigates automatically, and render proper anchor tags with hr
 ```jsx
 import * as React from "react"
 import { Breadcrumb } from "@operational/components"
-;<Breadcrumb to="/some-url">Home</Breadcrumb>
+;<Breadcrumb to="/#/Components/Breadcrumbs">Breadcrumbs</Breadcrumb>
 ```
 
 ### Usage with icons
 
 ```jsx
 import { HomeIcon } from "@operational/components"
-;<Breadcrumb to="/some-url" icon={HomeIcon}>
+;<Breadcrumb to="/#" icon={HomeIcon}>
   Home
 </Breadcrumb>
 ```
