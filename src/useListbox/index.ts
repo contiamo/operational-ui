@@ -20,8 +20,12 @@ import { useRef, useState, useEffect, useCallback } from "react"
  * parts involving state and multiselect capabilities.
  */
 export const useListbox = (numberOfOptions: number) => {
+  if (numberOfOptions < 1) {
+    return [false, () => {}, {}, () => {}] as const
+  }
+
   const containerRef = useRef<HTMLDivElement>(null)
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, _setIsOpen] = useState(false)
   const [focusedOptionIndex, setFocusedOptionIndex] = useState()
 
   useEffect(() => {
@@ -71,19 +75,21 @@ export const useListbox = (numberOfOptions: number) => {
       switch (e.key) {
         case "Enter":
           e.preventDefault()
+          e.stopPropagation()
           if (!isOpen) {
-            setIsOpen(true)
+            _setIsOpen(true)
             setFocusedOptionIndex(0)
           } else {
-            setIsOpen(false)
+            _setIsOpen(false)
             setFocusedOptionIndex(null)
           }
           return
 
         case "ArrowDown":
           e.preventDefault()
+          e.stopPropagation()
           if (!isOpen) {
-            setIsOpen(true)
+            _setIsOpen(true)
             setFocusedOptionIndex(0)
             return
           }
@@ -92,8 +98,9 @@ export const useListbox = (numberOfOptions: number) => {
 
         case "ArrowUp":
           e.preventDefault()
+          e.stopPropagation()
           if (!isOpen) {
-            setIsOpen(true)
+            _setIsOpen(true)
             setFocusedOptionIndex(numberOfOptions - 1)
             return
           }
@@ -102,17 +109,20 @@ export const useListbox = (numberOfOptions: number) => {
 
         case "Home":
           e.preventDefault()
+          e.stopPropagation()
           setFocusedOptionIndex(0)
           return
 
         case "End":
           e.preventDefault()
+          e.stopPropagation()
           setFocusedOptionIndex(numberOfOptions - 1)
           return
 
         case "Escape":
           e.preventDefault()
-          setIsOpen(false)
+          e.stopPropagation()
+          _setIsOpen(false)
           setFocusedOptionIndex(null)
           return
 
@@ -127,7 +137,7 @@ export const useListbox = (numberOfOptions: number) => {
     e => {
       const node = containerRef.current
       if (e.target === node) {
-        setIsOpen(!isOpen)
+        _setIsOpen(!isOpen)
       }
     },
     [isOpen],
@@ -147,6 +157,16 @@ export const useListbox = (numberOfOptions: number) => {
       }
     }
   }, [handleKeyDown])
+
+  const setIsOpen = useCallback(
+    (value: boolean) => {
+      _setIsOpen(value)
+      if (value === true && !focusedOptionIndex) {
+        setFocusedOptionIndex(0)
+      }
+    },
+    [focusedOptionIndex],
+  )
 
   return [
     isOpen,
