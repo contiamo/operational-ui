@@ -21,6 +21,8 @@ const Slash = styled("span")(({ theme }) => ({
   color: theme.color.text.lightest,
 }))
 
+const addCaret = (item: React.ReactElement) => React.cloneElement(item, { icon: CaretLeftIcon, iconLeft: true })
+
 /**
  * Intersperse slashes between the children (`<Breadcrumb />` elements)
  * Curried first argument is necessary to give unique auto-incrementing
@@ -35,7 +37,7 @@ const Breadcrumbs: React.SFC<BreadcrumbsProps> = props => {
   const items = React.Children.toArray(props.children)
   return (
     <Container {...props}>
-      {items.length === 1 ? [<CaretLeftIcon size={12} left />, ...items] : intersperseSlashes(0)(items)}
+      {items.length === 1 ? [addCaret(items[0] as React.ReactElement)] : intersperseSlashes(0)(items)}
     </Container>
   )
 }

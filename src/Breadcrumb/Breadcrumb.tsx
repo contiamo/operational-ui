@@ -3,7 +3,6 @@ import { IconComponentType } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { DefaultProps } from "../types"
 import { darken, isModifiedEvent, isOutsideLink } from "../utils"
-import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
 export interface BreadcrumbProps extends DefaultProps {
@@ -12,9 +11,10 @@ export interface BreadcrumbProps extends DefaultProps {
   onClick?: (ev?: React.SyntheticEvent<React.ReactNode>) => void
   children?: React.ReactNode
   icon?: IconComponentType
+  iconLeft?: boolean
 }
 
-const Container = styled("a")(({ theme }: { theme: OperationalStyleConstants }) => ({
+const Container = styled("a")(({ theme }) => ({
   color: theme.color.primary,
   label: "breadcrumb",
   "&:hover": {
@@ -38,8 +38,9 @@ const Breadcrumb: React.SFC<BreadcrumbProps> = ({ to, icon: Icon, onClick, ...pr
           }
         }}
       >
+        {Icon && props.iconLeft && <Icon size={12} left />}
         <span>{props.children}</span>
-        {Icon && <Icon size={12} right />}
+        {Icon && !props.iconLeft && <Icon size={12} right />}
       </Container>
     )}
   </OperationalContext>
