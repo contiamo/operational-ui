@@ -34,10 +34,16 @@ const Container = styled("div")`
 const TabList = styled("div")`
   display: flex;
   height: ${({ theme }) => theme.space.element * 2}px;
-  overflow-x: hidden;
+  overflow-x: auto;
   max-width: calc(100% - 110px);
   scroll-behavior: smooth;
   border-left: solid 1px ${({ theme }) => theme.color.separators.default};
+  overflow-y: hidden;
+  height: ${({ theme }) => theme.space.element * 2 + 20}px;
+  -webkit-overflow-scrolling: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 TabList.defaultProps = {
@@ -51,7 +57,7 @@ const TabScroll = styled("div")`
 const TabHeader = styled(SectionHeader)<{
   first: boolean
   "aria-selected": boolean
-  addButton?: boolean
+  condensed?: boolean
   as?: React.FC<any> | string
 }>`
   cursor: pointer;
@@ -67,10 +73,11 @@ const TabHeader = styled(SectionHeader)<{
          font-weight: bold;`
       : ""}
 
-  ${({ addButton }) => (addButton ? "max-width: 55px; min-width: 55px;" : "max-width: 180px;")}
+  ${({ condensed }) => (condensed ? "max-width: 55px; min-width: 55px;" : "max-width: 180px;")}
   flex-grow: 1;
   & svg {
-    pointer-events: none;
+    ${({ condensed }) => (condensed ? "pointer-events: none;" : "")}
+    cursor: pointer;
   }
   :focus {
     outline: none;
@@ -80,7 +87,7 @@ const TabHeader = styled(SectionHeader)<{
     color: ${({ theme }) => theme.color.disabled};
     cursor: not-allowed;
   }
-  z-index: 1;
+  margin: 0;
 `
 
 TabHeader.defaultProps = {
@@ -130,10 +137,12 @@ const TabIcon = styled("span")`
 
 const ScrollButtons = styled("div")`
   position: absolute;
-  right: 0;
+  right: 1px;
   width: 110px;
   display: flex;
   border-left: solid 1px ${({ theme }) => theme.color.separators.default};
+  border-right: solid 1px ${({ theme }) => theme.color.separators.default};
+  z-index: 1;
 `
 
 const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }: TabsProps) => {
@@ -274,14 +283,14 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
               tabIndex={-1}
               first={false}
               aria-selected={false}
-              addButton={true}
+              condensed={true}
               onMouseDown={e => {
                 e.preventDefault()
                 userAction.current = true
                 onInsert(tabs.length - 1)
               }}
             >
-              <PlusIcon size={12} />
+              <PlusIcon size={12} color="primary" />
             </TabHeader>
           )}
         </TabScroll>
@@ -292,7 +301,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
           tabIndex={-1}
           first={true}
           aria-selected={false}
-          addButton={true}
+          condensed={true}
           onClick={scrollLeft}
         >
           <ChevronLeftIcon size={14} />
@@ -302,7 +311,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
           tabIndex={-1}
           first={false}
           aria-selected={false}
-          addButton={true}
+          condensed={true}
           onClick={scrollRight}
         >
           <ChevronRightIcon size={14} />
