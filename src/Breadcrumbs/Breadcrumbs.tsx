@@ -8,7 +8,7 @@ export interface BreadcrumbsProps extends DefaultProps {
   children?: React.ReactNode
 }
 
-const Container = styled("div")(({ theme }) => ({
+const Container = styled("nav")(({ theme }) => ({
   label: "breadcrumbs",
   color: theme.color.text.action,
   "& > *": {
@@ -36,7 +36,7 @@ const intersperseSlashes = (index: number) => ([head, ...tail]: React.ReactNode[
 const Breadcrumbs: React.SFC<BreadcrumbsProps> = props => {
   const items = React.Children.toArray(props.children)
   return (
-    <Container {...props}>
+    <Container aria-label={"Breadcrumb"} {...props}>
       {items.length === 1 ? [addCaret(items[0] as React.ReactElement)] : intersperseSlashes(0)(items)}
     </Container>
   )
