@@ -21,14 +21,8 @@ import {
 ;<Sidenav compact dark>
   <SidenavHeader condensed icon={HomeIcon} label="Project Home" />
   <SidenavHeader label="The Prize">
-    <SidenavItem onClick={() => alert("Overview")} label="Overview" icon={FunctionIcon} />
-    <SidenavItem to="https://tejaskumar.com/" label="Use Cases" icon={DocumentIcon} />
-    <SidenavItem onClick={() => alert("Guides")} label="Guides" icon={HomeIcon} />
-  </SidenavHeader>
-  <SidenavHeader label="Let It Snow">
     <SidenavItem
-      label="Steak"
-      icon={YesIcon}
+      icon={NoIcon}
       items={[
         { label: <strong>Fabien</strong>, onClick: () => alert("hi i like robots") },
         {
@@ -36,16 +30,40 @@ import {
           label: "Cheese",
           onClick: () => alert("chicken"),
           items: Array.from({ length: 100 }, (_, i) => ({
-            label: "Project " + i + 1,
-            onClick: () => alert("Slava is angry " + i + 1),
+            label: "Project " + (i + 1),
+            onClick: () => alert("Slava is angry " + "😡".repeat(i + 1)),
+          })),
+        },
+        { icon: AdminIcon, label: "Ice", onClick: () => alert("cream") },
+      ]}
+      onClick={() => alert("Overview")}
+      label="Overview"
+      icon={FunctionIcon}
+    />
+    <SidenavItem to="https://tejaskumar.com/" label="Use Cases" icon={DocumentIcon} />
+    <SidenavItem onClick={() => alert("Guides")} label="Guides" icon={HomeIcon} />
+  </SidenavHeader>
+  <SidenavHeader label="Let It Snow">
+    <SidenavItem label="Steak" icon={YesIcon} />
+    <SidenavSeparator />
+    <SidenavItem label="Frites" active icon={LockIcon} />
+    <SidenavItem
+      label="Rum"
+      icon={NoIcon}
+      items={[
+        { label: <strong>Fabien</strong>, onClick: () => alert("hi i like robots") },
+        {
+          icon: ProjectIcon,
+          label: "Cheese",
+          onClick: () => alert("chicken"),
+          items: Array.from({ length: 100 }, (_, i) => ({
+            label: "Project " + (i + 1),
+            onClick: () => alert("Slava is angry " + "😡".repeat(i + 1)),
           })),
         },
         { icon: AdminIcon, label: "Ice", onClick: () => alert("cream") },
       ]}
     />
-    <SidenavSeparator />
-    <SidenavItem label="Frites" active icon={LockIcon} />
-    <SidenavItem label="Rum" icon={NoIcon} />
   </SidenavHeader>
 </Sidenav>
 ```

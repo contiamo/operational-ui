@@ -1,7 +1,10 @@
 import styled from "../utils/styled"
 
+export const compactSidenavItemHeight = 84
+
 export const StyledSidenavItem = styled("div", {
-  shouldForwardProp: prop => !["as", "end", "isActive"].includes(prop),
+  shouldForwardProp: prop =>
+    !["isDark", "hasIcon", "hasItems", "compact", "hasOnClick", "as", "end", "isActive"].includes(prop),
 })<{
   as: "a" | "div"
   end: boolean
@@ -12,13 +15,14 @@ export const StyledSidenavItem = styled("div", {
   hasItems: boolean
   hasOnClick: boolean
 }>`
+  position: relative;
   display: grid;
   grid-template-rows: ${({ compact }) => (compact ? "40px min-content" : "auto")};
   text-align: ${({ compact }) => (compact ? "center" : "initial")};
   align-items: center;
   padding: ${({ theme }) => theme.space.content}px;
   font-size: ${({ theme, compact }) => (compact ? theme.font.size.tiny : theme.font.size.body)}px;
-  min-height: 48px;
+  min-height: ${({ compact }) => (compact ? compactSidenavItemHeight : 48)}px;
   width: 100%;
   background: ${({ theme, isActive, isDark }) =>
     isActive ? theme.color.white : isDark ? theme.color.primaryDark : theme.color.white};
