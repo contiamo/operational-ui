@@ -44,26 +44,26 @@ export interface State {
 const isChildAFunction = (children: ContextMenuProps["children"]): children is (isActive: boolean) => React.ReactNode =>
   typeof children === "function"
 
-const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: boolean }>(
-  ({ isOpen, theme, align }) => ({
-    label: "contextmenu",
-    cursor: "pointer",
-    position: "relative",
-    width: "fit-content",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: align === "left" ? "flex-start" : "flex-end",
-    zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
-  }),
-)
+const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: boolean }>(({ isOpen, theme, align }) => ({
+  label: "contextmenu",
+  cursor: "pointer",
+  position: "relative",
+  width: "fit-content",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: align === "left" ? "flex-start" : "flex-end",
+  zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
+}))
 
 const rowHeight = 40
+const condensedRowHeight = 35
 
 const MenuContainer = styled("div")<{
   embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
   numRows: number
   align: ContextMenuProps["align"]
-}>(({ theme, numRows, align, embedChildrenInMenu }) => ({
+  condensed: boolean
+}>(({ theme, numRows, align, embedChildrenInMenu, condensed }) => ({
   position: "absolute",
   top: embedChildrenInMenu ? 0 : "100%",
   left: align === "left" ? 0 : "auto",
@@ -73,7 +73,7 @@ const MenuContainer = styled("div")<{
   width: "100%",
   minWidth: "fit-content",
   display: "grid",
-  gridTemplateRows: `repeat(${numRows}, ${rowHeight}px)`,
+  gridTemplateRows: `repeat(${numRows}, ${condensed ? condensedRowHeight : rowHeight}px)`,
 }))
 
 /**
@@ -216,7 +216,14 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
     const renderedChildren = isChildAFunction(children) ? children(this.state.isOpen) : children
     return (
       <>
-        {isOpen && <InvisibleOverlay onClick={this.toggle} />}
+        {isOpen && (
+          <InvisibleOverlay
+            onClick={e => {
+              e.stopPropagation()
+              this.toggle()
+            }}
+          />
+        )}
         <Container
           aria-haspopup="listbox"
           {...props}
@@ -227,7 +234,8 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
           aria-expanded={isOpen}
           isOpen={isOpen}
           align={align}
-          onClick={() => {
+          onClick={e => {
+            e.stopPropagation()
             if (!disabled) {
               this.toggle()
             }
@@ -238,6 +246,7 @@ class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
           {renderedChildren}
           {isOpen && (
             <MenuContainer
+              condensed={Boolean(condensed)}
               numRows={items.length}
               align={this.props.align}
               ref={node => (this.menu = node)}
