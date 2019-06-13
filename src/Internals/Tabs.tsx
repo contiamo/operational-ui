@@ -3,6 +3,7 @@ import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
 import { IconComponentType } from "../Icon/Icon"
 import { inputFocus } from "../utils"
+import { useUniqueId } from "../useUniqueId"
 
 export interface Tab {
   name: string
@@ -101,6 +102,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
   const activeTabIndex = getTabIndexByName(tabs, activeTabName)
   const [activeTab, setActiveTab] = useState(activeTabIndex)
   const [isMouseDown, setMouseDown] = useState(false)
+  const uid = useUniqueId()
 
   useEffect(() => {
     setActiveTab(activeTabIndex)
@@ -118,7 +120,9 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
 
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
-      const tabElements: NodeListOf<HTMLElement> = document.querySelectorAll('[role="tab"]')
+      const tabElements: NodeListOf<HTMLElement> = (document.querySelector(
+        `[id=${uid}]`,
+      ) as HTMLElement).querySelectorAll('[role="tab"]')
       let newIndex: number
       switch (event.key) {
         case "ArrowRight":
@@ -152,13 +156,20 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
     [activeTab, onTabClick],
   )
 
+  const onFocus = (e: React.FocusEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    if (isMouseDown) {
+      e.target.blur()
+    }
+  }
+
   // Work around: wrap return in fragment- to prevent type error and not having to change childrens return type
   // https://github.com/Microsoft/TypeScript/issues/21699
   return (
     <>
       {children({
         tabsBar: (
-          <TabsBar role="tablist" onKeyDown={onKeyDown}>
+          <TabsBar role="tablist" id={uid} onKeyDown={onKeyDown}>
             {tabs
               .filter(({ hidden }) => !hidden)
               .map((tab, index: number) => {
@@ -172,11 +183,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
                     tabIndex={isActive ? 0 : -1}
                     onClick={() => onTabClick(index)}
                     onKeyDown={onKeyDown}
-                    onFocus={e => {
-                      if (isMouseDown) {
-                        e.target.blur()
-                      }
-                    }}
+                    onFocus={onFocus}
                     onMouseDown={() => setMouseDown(true)}
                     onMouseUp={() => setMouseDown(false)}
                   >
