@@ -27,7 +27,7 @@ import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@opera
 ;<div style={{ width: 280 }}>
   <Card title="Bundle information">
     <p>Here is the information available about this bundle.</p>
-    <CardColumns>
+    <CardColumns columns={1}>
       <CardColumn title="Contributors">
         <AvatarGroup avatars={[{ name: "Alice Bernoulli" }, { name: "Clarence Dermot" }]} />
       </CardColumn>
@@ -48,7 +48,7 @@ import { Card, CardColumns, CardColumn, Chip } from "@operational/components"
 ;<div style={{ width: 280 }}>
   <Card title="Bundle information">
     <p>Here is the information available about this bundle.</p>
-    <CardColumns>
+    <CardColumns columns={1}>
       <CardColumn title="Contributors">
         <img src="https://i.imgflip.com/1g4xbh.jpg" />
       </CardColumn>
