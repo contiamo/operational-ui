@@ -35,7 +35,10 @@ export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children, ...props
     if (node) {
       const rect = node.getBoundingClientRect()
       setLeft(`${rect.left}px`)
+
+      // If we're in the lower half of the screen
       if (rect.top > window.innerHeight / 2) {
+        // open towards the top
         setTop(`${rect.top - (rect.height - (node.parentElement ? node.parentElement.clientHeight : 0))}px`)
         setAlignment("flex-end")
       } else {
