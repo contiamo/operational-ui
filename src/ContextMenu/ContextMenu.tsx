@@ -145,7 +145,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         {...props}
         {...containerProps}
         aria-disabled={Boolean(disabled)}
-        aria-expanded={isOpen}
         isOpen={isOpen}
         side={align}
         onClick={e => {

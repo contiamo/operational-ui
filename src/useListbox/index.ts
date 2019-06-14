@@ -175,6 +175,7 @@ export const useListbox = (numberOfOptions: number) => {
       ref: containerRef,
       tabIndex: 0,
       role: "listbox",
+      "aria-expanded": isOpen,
     },
     (childItemIndex: number) => ({
       tabIndex: getChildTabIndex(childItemIndex),
