@@ -88,14 +88,13 @@ describe("Sidenav", () => {
       .should("be.visible")
       .should("have.length", 1)
 
+    cy.reload()
     cy.get("body")
       .tab()
       .tab()
       .tab()
       .focused()
       .type("{downarrow}")
-      .focused()
-      .type("{downarrow}{downarrow} ")
 
     // Bottom
     cy.reload()
@@ -111,18 +110,5 @@ describe("Sidenav", () => {
     cy.get('[data-cy="operational-ui__SidenavItemPopover"]')
       .should("be.visible")
       .should("have.length", 1)
-
-    cy.get("body")
-      .tab()
-      .tab()
-      .tab()
-      .tab()
-      .tab()
-      .focused()
-      .type("{downarrow}")
-      .focused()
-      .type("{downarrow}{downarrow} ")
-
-    cy.get('[data-cy="operational-ui__SidenavItemPopover"]').should("have.length", 2)
   })
 })
