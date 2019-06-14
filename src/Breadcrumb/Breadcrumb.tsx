@@ -11,6 +11,7 @@ export interface BreadcrumbProps extends DefaultProps {
   onClick?: (ev?: React.SyntheticEvent<React.ReactNode>) => void
   children?: React.ReactNode
   icon?: IconComponentType
+  /** Optionally moves icon from default position on right, to before the text, including appropriate padding */
   iconLeft?: boolean
 }
 
