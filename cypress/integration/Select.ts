@@ -31,7 +31,7 @@ describe("Select Components", () => {
       .tab()
       .tab()
       .type("{downarrow}{downarrow}{downarrow}{downarrow}{downarrow}{uparrow}{enter}")
-      .wait(100)
+      .wait(300)
     cy.get('[data-cy="basic-select"] input[value="Option 4"]')
   })
   it("should be selectable via keyboard home", () => {
@@ -73,13 +73,11 @@ describe("Select Components", () => {
     cy.get('[data-cy="basic-select-no-labels"] input[value="one"]')
       .type("{downarrow}")
       .focused()
-      .type("{downarrow}")
-      .contains("two")
-      .type("enter")
-    cy.get('[data-cy="basic-select-no-labels"] input[value="two"]')
+      .type("{downarrow}{enter}")
+    cy.get('[data-cy="basic-select-no-labels"] input[value="three"]')
   })
   it("should allow multi-select", () => {
-    cy.visit("/#!/Select/3").wait(1000)
+    cy.visit("/#!/Select/5").wait(1000)
     cy.tab()
       .tab()
       .tab()
@@ -93,7 +91,7 @@ describe("Select Components", () => {
     cy.get('[data-cy="multi-select"] input[value="Option 1, Option 2, Option 3, Option 4"]').type("{esc}")
   })
   it("should filter content", () => {
-    cy.visit("/#!/Select/5").wait(1000)
+    cy.visit("/#!/Select/7").wait(1000)
     cy.tab()
       .tab()
       .tab()
@@ -107,7 +105,7 @@ describe("Select Components", () => {
     cy.get('[data-cy="filterable-select"] input[value="Option 8"]')
   })
   it("should truncate max options", () => {
-    cy.visit("/#!/Select/7").wait(1000)
+    cy.visit("/#!/Select/9").wait(1000)
     cy.tab()
       .tab()
       .tab()
@@ -148,7 +146,7 @@ describe("Select Components", () => {
     cy.get('[data-cy="maxOptions-select"] input[value="Option 8"]')
   })
   it("should support a custom option", () => {
-    cy.visit("/#!/Select/13").wait(1000)
+    cy.visit("/#!/Select/15").wait(1000)
     cy.tab()
       .tab()
       .tab()
@@ -176,12 +174,16 @@ describe("Select Components", () => {
     cy.get('[data-cy="custom-select"] input[value="chickenshola amigo como estas"]')
   })
   it("should not be accessible when disabled", () => {
-    cy.visit("/#!/Select/11").wait(1000)
+    cy.visit("/#!/Select/13").wait(1000)
     cy.tab()
       .tab()
       .tab()
 
     cy.get('[data-cy="operational-ui__ContextMenu-focus-trap"]').should("have.focus")
+
+    cy.get('[data-cy="disabled-select"]').click()
+
+    cy.get("[role='listbox']").should("not.be.visible")
   })
   it("should allow only one open at a time", () => {
     cy.visit("/#!/Select")
