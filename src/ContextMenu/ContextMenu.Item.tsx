@@ -130,7 +130,7 @@ const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
 const ContextMenuItemIcon: React.SFC<Pick<Props, "item" | "iconLocation">> = ({ iconLocation, item }) => {
   // If item is just a string,
   if (typeof item === "string") {
-    return <></>
+    return null
   }
 
   // If it's an object with an icon property
