@@ -1,6 +1,6 @@
 import { DefaultProps } from "../types"
 
-export type Value = number | symbol | string
+export type Value = number | string
 
 export interface IOption {
   label?: string

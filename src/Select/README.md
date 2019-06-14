@@ -53,6 +53,55 @@ ${JSON.stringify(lastChanged, null, 2)}
 ;<MyComponent />
 ```
 
+If options are provided without labels, values are be displayed in the list.
+
+```jsx
+import * as React from "react"
+import { Select, Code } from "@operational/components"
+
+const options = [
+  { value: "one" },
+  { value: "two" },
+  { value: "three" },
+  { value: "four" },
+  { value: "five" },
+  { value: "six" },
+  { value: "seven" },
+  { value: "eight" },
+]
+
+const MyComponent = () => {
+  const [value, setValue] = React.useState("one")
+  const [lastChanged, setLastChanged] = React.useState(null)
+
+  return (
+    <>
+      <Select
+        id="basic-no-labels"
+        label="Without labels"
+        data-cy="basic-select-no-labels"
+        value={value}
+        options={options}
+        onChange={(newValue, lastChanged) => {
+          setValue(newValue)
+          setLastChanged(lastChanged)
+        }}
+      />
+      <Code>
+        {`
+Current value: ${value}
+Last changed option:
+
+${JSON.stringify(lastChanged, null, 2)}
+      `}
+      </Code>
+    </>
+  )
+}
+
+;<MyComponent />
+```
+
 ### Usage as multiselect
 
 Using an array prop in the `value` makes the component work as multiselect. The pop-up stays open so that additional values may be added.

@@ -59,6 +59,15 @@ describe("Select Components", () => {
   it("should be labelled correctly", () => {
     cy.get('[data-cy="basic-select"]').contains("Basic")
   })
+  it("should display values from the options if no labels were provided", () => {
+    cy.get('[data-cy="basic-select-no-labels"] input[value="one"]')
+      .type("{downarrow}")
+      .focused()
+      .type("{downarrow}")
+      .contains("two")
+      .type("enter")
+    cy.get('[data-cy="basic-select-no-labels"] input[value="two"]')
+  })
   it("should allow multi-select", () => {
     cy.get('[data-cy="multi-select"]')
       .type("{enter}")
