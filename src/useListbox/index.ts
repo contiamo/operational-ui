@@ -2,19 +2,6 @@ import { useRef, useState, useEffect, useCallback } from "react"
 import { useUniqueId } from "../useUniqueId"
 
 /**
- * ## Usage:
- *
- * ```jsx
- * const MyComponent = (props) => {
- *  const [isOpen, parentProps, getChildProps] = useListBox(props.listItems.length);
- *  return (
- *      <Select {...parentProps}>
- *          {options.map(option => <Option key={option.id} {...getChildProps(index)} />)}
- *      </Select>
- *  );
- * }
- * ```
- *
  * A low-level hook that implements the WAI-ARIA 1.1 specification for
  * a listbox. This hook only implements a part of the specification,
  * leaving other stateful parts up to the consumer: particularly the

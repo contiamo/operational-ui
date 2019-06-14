@@ -4,7 +4,8 @@
 import { useListbox, Button } from "@operational/components"
 
 const MyComponent = props => {
-  const [isOpen, setIsOpen, parentProps, getChildProps] = useListbox(props.listItems.length)
+  const { isOpen, setIsOpen, parentProps, getChildProps } = useListbox({ itemCount: props.listItems.length })
+
   return (
     <div {...parentProps}>
       <Button onClick={() => setIsOpen(!isOpen)} color="primary">
