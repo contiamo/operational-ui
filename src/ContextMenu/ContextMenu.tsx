@@ -172,7 +172,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         isOpen={isOpen || false}
         side={align}
         onClick={() => {
-          setIsOpen && setIsOpen(!isOpen)
+          !disabled && setIsOpen && setIsOpen(!isOpen)
         }}
         onKeyDown={e => {
           switch (e.key) {
