@@ -25,6 +25,17 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
   const [isOpen, setIsOpen, parentProps, getChildProps] = useListbox(items ? items.length : 0)
   const ctx = useOperationalContext()
 
+  React.useEffect(() => {
+    if (items) {
+      const handleClickOnBodyWhenWeHaveItems = () => {
+        setIsOpen(false)
+      }
+
+      document.addEventListener("click", handleClickOnBodyWhenWeHaveItems)
+      return () => document.removeEventListener("click", handleClickOnBodyWhenWeHaveItems)
+    }
+  }, [items])
+
   const handleClickOnSidenavItem = React.useCallback(
     e => {
       e.stopPropagation()
