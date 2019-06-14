@@ -44,6 +44,7 @@ const TabList = styled("div")`
   ::-webkit-scrollbar {
     display: none;
   }
+  z-index: 1;
 `
 
 TabList.defaultProps = {
@@ -83,6 +84,9 @@ const TabHeader = styled(SectionHeader)<{
     outline: none;
     box-shadow: ${({ theme }) => theme.shadows.insetFocus};
   }
+  ::-moz-focus-inner {
+    border: none;
+  }
   :disabled {
     color: ${({ theme }) => theme.color.disabled};
     cursor: not-allowed;
@@ -103,10 +107,13 @@ const TabContainer = styled("div")`
 `
 
 const TabPanel = styled("div")`
-  padding: ${({ theme }) => theme.space.element}px;
+  z-index: 2;
   :focus {
     outline: none;
     ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
+  }
+  ::-moz-focus-inner {
+    border: none;
   }
   height: 100%;
   overflow: auto;
@@ -280,6 +287,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
           })}
           {onInsert && (
             <TabHeader
+              aria-hidden={true}
               tabIndex={-1}
               first={false}
               aria-selected={false}
@@ -297,6 +305,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
       </TabList>
       <ScrollButtons>
         <TabHeader
+          aria-hidden={true}
           as={ScrollButton}
           tabIndex={-1}
           first={true}
@@ -307,6 +316,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
           <ChevronLeftIcon size={14} />
         </TabHeader>
         <TabHeader
+          aria-hidden={true}
           as={ScrollButton}
           tabIndex={-1}
           first={false}
