@@ -24,13 +24,14 @@ export interface TabsProps extends DefaultProps {
   id?: string
 }
 
-const Container = styled("div")`
+const Container = styled.div`
   label: Tabs;
   display: grid;
   grid-template-rows: ${({ theme }) => `${theme.space.element * 2}px 1fr`};
+  position: relative;
 `
 
-const TabList = styled("div")`
+const TabList = styled.div`
   display: flex;
   height: ${({ theme }) => theme.space.element * 2}px;
   overflow-x: auto;
@@ -51,11 +52,13 @@ TabList.defaultProps = {
   role: "tablist",
 }
 
-const TabScroll = styled("div")`
+const TabScroll = styled.div`
   display: flex;
 `
 
-const TabHeader = styled(SectionHeader)<{
+const TabHeader = styled(SectionHeader, {
+  shouldForwardProp: prop => !(prop === "first" || prop === "aria-selected" || prop === "condensed" || prop === "as" ),
+})<{
   first: boolean
   "aria-selected": boolean
   condensed?: boolean
@@ -100,14 +103,14 @@ TabHeader.defaultProps = {
   as: "button",
 }
 
-const TabContainer = styled("div")`
+const TabContainer = styled.div`
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   margin-top: -1px;
   overflow: hidden;
   background-color: ${({ theme }) => theme.color.background.lighter};
 `
 
-const TabPanel = styled("div")`
+const TabPanel = styled.div`
   z-index: 2;
   :focus {
     outline: none;
@@ -126,24 +129,24 @@ TabPanel.defaultProps = {
 }
 
 // We need this one so that icon and title both would be aligned to the left
-const TitleIconWrapper = styled("div")`
+const TitleIconWrapper = styled.div`
   display: flex;
   max-width: 120px;
 `
 
 // we need this one to show ellipsis if title is to long
-const TitleWrapper = styled("span")`
+const TitleWrapper = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-right: ${({ theme }) => theme.space.small}px;
 `
 
-const TabIcon = styled("span")`
+const TabIcon = styled.span`
   margin-right: ${({ theme }) => theme.space.small}px;
 `
 
-const ScrollButtons = styled("div")`
+const ScrollButtons = styled.div`
   position: absolute;
   right: 1px;
   width: ${buttonWidth * 2}px;
