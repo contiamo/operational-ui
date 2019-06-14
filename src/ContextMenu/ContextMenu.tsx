@@ -185,7 +185,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
           }
         }}
       >
-        <div style={{ width: "100%" }} {...buttonProps}>
+        <div style={{ outline: "none", width: "100%" }} {...buttonProps}>
           {renderedChildren}
         </div>
         <MenuContainer
