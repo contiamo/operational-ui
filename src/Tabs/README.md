@@ -48,8 +48,7 @@ const MyComponent = () => {
             <div>
               <p>Lorem ipsum {tabs.length + 1}</p>
             </div>
-          ),
-          key: Math.random(),
+          )
         },
       ]
       setTabs(newTabs)

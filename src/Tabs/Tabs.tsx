@@ -6,6 +6,8 @@ import { useUniqueId } from "../useUniqueId"
 import { NoIcon, PlusIcon, ChevronLeftIcon, ChevronRightIcon } from "../Icon/Icon"
 import { ScrollButton } from "./ScrollButton"
 
+const buttonWidth = 55
+
 export interface Tab {
   title: string
   icon?: React.ReactNode
@@ -32,10 +34,11 @@ const TabList = styled("div")`
   display: flex;
   height: ${({ theme }) => theme.space.element * 2}px;
   overflow-x: auto;
-  max-width: calc(100% - 110px);
+  max-width: calc(100% - ${buttonWidth * 2}px);
   scroll-behavior: smooth;
   border-left: solid 1px ${({ theme }) => theme.color.separators.default};
   overflow-y: hidden;
+  /* magic number to hide scroll bar underneath tabpanel */
   height: ${({ theme }) => theme.space.element * 2 + 20}px;
   -webkit-overflow-scrolling: auto;
   ::-webkit-scrollbar {
@@ -71,7 +74,8 @@ const TabHeader = styled(SectionHeader)<{
          font-weight: bold;`
       : ""}
 
-  ${({ condensed }) => (condensed ? "max-width: 55px; min-width: 55px;" : "max-width: 180px;")}
+  ${({ condensed }) =>
+    condensed ? `max-width: ${buttonWidth}px; min-width: ${buttonWidth}px;` : "max-width: 180px;"}
   flex-grow: 1;
   & svg {
     ${({ condensed }) => (condensed ? "pointer-events: none;" : "")}
@@ -142,14 +146,14 @@ const TabIcon = styled("span")`
 const ScrollButtons = styled("div")`
   position: absolute;
   right: 1px;
-  width: 110px;
+  width: ${buttonWidth * 2}px;
   display: flex;
   border-left: solid 1px ${({ theme }) => theme.color.separators.default};
   border-right: solid 1px ${({ theme }) => theme.color.separators.default};
   z-index: 1;
 `
 
-const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id, children }: TabsProps) => {
+const Tabs: React.FC<TabsProps> = ({ tabs, active, onClose, onActivate, onInsert, label, style, id, children }) => {
   if (!Number.isInteger(active) || active < 0 || active >= tabs.length) {
     active = active > 0 ? tabs.length - 1 : 0
     if (process.env.NODE_ENV !== "production")
@@ -220,16 +224,6 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id, c
 
   const tabListRef = React.useRef<HTMLDivElement>(null)
   const tabScrollRef = React.useRef<HTMLDivElement>(null)
-
-  React.useEffect(() => {
-    if (tabListRef.current && tabScrollRef.current) {
-      if (tabListRef.current.getBoundingClientRect().width < tabScrollRef.current.getBoundingClientRect().width) {
-        // console.log("enable scroll")
-      } else {
-        // console.log("disable scroll")
-      }
-    }
-  }, [tabs])
 
   const scrollLeft = React.useCallback(event => {
     event && event.preventDefault() // so the button won't get focus when clicked
