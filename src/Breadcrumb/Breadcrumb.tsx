@@ -28,6 +28,7 @@ const Breadcrumb: React.SFC<BreadcrumbProps> = ({ to, icon: Icon, onClick, ...pr
     {ctx => (
       <Container
         {...props}
+        tabIndex={0}
         href={to}
         onClick={(ev: React.SyntheticEvent<Node>) => {
           if (onClick) {
