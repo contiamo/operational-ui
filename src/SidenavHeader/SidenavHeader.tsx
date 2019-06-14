@@ -194,7 +194,7 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
               </CloseButton>
             )}
             {isActive && (
-              <ItemsContainer>
+              <ItemsContainer data-cy="operational-ui__sidenav-items">
                 {React.Children.map(props.children, child => {
                   /**
                    * If a child manages to get here but does not exist

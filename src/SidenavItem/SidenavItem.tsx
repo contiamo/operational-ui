@@ -91,7 +91,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
       {compact ? compactLabel || label : label}
       {!compact && items && <Caret isOpen={isOpen} />}
       {items && isOpen && (
-        <Popout>
+        <Popout data-cy="operational-ui__SidenavItemPopover">
           {items.map((item, index) => (
             <SidenavItem
               items={item.items}

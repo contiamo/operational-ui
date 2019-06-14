@@ -23,7 +23,7 @@ const ScrollTrap = styled("div")`
   overflow: auto;
 `
 
-export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children }) => {
+export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children, ...props }) => {
   const containerNode = React.useRef<HTMLDivElement>(null)
   const otherOpenMenuRef = React.useRef<HTMLDivElement>(null)
   const [top, setTop] = React.useState("0")
@@ -61,7 +61,7 @@ export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children }) => {
   }, [])
 
   return (
-    <Container position={position} top={top} alignment={alignment} left={left} ref={containerNode}>
+    <Container {...props} position={position} top={top} alignment={alignment} left={left} ref={containerNode}>
       <ScrollTrap>{children}</ScrollTrap>
     </Container>
   )
