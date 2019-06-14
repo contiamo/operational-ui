@@ -59,7 +59,7 @@ export const StyledSidenavItem = styled("div", {
       isActive ? theme.color.white : isDark ? theme.color.black : theme.color.background.lightest};
   }
 
-  > svg {
+  svg {
     pointer-events: none;
   }
 `
