@@ -83,7 +83,7 @@ const MenuContainer = styled("div")<{
 /**
  * Overlay to prevent mouse events when the context menu is open
  */
-export const InvisibleOverlay = styled("div")(({ theme }) => ({
+const InvisibleOverlay = styled("div")(({ theme }) => ({
   position: "fixed",
   top: 0,
   bottom: 0,
