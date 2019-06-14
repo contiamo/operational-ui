@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState, useRef } from "react"
 import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
 import { IconComponentType } from "../Icon/Icon"
@@ -45,7 +45,7 @@ const TabsBar = styled("div")(({ theme }) => ({
   },
 }))
 
-const SingleTab = styled("div")<{ active?: boolean }>(({ theme, active }) => ({
+const TabContainer = styled("div")<{ active?: boolean }>(({ theme, active }) => ({
   width: 150,
   height: "100%",
   display: "flex",
@@ -98,16 +98,47 @@ const getTabIndexByName = (tabs: Tab[], tabName?: string): number => {
   return 0
 }
 
+interface TabProps {
+  index: number
+  tab: Tab
+  onTabClick: (index: number) => void
+  isActive: boolean
+  isKeyboardActive: boolean
+}
+
+const SingleTab = ({ index, isActive, onTabClick, tab, isKeyboardActive }: TabProps) => {
+  const ref = React.useRef<HTMLDivElement>(null)
+  useEffect(() => {
+    if (isActive && isKeyboardActive && ref.current) {
+      ref.current.focus()
+    }
+  }, [isKeyboardActive, isActive])
+
+  return (
+    <TabContainer
+      ref={ref}
+      role="tab"
+      active={isActive}
+      aria-selected={isActive}
+      tabIndex={isActive ? 0 : -1}
+      onClick={() => onTabClick(index)}
+      onMouseDown={e => e.preventDefault()}
+    >
+      {tab.loading ? (
+        <Spinner left size={14} />
+      ) : (
+        tab.icon && React.createElement(tab.icon, { size: 14, color: tab.iconColor, left: true })
+      )}
+      <TabName>{tab.name}</TabName>
+    </TabContainer>
+  )
+}
+
 const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
   const activeTabIndex = getTabIndexByName(tabs, activeTabName)
   const [activeTab, setActiveTab] = useState(activeTabIndex)
-  const [isMouseDown, setMouseDown] = useState(false)
   const uid = useUniqueId()
-  const tabsList = tabs.map(() => React.useRef<HTMLDivElement>(null))
-
-  useEffect(() => {
-    setActiveTab(activeTabIndex)
-  }, [activeTabIndex])
+  const isKeyboardActive = useRef(false)
 
   const onTabClick = useCallback(
     (index: number) => {
@@ -121,58 +152,30 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
 
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
-      let newIndex: number
-      let tabEl: HTMLElement | null
+      isKeyboardActive.current = true
       switch (event.key) {
         case "ArrowRight":
           event.preventDefault()
-          newIndex = activeTab + 1 >= tabs.length ? 0 : activeTab + 1
-          tabEl = tabsList[newIndex].current
-          if (tabEl) {
-            tabEl.focus()
-          }
-          onTabClick(newIndex)
+          onTabClick(activeTab + 1 >= tabs.length ? 0 : activeTab + 1)
           break
         case "ArrowLeft":
           event.preventDefault()
-          newIndex = activeTab - 1 < 0 ? tabs.length - 1 : activeTab - 1
-          tabEl = tabsList[newIndex].current
-          if (tabEl) {
-            tabEl.focus()
-          }
-          onTabClick(newIndex)
+          onTabClick(activeTab - 1 < 0 ? tabs.length - 1 : activeTab - 1)
           break
         case "Home":
           event.preventDefault()
           // Activate first tab
-          newIndex = 0
-          tabEl = tabsList[newIndex].current
-          if (tabEl) {
-            tabEl.focus()
-          }
-          onTabClick(newIndex)
+          onTabClick(0)
           break
         case "End":
           event.preventDefault()
           // Activate last tab
-          newIndex = tabs.length - 1
-          tabEl = tabsList[newIndex].current
-          if (tabEl) {
-            tabEl.focus()
-          }
-          onTabClick(newIndex)
+          onTabClick(tabs.length - 1)
           break
       }
     },
     [activeTab, onTabClick],
   )
-
-  const onFocus = (e: React.FocusEvent<HTMLDivElement>) => {
-    e.preventDefault()
-    if (isMouseDown) {
-      e.target.blur()
-    }
-  }
 
   // Work around: wrap return in fragment- to prevent type error and not having to change childrens return type
   // https://github.com/Microsoft/TypeScript/issues/21699
@@ -180,34 +183,19 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
     <>
       {children({
         tabsBar: (
-          <TabsBar role="tablist" id={uid} onKeyDown={onKeyDown}>
+          <TabsBar role="tablist" id={uid} onKeyDown={onKeyDown} onMouseDown={() => (isKeyboardActive.current = false)}>
             {tabs
               .filter(({ hidden }) => !hidden)
-              .map((tab, index: number) => {
-                const isActive: boolean = activeTab === index
-                return (
-                  <SingleTab
-                    key={index}
-                    ref={tabsList[index]}
-                    role="tab"
-                    active={isActive}
-                    aria-selected={isActive}
-                    tabIndex={isActive ? 0 : -1}
-                    onClick={() => onTabClick(index)}
-                    onKeyDown={onKeyDown}
-                    onFocus={onFocus}
-                    onMouseDown={() => setMouseDown(true)}
-                    onMouseUp={() => setMouseDown(false)}
-                  >
-                    {tab.loading ? (
-                      <Spinner left size={14} />
-                    ) : (
-                      tab.icon && React.createElement(tab.icon, { size: 14, color: tab.iconColor, left: true })
-                    )}
-                    <TabName>{tab.name}</TabName>
-                  </SingleTab>
-                )
-              })}
+              .map((tab, index: number) => (
+                <SingleTab
+                  key={index}
+                  index={index}
+                  tab={tab}
+                  onTabClick={onTabClick}
+                  isActive={activeTab === index}
+                  isKeyboardActive={isKeyboardActive.current}
+                />
+              ))}
           </TabsBar>
         ),
         activeChildren: tabs[activeTab].children,
