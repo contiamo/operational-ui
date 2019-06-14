@@ -81,7 +81,7 @@ export const Select: React.FC<SelectProps> = ({
     const filteredOptions = filterList(filter)(initialOptions)
     const truncatedOptions = truncateList(maxOptions)(filteredOptions)
     const contextMenuItems = optionsToContextMenuItems(option => ({
-      label: option.label ? option.label : "",
+      label: option.label ? option.label : String(option.value),
       isActive: isOptionSelected(value)(option),
     }))(truncatedOptions)
 
