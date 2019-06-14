@@ -103,6 +103,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
   const [activeTab, setActiveTab] = useState(activeTabIndex)
   const [isMouseDown, setMouseDown] = useState(false)
   const uid = useUniqueId()
+  const tabsList = tabs.map(() => React.useRef<HTMLDivElement>(null))
 
   useEffect(() => {
     setActiveTab(activeTabIndex)
@@ -120,35 +121,45 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
 
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent) => {
-      const tabElements: NodeListOf<HTMLElement> = (document.querySelector(
-        `[id=${uid}]`,
-      ) as HTMLElement).querySelectorAll('[role="tab"]')
       let newIndex: number
+      let tabEl: HTMLElement | null
       switch (event.key) {
         case "ArrowRight":
           event.preventDefault()
           newIndex = activeTab + 1 >= tabs.length ? 0 : activeTab + 1
-          tabElements[newIndex].focus()
+          tabEl = tabsList[newIndex].current
+          if (tabEl) {
+            tabEl.focus()
+          }
           onTabClick(newIndex)
           break
         case "ArrowLeft":
           event.preventDefault()
           newIndex = activeTab - 1 < 0 ? tabs.length - 1 : activeTab - 1
-          tabElements[newIndex].focus()
+          tabEl = tabsList[newIndex].current
+          if (tabEl) {
+            tabEl.focus()
+          }
           onTabClick(newIndex)
           break
         case "Home":
           event.preventDefault()
-          newIndex = 0
-          tabElements[newIndex].focus()
           // Activate first tab
+          newIndex = 0
+          tabEl = tabsList[newIndex].current
+          if (tabEl) {
+            tabEl.focus()
+          }
           onTabClick(newIndex)
           break
         case "End":
           event.preventDefault()
-          newIndex = tabs.length - 1
-          tabElements[newIndex].focus()
           // Activate last tab
+          newIndex = tabs.length - 1
+          tabEl = tabsList[newIndex].current
+          if (tabEl) {
+            tabEl.focus()
+          }
           onTabClick(newIndex)
           break
       }
@@ -177,6 +188,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
                 return (
                   <SingleTab
                     key={index}
+                    ref={tabsList[index]}
                     role="tab"
                     active={isActive}
                     aria-selected={isActive}
