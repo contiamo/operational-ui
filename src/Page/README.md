@@ -107,7 +107,7 @@ const Tab = props => (
 ;<Page
   title="Bundle detail"
   tabs={[
-    { name: "overview", children: <Tab title="Overview" />, icon: "Search" },
+    { name: "overview", children: <Tab title="Overview" /> },
     { name: "jobs", children: <Tab title="Jobs" /> },
     { name: "functions and more text to check label truncation", children: <Tab title="Functions" /> },
   ]}
@@ -127,7 +127,7 @@ const Tab = props => (
 )
 ;<Page
   tabs={[
-    { name: "overview", children: <Tab title="Overview" />, icon: "Search" },
+    { name: "overview", children: <Tab title="Overview" /> },
     { name: "jobs", children: <Tab title="Jobs" /> },
     { name: "functions", children: <Tab title="Functions" /> },
   ]}

@@ -3,7 +3,6 @@ import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
 import { IconComponentType } from "../Icon/Icon"
 import { inputFocus } from "../utils"
-import { useUniqueId } from "../useUniqueId"
 
 export interface Tab {
   name: string
@@ -33,6 +32,7 @@ const TabsBar = styled("div")(({ theme }) => ({
   height: tabsBarHeight,
   position: "relative",
   margin: `0 ${theme.space.element}px`,
+  // This draws the line underneath the tabs
   "&::before": {
     content: "''",
     display: "block",
@@ -137,7 +137,6 @@ const SingleTab = ({ index, isActive, onTabClick, tab, isKeyboardActive }: TabPr
 const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
   const activeTabIndex = getTabIndexByName(tabs, activeTabName)
   const [activeTab, setActiveTab] = useState(activeTabIndex)
-  const uid = useUniqueId()
   const isKeyboardActive = useRef(false)
 
   const onTabClick = useCallback(
@@ -183,7 +182,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
     <>
       {children({
         tabsBar: (
-          <TabsBar role="tablist" id={uid} onKeyDown={onKeyDown} onMouseDown={() => (isKeyboardActive.current = false)}>
+          <TabsBar role="tablist" onKeyDown={onKeyDown} onMouseDown={() => (isKeyboardActive.current = false)}>
             {tabs
               .filter(({ hidden }) => !hidden)
               .map((tab, index: number) => (
