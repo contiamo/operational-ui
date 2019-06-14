@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, useCallback } from "react"
+import { useUniqueId } from "../useUniqueId"
 
 /**
  * ## Usage:
@@ -19,33 +20,44 @@ import { useRef, useState, useEffect, useCallback } from "react"
  * leaving other stateful parts up to the consumer: particularly the
  * parts involving state and multiselect capabilities.
  */
-export const useListbox = (numberOfOptions: number) => {
-  const containerRef = useRef<HTMLDivElement>(null)
+export const useListbox = ({
+  itemCount,
+  isMultiSelect = false,
+  isDisabled = false,
+}: {
+  itemCount: number
+  isMultiSelect?: boolean
+  isDisabled?: boolean
+}) => {
+  const buttonRef = useRef<HTMLDivElement>(null)
+  const listboxRef = useRef<HTMLDivElement>(null)
   const [isOpen, _setIsOpen] = useState(false)
-  const [focusedOptionIndex, setFocusedOptionIndex] = useState()
+  const [focusedOptionIndex, setFocusedOptionIndex] = useState<number | null | undefined>()
+  const id = useUniqueId()
 
   useEffect(() => {
-    const node = containerRef.current
+    const node = buttonRef.current
     if (node) {
       if (focusedOptionIndex === null) {
         node.focus()
         return
       }
-      const activeChild = node.querySelector<HTMLElement>('[tabindex="0"]')
+      const activeChild = node.querySelector<HTMLElement>(`[id="${id}-${focusedOptionIndex}"]`)
       if (activeChild) {
         activeChild.focus()
       }
     }
   }, [focusedOptionIndex])
 
-  const getChildTabIndex = useCallback(i => (focusedOptionIndex === i ? 0 : -1), [focusedOptionIndex])
-
   const getNextOptionIndex = useCallback(
     direction => {
+      if (focusedOptionIndex === undefined || focusedOptionIndex === null) {
+        return 0
+      }
       switch (direction) {
         case "down":
-          if (focusedOptionIndex === numberOfOptions - 1) {
-            return 0
+          if (focusedOptionIndex === itemCount - 1) {
+            return itemCount - 1
           }
           if (focusedOptionIndex === null) {
             return 0
@@ -53,7 +65,7 @@ export const useListbox = (numberOfOptions: number) => {
           return focusedOptionIndex + 1
         case "up":
           if (focusedOptionIndex === 0) {
-            return numberOfOptions - 1
+            return 0
           }
           if (focusedOptionIndex === null) {
             return 0
@@ -63,7 +75,17 @@ export const useListbox = (numberOfOptions: number) => {
           return 0
       }
     },
-    [focusedOptionIndex, numberOfOptions],
+    [focusedOptionIndex, itemCount],
+  )
+
+  const setIsOpen = useCallback(
+    (value: boolean) => {
+      _setIsOpen(value)
+      if (value === true && !focusedOptionIndex) {
+        setFocusedOptionIndex(0)
+      }
+    },
+    [focusedOptionIndex],
   )
 
   const handleKeyDown = useCallback(
@@ -71,13 +93,10 @@ export const useListbox = (numberOfOptions: number) => {
       switch (e.key) {
         case "Enter":
           e.preventDefault()
-          e.stopPropagation()
           if (!isOpen) {
-            _setIsOpen(true)
-            setFocusedOptionIndex(0)
-          } else {
-            _setIsOpen(false)
-            setFocusedOptionIndex(null)
+            setIsOpen(true)
+          } else if (!isMultiSelect) {
+            setIsOpen(false)
           }
           return
 
@@ -85,8 +104,7 @@ export const useListbox = (numberOfOptions: number) => {
           e.preventDefault()
           e.stopPropagation()
           if (!isOpen) {
-            _setIsOpen(true)
-            setFocusedOptionIndex(0)
+            setIsOpen(true)
             return
           }
           setFocusedOptionIndex(getNextOptionIndex("down"))
@@ -96,8 +114,7 @@ export const useListbox = (numberOfOptions: number) => {
           e.preventDefault()
           e.stopPropagation()
           if (!isOpen) {
-            _setIsOpen(true)
-            setFocusedOptionIndex(numberOfOptions - 1)
+            setIsOpen(true)
             return
           }
           setFocusedOptionIndex(getNextOptionIndex("up"))
@@ -112,13 +129,13 @@ export const useListbox = (numberOfOptions: number) => {
         case "End":
           e.preventDefault()
           e.stopPropagation()
-          setFocusedOptionIndex(numberOfOptions - 1)
+          setFocusedOptionIndex(itemCount - 1)
           return
 
         case "Escape":
           e.preventDefault()
           e.stopPropagation()
-          _setIsOpen(false)
+          setIsOpen(false)
           setFocusedOptionIndex(null)
           return
 
@@ -126,12 +143,12 @@ export const useListbox = (numberOfOptions: number) => {
           return
       }
     },
-    [isOpen, getNextOptionIndex, numberOfOptions],
+    [isOpen, focusedOptionIndex],
   )
 
-  const handleClick = useCallback(
+  const handleButtonClick = useCallback(
     e => {
-      const node = containerRef.current
+      const node = buttonRef.current
       if (e.target === node) {
         _setIsOpen(!isOpen)
       }
@@ -140,46 +157,47 @@ export const useListbox = (numberOfOptions: number) => {
   )
 
   useEffect(() => {
-    const node = containerRef.current
+    const node = buttonRef.current
 
     if (node) {
       node.addEventListener("keydown", handleKeyDown)
-      node.addEventListener("click", handleClick)
+      node.addEventListener("click", handleButtonClick)
     }
     return () => {
       if (node) {
         node.removeEventListener("keydown", handleKeyDown)
-        node.removeEventListener("click", handleClick)
+        node.removeEventListener("click", handleButtonClick)
       }
     }
   }, [handleKeyDown])
 
-  const setIsOpen = useCallback(
-    (value: boolean) => {
-      _setIsOpen(value)
-      if (value === true && !focusedOptionIndex) {
-        setFocusedOptionIndex(0)
-      }
-    },
-    [focusedOptionIndex],
-  )
-
-  if (numberOfOptions < 1) {
-    return [false, () => {}, {}, () => {}] as const
+  if (itemCount < 1) {
+    return {}
   }
 
-  return [
-    isOpen,
-    setIsOpen,
-    {
-      ref: containerRef,
-      tabIndex: 0,
-      role: "listbox",
+  return {
+    isOpen: isOpen,
+    setIsOpen: setIsOpen,
+    buttonProps: {
+      ref: buttonRef,
+      tabIndex: isDisabled ? -1 : 0,
+      role: "button",
       "aria-expanded": isOpen,
+      "aria-haspopup": "listbox" as "listbox",
+      "aria-disabled": Boolean(isDisabled),
     },
-    (childItemIndex: number) => ({
-      tabIndex: getChildTabIndex(childItemIndex),
+    listboxProps: {
+      ref: listboxRef,
+      role: "listbox",
+      // tabIndex: -1,
+      ...(focusedOptionIndex !== null && { "aria-activedescendant": `${id}-${focusedOptionIndex}` }),
+      style: !isOpen ? { display: "none" } : undefined,
+    },
+    getChildProps: (childItemIndex: number) => ({
+      "aria-selected": focusedOptionIndex === childItemIndex ? true : undefined,
       role: "option",
+      id: `${id}-${childItemIndex}`,
     }),
-  ] as const
+    focusedOptionIndex: focusedOptionIndex,
+  }
 }

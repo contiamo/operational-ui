@@ -28,7 +28,7 @@ export interface IContextMenuItem<TValue = any> {
   isActive?: boolean
 }
 
-const Container = styled("div")<Props>(({ align, theme, onClick, isActive, condensed, width, item }) => {
+const Container = styled("div")<Props>(({ align, theme, isActive, condensed, width, item }) => {
   const activeShadow = `0 0 0 1px ${theme.color.primary} inset`
 
   return {
@@ -46,7 +46,7 @@ const Container = styled("div")<Props>(({ align, theme, onClick, isActive, conde
     alignItems: "center",
     fontWeight: isActive ? theme.font.weight.bold : theme.font.weight.medium,
     boxShadow: isActive ? activeShadow : "none",
-    ":focus": {
+    "&[aria-selected='true']": {
       boxShadow: activeShadow,
       outline: "none",
     },
@@ -55,19 +55,11 @@ const Container = styled("div")<Props>(({ align, theme, onClick, isActive, conde
           borderBottom: `1px solid ${theme.color.border.select}`,
         }
       : {}),
-    ...(!!onClick
-      ? {
-          cursor: "pointer",
-          color: theme.color.text.default,
-          "&:hover, :focus": {
-            backgroundColor: lighten(theme.color.primary, 50),
-            color: theme.color.primary,
-          },
-        }
-      : {
-          cursor: "not-allowed",
-          color: theme.color.text.lightest,
-        }),
+    cursor: "pointer",
+    "&:hover, &[aria-selected='true']": {
+      backgroundColor: lighten(theme.color.primary, 50),
+      color: theme.color.primary,
+    },
     color: isActive ? theme.color.primary : theme.color.text.default,
     borderTop: `1px solid ${theme.color.border.select}`,
     "&:last-child": {
@@ -75,8 +67,6 @@ const Container = styled("div")<Props>(({ align, theme, onClick, isActive, conde
     },
   }
 })
-
-Container.defaultProps = { role: "option", "aria-disabled": false, "aria-hidden": false, "aria-invalid": false }
 
 const Title = styled("p")`
   font-weight: bold;
@@ -153,9 +143,14 @@ const ContextMenuItem: React.SFC<Props> = ({ iconLocation, item, onClick, conden
     <Container
       {...props}
       onKeyDown={e => {
-        e.preventDefault()
-        if (e.key === " " && onClick) {
-          onClick(e)
+        switch (e.key) {
+          case " ":
+          case "Enter":
+            if (onClick) {
+              e.stopPropagation()
+              e.preventDefault()
+              onClick(e)
+            }
         }
       }}
       onClick={onClick}

@@ -22,11 +22,11 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
   ...props
 }) => {
   const isActive = Boolean(active)
-  const [isOpen, setIsOpen, parentProps, getChildProps] = useListbox(items ? items.length : 0)
+  const { isOpen, setIsOpen, buttonProps, getChildProps } = useListbox({ itemCount: items ? items.length : 0 })
   const ctx = useOperationalContext()
 
   React.useEffect(() => {
-    if (items) {
+    if (items && setIsOpen) {
       const handleClickOnBodyWhenWeHaveItems = () => {
         setIsOpen(false)
       }
@@ -80,7 +80,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
   return (
     <StyledSidenavItem
       tabIndex={to ? 0 : -1}
-      {...parentProps}
+      {...buttonProps}
       {...props}
       isDark={Boolean(dark)}
       hasIcon={Boolean(Icon)}
@@ -88,8 +88,8 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
       compact={Boolean(compact)}
       as={Boolean(to) ? "a" : "div"}
       className={`${className || ""}${end ? " operational-ui__sidenav-item_end" : ""}`}
-      onMouseEnter={() => Boolean(items) && setIsOpen(true)}
-      onMouseLeave={() => Boolean(items) && setIsOpen(false)}
+      onMouseEnter={() => Boolean(items) && setIsOpen && setIsOpen(true)}
+      onMouseLeave={() => Boolean(items) && setIsOpen && setIsOpen(false)}
       hasOnClick={Boolean(onClick)}
       isActive={isActive}
       onClick={handleClickOnSidenavItem}
@@ -101,7 +101,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
         </IconContainer>
       )}
       {compact ? compactLabel || label : label}
-      {!compact && items && <Caret isOpen={isOpen} />}
+      {!compact && items && <Caret isOpen={isOpen || false} />}
       {items && isOpen && (
         <Popout data-cy="operational-ui__SidenavItemPopover">
           {items.map((item, index) => (
@@ -113,7 +113,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
               onClick={handleClickOnNestedItem(item)}
               onKeyDown={handleKeyDownOnNestedItem(item)}
               dark={dark}
-              {...getChildProps(index)}
+              {...getChildProps && getChildProps(index)}
             />
           ))}
         </Popout>

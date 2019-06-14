@@ -108,7 +108,11 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   ...props
 }) => {
   const uniqueId = useUniqueId(id)
-  const [isOpen, setIsOpen, containerProps, getChildProps] = useListbox(items.length)
+  const { isOpen, setIsOpen, buttonProps, listboxProps, getChildProps, focusedOptionIndex } = useListbox({
+    itemCount: items.length,
+    isMultiSelect: keepOpenOnItemClick,
+    isDisabled: disabled,
+  })
 
   /**
    * Preserve the public API: if users submit strings in props.items,
@@ -126,10 +130,32 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     }
   }, [items])
 
-  const renderedChildren = React.useMemo(() => (isChildAFunction(children) ? children(isOpen) : children), [
-    isOpen,
-    children,
-  ])
+  const renderedChildren = React.useMemo(
+    () => (isChildAFunction(children) ? children(isOpen ? isOpen : false) : children),
+    [isOpen, children],
+  )
+
+  const currentItem = React.useMemo(() => {
+    if (focusedOptionIndex === null || focusedOptionIndex === undefined) {
+      return
+    }
+    const tentativeItem = items[focusedOptionIndex]
+    if (typeof tentativeItem === "string") {
+      return makeItem(tentativeItem)
+    }
+
+    return tentativeItem
+  }, [focusedOptionIndex, items])
+
+  const handleSelect = React.useCallback(() => {
+    if (currentItem && currentItem.onClick) {
+      currentItem.onClick(currentItem)
+      return
+    }
+    if (currentItem && onClick) {
+      onClick(currentItem)
+    }
+  }, [currentItem, onClick])
 
   return (
     <>
@@ -137,63 +163,66 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         <InvisibleOverlay
           onClick={e => {
             e.stopPropagation()
-            setIsOpen(false)
+            setIsOpen && setIsOpen(false)
           }}
         />
       )}
       <Container
         {...props}
-        {...containerProps}
-        aria-disabled={Boolean(disabled)}
-        isOpen={isOpen}
+        isOpen={isOpen || false}
         side={align}
-        onClick={e => {
-          e.stopPropagation()
-          if (!disabled) {
-            setIsOpen(!isOpen)
+        onClick={() => {
+          setIsOpen && setIsOpen(!isOpen)
+        }}
+        onKeyDown={e => {
+          switch (e.key) {
+            case "Enter":
+              if (keepOpenOnItemClick) {
+                e.stopPropagation()
+              }
+              handleSelect()
+              break
           }
         }}
       >
-        {renderedChildren}
-        {isOpen && (
-          <MenuContainer
-            condensed={Boolean(condensed)}
-            numRows={items.length}
-            align={align}
-            embedChildrenInMenu={embedChildrenInMenu}
-          >
-            {embedChildrenInMenu && renderedChildren}
-            {items.map((itemFromProps, index: number) => {
-              const item = makeItem(itemFromProps)
-              const clickHandler = item.onClick ? item.onClick : onClick
-
-              return (
-                <ContextMenuItem
-                  id={`operational-ui__ContextMenuItem-${uniqueId}-${index}`}
-                  isActive={item.isActive}
-                  onClick={e => {
-                    if (keepOpenOnItemClick) {
-                      e.stopPropagation()
-                    }
-                    if (clickHandler) {
-                      return clickHandler(item)
-                    }
-                  }}
-                  key={`contextmenu-${index}`}
-                  condensed={condensed}
-                  align={align}
-                  iconLocation={iconLocation}
-                  width={width || "100%"}
-                  item={item}
-                  {...getChildProps(index)}
-                />
-              )
-            })}
-          </MenuContainer>
-        )}
+        <div style={{ width: "100%" }} {...buttonProps}>
+          {renderedChildren}
+        </div>
+        <MenuContainer
+          {...listboxProps}
+          condensed={Boolean(condensed)}
+          numRows={items.length}
+          align={align}
+          embedChildrenInMenu={embedChildrenInMenu}
+        >
+          {embedChildrenInMenu && renderedChildren}
+          {items.map((item, index: number) => (
+            <ContextMenuItem
+              id={`operational-ui__ContextMenuItem-${uniqueId}-${index}`}
+              isActive={typeof item !== "string" && item.isActive}
+              key={`contextmenu-${index}`}
+              condensed={condensed}
+              align={align}
+              iconLocation={iconLocation}
+              width={width || "100%"}
+              item={item}
+              onClick={() => {
+                if (onClick) {
+                  onClick(makeItem(item))
+                }
+              }}
+              {...(getChildProps ? getChildProps(index) : {})}
+            />
+          ))}
+        </MenuContainer>
       </Container>
       {/* Element to close an open select when blurring it so only one can be open at a time */}
-      <div tabIndex={isOpen ? 0 : -1} role="button" onFocus={() => setIsOpen(false)} aria-hidden="true" />
+      <div
+        tabIndex={0}
+        data-cy="operational-ui__ContextMenu-focus-trap"
+        onFocus={() => setIsOpen && setIsOpen(false)}
+        aria-hidden="true"
+      />
     </>
   )
 }
