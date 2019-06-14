@@ -27,8 +27,13 @@ const StyledInput = styled(Input)<{ error: string }>`
   }
 ` as typeof Input
 
-export const DataTableInput: React.FC<InputProps> = props => (
-  <StyledInput errorComponent={({ errorMessage }) => <Tooltip bottom>{errorMessage}</Tooltip>} fullWidth {...props} />
+export const DataTableInput: React.FC<InputProps> = ({ copy, ...props }) => (
+  <StyledInput
+    {...props}
+    errorComponent={({ errorMessage }) => <Tooltip bottom>{errorMessage}</Tooltip>}
+    fullWidth
+    {...props}
+  />
 )
 
 export default DataTableInput
