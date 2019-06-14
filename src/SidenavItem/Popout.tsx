@@ -25,24 +25,10 @@ const ScrollTrap = styled("div")`
 
 export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children, ...props }) => {
   const containerNode = React.useRef<HTMLDivElement>(null)
-  const otherOpenMenuRef = React.useRef<HTMLDivElement>(null)
   const [top, setTop] = React.useState("0")
   const [alignment, setAlignment] = React.useState("flex-start")
   const [left, setLeft] = React.useState("100%")
   const [position, setPosition] = React.useState("absolute")
-
-  React.useEffect(() => {
-    // @ts-ignore find open menu
-    otherOpenMenuRef.current = document.querySelector(`[tabindex="0"]`)
-    if (otherOpenMenuRef.current) {
-      otherOpenMenuRef.current.setAttribute("tabindex", "-1")
-    }
-    return () => {
-      if (otherOpenMenuRef.current) {
-        otherOpenMenuRef.current.setAttribute("tabindex", "0")
-      }
-    }
-  }, [])
 
   React.useLayoutEffect(() => {
     const node = containerNode.current
