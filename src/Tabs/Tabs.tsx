@@ -8,9 +8,7 @@ import { ScrollButton } from "./ScrollButton"
 
 export interface Tab {
   title: string
-  content: () => React.ReactNode
-  key: string | number
-  icon: React.ReactNode
+  icon?: React.ReactNode
 }
 
 export interface TabsProps extends DefaultProps {
@@ -19,7 +17,6 @@ export interface TabsProps extends DefaultProps {
   onActivate: (tabIndex: number) => void
   onClose?: (tabIndex: number) => void
   onInsert?: (tabIndex: number) => void
-  children?: never
   label?: string
   style?: React.CSSProperties
   id?: string
@@ -152,7 +149,7 @@ const ScrollButtons = styled("div")`
   z-index: 1;
 `
 
-const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }: TabsProps) => {
+const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id, children }: TabsProps) => {
   if (!Number.isInteger(active) || active < 0 || active >= tabs.length) {
     active = active > 0 ? tabs.length - 1 : 0
     if (process.env.NODE_ENV !== "production")
@@ -252,7 +249,7 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
     <Container data-cy="operational-ui__Tabs" style={style}>
       <TabList aria-label={label} onKeyDown={onKeyDown} ref={tabListRef}>
         <TabScroll ref={tabScrollRef}>
-          {tabs.map(({ key, title, icon }, i) => {
+          {tabs.map(({ title, icon }, i) => {
             const onClick = () => {
               userAction.current = true
               onActivate(i)
@@ -262,9 +259,9 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
                 tabIndex={i === active ? 0 : -1}
                 first={i === 0}
                 aria-selected={i === active}
-                aria-controls={`TabPanel-${uid}-${key}`}
-                id={`TabHeader-${uid}-${key}`}
-                key={key}
+                aria-controls={`TabPanel-${uid}-${i}`}
+                id={`TabHeader-${uid}-${i}`}
+                key={i}
                 onClick={onClick}
                 onFocus={onClick}
                 ref={i === active ? activeTab : undefined}
@@ -328,14 +325,9 @@ const Tabs = ({ tabs, active, onClose, onActivate, onInsert, label, style, id }:
         </TabHeader>
       </ScrollButtons>
       <TabContainer>
-        {tabs.map(({ key, content }, i) => (
-          <TabPanel
-            hidden={i !== active}
-            id={`TabPanel-${uid}-${key}`}
-            aria-labelledby={`TabHeader-${uid}-${key}`}
-            key={key}
-          >
-            {i === active && content()}
+        {tabs.map((_, i) => (
+          <TabPanel hidden={i !== active} id={`TabPanel-${uid}-${i}`} aria-labelledby={`TabHeader-${uid}-${i}`} key={i}>
+            {i === active && children}
           </TabPanel>
         ))}
       </TabContainer>
