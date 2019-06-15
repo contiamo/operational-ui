@@ -30,23 +30,15 @@ const watchDir = join(__dirname, "../lib")
 export const generateTypeDictionary = () =>
   new Promise(async (resolve, reject) => {
     try {
-      const generatedFolder = join(__dirname, "../styleguide/__generated__")
-
       const parentProject = require(join(__dirname, "../package.json"))
-      const parentPath = join(__dirname, "../")
-
-      const getTypesDir = () => join(__dirname, "../lib")
 
       // This is used in Monaco. It simulates a virtual filesystem.
       const virtualModuleDir = `node_modules/${parentProject.name}`
 
+      const generatedFolder = join(__dirname, "../styleguide/__generated__")
+      const parentPath = join(__dirname, "../")
+      const getTypesDir = () => join(__dirname, "../lib")
       const replaceStringLiteralTokens = (str: string) => str.replace(/`/gm, "'").replace(/\$\{/gm, "{")
-
-      const getReactTypedefs = async () => {
-        const reactInCurrentProject = `${parentPath}/node_modules/@types/react/index.d.ts`
-        return await readFile(reactInCurrentProject, "utf8")
-      }
-
       const getTypedefs = async () => {
         const components = glob
           .sync(join(getTypesDir(), "**/*.d.ts"))
@@ -81,7 +73,23 @@ export const generateTypeDictionary = () =>
           // React's type definitions
           {
             path: "node_modules/@types/react/index.d.ts",
-            content: replaceStringLiteralTokens(await getReactTypedefs()),
+            content: replaceStringLiteralTokens(
+              await readFile(join(parentPath, "node_modules/@types/react/index.d.ts"), "utf8"),
+            ),
+          },
+
+          // Emotion's type definitions
+          {
+            path: "node_modules/@emotion/styled/index.d.ts",
+            content: replaceStringLiteralTokens(
+              await readFile(join(parentPath, "node_modules/@emotion/styled/types/index.d.ts"), "utf8"),
+            ),
+          },
+          {
+            path: "node_modules/@emotion/styled-base/index.d.ts",
+            content: replaceStringLiteralTokens(
+              await readFile(join(parentPath, "node_modules/@emotion/styled-base/types/index.d.ts"), "utf8"),
+            ),
           },
         ]
       }
