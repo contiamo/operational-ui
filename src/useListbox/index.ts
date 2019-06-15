@@ -177,7 +177,9 @@ export const useListbox = ({
       ref: listboxRef,
       role: "listbox",
       // tabIndex: -1,
-      ...(focusedOptionIndex !== null && { "aria-activedescendant": `${id}-${focusedOptionIndex}` }),
+      ...(focusedOptionIndex !== null && {
+        "aria-activedescendant": isOpen ? `${id}-${focusedOptionIndex}` : undefined,
+      }),
       style: !isOpen ? { display: "none" } : undefined,
     },
     getChildProps: (childItemIndex: number) => ({
