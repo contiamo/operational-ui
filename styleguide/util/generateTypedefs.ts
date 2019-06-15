@@ -108,5 +108,5 @@ run()
 
 if (program.watch) {
   // Watch mode (input folder only)
-  chokidar.watch(watchDir).on("change", run)
+  chokidar.watch(`${watchDir}/**/*.d.ts`).on("change", run)
 }
