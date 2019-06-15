@@ -103,7 +103,7 @@ const startWatchers = () =>
           const watcherStartSuccessMessage = "Watching Type Declarations and Icons."
           resolve(watcherStartSuccessMessage)
           spinner.succeed(
-            `${watcherStartSuccessMessage}. Took ${formatPerfTimeStamp(new Date().getTime() - startWatchersTime)}.`,
+            `${watcherStartSuccessMessage} Took ${formatPerfTimeStamp(new Date().getTime() - startWatchersTime)}.`,
           )
           return
         }
