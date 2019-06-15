@@ -31,14 +31,13 @@ exports[`ContextMenu Component Should render 1`] = `
       </svg>
     </div>
     <div
-      aria-activedescendant="_YPX3e3IVn4tjag7-QcR2-undefined"
       class="css-1ydh3tr"
       role="listbox"
       style="display:none"
     >
       <div
         class="css-i2xmf4-contextmenuitem"
-        id="_YPX3e3IVn4tjag7-QcR2-0"
+        id="0geyIYiuG065dDu7dqkTj-0"
         role="option"
         width="100%"
       >
@@ -46,7 +45,7 @@ exports[`ContextMenu Component Should render 1`] = `
       </div>
       <div
         class="css-i2xmf4-contextmenuitem"
-        id="_YPX3e3IVn4tjag7-QcR2-1"
+        id="0geyIYiuG065dDu7dqkTj-1"
         role="option"
         width="100%"
       >
@@ -54,7 +53,7 @@ exports[`ContextMenu Component Should render 1`] = `
       </div>
       <div
         class="css-i2xmf4-contextmenuitem"
-        id="_YPX3e3IVn4tjag7-QcR2-2"
+        id="0geyIYiuG065dDu7dqkTj-2"
         role="option"
         width="100%"
       >
