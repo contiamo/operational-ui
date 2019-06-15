@@ -14,12 +14,11 @@
     "lib/"
   ],
   "scripts": {
-    "postinstall": "tsc -d",
-    "start": "tsc -d && run-p start:*",
+    "start": "run-p start:*",
+    "start:icons": "ts-node -P tsconfig.node.json build-icons.ts --watch",
     "start:compiler": "tsc -d -w",
     "start:types": "ts-node -P tsconfig.node.json ./styleguide/util/generateTypedefs.ts --watch",
     "start:styleguidist": "styleguidist server",
-    "start:icons": "ts-node -P tsconfig.node.json build-icons.ts --watch",
     "build": "run-s build:*",
     "build:icons": "ts-node -P tsconfig.node.json build-icons.ts",
     "build:package": "rimraf lib .tsbuildinfo && tsc -d",
@@ -30,7 +29,7 @@
     "test": "run-p test:*",
     "test:unit": "jest",
     "test:e2e": "cypress run",
-    "preversion": "npm run build:package",
+    "preversion": "npm run build",
     "version": "auto-changelog -u && git add CHANGELOG.md",
     "precommit": "tsc && lint-staged",
     "ci": "npm run build:icons && npm run test:unit && run-p danger build"
