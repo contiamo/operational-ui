@@ -1,10 +1,10 @@
 import { languages } from "monaco-editor"
 
-import { GeneratedTypedef } from "./util/generateTypedefs"
+import { GeneratedTypedef } from "../scripts/generate-type-dictionary"
 
 // @ts-ignore this file is guaranteed to exist, but has variable type declarations.
 import typedefs from "./__generated__/typeMap"
-import compilerOptions from "./util/compilerOptions"
+import compilerOptions from "./compilerOptions"
 
 const addLibraries = () => {
   try {

@@ -1,8 +1,19 @@
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "fs"
+import {
+  readFile as oldSchoolreadFile,
+  writeFile as oldSchoolwriteFile,
+  exists as oldSchoolexists,
+  mkdir as oldSchoolmkdir,
+} from "fs"
 import glob from "glob"
 import chokidar from "chokidar"
 import { join } from "path"
 import program from "commander"
+import { promisify } from "util"
+
+const readFile = promisify(oldSchoolreadFile)
+const writeFile = promisify(oldSchoolwriteFile)
+const exists = promisify(oldSchoolexists)
+const mkdir = promisify(oldSchoolmkdir)
 
 export interface GeneratedTypedef {
   path: string
@@ -10,38 +21,33 @@ export interface GeneratedTypedef {
 }
 
 program
-  .version(require(join(__dirname, "../../package.json")).version)
+  .version(require(join(__dirname, "../package.json")).version)
   .option("-w, --watch", "Watch filesystem for rebuild")
   .parse(process.argv)
 
-const watchDir = join(__dirname, "../../lib")
+const watchDir = join(__dirname, "../lib")
 
-const run = () =>
-  new Promise((resolve, reject) => {
+export const generateTypeDictionary = () =>
+  new Promise(async (resolve, reject) => {
     try {
-      const generatedFolder = join(__dirname, "../__generated__")
+      const generatedFolder = join(__dirname, "../styleguide/__generated__")
 
-      const parentProject = require(join(__dirname, "../../package.json"))
-      const parentPath = join(__dirname, "../../")
+      const parentProject = require(join(__dirname, "../package.json"))
+      const parentPath = join(__dirname, "../")
 
-      const getTypesDir = () => join(__dirname, "../../lib")
+      const getTypesDir = () => join(__dirname, "../lib")
 
       // This is used in Monaco. It simulates a virtual filesystem.
       const virtualModuleDir = `node_modules/${parentProject.name}`
 
       const replaceStringLiteralTokens = (str: string) => str.replace(/`/gm, "'").replace(/\$\{/gm, "{")
 
-      const getReactTypedefs = () => {
+      const getReactTypedefs = async () => {
         const reactInCurrentProject = `${parentPath}/node_modules/@types/react/index.d.ts`
-        if (existsSync(reactInCurrentProject)) {
-          return readFileSync(reactInCurrentProject, "utf8")
-        }
-
-        const reactInThisProject = join(__dirname, "../../node_modules/@types/react/index.d.ts")
-        return readFileSync(reactInThisProject, "utf8")
+        return await readFile(reactInCurrentProject, "utf8")
       }
 
-      const getTypedefs = (): GeneratedTypedef[] => {
+      const getTypedefs = async () => {
         const components = glob
           .sync(join(getTypesDir(), "**/*.d.ts"))
           .filter(path => path.includes(join(getTypesDir())))
@@ -55,18 +61,13 @@ const run = () =>
          * along with all other related type declaration modules.
          */
 
-        const indexFile =
-          components.find(
-            component => component.includes("index.d.ts") && component.includes(join(parentPath, getTypesDir())),
-          ) || ""
-
         // Index file uses __dirname, so we want to get all of it without the actual file name.
-        const indexPath = join(__dirname, "../../lib")
+        const indexPath = join(__dirname, "../lib")
 
-        const typeMap = components.map(path => {
+        const typeMap = components.map(async path => {
           return {
             path: virtualModuleDir + path.replace(indexPath, ""), // Remove the indexPath, making all other module declarations root-level.
-            content: replaceStringLiteralTokens(readFileSync(path, "utf8")).replace(
+            content: replaceStringLiteralTokens(await readFile(path, "utf8")).replace(
               new RegExp("//# sourceMappingURL=(.*)", "mgi"), // clean up garbage if any
               "",
             ),
@@ -75,24 +76,24 @@ const run = () =>
 
         return [
           // Our type definitions
-          ...typeMap,
+          ...(await Promise.all(typeMap)),
 
           // React's type definitions
           {
             path: "node_modules/@types/react/index.d.ts",
-            content: replaceStringLiteralTokens(getReactTypedefs()),
+            content: replaceStringLiteralTokens(await getReactTypedefs()),
           },
         ]
       }
 
-      if (!existsSync(generatedFolder)) {
-        mkdirSync(generatedFolder)
+      if (!(await exists(generatedFolder))) {
+        await mkdir(generatedFolder)
       }
 
       // Write the generated code to disk.
-      writeFileSync(
+      await writeFile(
         join(generatedFolder, `typeMap.js`),
-        `module.exports = ${JSON.stringify(getTypedefs(), null, 2).replace(
+        `module.exports = ${JSON.stringify(await getTypedefs(), null, 2).replace(
           /"content": "(.*)"/gm,
           `"content": \`$1\``,
         )}`,
@@ -104,9 +105,7 @@ const run = () =>
     resolve("Done!")
   })
 
-run()
-
 if (program.watch) {
   // Watch mode (input folder only)
-  chokidar.watch(`${watchDir}/**/*.d.ts`).on("change", run)
+  chokidar.watch(`${watchDir}/**/*.d.ts`).on("change", generateTypeDictionary)
 }

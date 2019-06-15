@@ -59,7 +59,7 @@ module.exports = {
       return null
     }
   },
-  dangerouslyUpdateWebpackConfig(webpackConfig, env) {
+  dangerouslyUpdateWebpackConfig(webpackConfig) {
     webpackConfig.output = {
       path: join(__dirname, "dist"),
     }
