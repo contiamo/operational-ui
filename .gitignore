@@ -16,3 +16,4 @@ cypress/screenshots
 # Auto-generated icons
 src/Icon/*.ts*
 coverage
+__generated__

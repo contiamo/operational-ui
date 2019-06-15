@@ -1,7 +1,10 @@
 // styleguide.config.js
 const { join, resolve } = require("path")
+const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin")
+
 const { parse: propsParser } = require("react-docgen-typescript")
 const { version } = require("./package.json")
+
 const { styles, theme } = require("./styleguide/styles.js")
 const { sections } = require("./styleguide/sections.js")
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin")
@@ -29,6 +32,8 @@ module.exports = {
     StyleGuideRenderer: join(__dirname, "styleguide/StyleGuideRenderer"),
     TableOfContentsRenderer: join(__dirname, "styleguide/TableOfContentsRenderer"),
     ComponentsListRenderer: join(__dirname, "styleguide/ComponentsListRenderer"),
+    Playground: join(__dirname, "styleguide/Playground"),
+    ReactExample: join(__dirname, "styleguide/ReactExample"),
     ReactComponentRenderer: join(__dirname, "styleguide/ReactComponentRenderer"),
     SectionHeadingRenderer: join(__dirname, "styleguide/SectionHeadingRenderer"),
     HeadingRenderer: join(__dirname, "styleguide/HeadingRenderer"),
@@ -61,10 +66,14 @@ module.exports = {
     return webpackConfig
   },
   webpackConfig: {
+    node: {
+      fs: "empty",
+      module: "empty",
+    },
     resolve: {
       extensions: [".js", ".tsx", ".ts"],
     },
-    plugins: [new ForkTsCheckerWebpackPlugin()],
+    plugins: [new ForkTsCheckerWebpackPlugin(), new MonacoWebpackPlugin()],
     optimization: {
       removeAvailableModules: false,
       removeEmptyChunks: false,
@@ -83,6 +92,10 @@ module.exports = {
               },
             },
           },
+        },
+        {
+          test: /\.css$/,
+          use: ["style-loader", "css-loader"],
         },
       ],
     },
