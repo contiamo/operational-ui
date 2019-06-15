@@ -2,10 +2,10 @@ import svgr from "@svgr/core"
 import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync } from "fs"
 import * as rimraf from "rimraf"
 import { join, parse, sep } from "path"
-import * as ProgressBar from "progress"
-import * as program from "commander"
-import * as chokidar from "chokidar"
-import * as base64Img from "base64-img"
+import ProgressBar from "progress"
+import program from "commander"
+import chokidar from "chokidar"
+import base64Img from "base64-img"
 
 program
   .version(require("./package.json").version)
