@@ -32,7 +32,7 @@
     "preversion": "npm run build",
     "version": "auto-changelog -u && git add CHANGELOG.md",
     "precommit": "tsc && lint-staged",
-    "ci": "npm run build:icons && npm run test:unit && run-p danger build"
+    "ci": "npm run build:icons && npm run test:unit"
   },
   "lint-staged": {
     "*.(js|jsx|json|md)": [
