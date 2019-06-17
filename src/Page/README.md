@@ -81,10 +81,10 @@ import { Page, Card } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { Button, Page, Card } from "@operational/components"
+import { OpenIcon, Button, Page, Card } from "@operational/components"
 
 const actions = (
-  <Button color="primary" icon="Open">
+  <Button color="primary" icon={OpenIcon}>
     Go somewhere else
   </Button>
 )
@@ -138,7 +138,7 @@ const Tab = props => (
 
 ```jsx
 import * as React from "react"
-import { PageContent, Card, Page, Button } from "@operational/components"
+import { OpenIcon, PageContent, Card, Page, Button } from "@operational/components"
 
 const TabContent = props => (
   <PageContent areas="side main">
@@ -153,7 +153,7 @@ const TabContent = props => (
 )
 ;<div style={{ height: 300 }}>
   <Page
-    actions={<Button icon="Open">Go somewhere else</Button>}
+    actions={<Button icon={OpenIcon}>Go somewhere else</Button>}
     title="Bundle detail"
     tabs={[
       { name: "overview", children: <TabContent title="overview" /> },
