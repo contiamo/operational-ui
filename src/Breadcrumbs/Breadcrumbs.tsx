@@ -36,7 +36,7 @@ const intersperseSlashes = (index: number) => ([head, ...tail]: React.ReactNode[
 const Breadcrumbs: React.SFC<BreadcrumbsProps> = props => {
   const items = React.Children.toArray(props.children)
   return (
-    <Container aria-label={"Breadcrumb"} {...props}>
+    <Container aria-label="Breadcrumb" {...props}>
       {items.length === 1 ? [addCaret(items[0] as React.ReactElement)] : intersperseSlashes(0)(items)}
     </Container>
   )
