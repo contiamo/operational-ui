@@ -17,6 +17,29 @@ import { Card, CardColumns, CardColumn } from "@operational/components"
 </Card>
 ```
 
+# With JSX title and actions
+
+Here's how you can easily use this component.
+
+```jsx
+import * as React from "react"
+import { Card, CardColumns, CardColumn, Button } from "@operational/components"
+;<Card title="Bundle Information">
+  <CardColumns>
+    <CardColumn
+      title={<strong>Data Sources</strong>}
+      action={
+        <Button condensed color="primary">
+          Add
+        </Button>
+      }
+    >
+      I am a table
+    </CardColumn>
+  </CardColumns>
+</Card>
+```
+
 # With Tabs
 
 Card columns can be used with tabs when required. Here's how.
