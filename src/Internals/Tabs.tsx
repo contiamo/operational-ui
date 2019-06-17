@@ -88,13 +88,13 @@ const TabContainer = styled("div")<{ active?: boolean }>(({ theme, active }) => 
   },
 }))
 
-const TabName = styled("p")(() => ({
+const TabName = styled("p")({
   width: "100%",
   whiteSpace: "nowrap",
   overflow: "hidden",
   textOverflow: "ellipsis",
   textAlign: "center",
-}))
+})
 
 const getTabIndexByName = (tabs: Tab[], tabName?: string): number => {
   if (tabName) {
