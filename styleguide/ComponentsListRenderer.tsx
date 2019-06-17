@@ -19,7 +19,6 @@ export interface ParentItems {
   visibleName: string
   description?: string
   href: string
-  content?: any
   filepath?: string
   usageMode: "collapse" | "expanded"
   components: ComponentsListItem[]
