@@ -168,6 +168,10 @@ ${files
     }
   })
 
+if (program.output) {
+  buildIcons(program.output)
+}
+
 // Watch mode (input folder only)
 if (program.watch) {
   chokidar.watch([`${inputFolder}/**.svg`]).on("change", buildIcons)
