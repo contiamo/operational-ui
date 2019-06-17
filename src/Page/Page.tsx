@@ -7,6 +7,7 @@ import Progress from "../Progress/Progress"
 import { DefaultProps } from "../types"
 import { Title } from "../Typography/Title"
 import styled from "../utils/styled"
+import { OperationalStyleConstants } from "../utils/constants"
 
 export interface BaseProps extends DefaultProps {
   /** Content of the page */
@@ -64,15 +65,22 @@ export interface PropsWithTabs extends BaseProps {
 
 export type PageProps = PropsWithSimplePage | PropsWithComplexPage | PropsWithTabs
 
-const Container = styled("div")<{ hasTabs: boolean }>(({ theme, hasTabs }) => ({
+const computeRowHeights = (theme: OperationalStyleConstants, hasTitle: boolean, hasTabs: boolean) => {
+  const titleHeightString = hasTitle ? `${theme.titleHeight}px ` : ""
+  const tabsHeightString = hasTabs ? `${theme.tabsBarHeight}px ` : ""
+  const titleHeightWithRowGap = hasTitle ? theme.titleHeight + theme.space.element : 0
+  const tabsHeightWithRowGap = hasTabs ? theme.tabsBarHeight + theme.space.element : 0
+  const viewContainerHeightString = `calc(100% - ${titleHeightWithRowGap + tabsHeightWithRowGap}px)`
+  return `${titleHeightString}${tabsHeightString}${viewContainerHeightString}`
+}
+
+const Container = styled("div")<{ hasTitle: boolean; hasTabs: boolean }>(({ theme, hasTitle, hasTabs }) => ({
   height: "100%",
   position: "relative",
   display: "grid",
   gridRowGap: theme.space.element,
   backgroundColor: theme.color.white,
-  gridTemplateRows: hasTabs
-    ? `${theme.titleHeight}px ${theme.tabsBarHeight}px calc(100% - ${theme.titleHeight + theme.tabsBarHeight}px);`
-    : `${theme.titleHeight}px calc(100% - ${theme.titleHeight}px);`,
+  gridTemplateRows: computeRowHeights(theme, hasTitle, hasTabs),
 }))
 
 const TitleContainer = styled("div")(({ theme }) => ({
@@ -166,7 +174,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
     const { tabs, fill, onTabChange, loading, title, ...props } = this.props
 
     return (
-      <Container hasTabs={Boolean(tabs)} {...props}>
+      <Container hasTabs={Boolean(tabs)} hasTitle={Boolean(title)} {...props}>
         {loading && <FixedProgress />}
         {tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}
       </Container>
