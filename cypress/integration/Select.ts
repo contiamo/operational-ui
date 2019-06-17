@@ -88,7 +88,7 @@ describe("Select Components", () => {
       .type("{esc}")
       .type("{downarrow}{downarrow}{downarrow}{downarrow}{enter}")
       .wait(300)
-    cy.get('[data-cy="multi-select"] input[value="Option 1, Option 2, Option 3, Option 4"]').type("{esc}")
+    cy.get('[data-cy="multi-select"] input[value="Option 1, Option 4"]').type("{esc}")
   })
   it("should filter content", () => {
     cy.visit("/#!/Select/7").wait(1000)
