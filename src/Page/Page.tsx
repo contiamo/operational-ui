@@ -115,7 +115,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
 
     return (
       <Tabs tabs={tabs} activeTabName={this.props.activeTabName} onTabChange={this.props.onTabChange}>
-        {({ tabsBar, activeChildren }) => (
+        {({ tabsBar, activeChildren, activeTabId }) => (
           <>
             {title ? (
               <>
@@ -128,7 +128,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
             ) : (
               tabsBar
             )}
-            <ViewContainer role="tabpanel" tabIndex={0}>
+            <ViewContainer aria-labelledby={activeTabId} role="tabpanel" tabIndex={0}>
               {activeChildren}
             </ViewContainer>
           </>

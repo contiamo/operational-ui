@@ -3,8 +3,10 @@ import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
 import { IconComponentType } from "../Icon/Icon"
 import { inputFocus } from "../utils"
+import { useUniqueId } from "../useUniqueId"
 
 export interface Tab {
+  id?: string
   name: string
   children: React.ReactNode
   hidden?: boolean
@@ -17,7 +19,11 @@ export interface Props {
   tabs: Tab[]
   activeTabName?: string
   onTabChange?: (newTabName: string) => void
-  children: (childrenConfig: { tabsBar: React.ReactNode; activeChildren: React.ReactNode }) => React.ReactNode
+  children: (childrenConfig: {
+    tabsBar: React.ReactNode
+    activeTabId: string
+    activeChildren: React.ReactNode
+  }) => React.ReactNode
 }
 
 export interface State {
@@ -99,6 +105,7 @@ const getTabIndexByName = (tabs: Tab[], tabName?: string): number => {
 }
 
 interface TabProps {
+  id?: string
   index: number
   tab: Tab
   onTabClick: (index: number) => void
@@ -106,7 +113,7 @@ interface TabProps {
   isKeyboardActive: boolean
 }
 
-const SingleTab = ({ index, isActive, onTabClick, tab, isKeyboardActive }: TabProps) => {
+const SingleTab = ({ id, index, isActive, onTabClick, tab, isKeyboardActive }: TabProps) => {
   const ref = React.useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (isActive && isKeyboardActive && ref.current) {
@@ -129,7 +136,9 @@ const SingleTab = ({ index, isActive, onTabClick, tab, isKeyboardActive }: TabPr
       ) : (
         tab.icon && React.createElement(tab.icon, { size: 14, color: tab.iconColor, left: true })
       )}
-      <TabName>{tab.name}</TabName>
+      <TabName id={id} aria-label={tab.name}>
+        {tab.name}
+      </TabName>
     </TabContainer>
   )
 }
@@ -138,6 +147,13 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
   const activeTabIndex = getTabIndexByName(tabs, activeTabName)
   const [activeTab, setActiveTab] = useState(activeTabIndex)
   const isKeyboardActive = useRef(false)
+  const uniqueId = useUniqueId()
+
+  const getUniqueTabId = React.useCallback((index: number) => `operational-ui__Tab--${uniqueId}-${index}`, [uniqueId])
+  const tabsWithId = React.useMemo(() => tabs.map((tab, index) => ({ ...tab, id: tab.id || getUniqueTabId(index) })), [
+    tabs,
+    getUniqueTabId,
+  ])
 
   const onTabClick = useCallback(
     (index: number) => {
@@ -187,6 +203,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
               .filter(({ hidden }) => !hidden)
               .map((tab, index: number) => (
                 <SingleTab
+                  id={tab.id || getUniqueTabId(index)}
                   key={index}
                   index={index}
                   tab={tab}
@@ -197,6 +214,7 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
               ))}
           </TabsBar>
         ),
+        activeTabId: tabsWithId[activeTab].id,
         activeChildren: tabs[activeTab].children,
       })}
     </>
