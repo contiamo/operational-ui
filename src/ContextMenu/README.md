@@ -7,7 +7,7 @@ import * as React from "react"
 import { ContextMenu, ContextMenuProps } from "@operational/components"
 
 const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
-;<ContextMenu items={menuItems} onClick={item => alert(`clicked ${item}`)}>
+;<ContextMenu items={menuItems} onClick={item => alert(`clicked ${item.label}`)}>
   <span>Click here</span>
 </ContextMenu>
 ```
@@ -20,10 +20,10 @@ import { ContextMenu, ContextMenuProps, Button, SearchIcon } from "@operational/
 
 const menuItems = [{ label: "Menu 1", icon: SearchIcon }, "Menu 2", "Menu 3"]
 ;<>
-  <ContextMenu items={menuItems} onClick={item => alert(`clicked ${item}`)}>
+  <ContextMenu items={menuItems} onClick={item => alert(`clicked ${item.label}`)}>
     <Button>Click here for icon on left</Button>
   </ContextMenu>
-  <ContextMenu iconLocation="right" items={menuItems} onClick={item => alert(`clicked ${item}`)}>
+  <ContextMenu iconLocation="right" items={menuItems} onClick={item => alert(`clicked ${item.label}`)}>
     <Button color="primary">Click here for icon on right</Button>
   </ContextMenu>
 </>
@@ -59,7 +59,7 @@ In some cases, you might want your `label` to be a little bit more clever than j
 
 ```jsx
 import * as React from "react"
-import { ContextMenu, ContextMenuProps, Contact, Hint, Button } from "@operational/components"
+import { AddIcon, ContextMenu, ContextMenuProps, Contact, Hint, Button } from "@operational/components"
 
 /* Anything can be a label now, even some DIV you style yourself */
 const MyLabelContainer = ({ children, style }) => (
@@ -73,7 +73,7 @@ const menuItems = [
         <Contact name="Tejas Kumar" meta="youare@cool.com" />
       </MyLabelContainer>
     ),
-    icon: "Add",
+    icon: AddIcon,
   },
   {
     label: (
@@ -93,7 +93,7 @@ const menuItems = [
         <Contact name="Sibelius Seraphini" meta="sibelius@seraphini.com" />
       </MyLabelContainer>
     ),
-    icon: "Add",
+    icon: AddIcon,
   },
   {
     label: (
@@ -104,7 +104,7 @@ const menuItems = [
         />
       </MyLabelContainer>
     ),
-    icon: "Add",
+    icon: AddIcon,
   },
 ]
 ;<>
@@ -124,6 +124,6 @@ import { ContextMenu, ContextMenuProps } from "@operational/components"
 
 const menuItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(item => `Menu ${item}`)
 ;<ContextMenu condensed items={menuItems} onClick={() => alert("clicked")}>
-  Many options may be selected here
+  <div>Many options may be selected here</div>
 </ContextMenu>
 ```

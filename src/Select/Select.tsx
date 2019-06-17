@@ -120,7 +120,6 @@ export const Select: React.FC<SelectProps> = ({
       disabled={disabled}
       keepOpenOnItemClick={Array.isArray(value)}
       items={items}
-      tabIndex={disabled ? -1 : tabIndex}
       aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
       initialFocusedItemIndex={options.findIndex(option => option.value === value)}
       {...rest}
@@ -145,7 +144,7 @@ export const Select: React.FC<SelectProps> = ({
             <SelectInput
               inputRef={inputRef}
               fullWidth={fullWidth}
-              tabIndex={customOption ? 0 : -1}
+              tabIndex={customOption && customOption.value === value ? 0 : -1}
               disabled={disabled}
               placeholder={placeholder}
               hasCustomOption={customOption ? customOption.value === value : false}

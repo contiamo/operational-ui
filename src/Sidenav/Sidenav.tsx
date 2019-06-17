@@ -25,11 +25,19 @@ const Container = styled("div")<SidenavProps>(({ theme, compact, dark }) => {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    overflow: "auto",
+    overflow: compact ? "hidden" : "overlay",
     width: compact ? theme.compactSidebarWidth : theme.sidebarWidth,
     height: "100%",
     borderRight: "1px solid",
     borderRightColor: theme.color.separators.default,
+
+    ".operational-ui__sidenav-item_end": {
+      marginTop: "auto",
+    },
+
+    ".operational-ui__sidenav-item_end + .operational-ui__sidenav-item_end": {
+      marginTop: 0,
+    },
   }
 })
 

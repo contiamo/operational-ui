@@ -35,7 +35,12 @@ const StatefulSidenav = () => {
     <div style={{ height: 400, display: "flex" }}>
       <Sidenav>
         <SidenavHeader condensed icon={HomeIcon} label="Project Home" />
-        <SidenavHeader label="The Prize" active={activeHeaders.indexOf(1) > -1} onToggle={() => toggle(1)}>
+        <SidenavHeader label="Inactive SidenavHeader">
+          <SidenavItem label="Cheese" />
+          <SidenavItem label="Coffee" items={[{ label: "Tea" }]} />
+          <SidenavItem label="Cake" />
+        </SidenavHeader>
+        <SidenavHeader label="Active SidenavHeader" active={activeHeaders.indexOf(1) > -1} onToggle={() => toggle(1)}>
           <SidenavItem label="The First Prize" compactLabel="First" icon={AddIcon} />
           <SidenavItem active label="The Second Prize" compactLabel="Second" icon={AdminIcon} />
           <SidenavItem label="No Short Label" icon={BinaryIcon} />

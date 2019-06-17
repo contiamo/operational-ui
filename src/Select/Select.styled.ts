@@ -3,6 +3,7 @@ import { expandColor } from "../utils/constants"
 import Input from "../Input/Input"
 
 export const Listbox = styled("div")<{ disabled: boolean; color?: string; fullWidth: boolean }>`
+  label: SelectListbox;
   display: flex;
   flex-direction: column;
   color: ${({ theme, color }) => expandColor(theme, color)};
@@ -11,10 +12,6 @@ export const Listbox = styled("div")<{ disabled: boolean; color?: string; fullWi
   outline: none;
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "initial")};
 `
-
-Listbox.defaultProps = {
-  tabIndex: -1,
-}
 
 const dropdownButtonWidth = 40
 

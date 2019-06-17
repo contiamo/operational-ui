@@ -1,12 +1,12 @@
 import * as React from "react"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { SidenavProps } from "../Sidenav/Sidenav"
-import { SidenavItemProps } from "../SidenavItem/SidenavItem"
+import { SidenavItemProps } from "../SidenavItem/SidenavItem.types"
 import { DefaultProps } from "../types"
 import { isModifiedEvent, isOutsideLink } from "../utils"
 import styled from "../utils/styled"
 import { truncate } from "../utils/truncate"
-import { IconComponentType, ChevronUpIcon, ChevronDownIcon } from "../Icon/Icon"
+import { IconComponentType } from "../Icon/Icon"
 
 export interface SidenavHeaderProps extends DefaultProps {
   /** Main label for the header */
@@ -38,24 +38,32 @@ const SidenavHeaderBase = styled<"div" | "a">("div")<{
   as?: "div" | "a"
   compact: SidenavHeaderProps["compact"]
   dark?: SidenavHeaderProps["dark"]
-}>(({ theme, compact, dark }) => ({
-  label: "sidenavheader",
-  textDecoration: "none",
-  width: "100%",
-  borderBottom: compact ? 0 : "1px solid",
-  borderBottomColor: dark ? theme.color.black : theme.color.separators.default,
-}))
+}>(({ theme, compact, dark }) => {
+  const color = theme.color.text.default
+
+  return {
+    label: "sidenavheader",
+    textDecoration: "none",
+    width: "100%",
+    borderBottom: compact ? 0 : "1px solid",
+    borderBottomColor: dark ? theme.color.black : theme.color.separators.default,
+    color,
+
+    ":link, :visited": {
+      color,
+    },
+  }
+})
 
 const Content = styled("div")<{
   onClick: SidenavHeaderProps["onClick"]
   isCondensed: boolean
   isActive: boolean
-  compact: SidenavHeaderProps["compact"]
-}>(({ theme, onClick, isCondensed, compact, isActive }) => ({
+}>(({ theme, onClick, isCondensed, isActive }) => ({
   textDecoration: "none",
   cursor: Boolean(onClick) ? "pointer" : "initial",
   position: "relative",
-  display: compact ? "none" : "flex",
+  display: "flex",
   flexDirection: "column",
   alignItems: "flex-start",
   justifyContent: "center",
@@ -85,26 +93,6 @@ const ItemsContainer = styled("div")({
   // animation: `${floatIn} .15s forwards ease`,
   position: "relative",
 })
-
-const CloseButton = styled("div")(({ theme, onClick }) => ({
-  position: "absolute",
-  cursor: onClick ? "pointer" : "initial",
-  display: "none",
-  alignItems: "center",
-  justifyContent: "center",
-  width: 24,
-  height: 24,
-  top: 16,
-  right: theme.space.content,
-  color: theme.color.primary,
-  ".op_sidenavheader:hover &": {
-    display: "flex",
-  },
-  "& svg": {
-    width: 16,
-    height: 16,
-  },
-}))
 
 const Summary = styled("div")<{
   isActive: boolean
@@ -162,39 +150,23 @@ const SidenavHeader: React.SFC<SidenavHeaderProps> = ({ onToggle, active, to, co
               }
             }}
           >
-            <Content
-              isActive={isActive}
-              compact={compact}
-              onClick={props.onClick}
-              isCondensed={Boolean(props.condensed)}
-            >
-              <LabelText compact={compact} isActive={isActive}>
-                {props.label}
-                {props.icon && typeof props.icon === "function"
-                  ? React.createElement(props.icon as IconComponentType, { right: true })
-                  : props.icon}
-              </LabelText>
-              {!props.condensed && (
-                <Summary dark={dark} compact={compact} isActive={isActive}>
-                  {truncate(24)(childSidenavItems.map(child => child.props.label).join(", "))}
-                </Summary>
-              )}
-            </Content>
-            {childSidenavItems.length > 0 && (
-              <CloseButton
-                onClick={(ev: React.SyntheticEvent<Node>) => {
-                  // Prevent clicks on parent in order to avoid conflicting behavior
-                  ev.stopPropagation()
-                  if (onToggle) {
-                    onToggle(!active)
-                  }
-                }}
-              >
-                {active ? <ChevronUpIcon /> : <ChevronDownIcon />}
-              </CloseButton>
+            {!compact && (
+              <Content isActive={isActive} onClick={props.onClick} isCondensed={Boolean(props.condensed)}>
+                <LabelText compact={compact} isActive={isActive}>
+                  {props.label}
+                  {props.icon && typeof props.icon === "function"
+                    ? React.createElement(props.icon as IconComponentType, { right: true })
+                    : props.icon}
+                </LabelText>
+                {!props.condensed && (
+                  <Summary dark={dark} compact={compact} isActive={isActive}>
+                    {truncate(24)(childSidenavItems.map(child => child.props.label).join(", "))}
+                  </Summary>
+                )}
+              </Content>
             )}
             {isActive && (
-              <ItemsContainer>
+              <ItemsContainer data-cy="operational-ui__sidenav-items">
                 {React.Children.map(props.children, child => {
                   /**
                    * If a child manages to get here but does not exist

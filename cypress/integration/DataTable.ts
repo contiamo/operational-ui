@@ -61,13 +61,15 @@ describe("DataTable", () => {
     cy.get('[id^="input-field-"]')
   })
   it("should support input validation", () => {
-    cy.get('[id^="input-field-"]').type("ola amgio como estas")
+    cy.get('[data-cy="validate-me"]')
+      .first()
+      .type("ola amgio como estas")
     cy.contains("Only numbers please!")
   })
   it("should support selects", () => {
-    cy.get('[role="listbox"]')
+    cy.get('[data-cy="pull-me-down"] > div')
       .first()
-      .click()
+      .type("{downarrow}")
     cy.contains("Other Dropdown Option")
   })
 })
