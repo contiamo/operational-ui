@@ -38,13 +38,22 @@ const SidenavHeaderBase = styled<"div" | "a">("div")<{
   as?: "div" | "a"
   compact: SidenavHeaderProps["compact"]
   dark?: SidenavHeaderProps["dark"]
-}>(({ theme, compact, dark }) => ({
-  label: "sidenavheader",
-  textDecoration: "none",
-  width: "100%",
-  borderBottom: compact ? 0 : "1px solid",
-  borderBottomColor: dark ? theme.color.black : theme.color.separators.default,
-}))
+}>(({ theme, compact, dark }) => {
+  const color = theme.color.text.default
+
+  return {
+    label: "sidenavheader",
+    textDecoration: "none",
+    width: "100%",
+    borderBottom: compact ? 0 : "1px solid",
+    borderBottomColor: dark ? theme.color.black : theme.color.separators.default,
+    color,
+
+    ":link, :visited": {
+      color,
+    },
+  }
+})
 
 const Content = styled("div")<{
   onClick: SidenavHeaderProps["onClick"]
