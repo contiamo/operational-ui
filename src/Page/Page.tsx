@@ -64,14 +64,15 @@ export interface PropsWithTabs extends BaseProps {
 
 export type PageProps = PropsWithSimplePage | PropsWithComplexPage | PropsWithTabs
 
-const Container = styled("div")(({ theme }) => ({
+const Container = styled("div")<{ hasTabs: boolean }>(({ theme, hasTabs }) => ({
   height: "100%",
   position: "relative",
   display: "grid",
   gridRowGap: theme.space.element,
   backgroundColor: theme.color.white,
-  gridTemplateRows: `${theme.titleHeight}px ${theme.tabsBarHeight}px calc(100% - ${theme.titleHeight +
-    theme.tabsBarHeight}px);`,
+  gridTemplateRows: hasTabs
+    ? `${theme.titleHeight}px ${theme.tabsBarHeight}px calc(100% - ${theme.titleHeight + theme.tabsBarHeight}px);`
+    : `${theme.titleHeight}px calc(100% - ${theme.titleHeight}px);`,
 }))
 
 const TitleContainer = styled("div")(({ theme }) => ({
@@ -165,7 +166,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
     const { tabs, fill, onTabChange, loading, title, ...props } = this.props
 
     return (
-      <Container {...props}>
+      <Container hasTabs={Boolean(tabs)} {...props}>
         {loading && <FixedProgress />}
         {tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}
       </Container>
