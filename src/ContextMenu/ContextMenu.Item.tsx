@@ -53,7 +53,7 @@ const Container = styled("div")<Props>(({ align, theme, onClick, isActive, conde
     },
     ...(typeof item !== "string" && Boolean(item.description)
       ? {
-          borderBottom: `1px solid ${theme.color.border.default}`,
+          borderBottom: `1px solid ${theme.color.border.select}`,
         }
       : {}),
     ...(!!onClick
@@ -70,7 +70,7 @@ const Container = styled("div")<Props>(({ align, theme, onClick, isActive, conde
           color: theme.color.text.lightest,
         }),
     color: isActive ? theme.color.primary : theme.color.text.default,
-    borderTop: `1px solid ${theme.color.border.default}`,
+    borderTop: `1px solid ${theme.color.border.select}`,
     "&:last-child": {
       paddingBottom: 2,
     },
