@@ -2,6 +2,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 import AccordionSection, { AccordionSectionProps } from "../AccordionSection/AccordionSection"
+import { useUniqueId } from "../useUniqueId"
 
 export interface AccordionProps extends DefaultProps {
   children: React.ReactElement<AccordionSectionProps, typeof AccordionSection>[]
@@ -19,7 +20,9 @@ const Container = styled("div")<{ sections: boolean[] }>`
   border-top: none;
 `
 
-const Accordion = ({ onToggle, expanded, children, ...rest }: AccordionProps) => {
+const Accordion = ({ onToggle, expanded, children, id, ...rest }: AccordionProps) => {
+  const uid = useUniqueId(id)
+
   // this ref is used to detect if visitor uses mouse or keyboard
   // to show focus state in case of keyboard
   const isMouseRef = React.useRef(false)
@@ -52,6 +55,7 @@ const Accordion = ({ onToggle, expanded, children, ...rest }: AccordionProps) =>
         isMouseRef.current = false
       }}
       data-cy="operational-ui__Accordion"
+      id={uid}
       {...rest}
     >
       {React.Children.map(children, (element, index) =>
@@ -61,6 +65,7 @@ const Accordion = ({ onToggle, expanded, children, ...rest }: AccordionProps) =>
           toggleSection,
           index,
           isMouseRef,
+          id: uid,
         }),
       )}
     </Container>
