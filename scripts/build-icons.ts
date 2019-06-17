@@ -15,17 +15,12 @@ program
   .option("-w, --watch", "Watch filesystem for rebuild")
   .parse(process.argv)
 
-const inputFolder = program.input || join(__dirname, "../icons")
-const outputFolder = program.output || join(__dirname, "../src/Icon")
+const inputFolder = join(__dirname, "..", program.input || "./icons")
+const outputFolder = join(__dirname, "..", program.output || "./src/Icon")
 
 // Make sure the output folder is clean
 if (program.clean) {
   rimraf.sync(`${outputFolder}/*.tsx`)
-}
-
-// Ensure the output folder exists
-if (!existsSync(outputFolder)) {
-  mkdirSync(outputFolder)
 }
 
 /**
@@ -36,6 +31,11 @@ if (!existsSync(outputFolder)) {
 export const buildIcons = (iconPath?: string) =>
   new Promise((resolve, reject) => {
     try {
+      // Ensure the output folder exists
+      if (!existsSync(outputFolder)) {
+        mkdirSync(outputFolder)
+      }
+
       const files = readdirSync(inputFolder).filter(i => {
         if (!/\.svg$/.exec(i)) return false
         if (iconPath && iconPath.split(sep)[1] !== i) return false
@@ -169,7 +169,7 @@ ${files
   })
 
 if (program.output) {
-  buildIcons(program.output)
+  buildIcons().catch(console.error)
 }
 
 // Watch mode (input folder only)
