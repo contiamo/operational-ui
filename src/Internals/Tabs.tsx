@@ -149,6 +149,10 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
     getUniqueTabId,
   ])
 
+  useEffect(() => {
+    setActiveTab(activeTabIndex)
+  }, [activeTabIndex])
+
   const onTabClick = useCallback(
     (index: number) => {
       setActiveTab(index)
