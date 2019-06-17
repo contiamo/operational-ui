@@ -23,19 +23,19 @@ export interface GeneratedTypedef {
 program
   .version(require(join(__dirname, "../package.json")).version)
   .option("-w, --watch", "Watch filesystem for rebuild")
+  .option("-o, --output [relative path]", "Output dictionary to a file (relative path)")
   .parse(process.argv)
 
 const watchDir = join(__dirname, "../lib")
 
-export const generateTypeDictionary = () =>
+export const generateTypeDictionary = (outputPath = "styleguide/__generated__") =>
   new Promise(async (resolve, reject) => {
     try {
+      const generatedFolder = join(__dirname, "..", outputPath)
       const parentProject = require(join(__dirname, "../package.json"))
-
       // This is used in Monaco. It simulates a virtual filesystem.
       const virtualModuleDir = `node_modules/${parentProject.name}`
 
-      const generatedFolder = join(__dirname, "../styleguide/__generated__")
       const parentPath = join(__dirname, "../")
       const getTypesDir = () => join(__dirname, "../lib")
       const replaceStringLiteralTokens = (str: string) => str.replace(/`/gm, "'").replace(/\$\{/gm, "{")
@@ -112,6 +112,10 @@ export const generateTypeDictionary = () =>
 
     resolve("Done!")
   })
+
+if (program.output) {
+  generateTypeDictionary(program.output)
+}
 
 if (program.watch) {
   // Watch mode (input folder only)
