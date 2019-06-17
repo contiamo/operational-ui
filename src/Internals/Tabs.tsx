@@ -35,12 +35,10 @@ export interface SingleTabProps {
   isKeyboardActive: boolean
 }
 
-const tabsBarHeight = 48
-
 const TabsBar = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "flex-end",
-  height: tabsBarHeight,
+  height: theme.tabsBarHeight,
   position: "relative",
   margin: `0 ${theme.space.element}px`,
   // This draws the line underneath the tabs
@@ -50,7 +48,7 @@ const TabsBar = styled("div")(({ theme }) => ({
     position: "absolute",
     width: "100%",
     height: 0,
-    top: tabsBarHeight - 1,
+    top: theme.tabsBarHeight - 1,
     left: 0,
     borderBottom: `1px solid ${theme.color.border.select}`,
   },

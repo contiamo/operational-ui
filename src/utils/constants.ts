@@ -257,6 +257,7 @@ const constants = {
   sidebarWidth: 220,
   topbarHeight: 42,
   titleHeight: 50,
+  tabsBarHeight: 48,
 }
 
 /*

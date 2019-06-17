@@ -70,7 +70,8 @@ const Container = styled("div")(({ theme }) => ({
   display: "grid",
   gridRowGap: theme.space.element,
   backgroundColor: theme.color.white,
-  gridTemplateRows: "max-content",
+  gridTemplateRows: `${theme.titleHeight}px ${theme.tabsBarHeight}px calc(100% - ${theme.titleHeight +
+    theme.tabsBarHeight}px);`,
 }))
 
 const TitleContainer = styled("div")(({ theme }) => ({
