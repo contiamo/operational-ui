@@ -26,8 +26,13 @@ export interface Props {
   }) => React.ReactNode
 }
 
-export interface State {
-  activeTab: number
+export interface SingleTabProps {
+  id?: string
+  index: number
+  tab: Tab
+  onTabClick: (index: number) => void
+  isActive: boolean
+  isKeyboardActive: boolean
 }
 
 const tabsBarHeight = 48
@@ -104,16 +109,7 @@ const getTabIndexByName = (tabs: Tab[], tabName?: string): number => {
   return 0
 }
 
-interface TabProps {
-  id?: string
-  index: number
-  tab: Tab
-  onTabClick: (index: number) => void
-  isActive: boolean
-  isKeyboardActive: boolean
-}
-
-const SingleTab = ({ id, index, isActive, onTabClick, tab, isKeyboardActive }: TabProps) => {
+const SingleTab = ({ id, index, isActive, onTabClick, tab, isKeyboardActive }: SingleTabProps) => {
   const ref = React.useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (isActive && isKeyboardActive && ref.current) {
