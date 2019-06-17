@@ -9,13 +9,17 @@ import * as React from "react"
 import { Accordion, AccordionSection } from "@operational/components"
 
 const MyComponent = () => {
+  const [expanded, setExpanded] = React.useState([true, false, false])
+  const onToggle = (index: number) => {
+    const newExpanded = [...sections]
+    newExpanded[index] = !newExpanded[index]
+    setExpanded(newExpanded)
+  }
   return (
     <div style={{ height: 400 }}>
-      <Accordion expanded={[true, false, false]}>
-        <AccordionSection
-          title="Section 1"
-          expanded={true}
-          content={() => (
+      <Accordion expanded={expanded} onToggle={onToggle}>
+        <AccordionSection title="Section 1">
+          {() => (
             <>
               Content 1<br />
               Content 1<br />
@@ -34,9 +38,9 @@ const MyComponent = () => {
               Content 1<br />
             </>
           )}
-        />
-        <AccordionSection title="Section 2" expanded={false} content={() => <>Content 2</>} />
-        <AccordionSection title="Section 3" expanded={false} content={() => <>Content 3</>} />
+        </AccordionSection>
+        <AccordionSection title="Section 2">Content 2</AccordionSection>
+        <AccordionSection title="Section 3">Content 3</AccordionSection>
       </Accordion>
     </div>
   )

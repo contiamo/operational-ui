@@ -3,10 +3,12 @@ import { SectionHeader } from "../Internals/SectionHeader"
 import styled from "../utils/styled"
 import { ChevronUpIcon, ChevronDownIcon } from "../Icon/Icon"
 import { DefaultProps } from "../types"
+import isFunction from "lodash/isFunction"
 
 export interface AccordionSectionProps extends DefaultProps {
   title: React.ReactNode
-  content: () => React.ReactNode
+  children: (() => React.ReactNode) | React.ReactNode
+  // for internal use
   expanded: boolean
   index: number
   toggleSection: (index: number) => void
@@ -68,7 +70,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   expanded,
   toggleSection,
   title,
-  content,
+  children,
   isMouseRef,
 }) => {
   const titleId = `${id}-${index}-heading`
@@ -96,7 +98,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Header>
       <Panel id={contentId} aria-labelledby={titleId} hidden={!expanded}>
-        {expanded && content()}
+        {expanded && isFunction(children) ? children() : children}
       </Panel>
       {focusFlag ? <Focus /> : null}
     </Container>
