@@ -342,6 +342,20 @@ ${JSON.stringify(lastChanged, null, 2)}
 ;<MyComponent />
 ```
 
+### Return Value
+
+The value prop passed to select is either an `Option` object, or an Array of `Option` objects. If it is an
+array, the component automatically becomes a multi-select. The shape of an Option object is described below.
+
+```ts
+import { SelectProps } from "@operational/components"
+
+const option: SelectProps["options"][-1] = {
+  label: "any_string",
+  value: "Any String",
+}
+```
+
 ### Custom Input exposes onBlur callback
 
 Let's say we would like to prevent user leaving the custom input value empty, but still would like to allow user clean up the input before starting entering something new. We can use onInputBlur callback to implement such behaviour.
@@ -378,13 +392,15 @@ const MyComponent = () => {
         placeholder="Choose an option"
         customOption={{ label: "Custom...", value: customOptionValue }}
         onChange={(newValue, lastChanged) => {
-          setValue(newValue)
+          setValue(String(newValue))
           if (lastChanged && lastChanged.label === "Custom...") {
-            setCustomOptionValue(newValue)
+            setCustomOptionValue(String(newValue))
           }
           setLastChanged(lastChanged)
         }}
-        onInputBlur={onBlurHandler}
+        customInputSettings={{
+          onBlur: onBlurHandler,
+        }}
       />
       <Code>
         {`
@@ -399,18 +415,4 @@ ${JSON.stringify(lastChanged, null, 2)}
 }
 
 ;<MyComponent />
-```
-
-### Return Value
-
-The value prop passed to select is either an `Option` object, or an Array of `Option` objects. If it is an
-array, the component automatically becomes a multi-select. The shape of an Option object is described below.
-
-```ts
-import { SelectProps } from "@operational/components"
-
-const option: SelectProps["options"][-1] = {
-  label: "any_string",
-  value: "Any String",
-}
 ```

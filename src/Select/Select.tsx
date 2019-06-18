@@ -25,7 +25,7 @@ export const Select: React.FC<SelectProps> = ({
   value,
   naked,
   onChange,
-  onInputBlur,
+  customInputSettings,
   placeholder,
   color,
   disabled,
@@ -165,8 +165,8 @@ export const Select: React.FC<SelectProps> = ({
                 }
               }}
               onBlur={() => {
-                if (!isReadOnly && onInputBlur) {
-                  onInputBlur(getDisplayValue(value)(options))
+                if (!isReadOnly && customInputSettings && customInputSettings.onBlur) {
+                  customInputSettings.onBlur(getDisplayValue(value)(options))
                 }
               }}
             />
