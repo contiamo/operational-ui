@@ -42,7 +42,7 @@ const Accordion = ({ onToggle, expanded, children, id, ...rest }: AccordionProps
 
   // number of items in state and number of childre can be different
   const sectionsMapped = React.Children.map(children, (_, index) =>
-    onToggle && expanded ? !!expanded[index] : !!sections[index],
+    Boolean(onToggle && expanded ? expanded[index] : sections[index]),
   )
 
   return (
