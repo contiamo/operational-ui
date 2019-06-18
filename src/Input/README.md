@@ -1,3 +1,14 @@
+### ID style
+
+```jsx
+import * as React from "react"
+import { Input } from "@operational/components"
+
+const [value, setValue] = React.useState("MyTable_01")
+
+;<Input idStyle label="Name" value={value} onChange={setValue} />
+```
+
 ### Usage
 
 ```jsx

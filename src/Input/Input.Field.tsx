@@ -27,7 +27,10 @@ const Field = styled("input")<{
   preset: InputProps["preset"]
   disabled: InputProps["disabled"]
   clear: InputProps["clear"]
-}>(({ theme, disabled, isError, withIconButton, preset, clear }) => {
+  idStyle?: boolean
+}>(({ theme, disabled, isError, withIconButton, preset, clear, idStyle }) => {
+  console.log("idStyle", idStyle)
+
   const makeBackgroundColor = () => {
     if (disabled) {
       return theme.color.disabled
@@ -40,22 +43,37 @@ const Field = styled("input")<{
     return theme.color.white
   }
 
+  const getFontWeight = () => {
+    if (idStyle) {
+      return theme.font.weight.bold
+    }
+
+    if (preset) {
+      return theme.font.weight.medium
+    }
+
+    return theme.font.weight.regular
+  }
+
   return {
     ...(withIconButton
       ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
       : { borderRadius: theme.borderRadius }),
+    font: idStyle ? undefined : "inherit",
+    fontFamily: idStyle ? theme.font.family.code : theme.font.family.main,
+    fontWeight: getFontWeight(),
     fontSize: theme.font.size.body,
     width: "100%",
     height,
     label: "input",
     flexGrow: 1,
-    padding: `${theme.space.small}px ${theme.space.medium}px`,
+    padding: `${theme.space.small}px ${idStyle ? 2 * theme.space.big : theme.space.medium}px ${theme.space.small}px ${
+      theme.space.medium
+    }px`,
     opacity: disabled ? 0.6 : 1.0,
-    font: "inherit",
     border: "1px solid",
     borderColor: isError ? theme.color.error : theme.color.border.default,
     appearance: "none",
-    fontWeight: preset ? theme.font.weight.medium : theme.font.weight.regular,
     color: preset ? theme.color.text.dark : theme.color.text.default,
     backgroundColor: makeBackgroundColor(),
     "::placeholder": {
@@ -114,6 +132,7 @@ const InputField: React.SFC<InputProps> = ({
   copy,
   onIconClick,
   tabIndex,
+  idStyle,
   errorComponent: ErrorComponent,
   ...props
 }) => {
@@ -154,6 +173,7 @@ const InputField: React.SFC<InputProps> = ({
           withIconButton={shouldShowIconButton}
           autoComplete={autoComplete}
           tabIndex={tabIndex}
+          idStyle={idStyle}
           {...props}
         />
         {clear && value && (
