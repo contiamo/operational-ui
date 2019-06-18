@@ -4,11 +4,12 @@ The tree component renders a tree structure with collapsable nodes in a filetree
 
 ```jsx
 import * as React from "react"
-import { Tree } from "@operational/components"
+import { Tree, OlapIcon } from "@operational/components"
 ;<Tree
   trees={[
     {
-      label: "Store",
+      label: "ERP",
+      tag: "OR",
       childNodes: [
         {
           label: "Region",
@@ -16,7 +17,8 @@ import { Tree } from "@operational/components"
           childNodes: [
             {
               label: "City",
-              tag: "D",
+              icon: OlapIcon,
+              iconColor: "primary",
               disabled: true,
               childNodes: [],
             },
@@ -25,7 +27,7 @@ import { Tree } from "@operational/components"
               color: "primary",
               onClick: () => alert("country was clicked"),
               onRemove: () => alert("node is removed"),
-              tag: "D",
+              icon: OlapIcon,
               childNodes: [],
             },
           ],
@@ -34,16 +36,17 @@ import { Tree } from "@operational/components"
     },
     {
       label: "Legal Entity",
+      tag: "D2",
       initiallyOpen: true,
       childNodes: [
         {
           label: "Limited Liability Company",
-          tag: "D",
+          icon: OlapIcon,
           childNodes: [],
         },
         {
           label: "Inc.",
-          tag: "D",
+          icon: OlapIcon,
           color: "#2C363F",
           childNodes: [],
         },
@@ -107,6 +110,71 @@ import { Tree } from "@operational/components"
     },
   ]}
 />
+```
+
+### With higlighted search
+
+```jsx
+import * as React from "react"
+import { Tree, Input } from "@operational/components"
+const Example = () => {
+  const [filter, setFilter] = React.useState("liability")
+
+  return (
+    <>
+      <Input value={filter} onChange={setFilter} label="Search" />
+      <br />
+      <Tree
+        searchWords={filter.split(" ")}
+        trees={[
+          {
+            label: "Store",
+            childNodes: [
+              {
+                label: "Region",
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "City",
+                    tag: "D",
+                    disabled: true,
+                    childNodes: [],
+                  },
+                  {
+                    label: "Country",
+                    color: "primary",
+                    onRemove: () => {},
+                    tag: "D",
+                    childNodes: [],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            label: "Legal Entity",
+            initiallyOpen: true,
+            childNodes: [
+              {
+                label: "Limited Liability Company",
+                tag: "D",
+                childNodes: [],
+              },
+              {
+                label: "Inc.",
+                tag: "D",
+                color: "#2C363F",
+                childNodes: [],
+              },
+            ],
+          },
+        ]}
+      />
+    </>
+  )
+}
+
+;<Example />
 ```
 
 ### With react-beautiful-dnd
@@ -251,4 +319,76 @@ const PizzaMaker = () => {
   )
 }
 ;<PizzaMaker />
+```
+
+### On an Accordion
+
+```jsx
+import * as React from "react"
+import { Accordion, useAccordionState, Tree } from "@operational/components"
+
+const MyComponent = () => {
+  const [sections, onToggle] = useAccordionState([
+    {
+      key: 1,
+      title: "My tree",
+      expanded: true,
+      content: () => (
+        <Tree
+          trees={[
+            {
+              label: "Store",
+              childNodes: [
+                {
+                  label: "Region",
+                  initiallyOpen: true,
+                  childNodes: [
+                    {
+                      label: "City",
+                      tag: "D",
+                      disabled: true,
+                      childNodes: [],
+                    },
+                    {
+                      label: "Country",
+                      color: "primary",
+                      onRemove: () => {},
+                      tag: "D",
+                      childNodes: [],
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              label: "Legal Entity",
+              initiallyOpen: true,
+              childNodes: [
+                {
+                  label: "Limited Liability Company",
+                  tag: "D",
+                  childNodes: [],
+                },
+                {
+                  label: "Inc.",
+                  tag: "D",
+                  color: "#2C363F",
+                  childNodes: [],
+                },
+              ],
+            },
+          ]}
+        />
+      ),
+    },
+  ])
+
+  return (
+    <div style={{ height: 400 }}>
+      <Accordion sections={sections} onToggle={onToggle} />
+    </div>
+  )
+}
+
+;<MyComponent />
 ```

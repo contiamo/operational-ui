@@ -44,10 +44,10 @@ const StatusDot = styled("div")<StatusProps>(props => ({
 }))
 
 const Status: React.SFC<StatusProps> = ({ children, ...props }) => (
-  <>
+  <div>
     <StatusDot {...props} />
     {children}
-  </>
+  </div>
 )
 
 export default Status

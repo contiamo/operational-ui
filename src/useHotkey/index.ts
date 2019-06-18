@@ -61,6 +61,7 @@ export function useHotkey(containerNode: RefObject<HTMLElement>, hotkey: Key, ca
         return
       }
 
+      event.preventDefault()
       event.stopPropagation()
       callbackRef.current()
     }

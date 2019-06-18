@@ -17,27 +17,32 @@ const MyComponent = () => {
         {
           title: "Select Your Git Provider",
           content: (
-            <List
-              items={[
-                {
-                  photo: "https://placehold.it/140x60",
-                  description: "We will ask you to authenticate yourself with OAuth.",
-                  onClick: () => setActiveSlideIndex(1),
-                },
-                {
-                  photo: "https://placehold.it/140x60",
-                  description: "We will ask you to authenticate yourself with OAuth.",
-                  onClick: () => alert("You chose the second item!"),
-                },
-                {
-                  title: "Manual Setup",
-                  photo: "https://placehold.it/140x60",
-                  description:
-                    "Provide the URL to any accessible git repository and set up the required keys for access.",
-                  onClick: () => alert("You chose the third item!"),
-                },
-              ]}
-            />
+            <Body>
+              <List
+                items={[
+                  {
+                    photo: "https://placehold.it/140x60",
+                    description: "We will ask you to authenticate yourself with OAuth.",
+                    onClick: () => setActiveSlideIndex(1),
+                  },
+                  {
+                    photo: "https://placehold.it/140x60",
+                    description: "We will ask you to authenticate yourself with OAuth.",
+                    onClick: () => alert("You chose the second item!"),
+                  },
+                  {
+                    title: "Manual Setup",
+                    photo: "https://placehold.it/140x60",
+                    description:
+                      "Provide the URL to any accessible git repository and set up the required keys for access.",
+                    onClick: () => alert("You chose the third item!"),
+                  },
+                ]}
+              />
+              <Button color="primary" onClick={() => setActiveSlideIndex(1)}>
+                Go to Step 2
+              </Button>
+            </Body>
           ),
         },
         {
@@ -56,7 +61,7 @@ const MyComponent = () => {
           content: (
             <Card
               action={<SimpleLink onClick={() => setActiveSlideIndex(3)}>Next Slide 👉🏾</SimpleLink>}
-              title="Anything goes"
+              title="Step 3: anything goes"
             >
               Any content goes in here and it should just work.
             </Card>

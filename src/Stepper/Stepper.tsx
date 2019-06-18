@@ -1,7 +1,9 @@
 import * as React from "react"
-
-import { expandColor, OperationalStyleConstants } from "../utils/constants"
+import { OperationalStyleConstants } from "../utils/constants"
+import { useHotkey } from "../useHotkey"
 import styled from "../utils/styled"
+import { YesIcon } from "../Icon/Icon"
+import { inputFocus } from "../utils/mixins"
 
 export interface StepperProps {
   steps: Array<{ title: string; content: React.ReactNode }>
@@ -10,93 +12,204 @@ export interface StepperProps {
   onStepChange?: (slideIndex: number) => void
 }
 
-const circleSize = 24
-
 const StepContent = styled("div")`
+  label: StepContent;
   height: 100%;
   width: 100%;
 `
+StepContent.displayName = "StepContent"
 
-const Steps = styled("ul")`
-  display: flex;
-  margin: 0 0 ${({ theme }) => theme.space.big}px;
-  padding: 0;
-  list-style-type: none;
-  justify-content: space-between;
-`
-
-const Step = styled("li")<{ isActive: boolean; number: number; color: StepperProps["stepColor"] }>`
-  display: flex;
-  align-items: center;
-    font-weight: ${({ theme, isActive }) => (isActive ? "bold" : theme.font.weight.regular)};
-  flex: 1 0 auto;
-  font-size: ${({ theme }) => theme.font.size.body}px;
-  color: ${({ theme, isActive }) => (isActive ? theme.color.text.dark : theme.color.text.lighter)};
-  cursor: pointer;
-
-  /* Number with circles */
-  ::before {
-    content: "${({ number }) => number}";
-    width: ${circleSize}px;
-    height: ${circleSize}px;
-    flex: 0 0 ${circleSize}px;
-    line-height: 23px;
-    text-align: center;
-    font-weight: ${({ theme }) => theme.font.weight.bold};
-    font-size: ${({ theme }) => theme.font.size.body}px;
-    box-sizing: border-box;
-    background: ${({ theme, color, isActive }) => (isActive ? expandColor(theme, color) : theme.color.border.default)};
-    margin-right: ${({ theme }) => theme.space.small}px;
-    border-radius: 50%;
-    color: white;
-  }
-
-  :not(:last-child)::after {
-      content: '';
-      width: 100%;
-      margin: 0 16px;
-      height: 1px;
-      background: ${({ theme }) => theme.color.separators.default};
-      display: block;
-  }
-
-  :last-child {
-      flex: 0 1 0;
-  }
-
-`
+type StepState = "inactive" | "active" | "completed"
 
 const StepLabel = styled("div")`
+  label: StepLabel;
   min-width: fit-content;
   white-space: pre;
   max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
 `
+StepLabel.displayName = "StepLabel"
 
-const Stepper: React.SFC<StepperProps> = props => {
-  const { steps, stepColor, onStepChange, activeSlideIndex } = props
+const Steps = styled("ul")<{ steps: number }>`
+  label: Steps;
+  display: flex;
+  justify-items: center;
+  margin: 0 0 ${({ theme }) => theme.space.big}px;
+`
+Steps.displayName = "Steps"
+
+const ballSize = 24
+const translateY = ballSize / 2
+
+const Step = styled("li")<{ stepState: StepState; color: StepperProps["stepColor"] }>`
+  position: relative;
+  width: 100%;
+  color: ${({ theme, stepState }) => {
+    if (stepState === "active") return theme.color.text.dark
+    if (stepState === "completed") return theme.color.text.lighter
+    return theme.color.text.lightest
+  }};
+  font-weight: ${({ theme, stepState }) =>
+    stepState === "active" ? theme.font.weight.bold : theme.font.weight.regular};
+  text-align: center;
+  overflow: hidden;
+
+  :focus {
+    ${({ theme }) =>
+      inputFocus({
+        theme,
+      })}
+  }
+
+  /** Separator line */
+  ::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    top: 0;
+    transform: translateY(${translateY}px);
+    display: block;
+    height: 1px;
+    width: 100%;
+    background-color: ${({ theme }) => theme.color.border.default};
+  }
+
+  :first-of-type::after,
+  :last-of-type::after {
+    width: 50%;
+  }
+
+  :first-of-type::after {
+    transform: translate(50%, ${translateY}px);
+  }
+
+  :last-of-type::after {
+    transform: translate(-50%, ${translateY}px);
+  }
+`
+Step.displayName = "Step"
+
+const Ball = styled("div")<{ stepState: StepState }>`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto ${({ theme }) => theme.space.small}px;
+  width: ${ballSize}px;
+  height: ${ballSize}px;
+  border-radius: 50%;
+  background-color: ${({ theme, stepState }) => {
+    if (stepState === "active") return theme.color.primary
+    if (stepState === "completed") return theme.color.text.lightest
+    return theme.color.border.default
+  }};
+  font-weight: ${({ theme }) => theme.font.weight.regular};
+  color: ${({ theme }) => theme.color.white};
+  z-index: 1;
+}`
+
+function getStepState(index: number, activeIndex?: number): StepState {
+  if (activeIndex === undefined) return "inactive"
+  if (index < activeIndex) return "completed"
+  if (index === activeIndex) return "active"
+  return "inactive"
+}
+
+const getNextTabIndex = (current: number, lastIndex: number) => {
+  if (current + 1 > lastIndex) return 0
+  return current + 1
+}
+
+const getPreviousTabIndex = (current: number, lastIndex: number) => {
+  if (current - 1 < 0) return lastIndex
+  return current - 1
+}
+
+const Stepper: React.FC<StepperProps> = props => {
+  const { steps, stepColor, onStepChange, activeSlideIndex, ...rest } = props
+
+  const [focusedTab, setFocusedTab] = React.useState({
+    index: 0,
+    shouldFocus: false,
+  })
+
+  const clickHandler = React.useCallback(
+    (activeIndex: number) => {
+      if (onStepChange) {
+        onStepChange(activeIndex)
+      }
+    },
+    [onStepChange],
+  )
+
+  const hotkeyScope = React.useRef(null)
+  useHotkey(hotkeyScope, { key: "ArrowLeft" }, () => {
+    const index = getPreviousTabIndex(focusedTab.index, steps.length - 1)
+    setFocusedTab({ index, shouldFocus: true })
+  })
+  useHotkey(hotkeyScope, { key: "ArrowRight" }, () => {
+    const index = getNextTabIndex(focusedTab.index, steps.length - 1)
+    setFocusedTab({ index, shouldFocus: true })
+  })
+  useHotkey(hotkeyScope, { key: "Enter" }, () => {
+    clickHandler(focusedTab.index)
+  })
+
+  // Set actual focus on each render
+  const focusedTabRef = React.useRef<HTMLLIElement>(null)
+  React.useEffect(() => {
+    if (focusedTabRef.current && focusedTab.shouldFocus) {
+      focusedTabRef.current.focus()
+      setFocusedTab({ ...focusedTab, shouldFocus: false })
+    }
+  }, [focusedTab])
+
+  // Set focus to the current slide if the value has changed
+  React.useEffect(() => {
+    if (activeSlideIndex !== undefined) {
+      setFocusedTab({ index: activeSlideIndex, shouldFocus: false })
+    }
+  }, [activeSlideIndex])
+
   return (
-    <>
-      <Steps>
-        {steps.map(({ title }, index) => (
-          <Step
-            key={index}
-            isActive={activeSlideIndex === index}
-            number={index + 1}
-            color={stepColor}
-            onClick={() => {
-              if (onStepChange) {
-                onStepChange(index)
-              }
-            }}
-          >
-            <StepLabel>{title}</StepLabel>
-          </Step>
-        ))}
+    <div data-cy="operational-ui__Stepper" {...rest}>
+      <Steps
+        ref={hotkeyScope}
+        steps={steps.length}
+        data-cy="operational-ui__Stepper-steps"
+        aria-orientation="horizontal"
+        role="tablist"
+      >
+        {steps.map(({ title }, index) => {
+          const stepState = getStepState(index, activeSlideIndex)
+          const number = index + 1
+          return (
+            <Step
+              data-cy={`operational-ui__Stepper__step-${index}`}
+              ref={index === focusedTab.index ? focusedTabRef : undefined}
+              tabIndex={index === focusedTab.index ? 0 : -1}
+              key={index}
+              stepState={stepState}
+              color={stepColor}
+              onClick={() => clickHandler(index)}
+              role="tab"
+              aria-selected={index === activeSlideIndex}
+              aria-setsize={steps.length}
+              aria-posinset={number}
+            >
+              <Ball stepState={stepState}>{stepState === "completed" ? <YesIcon size={11} /> : number}</Ball>
+              {title}
+            </Step>
+          )
+        })}
       </Steps>
-      <StepContent>{steps[activeSlideIndex!].content}</StepContent>
-    </>
+      <StepContent data-cy="operational-ui__Stepper-content" role="tabpanel">
+        {steps[activeSlideIndex!].content}
+      </StepContent>
+    </div>
   )
 }
 

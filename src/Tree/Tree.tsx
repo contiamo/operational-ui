@@ -3,6 +3,7 @@ import * as React from "react"
 import { Draggable, DraggableProps, Droppable, DroppableProps, DroppableStateSnapshot } from "react-beautiful-dnd"
 import styled from "../utils/styled"
 import ChildTree from "./ChildTree"
+import { IconComponentType } from "../Icon/Icon"
 
 interface BaseTree {
   label: string
@@ -11,12 +12,13 @@ interface BaseTree {
   tag?: string
   disabled?: boolean
   color?: string
+  icon?: IconComponentType
+  iconColor?: string
   onClick?: () => void
   cursor?: string
   onRemove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   forwardRef?: (element?: HTMLElement | null) => any
 }
-
 interface TreeWithChildren extends BaseTree {
   childNodes?: Tree[]
   draggableProps?: never
@@ -33,18 +35,17 @@ export type Tree = TreeWithChildren | TreeWithoutChildren
 
 export interface TreeProps {
   trees: Tree[]
+  searchWords?: string[]
   droppableProps?: Omit<DroppableProps, "children">
   placeholder?: React.ComponentType<DroppableStateSnapshot>
+  _level?: number
 }
 
 const Container = styled("div")`
   user-select: none;
-  & & {
-    margin-left: ${({ theme }) => theme.space.content}px;
-  }
 `
 
-const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder }) => {
+const Tree: React.SFC<TreeProps> = ({ _level = 0, trees, droppableProps, placeholder, searchWords }) => {
   const isLowestLevel = trees.length === 0 || trees.some(tree => !tree.childNodes || !tree.childNodes.length)
 
   /**
@@ -55,7 +56,7 @@ const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder }) => {
     return (
       <Container>
         {trees.map((treeData, index) => (
-          <ChildTree key={index} {...treeData} />
+          <ChildTree level={_level} key={index} {...treeData} searchWords={searchWords} />
         ))}
       </Container>
     )
@@ -72,7 +73,9 @@ const Tree: React.SFC<TreeProps> = ({ trees, droppableProps, placeholder }) => {
                   {draggableProvided => {
                     return (
                       <ChildTree
+                        level={_level}
                         forwardRef={draggableProvided.innerRef}
+                        searchWords={searchWords}
                         {...treeData}
                         {...draggableProvided.draggableProps}
                         {...draggableProvided.dragHandleProps}

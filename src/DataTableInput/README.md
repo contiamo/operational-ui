@@ -22,6 +22,7 @@ const Age = () => {
 
   return (
     <DataTableInput
+      data-cy="validate-me"
       error={isError ? "Only numbers please!" : undefined}
       placeholder="Age..."
       value={age}
@@ -35,6 +36,7 @@ const Age = () => {
     [
       "I am so long I am the longest the longest of the long LOL look how long I am my mom said I would never be long but I really am the longest KOBE BRYANT AINT GOT NOTHING ON ME HOMIE",
       <DataTableSelect
+        data-cy="pull-me-down"
         options={[{ label: "Yes", value: "Yes" }, { label: "Other Dropdown Option", value: 1 }]}
         value="Yes"
       />,

@@ -48,8 +48,12 @@ export const Actions = styled("div")`
 `
 
 export const ControlledModalContent = styled("div")<{ fullSize: boolean }>(({ fullSize, theme }) => ({
+  label: "ControlledModalContent",
+
   // Invert control of spacing from Card to Modal
-  margin: theme.space.element * -1,
+  marginTop: theme.space.element * -1,
+  marginLeft: theme.space.element * -1,
+  marginRight: theme.space.element * -1,
   padding: theme.space.element,
 
   ...(fullSize
@@ -65,7 +69,7 @@ export class Confirm<T> extends React.Component<Props, Readonly<State<T>>> {
     options: {},
   }
 
-  private openConfirm(options: Partial<ConfirmOptions<T>>) {
+  private openConfirm = (options: Partial<ConfirmOptions<T>>) => {
     this.setState({ options })
   }
 

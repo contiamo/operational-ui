@@ -1,11 +1,10 @@
-import { isEqual } from "lodash"
 import * as React from "react"
 
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-
-import { keyCodes } from "../utils"
 import ContextMenuItem, { IContextMenuItem } from "./ContextMenu.Item"
+import { useUniqueId } from "../useUniqueId"
+import { useListbox } from "../useListbox"
 
 export interface ContextMenuProps extends DefaultProps {
   children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
@@ -27,11 +26,15 @@ export interface ContextMenuProps extends DefaultProps {
   align?: "left" | "right"
   /** Custom width */
   width?: number
+  /* Is the child disabled? */
+  disabled?: boolean
   /**
    * Whether to include the click element in the context menu styling.
    * Only recommended when the click element is the same width as the context menu.
    */
   embedChildrenInMenu?: boolean
+  /** Where do we start focus from? */
+  initialFocusedItemIndex?: number
 }
 
 export interface State {
@@ -42,29 +45,39 @@ export interface State {
 const isChildAFunction = (children: ContextMenuProps["children"]): children is (isActive: boolean) => React.ReactNode =>
   typeof children === "function"
 
-const Container = styled("div")<{ align: ContextMenuProps["align"]; isOpen: boolean }>(({ isOpen, theme, align }) => ({
-  label: "contextmenu",
-  cursor: "pointer",
-  position: "relative",
-  width: "fit-content",
-  display: "flex",
-  alignItems: "center",
-  justifyContent: align === "left" ? "flex-start" : "flex-end",
-  zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
-}))
+const Container = styled("div")<{ side: ContextMenuProps["align"]; isOpen: boolean }>(
+  ({ isOpen, theme, side: align }) => ({
+    label: "contextmenu",
+    cursor: "pointer",
+    outline: "none",
+    position: "relative",
+    width: "fit-content",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: align === "left" ? "flex-start" : "flex-end",
+    zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
+  }),
+)
+
+const rowHeight = 40
+const condensedRowHeight = 35
 
 const MenuContainer = styled("div")<{
   embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
+  numRows: number
   align: ContextMenuProps["align"]
-}>(({ theme, align, embedChildrenInMenu }) => ({
+  condensed: boolean
+}>(({ theme, numRows, align, embedChildrenInMenu, condensed }) => ({
   position: "absolute",
   top: embedChildrenInMenu ? 0 : "100%",
   left: align === "left" ? 0 : "auto",
-  maxHeight: 360,
+  maxHeight: "50vh",
   overflow: "auto",
   boxShadow: theme.shadows.popup,
-  width: `calc(100% - ${theme.space.small}px)`,
+  width: "100%",
   minWidth: "fit-content",
+  display: "grid",
+  gridTemplateRows: `repeat(${numRows}, ${condensed ? condensedRowHeight : rowHeight}px)`,
 }))
 
 /**
@@ -80,115 +93,143 @@ const InvisibleOverlay = styled("div")(({ theme }) => ({
   zIndex: theme.zIndex.selectOptions + 1,
 }))
 
-class ContextMenu extends React.Component<ContextMenuProps, Readonly<State>> {
-  private menu: HTMLDivElement | null = null
-
-  private toggle = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-    this.setState(prevState => ({
-      isOpen: !prevState.isOpen,
-    }))
-  }
-
-  private focusElement = () => {
-    if (this.menu && this.menu.querySelector('[tabindex="0"]')) {
-      setTimeout(() => (this.menu!.querySelector('[tabindex="0"]') as HTMLDivElement).focus())
-    }
-  }
-
-  private onUpPress = () => ({
-    focusedItemIndex: this.state.focusedItemIndex === 0 ? this.props.items.length - 1 : this.state.focusedItemIndex - 1,
+const ContextMenu: React.FC<ContextMenuProps> = ({
+  id,
+  align = "left",
+  embedChildrenInMenu = false,
+  keepOpenOnItemClick,
+  condensed,
+  iconLocation,
+  children,
+  items,
+  onClick,
+  disabled,
+  width,
+  ...props
+}) => {
+  const uniqueId = useUniqueId(id)
+  const { isOpen, setIsOpen, buttonProps, listboxProps, getChildProps, focusedOptionIndex } = useListbox({
+    itemCount: items.length,
+    isMultiSelect: keepOpenOnItemClick,
+    isDisabled: disabled,
   })
-
-  private onDownPress = () => ({
-    focusedItemIndex: this.state.focusedItemIndex === this.props.items.length - 1 ? 0 : this.state.focusedItemIndex + 1,
-  })
-
-  private handleKeyPress = ({ keyCode }: React.KeyboardEvent<HTMLDivElement>) => {
-    if (keyCode === keyCodes.enter && this.props.onClick) {
-      this.props.onClick(this.makeItem(this.props.items[this.state.focusedItemIndex]))
-      this.setState(() => ({ isOpen: false }))
-      return
-    }
-
-    if (keyCode === keyCodes.esc) {
-      this.setState(() => ({ isOpen: false }))
-      return
-    }
-
-    if ([keyCodes.up, keyCodes.down].includes(keyCode)) {
-      this.setState(keyCode === keyCodes.up ? this.onUpPress : this.onDownPress)
-      this.focusElement()
-    }
-  }
 
   /**
    * Preserve the public API: if users submit strings in props.items,
    * convert them into actual ContextMenuItems.
    */
-  private makeItem = (itemFromProps: ContextMenuProps["items"][-1]) =>
-    typeof itemFromProps === "string" ? { label: itemFromProps } : itemFromProps
+  const makeItem = React.useCallback(
+    (itemFromProps: ContextMenuProps["items"][-1]) =>
+      typeof itemFromProps === "string" ? { label: itemFromProps } : itemFromProps,
+    [],
+  )
 
-  public readonly state: State = {
-    isOpen: false,
-    focusedItemIndex: 0,
-  }
-
-  public static defaultProps: Partial<ContextMenuProps> = {
-    align: "left",
-    embedChildrenInMenu: false,
-  }
-
-  public componentDidUpdate(prevProps: ContextMenuProps) {
-    // Reset focused item to first if items change.
-    if (!isEqual(this.props.items, prevProps.items)) {
-      this.setState(() => ({ focusedItemIndex: this.props.items.length - 1 }))
-    }
-  }
-
-  public render() {
-    if (!this.props.items) {
+  React.useEffect(() => {
+    if (!items) {
       throw new Error("No array of items has been provided for the ContextMenu.")
     }
+  }, [items])
 
-    const { condensed, iconLocation, children, open, embedChildrenInMenu, align, width, ...props } = this.props
-    const isOpen = open || this.state.isOpen
-    const renderedChildren = isChildAFunction(children) ? children(this.state.isOpen) : children
-    return (
-      <>
-        {isOpen && <InvisibleOverlay onClick={this.toggle} />}
-        <Container isOpen={isOpen} {...props} align={align} onClick={this.toggle} onKeyUp={this.handleKeyPress}>
+  const renderedChildren = React.useMemo(
+    () => (isChildAFunction(children) ? children(isOpen ? isOpen : false) : children),
+    [isOpen, children],
+  )
+
+  const currentItem = React.useMemo(() => {
+    if (focusedOptionIndex === null || focusedOptionIndex === undefined) {
+      return
+    }
+    const tentativeItem = items[focusedOptionIndex]
+    if (typeof tentativeItem === "string") {
+      return makeItem(tentativeItem)
+    }
+
+    return tentativeItem
+  }, [focusedOptionIndex, items])
+
+  const handleSelect = React.useCallback(() => {
+    if (currentItem && currentItem.onClick) {
+      currentItem.onClick(currentItem)
+      return
+    }
+    if (currentItem && onClick) {
+      onClick(currentItem)
+    }
+  }, [currentItem, onClick])
+
+  return (
+    <>
+      {isOpen && (
+        <InvisibleOverlay
+          onClick={e => {
+            e.stopPropagation()
+            setIsOpen && setIsOpen(false)
+          }}
+        />
+      )}
+      <Container
+        {...props}
+        isOpen={isOpen || false}
+        side={align}
+        onClick={e => {
+          e.stopPropagation()
+          if (keepOpenOnItemClick && isOpen) {
+            return
+          }
+          if (!disabled && setIsOpen) {
+            setIsOpen(!isOpen)
+          }
+        }}
+        onKeyDown={e => {
+          switch (e.key) {
+            case "Enter":
+              if (keepOpenOnItemClick) {
+                e.stopPropagation()
+              }
+              handleSelect()
+              break
+          }
+        }}
+      >
+        <div style={{ outline: "none", width: "100%" }} {...buttonProps}>
           {renderedChildren}
-          {isOpen && (
-            <MenuContainer
-              align={this.props.align}
-              ref={node => (this.menu = node)}
-              embedChildrenInMenu={this.props.embedChildrenInMenu}
-            >
-              {embedChildrenInMenu && renderedChildren}
-              {props.items.map((itemFromProps, index: number) => {
-                const item = this.makeItem(itemFromProps)
-                const clickHandler = item.onClick ? item.onClick : this.props.onClick
-
-                return (
-                  <ContextMenuItem
-                    tabIndex={this.state.focusedItemIndex === index ? 0 : -1} // ref "tabindex roving": https://developers.google.com/web/fundamentals/accessibility/focus/using-tabindex
-                    onClick={clickHandler && (() => clickHandler(item))}
-                    key={`contextmenu-${index}`}
-                    condensed={condensed}
-                    align={align}
-                    iconLocation={iconLocation}
-                    width={width || "100%"}
-                    item={item}
-                  />
-                )
-              })}
-            </MenuContainer>
-          )}
-        </Container>
-      </>
-    )
-  }
+        </div>
+        <MenuContainer
+          {...listboxProps}
+          condensed={Boolean(condensed)}
+          numRows={items.length}
+          align={align}
+          embedChildrenInMenu={embedChildrenInMenu}
+        >
+          {embedChildrenInMenu && renderedChildren}
+          {items.map((item, index: number) => (
+            <ContextMenuItem
+              id={`operational-ui__ContextMenuItem-${uniqueId}-${index}`}
+              isActive={typeof item !== "string" && item.isActive}
+              key={`contextmenu-${index}`}
+              condensed={condensed}
+              align={align}
+              iconLocation={iconLocation}
+              width={width || "100%"}
+              item={item}
+              onClick={() => {
+                if (onClick) {
+                  onClick(makeItem(item))
+                }
+              }}
+              {...(getChildProps ? getChildProps(index) : {})}
+            />
+          ))}
+        </MenuContainer>
+      </Container>
+      {/* Element to close an open select when blurring it so only one can be open at a time */}
+      <div
+        tabIndex={0}
+        data-cy="operational-ui__ContextMenu-focus-trap"
+        onFocus={() => setIsOpen && setIsOpen(false)}
+        aria-hidden="true"
+      />
+    </>
+  )
 }
-
 export default ContextMenu

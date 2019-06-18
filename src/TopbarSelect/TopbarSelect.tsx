@@ -19,18 +19,14 @@ export interface TopbarSelectProps {
 
 const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
   line-height: 1;
-  height: ${props => props.theme.topbarHeight}px;
+  height: ${props => props.theme.topbarHeight - (props.isActive ? 1 : 0)}px;
   display: flex;
   align-items: center;
   padding: 0px ${props => props.theme.space.medium}px;
   box-shadow: ${props => (props.isActive ? props.theme.shadows.popup : "none")};
-  border-bottom: ${props => (props.isActive ? "1px" : "0px")};
-  border-color: ${props => props.theme.color.border.default};
+  border-bottom: 1px solid transparent;
   cursor: pointer;
   background-color: ${props => (props.isActive ? props.theme.color.white : "transparent")};
-  :hover {
-    background-color: ${props => (props.isActive ? props.theme.color.white : props.theme.color.background.lighter)};
-  }
   & svg {
     /** Icons are purely presentational and click events are handled upstream */
     pointer-events: none;
@@ -80,6 +76,7 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
           onChange(newItem.label)
         }
       }}
+      tabIndex={0}
     >
       {isActive => (
         <TopbarSelectContainer {...props} isActive={isActive} ref={containerRef}>

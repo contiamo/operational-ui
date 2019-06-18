@@ -10,22 +10,37 @@ export interface ProgressProps extends DefaultProps {
   onClose?: () => void
   /** Show progress bar on the bottom? */
   bottom?: boolean
+  /** Display progress bar inline? */
+  inline?: boolean
+  /** Progress as percentage */
+  percentage?: number
+  /** Explicit bar width for inline only. Default: 100%. Minimum: 64px.  */
+  width?: number
 }
 
 const Container = styled("div")<ProgressProps>(
   {
     label: "progress",
-    width: "100%",
     overflowX: "hidden",
     textAlign: "center",
-    left: 0,
-    position: "fixed",
-    backgroundColor: "transparent",
   },
-  ({ theme, bottom }) => ({
+  ({ theme, bottom, inline, width }) => ({
+    ...(inline
+      ? {
+          backgroundColor: theme.color.background.light,
+          borderRadius: theme.borderRadius,
+          width: width ? width : "100%",
+          minWidth: 64,
+        }
+      : {
+          backgroundColor: "transparent",
+          position: "fixed",
+          width: "100%",
+          top: bottom ? "auto" : 0,
+          bottom: bottom ? 0 : "auto",
+          left: 0,
+        }),
     zIndex: theme.zIndex.globalProgress,
-    top: bottom ? "auto" : 0,
-    bottom: bottom ? 0 : "auto",
   }),
 )
 
@@ -38,16 +53,31 @@ const fillProgress = keyframes({
   },
 })
 
-const Bar = styled("div")(({ theme }) => ({
+const Bar = styled("div")<Pick<ProgressProps, "percentage">>(({ percentage, theme }) => ({
   width: "100%",
   height: 3,
-  backgroundColor: theme.color.primary,
-  animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`,
+  position: "relative",
+  ...(typeof percentage !== "undefined"
+    ? {
+        ":after": {
+          content: `""`,
+          position: "absolute",
+          top: 0,
+          left: 0,
+          backgroundColor: theme.color.primary,
+          width: `${percentage}%`,
+          height: "100%",
+        },
+      }
+    : {
+        animation: `${fillProgress} cubic-bezier(0, 0.9, 0.26, 1) forwards 20s`,
+        backgroundColor: theme.color.primary,
+      }),
 }))
 
-const Progress: React.SFC<ProgressProps> = ({ onRetry, onClose, ...props }) => (
+const Progress: React.SFC<ProgressProps> = ({ onRetry, onClose, percentage, ...props }) => (
   <Container {...props}>
-    <Bar />
+    <Bar percentage={percentage} />
   </Container>
 )
 

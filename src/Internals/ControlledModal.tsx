@@ -36,14 +36,16 @@ const fromTop = (fullSize: boolean) => {
 
 export const ModalContainer = styled(Card)<{ fullSize: boolean; type?: ControlledModalProps["type"] }>(
   ({ theme, fullSize, type }) => ({
+    label: "ModalContainer",
     top: theme.space.element,
     left: fullSize ? theme.space.element : "50%",
-    height: fullSize ? "100%" : "fit-content",
     animation: `${fromTop(Boolean(fullSize))} 0.2s`,
     position: "absolute",
     minWidth: 600,
     zIndex: type === "confirm" ? theme.zIndex.confirm : theme.zIndex.modal,
     maxWidth: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the screen!
+    maxHeight: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the page!
+    overflow: "hidden",
 
     ...(fullSize
       ? // Full-size specific rules
@@ -52,7 +54,6 @@ export const ModalContainer = styled(Card)<{ fullSize: boolean; type?: Controlle
           width: 1110,
           display: "grid",
           gridTemplateRows: "40px 100%",
-          maxHeight: `calc(100% - ${theme.space.element * 3}px)`,
         }
       : // Regular size rules
         {
@@ -62,6 +63,7 @@ export const ModalContainer = styled(Card)<{ fullSize: boolean; type?: Controlle
 )
 
 const Content = styled("div")<{ fullSize: boolean }>(({ theme, fullSize }) => ({
+  label: "Content",
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
@@ -73,7 +75,8 @@ const Content = styled("div")<{ fullSize: boolean }>(({ theme, fullSize }) => ({
   // Ensure scrollability if content is too long
   ...(fullSize
     ? {
-        height: "100%",
+        minHeight: "400px",
+        maxHeight: "100%",
         overflow: "auto",
       }
     : {}),
