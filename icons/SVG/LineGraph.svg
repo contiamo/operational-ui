@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 15">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+      }
+    </style>
+  </defs>
+  <title>LineGraph</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M15.5,14H1V12.5L5.66,7.07l4.69,1.47a.52.52,0,0,0,.48-.1l5-4.46a.5.5,0,0,0,0-.71.5.5,0,0,0-.7,0L10.38,7.5,5.65,6a.5.5,0,0,0-.53.15L1,11V.5A.5.5,0,0,0,.5,0,.5.5,0,0,0,0,.5v14a.5.5,0,0,0,.5.5h15a.5.5,0,0,0,0-1Z"/>
+    </g>
+  </g>
+</svg>
