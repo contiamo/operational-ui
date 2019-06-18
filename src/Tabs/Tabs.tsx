@@ -14,6 +14,7 @@ import {
   TabScroll,
   TitleIconWrapper,
   TitleWrapper,
+  TabContent,
 } from "./Tabs.styled"
 
 export interface Tab {
@@ -216,7 +217,7 @@ const Tabs: React.FC<TabsProps> = ({
       <TabContainer>
         {tabs.map((_, i) => (
           <TabPanel hidden={i !== active} id={`TabPanel-${uid}-${i}`} aria-labelledby={`TabHeader-${uid}-${i}`} key={i}>
-            {i === active && children}
+            <TabContent>{i === active && children}</TabContent>
           </TabPanel>
         ))}
       </TabContainer>
