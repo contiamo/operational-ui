@@ -48,7 +48,7 @@ const MyComponent = () => {
             <div>
               <p>Lorem ipsum {tabs.length + 1}</p>
             </div>
-          )
+          ),
         },
       ]
       setTabs(newTabs)
@@ -78,6 +78,37 @@ const MyComponent = () => {
         </div>
       </Tabs>
     </div>
+  )
+}
+
+;<MyComponent />
+```
+
+### Usage in a Sidebar
+
+```jsx
+import * as React from "react"
+import { styled, Tabs, OlapIcon } from "@operational/components"
+
+const Sidebar = styled.div`
+  width: 240px;
+  height: 400px;
+`
+
+const MyComponent = () => {
+  const [activeTab, setActiveTab] = React.useState(0)
+
+  return (
+    <Sidebar>
+      <Tabs
+        noScroll
+        tabs={[{ title: "OLAP", icon: <OlapIcon /> }, { title: "Inventory" }]}
+        active={activeTab}
+        onActivate={setActiveTab}
+      >
+        <>Tab {activeTab}</>
+      </Tabs>
+    </Sidebar>
   )
 }
 
