@@ -1,12 +1,13 @@
 import * as React from "react"
 
-import Tabs, { Tab, tabsBarHeight } from "../Internals/Tabs"
+import Tabs, { Tab } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps, isChildFunction } from "../PageContent/PageContent"
 import Progress from "../Progress/Progress"
 import { DefaultProps } from "../types"
 import { Title } from "../Typography/Title"
 import styled from "../utils/styled"
+import { OperationalStyleConstants } from "../utils/constants"
 
 export interface BaseProps extends DefaultProps {
   /** Content of the page */
@@ -29,7 +30,6 @@ export interface PropsWithSimplePage extends BaseProps {
   tabs?: never
   activeTabName?: never
   onTabChange?: never
-  condensedTitle?: never
 }
 
 export interface PropsWithComplexPage extends BaseProps {
@@ -40,7 +40,6 @@ export interface PropsWithComplexPage extends BaseProps {
   tabs?: never
   activeTabName?: never
   onTabChange?: never
-  condensedTitle?: never
 }
 
 export interface PropsWithTabs extends BaseProps {
@@ -62,16 +61,26 @@ export interface PropsWithTabs extends BaseProps {
   children?: never
   areas?: never
   fill?: never
-  /** Condensed option */
-  condensedTitle?: boolean
 }
 
 export type PageProps = PropsWithSimplePage | PropsWithComplexPage | PropsWithTabs
 
-const Container = styled("div")(({ theme }) => ({
+const computeRowHeights = (theme: OperationalStyleConstants, hasTitle: boolean, hasTabs: boolean) => {
+  const titleHeightString = hasTitle ? `${theme.titleHeight}px ` : ""
+  const tabsHeightString = hasTabs ? `${theme.tabsBarHeight}px ` : ""
+  const titleHeightWithRowGap = hasTitle ? theme.titleHeight + theme.space.element : 0
+  const tabsHeightWithRowGap = hasTabs ? theme.tabsBarHeight + theme.space.element : 0
+  const viewContainerHeightString = `calc(100% - ${titleHeightWithRowGap + tabsHeightWithRowGap}px)`
+  return `${titleHeightString}${tabsHeightString}${viewContainerHeightString}`
+}
+
+const Container = styled("div")<{ hasTitle: boolean; hasTabs: boolean }>(({ theme, hasTitle, hasTabs }) => ({
   height: "100%",
   position: "relative",
-  backgroundColor: theme.color.background.lighter,
+  display: "grid",
+  gridRowGap: theme.space.element,
+  backgroundColor: theme.color.white,
+  gridTemplateRows: computeRowHeights(theme, hasTitle, hasTabs),
 }))
 
 const TitleContainer = styled("div")(({ theme }) => ({
@@ -82,16 +91,11 @@ const TitleContainer = styled("div")(({ theme }) => ({
   fontWeight: theme.font.weight.medium,
 }))
 
-const ViewContainer = styled("div")<{ isInTab?: boolean; isTitleCondensed?: boolean; hasTitle?: boolean }>(
-  ({ theme, isInTab, isTitleCondensed, hasTitle }) => {
-    const calculatedTitleOffset = isInTab && !isTitleCondensed ? theme.titleHeight + tabsBarHeight : theme.titleHeight
-    return {
-      height: hasTitle ? `calc(100% - ${calculatedTitleOffset}px)` : "100%",
-      overflow: "hidden",
-      position: "relative",
-    }
-  },
-)
+const ViewContainer = styled("div")`
+  overflow: hidden;
+  position: relative;
+  outline: none;
+`
 
 const ActionsContainer = styled("div")`
   display: flex;
@@ -118,30 +122,24 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
 
   private renderPageWithTabs() {
     const tabs = this.props.tabs!
-    const { title, actions, condensedTitle } = this.props
+    const { title, actions } = this.props
 
     return (
-      <Tabs
-        tabs={tabs}
-        activeTabName={this.props.activeTabName}
-        onTabChange={this.props.onTabChange}
-        condensed={condensedTitle}
-      >
-        {({ tabsBar, activeChildren }) => (
+      <Tabs tabs={tabs} activeTabName={this.props.activeTabName} onTabChange={this.props.onTabChange}>
+        {({ tabsBar, activeChildren, activeTabId }) => (
           <>
             {title ? (
               <>
                 <TitleContainer>
                   <Title>{title}</Title>
-                  {condensedTitle && tabsBar}
                   <ActionsContainer>{actions}</ActionsContainer>
                 </TitleContainer>
-                {!condensedTitle && tabsBar}
+                {tabsBar}
               </>
             ) : (
               tabsBar
             )}
-            <ViewContainer isInTab isTitleCondensed={condensedTitle} hasTitle>
+            <ViewContainer aria-labelledby={activeTabId} role="tabpanel" tabIndex={0}>
               {activeChildren}
             </ViewContainer>
           </>
@@ -161,7 +159,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
             <ActionsContainer>{actions}</ActionsContainer>
           </TitleContainer>
         )}
-        <ViewContainer hasTitle={Boolean(title)}>
+        <ViewContainer>
           <PageContent noPadding={Boolean(noPadding)} areas={areas} fill={fill}>
             {modalConfirmContext => {
               const resolvedChildren = isChildFunction(children) ? children(modalConfirmContext) : children
@@ -177,7 +175,7 @@ class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
     const { tabs, fill, onTabChange, loading, title, ...props } = this.props
 
     return (
-      <Container {...props}>
+      <Container hasTabs={Boolean(tabs)} hasTitle={Boolean(title)} {...props}>
         {loading && <FixedProgress />}
         {tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}
       </Container>

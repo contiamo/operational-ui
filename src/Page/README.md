@@ -81,10 +81,10 @@ import { Page, Card } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { Button, Page, Card } from "@operational/components"
+import { OpenIcon, Button, Page, Card } from "@operational/components"
 
 const actions = (
-  <Button color="primary" icon="Open">
+  <Button color="primary" icon={OpenIcon}>
     Go somewhere else
   </Button>
 )
@@ -107,9 +107,9 @@ const Tab = props => (
 ;<Page
   title="Bundle detail"
   tabs={[
-    { name: "overview", children: <Tab title="Overview" />, icon: "Search" },
+    { name: "overview", children: <Tab title="Overview" /> },
     { name: "jobs", children: <Tab title="Jobs" /> },
-    { name: "functions", children: <Tab title="Functions" /> },
+    { name: "functions and more text to check label truncation", children: <Tab title="Functions" /> },
   ]}
 />
 ```
@@ -127,7 +127,7 @@ const Tab = props => (
 )
 ;<Page
   tabs={[
-    { name: "overview", children: <Tab title="Overview" />, icon: "Search" },
+    { name: "overview", children: <Tab title="Overview" /> },
     { name: "jobs", children: <Tab title="Jobs" /> },
     { name: "functions", children: <Tab title="Functions" /> },
   ]}
@@ -138,10 +138,12 @@ const Tab = props => (
 
 ```jsx
 import * as React from "react"
-import { PageContent, Card, Page, Button } from "@operational/components"
+import { OpenIcon, PageContent, Card, Page, Button } from "@operational/components"
 
 const TabContent = props => (
   <PageContent areas="side main">
+    <h1>{props.title}</h1>
+    <h1>Column 2</h1>
     {Array(50)
       .fill("Hello, this is page content")
       .map((text, index) => (
@@ -149,15 +151,16 @@ const TabContent = props => (
       ))}
   </PageContent>
 )
-;<div style={{ height: 200 }}>
+;<div style={{ height: 300 }}>
   <Page
-    actions={<Button icon="Open">Go somewhere else</Button>}
+    actions={<Button icon={OpenIcon}>Go somewhere else</Button>}
     title="Bundle detail"
     tabs={[
-      { name: "overview", children: <TabContent /> },
-      { name: "jobs", children: <TabContent /> },
-      { name: "functions", children: <TabContent /> },
+      { name: "overview", children: <TabContent title="overview" /> },
+      { name: "jobs", children: <TabContent title="jobs" /> },
+      { name: "functions", children: <TabContent title="functions" /> },
     ]}
+    activeTabName={"jobs"}
   />
 </div>
 ```
