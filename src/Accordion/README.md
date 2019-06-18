@@ -11,7 +11,7 @@ import { Accordion, AccordionSection } from "@operational/components"
 const MyComponent = () => {
   const [expanded, setExpanded] = React.useState([true, false, false])
   const onToggle = (index: number) => {
-    const newExpanded = [...sections]
+    const newExpanded = [...expanded]
     newExpanded[index] = !newExpanded[index]
     setExpanded(newExpanded)
   }

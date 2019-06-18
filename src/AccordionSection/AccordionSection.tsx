@@ -9,10 +9,10 @@ export interface AccordionSectionProps extends DefaultProps {
   title: React.ReactNode
   children: (() => React.ReactNode) | React.ReactNode
   // for internal use
-  expanded: boolean
-  index: number
-  toggleSection: (index: number) => void
-  isMouseRef: React.MutableRefObject<boolean>
+  index?: number
+  expanded?: boolean
+  toggleSection?: (index: number) => void
+  isMouseRef?: React.MutableRefObject<boolean>
 }
 
 const Container = styled.div<{ expanded: boolean }>`
@@ -76,6 +76,10 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   const titleId = `${id}-${index}-heading`
   const contentId = `${id}-${index}-panel`
   const [focusFlag, setFocusFlag] = React.useState(false)
+
+  if (expanded === undefined || index === undefined || isMouseRef === undefined || toggleSection === undefined) {
+    throw new Error("Use AccordionSection inside Accordion")
+  }
 
   return (
     <Container expanded={expanded}>
