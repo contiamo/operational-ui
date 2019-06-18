@@ -173,6 +173,22 @@ describe("Select Components", () => {
       .type("{downarrow}{end}{enter}")
     cy.get('[data-cy="custom-select"] input[value="chickenshola amigo como estas"]')
   })
+  it("should expose onBlur handler for the custom input ", () => {
+    cy.visit("/#!/Select/17").wait(1000)
+    cy.tab()
+      .tab()
+      .tab()
+      .type("{downarrow}")
+      .focused()
+      .type("{downarrow}{end} ")
+    cy.focused()
+      .type("{enter}")
+      .focused()
+      .type("{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}{backspace}")
+      .blur()
+
+    cy.get('[data-cy="custom-select"] input[value="chickens are back"]')
+  })
   it("should not be accessible when disabled", () => {
     cy.visit("/#!/Select/13").wait(1000)
     cy.tab()
