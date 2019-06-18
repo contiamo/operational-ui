@@ -6,13 +6,15 @@ import styled from "../utils/styled"
 
 export interface BaseCardColumnProps extends DefaultProps {
   /** Column title */
-  title?: string
+  title?: React.ReactNode
   /** Align the content to the right */
   contentRight?: boolean
   /** Force the column to be full with */
   fullWidth?: boolean
   /** Remove padding */
   noPadding?: boolean
+  /** Component containing buttons/links/actions assigned to the card */
+  action?: React.ReactNode
 }
 
 export interface CardColumnPropsWithTabs extends BaseCardColumnProps {
@@ -49,6 +51,10 @@ const Container = styled("div")<Pick<CardColumnProps, "contentRight" | "fullWidt
   }),
 )
 
+const Action = styled("div")`
+  margin-left: auto;
+`
+
 const Title = styled("div")(({ theme }) => ({
   fontFamily: theme.font.family.main,
   fontWeight: theme.font.weight.medium,
@@ -78,7 +84,7 @@ const Tab = styled("div")<{ active: boolean }>`
   cursor: pointer;
 `
 
-const CardColumn = ({ title, tabs, activeTabName, onTabChange, children, ...props }: CardColumnProps) => {
+const CardColumn = ({ title, action, tabs, activeTabName, onTabChange, children, ...props }: CardColumnProps) => {
   if (tabs) {
     return (
       <Container {...props}>
@@ -100,6 +106,7 @@ const CardColumn = ({ title, tabs, activeTabName, onTabChange, children, ...prop
                 </Tab>
               ))}
             </Tabs>
+            {action && <Action>{action}</Action>}
           </Title>
         )}
         {(tabs.find(({ name }) => name === activeTabName) || { ...tabs[0] }).children}
@@ -109,7 +116,12 @@ const CardColumn = ({ title, tabs, activeTabName, onTabChange, children, ...prop
 
   return (
     <Container {...props}>
-      {title && <Title>{title}</Title>}
+      {title && (
+        <Title>
+          {title}
+          {action && <Action>{action}</Action>}
+        </Title>
+      )}
       {children}
     </Container>
   )
