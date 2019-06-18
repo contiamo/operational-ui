@@ -355,3 +355,64 @@ const option: SelectProps["options"][-1] = {
   value: "Any String",
 }
 ```
+
+### Custom Input exposes onBlur callback
+
+Let's say we would like to prevent user leaving the custom input value empty, but still would like to allow user clean up the input before starting entering something new. We can use onInputBlur callback to implement such behaviour.
+
+```jsx
+import * as React from "react"
+import { Select, Form, Code } from "@operational/components"
+
+const options = [
+  { label: "Option 1", value: "one" },
+  { label: "Option 2", value: "two" },
+  { label: "Option 3", value: "three" },
+]
+
+const MyComponent = () => {
+  const [value, setValue] = React.useState("one")
+  const [lastChanged, setLastChanged] = React.useState(null)
+  const [customOptionValue, setCustomOptionValue] = React.useState("chickens")
+
+  const onBlurHandler = value => {
+    if (value === "") {
+      setValue("chickens are back")
+      setCustomOptionValue("chickens are back")
+    }
+  }
+
+  return (
+    <Form>
+      <Select
+        data-cy="custom-select"
+        value={value}
+        options={options}
+        label="Custom Input"
+        placeholder="Choose an option"
+        customOption={{ label: "Custom...", value: customOptionValue }}
+        onChange={(newValue, lastChanged) => {
+          setValue(String(newValue))
+          if (lastChanged && lastChanged.label === "Custom...") {
+            setCustomOptionValue(String(newValue))
+          }
+          setLastChanged(lastChanged)
+        }}
+        customInputSettings={{
+          onBlur: onBlurHandler,
+        }}
+      />
+      <Code>
+        {`
+Current value: ${String(value)}
+Last changed option:
+
+${JSON.stringify(lastChanged, null, 2)}
+      `}
+      </Code>
+    </Form>
+  )
+}
+
+;<MyComponent />
+```
