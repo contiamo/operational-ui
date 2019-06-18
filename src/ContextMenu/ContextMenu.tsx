@@ -171,7 +171,8 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         {...props}
         isOpen={isOpen || false}
         side={align}
-        onClick={() => {
+        onClick={e => {
+          e.stopPropagation()
           if (keepOpenOnItemClick && isOpen) {
             return
           }
