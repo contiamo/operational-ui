@@ -59,23 +59,14 @@ const MyComponent = () => {
 
   return (
     <div style={{ height: "200px" }}>
-      <Tabs
-        tabs={tabs}
-        active={active}
-        onActivate={setActive}
-        onClose={onClose}
-        onInsert={onInsert}
-        style={{ height: "100%", width: "100%" }}
-      >
-        <div style={{ padding: 20 }}>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-        </div>
+      <Tabs tabs={tabs} active={active} onActivate={setActive} onClose={onClose} onInsert={onInsert}>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
       </Tabs>
     </div>
   )
