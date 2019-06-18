@@ -25,7 +25,7 @@ const Container = styled("div")<SidenavProps>(({ theme, compact, dark }) => {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    overflow: compact ? "auto" : "overlay",
+    overflow: "auto",
     width: compact ? theme.compactSidebarWidth : theme.sidebarWidth,
     height: "100%",
     borderRight: "1px solid",
