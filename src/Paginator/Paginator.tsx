@@ -3,7 +3,6 @@ import * as React from "react"
 import Button from "../Button/Button"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-import { ChevronRightIcon, ChevronLeftIcon } from "../Icon/Icon"
 
 export interface PaginatorProps extends DefaultProps {
   /** Function to be executed after changing page */
@@ -21,12 +20,12 @@ const PaginatorSpan = styled("div")(({ theme }) => ({
   fontSize: theme.font.size.small,
   padding: `0 ${theme.space.content}px`,
   display: "inline-flex",
-  color: theme.color.text.lighter,
+  color: theme.color.text.lightest,
   minWidth: 120,
   justifyContent: "center",
   "& span": {
     color: theme.color.text.dark,
-    paddingRight: 3,
+    padding: `0 ${theme.space.base}px`,
   },
 }))
 
@@ -40,16 +39,18 @@ interface ControlProps {
   type: "first" | "previous" | "next" | "last"
 }
 
-const NavigationButton = styled(Button)<Partial<ControlProps>>(({ type }) => ({
-  width: type === "next" || type === "previous" ? 70 : 56,
-  marginRight: 3,
+const NavigationButton = styled(Button)(({ type, theme }) => ({
+  width: 96,
+  height: 24,
+  lineHeight: "24px",
+  marginRight: type === "previous" ? theme.space.big : theme.space.small,
   padding: 0,
   "& svg": {
     verticalAlign: "middle",
     marginTop: 1,
   },
   "& span": {
-    padding: "0 3px",
+    padding: `0 ${theme.space.base}px`,
   },
 }))
 
@@ -84,6 +85,7 @@ const Container = styled("div")(({ theme }) => ({
   label: "paginator",
   marginTop: theme.space.element,
   display: "flex",
+  justifyContent: "space-between",
   alignItems: "center",
 }))
 
@@ -99,23 +101,23 @@ const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, o
   const isLastDisabled = itemsPerPage * page >= itemCount
   return (
     <Container {...props}>
-      <PaginatorControl type="first" {...controlProps} isDisabled={isFirstDisabled}>
-        first
-      </PaginatorControl>
-      <PaginatorControl type="previous" {...controlProps} isDisabled={isFirstDisabled}>
-        <ChevronLeftIcon size={11} />
-        <span>prev</span>
-      </PaginatorControl>
+      <div>
+        <PaginatorControl type="first" {...controlProps} isDisabled={isFirstDisabled}>
+          First
+        </PaginatorControl>
+        <PaginatorControl type="previous" {...controlProps} isDisabled={isFirstDisabled}>
+          Prev
+        </PaginatorControl>
+        <PaginatorControl type="next" {...controlProps} isDisabled={isLastDisabled}>
+          Next
+        </PaginatorControl>
+        <PaginatorControl type="last" {...controlProps} isDisabled={isLastDisabled}>
+          Last
+        </PaginatorControl>
+      </div>
       <PaginatorSpan key={page}>
-        <span>{getRange({ page, itemCount, itemsPerPage })}</span> of {itemCount}
+        Showing <span>{getRange({ page, itemCount, itemsPerPage })}</span> of <span>{itemCount}</span>
       </PaginatorSpan>
-      <PaginatorControl type="next" {...controlProps} isDisabled={isLastDisabled}>
-        <span>next</span>
-        <ChevronRightIcon size={11} />
-      </PaginatorControl>
-      <PaginatorControl type="last" {...controlProps} isDisabled={isLastDisabled}>
-        last
-      </PaginatorControl>
     </Container>
   )
 }
