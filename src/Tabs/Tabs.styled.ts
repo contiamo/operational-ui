@@ -139,3 +139,7 @@ export const ScrollButtons = styled.div`
   border-right: solid 1px ${({ theme }) => theme.color.separators.default};
   z-index: 1;
 `
+
+export const TabContent = styled.div`
+  padding: ${({ theme }) => theme.space.content}px;
+`
