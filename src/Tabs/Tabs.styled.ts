@@ -97,7 +97,6 @@ export const TabPanel = styled.div`
   z-index: 2;
   :focus {
     outline: none;
-    ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
   }
   ::-moz-focus-inner {
     border: none;
