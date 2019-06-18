@@ -16,7 +16,7 @@ const Header: React.FC<{ version: string }> = ({ version }) => {
       end={
         <>
           <VersionContainer>v{version}</VersionContainer>
-          {window.location.host.startsWith("deploy-preview") && (
+          {(window.location.host.startsWith("deploy-preview") || window.location.host.startsWith("localhost")) && (
             <Button
               textColor={isDiffWithMaster ? "error" : undefined}
               color={isDiffWithMaster ? undefined : "primary"}
