@@ -67,7 +67,7 @@ const Field = styled("input")<{
     height,
     label: "input",
     flexGrow: 1,
-    padding: `${theme.space.small}px ${idStyle ? 2 * theme.space.big : theme.space.medium}px ${theme.space.small}px ${
+    padding: `${theme.space.small}px ${idStyle ? height : theme.space.medium}px ${theme.space.small}px ${
       theme.space.medium
     }px`,
     opacity: disabled ? 0.6 : 1.0,
@@ -107,6 +107,21 @@ const ClearButton = styled("div")`
   > svg {
     pointer-events: none;
   }
+`
+
+const IdIconContainer = styled.div`
+  position: absolute;
+  top: 0; /* anchor the position to the top so the browser doesn't guess */
+  right: 0; /* not 12px but 0 because we want a _box_ to attach to the end of Input and not just an X pushed in from the right */
+
+  /* We also probably should specify the dimensions of this box */
+  width: ${height}px;
+  height: ${height}px;
+
+  /* Also, let's center the contents of this box */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const InputField: React.SFC<InputProps> = ({
@@ -176,7 +191,12 @@ const InputField: React.SFC<InputProps> = ({
           idStyle={idStyle}
           {...props}
         />
-        {clear && value && (
+        {idStyle && (
+          <IdIconContainer>
+            <NoIcon />
+          </IdIconContainer>
+        )}
+        {!idStyle && clear && value && (
           <ClearButton onClick={clear}>
             <NoIcon />
           </ClearButton>
