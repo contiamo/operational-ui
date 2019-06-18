@@ -18,6 +18,8 @@ export interface BaseSelectProps extends DefaultProps {
   disabled?: boolean
   /** Callback trigger on any changes */
   onChange?: (newValue: null | Value | Value[], changedItem?: IOption) => void
+  /** Callback to trigger when focus removed from the custom input */
+  onInputBlur?: (currentValue: Value) => void
   /** Text color */
   color?: string
   /** Text to display when no active selection */

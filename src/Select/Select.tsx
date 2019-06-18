@@ -25,6 +25,7 @@ export const Select: React.FC<SelectProps> = ({
   value,
   naked,
   onChange,
+  onInputBlur,
   placeholder,
   color,
   disabled,
@@ -104,6 +105,8 @@ export const Select: React.FC<SelectProps> = ({
     return contextMenuItems
   }, [options, value, filter, maxOptions, filterable, customOption, onChange])
 
+  const isReadOnly = React.useMemo(() => (customOption ? customOption.value !== value : true), [customOption, value])
+
   return (
     <ContextMenu
       onClick={item => {
@@ -148,7 +151,7 @@ export const Select: React.FC<SelectProps> = ({
               disabled={disabled}
               placeholder={placeholder}
               hasCustomOption={customOption ? customOption.value === value : false}
-              readOnly={customOption ? customOption.value !== value : true}
+              readOnly={isReadOnly}
               value={getDisplayValue(value)(options)}
               id={`operational-ui__Select-Input-${uniqueId}`}
               onClick={e => {
@@ -159,6 +162,11 @@ export const Select: React.FC<SelectProps> = ({
               onChange={newValue => {
                 if (onChange) {
                   onChange(newValue, customOption)
+                }
+              }}
+              onBlur={() => {
+                if (!isReadOnly && onInputBlur) {
+                  onInputBlur(getDisplayValue(value)(options))
                 }
               }}
             />
