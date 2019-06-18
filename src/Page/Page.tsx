@@ -94,6 +94,7 @@ const TitleContainer = styled("div")(({ theme }) => ({
 const ViewContainer = styled("div")`
   overflow: hidden;
   position: relative;
+  outline: none;
 `
 
 const ActionsContainer = styled("div")`
