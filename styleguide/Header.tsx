@@ -16,19 +16,18 @@ const Header: React.FC<{ version: string }> = ({ version }) => {
       end={
         <>
           <VersionContainer>v{version}</VersionContainer>
-          {window.location.host.startsWith("deploy-preview") ||
-            (window.location.host.startsWith("localhost") && (
-              <Button
-                textColor={isDiffWithMaster ? "error" : undefined}
-                color={isDiffWithMaster ? undefined : "primary"}
-                icon={isDiffWithMaster ? NoIcon : MaterializationIcon}
-                iconPosition="start"
-                condensed
-                onClick={() => dispatch({ type: "toggle master diff" })}
-              >
-                {isDiffWithMaster ? "Close diff" : "Diff with master"}
-              </Button>
-            ))}
+          {(window.location.host.startsWith("deploy-preview") || window.location.host.startsWith("localhost")) && (
+            <Button
+              textColor={isDiffWithMaster ? "error" : undefined}
+              color={isDiffWithMaster ? undefined : "primary"}
+              icon={isDiffWithMaster ? NoIcon : MaterializationIcon}
+              iconPosition="start"
+              condensed
+              onClick={() => dispatch({ type: "toggle master diff" })}
+            >
+              {isDiffWithMaster ? "Close diff" : "Diff with master"}
+            </Button>
+          )}
         </>
       }
     />
