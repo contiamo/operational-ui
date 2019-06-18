@@ -77,8 +77,9 @@ const MenuContainer = styled("div")<{
   boxShadow: theme.shadows.popup,
   width: "100%",
   minWidth: "fit-content",
+  minHeight: condensed ? condensedRowHeight : rowHeight,
   display: "grid",
-  gridTemplateRows: `repeat(${numRows}, ${condensed ? condensedRowHeight : rowHeight}px)`,
+  gridTemplateRows: `repeat(${numRows}, maxcontent)`,
 }))
 
 /**

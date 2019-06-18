@@ -18,6 +18,7 @@ export { default as CardSection, CardSectionProps, DragAndDropFeedback } from ".
 export { default as Checkbox, CheckboxProps } from "./Checkbox/Checkbox"
 export { default as Chip, ChipProps } from "./Chip/Chip"
 export { default as Code, CodeProps } from "./Code/Code"
+export { default as ComboButton, ComboButtonProps } from "./ComboButton/ComboButton"
 export { default as Contact, ContactProps } from "./Contact/Contact"
 export { default as ContextMenu, ContextMenuProps } from "./ContextMenu/ContextMenu"
 export { default as DataTable, DataTableProps } from "./DataTable/DataTable"
