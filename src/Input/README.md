@@ -1,12 +1,15 @@
-### ID style
+### Id style
 
 ```jsx
 import * as React from "react"
-import { Input } from "@operational/components"
+import { Input, Form } from "@operational/components"
 
 const [value, setValue] = React.useState("MyTable_01")
 
-;<Input idStyle label="Name" value={value} onChange={setValue} />
+;<Form>
+  <Input idStyle label="Name" value={value} onChange={setValue} />
+  <Input idStyle clear={() => setValue("")} label="Name" value={value} onChange={setValue} />
+</Form>
 ```
 
 ### Usage

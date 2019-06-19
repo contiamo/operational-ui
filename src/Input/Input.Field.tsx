@@ -5,7 +5,7 @@ import styled from "../utils/styled"
 import { InputProps } from "./Input"
 import InputButton from "./Input.Button"
 import { height } from "./Input.constants"
-import { NoIcon } from "../Icon/Icon"
+import { NoIcon, ServiceAccountIcon } from "../Icon/Icon"
 
 const width = 360
 
@@ -27,10 +27,9 @@ const Field = styled("input")<{
   preset: InputProps["preset"]
   disabled: InputProps["disabled"]
   clear: InputProps["clear"]
-  idStyle?: boolean
-}>(({ theme, disabled, isError, withIconButton, preset, clear, idStyle }) => {
-  console.log("idStyle", idStyle)
 
+  idStyle: InputProps["idStyle"]
+}>(({ theme, disabled, isError, withIconButton, preset, clear, idStyle }) => {
   const makeBackgroundColor = () => {
     if (disabled) {
       return theme.color.disabled
@@ -55,6 +54,18 @@ const Field = styled("input")<{
     return theme.font.weight.regular
   }
 
+  const getRightPadding = () => {
+    if (clear && idStyle) {
+      return height + theme.space.big
+    }
+
+    if (clear || idStyle) {
+      return height
+    }
+
+    return theme.space.small
+  }
+
   return {
     ...(withIconButton
       ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
@@ -67,9 +78,7 @@ const Field = styled("input")<{
     height,
     label: "input",
     flexGrow: 1,
-    padding: `${theme.space.small}px ${idStyle ? height : theme.space.medium}px ${theme.space.small}px ${
-      theme.space.medium
-    }px`,
+    padding: `${theme.space.small}px ${getRightPadding()}px ${theme.space.small}px ${theme.space.medium}px`,
     opacity: disabled ? 0.6 : 1.0,
     border: "1px solid",
     borderColor: isError ? theme.color.error : theme.color.border.default,
@@ -79,7 +88,6 @@ const Field = styled("input")<{
     "::placeholder": {
       color: theme.color.text.disabled,
     },
-    ...(clear ? { paddingRight: 40 } : {}),
     "&:focus": inputFocus({
       theme,
       isError,
@@ -87,11 +95,7 @@ const Field = styled("input")<{
   }
 })
 
-const ClearButton = styled("div")`
-  position: absolute;
-  top: 0; /* anchor the position to the top so the browser doesn't guess */
-  right: 0; /* not 12px but 0 because we want a _box_ to attach to the end of Input and not just an X pushed in from the right */
-
+const ClearButton = styled.div`
   /* We also probably should specify the dimensions of this box */
   width: ${height}px;
   height: ${height}px;
@@ -109,13 +113,17 @@ const ClearButton = styled("div")`
   }
 `
 
-const IdIconContainer = styled.div`
+const IconContainer = styled.div<{
+  clear: InputProps["clear"]
+  value: InputProps["value"]
+  idStyle: InputProps["idStyle"]
+}>`
   position: absolute;
   top: 0; /* anchor the position to the top so the browser doesn't guess */
   right: 0; /* not 12px but 0 because we want a _box_ to attach to the end of Input and not just an X pushed in from the right */
 
   /* We also probably should specify the dimensions of this box */
-  width: ${height}px;
+  width: ${({ clear, value, idStyle }) => (clear && value && idStyle ? 2 * height : height)}px;
   height: ${height}px;
 
   /* Also, let's center the contents of this box */
@@ -191,16 +199,14 @@ const InputField: React.SFC<InputProps> = ({
           idStyle={idStyle}
           {...props}
         />
-        {idStyle && (
-          <IdIconContainer>
-            <NoIcon />
-          </IdIconContainer>
-        )}
-        {!idStyle && clear && value && (
-          <ClearButton onClick={clear}>
-            <NoIcon />
-          </ClearButton>
-        )}
+        <IconContainer clear={clear} value={value} idStyle={idStyle}>
+          {clear && value && (
+            <ClearButton onClick={clear}>
+              <NoIcon />
+            </ClearButton>
+          )}
+          {idStyle && <ServiceAccountIcon />}
+        </IconContainer>
         {error && !ErrorComponent ? <FormFieldError>{error}</FormFieldError> : null}
       </Container>
       {error && ErrorComponent ? <ErrorComponent errorMessage={error} /> : null}
