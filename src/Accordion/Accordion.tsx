@@ -61,11 +61,11 @@ const Accordion = ({ onToggle, expanded, children, id, ...rest }: AccordionProps
       {React.Children.map(children, (element, index) =>
         React.cloneElement(element, {
           ...element.props,
-          expanded: sectionsMapped[index],
-          toggleSection,
-          index,
-          isMouseRef,
           id: uid,
+          _expanded: sectionsMapped[index],
+          _toggleSection: toggleSection,
+          _index: index,
+          _isMouseRef: isMouseRef,
         }),
       )}
     </Container>

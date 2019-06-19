@@ -9,10 +9,10 @@ export interface AccordionSectionProps extends DefaultProps {
   title: React.ReactNode
   children: (() => React.ReactNode) | React.ReactNode
   // for internal use
-  index?: number
-  expanded?: boolean
-  toggleSection?: (index: number) => void
-  isMouseRef?: React.MutableRefObject<boolean>
+  _index?: number
+  _expanded?: boolean
+  _toggleSection?: (index: number) => void
+  _isMouseRef?: React.MutableRefObject<boolean>
 }
 
 const Container = styled.div<{ expanded: boolean }>`
@@ -66,43 +66,45 @@ const Focus = styled.div`
 
 const AccordionSection: React.FC<AccordionSectionProps> = ({
   id,
-  index,
-  expanded,
-  toggleSection,
   title,
   children,
-  isMouseRef,
+  _index,
+  _expanded,
+  _toggleSection,
+  _isMouseRef,
 }) => {
-  const titleId = `${id}-${index}-heading`
-  const contentId = `${id}-${index}-panel`
+  const titleId = `${id}-${_index}-heading`
+  const contentId = `${id}-${_index}-panel`
   const [focusFlag, setFocusFlag] = React.useState(false)
 
-  if (expanded === undefined || index === undefined || isMouseRef === undefined || toggleSection === undefined) {
-    throw new Error("Only AccordionSections can be used inside Accordion. See https://operational-ui.netlify.com/#!/Accordion for more info.")
+  if (_expanded === undefined || _index === undefined || _isMouseRef === undefined || _toggleSection === undefined) {
+    throw new Error(
+      "Only AccordionSections can be used inside Accordion. See https://operational-ui.netlify.com/#!/Accordion for more info.",
+    )
   }
 
   return (
-    <Container expanded={expanded}>
+    <Container expanded={_expanded}>
       <Header
         id={titleId}
         aria-controls={contentId}
-        aria-expanded={expanded}
+        aria-expanded={_expanded}
         tabIndex={0}
-        onClick={() => toggleSection(index)}
-        onKeyPress={() => toggleSection(index)}
-        expanded={expanded}
+        onClick={() => _toggleSection(_index)}
+        onKeyPress={() => _toggleSection(_index)}
+        expanded={_expanded}
         onFocus={() => {
-          if (!isMouseRef.current) {
+          if (!_isMouseRef.current) {
             setFocusFlag(true)
           }
         }}
         onBlur={() => setFocusFlag(false)}
       >
         {title}
-        {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
+        {_expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
       </Header>
-      <Panel id={contentId} aria-labelledby={titleId} hidden={!expanded}>
-        {expanded && isFunction(children) ? children() : children}
+      <Panel id={contentId} aria-labelledby={titleId} hidden={!_expanded}>
+        {_expanded && isFunction(children) ? children() : children}
       </Panel>
       {focusFlag ? <Focus /> : null}
     </Container>

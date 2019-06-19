@@ -19,25 +19,21 @@ const MyComponent = () => {
     <div style={{ height: 400 }}>
       <Accordion expanded={expanded} onToggle={onToggle}>
         <AccordionSection title="Section 1">
-          {() => (
-            <>
-              Content 1<br />
-              Content 1<br />
-              Content 1<br />
-              Content 1<br />
-              Content 1<br />
-              Content 1<br />
-              <a href="#">test link</a>
-              <br />
-              Content 1<br />
-              Content 1<br />
-              Content 1<br />
-              Content 1<br />
-              Content 1<br />
-              Content 1<br />
-              Content 1<br />
-            </>
-          )}
+          Content 1<br />
+          Content 1<br />
+          Content 1<br />
+          Content 1<br />
+          Content 1<br />
+          Content 1<br />
+          <a href="#">test link</a>
+          <br />
+          Content 1<br />
+          Content 1<br />
+          Content 1<br />
+          Content 1<br />
+          Content 1<br />
+          Content 1<br />
+          Content 1<br />
         </AccordionSection>
         <AccordionSection title="Section 2">Content 2</AccordionSection>
         <AccordionSection title="Section 3">Content 3</AccordionSection>
