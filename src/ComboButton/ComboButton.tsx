@@ -7,6 +7,7 @@ import { CaretDownIcon, CaretRightIcon } from "../Icon/Icon"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import Button from "../Button/Button"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
+import { setAlpha } from "../utils"
 
 export interface ComboButtonProps extends DefaultProps {
   /** Button color theme (hex or named color from `theme.color`) */
@@ -34,7 +35,7 @@ const BaseComboButton = styled(Button)<{ isOpen: boolean; textColor: string }>((
 const CaretContainer = styled("div")<{ isOpen: boolean; color: string }>(({ isOpen, color, theme }) => ({
   width: "36px",
   marginLeft: theme.space.content,
-  borderLeft: `1px solid ${isOpen ? expandColor(theme, color) : theme.color.text.white}`,
+  borderLeft: `1px solid ${isOpen ? expandColor(theme, color) : setAlpha(0.5)(theme.color.text.white)}`,
 }))
 
 const ItemWithCaret = styled("div")`
