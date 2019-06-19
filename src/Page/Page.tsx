@@ -83,12 +83,14 @@ const Container = styled("div")<{ hasTitle: boolean; hasTabs: boolean }>(({ them
   gridTemplateRows: computeRowHeights(theme, hasTitle, hasTabs),
 }))
 
-const TitleContainer = styled("div")(({ theme }) => ({
+const TitleContainer = styled("div")<{ fill: boolean }>(({ theme, fill }) => ({
   display: "flex",
   alignItems: "center",
   padding: theme.space.element,
   height: theme.titleHeight,
   fontWeight: theme.font.weight.medium,
+  minWidth: theme.pageSize.min,
+  maxWidth: fill ? "100%" : `${theme.pageSize.max}px`,
 }))
 
 const ViewContainer = styled("div")`
@@ -110,77 +112,71 @@ const FixedProgress = styled(Progress)`
   width: 100vw;
 `
 
-const initialState = {}
+const TabsContainer = styled.div<{ fill: boolean }>`
+  padding: 0 ${({ theme }) => theme.space.element}px;
+  min-width: ${({ theme }) => theme.pageSize.min};
+  max-width: ${({ theme, fill }) => (fill ? "100%" : `${theme.pageSize.max}px`)};
+`
 
-class Page extends React.Component<PageProps, Readonly<typeof initialState>> {
-  public static defaultProps: Partial<PageProps> = {
-    areas: "main",
-    fill: false,
-  }
+const Page: React.FC<PageProps> = ({
+  actions,
+  activeTabName,
+  areas,
+  children,
+  fill,
+  loading,
+  noPadding,
+  onTabChange,
+  tabs,
+  title,
+  ...props
+}) => {
+  const page = tabs ? (
+    <Tabs tabs={tabs} activeTabName={activeTabName} onTabChange={onTabChange}>
+      {({ tabsBar, activeChildren, activeTabId }) => (
+        <>
+          {title ? (
+            <>
+              <TitleContainer fill={Boolean(fill)}>
+                <Title>{title}</Title>
+                <ActionsContainer>{actions}</ActionsContainer>
+              </TitleContainer>
+              <TabsContainer fill={Boolean(fill)}>{tabsBar}</TabsContainer>
+            </>
+          ) : (
+            <TabsContainer fill={Boolean(fill)}>{tabsBar}</TabsContainer>
+          )}
+          <ViewContainer aria-labelledby={activeTabId} role="tabpanel" tabIndex={0}>
+            {activeChildren}
+          </ViewContainer>
+        </>
+      )}
+    </Tabs>
+  ) : (
+    <>
+      {title && (
+        <TitleContainer fill={Boolean(fill)}>
+          <Title>{title}</Title>
+          <ActionsContainer>{actions}</ActionsContainer>
+        </TitleContainer>
+      )}
+      <ViewContainer>
+        <PageContent noPadding={Boolean(noPadding)} areas={areas} fill={fill}>
+          {modalConfirmContext => {
+            const resolvedChildren = isChildFunction(children) ? children(modalConfirmContext) : children
+            return areas === "main" ? <PageArea fill={fill}>{resolvedChildren}</PageArea> : resolvedChildren
+          }}
+        </PageContent>
+      </ViewContainer>
+    </>
+  )
 
-  public readonly state = initialState
-
-  private renderPageWithTabs() {
-    const tabs = this.props.tabs!
-    const { title, actions } = this.props
-
-    return (
-      <Tabs tabs={tabs} activeTabName={this.props.activeTabName} onTabChange={this.props.onTabChange}>
-        {({ tabsBar, activeChildren, activeTabId }) => (
-          <>
-            {title ? (
-              <>
-                <TitleContainer>
-                  <Title>{title}</Title>
-                  <ActionsContainer>{actions}</ActionsContainer>
-                </TitleContainer>
-                {tabsBar}
-              </>
-            ) : (
-              tabsBar
-            )}
-            <ViewContainer aria-labelledby={activeTabId} role="tabpanel" tabIndex={0}>
-              {activeChildren}
-            </ViewContainer>
-          </>
-        )}
-      </Tabs>
-    )
-  }
-
-  private renderPageWithoutTabs() {
-    const { title, actions, areas, children, fill, noPadding } = this.props
-
-    return (
-      <>
-        {title && (
-          <TitleContainer>
-            <Title>{title}</Title>
-            <ActionsContainer>{actions}</ActionsContainer>
-          </TitleContainer>
-        )}
-        <ViewContainer>
-          <PageContent noPadding={Boolean(noPadding)} areas={areas} fill={fill}>
-            {modalConfirmContext => {
-              const resolvedChildren = isChildFunction(children) ? children(modalConfirmContext) : children
-              return areas === "main" ? <PageArea fill={fill}>{resolvedChildren}</PageArea> : resolvedChildren
-            }}
-          </PageContent>
-        </ViewContainer>
-      </>
-    )
-  }
-
-  public render() {
-    const { tabs, fill, onTabChange, loading, title, ...props } = this.props
-
-    return (
-      <Container hasTabs={Boolean(tabs)} hasTitle={Boolean(title)} {...props}>
-        {loading && <FixedProgress />}
-        {tabs ? this.renderPageWithTabs() : this.renderPageWithoutTabs()}
-      </Container>
-    )
-  }
+  return (
+    <Container hasTabs={Boolean(tabs)} hasTitle={Boolean(title)} {...props}>
+      {loading && <FixedProgress />}
+      {page}
+    </Container>
+  )
 }
 
 export default Page
