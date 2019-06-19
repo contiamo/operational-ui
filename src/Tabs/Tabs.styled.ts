@@ -56,7 +56,7 @@ export const TabHeader = styled(SectionHeader, {
     props["aria-selected"]
       ? `border-bottom: 1px solid ${props.theme.color.background.lighter}; 
          background-color: ${props.theme.color.background.lighter};
-         color: ${props.theme.color.primary};
+         color: ${props.theme.color.text.dark};
          font-weight: bold;`
       : ""}
 
