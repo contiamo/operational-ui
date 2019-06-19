@@ -27,7 +27,7 @@ import * as React from "react"
 import { ComboButton, DataSourceIcon } from "@operational/components"
 
 /* Anything can be a label */
-const MyLabelContainer = ({ title, children, style }) => (
+const MyLabelContainer = ({ title, children }) => (
   <div style={{ display: "flex", alignItems: "center", width: "300px", whiteSpace: "normal" }}>
     <DataSourceIcon left />
     <div style={{ lineHeight: 1, width: "100%", margin: "8px 0" }}>
@@ -44,6 +44,7 @@ const menuItems = [
         <span>Connect to your existing external data sources - databases, big data storages and NoSQL DBs.</span>
       </MyLabelContainer>
     ),
+    onClick: () => alert("External"),
   },
   {
     label: (
@@ -51,6 +52,7 @@ const menuItems = [
         <span>Connect to your existing external data sources - databases, big data storages and NoSQL DBs.</span>
       </MyLabelContainer>
     ),
+    onClick: () => alert("Managed"),
   },
   {
     label: (
@@ -58,9 +60,18 @@ const menuItems = [
         <span>Connect to your existing external data sources - databases, big data storages and NoSQL DBs.</span>
       </MyLabelContainer>
     ),
+    onClick: () => alert("Virtual"),
   },
 ]
+
 ;<>
-  <ComboButton items={menuItems}>Add data source</ComboButton>
+  <ComboButton
+    items={menuItems}
+    onClick={() => {
+      console.log("Button clicked")
+    }}
+  >
+    Add data source
+  </ComboButton>
 </>
 ```

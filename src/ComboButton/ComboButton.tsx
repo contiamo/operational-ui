@@ -48,10 +48,12 @@ const ItemWithCaret = styled("div")`
 const ComboButton: React.SFC<ComboButtonProps> = ({ items, onItemClick, color, children, ...props }) => {
   // Dropdown buttons always have right carets for every item. These are added automatically.
   const itemsWithCarets = items.map(item => {
+    const itemAsObject = typeof item === "string" ? { label: item } : item
     return {
+      ...itemAsObject,
       label: (
         <ItemWithCaret>
-          {typeof item === "string" ? item : item.label}
+          {itemAsObject.label}
           <CaretRightIcon size={8} />
         </ItemWithCaret>
       ),
