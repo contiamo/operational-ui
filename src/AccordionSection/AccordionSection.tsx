@@ -78,7 +78,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   const [focusFlag, setFocusFlag] = React.useState(false)
 
   if (expanded === undefined || index === undefined || isMouseRef === undefined || toggleSection === undefined) {
-    throw new Error("Use AccordionSection inside Accordion")
+    throw new Error("Only AccordionSections can be used inside Accordion. See https://operational-ui.netlify.com/#!/Accordion for more info.")
   }
 
   return (
