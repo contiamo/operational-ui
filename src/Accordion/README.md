@@ -6,16 +6,19 @@ Accordion component implemented (mostly) according to [WAI-ARIA specification](h
 
 ```jsx
 import * as React from "react"
-import { Accordion, useAccordionState } from "@operational/components"
+import { Accordion, AccordionSection } from "@operational/components"
 
 const MyComponent = () => {
-  const [sections, onToggle] = useAccordionState([
-    {
-      key: 1,
-      title: "Section 1",
-      expanded: true,
-      content: () => (
-        <>
+  const [expanded, setExpanded] = React.useState([true, false, false])
+  const onToggle = index => {
+    const newExpanded = [...expanded]
+    newExpanded[index] = !newExpanded[index]
+    setExpanded(newExpanded)
+  }
+  return (
+    <div style={{ height: 400 }}>
+      <Accordion expanded={expanded} onToggle={onToggle}>
+        <AccordionSection title="Section 1">
           Content 1<br />
           Content 1<br />
           Content 1<br />
@@ -31,26 +34,10 @@ const MyComponent = () => {
           Content 1<br />
           Content 1<br />
           Content 1<br />
-        </>
-      ),
-    },
-    {
-      key: 2,
-      title: "Section 2",
-      expanded: false,
-      content: () => <>Content 2</>,
-    },
-    {
-      key: 3,
-      title: "Section 3",
-      expanded: false,
-      content: () => <>Content 3</>,
-    },
-  ])
-
-  return (
-    <div style={{ height: 400 }}>
-      <Accordion sections={sections} onToggle={onToggle} />
+        </AccordionSection>
+        <AccordionSection title="Section 2">Content 2</AccordionSection>
+        <AccordionSection title="Section 3">Content 3</AccordionSection>
+      </Accordion>
     </div>
   )
 }

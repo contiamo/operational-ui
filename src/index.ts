@@ -79,7 +79,7 @@ export { default as Tree, TreeProps } from "./Tree/Tree"
 export { default as TourModal, TourModalProps } from "./TourModal/TourModal"
 export { default as LabelText } from "./LabelText/LabelText"
 export { default as Accordion, AccordionProps } from "./Accordion/Accordion"
-export { useAccordionState } from "./Accordion/useAccordionState"
+export { default as AccordionSection, AccordionSectionProps } from "./AccordionSection/AccordionSection"
 export { default as Tabs, TabsProps } from "./Tabs/Tabs"
 export { default as Uploader, UploaderProps } from "./Uploader/Uploader"
 
