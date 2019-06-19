@@ -8,17 +8,30 @@ import { height } from "./Input.constants"
 import { NoIcon, ServiceAccountIcon } from "../Icon/Icon"
 
 const width = 360
+const iconBoxSize = height // Fit icons into the square with the side of the input height
 
-const Container = styled("div")<{
+const getMaxWidth = (fullWidth: InputProps["fullWidth"], statusIcon: InputProps["statusIcon"]) => {
+  if (fullWidth && statusIcon) {
+    return `calc(100% - ${iconBoxSize}px)`
+  }
+
+  if (fullWidth) {
+    return "none"
+  }
+
+  return `${width}px`
+}
+
+const Container = styled.div<{
   fullWidth: InputProps["fullWidth"]
-  withLabel: boolean
+  statusIcon: InputProps["statusIcon"]
 }>`
   position: relative;
   align-items: center;
   justify-content: center;
   display: inline-flex;
   width: 100%;
-  max-width: ${({ fullWidth }) => (fullWidth ? "none" : `${width}px`)};
+  max-width: ${({ fullWidth, statusIcon }) => getMaxWidth(fullWidth, statusIcon)};
 `
 
 const Field = styled("input")<{
@@ -27,7 +40,6 @@ const Field = styled("input")<{
   preset: InputProps["preset"]
   disabled: InputProps["disabled"]
   clear: InputProps["clear"]
-
   idStyle: InputProps["idStyle"]
 }>(({ theme, disabled, isError, withIconButton, preset, clear, idStyle }) => {
   const makeBackgroundColor = () => {
@@ -56,11 +68,11 @@ const Field = styled("input")<{
 
   const getRightPadding = () => {
     if (clear && idStyle) {
-      return height + theme.space.big
+      return iconBoxSize + theme.space.big
     }
 
     if (clear || idStyle) {
-      return height
+      return iconBoxSize
     }
 
     return theme.space.small
@@ -70,7 +82,7 @@ const Field = styled("input")<{
     ...(withIconButton
       ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
       : { borderRadius: theme.borderRadius }),
-    font: idStyle ? undefined : "inherit",
+    font: idStyle ? "none" : "inherit",
     fontFamily: idStyle ? theme.font.family.code : theme.font.family.main,
     fontWeight: getFontWeight(),
     fontSize: theme.font.size.body,
@@ -97,8 +109,8 @@ const Field = styled("input")<{
 
 const ClearButton = styled.div`
   /* We also probably should specify the dimensions of this box */
-  width: ${height}px;
-  height: ${height}px;
+  width: ${iconBoxSize}px;
+  height: ${iconBoxSize}px;
 
   /* Also, let's center the contents of this box */
   display: flex;
@@ -116,12 +128,11 @@ const ClearButton = styled.div`
 const IconContainer = styled.div<{ iconAmount: number; right: number }>`
   position: absolute;
   top: 0; /* anchor the position to the top so the browser doesn't guess */
-  right: ${({ right }) =>
-    right}px; /* not 12px but 0 because we want a _box_ to attach to the end of Input and not just an X pushed in from the right */
+  right: ${({ right }) => right}px;
 
-  /* We also probably should specify the dimensions of this box */
-  width: ${({ iconAmount }) => iconAmount * height}px;
-  height: ${height}px;
+  /* Dimensions of the container */
+  width: ${({ iconAmount }) => iconAmount * iconBoxSize}px;
+  height: ${iconBoxSize}px;
 
   /* Also, let's center the contents of this box */
   display: flex;
@@ -152,8 +163,8 @@ const InputField: React.FC<InputProps> = ({
   copy,
   onIconClick,
   tabIndex,
-  idStyle,
   errorComponent: ErrorComponent,
+  idStyle,
   statusIcon,
   ...props
 }) => {
@@ -169,7 +180,7 @@ const InputField: React.FC<InputProps> = ({
 
   return (
     <>
-      <Container fullWidth={fullWidth} withLabel={Boolean(label)}>
+      <Container fullWidth={fullWidth} statusIcon={statusIcon}>
         {shouldShowIconButton && renderButton()}
         <Field
           ref={inputRef}
@@ -198,6 +209,7 @@ const InputField: React.FC<InputProps> = ({
           {...props}
         />
         <IconContainer iconAmount={(clear && value ? 1 : 0) + (idStyle ? 1 : 0)} right={0}>
+          {/* Clear button and Id style icon within the input border */}
           {clear && value && (
             <ClearButton onClick={clear}>
               <NoIcon />
@@ -206,7 +218,8 @@ const InputField: React.FC<InputProps> = ({
           {idStyle && <ServiceAccountIcon />}
         </IconContainer>
         {Boolean(statusIcon) && (
-          <IconContainer iconAmount={1} right={-height}>
+          <IconContainer iconAmount={1} right={-iconBoxSize}>
+            {/* negative `right` to place the status icon on the right side of the input */}
             {statusIcon}
           </IconContainer>
         )}

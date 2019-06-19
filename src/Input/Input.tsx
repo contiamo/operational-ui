@@ -53,7 +53,7 @@ export interface BaseProps extends DefaultProps, DefaultInputProps, Omit<React.I
   errorComponent?: React.FC<{ errorMessage: string }>
   /** Is the input read-only? */
   readOnly?: boolean
-  /** Should this input has Id input style */
+  /** Should this input get Id input style */
   idStyle?: boolean
   /** Status icon on the right side of the Input */
   statusIcon?: React.FC
