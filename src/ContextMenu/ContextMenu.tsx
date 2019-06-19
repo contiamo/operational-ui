@@ -79,7 +79,7 @@ const MenuContainer = styled("div")<{
   minWidth: "fit-content",
   minHeight: condensed ? condensedRowHeight : rowHeight,
   display: "grid",
-  gridTemplateRows: `repeat(${numRows}, maxcontent)`,
+  gridTemplateRows: `repeat(${numRows}, max-content)`,
 }))
 
 /**
