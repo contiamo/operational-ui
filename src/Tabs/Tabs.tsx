@@ -14,7 +14,6 @@ import {
   TabScroll,
   TitleIconWrapper,
   TitleWrapper,
-  TabContent,
 } from "./Tabs.styled"
 
 export interface Tab {
@@ -26,7 +25,7 @@ export interface TabsProps extends DefaultProps {
   tabs: Tab[]
   active: number
   onActivate: (tabIndex: number) => void
-  noScroll?: boolean
+  scroll?: boolean
   onClose?: (tabIndex: number) => void
   onInsert?: (tabIndex: number) => void
   label?: string
@@ -36,7 +35,7 @@ export interface TabsProps extends DefaultProps {
 
 const Tabs: React.FC<TabsProps> = ({
   tabs,
-  noScroll,
+  scroll,
   active,
   onClose,
   onActivate,
@@ -133,7 +132,7 @@ const Tabs: React.FC<TabsProps> = ({
 
   return (
     <Container data-cy="operational-ui__Tabs" style={style}>
-      <TabList noScroll={Boolean(noScroll)} aria-label={label} onKeyDown={onKeyDown} ref={tabListRef}>
+      <TabList scroll={Boolean(scroll)} aria-label={label} onKeyDown={onKeyDown} ref={tabListRef}>
         <TabScroll ref={tabScrollRef}>
           {tabs.map(({ title, icon }, i) => {
             const onClick = () => {
@@ -142,7 +141,7 @@ const Tabs: React.FC<TabsProps> = ({
             }
             return (
               <TabHeader
-                center={Boolean(noScroll)}
+                center={!scroll}
                 tabIndex={i === active ? 0 : -1}
                 first={i === 0}
                 aria-selected={i === active}
@@ -188,7 +187,7 @@ const Tabs: React.FC<TabsProps> = ({
           )}
         </TabScroll>
       </TabList>
-      {noScroll !== true && (
+      {scroll && (
         <ScrollButtons>
           <TabHeader
             aria-hidden={true}
@@ -217,12 +216,16 @@ const Tabs: React.FC<TabsProps> = ({
       <TabContainer>
         {tabs.map((_, i) => (
           <TabPanel hidden={i !== active} id={`TabPanel-${uid}-${i}`} aria-labelledby={`TabHeader-${uid}-${i}`} key={i}>
-            <TabContent>{i === active && children}</TabContent>
+            {i === active && children}
           </TabPanel>
         ))}
       </TabContainer>
     </Container>
   )
+}
+
+Tabs.defaultProps = {
+  scroll: true,
 }
 
 export default Tabs

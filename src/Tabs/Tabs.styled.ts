@@ -11,11 +11,11 @@ export const Container = styled.div`
   height: 100%;
 `
 
-export const TabList = styled.div<{ noScroll: boolean }>`
+export const TabList = styled.div<{ scroll: boolean }>`
   display: flex;
   height: ${({ theme }) => theme.space.element * 2}px;
   overflow-x: auto;
-  max-width: ${({ noScroll }) => (noScroll ? "none" : `calc(100% - ${buttonWidth * 2}px)`)};
+  max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px)` : "none")};
   scroll-behavior: smooth;
   border-left: solid 1px ${({ theme }) => theme.color.separators.default};
   overflow-y: hidden;
@@ -138,8 +138,4 @@ export const ScrollButtons = styled.div`
   border-left: solid 1px ${({ theme }) => theme.color.separators.default};
   border-right: solid 1px ${({ theme }) => theme.color.separators.default};
   z-index: 1;
-`
-
-export const TabContent = styled.div`
-  padding: ${({ theme }) => theme.space.content}px;
 `

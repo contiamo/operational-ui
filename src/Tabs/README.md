@@ -92,7 +92,7 @@ const MyComponent = () => {
   return (
     <Sidebar>
       <Tabs
-        noScroll
+        scroll={false}
         tabs={[{ title: "OLAP", icon: <OlapIcon /> }, { title: "Inventory" }]}
         active={activeTab}
         onActivate={setActiveTab}
