@@ -48,7 +48,7 @@ const MyComponent = () => {
             <div>
               <p>Lorem ipsum {tabs.length + 1}</p>
             </div>
-          )
+          ),
         },
       ]
       setTabs(newTabs)
@@ -59,25 +59,47 @@ const MyComponent = () => {
 
   return (
     <div style={{ height: "200px" }}>
-      <Tabs
-        tabs={tabs}
-        active={active}
-        onActivate={setActive}
-        onClose={onClose}
-        onInsert={onInsert}
-        style={{ height: "100%", width: "100%" }}
-      >
-        <div style={{ padding: 20 }}>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-          <p>Lorem ipsum {active + 1}</p>
-        </div>
+      <Tabs tabs={tabs} active={active} onActivate={setActive} onClose={onClose} onInsert={onInsert}>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
+        <p>Lorem ipsum {active + 1}</p>
       </Tabs>
     </div>
+  )
+}
+
+;<MyComponent />
+```
+
+### Usage in a Sidebar
+
+```jsx
+import * as React from "react"
+import { styled, Tabs, OlapIcon } from "@operational/components"
+
+const Sidebar = styled.div`
+  width: 240px;
+  height: 400px;
+`
+
+const MyComponent = () => {
+  const [activeTab, setActiveTab] = React.useState(0)
+
+  return (
+    <Sidebar>
+      <Tabs
+        scroll={false}
+        tabs={[{ title: "OLAP", icon: <OlapIcon /> }, { title: "Inventory" }]}
+        active={activeTab}
+        onActivate={setActiveTab}
+      >
+        <>Tab {activeTab}</>
+      </Tabs>
+    </Sidebar>
   )
 }
 
