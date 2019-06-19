@@ -1,17 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16 14.98">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 14.98">
   <defs>
     <style>
       .cls-1 {
-        fill: white;
+        fill: #fff;
       }
     </style>
   </defs>
   <title>Date</title>
   <g id="Layer_2" data-name="Layer 2">
     <g id="Layer_1-2" data-name="Layer 1">
-      <rect class="cls-1" x="1.92" y="0.98" width="3.11" height="1.15" rx="0.57" transform="translate(5.04 -1.92) rotate(90)"/>
-      <rect class="cls-1" x="10.96" y="0.98" width="3.11" height="1.15" rx="0.57" transform="translate(14.08 -10.96) rotate(90)"/>
-      <path class="cls-1" d="M15,1.52H13.36v1a.84.84,0,0,1-1.68,0v-1H4.32v1a.84.84,0,0,1-1.68,0v-1H1a1,1,0,0,0-1,1V14a1,1,0,0,0,1,1H15a1,1,0,0,0,1-1V2.52A1,1,0,0,0,15,1.52Zm0,13V14H1V4.68H15V14h0Z"/>
+      <g>
+        <rect class="cls-1" x="1.92" y="0.98" width="3.11" height="1.15" rx="0.57" transform="translate(5.04 -1.92) rotate(90)"/>
+        <rect class="cls-1" x="10.96" y="0.98" width="3.11" height="1.15" rx="0.57" transform="translate(14.08 -10.96) rotate(90)"/>
+        <path class="cls-1" d="M15,1.52H13.36v1a.84.84,0,0,1-1.68,0v-1H4.32v1a.84.84,0,0,1-1.68,0v-1H1a1,1,0,0,0-1,1V14a1,1,0,0,0,1,1H15a1,1,0,0,0,1-1V2.52A1,1,0,0,0,15,1.52Zm0,13V14H1V4.68H15V14h0Z"/>
+      </g>
     </g>
   </g>
 </svg>

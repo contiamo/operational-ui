@@ -1,17 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 17.5 10.88">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17.5 10.88">
   <defs>
     <style>
       .cls-1 {
-        fill: white;
+        fill: #fff;
       }
     </style>
   </defs>
   <title>HamburgerMenu</title>
   <g id="Layer_2" data-name="Layer 2">
     <g id="Layer_1-2" data-name="Layer 1">
-      <path class="cls-1" d="M16.75,1.5H.75A.76.76,0,0,1,0,.75.76.76,0,0,1,.75,0h16a.76.76,0,0,1,.75.75A.76.76,0,0,1,16.75,1.5Z"/>
-      <path class="cls-1" d="M16.75,6.19H.75a.75.75,0,0,1,0-1.5h16a.75.75,0,0,1,0,1.5Z"/>
-      <path class="cls-1" d="M16.75,10.88H.75a.75.75,0,0,1,0-1.5h16a.75.75,0,0,1,0,1.5Z"/>
+      <g>
+        <path class="cls-1" d="M16.75,1.5H.75A.76.76,0,0,1,0,.75.76.76,0,0,1,.75,0h16a.76.76,0,0,1,.75.75A.76.76,0,0,1,16.75,1.5Z"/>
+        <path class="cls-1" d="M16.75,6.19H.75a.75.75,0,0,1,0-1.5h16a.75.75,0,0,1,0,1.5Z"/>
+        <path class="cls-1" d="M16.75,10.88H.75a.75.75,0,0,1,0-1.5h16a.75.75,0,0,1,0,1.5Z"/>
+      </g>
     </g>
   </g>
 </svg>

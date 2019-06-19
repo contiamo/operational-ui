@@ -1,3 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="white" width="30" height="30" viewBox="0 0 360 360">
-  <path d="M320,280.187l-280,0l0,-40l280,0l0,40Zm0,-80l-280,0l0,-40l280,0l0,40Zm0,-80l-280,0l0,-40l280,0l0,40Z" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3 13">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>Menu</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <g>
+        <circle class="cls-1" cx="1.5" cy="1.5" r="1.5"/>
+        <circle class="cls-1" cx="1.5" cy="6.5" r="1.5"/>
+        <circle class="cls-1" cx="1.5" cy="11.5" r="1.5"/>
+      </g>
+    </g>
+  </g>
 </svg>

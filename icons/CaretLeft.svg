@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 6.71 12.41">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13.75 16.68">
   <defs>
     <style>
       .cls-1 {
-        fill: white;
+        fill: #fff;
       }
     </style>
   </defs>
-  <title>CaretLeft_1</title>
+  <title>CaretLeft</title>
   <g id="Layer_2" data-name="Layer 2">
     <g id="Layer_1-2" data-name="Layer 1">
-      <path class="cls-1" d="M6.21,12.41a.54.54,0,0,1-.36-.14L.15,6.56a.5.5,0,0,1,0-.71L5.85.15a.5.5,0,0,1,.71,0,.5.5,0,0,1,0,.7L1.21,6.21l5.35,5.35a.51.51,0,0,1,0,.71A.54.54,0,0,1,6.21,12.41Z"/>
+      <path class="cls-1" d="M13.39.09a.67.67,0,0,0-.71,0L.33,7.75A.68.68,0,0,0,0,8.34a.7.7,0,0,0,.33.6l12.35,7.64a.69.69,0,0,0,.37.1.67.67,0,0,0,.34-.09.69.69,0,0,0,.36-.61V.7A.7.7,0,0,0,13.39.09Z"/>
     </g>
   </g>
 </svg>

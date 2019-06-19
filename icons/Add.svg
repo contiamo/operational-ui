@@ -1,16 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 17 17">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 17">
   <defs>
     <style>
       .cls-1 {
-        fill: white;
+        fill: #fff;
       }
     </style>
   </defs>
   <title>Add</title>
   <g id="Layer_2" data-name="Layer 2">
     <g id="Layer_1-2" data-name="Layer 1">
-      <path class="cls-1" d="M8.5,0A8.5,8.5,0,1,0,17,8.5,8.51,8.51,0,0,0,8.5,0Zm0,16A7.5,7.5,0,1,1,16,8.5,7.5,7.5,0,0,1,8.5,16Z"/>
-      <path class="cls-1" d="M13.25,7.75h-4v-4a.75.75,0,0,0-1.5,0v4h-4a.75.75,0,0,0,0,1.5h4v4a.75.75,0,0,0,1.5,0v-4h4a.75.75,0,0,0,0-1.5Z"/>
+      <g>
+        <path class="cls-1" d="M8.5,0A8.5,8.5,0,1,0,17,8.5,8.51,8.51,0,0,0,8.5,0Zm0,16A7.5,7.5,0,1,1,16,8.5,7.5,7.5,0,0,1,8.5,16Z"/>
+        <path class="cls-1" d="M13.25,7.75h-4v-4a.75.75,0,0,0-1.5,0v4h-4a.75.75,0,0,0,0,1.5h4v4a.75.75,0,0,0,1.5,0v-4h4a.75.75,0,0,0,0-1.5Z"/>
+      </g>
     </g>
   </g>
 </svg>

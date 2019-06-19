@@ -1,15 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12.97">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.01 12.98">
   <defs>
     <style>
       .cls-1 {
-        fill: #231f20;
+        fill: #fff;
       }
     </style>
   </defs>
   <title>CohortChart</title>
   <g id="Layer_2" data-name="Layer 2">
     <g id="Layer_1-2" data-name="Layer 1">
-      <path class="cls-1" d="M15.5,0H.51A.5.5,0,0,0,0,.5V4.38a.41.41,0,0,0,0,.18V8.43s0,0,0,.05v4a.5.5,0,0,0,.5.5h5a.5.5,0,0,0,.5-.5V8.93H10.5a.5.5,0,0,0,.5-.5V5h4.5a.5.5,0,0,0,.5-.5V.5A.5.5,0,0,0,15.5,0ZM6,1h4V4H6ZM1,1H5V4H1ZM5,5v3H1V5Zm0,7H1v-3H5Zm5-4H6V5h4Zm5-4H11V1h4Z"/>
+      <g id="Layer_1-2-2" data-name="Layer 1-2">
+        <path class="cls-1" d="M15.51,0H.52A.5.5,0,0,0,0,.49H0V4.38a.54.54,0,0,0,0,.18v7.92a.5.5,0,0,0,.5.5h5a.5.5,0,0,0,.5-.5V8.93h4.5a.5.5,0,0,0,.5-.5V5h4.5a.5.5,0,0,0,.5-.5V.5A.5.5,0,0,0,15.51,0ZM6,1h4V4H6ZM1,1H5V4H1ZM5,5V8H1V5Zm0,7H1V9H5Zm5-4H6V5h4Zm5-4H11V1h4Z"/>
+      </g>
     </g>
   </g>
 </svg>
