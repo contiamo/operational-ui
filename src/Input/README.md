@@ -2,13 +2,14 @@
 
 ```jsx
 import * as React from "react"
-import { Input, Form } from "@operational/components"
+import { Input, Form, SyncIcon, UnlockIcon } from "@operational/components"
 
 const [value, setValue] = React.useState("MyTable_01")
 
 ;<Form>
-  <Input idStyle label="Name" value={value} onChange={setValue} />
-  <Input idStyle clear={() => setValue("")} label="Name" value={value} onChange={setValue} />
+  <Input idStyle label="Enter Table name" value={value} onChange={setValue} />
+  <Input idStyle clear={() => setValue("")} label="Also clearable" value={value} onChange={setValue} />
+  <Input idStyle label="Enter Table name" value={value} onChange={setValue} statusIcon={<SyncIcon color="pri />} />
 </Form>
 ```
 

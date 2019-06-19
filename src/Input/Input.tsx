@@ -55,6 +55,8 @@ export interface BaseProps extends DefaultProps, DefaultInputProps, Omit<React.I
   readOnly?: boolean
   /** Should this input has Id input style */
   idStyle?: boolean
+  /** Status icon on the right side of the Input */
+  statusIcon?: React.FC
 }
 
 export interface BasePropsWithCopy extends BaseProps {
@@ -73,7 +75,7 @@ export interface BasePropsWithoutCopy extends BaseProps {
 
 export type InputProps = BasePropsWithCopy | BasePropsWithoutCopy
 
-const Input: React.SFC<InputProps> = ({
+const Input: React.FC<InputProps> = ({
   id,
   tabIndex,
   fullWidth,
@@ -84,6 +86,7 @@ const Input: React.SFC<InputProps> = ({
   disabled,
   errorComponent,
   idStyle,
+  statusIcon,
   ...props
 }) => {
   const uniqueId = useUniqueId(id)
@@ -101,6 +104,7 @@ const Input: React.SFC<InputProps> = ({
       aria-label={label}
       errorComponent={errorComponent}
       idStyle={idStyle}
+      statusIcon={statusIcon}
       {...props}
     />
   )

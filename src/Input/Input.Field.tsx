@@ -113,17 +113,14 @@ const ClearButton = styled.div`
   }
 `
 
-const IconContainer = styled.div<{
-  clear: InputProps["clear"]
-  value: InputProps["value"]
-  idStyle: InputProps["idStyle"]
-}>`
+const IconContainer = styled.div<{ iconAmount: number; right: number }>`
   position: absolute;
   top: 0; /* anchor the position to the top so the browser doesn't guess */
-  right: 0; /* not 12px but 0 because we want a _box_ to attach to the end of Input and not just an X pushed in from the right */
+  right: ${({ right }) =>
+    right}px; /* not 12px but 0 because we want a _box_ to attach to the end of Input and not just an X pushed in from the right */
 
   /* We also probably should specify the dimensions of this box */
-  width: ${({ clear, value, idStyle }) => (clear && value && idStyle ? 2 * height : height)}px;
+  width: ${({ iconAmount }) => iconAmount * height}px;
   height: ${height}px;
 
   /* Also, let's center the contents of this box */
@@ -132,7 +129,7 @@ const IconContainer = styled.div<{
   justify-content: center;
 `
 
-const InputField: React.SFC<InputProps> = ({
+const InputField: React.FC<InputProps> = ({
   id,
   hint,
   fullWidth,
@@ -157,6 +154,7 @@ const InputField: React.SFC<InputProps> = ({
   tabIndex,
   idStyle,
   errorComponent: ErrorComponent,
+  statusIcon,
   ...props
 }) => {
   const shouldShowIconButton = Boolean(icon) || Boolean(copy)
@@ -199,7 +197,7 @@ const InputField: React.SFC<InputProps> = ({
           idStyle={idStyle}
           {...props}
         />
-        <IconContainer clear={clear} value={value} idStyle={idStyle}>
+        <IconContainer iconAmount={(clear && value ? 1 : 0) + (idStyle ? 1 : 0)} right={0}>
           {clear && value && (
             <ClearButton onClick={clear}>
               <NoIcon />
@@ -207,6 +205,11 @@ const InputField: React.SFC<InputProps> = ({
           )}
           {idStyle && <ServiceAccountIcon />}
         </IconContainer>
+        {Boolean(statusIcon) && (
+          <IconContainer iconAmount={1} right={-height}>
+            {statusIcon}
+          </IconContainer>
+        )}
         {error && !ErrorComponent ? <FormFieldError>{error}</FormFieldError> : null}
       </Container>
       {error && ErrorComponent ? <ErrorComponent errorMessage={error} /> : null}
