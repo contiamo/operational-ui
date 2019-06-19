@@ -3,7 +3,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
-import { CaretDownIcon, CaretRightIcon } from "../Icon/Icon"
+import { CaretDownIcon, CaretUpIcon, ChevronRightIcon } from "../Icon/Icon"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import Button from "../Button/Button"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
@@ -38,7 +38,7 @@ const CaretContainer = styled("div")<{ isOpen: boolean; color: string }>(({ isOp
   borderLeft: `1px solid ${isOpen ? expandColor(theme, color) : setAlpha(0.5)(theme.color.text.white)}`,
 }))
 
-const ItemWithCaret = styled("div")`
+const ItemWithChevron = styled("div")`
   width: 100%;
   display: flex;
   align-items: baseline;
@@ -46,16 +46,16 @@ const ItemWithCaret = styled("div")`
 `
 
 const ComboButton: React.SFC<ComboButtonProps> = ({ items, onItemClick, color, children, ...props }) => {
-  // Dropdown buttons always have right carets for every item. These are added automatically.
+  // Dropdown buttons always have right chevrons for every item. These are added automatically.
   const itemsWithCarets = items.map(item => {
     const itemAsObject = typeof item === "string" ? { label: item } : item
     return {
       ...itemAsObject,
       label: (
-        <ItemWithCaret>
+        <ItemWithChevron>
           {itemAsObject.label}
-          <CaretRightIcon size={8} />
-        </ItemWithCaret>
+          <ChevronRightIcon size={8} />
+        </ItemWithChevron>
       ),
     }
   })
@@ -72,7 +72,7 @@ const ComboButton: React.SFC<ComboButtonProps> = ({ items, onItemClick, color, c
           >
             {children}
             <CaretContainer isOpen={isOpen} color={color}>
-              <CaretDownIcon size={8} />
+              {isOpen ? <CaretUpIcon size={8} /> : <CaretDownIcon size={8} />}
             </CaretContainer>
           </BaseComboButton>
         )
