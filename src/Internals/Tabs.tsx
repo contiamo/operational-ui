@@ -40,7 +40,6 @@ const TabsBar = styled("div")(({ theme }) => ({
   alignItems: "flex-end",
   height: theme.tabsBarHeight,
   position: "relative",
-  margin: `0 ${theme.space.element}px`,
   // This draws the line underneath the tabs
   "&::before": {
     content: "''",
