@@ -140,23 +140,7 @@ const ContextMenuItemIcon: React.SFC<Pick<Props, "item" | "iconLocation">> = ({ 
 
 const ContextMenuItem: React.SFC<Props> = ({ iconLocation, item, onClick, condensed, ...props }) => {
   return (
-    <Container
-      {...props}
-      onKeyDown={e => {
-        switch (e.key) {
-          case " ":
-          case "Enter":
-            if (onClick) {
-              e.stopPropagation()
-              e.preventDefault()
-              onClick(e)
-            }
-        }
-      }}
-      onClick={onClick}
-      condensed={condensed}
-      item={item}
-    >
+    <Container {...props} onClick={onClick} condensed={condensed} item={item}>
       {(!iconLocation || iconLocation === "left") && <ContextMenuItemIcon iconLocation={iconLocation} item={item} />}
       <Content value={item} />
       {iconLocation === "right" && <ContextMenuItemIcon iconLocation={iconLocation} item={item} />}
