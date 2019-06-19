@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16.41 6.83">
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 12.41 6.7">
   <defs>
     <style>
       .cls-1 {
-        fill: white;
+        fill: #fff;
       }
     </style>
   </defs>
   <title>ChevronUp</title>
   <g id="Layer_2" data-name="Layer 2">
     <g id="Layer_1-2" data-name="Layer 1">
-      <path class="cls-1" d="M.5,6.83a.51.51,0,0,1-.4-.2.5.5,0,0,1,.1-.7L8.21,0l8,5.93a.5.5,0,0,1,.1.7.48.48,0,0,1-.69.1L8.21,1.24.8,6.73A.49.49,0,0,1,.5,6.83Z"/>
+      <path class="cls-1" d="M11.91,6.7a.5.5,0,0,1-.35-.15L6.21,1.2.85,6.55a.48.48,0,0,1-.7,0,.48.48,0,0,1,0-.7L5.85.14a.51.51,0,0,1,.71,0l5.71,5.71a.5.5,0,0,1,0,.7A.51.51,0,0,1,11.91,6.7Z"/>
     </g>
   </g>
 </svg>
