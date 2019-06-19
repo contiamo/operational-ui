@@ -38,7 +38,8 @@ export const TabScroll = styled.div`
 `
 
 export const TabHeader = styled(SectionHeader, {
-  shouldForwardProp: prop => !(prop === "first" || prop === "aria-selected" || prop === "condensed" || prop === "as"),
+  shouldForwardProp: prop =>
+    !(prop === "first" || prop === "center" || prop === "aria-selected" || prop === "condensed" || prop === "as"),
 })<{
   first: boolean
   "aria-selected": boolean
