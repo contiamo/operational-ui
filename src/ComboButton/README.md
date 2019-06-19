@@ -2,7 +2,8 @@
 
 ```jsx
 import * as React from "react"
-import { CaretRightIcon, ContextMenu, ComboButton } from "@operational/components"
+import { ComboButton } from "@operational/components"
+
 const menuItems = ["Project", "User"]
 ;<ComboButton
   color="error"

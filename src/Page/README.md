@@ -832,3 +832,26 @@ const ControlledModalTest = () => {
 
 ;<ControlledModalTest />
 ```
+
+### With ComboButton actions
+
+```jsx
+import * as React from "react"
+import { OpenIcon, ComboButton, Page, Card } from "@operational/components"
+
+const menuItems = ["Project", "User"]
+
+const actions = (
+  <ComboButton
+    items={menuItems}
+    onItemClick={() => {
+      console.log("Item clicked")
+    }}
+  >
+    Create
+  </ComboButton>
+)
+;<Page title="Settings Page" actions={actions}>
+  <Card>Hello, this is page content</Card>
+</Page>
+```
