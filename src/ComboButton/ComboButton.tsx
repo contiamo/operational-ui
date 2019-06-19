@@ -1,75 +1,41 @@
 import * as React from "react"
 
 import { DefaultProps } from "../types"
-import { darken, inputFocus } from "../utils"
+import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 import { CaretDownIcon, CaretRightIcon } from "../Icon/Icon"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
+import Button from "../Button/Button"
+import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 
 export interface ComboButtonProps extends DefaultProps {
-  /** Title */
-  title?: string
+  /** Button color theme (hex or named color from `theme.color`) */
+  color: string
   /** Actions to display in dropdown */
   items: ContextMenuProps["items"]
   /** Disabled option */
   disabled?: boolean
   /** What is the tab index, for accessibility? */
   tabIndex?: number
+  /** onItemClick method for all menu items */
+  onItemClick?: (item: IContextMenuItem) => void
+  children?: React.ReactNode
 }
 
-const BaseComboButton = styled("button")<{ disabled?: ComboButtonProps["disabled"]; isOpen: boolean }>(
-  ({ theme, disabled, isOpen }) => {
-    return {
-      backgroundColor: theme.color.primary,
-      lineHeight: "36px",
-      fontSize: theme.font.size.small,
-      fontFamily: theme.font.family.main,
-      fontWeight: theme.font.weight.medium,
-      color: theme.color.text.white,
-      display: "inline-flex",
-      alignItems: "center",
-      justifyContent: "center",
-      padding: `0 0 0 ${theme.space.element}px`,
-      borderRadius: theme.borderRadius,
-      border: 0,
-      cursor: disabled ? "not-allowed" : "pointer",
-      opacity: disabled ? 0.6 : 1.0,
-      outline: "none",
-      position: "relative",
-      marginRight: theme.space.small,
-      ...(isOpen
-        ? {
-            backgroundColor: theme.color.white,
-            color: theme.color.text.default,
-            borderColor: theme.color.border.select,
-          }
-        : {
-            backgroundColor: theme.color.primary,
-            color: theme.color.text.white,
-            borderColor: theme.color.border.invisible,
-          }),
-      // Apply styles with increased specificity to override defaults
-      ":focus": {
-        ...inputFocus({ theme }),
-      },
-      ...(!disabled
-        ? {
-            ":hover": {
-              backgroundColor: isOpen ? theme.color.white : darken(theme.color.primary, 5),
-            },
-          }
-        : {}),
-    }
-  },
-)
+const BaseComboButton = styled(Button)<{ isOpen: boolean; textColor: string }>(({ isOpen, textColor, theme }) => ({
+  paddingRight: 0,
+  ...(isOpen
+    ? {
+        boxShadow: `0 0 0 1px ${expandColor(theme, textColor)} inset`,
+      }
+    : {}),
+}))
 
-const CaretContainer = styled("div")<{ isOpen: boolean }>(({ isOpen, theme }) => {
-  return {
-    width: "36px",
-    marginLeft: theme.space.content,
-    borderLeft: `1px solid ${isOpen ? theme.color.primary : theme.color.text.white}`,
-  }
-})
+const CaretContainer = styled("div")<{ isOpen: boolean; color: string }>(({ isOpen, color, theme }) => ({
+  width: "36px",
+  marginLeft: theme.space.content,
+  borderLeft: `1px solid ${isOpen ? expandColor(theme, color) : theme.color.text.white}`,
+}))
 
 const ItemWithCaret = styled("div")`
   width: 100%;
@@ -78,8 +44,8 @@ const ItemWithCaret = styled("div")`
   justify-content: space-between;
 `
 
-const ComboButton: React.SFC<ComboButtonProps> = ({ items, title, tabIndex, ...props }) => {
-  // Dropdown buttons always have right carets for every item. These are
+const ComboButton: React.SFC<ComboButtonProps> = ({ items, onItemClick, color, children, ...props }) => {
+  // Dropdown buttons always have right carets for every item. These are added automatically.
   const itemsWithCarets = items.map(item => {
     return {
       label: (
@@ -92,25 +58,17 @@ const ComboButton: React.SFC<ComboButtonProps> = ({ items, title, tabIndex, ...p
   })
 
   return (
-    <ContextMenu {...props} iconLocation="right" items={itemsWithCarets}>
+    <ContextMenu {...props} onClick={onItemClick} iconLocation="right" items={itemsWithCarets}>
       {isOpen => {
         return (
           <BaseComboButton
             {...props}
-            role="button"
-            aria-label={title}
-            tabIndex={tabIndex}
-            onClick={(ev: React.SyntheticEvent<React.ReactNode>) => {
-              if (props.disabled) {
-                ev.preventDefault()
-                return
-              }
-            }}
-            title={title}
+            color={isOpen ? "default" : color}
+            textColor={isOpen ? color : "default"}
             isOpen={isOpen}
           >
-            {title}
-            <CaretContainer isOpen={isOpen}>
+            {children}
+            <CaretContainer isOpen={isOpen} color={color}>
               <CaretDownIcon size={8} />
             </CaretContainer>
           </BaseComboButton>
@@ -118,6 +76,10 @@ const ComboButton: React.SFC<ComboButtonProps> = ({ items, title, tabIndex, ...p
       }}
     </ContextMenu>
   )
+}
+
+ComboButton.defaultProps = {
+  color: "primary",
 }
 
 export default ComboButton

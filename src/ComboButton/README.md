@@ -4,7 +4,18 @@
 import * as React from "react"
 import { CaretRightIcon, ContextMenu, ComboButton } from "@operational/components"
 const menuItems = ["Project", "User"]
-;<ComboButton title="Create" items={menuItems} />
+;<ComboButton
+  color="error"
+  items={menuItems}
+  onClick={() => {
+    console.log("Button clicked")
+  }}
+  onItemClick={() => {
+    console.log("Item clicked")
+  }}
+>
+  Create
+</ComboButton>
 ```
 
 ### Usage with complex list contents
@@ -50,6 +61,6 @@ const menuItems = [
   },
 ]
 ;<>
-  <ComboButton title="Add data source" items={menuItems} />
+  <ComboButton items={menuItems}>Add data source</ComboButton>
 </>
 ```
