@@ -1,26 +1,3 @@
-### Id style
-
-```jsx
-import * as React from "react"
-import { Input, Form, SyncIcon, UnlockIcon } from "@operational/components"
-
-const [value, setValue] = React.useState("MyTable_01")
-
-;<Form>
-  <Input idStyle label="Enter Table name" value={value} onChange={setValue} />
-  <Input idStyle clear={() => setValue("")} label="Also clearable" value={value} onChange={setValue} />
-  <Input idStyle label="Enter Table name" value={value} onChange={setValue} statusIcon={<SyncIcon color="primary" />} />
-  <Input
-    idStyle
-    fullWidth
-    label="Can be full width too"
-    value={value}
-    onChange={setValue}
-    statusIcon={<SyncIcon color="primary" />}
-  />
-</Form>
-```
-
 ### Usage
 
 ```jsx
@@ -200,4 +177,47 @@ import { Input } from "@operational/components"
 import * as React from "react"
 import { Input } from "@operational/components"
 ;<Input fullWidth value="Dave the Sheep" label="Hi, My Name is" />
+```
+
+### Id style
+
+```jsx
+import * as React from "react"
+import { Input, Form } from "@operational/components"
+
+const [value, setValue] = React.useState("MyTable_01")
+
+;<Form>
+  <Input idStyle label="Enter Table name" value={value} onChange={setValue} />
+  <Input idStyle label="Also clearable" value={value} onChange={setValue} clear={() => setValue("")} />
+</Form>
+```
+
+### Custom status icon
+
+```jsx
+import * as React from "react"
+import { Input, Form, SyncIcon, TimeIcon, SchemaIcon, WarningIcon } from "@operational/components"
+
+const [value, setValue] = React.useState("MyTable_01")
+
+;<Form>
+  <Input label="With a status icon" value={value} onChange={setValue} statusIcon={<SyncIcon color="primary" />} />
+  <Input idStyle label="Status icon with Id style" value={value} onChange={setValue} statusIcon={<SchemaIcon />} />
+  <Input
+    idStyle
+    label="Enter Table name, can also be cleared"
+    value={value}
+    onChange={setValue}
+    clear={() => setValue("")}
+    statusIcon={<TimeIcon color="primary" />}
+  />
+  <Input
+    fullWidth
+    label="Can be full width too"
+    value={value}
+    onChange={setValue}
+    statusIcon={<WarningIcon color="error" />}
+  />
+</Form>
 ```

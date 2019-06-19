@@ -56,7 +56,7 @@ export interface BaseProps extends DefaultProps, DefaultInputProps, Omit<React.I
   /** Should this input get Id input style */
   idStyle?: boolean
   /** Status icon on the right side of the Input */
-  statusIcon?: React.FC
+  statusIcon?: React.ReactNode
 }
 
 export interface BasePropsWithCopy extends BaseProps {
