@@ -189,7 +189,14 @@ const [value, setValue] = React.useState("MyTable_01")
 
 ;<Form>
   <Input idStyle label="Enter Table name" value={value} onChange={setValue} />
-  <Input idStyle label="Also clearable" value={value} onChange={setValue} clear={() => setValue("")} />
+  <Input
+    data-cy="clearable-input-with-id-style"
+    idStyle
+    label="Also clearable"
+    value={value}
+    onChange={setValue}
+    clear={() => setValue("")}
+  />
 </Form>
 ```
 

@@ -83,9 +83,9 @@ const Field = styled("input")<{
       ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
       : { borderRadius: theme.borderRadius }),
     font: idStyle ? "none" : "inherit",
-    fontFamily: idStyle ? theme.font.family.code : theme.font.family.main,
+    fontFamily: idStyle ? theme.font.family.code : "inherit",
     fontWeight: getFontWeight(),
-    fontSize: theme.font.size.body,
+    fontSize: theme.font.size.small,
     width: "100%",
     height,
     label: "input",
@@ -118,6 +118,14 @@ const ClearButton = styled.div`
   justify-content: center;
 
   cursor: pointer; /* Let the user know this is clickable */
+
+  outline: none;
+  :focus {
+    ${({ theme }) =>
+      inputFocus({
+        theme,
+      })}
+  }
 
   /* We want the user to click on thix _box_, not the icon inside it */
   > svg {
@@ -183,6 +191,7 @@ const InputField: React.FC<InputProps> = ({
       <Container fullWidth={fullWidth} statusIcon={statusIcon}>
         {shouldShowIconButton && renderButton()}
         <Field
+          data-cy="operational-ui__Input"
           ref={inputRef}
           autoFocus={autoFocus}
           name={name}
@@ -211,14 +220,19 @@ const InputField: React.FC<InputProps> = ({
         <IconContainer iconAmount={(clear && value ? 1 : 0) + (idStyle ? 1 : 0)} right={0}>
           {/* Clear button and Id style icon within the input border */}
           {clear && value && (
-            <ClearButton onClick={clear}>
+            <ClearButton
+              data-cy="operational-ui__Input-clear-button"
+              aria-label="Clear Input"
+              tabIndex={0}
+              onClick={clear}
+            >
               <NoIcon />
             </ClearButton>
           )}
           {idStyle && <ServiceAccountIcon />}
         </IconContainer>
         {Boolean(statusIcon) && (
-          <IconContainer iconAmount={1} right={-iconBoxSize}>
+          <IconContainer data-cy="operational-ui__Input-status-icon" iconAmount={1} right={-iconBoxSize}>
             {/* negative `right` to place the status icon on the right side of the input */}
             {statusIcon}
           </IconContainer>
