@@ -263,6 +263,10 @@ const constants = {
   topbarHeight: 48,
   titleHeight: 50,
   tabsBarHeight: 48,
+  pageSize: {
+    min: 800,
+    max: 1000,
+  },
 }
 
 /*
