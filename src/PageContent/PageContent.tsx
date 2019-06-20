@@ -60,7 +60,6 @@ const StyledPageContent = styled("div", {
     height: "100%",
     minWidth: props.theme.pageSize.min,
     maxWidth: props.fill ? "none" : props.theme.pageSize.max,
-    padding: props.noPadding ? 0 : `${props.theme.space[props.padding || "element"]}px`,
 
     /**
      * Since PageContent is in a scrollable context,
