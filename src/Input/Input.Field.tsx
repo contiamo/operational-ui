@@ -5,7 +5,7 @@ import styled from "../utils/styled"
 import { InputProps } from "./Input"
 import InputButton from "./Input.Button"
 import { height, iconBoxSize, width } from "./Input.constants"
-import { NoIcon, ServiceAccountIcon } from "../Icon/Icon"
+import { NoIcon, IDIcon } from "../Icon/Icon"
 
 const getMaxWidth = (fullWidth: InputProps["fullWidth"], statusIcon: InputProps["statusIcon"]) => {
   if (fullWidth && statusIcon) {
@@ -145,6 +145,10 @@ const IconContainer = styled.div<{ iconAmount: number; right: number }>`
   justify-content: center;
 `
 
+const UniqueIdIcon = styled(IDIcon)`
+  color: ${({ theme }) => theme.color.text.lightest};
+`
+
 const InputField: React.FC<InputProps> = ({
   id,
   hint,
@@ -226,7 +230,7 @@ const InputField: React.FC<InputProps> = ({
               <NoIcon />
             </ClearButton>
           )}
-          {isUniqueId && <ServiceAccountIcon />}
+          {isUniqueId && <UniqueIdIcon />}
         </IconContainer>
         {Boolean(statusIcon) && (
           <IconContainer data-cy="operational-ui__Input-status-icon" iconAmount={1} right={-iconBoxSize}>
