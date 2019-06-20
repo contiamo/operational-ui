@@ -53,6 +53,10 @@ export interface BaseProps extends DefaultProps, DefaultInputProps, Omit<React.I
   errorComponent?: React.FC<{ errorMessage: string }>
   /** Is the input read-only? */
   readOnly?: boolean
+  /** Should this input get Id input style */
+  isUniqueId?: boolean
+  /** Status icon on the right side of the Input */
+  statusIcon?: React.ReactNode
 }
 
 export interface BasePropsWithCopy extends BaseProps {
@@ -71,7 +75,7 @@ export interface BasePropsWithoutCopy extends BaseProps {
 
 export type InputProps = BasePropsWithCopy | BasePropsWithoutCopy
 
-const Input: React.SFC<InputProps> = ({
+const Input: React.FC<InputProps> = ({
   id,
   tabIndex,
   fullWidth,
@@ -81,6 +85,8 @@ const Input: React.SFC<InputProps> = ({
   onToggle,
   disabled,
   errorComponent,
+  isUniqueId,
+  statusIcon,
   ...props
 }) => {
   const uniqueId = useUniqueId(id)
@@ -97,6 +103,8 @@ const Input: React.SFC<InputProps> = ({
       aria-describedby={hint ? `input-hint-${uniqueId}` : undefined}
       aria-label={label}
       errorComponent={errorComponent}
+      isUniqueId={isUniqueId}
+      statusIcon={statusIcon}
       {...props}
     />
   )

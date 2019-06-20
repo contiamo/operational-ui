@@ -4,21 +4,31 @@ import { FormFieldError, inputFocus, setAlpha } from "../utils"
 import styled from "../utils/styled"
 import { InputProps } from "./Input"
 import InputButton from "./Input.Button"
-import { height } from "./Input.constants"
-import { NoIcon } from "../Icon/Icon"
+import { height, iconBoxSize, width } from "./Input.constants"
+import { NoIcon, IDIcon } from "../Icon/Icon"
 
-const width = 360
+const getMaxWidth = (fullWidth: InputProps["fullWidth"], statusIcon: InputProps["statusIcon"]) => {
+  if (fullWidth && statusIcon) {
+    return `calc(100% - ${iconBoxSize}px)`
+  }
 
-const Container = styled("div")<{
+  if (fullWidth) {
+    return "none"
+  }
+
+  return `${width}px`
+}
+
+const Container = styled.div<{
   fullWidth: InputProps["fullWidth"]
-  withLabel: boolean
+  statusIcon: InputProps["statusIcon"]
 }>`
   position: relative;
   align-items: center;
   justify-content: center;
   display: inline-flex;
   width: 100%;
-  max-width: ${({ fullWidth }) => (fullWidth ? "none" : `${width}px`)};
+  max-width: ${({ fullWidth, statusIcon }) => getMaxWidth(fullWidth, statusIcon)};
 `
 
 const Field = styled("input")<{
@@ -27,7 +37,8 @@ const Field = styled("input")<{
   preset: InputProps["preset"]
   disabled: InputProps["disabled"]
   clear: InputProps["clear"]
-}>(({ theme, disabled, isError, withIconButton, preset, clear }) => {
+  isUniqueId: InputProps["isUniqueId"]
+}>(({ theme, disabled, isError, withIconButton, preset, clear, isUniqueId }) => {
   const makeBackgroundColor = () => {
     if (disabled) {
       return theme.color.disabled
@@ -40,28 +51,52 @@ const Field = styled("input")<{
     return theme.color.white
   }
 
+  const getFontWeight = () => {
+    if (isUniqueId) {
+      return theme.font.weight.bold
+    }
+
+    if (preset) {
+      return theme.font.weight.medium
+    }
+
+    return theme.font.weight.regular
+  }
+
+  const getRightPadding = () => {
+    if (clear && isUniqueId) {
+      return iconBoxSize + theme.space.big
+    }
+
+    if (clear || isUniqueId) {
+      return iconBoxSize
+    }
+
+    return theme.space.small
+  }
+
   return {
     ...(withIconButton
       ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
       : { borderRadius: theme.borderRadius }),
-    fontSize: theme.font.size.body,
+    font: isUniqueId ? "none" : "inherit",
+    fontFamily: isUniqueId ? theme.font.family.code : "inherit",
+    fontWeight: getFontWeight(),
+    fontSize: theme.font.size.small,
     width: "100%",
     height,
     label: "input",
     flexGrow: 1,
-    padding: `${theme.space.small}px ${theme.space.medium}px`,
+    padding: `${theme.space.small}px ${getRightPadding()}px ${theme.space.small}px ${theme.space.medium}px`,
     opacity: disabled ? 0.6 : 1.0,
-    font: "inherit",
     border: "1px solid",
     borderColor: isError ? theme.color.error : theme.color.border.default,
     appearance: "none",
-    fontWeight: preset ? theme.font.weight.medium : theme.font.weight.regular,
     color: preset ? theme.color.text.dark : theme.color.text.default,
     backgroundColor: makeBackgroundColor(),
     "::placeholder": {
       color: theme.color.text.disabled,
     },
-    ...(clear ? { paddingRight: 40 } : {}),
     "&:focus": inputFocus({
       theme,
       isError,
@@ -69,14 +104,10 @@ const Field = styled("input")<{
   }
 })
 
-const ClearButton = styled("div")`
-  position: absolute;
-  top: 0; /* anchor the position to the top so the browser doesn't guess */
-  right: 0; /* not 12px but 0 because we want a _box_ to attach to the end of Input and not just an X pushed in from the right */
-
+const ClearButton = styled.div`
   /* We also probably should specify the dimensions of this box */
-  width: ${height}px;
-  height: ${height}px;
+  width: ${iconBoxSize}px;
+  height: ${iconBoxSize}px;
 
   /* Also, let's center the contents of this box */
   display: flex;
@@ -85,13 +116,40 @@ const ClearButton = styled("div")`
 
   cursor: pointer; /* Let the user know this is clickable */
 
+  outline: none;
+  :focus {
+    ${({ theme }) =>
+      inputFocus({
+        theme,
+      })}
+  }
+
   /* We want the user to click on thix _box_, not the icon inside it */
   > svg {
     pointer-events: none;
   }
 `
 
-const InputField: React.SFC<InputProps> = ({
+const IconContainer = styled.div<{ iconAmount: number; right: number }>`
+  position: absolute;
+  top: 0; /* anchor the position to the top so the browser doesn't guess */
+  right: ${({ right }) => right}px;
+
+  /* Dimensions of the container */
+  width: ${({ iconAmount }) => iconAmount * iconBoxSize}px;
+  height: ${iconBoxSize}px;
+
+  /* Also, let's center the contents of this box */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const UniqueIdIcon = styled(IDIcon)`
+  color: ${({ theme }) => theme.color.text.lightest};
+`
+
+const InputField: React.FC<InputProps> = ({
   id,
   hint,
   fullWidth,
@@ -115,6 +173,8 @@ const InputField: React.SFC<InputProps> = ({
   onIconClick,
   tabIndex,
   errorComponent: ErrorComponent,
+  isUniqueId,
+  statusIcon,
   ...props
 }) => {
   const shouldShowIconButton = Boolean(icon) || Boolean(copy)
@@ -129,9 +189,10 @@ const InputField: React.SFC<InputProps> = ({
 
   return (
     <>
-      <Container fullWidth={fullWidth} withLabel={Boolean(label)}>
+      <Container fullWidth={fullWidth} statusIcon={statusIcon}>
         {shouldShowIconButton && renderButton()}
         <Field
+          data-cy="operational-ui__Input"
           ref={inputRef}
           autoFocus={autoFocus}
           name={name}
@@ -154,12 +215,28 @@ const InputField: React.SFC<InputProps> = ({
           withIconButton={shouldShowIconButton}
           autoComplete={autoComplete}
           tabIndex={tabIndex}
+          isUniqueId={isUniqueId}
           {...props}
         />
-        {clear && value && (
-          <ClearButton onClick={clear}>
-            <NoIcon />
-          </ClearButton>
+        <IconContainer iconAmount={(clear && value ? 1 : 0) + (isUniqueId ? 1 : 0)} right={0}>
+          {/* Clear button and Id style icon within the input border */}
+          {clear && value && (
+            <ClearButton
+              data-cy="operational-ui__Input-clear-button"
+              aria-label="Clear Input"
+              tabIndex={0}
+              onClick={clear}
+            >
+              <NoIcon />
+            </ClearButton>
+          )}
+          {isUniqueId && <UniqueIdIcon />}
+        </IconContainer>
+        {Boolean(statusIcon) && (
+          <IconContainer data-cy="operational-ui__Input-status-icon" iconAmount={1} right={-iconBoxSize}>
+            {/* negative `right` to place the status icon on the right side of the input */}
+            {statusIcon}
+          </IconContainer>
         )}
         {error && !ErrorComponent ? <FormFieldError>{error}</FormFieldError> : null}
       </Container>

@@ -178,3 +178,53 @@ import * as React from "react"
 import { Input } from "@operational/components"
 ;<Input fullWidth value="Dave the Sheep" label="Hi, My Name is" />
 ```
+
+### Can server as a unique Id input
+
+```jsx
+import * as React from "react"
+import { Input, Form } from "@operational/components"
+
+const [value, setValue] = React.useState("MyTable_01")
+
+;<Form>
+  <Input isUniqueId label="Enter Table name" value={value} onChange={setValue} />
+  <Input
+    data-cy="clearable-input-with-id-style"
+    isUniqueId
+    label="Also clearable"
+    value={value}
+    onChange={setValue}
+    clear={() => setValue("")}
+  />
+</Form>
+```
+
+### Can have a custom status icon
+
+```jsx
+import * as React from "react"
+import { Input, Form, SyncIcon, TimeIcon, SchemaIcon, WarningIcon } from "@operational/components"
+
+const [value, setValue] = React.useState("MyTable_01")
+
+;<Form>
+  <Input label="With a status icon" value={value} onChange={setValue} statusIcon={<SyncIcon color="primary" />} />
+  <Input isUniqueId label="Status icon with Id style" value={value} onChange={setValue} statusIcon={<SchemaIcon />} />
+  <Input
+    isUniqueId
+    label="Enter Table name, can also be cleared"
+    value={value}
+    onChange={setValue}
+    clear={() => setValue("")}
+    statusIcon={<TimeIcon color="primary" />}
+  />
+  <Input
+    fullWidth
+    label="Can be full width too"
+    value={value}
+    onChange={setValue}
+    statusIcon={<WarningIcon color="error" />}
+  />
+</Form>
+```
