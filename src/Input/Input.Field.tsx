@@ -4,11 +4,8 @@ import { FormFieldError, inputFocus, setAlpha } from "../utils"
 import styled from "../utils/styled"
 import { InputProps } from "./Input"
 import InputButton from "./Input.Button"
-import { height } from "./Input.constants"
+import { height, iconBoxSize, width } from "./Input.constants"
 import { NoIcon, ServiceAccountIcon } from "../Icon/Icon"
-
-const width = 360
-const iconBoxSize = height // Fit icons into the square with the side of the input height
 
 const getMaxWidth = (fullWidth: InputProps["fullWidth"], statusIcon: InputProps["statusIcon"]) => {
   if (fullWidth && statusIcon) {
