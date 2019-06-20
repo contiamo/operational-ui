@@ -47,10 +47,12 @@ const Main = styled("div")<{ hasHeader: boolean }>(({ theme, hasHeader }) => ({
   gridColumn: "2",
   height: hasHeader ? `calc(100% - ${theme.titleHeight}px)` : "100%", // FORCE a height that is the page - the logo so that children with 100% have context
   backgroundColor: theme.color.white,
+  padding: "50px 35px 35px",
 }))
 
 const Side = styled(Main)({
   gridColumn: "1",
+  padding: 0,
 })
 
 const Header = styled("div")({
