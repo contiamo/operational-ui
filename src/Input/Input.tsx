@@ -54,7 +54,7 @@ export interface BaseProps extends DefaultProps, DefaultInputProps, Omit<React.I
   /** Is the input read-only? */
   readOnly?: boolean
   /** Should this input get Id input style */
-  idStyle?: boolean
+  isUniqueId?: boolean
   /** Status icon on the right side of the Input */
   statusIcon?: React.ReactNode
 }
@@ -85,7 +85,7 @@ const Input: React.FC<InputProps> = ({
   onToggle,
   disabled,
   errorComponent,
-  idStyle,
+  isUniqueId,
   statusIcon,
   ...props
 }) => {
@@ -103,7 +103,7 @@ const Input: React.FC<InputProps> = ({
       aria-describedby={hint ? `input-hint-${uniqueId}` : undefined}
       aria-label={label}
       errorComponent={errorComponent}
-      idStyle={idStyle}
+      isUniqueId={isUniqueId}
       statusIcon={statusIcon}
       {...props}
     />

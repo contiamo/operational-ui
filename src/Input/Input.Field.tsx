@@ -37,8 +37,8 @@ const Field = styled("input")<{
   preset: InputProps["preset"]
   disabled: InputProps["disabled"]
   clear: InputProps["clear"]
-  idStyle: InputProps["idStyle"]
-}>(({ theme, disabled, isError, withIconButton, preset, clear, idStyle }) => {
+  isUniqueId: InputProps["isUniqueId"]
+}>(({ theme, disabled, isError, withIconButton, preset, clear, isUniqueId }) => {
   const makeBackgroundColor = () => {
     if (disabled) {
       return theme.color.disabled
@@ -52,7 +52,7 @@ const Field = styled("input")<{
   }
 
   const getFontWeight = () => {
-    if (idStyle) {
+    if (isUniqueId) {
       return theme.font.weight.bold
     }
 
@@ -64,11 +64,11 @@ const Field = styled("input")<{
   }
 
   const getRightPadding = () => {
-    if (clear && idStyle) {
+    if (clear && isUniqueId) {
       return iconBoxSize + theme.space.big
     }
 
-    if (clear || idStyle) {
+    if (clear || isUniqueId) {
       return iconBoxSize
     }
 
@@ -79,8 +79,8 @@ const Field = styled("input")<{
     ...(withIconButton
       ? { borderTopRightRadius: theme.borderRadius, borderBottomRightRadius: theme.borderRadius, marginLeft: -1 }
       : { borderRadius: theme.borderRadius }),
-    font: idStyle ? "none" : "inherit",
-    fontFamily: idStyle ? theme.font.family.code : "inherit",
+    font: isUniqueId ? "none" : "inherit",
+    fontFamily: isUniqueId ? theme.font.family.code : "inherit",
     fontWeight: getFontWeight(),
     fontSize: theme.font.size.small,
     width: "100%",
@@ -169,7 +169,7 @@ const InputField: React.FC<InputProps> = ({
   onIconClick,
   tabIndex,
   errorComponent: ErrorComponent,
-  idStyle,
+  isUniqueId,
   statusIcon,
   ...props
 }) => {
@@ -211,10 +211,10 @@ const InputField: React.FC<InputProps> = ({
           withIconButton={shouldShowIconButton}
           autoComplete={autoComplete}
           tabIndex={tabIndex}
-          idStyle={idStyle}
+          isUniqueId={isUniqueId}
           {...props}
         />
-        <IconContainer iconAmount={(clear && value ? 1 : 0) + (idStyle ? 1 : 0)} right={0}>
+        <IconContainer iconAmount={(clear && value ? 1 : 0) + (isUniqueId ? 1 : 0)} right={0}>
           {/* Clear button and Id style icon within the input border */}
           {clear && value && (
             <ClearButton
@@ -226,7 +226,7 @@ const InputField: React.FC<InputProps> = ({
               <NoIcon />
             </ClearButton>
           )}
-          {idStyle && <ServiceAccountIcon />}
+          {isUniqueId && <ServiceAccountIcon />}
         </IconContainer>
         {Boolean(statusIcon) && (
           <IconContainer data-cy="operational-ui__Input-status-icon" iconAmount={1} right={-iconBoxSize}>

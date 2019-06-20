@@ -179,7 +179,7 @@ import { Input } from "@operational/components"
 ;<Input fullWidth value="Dave the Sheep" label="Hi, My Name is" />
 ```
 
-### Id style
+### Can server as a unique Id input
 
 ```jsx
 import * as React from "react"
@@ -188,10 +188,10 @@ import { Input, Form } from "@operational/components"
 const [value, setValue] = React.useState("MyTable_01")
 
 ;<Form>
-  <Input idStyle label="Enter Table name" value={value} onChange={setValue} />
+  <Input isUniqueId label="Enter Table name" value={value} onChange={setValue} />
   <Input
     data-cy="clearable-input-with-id-style"
-    idStyle
+    isUniqueId
     label="Also clearable"
     value={value}
     onChange={setValue}
@@ -200,7 +200,7 @@ const [value, setValue] = React.useState("MyTable_01")
 </Form>
 ```
 
-### Custom status icon
+### Can have a custom status icon
 
 ```jsx
 import * as React from "react"
@@ -210,9 +210,9 @@ const [value, setValue] = React.useState("MyTable_01")
 
 ;<Form>
   <Input label="With a status icon" value={value} onChange={setValue} statusIcon={<SyncIcon color="primary" />} />
-  <Input idStyle label="Status icon with Id style" value={value} onChange={setValue} statusIcon={<SchemaIcon />} />
+  <Input isUniqueId label="Status icon with Id style" value={value} onChange={setValue} statusIcon={<SchemaIcon />} />
   <Input
-    idStyle
+    isUniqueId
     label="Enter Table name, can also be cleared"
     value={value}
     onChange={setValue}
