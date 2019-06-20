@@ -96,7 +96,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
     [columns, rows, rowHeight],
   )
 
-  const numCells = React.useMemo(() => rows[0].length, [rows])
+  const numCells = React.useMemo(() => (rows[0] ? rows[0].length : 0), [rows])
   const VirtualRow: React.FC<ListChildComponentProps> = React.useMemo(
     () =>
       React.memo(({ style, index }) => (
