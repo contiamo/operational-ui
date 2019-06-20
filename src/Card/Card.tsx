@@ -104,8 +104,7 @@ export interface State {
 
 const Container = styled("div")(({ theme }) => ({
   marginBottom: theme.space.element,
-  borderTop: `1px solid ${theme.color.separators.light}`,
-  boxShadow: theme.shadows.card,
+  border: `1px solid ${theme.color.separators.light}`,
   backgroundColor: theme.color.white,
   wordWrap: "break-word",
   "& > img": {
