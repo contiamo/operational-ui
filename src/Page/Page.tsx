@@ -86,7 +86,6 @@ const Container = styled("div")<{ hasTitle: boolean; hasTabs: boolean }>(({ them
 const TitleContainer = styled("div")<{ fill: boolean }>(({ theme, fill }) => ({
   display: "flex",
   alignItems: "center",
-  padding: theme.space.element,
   height: theme.titleHeight,
   fontWeight: theme.font.weight.medium,
   minWidth: theme.pageSize.min,
@@ -113,7 +112,6 @@ const FixedProgress = styled(Progress)`
 `
 
 const TabsContainer = styled.div<{ fill: boolean }>`
-  padding: 0 ${({ theme }) => theme.space.element}px;
   min-width: ${({ theme }) => theme.pageSize.min};
   max-width: ${({ theme, fill }) => (fill ? "100%" : `${theme.pageSize.max}px`)};
 `
@@ -121,7 +119,7 @@ const TabsContainer = styled.div<{ fill: boolean }>`
 const Page: React.FC<PageProps> = ({
   actions,
   activeTabName,
-  areas,
+  areas = "main",
   children,
   fill,
   loading,
