@@ -18,6 +18,8 @@ export interface ComboButtonProps extends DefaultProps {
   disabled?: boolean
   /** What is the tab index, for accessibility? */
   tabIndex?: number
+  /** onClick method for button */
+  onClick?: (e?: React.SyntheticEvent<React.ReactNode>) => void
   /** onItemClick method for all menu items */
   onItemClick?: (item: IContextMenuItem) => void
   children?: React.ReactNode
