@@ -1,4 +1,5 @@
 import * as React from "react"
+import isString from "lodash/isString"
 
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
@@ -212,7 +213,12 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
               iconLocation={iconLocation}
               width={width || "100%"}
               item={item}
-              onClick={() => {
+              onClick={e => {
+                e.stopPropagation()
+                if (!isString(item) && item.onClick) {
+                  item.onClick(makeItem(item))
+                  return
+                }
                 if (onClick) {
                   onClick(makeItem(item))
                 }

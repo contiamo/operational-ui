@@ -1,12 +1,20 @@
 import * as React from "react"
-import { SectionHeader } from "../Internals/SectionHeader"
 import { DefaultProps } from "../types"
-import styled from "../utils/styled"
 import { useUniqueId } from "../useUniqueId"
 import { NoIcon, PlusIcon, ChevronLeftIcon, ChevronRightIcon } from "../Icon/Icon"
 import { ScrollButton } from "./ScrollButton"
-
-const buttonWidth = 55
+import {
+  Container,
+  ScrollButtons,
+  TabContainer,
+  TabHeader,
+  TabIcon,
+  TabList,
+  TabPanel,
+  TabScroll,
+  TitleIconWrapper,
+  TitleWrapper,
+} from "./Tabs.styled"
 
 export interface Tab {
   title: string
@@ -17,6 +25,7 @@ export interface TabsProps extends DefaultProps {
   tabs: Tab[]
   active: number
   onActivate: (tabIndex: number) => void
+  scroll?: boolean
   onClose?: (tabIndex: number) => void
   onInsert?: (tabIndex: number) => void
   label?: string
@@ -24,139 +33,18 @@ export interface TabsProps extends DefaultProps {
   id?: string
 }
 
-const Container = styled.div`
-  label: Tabs;
-  display: grid;
-  grid-template-rows: ${({ theme }) => `${theme.space.element * 2}px 1fr`};
-  position: relative;
-`
-
-const TabList = styled.div`
-  display: flex;
-  height: ${({ theme }) => theme.space.element * 2}px;
-  overflow-x: auto;
-  max-width: calc(100% - ${buttonWidth * 2}px);
-  scroll-behavior: smooth;
-  border-left: solid 1px ${({ theme }) => theme.color.separators.default};
-  overflow-y: hidden;
-  /* magic number to hide scroll bar underneath tabpanel */
-  height: ${({ theme }) => theme.space.element * 2 + 20}px;
-  -webkit-overflow-scrolling: auto;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  z-index: 1;
-`
-
-TabList.defaultProps = {
-  role: "tablist",
-}
-
-const TabScroll = styled.div`
-  display: flex;
-`
-
-const TabHeader = styled(SectionHeader, {
-  shouldForwardProp: prop => !(prop === "first" || prop === "aria-selected" || prop === "condensed" || prop === "as" ),
-})<{
-  first: boolean
-  "aria-selected": boolean
-  condensed?: boolean
-  as?: React.FC<any> | string
-}>`
-  cursor: pointer;
-  font-weight: normal;
-  background-color: ${({ theme }) => theme.color.background.light};
-  border: solid 1px ${({ theme }) => theme.color.separators.default};
-  border-left: none;
-  ${props =>
-    props["aria-selected"]
-      ? `border-bottom: 1px solid ${props.theme.color.background.lighter}; 
-         background-color: ${props.theme.color.background.lighter};
-         color: ${props.theme.color.primary};
-         font-weight: bold;`
-      : ""}
-
-  ${({ condensed }) =>
-    condensed ? `max-width: ${buttonWidth}px; min-width: ${buttonWidth}px;` : "max-width: 180px;"}
-  flex-grow: 1;
-  & svg {
-    ${({ condensed }) => (condensed ? "pointer-events: none;" : "")}
-    cursor: pointer;
-  }
-  :focus {
-    outline: none;
-    box-shadow: ${({ theme }) => theme.shadows.insetFocus};
-  }
-  ::-moz-focus-inner {
-    border: none;
-  }
-  :disabled {
-    color: ${({ theme }) => theme.color.disabled};
-    cursor: not-allowed;
-  }
-  margin: 0;
-`
-
-TabHeader.defaultProps = {
-  role: "tab",
-  as: "button",
-}
-
-const TabContainer = styled.div`
-  border: solid 1px ${({ theme }) => theme.color.separators.default};
-  margin-top: -1px;
-  overflow: hidden;
-  background-color: ${({ theme }) => theme.color.background.lighter};
-`
-
-const TabPanel = styled.div`
-  z-index: 2;
-  :focus {
-    outline: none;
-    ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
-  }
-  ::-moz-focus-inner {
-    border: none;
-  }
-  height: 100%;
-  overflow: auto;
-`
-
-TabPanel.defaultProps = {
-  role: "tabpanel",
-  tabIndex: 0,
-}
-
-// We need this one so that icon and title both would be aligned to the left
-const TitleIconWrapper = styled.div`
-  display: flex;
-  max-width: 120px;
-`
-
-// we need this one to show ellipsis if title is to long
-const TitleWrapper = styled.span`
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  margin-right: ${({ theme }) => theme.space.small}px;
-`
-
-const TabIcon = styled.span`
-  margin-right: ${({ theme }) => theme.space.small}px;
-`
-
-const ScrollButtons = styled.div`
-  position: absolute;
-  right: 1px;
-  width: ${buttonWidth * 2}px;
-  display: flex;
-  border-left: solid 1px ${({ theme }) => theme.color.separators.default};
-  border-right: solid 1px ${({ theme }) => theme.color.separators.default};
-  z-index: 1;
-`
-
-const Tabs: React.FC<TabsProps> = ({ tabs, active, onClose, onActivate, onInsert, label, style, id, children }) => {
+const Tabs: React.FC<TabsProps> = ({
+  tabs,
+  scroll,
+  active,
+  onClose,
+  onActivate,
+  onInsert,
+  label,
+  style,
+  id,
+  children,
+}) => {
   if (!Number.isInteger(active) || active < 0 || active >= tabs.length) {
     active = active > 0 ? tabs.length - 1 : 0
     if (process.env.NODE_ENV !== "production")
@@ -244,7 +132,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs, active, onClose, onActivate, onInsert
 
   return (
     <Container data-cy="operational-ui__Tabs" style={style}>
-      <TabList aria-label={label} onKeyDown={onKeyDown} ref={tabListRef}>
+      <TabList scroll={Boolean(scroll)} aria-label={label} onKeyDown={onKeyDown} ref={tabListRef}>
         <TabScroll ref={tabScrollRef}>
           {tabs.map(({ title, icon }, i) => {
             const onClick = () => {
@@ -253,6 +141,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs, active, onClose, onActivate, onInsert
             }
             return (
               <TabHeader
+                center={!scroll}
                 tabIndex={i === active ? 0 : -1}
                 first={i === 0}
                 aria-selected={i === active}
@@ -269,6 +158,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs, active, onClose, onActivate, onInsert
                 </TitleIconWrapper>
                 {onClose && (
                   <NoIcon
+                    right
                     size={9}
                     onMouseDown={e => {
                       e.stopPropagation()
@@ -297,30 +187,32 @@ const Tabs: React.FC<TabsProps> = ({ tabs, active, onClose, onActivate, onInsert
           )}
         </TabScroll>
       </TabList>
-      <ScrollButtons>
-        <TabHeader
-          aria-hidden={true}
-          as={ScrollButton}
-          tabIndex={-1}
-          first={true}
-          aria-selected={false}
-          condensed={true}
-          onClick={scrollLeft}
-        >
-          <ChevronLeftIcon size={14} />
-        </TabHeader>
-        <TabHeader
-          aria-hidden={true}
-          as={ScrollButton}
-          tabIndex={-1}
-          first={false}
-          aria-selected={false}
-          condensed={true}
-          onClick={scrollRight}
-        >
-          <ChevronRightIcon size={14} />
-        </TabHeader>
-      </ScrollButtons>
+      {scroll && (
+        <ScrollButtons>
+          <TabHeader
+            aria-hidden={true}
+            as={ScrollButton}
+            tabIndex={-1}
+            first={true}
+            aria-selected={false}
+            condensed={true}
+            onClick={scrollLeft}
+          >
+            <ChevronLeftIcon size={14} />
+          </TabHeader>
+          <TabHeader
+            aria-hidden={true}
+            as={ScrollButton}
+            tabIndex={-1}
+            first={false}
+            aria-selected={false}
+            condensed={true}
+            onClick={scrollRight}
+          >
+            <ChevronRightIcon size={14} />
+          </TabHeader>
+        </ScrollButtons>
+      )}
       <TabContainer>
         {tabs.map((_, i) => (
           <TabPanel hidden={i !== active} id={`TabPanel-${uid}-${i}`} aria-labelledby={`TabHeader-${uid}-${i}`} key={i}>
@@ -330,6 +222,10 @@ const Tabs: React.FC<TabsProps> = ({ tabs, active, onClose, onActivate, onInsert
       </TabContainer>
     </Container>
   )
+}
+
+Tabs.defaultProps = {
+  scroll: true,
 }
 
 export default Tabs

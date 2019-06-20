@@ -7,6 +7,10 @@ export interface IOption {
   value: Value
 }
 
+export interface CustomInputSettings {
+  onBlur?: (currentValue: Value) => void
+}
+
 export interface BaseSelectProps extends DefaultProps {
   /** Options available */
   options: IOption[]
@@ -35,6 +39,8 @@ export interface BaseSelectProps extends DefaultProps {
 export interface SelectPropsWithCustomOption extends BaseSelectProps {
   /** A pseudo-option that allows a user to supply a custom value. */
   customOption?: IOption
+  /** Settings for the custom input field */
+  customInputSettings?: CustomInputSettings
   /** Current value */
   value: null | Value
 }
@@ -44,6 +50,8 @@ export interface SelectPropsWithMultiSelect extends BaseSelectProps {
   customOption?: never
   /** The value of the pseudo-option that allows a user to supply a custom value. */
   customOptionValue?: never
+  /** Settings for the custom input field */
+  customInputSettings?: never
   /** Current value */
   value: null | Value | Value[]
 }

@@ -1,15 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 12.41 6.7">
+<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 16.68 13.75">
   <defs>
     <style>
       .cls-1 {
-        fill: white;
+        fill: #fff;
       }
     </style>
   </defs>
-  <title>CaretUp_1</title>
+  <title>CaretUp</title>
   <g id="Layer_2" data-name="Layer 2">
     <g id="Layer_1-2" data-name="Layer 1">
-      <path class="cls-1" d="M11.91,6.7a.5.5,0,0,1-.35-.15L6.21,1.2.85,6.55a.48.48,0,0,1-.7,0,.48.48,0,0,1,0-.7L5.85.14a.51.51,0,0,1,.71,0l5.71,5.71a.5.5,0,0,1,0,.7A.51.51,0,0,1,11.91,6.7Z"/>
+      <path class="cls-1" d="M16.58,12.68,8.94.33A.69.69,0,0,0,8.34,0h0a.69.69,0,0,0-.59.33L.1,12.68a.72.72,0,0,0,0,.71.7.7,0,0,0,.61.36H16a.71.71,0,0,0,.6-1.07Z"/>
     </g>
   </g>
 </svg>

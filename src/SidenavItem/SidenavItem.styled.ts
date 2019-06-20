@@ -62,6 +62,8 @@ export const StyledSidenavItem = styled("div", {
   svg {
     pointer-events: none;
   }
+
+  outline: none;
 `
 
 export const Caret = styled("div")<{ isOpen: boolean }>`

@@ -39,7 +39,7 @@ const SidenavHeaderBase = styled<"div" | "a">("div")<{
   compact: SidenavHeaderProps["compact"]
   dark?: SidenavHeaderProps["dark"]
 }>(({ theme, compact, dark }) => {
-  const color = theme.color.text.default
+  const color = dark ? theme.color.white : theme.color.text.default
 
   return {
     label: "sidenavheader",

@@ -2,11 +2,11 @@
   <defs>
     <style>
       .cls-1 {
-        fill: white;
+        fill: #fff;
       }
     </style>
   </defs>
-  <title>Physical table</title>
+  <title>PhysicalTable</title>
   <g id="Layer_2" data-name="Layer 2">
     <g id="Layer_1-2" data-name="Layer 1">
       <path class="cls-1" d="M15,0H1A1,1,0,0,0,0,1V11.46a1,1,0,0,0,1,1H15a1,1,0,0,0,1-1V1A1,1,0,0,0,15,0ZM7.5,3.16V6.81H1V3.16ZM1,7.81H7.5v3.65H1ZM15,12v-.5H8.5V7.81H15v3.65h0Zm0-5.15H8.5V3.16H15Z"/>

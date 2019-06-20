@@ -25,7 +25,7 @@ const Container = styled("div")<SidenavProps>(({ theme, compact, dark }) => {
     display: "flex",
     flexDirection: "column",
     alignItems: "flex-start",
-    overflow: compact ? "hidden" : "overlay",
+    overflow: "auto",
     width: compact ? theme.compactSidebarWidth : theme.sidebarWidth,
     height: "100%",
     borderRight: "1px solid",
@@ -37,6 +37,24 @@ const Container = styled("div")<SidenavProps>(({ theme, compact, dark }) => {
 
     ".operational-ui__sidenav-item_end + .operational-ui__sidenav-item_end": {
       marginTop: 0,
+    },
+
+    /** Give people a slightly nicer experience on Chrome/Safari/Edge */
+    "::-webkit-scrollbar": {
+      width: 6,
+    },
+
+    "::-webkit-scrollbar-track": {
+      background: "transparent",
+    },
+
+    "::-webkit-scrollbar-thumb": {
+      background: dark ? "rgba(255, 255, 255, 0.3)" : theme.color.background.light,
+      cursor: "grab",
+    },
+
+    "::-webkit-scrollbar-thumb:hover": {
+      background: theme.color.primary,
     },
   }
 })
