@@ -1,3 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" fill="white" width="30" height="30" viewBox="0 0 360 360">
-  <path d="M140,40.187l0,280l-40,0l0,-280l40,0Zm120,0l0,280l-40,0l0,-280l40,0Z" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 6.93 10.02">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>Pause</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <g>
+        <path class="cls-1" d="M6.11,10a.75.75,0,0,1-.75-.75L5.43.78a.75.75,0,0,1,1.5,0L6.86,9.28A.74.74,0,0,1,6.11,10Z"/>
+        <path class="cls-1" d="M.74,10A.75.75,0,0,1,0,9.23L.06.74A.76.76,0,0,1,.82,0a.74.74,0,0,1,.74.76L1.5,9.24A.74.74,0,0,1,.74,10Z"/>
+      </g>
+    </g>
+  </g>
 </svg>
