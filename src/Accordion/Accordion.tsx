@@ -4,8 +4,10 @@ import styled from "../utils/styled"
 import AccordionSection, { AccordionSectionProps } from "../AccordionSection/AccordionSection"
 import { useUniqueId } from "../useUniqueId"
 
+type AccordionSectionElement = React.ReactElement<AccordionSectionProps, typeof AccordionSection>
+
 export interface AccordionProps extends DefaultProps {
-  children: React.ReactElement<AccordionSectionProps, typeof AccordionSection>[]
+  children: AccordionSectionElement | AccordionSectionElement[]
   onToggle?: (sectionIndex: number) => void
   expanded?: boolean[]
 }
