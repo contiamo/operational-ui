@@ -123,7 +123,7 @@ import * as React from "react"
 import { ContextMenu, ContextMenuProps } from "@operational/components"
 
 const menuItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(item => `Menu ${item}`)
-;<ContextMenu keepOpenOnItemClick condensed items={menuItems} onClick={() => alert("clicked")}>
-  <div>Many options may be selected here</div>
+;<ContextMenu condensed items={menuItems} onClick={() => alert("clicked")}>
+  <div>Long list of options here</div>
 </ContextMenu>
 ```
