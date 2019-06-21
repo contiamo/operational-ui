@@ -228,3 +228,25 @@ const [value, setValue] = React.useState("MyTable_01")
   />
 </Form>
 ```
+
+### With search icon in placeholder
+
+```jsx
+import * as React from "react"
+import { Input, SearchIcon } from "@operational/components"
+
+const SearchInput = () => {
+  const [value, setValue] = React.useState("")
+  return (
+    <Input
+      value={value}
+      onChange={setValue}
+      placeholder="Search measures & dimensions"
+      placeholderIcon={<SearchIcon size={10} />}
+      clear={() => setValue("")}
+    />
+  )
+}
+
+;<SearchInput />
+```
