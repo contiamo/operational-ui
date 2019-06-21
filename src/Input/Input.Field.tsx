@@ -175,6 +175,7 @@ const InputField: React.FC<InputProps> = ({
   errorComponent: ErrorComponent,
   isUniqueId,
   statusIcon,
+  placeholderIcon,
   ...props
 }) => {
   const shouldShowIconButton = Boolean(icon) || Boolean(copy)
@@ -218,6 +219,10 @@ const InputField: React.FC<InputProps> = ({
           isUniqueId={isUniqueId}
           {...props}
         />
+        <IconContainer iconAmount={placeholderIcon && !value ? 1 : 0} right={0}>
+          {/* Clear button and Id style icon within the input border */}
+          {!value && placeholderIcon}
+        </IconContainer>
         <IconContainer iconAmount={(clear && value ? 1 : 0) + (isUniqueId ? 1 : 0)} right={0}>
           {/* Clear button and Id style icon within the input border */}
           {clear && value && (
@@ -227,7 +232,7 @@ const InputField: React.FC<InputProps> = ({
               tabIndex={0}
               onClick={clear}
             >
-              <NoIcon />
+              <NoIcon size={10} />
             </ClearButton>
           )}
           {isUniqueId && <UniqueIdIcon />}

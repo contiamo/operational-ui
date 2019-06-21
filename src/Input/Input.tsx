@@ -57,6 +57,8 @@ export interface BaseProps extends DefaultProps, DefaultInputProps, Omit<React.I
   isUniqueId?: boolean
   /** Status icon on the right side of the Input */
   statusIcon?: React.ReactNode
+  /** Inline icon on the right side inside the placeholder */
+  placeholderIcon?: React.ReactNode
 }
 
 export interface BasePropsWithCopy extends BaseProps {
@@ -87,6 +89,7 @@ const Input: React.FC<InputProps> = ({
   errorComponent,
   isUniqueId,
   statusIcon,
+  placeholderIcon,
   ...props
 }) => {
   const uniqueId = useUniqueId(id)
@@ -105,6 +108,7 @@ const Input: React.FC<InputProps> = ({
       errorComponent={errorComponent}
       isUniqueId={isUniqueId}
       statusIcon={statusIcon}
+      placeholderIcon={placeholderIcon}
       {...props}
     />
   )
