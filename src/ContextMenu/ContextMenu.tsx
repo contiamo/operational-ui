@@ -215,18 +215,15 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
               item={item}
               onClick={e => {
                 e.stopPropagation()
+                if (!keepOpenOnItemClick && setIsOpen) {
+                  setIsOpen(false)
+                }
                 if (!isString(item) && item.onClick) {
                   item.onClick(makeItem(item))
-                  if (!keepOpenOnItemClick && setIsOpen) {
-                    setIsOpen(false)
-                  }
                   return
                 }
                 if (onClick) {
                   onClick(makeItem(item))
-                  if (!keepOpenOnItemClick && setIsOpen) {
-                    setIsOpen(false)
-                  }
                 }
               }}
               {...(getChildProps ? getChildProps(index) : {})}
