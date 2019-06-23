@@ -81,6 +81,7 @@ const Container = styled("div")<{ hasTitle: boolean; hasTabs: boolean }>(({ them
   gridRowGap: theme.space.element,
   backgroundColor: theme.color.white,
   gridTemplateRows: computeRowHeights(theme, hasTitle, hasTabs),
+  padding: "50px 35px 35px",
 }))
 
 const TitleContainer = styled("div")<{ fill: boolean }>(({ theme, fill }) => ({
@@ -92,10 +93,12 @@ const TitleContainer = styled("div")<{ fill: boolean }>(({ theme, fill }) => ({
   maxWidth: fill ? "100%" : `${theme.pageSize.max}px`,
 }))
 
-const ViewContainer = styled("div")`
+const ViewContainer = styled("div")<{ fill: boolean }>`
   overflow: hidden;
   position: relative;
   outline: none;
+  min-width: ${({ theme }) => theme.pageSize.min}px;
+  max-width: ${({ fill, theme }) => (fill ? "100%" : `${theme.pageSize.max}px`)};
 `
 
 const ActionsContainer = styled("div")`
@@ -112,7 +115,7 @@ const FixedProgress = styled(Progress)`
 `
 
 const TabsContainer = styled.div<{ fill: boolean }>`
-  min-width: ${({ theme }) => theme.pageSize.min};
+  min-width: ${({ theme }) => theme.pageSize.min}px;
   max-width: ${({ theme, fill }) => (fill ? "100%" : `${theme.pageSize.max}px`)};
 `
 
@@ -144,7 +147,7 @@ const Page: React.FC<PageProps> = ({
           ) : (
             <TabsContainer fill={Boolean(fill)}>{tabsBar}</TabsContainer>
           )}
-          <ViewContainer aria-labelledby={activeTabId} role="tabpanel" tabIndex={0}>
+          <ViewContainer fill={Boolean(fill)} aria-labelledby={activeTabId} role="tabpanel" tabIndex={0}>
             {activeChildren}
           </ViewContainer>
         </>
@@ -158,7 +161,7 @@ const Page: React.FC<PageProps> = ({
           <ActionsContainer>{actions}</ActionsContainer>
         </TitleContainer>
       )}
-      <ViewContainer>
+      <ViewContainer fill={Boolean(fill)}>
         <PageContent noPadding={Boolean(noPadding)} areas={areas} fill={fill}>
           {modalConfirmContext => {
             const resolvedChildren = isChildFunction(children) ? children(modalConfirmContext) : children
