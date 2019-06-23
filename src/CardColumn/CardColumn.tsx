@@ -11,8 +11,6 @@ export interface BaseCardColumnProps extends DefaultProps {
   contentRight?: boolean
   /** Force the column to be full with */
   fullWidth?: boolean
-  /** Remove padding */
-  noPadding?: boolean
   /** Component containing buttons/links/actions assigned to the card */
   action?: React.ReactNode
 }
@@ -37,19 +35,16 @@ export interface CardColumnPropsWithoutTabs extends BaseCardColumnProps {
 
 export type CardColumnProps = CardColumnPropsWithTabs | CardColumnPropsWithoutTabs
 
-const Container = styled("div")<Pick<CardColumnProps, "contentRight" | "fullWidth" | "noPadding">>(
-  ({ theme, contentRight, fullWidth, noPadding }) => ({
-    label: "card-column",
-    height: "min-content",
-    minWidth: 280 / 2,
-    padding: noPadding ? 0 : theme.space.element / 2,
-    ...(fullWidth ? { flex: "1 1 100%", maxWidth: "100%" } : {}),
-    img: {
-      maxWidth: "100%",
-    },
-    textAlign: contentRight ? "right" : "left",
-  }),
-)
+const Container = styled("div")<Pick<CardColumnProps, "contentRight" | "fullWidth">>(({ contentRight, fullWidth }) => ({
+  label: "card-column",
+  height: "min-content",
+  minWidth: 280 / 2,
+  ...(fullWidth ? { flex: "1 1 100%", maxWidth: "100%" } : {}),
+  img: {
+    maxWidth: "100%",
+  },
+  textAlign: contentRight ? "right" : "left",
+}))
 
 const Action = styled("div")`
   margin-left: auto;
