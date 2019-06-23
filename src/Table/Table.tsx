@@ -121,7 +121,7 @@ const Actions = styled(Td)(({ theme }) => ({
    * the box model of the Td while opacity does not.
    */
   opacity: 0,
-  "tr:hover &, :hover": {
+  "tr:hover &, :hover, tr:focus &, :focus-within, &:focus": {
     opacity: 1,
   },
 
@@ -174,6 +174,19 @@ function Table<T>({
 
   const hasIcons = Boolean(data[0] && icon && icon(data[0]))
 
+  const handleKeyDownOnRow = React.useCallback(
+    (entry, index) => (e: React.KeyboardEvent<HTMLTableRowElement>) => {
+      if (!onRowClick) {
+        return
+      }
+      switch (e.key) {
+        case "Enter":
+          onRowClick(entry, index)
+      }
+    },
+    [onRowClick],
+  )
+
   return (
     <Container fixedLayout={fixedLayout} {...props}>
       {!headless && (
@@ -224,6 +237,9 @@ function Table<T>({
             })()
             return (
               <Tr
+                onKeyDown={handleKeyDownOnRow(dataEntry, dataEntryIndex)}
+                tabIndex={onRowClick ? 0 : undefined}
+                role={onRowClick ? "button" : undefined}
                 hover={Boolean(onRowClick)}
                 key={dataEntryIndex}
                 clickable={Boolean(onRowClick)}
