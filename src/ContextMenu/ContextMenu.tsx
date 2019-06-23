@@ -211,7 +211,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
               condensed={condensed}
               align={align}
               iconLocation={iconLocation}
-              width={width || "100%"}
+              width={width || "min-content"}
               item={item}
               onClick={e => {
                 e.stopPropagation()
