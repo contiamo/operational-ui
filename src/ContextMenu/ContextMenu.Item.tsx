@@ -35,6 +35,7 @@ const Container = styled("div")<Props>(({ align, theme, isActive, condensed, wid
     userSelect: "none",
     label: "contextmenuitem",
     width: width || (condensed ? 160 : "100%"),
+    minWidth: "100%",
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
