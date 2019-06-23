@@ -10,7 +10,7 @@ export const truncateList = (maxLength?: number) => (options: SelectProps["optio
   maxLength ? options.slice(0, maxLength) : options
 
 export const filterList = (filter: string) => (options: SelectProps["options"]) =>
-  options.filter(option => String(option.label).match(new RegExp(filter, "ig")))
+  options.filter(option => String(option.label).match(new RegExp(filter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "ig")))
 
 export const prependItem = (filterItem: IContextMenuItem) => (items: IContextMenuItem[]): IContextMenuItem[] => [
   filterItem,
