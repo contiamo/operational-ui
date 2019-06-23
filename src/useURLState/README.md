@@ -13,6 +13,7 @@ Because the URL is not really the safest way to provide state to an application,
 ## Usage
 
 ```jsx
+import * as React from "react"
 import { Button, useURLState } from "@operational/components"
 const countDecoder = i => (isNaN(+i) ? undefined : +i)
 
