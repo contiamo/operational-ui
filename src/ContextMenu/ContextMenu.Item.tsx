@@ -1,4 +1,6 @@
 import * as React from "react"
+import isString from "lodash/isString"
+
 import { lighten } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
@@ -16,6 +18,7 @@ export interface Props {
   item: StringOrItem
   isActive?: boolean
   id?: string
+  disabled: boolean
 }
 
 export interface IContextMenuItem<TValue = any> {
@@ -28,8 +31,9 @@ export interface IContextMenuItem<TValue = any> {
   isActive?: boolean
 }
 
-const Container = styled("div")<Props>(({ align, theme, isActive, condensed, width, item }) => {
+const Container = styled("div")<Props>(({ disabled, align, theme, isActive, condensed, width, item }) => {
   const activeShadow = `0 0 0 1px ${theme.color.primary} inset`
+  const doWeHaveDescription = !isString(item) && Boolean(item.description)
 
   return {
     userSelect: "none",
@@ -47,25 +51,25 @@ const Container = styled("div")<Props>(({ align, theme, isActive, condensed, wid
     alignItems: "center",
     fontWeight: isActive ? theme.font.weight.bold : theme.font.weight.medium,
     boxShadow: isActive ? activeShadow : "none",
-    "&[aria-selected='true']": {
-      boxShadow: activeShadow,
-      outline: "none",
-    },
-    ...(typeof item !== "string" && Boolean(item.description)
-      ? {
-          borderBottom: `1px solid ${theme.color.border.select}`,
-        }
-      : {}),
-    cursor: "pointer",
-    "&:hover, &[aria-selected='true']": {
-      backgroundColor: lighten(theme.color.primary, 50),
-      color: theme.color.primary,
-    },
-    color: isActive ? theme.color.primary : theme.color.text.default,
+    color: disabled ? theme.color.text.disabled : isActive ? theme.color.primary : theme.color.text.default,
     borderTop: `1px solid ${theme.color.border.select}`,
+    cursor: disabled ? "initial" : "pointer",
     "&:last-child": {
       paddingBottom: 2,
     },
+    ...(!disabled && {
+      "&[aria-selected='true']": {
+        boxShadow: activeShadow,
+        outline: "none",
+      },
+      "&:hover, &[aria-selected='true']": {
+        backgroundColor: lighten(theme.color.primary, 50),
+        color: theme.color.primary,
+      },
+    }),
+    ...(doWeHaveDescription && {
+      borderBottom: `1px solid ${theme.color.border.select}`,
+    }),
   }
 })
 

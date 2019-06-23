@@ -211,6 +211,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
               iconLocation={iconLocation}
               width={width || "min-content"}
               item={item}
+              disabled={isString(item) ? !onClick : !item.onClick && !onClick}
               onClick={e => {
                 e.stopPropagation() //clicking on an item should not trigger the parent's onClick
                 if (!keepOpenOnItemClick && setIsOpen) {
