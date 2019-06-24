@@ -184,9 +184,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         onKeyDown={e => {
           switch (e.key) {
             case "Enter":
-              if (keepOpenOnItemClick) {
-                e.stopPropagation()
-              }
+              e.stopPropagation()
               handleSelect()
               break
           }
