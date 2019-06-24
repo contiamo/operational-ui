@@ -45,7 +45,6 @@ export const ModalContainer = styled(Card)<{ fullSize: boolean; type?: Controlle
     zIndex: type === "confirm" ? theme.zIndex.confirm : theme.zIndex.modal,
     maxWidth: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the screen!
     maxHeight: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the page!
-    overflow: "hidden",
 
     ...(fullSize
       ? // Full-size specific rules
