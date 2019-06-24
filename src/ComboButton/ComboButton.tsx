@@ -43,7 +43,7 @@ const CaretContainer = styled("div")<{ isOpen: boolean; color: string }>(({ isOp
 const ItemWithChevron = styled("div")`
   width: 100%;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
 `
 
