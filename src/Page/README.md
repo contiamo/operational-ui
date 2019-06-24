@@ -833,23 +833,23 @@ const ControlledModalTest = () => {
 ;<ControlledModalTest />
 ```
 
-### With ComboButton actions
+### With DropdownButton actions
 
 ```jsx
 import * as React from "react"
-import { OpenIcon, ComboButton, Page, Card } from "@operational/components"
+import { OpenIcon, DropdownButton, Page, Card } from "@operational/components"
 
 const menuItems = ["Project", "User"]
 
 const actions = (
-  <ComboButton
+  <DropdownButton
     items={menuItems}
     onItemClick={() => {
       console.log("Item clicked")
     }}
   >
     Create
-  </ComboButton>
+  </DropdownButton>
 )
 ;<Page title="Settings Page" actions={actions}>
   <Card>Hello, this is page content</Card>

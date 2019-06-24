@@ -9,7 +9,7 @@ import Button from "../Button/Button"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 import { setAlpha } from "../utils"
 
-export interface ComboButtonProps extends DefaultProps {
+export interface DropdownButtonProps extends DefaultProps {
   /** Button color theme (hex or named color from `theme.color`) */
   color: string
   /** Actions to display in dropdown */
@@ -25,7 +25,7 @@ export interface ComboButtonProps extends DefaultProps {
   children?: React.ReactNode
 }
 
-const BaseComboButton = styled(Button)<{ isOpen: boolean; textColor: string }>(({ isOpen, textColor, theme }) => ({
+const BaseDropdownButton = styled(Button)<{ isOpen: boolean; textColor: string }>(({ isOpen, textColor, theme }) => ({
   paddingRight: 0,
   ...(isOpen
     ? {
@@ -47,7 +47,7 @@ const ItemWithChevron = styled("div")`
   justify-content: space-between;
 `
 
-const ComboButton: React.SFC<ComboButtonProps> = ({ items, onItemClick, color, children, ...props }) => {
+const DropdownButton: React.SFC<DropdownButtonProps> = ({ items, onItemClick, color, children, ...props }) => {
   // Dropdown buttons always have right chevrons for every item. These are added automatically.
   const itemsWithCarets = items.map(item => {
     const itemAsObject = typeof item === "string" ? { label: item } : item
@@ -66,7 +66,7 @@ const ComboButton: React.SFC<ComboButtonProps> = ({ items, onItemClick, color, c
     <ContextMenu {...props} onClick={onItemClick} iconLocation="right" items={itemsWithCarets}>
       {isOpen => {
         return (
-          <BaseComboButton
+          <BaseDropdownButton
             {...props}
             color={isOpen ? "default" : color}
             textColor={isOpen ? color : "default"}
@@ -76,15 +76,15 @@ const ComboButton: React.SFC<ComboButtonProps> = ({ items, onItemClick, color, c
             <CaretContainer isOpen={isOpen} color={color}>
               {isOpen ? <CaretUpIcon size={8} /> : <CaretDownIcon size={8} />}
             </CaretContainer>
-          </BaseComboButton>
+          </BaseDropdownButton>
         )
       }}
     </ContextMenu>
   )
 }
 
-ComboButton.defaultProps = {
+DropdownButton.defaultProps = {
   color: "primary",
 }
 
-export default ComboButton
+export default DropdownButton

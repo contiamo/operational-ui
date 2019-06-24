@@ -2,10 +2,10 @@
 
 ```jsx
 import * as React from "react"
-import { ComboButton } from "@operational/components"
+import { DropdownButton } from "@operational/components"
 
 const menuItems = ["Project", "User"]
-;<ComboButton
+;<DropdownButton
   color="error"
   items={menuItems}
   onClick={() => {
@@ -16,7 +16,7 @@ const menuItems = ["Project", "User"]
   }}
 >
   Create
-</ComboButton>
+</DropdownButton>
 ```
 
 ### Usage with complex list contents
@@ -25,7 +25,7 @@ In some cases, you might want your `label` to be a little bit more clever than j
 
 ```jsx
 import * as React from "react"
-import { ComboButton, DataSourceIcon } from "@operational/components"
+import { DropdownButton, DataSourceIcon } from "@operational/components"
 
 /* Anything can be a label */
 const MyLabelContainer = ({ title, children }) => (
@@ -66,13 +66,13 @@ const menuItems = [
 ]
 
 ;<>
-  <ComboButton
+  <DropdownButton
     items={menuItems}
     onClick={() => {
       console.log("Button clicked")
     }}
   >
     Add data source
-  </ComboButton>
+  </DropdownButton>
 </>
 ```
