@@ -92,28 +92,33 @@ export const buildIcons = (iconPath?: string) =>
       files.forEach(fileName => {
         const { name } = parse(fileName)
         const svgCode = readFileSync(join(inputFolder, fileName), "utf-8")
-        const output = svgr.sync(
-          svgCode,
-          {
-            prettier: true,
-            svgo: true,
-            plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx", "@svgr/plugin-prettier"],
-            svgProps: {
-              fill: "{iconColor}",
-              width: "{size}",
-              height: "{size}",
-              style: "{style}",
+        try {
+          const output = svgr.sync(
+            svgCode,
+            {
+              prettier: true,
+              svgo: true,
+              plugins: ["@svgr/plugin-svgo", "@svgr/plugin-jsx", "@svgr/plugin-prettier"],
+              svgProps: {
+                fill: "{iconColor}",
+                width: "{size}",
+                height: "{size}",
+                style: "{style}",
+              },
+              template,
             },
-            template,
-          },
-          { componentName: `${name}Icon` },
-        )
+            { componentName: `${name}Icon` },
+          )
 
-        // Add a preview in the documentation
-        const preview = base64Img.base64Sync(join(inputFolder, fileName))
-        const previewImage = `![${name}Icon](${preview}) `
-        writeFileSync(join(outputFolder, `Icon.${name}.tsx`), output.replace("{{previewImage}}", previewImage))
-        progressBar.tick()
+          // Add a preview in the documentation
+          const preview = base64Img.base64Sync(join(inputFolder, fileName))
+          const previewImage = `![${name}Icon](${preview}) `
+          writeFileSync(join(outputFolder, `Icon.${name}.tsx`), output.replace("{{previewImage}}", previewImage))
+          progressBar.tick()
+        } catch (e) {
+          console.error(`\nError: ${name}Icon can't be generated!`)
+          console.error(e)
+        }
       })
 
       // Don't update the index if we are in watch mode
