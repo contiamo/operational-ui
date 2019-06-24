@@ -3,7 +3,7 @@ import isString from "lodash/isString"
 
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-import ContextMenuItem, { IContextMenuItem } from "./ContextMenu.Item"
+import ContextMenuItem, { condensedRowHeight, rowHeight, IContextMenuItem } from "./ContextMenu.Item"
 import { useUniqueId } from "../useUniqueId"
 import { useListbox } from "../useListbox"
 
@@ -59,9 +59,6 @@ const Container = styled("div")<{ side: ContextMenuProps["align"]; isOpen: boole
     zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
   }),
 )
-
-const rowHeight = 40
-const condensedRowHeight = 35
 
 const MenuContainer = styled("div")<{
   embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]

@@ -31,6 +31,9 @@ export interface IContextMenuItem<TValue = any> {
   isActive?: boolean
 }
 
+export const rowHeight = 40
+export const condensedRowHeight = 35
+
 const Container = styled("div")<Props>(({ disabled, align, theme, isActive, condensed, width, item }) => {
   const activeShadow = `0 0 0 1px ${theme.color.primary} inset`
   const hasDescription = !isString(item) && Boolean(item.description)
@@ -44,7 +47,7 @@ const Container = styled("div")<Props>(({ disabled, align, theme, isActive, cond
     overflow: "hidden",
     textOverflow: "ellipsis",
     backgroundColor: theme.color.white,
-    lineHeight: `${condensed ? 35 : 44}px`,
+    lineHeight: `${condensed ? condensedRowHeight : rowHeight}px`,
     padding: `0 ${theme.space.content}px`,
     textAlign: align,
     display: "flex",
