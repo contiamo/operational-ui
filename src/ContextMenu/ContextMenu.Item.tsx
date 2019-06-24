@@ -105,6 +105,9 @@ const ContextMenuIconBase = styled("div", { shouldForwardProp: prop => prop !== 
   flex: 0 1 auto;
   height: 100%;
   margin-left: ${({ iconLocation }) => (iconLocation && iconLocation === "right" ? "auto" : 0)};
+  & svg {
+    vertical-align: text-bottom;
+  }
 `
 
 const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
