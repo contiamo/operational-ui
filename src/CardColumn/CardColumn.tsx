@@ -35,7 +35,7 @@ export interface CardColumnPropsWithoutTabs extends BaseCardColumnProps {
 
 export type CardColumnProps = CardColumnPropsWithTabs | CardColumnPropsWithoutTabs
 
-const Container = styled("div")<Pick<CardColumnProps, "contentRight" | "fullWidth">>(({ contentRight, fullWidth }) => ({
+const Container = styled.div<Pick<CardColumnProps, "contentRight" | "fullWidth">>(({ contentRight, fullWidth }) => ({
   label: "card-column",
   height: "min-content",
   minWidth: 280 / 2,
