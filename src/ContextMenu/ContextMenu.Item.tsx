@@ -33,7 +33,7 @@ export interface IContextMenuItem<TValue = any> {
 
 const Container = styled("div")<Props>(({ disabled, align, theme, isActive, condensed, width, item }) => {
   const activeShadow = `0 0 0 1px ${theme.color.primary} inset`
-  const doWeHaveDescription = !isString(item) && Boolean(item.description)
+  const hasDescription = !isString(item) && Boolean(item.description)
 
   return {
     userSelect: "none",
@@ -67,7 +67,7 @@ const Container = styled("div")<Props>(({ disabled, align, theme, isActive, cond
         color: theme.color.primary,
       },
     }),
-    ...(doWeHaveDescription && {
+    ...(hasDescription && {
       borderBottom: `1px solid ${theme.color.border.select}`,
     }),
   }
