@@ -163,7 +163,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
       {isOpen && (
         <InvisibleOverlay
           onClick={e => {
-            e.stopPropagation() //clicking on an item should not trigger the parent's onClick
+            e.stopPropagation()
             setIsOpen && setIsOpen(false)
           }}
         />
