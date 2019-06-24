@@ -35,6 +35,7 @@ const Container = styled("div")(({ theme }) => ({
   cursor: "pointer",
   "&:hover": {
     backgroundColor: darken(theme.color.white, 5),
+    boxShadow: `0 0 0 1px ${theme.color.primary}`,
   },
 }))
 
