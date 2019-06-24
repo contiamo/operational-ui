@@ -214,7 +214,10 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
               width={width || "100%"}
               item={item}
               onClick={e => {
-                e.stopPropagation()
+                e.stopPropagation() //clicking on an item should not trigger the parent's onClick
+                if (!keepOpenOnItemClick && setIsOpen) {
+                  setIsOpen(false)
+                }
                 if (!isString(item) && item.onClick) {
                   item.onClick(makeItem(item))
                   return
