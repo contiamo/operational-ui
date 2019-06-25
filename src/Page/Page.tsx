@@ -82,6 +82,7 @@ const Container = styled("div")<{ hasTitle: boolean; hasTabs: boolean }>(({ them
   backgroundColor: theme.color.white,
   gridTemplateRows: computeRowHeights(theme, hasTitle, hasTabs),
   padding: "50px 35px 35px",
+  overflow: "auto",
 }))
 
 const TitleContainer = styled("div")<{ fill: boolean }>(({ theme, fill }) => ({
@@ -94,11 +95,12 @@ const TitleContainer = styled("div")<{ fill: boolean }>(({ theme, fill }) => ({
 }))
 
 const ViewContainer = styled("div")<{ fill: boolean }>`
-  overflow: hidden;
   position: relative;
   outline: none;
   min-width: ${({ theme }) => theme.pageSize.min}px;
   max-width: ${({ fill, theme }) => (fill ? "100%" : `${theme.pageSize.max}px`)};
+  overflow-y: auto;
+  overflow-x: hidden;
 `
 
 const ActionsContainer = styled("div")`
