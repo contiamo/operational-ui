@@ -65,7 +65,8 @@ const MenuContainer = styled("div")<{
   numRows: number
   align: ContextMenuProps["align"]
   condensed: boolean
-}>(({ theme, numRows, align, embedChildrenInMenu, condensed }) => ({
+  isOpen: boolean
+}>(({ theme, numRows, align, embedChildrenInMenu, isOpen, condensed }) => ({
   position: "absolute",
   top: embedChildrenInMenu ? 0 : "100%",
   left: align === "left" ? 0 : "auto",
@@ -74,7 +75,7 @@ const MenuContainer = styled("div")<{
   boxShadow: theme.shadows.popup,
   width: "100%",
   minWidth: "fit-content",
-  minHeight: condensed ? condensedRowHeight : rowHeight,
+  minHeight: isOpen ? (condensed ? condensedRowHeight : rowHeight) : 0,
   display: "grid",
   gridTemplateRows: `repeat(${numRows}, max-content)`,
 }))
@@ -104,6 +105,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   onClick,
   disabled,
   width,
+  open,
   ...props
 }) => {
   const uniqueId = useUniqueId(id)
@@ -111,6 +113,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     itemCount: items.length,
     isMultiSelect: keepOpenOnItemClick,
     isDisabled: disabled,
+    initiallyOpen: open,
   })
 
   /**
@@ -193,6 +196,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         </div>
         <MenuContainer
           {...listboxProps}
+          isOpen={Boolean(isOpen)}
           condensed={Boolean(condensed)}
           numRows={items.length}
           align={align}
