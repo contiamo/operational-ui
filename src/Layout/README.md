@@ -16,10 +16,14 @@ import {
   HeaderBar,
   HeaderMenu,
   Page,
+  CardColumns,
+  CardColumn,
   Button,
-  Card,
+  Table,
   Form,
   Body,
+  Chip,
+  AvatarGroup,
   Logo,
   Autocomplete,
   AdminIcon,
@@ -52,6 +56,18 @@ const sidebar = (
   </Sidenav>
 )
 
+const data = Array.from({ length: 100 }, (_, i) => ({
+  name: "Item " + i + 1,
+  lastUpdated: new Intl.DateTimeFormat("en-US").format(new Date()),
+  tags: ["agent-view", "production"],
+  collaborators: [
+    { photo: "https://graph.facebook.com/775278331/picture", name: "Tejas Kumar" },
+    { photo: "https://graph.facebook.com/508358907/picture", name: "Tejas Kumar" },
+    { photo: "https://graph.facebook.com/1213161789/picture", name: "Tejas Kumar" },
+    { photo: "https://graph.facebook.com/1263587213/picture", name: "Tejas Kumar" },
+  ],
+}))
+
 // Container must set the height explicitly.
 // This component will set height to 100%.
 const Example = () => (
@@ -83,14 +99,38 @@ const Example = () => (
           }
         >
           {({ confirm, modal }) => (
-            <>
-              {Array(10)
-                .fill("Hello!!!!")
-                .map((value, i) => (
-                  <Card key={i}>{value}</Card>
-                ))}
-
-              <Card title="Partial Kanye Lyrics">
+            <CardColumns columns={1}>
+              <CardColumn title="Random Table">
+                <Table
+                  data={data}
+                  columns={[
+                    { heading: "", cell: dataEntry => <FunctionIcon color="primary" /> },
+                    { heading: "Name", cell: dataEntry => dataEntry.name },
+                    { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
+                    {
+                      heading: "Tags",
+                      cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>),
+                    },
+                    { heading: "Collaborators", cell: dataEntry => <AvatarGroup avatars={dataEntry.collaborators} /> },
+                  ]}
+                  onRowClick={(dataEntry, dataEntryIndex) => alert("You chose " + dataEntry.name)}
+                  rowActions={dataEntry => [
+                    {
+                      label: "Details",
+                      onClick: () => {
+                        alert("Details on " + dataEntry.name)
+                      },
+                    },
+                    {
+                      label: "Delete",
+                      onClick: () => {
+                        alert("Deleting " + dataEntry.name)
+                      },
+                    },
+                  ]}
+                />
+              </CardColumn>
+              <CardColumn title="Partial Kanye Lyrics">
                 <div>
                   <Button
                     color="#314865"
@@ -219,8 +259,8 @@ Revealing the layers to my soul
                     Open a full-size Modal
                   </Button>
                 </div>
-              </Card>
-            </>
+              </CardColumn>
+            </CardColumns>
           )}
         </Page>
       }
