@@ -25,12 +25,12 @@ In some cases, you might want your `label` to be a little bit more clever than j
 
 ```jsx
 import * as React from "react"
-import { DropdownButton, DataSourceIcon } from "@operational/components"
+import { DropdownButton, DatabaseIcon } from "@operational/components"
 
 /* Anything can be a label */
 const MyLabelContainer = ({ title, children }) => (
   <div style={{ display: "flex", alignItems: "center", width: "300px", whiteSpace: "normal" }}>
-    <DataSourceIcon left />
+    <DatabaseIcon left />
     <div style={{ lineHeight: 1, width: "100%", margin: "8px 0" }}>
       <p style={{ fontWeight: "bold", margin: "0 0 4px 0" }}>{title}</p>
       {children}
