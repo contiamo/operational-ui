@@ -105,11 +105,13 @@ const BaseButton = styled<"button" | "a">("button")<{
     },
     ":focus": {
       ...inputFocus({ theme, isError: color_ === "error" }),
+      boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.primary} inset` : "none",
     },
     ...(!disabled
       ? {
           ":hover": {
             backgroundColor: darken(backgroundColor, 5),
+            boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.primary} inset` : "none",
           },
         }
       : {}),
