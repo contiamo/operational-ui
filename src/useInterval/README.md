@@ -9,6 +9,9 @@ An implementation of `setInterval` with Hooks.
 #### Basic Counter
 
 ```jsx
+import * as React from "react"
+import { useInterval } from "@operational/components"
+
 function BasicCounter() {
   const [count, setCount] = React.useState(0)
 
@@ -27,6 +30,9 @@ function BasicCounter() {
 Example, we can have a delay of one interval be controlled by another:
 
 ```jsx
+import * as React from "react"
+import { useInterval } from "@operational/components"
+
 function Counter() {
   const [start, setStart] = React.useState(false)
   const [delay, setDelay] = React.useState(1000)
@@ -68,6 +74,9 @@ function Counter() {
 If you need your callback to be delayed for an extended period of time, but you want it to trigger immediately upon mounting, then pass in immediate as the third argument.
 
 ```jsx
+import * as React from "react"
+import { useInterval } from "@operational/components"
+
 function MyComp() {
   const [inverted, setInvert] = React.useState(false)
   const [inverted2, setInvert2] = React.useState(false)

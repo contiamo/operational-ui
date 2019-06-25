@@ -102,5 +102,6 @@ export * from "./useWindowSize"
 export * from "./useUniqueId"
 export * from "./useHotkey"
 export * from "./useListbox"
+export * from "./useInterval"
 
 export default OperationalUI
