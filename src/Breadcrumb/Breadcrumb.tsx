@@ -20,6 +20,7 @@ const Container = styled("a")(({ theme }) => ({
   label: "breadcrumb",
   "&:hover": {
     color: darken(theme.color.primary, 5),
+    boxShadow: `0 0 0 1px ${theme.color.primary}`,
   },
 }))
 
