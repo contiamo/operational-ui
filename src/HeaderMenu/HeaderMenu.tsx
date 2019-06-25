@@ -39,7 +39,7 @@ const Container = styled("div")<{
   lineHeight: 1,
   padding: `${theme.space.content / 2}px ${theme.space.content}px`,
   height: "100%",
-  [align === "left" ? "paddingRight" : "paddingLeft"]: theme.space.element * 2, // leave room for the caret
+  [align === "left" ? "paddingRight" : "paddingLeft"]: 36, // leave room for the caret
   color: isOpen ? theme.color.white : "#ffffffcc",
   backgroundColor: isOpen ? backgroundColor : "transparent",
   boxShadow: isOpen ? boxShadow : "none",

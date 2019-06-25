@@ -21,10 +21,7 @@ const Container = styled.div<{ expanded: boolean }>`
   overflow: hidden;
   /* to fix overflow: hidden above, otherwise header can disappear */
   display: grid;
-  grid-template-rows: ${({ theme }) => {
-    const headerHeight = theme.space.element * 2
-    return `${headerHeight}px calc(100% - ${headerHeight}px)`
-  }};
+  grid-template-rows: 36px calc(100% - 36px);
   /* for Focus */
   position: relative;
 `

@@ -16,8 +16,7 @@ const Container = styled("div")<{ sections: boolean[] }>`
   label: Accordion;
   height: 100%;
   display: grid;
-  grid-template-rows: ${({ theme, sections }) =>
-    sections.map(expanded => (expanded ? "1fr" : `${theme.space.element * 2}px`)).join(" ")};
+  grid-template-rows: ${({ sections }) => sections.map(expanded => (expanded ? "1fr" : "36px")).join(" ")};
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   border-top: none;
 `

@@ -12,7 +12,7 @@ export const SectionHeader = styled("div")(({ theme }) => ({
 
   // This ensures that the card header text and card controls are placed in opposite corners.
   justifyContent: "space-between",
-  height: theme.space.element * 2,
+  height: "36px",
   padding: `0 ${theme.space.element}px`,
   lineHeight: 1,
 }))

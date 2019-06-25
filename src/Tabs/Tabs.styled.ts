@@ -6,21 +6,20 @@ const buttonWidth = 55
 export const Container = styled.div`
   label: Tabs;
   display: grid;
-  grid-template-rows: ${({ theme }) => `${theme.space.element * 2}px 1fr`};
+  grid-template-rows: 36px 1fr;
   position: relative;
   height: 100%;
 `
 
 export const TabList = styled.div<{ scroll: boolean }>`
   display: flex;
-  height: ${({ theme }) => theme.space.element * 2}px;
   overflow-x: auto;
   max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px)` : "none")};
   scroll-behavior: smooth;
   border-left: solid 1px ${({ theme }) => theme.color.separators.default};
   overflow-y: hidden;
   /* magic number to hide scroll bar underneath tabpanel */
-  height: ${({ theme }) => theme.space.element * 2 + 20}px;
+  height: 56px;
   -webkit-overflow-scrolling: auto;
   ::-webkit-scrollbar {
     display: none;
