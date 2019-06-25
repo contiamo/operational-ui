@@ -72,6 +72,14 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
   font-size: ${({ theme, condensed }) => (condensed ? theme.font.size.small : theme.font.size.body)}px;
   font-weight: 400;
 
+  :focus {
+    color: ${props => props.theme.color.primary};
+
+    ::before {
+      border: solid 1px ${props => props.theme.color.primary};
+    }
+  }
+
   :hover {
     color: ${props => props.theme.color.primary};
 
