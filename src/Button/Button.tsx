@@ -105,13 +105,16 @@ const BaseButton = styled<"button" | "a">("button")<{
     },
     ":focus": {
       ...inputFocus({ theme, isError: color_ === "error" }),
-      boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.primary} inset` : "none",
+      boxShadow: isWhite(backgroundColor) ? theme.shadows.insetFocus : "none",
+      //Higher zIndex will make right border appear on ButtonGroup Focus.
+      zIndex: theme.zIndex.confirm,
     },
     ...(!disabled
       ? {
           ":hover": {
             backgroundColor: darken(backgroundColor, 5),
-            boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.primary} inset` : "none",
+            boxShadow: isWhite(backgroundColor) ? theme.shadows.insetFocus : "none",
+            zIndex: theme.zIndex.confirm,
           },
         }
       : {}),
