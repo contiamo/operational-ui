@@ -1,6 +1,13 @@
 import { useRef, useState, useEffect, useCallback } from "react"
 import { useUniqueId } from "../useUniqueId"
 
+export interface UseListboxOptions {
+  itemCount: number
+  isMultiSelect?: boolean
+  isDisabled?: boolean
+  initiallyOpen?: boolean
+}
+
 /**
  * A low-level hook that implements the WAI-ARIA 1.1 specification for
  * a listbox. This hook only implements a part of the specification,
@@ -11,14 +18,11 @@ export const useListbox = ({
   itemCount,
   isMultiSelect = false,
   isDisabled = false,
-}: {
-  itemCount: number
-  isMultiSelect?: boolean
-  isDisabled?: boolean
-}) => {
+  initiallyOpen = false,
+}: UseListboxOptions) => {
   const buttonRef = useRef<HTMLDivElement>(null)
   const listboxRef = useRef<HTMLDivElement>(null)
-  const [isOpen, _setIsOpen] = useState(false)
+  const [isOpen, _setIsOpen] = useState(initiallyOpen)
   const [focusedOptionIndex, setFocusedOptionIndex] = useState<number | null | undefined>()
   const id = useUniqueId()
 
