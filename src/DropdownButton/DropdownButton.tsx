@@ -10,10 +10,10 @@ import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 import { setAlpha } from "../utils"
 
 export interface DropdownButtonProps extends DefaultProps {
-  /** Button color theme (hex or named color from `theme.color`) */
-  color: string
   /** Actions to display in dropdown */
   items: ContextMenuProps["items"]
+  /** Button color theme (hex or named color from `theme.color`) */
+  color?: string
   /** Disabled option */
   disabled?: boolean
   /** What is the tab index, for accessibility? */
@@ -47,7 +47,13 @@ const ItemWithChevron = styled("div")`
   justify-content: space-between;
 `
 
-const DropdownButton: React.SFC<DropdownButtonProps> = ({ items, onItemClick, color, children, ...props }) => {
+const DropdownButton: React.FC<DropdownButtonProps> = ({
+  items,
+  onItemClick,
+  color = "primary",
+  children,
+  ...props
+}) => {
   // Dropdown buttons always have right chevrons for every item. These are added automatically.
   const itemsWithCarets = items.map(item => {
     const itemAsObject = typeof item === "string" ? { label: item } : item
@@ -81,10 +87,6 @@ const DropdownButton: React.SFC<DropdownButtonProps> = ({ items, onItemClick, co
       }}
     </ContextMenu>
   )
-}
-
-DropdownButton.defaultProps = {
-  color: "primary",
 }
 
 export default DropdownButton
