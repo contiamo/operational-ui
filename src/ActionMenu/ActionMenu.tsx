@@ -37,6 +37,10 @@ const Container = styled("div")(({ theme }) => ({
     backgroundColor: darken(theme.color.white, 5),
     boxShadow: `0 0 0 1px ${theme.color.primary}`,
   },
+  "&:focus": {
+    backgroundColor: darken(theme.color.white, 5),
+    boxShadow: `0 0 0 1px ${theme.color.primary}`,
+  },
 }))
 
 const TitleContainer = styled("p")(({ theme }) => ({
