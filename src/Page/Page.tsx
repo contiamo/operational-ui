@@ -75,8 +75,8 @@ const computeRowHeights = (theme: OperationalStyleConstants, hasTitle: boolean, 
 }
 
 const Container = styled("div")<{ hasTitle: boolean; hasTabs: boolean }>(({ theme, hasTitle, hasTabs }) => ({
-  height: "100%",
   position: "relative",
+  height: "100%",
   display: "grid",
   gridRowGap: theme.space.element,
   backgroundColor: theme.color.white,
@@ -95,7 +95,6 @@ const TitleContainer = styled("div")<{ fill: boolean }>(({ theme, fill }) => ({
 }))
 
 const ViewContainer = styled("div")<{ fill: boolean }>`
-  position: relative;
   outline: none;
   min-width: ${({ theme }) => theme.pageSize.min}px;
   max-width: ${({ fill, theme }) => (fill ? "100%" : `${theme.pageSize.max}px`)};
