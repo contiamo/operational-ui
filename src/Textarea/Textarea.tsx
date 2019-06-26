@@ -117,12 +117,9 @@ const Outline = styled("div")<{
   disabled: boolean
   focus: boolean
 }>(({ theme, error, focus, disabled }) => ({
-  boxShadow: focus
-    ? `0 0 0 3px ${error ? lighten(theme.color.error, 60) : lighten(theme.color.primary, 40)}`
-    : "initial",
   borderRadius: theme.borderRadius,
   border: `${theme.color.border.default} 1px solid`,
-  borderColor: error ? theme.color.error : theme.color.border.default,
+  borderColor: error ? theme.color.error : focus ? theme.color.primary : theme.color.border.default,
   opacity: disabled ? 0.6 : 1.0,
 }))
 
