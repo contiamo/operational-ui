@@ -2,13 +2,15 @@ import React, { useLayoutEffect, useRef, useState } from "react"
 
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import styled from "../utils/styled"
-import { CaretUpIcon, CaretDownIcon } from "../Icon/Icon"
+import { CaretUpIcon, CaretDownIcon, IconComponentType } from "../Icon/Icon"
 
 export interface TopbarSelectProps {
   /** A label added right before displaying the selected value */
   label: string
   /** Selected value */
   selected?: string
+  /** Selected icon */
+  selectedIcon?: IconComponentType
   /** A placeholder displayed when no item is selected */
   placeholder?: string
   /** Menu items, conforming to the ContextMenu API */
@@ -27,6 +29,7 @@ const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
   border-bottom: 1px solid transparent;
   cursor: pointer;
   background-color: ${props => (props.isActive ? props.theme.color.white : "transparent")};
+  color: ${props => props.theme.color.text.dark};
   & svg {
     /** Icons are purely presentational and click events are handled upstream */
     pointer-events: none;
@@ -38,24 +41,23 @@ const TopbarSelectValue = styled("div")`
   font-size: ${props => props.theme.font.size.fineprint}px;
   display: flex;
   align-items: center;
-  color: ${props => props.theme.color.text.dark};
-  & > :first-child {
-    margin-right: ${props => props.theme.space.element}px;
-  }
 `
 
-const TopbarSelectValueSpan = styled("span")<{ active?: boolean }>`
-  color: ${props => (props.active ? props.theme.color.text.dark : props.theme.color.text.lighter)};
+const TopbarSelectValueSpan = styled("span")`
+  margin-right: ${props => props.theme.space.element}px;
+`
+
+const TopbarSelectIcon = styled("div")`
+  paddingleft: ${props => props.theme.space.base}px;
 `
 
 const TopbarSelectLabel = styled("p")`
-  margin: 0px ${props => props.theme.space.base}px 0px 0px;
+  margin: 0px ${props => props.theme.space.element}px 0px 0px;
   font-size: ${props => props.theme.font.size.fineprint}px;
-  color: ${props => props.theme.color.text.lightest};
   font-weight: ${props => props.theme.font.weight.medium};
 `
 
-const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSelectProps) => {
+const TopbarSelect = ({ label, selected, selectedIcon: Icon, items, onChange, ...props }: TopbarSelectProps) => {
   const [containerWidth, setContainerWidth] = useState(0)
 
   const containerRef = useRef<HTMLDivElement>(null)
@@ -82,8 +84,13 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
         <TopbarSelectContainer {...props} isActive={isActive} ref={containerRef}>
           <TopbarSelectLabel>{label}</TopbarSelectLabel>
           <TopbarSelectValue>
-            <TopbarSelectValueSpan active={Boolean(selected)}>{selected}</TopbarSelectValueSpan>
-            {React.createElement(isActive ? CaretUpIcon : CaretDownIcon, { size: 12, color: "color.text.lightest" })}
+            {Icon && (
+              <TopbarSelectIcon>
+                <Icon left />
+              </TopbarSelectIcon>
+            )}
+            <TopbarSelectValueSpan>{selected}</TopbarSelectValueSpan>
+            {React.createElement(isActive ? CaretUpIcon : CaretDownIcon, { size: 10, color: "color.text.lightest" })}
           </TopbarSelectValue>
         </TopbarSelectContainer>
       )}
