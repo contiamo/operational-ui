@@ -22,6 +22,11 @@ const Container = styled("a")(({ theme }) => ({
     color: darken(theme.color.primary, 5),
     boxShadow: `0 0 0 1px ${theme.color.primary}`,
   },
+  "&:focus": {
+    outline: "none",
+    color: darken(theme.color.primary, 5),
+    boxShadow: `0 0 0 1px ${theme.color.primary}`,
+  },
 }))
 
 const Breadcrumb: React.SFC<BreadcrumbProps> = ({ to, icon: Icon, onClick, ...props }) => (
