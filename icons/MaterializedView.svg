@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.19 12.46">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>MaterializedView</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M20.19,0h-14a1,1,0,0,0-1,1V11.46a1,1,0,0,0,1,1h14a1,1,0,0,0,1-1V1A1,1,0,0,0,20.19,0Zm-7.5,3.16V6.81H6.19V3.16ZM6.19,7.81h6.5v3.65H6.19Zm14,4.15v-.5h-6.5V7.81h6.5v3.65h0Zm0-5.15h-6.5V3.16h6.5Z"/>
+      <path class="cls-1" d="M2.81.14a.5.5,0,0,0-.7,0l-2,2a.5.5,0,0,0,0,.7.5.5,0,0,0,.7,0L2,1.68V12a.49.49,0,0,0,1,0V1.68L4.08,2.81A.5.5,0,0,0,4.43,3a.49.49,0,0,0,.34-.14.48.48,0,0,0,0-.7Z"/>
+    </g>
+  </g>
+</svg>
