@@ -74,7 +74,7 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
 
   :focus {
     color: ${props => props.theme.color.primary};
-
+    outline: none;
     ::before {
       border: solid 1px ${props => props.theme.color.primary};
     }
