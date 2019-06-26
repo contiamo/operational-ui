@@ -24,16 +24,6 @@ const displayItems = [
   { label: "Waterfall Chart", icon: WaterfallChartIcon },
 ]
 
-const icons = {
-  Table: TableIcon,
-  "Bar Chart": BarChartIcon,
-  "Line Chart": LineGraphIcon,
-  Counter: CounterIcon,
-  "Pie Chart": PieChartIcon,
-  "Cohort Chart": CohortChartIcon,
-  "Waterfall Chart": WaterfallChartIcon,
-}
-
 const [activeFruit, setActiveFruit] = React.useState(undefined)
 const [activeDisplay, setActiveDisplay] = React.useState("Table")
 
@@ -50,7 +40,6 @@ const [activeDisplay, setActiveDisplay] = React.useState("Table")
     <TopbarSelect
       label="Display:"
       selected={activeDisplay}
-      selectedIcon={icons[activeDisplay]}
       items={displayItems}
       onChange={item => setActiveDisplay(item)}
     />

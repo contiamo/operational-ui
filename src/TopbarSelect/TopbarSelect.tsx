@@ -1,16 +1,14 @@
-import React, { useLayoutEffect, useRef, useState } from "react"
+import React, { useLayoutEffect, useRef, useState, useMemo } from "react"
 
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import styled from "../utils/styled"
-import { CaretUpIcon, CaretDownIcon, IconComponentType } from "../Icon/Icon"
+import { CaretUpIcon, CaretDownIcon } from "../Icon/Icon"
 
 export interface TopbarSelectProps {
   /** A label added right before displaying the selected value */
   label: string
   /** Selected value */
   selected?: string
-  /** Selected icon */
-  selectedIcon?: IconComponentType
   /** A placeholder displayed when no item is selected */
   placeholder?: string
   /** Menu items, conforming to the ContextMenu API */
@@ -47,19 +45,19 @@ const TopbarSelectValueSpan = styled("span")`
   margin-right: ${props => props.theme.space.element}px;
 `
 
-const TopbarSelectIcon = styled("div")`
-  paddingleft: ${props => props.theme.space.base}px;
-`
-
 const TopbarSelectLabel = styled("p")`
   margin: 0px ${props => props.theme.space.element}px 0px 0px;
   font-size: ${props => props.theme.font.size.fineprint}px;
   font-weight: ${props => props.theme.font.weight.medium};
 `
 
-const TopbarSelect = ({ label, selected, selectedIcon: Icon, items, onChange, ...props }: TopbarSelectProps) => {
+const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSelectProps) => {
   const [containerWidth, setContainerWidth] = useState(0)
 
+  const Icon = useMemo(() => {
+    const item = items.find(item => (typeof item === "string" ? false : item.label === selected))
+    return typeof item === "object" && item.icon
+  }, [items, selected])
   const containerRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
@@ -78,17 +76,12 @@ const TopbarSelect = ({ label, selected, selectedIcon: Icon, items, onChange, ..
           onChange(newItem.label)
         }
       }}
-      tabIndex={0}
     >
       {isActive => (
         <TopbarSelectContainer {...props} isActive={isActive} ref={containerRef}>
           <TopbarSelectLabel>{label}</TopbarSelectLabel>
           <TopbarSelectValue>
-            {Icon && (
-              <TopbarSelectIcon>
-                <Icon left />
-              </TopbarSelectIcon>
-            )}
+            {Icon && <Icon left />}
             <TopbarSelectValueSpan>{selected}</TopbarSelectValueSpan>
             {React.createElement(isActive ? CaretUpIcon : CaretDownIcon, { size: 10, color: "color.text.lightest" })}
           </TopbarSelectValue>
