@@ -23,6 +23,8 @@ export interface DropdownButtonProps extends DefaultProps {
   /** onItemClick method for all menu items */
   onItemClick?: (item: IContextMenuItem) => void
   children?: React.ReactNode
+  /** Alignment */
+  align?: "left" | "right"
 }
 
 const BaseDropdownButton = styled(Button)<{ isOpen: boolean; textColor: string }>(({ isOpen, textColor, theme }) => ({
@@ -47,6 +49,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
   items,
   onItemClick,
   color = "primary",
+  align,
   children,
   ...props
 }) => {
@@ -65,7 +68,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
   })
 
   return (
-    <ContextMenu {...props} onClick={onItemClick} iconLocation="right" items={itemsWithCarets}>
+    <ContextMenu {...props} onClick={onItemClick} iconLocation="right" items={itemsWithCarets} align={align}>
       {isOpen => {
         return (
           <BaseDropdownButton

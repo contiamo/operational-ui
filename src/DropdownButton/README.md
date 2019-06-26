@@ -31,7 +31,7 @@ import { DropdownButton, DatabaseIcon } from "@operational/components"
 const MyLabelContainer = ({ title, children }) => (
   <div style={{ display: "flex", alignItems: "center", width: "300px", whiteSpace: "normal" }}>
     <DatabaseIcon left />
-    <div style={{ lineHeight: 1, width: "100%", margin: "8px 0" }}>
+    <div style={{ lineHeight: 1, width: "100%", margin: "8px 0", textAlign: "left" }}>
       <p style={{ fontWeight: "bold", margin: "0 0 4px 0" }}>{title}</p>
       {children}
     </div>
@@ -65,7 +65,7 @@ const menuItems = [
   },
 ]
 
-;<>
+;<div style={{ display: "flex", justifyContent: "space-around" }}>
   <DropdownButton
     items={menuItems}
     onClick={() => {
@@ -74,5 +74,14 @@ const menuItems = [
   >
     Add data source
   </DropdownButton>
-</>
+  <DropdownButton
+    align="right"
+    items={menuItems}
+    onClick={() => {
+      console.log("Button clicked")
+    }}
+  >
+    Add data source
+  </DropdownButton>
+</div>
 ```
