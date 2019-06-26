@@ -5,6 +5,7 @@ import * as React from "react"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
+import { headerHeight } from "../utils/constants"
 
 export interface HeaderMenuProps extends DefaultProps {
   /** Clickable component(s) from which menu appears  */
@@ -39,7 +40,7 @@ const Container = styled("div")<{
   lineHeight: 1,
   padding: `${theme.space.content / 2}px ${theme.space.content}px`,
   height: "100%",
-  [align === "left" ? "paddingRight" : "paddingLeft"]: 36, // leave room for the caret
+  [align === "left" ? "paddingRight" : "paddingLeft"]: headerHeight, // leave room for the caret
   color: isOpen ? theme.color.white : "#ffffffcc",
   backgroundColor: isOpen ? backgroundColor : "transparent",
   boxShadow: isOpen ? boxShadow : "none",

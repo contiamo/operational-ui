@@ -4,6 +4,7 @@ import styled from "../utils/styled"
 import { ChevronUpIcon, ChevronDownIcon } from "../Icon/Icon"
 import { DefaultProps } from "../types"
 import isFunction from "lodash/isFunction"
+import { headerHeight } from "../utils/constants"
 
 export interface AccordionSectionProps extends DefaultProps {
   title: React.ReactNode
@@ -21,7 +22,7 @@ const Container = styled.div<{ expanded: boolean }>`
   overflow: hidden;
   /* to fix overflow: hidden above, otherwise header can disappear */
   display: grid;
-  grid-template-rows: 36px calc(100% - 36px);
+  grid-template-rows: ${headerHeight}px calc(100% - ${headerHeight}px);
   /* for Focus */
   position: relative;
 `

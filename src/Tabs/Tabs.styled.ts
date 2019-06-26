@@ -1,5 +1,6 @@
 import styled from "../utils/styled"
 import { SectionHeader } from "../Internals/SectionHeader"
+import { headerHeight } from "../utils/constants"
 
 const buttonWidth = 55
 
@@ -19,7 +20,7 @@ export const TabList = styled.div<{ scroll: boolean }>`
   border-left: solid 1px ${({ theme }) => theme.color.separators.default};
   overflow-y: hidden;
   /* magic number to hide scroll bar underneath tabpanel */
-  height: 56px;
+  height: ${headerHeight + 20}px;
   -webkit-overflow-scrolling: auto;
   ::-webkit-scrollbar {
     display: none;
