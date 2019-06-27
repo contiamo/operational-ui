@@ -5,6 +5,7 @@ import { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import { ChevronUpIcon, ChevronDownIcon } from "../Icon/Icon"
 import { DefaultProps, DragProps } from "../types"
 import styled from "../utils/styled"
+import { headerHeight } from "../utils/constants"
 
 export interface CardSectionProps extends DefaultProps, DragProps {
   /** Column title */
@@ -99,7 +100,7 @@ const Title = styled("div")<{ withToggle: boolean; forceHoverStyles: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 36px;
+  height: ${headerHeight}px;
   ${({ theme, withToggle, forceHoverStyles }) => `
     padding: 0px ${theme.space.medium}px;
     font-family: ${theme.font.family.main};

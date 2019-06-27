@@ -7,7 +7,7 @@ const buttonWidth = 55
 export const Container = styled.div`
   label: Tabs;
   display: grid;
-  grid-template-rows: 36px 1fr;
+  grid-template-rows: ${headerHeight}px 1fr;
   position: relative;
   height: 100%;
 `
