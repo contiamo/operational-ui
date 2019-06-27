@@ -65,6 +65,12 @@ export const TabHeader = styled(SectionHeader, {
     condensed ? `max-width: ${buttonWidth}px; min-width: ${buttonWidth}px;` : "max-width: 180px;"}
   flex-grow: 1;
   transition: background-color 0.2s;
+
+  /* Fix the cursor on the "add tab" button */
+  & svg {
+    ${({ condensed }) => (condensed ? "pointer-events: none;" : "")}
+    cursor: pointer;
+  }
   :focus {
     outline: none;
     box-shadow: ${({ theme }) => theme.shadows.insetFocus};
