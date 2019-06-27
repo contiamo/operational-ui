@@ -4,7 +4,7 @@ import styled from "../utils/styled"
 import { OperationalStyleConstants } from "../utils/constants"
 import * as mixins from "../utils/mixins"
 
-const inputHeight: number = 36
+const inputHeight = 36
 
 export interface ContainerProps {
   isExpanded: boolean
