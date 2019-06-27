@@ -268,6 +268,8 @@ const constants = {
   },
 }
 
+export const headerHeight: number = 36
+
 /*
  * Expands a color expressed either as a custom hex value
  * or a color key to pick from within the style constants object.
