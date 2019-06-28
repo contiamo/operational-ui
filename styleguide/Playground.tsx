@@ -34,31 +34,30 @@ const Playground: React.FC<{
         <Preview code={code} evalInContext={evalInContext} />
       </OperationalDocsErrorBoundary>
       <PlayButton
-        icon={isPlaying || true ? NoIcon : PlayIcon}
-        textColor={isPlaying || true ? "error" : undefined}
+        icon={isPlaying ? NoIcon : PlayIcon}
+        textColor={isPlaying ? "error" : undefined}
         onClick={() => setIsPlaying(!isPlaying)}
       >
-        {isPlaying || true ? "Close" : "View Code"}
+        {isPlaying ? "Close" : "View Code"}
       </PlayButton>
-      {isPlaying ||
-        (true && (
-          <>
-            <ShinyMessage
-              title="Self-Documentation"
-              type="info"
-              body={
-                <>
-                  ✨ Press <ResourceName>alt + Space</ResourceName> inside a{" "}
-                  <ResourceName>&lt;Component /&gt;</ResourceName> for available props and documentation.
-                </>
-              }
-            />
+      {isPlaying && (
+        <>
+          <ShinyMessage
+            title="Self-Documentation"
+            type="info"
+            body={
+              <>
+                ✨ Press <ResourceName>alt + Space</ResourceName> inside a{" "}
+                <ResourceName>&lt;Component /&gt;</ResourceName> for available props and documentation.
+              </>
+            }
+          />
 
-            <Suspense fallback={<Spinner />}>
-              <MonacoEditor component={"component"} code={code} onChange={setCode} />
-            </Suspense>
-          </>
-        ))}
+          <Suspense fallback={<Spinner />}>
+            <MonacoEditor component={"component"} code={code} onChange={setCode} />
+          </Suspense>
+        </>
+      )}
     </>
   )
 }
