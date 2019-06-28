@@ -14,7 +14,7 @@ export interface TopbarSelectProps {
   /** Menu items, conforming to the ContextMenu API */
   items: ContextMenuProps["items"]
   /** Change handler */
-  onChange?: (newLabel: string | React.ReactElement<any>) => void
+  onChange?: ContextMenuProps["onClick"]
 }
 
 const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
@@ -73,7 +73,7 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
       width={containerWidth}
       onClick={newItem => {
         if (onChange) {
-          onChange(newItem.label)
+          onChange(newItem)
         }
       }}
     >
