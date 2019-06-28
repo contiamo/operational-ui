@@ -42,7 +42,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   footer = null,
   height = 500,
   width = "100%",
-  cellWidth = "1fr",
+  cellWidth = "minmax(200px, 1fr)",
   maxCharactersInCell = 30,
   className,
 }: DataTableProps<Columns, Rows>) {
