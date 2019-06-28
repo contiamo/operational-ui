@@ -4,7 +4,7 @@ Main wrapper for Operational UI, required at the top level of the application. S
 
 ```jsx
 import * as React from "react"
-import { Button } from "@operational/components"
+import { Button, OperationalUI } from "@operational/components"
 
 const App = () => (
   <div>
@@ -23,9 +23,9 @@ To set up routing that is automatically wired up to the `to` props of all nested
 
 ```jsx
 import * as React from "react"
-import { Button } from "@operational/components"
+import { Button, OperationalUI, OperationalUIProps } from "@operational/components"
 
-class RoutingComponent extends React.Component {
+class RoutingComponent extends React.Component<OperationalUIProps, any> {
   constructor(props) {
     super(props)
     // Set the initial path instate
@@ -35,6 +35,8 @@ class RoutingComponent extends React.Component {
   }
 
   render() {
+    const { path } = this.state
+
     return (
       <OperationalUI
         pushState={newPath => {
@@ -51,7 +53,7 @@ class RoutingComponent extends React.Component {
         }}
       >
         <div>
-          <p>{`The path is ${this.state.path}`}</p>
+          <p>{`The path is ${path}`}</p>
           <Button to="/abcd">Go to /abcd</Button>
         </div>
       </OperationalUI>

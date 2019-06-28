@@ -43,6 +43,11 @@ const MyComponent = () => {
       })
   }, [dogToFetch])
 
+  const onResultClickUtil = result => {
+    const value = result.value
+    setDogToFetch(value)
+  }
+
   return (
     <div style={{ display: "flex", alignItems: "flex-start" }}>
       <Autocomplete
@@ -52,7 +57,7 @@ const MyComponent = () => {
         label="Find a Good Boye 🐶"
         hint={`Try "Husky"`}
         onChange={setText}
-        onResultClick={result => setDogToFetch(result.value)}
+        onResultClick={onResultClickUtil}
       />
 
       {chosenDog && <img alt={chosenDog.label} src={chosenDog.value} style={{ marginLeft: 8, width: 100 }} />}

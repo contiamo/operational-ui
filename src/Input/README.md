@@ -1,6 +1,7 @@
 ### Usage
 
 ```jsx
+import * as React from "react"
 import { Form, Input } from "@operational/components"
 
 const MyComponent = () => {
@@ -150,7 +151,8 @@ const makeErrorStyles = ({ left, top, size }) => ({
 ### With an Action Button
 
 ```jsx
-import { UserIcon } from "@operational/components"
+import * as React from "react"
+import { UserIcon, Input } from "@operational/components"
 ;<Input
   value="JNAPE92"
   label="Employee ID"

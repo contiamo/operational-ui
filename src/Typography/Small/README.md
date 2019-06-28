@@ -3,5 +3,7 @@ Small text reserved for form labels and other secondary content. Consider combin
 ### Usage
 
 ```js
+import * as React from "react"
+import { Small } from "@operational/components"
 ;<Small>I'm a small text</Small>
 ```

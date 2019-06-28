@@ -1,7 +1,7 @@
 # Usage
 
 ```js
-import React from "react"
+import * as React from "react"
 import { Flow, YesIcon, UserIcon, UndoIcon } from "@operational/components"
 ;<Flow
   items={[
@@ -34,25 +34,29 @@ import { Flow, YesIcon, UserIcon, UndoIcon } from "@operational/components"
 To condense your items, simply add a condensed prop!
 
 ```js
-import React from "react"
+import * as React from "react"
 import { Flow, SyncIcon, UnlockIcon, PhysicalTableIcon, SortDescendingIcon } from "@operational/components"
 ;<Flow
   condensed
   items={[
     {
+      label: "Unlock",
       icon: UnlockIcon,
     },
     {
+      label: "Sync",
       icon: SyncIcon,
-      iconColor: "#fa0",
+      iconColor: "primary",
     },
     {
+      label: "Physical Table",
       icon: PhysicalTableIcon,
-      iconColor: "#0af",
+      iconColor: "primary",
     },
     {
+      label: "Sort Descending",
       icon: SortDescendingIcon,
-      iconColor: "#f0f",
+      iconColor: "primary",
     },
   ]}
 />
@@ -63,14 +67,14 @@ import { Flow, SyncIcon, UnlockIcon, PhysicalTableIcon, SortDescendingIcon } fro
 `Flow` components can be controlled, and do things on click &mdash; like navigating to a new page or similar like so.
 
 ```js
-import React from "react"
+import * as React from "react"
 import {
   Flow,
   Title,
   SortAscendingIcon,
   ShareIcon,
   SearchIcon,
-  VirtualDatabaseIcon,
+  VirtualDBIcon,
   SortDescendingIcon,
 } from "@operational/components"
 
@@ -85,19 +89,23 @@ const MyComponent = () => {
         activeItemIndex={route}
         items={[
           {
+            label: "Sort Ascending",
             icon: SortAscendingIcon,
             onClick: () => setRoute(0),
           },
           {
+            label: "Share",
             icon: ShareIcon,
             onClick: () => setRoute(1),
           },
           {
+            label: "Search",
             icon: SearchIcon,
             onClick: () => setRoute(2),
           },
           {
-            icon: VirtualDatabaseIcon,
+            label: "Virtual Database",
+            icon: VirtualDBIcon,
             onClick: () => setRoute(3),
           },
         ]}
@@ -122,7 +130,7 @@ const MyComponent = () => {
           },
           {
             label: "Network",
-            icon: VirtualDatabaseIcon,
+            icon: VirtualDBIcon,
             onClick: () => setRoute(3),
           },
         ]}

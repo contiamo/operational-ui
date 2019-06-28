@@ -22,7 +22,7 @@ const options = [
 ]
 
 const MyComponent = () => {
-  const [value, setValue] = React.useState("one")
+  const [value, setValue] = React.useState < string > "one"
   const [lastChanged, setLastChanged] = React.useState(null)
 
   return (

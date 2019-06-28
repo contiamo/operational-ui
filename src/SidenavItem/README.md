@@ -22,7 +22,6 @@ import {
   <SidenavHeader condensed icon={HomeIcon} label="Project Home" />
   <SidenavHeader label="The Prize">
     <SidenavItem
-      icon={NoIcon}
       items={[
         { label: <strong>Fabien</strong>, onClick: () => alert("hi i like robots") },
         {
@@ -38,7 +37,7 @@ import {
       ]}
       onClick={() => alert("Overview")}
       label="Overview"
-      icon={FunctionIcon}
+      icon={FunctionIcon || NoIcon}
     />
     <SidenavItem to="https://tejaskumar.com/" label="Use Cases" icon={DocumentIcon} />
     <SidenavItem onClick={() => alert("Guides")} label="Guides" icon={HomeIcon} />

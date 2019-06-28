@@ -8,6 +8,7 @@ Our DataTable is used to render tabular data structures. For a basic use case, g
 Additionally, supply a `height` prop to limit the height of the table.
 
 ```jsx
+import * as React from "react"
 import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operational/components"
 ;<DataTable
   columns={[
@@ -32,6 +33,7 @@ import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operation
 Sometimes, we wish to render a _lot_ more data and have more of it visible. For this, we set `rowHeight="compact"` to enable compact mode.
 
 ```jsx
+import * as React from "react"
 import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operational/components"
 ;<DataTable
   height={225}
@@ -70,6 +72,7 @@ The value of this component is that it uses a technique called **windowing** (or
 This is made possible by [react-window](https://github.com/bvaughn/react-window) from [Brian Vaughn](https://twitter.com/brian_d_vaughn) on the [React](https://reactjs.org/) team. Thanks, Brian! 🎉
 
 ```jsx
+import * as React from "react"
 import { Title, DataTable, DataTableSelect, DataTableFooter, Checkbox } from "@operational/components"
 const getNewRows = (lastIndex = 0) =>
   Array.from({ length: lastIndex > 1000000 ? 1 : (lastIndex || 1) * 10 }, (_, i) => [
@@ -127,6 +130,7 @@ const MyComponent = () => {
 When defining data sources in our product, we sometimes need to manually describe a schema. This is how `DataTable` allows us to model and define a schema.
 
 ```jsx
+import * as React from "react"
 import { Button, DataTable, DataTableSelect, Checkbox } from "@operational/components"
 
 const columnsReducer = (columns, action) => {

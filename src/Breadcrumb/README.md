@@ -13,7 +13,8 @@ import { Breadcrumb } from "@operational/components"
 ### Usage with icons
 
 ```jsx
-import { HomeIcon } from "@operational/components"
+import * as React from "react"
+import { HomeIcon, Breadcrumb } from "@operational/components"
 ;<Breadcrumb to="/#" icon={HomeIcon}>
   Home
 </Breadcrumb>

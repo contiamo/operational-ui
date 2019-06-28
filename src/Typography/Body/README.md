@@ -3,6 +3,8 @@ Ordinary body text.
 ### Usage
 
 ```jsx
+import * as React from "react"
+import { Body } from "@operational/components"
 ;<Body>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed condimentum augue lorem. Suspendisse et tellus augue.
   Nulla lorem magna, efficitur eu condimentum molestie, varius et risus. Maecenas vitae arcu ligula. Fusce lobortis,
