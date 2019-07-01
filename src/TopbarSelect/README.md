@@ -33,7 +33,7 @@ const [activeDisplay, setActiveDisplay] = React.useState("Table")
       label="Fruit"
       selected={activeFruit}
       items={["apples", "oranges"].map(name => ({ label: name }))}
-      onChange={item => setActiveFruit(item)}
+      onChange={item => setActiveFruit(item.label)}
     />
   }
   right={
@@ -41,7 +41,7 @@ const [activeDisplay, setActiveDisplay] = React.useState("Table")
       label="Display:"
       selected={activeDisplay}
       items={displayItems}
-      onChange={item => setActiveDisplay(item)}
+      onChange={item => setActiveDisplay(item.label)}
     />
   }
 />
