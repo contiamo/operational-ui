@@ -64,6 +64,9 @@ export const TabHeader = styled(SectionHeader, {
   ${({ condensed }) =>
     condensed ? `max-width: ${buttonWidth}px; min-width: ${buttonWidth}px;` : "max-width: 180px;"}
   flex-grow: 1;
+  transition: background-color 0.2s;
+
+  /* Fix the cursor on the "add tab" button */
   & svg {
     ${({ condensed }) => (condensed ? "pointer-events: none;" : "")}
     cursor: pointer;
@@ -78,6 +81,9 @@ export const TabHeader = styled(SectionHeader, {
   :disabled {
     color: ${({ theme }) => theme.color.disabled};
     cursor: not-allowed;
+  }
+  :hover {
+    background-color: ${({ theme }) => theme.color.separators.default};
   }
   margin: 0;
 `
@@ -128,6 +134,7 @@ export const TitleWrapper = styled.span`
 
 export const TabIcon = styled.span`
   margin-right: ${({ theme }) => theme.space.small}px;
+  pointer-events: none;
 `
 
 export const ScrollButtons = styled.div`
