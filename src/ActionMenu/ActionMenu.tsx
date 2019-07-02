@@ -1,7 +1,7 @@
 import * as React from "react"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import { DefaultProps } from "../types"
-import { darken } from "../utils"
+import { inputFocus } from "../utils"
 import styled from "../utils/styled"
 import { ChevronUpIcon, HamburgerMenuIcon } from "../Icon/Icon"
 
@@ -34,12 +34,10 @@ const Container = styled("div")(({ theme }) => ({
   boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
   cursor: "pointer",
   "&:hover": {
-    backgroundColor: darken(theme.color.white, 5),
-    boxShadow: `0 0 0 1px ${theme.color.primary}`,
+    ...inputFocus({ theme }),
   },
   "&:focus": {
-    backgroundColor: darken(theme.color.white, 5),
-    boxShadow: `0 0 0 1px ${theme.color.primary}`,
+    ...inputFocus({ theme }),
   },
 }))
 
