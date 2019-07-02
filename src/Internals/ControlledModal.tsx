@@ -76,7 +76,7 @@ const Content = styled("div")<{ fullSize: boolean }>(({ theme, fullSize }) => ({
   ...(fullSize
     ? {
         minHeight: "400px",
-        maxHeight: "100%",
+        height: "100%",
         overflow: "auto",
       }
     : {}),
