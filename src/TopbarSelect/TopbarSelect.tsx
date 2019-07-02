@@ -36,7 +36,7 @@ const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
 
 const TopbarSelectValue = styled("div")`
   padding: 0px ${props => props.theme.space.base}px;
-  font-size: ${props => props.theme.font.size.fineprint}px;
+  font-size: ${props => props.theme.font.size.small}px;
   display: flex;
   align-items: center;
 `
@@ -47,7 +47,7 @@ const TopbarSelectValueSpan = styled("span")`
 
 const TopbarSelectLabel = styled("p")`
   margin: 0px ${props => props.theme.space.element}px 0px 0px;
-  font-size: ${props => props.theme.font.size.fineprint}px;
+  font-size: ${props => props.theme.font.size.small}px;
   font-weight: ${props => props.theme.font.weight.medium};
 `
 
@@ -83,7 +83,7 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
           <TopbarSelectValue>
             {Icon && <Icon left />}
             <TopbarSelectValueSpan>{selected}</TopbarSelectValueSpan>
-            {React.createElement(isActive ? CaretUpIcon : CaretDownIcon, { size: 10, color: "color.text.lightest" })}
+            {React.createElement(isActive ? CaretUpIcon : CaretDownIcon, { size: 5, color: "color.text.lightest" })}
           </TopbarSelectValue>
         </TopbarSelectContainer>
       )}
