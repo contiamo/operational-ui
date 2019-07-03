@@ -40,6 +40,10 @@ const Container = styled("div")<{ color_?: string }>(({ theme, color_ }) => {
     borderRadius: 2,
     color: theme.color.text.default,
     margin: `0px ${theme.space.small}px 0px 0px`,
+    ":focus": {
+      outline: "none",
+      ...inputFocus({ theme }),
+    },
   }
 })
 
@@ -65,6 +69,7 @@ const Content = styled<"div" | "button">("div")<{ as?: "div" | "button"; onClick
     font: "inherit",
     color: "inherit",
     border: 0,
+    outline: "none",
     alignItems: "center",
     padding: `0px ${theme.space.base}px`,
     cursor: Boolean(onClick) ? "pointer" : "initial",
