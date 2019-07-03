@@ -325,7 +325,7 @@ const PizzaMaker = () => {
 
 ```jsx
 import * as React from "react"
-import { Accordion, Tree } from "@operational/components"
+import { Accordion, Tree, AccordionSection } from "@operational/components"
 
 const MyComponent = () => {
   const [expanded, setExpanded] = React.useState([true])
