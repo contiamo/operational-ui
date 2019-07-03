@@ -2,7 +2,7 @@ import React from "react"
 import NameTag from "../NameTag/NameTag"
 import { darken } from "../utils"
 import styled from "../utils/styled"
-import { PlusIcon, NoIcon, MinusIcon, IconComponentType } from "../Icon/Icon"
+import { ChevronRightIcon, NoIcon, ChevronDownIcon, IconComponentType } from "../Icon/Icon"
 import Highlighter from "react-highlight-words"
 import constants from "../utils/constants"
 
@@ -83,7 +83,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
 }) => (
   <Header level={level} onClick={onNodeClick} highlight={Boolean(highlight)} cursor={cursor}>
     {hasChildren &&
-      React.createElement(isOpen ? MinusIcon : PlusIcon, {
+      React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
         size: 11,
         left: true,
         color: "color.text.action",
