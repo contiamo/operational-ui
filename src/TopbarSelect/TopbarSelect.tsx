@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from "react"
+import { inputFocus } from "../utils"
 
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import styled from "../utils/styled"
@@ -26,10 +27,14 @@ const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
   box-shadow: ${props => (props.isActive ? props.theme.shadows.popup : "none")};
   border-bottom: 1px solid transparent;
   cursor: pointer;
+  outline: none;
   background-color: ${props => (props.isActive ? props.theme.color.white : "transparent")};
   & svg {
     /** Icons are purely presentational and click events are handled upstream */
     pointer-events: none;
+  }
+  :focus {
+    ${({ theme }) => inputFocus({ theme })};
   }
 `
 

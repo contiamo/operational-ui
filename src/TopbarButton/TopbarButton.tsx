@@ -39,7 +39,7 @@ const TopbarButtonContainer = styled("button")<{ disabled?: boolean; flavor: Top
   font-size: ${props => props.theme.font.size.small}px;
   outline: "none";
   :focus {
-    ${({ theme }) => inputFocus({ theme })}
+    ${({ theme }) => inputFocus({ theme })};
   }
   & svg {
     /** Icons are purely presentational and click events are handled upstream */
