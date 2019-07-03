@@ -1,13 +1,16 @@
 ## Usage:
 
 ```jsx
+import * as React from "react"
 import { useListbox, Button } from "@operational/components"
 
 const MyComponent = props => {
-  const { isOpen, setIsOpen, parentProps, getChildProps } = useListbox({ itemCount: props.listItems.length })
+  const { isOpen, setIsOpen, buttonProps, getChildProps } = useListbox({
+    itemCount: props.listItems.length,
+  })
 
   return (
-    <div {...parentProps}>
+    <div {...buttonProps}>
       <Button onClick={() => setIsOpen(!isOpen)} color="primary">
         Hit it, Lionel!
       </Button>

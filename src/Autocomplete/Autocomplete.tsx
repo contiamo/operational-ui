@@ -87,27 +87,18 @@ export function Autocomplete<T>({
   children,
   ...inputProps
 }: AutocompleteProps<T>) {
-  const [isContextMenuOpen, setIsContextMenuOpen] = React.useState(false)
   const uniqueId = useUniqueId(id)
 
   return (
     <Container
-      open={isContextMenuOpen}
+      open
       iconLocation="right"
       fullWidth={Boolean(fullWidth)}
       items={makeItems({ results, value: inputProps.value, resultIcon, noResultsMessage })}
       onClick={item => onResultClick(item as IContextMenuItem<T>)}
     >
       {loading && <Progress bottom />}
-      <Input
-        id={uniqueId}
-        tabIndex={tabIndex}
-        onFocus={() => setIsContextMenuOpen(true)}
-        onBlur={() => setIsContextMenuOpen(false)}
-        fullWidth={true}
-        preset={Boolean(selectedResult)}
-        {...inputProps}
-      />
+      <Input id={uniqueId} tabIndex={tabIndex} fullWidth={fullWidth} preset={Boolean(selectedResult)} {...inputProps} />
     </Container>
   )
 }

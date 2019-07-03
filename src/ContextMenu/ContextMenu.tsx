@@ -3,7 +3,7 @@ import isString from "lodash/isString"
 
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-import ContextMenuItem, { IContextMenuItem } from "./ContextMenu.Item"
+import ContextMenuItem, { condensedRowHeight, rowHeight, IContextMenuItem } from "./ContextMenu.Item"
 import { useUniqueId } from "../useUniqueId"
 import { useListbox } from "../useListbox"
 
@@ -60,15 +60,13 @@ const Container = styled("div")<{ side: ContextMenuProps["align"]; isOpen: boole
   }),
 )
 
-const rowHeight = 40
-const condensedRowHeight = 35
-
 const MenuContainer = styled("div")<{
   embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
   numRows: number
   align: ContextMenuProps["align"]
   condensed: boolean
-}>(({ theme, numRows, align, embedChildrenInMenu, condensed }) => ({
+  isOpen: boolean
+}>(({ theme, numRows, align, embedChildrenInMenu, isOpen, condensed }) => ({
   position: "absolute",
   top: embedChildrenInMenu ? 0 : "100%",
   left: align === "left" ? 0 : "auto",
@@ -77,8 +75,9 @@ const MenuContainer = styled("div")<{
   boxShadow: theme.shadows.popup,
   width: "100%",
   minWidth: "fit-content",
+  minHeight: isOpen ? (condensed ? condensedRowHeight : rowHeight) : 0,
   display: "grid",
-  gridTemplateRows: `repeat(${numRows}, ${condensed ? condensedRowHeight : rowHeight}px)`,
+  gridTemplateRows: `repeat(${numRows}, max-content)`,
 }))
 
 /**
@@ -106,6 +105,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   onClick,
   disabled,
   width,
+  open,
   ...props
 }) => {
   const uniqueId = useUniqueId(id)
@@ -113,6 +113,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     itemCount: items.length,
     isMultiSelect: keepOpenOnItemClick,
     isDisabled: disabled,
+    initiallyOpen: open,
   })
 
   /**
@@ -184,9 +185,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         onKeyDown={e => {
           switch (e.key) {
             case "Enter":
-              if (keepOpenOnItemClick) {
-                e.stopPropagation()
-              }
+              e.stopPropagation()
               handleSelect()
               break
           }
@@ -197,6 +196,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         </div>
         <MenuContainer
           {...listboxProps}
+          isOpen={Boolean(isOpen)}
           condensed={Boolean(condensed)}
           numRows={items.length}
           align={align}
@@ -211,10 +211,14 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
               condensed={condensed}
               align={align}
               iconLocation={iconLocation}
-              width={width || "100%"}
+              width={width || "min-content"}
               item={item}
+              disabled={isString(item) ? !onClick : !item.onClick && !onClick}
               onClick={e => {
-                e.stopPropagation()
+                e.stopPropagation() //clicking on an item should not trigger the parent's onClick
+                if (!keepOpenOnItemClick && setIsOpen) {
+                  setIsOpen(false)
+                }
                 if (!isString(item) && item.onClick) {
                   item.onClick(makeItem(item))
                   return

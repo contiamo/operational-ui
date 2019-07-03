@@ -9,13 +9,9 @@ export type CardColumnsProps = React.Props<{}> & {
 export const CardColumns = styled("div")<CardColumnsProps>(({ children, theme, columns }) => {
   columns = columns === undefined ? React.Children.count(children) : columns
   return {
-    display: "flex",
-    flexWrap: "wrap",
-    margin: -(theme.space.element / 2),
-    "& > *": {
-      flex: `1 1 calc(100% / ${columns})`,
-      maxWidth: `calc(100% / ${columns})`,
-    },
+    display: "grid",
+    gridTemplateColumns: `repeat(${columns}, 1fr)`,
+    gridGap: theme.space.element,
   }
 })
 

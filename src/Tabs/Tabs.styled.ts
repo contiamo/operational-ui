@@ -1,26 +1,26 @@
 import styled from "../utils/styled"
 import { SectionHeader } from "../Internals/SectionHeader"
+import { headerHeight } from "../utils/constants"
 
 const buttonWidth = 55
 
 export const Container = styled.div`
   label: Tabs;
   display: grid;
-  grid-template-rows: ${({ theme }) => `${theme.space.element * 2}px 1fr`};
+  grid-template-rows: ${headerHeight}px 1fr;
   position: relative;
   height: 100%;
 `
 
 export const TabList = styled.div<{ scroll: boolean }>`
   display: flex;
-  height: ${({ theme }) => theme.space.element * 2}px;
   overflow-x: auto;
   max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px)` : "none")};
   scroll-behavior: smooth;
   border-left: solid 1px ${({ theme }) => theme.color.separators.default};
   overflow-y: hidden;
   /* magic number to hide scroll bar underneath tabpanel */
-  height: ${({ theme }) => theme.space.element * 2 + 20}px;
+  height: ${headerHeight + 20}px;
   -webkit-overflow-scrolling: auto;
   ::-webkit-scrollbar {
     display: none;
@@ -64,6 +64,9 @@ export const TabHeader = styled(SectionHeader, {
   ${({ condensed }) =>
     condensed ? `max-width: ${buttonWidth}px; min-width: ${buttonWidth}px;` : "max-width: 180px;"}
   flex-grow: 1;
+  transition: background-color 0.2s;
+
+  /* Fix the cursor on the "add tab" button */
   & svg {
     ${({ condensed }) => (condensed ? "pointer-events: none;" : "")}
     cursor: pointer;
@@ -78,6 +81,9 @@ export const TabHeader = styled(SectionHeader, {
   :disabled {
     color: ${({ theme }) => theme.color.disabled};
     cursor: not-allowed;
+  }
+  :hover {
+    background-color: ${({ theme }) => theme.color.separators.default};
   }
   margin: 0;
 `
@@ -128,6 +134,7 @@ export const TitleWrapper = styled.span`
 
 export const TabIcon = styled.span`
   margin-right: ${({ theme }) => theme.space.small}px;
+  pointer-events: none;
 `
 
 export const ScrollButtons = styled.div`
