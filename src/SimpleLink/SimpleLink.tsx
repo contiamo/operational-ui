@@ -53,7 +53,7 @@ const BaseSimpleLink = styled<"a" | "button">("button")<{
     position: "relative",
     cursor: "pointer",
     ":focus": {
-      ...inputFocus({ theme, isError: false }),
+      ...inputFocus({ theme }),
     },
     ":hover": {
       color: hoverColor,
