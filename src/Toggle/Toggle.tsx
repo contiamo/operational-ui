@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { darken } from "../utils"
+import { darken, inputFocus } from "../utils"
 import styled from "../utils/styled"
 
 export interface Value {
@@ -54,7 +54,9 @@ const Button = styled("div")<{ selected: boolean; condensed?: boolean }>`
     }
     return originalBoxShadow
   }};
-
+  :focus {
+    ${({ theme }) => inputFocus({ theme })},
+  }
   :hover {
     background-color: ${props => darken(props.theme.color.white, 5)};
   }
