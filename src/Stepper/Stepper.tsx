@@ -54,14 +54,7 @@ const Step = styled("li")<{ stepState: StepState; color: StepperProps["stepColor
     stepState === "active" ? theme.font.weight.bold : theme.font.weight.regular};
   text-align: center;
   overflow: hidden;
-
-  :focus {
-    ${({ theme }) =>
-      inputFocus({
-        theme,
-      })}
-  }
-
+  outline: none;
   /** Separator line */
   ::after {
     content: "";
@@ -75,6 +68,9 @@ const Step = styled("li")<{ stepState: StepState; color: StepperProps["stepColor
     height: 1px;
     width: 100%;
     background-color: ${({ theme }) => theme.color.border.default};
+  }
+  :focus {
+    ${({ theme }) => inputFocus({ theme })};
   }
 
   :first-of-type::after,
@@ -101,6 +97,7 @@ const Ball = styled("div")<{ stepState: StepState }>`
   width: ${ballSize}px;
   height: ${ballSize}px;
   border-radius: 50%;
+  outline: none;
   background-color: ${({ theme, stepState }) => {
     if (stepState === "active") return theme.color.primary
     if (stepState === "completed") return theme.color.text.lightest
@@ -109,6 +106,11 @@ const Ball = styled("div")<{ stepState: StepState }>`
   font-weight: ${({ theme }) => theme.font.weight.regular};
   color: ${({ theme }) => theme.color.white};
   z-index: 1;
+  :focus {
+    color:  ${({ theme, stepState }) =>
+      stepState != "active" && stepState != "completed" ? theme.color.primary : theme.color.white};
+    ${({ theme }) => inputFocus({ theme })},
+  }
 }`
 
 function getStepState(index: number, activeIndex?: number): StepState {
