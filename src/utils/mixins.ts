@@ -7,7 +7,7 @@ import { OperationalStyleConstants } from "./constants"
 
 export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
   outline: 0,
-  boxShadoow: `0 0 0 1px ${isError ? theme.color.error : theme.color.primary}`,
+  boxShadow: `0 0 0 1px ${isError ? theme.color.error : theme.color.primary}`,
 })
 
 export const Label = styled("label")<{ fullWidth?: boolean; left?: boolean }>(({ fullWidth, theme, left }) => ({
