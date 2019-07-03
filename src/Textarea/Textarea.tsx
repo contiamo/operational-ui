@@ -6,7 +6,7 @@ import { LabelText } from "../LabelText/LabelText"
 import { useOperationalContext } from "../OperationalContext/OperationalContext"
 import { DefaultInputProps, DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
-import { isCmdEnter, lighten } from "../utils"
+import { isCmdEnter, lighten, inputFocus } from "../utils"
 import { FormFieldControls, Label } from "../utils/mixins"
 import styled from "../utils/styled"
 import { CopyIcon } from "../Icon/Icon"
@@ -79,6 +79,9 @@ const TextareaComp = styled("textarea")<{
     // There's an white subpixel if it's theme.borderRadius and no noticeable regression if -1
     borderRadius: theme.borderRadius - 1,
     ...props,
+    ":focus": {
+      ...inputFocus({ theme }),
+    },
   }
 })
 
