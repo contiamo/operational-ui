@@ -40,7 +40,7 @@ const [activeFruit, setActiveFruit] = React.useState("apples")
         label="Fruit"
         selected={activeFruit}
         items={["apples", "oranges"].map(name => ({ label: name }))}
-        onChange={item => setActiveFruit(item.label)}
+        onChange={item => setActiveFruit(String(item.label))}
       />
       <TopbarButton icon={NoIcon}>Clear</TopbarButton>
       <TopbarSeparator />

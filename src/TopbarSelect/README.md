@@ -41,7 +41,7 @@ const [activeDisplay, setActiveDisplay] = React.useState("Table")
       label="Display:"
       selected={activeDisplay}
       items={displayItems}
-      onChange={item => setActiveDisplay(item.label)}
+      onChange={item => setActiveDisplay(String(item.label))}
     />
   }
 />
