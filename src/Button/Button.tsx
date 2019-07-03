@@ -103,7 +103,7 @@ const BaseButton = styled<"button" | "a">("button")<{
       textDecoration: "none",
       color: loading ? "transparent" : expandColor(theme, textColor) || foregroundColor,
     },
-    ":focus": {
+    "&:focus": {
       ...inputFocus({ theme, isError: color_ === "error" }),
       boxShadow: isWhite(backgroundColor) ? theme.shadows.insetFocus : "none",
       //Higher zIndex will make right border appear on ButtonGroup Focus.
