@@ -1,5 +1,6 @@
 import * as React from "react"
 import { DefaultProps } from "../types"
+import { inputFocus } from "../utils"
 import styled from "../utils/styled"
 
 export interface SwitchProps extends DefaultProps {
@@ -17,10 +18,18 @@ const width: number = 28
 const height: number = 16
 const railHeight: number = 16
 
-const Container = styled("div")({
-  display: "inline-flex",
-  alignItems: "center",
-})
+const Container = styled("div")(
+  {
+    display: "inline-flex",
+    alignItems: "center",
+    outline: "none",
+  },
+  ({ theme }) => ({
+    ":focus": {
+      ...inputFocus({ theme }),
+    },
+  }),
+)
 
 const RailContainer = styled("div")<{ left?: string; right?: string }>(
   {
@@ -30,11 +39,15 @@ const RailContainer = styled("div")<{ left?: string; right?: string }>(
     position: "relative",
     borderRadius: height / 2,
     overflow: "hidden",
+    outline: "none",
     cursor: "pointer",
   },
   ({ theme, left, right }) => ({
     marginLeft: left ? theme.space.base : 0,
     marginRight: right ? theme.space.base : 0,
+    ":focus": {
+      ...inputFocus({ theme }),
+    },
   }),
 )
 
@@ -52,7 +65,9 @@ const Button = styled("div")<{ on: boolean }>(
   ({ on, theme }) => ({
     transform: `translate3d(${on ? width - height : 0}px, 0, 0)`,
     backgroundColor: theme.color.white,
-    border: `1px solid ${on ? theme.color.primary : theme.color.border.default}`,
+    border: "none",
+    outline: "none",
+    boxShadow: `0 0 0 1px ${on ? theme.color.primary : theme.color.border.default}`,
     zIndex: theme.zIndex.switch + 1,
   }),
 )
@@ -66,6 +81,7 @@ const Rail = styled("div")<{ on: boolean }>(
     left: 0,
     borderRadius: railHeight / 2,
     overflow: "hidden",
+    outline: "none",
   },
   ({ on, theme }) => ({
     backgroundColor: theme.color.background.mediumDark,
