@@ -44,6 +44,7 @@ const Container = styled("div")<Props>(({ align, theme, isActive, condensed, wid
     textAlign: align,
     display: "flex",
     alignItems: "center",
+    outline: "none",
     fontWeight: isActive ? theme.font.weight.bold : theme.font.weight.medium,
     boxShadow: isActive ? activeShadow : "none",
     "&[aria-selected='true']": {
@@ -57,6 +58,10 @@ const Container = styled("div")<Props>(({ align, theme, isActive, condensed, wid
       : {}),
     cursor: "pointer",
     "&:hover, &[aria-selected='true']": {
+      backgroundColor: lighten(theme.color.primary, 50),
+      color: theme.color.primary,
+    },
+    "&:focus": {
       backgroundColor: lighten(theme.color.primary, 50),
       color: theme.color.primary,
     },

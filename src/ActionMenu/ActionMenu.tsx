@@ -33,10 +33,10 @@ const Container = styled("div")(({ theme }) => ({
   userSelect: "none",
   boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
   cursor: "pointer",
-  "&:hover": {
+  ":hover": {
     ...inputFocus({ theme }),
   },
-  "&:focus": {
+  ":focus": {
     ...inputFocus({ theme }),
   },
 }))
@@ -49,7 +49,11 @@ const TitleContainer = styled("p")(({ theme }) => ({
   textOverflow: "ellipsis",
   justifySelf: "flex-start",
   color: theme.color.primary,
+  outline: "none",
   textAlign: "left",
+  ":focus": {
+    ...inputFocus({ theme }),
+  },
 }))
 
 const ActionMenu: React.SFC<ActionMenuProps> = ({ stickyTitle, items, title, ...props }) => (
