@@ -18,14 +18,15 @@ export interface BreadcrumbProps extends DefaultProps {
 const Container = styled("a")(({ theme }) => ({
   color: theme.color.primary,
   label: "breadcrumb",
+  outline: "none",
   "&:hover": {
-    boxShadow: "0 0 0 1px",
     ...inputFocus({ theme }),
   },
   "&:focus": {
-    outline: "none",
-    boxShadow: `0 0 0 1px`,
     ...inputFocus({ theme }),
+  },
+  "& > span": {
+    outline: "none",
   },
 }))
 
