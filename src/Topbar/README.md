@@ -9,7 +9,7 @@ import {
   TopbarSelect,
   TopbarButton,
   TopbarSeparator,
-  styles,
+  styled,
   NoIcon,
   UndoIcon,
   RedoIcon,
@@ -29,12 +29,19 @@ const Grid = styled("div")`
   padding-right: 20px;
 `
 
+const [activeFruit, setActiveFruit] = React.useState("apples")
+
 ;<Topbar
   left={
     <>
       <Label>Editor</Label>
       <TopbarSeparator />
-      <TopbarSelect label="Fruit" selected={"apples"} items={["apples", "oranges"].map(name => ({ label: name }))} />
+      <TopbarSelect
+        label="Fruit"
+        selected={activeFruit}
+        items={["apples", "oranges"].map(name => ({ label: name }))}
+        onChange={item => setActiveFruit(String(item.label))}
+      />
       <TopbarButton icon={NoIcon}>Clear</TopbarButton>
       <TopbarSeparator />
       <TopbarButton icon={UndoIcon}>Undo</TopbarButton>
