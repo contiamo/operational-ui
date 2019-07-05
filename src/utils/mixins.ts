@@ -6,7 +6,7 @@ import styled from "../utils/styled"
 import { OperationalStyleConstants } from "./constants"
 
 export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
-  outline: 0,
+  outline: "none",
   boxShadow: `0 0 0 1px ${isError ? theme.color.error : theme.color.primary}`,
 })
 
