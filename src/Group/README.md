@@ -4,8 +4,8 @@ Groups are little bits of content that group relevant data together. They can be
 
 ```jsx
 import * as React from "react"
-import { Group, Autocomplete } from "@operational/components"
-;<Group icon="User" iconColor="primary" title="Users">
+import { Group, Autocomplete, UserIcon } from "@operational/components"
+;<Group icon={UserIcon} iconColor="primary" title="Users">
   <Autocomplete
     value="Hello"
     onChange={() => console.log("changed")}

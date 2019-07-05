@@ -119,7 +119,7 @@ const Container = styled("div")(({ theme }) => ({
   },
 }))
 
-const Content = styled("div")<{ fullSize?: boolean }>`
+const Content = styled("div", { shouldForwardProp: prop => prop !== "fullSize" })<{ fullSize?: boolean }>`
   padding: ${({ theme }) => theme.space.element}px;
   height: ${props => (props.fullSize ? "100%" : "auto")};
   white-space: pre-wrap;

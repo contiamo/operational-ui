@@ -23,7 +23,9 @@ export const Row = styled("div")<{ numCells: number; cellWidth: string }>`
   grid-template-columns: repeat(${({ numCells, cellWidth }) => `${numCells}, ${cellWidth}`});
 `
 
-export const Cell = styled("div", { shouldForwardProp: prop => !["isEvenRow", "height", "cell"].includes(prop) })<{
+export const Cell = styled("div", {
+  shouldForwardProp: prop => !["isEvenRow", "height", "cell", "rowIndex"].includes(prop),
+})<{
   height: number
   cell: number
   rowIndex: number
@@ -46,7 +48,7 @@ export const Cell = styled("div", { shouldForwardProp: prop => !["isEvenRow", "h
   background-color: ${({ theme, isEvenRow }) => (isEvenRow ? theme.color.background.almostWhite : theme.color.white)};
 `
 
-export const HeaderRow = styled("div")<{
+export const HeaderRow = styled("div", { shouldForwardProp: prop => prop !== "rowHeight" })<{
   rowHeight: DataTableProps<any, any>["rowHeight"]
 }>`
   left: 0;
@@ -58,7 +60,9 @@ export const HeaderRow = styled("div")<{
   height: ${({ rowHeight }) => getHeaderRowHeight(rowHeight)}px;
 `
 
-export const HeaderCell = styled(Cell)<{
+export const HeaderCell = styled(Cell, {
+  shouldForwardProp: prop => !["rowHeight", "rowIndex"].includes(prop),
+})<{
   rowHeight: DataTableProps<any, any>["rowHeight"]
   rowIndex: number
 }>`

@@ -17,13 +17,13 @@ import { Card } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { Card, SimpleLink } from "@operational/components"
+import { Card, SimpleLink, OpenIcon } from "@operational/components"
 ;<Card
   title="Functions"
   action={
     <>
       Learn more at the
-      <SimpleLink right icon="Open" to="https://github.com">
+      <SimpleLink right icon={OpenIcon} to="https://github.com">
         Configuration page
       </SimpleLink>
     </>
@@ -124,7 +124,7 @@ These features are shown in the example below:
 
 ```jsx
 import * as React from "react"
-import { Card, Button } from "@operational/components"
+import { Card, Button, YesIcon } from "@operational/components"
 
 const MyComponent = () => {
   const [activeTab, setActiveTab] = React.useState("Results")
@@ -152,7 +152,7 @@ const MyComponent = () => {
           children: isTab1Loading ? "" : "The answer is 42",
           loading: isTab1Loading,
           // The icon is replaced by a spinner when loading.
-          icon: "Yes",
+          icon: YesIcon,
           iconColor: "success",
         },
         {
