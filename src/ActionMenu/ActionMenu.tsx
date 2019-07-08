@@ -16,7 +16,7 @@ export interface ActionMenuProps extends DefaultProps {
   stickyTitle?: boolean
 }
 
-const Container = styled("div")(({ theme }) => ({
+const Container = styled("div")<{ isOpen: boolean }>(({ theme, isOpen }) => ({
   height: 35,
   /**
    * `textAlign` is set explicitly for when a parent sets a text-align to right-position this container,
@@ -31,7 +31,7 @@ const Container = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   userSelect: "none",
-  boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
+  boxShadow: `0 0 0 1px ${isOpen ? theme.color.primary : theme.color.separators.light}`,
   cursor: "pointer",
   ":hover": {
     ...inputFocus({ theme }),
@@ -50,9 +50,6 @@ const TitleContainer = styled("p")(({ theme }) => ({
   justifySelf: "flex-start",
   color: theme.color.primary,
   textAlign: "left",
-  ":focus": {
-    ...inputFocus({ theme }),
-  },
 }))
 
 const ActionMenu: React.SFC<ActionMenuProps> = ({ stickyTitle, items, title, ...props }) => (
@@ -60,7 +57,7 @@ const ActionMenu: React.SFC<ActionMenuProps> = ({ stickyTitle, items, title, ...
     {isOpen => {
       const iconColor = isOpen || stickyTitle ? "primary" : "color.text.lighter"
       return (
-        <Container>
+        <Container isOpen={isOpen}>
           {(isOpen || stickyTitle) && <TitleContainer>{title}</TitleContainer>}
           {isOpen ? <ChevronUpIcon color={iconColor} /> : <HamburgerMenuIcon color={iconColor} />}
         </Container>
