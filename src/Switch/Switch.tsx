@@ -43,9 +43,6 @@ const RailContainer = styled("div")<{ left?: string; right?: string }>(
   ({ theme, left, right }) => ({
     marginLeft: left ? theme.space.base : 0,
     marginRight: right ? theme.space.base : 0,
-    ":focus": {
-      ...inputFocus({ theme }),
-    },
   }),
 )
 
