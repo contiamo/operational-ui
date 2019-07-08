@@ -1,5 +1,6 @@
 import { keyframes } from "@emotion/core"
 import uniqueId from "lodash/uniqueId"
+import { inputFocus } from "../utils"
 import * as React from "react"
 
 import styled from "../utils/styled"
@@ -74,9 +75,9 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
 
   :focus {
     color: ${props => props.theme.color.primary};
-    outline: none;
+    ${({ theme }) => inputFocus({ theme })}
     ::before {
-      border: solid 1px ${props => props.theme.color.primary};
+      ${({ theme }) => inputFocus({ theme })}
     }
   }
 
@@ -84,7 +85,7 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
     color: ${props => props.theme.color.primary};
 
     ::before {
-      border: solid 1px ${props => props.theme.color.primary};
+      ${({ theme }) => inputFocus({ theme })}
     }
   }
 
@@ -99,7 +100,8 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
     height: ${({ condensed }) => (condensed ? 10 : 18)}px;
     border-radius: ${props => props.theme.borderRadius}px;
     background-color: #f2f2f2;
-    border: solid 1px #c0c0c0;
+    box-shadow: 0 0 0 1px #c0c0c0;
+    border: none;
   }
 `
 
