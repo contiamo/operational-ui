@@ -82,6 +82,7 @@ const BaseButton = styled<"button" | "a">("button")<{
   return {
     backgroundColor,
     lineHeight: `${condensed ? 28 : 36}px`,
+    minWidth: "max-content",
     fontSize: theme.font.size.small,
     fontFamily: theme.font.family.main,
     fontWeight: theme.font.weight.medium,

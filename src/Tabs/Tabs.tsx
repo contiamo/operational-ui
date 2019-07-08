@@ -160,7 +160,7 @@ const Tabs: React.FC<TabsProps> = ({
                   <NoIcon
                     right
                     size={9}
-                    onMouseDown={e => {
+                    onClick={e => {
                       e.stopPropagation()
                       onClose(i)
                     }}

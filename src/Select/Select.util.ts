@@ -9,8 +9,10 @@ export const appendItem = (newItem: IContextMenuItem) => (existingItems: IContex
 export const truncateList = (maxLength?: number) => (options: SelectProps["options"]) =>
   maxLength ? options.slice(0, maxLength) : options
 
-export const filterList = (filter: string) => (options: SelectProps["options"]) =>
-  options.filter(option => String(option.label).match(new RegExp(filter, "ig")))
+export const filterList = (filter: string) => {
+  const searchRegExp = new RegExp(filter.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "ig")
+  return (options: SelectProps["options"]) => options.filter(option => String(option.label).match(searchRegExp))
+}
 
 export const prependItem = (filterItem: IContextMenuItem) => (items: IContextMenuItem[]): IContextMenuItem[] => [
   filterItem,

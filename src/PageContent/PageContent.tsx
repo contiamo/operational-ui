@@ -58,9 +58,8 @@ const StyledPageContent = styled("div", {
     gridGap: props.theme.space.element,
     width: "100%",
     height: "100%",
-    minWidth: 800,
-    maxWidth: props.fill ? "none" : 1150,
-    padding: props.noPadding ? 0 : `${props.theme.space[props.padding || "element"]}px`,
+    minWidth: props.theme.pageSize.min,
+    maxWidth: props.fill ? "none" : props.theme.pageSize.max,
 
     /**
      * Since PageContent is in a scrollable context,
@@ -90,10 +89,8 @@ const StyledPageContent = styled("div", {
 })
 
 const Container = styled("div")({
-  position: "relative",
   width: "100%",
   height: "100%",
-  overflow: "auto",
 })
 
 const PageContent = ({ children, ...props }: PageContentProps) => {

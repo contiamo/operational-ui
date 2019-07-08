@@ -1,11 +1,11 @@
 ### Assign a callback to some keystroke
 
 ```jsx
-import React, { useRef } from "react"
-import { Input } from "@operational/components"
+import * as React from "react"
+import { Input, useHotkey } from "@operational/components"
 
 const Component1 = () => {
-  const container = useRef(null)
+  const container = React.useRef(null)
   useHotkey(container, { key: "enter" }, () => {
     alert("⏎")
   })
@@ -23,11 +23,11 @@ const Component1 = () => {
 ### Can be used with key modifiers
 
 ```jsx
-import React, { useRef } from "react"
-import { Input } from "@operational/components"
+import * as React from "react"
+import { Input, useHotkey } from "@operational/components"
 
 const Component2 = () => {
-  const container = useRef(null)
+  const container = React.useRef(null)
   useHotkey(container, { key: "p", ctrl: true, shift: true }, () => {
     alert("Ctrl + Shift + P")
   })

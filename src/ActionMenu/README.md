@@ -5,8 +5,7 @@ A single `onClick` action common to all items in the `ActionMenu` can be passed 
 ```jsx
 import * as React from "react"
 import { ActionMenu } from "@operational/components"
-
-;<ActionMenu items={["Open editor", "Stop", "Destroy"]} onClick={item => alert(`"${item}" clicked`)} />
+;<ActionMenu items={["Open editor", "Stop", "Destroy"]} onClick={item => alert(`${item.label} clicked`)} />
 ```
 
 ### Different actions on click

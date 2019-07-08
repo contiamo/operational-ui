@@ -1,4 +1,6 @@
 import * as React from "react"
+import isString from "lodash/isString"
+
 import { lighten } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
@@ -16,6 +18,7 @@ export interface Props {
   item: StringOrItem
   isActive?: boolean
   id?: string
+  disabled: boolean
 }
 
 export interface IContextMenuItem<TValue = any> {
@@ -28,18 +31,23 @@ export interface IContextMenuItem<TValue = any> {
   isActive?: boolean
 }
 
-const Container = styled("div")<Props>(({ align, theme, isActive, condensed, width, item }) => {
+export const rowHeight = 40
+export const condensedRowHeight = 35
+
+const Container = styled("div")<Props>(({ disabled, align, theme, isActive, condensed, width, item }) => {
   const activeShadow = `0 0 0 1px ${theme.color.primary} inset`
+  const hasDescription = !isString(item) && Boolean(item.description)
 
   return {
     userSelect: "none",
     label: "contextmenuitem",
     width: width || (condensed ? 160 : "100%"),
+    minWidth: "100%",
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
     backgroundColor: theme.color.white,
-    lineHeight: `${condensed ? 35 : 44}px`,
+    lineHeight: `${condensed ? condensedRowHeight : rowHeight}px`,
     padding: `0 ${theme.space.content}px`,
     textAlign: align,
     display: "flex",
@@ -47,6 +55,7 @@ const Container = styled("div")<Props>(({ align, theme, isActive, condensed, wid
     outline: "none",
     fontWeight: isActive ? theme.font.weight.bold : theme.font.weight.medium,
     boxShadow: isActive ? activeShadow : "none",
+
     "&[aria-selected='true']": {
       boxShadow: activeShadow,
       outline: "none",
@@ -65,11 +74,25 @@ const Container = styled("div")<Props>(({ align, theme, isActive, condensed, wid
       backgroundColor: lighten(theme.color.primary, 50),
       color: theme.color.primary,
     },
-    color: isActive ? theme.color.primary : theme.color.text.default,
+    color: disabled ? theme.color.text.disabled : isActive ? theme.color.primary : theme.color.text.default,
     borderTop: `1px solid ${theme.color.border.select}`,
+    cursor: disabled ? "initial" : "pointer",
     "&:last-child": {
       paddingBottom: 2,
     },
+    ...(!disabled && {
+      "&[aria-selected='true']": {
+        boxShadow: activeShadow,
+        outline: "none",
+      },
+      "&:hover, &[aria-selected='true']": {
+        backgroundColor: lighten(theme.color.primary, 50),
+        color: theme.color.primary,
+      },
+    }),
+    ...(hasDescription && {
+      borderBottom: `1px solid ${theme.color.border.select}`,
+    }),
   }
 })
 
@@ -102,6 +125,9 @@ const ContextMenuIconBase = styled("div", { shouldForwardProp: prop => prop !== 
   flex: 0 1 auto;
   height: 100%;
   margin-left: ${({ iconLocation }) => (iconLocation && iconLocation === "right" ? "auto" : 0)};
+  & svg {
+    vertical-align: text-bottom;
+  }
 `
 
 const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {

@@ -22,6 +22,7 @@ export interface AvatarGroupProps extends DefaultProps {
 
 const Container = styled("div")({
   display: "flex",
+  marginLeft: 12,
 })
 
 const GroupedAvatar = styled(Avatar)({

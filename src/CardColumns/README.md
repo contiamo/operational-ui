@@ -124,21 +124,3 @@ import { Card, CardColumns, CardColumn, AvatarGroup, Avatar, Chip } from "@opera
   </CardColumns>
 </Card>
 ```
-
-Columns will always wrap and overflow if their containing element is not wide enough for them.
-
-```jsx
-import { Card, AvatarGroup, CardColumn, Avatar, Chip } from "@operational/components"
-;<Card title="Bundle information">
-  <p>Here is the information available about this bundle.</p>
-  <CardColumns columns={3} style={{ width: "200px" }}>
-    <CardColumn title="Contributors">
-      <AvatarGroup avatars={[{ name: "Alice Bernoulli" }, { name: "Clarence Dermot" }]} />
-    </CardColumn>
-    <CardColumn title="Tags">
-      <Chip>agent-view</Chip>
-      <Chip>production</Chip>
-    </CardColumn>
-  </CardColumns>
-</Card>
-```

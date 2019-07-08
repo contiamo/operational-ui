@@ -325,67 +325,67 @@ const PizzaMaker = () => {
 
 ```jsx
 import * as React from "react"
-import { Accordion, useAccordionState, Tree } from "@operational/components"
+import { Accordion, Tree, AccordionSection } from "@operational/components"
 
 const MyComponent = () => {
-  const [sections, onToggle] = useAccordionState([
-    {
-      key: 1,
-      title: "My tree",
-      expanded: true,
-      content: () => (
-        <Tree
-          trees={[
-            {
-              label: "Store",
-              childNodes: [
-                {
-                  label: "Region",
-                  initiallyOpen: true,
-                  childNodes: [
-                    {
-                      label: "City",
-                      tag: "D",
-                      disabled: true,
-                      childNodes: [],
-                    },
-                    {
-                      label: "Country",
-                      color: "primary",
-                      onRemove: () => {},
-                      tag: "D",
-                      childNodes: [],
-                    },
-                  ],
-                },
-              ],
-            },
-            {
-              label: "Legal Entity",
-              initiallyOpen: true,
-              childNodes: [
-                {
-                  label: "Limited Liability Company",
-                  tag: "D",
-                  childNodes: [],
-                },
-                {
-                  label: "Inc.",
-                  tag: "D",
-                  color: "#2C363F",
-                  childNodes: [],
-                },
-              ],
-            },
-          ]}
-        />
-      ),
-    },
-  ])
+  const [expanded, setExpanded] = React.useState([true])
+  const onToggle = index => {
+    const newExpanded = [...expanded]
+    newExpanded[index] = !newExpanded[index]
+    setExpanded(newExpanded)
+  }
 
   return (
     <div style={{ height: 400 }}>
-      <Accordion sections={sections} onToggle={onToggle} />
+      <Accordion expanded={expanded} onToggle={onToggle}>
+        <AccordionSection title="My tree">
+          <Tree
+            trees={[
+              {
+                label: "Store",
+                childNodes: [
+                  {
+                    label: "Region",
+                    initiallyOpen: true,
+                    childNodes: [
+                      {
+                        label: "City",
+                        tag: "D",
+                        disabled: true,
+                        childNodes: [],
+                      },
+                      {
+                        label: "Country",
+                        color: "primary",
+                        onRemove: () => {},
+                        tag: "D",
+                        childNodes: [],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Legal Entity",
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Limited Liability Company",
+                    tag: "D",
+                    childNodes: [],
+                  },
+                  {
+                    label: "Inc.",
+                    tag: "D",
+                    color: "#2C363F",
+                    childNodes: [],
+                  },
+                ],
+              },
+            ]}
+          />
+        </AccordionSection>
+      </Accordion>
     </div>
   )
 }

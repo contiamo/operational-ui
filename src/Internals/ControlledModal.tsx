@@ -3,6 +3,7 @@ import * as React from "react"
 import Card, { CardProps } from "../Card/Card"
 import Overlay from "../Internals/Overlay"
 import styled from "../utils/styled"
+import { headerHeight } from "../utils/constants"
 
 export interface ControlledModalProps {
   id?: string
@@ -43,9 +44,8 @@ export const ModalContainer = styled(Card)<{ fullSize: boolean; type?: Controlle
     position: "absolute",
     minWidth: 600,
     zIndex: type === "confirm" ? theme.zIndex.confirm : theme.zIndex.modal,
-    maxWidth: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the screen!
-    maxHeight: `calc(100% - ${theme.space.element * 2}px)`, // don't go past the page!
-    overflow: "hidden",
+    maxWidth: `calc(100% - ${headerHeight}px)`, // don't go past the screen!
+    maxHeight: `calc(100% - ${headerHeight}px)`, // don't go past the page!
 
     ...(fullSize
       ? // Full-size specific rules
@@ -76,7 +76,7 @@ const Content = styled("div")<{ fullSize: boolean }>(({ theme, fullSize }) => ({
   ...(fullSize
     ? {
         minHeight: "400px",
-        maxHeight: "100%",
+        height: "100%",
         overflow: "auto",
       }
     : {}),

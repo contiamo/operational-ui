@@ -1,4 +1,5 @@
 import styled from "../utils/styled"
+import { headerHeight } from "../utils/constants"
 
 export const SectionHeader = styled("div")(({ theme }) => ({
   fontFamily: theme.font.family.main,
@@ -12,7 +13,7 @@ export const SectionHeader = styled("div")(({ theme }) => ({
 
   // This ensures that the card header text and card controls are placed in opposite corners.
   justifyContent: "space-between",
-  height: theme.space.element * 2,
+  height: headerHeight,
   padding: `0 ${theme.space.element}px`,
   lineHeight: 1,
 }))

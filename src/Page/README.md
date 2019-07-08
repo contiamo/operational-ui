@@ -832,3 +832,26 @@ const ControlledModalTest = () => {
 
 ;<ControlledModalTest />
 ```
+
+### With DropdownButton actions
+
+```jsx
+import * as React from "react"
+import { OpenIcon, DropdownButton, Page, Card } from "@operational/components"
+
+const menuItems = ["Project", "User"]
+
+const actions = (
+  <DropdownButton
+    items={menuItems}
+    onItemClick={() => {
+      console.log("Item clicked")
+    }}
+  >
+    Create
+  </DropdownButton>
+)
+;<Page title="Settings Page" actions={actions}>
+  <Card>Hello, this is page content</Card>
+</Page>
+```

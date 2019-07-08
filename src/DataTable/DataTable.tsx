@@ -1,5 +1,5 @@
 import * as React from "react"
-import { FixedSizeList, ListChildComponentProps } from "react-window"
+import { FixedSizeList, ListChildComponentProps, FixedSizeListProps } from "react-window"
 
 import Message from "../Internals/Message/Message"
 import { truncate } from "../utils/truncate"
@@ -19,8 +19,13 @@ export interface DataTableProps<Columns, Rows> {
   /** Shall we include a footer? */
   footer?: React.ReactNode
 
-  /** How much shall we restrict the height? */
-  height?: number
+  /**
+   * Height of the list.
+   *
+   * For vertical lists, this must be a number. It affects the number of rows that will be rendered (and displayed) at any given time.
+   * For horizontal lists, this can be a number or a string (e.g. "50%").
+   */
+  height?: FixedSizeListProps["height"]
 
   /** How much shall we restrict the width? Default: `unlimited` */
   width?: string
@@ -42,7 +47,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   footer = null,
   height = 500,
   width = "100%",
-  cellWidth = "1fr",
+  cellWidth = "minmax(200px, 1fr)",
   maxCharactersInCell = 30,
   className,
 }: DataTableProps<Columns, Rows>) {

@@ -3,6 +3,7 @@ import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 import AccordionSection, { AccordionSectionProps } from "../AccordionSection/AccordionSection"
 import { useUniqueId } from "../useUniqueId"
+import { headerHeight } from "../utils/constants"
 
 type AccordionSectionElement = React.ReactElement<AccordionSectionProps, typeof AccordionSection>
 
@@ -16,8 +17,7 @@ const Container = styled("div")<{ sections: boolean[] }>`
   label: Accordion;
   height: 100%;
   display: grid;
-  grid-template-rows: ${({ theme, sections }) =>
-    sections.map(expanded => (expanded ? "1fr" : `${theme.space.element * 2}px`)).join(" ")};
+  grid-template-rows: ${({ sections }) => sections.map(expanded => (expanded ? "1fr" : `${headerHeight}px`)).join(" ")};
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   border-top: none;
 `

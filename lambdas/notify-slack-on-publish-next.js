@@ -19,7 +19,7 @@ const body = {
   ],
 }
 
-fetch("https://hooks.slack.com/services/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", {
+fetch(process.env.SLACK_WEBHOOK_URL, {
   method: "POST",
   headers: {
     "content-type": "application/json",
