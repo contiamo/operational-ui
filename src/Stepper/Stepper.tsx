@@ -97,7 +97,6 @@ const Ball = styled("div")<{ stepState: StepState }>`
   width: ${ballSize}px;
   height: ${ballSize}px;
   border-radius: 50%;
-  outline: none;
   background-color: ${({ theme, stepState }) => {
     if (stepState === "active") return theme.color.primary
     if (stepState === "completed") return theme.color.text.lightest

@@ -41,7 +41,6 @@ const Button = styled("div")<{ selected: boolean; condensed?: boolean }>`
   border-radius: ${props => props.theme.borderRadius}px;
   border: 0;
   cursor: pointer;
-  outline: none;
   margin-right: ${props => props.theme.space.small}px;
   background-color: ${props => (props.selected ? darken(props.theme.color.white, 5) : props.theme.color.white)};
   padding: 0 ${props => props.theme.space.element}px;

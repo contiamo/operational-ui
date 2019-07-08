@@ -1,5 +1,5 @@
 import * as React from "react"
-import { darken } from "../utils"
+import { darken, inputFocus } from "../utils"
 import styled from "../utils/styled"
 import { YesIcon } from "../Icon/Icon"
 
@@ -20,12 +20,14 @@ const Container = styled("div")<{ selected: boolean }>(({ theme, selected }) => 
     position: "relative",
     padding: `${theme.space.small}px ${theme.space.content}px`,
     wordWrap: "break-word",
-    outline: "none",
     borderTop: "1px solid",
     borderColor: darken(backgroundColor, 10),
     color: theme.color.text.default,
     ":hover": {
       backgroundColor: darken(backgroundColor, 5),
+    },
+    ":focus": {
+      ...inputFocus({ theme }),
     },
   }
 })

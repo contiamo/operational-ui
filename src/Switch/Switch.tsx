@@ -22,7 +22,6 @@ const Container = styled("div")(
   {
     display: "inline-flex",
     alignItems: "center",
-    outline: "none",
   },
   ({ theme }) => ({
     ":focus": {
@@ -39,7 +38,6 @@ const RailContainer = styled("div")<{ left?: string; right?: string }>(
     position: "relative",
     borderRadius: height / 2,
     overflow: "hidden",
-    outline: "none",
     cursor: "pointer",
   },
   ({ theme, left, right }) => ({

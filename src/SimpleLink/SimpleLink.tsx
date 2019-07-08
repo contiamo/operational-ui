@@ -49,7 +49,6 @@ const BaseSimpleLink = styled<"a" | "button">("button")<{
     justifyContent: "center",
     borderRadius: theme.borderRadius,
     border: 0,
-    outline: "none",
     position: "relative",
     cursor: "pointer",
     ":focus": {

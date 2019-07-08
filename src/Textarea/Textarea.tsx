@@ -74,7 +74,6 @@ const TextareaComp = styled("textarea")<{
     minHeight: 120,
     padding: `${theme.space.small}px ${theme.space.medium}px`,
     fontFamily: isCode ? "monospace" : theme.font.family.main,
-    outline: "none",
     border: "none",
     // There's an white subpixel if it's theme.borderRadius and no noticeable regression if -1
     borderRadius: theme.borderRadius - 1,

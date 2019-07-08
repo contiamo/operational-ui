@@ -94,7 +94,6 @@ const BaseButton = styled<"button" | "a">("button")<{
     boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.border.disabled} inset` : "none",
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.6 : 1.0,
-    outline: "none",
     position: "relative",
     width: fullWidth ? "100%" : "initial",
     marginRight: theme.space.small,

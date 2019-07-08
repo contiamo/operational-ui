@@ -37,7 +37,6 @@ const TopbarButtonContainer = styled("button")<{ disabled?: boolean; flavor: Top
   cursor: ${props => (props.disabled ? "auto" : "pointer")};
   opacity: ${props => (props.disabled ? 0.6 : 1)};
   font-size: ${props => props.theme.font.size.small}px;
-  outline: "none";
   :focus {
     ${({ theme }) => inputFocus({ theme })};
   }

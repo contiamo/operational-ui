@@ -41,7 +41,6 @@ const Container = styled("div")<{ color_?: string }>(({ theme, color_ }) => {
     color: theme.color.text.default,
     margin: `0px ${theme.space.small}px 0px 0px`,
     ":focus": {
-      outline: "none",
       ...inputFocus({ theme }),
     },
   }

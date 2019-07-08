@@ -49,7 +49,6 @@ const TitleContainer = styled("p")(({ theme }) => ({
   textOverflow: "ellipsis",
   justifySelf: "flex-start",
   color: theme.color.primary,
-  outline: "none",
   textAlign: "left",
   ":focus": {
     ...inputFocus({ theme }),
