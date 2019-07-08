@@ -65,7 +65,6 @@ const Container = styled("div")<Props>(({ disabled, align, theme, isActive, cond
           borderBottom: `1px solid ${theme.color.border.select}`,
         }
       : {}),
-    cursor: "pointer",
     "&:hover, &[aria-selected='true']": {
       backgroundColor: lighten(theme.color.primary, 50),
       color: theme.color.primary,
