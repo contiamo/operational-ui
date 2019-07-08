@@ -43,9 +43,9 @@ export const SelectInput = styled(Input)<{ hasCustomOption: boolean }>`
   border-bottom-right-radius: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-
+  box-shadow: none;
   :focus {
-    box-shadow: ${({ hasCustomOption, theme }) => (hasCustomOption ? "0 0 0 1px " + theme.color.primary : "none")};
+    box-shadow: none;
   }
 `
 
@@ -62,13 +62,12 @@ export const DropdownButton = styled("div")<{ naked: boolean; isOpen: boolean; h
   align-items: center;
   justify-content: center;
   margin: -1px 0;
-  border: 1px solid
-    ${({ theme, isOpen, hasCustomOption }) => (hasCustomOption && isOpen ? theme.color.primary : "transparent")};
+  border: none;
   border-top-right-radius: ${({ theme }) => theme.borderRadius}px;
   border-bottom-right-radius: ${({ theme }) => theme.borderRadius}px;
 
   :focus {
-    ${({ theme }) => inputFocus({ theme })}
+    box-shadow: none;
   }
 
   ::after {
