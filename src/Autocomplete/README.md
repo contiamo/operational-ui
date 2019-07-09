@@ -43,10 +43,10 @@ const MyComponent = () => {
       })
   }, [dogToFetch])
 
-  const onResultClickUtil = result => {
+  const onResultClickUtil = React.useCallback(result => {
     const value = result.value
     setDogToFetch(value)
-  }
+  }, [])
 
   return (
     <div style={{ display: "flex", alignItems: "flex-start" }}>
