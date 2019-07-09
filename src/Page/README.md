@@ -621,9 +621,18 @@ import { Page, Card, Button } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import ControlledModal from "../Internals/ControlledModal"
-import { Actions, List, Body, SimpleLink, Card, Button, Stepper, ControlledModalContent } from "../index"
-import PageContent from "../PageContent/PageContent"
+import {
+  Actions,
+  List,
+  Body,
+  SimpleLink,
+  Card,
+  Button,
+  Stepper,
+  ControlledModalContent,
+  ControlledModal,
+  PageContent,
+} from "@operational/components"
 
 const MyPage = styled("div")`
   height: 800px;
