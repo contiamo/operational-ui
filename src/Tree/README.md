@@ -1,4 +1,4 @@
-The tree component renders a tree structure with collapsable nodes in a filetree-like design.
+The tree component renders a tree structure with collapsable nodes in a filetree-like design. Defined items in the tree can have a custom click and a context-click handler.
 
 ### Usage
 
@@ -26,6 +26,7 @@ import { Tree, OlapIcon } from "@operational/components"
               label: "Country",
               color: "primary",
               onClick: () => alert("country was clicked"),
+              onContextMenu: () => alert("country was right-clicked"),
               onRemove: () => alert("node is removed"),
               icon: OlapIcon,
               childNodes: [],
