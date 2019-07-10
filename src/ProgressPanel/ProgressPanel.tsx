@@ -64,7 +64,7 @@ const Item = styled("div")`
   padding: 6px 0;
 `
 
-const Body = styled("div", { shouldForwardProp: prop => prop !== "status" })<{ status: Status }>`
+const Body = styled.div<{ status: Status }>`
   display: flex;
   align-items: center;
   justify-content: flex-start;
