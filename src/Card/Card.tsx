@@ -13,7 +13,6 @@ export interface BaseProps extends DefaultProps {
    */
   fullSize?: boolean
   onClick?: (event: React.MouseEvent<HTMLDivElement>) => void
-  style?: React.CSSProperties
 }
 
 export interface CardPropsWithChildrenOrData<T extends {} = {}> extends BaseProps {

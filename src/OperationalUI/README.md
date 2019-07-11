@@ -25,40 +25,28 @@ To set up routing that is automatically wired up to the `to` props of all nested
 import * as React from "react"
 import { Button, OperationalUI, OperationalUIProps } from "@operational/components"
 
-class RoutingComponent extends React.Component<OperationalUIProps, any> {
-  constructor(props) {
-    super(props)
-    // Set the initial path instate
-    this.state = {
-      path: window.location.pathname,
-    }
-  }
+const RoutingComponent = () => {
+  const [path, setPath] = React.useState(window.location.pathname)
 
-  render() {
-    const { path } = this.state
-
-    return (
-      <OperationalUI
-        pushState={newPath => {
-          /**
-           * This is a simple way to persist path changes in state.
-           * Routing libraries like `react-router` do this automatically,
-           * so if you have access to its `history` object, you can simply do
-           * `<OperationalUI pushState={history.push} />`
-           */
-          this.setState(() => ({
-            path: newPath,
-          }))
-          window.history.pushState(null, null, newPath)
-        }}
-      >
-        <div>
-          <p>{`The path is ${path}`}</p>
-          <Button to="/abcd">Go to /abcd</Button>
-        </div>
-      </OperationalUI>
-    )
-  }
+  return (
+    <OperationalUI
+      pushState={newPath => {
+        /**
+         * This is a simple way to persist path changes in state.
+         * Routing libraries like `react-router` do this automatically,
+         * so if you have access to its `history` object, you can simply do
+         * `<OperationalUI pushState={history.push} />`
+         */
+        setPath(newPath)
+        window.history.pushState(null, null, newPath)
+      }}
+    >
+      <div>
+        <p>{`The path is ${path}`}</p>
+        <Button to="/abcd">Go to /abcd</Button>
+      </div>
+    </OperationalUI>
+  )
 }
 
 ;<RoutingComponent />
