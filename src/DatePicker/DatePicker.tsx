@@ -7,7 +7,7 @@ import { Label } from "../utils/mixins"
 import { keyCodes } from "../utils"
 import Month from "./DatePicker.Month"
 import { Container, DatePickerCard, IconContainer, Input, MonthNav, Toggle } from "./DatePicker.styles"
-import { changeMonth, months, toDate, toYearMonthDay, validateDateString } from "./DatePicker.utils"
+import { changeMonth, months, toDate, validateDateString, getStartMonthYearInWidget } from "./DatePicker.utils"
 
 export interface DatePickerProps extends DefaultProps {
   id?: string
@@ -43,7 +43,7 @@ class DatePicker extends React.Component<DatePickerProps, State> {
     this.validate(props) // Start year month is either based on the start date
     // or the current month if no start date is specified.
 
-    const startYearMonthInWidget = this.getStartMonthYearInWidget(props)
+    const startYearMonthInWidget = getStartMonthYearInWidget(props)
 
     this.state = {
       ...startYearMonthInWidget,
@@ -69,36 +69,6 @@ class DatePicker extends React.Component<DatePickerProps, State> {
     if (validatedProps.end) {
       validateDateString(validatedProps.end)
     }
-  }
-
-  public getStartMonthYearInWidget(props?: DatePickerProps) {
-    // set start month and year of the widget based on the availability of start, end, max, or min props.
-    // if none of the props are available, set it to the current month and year.
-    const validatedProps = props || this.props
-    return validatedProps.start
-      ? {
-          year: toYearMonthDay(validatedProps.start).year,
-          month: toYearMonthDay(validatedProps.start).month,
-        }
-      : validatedProps.end
-      ? {
-          year: toYearMonthDay(validatedProps.end).year,
-          month: toYearMonthDay(validatedProps.end).month,
-        }
-      : validatedProps.min
-      ? {
-          year: toYearMonthDay(validatedProps.min).year,
-          month: toYearMonthDay(validatedProps.min).month,
-        }
-      : validatedProps.max
-      ? {
-          year: toYearMonthDay(validatedProps.max).year,
-          month: toYearMonthDay(validatedProps.max).month,
-        }
-      : {
-          year: new Date().getFullYear(),
-          month: new Date().getMonth(),
-        }
   }
 
   public changeMonth(diff: number) {

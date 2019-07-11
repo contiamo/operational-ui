@@ -1,4 +1,5 @@
 import moment from "moment"
+import { DatePickerProps } from "./DatePicker"
 
 export const months: string[] = [
   "January",
@@ -75,4 +76,40 @@ export const monthStartDay = (year: number, month: number): number => moment(toD
 
 export const daysInMonth = (month: number, year: number): number => {
   return moment(toDate(year, month, 2)).daysInMonth()
+}
+
+export const getStartMonthYearInWidget = (props?: DatePickerProps) => {
+  // set start month and year of the widget based on the availability of start, end, max, or min props.
+  // if none of the props are available or if there are no props, set it to the current month and year.
+  if (props) {
+    return props.start
+      ? {
+          year: toYearMonthDay(props.start).year,
+          month: toYearMonthDay(props.start).month,
+        }
+      : props.end
+      ? {
+          year: toYearMonthDay(props.end).year,
+          month: toYearMonthDay(props.end).month,
+        }
+      : props.min
+      ? {
+          year: toYearMonthDay(props.min).year,
+          month: toYearMonthDay(props.min).month,
+        }
+      : props.max
+      ? {
+          year: toYearMonthDay(props.max).year,
+          month: toYearMonthDay(props.max).month,
+        }
+      : {
+          year: new Date().getFullYear(),
+          month: new Date().getMonth(),
+        }
+  } else {
+    return {
+      year: new Date().getFullYear(),
+      month: new Date().getMonth(),
+    }
+  }
 }
