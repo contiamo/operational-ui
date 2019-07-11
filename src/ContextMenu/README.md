@@ -145,3 +145,31 @@ const menuItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(it
   <div>Long list of options here</div>
 </ContextMenu>
 ```
+
+#### Retrieve the size and position of the context menu container
+
+It is possible to retrieve the rect dimensions of the ContextMenu container when it is rendered on the screen
+
+```jsx
+import * as React from "react"
+import { Button, ContextMenu, ContextMenuProps, Code } from "@operational/components"
+
+const menuRef = React.createRef<HTMLDivElement>();
+const [rect, setRect] = React.useState<DOMRect>()
+
+React.useEffect(() => {
+  if (menuRef.current) {
+    setRect(menuRef.current.getBoundingClientRect());
+  }
+}, [menuRef.current, rect]);
+
+const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
+; <>
+    <Code>
+        {`Rect: ${JSON.stringify(rect, null, 2)}`}
+    </Code>
+    <ContextMenu containerRef={menuRef} items={menuItems} onClick={() => alert("clicked")}>
+    <Button>Click here</Button>
+    </ContextMenu>
+  </>
+```
