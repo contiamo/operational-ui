@@ -35,9 +35,9 @@ describe("DatePicker Component", () => {
     })
   })
   it("Returns month and date of start/end/min/max for datepicker to open on initially, if it is available", () => {
-    expect(getStartMonthYearInWidget({ start: "1996-06-18" })).toEqual({ year: 1996, month: 6 })
-    expect(getStartMonthYearInWidget({ end: "1995-02-26" })).toEqual({ year: 1995, month: 2 })
-    expect(getStartMonthYearInWidget({ max: "1972-05-27" })).toEqual({ year: 1972, month: 5 })
-    expect(getStartMonthYearInWidget({ min: "1963-03-23" })).toEqual({ year: 1963, month: 3 })
+    expect(getStartMonthYearInWidget({ start: "1996-06-18" })).toEqual({ year: 1996, month: 5 })
+    expect(getStartMonthYearInWidget({ end: "1995-02-26" })).toEqual({ year: 1995, month: 1 })
+    expect(getStartMonthYearInWidget({ max: "1972-05-27" })).toEqual({ year: 1972, month: 4 })
+    expect(getStartMonthYearInWidget({ min: "1963-03-23" })).toEqual({ year: 1963, month: 2 })
   })
 })
