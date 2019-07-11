@@ -103,6 +103,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   children,
   items,
   onClick,
+  onOutsideClick,
   disabled,
   width,
   open,
@@ -166,6 +167,9 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
           onClick={e => {
             e.stopPropagation()
             setIsOpen && setIsOpen(false)
+            if (onOutsideClick) {
+              onOutsideClick()
+            }
           }}
         />
       )}

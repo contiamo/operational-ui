@@ -12,6 +12,24 @@ const menuItems = [{ label: "Menu 1", onClick: () => alert("Menu 1 uses custom o
 </ContextMenu>
 ```
 
+### Trigger a Callback on Outside Click
+
+It is also possible to detect a click outside the `ContextMenu` and do something as below. Open the context menu and click outside to see this behavior.
+
+```jsx
+import * as React from "react"
+import { Button, ContextMenu, ContextMenuProps } from "@operational/components"
+
+const menuItems = ["Item 1", "Item 2", "Item 3"]
+;<ContextMenu
+  items={menuItems}
+  onClick={item => alert(`clicked ${item.label}`)}
+  onOutsideClick={() => alert("Clicked outside the menu!")}
+>
+  <Button color="primary">Click here</Button>
+</ContextMenu>
+```
+
 ### Usage with Icon
 
 ```jsx
