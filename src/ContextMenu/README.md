@@ -154,22 +154,28 @@ It is possible to retrieve the rect dimensions of the ContextMenu container when
 import * as React from "react"
 import { Button, ContextMenu, ContextMenuProps, Code } from "@operational/components"
 
-const menuRef = React.createRef<HTMLDivElement>();
-const [rect, setRect] = React.useState<DOMRect>()
-
-React.useEffect(() => {
-  if (menuRef.current) {
-    setRect(menuRef.current.getBoundingClientRect());
-  }
-});
-
 const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
-; <>
-    <Code>
-        {`Rect: ${JSON.stringify(rect, null, 2)}`}
-    </Code>
-    <ContextMenu containerRef={menuRef} items={menuItems} onClick={() => alert("clicked")}>
-    <Button>Click here</Button>
-    </ContextMenu>
-  </>
+
+const Wrapper = () => {
+  const menuRef = React.createRef<HTMLDivElement>();
+  const [rect, setRect] = React.useState<DOMRect>();
+
+  React.useLayoutEffect(() => {
+    if (menuRef.current) {
+      setRect(menuRef.current.getBoundingClientRect());
+    }
+  }, [menuRef.current]);
+
+  return (
+    <>
+      <Code>
+          {`Rect: ${JSON.stringify(rect, null, 2)}`}
+      </Code>
+      <ContextMenu open containerRef={menuRef} items={menuItems} onClick={() => alert("clicked")}>
+        <Button>Click here</Button>
+      </ContextMenu>
+    </>
+  )
+}
+;<Wrapper/>
 ```
