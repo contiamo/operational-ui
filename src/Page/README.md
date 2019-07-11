@@ -622,7 +622,6 @@ import { Page, Card, Button } from "@operational/components"
 ```jsx
 import * as React from "react"
 import {
-  Actions,
   List,
   Body,
   SimpleLink,
@@ -632,6 +631,7 @@ import {
   ControlledModalContent,
   ControlledModal,
   PageContent,
+  styled,
 } from "@operational/components"
 
 const MyPage = styled("div")`
@@ -816,9 +816,6 @@ const ControlledModalTest = () => {
               ]}
             />
           </ControlledModalContent>
-          <Actions>
-            <Button onClick={() => setControlledModalRunning(false)}>Close</Button>
-          </Actions>
         </ControlledModal>
       </PageContent>
     </MyPage>

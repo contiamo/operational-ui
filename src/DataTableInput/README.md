@@ -9,7 +9,7 @@ import * as React from "react"
 import { Title, DataTable, DataTableSelect, DataTableInput, DataTableFooter, Checkbox } from "@operational/components"
 
 const Age = () => {
-  const [age, setAge] = React.useState(new Date().getFullYear() - 1993)
+  const [age, setAge] = React.useState(String(new Date().getFullYear() - 1993))
   const [isError, setIsError] = React.useState(false)
 
   React.useEffect(() => {

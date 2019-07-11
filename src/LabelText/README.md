@@ -12,13 +12,12 @@ This component renders a semantic label tag. This is used internally in the foll
 ```jsx
 import * as React from "react"
 import { LabelText } from "@operational/components"
-
 ;<div>
-  <LabelText htmlFor="male">Male</LabelText>
+  <LabelText>Male</LabelText>
   <input type="radio" readOnly name="gender" id="male" value="male" />
   <br />
 
-  <LabelText htmlFor="female">Female</LabelText>
+  <LabelText>Female</LabelText>
   <input checked type="radio" readOnly name="gender" id="female" value="female" />
 </div>
 ```
