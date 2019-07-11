@@ -8,7 +8,10 @@ import { useUniqueId } from "../useUniqueId"
 import { useListbox } from "../useListbox"
 
 export interface ContextMenuProps extends DefaultProps {
-  children: React.ReactNode | ((isActive: boolean) => React.ReactNode)
+  /** Optional reference for the menu container  */
+  containerRef?: React.RefObject<HTMLDivElement>
+  /** Children of the component  */
+  children?: React.ReactNode | ((isActive: boolean) => React.ReactNode)
   /** Specify whether the menu items are visible. Overrides internal open state that triggers on click. */
   open?: boolean
   /** Condensed mode */
@@ -46,7 +49,7 @@ export interface State {
 const isChildAFunction = (children: ContextMenuProps["children"]): children is (isActive: boolean) => React.ReactNode =>
   typeof children === "function"
 
-const Container = styled("div")<{ side: ContextMenuProps["align"]; isOpen: boolean }>(
+const Container = styled.div<{ side: ContextMenuProps["align"]; isOpen: boolean }>(
   ({ isOpen, theme, side: align }) => ({
     label: "contextmenu",
     cursor: "pointer",
@@ -60,7 +63,7 @@ const Container = styled("div")<{ side: ContextMenuProps["align"]; isOpen: boole
   }),
 )
 
-const MenuContainer = styled("div")<{
+const MenuContainer = styled.div<{
   embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
   numRows: number
   align: ContextMenuProps["align"]
@@ -94,6 +97,7 @@ const InvisibleOverlay = styled("div")(({ theme }) => ({
 }))
 
 const ContextMenu: React.FC<ContextMenuProps> = ({
+  containerRef,
   id,
   align = "left",
   embedChildrenInMenu = false,
@@ -200,6 +204,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         </div>
         <MenuContainer
           {...listboxProps}
+          ref={containerRef}
           isOpen={Boolean(isOpen)}
           condensed={Boolean(condensed)}
           numRows={items.length}
