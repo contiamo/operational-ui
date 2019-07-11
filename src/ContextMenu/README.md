@@ -7,7 +7,11 @@ import * as React from "react"
 import { ContextMenu, ContextMenuProps } from "@operational/components"
 
 const menuItems = [{ label: "Menu 1", onClick: () => alert("Menu 1 uses custom onClick function") }, "Menu 2", "Menu 3"]
-;<ContextMenu items={menuItems} onClick={item => alert(`clicked ${item.label}`)}>
+;<ContextMenu
+  items={menuItems}
+  onClick={item => alert(`clicked ${item.label}`)}
+  onOutsideClick={() => alert("Clicked outside the menu!")}
+>
   <span>Click here</span>
 </ContextMenu>
 ```
