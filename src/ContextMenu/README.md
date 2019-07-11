@@ -161,7 +161,7 @@ React.useEffect(() => {
   if (menuRef.current) {
     setRect(menuRef.current.getBoundingClientRect());
   }
-}, [menuRef.current, rect]);
+});
 
 const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
 ; <>
