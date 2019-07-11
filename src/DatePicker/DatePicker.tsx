@@ -7,7 +7,7 @@ import { Label } from "../utils/mixins"
 import { keyCodes } from "../utils"
 import Month from "./DatePicker.Month"
 import { Container, DatePickerCard, IconContainer, Input, MonthNav, Toggle } from "./DatePicker.styles"
-import { changeMonth, months, toDate, toYearMonthDay, validateDateString } from "./DatePicker.utils"
+import { changeMonth, months, toDate, validateDateString, getStartMonthYearInWidget } from "./DatePicker.utils"
 
 export interface DatePickerProps extends DefaultProps {
   id?: string
@@ -43,15 +43,8 @@ class DatePicker extends React.Component<DatePickerProps, State> {
     this.validate(props) // Start year month is either based on the start date
     // or the current month if no start date is specified.
 
-    const startYearMonthInWidget = props.start
-      ? {
-          year: toYearMonthDay(props.start).year,
-          month: toYearMonthDay(props.start).month,
-        }
-      : {
-          year: new Date().getFullYear(),
-          month: new Date().getMonth(),
-        }
+    const startYearMonthInWidget = getStartMonthYearInWidget(props)
+
     this.state = {
       ...startYearMonthInWidget,
       isExpanded: false,
