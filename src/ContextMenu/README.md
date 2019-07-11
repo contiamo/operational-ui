@@ -155,16 +155,16 @@ import * as React from "react"
 import { Button, ContextMenu, ContextMenuProps, Code } from "@operational/components"
 
 const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
+const menuRef = React.createRef<HTMLDivElement>();
 
 const Wrapper = () => {
-  const menuRef = React.createRef<HTMLDivElement>();
   const [rect, setRect] = React.useState<DOMRect>();
 
-  React.useLayoutEffect(() => {
+  React.useEffect(() => {
     if (menuRef.current) {
       setRect(menuRef.current.getBoundingClientRect());
     }
-  }, [menuRef.current]);
+  }, []);
 
   return (
     <>
