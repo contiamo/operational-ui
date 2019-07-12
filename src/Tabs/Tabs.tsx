@@ -181,6 +181,7 @@ const Tabs: React.FC<TabsProps> = ({
               aria-selected={false}
               condensed={true}
               onMouseDown={e => {
+                userAction.current = true
                 e.preventDefault()
                 onInsert(tabs.length - 1)
               }}
