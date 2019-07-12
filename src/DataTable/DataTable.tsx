@@ -121,7 +121,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
                 cell={cellIndex + 1}
                 height={rowHeight}
               >
-                {truncate(maxCharactersInCell)(cell)}
+                {truncate(maxCharactersInCell)(String(cell))}
               </Cell>
             ))}
         </Row>
