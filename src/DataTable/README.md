@@ -16,13 +16,14 @@ import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operation
     ],
     ["Name"],
     ["Diet"],
+    ["Loves You"],
   ]}
   rows={[
-    [String(Math.random()).repeat(1000), "Imogen Mason", "Good Stuff"],
-    [String(Math.random()).repeat(1000), "Fabien Bernard", "🥖🥐🧀🍷"],
-    [String(Math.random()).repeat(1000), "STEREO BOOSTER", "☕️"],
-    [String(Math.random()).repeat(1000), "Mischa Potomin", "null"],
-    [String(Math.random()).repeat(1000), "Tejas Kumar", "🍗🍖🥓🥩"],
+    [String(Math.random()).repeat(1000), "Imogen Mason", "Good Stuff", true],
+    [String(Math.random()).repeat(1000), "Fabien Bernard", "🥖🥐🧀🍷", false],
+    [String(Math.random()).repeat(1000), "STEREO BOOSTER", "☕️", true],
+    [String(Math.random()).repeat(1000), "Mischa Potomin", "null", false],
+    [String(Math.random()).repeat(1000), "Tejas Kumar", "🍗🍖🥓🥩", true],
   ]}
 />
 ```
