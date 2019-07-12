@@ -6,9 +6,10 @@ Tabs component implemented according to [WAI-ARIA specification](https://www.w3.
 
 ```jsx
 import * as React from "react"
-import { Tabs, OlapIcon } from "@operational/components"
+import { Tabs, OlapIcon, Textarea } from "@operational/components"
 
 const MyComponent = () => {
+  const [textareaValue, setTextareaValue] = React.useState("")
   const [tabs, setTabs] = React.useState([
     {
       title: "tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1",
@@ -60,13 +61,8 @@ const MyComponent = () => {
   return (
     <div style={{ height: "200px" }}>
       <Tabs tabs={tabs} active={active} onActivate={setActive} onClose={onClose} onInsert={onInsert}>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
+        Tab {active + 1}
+        <Textarea fullWidth height={143} onChange={setTextareaValue} value={textareaValue} />
       </Tabs>
     </div>
   )
@@ -100,37 +96,6 @@ const MyComponent = () => {
         <>Tab {activeTab}</>
       </Tabs>
     </Sidebar>
-  )
-}
-
-;<MyComponent />
-```
-
-### Focusability
-
-The Tabs should be keyboard accessible, but _not_ steal focus away from an text areas they contain. To test this, type in one text area, change tabs a few times, and try to type again. The tabs should not steal focus from the textarea.
-
-```jsx
-import * as React from "react"
-import { styled, Tabs, Textarea, OlapIcon } from "@operational/components"
-
-const MyComponent = () => {
-  const [activeTab, setActiveTab] = React.useState(0)
-  const [textareaValue, setTextareaValue] = React.useState("")
-  const tabContents = [
-    <Textarea fullWidth height={250} onChange={setTextareaValue} value={textareaValue} />,
-    <Textarea fullWidth height={250} onChange={setTextareaValue} value={textareaValue} />,
-  ]
-
-  return (
-    <Tabs
-      scroll={false}
-      tabs={[{ title: "OLAP", icon: <OlapIcon /> }, { title: "Inventory" }]}
-      active={activeTab}
-      onActivate={setActiveTab}
-    >
-      <>{tabContents[activeTab]}</>
-    </Tabs>
   )
 }
 
