@@ -12,6 +12,24 @@ const menuItems = [{ label: "Menu 1", onClick: () => alert("Menu 1 uses custom o
 </ContextMenu>
 ```
 
+### Trigger a Callback on Outside Click
+
+It is also possible to detect a click outside the `ContextMenu` and do something as below. Open the context menu and click outside to see this behavior.
+
+```jsx
+import * as React from "react"
+import { Button, ContextMenu, ContextMenuProps } from "@operational/components"
+
+const menuItems = ["Item 1", "Item 2", "Item 3"]
+;<ContextMenu
+  items={menuItems}
+  onClick={item => alert(`clicked ${item.label}`)}
+  onOutsideClick={() => alert("Clicked outside the menu!")}
+>
+  <Button color="primary">Click here</Button>
+</ContextMenu>
+```
+
 ### Usage with Icon
 
 ```jsx
@@ -126,4 +144,38 @@ const menuItems = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(it
 ;<ContextMenu condensed items={menuItems} onClick={() => alert("clicked")}>
   <div>Long list of options here</div>
 </ContextMenu>
+```
+
+#### Retrieve the size and position of the context menu container
+
+It is possible to retrieve the rect dimensions of the ContextMenu container when it is rendered on the screen
+
+```jsx
+import * as React from "react"
+import { Button, ContextMenu, ContextMenuProps, Code } from "@operational/components"
+
+const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
+const menuRef = React.createRef<HTMLDivElement>();
+
+const Wrapper = () => {
+  const [rect, setRect] = React.useState<DOMRect>();
+
+  React.useEffect(() => {
+    if (menuRef.current) {
+      setRect(menuRef.current.getBoundingClientRect());
+    }
+  }, []);
+
+  return (
+    <>
+      <Code>
+          {`Rect: ${JSON.stringify(rect, null, 2)}`}
+      </Code>
+      <ContextMenu open containerRef={menuRef} items={menuItems} onClick={() => alert("clicked")}>
+        <Button>Click here</Button>
+      </ContextMenu>
+    </>
+  )
+}
+;<Wrapper/>
 ```

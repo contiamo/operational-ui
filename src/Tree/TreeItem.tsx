@@ -63,6 +63,7 @@ interface TreeItemProps {
   color?: string
   cursor?: string
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
+  onNodeContextMenu?: (e: React.MouseEvent<HTMLDivElement>) => void
   onRemove?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
 
@@ -74,6 +75,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   label,
   color,
   onNodeClick,
+  onNodeContextMenu,
   onRemove,
   hasChildren,
   isOpen,
@@ -81,7 +83,13 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   cursor,
   searchWords = [],
 }) => (
-  <Header level={level} onClick={onNodeClick} highlight={Boolean(highlight)} cursor={cursor}>
+  <Header
+    level={level}
+    onClick={onNodeClick}
+    onContextMenu={onNodeContextMenu}
+    highlight={Boolean(highlight)}
+    cursor={cursor}
+  >
     {hasChildren &&
       React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
         size: 11,
