@@ -17,9 +17,11 @@ export interface ActionMenuProps extends DefaultProps {
 }
 
 const StyledContextMenu = styled(ContextMenu)(({ theme }) => ({
-  borderRadius: theme.borderRadius,
-  boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
-  ":focus": {
+  " > div": {
+    borderRadius: theme.borderRadius,
+    boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
+  },
+  ":focus > div ": {
     ...inputFocus({ theme }),
   },
 }))
