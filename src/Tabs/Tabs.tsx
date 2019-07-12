@@ -65,9 +65,9 @@ const Tabs: React.FC<TabsProps> = ({
 
   const onKeyDown = React.useCallback(
     (event: React.KeyboardEvent) => {
-      userAction.current = true
       switch (event.key) {
         case "ArrowRight":
+          userAction.current = true
           event.preventDefault()
           if (active + 1 >= tabs.length) {
             onActivate(0)
@@ -76,6 +76,7 @@ const Tabs: React.FC<TabsProps> = ({
           }
           break
         case "ArrowLeft":
+          userAction.current = true
           event.preventDefault()
           if (active - 1 < 0) {
             onActivate(tabs.length - 1)
@@ -84,20 +85,24 @@ const Tabs: React.FC<TabsProps> = ({
           }
           break
         case "Home":
+          userAction.current = true
           event.preventDefault()
           onActivate(0)
           break
         case "End":
+          userAction.current = true
           event.preventDefault()
           onActivate(tabs.length - 1)
           break
         case "Delete":
+          userAction.current = true
           event.preventDefault()
           if (onClose) {
             onClose(active)
           }
           break
         case "Enter":
+          userAction.current = true
           // There is no insert on some modern keyboards.
           // You can use `fn` + `enter` to get it on Mac keyboard, it will be reported as Enter.
           // Can be differentiated from enter using this check `e.nativeEvent.code === "NumpadEnter"`
@@ -136,7 +141,6 @@ const Tabs: React.FC<TabsProps> = ({
         <TabScroll ref={tabScrollRef}>
           {tabs.map(({ title, icon }, i) => {
             const onClick = () => {
-              userAction.current = true
               onActivate(i)
             }
             return (
@@ -177,8 +181,8 @@ const Tabs: React.FC<TabsProps> = ({
               aria-selected={false}
               condensed={true}
               onMouseDown={e => {
-                e.preventDefault()
                 userAction.current = true
+                e.preventDefault()
                 onInsert(tabs.length - 1)
               }}
             >

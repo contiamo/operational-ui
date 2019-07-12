@@ -6,9 +6,10 @@ Tabs component implemented according to [WAI-ARIA specification](https://www.w3.
 
 ```jsx
 import * as React from "react"
-import { Tabs, OlapIcon } from "@operational/components"
+import { Tabs, OlapIcon, Textarea } from "@operational/components"
 
 const MyComponent = () => {
+  const [textareaValue, setTextareaValue] = React.useState("")
   const [tabs, setTabs] = React.useState([
     {
       title: "tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1",
@@ -60,13 +61,8 @@ const MyComponent = () => {
   return (
     <div style={{ height: "200px" }}>
       <Tabs tabs={tabs} active={active} onActivate={setActive} onClose={onClose} onInsert={onInsert}>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
-        <p>Lorem ipsum {active + 1}</p>
+        Tab {active + 1}
+        <Textarea fullWidth height={143} onChange={setTextareaValue} value={textareaValue} />
       </Tabs>
     </div>
   )
