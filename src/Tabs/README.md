@@ -105,3 +105,34 @@ const MyComponent = () => {
 
 ;<MyComponent />
 ```
+
+### Focusability
+
+The Tabs should be keyboard accessible, but _not_ steal focus away from an text areas they contain. To test this, type in one text area, change tabs a few times, and try to type again. The tabs should not steal focus from the textarea.
+
+```jsx
+import * as React from "react"
+import { styled, Tabs, Textarea, OlapIcon } from "@operational/components"
+
+const MyComponent = () => {
+  const [activeTab, setActiveTab] = React.useState(0)
+  const [textareaValue, setTextareaValue] = React.useState("")
+  const tabContents = [
+    <Textarea fullWidth height={250} onChange={setTextareaValue} value={textareaValue} />,
+    <Textarea fullWidth height={250} onChange={setTextareaValue} value={textareaValue} />,
+  ]
+
+  return (
+    <Tabs
+      scroll={false}
+      tabs={[{ title: "OLAP", icon: <OlapIcon /> }, { title: "Inventory" }]}
+      active={activeTab}
+      onActivate={setActiveTab}
+    >
+      <>{tabContents[activeTab]}</>
+    </Tabs>
+  )
+}
+
+;<MyComponent />
+```
