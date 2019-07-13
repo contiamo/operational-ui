@@ -85,16 +85,18 @@ const Container = styled("div")<{ hasTitle: boolean; hasTabs: boolean }>(({ them
   overflow: "auto",
 }))
 
-const TitleContainer = styled("div")<{ fill: boolean }>(({ theme, fill }) => ({
-  display: "flex",
-  alignItems: "center",
-  height: theme.titleHeight,
-  fontWeight: theme.font.weight.medium,
-  minWidth: theme.pageSize.min,
-  maxWidth: fill ? "100%" : `${theme.pageSize.max}px`,
-}))
+const TitleContainer = styled("div", { shouldForwardProp: prop => prop !== "fill" })<{ fill: boolean }>(
+  ({ theme, fill }) => ({
+    display: "flex",
+    alignItems: "center",
+    height: theme.titleHeight,
+    fontWeight: theme.font.weight.medium,
+    minWidth: theme.pageSize.min,
+    maxWidth: fill ? "100%" : `${theme.pageSize.max}px`,
+  }),
+)
 
-const ViewContainer = styled("div")<{ fill: boolean }>`
+const ViewContainer = styled("div", { shouldForwardProp: prop => prop !== "fill" })<{ fill: boolean }>`
   outline: none;
   min-width: ${({ theme }) => theme.pageSize.min}px;
   max-width: ${({ fill, theme }) => (fill ? "100%" : `${theme.pageSize.max}px`)};
@@ -115,7 +117,7 @@ const FixedProgress = styled(Progress)`
   width: 100vw;
 `
 
-const TabsContainer = styled.div<{ fill: boolean }>`
+const TabsContainer = styled("div", { shouldForwardProp: prop => prop !== "fill" })<{ fill: boolean }>`
   min-width: ${({ theme }) => theme.pageSize.min}px;
   max-width: ${({ theme, fill }) => (fill ? "100%" : `${theme.pageSize.max}px`)};
 `

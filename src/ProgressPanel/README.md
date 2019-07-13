@@ -60,8 +60,7 @@ import { ProgressPanel } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { Card, ProgressPanel, CardColumns, CardColumn, Button } from "@operational/components"
-
+import { Card, ProgressPanel, CardColumns, CardColumn, Button, RemoveIcon } from "@operational/components"
 ;<>
   <Card title="Progress panel">
     <ProgressPanel
@@ -74,7 +73,7 @@ import { Card, ProgressPanel, CardColumns, CardColumn, Button } from "@operation
     />
     <CardColumns>
       <CardColumn title="Danger zone">
-        <Button color="error" icon="Remove">
+        <Button color="error" icon={RemoveIcon}>
           Destroy Editor
         </Button>
       </CardColumn>

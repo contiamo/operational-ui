@@ -65,7 +65,7 @@ import { Card, CardColumns, CardColumn, Chip } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import { Card, CardColumns, CardColumn, Textarea, Code, Button } from "@operational/components"
+import { Card, CardColumns, CardColumn, Textarea, Code, Button, OpenIcon } from "@operational/components"
 ;<Card title="Playground">
   <CardColumns>
     <CardColumn title="Input">
@@ -88,7 +88,7 @@ import { Card, CardColumns, CardColumn, Textarea, Code, Button } from "@operatio
       <Button color="primary">Send Request</Button>
     </CardColumn>
     <CardColumn contentRight>
-      <Button color="grey" icon="Open">
+      <Button color="grey" icon={OpenIcon}>
         curl/code
       </Button>
     </CardColumn>

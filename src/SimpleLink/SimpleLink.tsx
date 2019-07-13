@@ -27,7 +27,9 @@ export interface SimpleLinkProps extends DefaultProps {
   children?: React.ReactNode
 }
 
-const BaseSimpleLink = styled<"a" | "button">("button")<{
+const BaseSimpleLink = styled<"a" | "button">("button", {
+  shouldForwardProp: prop => !["color_", "left_", "right_"].includes(prop),
+})<{
   color_?: string
   left_?: boolean
   right_?: boolean
