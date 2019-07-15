@@ -1,4 +1,5 @@
 import styled from "../utils/styled"
+import { inputFocus } from "../utils"
 import { expandColor } from "../utils/constants"
 import Input from "../Input/Input"
 
@@ -20,7 +21,7 @@ export const Combobox = styled("div")<{ naked: boolean; isOpen: boolean; hasCust
   grid-template-columns: calc(100% - ${dropdownButtonWidth}px) ${dropdownButtonWidth}px;
   grid-gap: 1px;
   align-items: stretch;
-  border: 1px solid
+  box-shadow: 0 0 0 1px
     ${({ theme, isOpen, hasCustomOption }) =>
       !hasCustomOption && isOpen ? theme.color.primary : theme.color.border.select};
   border-width: ${({ naked }) => (naked ? 0 : 1)}px;
@@ -28,7 +29,7 @@ export const Combobox = styled("div")<{ naked: boolean; isOpen: boolean; hasCust
   background-color: ${({ isOpen, naked }) => (!naked && isOpen ? "white" : "transparent")};
 
   :focus {
-    border-color: ${({ theme }) => theme.color.primary};
+    ${({ theme }) => inputFocus({ theme })}
   }
 `
 
@@ -42,9 +43,9 @@ export const SelectInput = styled(Input)<{ hasCustomOption: boolean }>`
   border-bottom-right-radius: 0;
   overflow: hidden;
   text-overflow: ellipsis;
-
+  box-shadow: none;
   :focus {
-    box-shadow: ${({ hasCustomOption, theme }) => (hasCustomOption ? "0 0 0 1px " + theme.color.primary : "none")};
+    box-shadow: none;
   }
 `
 
@@ -61,13 +62,12 @@ export const DropdownButton = styled("div")<{ naked: boolean; isOpen: boolean; h
   align-items: center;
   justify-content: center;
   margin: -1px 0;
-  border: 1px solid
-    ${({ theme, isOpen, hasCustomOption }) => (hasCustomOption && isOpen ? theme.color.primary : "transparent")};
+  border: none;
   border-top-right-radius: ${({ theme }) => theme.borderRadius}px;
   border-bottom-right-radius: ${({ theme }) => theme.borderRadius}px;
 
   :focus {
-    border-color: ${({ theme }) => theme.color.primary};
+    box-shadow: none;
   }
 
   ::after {

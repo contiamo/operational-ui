@@ -1,7 +1,7 @@
 import * as React from "react"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import { DefaultProps } from "../types"
-import { darken } from "../utils"
+import { inputFocus } from "../utils"
 import styled from "../utils/styled"
 import { ChevronUpIcon, HamburgerMenuIcon } from "../Icon/Icon"
 
@@ -15,6 +15,16 @@ export interface ActionMenuProps extends DefaultProps {
   /** Should the title always be visible? */
   stickyTitle?: boolean
 }
+
+const StyledContextMenu = styled(ContextMenu)(({ theme }) => ({
+  " > div": {
+    borderRadius: theme.borderRadius,
+    boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
+  },
+  ":focus > div ": {
+    ...inputFocus({ theme }),
+  },
+}))
 
 const Container = styled("div")(({ theme }) => ({
   height: 35,
@@ -31,10 +41,12 @@ const Container = styled("div")(({ theme }) => ({
   alignItems: "center",
   justifyContent: "flex-end",
   userSelect: "none",
-  boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
   cursor: "pointer",
-  "&:hover": {
-    backgroundColor: darken(theme.color.white, 5),
+  ":hover": {
+    ...inputFocus({ theme }),
+  },
+  ":focus": {
+    ...inputFocus({ theme }),
   },
 }))
 
@@ -50,7 +62,7 @@ const TitleContainer = styled("p")(({ theme }) => ({
 }))
 
 const ActionMenu: React.SFC<ActionMenuProps> = ({ stickyTitle, items, title, ...props }) => (
-  <ContextMenu align="right" {...props} items={items} condensed embedChildrenInMenu>
+  <StyledContextMenu align="right" {...props} items={items} condensed embedChildrenInMenu>
     {isOpen => {
       const iconColor = isOpen || stickyTitle ? "primary" : "color.text.lighter"
       return (
@@ -60,7 +72,7 @@ const ActionMenu: React.SFC<ActionMenuProps> = ({ stickyTitle, items, title, ...
         </Container>
       )
     }}
-  </ContextMenu>
+  </StyledContextMenu>
 )
 
 ActionMenu.defaultProps = {

@@ -6,7 +6,7 @@ import { LabelText } from "../LabelText/LabelText"
 import { useOperationalContext } from "../OperationalContext/OperationalContext"
 import { DefaultInputProps, DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
-import { isCmdEnter, lighten } from "../utils"
+import { isCmdEnter, lighten, inputFocus } from "../utils"
 import { FormFieldControls, Label } from "../utils/mixins"
 import styled from "../utils/styled"
 import { CopyIcon } from "../Icon/Icon"
@@ -74,11 +74,13 @@ const TextareaComp = styled("textarea")<{
     minHeight: 120,
     padding: `${theme.space.small}px ${theme.space.medium}px`,
     fontFamily: isCode ? "monospace" : theme.font.family.main,
-    outline: "none",
     border: "none",
     // There's an white subpixel if it's theme.borderRadius and no noticeable regression if -1
     borderRadius: theme.borderRadius - 1,
     ...props,
+    ":focus": {
+      ...inputFocus({ theme }),
+    },
   }
 })
 
@@ -117,12 +119,9 @@ const Outline = styled("div")<{
   disabled: boolean
   focus: boolean
 }>(({ theme, error, focus, disabled }) => ({
-  boxShadow: focus
-    ? `0 0 0 3px ${error ? lighten(theme.color.error, 60) : lighten(theme.color.primary, 40)}`
-    : "initial",
   borderRadius: theme.borderRadius,
   border: `${theme.color.border.default} 1px solid`,
-  borderColor: error ? theme.color.error : theme.color.border.default,
+  borderColor: error ? theme.color.error : focus ? theme.color.primary : theme.color.border.default,
   opacity: disabled ? 0.6 : 1.0,
 }))
 

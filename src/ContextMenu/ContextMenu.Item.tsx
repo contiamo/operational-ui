@@ -52,8 +52,27 @@ const Container = styled("div")<Props>(({ disabled, align, theme, isActive, cond
     textAlign: align,
     display: "flex",
     alignItems: "center",
+    outline: "none",
     fontWeight: isActive ? theme.font.weight.bold : theme.font.weight.medium,
     boxShadow: isActive ? activeShadow : "none",
+
+    "&[aria-selected='true']": {
+      boxShadow: activeShadow,
+      outline: "none",
+    },
+    ...(typeof item !== "string" && Boolean(item.description)
+      ? {
+          borderBottom: `1px solid ${theme.color.border.select}`,
+        }
+      : {}),
+    "&:hover, &[aria-selected='true']": {
+      backgroundColor: lighten(theme.color.primary, 50),
+      color: theme.color.primary,
+    },
+    "&:focus": {
+      backgroundColor: lighten(theme.color.primary, 50),
+      color: theme.color.primary,
+    },
     color: disabled ? theme.color.text.disabled : isActive ? theme.color.primary : theme.color.text.default,
     borderTop: `1px solid ${theme.color.border.select}`,
     cursor: disabled ? "initial" : "pointer",

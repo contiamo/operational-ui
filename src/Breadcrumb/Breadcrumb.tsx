@@ -2,7 +2,7 @@ import * as React from "react"
 import { IconComponentType } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import { DefaultProps } from "../types"
-import { darken, isModifiedEvent, isOutsideLink } from "../utils"
+import { inputFocus, isModifiedEvent, isOutsideLink } from "../utils"
 import styled from "../utils/styled"
 
 export interface BreadcrumbProps extends DefaultProps {
@@ -19,7 +19,13 @@ const Container = styled("a")(({ theme }) => ({
   color: theme.color.primary,
   label: "breadcrumb",
   "&:hover": {
-    color: darken(theme.color.primary, 5),
+    ...inputFocus({ theme }),
+  },
+  "&:focus": {
+    ...inputFocus({ theme }),
+  },
+  "& > span": {
+    outline: "none",
   },
 }))
 
