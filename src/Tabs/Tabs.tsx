@@ -153,7 +153,6 @@ const Tabs: React.FC<TabsProps> = ({
                 id={`TabHeader-${uid}-${i}`}
                 key={i}
                 onClick={onClick}
-                onFocus={onClick}
                 ref={i === active ? activeTab : undefined}
               >
                 <TitleIconWrapper>
