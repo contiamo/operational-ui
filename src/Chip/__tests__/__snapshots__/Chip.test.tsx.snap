@@ -8,11 +8,11 @@ exports[`Chip Should render 1`] = `
     class="css-p29iif"
   />
   <div
-    class="css-unwalq-chip"
+    class="css-1o7p7q7-chip"
   >
     <div
       aria-label="Hi"
-      class="css-120laba"
+      class="css-12kpymt"
     >
       Hi
     </div>
