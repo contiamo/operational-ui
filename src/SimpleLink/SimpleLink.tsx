@@ -28,7 +28,7 @@ export interface SimpleLinkProps extends DefaultProps {
 }
 
 const BaseSimpleLink = styled<"a" | "button">("button", {
-  shouldForwardProp: prop => !["color_", "left_", "right_"].includes(prop),
+  shouldForwardProp: prop => !["color_", "left_", "right_", "as"].includes(prop),
 })<{
   color_?: string
   left_?: boolean
