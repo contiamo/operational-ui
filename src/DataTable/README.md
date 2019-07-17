@@ -5,10 +5,18 @@ Our DataTable is used to render tabular data structures. For a basic use case, g
 - `columns` is an array (X) of arrays (Y), where X contains a column, and Y contains a stack of headers in each column.
 - `rows` is an array (A) of arrays (B), where A is the entire row, and B is a single cell.
 
-Additionally, supply a `height` prop to limit the height of the table.
+Supply a `height` prop to limit the height of the table.
+
+Additionally, you can supply a component as a cell to customize the styling and functionality.
 
 ```jsx
-import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operational/components"
+import * as React from "react"
+import { DataTable, DataTableSelect, DataTableInput, Checkbox, styled } from "@operational/components"
+
+const CustomCell = styled.span`
+  color: red;
+`
+
 ;<DataTable
   columns={[
     [
@@ -22,7 +30,7 @@ import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operation
     [String(Math.random()).repeat(1000), "Imogen Mason", "Good Stuff", true],
     [String(Math.random()).repeat(1000), "Fabien Bernard", "🥖🥐🧀🍷", false],
     [String(Math.random()).repeat(1000), "STEREO BOOSTER", "☕️", true],
-    [String(Math.random()).repeat(1000), "Mischa Potomin", "null", false],
+    [String(Math.random()).repeat(1000), <CustomCell>Mischa Potomin</CustomCell>, "null", false],
     [String(Math.random()).repeat(1000), "Tejas Kumar", "🍗🍖🥓🥩", true],
   ]}
 />
@@ -33,6 +41,7 @@ import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operation
 Sometimes, we wish to render a _lot_ more data and have more of it visible. For this, we set `rowHeight="compact"` to enable compact mode.
 
 ```jsx
+import * as React from "react"
 import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operational/components"
 ;<DataTable
   height={225}

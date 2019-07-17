@@ -40,6 +40,11 @@ export interface DataTableProps<Columns, Rows> {
   className?: string
 }
 
+const stringifyIfNeeded = (value: any) => {
+  // We compare booleans like this and without typeof for perf
+  return value === true || value === false ? String(value) : value
+}
+
 export function DataTable<Columns extends any[][], Rows extends any[][]>({
   columns,
   rows,
@@ -121,7 +126,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
                 cell={cellIndex + 1}
                 height={rowHeight}
               >
-                {truncate(maxCharactersInCell)(String(cell))}
+                {truncate(maxCharactersInCell)(stringifyIfNeeded(cell))}
               </Cell>
             ))}
         </Row>
