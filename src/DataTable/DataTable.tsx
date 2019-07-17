@@ -41,7 +41,7 @@ export interface DataTableProps<Columns, Rows> {
 }
 
 const stringifyIfNeeded = (value: any) => {
-  return typeof value === "boolean" ? String(value) : value
+  return value === true || value === false ? String(value) : value
 }
 
 export function DataTable<Columns extends any[][], Rows extends any[][]>({
