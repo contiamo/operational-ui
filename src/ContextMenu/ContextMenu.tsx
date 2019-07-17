@@ -229,7 +229,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                 }
                 if (!isString(item) && item.onClick) {
                   item.onClick(makeItem(item))
-                  return
                 }
                 if (onClick) {
                   onClick(makeItem(item))
