@@ -41,6 +41,7 @@ export interface DataTableProps<Columns, Rows> {
 }
 
 const stringifyIfNeeded = (value: any) => {
+  // We compare booleans like this and without typeof for perf
   return value === true || value === false ? String(value) : value
 }
 

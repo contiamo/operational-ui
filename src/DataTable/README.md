@@ -10,6 +10,7 @@ Supply a `height` prop to limit the height of the table.
 Additionally, you can supply a component as a cell to customize the styling and functionality.
 
 ```jsx
+import * as React from "react"
 import { DataTable, DataTableSelect, DataTableInput, Checkbox, styled } from "@operational/components"
 
 const CustomCell = styled.span`
@@ -29,7 +30,7 @@ const CustomCell = styled.span`
     [String(Math.random()).repeat(1000), "Imogen Mason", "Good Stuff", true],
     [String(Math.random()).repeat(1000), "Fabien Bernard", "🥖🥐🧀🍷", false],
     [String(Math.random()).repeat(1000), "STEREO BOOSTER", "☕️", true],
-    [String(Math.random()).repeat(1000), <CustomCell>{"Mischa Potomin"}</CustomCell>, "null", false],
+    [String(Math.random()).repeat(1000), <CustomCell>Mischa Potomin</CustomCell>, "null", false],
     [String(Math.random()).repeat(1000), "Tejas Kumar", "🍗🍖🥓🥩", true],
   ]}
 />
@@ -40,6 +41,7 @@ const CustomCell = styled.span`
 Sometimes, we wish to render a _lot_ more data and have more of it visible. For this, we set `rowHeight="compact"` to enable compact mode.
 
 ```jsx
+import * as React from "react"
 import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operational/components"
 ;<DataTable
   height={225}
