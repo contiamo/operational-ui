@@ -157,7 +157,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   const handleSelect = React.useCallback(() => {
     if (currentItem && currentItem.onClick) {
       currentItem.onClick(currentItem)
-      return
     }
     if (currentItem && onClick) {
       onClick(currentItem)
