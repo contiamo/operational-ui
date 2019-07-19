@@ -96,6 +96,7 @@ export { Tab } from "./Internals/Tabs"
 
 // Utils
 export { default as styled } from "./utils/styled"
+export { expandColor } from "./utils/constants"
 
 // Hooks
 export * from "./useURLState"
