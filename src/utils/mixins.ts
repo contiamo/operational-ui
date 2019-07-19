@@ -5,6 +5,27 @@ import { lighten } from "../utils"
 import styled from "../utils/styled"
 import { OperationalStyleConstants } from "./constants"
 
+export const customScrollbar = ({ theme, dark = false }: { theme: OperationalStyleConstants; dark?: boolean }) => ({
+  /** Give people a slightly nicer experience on Chrome/Safari/Edge */
+  "::-webkit-scrollbar": {
+    width: 6,
+    height: 6,
+  },
+
+  "::-webkit-scrollbar-track": {
+    background: "transparent",
+  },
+
+  "::-webkit-scrollbar-thumb": {
+    background: dark ? "rgba(255, 255, 255, 0.3)" : theme.color.background.light,
+    cursor: "grab",
+  },
+
+  "::-webkit-scrollbar-thumb:hover": {
+    background: theme.color.primary,
+  },
+})
+
 export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
   outline: "none",
   boxShadow: `0 0 0 1px ${isError ? theme.color.error : theme.color.primary}`,
