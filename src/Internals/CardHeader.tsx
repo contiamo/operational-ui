@@ -12,8 +12,11 @@ export interface CardHeaderProps extends DefaultProps {
   action?: React.ReactNode
 }
 
+export const cardHeaderHeight = 36
+
 const Container = styled(SectionHeader)(({ theme }) => ({
   borderBottom: `1px solid ${theme.color.separators.default}`,
+  height: cardHeaderHeight,
   "& > :not(:first-child)": {
     fontSize: theme.font.size.fineprint,
     color: theme.color.text.lightest,

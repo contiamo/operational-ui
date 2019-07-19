@@ -1,6 +1,6 @@
 import * as React from "react"
 import CardItem from "../CardItem/CardItem"
-import CardHeader from "../Internals/CardHeader"
+import CardHeader, { cardHeaderHeight } from "../Internals/CardHeader"
 import Tabs, { Tab } from "../Internals/Tabs"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
@@ -121,7 +121,7 @@ const Container = styled("div")(({ theme }) => ({
 
 const Content = styled.div<{ fullSize?: boolean }>`
   padding: ${({ theme }) => theme.space.element}px;
-  height: ${props => (props.fullSize ? "100%" : "auto")};
+  height: ${props => (props.fullSize ? `calc(100% - ${cardHeaderHeight}px)` : "auto")};
   white-space: pre-wrap;
   word-wrap: break-all;
   hyphens: auto;
@@ -172,7 +172,7 @@ function renderData<T extends {}>(props: CardPropsWithChildrenOrData<T>) {
   return data && titles.map((cardItemTitle, i) => <CardItem key={i} value={values[i]} title={cardItemTitle} />)
 }
 
-function Card<T extends {}>(props: CardProps<T>) {
+function Card<T extends {}>(props: CardProps<T>, ref: React.RefObject<HTMLDivElement>) {
   const {
     title,
     keyFormatter,
@@ -189,7 +189,7 @@ function Card<T extends {}>(props: CardProps<T>) {
 
   if (sections) {
     return (
-      <Container {...rest}>
+      <Container ref={ref} {...rest}>
         {(title || action) && <CardHeader title={title} action={action} />}
         <SectionsContainer stackHorizontal={stackSections === "horizontal"}>{sections}</SectionsContainer>
       </Container>
@@ -220,7 +220,7 @@ function Card<T extends {}>(props: CardProps<T>) {
   }
 
   return (
-    <Container {...rest}>
+    <Container ref={ref} {...rest}>
       {(title || action) && <CardHeader title={title} action={action} />}
       <Content fullSize={fullSize}>
         {renderData(props as CardPropsWithChildrenOrData<T>)}
@@ -230,4 +230,4 @@ function Card<T extends {}>(props: CardProps<T>) {
   )
 }
 
-export default Card
+export default React.forwardRef(Card as React.RefForwardingComponent<HTMLDivElement, CardProps>)
