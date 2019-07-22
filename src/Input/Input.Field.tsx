@@ -89,18 +89,16 @@ const Field = styled("input")<{
     flexGrow: 1,
     padding: `${theme.space.small}px ${getRightPadding()}px ${theme.space.small}px ${theme.space.medium}px`,
     opacity: disabled ? 0.6 : 1.0,
-    border: "1px solid",
-    borderColor: isError ? theme.color.error : theme.color.border.default,
+    border: "none",
+    boxShadow: `0 0 0 1px ${isError ? theme.color.error : theme.color.border.default}`,
+    outline: "none",
     appearance: "none",
     color: preset ? theme.color.text.dark : theme.color.text.default,
     backgroundColor: makeBackgroundColor(),
     "::placeholder": {
       color: theme.color.text.disabled,
     },
-    "&:focus": inputFocus({
-      theme,
-      isError,
-    }),
+    ":focus": inputFocus({ theme, isError }),
   }
 })
 

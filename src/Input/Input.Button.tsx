@@ -37,12 +37,7 @@ const Button = styled("button")`
   align-items: center;
   justify-content: center;
   cursor: pointer;
-
-  :focus {
-    ${inputFocus}
-    border: 1px solid ${({ theme }) => theme.color.primary};
-  }
-
+  outline: none;
   /* Don't respond to children's pointer-events */
   * {
     pointer-events: none;
@@ -51,10 +46,13 @@ const Button = styled("button")`
     background-color: ${theme.color.background.lighter};
     border-top-left-radius: ${theme.borderRadius}px;
     border-bottom-left-radius: ${theme.borderRadius}px;
-    border: 1px solid;
-    border-color: ${theme.color.border.default};
+    box-shadow: 0 0 0 1px ${theme.color.border.default};
+    border:none;
     color: ${theme.color.text.light};
-    &:hover {
+    :focus {
+     ${inputFocus({ theme })},
+    }
+    :hover {
       background-color: ${theme.color.background.light};
     }
   `};

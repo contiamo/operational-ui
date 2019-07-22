@@ -99,7 +99,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         onBlur={() => setFocusFlag(false)}
       >
         {title}
-        {_expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
+        {_expanded ? <ChevronUpIcon size={12} /> : <ChevronDownIcon size={12} />}
       </Header>
       <Panel id={contentId} aria-labelledby={titleId} hidden={!_expanded}>
         {_expanded && isFunction(children) ? children() : children}

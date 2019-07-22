@@ -27,7 +27,9 @@ export interface SimpleLinkProps extends DefaultProps {
   children?: React.ReactNode
 }
 
-const BaseSimpleLink = styled<"a" | "button">("button")<{
+const BaseSimpleLink = styled<"a" | "button">("button", {
+  shouldForwardProp: prop => !["color_", "left_", "right_", "as"].includes(prop),
+})<{
   color_?: string
   left_?: boolean
   right_?: boolean
@@ -49,11 +51,10 @@ const BaseSimpleLink = styled<"a" | "button">("button")<{
     justifyContent: "center",
     borderRadius: theme.borderRadius,
     border: 0,
-    outline: "none",
     position: "relative",
     cursor: "pointer",
     ":focus": {
-      ...inputFocus({ theme, isError: false }),
+      ...inputFocus({ theme }),
     },
     ":hover": {
       color: hoverColor,

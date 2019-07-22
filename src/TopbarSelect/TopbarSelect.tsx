@@ -1,3 +1,4 @@
+import { inputFocus } from "../utils"
 import React, { useLayoutEffect, useRef, useState, useMemo } from "react"
 
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
@@ -31,6 +32,9 @@ const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
   & svg {
     /** Icons are purely presentational and click events are handled upstream */
     pointer-events: none;
+  }
+  :focus {
+    ${({ theme }) => inputFocus({ theme })};
   }
 `
 

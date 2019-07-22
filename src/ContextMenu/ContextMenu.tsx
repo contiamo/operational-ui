@@ -157,7 +157,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   const handleSelect = React.useCallback(() => {
     if (currentItem && currentItem.onClick) {
       currentItem.onClick(currentItem)
-      return
     }
     if (currentItem && onClick) {
       onClick(currentItem)
@@ -230,7 +229,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                 }
                 if (!isString(item) && item.onClick) {
                   item.onClick(makeItem(item))
-                  return
                 }
                 if (onClick) {
                   onClick(makeItem(item))

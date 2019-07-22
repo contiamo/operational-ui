@@ -95,7 +95,6 @@ const BaseButton = styled<"button" | "a">("button")<{
     boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.border.disabled} inset` : "none",
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.6 : 1.0,
-    outline: "none",
     position: "relative",
     width: fullWidth ? "100%" : "initial",
     marginRight: theme.space.small,
@@ -104,13 +103,18 @@ const BaseButton = styled<"button" | "a">("button")<{
       textDecoration: "none",
       color: loading ? "transparent" : expandColor(theme, textColor) || foregroundColor,
     },
-    ":focus": {
+    "&:focus": {
       ...inputFocus({ theme, isError: color_ === "error" }),
+      boxShadow: isWhite(backgroundColor) ? theme.shadows.insetFocus : "none",
+      //Higher zIndex will make right border appear on ButtonGroup Focus.
+      zIndex: theme.zIndex.confirm,
     },
     ...(!disabled
       ? {
           ":hover": {
             backgroundColor: darken(backgroundColor, 5),
+            boxShadow: isWhite(backgroundColor) ? theme.shadows.insetFocus : "none",
+            zIndex: theme.zIndex.confirm,
           },
         }
       : {}),
