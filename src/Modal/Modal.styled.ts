@@ -30,9 +30,10 @@ export const Container = styled("div", { shouldForwardProp: prop => !["width", "
     `calc(${getTop({ top, theme, height: isNumber(height) ? height : 0 })}px + ${theme.space.content}px)`};
   left: ${({ left, theme }) => `calc(${left}px + ${theme.space.content}px)`};
   right: ${({ left }) => (left ? "auto" : 0)};
-  width: ${({ width, theme }) => `calc(${width}px - ${theme.space.content * 2}px)`};
+  width: ${({ width, theme }) =>
+    width === "min-content" ? "min-content" : `calc(${width}px - ${theme.space.content * 2}px)`};
   max-width: calc(100vw - ${({ theme }) => theme.space.element}px);
-  height: ${({ height, theme }) => `calc(${height}px - ${theme.space.content * 2}px)`};
+  height: ${({ height, theme }) => (height === "auto" ? "auto" : `calc(${height}px - ${theme.space.content * 2}px)`)};
   max-height: calc(100vh - ${({ theme }) => theme.space.content * 2}px);
   z-index: ${({ theme }) => theme.zIndex.modal};
 
@@ -55,6 +56,7 @@ export const ModalContent = styled.div<{ anchor: boolean; height: ModalProps["he
       ${({ theme }) => cardHeaderHeight + theme.space.element + theme.space.element + theme.space.element + 1}px
   );
   overflow: auto;
+  row-gap: ${({ theme }) => theme.space.element}px;
 
   ${({ theme }) => customScrollbar({ theme })};
 `
@@ -63,5 +65,10 @@ export const Actions = styled.div<{ childCount: number }>`
   display: grid;
   grid-template-columns: ${({ childCount }) => `repeat(${childCount}, max-content)`};
   margin-top: auto;
-  padding-top: ${({ theme }) => theme.space.element}px;
+`
+
+export const ContentWrapper = styled.div`
+  overflow: auto;
+  height: 100%;
+  ${({ theme }) => customScrollbar({ theme })}
 `
