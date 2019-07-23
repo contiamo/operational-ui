@@ -164,8 +164,8 @@ const MyComponent = () => {
 
   return (
     <>
-      <div ref={appleRef} style={{ background: "#0ff", padding: 32, height: 480 }} onClick={() => setIsModalOpen(true)}>
-        Click to Open a Modal Anchored to this div
+      <div ref={appleRef} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#0ff", padding: 32, height: 480 }} onClick={() => setIsModalOpen(true)}>
+        <h2>Click to open a (smaller) Modal anchored to this div</h2>
       </div>
       <Modal
       width="max-content"
@@ -231,8 +231,8 @@ checked?: boolean}>({})
 
   return (
     <>
-      <div ref={formRef} style={{ background: "#0c0", width: 640, height: 480 }} onClick={() => setIsModalOpen(true)}>
-        Open a Form
+      <div ref={formRef} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#0c0", width: 640, height: 480 }} onClick={() => setIsModalOpen(true)}>
+        <h2>Open a Form</h2>
       </div>
       <Modal
         actions={
@@ -296,7 +296,7 @@ checked?: boolean}>({})
 ;<MyComponent />
 ```
 
-## With a Table
+## With an Anchored Table
 
 Here's how a table can compose into a modal.
 
@@ -314,8 +314,8 @@ checked?: boolean}>({})
 
   return (
     <>
-      <div ref={formRef} style={{ background: "#eaf", width: "100%", height: 480 }} onClick={() => setIsModalOpen(true)}>
-        Open a Form
+      <div ref={formRef} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#eaf", width: "100%", height: 480 }} onClick={() => setIsModalOpen(true)}>
+        <h2>Show me the Table</h2>
       </div>
       {isModalOpen && <Modal
       width="max-content"
