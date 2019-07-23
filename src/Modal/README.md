@@ -115,7 +115,7 @@ import { Modal, Body, Button } from "@operational/components"
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-  const appleRef = React.useRef < HTMLDivElement > null
+  const appleRef = React.useRef<HTMLDivElement>(null)
 
   return (
     <>
@@ -288,6 +288,55 @@ checked?: boolean}>({})
           </Form>
         )}
       </Modal>
+    </>
+  )
+}
+;<MyComponent />
+```
+
+## With a Table
+
+```jsx
+import { Table, Modal, Chip, Button, ProjectIcon } from "@operational/components"
+
+
+const MyComponent = () => {
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
+  const [formData, setFormData] = React.useState<{name?: string
+iceCream?: string
+checked?: boolean}>({})
+  const formRef = React.useRef<HTMLDivElement>(null)
+  const modalRef = React.useRef<HTMLDivElement>(null)
+
+  return (
+    <>
+      <div ref={formRef} style={{ background: "#eaf", width: "100%", height: 480 }} onClick={() => setIsModalOpen(true)}>
+        Open a Form
+      </div>
+      {isModalOpen && <Modal
+      width="max-content"
+        actions={
+            [<Button onClick={() => setIsModalOpen(false)}>Close Modal</Button>]
+        }
+        ref={modalRef}
+        anchor={formRef}
+        isOpen={isModalOpen}
+        onClickOutside={() => setIsModalOpen(false)}
+        title="Questionnaire"
+      >
+        <div style={{width: 600}}>
+<Table
+  data={Array(100).fill({ name: "Mischa", lastUpdated: (new Date()).toString(), tags: ["yes", "no"]})}
+  columns={[
+    { heading: "", cell: dataEntry => <ProjectIcon color="primary" /> },
+    { heading: "Name", cell: dataEntry => dataEntry.name },
+    { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
+    { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
+  ]}
+  onRowClick={(dataEntry, i) => console.log({ dataEntry, i })}
+/>
+</div>
+      </Modal>}
     </>
   )
 }
