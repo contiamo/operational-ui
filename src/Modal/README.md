@@ -115,7 +115,7 @@ import { Modal, Body } from "@operational/components"
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-  const galactusRef = React.useRef < HTMLDivElement > null
+  const galactusRef = React.useRef<HTMLDivElement>(null)
 
   return (
     <>
