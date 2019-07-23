@@ -115,43 +115,6 @@ import { Modal, Body, Button } from "@operational/components"
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-  const appleRef = React.useRef<HTMLDivElement>(null)
-
-  return (
-    <>
-      <div ref={appleRef} style={{ background: "#0ff", padding: 32, height: 480 }} onClick={() => setIsModalOpen(true)}>
-        Click to Open a Modal Anchored to this div
-      </div>
-      <Modal
-        actions={[
-          <Button color="primary" onClick={() => alert("Apple used to be good but I'm not paying $999 for a monitor.")}>
-            Tell me the Truth
-          </Button>,
-          <Button onClick={() => setIsModalOpen(false)}>Close</Button>,
-        ]}
-        anchor={appleRef}
-        isOpen={isModalOpen}
-        onClickOutside={() => setIsModalOpen(false)}
-        title="🛡"
-      >
-        <img alt="JS" src="https://satchel.rei.com/media/global/img/compass-animation-222.gif" />
-      </Modal>
-    </>
-  )
-}
-;<MyComponent />
-```
-
-## Anchoring to a Huge Element
-
-In some cases, you'd want a modal to be "anchored" to a parent element such that it covers it, providing screen real-estate and context. Supply the `anchor` prop with a `ref` and the modal will magically attach itself to the node in question if it can find it.
-
-```jsx
-import * as React from "react"
-import { Modal, Body, Button } from "@operational/components"
-
-const MyComponent = () => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false)
   const galactusRef = React.useRef<HTMLDivElement>(null)
 
   return (
@@ -180,6 +143,45 @@ const MyComponent = () => {
           The avengers win
           <img style={{ width: "100%" }} alt="Avengers" src="https://images5.alphacoders.com/481/481123.jpg" />
         </div>
+      </Modal>
+    </>
+  )
+}
+;<MyComponent />
+```
+
+## Anchoring to an Element, but overriding width and height
+
+In some cases, you want an anchored modal not to consume _all_ available space. In this case, we can override its size like so.
+
+```jsx
+import * as React from "react"
+import { Modal, Body, Button } from "@operational/components"
+
+const MyComponent = () => {
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
+  const appleRef = React.useRef<HTMLDivElement>(null)
+
+  return (
+    <>
+      <div ref={appleRef} style={{ background: "#0ff", padding: 32, height: 480 }} onClick={() => setIsModalOpen(true)}>
+        Click to Open a Modal Anchored to this div
+      </div>
+      <Modal
+      width="max-content"
+      height="auto"
+        anchor={appleRef}
+        isOpen={isModalOpen}
+        onClickOutside={() => setIsModalOpen(false)}
+        title="🛡"
+        actions={[
+          <Button color="primary" onClick={() => alert("Apple used to be good but I'm not paying $999 for a monitor.")}>
+            Tell me the Truth
+          </Button>,
+          <Button onClick={() => setIsModalOpen(false)}>Close</Button>,
+        ]}
+      >
+        <img alt="JS" src="https://satchel.rei.com/media/global/img/compass-animation-222.gif" />
       </Modal>
     </>
   )
@@ -295,6 +297,8 @@ checked?: boolean}>({})
 ```
 
 ## With a Table
+
+Here's how a table can compose into a modal.
 
 ```jsx
 import { Table, Modal, Chip, Button, ProjectIcon } from "@operational/components"
