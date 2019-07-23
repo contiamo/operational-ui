@@ -7,7 +7,7 @@ export interface ModalProps {
   isOpen: boolean
   children: React.ReactNode
   onClickOutside?: () => void
-  width?: "min-content" | number
+  width?: "max-content" | number
   height?: "auto" | number
   anchor?: React.RefObject<HTMLElement>
   actions?: React.ReactNode[]

@@ -31,7 +31,7 @@ export const Container = styled("div", { shouldForwardProp: prop => !["width", "
   left: ${({ left, theme }) => `calc(${left}px + ${theme.space.content}px)`};
   right: ${({ left }) => (left ? "auto" : 0)};
   width: ${({ width, theme }) =>
-    width === "min-content" ? "min-content" : `calc(${width}px - ${theme.space.content * 2}px)`};
+    width === "max-content" ? "max-content" : `calc(${width}px - ${theme.space.content * 2}px)`};
   max-width: calc(100vw - ${({ theme }) => theme.space.element}px);
   height: ${({ height, theme }) => (height === "auto" ? "auto" : `calc(${height}px - ${theme.space.content * 2}px)`)};
   max-height: calc(100vh - ${({ theme }) => theme.space.content * 2}px);
