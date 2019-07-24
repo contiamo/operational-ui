@@ -43,6 +43,19 @@ const Modal: React.RefForwardingComponent<HTMLDivElement, ModalProps> = (
     }
   }, [isOpen])
 
+  // Close on Escape
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key != "Escape" || !onClickOutside) {
+        return
+      }
+
+      onClickOutside()
+    }
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [])
+
   if (!isOpen) {
     return null
   }
