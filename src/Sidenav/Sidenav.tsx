@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import { DefaultProps } from "../types"
-import { readableTextColor } from "../utils"
+import { readableTextColor, customScrollbar } from "../utils"
 import styled from "../utils/styled"
 
 export interface SidenavProps extends DefaultProps {
@@ -39,23 +39,7 @@ const Container = styled("div")<SidenavProps>(({ theme, compact, dark }) => {
       marginTop: 0,
     },
 
-    /** Give people a slightly nicer experience on Chrome/Safari/Edge */
-    "::-webkit-scrollbar": {
-      width: 6,
-    },
-
-    "::-webkit-scrollbar-track": {
-      background: "transparent",
-    },
-
-    "::-webkit-scrollbar-thumb": {
-      background: dark ? "rgba(255, 255, 255, 0.3)" : theme.color.background.light,
-      cursor: "grab",
-    },
-
-    "::-webkit-scrollbar-thumb:hover": {
-      background: theme.color.primary,
-    },
+    ...customScrollbar({ theme, dark }),
   }
 })
 
