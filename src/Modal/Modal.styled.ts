@@ -29,8 +29,8 @@ export const Container = styled("div", {
   position: fixed;
   margin: 0 auto;
   box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.32);
-  top: ${({ top, theme, modalHeight }) =>
-    `calc(${getTop({ top, theme, height: modalHeight || 0 })}px + ${theme.space.content}px)`};
+  top: ${({ top, theme, anchorHeight }) =>
+    `calc(${getTop({ top, theme, height: anchorHeight || 0 })}px + ${theme.space.content}px)`};
   left: ${({ left, theme }) => `calc(${left}px + ${theme.space.content}px)`};
   right: ${({ left }) => (left ? "auto" : 0)};
   width: ${({ width, theme }) =>
@@ -50,9 +50,9 @@ export const ModalCard = styled(Card)`
   height: 100%;
 `
 
-export const ModalContent = styled.div<{ anchor: boolean }>`
+export const ModalContent = styled.div<{ anchor: boolean; actions: boolean }>`
   display: grid;
-  grid-template-rows: auto max-content;
+  grid-template-rows: ${({ actions }) => (actions ? "auto max-content" : "auto")};
   height: 100%;
   max-height: calc(
     /* card title + bottom padding + bottom margin + border */ 100vh -
