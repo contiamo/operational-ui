@@ -81,7 +81,7 @@ const MyComponent = () => {
   return (
     <>
       <div onClick={() => setIsModalOpen(true)}>An Essay About Ice-Cream</div>
-      <Modal height="100px" isOpen={isModalOpen} onClickOutside={() => setIsModalOpen(false)} title="🍦">
+      <Modal height="300px" isOpen={isModalOpen} onClickOutside={() => setIsModalOpen(false)} title="🍦">
         <Body>
           White chocolate cookies and cream raspberry, white chocolate. Caramel cherry mint maple orange frozen almond
           dessert scoop sorbet, snow cones caramel. Raspberry cake raspberry vanilla. Scoop sundae, apple, froyo. Apple
