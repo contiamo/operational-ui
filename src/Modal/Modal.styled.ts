@@ -35,7 +35,7 @@ export const Container = styled("div", {
   right: ${({ left }) => (left ? "auto" : 0)};
   width: ${({ width, theme }) =>
     width === "max-content" ? "max-content" : `calc(${width}px - ${theme.space.content * 2}px)`};
-  max-width: calc(100vw - ${({ left, theme }) => theme.space.element + left + theme.space.content}px);
+  max-width: calc(100vw - ${({ left, theme }) => theme.space.content * 2 /* <- two sides */ + left}px);
   height: ${getContainerHeight};
   max-height: calc(100vh - ${({ theme }) => theme.space.content * 2}px);
   z-index: ${({ theme }) => theme.zIndex.modal};
