@@ -15,8 +15,9 @@ export const Overlay = styled.div`
   z-index: ${({ theme }) => theme.zIndex.modal - 1};
 `
 
+// We use styled("div") here to filter out `height` and `width` props.
 export const Container = styled("div", {
-  shouldForwardProp: prop => !["width", "height", "top", "left"].includes(prop),
+  shouldForwardProp: prop => !["width", "height", "top", "left", "modalHeight", "anchorHeight"].includes(prop),
 })<{
   top: Top
   left: Left
