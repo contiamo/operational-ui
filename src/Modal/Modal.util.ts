@@ -50,7 +50,7 @@ export const getContainerHeight = ({
 
   // ⚠️ From here, we are always working with anchors.
 
-  // If  we're anchored and the height is "auto" with enough space, use the "auto" size.
+  // If we're anchored and the height is "auto" with enough space, use the "auto" size.
   if (height === "auto" && anchorHeight > modalHeight) {
     return "auto"
   }
