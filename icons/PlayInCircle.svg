@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" height="30" width="30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>PlayInCircle</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M8,16a8,8,0,1,1,8-8A8,8,0,0,1,8,16ZM8,1a7,7,0,1,0,7,7A7,7,0,0,0,8,1Z"/>
+      <path class="cls-1" d="M10.91,8a.24.24,0,0,0-.11-.21L6.6,5a.23.23,0,0,0-.24,0,.27.27,0,0,0-.12.22l0,5.5a.25.25,0,0,0,.12.22.22.22,0,0,0,.24,0L10.8,8.2A.24.24,0,0,0,10.91,8Z"/>
+    </g>
+  </g>
+</svg>
