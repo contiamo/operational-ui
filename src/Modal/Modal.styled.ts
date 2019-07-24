@@ -17,7 +17,9 @@ export const Overlay = styled.div`
   z-index: ${({ theme }) => theme.zIndex.modal - 1};
 `
 
-export const Container = styled("div", { shouldForwardProp: prop => !["width", "height"].includes(prop) })<{
+export const Container = styled("div", {
+  shouldForwardProp: prop => !["width", "height", "top", "left"].includes(prop),
+})<{
   top: Top
   left: Left
   width: Width
@@ -32,7 +34,7 @@ export const Container = styled("div", { shouldForwardProp: prop => !["width", "
   right: ${({ left }) => (left ? "auto" : 0)};
   width: ${({ width, theme }) =>
     width === "max-content" ? "max-content" : `calc(${width}px - ${theme.space.content * 2}px)`};
-  max-width: calc(100vw - ${({ theme }) => theme.space.element}px);
+  max-width: calc(100vw - ${({ left, theme }) => theme.space.element - left - theme.space.content}px);
   height: ${({ height, theme }) => (height === "auto" ? "auto" : `calc(${height}px - ${theme.space.content * 2}px)`)};
   max-height: calc(100vh - ${({ theme }) => theme.space.content * 2}px);
   z-index: ${({ theme }) => theme.zIndex.modal};
