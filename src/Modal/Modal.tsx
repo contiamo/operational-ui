@@ -8,7 +8,7 @@ export interface ModalProps {
   children: React.ReactNode
   onClickOutside?: () => void
   width?: "max-content" | number
-  height?: "auto" | number
+  height?: React.CSSProperties["height"]
   anchor?: React.RefObject<HTMLElement>
   actions?: React.ReactNode[]
 }
@@ -56,10 +56,12 @@ const Modal: React.RefForwardingComponent<HTMLDivElement, ModalProps> = (
         top={size[0]}
         left={size[1]}
         width={width || size[2]}
-        height={height || size[3]}
+        height={height}
+        modalHeight={$modalContainer.current && $modalContainer.current.clientHeight}
+        anchorHeight={typeof size[3] === "number" && size[3]}
       >
         <ModalCard ref={ref} fullSize title={title}>
-          <ModalContent anchor={Boolean(anchor)} height={height}>
+          <ModalContent anchor={Boolean(anchor)}>
             <ContentWrapper>{children}</ContentWrapper>
             {actions && <Actions childCount={actions.length}>{actions}</Actions>}
           </ModalContent>

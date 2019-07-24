@@ -1,11 +1,9 @@
-import isNumber from "lodash/isNumber"
-
 import styled from "../utils/styled"
 import Card from "../Card/Card"
 import { customScrollbar } from "../utils"
 import { cardHeaderHeight } from "../Internals/CardHeader"
-import { Top, Left, Width, Height, ModalProps } from "./Modal"
-import { getTop } from "./Modal.util"
+import { Top, Left, Width, Height } from "./Modal"
+import { getTop, getContainerHeight } from "./Modal.util"
 
 export const Overlay = styled.div`
   position: fixed;
@@ -24,18 +22,20 @@ export const Container = styled("div", {
   left: Left
   width: Width
   height: Height
+  modalHeight: number | null
+  anchorHeight: number | false
 }>`
   position: fixed;
   margin: 0 auto;
   box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.32);
-  top: ${({ top, theme, height }) =>
-    `calc(${getTop({ top, theme, height: isNumber(height) ? height : 0 })}px + ${theme.space.content}px)`};
+  top: ${({ top, theme, modalHeight }) =>
+    `calc(${getTop({ top, theme, height: modalHeight || 0 })}px + ${theme.space.content}px)`};
   left: ${({ left, theme }) => `calc(${left}px + ${theme.space.content}px)`};
   right: ${({ left }) => (left ? "auto" : 0)};
   width: ${({ width, theme }) =>
     width === "max-content" ? "max-content" : `calc(${width}px - ${theme.space.content * 2}px)`};
   max-width: calc(100vw - ${({ left, theme }) => theme.space.element - left - theme.space.content}px);
-  height: ${({ height, theme }) => (height === "auto" ? "auto" : `calc(${height}px - ${theme.space.content * 2}px)`)};
+  height: ${getContainerHeight};
   max-height: calc(100vh - ${({ theme }) => theme.space.content * 2}px);
   z-index: ${({ theme }) => theme.zIndex.modal};
 
@@ -49,10 +49,10 @@ export const ModalCard = styled(Card)`
   height: 100%;
 `
 
-export const ModalContent = styled.div<{ anchor: boolean; height: ModalProps["height"] }>`
+export const ModalContent = styled.div<{ anchor: boolean }>`
   display: grid;
   grid-template-rows: auto max-content;
-  height: ${({ height }) => height || "100%"};
+  height: 100%;
   max-height: calc(
     /* card title + bottom padding + bottom margin + border */ 100vh -
       ${({ theme }) => cardHeaderHeight + theme.space.element + theme.space.element + theme.space.element + 1}px
