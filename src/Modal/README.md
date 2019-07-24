@@ -164,12 +164,23 @@ const MyComponent = () => {
 
   return (
     <>
-      <div ref={appleRef} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#0ff", padding: 32, height: 480 }} onClick={() => setIsModalOpen(true)}>
+      <div
+        ref={appleRef}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#0ff",
+          padding: 32,
+          height: 480,
+        }}
+        onClick={() => setIsModalOpen(true)}
+      >
         <h2>Click to open a (smaller) Modal anchored to this div</h2>
       </div>
       <Modal
-      width="max-content"
-      height="auto"
+        width="max-content"
+        height="auto"
         anchor={appleRef}
         isOpen={isModalOpen}
         onClickOutside={() => setIsModalOpen(false)}
@@ -301,8 +312,8 @@ checked?: boolean}>({})
 Here's how a table can compose into a modal.
 
 ```jsx
+import * as React from "react"
 import { Table, Modal, Chip, Button, ProjectIcon } from "@operational/components"
-
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
@@ -319,6 +330,7 @@ checked?: boolean}>({})
       </div>
       {isModalOpen && <Modal
       width="max-content"
+      height="auto"
         actions={
             [<Button onClick={() => setIsModalOpen(false)}>Close Modal</Button>]
         }
