@@ -101,6 +101,7 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
     border-radius: ${props => props.theme.borderRadius}px;
     background-color: #f2f2f2;
     box-shadow: 0 0 0 1px ${props => props.theme.color.border.default};
+    margin: 0 1px; /* offset box shadow */
     border: none;
   }
 `
