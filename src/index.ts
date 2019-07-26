@@ -92,7 +92,8 @@ export { default as Title } from "./Typography/Title"
 export { default as Small } from "./Typography/Small"
 
 // Internals components
-export { Actions, ControlledModalContent, ConfirmBodyProps, ConfirmOptions } from "./Internals/Confirm"
+export { ControlledModalContent, ConfirmBodyProps, ConfirmOptions } from "./Internals/Confirm"
+export { default as ControlledModal } from "./Internals/ControlledModal"
 export { Tab } from "./Internals/Tabs"
 
 // Utils

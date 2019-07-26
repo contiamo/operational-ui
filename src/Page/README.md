@@ -200,41 +200,34 @@ const Tab = props => (
   </PageContent>
 )
 
-class Router extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      tabName: "jobs",
-    }
+const Router = () => {
+  const [tabName, setTabName] = React.useState("jobs")
+
+  const goTo = tabName => {
+    setTabName(tabName)
   }
 
-  goTo(tabName) {
-    this.setState({ tabName })
-  }
-
-  render() {
-    return (
-      <>
-        <div style={{ paddingBottom: 10, marginBottom: 10, borderBottom: "1px black solid" }}>
-          <h1>Router actions</h1>
-          <p>Current route: {this.state.tabName}</p>
-          <Button onClick={() => this.goTo("overview")}>go to overview</Button>
-          <Button onClick={() => this.goTo("jobs")}>go to jobs</Button>
-          <Button onClick={() => this.goTo("functions")}>go to functions</Button>
-        </div>
-        <Page
-          title="Bundle detail"
-          activeTabName={this.state.tabName}
-          onTabChange={this.goTo.bind(this)}
-          tabs={[
-            { name: "overview", children: <Tab title="Overview" /> },
-            { name: "jobs", children: <Tab title="Jobs" /> },
-            { name: "functions", children: <Tab title="Functions" /> },
-          ]}
-        />
-      </>
-    )
-  }
+  return (
+    <>
+      <div style={{ paddingBottom: 10, marginBottom: 10, borderBottom: "1px black solid" }}>
+        <h1>Router actions</h1>
+        <p>Current route: {tabName}</p>
+        <Button onClick={() => goTo("overview")}>go to overview</Button>
+        <Button onClick={() => goTo("jobs")}>go to jobs</Button>
+        <Button onClick={() => goTo("functions")}>go to functions</Button>
+      </div>
+      <Page
+        title="Bundle detail"
+        activeTabName={tabName}
+        onTabChange={goTo}
+        tabs={[
+          { name: "overview", children: <Tab title="Overview" /> },
+          { name: "jobs", children: <Tab title="Jobs" /> },
+          { name: "functions", children: <Tab title="Functions" /> },
+        ]}
+      />
+    </>
+  )
 }
 
 ;<Router />
@@ -252,43 +245,36 @@ const Tab = props => (
   </PageContent>
 )
 
-class Router extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      tabName: "jobs",
-    }
+const Router = () => {
+  const [tabName, setTabName] = React.useState("jobs")
+
+  const goTo = tabName => {
+    setTabName(tabName)
   }
 
-  goTo(tabName) {
-    this.setState({ tabName })
-  }
-
-  render() {
-    return (
-      <>
-        <div style={{ paddingBottom: 10, marginBottom: 10, borderBottom: "1px black solid" }}>
-          <h1>Router actions</h1>
-          <p>Current route: {this.state.tabName}</p>
-          <Button onClick={() => this.goTo("overview")}>go to overview</Button>
-          <Button onClick={() => this.goTo("jobs")}>go to jobs</Button>
-          <Button onClick={() => this.goTo("functions")}>go to functions</Button>
-          <Button onClick={() => this.goTo("editor")}>go to editor</Button>
-        </div>
-        <Page
-          title="Bundle detail"
-          activeTabName={this.state.tabName}
-          onTabChange={this.goTo.bind(this)}
-          tabs={[
-            { name: "overview", children: <Tab title="Overview" /> },
-            { name: "jobs", children: <Tab title="Overview" /> },
-            { name: "functions", children: <Tab title="Overview" /> },
-            { name: "editor", children: <Tab title="Editor" />, hidden: true },
-          ]}
-        />
-      </>
-    )
-  }
+  return (
+    <>
+      <div style={{ paddingBottom: 10, marginBottom: 10, borderBottom: "1px black solid" }}>
+        <h1>Router actions</h1>
+        <p>Current route: {tabName}</p>
+        <Button onClick={() => goTo("overview")}>go to overview</Button>
+        <Button onClick={() => goTo("jobs")}>go to jobs</Button>
+        <Button onClick={() => goTo("functions")}>go to functions</Button>
+        <Button onClick={() => goTo("editor")}>go to editor</Button>
+      </div>
+      <Page
+        title="Bundle detail"
+        activeTabName={tabName}
+        onTabChange={goTo}
+        tabs={[
+          { name: "overview", children: <Tab title="Overview" /> },
+          { name: "jobs", children: <Tab title="Jobs" /> },
+          { name: "functions", children: <Tab title="Functions" /> },
+          { name: "editor", children: <Tab title="Editor" />, hidden: true },
+        ]}
+      />
+    </>
+  )
 }
 
 ;<Router />
@@ -635,9 +621,18 @@ import { Page, Card, Button } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import ControlledModal from "../Internals/ControlledModal"
-import { Actions, List, Body, SimpleLink, Card, Button, Stepper, ControlledModalContent } from "../index"
-import PageContent from "../PageContent/PageContent"
+import {
+  List,
+  Body,
+  SimpleLink,
+  Card,
+  Button,
+  Stepper,
+  ControlledModalContent,
+  ControlledModal,
+  PageContent,
+  styled,
+} from "@operational/components"
 
 const MyPage = styled("div")`
   height: 800px;
@@ -821,9 +816,6 @@ const ControlledModalTest = () => {
               ]}
             />
           </ControlledModalContent>
-          <Actions>
-            <Button onClick={() => setControlledModalRunning(false)}>Close</Button>
-          </Actions>
         </ControlledModal>
       </PageContent>
     </MyPage>

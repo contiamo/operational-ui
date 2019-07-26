@@ -300,7 +300,7 @@ import {
   DataSourceIcon, 
   EmptyCircleIcon,
   FunctionIcon,
-  VirtualDatabaseIcon,
+  VirtualDBIcon,
   CollectionsIcon} from "@operational/components"
 
 const sidebar = (
@@ -317,7 +317,7 @@ const sidebar = (
       <SidenavItem label="The Third Prize" icon={FunctionIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon={VirtualDatabaseIcon} />
+      <SidenavItem label="The First Prize" icon={VirtualDBIcon} />
       <SidenavItem label="The Second Prize" icon={HomeIcon} />
       <SidenavItem label="The Third Prize" icon={CollectionsIcon} />
     </SidenavHeader>

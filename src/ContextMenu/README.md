@@ -80,9 +80,7 @@ import * as React from "react"
 import { AddIcon, ContextMenu, ContextMenuProps, Contact, Hint, Button } from "@operational/components"
 
 /* Anything can be a label now, even some DIV you style yourself */
-const MyLabelContainer = ({ children, style }) => (
-  <div style={{ marginRight: 8, padding: "8px 0", ...style }}>{children}</div>
-)
+const MyLabelContainer = ({ children }) => <div style={{ marginRight: 8, padding: "8px 0" }}>{children}</div>
 
 const menuItems = [
   {

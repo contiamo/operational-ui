@@ -34,14 +34,14 @@ const MyComponent = () => {
         value={value}
         options={options}
         onChange={(newValue, lastChanged) => {
-          setValue(newValue)
+          setValue(newValue as string)
           setLastChanged(lastChanged)
         }}
       />
       <Code>
         {`
 Current value: ${value}
-Last changed option: 
+Last changed option:
 
 ${JSON.stringify(lastChanged, null, 2)}
       `}
@@ -83,7 +83,7 @@ const MyComponent = () => {
         value={value}
         options={options}
         onChange={(newValue, lastChanged) => {
-          setValue(newValue)
+          setValue(newValue as string)
           setLastChanged(lastChanged)
         }}
       />
@@ -130,7 +130,7 @@ const MyOtherComponent = () => {
       value={value}
       options={options}
       placeholder="Choose an option"
-      onChange={setValue}
+      onChange={newValue => setValue(newValue as string[])}
     />
   )
 }
@@ -167,7 +167,7 @@ const MyThirdComponent = () => {
       options={options}
       filterable
       placeholder="Choose an option"
-      onChange={setValue}
+      onChange={newValue => setValue(newValue as string)}
     />
   )
 }
@@ -205,7 +205,7 @@ const MyThirdComponent = () => {
       filterable
       maxOptions={2}
       placeholder="Choose an option"
-      onChange={newValue => setValue(newValue)}
+      onChange={newValue => setValue(newValue as string)}
     />
   )
 }
@@ -244,7 +244,7 @@ const MyComponent = () => {
         options={options}
         filterable
         placeholder="Choose an option"
-        onChange={setValue}
+        onChange={newValue => setValue(newValue as string)}
       />
     </div>
   )
@@ -283,7 +283,7 @@ const MyComponent = () => {
       options={options}
       label="Disabled"
       placeholder="Choose an option"
-      onChange={setValue}
+      onChange={newValue => setValue(newValue as string)}
     />
   )
 }
@@ -320,9 +320,9 @@ const MyComponent = () => {
         placeholder="Choose an option"
         customOption={{ label: "Custom...", value: customOptionValue }}
         onChange={(newValue, lastChanged) => {
-          setValue(newValue)
+          setValue(newValue as string)
           if (lastChanged && lastChanged.label === "Custom...") {
-            setCustomOptionValue(newValue)
+            setCustomOptionValue(newValue as string)
           }
           setLastChanged(lastChanged)
         }}

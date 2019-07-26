@@ -88,13 +88,13 @@ const MyComponent = () => {
 
 ```jsx
 import * as React from "react"
-import { Progress, Uploader } from "@operational/components"
+import { Progress, Uploader, styled } from "@operational/components"
 
 const UploadingText = styled("p")(({ theme }) => ({
   color: theme.color.text.lighter,
 }))
 
-;<Uploader>
+;<Uploader dragActive>
   <Progress inline width={196} />
   <UploadingText>Uploading...</UploadingText>
 </Uploader>
@@ -104,14 +104,14 @@ const UploadingText = styled("p")(({ theme }) => ({
 
 ```jsx
 import * as React from "react"
-import { Uploader } from "@operational/components"
+import { Uploader, styled } from "@operational/components"
 
 const CompletedText = styled("p")(({ theme }) => ({
   color: theme.color.primary,
   fontWeight: theme.font.weight.bold,
 }))
 
-;<Uploader>
+;<Uploader dragActive={false}>
   <CompletedText>Completed</CompletedText>
 </Uploader>
 ```
@@ -120,7 +120,7 @@ const CompletedText = styled("p")(({ theme }) => ({
 
 ```jsx
 import * as React from "react"
-import { Uploader } from "@operational/components"
+import { Uploader, styled } from "@operational/components"
 
 const ErrorContentContainer = styled("p")(({ theme }) => ({
   color: theme.color.error,
@@ -132,7 +132,7 @@ const ErrorContentContainer = styled("p")(({ theme }) => ({
   },
 }))
 
-;<Uploader>
+;<Uploader dragActive={false}>
   <ErrorContentContainer>
     Upload failed
     <br />

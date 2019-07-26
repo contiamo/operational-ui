@@ -55,7 +55,7 @@ const MyComponent = () => {
         }}
       >
         <Input
-          Icon={SearchIcon}
+          icon={SearchIcon}
           label="Search"
           placeholder="Filter Icons..."
           type="text"

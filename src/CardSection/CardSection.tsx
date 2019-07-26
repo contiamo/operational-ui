@@ -9,7 +9,7 @@ import { headerHeight } from "../utils/constants"
 
 export interface CardSectionProps extends DefaultProps, DragProps {
   /** Column title */
-  title?: string
+  title?: React.ReactNode
   /** Disabled */
   disabled?: boolean
   /** Feedback during drag and drop interaction */

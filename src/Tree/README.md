@@ -237,7 +237,7 @@ const PizzaMaker = () => {
     "Beef",
     "Pork",
   ])
-  const [ingredients, setIngredients] = React.useState([])
+  const [ingredients, setIngredients] = React.useState<string[]>([])
 
   const onDragEnd = React.useCallback(result => {
     if (result.destination) {
@@ -284,7 +284,7 @@ const PizzaMaker = () => {
     } else {
       alert("Not bad ^^")
     }
-  })
+  }, [])
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>

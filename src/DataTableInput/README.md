@@ -5,10 +5,11 @@ This component is a variant of `Input` that can be used with `DataTable`. See [D
 We sometimes require editing data inside cells, for operational reasons. Here's how a `DataTableInput` composes together inside a [`DataTable`](#!/DataTable). The following `DataTableInput` also supports validation. It is programmed to only accept a `number`. Putting textual characters in there will trigger a validation error. Try it out!
 
 ```jsx
+import * as React from "react"
 import { Title, DataTable, DataTableSelect, DataTableInput, DataTableFooter, Checkbox } from "@operational/components"
 
 const Age = () => {
-  const [age, setAge] = React.useState(new Date().getFullYear() - 1993)
+  const [age, setAge] = React.useState(String(new Date().getFullYear() - 1993))
   const [isError, setIsError] = React.useState(false)
 
   React.useEffect(() => {
