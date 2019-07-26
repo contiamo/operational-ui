@@ -157,7 +157,8 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
                 >
                   {truncate(maxCharactersInCell)(cellString)}
                   {cellString.length > maxCharactersInCell && (
-                    <ViewMoreToggle height={rowHeight} onClick={openViewMore(cellString)}>
+                    /* we don't want this to cover the border-bottom */
+                    <ViewMoreToggle height={rowHeight - 1} onClick={openViewMore(cellString)}>
                       <ChevronDownIcon color={Boolean(viewMorePopup) ? "primary" : undefined} size={10} />
                     </ViewMoreToggle>
                   )}

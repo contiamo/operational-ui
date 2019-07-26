@@ -84,7 +84,7 @@ export const ViewMoreToggle = styled("div", { shouldForwardProp: prop => prop !=
   position: absolute;
   right: 0;
   top: 0;
-  height: ${({ height }) => height - 1}px; /* we don't want this to cover the border-bottom */
+  height: ${({ height }) => height}px;
   width: 40px;
   display: flex;
   align-items: center;
