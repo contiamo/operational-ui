@@ -1,7 +1,8 @@
+import { keyframes } from "@emotion/core"
+
 import styled from "../utils/styled"
 import { DataTableProps } from "./DataTable"
 import { getHeaderRowHeight } from "./DataTable.util"
-import { keyframes } from "@emotion/core"
 import { customScrollbar } from "../utils"
 
 export const Container = styled("div", { shouldForwardProp: prop => prop !== "width" })<{ width: string }>`
@@ -79,7 +80,7 @@ export const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: DataTa
   top: ${({ numHeaders, rowHeight }) => numHeaders * getHeaderRowHeight(rowHeight)}px;
 `
 
-export const Kebab = styled("div", { shouldForwardProp: prop => prop !== "height" })<{ height: number }>`
+export const ViewMoreToggle = styled("div", { shouldForwardProp: prop => prop !== "height" })<{ height: number }>`
   position: absolute;
   right: 0;
   top: 0;

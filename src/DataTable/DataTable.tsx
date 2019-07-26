@@ -12,7 +12,7 @@ import {
   HeadersContainer,
   Row,
   ViewMorePopup,
-  Kebab,
+  ViewMoreToggle,
 } from "./DataTable.styled"
 import { defaultRowHeight, getRowHeight } from "./DataTable.util"
 import { ChevronDownIcon } from "../Icon/Icon"
@@ -157,9 +157,9 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
                 >
                   {truncate(maxCharactersInCell)(cellString)}
                   {cellString.length > maxCharactersInCell && (
-                    <Kebab height={rowHeight} onClick={openViewMore(cellString)}>
+                    <ViewMoreToggle height={rowHeight} onClick={openViewMore(cellString)}>
                       <ChevronDownIcon color={Boolean(viewMorePopup) ? "primary" : undefined} size={10} />
-                    </Kebab>
+                    </ViewMoreToggle>
                   )}
                 </Cell>
               )
