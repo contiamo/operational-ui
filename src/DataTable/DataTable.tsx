@@ -146,7 +146,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
         >
           {rows[index] &&
             rows[index].map((cell, cellIndex) => {
-              const cellString = stringifyIfNeeded(cell)
+              const cellMaybeString = stringifyIfNeeded(cell)
               return (
                 <Cell
                   rowIndex={index}
@@ -155,10 +155,10 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
                   cell={cellIndex + 1}
                   height={rowHeight}
                 >
-                  {truncate(maxCharactersInCell)(cellString)}
-                  {cellString.length > maxCharactersInCell && (
+                  {truncate(maxCharactersInCell)(cellMaybeString)}
+                  {typeof cellMaybeString === "string" && cellMaybeString.length > maxCharactersInCell && (
                     /* we don't want this to cover the border-bottom */
-                    <ViewMoreToggle height={rowHeight - 1} onClick={openViewMore(cellString)}>
+                    <ViewMoreToggle height={rowHeight - 1} onClick={openViewMore(cellMaybeString)}>
                       <ChevronDownIcon color={Boolean(viewMorePopup) ? "primary" : undefined} size={10} />
                     </ViewMoreToggle>
                   )}
