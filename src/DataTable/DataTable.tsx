@@ -3,8 +3,19 @@ import { FixedSizeList, ListChildComponentProps, FixedSizeListProps } from "reac
 
 import Message from "../Internals/Message/Message"
 import { truncate } from "../utils/truncate"
-import { Cell, Container, DataWrapper, HeaderCell, HeaderRow, HeadersContainer, Row } from "./DataTable.styled"
+import {
+  Cell,
+  Container,
+  DataWrapper,
+  HeaderCell,
+  HeaderRow,
+  HeadersContainer,
+  Row,
+  ViewMorePopup,
+  Kebab,
+} from "./DataTable.styled"
 import { defaultRowHeight, getRowHeight } from "./DataTable.util"
+import { ChevronDownIcon } from "../Icon/Icon"
 
 export interface DataTableProps<Columns, Rows> {
   /* The columns of our table. They are an array of header layers. */
@@ -56,15 +67,31 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   maxCharactersInCell = 30,
   className,
 }: DataTableProps<Columns, Rows>) {
-  if (rows.length && rows[0].length !== columns.length) {
-    return (
-      <Message color="error">
-        Invalid data: `rows` have different cardinality ({rows[0].length}) than `columns` ({columns.length}). Please
-        check both props and try again.
-      </Message>
-    )
-  }
+  const [viewMorePopup, setViewMorePopup] = React.useState<{ content: string; x: number; y: number } | false>(false)
+  React.useEffect(() => {
+    if (!viewMorePopup) {
+      return
+    }
 
+    const handleClickOutside = () => {
+      setViewMorePopup(false)
+    }
+
+    document.addEventListener("click", handleClickOutside)
+    document.addEventListener("contextmenu", handleClickOutside)
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside)
+      document.removeEventListener("contextmenu", handleClickOutside)
+    }
+  }, [viewMorePopup])
+
+  const openViewMore = React.useCallback(
+    (content: string) => (e: React.MouseEvent) => {
+      setViewMorePopup({ content, x: e.clientX, y: e.clientY })
+    },
+    [viewMorePopup],
+  )
   const rowHeight = React.useMemo(() => getRowHeight(initialRowHeight), [initialRowHeight])
 
   const Table = React.useMemo(
@@ -118,38 +145,62 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
           numCells={numCells}
         >
           {rows[index] &&
-            rows[index].map((cell, cellIndex) => (
-              <Cell
-                rowIndex={index}
-                isEvenRow={index % 2 === 0}
-                key={`op-row-${index}-cell-${cellIndex}`}
-                cell={cellIndex + 1}
-                height={rowHeight}
-              >
-                {truncate(maxCharactersInCell)(stringifyIfNeeded(cell))}
-              </Cell>
-            ))}
+            rows[index].map((cell, cellIndex) => {
+              const cellString = stringifyIfNeeded(cell)
+              return (
+                <Cell
+                  rowIndex={index}
+                  isEvenRow={index % 2 === 0}
+                  key={`op-row-${index}-cell-${cellIndex}`}
+                  cell={cellIndex + 1}
+                  height={rowHeight}
+                >
+                  {truncate(maxCharactersInCell)(cellString)}
+                  {cellString.length > maxCharactersInCell && (
+                    <Kebab height={rowHeight} onClick={openViewMore(cellString)}>
+                      <ChevronDownIcon color={Boolean(viewMorePopup) ? "primary" : undefined} size={10} />
+                    </Kebab>
+                  )}
+                </Cell>
+              )
+            })}
         </Row>
       )),
     [rows, rowHeight],
   )
 
+  if (rows.length && rows[0].length !== columns.length) {
+    return (
+      <Message color="error">
+        Invalid data: `rows` have different cardinality ({rows[0].length}) than `columns` ({columns.length}). Please
+        check both props and try again.
+      </Message>
+    )
+  }
+
   return (
-    <Container width={width} className={className}>
-      <FixedSizeList
-        itemCount={rows.length}
-        itemSize={rowHeight}
-        height={height}
-        width={width}
-        innerElementType={Table}
-        /** can't use data-cy or any other prop because of react-window */
-        className="operational-ui__DataTable--virtual-scroller"
-        style={{ willChange: undefined }}
-      >
-        {VirtualRow}
-      </FixedSizeList>
-      {footer}
-    </Container>
+    <>
+      {viewMorePopup && (
+        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x}>
+          {viewMorePopup.content}
+        </ViewMorePopup>
+      )}
+      <Container width={width} className={className}>
+        <FixedSizeList
+          itemCount={rows.length}
+          itemSize={rowHeight}
+          height={height}
+          width={width}
+          innerElementType={Table}
+          /** can't use data-cy or any other prop because of react-window */
+          className="operational-ui__DataTable--virtual-scroller"
+          style={{ willChange: undefined }}
+        >
+          {VirtualRow}
+        </FixedSizeList>
+        {footer}
+      </Container>
+    </>
   )
 }
 

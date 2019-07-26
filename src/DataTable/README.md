@@ -202,3 +202,108 @@ const MyComponent = () => {
 
 ;<MyComponent />
 ```
+
+## Text Overflow Protection
+
+Sometimes, text overflows in ways that could be potentially ugly. The `DataTable` provisions for this, in case the content of a cell is longer than it's specified size by adding chevrons to indicate content overflow.
+
+```jsx
+import * as React from "react"
+import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operational/components"
+;<DataTable
+  columns={[
+    [
+      "I am so long I am the longest the longest of the long LOL look how long I am my mom said I would never be long but I really am the longest KOBE BRYANT AINT GOT NOTHING ON ME HOMIE",
+    ],
+    ["Name"],
+    ["Lifestyle"],
+    ["Resolution"],
+    ["Name"],
+    ["Lifestyle"],
+    ["Resolution"],
+    ["Name"],
+    ["Lifestyle"],
+    ["Resolution"],
+    ["Name"],
+    ["Lifestyle"],
+    ["Resolution"],
+  ]}
+  rows={[
+    [
+      String(Math.random()).repeat(1000),
+      "Imogen Mason",
+      "I love my family",
+      "To uphold British spelling ".repeat(1000),
+      "Imogen Mason",
+      "I love my family",
+      "To uphold British spelling ".repeat(1000),
+      "Imogen Mason",
+      "I love my family",
+      "To uphold British spelling ".repeat(1000),
+      "Imogen Mason",
+      "I love my family",
+      "To uphold British spelling ".repeat(1000),
+    ],
+    [
+      String(Math.random()).repeat(1000),
+      "Fabien Bernard",
+      "CLIMBING WINE TECH CNC FABLAB WOOO",
+      "I promise to love wine ".repeat(1000),
+      "Fabien Bernard",
+      "CLIMBING WINE TECH CNC FABLAB WOOO",
+      "I promise to love wine ".repeat(1000),
+      "Fabien Bernard",
+      "CLIMBING WINE TECH CNC FABLAB WOOO",
+      "I promise to love wine ".repeat(1000),
+      "Fabien Bernard",
+      "CLIMBING WINE TECH CNC FABLAB WOOO",
+      "I promise to love wine ".repeat(1000),
+    ],
+    [
+      String(Math.random()).repeat(1000),
+      "STEREO BOOSTER",
+      "☕️",
+      "I promise to boost stereos ".repeat(1000),
+      "STEREO BOOSTER",
+      "☕️",
+      "I promise to boost stereos ".repeat(1000),
+      "STEREO BOOSTER",
+      "☕️",
+      "I promise to boost stereos ".repeat(1000),
+      "STEREO BOOSTER",
+      "☕️",
+      "I promise to boost stereos ".repeat(1000),
+    ],
+    [
+      String(Math.random()).repeat(1000),
+      "Mischa Potomin",
+      "F I T N E S S",
+      "I will always look my best ".repeat(2000),
+      "Mischa Potomin",
+      "F I T N E S S",
+      "I will always look my best ".repeat(2000),
+      "Mischa Potomin",
+      "F I T N E S S",
+      "I will always look my best ".repeat(2000),
+      "Mischa Potomin",
+      "F I T N E S S",
+      "I will always look my best ".repeat(2000),
+    ],
+    [
+      String(Math.random()).repeat(1000),
+      "Tejas Kumar",
+      "🍗🍖🥓🥩",
+      "I will not complain about the backend team ".repeat(1000),
+      "Tejas Kumar",
+      "🍗🍖🥓🥩",
+      "I will not complain about the backend team ".repeat(1000),
+      "Tejas Kumar",
+      "🍗🍖🥓🥩",
+      "I will not complain about the backend team ".repeat(1000),
+      "Tejas Kumar",
+      "🍗🍖🥓🥩",
+      "I will not complain about the backend team ".repeat(1000),
+    ],
+  ]}
+/>
+```
