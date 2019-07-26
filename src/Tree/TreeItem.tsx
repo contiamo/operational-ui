@@ -105,7 +105,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       React.createElement(icon, {
         size: 12,
         color: iconColor || "color.text.lighter",
-        style: { marginLeft: 0, marginRight: 8 },
+        style: { marginLeft: 0, marginRight: 8, flex: "0 0 15px" },
       })}
     <Label hasChildren={hasChildren}>
       <Highlighter
