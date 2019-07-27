@@ -30,3 +30,11 @@ import * as React from "react"
 import { Logo } from "@operational/components"
 ;<Logo size={100} color="#747474" name="ContiamoStacked" />
 ```
+
+#### 🌈 Pride 🌈
+
+```jsx
+import * as React from "react"
+import { Logo } from "@operational/components"
+;<Logo size={100} name="ContiamoPride" />
+```
