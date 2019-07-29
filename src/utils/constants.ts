@@ -243,6 +243,7 @@ const shadows = {
   focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
   insetFocus: "inset 0 0 0px 1px #1499ce",
   popup: "0 3px 12px rgba(0, 0, 0, .15)",
+  contextMenu: "0 2px 4px 0 rgba(0, 0, 0, 0.25)",
 }
 
 const constants = {
