@@ -4,9 +4,28 @@ Context menus are nested menus that can expand from anywhere on a page. Their us
 
 ```jsx
 import * as React from "react"
-import { ContextMenu, ContextMenuProps } from "@operational/components"
+import {
+  SearchIcon,
+  ViewIcon,
+  RenameIcon,
+  DeleteIcon,
+  MaterializationIcon,
+  WorkbenchIcon,
+  ContextMenu,
+  ContextMenuProps,
+} from "@operational/components"
 
-const menuItems = [{ label: "Menu 1", onClick: () => alert("Menu 1 uses custom onClick function") }, "Menu 2", "Menu 3"]
+const menuItems = [
+  { icon: SearchIcon, label: "View Data" },
+  { icon: ViewIcon, label: "View Definition" },
+  "---",
+  { icon: RenameIcon, label: "Rename" },
+  { icon: DeleteIcon, label: "Delete" },
+  "---",
+  { icon: MaterializationIcon, label: "Turn into View" },
+  "---",
+  { icon: WorkbenchIcon, label: "Join to Query" },
+]
 ;<ContextMenu items={menuItems} onClick={item => alert(`clicked ${item.label}`)}>
   <span>Click here</span>
 </ContextMenu>
