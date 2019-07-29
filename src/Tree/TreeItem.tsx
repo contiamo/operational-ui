@@ -101,8 +101,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
             return
           }
 
-          console.log(e, onNodeDoubleClick)
-
           if (onNodeDoubleClick) {
             onNodeDoubleClick(e)
           }
