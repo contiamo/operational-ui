@@ -1,13 +1,9 @@
 import * as React from "react"
-import isString from "lodash/isString"
 
-import { lighten } from "../utils"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 import { ContextMenuProps } from "./ContextMenu"
 import { IconComponentType } from "../Icon/Icon"
-
-type StringOrItem = string | IContextMenuItem
 
 export interface Props {
   condensed?: boolean
@@ -15,7 +11,7 @@ export interface Props {
   onClick?: (e: React.MouseEvent<HTMLDivElement> | React.KeyboardEvent<HTMLDivElement>) => void
   align?: "left" | "right"
   iconLocation?: "left" | "right"
-  item: StringOrItem
+  item: IContextMenuItem
   isActive?: boolean
   id?: string
   disabled: boolean
@@ -31,67 +27,33 @@ export interface IContextMenuItem<TValue = any> {
   isActive?: boolean
 }
 
-export const rowHeight = 40
-export const condensedRowHeight = 35
+export const rowHeight = 32
 
-const Container = styled("div")<Props>(({ disabled, align, theme, isActive, condensed, width, item }) => {
-  const activeShadow = `0 0 0 1px ${theme.color.primary} inset`
-  const hasDescription = !isString(item) && Boolean(item.description)
-
+const Container = styled("div")<Props>(({ condensed, disabled, align, theme, width }) => {
   return {
     userSelect: "none",
     label: "contextmenuitem",
-    width: width || (condensed ? 160 : "100%"),
+    width: width || "100%",
     minWidth: "100%",
     whiteSpace: "nowrap",
     overflow: "hidden",
     textOverflow: "ellipsis",
     backgroundColor: theme.color.white,
-    lineHeight: `${condensed ? condensedRowHeight : rowHeight}px`,
-    padding: `0 ${theme.space.content}px`,
+    lineHeight: `${rowHeight}px`,
+    padding: `${condensed ? 0 : theme.space.small}px ${theme.space.content}px`,
     textAlign: align,
     display: "flex",
     alignItems: "center",
     outline: "none",
-    fontWeight: isActive ? theme.font.weight.bold : theme.font.weight.medium,
-    boxShadow: isActive ? activeShadow : "none",
-
+    fontWeight: theme.font.weight.bold,
+    color: disabled ? theme.color.text.disabled : theme.color.text.default,
+    cursor: disabled ? "initial" : "pointer",
     "&[aria-selected='true']": {
-      boxShadow: activeShadow,
       outline: "none",
     },
-    ...(typeof item !== "string" && Boolean(item.description)
-      ? {
-          borderBottom: `1px solid ${theme.color.border.select}`,
-        }
-      : {}),
-    "&:hover, &[aria-selected='true']": {
-      backgroundColor: lighten(theme.color.primary, 50),
-      color: theme.color.primary,
+    "&:hover, &:focus, &[aria-selected='true']": {
+      backgroundColor: theme.color.background.lightest,
     },
-    "&:focus": {
-      backgroundColor: lighten(theme.color.primary, 50),
-      color: theme.color.primary,
-    },
-    color: disabled ? theme.color.text.disabled : isActive ? theme.color.primary : theme.color.text.default,
-    borderTop: `1px solid ${theme.color.border.select}`,
-    cursor: disabled ? "initial" : "pointer",
-    "&:last-child": {
-      paddingBottom: 2,
-    },
-    ...(!disabled && {
-      "&[aria-selected='true']": {
-        boxShadow: activeShadow,
-        outline: "none",
-      },
-      "&:hover, &[aria-selected='true']": {
-        backgroundColor: lighten(theme.color.primary, 50),
-        color: theme.color.primary,
-      },
-    }),
-    ...(hasDescription && {
-      borderBottom: `1px solid ${theme.color.border.select}`,
-    }),
   }
 })
 
@@ -129,7 +91,7 @@ const ContextMenuIconBase = styled("div", { shouldForwardProp: prop => prop !== 
   }
 `
 
-const Content: React.SFC<{ value: StringOrItem }> = ({ value }) => {
+const Content: React.SFC<{ value: IContextMenuItem }> = ({ value }) => {
   // Fragments are required to hint to the compiler that these are valid types.
   if (typeof value === "string") {
     return <>{value}</>
@@ -168,14 +130,12 @@ const ContextMenuItemIcon: React.SFC<Pick<Props, "item" | "iconLocation">> = ({ 
   return <>{item.icon}</>
 }
 
-const ContextMenuItem: React.SFC<Props> = ({ iconLocation, item, onClick, condensed, ...props }) => {
-  return (
-    <Container {...props} onClick={onClick} condensed={condensed} item={item}>
-      {(!iconLocation || iconLocation === "left") && <ContextMenuItemIcon iconLocation={iconLocation} item={item} />}
-      <Content value={item} />
-      {iconLocation === "right" && <ContextMenuItemIcon iconLocation={iconLocation} item={item} />}
-    </Container>
-  )
-}
+const ContextMenuItem: React.SFC<Props> = ({ iconLocation, item, onClick, condensed, ...props }) => (
+  <Container {...props} onClick={onClick} condensed={condensed} item={item}>
+    {(!iconLocation || iconLocation === "left") && <ContextMenuItemIcon iconLocation={iconLocation} item={item} />}
+    <Content value={item} />
+    {iconLocation === "right" && <ContextMenuItemIcon iconLocation={iconLocation} item={item} />}
+  </Container>
+)
 
 export default ContextMenuItem
