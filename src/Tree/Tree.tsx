@@ -16,6 +16,7 @@ interface BaseTree {
   iconColor?: string
   onClick?: () => void
   onContextMenu?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  onDoubleClick?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   cursor?: string
   onRemove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   forwardRef?: (element?: HTMLElement | null) => any

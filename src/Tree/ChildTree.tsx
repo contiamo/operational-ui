@@ -25,6 +25,7 @@ const ChildTree: React.SFC<Props> = ({
   droppableProps,
   onClick,
   onContextMenu,
+  onDoubleClick,
   onRemove,
   cursor,
   searchWords,
@@ -57,6 +58,17 @@ const ChildTree: React.SFC<Props> = ({
     [disabled, onContextMenu],
   )
 
+  const onNodeDoubleClick = React.useMemo(
+    () =>
+      !disabled && onDoubleClick
+        ? (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+            event.preventDefault()
+            onDoubleClick(event)
+          }
+        : undefined,
+    [disabled, onContextMenu],
+  )
+
   return (
     <Container ref={forwardRef} disabled={Boolean(disabled)} hasChildren={hasChildren} {...props}>
       <TreeItem
@@ -64,6 +76,7 @@ const ChildTree: React.SFC<Props> = ({
         searchWords={searchWords}
         onNodeClick={onNodeClick}
         onNodeContextMenu={onNodeContextMenu}
+        onNodeDoubleClick={onNodeDoubleClick}
         highlight={Boolean(highlight)}
         hasChildren={hasChildren}
         isOpen={isOpen}
