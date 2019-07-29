@@ -103,22 +103,27 @@ const TreeItem: React.SFC<TreeItemProps> = ({
 
           if (onNodeDoubleClick) {
             onNodeDoubleClick(e)
+            return
           }
-          break
+
+          if (onNodeClick) {
+            onNodeClick(e)
+          }
+          return
         case " ":
         case "Space": // the platform™
           e.preventDefault()
           if (onNodeClick) {
             onNodeClick(e)
           }
-          break
+          return
         case "Delete":
         case "Backspace":
           e.preventDefault()
           if (onRemove) {
             onRemove(e)
           }
-          break
+          return
       }
     },
     [onNodeContextMenu, onNodeDoubleClick, onNodeClick],
