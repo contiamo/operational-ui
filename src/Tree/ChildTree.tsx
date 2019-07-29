@@ -34,18 +34,8 @@ const ChildTree: React.SFC<Props> = ({
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
   const hasChildren = Boolean(childNodes && childNodes.length)
-  const onNodeClick =
-    !disabled && (hasChildren || onClick)
-      ? (e: React.MouseEvent<HTMLDivElement>) => {
-          e.stopPropagation()
-          if (hasChildren) {
-            setIsOpen(!isOpen)
-          }
-          if (onClick) {
-            onClick()
-          }
-        }
-      : undefined
+  const clickCount = React.useRef(0)
+  const timeoutForDoubleClick = 200
 
   const onNodeContextMenu = React.useMemo(
     () =>
@@ -57,6 +47,32 @@ const ChildTree: React.SFC<Props> = ({
         : undefined,
     [disabled, onContextMenu],
   )
+
+  const onNodeClick =
+    !disabled && (hasChildren || onClick)
+      ? (e: React.MouseEvent<HTMLDivElement>) => {
+          e.stopPropagation()
+          if (e.altKey && onNodeContextMenu) {
+            onNodeContextMenu(e)
+            return
+          }
+          clickCount.current++
+          setTimeout(
+            () => {
+              if (clickCount.current === 1) {
+                if (hasChildren) {
+                  setIsOpen(!isOpen)
+                }
+                if (onClick) {
+                  onClick()
+                }
+              }
+              clickCount.current = 0
+            },
+            onDoubleClick ? timeoutForDoubleClick : 0,
+          )
+        }
+      : undefined
 
   const onNodeDoubleClick = React.useMemo(
     () =>
