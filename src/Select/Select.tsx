@@ -1,7 +1,6 @@
 import * as React from "react"
 
-import ContextMenu from "../ContextMenu/ContextMenu"
-import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
+import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import LabelText from "../LabelText/LabelText"
 import { useUniqueId } from "../useUniqueId"
 import { FilterInput, Combobox, Listbox, DropdownButton, SelectInput } from "./Select.styled"
@@ -48,7 +47,7 @@ export const Select: React.FC<SelectProps> = ({
   }, [value, customOption])
 
   const appendCustomOption = React.useCallback(
-    (optionToAppend: IOption) => (options: IContextMenuItem[]): IContextMenuItem[] => {
+    (optionToAppend: IOption) => (options: ContextMenuProps["items"]): ContextMenuProps["items"] => {
       // We can't have a multiselect _and_ a custom option.
       if (Array.isArray(value) && process.env.NODE_ENV !== "production") {
         console.trace(
@@ -93,7 +92,7 @@ export const Select: React.FC<SelectProps> = ({
 
     // Case 2: It's filterable and no custom option
     if (filterable && customOption === undefined) {
-      return prependItem({ label: filterComponent, value: options[0].value })(contextMenuItems)
+      return prependItem({ label: filterComponent })(contextMenuItems)
     }
 
     // Case 3, It has a custom option but is not filterable

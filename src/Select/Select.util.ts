@@ -1,10 +1,10 @@
 import { IOption, SelectProps, Value } from "./Select.types"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
+import { ContextMenuProps } from "../ContextMenu/ContextMenu"
 
-export const appendItem = (newItem: IContextMenuItem) => (existingItems: IContextMenuItem[]): IContextMenuItem[] => [
-  ...existingItems,
-  newItem,
-]
+export const appendItem = (newItem: IContextMenuItem) => (
+  existingItems: ContextMenuProps["items"],
+): ContextMenuProps["items"] => [...existingItems, newItem]
 
 export const truncateList = (maxLength?: number) => (options: SelectProps["options"]) =>
   maxLength ? options.slice(0, maxLength) : options
@@ -14,8 +14,9 @@ export const filterList = (filter: string) => {
   return (options: SelectProps["options"]) => options.filter(option => String(option.label).match(searchRegExp))
 }
 
-export const prependItem = (filterItem: IContextMenuItem) => (items: IContextMenuItem[]): IContextMenuItem[] => [
+export const prependItem = (filterItem: IContextMenuItem) => (items: IContextMenuItem[]): ContextMenuProps["items"] => [
   filterItem,
+  "---",
   ...items,
 ]
 
@@ -70,10 +71,12 @@ export const optionsToContextMenuItems = (overrides?: (option: IOption) => Parti
     }),
   )
 
-export const getOptionFromItem = (haystack: IContextMenuItem[]) => (needle: IContextMenuItem): IOption | undefined => {
-  const result = haystack.find(item => needle.label === item.label)
+export const getOptionFromItem = (haystack: ContextMenuProps["items"]) => (
+  needle: IContextMenuItem,
+): IOption | undefined => {
+  const result = haystack.find(item => item !== "---" && needle.label === item.label)
 
-  if (result) {
+  if (result && result !== "---") {
     return { label: result.label || result.value, value: result.value }
   }
 

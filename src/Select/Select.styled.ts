@@ -54,6 +54,7 @@ export const FilterInput = styled(Input)`
   margin: ${({ theme }) => -theme.space.content}px;
   border-radius: 0;
   height: auto;
+  min-height: 32px;
   max-width: none;
 `
 
