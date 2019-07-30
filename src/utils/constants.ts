@@ -258,7 +258,7 @@ const constants = {
    * Default is `2`.
    */
   borderRadius: 2,
-  compactSidebarWidth: 80,
+  compactSidebarWidth: 64,
   sidebarWidth: 220,
   topbarHeight: 48,
   titleHeight: 50,
