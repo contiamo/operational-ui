@@ -20,6 +20,7 @@ const StyledContextMenu = styled(ContextMenu)(({ theme }) => ({
   " > div": {
     borderRadius: theme.borderRadius,
     boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
+    padding: 0,
   },
   ":focus > div ": {
     ...inputFocus({ theme }),
