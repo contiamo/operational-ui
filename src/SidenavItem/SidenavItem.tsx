@@ -102,9 +102,10 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
           <Icon size={compact ? 24 : 18} />
         </IconContainer>
       )}
-      {compact
-        ? isLabelVisible && <SidenavTooltip dark={Boolean(dark)}>{compactLabel || label}</SidenavTooltip>
-        : label}
+      {label &&
+        (compact
+          ? isLabelVisible && <SidenavTooltip dark={Boolean(dark)}>{compactLabel || label}</SidenavTooltip>
+          : label)}
       {!compact && items && <Caret isOpen={isOpen || false} />}
       {items && isOpen && (
         <Popout data-cy="operational-ui__SidenavItemPopover">
