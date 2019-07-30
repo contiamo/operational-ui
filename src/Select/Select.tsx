@@ -87,12 +87,14 @@ export const Select: React.FC<SelectProps> = ({
 
     // Case 1: It's both filterable _and_ has a custom option
     if (filterable && customOption !== undefined) {
-      return appendCustomOption(customOption)(prependItem({ label: filterComponent })(contextMenuItems))
+      return appendCustomOption(customOption)(
+        prependItem({ label: filterComponent, separator: "bottom" })(contextMenuItems),
+      )
     }
 
     // Case 2: It's filterable and no custom option
     if (filterable && customOption === undefined) {
-      return prependItem({ label: filterComponent })(contextMenuItems)
+      return prependItem({ label: filterComponent, separator: "bottom" })(contextMenuItems)
     }
 
     // Case 3, It has a custom option but is not filterable

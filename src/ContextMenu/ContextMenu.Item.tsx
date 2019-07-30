@@ -25,6 +25,7 @@ export interface IContextMenuItem<TValue = any> {
   onClick?: ContextMenuProps["onClick"]
   value?: TValue
   isActive?: boolean
+  separator?: "top" | "bottom" | "both"
 }
 
 export const rowHeight = 32

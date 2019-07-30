@@ -16,7 +16,6 @@ export const filterList = (filter: string) => {
 
 export const prependItem = (filterItem: IContextMenuItem) => (items: IContextMenuItem[]): ContextMenuProps["items"] => [
   filterItem,
-  "---",
   ...items,
 ]
 
@@ -74,9 +73,9 @@ export const optionsToContextMenuItems = (overrides?: (option: IOption) => Parti
 export const getOptionFromItem = (haystack: ContextMenuProps["items"]) => (
   needle: IContextMenuItem,
 ): IOption | undefined => {
-  const result = haystack.find(item => item !== "---" && needle.label === item.label)
+  const result = haystack.find(item => needle.label === item.label)
 
-  if (result && result !== "---") {
+  if (result) {
     return { label: result.label || result.value, value: result.value }
   }
 

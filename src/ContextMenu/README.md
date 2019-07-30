@@ -18,12 +18,9 @@ import {
 const menuItems = [
   { icon: SearchIcon, label: "View Data" },
   { icon: ViewIcon, label: "View Definition" },
-  "---",
-  { icon: RenameIcon, label: "Rename" },
+  { icon: RenameIcon, label: "Rename", separator: "top" },
   { icon: DeleteIcon, label: "Delete" },
-  "---",
-  { icon: MaterializationIcon, label: "Turn into View" },
-  "---",
+  { icon: MaterializationIcon, label: "Turn into View", separator: "both" },
   { icon: WorkbenchIcon, label: "Join to Query" },
 ]
 ;<ContextMenu items={menuItems} onClick={item => alert(`clicked ${item.label}`)}>

@@ -23,7 +23,7 @@ export interface ContextMenuProps extends DefaultProps {
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
   keepOpenOnItemClick?: boolean
   /** Menu items */
-  items: Array<IContextMenuItem | "---">
+  items: Array<IContextMenuItem>
   /** Where shall we place an icon in rows? */
   iconLocation?: "left" | "right"
   /** Alignment */
@@ -157,7 +157,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   }, [focusedOptionIndex, items])
 
   const handleSelect = React.useCallback(() => {
-    if (!currentItem || currentItem === "---") {
+    if (!currentItem) {
       return
     }
     if (currentItem.onClick) {
@@ -216,10 +216,9 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
           embedChildrenInMenu={embedChildrenInMenu}
         >
           {embedChildrenInMenu && renderedChildren}
-          {items.map((item, index: number) =>
-            item === "---" ? (
-              <Separator />
-            ) : (
+          {items.map((item, index: number) => (
+            <>
+              {(item.separator === "top" || item.separator === "both") && <Separator />}
               <ContextMenuItem
                 id={`operational-ui__ContextMenuItem-${uniqueId}-${index}`}
                 isActive={typeof item !== "string" && item.isActive}
@@ -244,8 +243,9 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                 }}
                 {...(getChildProps ? getChildProps(index) : {})}
               />
-            ),
-          )}
+              {(item.separator === "bottom" || item.separator === "both") && <Separator />}
+            </>
+          ))}
         </MenuContainer>
       </Container>
       {/* Element to close an open select when blurring it so only one can be open at a time */}
