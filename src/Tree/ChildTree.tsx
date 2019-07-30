@@ -56,6 +56,8 @@ const ChildTree: React.SFC<Props> = ({
     [disabled, onContextMenu],
   )
 
+  let clickTimeout: number = 0
+
   const onNodeClick =
     !disabled && (hasChildren || onClick)
       ? (e: React.MouseEvent<HTMLDivElement>) => {
@@ -64,8 +66,11 @@ const ChildTree: React.SFC<Props> = ({
             onNodeContextMenu(e)
             return
           }
+          if (clickTimeout) {
+            clearTimeout(clickTimeout)
+          }
           clickCount.current++
-          setTimeout(
+          clickTimeout = window.setTimeout(
             () => {
               if (clickCount.current === 1) {
                 if (hasChildren) {
@@ -81,6 +86,16 @@ const ChildTree: React.SFC<Props> = ({
           )
         }
       : undefined
+
+  // Clean up timer on unmount
+  React.useEffect(
+    () => () => {
+      if (clickTimeout) {
+        clearTimeout(clickTimeout)
+      }
+    },
+    [clickTimeout],
+  )
 
   const onNodeDoubleClick = React.useMemo(
     () =>
