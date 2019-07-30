@@ -81,6 +81,8 @@ const MenuContainer = styled.div<{
   minHeight: isOpen ? rowHeight : 0,
   display: "grid",
   gridTemplateRows: `repeat(${numRows}, max-content)`,
+  backgroundColor: theme.color.white,
+  padding: `${theme.space.small}px 0`,
 }))
 
 /**
@@ -97,9 +99,18 @@ const InvisibleOverlay = styled("div")(({ theme }) => ({
 }))
 
 const Separator = styled.div`
-  height: 1px;
-  background-color: ${({ theme }) => theme.color.border.select};
+  padding: ${({ theme }) => theme.space.small}px 0;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  background-color: ${({ theme }) => theme.color.white};
+
+  ::after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    background-color: ${({ theme }) => theme.color.border.select};
+  }
 `
 
 const ContextMenu: React.FC<ContextMenuProps> = ({
