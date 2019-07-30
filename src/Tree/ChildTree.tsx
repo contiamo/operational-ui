@@ -35,6 +35,14 @@ const ChildTree: React.SFC<Props> = ({
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
   const hasChildren = Boolean(childNodes && childNodes.length)
   const clickCount = React.useRef(0)
+
+  /**
+   * This ensures that single-click isn't caught when double clicking:
+   * we set a timeout to catch the second click in a doubleclick event.
+   * If found, we do nothing. If not found within the time window, we
+   * fire the single click event.
+   */
+
   const timeoutForDoubleClick = 200
 
   const onNodeContextMenu = React.useMemo(
