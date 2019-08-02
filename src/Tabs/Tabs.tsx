@@ -37,7 +37,7 @@ export interface TabsProps extends DefaultProps {
 
 const Tabs: React.FC<TabsProps> = ({
   tabs,
-  scroll,
+  scroll = true,
   active,
   onClose,
   onActivate,
