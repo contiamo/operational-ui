@@ -31,9 +31,8 @@ export interface TabsProps extends DefaultProps {
   label?: string
   style?: React.CSSProperties
   id?: string
-  // TODO: add type safety here
-  TabHeader?: React.FC<any>
-  TabPanel?: React.FC<any>
+  TabHeader?: typeof DefaultTabHeader
+  TabPanel?: typeof DefaultTabPanel
 }
 
 const Tabs: React.FC<TabsProps> = ({
@@ -151,6 +150,7 @@ const Tabs: React.FC<TabsProps> = ({
             return (
               <TabHeader
                 {...rest}
+                active={i === active}
                 center={!scroll}
                 tabIndex={i === active ? 0 : -1}
                 first={i === 0}
@@ -183,7 +183,7 @@ const Tabs: React.FC<TabsProps> = ({
               aria-hidden={true}
               tabIndex={-1}
               first={false}
-              aria-selected={false}
+              active={false}
               condensed={true}
               onMouseDown={e => {
                 userAction.current = true
@@ -203,7 +203,7 @@ const Tabs: React.FC<TabsProps> = ({
             as={ScrollButton}
             tabIndex={-1}
             first={true}
-            aria-selected={false}
+            active={false}
             condensed={true}
             onClick={scrollLeft}
           >
@@ -214,7 +214,7 @@ const Tabs: React.FC<TabsProps> = ({
             as={ScrollButton}
             tabIndex={-1}
             first={false}
-            aria-selected={false}
+            active={false}
             condensed={true}
             onClick={scrollRight}
           >
@@ -226,6 +226,7 @@ const Tabs: React.FC<TabsProps> = ({
         {tabs.map(({ title, icon, ...rest }, i) => (
           <TabPanel
             {...rest}
+            active={i === active}
             hidden={i !== active}
             id={`TabPanel-${uid}-${i}`}
             aria-labelledby={`TabHeader-${uid}-${i}`}

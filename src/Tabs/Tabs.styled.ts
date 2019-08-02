@@ -39,13 +39,20 @@ export const TabScroll = styled.div`
 
 export const TabHeader = styled(SectionHeader, {
   shouldForwardProp: prop =>
-    !(prop === "first" || prop === "center" || prop === "aria-selected" || prop === "condensed" || prop === "as"),
+    !(
+      prop === "active" ||
+      prop === "first" ||
+      prop === "center" ||
+      prop === "aria-selected" ||
+      prop === "condensed" ||
+      prop === "as"
+    ),
 })<{
+  active: boolean
   first: boolean
-  "aria-selected": boolean
+  center?: boolean
   condensed?: boolean
   as?: React.FC<any> | string
-  center?: boolean
 }>`
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   cursor: pointer;
@@ -54,7 +61,7 @@ export const TabHeader = styled(SectionHeader, {
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   border-left: none;
   ${props =>
-    props["aria-selected"]
+    props.active
       ? `border-bottom: 1px solid ${props.theme.color.background.lighter}; 
          background-color: ${props.theme.color.background.lighter};
          color: ${props.theme.color.text.dark};
@@ -100,7 +107,7 @@ export const TabContainer = styled.div`
   background-color: ${({ theme }) => theme.color.background.lighter};
 `
 
-export const TabPanel = styled.div`
+export const TabPanel = styled.div<{ active: boolean; first?: boolean; center?: boolean }>`
   z-index: 2;
   :focus {
     outline: none;

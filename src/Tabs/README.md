@@ -11,17 +11,15 @@ import { Tabs, OlapIcon, Textarea, TabHeader, TabPanel, styled } from "@operatio
 const ColoredTabHeader = styled(TabHeader)(prop => {
   if (!prop.saved) return
   return {
-    // TODO: use consisten property active
-    backgroundColor: prop["aria-selected"] ? "#e2eff5" : "#bbd9e8",
-    borderBottomColor: prop["aria-selected"] ? "#e2eff5" : undefined,
+    backgroundColor: prop.active ? "#e2eff5" : "#bbd9e8",
+    borderBottomColor: prop.active ? "#e2eff5" : undefined,
   }
 })
 
 const ColoredTabPanel = styled(TabPanel)(prop => {
   if (!prop.saved) return
   return {
-    // TODO: use consisten property active
-    backgroundColor: !prop["hidden"] ? "#e2eff5" : "#bbd9e8",
+    backgroundColor: prop.active ? "#e2eff5" : "#bbd9e8",
   }
 })
 
