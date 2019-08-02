@@ -1,7 +1,7 @@
 import styled from "../utils/styled"
 import { headerHeight } from "../utils/constants"
 
-export const SectionHeader = styled("div")(({ theme }) => ({
+export const SectionHeader = styled.div(({ theme }) => ({
   fontFamily: theme.font.family.main,
   fontSize: theme.font.size.body,
   fontWeight: theme.font.weight.medium,

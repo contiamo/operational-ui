@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from "react"
+import React, { Component } from "react"
 import { languages } from "monaco-editor"
 import compileCode from "react-styleguidist/lib/client/utils/compileCode"
 import splitExampleCode from "react-styleguidist/lib/client/utils/splitExampleCode"
@@ -38,7 +38,7 @@ class StateHolder<T> extends Component<{ initialState: T; component: React.Compo
   }
 }
 
-export default class ReactExample extends PureComponent<{
+export default class ReactExample extends Component<{
   code: string
   evalInContext: typeof ev
   onError: () => void

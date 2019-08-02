@@ -6,13 +6,31 @@ Tabs component implemented according to [WAI-ARIA specification](https://www.w3.
 
 ```jsx
 import * as React from "react"
-import { Tabs, OlapIcon, Textarea } from "@operational/components"
+import { Tabs, OlapIcon, Textarea, TabHeader, TabPanel, styled } from "@operational/components"
+
+const ColoredTabHeader = styled(TabHeader)(prop => {
+  if (!prop.saved) return
+  return {
+    // TODO: use consisten property active
+    backgroundColor: prop["aria-selected"] ? "#e2eff5" : "#bbd9e8",
+    borderBottomColor: prop["aria-selected"] ? "#e2eff5" : undefined,
+  }
+})
+
+const ColoredTabPanel = styled(TabPanel)(prop => {
+  if (!prop.saved) return
+  return {
+    // TODO: use consisten property active
+    backgroundColor: !prop["hidden"] ? "#e2eff5" : "#bbd9e8",
+  }
+})
 
 const MyComponent = () => {
   const [textareaValue, setTextareaValue] = React.useState("")
   const [tabs, setTabs] = React.useState([
     {
       title: "tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1",
+      saved: true,
     },
     {
       title: "tab 2",
@@ -60,7 +78,15 @@ const MyComponent = () => {
 
   return (
     <div style={{ height: "200px" }}>
-      <Tabs tabs={tabs} active={active} onActivate={setActive} onClose={onClose} onInsert={onInsert}>
+      <Tabs
+        tabs={tabs}
+        active={active}
+        onActivate={setActive}
+        onClose={onClose}
+        onInsert={onInsert}
+        TabHeader={ColoredTabHeader}
+        TabPanel={ColoredTabPanel}
+      >
         Tab {active + 1}
         <Textarea fullWidth height={143} onChange={setTextareaValue} value={textareaValue} />
       </Tabs>

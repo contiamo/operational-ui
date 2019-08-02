@@ -83,6 +83,7 @@ export { default as LabelText } from "./LabelText/LabelText"
 export { default as Accordion, AccordionProps } from "./Accordion/Accordion"
 export { default as AccordionSection, AccordionSectionProps } from "./AccordionSection/AccordionSection"
 export { default as Tabs, TabsProps } from "./Tabs/Tabs"
+export { TabHeader, TabPanel } from "./Tabs/Tabs.styled"
 export { default as Uploader, UploaderProps } from "./Uploader/Uploader"
 
 // Typography components
