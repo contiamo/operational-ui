@@ -19,6 +19,7 @@ import {
 export interface Tab {
   title: string
   icon?: React.ReactNode
+  color?: string
 }
 
 export interface TabsProps extends DefaultProps {
@@ -139,7 +140,7 @@ const Tabs: React.FC<TabsProps> = ({
     <Container data-cy="operational-ui__Tabs" style={style}>
       <TabList scroll={Boolean(scroll)} aria-label={label} onKeyDown={onKeyDown} ref={tabListRef}>
         <TabScroll ref={tabScrollRef}>
-          {tabs.map(({ title, icon }, i) => {
+          {tabs.map(({ title, icon, color }, i) => {
             const onClick = () => {
               onActivate(i)
             }
@@ -154,6 +155,7 @@ const Tabs: React.FC<TabsProps> = ({
                 key={i}
                 onClick={onClick}
                 ref={i === active ? activeTab : undefined}
+                color={color}
               >
                 <TitleIconWrapper>
                   {icon && <TabIcon>{icon}</TabIcon>}
@@ -217,8 +219,14 @@ const Tabs: React.FC<TabsProps> = ({
         </ScrollButtons>
       )}
       <TabContainer>
-        {tabs.map((_, i) => (
-          <TabPanel hidden={i !== active} id={`TabPanel-${uid}-${i}`} aria-labelledby={`TabHeader-${uid}-${i}`} key={i}>
+        {tabs.map(({ color }, i) => (
+          <TabPanel
+            hidden={i !== active}
+            id={`TabPanel-${uid}-${i}`}
+            aria-labelledby={`TabHeader-${uid}-${i}`}
+            key={i}
+            color={color}
+          >
             {i === active && children}
           </TabPanel>
         ))}

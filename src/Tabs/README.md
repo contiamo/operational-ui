@@ -13,6 +13,7 @@ const MyComponent = () => {
   const [tabs, setTabs] = React.useState([
     {
       title: "tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1",
+      color: "#e2eff5",
     },
     {
       title: "tab 2",
