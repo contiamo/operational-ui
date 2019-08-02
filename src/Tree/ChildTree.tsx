@@ -25,7 +25,6 @@ const ChildTree: React.SFC<Props> = ({
   droppableProps,
   onClick,
   onContextMenu,
-  onDoubleClick,
   onRemove,
   cursor,
   searchWords,
@@ -34,17 +33,6 @@ const ChildTree: React.SFC<Props> = ({
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
   const hasChildren = Boolean(childNodes && childNodes.length)
-  const clickCount = React.useRef(0)
-
-  /**
-   * This ensures that single-click isn't caught when double clicking:
-   * we set a timeout to catch the second click in a doubleclick event.
-   * If found, we do nothing. If not found within the time window, we
-   * fire the single click event.
-   */
-
-  const millisecondsToWaitForDoubleClick = 200
-  const clickTimeout = React.useRef(0)
 
   const onNodeContextMenu = React.useMemo(
     () =>
@@ -65,47 +53,14 @@ const ChildTree: React.SFC<Props> = ({
             onNodeContextMenu(e)
             return
           }
-          if (clickTimeout.current) {
-            clearTimeout(clickTimeout.current)
+          if (hasChildren) {
+            setIsOpen(!isOpen)
           }
-          clickCount.current++
-          clickTimeout.current = window.setTimeout(
-            () => {
-              if (clickCount.current === 1) {
-                if (hasChildren) {
-                  setIsOpen(!isOpen)
-                }
-                if (onClick) {
-                  onClick()
-                }
-              }
-              clickCount.current = 0
-            },
-            onDoubleClick ? millisecondsToWaitForDoubleClick : 0,
-          )
+          if (onClick) {
+            onClick()
+          }
         }
       : undefined
-
-  // Clean up timer on unmount
-  React.useEffect(
-    () => () => {
-      if (clickTimeout.current) {
-        clearTimeout(clickTimeout.current)
-      }
-    },
-    [clickTimeout],
-  )
-
-  const onNodeDoubleClick = React.useMemo(
-    () =>
-      !disabled && onDoubleClick
-        ? (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-            event.preventDefault()
-            onDoubleClick(event)
-          }
-        : undefined,
-    [disabled, onContextMenu],
-  )
 
   return (
     <Container ref={forwardRef} disabled={Boolean(disabled)} hasChildren={hasChildren} {...props}>
@@ -114,7 +69,6 @@ const ChildTree: React.SFC<Props> = ({
         searchWords={searchWords}
         onNodeClick={onNodeClick}
         onNodeContextMenu={onNodeContextMenu}
-        onNodeDoubleClick={onNodeDoubleClick}
         highlight={Boolean(highlight)}
         hasChildren={hasChildren}
         isOpen={isOpen}

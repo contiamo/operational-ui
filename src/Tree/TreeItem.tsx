@@ -19,7 +19,6 @@ interface TreeItemProps {
   color?: string
   cursor?: string
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
-  onNodeDoubleClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   onNodeContextMenu?: (e: React.MouseEvent<HTMLDivElement>) => void
   onRemove?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
@@ -82,7 +81,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   label,
   color,
   onNodeClick,
-  onNodeDoubleClick,
   onNodeContextMenu,
   onRemove,
   hasChildren,
@@ -98,11 +96,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           e.preventDefault()
           if (e.altKey && onNodeContextMenu) {
             onNodeContextMenu(e)
-            return
-          }
-
-          if (onNodeDoubleClick) {
-            onNodeDoubleClick(e)
             return
           }
 
@@ -126,7 +119,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           return
       }
     },
-    [onNodeContextMenu, onNodeDoubleClick, onNodeClick],
+    [onNodeContextMenu, onNodeClick],
   )
 
   return (
@@ -134,7 +127,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       level={level}
       onClick={onNodeClick}
       onContextMenu={onNodeContextMenu}
-      onDoubleClick={onNodeDoubleClick}
       onKeyDown={handleKeyDown}
       highlight={Boolean(highlight)}
       cursor={cursor}
