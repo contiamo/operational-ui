@@ -52,7 +52,6 @@ export const Cell = styled.div<{
 export const HeaderRow = styled.div<{
   rowHeight: DataTableProps<any, any>["rowHeight"]
 }>`
-  left: 0;
   width: 100%;
   position: sticky;
   grid-row: 1;
