@@ -1,6 +1,6 @@
 import styled from "../utils/styled"
 import { SectionHeader } from "../Internals/SectionHeader"
-import { headerHeight } from "../utils/constants"
+import { headerHeight, expandColor } from "../utils/constants"
 import { darken } from "../utils"
 
 const buttonWidth = 55
@@ -54,16 +54,31 @@ export const TabHeader = styled(SectionHeader, {
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   cursor: pointer;
   font-weight: normal;
-  background-color: ${({ theme, color }) => (color ? darken(color, 10) : theme.color.background.light)};
+  background-color: ${({ theme, color }) =>
+    color ? darken(expandColor(theme, color)!, 10) : theme.color.background.light};
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   border-top: none;
   border-left: none;
   ${props =>
     props["aria-selected"]
-      ? `border-bottom: 1px solid ${props.color || props.theme.color.background.lighter}; 
-         background-color: ${props.color || props.theme.color.background.lighter};
-         color: ${props.theme.color.text.dark};
-         font-weight: bold;`
+      ? `border-bottom: 1px solid ${expandColor(props.theme, props.color) || props.theme.color.background.lighter}; 
+         background-color: ${expandColor(props.theme, props.color) || props.theme.color.background.lighter};
+         color: ${props.theme.color.text.action};
+         font-weight: bold;
+         pointer-events: none;
+         :hover {
+           background-color: ${expandColor(props.theme, props.color) ||
+             props.theme.color.background.lighter} !important;
+         }
+         & svg {
+          color: ${props.theme.color.text.action};
+         }
+         /* close icon */
+         > svg {
+          color: ${props.theme.color.text.dark};
+          pointer-events: all;
+         }
+         `
       : ""}
 
   ${({ condensed }) =>
@@ -78,7 +93,6 @@ export const TabHeader = styled(SectionHeader, {
   }
   :focus {
     outline: none;
-    box-shadow: ${({ theme }) => theme.shadows.insetFocus};
   }
   ::-moz-focus-inner {
     border: none;
@@ -88,7 +102,8 @@ export const TabHeader = styled(SectionHeader, {
     cursor: not-allowed;
   }
   :hover {
-    background-color: ${({ theme }) => theme.color.separators.default};
+    background-color: ${({ theme, color }) =>
+      color ? darken(expandColor(theme, color)!, 20) : theme.color.separators.default};
   }
   margin: 0;
 `
@@ -115,7 +130,7 @@ export const TabPanel = styled.div`
   }
   height: 100%;
   overflow: auto;
-  background-color: ${({ color }) => color};
+  background-color: ${({ theme, color }) => expandColor(theme, color)};
 `
 
 TabPanel.defaultProps = {
