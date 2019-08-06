@@ -9,10 +9,10 @@ import * as React from "react"
 import { Tabs, OlapIcon, Textarea } from "@operational/components"
 
 const MyComponent = () => {
-  const [textareaValue, setTextareaValue] = React.useState("")
   const [tabs, setTabs] = React.useState([
     {
       title: "tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1 tab 1",
+      color: "#e2eff5",
     },
     {
       title: "tab 2",
@@ -59,10 +59,11 @@ const MyComponent = () => {
   )
 
   return (
-    <div style={{ height: "200px" }}>
+    <div style={{ height: "220px" }}>
       <Tabs tabs={tabs} active={active} onActivate={setActive} onClose={onClose} onInsert={onInsert}>
-        Tab {active + 1}
-        <Textarea fullWidth height={143} onChange={setTextareaValue} value={textareaValue} />
+        <div style={{ padding: 8 }}>
+          <Textarea fullWidth height={143} value={`Tab ${active + 1}`} />
+        </div>
       </Tabs>
     </div>
   )
