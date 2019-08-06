@@ -33,18 +33,6 @@ const ChildTree: React.SFC<Props> = ({
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
   const hasChildren = Boolean(childNodes && childNodes.length)
-  const onNodeClick =
-    !disabled && (hasChildren || onClick)
-      ? (e: React.MouseEvent<HTMLDivElement>) => {
-          e.stopPropagation()
-          if (hasChildren) {
-            setIsOpen(!isOpen)
-          }
-          if (onClick) {
-            onClick()
-          }
-        }
-      : undefined
 
   const onNodeContextMenu = React.useMemo(
     () =>
@@ -56,6 +44,23 @@ const ChildTree: React.SFC<Props> = ({
         : undefined,
     [disabled, onContextMenu],
   )
+
+  const onNodeClick =
+    !disabled && (hasChildren || onClick)
+      ? (e: React.MouseEvent<HTMLDivElement>) => {
+          e.stopPropagation()
+          if (e.altKey && onNodeContextMenu) {
+            onNodeContextMenu(e)
+            return
+          }
+          if (hasChildren) {
+            setIsOpen(!isOpen)
+          }
+          if (onClick) {
+            onClick()
+          }
+        }
+      : undefined
 
   return (
     <Container ref={forwardRef} disabled={Boolean(disabled)} hasChildren={hasChildren} {...props}>
