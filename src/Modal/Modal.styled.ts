@@ -73,5 +73,6 @@ export const Actions = styled.div<{ childCount: number }>`
 export const ContentWrapper = styled.div`
   overflow: auto;
   height: 100%;
+  display: grid;
   ${({ theme }) => customScrollbar({ theme })}
 `
