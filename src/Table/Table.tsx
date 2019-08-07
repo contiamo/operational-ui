@@ -66,7 +66,7 @@ const Thead = styled("thead")`
 const Th = styled("th")<{ sortable?: boolean }>(({ theme, sortable }) => ({
   position: "relative",
   borderBottom: `1px solid ${theme.color.separators.default}`,
-  color: theme.color.text.lightest,
+  color: theme.color.text.dark,
   paddingBottom: theme.space.base,
   "&:first-child": {
     paddingLeft: theme.space.small,
