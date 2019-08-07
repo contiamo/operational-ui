@@ -46,7 +46,6 @@ const Container = styled("div")<Props>(({ condensed, disabled, align, theme, wid
     display: "flex",
     alignItems: "center",
     outline: "none",
-    fontWeight: theme.font.weight.bold,
     color: disabled ? theme.color.text.disabled : theme.color.text.default,
     cursor: disabled ? "initial" : "pointer",
     "&[aria-selected='true']": {
