@@ -59,6 +59,7 @@ export const TabHeader = styled(SectionHeader, {
   border: solid 1px ${({ theme }) => theme.color.separators.default};
   border-top: none;
   border-left: none;
+  padding-right: ${({ theme }) => theme.space.base}px;
   ${props =>
     props["aria-selected"]
       ? `border-bottom: 1px solid ${expandColor(props.theme, props.color) || props.theme.color.background.lighter}; 
@@ -72,11 +73,6 @@ export const TabHeader = styled(SectionHeader, {
          }
          & svg {
           color: ${props.theme.color.text.action};
-         }
-         /* close icon */
-         > svg {
-          color: ${props.theme.color.text.dark};
-          pointer-events: all;
          }
          `
       : ""}
@@ -156,6 +152,23 @@ export const TitleWrapper = styled.span`
 export const TabIcon = styled.span`
   margin-right: ${({ theme }) => theme.space.small}px;
   pointer-events: none;
+`
+
+export const CloseIcon = styled.span`
+  pointer-events: all;
+  &:hover {
+    background: ${({ theme }) => theme.color.separators.default};
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  min-width: 32px;
+  border-radius: 32px;
+  & svg {
+    color: ${({ theme }) => theme.color.text.default} !important;
+    cursor: pointer !important;
+  }
 `
 
 export const ScrollButtons = styled.div`

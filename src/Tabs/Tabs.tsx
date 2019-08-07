@@ -14,6 +14,7 @@ import {
   TabScroll,
   TitleIconWrapper,
   TitleWrapper,
+  CloseIcon,
 } from "./Tabs.styled"
 
 export interface Tab {
@@ -162,14 +163,14 @@ const Tabs: React.FC<TabsProps> = ({
                   <TitleWrapper title={title}>{title}</TitleWrapper>
                 </TitleIconWrapper>
                 {onClose && (
-                  <NoIcon
-                    right
-                    size={9}
+                  <CloseIcon
                     onClick={e => {
                       e.stopPropagation()
                       onClose(i)
                     }}
-                  />
+                  >
+                    <NoIcon size={9} />
+                  </CloseIcon>
                 )}
               </TabHeader>
             )
