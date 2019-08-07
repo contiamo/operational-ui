@@ -82,7 +82,7 @@ const MenuContainer = styled.div<{
   display: "grid",
   gridTemplateRows: `repeat(${numRows}, max-content)`,
   backgroundColor: theme.color.white,
-  padding: `${theme.space.small}px 0`,
+  padding: isOpen ? `${theme.space.small}px 0` : 0,
 }))
 
 /**
