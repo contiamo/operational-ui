@@ -24,7 +24,7 @@ const TopbarSelectContainer = styled("div")<{ isActive: boolean }>`
   display: flex;
   align-items: center;
   padding: 0px ${props => props.theme.space.medium}px;
-  box-shadow: ${props => (props.isActive ? props.theme.shadows.popup : "none")};
+  box-shadow: ${props => (props.isActive ? props.theme.shadows.contextMenu : "none")};
   border-bottom: 1px solid transparent;
   cursor: pointer;
   background-color: ${props => (props.isActive ? props.theme.color.white : "transparent")};

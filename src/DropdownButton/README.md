@@ -42,7 +42,9 @@ const menuItems = [
   {
     label: (
       <MyLabelContainer title={"External"}>
-        <span>Connect to your existing external data sources - databases, big data storages and NoSQL DBs.</span>
+        <span style={{ fontWeight: 400 }}>
+          Connect to your existing external data sources - databases, big data storages and NoSQL DBs.
+        </span>
       </MyLabelContainer>
     ),
     onClick: () => alert("External"),
@@ -50,7 +52,9 @@ const menuItems = [
   {
     label: (
       <MyLabelContainer title={"Managed"}>
-        <span>Connect to your existing external data sources - databases, big data storages and NoSQL DBs.</span>
+        <span style={{ fontWeight: 400 }}>
+          Connect to your existing external data sources - databases, big data storages and NoSQL DBs.
+        </span>
       </MyLabelContainer>
     ),
     onClick: () => alert("Managed"),
@@ -58,7 +62,9 @@ const menuItems = [
   {
     label: (
       <MyLabelContainer title={"Virtual"}>
-        <span>Connect to your existing external data sources - databases, big data storages and NoSQL DBs.</span>
+        <span style={{ fontWeight: 400 }}>
+          Connect to your existing external data sources - databases, big data storages and NoSQL DBs.
+        </span>
       </MyLabelContainer>
     ),
     onClick: () => alert("Virtual"),

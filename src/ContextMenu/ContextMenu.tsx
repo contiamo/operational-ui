@@ -3,7 +3,7 @@ import isString from "lodash/isString"
 
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-import ContextMenuItem, { condensedRowHeight, rowHeight, IContextMenuItem } from "./ContextMenu.Item"
+import ContextMenuItem, { rowHeight, IContextMenuItem } from "./ContextMenu.Item"
 import { useUniqueId } from "../useUniqueId"
 import { useListbox } from "../useListbox"
 
@@ -23,7 +23,7 @@ export interface ContextMenuProps extends DefaultProps {
   /** Suppresses the default behavior of closing the context menu when one of its items is clicked. */
   keepOpenOnItemClick?: boolean
   /** Menu items */
-  items: Array<string | IContextMenuItem>
+  items: Array<IContextMenuItem>
   /** Where shall we place an icon in rows? */
   iconLocation?: "left" | "right"
   /** Alignment */
@@ -69,18 +69,20 @@ const MenuContainer = styled.div<{
   align: ContextMenuProps["align"]
   condensed: boolean
   isOpen: boolean
-}>(({ theme, numRows, align, embedChildrenInMenu, isOpen, condensed }) => ({
+}>(({ theme, numRows, align, embedChildrenInMenu, isOpen }) => ({
   position: "absolute",
   top: embedChildrenInMenu ? 0 : "100%",
   left: align === "left" ? 0 : "auto",
   maxHeight: "50vh",
   overflow: "auto",
-  boxShadow: theme.shadows.popup,
+  boxShadow: theme.shadows.contextMenu,
   width: "100%",
   minWidth: "fit-content",
-  minHeight: isOpen ? (condensed ? condensedRowHeight : rowHeight) : 0,
+  minHeight: isOpen ? rowHeight : 0,
   display: "grid",
   gridTemplateRows: `repeat(${numRows}, max-content)`,
+  backgroundColor: theme.color.white,
+  padding: isOpen ? `${theme.space.small}px 0` : 0,
 }))
 
 /**
@@ -95,6 +97,21 @@ const InvisibleOverlay = styled("div")(({ theme }) => ({
   cursor: "default",
   zIndex: theme.zIndex.selectOptions + 1,
 }))
+
+const Separator = styled.div`
+  padding: ${({ theme }) => theme.space.small}px 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  background-color: ${({ theme }) => theme.color.white};
+
+  ::after {
+    content: "";
+    height: 1px;
+    width: 100%;
+    background-color: ${({ theme }) => theme.color.border.select};
+  }
+`
 
 const ContextMenu: React.FC<ContextMenuProps> = ({
   containerRef,
@@ -121,16 +138,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     initiallyOpen: open,
   })
 
-  /**
-   * Preserve the public API: if users submit strings in props.items,
-   * convert them into actual ContextMenuItems.
-   */
-  const makeItem = React.useCallback(
-    (itemFromProps: ContextMenuProps["items"][-1]) =>
-      typeof itemFromProps === "string" ? { label: itemFromProps } : itemFromProps,
-    [],
-  )
-
   React.useEffect(() => {
     if (!items) {
       throw new Error("No array of items has been provided for the ContextMenu.")
@@ -146,19 +153,17 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     if (focusedOptionIndex === null || focusedOptionIndex === undefined) {
       return
     }
-    const tentativeItem = items[focusedOptionIndex]
-    if (typeof tentativeItem === "string") {
-      return makeItem(tentativeItem)
-    }
-
-    return tentativeItem
+    return items[focusedOptionIndex]
   }, [focusedOptionIndex, items])
 
   const handleSelect = React.useCallback(() => {
-    if (currentItem && currentItem.onClick) {
+    if (!currentItem) {
+      return
+    }
+    if (currentItem.onClick) {
       currentItem.onClick(currentItem)
     }
-    if (currentItem && onClick) {
+    if (onClick) {
       onClick(currentItem)
     }
   }, [currentItem, onClick])
@@ -212,30 +217,34 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         >
           {embedChildrenInMenu && renderedChildren}
           {items.map((item, index: number) => (
-            <ContextMenuItem
-              id={`operational-ui__ContextMenuItem-${uniqueId}-${index}`}
-              isActive={typeof item !== "string" && item.isActive}
-              key={`contextmenu-${index}`}
-              condensed={condensed}
-              align={align}
-              iconLocation={iconLocation}
-              width={width || "min-content"}
-              item={item}
-              disabled={isString(item) ? !onClick : !item.onClick && !onClick}
-              onClick={e => {
-                e.stopPropagation() //clicking on an item should not trigger the parent's onClick
-                if (!keepOpenOnItemClick && setIsOpen) {
-                  setIsOpen(false)
-                }
-                if (!isString(item) && item.onClick) {
-                  item.onClick(makeItem(item))
-                }
-                if (onClick) {
-                  onClick(makeItem(item))
-                }
-              }}
-              {...(getChildProps ? getChildProps(index) : {})}
-            />
+            <>
+              {(item.separator === "top" || item.separator === "both") && <Separator />}
+              <ContextMenuItem
+                id={`operational-ui__ContextMenuItem-${uniqueId}-${index}`}
+                isActive={typeof item !== "string" && item.isActive}
+                key={`contextmenu-${index}`}
+                condensed={condensed}
+                align={align}
+                iconLocation={iconLocation}
+                width={width || "min-content"}
+                item={item}
+                disabled={isString(item) ? !onClick : !item.onClick && !onClick}
+                onClick={e => {
+                  e.stopPropagation() //clicking on an item should not trigger the parent's onClick
+                  if (!keepOpenOnItemClick && setIsOpen) {
+                    setIsOpen(false)
+                  }
+                  if (!isString(item) && item.onClick) {
+                    item.onClick(item)
+                  }
+                  if (onClick) {
+                    onClick(item)
+                  }
+                }}
+                {...(getChildProps ? getChildProps(index) : {})}
+              />
+              {(item.separator === "bottom" || item.separator === "both") && <Separator />}
+            </>
           ))}
         </MenuContainer>
       </Container>
