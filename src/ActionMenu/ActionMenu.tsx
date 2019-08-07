@@ -3,7 +3,7 @@ import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import { DefaultProps } from "../types"
 import { inputFocus } from "../utils"
 import styled from "../utils/styled"
-import { ChevronUpIcon, HamburgerMenuIcon } from "../Icon/Icon"
+import { ChevronUpIcon, HamburgerMenuIcon, DotMenuIcon } from "../Icon/Icon"
 
 export interface ActionMenuProps extends DefaultProps {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
@@ -16,26 +16,31 @@ export interface ActionMenuProps extends DefaultProps {
   stickyTitle?: boolean
 }
 
-const StyledContextMenu = styled(ContextMenu)(({ theme }) => ({
-  " > div": {
-    borderRadius: theme.borderRadius,
-    boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
-    padding: 0,
-  },
+const StyledContextMenu = styled(ContextMenu)<{ title?: string }>(({ theme, title }) => ({
+  ...(title
+    ? {
+        " > div": {
+          borderRadius: theme.borderRadius,
+          boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
+          padding: 0,
+        },
+      }
+    : {}),
   ":focus > div ": {
     ...inputFocus({ theme }),
   },
 }))
 
-const Container = styled("div")(({ theme }) => ({
-  height: 35,
+const Container = styled("div")(({ theme, title }) => ({
+  height: 36,
+  width: 36,
   /**
    * `textAlign` is set explicitly for when a parent sets a text-align to right-position this container,
    * leaving its content left-aligned.
    */
   textAlign: "right",
   padding: `0 ${theme.space.content}px`,
-  backgroundColor: theme.color.white,
+  backgroundColor: title ? theme.color.white : "none",
   fontWeight: theme.font.weight.medium,
   borderRadius: theme.borderRadius,
   display: "flex",
@@ -44,10 +49,17 @@ const Container = styled("div")(({ theme }) => ({
   userSelect: "none",
   cursor: "pointer",
   ":hover": {
-    ...inputFocus({ theme }),
+    ...(title ? {} : { backgroundColor: theme.color.white, boxShadow: `0 0 0 1px ${theme.color.separators.light}` }),
+    "> svg": {
+      fill: theme.color.primary,
+      cursor: "pointer",
+    },
   },
   ":focus": {
     ...inputFocus({ theme }),
+  },
+  "> svg": {
+    cursor: "pointer",
   },
 }))
 
@@ -63,21 +75,26 @@ const TitleContainer = styled("p")(({ theme }) => ({
 }))
 
 const ActionMenu: React.SFC<ActionMenuProps> = ({ stickyTitle, items, title, ...props }) => (
-  <StyledContextMenu align="right" {...props} items={items} condensed embedChildrenInMenu>
+  <StyledContextMenu align="right" {...props} items={items} condensed title={title}>
     {isOpen => {
       const iconColor = isOpen || stickyTitle ? "primary" : "color.text.lighter"
-      return (
-        <Container>
-          {(isOpen || stickyTitle) && <TitleContainer>{title}</TitleContainer>}
-          {isOpen ? <ChevronUpIcon color={iconColor} /> : <HamburgerMenuIcon color={iconColor} />}
-        </Container>
-      )
+
+      if (title) {
+        return (
+          <Container title={title}>
+            {(isOpen || stickyTitle) && <TitleContainer>{title}</TitleContainer>}
+            {isOpen ? <ChevronUpIcon color={iconColor} /> : <HamburgerMenuIcon color={iconColor} />}
+          </Container>
+        )
+      } else {
+        return (
+          <Container title={title}>
+            <DotMenuIcon size={16} color={iconColor} />
+          </Container>
+        )
+      }
     }}
   </StyledContextMenu>
 )
-
-ActionMenu.defaultProps = {
-  title: "Actions",
-}
 
 export default ActionMenu

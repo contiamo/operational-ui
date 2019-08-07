@@ -228,7 +228,7 @@ function Table<T>({
               return (
                 <Actions>
                   {Array.isArray(dataEntryRowActions) ? (
-                    <ActionMenu stickyTitle items={dataEntryRowActions as ActionMenuProps["items"]} />
+                    <ActionMenu items={dataEntryRowActions as ActionMenuProps["items"]} />
                   ) : (
                     dataEntryRowActions
                   )}
