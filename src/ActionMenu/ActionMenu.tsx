@@ -60,7 +60,7 @@ const Container = styled("div")<{ isOpen: boolean }>(({ theme, isOpen }) => ({
         // Mimic a white border bottom to avoid issue cut corner / jumping issue
         ":after": {
           content: "''",
-          backgroundColor: "white",
+          backgroundColor: theme.color.white,
           height: 2,
           position: "absolute",
           bottom: -1,
