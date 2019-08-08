@@ -63,10 +63,14 @@ const Container = styled("div")<{ isOpen: boolean }>(({ theme, isOpen }) => ({
       backgroundColor: theme.color.white,
       height: 2,
       position: "absolute",
-      bottom: -1.5,
       zIndex: 1,
-      left: 0.5,
       right: 0,
+      bottom: -1,
+      left: 0,
+    },
+    "@media (-webkit-min-device-pixel-ratio: 2) (min-resolution: 192dpi)": {
+      bottom: -1.5,
+      left: 0.5,
     },
     "> svg": {
       fill: theme.color.primary,
