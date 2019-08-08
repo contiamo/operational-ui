@@ -36,7 +36,7 @@ It is also possible to detect a click outside the `ContextMenu` and do something
 import * as React from "react"
 import { Button, ContextMenu, ContextMenuProps } from "@operational/components"
 
-const menuItems = ["Item 1", "Item 2", "Item 3"]
+const menuItems = [{ label: "Item 1" }, { label: "Item 2" }, { label: "Item 3" }]
 ;<ContextMenu
   items={menuItems}
   onClick={item => alert(`clicked ${item.label}`)}
@@ -52,7 +52,7 @@ const menuItems = ["Item 1", "Item 2", "Item 3"]
 import * as React from "react"
 import { ContextMenu, ContextMenuProps, Button, SearchIcon } from "@operational/components"
 
-const menuItems = [{ label: "Menu 1", icon: SearchIcon }, "Menu 2", "Menu 3"]
+const menuItems = [{ label: "Menu 1", icon: SearchIcon }, { label: "Menu 2" }, { label: "Menu 3" }]
 ;<>
   <ContextMenu items={menuItems} onClick={item => alert(`clicked ${item.label}`)}>
     <Button>Click here for icon on left</Button>
@@ -69,7 +69,7 @@ const menuItems = [{ label: "Menu 1", icon: SearchIcon }, "Menu 2", "Menu 3"]
 import * as React from "react"
 import { ContextMenu, ContextMenuProps } from "@operational/components"
 
-const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
+const menuItems = [{ label: "Menu 1" }, { label: "Menu 2" }, { label: "Menu 3" }]
 ;<ContextMenu condensed items={menuItems} onClick={() => alert("clicked")}>
   <span>Click here</span>
 </ContextMenu>

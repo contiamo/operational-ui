@@ -8,7 +8,7 @@ import { ActionMenu } from "@operational/components"
 
 // For now, we assume that the actionMenu is always used on the right side of the screen
 ;<div style={{ display: "flex", justifyContent: "flex-end" }}>
-  <ActionMenu items={["Open editor", "Stop", "Destroy"]} onClick={item => alert(`${item.label} clicked`)} />
+  <ActionMenu items={["Open editor", "Stop", "Destroy"]} onClick={item => alert(`${item} clicked`)} />
 </div>
 ```
 
