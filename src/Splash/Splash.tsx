@@ -78,7 +78,7 @@ const Static = styled("div")`
     color: inherit;
     text-decoration: underline;
   }
-  & > *:first-child {
+  & > *:first-of-type {
     margin-top: 0px;
   }
   & > *:last-child {

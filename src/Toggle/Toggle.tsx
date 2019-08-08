@@ -25,7 +25,7 @@ const Container = styled("div")`
     border-radius: ${({ theme: { borderRadius } }) => `${borderRadius}px 0 0 ${borderRadius}px`};
   }
 
-  > :not(:first-child) {
+  > :not(:first-of-type) {
     left: -1px; /* Merge buttons */
     border-radius: ${({ theme: { borderRadius } }) => `0 ${borderRadius}px ${borderRadius}px 0`};
   }
@@ -54,7 +54,7 @@ const Button = styled("div")<{ selected: boolean; condensed?: boolean }>`
     return originalBoxShadow
   }};
   :focus {
-    ${({ theme }) => inputFocus({ theme })},
+    ${({ theme }) => inputFocus({ theme })};
   }
   :hover {
     background-color: ${props => darken(props.theme.color.white, 5)};
