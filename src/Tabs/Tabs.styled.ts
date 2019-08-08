@@ -40,13 +40,15 @@ export const TabScroll = styled.div`
 `
 
 export const TabHeader = styled(SectionHeader, {
-  shouldForwardProp: prop => !(prop === "center" || prop === "aria-selected" || prop === "condensed" || prop === "as"),
+  shouldForwardProp: prop =>
+    !(prop === "center" || prop === "aria-selected" || prop === "condensed" || prop === "as" || prop === "last"),
 })<{
   "aria-selected": boolean
   condensed?: boolean
   as?: React.FC<any> | string
   center?: boolean
   color?: string
+  last?: boolean
 }>`
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   cursor: pointer;
@@ -56,8 +58,8 @@ export const TabHeader = styled(SectionHeader, {
   border: 1px solid ${({ theme }) => theme.color.separators.default};
   border-radius: 4px 4px 0 0;
   margin: 0;
-  margin-right: -1px;
-  padding-right: ${({ theme }) => theme.space.base}px;
+  margin-right: ${({ last }) => (last ? 0 : -1)}px;
+  padding-right: ${({ theme, center }) => (center ? theme.space.element : theme.space.base)}px;
   ${props =>
     props["aria-selected"]
       ? `border-bottom: 1px solid ${expandColor(props.theme, props.color) || props.theme.color.background.lighter}; 
@@ -120,7 +122,6 @@ export const TabButton = styled(SectionHeader, {
   min-width: ${buttonWidth}px;
   border: solid ${({ theme }) => theme.color.separators.default};
   border-width: ${({ transparent }) => (transparent ? `0 0 1px 0` : "1px")};
-  margin-left: ${({ transparent }) => (transparent ? 1 : 0)}px;
   margin-right: -1px;
   & svg {
     color: ${({ theme }) => theme.color.text.lighter};

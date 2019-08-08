@@ -156,6 +156,7 @@ const Tabs: React.FC<TabsProps> = ({
                 onClick={onClick}
                 ref={i === active ? activeTab : undefined}
                 color={color}
+                last={i === tabs.length - 1}
               >
                 <TitleIconWrapper>
                   {icon && <TabIcon>{icon}</TabIcon>}
