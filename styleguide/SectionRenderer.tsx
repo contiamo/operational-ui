@@ -47,11 +47,10 @@ export function SectionRenderer(allProps: SectionProps) {
 
   return (
     <section className={classes.root}>
-      {!content && heading}
-
-      {description && <Markdown text={description} />}
+      {!Boolean(content) && heading}
+      {Boolean(description) && <Markdown text={description} />}
       {/* content is a raw MD file */}
-      {content && <Card title={name}>{content}</Card>}
+      {Boolean(content) && <Card title={name}>{content}</Card>}
       {sections}
       {components}
     </section>
