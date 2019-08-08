@@ -1,11 +1,8 @@
 import React from "react"
-// @ts-ignore
 import Styled from "react-styleguidist/lib/client/rsg-components/Styled/Styled"
-import { Card } from "../src"
+import Markdown from "react-styleguidist/lib/client/rsg-components/Markdown"
 
-/* tslint:disable:no-var-requires */
-const SectionHeading = require("react-styleguidist/lib/client/rsg-components/SectionHeading")
-const Markdown = require("react-styleguidist/lib/client/rsg-components/Markdown")
+import { Card, Page } from "../src"
 
 // Ref https://github.com/styleguidist/react-styleguidist/blob/master/src/client/rsg-components/Section/SectionRenderer.js
 // This is needed to wrap raw MD files (that get passed into the content prop within the styleconfig) in a Card.
@@ -31,26 +28,13 @@ interface SectionProps {
 }
 
 export function SectionRenderer(allProps: SectionProps) {
-  const { classes, name, slug, content, components, sections, depth, description, pagePerSection } = allProps
-
-  const heading = name && (
-    <SectionHeading
-      depth={depth}
-      id={slug}
-      slotName="sectionToolbar"
-      pagePerSection={pagePerSection}
-      slotProps={allProps}
-    >
-      {name}
-    </SectionHeading>
-  )
+  const { classes, name, content, components, sections, description } = allProps
 
   return (
     <section className={classes.root}>
-      {!Boolean(content) && heading}
       {Boolean(description) && <Markdown text={description} />}
       {/* content is a raw MD file */}
-      {Boolean(content) && <Card title={name}>{content}</Card>}
+      {Boolean(content) && <Page title={name}>{content}</Page>}
       {sections}
       {components}
     </section>

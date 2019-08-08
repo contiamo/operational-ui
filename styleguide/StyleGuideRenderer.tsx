@@ -48,11 +48,7 @@ const StyleGuideRenderer: React.FC<StyleGuideRendererProps> = ({ children, toc, 
         >
           <div>
             {hasSidebar ? (
-              <Layout
-                header={<Header version={version} />}
-                sidenav={toc}
-                main={<Page title="Components">{children}</Page>}
-              />
+              <Layout header={<Header version={version} />} sidenav={toc} main={children} />
             ) : (
               <>
                 <Header version={version} />
