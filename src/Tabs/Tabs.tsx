@@ -2,7 +2,6 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
 import { NoIcon, PlusIcon, ChevronLeftIcon, ChevronRightIcon } from "../Icon/Icon"
-import { ScrollButton } from "./ScrollButton"
 import {
   Container,
   ScrollButtons,
@@ -15,6 +14,7 @@ import {
   TitleIconWrapper,
   TitleWrapper,
   CloseIcon,
+  TabButton,
 } from "./Tabs.styled"
 
 export interface Tab {
@@ -149,7 +149,6 @@ const Tabs: React.FC<TabsProps> = ({
               <TabHeader
                 center={!scroll}
                 tabIndex={i === active ? 0 : -1}
-                first={i === 0}
                 aria-selected={i === active}
                 aria-controls={`TabPanel-${uid}-${i}`}
                 id={`TabHeader-${uid}-${i}`}
@@ -176,12 +175,8 @@ const Tabs: React.FC<TabsProps> = ({
             )
           })}
           {onInsert && (
-            <TabHeader
-              aria-hidden={true}
-              tabIndex={-1}
-              first={false}
-              aria-selected={false}
-              condensed={true}
+            <TabButton
+              leftMargin={true}
               onMouseDown={e => {
                 userAction.current = true
                 e.preventDefault()
@@ -189,34 +184,18 @@ const Tabs: React.FC<TabsProps> = ({
               }}
             >
               <PlusIcon size={12} color="primary" />
-            </TabHeader>
+            </TabButton>
           )}
         </TabScroll>
       </TabList>
       {scroll && (
         <ScrollButtons>
-          <TabHeader
-            aria-hidden={true}
-            as={ScrollButton}
-            tabIndex={-1}
-            first={true}
-            aria-selected={false}
-            condensed={true}
-            onClick={scrollLeft}
-          >
+          <TabButton onClick={scrollLeft}>
             <ChevronLeftIcon size={14} />
-          </TabHeader>
-          <TabHeader
-            aria-hidden={true}
-            as={ScrollButton}
-            tabIndex={-1}
-            first={false}
-            aria-selected={false}
-            condensed={true}
-            onClick={scrollRight}
-          >
+          </TabButton>
+          <TabButton onClick={scrollRight}>
             <ChevronRightIcon size={14} />
-          </TabHeader>
+          </TabButton>
         </ScrollButtons>
       )}
       <TabContainer>

@@ -3,7 +3,7 @@ import { SectionHeader } from "../Internals/SectionHeader"
 import { headerHeight, expandColor } from "../utils/constants"
 import { darken } from "../utils"
 
-const buttonWidth = 55
+const buttonWidth = 36
 
 export const Container = styled.div`
   label: Tabs;
@@ -12,7 +12,7 @@ export const Container = styled.div`
   position: relative;
   height: 100%;
   background-color: ${({ theme }) => theme.color.background.light};
-  border-top: solid 1px ${({ theme }) => theme.color.separators.default};
+  padding-top: 1px;
 `
 
 export const TabList = styled.div<{ scroll: boolean }>`
@@ -20,7 +20,6 @@ export const TabList = styled.div<{ scroll: boolean }>`
   overflow-x: auto;
   max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px)` : "none")};
   scroll-behavior: smooth;
-  border-left: solid 1px ${({ theme }) => theme.color.separators.default};
   overflow-y: hidden;
   /* magic number to hide scroll bar underneath tabpanel */
   height: ${headerHeight + 20}px;
@@ -41,10 +40,8 @@ export const TabScroll = styled.div`
 `
 
 export const TabHeader = styled(SectionHeader, {
-  shouldForwardProp: prop =>
-    !(prop === "first" || prop === "center" || prop === "aria-selected" || prop === "condensed" || prop === "as"),
+  shouldForwardProp: prop => !(prop === "center" || prop === "aria-selected" || prop === "condensed" || prop === "as"),
 })<{
-  first: boolean
   "aria-selected": boolean
   condensed?: boolean
   as?: React.FC<any> | string
@@ -56,9 +53,10 @@ export const TabHeader = styled(SectionHeader, {
   font-weight: normal;
   background-color: ${({ theme, color }) =>
     color ? darken(expandColor(theme, color)!, 10) : theme.color.background.light};
-  border: solid 1px ${({ theme }) => theme.color.separators.default};
-  border-top: none;
-  border-left: none;
+  border: 1px solid ${({ theme }) => theme.color.separators.default};
+  border-radius: 4px 4px 0 0;
+  margin: 0;
+  margin-right: -1px;
   padding-right: ${({ theme }) => theme.space.base}px;
   ${props =>
     props["aria-selected"]
@@ -101,12 +99,33 @@ export const TabHeader = styled(SectionHeader, {
     background-color: ${({ theme, color }) =>
       color ? darken(expandColor(theme, color)!, 20) : theme.color.separators.default};
   }
-  margin: 0;
 `
 
 TabHeader.defaultProps = {
   role: "tab",
   as: "button",
+}
+
+export const TabButton = styled(SectionHeader, {
+  shouldForwardProp: prop => !(prop === "leftMargin" || prop === "as"),
+})<{ as?: React.FC<any> | string; leftMargin?: boolean }>`
+  justify-content: center;
+  cursor: pointer;
+  font-weight: normal;
+  background-color: ${({ theme }) => theme.color.background.light};
+  border: 0;
+  margin: 0;
+  padding: 0;
+  width: ${buttonWidth}px;
+  min-width: ${buttonWidth}px;
+  border-bottom: 1px solid ${({ theme }) => theme.color.separators.default};
+  margin-left: ${({ leftMargin }) => (leftMargin ? 1 : 0)}px;
+`
+
+TabButton.defaultProps = {
+  as: "button",
+  "aria-hidden": true,
+  tabIndex: -1,
 }
 
 export const TabContainer = styled.div`
@@ -156,6 +175,7 @@ export const TabIcon = styled.span`
 
 export const CloseIcon = styled.span`
   pointer-events: all;
+  transition: background-color 0.2s;
   &:hover {
     background: ${({ theme }) => theme.color.separators.default};
   }
@@ -173,10 +193,9 @@ export const CloseIcon = styled.span`
 
 export const ScrollButtons = styled.div`
   position: absolute;
-  right: 1px;
+  top: 1px;
+  right: 0;
   width: ${buttonWidth * 2}px;
   display: flex;
-  border-left: solid 1px ${({ theme }) => theme.color.separators.default};
-  border-right: solid 1px ${({ theme }) => theme.color.separators.default};
   z-index: 1;
 `
