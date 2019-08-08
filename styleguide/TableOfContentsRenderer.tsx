@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import { Input, Sidenav, styled } from "../src"
 
 export interface TableOfContentsRendererProps {
@@ -38,22 +38,42 @@ const TableOfContentsRenderer: React.SFC<TableOfContentsRendererProps> = ({
   children,
   searchTerm,
   onSearchTermChange,
-}) => (
-  <Sidenav>
-    <Container>
-      <Content>
-        <Input
-          autoFocus
-          fullWidth
-          value={searchTerm}
-          placeholder="Search Components..."
-          aria-label="Search Components..."
-          onChange={onSearchTermChange}
-        />
-      </Content>
-    </Container>
-    {children}
-  </Sidenav>
-)
+}) => {
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
+        return
+      }
+      if (e.key === "/" && inputRef.current) {
+        e.preventDefault()
+        inputRef.current.focus()
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+    return () => document.removeEventListener("keydown", handleKeyDown)
+  }, [])
+
+  return (
+    <Sidenav>
+      <Container>
+        <Content>
+          <Input
+            inputRef={inputRef}
+            autoFocus
+            fullWidth
+            value={searchTerm}
+            placeholder="Press / to search"
+            aria-label="Search Components..."
+            onChange={onSearchTermChange}
+          />
+        </Content>
+      </Container>
+      {children}
+    </Sidenav>
+  )
+}
 
 export default TableOfContentsRenderer
