@@ -249,12 +249,14 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         </MenuContainer>
       </Container>
       {/* Element to close an open select when blurring it so only one can be open at a time */}
-      <div
-        tabIndex={0}
-        data-cy="operational-ui__ContextMenu-focus-trap"
-        onFocus={() => setIsOpen && setIsOpen(false)}
-        aria-hidden="true"
-      />
+      {isOpen && (
+        <div
+          tabIndex={0}
+          data-cy="operational-ui__ContextMenu-focus-trap"
+          onFocus={() => setIsOpen && setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
     </>
   )
 }

@@ -5,7 +5,11 @@ A single `onClick` action common to all items in the `ActionMenu` can be passed 
 ```jsx
 import * as React from "react"
 import { ActionMenu } from "@operational/components"
-;<ActionMenu items={["Open editor", "Stop", "Destroy"]} onClick={item => alert(`${item.label} clicked`)} />
+
+// For now, we assume that the actionMenu is always used on the right side of the screen
+;<div style={{ display: "flex", justifyContent: "flex-end" }}>
+  <ActionMenu items={["Open editor", "Stop", "Destroy"]} onClick={item => alert(`${item.label} clicked`)} />
+</div>
 ```
 
 ### Different actions on click
@@ -21,5 +25,9 @@ const items = [
   { label: "Stop", onClick: () => {} },
   { label: "Destroy" },
 ]
-;<ActionMenu items={items} />
+
+// For now, we assume that the actionMenu is always used on the right side of the screen
+;<div style={{ display: "flex", justifyContent: "flex-end" }}>
+  <ActionMenu items={items} />
+</div>
 ```

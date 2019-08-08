@@ -3,35 +3,37 @@ import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import { DefaultProps } from "../types"
 import { inputFocus } from "../utils"
 import styled from "../utils/styled"
-import { ChevronUpIcon, HamburgerMenuIcon, DotMenuIcon } from "../Icon/Icon"
+import { DotMenuIcon } from "../Icon/Icon"
 
 export interface ActionMenuProps extends DefaultProps {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
   onClick?: ContextMenuProps["onClick"]
-  /** Title */
-  title?: string
   /** Actions to display in dropdown */
   items: ContextMenuProps["items"]
-  /** Should the title always be visible? */
-  stickyTitle?: boolean
 }
 
-const StyledContextMenu = styled(ContextMenu)<{ title?: string }>(({ theme, title }) => ({
-  ...(title
-    ? {
-        " > div": {
-          borderRadius: theme.borderRadius,
-          boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
-          padding: 0,
-        },
-      }
-    : {}),
-  ":focus > div ": {
+const StyledContextMenu = styled(ContextMenu)(({ theme }) => ({
+  " > div:focus > div": {
     ...inputFocus({ theme }),
+    backgroundColor: theme.color.white,
+    border: `1px solid ${theme.color.separators.light}`,
+    boxShadow: "none",
+    "> svg": {
+      fill: theme.color.primary,
+    },
+  },
+  " [role='option']": {
+    border: `1px solid ${theme.color.separators.light}`,
+  },
+  " [role='option']:not(:last-of-type)": {
+    borderBottom: 0,
+  },
+  " [role='listbox']": {
+    padding: 0,
   },
 }))
 
-const Container = styled("div")(({ theme, title }) => ({
+const Container = styled("div")<{ isOpen: boolean }>(({ theme, isOpen }) => ({
   height: 36,
   width: 36,
   /**
@@ -39,60 +41,63 @@ const Container = styled("div")(({ theme, title }) => ({
    * leaving its content left-aligned.
    */
   textAlign: "right",
-  padding: `0 ${theme.space.content}px`,
-  backgroundColor: title ? theme.color.white : "none",
   fontWeight: theme.font.weight.medium,
   borderRadius: theme.borderRadius,
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-end",
+  justifyContent: "center",
   userSelect: "none",
   cursor: "pointer",
-  ":hover": {
-    ...(title ? {} : { backgroundColor: theme.color.white, boxShadow: `0 0 0 1px ${theme.color.separators.light}` }),
+  marginBottom: -1.5,
+  position: "relative",
+  zIndex: 1,
+  ...(isOpen
+    ? {
+        backgroundColor: theme.color.white,
+        border: `1px solid ${theme.color.separators.light}`,
+        borderBottomLeftRadius: 0,
+        borderBottomRightRadius: 0,
+        // Mimic a white border bottom to avoid issue cut corner / jumping issue
+        ":after": {
+          content: "''",
+          backgroundColor: "white",
+          height: 2,
+          position: "absolute",
+          bottom: -1,
+          zIndex: 10000,
+          left: 0.5,
+          right: 0,
+        },
+        "> svg": {
+          fill: theme.color.primary,
+          cursor: "pointer",
+        },
+      }
+    : {}),
+  ":hover, :focus": {
+    backgroundColor: theme.color.white,
+    border: `1px solid ${theme.color.separators.light}`,
+
     "> svg": {
       fill: theme.color.primary,
       cursor: "pointer",
     },
-  },
-  ":focus": {
-    ...inputFocus({ theme }),
   },
   "> svg": {
     cursor: "pointer",
   },
 }))
 
-const TitleContainer = styled("p")(({ theme }) => ({
-  minWidth: 90,
-  width: "100%",
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  justifySelf: "flex-start",
-  color: theme.color.primary,
-  textAlign: "left",
-}))
-
-const ActionMenu: React.SFC<ActionMenuProps> = ({ stickyTitle, items, title, ...props }) => (
-  <StyledContextMenu align="right" {...props} items={items} condensed title={title}>
+const ActionMenu: React.SFC<ActionMenuProps> = ({ items, ...props }) => (
+  <StyledContextMenu align="right" {...props} items={items} condensed>
     {isOpen => {
-      const iconColor = isOpen || stickyTitle ? "primary" : "color.text.lighter"
+      const iconColor = isOpen ? "primary" : "color.text.lighter"
 
-      if (title) {
-        return (
-          <Container title={title}>
-            {(isOpen || stickyTitle) && <TitleContainer>{title}</TitleContainer>}
-            {isOpen ? <ChevronUpIcon color={iconColor} /> : <HamburgerMenuIcon color={iconColor} />}
-          </Container>
-        )
-      } else {
-        return (
-          <Container title={title}>
-            <DotMenuIcon size={16} color={iconColor} />
-          </Container>
-        )
-      }
+      return (
+        <Container isOpen={isOpen}>
+          <DotMenuIcon size={16} color={iconColor} />
+        </Container>
+      )
     }}
   </StyledContextMenu>
 )
