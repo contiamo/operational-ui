@@ -64,7 +64,7 @@ const Container = styled("div")<{ isOpen: boolean }>(({ theme, isOpen }) => ({
           height: 2,
           position: "absolute",
           bottom: -1,
-          zIndex: 10000,
+          zIndex: 1,
           left: 0.5,
           right: 0,
         },
