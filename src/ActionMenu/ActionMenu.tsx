@@ -30,6 +30,7 @@ const StyledContextMenu = styled(ContextMenu)(({ theme }) => ({
   },
   " [role='listbox']": {
     padding: 0,
+    top: 35,
   },
 }))
 
@@ -62,7 +63,7 @@ const Container = styled("div")<{ isOpen: boolean }>(({ theme, isOpen }) => ({
       backgroundColor: theme.color.white,
       height: 2,
       position: "absolute",
-      bottom: -1,
+      bottom: -1.5,
       zIndex: 1,
       left: 0.5,
       right: 0,
