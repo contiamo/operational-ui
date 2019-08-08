@@ -108,18 +108,29 @@ TabHeader.defaultProps = {
 
 export const TabButton = styled(SectionHeader, {
   shouldForwardProp: prop => !(prop === "leftMargin" || prop === "as"),
-})<{ as?: React.FC<any> | string; leftMargin?: boolean }>`
+})<{ as?: React.FC<any> | string; transparent?: boolean }>`
   justify-content: center;
   cursor: pointer;
   font-weight: normal;
-  background-color: ${({ theme }) => theme.color.background.light};
-  border: 0;
+  background-color: ${({ theme, transparent }) =>
+    transparent ? theme.color.background.light : theme.color.background.lighter};
   margin: 0;
   padding: 0;
   width: ${buttonWidth}px;
   min-width: ${buttonWidth}px;
-  border-bottom: 1px solid ${({ theme }) => theme.color.separators.default};
-  margin-left: ${({ leftMargin }) => (leftMargin ? 1 : 0)}px;
+  border: solid ${({ theme }) => theme.color.separators.default};
+  border-width: ${({ transparent }) => (transparent ? `0 0 1px 0` : "1px")};
+  margin-left: ${({ transparent }) => (transparent ? 1 : 0)}px;
+  margin-right: -1px;
+  & svg {
+    color: ${({ theme }) => theme.color.text.lighter};
+  }
+  &:disabled {
+    background-color: ${({ theme }) => theme.color.background.light};
+  }
+  &:disabled svg {
+    color: ${({ theme }) => theme.color.separators.default};
+  }
 `
 
 TabButton.defaultProps = {
@@ -173,7 +184,7 @@ export const TabIcon = styled.span`
   pointer-events: none;
 `
 
-export const CloseIcon = styled.span`
+export const IconButton = styled.span`
   pointer-events: all;
   transition: background-color 0.2s;
   &:hover {
@@ -194,7 +205,7 @@ export const CloseIcon = styled.span`
 export const ScrollButtons = styled.div`
   position: absolute;
   top: 1px;
-  right: 0;
+  right: -1px;
   width: ${buttonWidth * 2}px;
   display: flex;
   z-index: 1;

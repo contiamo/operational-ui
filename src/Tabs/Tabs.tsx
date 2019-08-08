@@ -13,7 +13,7 @@ import {
   TabScroll,
   TitleIconWrapper,
   TitleWrapper,
-  CloseIcon,
+  IconButton,
   TabButton,
 } from "./Tabs.styled"
 
@@ -162,28 +162,30 @@ const Tabs: React.FC<TabsProps> = ({
                   <TitleWrapper title={title}>{title}</TitleWrapper>
                 </TitleIconWrapper>
                 {onClose && (
-                  <CloseIcon
+                  <IconButton
                     onClick={e => {
                       e.stopPropagation()
                       onClose(i)
                     }}
                   >
                     <NoIcon size={9} />
-                  </CloseIcon>
+                  </IconButton>
                 )}
               </TabHeader>
             )
           })}
           {onInsert && (
             <TabButton
-              leftMargin={true}
+              transparent={true}
               onMouseDown={e => {
                 userAction.current = true
                 e.preventDefault()
                 onInsert(tabs.length - 1)
               }}
             >
-              <PlusIcon size={12} color="primary" />
+              <IconButton>
+                <PlusIcon size={14} color="primary" />
+              </IconButton>
             </TabButton>
           )}
         </TabScroll>
