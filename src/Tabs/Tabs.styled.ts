@@ -131,6 +131,9 @@ export const TabButton = styled(SectionHeader, {
   &:disabled svg {
     color: ${({ theme }) => theme.color.separators.default};
   }
+  &:focus {
+    outline: none;
+  }
 `
 
 TabButton.defaultProps = {
