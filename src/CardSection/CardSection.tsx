@@ -133,6 +133,28 @@ const StyledActionMenu = styled(ActionMenu)`
   position: absolute;
   top: 0px;
   right: 0px;
+
+  > [role="button"] > div {
+    border: 1px solid transparent;
+    border-radius: 0;
+    background-color: transparent;
+    z-index: 0;
+
+    > svg {
+      cursor: pointer !important;
+    }
+  }
+
+  > [role="button"]:hover > div,
+  > [role="button"]:focus > div {
+    border: 1px solid transparent;
+    background-color: rgba(0, 0, 0, 0.05);
+
+    /* Fake bottom-border */
+    :after {
+      background-color: transparent;
+    }
+  }
 `
 
 const makeOverlayType = (

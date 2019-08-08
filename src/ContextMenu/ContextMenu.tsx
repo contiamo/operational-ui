@@ -230,7 +230,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                 item={item}
                 disabled={isString(item) ? !onClick : !item.onClick && !onClick}
                 onClick={e => {
-                  e.stopPropagation() //clicking on an item should not trigger the parent's onClick
+                  e.stopPropagation() // clicking on an item should not trigger the parent's onClick
                   if (!keepOpenOnItemClick && setIsOpen) {
                     setIsOpen(false)
                   }
@@ -249,12 +249,15 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         </MenuContainer>
       </Container>
       {/* Element to close an open select when blurring it so only one can be open at a time */}
-      <div
-        tabIndex={0}
-        data-cy="operational-ui__ContextMenu-focus-trap"
-        onFocus={() => setIsOpen && setIsOpen(false)}
-        aria-hidden="true"
-      />
+      {isOpen && (
+        <div
+          style={{ position: "absolute", zIndex: -1, width: 0, height: 0 }}
+          tabIndex={0}
+          data-cy="operational-ui__ContextMenu-focus-trap"
+          onFocus={() => setIsOpen && setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
     </>
   )
 }

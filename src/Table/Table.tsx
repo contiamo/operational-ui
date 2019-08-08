@@ -49,7 +49,7 @@ const Tr = styled("tr")<{ hover?: boolean; clickable?: boolean }>(({ hover, them
   height: 50,
   ...(hover
     ? {
-        ":hover": {
+        ":hover, :focus": {
           backgroundColor: theme.color.background.lighter,
           cursor: clickable ? "pointer" : "default",
         },
@@ -228,7 +228,7 @@ function Table<T>({
               return (
                 <Actions>
                   {Array.isArray(dataEntryRowActions) ? (
-                    <ActionMenu stickyTitle items={dataEntryRowActions as ActionMenuProps["items"]} />
+                    <ActionMenu items={dataEntryRowActions as ActionMenuProps["items"]} />
                   ) : (
                     dataEntryRowActions
                   )}

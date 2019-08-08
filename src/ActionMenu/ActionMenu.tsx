@@ -3,81 +3,101 @@ import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import { DefaultProps } from "../types"
 import { inputFocus } from "../utils"
 import styled from "../utils/styled"
-import { ChevronUpIcon, HamburgerMenuIcon } from "../Icon/Icon"
+import { DotMenuIcon } from "../Icon/Icon"
 
 export interface ActionMenuProps extends DefaultProps {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */
   onClick?: ContextMenuProps["onClick"]
-  /** Title */
-  title?: string
   /** Actions to display in dropdown */
   items: ContextMenuProps["items"]
-  /** Should the title always be visible? */
-  stickyTitle?: boolean
 }
 
 const StyledContextMenu = styled(ContextMenu)(({ theme }) => ({
-  " > div": {
-    borderRadius: theme.borderRadius,
-    boxShadow: `0 0 0 1px ${theme.color.separators.light}`,
-    padding: 0,
-  },
-  ":focus > div ": {
+  " > div:focus > div": {
     ...inputFocus({ theme }),
+    backgroundColor: theme.color.white,
+    border: `1px solid ${theme.color.separators.light}`,
+    boxShadow: "none",
+    "> svg": {
+      fill: theme.color.primary,
+    },
+  },
+  " [role='option']": {
+    border: `1px solid ${theme.color.separators.light}`,
+  },
+  " [role='option']:not(:last-of-type)": {
+    borderBottom: 0,
+  },
+  " [role='listbox']": {
+    padding: 0,
   },
 }))
 
-const Container = styled("div")(({ theme }) => ({
-  height: 35,
+const Container = styled("div")<{ isOpen: boolean }>(({ theme, isOpen }) => ({
+  height: 36,
+  width: 36,
   /**
    * `textAlign` is set explicitly for when a parent sets a text-align to right-position this container,
    * leaving its content left-aligned.
    */
   textAlign: "right",
-  padding: `0 ${theme.space.content}px`,
-  backgroundColor: theme.color.white,
   fontWeight: theme.font.weight.medium,
   borderRadius: theme.borderRadius,
   display: "flex",
   alignItems: "center",
-  justifyContent: "flex-end",
+  justifyContent: "center",
   userSelect: "none",
   cursor: "pointer",
-  ":hover": {
-    ...inputFocus({ theme }),
+  marginBottom: -1.5,
+  position: "relative",
+  zIndex: 1,
+  ...(isOpen && {
+    backgroundColor: theme.color.white,
+    border: `1px solid ${theme.color.separators.light}`,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    // Mimic a white border bottom to avoid issue cut corner / jumping issue
+    ":after": {
+      content: "''",
+      backgroundColor: theme.color.white,
+      height: 2,
+      position: "absolute",
+      bottom: -1,
+      zIndex: 1,
+      left: 0.5,
+      right: 0,
+    },
+    "> svg": {
+      fill: theme.color.primary,
+      cursor: "pointer",
+    },
+  }),
+  ":hover, :focus": {
+    backgroundColor: theme.color.white,
+    border: `1px solid ${theme.color.separators.light}`,
+
+    "> svg": {
+      fill: theme.color.primary,
+      cursor: "pointer",
+    },
   },
-  ":focus": {
-    ...inputFocus({ theme }),
+  "> svg": {
+    cursor: "pointer",
   },
 }))
 
-const TitleContainer = styled("p")(({ theme }) => ({
-  minWidth: 90,
-  width: "100%",
-  whiteSpace: "nowrap",
-  overflow: "hidden",
-  textOverflow: "ellipsis",
-  justifySelf: "flex-start",
-  color: theme.color.primary,
-  textAlign: "left",
-}))
-
-const ActionMenu: React.SFC<ActionMenuProps> = ({ stickyTitle, items, title, ...props }) => (
-  <StyledContextMenu align="right" {...props} items={items} condensed embedChildrenInMenu>
+const ActionMenu: React.SFC<ActionMenuProps> = ({ items, ...props }) => (
+  <StyledContextMenu align="right" {...props} items={items} condensed>
     {isOpen => {
-      const iconColor = isOpen || stickyTitle ? "primary" : "color.text.lighter"
+      const iconColor = isOpen ? "primary" : "color.text.lighter"
+
       return (
-        <Container>
-          {(isOpen || stickyTitle) && <TitleContainer>{title}</TitleContainer>}
-          {isOpen ? <ChevronUpIcon color={iconColor} /> : <HamburgerMenuIcon color={iconColor} />}
+        <Container isOpen={isOpen}>
+          <DotMenuIcon size={16} color={iconColor} />
         </Container>
       )
     }}
   </StyledContextMenu>
 )
-
-ActionMenu.defaultProps = {
-  title: "Actions",
-}
 
 export default ActionMenu

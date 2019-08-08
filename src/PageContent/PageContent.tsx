@@ -4,15 +4,12 @@ import Modal, { ModalOptions } from "../Internals/Modal"
 import { DefaultProps } from "../types"
 import { space } from "../utils/constants"
 import styled from "../utils/styled"
+import { isChildFunction } from "../utils/isChildFunction"
 
 export interface ModalConfirmContext {
   modal: (modalOptions: ModalOptions) => void
   confirm: <T>(confirmOptions: ConfirmOptions<T>) => void
 }
-
-export const isChildFunction = (
-  children: PageContentProps["children"],
-): children is (modalConfirmContext: ModalConfirmContext) => React.ReactNode => typeof children === "function"
 
 export interface BasePageContentProps extends DefaultProps {
   /** Children to render, you */

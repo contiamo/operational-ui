@@ -148,7 +148,9 @@ const SectionsContainer = styled("div")<{ stackHorizontal: boolean }>`
       Assume the first level down is a section
       since this is a SectionsContainer.
     */
-    > div { border-right: ${stackHorizontal ? `1px solid ${theme.color.separators.default}` : `none`} };	
+    > div:not(:last-child) { border-right: ${
+      stackHorizontal ? `1px solid ${theme.color.separators.default}` : `none`
+    } };	
   `};
 `
 
