@@ -193,10 +193,10 @@ const Tabs: React.FC<TabsProps> = ({
       </TabList>
       {scroll && (
         <ScrollButtons>
-          <TabButton onClick={scrollLeft}>
+          <TabButton onMouseDown={scrollLeft}>
             <ChevronLeftIcon size={14} />
           </TabButton>
-          <TabButton onClick={scrollRight}>
+          <TabButton onMouseDown={scrollRight}>
             <ChevronRightIcon size={14} />
           </TabButton>
         </ScrollButtons>
