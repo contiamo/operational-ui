@@ -217,12 +217,11 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         >
           {embedChildrenInMenu && renderedChildren}
           {items.map((item, index: number) => (
-            <>
+            <React.Fragment key={index}>
               {(item.separator === "top" || item.separator === "both") && <Separator />}
               <ContextMenuItem
                 id={`operational-ui__ContextMenuItem-${uniqueId}-${index}`}
                 isActive={typeof item !== "string" && item.isActive}
-                key={`contextmenu-${index}`}
                 condensed={condensed}
                 align={align}
                 iconLocation={iconLocation}
@@ -244,7 +243,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                 {...(getChildProps ? getChildProps(index) : {})}
               />
               {(item.separator === "bottom" || item.separator === "both") && <Separator />}
-            </>
+            </React.Fragment>
           ))}
         </MenuContainer>
       </Container>
