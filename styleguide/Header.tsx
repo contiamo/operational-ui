@@ -32,7 +32,7 @@ const Header: React.FC<{ version: string }> = ({ version }) => {
 
   return (
     <HeaderBar
-      logo={<Logo name="OperationalUI" />}
+      logo={<Logo to="/" name="OperationalUI" />}
       end={
         <>
           <VersionContainer>v{version}</VersionContainer>
