@@ -43,6 +43,7 @@ const TableOfContentsRenderer: React.SFC<TableOfContentsRendererProps> = ({
     <Container>
       <Content>
         <Input
+          autoFocus
           fullWidth
           value={searchTerm}
           placeholder="Search Components..."
