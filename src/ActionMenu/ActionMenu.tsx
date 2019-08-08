@@ -51,29 +51,27 @@ const Container = styled("div")<{ isOpen: boolean }>(({ theme, isOpen }) => ({
   marginBottom: -1.5,
   position: "relative",
   zIndex: 1,
-  ...(isOpen
-    ? {
-        backgroundColor: theme.color.white,
-        border: `1px solid ${theme.color.separators.light}`,
-        borderBottomLeftRadius: 0,
-        borderBottomRightRadius: 0,
-        // Mimic a white border bottom to avoid issue cut corner / jumping issue
-        ":after": {
-          content: "''",
-          backgroundColor: theme.color.white,
-          height: 2,
-          position: "absolute",
-          bottom: -1,
-          zIndex: 1,
-          left: 0.5,
-          right: 0,
-        },
-        "> svg": {
-          fill: theme.color.primary,
-          cursor: "pointer",
-        },
-      }
-    : {}),
+  ...(isOpen && {
+    backgroundColor: theme.color.white,
+    border: `1px solid ${theme.color.separators.light}`,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    // Mimic a white border bottom to avoid issue cut corner / jumping issue
+    ":after": {
+      content: "''",
+      backgroundColor: theme.color.white,
+      height: 2,
+      position: "absolute",
+      bottom: -1,
+      zIndex: 1,
+      left: 0.5,
+      right: 0,
+    },
+    "> svg": {
+      fill: theme.color.primary,
+      cursor: "pointer",
+    },
+  }),
   ":hover, :focus": {
     backgroundColor: theme.color.white,
     border: `1px solid ${theme.color.separators.light}`,
