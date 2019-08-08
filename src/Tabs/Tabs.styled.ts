@@ -18,7 +18,8 @@ export const Container = styled.div`
 export const TabList = styled.div<{ scroll: boolean }>`
   display: flex;
   overflow-x: auto;
-  max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px)` : "none")};
+  /* + 1px to compensate right: -1px in ScrollButtons */
+  max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px + 1px)` : "none")};
   scroll-behavior: smooth;
   overflow-y: hidden;
   /* magic number to hide scroll bar underneath tabpanel */
