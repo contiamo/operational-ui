@@ -144,10 +144,6 @@ const IconContainer = styled.div<{ iconAmount: number; right: number }>`
   justify-content: center;
 `
 
-const UniqueIdIcon = styled(IDIcon)`
-  color: ${({ theme }) => theme.color.text.lightest};
-`
-
 const InputField: React.FC<InputProps> = ({
   id,
   hint,
@@ -234,7 +230,7 @@ const InputField: React.FC<InputProps> = ({
               <NoIcon size={10} />
             </ClearButton>
           )}
-          {isUniqueId && <UniqueIdIcon />}
+          {isUniqueId && <IDIcon color="color.text.lightest" />}
         </IconContainer>
         {Boolean(statusIcon) && (
           <IconContainer data-cy="operational-ui__Input-status-icon" iconAmount={1} right={-iconBoxSize}>
