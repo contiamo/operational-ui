@@ -38,6 +38,8 @@ const toggleCheckboxAnimation = keyframes`
 const Input = styled("input")<{ condensed: CheckboxProps["condensed"] }>`
   position: absolute;
   left: -100vw;
+  opacity: 0;
+  visibility: hidden;
 
   :checked + label::after {
     content: "";
