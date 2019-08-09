@@ -1,6 +1,6 @@
-workflow "Test TypeScript" {
+workflow "Compile and Publish" {
   on = "push"
-  resolves = ["Compile"]
+  resolves = ["Publish"]
 }
 
 action "Install" {
@@ -16,13 +16,8 @@ action "Build Icons" {
 
 action "Compile" {
   uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
-  needs = ["Build Icons"]
+  needs = ["Install", "Build Icons"]
   args = "run build:package"
-}
-
-workflow "Publish to npm on merge to master" {
-  on = "push"
-  resolves = ["Publish"]
 }
 
 action "Filter for Master" {
@@ -38,7 +33,7 @@ action "Package" {
 }
 
 action "Publish" {
-  needs = "Package"
+  needs = ["Install", "Build Icons", "Filter for Master", "Package"]
   uses = "actions/npm@master"
   args = "publish --tag next"
   secrets = ["NPM_AUTH_TOKEN"]
