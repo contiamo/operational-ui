@@ -3,7 +3,7 @@ import { SectionHeader } from "../Internals/SectionHeader"
 import { headerHeight, expandColor } from "../utils/constants"
 import { darken } from "../utils"
 
-const buttonWidth = 55
+const buttonWidth = 36
 
 export const Container = styled.div`
   label: Tabs;
@@ -12,15 +12,15 @@ export const Container = styled.div`
   position: relative;
   height: 100%;
   background-color: ${({ theme }) => theme.color.background.light};
-  border-top: solid 1px ${({ theme }) => theme.color.separators.default};
+  padding-top: 1px;
 `
 
 export const TabList = styled.div<{ scroll: boolean }>`
   display: flex;
   overflow-x: auto;
-  max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px)` : "none")};
+  /* + 1px to compensate right: -1px in ScrollButtons */
+  max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px + 1px)` : "none")};
   scroll-behavior: smooth;
-  border-left: solid 1px ${({ theme }) => theme.color.separators.default};
   overflow-y: hidden;
   /* magic number to hide scroll bar underneath tabpanel */
   height: ${headerHeight + 20}px;
@@ -42,23 +42,25 @@ export const TabScroll = styled.div`
 
 export const TabHeader = styled(SectionHeader, {
   shouldForwardProp: prop =>
-    !(prop === "first" || prop === "center" || prop === "aria-selected" || prop === "condensed" || prop === "as"),
+    !(prop === "center" || prop === "aria-selected" || prop === "condensed" || prop === "as" || prop === "last"),
 })<{
-  first: boolean
   "aria-selected": boolean
   condensed?: boolean
   as?: React.FC<any> | string
   center?: boolean
   color?: string
+  last?: boolean
 }>`
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   cursor: pointer;
   font-weight: normal;
   background-color: ${({ theme, color }) =>
     color ? darken(expandColor(theme, color)!, 10) : theme.color.background.light};
-  border: solid 1px ${({ theme }) => theme.color.separators.default};
-  border-top: none;
-  border-left: none;
+  border: 1px solid ${({ theme }) => theme.color.separators.default};
+  border-radius: 4px 4px 0 0;
+  margin: 0;
+  margin-right: ${({ last }) => (last ? 0 : -1)}px;
+  padding-right: ${({ theme, center }) => (center ? theme.space.element : theme.space.base)}px;
   ${props =>
     props["aria-selected"]
       ? `border-bottom: 1px solid ${expandColor(props.theme, props.color) || props.theme.color.background.lighter}; 
@@ -72,11 +74,6 @@ export const TabHeader = styled(SectionHeader, {
          }
          & svg {
           color: ${props.theme.color.text.action};
-         }
-         /* close icon */
-         > svg {
-          color: ${props.theme.color.text.dark};
-          pointer-events: all;
          }
          `
       : ""}
@@ -105,12 +102,46 @@ export const TabHeader = styled(SectionHeader, {
     background-color: ${({ theme, color }) =>
       color ? darken(expandColor(theme, color)!, 20) : theme.color.separators.default};
   }
-  margin: 0;
 `
 
 TabHeader.defaultProps = {
   role: "tab",
   as: "button",
+}
+
+export const TabButton = styled(SectionHeader, {
+  shouldForwardProp: prop => !(prop === "leftMargin" || prop === "as"),
+})<{ as?: React.FC<any> | string; transparent?: boolean }>`
+  justify-content: center;
+  cursor: pointer;
+  font-weight: normal;
+  background-color: ${({ theme, transparent }) =>
+    transparent ? theme.color.background.light : theme.color.background.lighter};
+  margin: 0;
+  padding: 0;
+  width: ${buttonWidth}px;
+  min-width: ${buttonWidth}px;
+  border: solid ${({ theme }) => theme.color.separators.default};
+  border-width: ${({ transparent }) => (transparent ? `0 0 1px 0` : "1px")};
+  margin-right: -1px;
+  & svg {
+    color: ${({ theme }) => theme.color.text.lighter};
+  }
+  &:disabled {
+    background-color: ${({ theme }) => theme.color.background.light};
+  }
+  &:disabled svg {
+    color: ${({ theme }) => theme.color.separators.default};
+  }
+  &:focus {
+    outline: none;
+  }
+`
+
+TabButton.defaultProps = {
+  as: "button",
+  "aria-hidden": true,
+  tabIndex: -1,
 }
 
 export const TabContainer = styled.div`
@@ -158,12 +189,29 @@ export const TabIcon = styled.span`
   pointer-events: none;
 `
 
+export const IconButton = styled.span`
+  pointer-events: all;
+  transition: background-color 0.2s;
+  &:hover {
+    background: ${({ theme }) => theme.color.separators.default};
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 32px;
+  min-width: 32px;
+  border-radius: 32px;
+  & svg {
+    color: ${({ theme }) => theme.color.text.default} !important;
+    cursor: pointer !important;
+  }
+`
+
 export const ScrollButtons = styled.div`
   position: absolute;
-  right: 1px;
+  top: 1px;
+  right: -1px;
   width: ${buttonWidth * 2}px;
   display: flex;
-  border-left: solid 1px ${({ theme }) => theme.color.separators.default};
-  border-right: solid 1px ${({ theme }) => theme.color.separators.default};
   z-index: 1;
 `

@@ -2,7 +2,6 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
 import { NoIcon, PlusIcon, ChevronLeftIcon, ChevronRightIcon } from "../Icon/Icon"
-import { ScrollButton } from "./ScrollButton"
 import {
   Container,
   ScrollButtons,
@@ -14,6 +13,8 @@ import {
   TabScroll,
   TitleIconWrapper,
   TitleWrapper,
+  IconButton,
+  TabButton,
 } from "./Tabs.styled"
 
 export interface Tab {
@@ -148,7 +149,6 @@ const Tabs: React.FC<TabsProps> = ({
               <TabHeader
                 center={!scroll}
                 tabIndex={i === active ? 0 : -1}
-                first={i === 0}
                 aria-selected={i === active}
                 aria-controls={`TabPanel-${uid}-${i}`}
                 id={`TabHeader-${uid}-${i}`}
@@ -156,66 +156,49 @@ const Tabs: React.FC<TabsProps> = ({
                 onClick={onClick}
                 ref={i === active ? activeTab : undefined}
                 color={color}
+                last={i === tabs.length - 1}
               >
                 <TitleIconWrapper>
                   {icon && <TabIcon>{icon}</TabIcon>}
                   <TitleWrapper title={title}>{title}</TitleWrapper>
                 </TitleIconWrapper>
                 {onClose && (
-                  <NoIcon
-                    right
-                    size={9}
+                  <IconButton
                     onClick={e => {
                       e.stopPropagation()
                       onClose(i)
                     }}
-                  />
+                  >
+                    <NoIcon size={9} />
+                  </IconButton>
                 )}
               </TabHeader>
             )
           })}
           {onInsert && (
-            <TabHeader
-              aria-hidden={true}
-              tabIndex={-1}
-              first={false}
-              aria-selected={false}
-              condensed={true}
+            <TabButton
+              transparent={true}
               onMouseDown={e => {
                 userAction.current = true
                 e.preventDefault()
                 onInsert(tabs.length - 1)
               }}
             >
-              <PlusIcon size={12} color="primary" />
-            </TabHeader>
+              <IconButton>
+                <PlusIcon size={14} color="primary" />
+              </IconButton>
+            </TabButton>
           )}
         </TabScroll>
       </TabList>
       {scroll && (
         <ScrollButtons>
-          <TabHeader
-            aria-hidden={true}
-            as={ScrollButton}
-            tabIndex={-1}
-            first={true}
-            aria-selected={false}
-            condensed={true}
-            onClick={scrollLeft}
-          >
+          <TabButton onMouseDown={scrollLeft}>
             <ChevronLeftIcon size={14} />
-          </TabHeader>
-          <TabHeader
-            aria-hidden={true}
-            as={ScrollButton}
-            tabIndex={-1}
-            first={false}
-            aria-selected={false}
-            condensed={true}
-            onClick={scrollRight}
-          >
+          </TabButton>
+          <TabButton onMouseDown={scrollRight}>
             <ChevronRightIcon size={14} />
-          </TabHeader>
+          </TabButton>
         </ScrollButtons>
       )}
       <TabContainer>
