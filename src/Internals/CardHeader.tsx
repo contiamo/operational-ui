@@ -17,7 +17,7 @@ export const cardHeaderHeight = 36
 const Container = styled(SectionHeader)(({ theme }) => ({
   borderBottom: `1px solid ${theme.color.separators.default}`,
   height: cardHeaderHeight,
-  "& > :not(:first-child)": {
+  "& > :not(:first-of-type)": {
     fontSize: theme.font.size.fineprint,
     color: theme.color.text.lightest,
   },

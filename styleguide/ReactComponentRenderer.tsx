@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Card } from "../src"
+import { Page } from "../src"
 
 export interface ReactComponentRendererProps {
   name: string
@@ -16,12 +16,11 @@ const ReactComponentRenderer: React.SFC<ReactComponentRendererProps> = ({
   tabButtons,
   tabBody,
 }) => (
-  <Card id={name}>
-    {heading} {/* See ./SectionHeadingRenderer.tsx */}
+  <Page fill title={name} id={name}>
     {tabButtons}
     <div style={{ marginTop: 16 }}>{tabBody}</div>
     {examples}
-  </Card>
+  </Page>
 )
 
 export default ReactComponentRenderer

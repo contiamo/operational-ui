@@ -8,7 +8,7 @@ exports[`ButtonGroup Component Should initialize properly 1`] = `
     class="css-p29iif"
   />
   <div
-    class="css-f3sa0o-buttongroup"
+    class="css-h8jdx-buttongroup"
   >
     <button
       aria-label="Hello"

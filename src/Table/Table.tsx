@@ -68,7 +68,7 @@ const Th = styled("th")<{ sortable?: boolean }>(({ theme, sortable }) => ({
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.dark,
   paddingBottom: theme.space.base,
-  "&:first-child": {
+  "&:first-of-type": {
     paddingLeft: theme.space.small,
   },
   paddingRight: theme.space.small,
@@ -98,7 +98,7 @@ const Td = styled("td")<{ cellWidth?: Column<any>["width"] }>(({ theme, cellWidt
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.default,
   hyphens: "auto",
-  "&:first-child": {
+  "&:first-of-type": {
     paddingLeft: theme.space.small,
   },
   paddingRight: theme.space.small,
