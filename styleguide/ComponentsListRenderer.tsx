@@ -82,7 +82,7 @@ const ComponentsListRenderer: React.FC<ComponentsListRendererProps> = ({ items }
 
   React.useEffect(() => {
     const handleArrow = (e: KeyboardEvent) => {
-      if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
+      if (["INPUT", "TEXTAREA", "BUTTON"].includes(document.activeElement.tagName)) {
         return
       }
       if (e.key === "ArrowLeft") {
