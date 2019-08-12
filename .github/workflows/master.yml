@@ -13,6 +13,7 @@ jobs:
       - run: yarn install
       - run: yarn build:icons
       - run: yarn test:unit
+      - run: yarn build:package
       - uses: actions/npm@master
       - run: npm version $(npm show . version)-$(git rev-parse --short HEAD) --no-git-tag-version --unsafe-perm
       - run: yarn publish --tag next
