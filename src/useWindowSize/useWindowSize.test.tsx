@@ -1,5 +1,5 @@
 import React from "react"
-import { act, cleanup, render } from "react-testing-library"
+import { act, cleanup, render } from "@testing-library/react"
 
 import { useWindowSize } from "."
 

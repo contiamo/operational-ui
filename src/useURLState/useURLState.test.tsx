@@ -1,5 +1,5 @@
 import React from "react"
-import { cleanup, fireEvent, render, wait } from "react-testing-library"
+import { cleanup, fireEvent, render, wait } from "@testing-library/react"
 
 import { useURLState } from "."
 
