@@ -17,6 +17,10 @@ jobs:
           yarn run build:package
       - name: Test
         run: yarn test:unit
+      - name: Use branch filter
+        uses: actions/bin/filter@master
+        with: 
+          branch: master
       - name: Use npm client
         if: github.head_ref == 'master'
         uses: actions/npm@master
