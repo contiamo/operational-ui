@@ -1,15 +1,15 @@
 name: CI
 on: [push, pull_request]
-  jobs:
-    package:
-      steps:
-        - name: Install Dependencies
-          uses: nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2
-          run: install
-        - name: Build Icons
-          uses: nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2
-          run: build:icons
-        - name: Build Package
-          uses: nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2
-          run: build:package  
-  
+jobs:
+  package:
+    steps:
+      - name: Install Dependencies
+        uses: nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2
+        run: install
+      - name: Build Icons
+        uses: nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2
+        run: build:icons
+      - name: Build Package
+        uses: nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2
+        run: build:package  
+
