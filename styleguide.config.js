@@ -89,6 +89,7 @@ module.exports = {
               transpileOnly: true, // don't type-check on the main thread
               compilerOptions: {
                 declaration: false,
+                alwaysStrict: true,
               },
             },
           },
