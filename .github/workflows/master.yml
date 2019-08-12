@@ -16,6 +16,6 @@ jobs:
       - run: yarn test:unit
       - uses: actions/npm@master
       - run: npm version $(npm show . version)-$(git rev-parse --short HEAD) --no-git-tag-version --unsafe-perm
-      - run: yarn publish --tag next
+      - run: npm publish --tag next
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
