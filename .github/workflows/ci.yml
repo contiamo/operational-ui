@@ -24,4 +24,4 @@ jobs:
         if: github.head_ref == 'master'
         run: |
           npm version $(npm show . version)-$(git rev-parse --short HEAD) --no-git-tag-version --unsafe-perm
-          npm publish --tag next
+          yarn publish --tag next
