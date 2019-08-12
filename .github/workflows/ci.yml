@@ -1,11 +1,5 @@
 name: CI
-on:
-  push:
-    branches:
-      - \!master
-  pull_request:
-    branches:
-      - \!master
+on: ['push', 'pull_request']
 jobs:
   build_test_and_deploy:
     name: Build, Test and Deploy if needed
