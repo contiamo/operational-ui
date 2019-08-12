@@ -43,7 +43,7 @@ const TableOfContentsRenderer: React.SFC<TableOfContentsRendererProps> = ({
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (["INPUT", "TEXTAREA"].includes(document.activeElement.tagName)) {
+      if (["INPUT", "TEXTAREA", "BUTTON"].includes(document.activeElement.tagName)) {
         return
       }
       if (e.key === "/" && inputRef.current) {
