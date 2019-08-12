@@ -12,8 +12,8 @@ jobs:
       - uses: nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2
       - run: yarn install
       - run: yarn build:icons
-      - run: yarn test:unit
       - run: yarn build:package
+      - run: yarn test:unit
       - uses: actions/npm@master
       - run: npm version $(npm show . version)-$(git rev-parse --short HEAD) --no-git-tag-version --unsafe-perm
       - run: yarn publish --tag next
