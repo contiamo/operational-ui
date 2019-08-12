@@ -2,10 +2,7 @@ name: CI
 on:
   push:
     branches:
-      - !master
-  pull_request:
-    branches:
-      - !master
+      - master
 jobs:
   build_test_and_deploy:
     name: Build, Test and Deploy if needed
@@ -27,3 +24,9 @@ jobs:
         uses: actions/bin/filter@master
         with: 
           branch: master
+      - name: Use npm client
+        uses: actions/npm@master
+      - name: Publish to npm@next
+        run: |
+          npm version $(npm show . version)-$(git rev-parse --short HEAD) --no-git-tag-version --unsafe-perm
+          yarn publish --tag next
