@@ -4,20 +4,20 @@ workflow "Compile and Publish" {
 }
 
 action "Install" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
+  uses = "nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2"
   args = "install"
 }
 
 action "Build Icons" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
+  uses = "nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2"
   needs = ["Install"]
-  args = "run build:icons"
+  args = "build:icons"
 }
 
 action "Compile" {
-  uses = "actions/npm@59b64a598378f31e49cb76f27d6f3312b582f680"
+  uses = "nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2"
   needs = ["Install", "Build Icons"]
-  args = "run build:package"
+  args = "build:package"
 }
 
 action "Filter for Master" {
