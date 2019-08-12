@@ -28,12 +28,10 @@ const Container = styled("div")<SidenavProps>(({ theme, compact, dark }) => {
     overflow: "auto",
     width: compact ? theme.compactSidebarWidth : theme.sidebarWidth,
     height: "100%",
-    ...(dark
-      ? {}
-      : {
-          borderRight: "1px solid",
-          borderRightColor: theme.color.separators.default,
-        }),
+    ...(!dark && {
+      borderRight: "1px solid",
+      borderRightColor: theme.color.separators.default,
+    }),
 
     ".operational-ui__sidenav-item_end": {
       marginTop: "auto",
