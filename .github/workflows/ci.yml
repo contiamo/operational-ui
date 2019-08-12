@@ -17,7 +17,3 @@ jobs:
           yarn run build:package
       - name: Test
         run: yarn test:unit
-      - name: Use branch filter
-        uses: actions/bin/filter@master
-        with: 
-          branch: master
