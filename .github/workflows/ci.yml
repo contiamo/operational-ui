@@ -1,31 +1,13 @@
 name: CI
-on: [push, pull_request]
+on: pull_request
 jobs:
   build_test_and_deploy:
-    name: Build, Test and Deploy if needed
+    name: Build & Test
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-      - name: Use yarn
-        uses: nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2
-      - name: Install
-        run: yarn install
-      - name: Build
-        run: |
-          yarn run build:icons
-          yarn run build:package
-      - name: Test
-        run: yarn test:unit
-      - name: Use branch filter
-        uses: actions/bin/filter@master
-        with: 
-          branch: master
-      - name: Use npm client
-        if: github.head_ref == 'master'
-        uses: actions/npm@master
-      - name: Publish to npm@next
-        if: github.head_ref == 'master'
-        run: |
-          npm version $(npm show . version)-$(git rev-parse --short HEAD) --no-git-tag-version --unsafe-perm
-          yarn publish --tag next
+      - uses: actions/checkout@master
+      - uses: nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2
+      - run: yarn install
+      - run: yarn run build:icons
+      - run: yarn run build:package
+      - run: yarn test:unit
