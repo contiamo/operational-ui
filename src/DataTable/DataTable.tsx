@@ -103,7 +103,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
             numColumns={columns.length}
             numHeaders={columns[0].length}
             columnWidth={cellWidth}
-            rowHeight={initialRowHeight}
+            rowHeight={rowHeight}
           >
             {columns.map((headerRow, rowIndex) => (
               <HeaderRow
@@ -125,7 +125,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
               </HeaderRow>
             ))}
           </HeadersContainer>
-          <DataWrapper numHeaders={columns[0].length} rowHeight={initialRowHeight}>
+          <DataWrapper numHeaders={columns[0].length} rowHeight={rowHeight}>
             {children}
           </DataWrapper>
         </>

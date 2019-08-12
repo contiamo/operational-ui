@@ -42,6 +42,7 @@ export const Cell = styled.div<{
   border-color: ${({ theme }) => theme.color.border.medium};
   height: ${({ height }) => height}px;
   font-family: ${({ theme }) => theme.font.family.code};
+  font-size: ${({ theme }) => theme.font.size.fineprint}px;
   font-weight: ${({ theme }) => theme.font.weight.regular};
   padding: 0 ${({ theme }) => theme.space.content}px;
   color: ${({ theme }) => theme.color.text.default};
@@ -57,7 +58,6 @@ export const HeaderRow = styled.div<{
   grid-row: 1;
   top: 0;
   z-index: 100;
-  height: ${({ rowHeight }) => getHeaderRowHeight(rowHeight)}px;
 `
 
 export const HeaderCell = styled(Cell)<{
@@ -70,7 +70,6 @@ export const HeaderCell = styled(Cell)<{
   font-weight: ${({ theme }) => theme.font.weight.bold};
   border-top: ${({ rowIndex }) => (rowIndex === 0 ? "1px solid" : 0)};
   border-color: ${({ theme }) => theme.color.border.default};
-  height: ${({ rowHeight }) => getHeaderRowHeight(rowHeight)}px;
 `
 
 export const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: DataTableProps<any, any>["rowHeight"] }>`
