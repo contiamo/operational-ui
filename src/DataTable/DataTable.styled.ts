@@ -48,6 +48,7 @@ export const Cell = styled.div<{
   color: ${({ theme }) => theme.color.text.default};
   grid-column: ${({ cell }) => cell};
   background-color: ${({ theme, isEvenRow }) => (isEvenRow ? theme.color.background.almostWhite : theme.color.white)};
+  overflow: hidden;
 `
 
 export const HeaderRow = styled.div<{
