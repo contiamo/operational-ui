@@ -52,7 +52,9 @@ const StyleGuideRenderer: React.FC<StyleGuideRendererProps> = ({ children, toc, 
             ) : (
               <>
                 <Header version={version} />
-                <Page fill>{children}</Page>
+                <Page fill key={String(state.isDiffWithMaster)}>
+                  {children}
+                </Page>
               </>
             )}
           </div>
