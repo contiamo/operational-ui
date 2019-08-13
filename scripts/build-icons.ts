@@ -59,25 +59,32 @@ export const buildIcons = (iconPath?: string) =>
       const template = ({ template }, opts, { componentName, jsx }) => {
         const typeScriptTpl = template.smart(
           `
-    import * as React from "react";
-    import constants, { expandColor } from "../utils/constants";
-    import { IconProps } from "./Icon";
+    import * as React from "react"
+    import constants, { expandColor } from "../utils/constants"
+    import { IconProps } from "./Icon"
+    import IconButton from "../Internals/IconButton"
     
     /**
      * {{previewImage}}
      */
-    export const COMPONENT_NAME = ({size = 18, color, left, right, ...props}: IconProps) => {
+    export const COMPONENT_NAME = ({size = 18, color, left, right, onClick, ...props}: IconProps) => {
       const iconColor: string = expandColor(constants, color) || "currentColor";
       const style = {
         // theme.space.small
         marginLeft: right ? 8 : 0,
         // theme.space.small
         marginRight: left ? 8 : 0,
-        cursor: Boolean(props.onClick) ? "pointer" : "default",
-        transition: "fill .075s ease"
+        cursor: Boolean(onClick) ? "pointer" : "default",
+        transition: "fill .075s ease",
       };
     
-      return JSX
+      const icon = (
+        JSX
+      )
+      
+      // {{iconButtonVariant}}
+
+      return icon
     };
     `,
           { plugins: ["typescript"], preserveComments: true },
@@ -93,7 +100,7 @@ export const buildIcons = (iconPath?: string) =>
         const { name } = parse(fileName)
         const svgCode = readFileSync(join(inputFolder, fileName), "utf-8")
         try {
-          const output = svgr.sync(
+          let output = svgr.sync(
             svgCode,
             {
               prettier: true,
@@ -113,7 +120,21 @@ export const buildIcons = (iconPath?: string) =>
           // Add a preview in the documentation
           const preview = base64Img.base64Sync(join(inputFolder, fileName))
           const previewImage = `![${name}Icon](${preview}) `
-          writeFileSync(join(outputFolder, `Icon.${name}.tsx`), output.replace("{{previewImage}}", previewImage))
+          output = output.replace("{{previewImage}}", previewImage)
+
+          // Add IconButton variant
+          const iconButtonChunk = `
+
+  if (onClick) {
+    return (
+      <IconButton size={size + 8} onClick={onClick}>
+        {icon}
+      </IconButton>
+    )
+  }`
+          output = output.replace("// {{iconButtonVariant}}", iconButtonChunk)
+
+          writeFileSync(join(outputFolder, `Icon.${name}.tsx`), output)
           progressBar.tick()
         } catch (e) {
           console.error(`\nError: ${name}Icon can't be generated!`)
@@ -128,7 +149,7 @@ export const buildIcons = (iconPath?: string) =>
       // Create Icon.ts
       const index = `import React from "react"
 
-export interface IconPropsBase extends React.SVGProps<SVGSVGElement>{
+export interface IconPropsBase {
   /**
    * Size
    *
@@ -137,6 +158,10 @@ export interface IconPropsBase extends React.SVGProps<SVGSVGElement>{
   size?: number
   /** Icon color, specified as a hex, or a color name (info, success, warning, error) */
   color?: string
+  /**
+   * On click handler
+   */
+  onClick?: (e: React.MouseEvent) => void
 }
 
 export type IconProps =

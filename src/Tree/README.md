@@ -7,16 +7,14 @@ The tree component is also keyboard accessible:
 - <kbd>Tab</kbd> navigates to the next node
 - <kbd>Shift</kbd>+<kbd>Tab</kbd> navigates to the previous node
 - <kbd>Space</kbd> triggers the `onClick` handler, usually expanding a node
-- <kbd>Enter</kbd> triggers the `onDblClick` action
+- <kbd>Enter</kbd> triggers the `onDoubleClick` action
 - <kbd>Alt</kbd>+<kbd>Enter</kbd> triggers the right-click action
-- <kbd>Delete</kbd> or <kbd>Backspace</kbd> triggers the "remove" action, if available
 
 Try it yourself!
 
 - "Region" has a double click/<kbd>Enter</kbd> handler
 - "Country" has a click/<kbd>Space</kbd> handler
 - "Country" has a right-click/<kbd>Alt</kbd>+<kbd>Enter</kbd> handler
-- "Country" has a remove/<kbd>Backspace</kbd>/<kbd>Delete</kbd> handler
 
 ```jsx
 import * as React from "react"
@@ -44,7 +42,6 @@ import { Tree, OlapIcon } from "@operational/components"
               color: "primary",
               onClick: () => alert("country was clicked"),
               onContextMenu: () => alert("country was right-clicked"),
-              onRemove: () => alert("node is removed"),
               icon: OlapIcon,
               childNodes: [],
             },
@@ -100,7 +97,6 @@ import { Tree } from "@operational/components"
             {
               label: "Country",
               color: "primary",
-              onRemove: () => {},
               tag: "D",
               childNodes: [],
             },
@@ -161,7 +157,6 @@ const Example = () => {
                   {
                     label: "Country",
                     color: "primary",
-                    onRemove: () => {},
                     tag: "D",
                     childNodes: [],
                   },
@@ -195,11 +190,82 @@ const Example = () => {
 ;<Example />
 ```
 
+### With custom actions
+
+```jsx
+import * as React from "react"
+import { Tree, DotMenuIcon, PlusIcon } from "@operational/components"
+const Example = () => {
+  return (
+    <>
+      <Tree
+        trees={[
+          {
+            label: "Store",
+            initiallyOpen: true,
+            actions: <DotMenuIcon size={12} />,
+            childNodes: [
+              {
+                label: "Region",
+                actions: <DotMenuIcon
+                  size={12}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    console.log("coucou");
+                  }}
+                />,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "City",
+                    tag: "D",
+                    disabled: true,
+                    actions: [<PlusIcon size={12} onClick={() => alert("coucou")} key="add"/>, <DotMenuIcon size={12} onClick={() => alert("coucou")} key="more"/>]
+                    childNodes: [],
+                  },
+                  {
+                    label: "Country",
+                    color: "primary",
+                    actions: [<PlusIcon size={12} onClick={() => alert("coucou")} key="add"/>, <DotMenuIcon size={12} onClick={() => alert("coucou")} key="more"/>]
+                    tag: "D",
+                    childNodes: [],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            label: "Legal Entity",
+            childNodes: [
+              {
+                label: "Limited Liability Company",
+                tag: "D",
+                childNodes: [],
+              },
+              {
+                label: "Inc.",
+                tag: "D",
+                color: "#2C363F",
+                childNodes: [],
+              },
+            ],
+          },
+        ]}
+      />
+    </>
+  )
+}
+
+; <Example />
+```
+
 ### With react-beautiful-dnd
 
 This tree component have `Droppable` and `Draggable` implemented from [react-beautiful-dnd](https://github.com/atlassian/react-beautiful-dnd/).
 
 To offer the most flexibility as possible in your drag & drop implementation, we are just spreading `draggableProps` and `droppableProps`.
+
+FIXME: https://github.com/styleguidist/react-styleguidist/issues/1278
 
 ```jsx
 import * as React from "react"
@@ -375,7 +441,6 @@ const MyComponent = () => {
                       {
                         label: "Country",
                         color: "primary",
-                        onRemove: () => {},
                         tag: "D",
                         childNodes: [],
                       },

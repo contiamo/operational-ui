@@ -17,7 +17,7 @@ interface BaseTree {
   onClick?: () => void
   onContextMenu?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   cursor?: string
-  onRemove?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
+  actions?: React.ReactNode
   forwardRef?: (element?: HTMLElement | null) => any
 }
 interface TreeWithChildren extends BaseTree {

@@ -2,7 +2,7 @@ import React, { useCallback } from "react"
 import NameTag from "../NameTag/NameTag"
 import { darken, lighten } from "../utils"
 import styled from "../utils/styled"
-import { ChevronRightIcon, NoIcon, ChevronDownIcon, IconComponentType } from "../Icon/Icon"
+import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon/Icon"
 import Highlighter from "react-highlight-words"
 import constants from "../utils/constants"
 
@@ -20,10 +20,10 @@ interface TreeItemProps {
   cursor?: string
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   onNodeContextMenu?: (e: React.MouseEvent<HTMLDivElement>) => void
-  onRemove?: (e: React.MouseEvent<HTMLDivElement>) => void
+  actions?: React.ReactNode
 }
 
-const Header = styled("div")<{
+const Header = styled.div<{
   highlight: boolean
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   cursor?: string
@@ -31,6 +31,7 @@ const Header = styled("div")<{
 }>`
   label: TreeItem;
   display: flex;
+  position: relative;
   align-items: center;
   cursor: ${({ onClick, cursor }) => cursor || (onClick ? "pointer" : "inherit")};
   background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
@@ -42,6 +43,10 @@ const Header = styled("div")<{
   :hover {
     background-color: ${({ theme, highlight }) =>
       highlight ? darken(theme.color.highlight, 20) : theme.color.background.lighter};
+
+    div:last-child {
+      display: grid;
+    }
   }
 
   :focus {
@@ -57,20 +62,13 @@ const Label = styled("div")<{ hasChildren: boolean }>`
   font-weight: ${({ theme, hasChildren }) => (hasChildren ? theme.font.weight.bold : theme.font.weight.medium)};
 `
 
-const DeleteNode = styled("div")`
-  display: flex;
+const ActionsContainer = styled.div<{ childrenCount: number }>`
+  display: none;
   align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  width: 14px;
-  height: 14px;
-  background-color: rgba(0, 0, 0, 0.05);
-  color: ${({ theme }) => theme.color.text.lighter};
-  cursor: pointer;
-
-  :hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
+  position: absolute;
+  right: 16px;
+  grid-template-columns: repeat(${({ childrenCount }) => childrenCount}, 1fr);
+  grid-column-gap: 4px;
 `
 
 const TreeItem: React.SFC<TreeItemProps> = ({
@@ -82,11 +80,11 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   color,
   onNodeClick,
   onNodeContextMenu,
-  onRemove,
   hasChildren,
   isOpen,
   level,
   cursor,
+  actions,
   searchWords = [],
 }) => {
   const handleKeyDown = useCallback(
@@ -108,13 +106,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           e.preventDefault()
           if (onNodeClick) {
             onNodeClick(e)
-          }
-          return
-        case "Delete":
-        case "Backspace":
-          e.preventDefault()
-          if (onRemove) {
-            onRemove(e)
           }
           return
       }
@@ -156,11 +147,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           searchWords={searchWords}
         />
       </Label>
-      {onRemove && (
-        <DeleteNode onClick={onRemove}>
-          <NoIcon size={12} />
-        </DeleteNode>
-      )}
+      <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>
     </Header>
   )
 }
