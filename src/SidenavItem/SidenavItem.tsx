@@ -6,7 +6,7 @@ import { useListbox } from "../useListbox"
 import Popout from "./Popout"
 import { StyledSidenavItem, Caret, IconContainer } from "./SidenavItem.styled"
 import { SidenavItemProps } from "./SidenavItem.types"
-import SidenavTooltip from "./Tooltip"
+import Tooltip from "../Tooltip/Tooltip"
 
 const SidenavItem: React.SFC<SidenavItemProps> = ({
   to,
@@ -102,10 +102,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
           <Icon size={compact ? 24 : 18} />
         </IconContainer>
       )}
-      {label &&
-        (compact
-          ? isLabelVisible && <SidenavTooltip dark={Boolean(dark)}>{compactLabel || label}</SidenavTooltip>
-          : label)}
+      {label && (compact ? isLabelVisible && <Tooltip>{compactLabel || label}</Tooltip> : label)}
       {!compact && items && <Caret isOpen={isOpen || false} />}
       {items && isOpen && (
         <Popout data-cy="operational-ui__SidenavItemPopover">
