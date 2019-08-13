@@ -147,7 +147,7 @@ export const buildIcons = (iconPath?: string) =>
       if (iconPath) return
 
       // Create Icon.ts
-      const index = `import React from "react"
+      const index = `import React, { MouseEventHandler } from "react"
 
 export interface IconPropsBase {
   /**
@@ -161,7 +161,7 @@ export interface IconPropsBase {
   /**
    * On click handler
    */
-  onClick?: (e: React.MouseEvent) => void
+  onClick?: MouseEventHandler
 }
 
 export type IconProps =

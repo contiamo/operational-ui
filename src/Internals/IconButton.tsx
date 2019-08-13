@@ -2,7 +2,7 @@ import styled from "../utils/styled"
 
 export const IconButton = styled.span<{
   size: number
-  onClick: (event: React.SyntheticEvent<HTMLSpanElement>) => void
+  onClick: (event: React.MouseEvent) => void
 }>`
   pointer-events: all;
   transition: background-color 0.2s;
