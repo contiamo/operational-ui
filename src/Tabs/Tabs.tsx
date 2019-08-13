@@ -170,6 +170,7 @@ const Tabs: React.FC<TabsProps> = ({
                         e.stopPropagation()
                         onClose(i)
                       }}
+                      selected={i === active}
                     >
                       <NoIcon size={9} />
                     </IconButton>

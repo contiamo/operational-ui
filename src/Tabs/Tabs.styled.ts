@@ -182,6 +182,7 @@ export const TitleIconWrapper = styled.div`
   max-width: 120px;
   justify-content: center;
   align-items: center;
+  margin-right: ${({ theme }) => theme.space.base}px;
 `
 
 // we need this one to show ellipsis if title is to long
@@ -196,11 +197,11 @@ export const TabIcon = styled.span`
   pointer-events: none;
 `
 
-export const IconButton = styled.span`
+export const IconButton = styled.span<{ selected?: boolean }>`
   pointer-events: all;
   transition: background-color 0.2s;
-  &:hover {
-    background: ${({ theme }) => theme.color.separators.default};
+  :hover {
+    background: ${({ theme, selected }) => (selected ? theme.color.separators.default : theme.color.background.light)};
   }
   display: flex;
   align-items: center;
