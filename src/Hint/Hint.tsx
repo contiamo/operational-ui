@@ -32,11 +32,6 @@ const Container = styled("div")<{ left?: HintProps["left"]; right?: HintProps["r
   width: 24,
 }))
 
-const HintTooltip = styled(Tooltip)`
-  max-height: 100px;
-  overflow: auto;
-`
-
 const Hint: React.SFC<HintProps> = props => {
   const [isTooltipVisible, setIsTooltipVisible] = React.useState(false)
 
@@ -49,9 +44,9 @@ const Hint: React.SFC<HintProps> = props => {
     >
       <HelpIcon size={12} />
       {isTooltipVisible && (
-        <HintTooltip position={props.tooltipPosition} textId={props.textId}>
+        <Tooltip position={props.tooltipPosition} textId={props.textId}>
           {props.children}
-        </HintTooltip>
+        </Tooltip>
       )}
     </Container>
   )
