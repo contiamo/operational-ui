@@ -15,11 +15,17 @@ export const Container = styled.div`
   padding-top: 1px;
 `
 
+export const PlusWrapper = styled.div`
+  display: flex;
+  max-width: 100%;
+  overflow: hidden;
+`
+
 export const TabList = styled.div<{ scroll: boolean }>`
   display: flex;
   overflow-x: auto;
   /* + 1px to compensate right: -1px in ScrollButtons */
-  max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px + 1px)` : "none")};
+  max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 3}px + 10px)` : "none")};
   scroll-behavior: smooth;
   overflow-y: hidden;
   /* magic number to hide scroll bar underneath tabpanel */
