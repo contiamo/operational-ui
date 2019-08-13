@@ -30,7 +30,7 @@ const StyledInput = styled(Input)<{ error: string }>`
 export const DataTableInput: React.FC<InputProps> = ({ copy, ...props }) => (
   <StyledInput
     {...props}
-    errorComponent={({ errorMessage }) => <Tooltip bottom>{errorMessage}</Tooltip>}
+    errorComponent={({ errorMessage }) => <Tooltip position="bottom">{errorMessage}</Tooltip>}
     fullWidth
     {...props}
   />
