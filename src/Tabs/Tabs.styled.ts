@@ -4,6 +4,7 @@ import { headerHeight, expandColor } from "../utils/constants"
 import { darken } from "../utils"
 
 const buttonWidth = 36
+const plusButtonWidth = 42
 
 export const Container = styled.div`
   label: Tabs;
@@ -25,7 +26,7 @@ export const TabList = styled.div<{ scroll: boolean }>`
   display: flex;
   overflow-x: auto;
   /* + 1px to compensate right: -1px in ScrollButtons */
-  max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 3}px + 10px)` : "none")};
+  max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px - ${plusButtonWidth}px - 1px)` : "none")};
   scroll-behavior: smooth;
   overflow-y: hidden;
   /* magic number to hide scroll bar underneath tabpanel */
@@ -125,8 +126,8 @@ export const TabButton = styled(SectionHeader, {
     transparent ? theme.color.background.light : theme.color.background.lighter};
   margin: 0;
   padding: 0;
-  width: ${buttonWidth}px;
-  min-width: ${buttonWidth}px;
+  width: ${({ transparent }) => (transparent ? plusButtonWidth : buttonWidth)}px;
+  min-width: ${({ transparent }) => (transparent ? plusButtonWidth : buttonWidth)}px;
   border: solid ${({ theme }) => theme.color.separators.default};
   border-width: ${({ transparent }) => (transparent ? `0 0 1px 0` : "1px")};
   margin-right: -1px;
