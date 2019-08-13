@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled from "../utils/styled"
 import { IconComponentType } from "../Icon/Icon"
-import { inputFocus } from "../utils"
 
 export interface TopbarButtonProps {
   /** The name of the button icon */
@@ -20,9 +19,9 @@ export interface TopbarButtonProps {
   flavor?: "basic" | "outline" | "filled"
 }
 
-const TopbarButtonContainer = styled("button")<{ disabled?: boolean; flavor: TopbarButtonProps["flavor"] }>`
-  height: ${({ flavor }) => (flavor === "outline" || flavor === "filled" ? "36px" : "100%")};
-  border-radius: ${({ flavor, theme }) => (flavor === "outline" || flavor === "filled" ? theme.borderRadius : "0")}px;
+const TopbarButtonContainer = styled.button<{ disabled?: boolean; flavor: TopbarButtonProps["flavor"] }>`
+  height: 36px;
+  border-radius: ${({ flavor, theme }) => (flavor === "outline" || flavor === "filled" ? theme.borderRadius : 18)}px;
   padding: 0px
     ${({ flavor, theme }) =>
       flavor === "outline" || flavor === "filled" ? theme.space.element : theme.space.medium}px;
@@ -38,7 +37,13 @@ const TopbarButtonContainer = styled("button")<{ disabled?: boolean; flavor: Top
   opacity: ${props => (props.disabled ? 0.6 : 1)};
   font-size: ${props => props.theme.font.size.small}px;
   :focus {
-    ${({ theme }) => inputFocus({ theme })};
+    outline: none;
+    background: ${({ flavor, theme }) =>
+      flavor === "outline" || flavor === "filled" ? undefined : theme.color.border.select};
+  }
+  :hover {
+    background: ${({ flavor, disabled }) =>
+      disabled || flavor === "outline" || flavor === "filled" ? undefined : "#e4e9eb"};
   }
   & svg {
     /** Icons are purely presentational and click events are handled upstream */
@@ -47,13 +52,7 @@ const TopbarButtonContainer = styled("button")<{ disabled?: boolean; flavor: Top
 `
 
 const TopbarButton: React.SFC<TopbarButtonProps> = ({ children, icon: Icon, onClick, flavor, ...props }) => (
-  <TopbarButtonContainer
-    {...props}
-    flavor={flavor}
-    onClick={props.disabled ? undefined : onClick}
-    aria-disabled={props.disabled}
-    tabIndex={props.disabled ? -1 : undefined}
-  >
+  <TopbarButtonContainer {...props} flavor={flavor} onClick={props.disabled ? undefined : onClick}>
     {children}
     {Icon && <Icon right size={12} />}
   </TopbarButtonContainer>
