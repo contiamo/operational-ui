@@ -1,6 +1,5 @@
 import { keyframes } from "@emotion/core"
 
-import { dangerousTooltipContainerClassName } from "../Tooltip/Tooltip"
 import { lighten } from "../utils"
 import styled from "../utils/styled"
 import { OperationalStyleConstants } from "./constants"
@@ -45,19 +44,6 @@ export const FormFieldControls = styled("div")({
   right: 0,
 })
 
-export const hoverTooltip: {} = {
-  [`.${dangerousTooltipContainerClassName}`]: {
-    visibility: "hidden",
-    pointerEvents: "none",
-  },
-  ":hover": {
-    [`.${dangerousTooltipContainerClassName}`]: {
-      visibility: "visible",
-      pointerEvents: "all",
-    },
-  },
-}
-
 export const FormFieldControl = styled("div")(({ theme }) => ({
   cursor: "pointer",
   position: "relative",
@@ -67,7 +53,6 @@ export const FormFieldControl = styled("div")(({ theme }) => ({
   marginLeft: theme.space.base,
   color: theme.color.text.lightest,
   height: 12,
-  ...hoverTooltip,
   "& svg": {
     position: "relative",
   },

@@ -1,128 +1,76 @@
-import tinycolor from "tinycolor2"
+import css from "@emotion/css"
 
 import styled from "../utils/styled"
+import { TooltipProps } from "./Tooltip"
 
-export type Position = "top" | "left" | "right" | "bottom"
+const caretSize = 6
 
-const makeContainerPositionStyles = (position: Position) => {
+const getCaretPosition = ({ position }: { position: TooltipProps["position"] }) => {
   switch (position) {
     case "top":
-      return {
-        left: "50%",
-        top: -6,
-        transform: "translate3d(-50%, -100%, 0)",
-      }
-    case "bottom":
-      return {
-        left: "50%",
-        top: "100%",
-        transform: "translate3d(-50%, 6px, 0)",
-      }
-    case "left":
-      return {
-        // 1px nudge fixes visual misalignment for carets that are rendered at half-pixel
-        top: "calc(50% - 1px)",
-        left: -6,
-        transform: "translate3d(-100%, -50%, 0)",
-      }
+      return css`
+        top: 100%;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+      `
     case "right":
-      return {
-        // 1px nudge fixes visual misalignment for carets that are rendered at half-pixel
-        top: "calc(50% - 1px)",
-        right: -6,
-        transform: "translate3d(100%, -50%, 0)",
-      }
+      return css`
+        top: 50%;
+        left: ${caretSize * -2}px;
+        transform: translateY(-50%);
+      `
+    case "bottom":
+      return css`
+        top: ${caretSize * -2}px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+      `
+    case "left":
+      return css`
+        top: 50%;
+        left: 100%;
+        transform: translateY(-50%);
+      `
   }
 }
 
-const makeCaretPositionStyles = (position: Position, backgroundColor: string): {} => {
-  switch (position) {
-    case "top":
-      return {
-        bottom: -4,
-        left: `calc(50% - 6px)`,
-        borderLeft: "6px solid transparent",
-        borderRight: "6px solid transparent",
-        borderTop: `6px solid ${backgroundColor}`,
-      }
-    case "bottom":
-      return {
-        top: -4,
-        left: `calc(50% - 6px)`,
-        borderLeft: "6px solid transparent",
-        borderRight: "6px solid transparent",
-        borderBottom: `6px solid ${backgroundColor}`,
-      }
-    case "left":
-      return {
-        right: -4,
-        top: `calc(50% - 6px)`,
-        borderTop: "6px solid transparent",
-        borderBottom: "6px solid transparent",
-        borderLeft: `6px solid ${backgroundColor}`,
-      }
-    case "right":
-      return {
-        left: -4,
-        top: `calc(50% - 6px)`,
-        borderTop: "6px solid transparent",
-        borderBottom: "6px solid transparent",
-        borderRight: `6px solid ${backgroundColor}`,
-      }
-  }
-}
+const Container = styled.div<{ top: number; left: number; position: TooltipProps["position"]; visible: boolean }>`
+  position: fixed;
+  top: ${({ top }) => top}px;
+  left: ${({ left }) => left}px;
+  z-index: ${({ theme }) => theme.zIndex.tooltip};
+  padding: ${({ theme }) => theme.space.base}px ${({ theme }) => theme.space.small}px;
+  background-color: ${({ theme }) => theme.color.primaryDark};
+  color: ${({ theme }) => theme.color.white};
+  font-size: ${({ theme }) => theme.font.size.fineprint}px;
+  border-radius: 2px;
+  white-space: pre;
+  visibility: ${({ visible }) => (visible ? "visible" : "hidden")};
+  transform: ${({ position }) => {
+    switch (position) {
+      case "top":
+        return "translate(-50%, -100%)"
+      case "bottom":
+        return "translateX(-50%)"
+      case "left":
+        return "translate(-100%, -50%)"
+      case "right":
+        return `translateY(-50%)`
+    }
+  }};
 
-export const Container = styled("div")<{
-  position: Position
-  offScreenWidthTest?: boolean
-  singleLineTextWidth: number
-}>(({ position, offScreenWidthTest, singleLineTextWidth, theme }) => {
-  const backgroundColor = tinycolor(theme.color.black)
-    .setAlpha(0.9)
-    .toString()
-  return {
-    backgroundColor,
-    label: "tooltip",
-    color: theme.color.white,
-    position: "absolute",
-    zIndex: theme.zIndex.tooltip,
-    borderRadius: 2,
-    boxShadow: "0 2px 6px rgba(0, 0, 0, .15)",
-    ...(offScreenWidthTest
-      ? {
-          width: "fit-content",
-          whiteSpace: "nowrap",
-          position: "fixed",
-          visibility: "hidden",
-          top: -200,
-          left: -200,
-        }
-      : {
-          // If there was an issue determining singleLineTextWidth, default to the 150px width
-          // Otherwise, honor the single line text width unless greater than 150px.
-          width: singleLineTextWidth === 0 ? 150 : Math.min(singleLineTextWidth + 4, 150),
-        }),
-    ...makeContainerPositionStyles(position),
-    // This pseudo-element extends the clickable area of a tooltip extending enough to disappear as the mouse moves over to the caret.
-    "&::after": {
-      content: "''",
-      position: "absolute",
-      top: 0,
-      left: -32,
-      display: "block",
-      width: 32,
-      height: "100%",
-    },
-    // They say behind every great tooltip is a great caret.
-    "&::before": {
-      content: "''",
-      position: "absolute",
-      zIndex: theme.zIndex.tooltip,
-      width: 0,
-      height: 0,
-      ...makeCaretPositionStyles(position, backgroundColor),
-    },
+  /* Caret */
+  ::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: ${caretSize}px solid transparent;
+    ${({ theme, position }) => `border-${position}-color: ${theme.color.primaryDark}`};
+    ${getCaretPosition}
   }
-})
+`
 
 export default Container
