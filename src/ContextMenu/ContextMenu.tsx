@@ -71,7 +71,7 @@ const MenuContainer = styled.div<{
   isOpen: boolean
 }>(({ theme, numRows, align, embedChildrenInMenu, isOpen }) => ({
   position: "absolute",
-  top: embedChildrenInMenu ? 0 : "100%",
+  top: embedChildrenInMenu ? 0 : "calc(100% - 1px)",
   left: align === "left" ? 0 : "auto",
   maxHeight: "50vh",
   overflow: "auto",

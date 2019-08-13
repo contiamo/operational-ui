@@ -39,7 +39,7 @@ export interface ButtonProps extends DefaultProps {
   children?: React.ReactNode
 }
 
-const makeColors = (theme: OperationalStyleConstants, color: string) => {
+export const makeColors = (theme: OperationalStyleConstants, color: string) => {
   const defaultColor = theme.color.white
 
   const backgroundColors: { [key: string]: string } = {
@@ -81,7 +81,7 @@ const BaseButton = styled<"button" | "a">("button")<{
   const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color_ || "")
   return {
     backgroundColor,
-    lineHeight: `${condensed ? 28 : 36}px`,
+    lineHeight: `${condensed ? 26 : 34}px`,
     minWidth: "max-content",
     fontSize: theme.font.size.small,
     fontFamily: theme.font.family.main,
@@ -91,8 +91,7 @@ const BaseButton = styled<"button" | "a">("button")<{
     justifyContent: "center",
     padding: `0 ${condensed ? theme.space.medium : theme.space.element}px`,
     borderRadius: theme.borderRadius,
-    border: 0,
-    boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.border.disabled} inset` : "none",
+    border: isWhite(backgroundColor) ? `1px solid ${theme.color.border.disabled}` : 0,
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.6 : 1.0,
     position: "relative",
@@ -105,7 +104,7 @@ const BaseButton = styled<"button" | "a">("button")<{
     },
     "&:focus": {
       ...inputFocus({ theme, isError: color_ === "error" }),
-      boxShadow: isWhite(backgroundColor) ? theme.shadows.insetFocus : "none",
+      border: isWhite(backgroundColor) ? theme.shadows.insetFocus : 0,
       //Higher zIndex will make right border appear on ButtonGroup Focus.
       zIndex: theme.zIndex.confirm,
     },
@@ -113,7 +112,7 @@ const BaseButton = styled<"button" | "a">("button")<{
       ? {
           ":hover": {
             backgroundColor: darken(backgroundColor, 5),
-            boxShadow: isWhite(backgroundColor) ? theme.shadows.insetFocus : "none",
+            border: isWhite(backgroundColor) ? theme.shadows.insetFocus : 0,
             zIndex: theme.zIndex.confirm,
           },
         }

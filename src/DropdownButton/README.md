@@ -91,3 +91,25 @@ const menuItems = [
   </DropdownButton>
 </div>
 ```
+
+```jsx
+import * as React from "react"
+import { DropdownButton } from "@operational/components"
+
+const menuItems = ["View", "Materialized view"]
+;<div style={{ paddingLeft: 100 }}>
+  <DropdownButton
+    color="default"
+    align="right"
+    items={menuItems}
+    onClick={() => {
+      console.log("Button clicked")
+    }}
+    onItemClick={() => {
+      console.log("Item clicked")
+    }}
+  >
+    Save as...
+  </DropdownButton>
+</div>
+```
