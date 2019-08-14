@@ -52,7 +52,7 @@ export const ModalCard = styled(Card)`
 
 export const ModalContent = styled.div<{ anchor: boolean; actions: boolean }>`
   display: grid;
-  grid-template-rows: ${({ actions }) => (actions ? "auto max-content" : "auto")};
+  grid-template-rows: ${({ actions }) => (actions ? "minmax(auto, 100%) max-content" : "auto")};
   height: 100%;
   max-height: calc(
     /* card title + bottom padding + bottom margin + border */ 100vh -
