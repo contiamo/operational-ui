@@ -82,7 +82,9 @@ export const buildIcons = (iconPath?: string) =>
         JSX
       )
       
-      // {{iconButtonVariant}}
+      if (onClick) {
+        return React.createElement(IconButton, {size: size + 8, onClick}, icon)
+      }
 
       return icon
     };
@@ -121,18 +123,6 @@ export const buildIcons = (iconPath?: string) =>
           const preview = base64Img.base64Sync(join(inputFolder, fileName))
           const previewImage = `![${name}Icon](${preview}) `
           output = output.replace("{{previewImage}}", previewImage)
-
-          // Add IconButton variant
-          const iconButtonChunk = `
-
-  if (onClick) {
-    return (
-      <IconButton size={size + 8} onClick={onClick}>
-        {icon}
-      </IconButton>
-    )
-  }`
-          output = output.replace("// {{iconButtonVariant}}", iconButtonChunk)
 
           writeFileSync(join(outputFolder, `Icon.${name}.tsx`), output)
           progressBar.tick()
