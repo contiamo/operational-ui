@@ -71,8 +71,7 @@ const MenuContainer = styled.div<{
   isOpen: boolean
 }>(({ theme, numRows, align, embedChildrenInMenu, isOpen }) => ({
   position: "absolute",
-  // Context menu is moved up by one pixel to cover the bottom border of dropdown buttons.
-  top: embedChildrenInMenu ? 0 : "calc(100% - 1px)",
+  top: embedChildrenInMenu ? 0 : "100%",
   left: align === "left" ? 0 : "auto",
   maxHeight: "50vh",
   overflow: "auto",

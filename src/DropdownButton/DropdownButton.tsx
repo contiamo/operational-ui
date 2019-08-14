@@ -56,6 +56,7 @@ const ItemWithChevron = styled("div")`
 const ContextMenuWithBorder = styled(ContextMenu)(({ theme }) => ({
   "& div[role='listbox']": {
     border: `1px solid ${theme.color.border.disabled}`,
+    transform: "translate(0, -1px)",
   },
 }))
 
