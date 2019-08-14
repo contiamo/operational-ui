@@ -36,6 +36,8 @@ const backgroundColors = {
   mediumDark: "#999",
   /** `#d9dfe3` */
   light: "#d9dfe3",
+  /** #eee */
+  grey: "#eee",
   /** `#f2f4f6` */
   lighter: "#f2f4f6",
   /** `#f8f8f8` */
