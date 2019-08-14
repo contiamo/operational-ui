@@ -74,7 +74,6 @@ export const buildIcons = (iconPath?: string) =>
         marginLeft: right ? 8 : 0,
         // theme.space.small
         marginRight: left ? 8 : 0,
-        cursor: Boolean(onClick) ? "pointer" : "default",
         transition: "fill .075s ease",
       };
     

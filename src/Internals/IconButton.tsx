@@ -1,6 +1,6 @@
 import styled from "../utils/styled"
 
-export const IconButton = styled.span<{
+export const IconButton = styled.div<{
   size: number
   onClick: (event: React.MouseEvent) => void
 }>`
@@ -15,9 +15,12 @@ export const IconButton = styled.span<{
   min-height: ${props => props.size}px;
   min-width: ${props => props.size}px;
   border-radius: ${props => props.size}px;
-  & svg {
-    cursor: pointer !important;
-  }
+  cursor: pointer;
 `
+
+IconButton.defaultProps = {
+  role: "button",
+  tabIndex: 0,
+}
 
 export default IconButton

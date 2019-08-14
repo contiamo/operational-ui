@@ -54,6 +54,11 @@ const Header = styled.div<{
     outline: none;
     color: ${({ theme }) => theme.color.primary};
     background-color: ${({ theme }) => lighten(theme.color.primary, 50)};
+
+    /* Show ActionsContainer on hover */
+    div:last-of-type {
+      display: grid;
+    }
   }
 `
 
