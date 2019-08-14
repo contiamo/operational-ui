@@ -30,7 +30,7 @@ const BaseDropdownButton = styled(Button)<{ isOpen: boolean }>(({ isOpen, theme 
   paddingRight: 0,
   marginRight: 0,
   ...(isOpen && {
-    borderBottom: "1px solid #fff",
+    borderBottom: `1px solid ${({theme}) => theme.color.white}`,
     zIndex: theme.zIndex.selectOptions + 2,
   }),
 }))
