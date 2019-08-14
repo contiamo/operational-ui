@@ -35,6 +35,7 @@ const Header = styled(SectionHeader)<{ expanded: boolean }>(({ theme, expanded }
   ":focus": {
     outline: "none",
   },
+  paddingRight: 0,
 }))
 
 Header.defaultProps = { role: "button", "aria-disabled": false }
@@ -60,6 +61,14 @@ const Focus = styled.div`
   /* we show it above other elements so that shadow would be visible, but we disable all events for it */
   pointer-events: none;
   ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
+`
+
+const IconWrapper = styled.div`
+  width: ${headerHeight}px;
+  height: ${headerHeight}px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const AccordionSection: React.FC<AccordionSectionProps> = ({
@@ -99,7 +108,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         onBlur={() => setFocusFlag(false)}
       >
         {title}
-        {_expanded ? <ChevronUpIcon size={12} /> : <ChevronDownIcon size={12} />}
+        <IconWrapper>{_expanded ? <ChevronUpIcon size={12} /> : <ChevronDownIcon size={12} />}</IconWrapper>
       </Header>
       <Panel id={contentId} aria-labelledby={titleId} hidden={!_expanded}>
         {_expanded && isFunction(children) ? children() : children}
