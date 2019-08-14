@@ -18,7 +18,6 @@ export const Container = styled.div`
 
 export const PlusWrapper = styled.div`
   display: flex;
-  max-width: 100%;
   overflow: hidden;
 `
 
@@ -118,18 +117,18 @@ TabHeader.defaultProps = {
 
 export const TabButton = styled(SectionHeader, {
   shouldForwardProp: prop => !(prop === "leftMargin" || prop === "as"),
-})<{ as?: React.FC<any> | string; transparent?: boolean }>`
+})<{ as?: React.FC<any> | string; isPlusButton?: boolean }>`
   justify-content: center;
   cursor: pointer;
   font-weight: normal;
-  background-color: ${({ theme, transparent }) =>
-    transparent ? theme.color.background.light : theme.color.background.lighter};
+  background-color: ${({ theme, isPlusButton }) =>
+    isPlusButton ? theme.color.background.light : theme.color.background.lighter};
   margin: 0;
   padding: 0;
-  width: ${({ transparent }) => (transparent ? plusButtonWidth : buttonWidth)}px;
-  min-width: ${({ transparent }) => (transparent ? plusButtonWidth : buttonWidth)}px;
+  width: ${({ isPlusButton }) => (isPlusButton ? plusButtonWidth : buttonWidth)}px;
+  min-width: ${({ isPlusButton }) => (isPlusButton ? plusButtonWidth : buttonWidth)}px;
   border: solid ${({ theme }) => theme.color.separators.default};
-  border-width: ${({ transparent }) => (transparent ? `0 0 1px 0` : "1px")};
+  border-width: ${({ isPlusButton }) => (isPlusButton ? `0 0 1px 0` : "1px")};
   margin-right: -1px;
   & svg {
     color: ${({ theme }) => theme.color.text.lighter};

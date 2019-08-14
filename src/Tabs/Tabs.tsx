@@ -182,7 +182,7 @@ const Tabs: React.FC<TabsProps> = ({
         </TabList>
         {onInsert && (
           <TabButton
-            transparent
+            isPlusButton
             onMouseDown={e => {
               userAction.current = true
               e.preventDefault()
