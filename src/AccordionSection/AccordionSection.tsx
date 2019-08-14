@@ -108,7 +108,13 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         onBlur={() => setFocusFlag(false)}
       >
         {title}
-        <IconWrapper>{_expanded ? <ChevronUpIcon size={12} /> : <ChevronDownIcon size={12} />}</IconWrapper>
+        <IconWrapper>
+          {_expanded ? (
+            <ChevronUpIcon size={12} onClick={() => _toggleSection(_index)} />
+          ) : (
+            <ChevronDownIcon size={12} onClick={() => _toggleSection(_index)} />
+          )}
+        </IconWrapper>
       </Header>
       <Panel id={contentId} aria-labelledby={titleId} hidden={!_expanded}>
         {_expanded && isFunction(children) ? children() : children}
