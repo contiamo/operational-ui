@@ -16,7 +16,7 @@ exports[`DatePicker Component Should render 1`] = `
       <svg
         fill="currentColor"
         height="14"
-        style="margin-left:0;margin-right:0;transition:fill .075s ease;min-width:14px"
+        style="margin-left:0;margin-right:0;transition:fill .075s ease;outline:none"
         viewBox="0 0 9.47 9.47"
         width="14"
       >
@@ -43,7 +43,7 @@ exports[`DatePicker Component Should render 1`] = `
           <svg
             fill="currentColor"
             height="12"
-            style="margin-left:0;margin-right:0;transition:fill .075s ease;min-width:12px"
+            style="margin-left:0;margin-right:0;transition:fill .075s ease;outline:none"
             viewBox="0 0 6.71 12.41"
             width="12"
           >
@@ -61,7 +61,7 @@ exports[`DatePicker Component Should render 1`] = `
           <svg
             fill="currentColor"
             height="12"
-            style="margin-left:0;margin-right:0;transition:fill .075s ease;min-width:12px"
+            style="margin-left:0;margin-right:0;transition:fill .075s ease;outline:none"
             viewBox="0 0 6.71 12.41"
             width="12"
           >
