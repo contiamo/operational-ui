@@ -49,12 +49,12 @@ const Container = styled("div", {
     fontWeight: theme.font.weight.bold,
     fontStretch: "condensed",
     width: condensed ? 16 : 28,
-    minWidth: condensed ? 16 : 28,
     height: condensed ? 14 : 20,
     borderRadius: theme.borderRadius,
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
+    flexShrink: 0,
     ...(left ? { marginRight: theme.space.small } : {}),
     ...(right ? { marginLeft: theme.space.small } : {}),
   }

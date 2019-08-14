@@ -35,8 +35,8 @@ const Header = styled.div<{
   align-items: center;
   cursor: ${({ onClick, cursor }) => cursor || (onClick ? "pointer" : "inherit")};
   background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
-  margin: 0 -20px;
-  padding: 4px 20px;
+  margin: 0 -${({ theme }) => theme.space.element}px;
+  padding: ${({ theme }) => `${theme.space.base}px ${theme.space.element}px`};
   padding-left: ${({ theme, level }) => theme.space.element * (level + 1)}px;
   color: ${({ theme }) => theme.color.text.dark};
 

@@ -75,7 +75,7 @@ export const buildIcons = (iconPath?: string) =>
         // theme.space.small
         marginRight: left ? 8 : 0,
         transition: "fill .075s ease",
-        minWidth: size,
+        outline: "none"
       };
     
       const icon = (
