@@ -152,6 +152,7 @@ export interface IconPropsBase {
    * On click handler
    */
   onClick?: MouseEventHandler
+  tabIndex?: number
 }
 
 export type IconProps =
