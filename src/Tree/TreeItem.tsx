@@ -44,7 +44,8 @@ const Header = styled.div<{
     background-color: ${({ theme, highlight }) =>
       highlight ? darken(theme.color.highlight, 20) : theme.color.background.lighter};
 
-    div:last-child {
+    /* Show ActionsContainer on hover */
+    div:last-of-type {
       display: grid;
     }
   }

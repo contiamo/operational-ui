@@ -207,26 +207,34 @@ const Example = () => {
             childNodes: [
               {
                 label: "Region",
-                actions: <DotMenuIcon
-                  size={12}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    console.log("coucou");
-                  }}
-                />,
+                actions: (
+                  <DotMenuIcon
+                    size={12}
+                    onClick={e => {
+                      e.stopPropagation()
+                      console.log("menu")
+                    }}
+                  />
+                ),
                 initiallyOpen: true,
                 childNodes: [
                   {
                     label: "City",
                     tag: "D",
                     disabled: true,
-                    actions: [<PlusIcon size={12} onClick={() => alert("coucou")} key="add"/>, <DotMenuIcon size={12} onClick={() => alert("coucou")} key="more"/>]
+                    actions: [
+                      <PlusIcon size={12} onClick={() => alert("plus")} key="add" />,
+                      <DotMenuIcon size={12} onClick={() => alert("menu")} key="more" />,
+                    ],
                     childNodes: [],
                   },
                   {
                     label: "Country",
                     color: "primary",
-                    actions: [<PlusIcon size={12} onClick={() => alert("coucou")} key="add"/>, <DotMenuIcon size={12} onClick={() => alert("coucou")} key="more"/>]
+                    actions: [
+                      <PlusIcon size={12} onClick={() => alert("plus")} key="add" />,
+                      <DotMenuIcon size={12} onClick={() => alert("menu")} key="more" />,
+                    ],
                     tag: "D",
                     childNodes: [],
                   },
@@ -256,7 +264,7 @@ const Example = () => {
   )
 }
 
-; <Example />
+;<Example />
 ```
 
 ### With react-beautiful-dnd
