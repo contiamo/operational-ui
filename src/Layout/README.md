@@ -29,7 +29,7 @@ import {
   AdminIcon,
   HomeIcon,
   CaretLeftIcon,
-  DataSourceIcon,
+  LockIcon,
   EmptyCircleIcon,
   OrganizationIcon,
   FunctionIcon,
@@ -44,12 +44,12 @@ const sidebar = (
       <SidenavItem label="The Third Prize" icon={CaretLeftIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon={DataSourceIcon} />
+      <SidenavItem label="The First Prize" icon={LockIcon} />
       <SidenavItem label="The Second Prize" icon={EmptyCircleIcon} />
       <SidenavItem label="The Third Prize" icon={FunctionIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon={DataSourceIcon} />
+      <SidenavItem label="The First Prize" icon={LockIcon} />
       <SidenavItem label="The Second Prize" icon={HomeIcon} />
       <SidenavItem label="The Third Prize" icon={FunctionIcon} />
     </SidenavHeader>
@@ -297,7 +297,7 @@ import {
   AdminIcon,
   OrganizationIcon,
   CaretLeftIcon,
-  DataSourceIcon, 
+  LockIcon, 
   EmptyCircleIcon,
   FunctionIcon,
   VirtualDBIcon,
@@ -312,7 +312,7 @@ const sidebar = (
       <SidenavItem label="The Third Prize" icon={CaretLeftIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon={DataSourceIcon} />
+      <SidenavItem label="The First Prize" icon={LockIcon} />
       <SidenavItem label="The Second Prize" icon={EmptyCircleIcon} />
       <SidenavItem label="The Third Prize" icon={FunctionIcon} />
     </SidenavHeader>
@@ -523,7 +523,7 @@ import {
   OrganizationIcon,
   CaretLeftIcon,
   UserIcon,
-  DataSourceIcon
+  LockIcon
   } from "@operational/components"
 
 const sidebar = (
@@ -534,7 +534,7 @@ const sidebar = (
       <SidenavItem label="Third" icon={CaretLeftIcon} />
     </SidenavHeader>
     <SidenavItem active end label="Other" icon={UserIcon} />
-    <SidenavItem end label="Admin" icon={DataSourceIcon} />
+    <SidenavItem end label="Admin" icon={LockIcon} />
   </Sidenav>
 )
 
@@ -597,7 +597,7 @@ import {
   AdminIcon,
   OrganizationIcon,
   CaretLeftIcon,
-  DataSourceIcon,
+  LockIcon,
   EmptyCircleIcon,
   FunctionIcon,
   HomeIcon,
@@ -612,7 +612,7 @@ const sidebar = (
       <SidenavItem label="The Third Prize" icon={CaretLeftIcon} />
     </SidenavHeader>
     <SidenavHeader label="Let It Snow" active>
-      <SidenavItem label="The First Prize" icon={DataSourceIcon} />
+      <SidenavItem label="The First Prize" icon={LockIcon} />
       <SidenavItem label="The Second Prize" icon={EmptyCircleIcon} />
       <SidenavItem label="The Third Prize" icon={FunctionIcon} />
     </SidenavHeader>

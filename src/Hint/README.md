@@ -5,7 +5,7 @@ The `Hint` component simply renders a question icon + a hover tooltip.
 ```jsx
 import * as React from "react"
 import { Hint } from "@operational/components"
-;<Hint tooltipPosition="smart">Can I be helpful?</Hint>
+;<Hint tooltipPosition="right">Can I be helpful?</Hint>
 ```
 
 ### Usage with neighboring content
@@ -15,7 +15,9 @@ import * as React from "react"
 import { Hint } from "@operational/components"
 ;<>
   <span>I am a confusing piece of text</span>
-  <Hint right>Pretty confusing..</Hint>
+  <Hint right tooltipPosition="right">
+    Pretty confusing..
+  </Hint>
 </>
 ```
 
@@ -27,7 +29,7 @@ import { Hint } from "@operational/components"
 ;<>
   <div>
     <span>I shouldn't look broken</span>
-    <Hint right tooltipPosition="smart">
+    <Hint right tooltipPosition="left">
       <ul>
         {Array(1000)
           .fill(null)
@@ -39,7 +41,7 @@ import { Hint } from "@operational/components"
   </div>
   <div>
     <span>I shouldn't either</span>
-    <Hint right tooltipPosition="smart">
+    <Hint right tooltipPosition="right">
       <img alt="HUGE IMAGE" src="https://placehold.it/1920x1080" />
     </Hint>
   </div>

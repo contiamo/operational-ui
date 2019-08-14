@@ -6,6 +6,7 @@ import { useListbox } from "../useListbox"
 import Popout from "./Popout"
 import { StyledSidenavItem, Caret, IconContainer } from "./SidenavItem.styled"
 import { SidenavItemProps } from "./SidenavItem.types"
+import Tooltip from "../Tooltip/Tooltip"
 
 const SidenavItem: React.SFC<SidenavItemProps> = ({
   to,
@@ -22,6 +23,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
   ...props
 }) => {
   const isActive = Boolean(active)
+  const [isLabelVisible, setIsLabelVisible] = React.useState(false)
   const { isOpen, setIsOpen, buttonProps, getChildProps } = useListbox({ itemCount: items ? items.length : 0 })
   const ctx = useOperationalContext()
 
@@ -88,8 +90,8 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
       compact={Boolean(compact)}
       as={Boolean(to) ? "a" : "div"}
       className={`${className || ""}${end ? " operational-ui__sidenav-item_end" : ""}`}
-      onMouseEnter={() => Boolean(items) && setIsOpen && setIsOpen(true)}
-      onMouseLeave={() => Boolean(items) && setIsOpen && setIsOpen(false)}
+      onMouseEnter={() => (Boolean(items) ? setIsOpen && setIsOpen(true) : setIsLabelVisible(true))}
+      onMouseLeave={() => (Boolean(items) ? setIsOpen && setIsOpen(false) : setIsLabelVisible(false))}
       hasOnClick={Boolean(onClick)}
       isActive={isActive}
       onClick={handleClickOnSidenavItem}
@@ -100,7 +102,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
           <Icon size={compact ? 24 : 18} />
         </IconContainer>
       )}
-      {compact ? compactLabel || label : label}
+      {label && (compact ? isLabelVisible && <Tooltip>{compactLabel || label}</Tooltip> : label)}
       {!compact && items && <Caret isOpen={isOpen || false} />}
       {items && isOpen && (
         <Popout data-cy="operational-ui__SidenavItemPopover">

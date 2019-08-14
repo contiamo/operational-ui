@@ -155,7 +155,7 @@ class Debug<T> extends React.Component<DebugProps<T>, DebugState> {
               <CopyIcon onClick={e => e.stopPropagation()} />
             </CopyToClipboard>
             {isExpanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
-            {copied && <Tooltip top>Copied</Tooltip>}
+            {copied && <Tooltip position="top">Copied</Tooltip>}
           </Icons>
         </Header>
         {isExpanded && (
