@@ -203,13 +203,14 @@ const Example = () => {
           {
             label: "Store",
             initiallyOpen: true,
-            actions: <DotMenuIcon size={12} />,
+            actions: <DotMenuIcon size={12} tabIndex={-1} />,
             childNodes: [
               {
                 label: "Region",
                 actions: (
                   <DotMenuIcon
                     size={12}
+                    tabIndex={-1}
                     onClick={e => {
                       e.stopPropagation()
                       console.log("menu")
@@ -223,8 +224,8 @@ const Example = () => {
                     tag: "D",
                     disabled: true,
                     actions: [
-                      <PlusIcon size={12} onClick={() => alert("plus")} key="add" />,
-                      <DotMenuIcon size={12} onClick={() => alert("menu")} key="more" />,
+                      <PlusIcon size={12} tabIndex={-1} onClick={() => alert("plus")} key="add" />,
+                      <DotMenuIcon size={12} tabIndex={-1} onClick={() => alert("menu")} key="more" />,
                     ],
                     childNodes: [],
                   },
@@ -232,8 +233,8 @@ const Example = () => {
                     label: "Country",
                     color: "primary",
                     actions: [
-                      <PlusIcon size={12} onClick={() => alert("plus")} key="add" />,
-                      <DotMenuIcon size={12} onClick={() => alert("menu")} key="more" />,
+                      <PlusIcon size={12} tabIndex={-1} onClick={() => alert("plus")} key="add" />,
+                      <DotMenuIcon size={12} tabIndex={-1} onClick={() => alert("menu")} key="more" />,
                     ],
                     tag: "D",
                     childNodes: [],

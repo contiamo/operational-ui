@@ -83,7 +83,7 @@ export const buildIcons = (iconPath?: string) =>
       )
       
       if (onClick) {
-        return React.createElement(IconButton, {size: size + 8, onClick}, icon)
+        return React.createElement(IconButton, {size: size + 8, onClick, ...props}, icon)
       }
 
       return icon
