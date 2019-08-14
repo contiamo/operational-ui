@@ -42,7 +42,7 @@ Header.defaultProps = { role: "button", "aria-disabled": false }
 const Panel = styled.div`
   label: AccordionPanel;
   /* we need it because of overflow: hidden; above */
-  overflow: unset;
+  overflow: auto;
   height: 100%;
   padding: ${({ theme }) => theme.space.element}px;
   background-color: ${({ theme }) => theme.color.white};

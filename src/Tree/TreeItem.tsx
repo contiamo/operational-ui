@@ -132,12 +132,15 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       cursor={cursor}
       tabIndex={0}
     >
-      {hasChildren &&
-        React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
-          size: 11,
-          left: true,
-          color: "color.text.action",
-        })}
+      {hasChildren && (
+        <div style={{ flexShrink: 0 }}>
+          {React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
+            size: 11,
+            left: true,
+            color: "color.text.action",
+          })}
+        </div>
+      )}
       {tag && (
         <NameTag condensed left color={color}>
           {tag}
