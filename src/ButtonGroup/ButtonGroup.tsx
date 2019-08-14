@@ -12,8 +12,6 @@ const Container = styled("div")({
     margin: 0,
   },
   "& > button:not(:first-of-type)": {
-    // To avoid overlapping borders
-    marginLeft: -1,
     borderLeft: 0,
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
