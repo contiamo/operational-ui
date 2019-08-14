@@ -4,7 +4,7 @@ import { IconComponentType } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import Spinner from "../Spinner/Spinner"
 import { DefaultProps } from "../types"
-import { darken, inputFocus, isModifiedEvent, isOutsideLink, isWhite, readableTextColor, setAlpha } from "../utils"
+import { darken, inputFocus, isModifiedEvent, isOutsideLink, isWhite, readableTextColor } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
@@ -53,7 +53,7 @@ export const makeColors = (theme: OperationalStyleConstants, color: string) => {
   }
 
   const borderColors: { [key: string]: string } = {
-    ghost: setAlpha(0)(theme.color.ghost),
+    ghost: "transparent",
   }
 
   const backgroundColor = backgroundColors[color] || expandColor(theme, color) || defaultColor
