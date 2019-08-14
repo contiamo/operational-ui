@@ -29,17 +29,20 @@ export interface DropdownButtonProps extends DefaultProps {
 const BaseDropdownButton = styled(Button)<{ isOpen: boolean }>(({ isOpen, theme }) => ({
   paddingRight: 0,
   marginRight: 0,
-  ...(isOpen && { borderBottom: "#fff", zIndex: theme.zIndex.selectOptions + 2 }),
+  ...(isOpen && {
+    borderBottom: "1px solid #fff",
+    zIndex: theme.zIndex.selectOptions + 2,
+  }),
 }))
 
 const CaretContainer = styled("div")<{ isOpen: boolean; color: string }>(({ isOpen, theme, color }) => {
-  const { background: backgroundColor } = makeColors(theme, color)
+  const { background: backgroundColor, border: borderColor } = makeColors(theme, color)
   return {
     width: 36,
     marginLeft: theme.space.content,
     borderLeft: isOpen
       ? "none"
-      : `1px solid ${isWhite(backgroundColor) ? theme.color.border.disabled : setAlpha(0.5)(theme.color.white)}`,
+      : `1px solid ${isWhite(backgroundColor) ? borderColor : setAlpha(0.5)(theme.color.white)}`,
   }
 })
 

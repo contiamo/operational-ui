@@ -4,7 +4,7 @@ import { IconComponentType } from "../Icon/Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import Spinner from "../Spinner/Spinner"
 import { DefaultProps } from "../types"
-import { darken, inputFocus, isModifiedEvent, isOutsideLink, isWhite, readableTextColor } from "../utils"
+import { darken, inputFocus, isModifiedEvent, isOutsideLink, isWhite, readableTextColor, setAlpha } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 
@@ -52,12 +52,21 @@ export const makeColors = (theme: OperationalStyleConstants, color: string) => {
     warning: theme.color.error,
   }
 
+  const borderColors: { [key: string]: string } = {
+    ghost: setAlpha(0)(theme.color.ghost),
+  }
+
   const backgroundColor = backgroundColors[color] || expandColor(theme, color) || defaultColor
+
   const textColor =
     textColors[color] || readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
+
+  const borderColor = borderColors[color] || (isWhite(backgroundColor) ? theme.color.border.disabled : backgroundColor)
+
   return {
     background: backgroundColor,
     foreground: textColor,
+    border: borderColor,
   }
 }
 
@@ -78,7 +87,10 @@ const BaseButton = styled<"button" | "a">("button")<{
   color_?: ButtonProps["color"]
   as?: "button" | "a"
 }>(({ theme, color_, disabled, condensed, loading, fullWidth, textColor }) => {
-  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color_ || "")
+  const { background: backgroundColor, foreground: foregroundColor, border: borderColor } = makeColors(
+    theme,
+    color_ || "",
+  )
   return {
     backgroundColor,
     lineHeight: `${condensed ? 26 : 34}px`,
@@ -91,7 +103,7 @@ const BaseButton = styled<"button" | "a">("button")<{
     justifyContent: "center",
     padding: `0 ${condensed ? theme.space.medium : theme.space.element}px`,
     borderRadius: theme.borderRadius,
-    border: isWhite(backgroundColor) ? `1px solid ${theme.color.border.disabled}` : 0,
+    border: `1px solid ${borderColor}`,
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.6 : 1.0,
     position: "relative",
@@ -104,7 +116,6 @@ const BaseButton = styled<"button" | "a">("button")<{
     },
     "&:focus": {
       ...inputFocus({ theme, isError: color_ === "error" }),
-      border: isWhite(backgroundColor) ? theme.shadows.insetFocus : 0,
       //Higher zIndex will make right border appear on ButtonGroup Focus.
       zIndex: theme.zIndex.confirm,
     },
@@ -112,7 +123,6 @@ const BaseButton = styled<"button" | "a">("button")<{
       ? {
           ":hover": {
             backgroundColor: darken(backgroundColor, 5),
-            border: isWhite(backgroundColor) ? theme.shadows.insetFocus : 0,
             zIndex: theme.zIndex.confirm,
           },
         }
