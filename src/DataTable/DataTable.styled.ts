@@ -48,7 +48,6 @@ export const Cell = styled.div<{
   color: ${({ theme }) => theme.color.text.default};
   grid-column: ${({ cell }) => cell};
   background-color: ${({ theme, isEvenRow }) => (isEvenRow ? theme.color.background.almostWhite : theme.color.white)};
-  overflow: hidden;
 `
 
 export const HeaderRow = styled.div<{
@@ -66,7 +65,7 @@ export const HeaderCell = styled(Cell)<{
   rowIndex: number
 }>`
   position: relative;
-  background-color: ${({ theme }) => theme.color.background.light};
+  background-color: ${({ theme }) => theme.color.background.grey};
   color: ${({ theme }) => theme.color.text.dark};
   font-weight: ${({ theme }) => theme.font.weight.bold};
   border-top: ${({ rowIndex }) => (rowIndex === 0 ? "1px solid" : 0)};
