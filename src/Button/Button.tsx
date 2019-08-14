@@ -39,7 +39,7 @@ export interface ButtonProps extends DefaultProps {
   children?: React.ReactNode
 }
 
-const makeColors = (theme: OperationalStyleConstants, color: string) => {
+export const makeColors = (theme: OperationalStyleConstants, color: string) => {
   const defaultColor = theme.color.white
 
   const backgroundColors: { [key: string]: string } = {
@@ -52,12 +52,21 @@ const makeColors = (theme: OperationalStyleConstants, color: string) => {
     warning: theme.color.error,
   }
 
+  const borderColors: { [key: string]: string } = {
+    ghost: "transparent",
+  }
+
   const backgroundColor = backgroundColors[color] || expandColor(theme, color) || defaultColor
+
   const textColor =
     textColors[color] || readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
+
+  const borderColor = borderColors[color] || (isWhite(backgroundColor) ? theme.color.border.disabled : backgroundColor)
+
   return {
     background: backgroundColor,
     foreground: textColor,
+    border: borderColor,
   }
 }
 
@@ -78,10 +87,13 @@ const BaseButton = styled<"button" | "a">("button")<{
   color_?: ButtonProps["color"]
   as?: "button" | "a"
 }>(({ theme, color_, disabled, condensed, loading, fullWidth, textColor }) => {
-  const { background: backgroundColor, foreground: foregroundColor } = makeColors(theme, color_ || "")
+  const { background: backgroundColor, foreground: foregroundColor, border: borderColor } = makeColors(
+    theme,
+    color_ || "",
+  )
   return {
     backgroundColor,
-    lineHeight: `${condensed ? 28 : 36}px`,
+    lineHeight: `${condensed ? 26 : 34}px`,
     minWidth: "max-content",
     fontSize: theme.font.size.small,
     fontFamily: theme.font.family.main,
@@ -91,8 +103,7 @@ const BaseButton = styled<"button" | "a">("button")<{
     justifyContent: "center",
     padding: `0 ${condensed ? theme.space.medium : theme.space.element}px`,
     borderRadius: theme.borderRadius,
-    border: 0,
-    boxShadow: isWhite(backgroundColor) ? `0 0 0 1px ${theme.color.border.disabled} inset` : "none",
+    border: `1px solid ${borderColor}`,
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.6 : 1.0,
     position: "relative",
@@ -105,7 +116,6 @@ const BaseButton = styled<"button" | "a">("button")<{
     },
     "&:focus": {
       ...inputFocus({ theme, isError: color_ === "error" }),
-      boxShadow: isWhite(backgroundColor) ? theme.shadows.insetFocus : "none",
       //Higher zIndex will make right border appear on ButtonGroup Focus.
       zIndex: theme.zIndex.confirm,
     },
@@ -113,7 +123,6 @@ const BaseButton = styled<"button" | "a">("button")<{
       ? {
           ":hover": {
             backgroundColor: darken(backgroundColor, 5),
-            boxShadow: isWhite(backgroundColor) ? theme.shadows.insetFocus : "none",
             zIndex: theme.zIndex.confirm,
           },
         }

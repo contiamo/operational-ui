@@ -8,11 +8,11 @@ exports[`ButtonGroup Component Should initialize properly 1`] = `
     class="css-p29iif"
   />
   <div
-    class="css-h8jdx-buttongroup"
+    class="css-mvshdl-buttongroup"
   >
     <button
       aria-label="Hello"
-      class="css-akq41w"
+      class="css-epr7ni"
       role="button"
     >
       Hello

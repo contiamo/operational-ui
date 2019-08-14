@@ -1,13 +1,12 @@
 import * as React from "react"
 
 import { DefaultProps } from "../types"
-import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
 import { CaretDownIcon, CaretUpIcon, ChevronRightIcon } from "../Icon/Icon"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
-import Button from "../Button/Button"
+import Button, { makeColors } from "../Button/Button"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
-import { setAlpha } from "../utils"
+import { setAlpha, isWhite } from "../utils"
 
 export interface DropdownButtonProps extends DefaultProps {
   /** Actions to display in dropdown */
@@ -27,16 +26,25 @@ export interface DropdownButtonProps extends DefaultProps {
   align?: "left" | "right"
 }
 
-const BaseDropdownButton = styled(Button)<{ isOpen: boolean; textColor: string }>(({ isOpen, textColor, theme }) => ({
+const BaseDropdownButton = styled(Button)<{ isOpen: boolean }>(({ isOpen, theme }) => ({
   paddingRight: 0,
-  ...(isOpen && { boxShadow: `0 0 0 1px ${expandColor(theme, textColor)} inset` }),
+  marginRight: 0,
+  ...(isOpen && {
+    borderBottom: `1px solid ${theme.color.white}`,
+    zIndex: theme.zIndex.selectOptions + 2,
+  }),
 }))
 
-const CaretContainer = styled("div")<{ isOpen: boolean; color: string }>(({ isOpen, color, theme }) => ({
-  width: 36,
-  marginLeft: theme.space.content,
-  borderLeft: `1px solid ${isOpen ? expandColor(theme, color) : setAlpha(0.5)(theme.color.text.white)}`,
-}))
+const CaretContainer = styled("div")<{ isOpen: boolean; color: string }>(({ isOpen, theme, color }) => {
+  const { background: backgroundColor, border: borderColor } = makeColors(theme, color)
+  return {
+    width: 36,
+    marginLeft: theme.space.content,
+    borderLeft: isOpen
+      ? "none"
+      : `1px solid ${isWhite(backgroundColor) ? borderColor : setAlpha(0.5)(theme.color.white)}`,
+  }
+})
 
 const ItemWithChevron = styled("div")`
   width: 100%;
@@ -44,6 +52,13 @@ const ItemWithChevron = styled("div")`
   align-items: center;
   justify-content: space-between;
 `
+
+const ContextMenuWithBorder = styled(ContextMenu)(({ theme }) => ({
+  "& div[role='listbox']": {
+    border: `1px solid ${theme.color.border.disabled}`,
+    transform: "translate(0, -1px)",
+  },
+}))
 
 const DropdownButton: React.FC<DropdownButtonProps> = ({
   items,
@@ -68,13 +83,13 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
   })
 
   return (
-    <ContextMenu {...props} onClick={onItemClick} iconLocation="right" items={itemsWithCarets} align={align}>
+    <ContextMenuWithBorder {...props} onClick={onItemClick} iconLocation="right" items={itemsWithCarets} align={align}>
       {isOpen => {
         return (
           <BaseDropdownButton
             {...props}
             color={isOpen ? "default" : color}
-            textColor={isOpen ? color : "default"}
+            textColor={isOpen ? "primary" : undefined}
             isOpen={isOpen}
           >
             {children}
@@ -84,7 +99,7 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
           </BaseDropdownButton>
         )
       }}
-    </ContextMenu>
+    </ContextMenuWithBorder>
   )
 }
 
