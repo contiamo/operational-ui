@@ -4,6 +4,7 @@ import { headerHeight, expandColor } from "../utils/constants"
 import { darken } from "../utils"
 
 const buttonWidth = 36
+const plusButtonWidth = 42
 
 export const Container = styled.div`
   label: Tabs;
@@ -15,11 +16,16 @@ export const Container = styled.div`
   padding-top: 1px;
 `
 
+export const PlusWrapper = styled.div`
+  display: flex;
+  overflow: hidden;
+`
+
 export const TabList = styled.div<{ scroll: boolean }>`
   display: flex;
   overflow-x: auto;
   /* + 1px to compensate right: -1px in ScrollButtons */
-  max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px + 1px)` : "none")};
+  max-width: ${({ scroll }) => (scroll ? `calc(100% - ${buttonWidth * 2}px - ${plusButtonWidth}px - 1px)` : "none")};
   scroll-behavior: smooth;
   overflow-y: hidden;
   /* magic number to hide scroll bar underneath tabpanel */
@@ -111,18 +117,18 @@ TabHeader.defaultProps = {
 
 export const TabButton = styled(SectionHeader, {
   shouldForwardProp: prop => !(prop === "leftMargin" || prop === "as"),
-})<{ as?: React.FC<any> | string; transparent?: boolean }>`
+})<{ as?: React.FC<any> | string; isPlusButton?: boolean }>`
   justify-content: center;
   cursor: pointer;
   font-weight: normal;
-  background-color: ${({ theme, transparent }) =>
-    transparent ? theme.color.background.light : theme.color.background.lighter};
+  background-color: ${({ theme, isPlusButton }) =>
+    isPlusButton ? theme.color.background.light : theme.color.background.lighter};
   margin: 0;
   padding: 0;
-  width: ${buttonWidth}px;
-  min-width: ${buttonWidth}px;
+  width: ${({ isPlusButton }) => (isPlusButton ? plusButtonWidth : buttonWidth)}px;
+  min-width: ${({ isPlusButton }) => (isPlusButton ? plusButtonWidth : buttonWidth)}px;
   border: solid ${({ theme }) => theme.color.separators.default};
-  border-width: ${({ transparent }) => (transparent ? `0 0 1px 0` : "1px")};
+  border-width: ${({ isPlusButton }) => (isPlusButton ? `0 0 1px 0` : "1px")};
   margin-right: -1px;
   & svg {
     color: ${({ theme }) => theme.color.text.lighter};
@@ -175,6 +181,7 @@ export const TitleIconWrapper = styled.div`
   max-width: 120px;
   justify-content: center;
   align-items: center;
+  margin-right: ${({ theme }) => theme.space.base}px;
 `
 
 // we need this one to show ellipsis if title is to long
@@ -189,11 +196,11 @@ export const TabIcon = styled.span`
   pointer-events: none;
 `
 
-export const IconButton = styled.span`
+export const IconButton = styled.span<{ selected?: boolean }>`
   pointer-events: all;
   transition: background-color 0.2s;
-  &:hover {
-    background: ${({ theme }) => theme.color.separators.default};
+  :hover {
+    background: ${({ theme, selected }) => (selected ? theme.color.separators.default : theme.color.background.light)};
   }
   display: flex;
   align-items: center;

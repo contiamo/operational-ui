@@ -15,6 +15,7 @@ import {
   TitleWrapper,
   IconButton,
   TabButton,
+  PlusWrapper,
 } from "./Tabs.styled"
 
 export interface Tab {
@@ -139,58 +140,61 @@ const Tabs: React.FC<TabsProps> = ({
 
   return (
     <Container data-cy="operational-ui__Tabs" style={style}>
-      <TabList scroll={Boolean(scroll)} aria-label={label} onKeyDown={onKeyDown} ref={tabListRef}>
-        <TabScroll ref={tabScrollRef}>
-          {tabs.map(({ title, icon, color }, i) => {
-            const onClick = () => {
-              onActivate(i)
-            }
-            return (
-              <TabHeader
-                center={!scroll}
-                tabIndex={i === active ? 0 : -1}
-                aria-selected={i === active}
-                aria-controls={`TabPanel-${uid}-${i}`}
-                id={`TabHeader-${uid}-${i}`}
-                key={i}
-                onClick={onClick}
-                ref={i === active ? activeTab : undefined}
-                color={color}
-                last={i === tabs.length - 1}
-              >
-                <TitleIconWrapper>
-                  {icon && <TabIcon>{icon}</TabIcon>}
-                  <TitleWrapper title={title}>{title}</TitleWrapper>
-                </TitleIconWrapper>
-                {onClose && (
-                  <IconButton
-                    onClick={e => {
-                      e.stopPropagation()
-                      onClose(i)
-                    }}
-                  >
-                    <NoIcon size={9} />
-                  </IconButton>
-                )}
-              </TabHeader>
-            )
-          })}
-          {onInsert && (
-            <TabButton
-              transparent={true}
-              onMouseDown={e => {
-                userAction.current = true
-                e.preventDefault()
-                onInsert(tabs.length - 1)
-              }}
-            >
-              <IconButton>
-                <PlusIcon size={14} color="primary" />
-              </IconButton>
-            </TabButton>
-          )}
-        </TabScroll>
-      </TabList>
+      <PlusWrapper>
+        <TabList scroll={Boolean(scroll)} aria-label={label} onKeyDown={onKeyDown} ref={tabListRef}>
+          <TabScroll ref={tabScrollRef}>
+            {tabs.map(({ title, icon, color }, i) => {
+              const onClick = () => {
+                onActivate(i)
+              }
+              return (
+                <TabHeader
+                  center={!scroll}
+                  tabIndex={i === active ? 0 : -1}
+                  aria-selected={i === active}
+                  aria-controls={`TabPanel-${uid}-${i}`}
+                  id={`TabHeader-${uid}-${i}`}
+                  key={i}
+                  onClick={onClick}
+                  ref={i === active ? activeTab : undefined}
+                  color={color}
+                  last={i === tabs.length - 1}
+                >
+                  <TitleIconWrapper>
+                    {icon && <TabIcon>{icon}</TabIcon>}
+                    <TitleWrapper title={title}>{title}</TitleWrapper>
+                  </TitleIconWrapper>
+                  {onClose && (
+                    <IconButton
+                      onClick={e => {
+                        e.stopPropagation()
+                        onClose(i)
+                      }}
+                      selected={i === active}
+                    >
+                      <NoIcon size={9} />
+                    </IconButton>
+                  )}
+                </TabHeader>
+              )
+            })}
+          </TabScroll>
+        </TabList>
+        {onInsert && (
+          <TabButton
+            isPlusButton
+            onMouseDown={e => {
+              userAction.current = true
+              e.preventDefault()
+              onInsert(tabs.length - 1)
+            }}
+          >
+            <IconButton>
+              <PlusIcon size={14} color="primary" />
+            </IconButton>
+          </TabButton>
+        )}
+      </PlusWrapper>
       {scroll && (
         <ScrollButtons>
           <TabButton onMouseDown={scrollLeft}>
