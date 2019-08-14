@@ -156,6 +156,12 @@ const Tabs: React.FC<TabsProps> = ({
                   id={`TabHeader-${uid}-${i}`}
                   key={i}
                   onClick={onClick}
+                  onMouseDown={e => {
+                    e.preventDefault()
+                    if (e.button === 1 /* middle click */ && onClose) {
+                      onClose(i)
+                    }
+                  }}
                   ref={i === active ? activeTab : undefined}
                   color={color}
                   last={i === tabs.length - 1}

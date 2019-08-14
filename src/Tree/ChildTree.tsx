@@ -9,8 +9,8 @@ const Container = styled("div")<{ hasChildren: boolean; disabled: boolean }>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "inherit")};
   user-select: none;
-  margin-bottom: -${({ theme }) => theme.space.base}px;
 `
+
 const ChildTree: React.SFC<Props> = ({
   initiallyOpen,
   highlight,
@@ -25,10 +25,10 @@ const ChildTree: React.SFC<Props> = ({
   droppableProps,
   onClick,
   onContextMenu,
-  onRemove,
   cursor,
   searchWords,
   level,
+  actions,
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
@@ -77,7 +77,7 @@ const ChildTree: React.SFC<Props> = ({
         color={color}
         icon={icon}
         iconColor={iconColor}
-        onRemove={onRemove}
+        actions={actions}
         cursor={cursor}
       />
       {hasChildren && isOpen && (

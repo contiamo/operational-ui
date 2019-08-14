@@ -54,6 +54,7 @@ const Container = styled("div", {
     display: "inline-flex",
     alignItems: "center",
     justifyContent: "center",
+    flexShrink: 0,
     ...(left ? { marginRight: theme.space.small } : {}),
     ...(right ? { marginLeft: theme.space.small } : {}),
   }

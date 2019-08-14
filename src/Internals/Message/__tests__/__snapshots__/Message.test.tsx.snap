@@ -16,7 +16,7 @@ exports[`Message Component Should render 1`] = `
       <svg
         fill="currentColor"
         height="18"
-        style="margin-left:0;margin-right:0;cursor:default;transition:fill .075s ease"
+        style="margin-left:0;margin-right:0;transition:fill .075s ease;outline:none"
         viewBox="0 0 9.47 9.47"
         width="18"
       >
