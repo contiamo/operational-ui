@@ -35,9 +35,9 @@ const Header = styled.div<{
   align-items: center;
   cursor: ${({ onClick, cursor }) => cursor || (onClick ? "pointer" : "inherit")};
   background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
-  padding: ${({ theme }) => theme.space.base}px;
-  border-radius: 2px;
-  padding-left: ${({ theme, level }) => theme.space.element * level}px;
+  margin: 0 -20px;
+  padding: 4px 20px;
+  padding-left: ${({ theme, level }) => theme.space.element * (level + 1)}px;
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover {
@@ -46,7 +46,7 @@ const Header = styled.div<{
 
     /* Show ActionsContainer on hover */
     div:last-of-type {
-      display: grid;
+      opacity: 1;
     }
   }
 
@@ -57,7 +57,7 @@ const Header = styled.div<{
 
     /* Show ActionsContainer on hover */
     div:last-of-type {
-      display: grid;
+      opacity: 1;
     }
   }
 `
@@ -66,12 +66,14 @@ const Label = styled("div")<{ hasChildren: boolean }>`
   overflow-wrap: break-word;
   font-size: ${({ theme }) => theme.font.size.small}px;
   font-weight: ${({ theme, hasChildren }) => (hasChildren ? theme.font.weight.bold : theme.font.weight.medium)};
+  overflow: auto;
+  flex: 1;
 `
 
-const ActionsContainer = styled.div<{ childrenCount: number }>`
-  display: none;
+const ActionsContainer = styled.div<{ childrenCount: number; highlight: boolean }>`
+  display: grid;
+  opacity: 0;
   align-items: center;
-  position: absolute;
   right: 16px;
   grid-template-columns: repeat(${({ childrenCount }) => childrenCount}, 1fr);
   grid-column-gap: 4px;
@@ -153,7 +155,9 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           searchWords={searchWords}
         />
       </Label>
-      <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>
+      <ActionsContainer highlight={highlight} childrenCount={React.Children.count(actions)}>
+        {actions}
+      </ActionsContainer>
     </Header>
   )
 }

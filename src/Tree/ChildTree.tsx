@@ -9,8 +9,8 @@ const Container = styled("div")<{ hasChildren: boolean; disabled: boolean }>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "inherit")};
   user-select: none;
-  margin-bottom: -${({ theme }) => theme.space.base}px;
 `
+
 const ChildTree: React.SFC<Props> = ({
   initiallyOpen,
   highlight,
