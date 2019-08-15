@@ -11,9 +11,6 @@ export interface IconPropsBase extends React.SVGProps<SVGSVGElement> {
   size?: number
   /** Icon color, specified as a hex, or a color name (info, success, warning, error) */
   color?: string
-  /**
-   * On click handler
-   */
   onClick?: MouseEventHandler
   tabIndex?: number
 }
@@ -46,11 +43,11 @@ export const Svg = styled.svg<IconProps>`
     &:hover {
       background: ${theme.color.separators.default};
     }
-    min-height: ${size + 8}px;
-    min-width: ${size + 8}px;
+    min-height: ${size + theme.space.small}px;
+    min-width: ${size + theme.space.small}px;
     border-radius: 100%;
     cursor: pointer;
-    padding: 4px;
+    padding: ${theme.space.base};
   `
       : ""}
 
