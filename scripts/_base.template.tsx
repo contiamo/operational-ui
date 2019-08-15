@@ -42,6 +42,7 @@ export const Svg = styled.svg<IconProps>`
     padding: ${theme.space.base}px;
     &:hover {
       background: ${theme.color.separators.default};
+      // we need to set it here, because otherwise icon takes shape of ellipse at least in Chrome, for unknown reason
       border-radius: 100%;
     } 
     // otherwise corners of icon cut out
