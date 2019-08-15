@@ -1,5 +1,5 @@
 import svgr from "@svgr/core"
-import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync } from "fs"
+import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync, copyFileSync } from "fs"
 import * as rimraf from "rimraf"
 import { join, parse, sep } from "path"
 import ProgressBar from "progress"
@@ -61,7 +61,7 @@ export const buildIcons = (iconPath?: string) =>
           `
     import * as React from "react"
     import constants, { expandColor } from "../utils/constants"
-    import { IconProps, Svg } from "./Icon"
+    import { IconProps, Svg } from "./_base"
     
     /**
      * {{previewImage}}
@@ -72,7 +72,7 @@ export const buildIcons = (iconPath?: string) =>
       return (
         JSX
       )
-    };
+    }
     `,
           { plugins: ["typescript"], preserveComments: true },
         )
@@ -99,7 +99,7 @@ export const buildIcons = (iconPath?: string) =>
                 height: "{size}",
                 size: "{size}",
                 role: '{props.onClick ? "button" : undefined}',
-                tabIndex: "{props.onClick ? 0 : -1}",
+                tabIndex: "{props.onClick ? 0 : undefined}",
               },
               template,
             },
@@ -127,78 +127,20 @@ export const buildIcons = (iconPath?: string) =>
       // This prevent to break the components summary
       if (iconPath) return
 
-      // Create Icon.ts
-      const index = `import React, { MouseEventHandler } from "react"
+      // Create _base.tsx
+      const base = readFileSync(join(__dirname, "_base.template.tsx"), { encoding: "utf8" }).replace(
+        `"../src/utils/styled"`,
+        `"../utils/styled"`,
+      )
+      writeFileSync(join(outputFolder, "_base.tsx"), base)
 
-import styled from "../utils/styled";
+      // Create index.ts
+      const index =
+        'export * from "./_base"\n' + files.map(fileName => `export * from "./Icon.${parse(fileName).name}"`).join("\n")
+      writeFileSync(join(outputFolder, "index.tsx"), index)
 
-export interface IconPropsBase extends React.SVGProps<SVGSVGElement> {
-  /**
-   * Size
-   *
-   * @default 18
-   */
-  size?: number
-  /** Icon color, specified as a hex, or a color name (info, success, warning, error) */
-  color?: string
-  /**
-   * On click handler
-   */
-  onClick?: MouseEventHandler
-  tabIndex?: number
-}
-
-export type IconProps =
-  | (IconPropsBase & {
-      left?: never
-      /**
-       * Indicates that this component is right of other content, and adds an appropriate left margin.
-       */
-      right?: boolean
-    })
-  | (IconPropsBase & {
-      /**
-       * Indicates that this component is left of other content, and adds an appropriate right margin.
-       */
-      left?: boolean
-      right?: never
-    })
-
-export type IconComponentType = React.ComponentType<React.SVGProps<SVGSVGElement> & IconProps>
-
-export const Svg = styled.svg<IconProps>\`
-pointer-events: all;
-transition: background-color 0.2s, fill 0.075s ease;
-
-\${({ onClick, theme, size = 18 }) =>
-  onClick
-    ? \`
-  &:hover {
-    background: \${theme.color.separators.default};
-  }
-  min-height: \${size + 8}px;
-  min-width: \${size + 8}px;
-  border-radius: 100%;
-  cursor: pointer;
-  padding: 4px;
-\`
-    : ""}
-
-margin-left: \${({ right, theme }) => (right ? theme.space.small : 0)}px;
-margin-right: \${({ left, theme }) => (left ? theme.space.small : 0)}px;
-outline: none;
-\`
-  
-${files
-  .map(fileName => {
-    const { name } = parse(fileName)
-
-    return `export * from "./Icon.${name}";`
-  })
-  .join("\n")}
-`
-
-      writeFileSync(join(outputFolder, "Icon.tsx"), index)
+      // Create Icon.tsx
+      copyFileSync(join(__dirname, "_dummy.template.tsx"), join(outputFolder, "Icon.tsx"))
       resolve()
     } catch (e) {
       reject(e)

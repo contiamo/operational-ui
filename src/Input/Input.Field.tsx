@@ -5,7 +5,7 @@ import styled from "../utils/styled"
 import { InputProps } from "./Input"
 import InputButton from "./Input.Button"
 import { height, iconBoxSize, width } from "./Input.constants"
-import { NoIcon, IDIcon } from "../Icon/Icon"
+import { NoIcon, IDIcon } from "../Icon"
 
 const getMaxWidth = (fullWidth: InputProps["fullWidth"], statusIcon: InputProps["statusIcon"]) => {
   if (fullWidth && statusIcon) {

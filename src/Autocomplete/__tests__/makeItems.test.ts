@@ -1,5 +1,5 @@
 import { makeItems } from "../Autocomplete.utils"
-import { NoIcon, AddIcon } from "../../Icon/Icon"
+import { NoIcon, AddIcon } from "../../Icon"
 
 describe("Autocomplete", () => {
   it("should create items with an appropriate shape for usage given a value and a result set", () => {

@@ -4,7 +4,7 @@ import styled from "../utils/styled"
 
 import Spinner from "../Spinner/Spinner"
 import constants, { OperationalStyleConstants } from "../utils/constants"
-import { YesIcon, NoIcon, EmptyCircleIcon } from "../Icon/Icon"
+import { YesIcon, NoIcon, EmptyCircleIcon } from "../Icon"
 
 export type Status = "waiting" | "todo" | "running" | "success" | "failure" | "done" | "failed"
 

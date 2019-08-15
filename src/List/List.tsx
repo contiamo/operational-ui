@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Body from "../Typography/Body"
 import styled from "../utils/styled"
-import { ChevronRightIcon } from "../Icon/Icon"
+import { ChevronRightIcon } from "../Icon"
 
 export type ImageURL = string
 

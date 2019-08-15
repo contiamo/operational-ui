@@ -3,7 +3,7 @@ import * as React from "react"
 import { Draggable, DraggableProps, Droppable, DroppableProps, DroppableStateSnapshot } from "react-beautiful-dnd"
 import styled from "../utils/styled"
 import ChildTree from "./ChildTree"
-import { IconComponentType } from "../Icon/Icon"
+import { IconComponentType } from "../Icon"
 
 interface BaseTree {
   label: string

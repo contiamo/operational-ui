@@ -1,7 +1,7 @@
 import * as React from "react"
 import { DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
-import { NoIcon, PlusIcon, ChevronLeftIcon, ChevronRightIcon } from "../Icon/Icon"
+import { NoIcon, PlusIcon, ChevronLeftIcon, ChevronRightIcon } from "../Icon"
 import {
   Container,
   ScrollButtons,

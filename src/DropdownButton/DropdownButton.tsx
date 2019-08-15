@@ -2,7 +2,7 @@ import * as React from "react"
 
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-import { CaretDownIcon, CaretUpIcon, ChevronRightIcon } from "../Icon/Icon"
+import { CaretDownIcon, CaretUpIcon, ChevronRightIcon } from "../Icon"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import Button, { makeColors } from "../Button/Button"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"

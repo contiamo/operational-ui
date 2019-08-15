@@ -1,7 +1,7 @@
 import * as React from "react"
 
 import styled from "../utils/styled"
-import { ChevronDownIcon, ChevronUpIcon } from "../Icon/Icon"
+import { ChevronDownIcon, ChevronUpIcon } from "../Icon"
 
 export interface TogglerProps {
   isFolded?: boolean

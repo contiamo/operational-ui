@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "../utils/styled"
-import { IconComponentType } from "../Icon/Icon"
+import { IconComponentType } from "../Icon"
 
 export interface TopbarButtonProps {
   /** The name of the button icon */

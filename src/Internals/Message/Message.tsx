@@ -4,7 +4,7 @@ import { DefaultProps } from "../../types"
 import styled from "../../utils/styled"
 
 import { expandColor } from "../../utils/constants"
-import { NoIcon } from "../../Icon/Icon"
+import { NoIcon } from "../../Icon"
 
 export interface MessageProps extends DefaultProps {
   className?: string

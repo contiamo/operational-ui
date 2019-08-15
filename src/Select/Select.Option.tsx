@@ -1,7 +1,7 @@
 import * as React from "react"
 import { darken, inputFocus } from "../utils"
 import styled from "../utils/styled"
-import { YesIcon } from "../Icon/Icon"
+import { YesIcon } from "../Icon"
 
 export interface Props {
   id?: number | string

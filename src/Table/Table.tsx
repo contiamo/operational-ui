@@ -3,7 +3,7 @@ import ActionMenu, { ActionMenuProps } from "../ActionMenu/ActionMenu"
 import { DefaultProps } from "../types"
 import Small from "../Typography/Small"
 import styled from "../utils/styled"
-import { IconComponentType, ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon } from "../Icon/Icon"
+import { IconComponentType, ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon } from "../Icon"
 
 export interface TableProps<T> extends DefaultProps {
   data: T[]

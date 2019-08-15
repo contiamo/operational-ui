@@ -4,7 +4,7 @@ import CopyToClipboard from "react-copy-to-clipboard"
 import Highlight from "react-highlight"
 import ReactJson, { ReactJsonViewProps } from "react-json-view"
 
-import { CopyIcon } from "../Icon/Icon"
+import { CopyIcon } from "../Icon"
 import { DefaultProps } from "../types"
 import constants from "../utils/constants"
 import styled from "../utils/styled"
