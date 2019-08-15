@@ -61,32 +61,17 @@ export const buildIcons = (iconPath?: string) =>
           `
     import * as React from "react"
     import constants, { expandColor } from "../utils/constants"
-    import { IconProps } from "./Icon"
-    import IconButton from "../Internals/IconButton"
+    import { IconProps, Svg } from "./Icon"
     
     /**
      * {{previewImage}}
      */
-    export const COMPONENT_NAME = ({size = 18, color, left, right, onClick, ...props}: IconProps) => {
+    export const COMPONENT_NAME = ({size = 18, color, ...props}: IconProps) => {
       const iconColor: string = expandColor(constants, color) || "currentColor";
-      const style = {
-        // theme.space.small
-        marginLeft: right ? 8 : 0,
-        // theme.space.small
-        marginRight: left ? 8 : 0,
-        transition: "fill .075s ease",
-        outline: "none"
-      };
     
-      const icon = (
+      return (
         JSX
       )
-      
-      if (onClick) {
-        return React.createElement(IconButton, {size: size + 8, onClick, ...props}, icon)
-      }
-
-      return icon
     };
     `,
           { plugins: ["typescript"], preserveComments: true },
@@ -112,7 +97,9 @@ export const buildIcons = (iconPath?: string) =>
                 fill: "{iconColor}",
                 width: "{size}",
                 height: "{size}",
-                style: "{style}",
+                size: "{size}",
+                role: '{props.onClick ? "button" : undefined}',
+                tabIndex: "{props.onClick ? 0 : -1}",
               },
               template,
             },
@@ -123,6 +110,10 @@ export const buildIcons = (iconPath?: string) =>
           const preview = base64Img.base64Sync(join(inputFolder, fileName))
           const previewImage = `![${name}Icon](${preview}) `
           output = output.replace("{{previewImage}}", previewImage)
+
+          // Replace `<svg>` by `<Svg>`
+          output = output.replace("<svg", "<Svg")
+          output = output.replace("</svg>", "</Svg>")
 
           writeFileSync(join(outputFolder, `Icon.${name}.tsx`), output)
           progressBar.tick()
@@ -139,7 +130,9 @@ export const buildIcons = (iconPath?: string) =>
       // Create Icon.ts
       const index = `import React, { MouseEventHandler } from "react"
 
-export interface IconPropsBase {
+import styled from "../utils/styled";
+
+export interface IconPropsBase extends React.SVGProps<SVGSVGElement> {
   /**
    * Size
    *
@@ -172,6 +165,29 @@ export type IconProps =
     })
 
 export type IconComponentType = React.ComponentType<React.SVGProps<SVGSVGElement> & IconProps>
+
+export const Svg = styled.svg<IconProps>\`
+pointer-events: all;
+transition: background-color 0.2s, fill 0.075s ease;
+
+\${({ onClick, theme, size = 18 }) =>
+  onClick
+    ? \`
+  &:hover {
+    background: \${theme.color.separators.default};
+  }
+  min-height: \${size + 8}px;
+  min-width: \${size + 8}px;
+  border-radius: 100%;
+  cursor: pointer;
+  padding: 4px;
+\`
+    : ""}
+
+margin-left: \${({ right, theme }) => (right ? theme.space.small : 0)}px;
+margin-right: \${({ left, theme }) => (left ? theme.space.small : 0)}px;
+outline: none;
+\`
   
 ${files
   .map(fileName => {
