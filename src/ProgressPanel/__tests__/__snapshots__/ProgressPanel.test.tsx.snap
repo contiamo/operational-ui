@@ -17,7 +17,7 @@ exports[`ProgressPanel Component Should initialize properly 1`] = `
         class="css-9fq4n"
       >
         <svg
-          class="css-3hlb9c"
+          class="css-1ryheq6"
           fill="currentColor"
           height="18"
           size="18"
@@ -38,7 +38,7 @@ exports[`ProgressPanel Component Should initialize properly 1`] = `
         class="css-5ugjy6"
       >
         <svg
-          class="css-3hlb9c"
+          class="css-1ryheq6"
           fill="currentColor"
           height="18"
           size="18"
@@ -109,7 +109,7 @@ exports[`ProgressPanel Component Should initialize properly 1`] = `
         class="css-9xk9fc"
       >
         <svg
-          class="css-3hlb9c"
+          class="css-1ryheq6"
           fill="currentColor"
           height="18"
           size="18"

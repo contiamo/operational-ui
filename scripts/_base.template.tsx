@@ -34,9 +34,6 @@ export type IconProps =
 export type IconComponentType = React.ComponentType<React.SVGProps<SVGSVGElement> & IconProps>
 
 export const Svg = styled.svg<IconProps>`
-  pointer-events: all;
-  /* transition: background-color 0.2s, fill 0.075s ease; */
-
   ${({ onClick, theme, size = 18 }) =>
     onClick
       ? `
@@ -47,6 +44,7 @@ export const Svg = styled.svg<IconProps>`
       background: ${theme.color.separators.default};
       border-radius: 100%;
     } 
+    // otherwise corners of icon cut out
     overflow: visible;
     cursor: pointer;
     `
