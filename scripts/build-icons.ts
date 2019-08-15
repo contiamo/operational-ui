@@ -130,7 +130,7 @@ export const buildIcons = (iconPath?: string) =>
       if (iconPath) return
 
       // Create _base.tsx
-      const base = readFileSync(join(__dirname, "_base.template.tsx"), { encoding: "utf8" }).replace(
+      const base = readFileSync(join(__dirname, "BaseIcon.template.tsx"), { encoding: "utf8" }).replace(
         `"../src/utils/styled"`,
         `"../utils/styled"`,
       )
@@ -138,11 +138,12 @@ export const buildIcons = (iconPath?: string) =>
 
       // Create index.ts
       const index =
-        'export * from "./_base"\n' + files.map(fileName => `export * from "./Icon.${parse(fileName).name}"`).join("\n")
+        'export { IconProps, IconComponentType } from "./_base"\n' +
+        files.map(fileName => `export * from "./Icon.${parse(fileName).name}"`).join("\n")
       writeFileSync(join(outputFolder, "index.tsx"), index)
 
       // Create Icon.tsx
-      copyFileSync(join(__dirname, "_dummy.template.tsx"), join(outputFolder, "Icon.tsx"))
+      copyFileSync(join(__dirname, "DummyIcon.template.tsx"), join(outputFolder, "Icon.tsx"))
       resolve()
     } catch (e) {
       reject(e)

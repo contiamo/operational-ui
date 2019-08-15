@@ -33,7 +33,6 @@ const onClick = () => alert("click")
     role="button"
     aria-label="Play"
     tabIndex={0}
-    tabIndex={0}
     onKeyDown={e => {
       if (e.key === " " || e.key === "Enter") {
         e.preventDefault()
@@ -41,6 +40,7 @@ const onClick = () => alert("click")
       }
     }}
   />
+  <PlayIcon />
 </>
 ```
 

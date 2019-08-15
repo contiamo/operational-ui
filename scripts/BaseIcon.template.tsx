@@ -34,24 +34,24 @@ export type IconProps =
 export type IconComponentType = React.ComponentType<React.SVGProps<SVGSVGElement> & IconProps>
 
 export const Svg = styled.svg<IconProps>`
-  ${({ onClick, theme, size = 18 }) =>
+  min-height: ${({ theme, size = 18 }) => size + theme.space.base * 2}px;
+  min-width: ${({ theme, size = 18 }) => size + theme.space.base * 2}px;
+  padding: ${({ theme }) => theme.space.base}px;
+  /* otherwise corners of icon cut out */
+  overflow: visible;
+  margin-left: ${({ right, theme }) => (right ? theme.space.small : 0)}px;
+  margin-right: ${({ left, theme }) => (left ? theme.space.small : 0)}px;
+
+  ${({ onClick, theme }) =>
     onClick
       ? `
-    min-height: ${size + theme.space.base * 2}px;
-    min-width: ${size + theme.space.base * 2}px;
-    padding: ${theme.space.base}px;
     &:hover, &:focus {
       background: ${theme.color.separators.default};
       // we need to set it here, because otherwise icon takes shape of ellipse at least in Chrome, for unknown reason
       border-radius: 100%;
     } 
-    // otherwise corners of icon cut out
-    overflow: visible;
     cursor: pointer;
+    outline: none;
     `
       : ""}
-
-  margin-left: ${({ right, theme }) => (right ? theme.space.small : 0)}px;
-  margin-right: ${({ left, theme }) => (left ? theme.space.small : 0)}px;
-  outline: none;
 `
