@@ -14,7 +14,7 @@ exports[`DatePicker Component Should render 1`] = `
       class="css-1i3ebus"
     >
       <svg
-        class="css-1fa6qlu"
+        class="css-f8oazv"
         fill="currentColor"
         height="14"
         size="14"
@@ -42,7 +42,7 @@ exports[`DatePicker Component Should render 1`] = `
           class="css-kaz4mx"
         >
           <svg
-            class="css-wb7ouw"
+            class="css-eowzpp"
             fill="currentColor"
             height="12"
             size="12"
@@ -61,7 +61,7 @@ exports[`DatePicker Component Should render 1`] = `
           class="css-kaz4mx"
         >
           <svg
-            class="css-wb7ouw"
+            class="css-eowzpp"
             fill="currentColor"
             height="12"
             size="12"

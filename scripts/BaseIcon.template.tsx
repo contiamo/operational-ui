@@ -34,9 +34,8 @@ export type IconProps =
 export type IconComponentType = React.ComponentType<React.SVGProps<SVGSVGElement> & IconProps>
 
 export const Svg = styled.svg<IconProps>`
-  min-height: ${({ theme, size = 18 }) => size + theme.space.base * 2}px;
-  min-width: ${({ theme, size = 18 }) => size + theme.space.base * 2}px;
-  padding: ${({ theme }) => theme.space.base}px;
+  min-height: ${({ size = 18 }) => size}px;
+  min-width: ${({ size = 18 }) => size}px;
   /* otherwise corners of icon cut out */
   overflow: visible;
   margin-left: ${({ right, theme }) => (right ? theme.space.small : 0)}px;
@@ -45,13 +44,14 @@ export const Svg = styled.svg<IconProps>`
   ${({ onClick, theme }) =>
     onClick
       ? `
-    &:hover, &:focus {
-      background: ${theme.color.separators.default};
-      // we need to set it here, because otherwise icon takes shape of ellipse at least in Chrome, for unknown reason
-      border-radius: 100%;
-    } 
+    padding: ${theme.space.base}px;
     cursor: pointer;
     outline: none;
+    &:hover, &:focus {
+      background: ${theme.color.separators.default};
+      /* we need to set it here, because otherwise icon takes shape of ellipse at least in Chrome, for unknown reason */
+      border-radius: 100%;
+    }
     `
       : ""}
 `
