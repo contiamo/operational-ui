@@ -111,7 +111,9 @@ export const buildIcons = (iconPath?: string) =>
           const previewImage = `![${name}Icon](${preview}) `
           output = output.replace("{{previewImage}}", previewImage)
 
-          // Replace `<svg>` by `<Svg>`
+          // Replace `<svg>` by `<Svg>` because
+          // first one is default React component,
+          // second one is custom styled component which provides hover styles
           output = output.replace("<svg", "<Svg")
           output = output.replace("</svg>", "</Svg>")
 
