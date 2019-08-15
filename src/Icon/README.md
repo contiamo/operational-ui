@@ -13,6 +13,18 @@ import { AddIcon, FunctionIcon, OlapIcon } from "@operational/components"
 </>
 ```
 
+#### As button
+
+```jsx
+import * as React from "react"
+import { PlusIcon, PlayIcon, AddIcon } from "@operational/components"
+;<>
+  <AddIcon size={18} onClick={() => alert("click")} role="button" aria-label="Add" />
+  <PlusIcon size={18} onClick={() => alert("click")} role="button" aria-label="Add" />
+  <PlayIcon size={18} onClick={() => alert("click")} role="button" aria-label="Play" />
+</>
+```
+
 #### With margins for content
 
 ```jsx

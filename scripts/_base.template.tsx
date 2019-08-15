@@ -35,20 +35,21 @@ export type IconComponentType = React.ComponentType<React.SVGProps<SVGSVGElement
 
 export const Svg = styled.svg<IconProps>`
   pointer-events: all;
-  transition: background-color 0.2s, fill 0.075s ease;
+  /* transition: background-color 0.2s, fill 0.075s ease; */
 
   ${({ onClick, theme, size = 18 }) =>
     onClick
       ? `
+    min-height: ${size + theme.space.base * 2}px;
+    min-width: ${size + theme.space.base * 2}px;
+    padding: ${theme.space.base}px;
     &:hover {
       background: ${theme.color.separators.default};
-    }
-    min-height: ${size + theme.space.small}px;
-    min-width: ${size + theme.space.small}px;
-    border-radius: 100%;
+      border-radius: 100%;
+    } 
+    overflow: visible;
     cursor: pointer;
-    padding: ${theme.space.base};
-  `
+    `
       : ""}
 
   margin-left: ${({ right, theme }) => (right ? theme.space.small : 0)}px;
