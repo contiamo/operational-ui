@@ -6,7 +6,7 @@ Accordion component implemented (mostly) according to [WAI-ARIA specification](h
 
 ```jsx
 import * as React from "react"
-import { Accordion, AccordionSection, AddIcon } from "@operational/components"
+import { Accordion, AccordionSection, AddIcon, styled } from "@operational/components"
 
 const MyComponent = () => {
   const [expanded, setExpanded] = React.useState([true, false, false])
@@ -20,7 +20,7 @@ const MyComponent = () => {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding-right: 32px;
+    padding-right: ${({theme}) => theme.space.small}px;
     align-items: center;
   `
 
@@ -34,8 +34,9 @@ const MyComponent = () => {
               <AddIcon
                 size={16}
                 color="primary"
-                onClick={() => {
-                  console.log("Add")
+                onClick={e => {
+                  e.stopPropagation()
+                  alert("Add")
                 }}
               />
             </Title>

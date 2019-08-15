@@ -67,7 +67,6 @@ const Accordion = ({ onToggle, expanded, children, id, ...rest }: AccordionProps
           _expanded: sectionsMapped[index],
           _toggleSection: toggleSection,
           _index: index,
-          _isMouseRef: isMouseRef,
         }),
       )}
     </Container>
