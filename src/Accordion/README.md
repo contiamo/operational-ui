@@ -6,7 +6,7 @@ Accordion component implemented (mostly) according to [WAI-ARIA specification](h
 
 ```jsx
 import * as React from "react"
-import { Accordion, AccordionSection } from "@operational/components"
+import { Accordion, AccordionSection, AddIcon } from "@operational/components"
 
 const MyComponent = () => {
   const [expanded, setExpanded] = React.useState([true, false, false])
@@ -15,10 +15,32 @@ const MyComponent = () => {
     newExpanded[index] = !newExpanded[index]
     setExpanded(newExpanded)
   }
+
+  const Title = styled.div`
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-right: 32px;
+    align-items: center;
+  `
+
   return (
     <div style={{ height: 400 }}>
       <Accordion expanded={expanded} onToggle={onToggle}>
-        <AccordionSection title="Section 1">
+        <AccordionSection
+          title={
+            <Title>
+              Section 1
+              <AddIcon
+                size={16}
+                color="primary"
+                onClick={() => {
+                  console.log("Add")
+                }}
+              />
+            </Title>
+          }
+        >
           Content 1<br />
           Content 1<br />
           Content 1<br />
