@@ -15,13 +15,32 @@ import { AddIcon, FunctionIcon, OlapIcon } from "@operational/components"
 
 #### As button
 
+Using `onClick` for the Icon doesn't make it accessible button. To make it accessible you need to add:
+
+- `role="button"`
+- `aria-label="..."`
+- `tabIndex={0}`
+- `onKeyDown={...}`
+
 ```jsx
 import * as React from "react"
 import { PlusIcon, PlayIcon, AddIcon } from "@operational/components"
+const onClick = () => alert("click")
+
 ;<>
-  <AddIcon size={18} onClick={() => alert("click")} role="button" aria-label="Add" />
-  <PlusIcon size={18} onClick={() => alert("click")} role="button" aria-label="Add" />
-  <PlayIcon size={18} onClick={() => alert("click")} role="button" aria-label="Play" />
+  <PlayIcon
+    onClick={onClick}
+    role="button"
+    aria-label="Play"
+    tabIndex={0}
+    tabIndex={0}
+    onKeyDown={e => {
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault()
+        onClick()
+      }
+    }}
+  />
 </>
 ```
 
