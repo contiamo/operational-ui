@@ -13,7 +13,6 @@ export interface AccordionSectionProps extends DefaultProps {
   _index?: number
   _expanded?: boolean
   _toggleSection?: (index: number) => void
-  _isMouseRef?: React.MutableRefObject<boolean>
 }
 
 const Container = styled.div<{ expanded: boolean }>`
@@ -36,6 +35,7 @@ const Header = styled(SectionHeader)<{ expanded: boolean }>(({ theme, expanded }
     outline: "none",
   },
   paddingRight: 0,
+  userSelect: "none",
 }))
 
 Header.defaultProps = { role: "button", "aria-disabled": false }
@@ -50,18 +50,6 @@ const Panel = styled.div`
 `
 
 Panel.defaultProps = { role: "region" }
-
-const Focus = styled.div`
-  label: AccordionFocus;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  /* we show it above other elements so that shadow would be visible, but we disable all events for it */
-  pointer-events: none;
-  ${({ theme }) => `box-shadow: ${theme.shadows.insetFocus};`}
-`
 
 const IconWrapper = styled.div`
   width: ${headerHeight}px;
@@ -78,13 +66,11 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   _index,
   _expanded,
   _toggleSection,
-  _isMouseRef,
 }) => {
   const titleId = `${id}-${_index}-heading`
   const contentId = `${id}-${_index}-panel`
-  const [focusFlag, setFocusFlag] = React.useState(false)
 
-  if (_expanded === undefined || _index === undefined || _isMouseRef === undefined || _toggleSection === undefined) {
+  if (_expanded === undefined || _index === undefined || _toggleSection === undefined) {
     throw new Error(
       "Only AccordionSections can be used inside Accordion. See https://operational-ui.netlify.com/#!/Accordion for more info.",
     )
@@ -100,12 +86,6 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         onClick={() => _toggleSection(_index)}
         onKeyPress={() => _toggleSection(_index)}
         expanded={_expanded}
-        onFocus={() => {
-          if (!_isMouseRef.current) {
-            setFocusFlag(true)
-          }
-        }}
-        onBlur={() => setFocusFlag(false)}
       >
         {title}
         <IconWrapper>
@@ -119,7 +99,6 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
       <Panel id={contentId} aria-labelledby={titleId} hidden={!_expanded}>
         {_expanded && isFunction(children) ? children() : children}
       </Panel>
-      {focusFlag ? <Focus /> : null}
     </Container>
   )
 }
