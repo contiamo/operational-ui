@@ -17,9 +17,11 @@ exports[`ProgressPanel Component Should initialize properly 1`] = `
         class="css-9fq4n"
       >
         <svg
+          class="css-pfrcl5"
           fill="currentColor"
           height="18"
-          style="margin-left:0;margin-right:8px;transition:fill .075s ease;outline:none"
+          size="18"
+          tabindex="-1"
           viewBox="0 0 11.42 8.78"
           width="18"
         >
@@ -37,9 +39,11 @@ exports[`ProgressPanel Component Should initialize properly 1`] = `
         class="css-5ugjy6"
       >
         <svg
+          class="css-pfrcl5"
           fill="currentColor"
           height="18"
-          style="margin-left:0;margin-right:8px;transition:fill .075s ease;outline:none"
+          size="18"
+          tabindex="-1"
           viewBox="0 0 9.47 9.47"
           width="18"
         >
@@ -107,9 +111,11 @@ exports[`ProgressPanel Component Should initialize properly 1`] = `
         class="css-9xk9fc"
       >
         <svg
+          class="css-pfrcl5"
           fill="currentColor"
           height="18"
-          style="margin-left:0;margin-right:8px;transition:fill .075s ease;outline:none"
+          size="18"
+          tabindex="-1"
           viewBox="0 0 12.81 12.81"
           width="18"
         >
