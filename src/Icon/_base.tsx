@@ -1,6 +1,6 @@
 import React, { MouseEventHandler } from "react"
 
-import styled from "../src/utils/styled"
+import styled from "../utils/styled"
 
 export interface IconPropsBase extends React.SVGProps<SVGSVGElement> {
   /**

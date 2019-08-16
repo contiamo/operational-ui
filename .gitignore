@@ -14,6 +14,8 @@ cypress/screenshots
 .tsbuildinfo
 
 # Auto-generated icons
-src/Icon/*.ts*
+src/Icon/Icon.*.tsx
+src/Icon/index.tsx
+
 coverage
 __generated__

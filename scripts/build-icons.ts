@@ -20,7 +20,8 @@ const outputFolder = join(__dirname, "..", program.output || "./src/Icon")
 
 // Make sure the output folder is clean
 if (program.clean) {
-  rimraf.sync(`${outputFolder}/*.tsx`)
+  rimraf.sync(`${outputFolder}/Icon.*.tsx`)
+  rimraf.sync(`${outputFolder}/index.tsx`)
 }
 
 /**
@@ -129,21 +130,12 @@ export const buildIcons = (iconPath?: string) =>
       // This prevent to break the components summary
       if (iconPath) return
 
-      // Create _base.tsx
-      const base = readFileSync(join(__dirname, "BaseIcon.template.tsx"), { encoding: "utf8" }).replace(
-        `"../src/utils/styled"`,
-        `"../utils/styled"`,
-      )
-      writeFileSync(join(outputFolder, "_base.tsx"), base)
-
       // Create index.ts
       const index =
         'export { IconProps, IconComponentType } from "./_base"\n' +
         files.map(fileName => `export * from "./Icon.${parse(fileName).name}"`).join("\n")
       writeFileSync(join(outputFolder, "index.tsx"), index)
 
-      // Create Icon.tsx
-      copyFileSync(join(__dirname, "DummyIcon.template.tsx"), join(outputFolder, "Icon.tsx"))
       resolve()
     } catch (e) {
       reject(e)
