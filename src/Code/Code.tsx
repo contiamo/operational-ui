@@ -210,7 +210,7 @@ const Code: React.SFC<CodeProps> = ({ children, ...props }) => {
           onCopy={onCopy}
           text={(children || "") as string /* type assertion because of React.SFC's broken children type */}
         >
-          <CodeIcon size={14} color="color.text.lighter" />
+          <CodeIcon size={22} color="color.text.lighter" />
         </CopyToClipboard>
       )}
       <StyledHighlight
