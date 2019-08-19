@@ -73,7 +73,6 @@ export const TabHeader = styled(SectionHeader, {
          background-color: ${expandColor(props.theme, props.color) || props.theme.color.background.lighter};
          color: ${props.theme.color.text.action};
          font-weight: bold;
-         pointer-events: none;
          :hover {
            background-color: ${expandColor(props.theme, props.color) ||
              props.theme.color.background.lighter} !important;
