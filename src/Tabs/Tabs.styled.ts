@@ -115,7 +115,7 @@ TabHeader.defaultProps = {
 }
 
 export const TabButton = styled(SectionHeader, {
-  shouldForwardProp: prop => !(prop === "leftMargin" || prop === "as"),
+  shouldForwardProp: prop => !(prop === "leftMargin" || prop === "as" || prop === "isPlusButton"),
 })<{ as?: React.FC<any> | string; isPlusButton?: boolean }>`
   justify-content: center;
   cursor: pointer;
