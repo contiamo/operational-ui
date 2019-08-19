@@ -1,7 +1,7 @@
 import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-import { CaretLeftIcon } from "../Icon/Icon"
+import { CaretLeftIcon } from "../Icon"
 
 export interface BreadcrumbsProps extends DefaultProps {
   /** Children as `Breadcrumb` elements */

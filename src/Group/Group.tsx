@@ -2,7 +2,7 @@ import * as React from "react"
 
 import Body from "../Typography/Body"
 import styled from "../utils/styled"
-import { IconComponentType } from "../Icon/Icon"
+import { IconComponentType } from "../Icon"
 
 interface GroupBaseProps {
   /** What is the title of this group? */

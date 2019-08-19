@@ -13,6 +13,37 @@ import { AddIcon, FunctionIcon, OlapIcon } from "@operational/components"
 </>
 ```
 
+#### As button
+
+Using `onClick` for the Icon doesn't make it accessible button. To make it accessible you need to add:
+
+- `role="button"`
+- `aria-label="..."`
+- `tabIndex={0}`
+- `onKeyDown={...}`
+
+```jsx
+import * as React from "react"
+import { PlusIcon, PlayIcon, AddIcon } from "@operational/components"
+const onClick = () => alert("click")
+
+;<>
+  <PlayIcon
+    onClick={onClick}
+    role="button"
+    aria-label="Play"
+    tabIndex={0}
+    onKeyDown={e => {
+      if (e.key === " " || e.key === "Enter") {
+        e.preventDefault()
+        onClick()
+      }
+    }}
+  />
+  <PlayIcon />
+</>
+```
+
 #### With margins for content
 
 ```jsx
@@ -36,7 +67,7 @@ import { DocumentIcon } from "@operational/components"
 ```jsx
 import * as React from "react"
 import { Table, ResourceName, Input, SearchIcon, Code, useOperationalContext } from "@operational/components"
-import * as Icon from "@operational/components/Icon/Icon"
+import * as Icon from "@operational/components/Icon"
 
 const MyComponent = () => {
   const [filter, setFilter] = React.useState("")
@@ -73,7 +104,7 @@ const MyComponent = () => {
       </div>
       <Table
         data={Object.keys(Icon)
-          .filter(name => !name.startsWith("_") && name.toLowerCase().includes(filter.toLowerCase()))
+          .filter(name => name.endsWith("Icon") && name.toLowerCase().includes(filter.toLowerCase()))
           .map(name => ({ name }))}
         columns={[
           {

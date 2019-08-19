@@ -1,5 +1,5 @@
 import svgr from "@svgr/core"
-import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync } from "fs"
+import { readdirSync, readFileSync, mkdirSync, writeFileSync, existsSync, copyFileSync } from "fs"
 import * as rimraf from "rimraf"
 import { join, parse, sep } from "path"
 import ProgressBar from "progress"
@@ -20,7 +20,8 @@ const outputFolder = join(__dirname, "..", program.output || "./src/Icon")
 
 // Make sure the output folder is clean
 if (program.clean) {
-  rimraf.sync(`${outputFolder}/*.tsx`)
+  rimraf.sync(`${outputFolder}/Icon.*.tsx`)
+  rimraf.sync(`${outputFolder}/index.tsx`)
 }
 
 /**
@@ -61,33 +62,18 @@ export const buildIcons = (iconPath?: string) =>
           `
     import * as React from "react"
     import constants, { expandColor } from "../utils/constants"
-    import { IconProps } from "./Icon"
-    import IconButton from "../Internals/IconButton"
+    import { IconProps, Svg } from "./_base"
     
     /**
      * {{previewImage}}
      */
-    export const COMPONENT_NAME = ({size = 18, color, left, right, onClick, ...props}: IconProps) => {
+    export const COMPONENT_NAME = ({size = 18, color, ...props}: IconProps) => {
       const iconColor: string = expandColor(constants, color) || "currentColor";
-      const style = {
-        // theme.space.small
-        marginLeft: right ? 8 : 0,
-        // theme.space.small
-        marginRight: left ? 8 : 0,
-        transition: "fill .075s ease",
-        outline: "none"
-      };
     
-      const icon = (
+      return (
         JSX
       )
-      
-      if (onClick) {
-        return React.createElement(IconButton, {size: size + 8, onClick, ...props}, icon)
-      }
-
-      return icon
-    };
+    }
     `,
           { plugins: ["typescript"], preserveComments: true },
         )
@@ -112,7 +98,9 @@ export const buildIcons = (iconPath?: string) =>
                 fill: "{iconColor}",
                 width: "{size}",
                 height: "{size}",
-                style: "{style}",
+                size: "{size}",
+                role: '{props.onClick ? "button" : undefined}',
+                tabIndex: "{props.onClick ? 0 : undefined}",
               },
               template,
             },
@@ -123,6 +111,12 @@ export const buildIcons = (iconPath?: string) =>
           const preview = base64Img.base64Sync(join(inputFolder, fileName))
           const previewImage = `![${name}Icon](${preview}) `
           output = output.replace("{{previewImage}}", previewImage)
+
+          // Replace `<svg>` by `<Svg>` because
+          // first one is default React component,
+          // second one is custom styled component which provides hover styles
+          output = output.replace("<svg", "<Svg")
+          output = output.replace("</svg>", "</Svg>")
 
           writeFileSync(join(outputFolder, `Icon.${name}.tsx`), output)
           progressBar.tick()
@@ -136,53 +130,12 @@ export const buildIcons = (iconPath?: string) =>
       // This prevent to break the components summary
       if (iconPath) return
 
-      // Create Icon.ts
-      const index = `import React, { MouseEventHandler } from "react"
+      // Create index.ts
+      const index =
+        'export { IconProps, IconComponentType } from "./_base"\n' +
+        files.map(fileName => `export * from "./Icon.${parse(fileName).name}"`).join("\n")
+      writeFileSync(join(outputFolder, "index.tsx"), index)
 
-export interface IconPropsBase {
-  /**
-   * Size
-   *
-   * @default 18
-   */
-  size?: number
-  /** Icon color, specified as a hex, or a color name (info, success, warning, error) */
-  color?: string
-  /**
-   * On click handler
-   */
-  onClick?: MouseEventHandler
-  tabIndex?: number
-}
-
-export type IconProps =
-  | (IconPropsBase & {
-      left?: never
-      /**
-       * Indicates that this component is right of other content, and adds an appropriate left margin.
-       */
-      right?: boolean
-    })
-  | (IconPropsBase & {
-      /**
-       * Indicates that this component is left of other content, and adds an appropriate right margin.
-       */
-      left?: boolean
-      right?: never
-    })
-
-export type IconComponentType = React.ComponentType<React.SVGProps<SVGSVGElement> & IconProps>
-  
-${files
-  .map(fileName => {
-    const { name } = parse(fileName)
-
-    return `export * from "./Icon.${name}";`
-  })
-  .join("\n")}
-`
-
-      writeFileSync(join(outputFolder, "Icon.tsx"), index)
       resolve()
     } catch (e) {
       reject(e)

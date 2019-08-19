@@ -3,7 +3,7 @@ import { DefaultProps } from "../types"
 import styled from "../utils/styled"
 
 import Tooltip from "../Tooltip/Tooltip"
-import { HelpIcon } from "../Icon/Icon"
+import { HelpIcon } from "../Icon"
 
 export interface HintProps extends DefaultProps {
   className?: string

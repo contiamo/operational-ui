@@ -6,7 +6,7 @@ import { DefaultProps } from "../types"
 import { isModifiedEvent, isOutsideLink } from "../utils"
 import styled from "../utils/styled"
 import { truncate } from "../utils/truncate"
-import { IconComponentType } from "../Icon/Icon"
+import { IconComponentType } from "../Icon"
 
 export interface SidenavHeaderProps extends DefaultProps {
   /** Main label for the header */

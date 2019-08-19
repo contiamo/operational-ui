@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { IconComponentType } from "../Icon/Icon"
+import { IconComponentType } from "../Icon"
 import OperationalContext from "../OperationalContext/OperationalContext"
 import Spinner from "../Spinner/Spinner"
 import { DefaultProps } from "../types"

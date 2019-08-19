@@ -2,7 +2,7 @@ import React, { useCallback } from "react"
 import NameTag from "../NameTag/NameTag"
 import { darken, lighten } from "../utils"
 import styled from "../utils/styled"
-import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon/Icon"
+import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
 import Highlighter from "react-highlight-words"
 import constants from "../utils/constants"
 

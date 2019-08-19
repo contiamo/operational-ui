@@ -3,7 +3,7 @@ import * as React from "react"
 import { OperationalStyleConstants } from "../utils/constants"
 import styled from "../utils/styled"
 import { ContextMenuProps } from "./ContextMenu"
-import { IconComponentType } from "../Icon/Icon"
+import { IconComponentType } from "../Icon"
 
 export interface Props {
   condensed?: boolean

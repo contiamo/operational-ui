@@ -1,6 +1,6 @@
 import * as React from "react"
 import tinycolor from "tinycolor2"
-import { IconComponentType } from "../Icon/Icon"
+import { IconComponentType } from "../Icon"
 import { DefaultProps } from "../types"
 import { inputFocus } from "../utils"
 import { expandColor, OperationalStyleConstants } from "../utils/constants"

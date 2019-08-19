@@ -9,7 +9,7 @@ import { useUniqueId } from "../useUniqueId"
 import { isCmdEnter, lighten, inputFocus } from "../utils"
 import { FormFieldControls, Label } from "../utils/mixins"
 import styled from "../utils/styled"
-import { CopyIcon } from "../Icon/Icon"
+import { CopyIcon } from "../Icon"
 
 type ResizeOptions = "none" | "both" | "vertical" | "horizontal"
 

@@ -6,7 +6,7 @@ import { DefaultInputProps, DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
 import { FormFieldControl, FormFieldControls, Label } from "../utils/mixins"
 import InputField from "./Input.Field"
-import { LockIcon, UnlockIcon, IconComponentType } from "../Icon/Icon"
+import { LockIcon, UnlockIcon, IconComponentType } from "../Icon"
 
 // The `any` here relates to the onChange prop that we omit in favor of our own
 export interface BaseProps extends DefaultProps, DefaultInputProps, Omit<React.InputHTMLAttributes<any>, "onChange"> {

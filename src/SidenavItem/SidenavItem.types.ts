@@ -1,5 +1,5 @@
 import { SidenavHeaderProps } from "../SidenavHeader/SidenavHeader"
-import { IconComponentType } from "../Icon/Icon"
+import { IconComponentType } from "../Icon"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 import { DefaultProps } from "../types"
 

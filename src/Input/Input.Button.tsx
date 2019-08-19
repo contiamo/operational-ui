@@ -5,7 +5,7 @@ import OperationalContext from "../OperationalContext/OperationalContext"
 import { inputFocus } from "../utils"
 import styled from "../utils/styled"
 import { height } from "./Input.constants"
-import { IconComponentType, CopyIcon } from "../Icon/Icon"
+import { IconComponentType, CopyIcon } from "../Icon"
 
 interface InputButtonBaseProps {
   onIconClick?: () => void

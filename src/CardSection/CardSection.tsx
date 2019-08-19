@@ -2,7 +2,7 @@ import * as React from "react"
 
 import ActionMenu from "../ActionMenu/ActionMenu"
 import { ContextMenuProps } from "../ContextMenu/ContextMenu"
-import { ChevronUpIcon, ChevronDownIcon } from "../Icon/Icon"
+import { ChevronUpIcon, ChevronDownIcon } from "../Icon"
 import { DefaultProps, DragProps } from "../types"
 import styled from "../utils/styled"
 import { headerHeight } from "../utils/constants"

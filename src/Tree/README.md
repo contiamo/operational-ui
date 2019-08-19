@@ -209,7 +209,7 @@ const Example = () => {
                 label: "Region",
                 actions: (
                   <DotMenuIcon
-                    size={12}
+                    size={20}
                     tabIndex={-1}
                     onClick={e => {
                       e.stopPropagation()
@@ -224,8 +224,8 @@ const Example = () => {
                     tag: "D",
                     disabled: true,
                     actions: [
-                      <PlusIcon size={12} tabIndex={-1} onClick={() => alert("plus")} key="add" />,
-                      <DotMenuIcon size={12} tabIndex={-1} onClick={() => alert("menu")} key="more" />,
+                      <PlusIcon size={20} tabIndex={-1} onClick={() => alert("plus")} key="add" />,
+                      <DotMenuIcon size={20} tabIndex={-1} onClick={() => alert("menu")} key="more" />,
                     ],
                     childNodes: [],
                   },
@@ -235,8 +235,8 @@ const Example = () => {
 Nous avoir parole la nous moussant. Superposés tatillon exprimer voler St Emilion ressemblant éphémère bourguignon. Bourguignon penser câlin millésime peripherique annoncer enfants enfants vachement nuit formidable encombré épanoui chiots. Arc truc cacatoès lorem flâner.`,
                     color: "primary",
                     actions: [
-                      <PlusIcon size={12} tabIndex={-1} onClick={() => alert("plus")} key="add" />,
-                      <DotMenuIcon size={12} tabIndex={-1} onClick={() => alert("menu")} key="more" />,
+                      <PlusIcon size={20} tabIndex={-1} onClick={() => alert("plus")} key="add" />,
+                      <DotMenuIcon size={20} tabIndex={-1} onClick={() => alert("menu")} key="more" />,
                     ],
                     tag: "D",
                     childNodes: [],

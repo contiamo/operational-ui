@@ -3,7 +3,7 @@ import * as React from "react"
 import { mount } from "enzyme"
 import { SidenavItem as ThemelessSidenavItem } from "../../index"
 import wrapDefaultTheme from "../../utils/wrap-default-theme"
-import { UserIcon } from "../../Icon/Icon"
+import { UserIcon } from "../../Icon"
 
 const SidenavItem = wrapDefaultTheme(ThemelessSidenavItem)
 

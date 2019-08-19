@@ -1,7 +1,7 @@
 import * as React from "react"
 import { SectionHeader } from "../Internals/SectionHeader"
 import styled from "../utils/styled"
-import { ChevronUpIcon, ChevronDownIcon } from "../Icon/Icon"
+import { ChevronUpIcon, ChevronDownIcon } from "../Icon"
 import { DefaultProps } from "../types"
 import isFunction from "lodash/isFunction"
 import { headerHeight } from "../utils/constants"

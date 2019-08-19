@@ -5,7 +5,7 @@ import { DefaultProps } from "../types"
 import { darken, inputFocus, isModifiedEvent, isOutsideLink } from "../utils"
 import { expandColor } from "../utils/constants"
 import styled from "../utils/styled"
-import { IconComponentType } from "../Icon/Icon"
+import { IconComponentType } from "../Icon"
 
 export interface SimpleLinkProps extends DefaultProps {
   /** Invoked when you click on the button */

@@ -2,7 +2,7 @@ import * as React from "react"
 import { OperationalStyleConstants } from "../utils/constants"
 import { useHotkey } from "../useHotkey"
 import styled from "../utils/styled"
-import { YesIcon } from "../Icon/Icon"
+import { YesIcon } from "../Icon"
 import { inputFocus } from "../utils/mixins"
 
 export interface StepperProps {

@@ -15,7 +15,7 @@ import {
   ViewMoreToggle,
 } from "./DataTable.styled"
 import { defaultRowHeight, getRowHeight } from "./DataTable.util"
-import { ChevronDownIcon } from "../Icon/Icon"
+import { ChevronDownIcon } from "../Icon"
 
 export interface DataTableProps<Columns, Rows> {
   /* The columns of our table. They are an array of header layers. */

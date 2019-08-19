@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState, useRef } from "react"
 import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
-import { IconComponentType } from "../Icon/Icon"
+import { IconComponentType } from "../Icon"
 import { inputFocus } from "../utils"
 import { useUniqueId } from "../useUniqueId"
 

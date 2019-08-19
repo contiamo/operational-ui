@@ -4,7 +4,7 @@ import CopyToClipboard from "react-copy-to-clipboard"
 import Highlight from "react-highlight"
 import ReactJson, { ReactJsonViewProps } from "react-json-view"
 
-import { CopyIcon } from "../Icon/Icon"
+import { CopyIcon } from "../Icon"
 import { DefaultProps } from "../types"
 import constants from "../utils/constants"
 import styled from "../utils/styled"
@@ -210,7 +210,7 @@ const Code: React.SFC<CodeProps> = ({ children, ...props }) => {
           onCopy={onCopy}
           text={(children || "") as string /* type assertion because of React.SFC's broken children type */}
         >
-          <CodeIcon size={14} color="color.text.lighter" />
+          <CodeIcon size={22} color="color.text.lighter" />
         </CopyToClipboard>
       )}
       <StyledHighlight

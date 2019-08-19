@@ -5,7 +5,7 @@ import Tooltip from "../Tooltip/Tooltip"
 import { isClient } from "../utils/isClient"
 import styled from "../utils/styled"
 import { makeRowsFromConfig } from "./makeRowsFromConfig"
-import { CopyIcon, ChevronDownIcon, ChevronUpIcon } from "../Icon/Icon"
+import { CopyIcon, ChevronDownIcon, ChevronUpIcon } from "../Icon"
 
 export interface DebugProps<T extends {}> {
   title: string

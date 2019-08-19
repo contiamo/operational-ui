@@ -3,7 +3,7 @@ import React, { useLayoutEffect, useRef, useState, useMemo } from "react"
 
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import styled from "../utils/styled"
-import { CaretUpIcon, CaretDownIcon } from "../Icon/Icon"
+import { CaretUpIcon, CaretDownIcon } from "../Icon"
 
 export interface TopbarSelectProps {
   /** A label added right before displaying the selected value */

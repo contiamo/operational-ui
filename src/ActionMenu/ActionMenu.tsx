@@ -3,7 +3,7 @@ import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import { DefaultProps } from "../types"
 import { inputFocus } from "../utils"
 import styled from "../utils/styled"
-import { DotMenuIcon } from "../Icon/Icon"
+import { DotMenuIcon } from "../Icon"
 
 export interface ActionMenuProps extends DefaultProps {
   /** Action when item in dropdown is selected - if specified here, it is applied to all dropdown items */

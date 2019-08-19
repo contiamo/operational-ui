@@ -1,5 +1,5 @@
 import * as React from "react"
-import { ChevronLeftIcon, ChevronRightIcon, NoIcon } from "../Icon/Icon"
+import { ChevronLeftIcon, ChevronRightIcon, NoIcon } from "../Icon"
 import { LabelText } from "../LabelText/LabelText"
 import { DefaultProps } from "../types"
 import { Label } from "../utils/mixins"
