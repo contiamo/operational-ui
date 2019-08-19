@@ -20,7 +20,7 @@ const MyComponent = () => {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding-right: ${({theme}) => theme.space.small}px;
+    padding-right: ${({ theme }) => theme.space.small}px;
     align-items: center;
   `
 
@@ -32,7 +32,7 @@ const MyComponent = () => {
             <Title>
               Section 1
               <AddIcon
-                size={16}
+                size={20}
                 color="primary"
                 onClick={e => {
                   e.stopPropagation()
