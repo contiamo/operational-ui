@@ -90,9 +90,9 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         {title}
         <IconWrapper>
           {_expanded ? (
-            <ChevronUpIcon size={20} onClick={() => _toggleSection(_index)} />
+            <ChevronUpIcon size={20} onClick={() => undefined} />
           ) : (
-            <ChevronDownIcon size={20} onClick={() => _toggleSection(_index)} />
+            <ChevronDownIcon size={20} onClick={() => undefined} />
           )}
         </IconWrapper>
       </Header>

@@ -16,6 +16,7 @@
   "scripts": {
     "start": "ts-node -P tsconfig.node.json ./scripts/start.ts",
     "build": "run-s build:*",
+    "clean:icons": "ts-node -P tsconfig.node.json ./scripts/build-icons.ts -c ./src/Icon",
     "build:icons": "ts-node -P tsconfig.node.json ./scripts/build-icons.ts -o ./src/Icon",
     "build:package": "rimraf lib .tsbuildinfo && tsc -d",
     "build:types": "ts-node -P tsconfig.node.json ./scripts/generate-type-dictionary.ts -o ./styleguide/__generated__",
