@@ -196,7 +196,13 @@ const Tabs: React.FC<TabsProps> = ({
             }}
           >
             <IconButton>
-              <PlusIcon size={14} color="primary" />
+              <PlusIcon
+                size={20}
+                color="primary"
+                onClick={() => {
+                  /* Just for the hover style */
+                }}
+              />
             </IconButton>
           </TabButton>
         )}
