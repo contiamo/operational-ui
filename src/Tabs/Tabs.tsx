@@ -195,7 +195,7 @@ const Tabs: React.FC<TabsProps> = ({
               onInsert(tabs.length - 1)
             }}
           >
-            <IconButton>
+            <IconButton selected>
               <PlusIcon size={14} color="primary" />
             </IconButton>
           </TabButton>
