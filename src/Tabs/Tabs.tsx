@@ -142,10 +142,10 @@ const Tabs: React.FC<TabsProps> = ({
 
   const onScroll = React.useCallback(() => {
     if (tabListRef.current) {
-      setLeftDisabled(tabListRef.current.scrollLeft === 0)
-      setRightDisabled(
-        tabListRef.current.scrollLeft === tabListRef.current.scrollWidth - tabListRef.current.offsetWidth,
-      )
+      const tabListElement = tabListRef.current
+      const scrollLeft = tabListElement.scrollLeft
+      setLeftDisabled(scrollLeft === 0)
+      setRightDisabled(scrollLeft === tabListElement.scrollWidth - tabListElement.offsetWidth)
     }
   }, [])
 
