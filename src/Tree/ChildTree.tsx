@@ -57,7 +57,7 @@ const ChildTree: React.SFC<Props> = ({
             setIsOpen(!isOpen)
           }
           if (onClick) {
-            onClick()
+            onClick(e)
           }
         }
       : undefined
