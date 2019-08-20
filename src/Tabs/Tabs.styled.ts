@@ -104,8 +104,7 @@ export const TabHeader = styled(SectionHeader, {
     cursor: not-allowed;
   }
   :hover {
-    background-color: ${({ theme, color }) =>
-      color ? darken(expandColor(theme, color)!, 20) : theme.color.separators.default};
+    background-color: ${({ theme, color }) => (color ? darken(expandColor(theme, color)!, 20) : "#e4e9eb")};
   }
 `
 
