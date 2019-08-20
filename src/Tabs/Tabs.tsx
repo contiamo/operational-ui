@@ -176,7 +176,6 @@ const Tabs: React.FC<TabsProps> = ({
                         e.stopPropagation()
                         onClose(i)
                       }}
-                      selected={i === active}
                     >
                       <NoIcon size={9} />
                     </IconButton>
@@ -195,7 +194,7 @@ const Tabs: React.FC<TabsProps> = ({
               onInsert(tabs.length - 1)
             }}
           >
-            <IconButton selected>
+            <IconButton>
               <PlusIcon size={14} color="primary" />
             </IconButton>
           </TabButton>

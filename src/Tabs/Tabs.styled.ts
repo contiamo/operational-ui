@@ -195,11 +195,11 @@ export const TabIcon = styled.span`
   pointer-events: none;
 `
 
-export const IconButton = styled.span<{ selected?: boolean }>`
+export const IconButton = styled.span`
   pointer-events: all;
   transition: background-color 0.2s;
   :hover {
-    background: ${({ theme, selected }) => (selected ? theme.color.separators.default : theme.color.background.light)};
+    background: ${({ theme }) => theme.color.separators.default};
   }
   display: flex;
   align-items: center;
