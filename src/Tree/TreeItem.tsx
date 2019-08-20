@@ -21,6 +21,7 @@ interface TreeItemProps {
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   onNodeContextMenu?: (e: React.MouseEvent<HTMLDivElement>) => void
   actions?: React.ReactNode
+  hasIconOffset?: boolean
 }
 
 const Header = styled.div<{
@@ -28,6 +29,7 @@ const Header = styled.div<{
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   cursor?: string
   level: number
+  hasIconOffset: boolean
 }>`
   label: TreeItem;
   display: flex;
@@ -37,7 +39,7 @@ const Header = styled.div<{
   background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
   margin: 0 -${({ theme }) => theme.space.element}px;
   padding: ${({ theme }) => `${theme.space.base}px ${theme.space.element}px`};
-  padding-left: ${({ theme, level }) => theme.space.element * (level + 1)}px;
+  padding-left: ${({ theme, level, hasIconOffset }) => theme.space.element * (level + 1) + (hasIconOffset ? 24 : 0)}px;
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover {
@@ -63,7 +65,11 @@ const Header = styled.div<{
 `
 
 const Label = styled("div")<{ hasChildren: boolean }>`
+  /* Split the label by caract properly and show the first line only */
   overflow-wrap: break-word;
+  overflow: hidden !important;
+  height: 16px;
+
   font-size: ${({ theme }) => theme.font.size.small}px;
   font-weight: ${({ theme, hasChildren }) => (hasChildren ? theme.font.weight.bold : theme.font.weight.medium)};
   overflow: auto;
@@ -93,6 +99,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   level,
   cursor,
   actions,
+  hasIconOffset,
   searchWords = [],
 }) => {
   const handleKeyDown = useCallback(
@@ -124,6 +131,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   return (
     <Header
       level={level}
+      hasIconOffset={Boolean(hasIconOffset)}
       onClick={onNodeClick}
       onContextMenu={onNodeContextMenu}
       onKeyDown={handleKeyDown}
