@@ -14,7 +14,7 @@ interface BaseTree {
   color?: string
   icon?: IconComponentType
   iconColor?: string
-  onClick?: () => void
+  onClick?: (event: React.MouseEvent) => void
   onContextMenu?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
   cursor?: string
   actions?: React.ReactNode
