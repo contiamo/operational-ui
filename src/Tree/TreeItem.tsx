@@ -1,10 +1,11 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useRef, useLayoutEffect, useState } from "react"
 import NameTag from "../NameTag/NameTag"
 import { darken, lighten } from "../utils"
 import styled from "../utils/styled"
-import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
+import { ChevronRightIcon, ChevronDownIcon, IconComponentType, DotMenuHorizontalIcon } from "../Icon"
 import Highlighter from "react-highlight-words"
 import constants from "../utils/constants"
+import { ViewMorePopup } from "../DataTable/DataTable.styled"
 
 interface TreeItemProps {
   level: number
@@ -76,7 +77,7 @@ const Label = styled("div")<{ hasChildren: boolean }>`
   flex: 1;
 `
 
-const ActionsContainer = styled.div<{ childrenCount: number; highlight: boolean }>`
+const ActionsContainer = styled.div<{ childrenCount: number }>`
   display: grid;
   opacity: 0;
   align-items: center;
@@ -128,6 +129,20 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     [onNodeContextMenu, onNodeClick],
   )
 
+  const [viewMorePopup, setViewMorePopup] = useState<{ x: number; y: number; content: string } | null>(null)
+  const [isTooLong, setIsTooLong] = useState(false)
+  const labelRef = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    // We can't attach the ref to `Highlighter`, this is why we attached the ref
+    // to the parent and using `children[0]`
+    if (labelRef.current && labelRef.current.children[0]) {
+      const { height } = labelRef.current.children[0].getBoundingClientRect()
+      if (height > 16) {
+        setIsTooLong(true)
+      }
+    }
+  })
+
   return (
     <Header
       level={level}
@@ -139,6 +154,11 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       cursor={cursor}
       tabIndex={0}
     >
+      {viewMorePopup && (
+        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x}>
+          {viewMorePopup.content}
+        </ViewMorePopup>
+      )}
       {hasChildren &&
         React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
           size: 11,
@@ -156,16 +176,34 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           color: iconColor || "color.text.lighter",
           style: { marginLeft: 0, marginRight: 8, flex: "0 0 15px" },
         })}
-      <Label hasChildren={hasChildren}>
+      <Label hasChildren={hasChildren} ref={labelRef}>
         <Highlighter
           textToHighlight={label}
           highlightStyle={{ color: constants.color.text.action, backgroundColor: "transparent", fontWeight: "bold" }}
           searchWords={searchWords}
         />
       </Label>
-      <ActionsContainer highlight={highlight} childrenCount={React.Children.count(actions)}>
-        {actions}
-      </ActionsContainer>
+      {isTooLong && (
+        <DotMenuHorizontalIcon
+          size={18}
+          left
+          onClick={() => {
+            /** Just the hover style! */
+          }}
+          onMouseEnter={() => {
+            if (labelRef.current) {
+              const { left, top } = labelRef.current.getBoundingClientRect()
+              setViewMorePopup({ y: top + 20, x: left, content: label })
+            }
+          }}
+          onMouseLeave={() => {
+            if (labelRef.current) {
+              setViewMorePopup(null)
+            }
+          }}
+        />
+      )}
+      <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>
     </Header>
   )
 }
