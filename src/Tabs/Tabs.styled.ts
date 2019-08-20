@@ -204,9 +204,9 @@ export const IconButton = styled.span<{ selected?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 32px;
-  min-width: 32px;
-  border-radius: 32px;
+  min-height: 24px;
+  min-width: 24px;
+  border-radius: 24px;
   & svg {
     color: ${({ theme }) => theme.color.text.default} !important;
     cursor: pointer !important;
