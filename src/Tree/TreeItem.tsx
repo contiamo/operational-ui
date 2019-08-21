@@ -1,10 +1,11 @@
-import React, { useCallback } from "react"
+import React, { useCallback, useRef, useLayoutEffect, useState } from "react"
 import NameTag from "../NameTag/NameTag"
 import { darken, lighten } from "../utils"
 import styled from "../utils/styled"
-import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
+import { ChevronRightIcon, ChevronDownIcon, IconComponentType, DotMenuHorizontalIcon } from "../Icon"
 import Highlighter from "react-highlight-words"
 import constants from "../utils/constants"
+import { ViewMorePopup } from "../DataTable/DataTable.styled"
 
 interface TreeItemProps {
   level: number
@@ -21,6 +22,7 @@ interface TreeItemProps {
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   onNodeContextMenu?: (e: React.MouseEvent<HTMLDivElement>) => void
   actions?: React.ReactNode
+  hasIconOffset?: boolean
 }
 
 const Header = styled.div<{
@@ -28,6 +30,7 @@ const Header = styled.div<{
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   cursor?: string
   level: number
+  hasIconOffset: boolean
 }>`
   label: TreeItem;
   display: flex;
@@ -37,7 +40,8 @@ const Header = styled.div<{
   background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
   margin: 0 -${({ theme }) => theme.space.element}px;
   padding: ${({ theme }) => `${theme.space.base}px ${theme.space.element}px`};
-  padding-left: ${({ theme, level }) => theme.space.element * (level + 1)}px;
+  padding-left: ${({ theme, level, hasIconOffset }) =>
+    theme.space.element * (level + 1) + (hasIconOffset ? theme.space.base + theme.space.element : 0)}px;
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover {
@@ -62,15 +66,20 @@ const Header = styled.div<{
   }
 `
 
-const Label = styled("div")<{ hasChildren: boolean }>`
+const viewMoreIconSize = 18
+
+const Label = styled.div<{ hasChildren: boolean }>`
+  /* Split the label by caract properly and show the first line only */
   overflow-wrap: break-word;
+  overflow: hidden;
+  height: 16px;
+
   font-size: ${({ theme }) => theme.font.size.small}px;
   font-weight: ${({ theme, hasChildren }) => (hasChildren ? theme.font.weight.bold : theme.font.weight.medium)};
-  overflow: auto;
   flex: 1;
 `
 
-const ActionsContainer = styled.div<{ childrenCount: number; highlight: boolean }>`
+const ActionsContainer = styled.div<{ childrenCount: number }>`
   display: grid;
   opacity: 0;
   align-items: center;
@@ -93,6 +102,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   level,
   cursor,
   actions,
+  hasIconOffset,
   searchWords = [],
 }) => {
   const handleKeyDown = useCallback(
@@ -121,9 +131,22 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     [onNodeContextMenu, onNodeClick],
   )
 
+  const [viewMorePopup, setViewMorePopup] = useState<{ x: number; y: number; content: string } | null>(null)
+  const [isTooLong, setIsTooLong] = useState(false)
+  const labelRef = useRef<HTMLDivElement>(null)
+  useLayoutEffect(() => {
+    // We can't attach the ref to `Highlighter`, this is why we attached the ref
+    // to the parent and using `children[0]`
+    if (labelRef.current && labelRef.current.children[0]) {
+      const { height } = labelRef.current.children[0].getBoundingClientRect()
+      setIsTooLong(height > 16)
+    }
+  }, [label])
+
   return (
     <Header
       level={level}
+      hasIconOffset={Boolean(hasIconOffset)}
       onClick={onNodeClick}
       onContextMenu={onNodeContextMenu}
       onKeyDown={handleKeyDown}
@@ -131,6 +154,11 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       cursor={cursor}
       tabIndex={0}
     >
+      {viewMorePopup && (
+        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x}>
+          {viewMorePopup.content}
+        </ViewMorePopup>
+      )}
       {hasChildren &&
         React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
           size: 11,
@@ -148,16 +176,34 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           color: iconColor || "color.text.lighter",
           style: { marginLeft: 0, marginRight: 8, flex: "0 0 15px" },
         })}
-      <Label hasChildren={hasChildren}>
+      <Label hasChildren={hasChildren} ref={labelRef}>
         <Highlighter
           textToHighlight={label}
           highlightStyle={{ color: constants.color.text.action, backgroundColor: "transparent", fontWeight: "bold" }}
           searchWords={searchWords}
         />
       </Label>
-      <ActionsContainer highlight={highlight} childrenCount={React.Children.count(actions)}>
-        {actions}
-      </ActionsContainer>
+      {isTooLong && (
+        <DotMenuHorizontalIcon
+          size={viewMoreIconSize}
+          left
+          onClick={() => {
+            /** Just the hover style! */
+          }}
+          onMouseEnter={() => {
+            if (labelRef.current) {
+              const { right, top } = labelRef.current.getBoundingClientRect()
+              setViewMorePopup({ y: top + viewMoreIconSize, x: right + viewMoreIconSize, content: label })
+            }
+          }}
+          onMouseLeave={() => {
+            if (labelRef.current) {
+              setViewMorePopup(null)
+            }
+          }}
+        />
+      )}
+      <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>
     </Header>
   )
 }

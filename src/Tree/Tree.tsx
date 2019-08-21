@@ -40,13 +40,21 @@ export interface TreeProps {
   droppableProps?: Omit<DroppableProps, "children">
   placeholder?: React.ComponentType<DroppableStateSnapshot>
   _level?: number
+  _hasIconOffset?: boolean
 }
 
 const Container = styled("div")`
   user-select: none;
 `
 
-const Tree: React.SFC<TreeProps> = ({ _level = 0, trees, droppableProps, placeholder, searchWords }) => {
+const Tree: React.SFC<TreeProps> = ({
+  _level = 0,
+  _hasIconOffset = false,
+  trees,
+  droppableProps,
+  placeholder,
+  searchWords,
+}) => {
   const isLowestLevel = trees.length === 0 || trees.some(tree => !tree.childNodes || !tree.childNodes.length)
 
   /**
@@ -57,7 +65,13 @@ const Tree: React.SFC<TreeProps> = ({ _level = 0, trees, droppableProps, placeho
     return (
       <Container>
         {trees.map((treeData, index) => (
-          <ChildTree level={_level} key={index} {...treeData} searchWords={searchWords} />
+          <ChildTree
+            level={_level}
+            hasIconOffset={_hasIconOffset}
+            key={index}
+            {...treeData}
+            searchWords={searchWords}
+          />
         ))}
       </Container>
     )
@@ -74,6 +88,7 @@ const Tree: React.SFC<TreeProps> = ({ _level = 0, trees, droppableProps, placeho
                   {draggableProvided => {
                     return (
                       <ChildTree
+                        hasIconOffset={_hasIconOffset}
                         level={_level}
                         forwardRef={draggableProvided.innerRef}
                         searchWords={searchWords}
