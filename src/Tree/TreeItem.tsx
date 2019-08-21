@@ -139,9 +139,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     // to the parent and using `children[0]`
     if (labelRef.current && labelRef.current.children[0]) {
       const { height } = labelRef.current.children[0].getBoundingClientRect()
-      if (height > 16) {
-        setIsTooLong(true)
-      }
+      setIsTooLong(height > 16)
     }
   }, [label])
 
