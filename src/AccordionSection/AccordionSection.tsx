@@ -90,9 +90,21 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         {title}
         <IconWrapper>
           {_expanded ? (
-            <ChevronUpIcon size={20} onClick={() => _toggleSection(_index)} />
+            <ChevronUpIcon
+              size={20}
+              onClick={() => {
+                /* Just for the hover style */
+              }}
+              tabIndex={-1}
+            />
           ) : (
-            <ChevronDownIcon size={20} onClick={() => _toggleSection(_index)} />
+            <ChevronDownIcon
+              size={20}
+              onClick={() => {
+                /* Just for the hover style */
+              }}
+              tabIndex={-1}
+            />
           )}
         </IconWrapper>
       </Header>
