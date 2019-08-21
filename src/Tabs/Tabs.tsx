@@ -123,6 +123,8 @@ const Tabs: React.FC<TabsProps> = ({
 
   const tabListRef = React.useRef<HTMLDivElement>(null)
   const tabScrollRef = React.useRef<HTMLDivElement>(null)
+  const [leftDisabled, setLeftDisabled] = React.useState(true)
+  const [rightDisabled, setRightDisabled] = React.useState(true)
 
   const scrollLeft = React.useCallback(event => {
     event && event.preventDefault() // so the button won't get focus when clicked
@@ -138,10 +140,21 @@ const Tabs: React.FC<TabsProps> = ({
     }
   }, [])
 
+  const onScroll = React.useCallback(() => {
+    if (tabListRef.current) {
+      const tabListElement = tabListRef.current
+      const scrollLeft = tabListElement.scrollLeft
+      setLeftDisabled(scrollLeft === 0)
+      setRightDisabled(scrollLeft === tabListElement.scrollWidth - tabListElement.offsetWidth)
+    }
+  }, [])
+
+  React.useLayoutEffect(onScroll, [])
+
   return (
     <Container data-cy="operational-ui__Tabs" style={style}>
       <PlusWrapper>
-        <TabList scroll={Boolean(scroll)} aria-label={label} onKeyDown={onKeyDown} ref={tabListRef}>
+        <TabList scroll={Boolean(scroll)} aria-label={label} onKeyDown={onKeyDown} ref={tabListRef} onScroll={onScroll}>
           <TabScroll ref={tabScrollRef}>
             {tabs.map(({ title, icon, color }, i) => {
               const onClick = () => {
@@ -202,10 +215,10 @@ const Tabs: React.FC<TabsProps> = ({
       </PlusWrapper>
       {scroll && (
         <ScrollButtons>
-          <TabButton onMouseDown={scrollLeft}>
+          <TabButton onMouseDown={scrollLeft} disabled={leftDisabled}>
             <ChevronLeftIcon size={14} />
           </TabButton>
-          <TabButton onMouseDown={scrollRight}>
+          <TabButton onMouseDown={scrollRight} disabled={rightDisabled}>
             <ChevronRightIcon size={14} />
           </TabButton>
         </ScrollButtons>
