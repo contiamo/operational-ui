@@ -50,6 +50,7 @@ export interface State {
   }>
   isLoading: boolean
   error?: Error
+  focus: boolean
 }
 
 const baseStylesheet = (theme: OperationalStyleConstants) => `
@@ -89,7 +90,7 @@ ul, ol {
 }
 `
 
-const Container = styled("div")`
+const Container = styled.div`
   position: relative;
   min-height: 60px;
   height: 100%;
@@ -115,6 +116,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
   public state: State = {
     messages: [],
     isLoading: false,
+    focus: false,
   }
 
   /**
@@ -159,6 +161,23 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     if (this.messageTimerInterval) {
       clearInterval(this.messageTimerInterval)
     }
+    document.removeEventListener("keydown", this.onKeyDown)
+    document.removeEventListener("click", this.onClick)
+  }
+
+  public componentDidMount() {
+    document.addEventListener("keydown", this.onKeyDown.bind(this))
+    document.addEventListener("click", this.onClick.bind(this))
+  }
+
+  private onKeyDown(e: KeyboardEvent) {
+    if (e.key === "Tab") {
+      this.setState({ focus: true })
+    }
+  }
+
+  private onClick() {
+    this.setState({ focus: false })
   }
 
   public render() {
@@ -179,7 +198,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
             }}
           >
             {!this.props.noBaseStyles && <Global styles={baseStylesheet(merge(constants, theme))} />}
-            <Container>
+            <Container className={this.state.focus ? undefined : "no-focus"}>
               {this.state.isLoading && <Progress />}
               <Messages>
                 {this.state.messages.map(({ message, count }, index) => (
