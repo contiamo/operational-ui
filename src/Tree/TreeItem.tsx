@@ -40,7 +40,8 @@ const Header = styled.div<{
   background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
   margin: 0 -${({ theme }) => theme.space.element}px;
   padding: ${({ theme }) => `${theme.space.base}px ${theme.space.element}px`};
-  padding-left: ${({ theme, level, hasIconOffset }) => theme.space.element * (level + 1) + (hasIconOffset ? 24 : 0)}px;
+  padding-left: ${({ theme, level, hasIconOffset }) =>
+    theme.space.element * (level + 1) + (hasIconOffset ? theme.space.base + theme.space.element : 0)}px;
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover {
@@ -64,6 +65,8 @@ const Header = styled.div<{
     }
   }
 `
+
+const viewMoreIconSize = 18
 
 const Label = styled("div")<{ hasChildren: boolean }>`
   /* Split the label by caract properly and show the first line only */
@@ -185,15 +188,15 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       </Label>
       {isTooLong && (
         <DotMenuHorizontalIcon
-          size={18}
+          size={viewMoreIconSize}
           left
           onClick={() => {
             /** Just the hover style! */
           }}
           onMouseEnter={() => {
             if (labelRef.current) {
-              const { left, top } = labelRef.current.getBoundingClientRect()
-              setViewMorePopup({ y: top + 20, x: left, content: label })
+              const { right, top } = labelRef.current.getBoundingClientRect()
+              setViewMorePopup({ y: top + viewMoreIconSize, x: right + viewMoreIconSize, content: label })
             }
           }}
           onMouseLeave={() => {
