@@ -73,7 +73,6 @@ export const TabHeader = styled(SectionHeader, {
          background-color: ${expandColor(props.theme, props.color) || props.theme.color.background.lighter};
          color: ${props.theme.color.text.action};
          font-weight: bold;
-         pointer-events: none;
          :hover {
            background-color: ${expandColor(props.theme, props.color) ||
              props.theme.color.background.lighter} !important;
@@ -105,8 +104,7 @@ export const TabHeader = styled(SectionHeader, {
     cursor: not-allowed;
   }
   :hover {
-    background-color: ${({ theme, color }) =>
-      color ? darken(expandColor(theme, color)!, 20) : theme.color.separators.default};
+    background-color: ${({ theme, color }) => (color ? darken(expandColor(theme, color)!, 20) : "#e4e9eb")};
   }
 `
 
@@ -116,7 +114,7 @@ TabHeader.defaultProps = {
 }
 
 export const TabButton = styled(SectionHeader, {
-  shouldForwardProp: prop => !(prop === "leftMargin" || prop === "as"),
+  shouldForwardProp: prop => !(prop === "leftMargin" || prop === "as" || prop === "isPlusButton"),
 })<{ as?: React.FC<any> | string; isPlusButton?: boolean; disabled?: boolean }>`
   justify-content: center;
   cursor: pointer;
@@ -196,18 +194,18 @@ export const TabIcon = styled.span`
   pointer-events: none;
 `
 
-export const IconButton = styled.span<{ selected?: boolean }>`
+export const IconButton = styled.span`
   pointer-events: all;
   transition: background-color 0.2s;
   :hover {
-    background: ${({ theme, selected }) => (selected ? theme.color.separators.default : theme.color.background.light)};
+    background: ${({ theme }) => theme.color.separators.default};
   }
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 32px;
-  min-width: 32px;
-  border-radius: 32px;
+  min-height: 24px;
+  min-width: 24px;
+  border-radius: 24px;
   & svg {
     color: ${({ theme }) => theme.color.text.default} !important;
     cursor: pointer !important;
