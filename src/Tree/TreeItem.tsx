@@ -134,6 +134,9 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   const [viewMorePopup, setViewMorePopup] = useState<{ x: number; y: number; content: string } | null>(null)
   const [isTooLong, setIsTooLong] = useState(false)
   const labelRef = useRef<HTMLDivElement>(null)
+
+  // We compute this on every re-render to handle the resize
+  // (resize event is only supported by chrome for now)
   useLayoutEffect(() => {
     // We can't attach the ref to `Highlighter`, this is why we attached the ref
     // to the parent and using `children[0]`
@@ -141,7 +144,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       const { height } = labelRef.current.children[0].getBoundingClientRect()
       setIsTooLong(height > 16)
     }
-  }, [label])
+  })
 
   return (
     <Header
