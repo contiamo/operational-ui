@@ -119,6 +119,12 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     focus: false,
   }
 
+  constructor(props: OperationalUIProps) {
+    super(props)
+    this.onKeyDown = this.onKeyDown.bind(this)
+    this.onClick = this.onClick.bind(this)
+  }
+
   /**
    *  The interval responsible for periodically checking
    *  whether any messages need to be removed from state
@@ -166,8 +172,8 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
   }
 
   public componentDidMount() {
-    document.addEventListener("keydown", this.onKeyDown.bind(this))
-    document.addEventListener("click", this.onClick.bind(this))
+    document.addEventListener("keydown", this.onKeyDown)
+    document.addEventListener("click", this.onClick)
   }
 
   private onKeyDown(e: KeyboardEvent) {
