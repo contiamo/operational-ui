@@ -68,15 +68,14 @@ const Header = styled.div<{
 
 const viewMoreIconSize = 18
 
-const Label = styled("div")<{ hasChildren: boolean }>`
+const Label = styled.div<{ hasChildren: boolean }>`
   /* Split the label by caract properly and show the first line only */
   overflow-wrap: break-word;
-  overflow: hidden !important;
+  overflow: hidden;
   height: 16px;
 
   font-size: ${({ theme }) => theme.font.size.small}px;
   font-weight: ${({ theme, hasChildren }) => (hasChildren ? theme.font.weight.bold : theme.font.weight.medium)};
-  overflow: auto;
   flex: 1;
 `
 
@@ -144,7 +143,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         setIsTooLong(true)
       }
     }
-  })
+  }, [label])
 
   return (
     <Header
