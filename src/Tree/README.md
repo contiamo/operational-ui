@@ -7,12 +7,10 @@ The tree component is also keyboard accessible:
 - <kbd>Tab</kbd> navigates to the next node
 - <kbd>Shift</kbd>+<kbd>Tab</kbd> navigates to the previous node
 - <kbd>Space</kbd> triggers the `onClick` handler, usually expanding a node
-- <kbd>Enter</kbd> triggers the `onDoubleClick` action
 - <kbd>Alt</kbd>+<kbd>Enter</kbd> triggers the right-click action
 
 Try it yourself!
 
-- "Region" has a double click/<kbd>Enter</kbd> handler
 - "Country" has a click/<kbd>Space</kbd> handler
 - "Country" has a right-click/<kbd>Alt</kbd>+<kbd>Enter</kbd> handler
 
@@ -28,7 +26,6 @@ import { Tree, OlapIcon } from "@operational/components"
         {
           label: "Region",
           initiallyOpen: true,
-          onDoubleClick: () => alert("woah you double clicked region amazing"),
           childNodes: [
             {
               label: "City",
