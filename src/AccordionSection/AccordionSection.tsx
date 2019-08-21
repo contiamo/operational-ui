@@ -31,8 +31,11 @@ const Header = styled(SectionHeader)<{ expanded: boolean }>(({ theme, expanded }
   borderTop: `1px solid ${theme.color.separators.default}`,
   borderBottom: `1px solid ${expanded ? theme.color.separators.default : theme.color.background.lighter}`,
   // disable browser focus to customise focus state
-  ":focus": {
+  ".no-focus :focus": {
     outline: "none",
+  },
+  ":focus": {
+    background: theme.color.border.select,
   },
   paddingRight: 0,
   userSelect: "none",

@@ -3,34 +3,37 @@ import { keyframes } from "@emotion/core"
 import { lighten } from "../utils"
 import styled from "../utils/styled"
 import { OperationalStyleConstants } from "./constants"
+import memoize from "lodash/memoize"
 
-export const customScrollbar = ({ theme, dark = false }: { theme: OperationalStyleConstants; dark?: boolean }) => ({
-  /** Give people a slightly nicer experience on Chrome/Safari/Edge */
-  "::-webkit-scrollbar": {
-    width: 6,
-    height: 6,
-  },
+export const customScrollbar = memoize(
+  ({ theme, dark = false }: { theme: OperationalStyleConstants; dark?: boolean }) => ({
+    /** Give people a slightly nicer experience on Chrome/Safari/Edge */
+    "::-webkit-scrollbar": {
+      width: 6,
+      height: 6,
+    },
 
-  "::-webkit-scrollbar-track": {
-    background: "transparent",
-  },
+    "::-webkit-scrollbar-track": {
+      background: "transparent",
+    },
 
-  "::-webkit-scrollbar-thumb": {
-    background: dark ? "rgba(255, 255, 255, 0.3)" : theme.color.background.light,
-    cursor: "grab",
-  },
+    "::-webkit-scrollbar-thumb": {
+      background: dark ? "rgba(255, 255, 255, 0.3)" : theme.color.background.light,
+      cursor: "grab",
+    },
 
-  "::-webkit-scrollbar-thumb:hover": {
-    background: theme.color.primary,
-  },
-})
+    "::-webkit-scrollbar-thumb:hover": {
+      background: theme.color.primary,
+    },
+  }),
+)
 
-export const inputFocus = ({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
+export const inputFocus = memoize(({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
   outline: "none",
   boxShadow: `0 0 0 1px ${isError ? theme.color.error : theme.color.primary}`,
-})
+}))
 
-export const Label = styled("label")<{ fullWidth?: boolean; left?: boolean }>(({ fullWidth, theme, left }) => ({
+export const Label = styled.label<{ fullWidth?: boolean; left?: boolean }>(({ fullWidth, theme, left }) => ({
   display: "inline-block",
   position: "relative",
   width: "100%",
@@ -38,13 +41,13 @@ export const Label = styled("label")<{ fullWidth?: boolean; left?: boolean }>(({
   marginRight: left ? theme.space.small : 0,
 }))
 
-export const FormFieldControls = styled("div")({
+export const FormFieldControls = styled.div({
   position: "absolute",
   top: -2,
   right: 0,
 })
 
-export const FormFieldControl = styled("div")(({ theme }) => ({
+export const FormFieldControl = styled.div(({ theme }) => ({
   cursor: "pointer",
   position: "relative",
   verticalAlign: "middle",
@@ -64,7 +67,7 @@ export const FormFieldControl = styled("div")(({ theme }) => ({
   },
 }))
 
-export const FormFieldError = styled("div")(({ theme }) => ({
+export const FormFieldError = styled.div(({ theme }) => ({
   fontSize: theme.font.size.fineprint,
   color: theme.color.error,
   padding: `${theme.space.base / 2}px ${theme.space.medium}px`,
