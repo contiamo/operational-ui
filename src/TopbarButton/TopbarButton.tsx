@@ -43,7 +43,7 @@ const TopbarButtonContainer = styled.button<{ disabled?: boolean; flavor: Topbar
   }
   :hover {
     background: ${({ flavor, disabled }) =>
-      disabled || flavor === "outline" || flavor === "filled" ? undefined : "#e4e9eb"};
+      disabled || flavor === "outline" || flavor === "filled" ? undefined : "rgba(0,0,25,0.05)"};
   }
   & svg {
     /** Icons are purely presentational and click events are handled upstream */
