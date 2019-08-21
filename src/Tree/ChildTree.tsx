@@ -85,7 +85,7 @@ const ChildTree: React.SFC<Props> = ({
       {hasChildren && isOpen && (
         <Tree
           _level={level + 1}
-          _hasIconOffset={Boolean(icon) || Boolean(tag)}
+          _hasIconOffset={Boolean(icon) || (Boolean(tag) && childNodes.length > 1)}
           trees={childNodes}
           searchWords={searchWords}
           droppableProps={droppableProps}
