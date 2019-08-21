@@ -2,7 +2,7 @@
 
 exports[`Tooltip Component Should intialize without problems 1`] = `
 <div
-  class="css-ftf61z"
+  class="no-focus css-ftf61z"
 >
   <div
     class="css-p29iif"
