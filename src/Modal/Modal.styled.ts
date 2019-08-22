@@ -31,7 +31,7 @@ export const Container = styled("div", {
   box-shadow: 0 3px 9px 0 rgba(0, 0, 0, 0.32);
   top: ${({ top, theme, anchorHeight }) =>
     `calc(${getTop({ top, theme, height: anchorHeight || 0 })}px + ${theme.space.content}px)`};
-  left: ${({ left, theme }) => `calc(${left}px + ${theme.space.content}px)`};
+  left: ${({ left }) => `${left}px`};
   right: ${({ left }) => (left ? "auto" : 0)};
   width: ${({ width, theme }) =>
     width === "max-content" ? "max-content" : `calc(${width}px - ${theme.space.content * 2}px)`};
