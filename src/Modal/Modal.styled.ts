@@ -52,6 +52,7 @@ export const ModalCard = styled(Card)`
   width: 100%;
   height: 100%;
   border-radius: 4px;
+  overflow: hidden;
 `
 
 export const ModalContent = styled.div<{ anchor: boolean; actions: boolean }>`
