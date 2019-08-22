@@ -50,7 +50,6 @@ export interface State {
   }>
   isLoading: boolean
   error?: Error
-  focus: boolean
 }
 
 const baseStylesheet = (theme: OperationalStyleConstants) => `
@@ -116,7 +115,6 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
   public state: State = {
     messages: [],
     isLoading: false,
-    focus: false,
   }
 
   constructor(props: OperationalUIProps) {
@@ -176,14 +174,15 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
     document.addEventListener("click", this.onClick)
   }
 
-  private onKeyDown(e: KeyboardEvent) {
-    if (e.key === "Tab") {
-      this.setState({ focus: true })
-    }
+  // We tried to use state instead of directly accessing DOM but it breaks
+  private onClick() {
+    document.body.classList.add("no-focus")
   }
 
-  private onClick() {
-    this.setState({ focus: false })
+  private onKeyDown(e: KeyboardEvent) {
+    if (e.key === "Tab") {
+      document.body.classList.remove("no-focus")
+    }
   }
 
   public render() {
@@ -204,7 +203,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
             }}
           >
             {!this.props.noBaseStyles && <Global styles={baseStylesheet(merge(constants, theme))} />}
-            <Container className={this.state.focus ? undefined : "no-focus"}>
+            <Container>
               {this.state.isLoading && <Progress />}
               <Messages>
                 {this.state.messages.map(({ message, count }, index) => (
