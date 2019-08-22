@@ -108,8 +108,8 @@ export const TabHeader = styled(SectionHeader, {
     color: ${({ theme }) => theme.color.disabled};
     cursor: not-allowed;
   }
-  .no-focus &:hover,
-  :hover {
+  :hover,
+  .no-focus &:hover:focus {
     background-color: ${({ theme, color }) => (color ? darken(expandColor(theme, color)!, 20) : "#e4e9eb")};
   }
 `

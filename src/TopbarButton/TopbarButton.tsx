@@ -44,7 +44,7 @@ const TopbarButtonContainer = styled.button<{ disabled?: boolean; flavor: Topbar
   .no-focus &:focus {
     background: none;
   }
-  .no-focus &:hover, :hover {
+  :hover, .no-focus &:hover:focus {
     background: ${({ flavor, disabled }) =>
       disabled || flavor === "outline" || flavor === "filled" ? undefined : "#e4e9eb"};
   }

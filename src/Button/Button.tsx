@@ -119,9 +119,12 @@ const BaseButton = styled<"button" | "a">("button")<{
       //Higher zIndex will make right border appear on ButtonGroup Focus.
       zIndex: theme.zIndex.confirm,
     },
+    ".no-focus &:focus": {
+      boxShadow: "none",
+    },
     ...(!disabled
       ? {
-          ":hover": {
+          ":hover, .no-focus &:hover:focus": {
             backgroundColor: darken(backgroundColor, 5),
             zIndex: theme.zIndex.confirm,
           },

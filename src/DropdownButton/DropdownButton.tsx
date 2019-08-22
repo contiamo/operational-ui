@@ -35,7 +35,7 @@ const BaseDropdownButton = styled(Button)<{ isOpen: boolean }>(({ isOpen, theme 
   }),
 }))
 
-const CaretContainer = styled("div")<{ isOpen: boolean; color: string }>(({ isOpen, theme, color }) => {
+const CaretContainer = styled.div<{ isOpen: boolean; color: string }>(({ isOpen, theme, color }) => {
   const { background: backgroundColor, border: borderColor } = makeColors(theme, color)
   return {
     width: 36,
@@ -46,7 +46,7 @@ const CaretContainer = styled("div")<{ isOpen: boolean; color: string }>(({ isOp
   }
 })
 
-const ItemWithChevron = styled("div")`
+const ItemWithChevron = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
