@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import { Overlay, Container, ModalCard, ModalContent, Actions, ContentWrapper } from "./Modal.styled"
+import { NoIcon } from "../Icon"
 
 export interface ModalProps {
   title: React.ReactNode
@@ -98,7 +99,7 @@ const Modal: React.RefForwardingComponent<HTMLDivElement, ModalProps> = (
         modalHeight={$modalContainer.current && $modalContainer.current.clientHeight}
         anchorHeight={typeof size[3] === "number" && size[3]}
       >
-        <ModalCard ref={ref} fullSize title={title}>
+        <ModalCard ref={ref} fullSize title={title} action={fullSize ? <NoIcon onClick={onClickOutside} /> : undefined}>
           <ModalContent actions={Boolean(actions)} anchor={Boolean(anchor)}>
             <ContentWrapper>{children}</ContentWrapper>
             {actions && <Actions childCount={actions.length}>{actions}</Actions>}
