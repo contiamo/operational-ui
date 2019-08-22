@@ -39,14 +39,6 @@ const Modal: React.RefForwardingComponent<HTMLDivElement, ModalProps> = (
     console.warn("width, height and anchor are ignored when used together with fullSize")
   }
 
-  if (
-    process.env.NODE_ENV !== "development" &&
-    fullSize &&
-    (height !== undefined || width !== undefined || anchor !== undefined)
-  ) {
-    console.warn("width, height and anchor are ignored when used together with fullSize")
-  }
-
   // Focus the modal on open
   React.useEffect(() => {
     const currentModalContainer = $modalContainer.current
