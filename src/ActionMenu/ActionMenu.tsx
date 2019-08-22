@@ -24,6 +24,7 @@ const StyledContextMenu = styled(ContextMenu)(({ theme }) => ({
   },
   " [role='option']": {
     border: `1px solid ${theme.color.separators.light}`,
+    height: "36px;",
   },
   " [role='option']:not(:last-of-type)": {
     borderBottom: 0,
@@ -34,7 +35,7 @@ const StyledContextMenu = styled(ContextMenu)(({ theme }) => ({
   },
 }))
 
-const Container = styled("div")<{ isOpen: boolean }>(({ theme, isOpen }) => ({
+const Container = styled.div<{ isOpen: boolean }>(({ theme, isOpen }) => ({
   height: 36,
   width: 36,
   /**
