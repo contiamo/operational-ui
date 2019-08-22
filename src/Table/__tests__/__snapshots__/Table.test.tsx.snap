@@ -2,7 +2,7 @@
 
 exports[`Table Component Should render 1`] = `
 <div
-  class="no-focus css-ftf61z"
+  class="css-ftf61z"
 >
   <div
     class="css-p29iif"
