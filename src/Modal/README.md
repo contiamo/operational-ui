@@ -136,7 +136,7 @@ import { Modal, Body, Button } from "@operational/components"
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-  const galactusRef = React.useRef < HTMLDivElement > null
+  const galactusRef = React.useRef<HTMLDivElement>(null)
 
   return (
     <>
@@ -181,7 +181,7 @@ import { Modal, Body, Button } from "@operational/components"
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-  const appleRef = React.useRef < HTMLDivElement > null
+  const appleRef = React.useRef<HTMLDivElement>(null)
 
   return (
     <>

@@ -3,7 +3,7 @@ import * as React from "react"
 import { Overlay, Container, ModalCard, ModalContent, Actions, ContentWrapper } from "./Modal.styled"
 
 export interface ModalProps {
-  title: string
+  title: React.ReactNode
   isOpen: boolean
   children: React.ReactNode
   onClickOutside?: () => void
