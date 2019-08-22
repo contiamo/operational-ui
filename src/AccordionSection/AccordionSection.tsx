@@ -33,6 +33,10 @@ const Header = styled(SectionHeader)<{ expanded: boolean }>(({ theme, expanded }
   // disable browser focus to customise focus state
   ":focus": {
     outline: "none",
+    background: theme.color.border.select,
+  },
+  ".no-focus &:focus": {
+    background: theme.color.background.lighter,
   },
   paddingRight: 0,
   userSelect: "none",

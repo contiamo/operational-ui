@@ -5,7 +5,7 @@ import styled from "../utils/styled"
 
 type Props = TreeProps["trees"][-1] & { searchWords?: string[]; level: number; hasIconOffset: boolean }
 
-const Container = styled("div")<{ hasChildren: boolean; disabled: boolean }>`
+const Container = styled.div<{ hasChildren: boolean; disabled: boolean }>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
   pointer-events: ${({ disabled }) => (disabled ? "none" : "inherit")};
   user-select: none;

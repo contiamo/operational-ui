@@ -37,15 +37,16 @@ const Header = styled.div<{
   position: relative;
   align-items: center;
   cursor: ${({ onClick, cursor }) => cursor || (onClick ? "pointer" : "inherit")};
-  background-color: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
+  background: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
   margin: 0 -${({ theme }) => theme.space.element}px;
   padding: ${({ theme }) => `${theme.space.base}px ${theme.space.element}px`};
   padding-left: ${({ theme, level, hasIconOffset }) =>
     theme.space.element * (level + 1) + (hasIconOffset ? theme.space.base + theme.space.element : 0)}px;
   color: ${({ theme }) => theme.color.text.dark};
 
-  :hover {
-    background-color: ${({ theme, highlight }) =>
+  :hover,
+  .no-focus &:hover:focus {
+    background: ${({ theme, highlight }) =>
       highlight ? darken(theme.color.highlight, 20) : theme.color.background.lighter};
 
     /* Show ActionsContainer on hover */
@@ -57,11 +58,18 @@ const Header = styled.div<{
   :focus {
     outline: none;
     color: ${({ theme }) => theme.color.primary};
-    background-color: ${({ theme }) => lighten(theme.color.primary, 50)};
+    background: ${({ theme }) => lighten(theme.color.primary, 50)};
 
     /* Show ActionsContainer on hover */
     div:last-of-type {
       opacity: 1;
+    }
+  }
+  .no-focus &:focus {
+    color: ${({ theme }) => theme.color.text.dark};
+    background: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
+    div:last-of-type {
+      opacity: 0;
     }
   }
 `
@@ -155,7 +163,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       onKeyDown={handleKeyDown}
       highlight={Boolean(highlight)}
       cursor={cursor}
-      tabIndex={0}
+      tabIndex={0} // TODO: tabIndex -1 for disabled items
     >
       {viewMorePopup && (
         <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x}>

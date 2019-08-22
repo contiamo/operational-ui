@@ -94,7 +94,12 @@ export const TabHeader = styled(SectionHeader, {
     cursor: pointer;
   }
   :focus {
+    background-color: ${({ theme, color }) => (color ? darken(expandColor(theme, color)!, 20) : "#e4e9eb")};
     outline: none;
+  }
+  .no-focus &:focus {
+    background-color: ${({ theme, color }) =>
+      color ? darken(expandColor(theme, color)!, 10) : theme.color.background.light};
   }
   ::-moz-focus-inner {
     border: none;
@@ -103,7 +108,8 @@ export const TabHeader = styled(SectionHeader, {
     color: ${({ theme }) => theme.color.disabled};
     cursor: not-allowed;
   }
-  :hover {
+  :hover,
+  .no-focus &:hover:focus {
     background-color: ${({ theme, color }) => (color ? darken(expandColor(theme, color)!, 20) : "#e4e9eb")};
   }
 `
