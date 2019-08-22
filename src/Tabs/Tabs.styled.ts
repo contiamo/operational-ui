@@ -1,7 +1,7 @@
 import styled from "../utils/styled"
 import { SectionHeader } from "../Internals/SectionHeader"
 import { headerHeight, expandColor } from "../utils/constants"
-import { darken } from "../utils"
+import { lighten } from "../utils"
 
 const buttonWidth = 36
 const plusButtonWidth = 42
@@ -60,8 +60,7 @@ export const TabHeader = styled(SectionHeader, {
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   cursor: pointer;
   font-weight: normal;
-  background-color: ${({ theme, color }) =>
-    color ? darken(expandColor(theme, color)!, 10) : theme.color.background.light};
+  background-color: ${({ theme, color }) => (color ? expandColor(theme, color)! : theme.color.background.light)};
   border: 1px solid ${({ theme }) => theme.color.separators.default};
   border-radius: 4px 4px 0 0;
   margin: 0;
@@ -93,13 +92,8 @@ export const TabHeader = styled(SectionHeader, {
     ${({ condensed }) => (condensed ? "pointer-events: none;" : "")}
     cursor: pointer;
   }
-  :focus {
-    background-color: ${({ theme, color }) => (color ? darken(expandColor(theme, color)!, 20) : "#e4e9eb")};
+  &:focus {
     outline: none;
-  }
-  .no-focus &:focus {
-    background-color: ${({ theme, color }) =>
-      color ? darken(expandColor(theme, color)!, 10) : theme.color.background.light};
   }
   ::-moz-focus-inner {
     border: none;
@@ -108,9 +102,8 @@ export const TabHeader = styled(SectionHeader, {
     color: ${({ theme }) => theme.color.disabled};
     cursor: not-allowed;
   }
-  :hover,
-  .no-focus &:hover:focus {
-    background-color: ${({ theme, color }) => (color ? darken(expandColor(theme, color)!, 20) : "#e4e9eb")};
+  :hover {
+    background-color: ${({ theme, color }) => (color ? lighten(expandColor(theme, color)!, 2) : "#e4e9eb")};
   }
 `
 
