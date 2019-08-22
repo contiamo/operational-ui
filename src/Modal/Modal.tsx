@@ -32,7 +32,7 @@ const Modal: React.RefForwardingComponent<HTMLDivElement, ModalProps> = (
   )
 
   if (
-    process.env.NODE_ENV !== "development" &&
+    process.env.NODE_ENV === "development" &&
     fullSize &&
     (height !== undefined || width !== undefined || anchor !== undefined)
   ) {
