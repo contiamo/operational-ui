@@ -40,6 +40,9 @@ export const Container = styled("div", {
   max-height: calc(100vh - ${({ theme }) => theme.space.content * 2}px);
   z-index: ${({ theme }) => theme.zIndex.modal};
 
+  min-width: 480px;
+  border-radius: 4px;
+
   :focus {
     outline: none;
   }
@@ -48,6 +51,7 @@ export const Container = styled("div", {
 export const ModalCard = styled(Card)`
   width: 100%;
   height: 100%;
+  border-radius: 4px;
 `
 
 export const ModalContent = styled.div<{ anchor: boolean; actions: boolean }>`
