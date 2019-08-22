@@ -72,8 +72,7 @@ export const TabHeader = styled(SectionHeader, {
          background-color: ${expandColor(props.theme, props.color) || props.theme.color.background.lighter};
          color: ${props.theme.color.text.action};
          font-weight: bold;
-         :hover,
-         .no-focus &:hover:focus {
+         :hover {
            background-color: ${expandColor(props.theme, props.color) ||
              props.theme.color.background.lighter} !important;
          }
@@ -93,15 +92,8 @@ export const TabHeader = styled(SectionHeader, {
     ${({ condensed }) => (condensed ? "pointer-events: none;" : "")}
     cursor: pointer;
   }
-  :focus {
-    background-color: ${({ theme, color }) => (color ? lighten(expandColor(theme, color)!, 2) : "#e4e9eb")};
+  &:focus {
     outline: none;
-  }
-  .no-focus &:focus {
-    background-color: ${props =>
-      props["aria-selected"]
-        ? expandColor(props.theme, props.color) || props.theme.color.background.lighter
-        : expandColor(props.theme, props.color) || props.theme.color.background.light};
   }
   ::-moz-focus-inner {
     border: none;
@@ -110,8 +102,7 @@ export const TabHeader = styled(SectionHeader, {
     color: ${({ theme }) => theme.color.disabled};
     cursor: not-allowed;
   }
-  :hover,
-  .no-focus &:hover:focus {
+  :hover {
     background-color: ${({ theme, color }) => (color ? lighten(expandColor(theme, color)!, 2) : "#e4e9eb")};
   }
 `
