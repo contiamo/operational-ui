@@ -60,8 +60,7 @@ export const TabHeader = styled(SectionHeader, {
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   cursor: pointer;
   font-weight: normal;
-  background-color: ${({ theme, color }) =>
-    color ? lighten(expandColor(theme, color)!, 10) : theme.color.background.light};
+  background-color: ${({ theme, color }) => (color ? expandColor(theme, color)! : theme.color.background.light)};
   border: 1px solid ${({ theme }) => theme.color.separators.default};
   border-radius: 4px 4px 0 0;
   margin: 0;
@@ -73,7 +72,8 @@ export const TabHeader = styled(SectionHeader, {
          background-color: ${expandColor(props.theme, props.color) || props.theme.color.background.lighter};
          color: ${props.theme.color.text.action};
          font-weight: bold;
-         :hover {
+         :hover,
+         .no-focus &:hover:focus {
            background-color: ${expandColor(props.theme, props.color) ||
              props.theme.color.background.lighter} !important;
          }
@@ -94,12 +94,14 @@ export const TabHeader = styled(SectionHeader, {
     cursor: pointer;
   }
   :focus {
-    background-color: ${({ theme, color }) => (color ? lighten(expandColor(theme, color)!, 20) : "#e4e9eb")};
+    background-color: ${({ theme, color }) => (color ? lighten(expandColor(theme, color)!, 2) : "#e4e9eb")};
     outline: none;
   }
   .no-focus &:focus {
-    background-color: ${({ theme, color }) =>
-      color ? lighten(expandColor(theme, color)!, 10) : theme.color.background.light};
+    background-color: ${props =>
+      props["aria-selected"]
+        ? expandColor(props.theme, props.color) || props.theme.color.background.lighter
+        : expandColor(props.theme, props.color) || props.theme.color.background.light};
   }
   ::-moz-focus-inner {
     border: none;
@@ -110,7 +112,7 @@ export const TabHeader = styled(SectionHeader, {
   }
   :hover,
   .no-focus &:hover:focus {
-    background-color: ${({ theme, color }) => (color ? lighten(expandColor(theme, color)!, 20) : "#e4e9eb")};
+    background-color: ${({ theme, color }) => (color ? lighten(expandColor(theme, color)!, 2) : "#e4e9eb")};
   }
 `
 
