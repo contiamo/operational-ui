@@ -149,6 +149,11 @@ const Tabs: React.FC<TabsProps> = ({
     }
   }, [])
 
+  React.useEffect(() => {
+    window.addEventListener("resize", onScroll)
+    return () => window.removeEventListener("resize", onScroll)
+  }, [])
+
   React.useLayoutEffect(onScroll, [])
 
   return (
