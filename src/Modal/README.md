@@ -25,7 +25,7 @@ const MyComponent = () => {
 
 ```jsx
 import * as React from "react"
-import { Modal } from "@operational/components"
+import { Modal, Button } from "@operational/components"
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
@@ -33,7 +33,13 @@ const MyComponent = () => {
   return (
     <>
       <div onClick={() => setIsModalOpen(true)}>Trigger the Modal</div>
-      <Modal isOpen={isModalOpen} onClickOutside={() => setIsModalOpen(false)} title="What's up?" fullSize>
+      <Modal
+        isOpen={isModalOpen}
+        onClickOutside={() => setIsModalOpen(false)}
+        title="What's up?"
+        fullSize
+        actions={[<Button onClick={() => setIsModalOpen(false)}>Cancel</Button>]}
+      >
         Dawg
       </Modal>
     </>
@@ -136,7 +142,7 @@ import { Modal, Body, Button } from "@operational/components"
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-  const galactusRef = React.useRef<HTMLDivElement>(null)
+  const galactusRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <>
