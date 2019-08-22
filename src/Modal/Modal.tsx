@@ -75,7 +75,7 @@ const Modal: React.RefForwardingComponent<HTMLDivElement, ModalProps> = (
       window.addEventListener("resize", handleResize)
       return () => window.removeEventListener("resize", handleResize)
     }
-  }, [isOpen, fullSize])
+  }, [isOpen, fullSize, setSize])
 
   // Close on Escape
   React.useEffect(() => {
