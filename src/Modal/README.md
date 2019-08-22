@@ -21,6 +21,33 @@ const MyComponent = () => {
 ;<MyComponent />
 ```
 
+## Full size
+
+```jsx
+import * as React from "react"
+import { Modal, Button } from "@operational/components"
+
+const MyComponent = () => {
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
+
+  return (
+    <>
+      <div onClick={() => setIsModalOpen(true)}>Trigger the Modal</div>
+      <Modal
+        isOpen={isModalOpen}
+        onClickOutside={() => setIsModalOpen(false)}
+        title="What's up?"
+        fullSize
+        actions={[<Button onClick={() => setIsModalOpen(false)}>Cancel</Button>]}
+      >
+        Dawg
+      </Modal>
+    </>
+  )
+}
+;<MyComponent />
+```
+
 ## With Actions
 
 Sometimes, you may want to mimic "Confirm" style behavior: like when deleting a resource. Here's how you can attach actions to your modal.
@@ -115,7 +142,7 @@ import { Modal, Body, Button } from "@operational/components"
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-  const galactusRef = React.useRef<HTMLDivElement>(null)
+  const galactusRef = React.useRef<HTMLDivElement>(null);
 
   return (
     <>
@@ -213,7 +240,7 @@ import { Modal, Form, Input, Button, Checkbox } from "@operational/components"
 const DeleteButton = ({ anchorRef }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
 
-    return (
+  return (
     <>
       <Button color="error" onClick={() => setIsModalOpen(true)}>
         Delete
@@ -234,15 +261,24 @@ const DeleteButton = ({ anchorRef }) => {
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
   const [currentFormPage, setCurrentFormPage] = React.useState(1)
-  const [formData, setFormData] = React.useState<{name?: string
-iceCream?: string
-checked?: boolean}>({})
+  const [formData, setFormData] = React.useState<{ name?: string; iceCream?: string; checked?: boolean }>({})
   const formRef = React.useRef<HTMLDivElement>(null)
   const modalRef = React.useRef<HTMLDivElement>(null)
 
   return (
     <>
-      <div ref={formRef} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#0c0", width: 640, height: 480 }} onClick={() => setIsModalOpen(true)}>
+      <div
+        ref={formRef}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#0c0",
+          width: 640,
+          height: 480,
+        }}
+        onClick={() => setIsModalOpen(true)}
+      >
         <h2>Open a Form</h2>
       </div>
       <Modal
@@ -317,42 +353,54 @@ import { Table, Modal, Chip, Button, ProjectIcon } from "@operational/components
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-  const [formData, setFormData] = React.useState<{name?: string
-iceCream?: string
-checked?: boolean}>({})
+  const [formData, setFormData] = React.useState<{ name?: string; iceCream?: string; checked?: boolean }>({})
   const formRef = React.useRef<HTMLDivElement>(null)
   const modalRef = React.useRef<HTMLDivElement>(null)
 
   return (
     <>
-      <div ref={formRef} style={{ display: "flex", alignItems: "center", justifyContent: "center", background: "#eaf", width: "100%", height: 480 }} onClick={() => setIsModalOpen(true)}>
+      <div
+        ref={formRef}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          background: "#eaf",
+          width: "100%",
+          height: 480,
+        }}
+        onClick={() => setIsModalOpen(true)}
+      >
         <h2>Show me the Table</h2>
       </div>
-      {isModalOpen && <Modal
-      width="max-content"
-      height="auto"
-        actions={
-            [<Button onClick={() => setIsModalOpen(false)}>Close Modal</Button>]
-        }
-        ref={modalRef}
-        anchor={formRef}
-        isOpen={isModalOpen}
-        onClickOutside={() => setIsModalOpen(false)}
-        title="Questionnaire"
-      >
-        <div style={{width: 600}}>
-<Table
-  data={Array(100).fill({ name: "Mischa", lastUpdated: (new Date()).toString(), tags: ["yes", "no"]})}
-  columns={[
-    { heading: "", cell: dataEntry => <ProjectIcon color="primary" /> },
-    { heading: "Name", cell: dataEntry => dataEntry.name },
-    { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
-    { heading: "Tags", cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>) },
-  ]}
-  onRowClick={(dataEntry, i) => console.log({ dataEntry, i })}
-/>
-</div>
-      </Modal>}
+      {isModalOpen && (
+        <Modal
+          width="max-content"
+          height="auto"
+          actions={[<Button onClick={() => setIsModalOpen(false)}>Close Modal</Button>]}
+          ref={modalRef}
+          anchor={formRef}
+          isOpen={isModalOpen}
+          onClickOutside={() => setIsModalOpen(false)}
+          title="Questionnaire"
+        >
+          <div style={{ width: 600 }}>
+            <Table
+              data={Array(100).fill({ name: "Mischa", lastUpdated: new Date().toString(), tags: ["yes", "no"] })}
+              columns={[
+                { heading: "", cell: dataEntry => <ProjectIcon color="primary" /> },
+                { heading: "Name", cell: dataEntry => dataEntry.name },
+                { heading: "Last updated", cell: dataEntry => dataEntry.lastUpdated },
+                {
+                  heading: "Tags",
+                  cell: dataEntry => dataEntry.tags.map((tag, tagIndex) => <Chip key={tagIndex}>{tag}</Chip>),
+                },
+              ]}
+              onRowClick={(dataEntry, i) => console.log({ dataEntry, i })}
+            />
+          </div>
+        </Modal>
+      )}
     </>
   )
 }
