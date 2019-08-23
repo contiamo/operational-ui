@@ -38,10 +38,10 @@ const Header = styled.div<{
   align-items: center;
   cursor: ${({ onClick, cursor }) => cursor || (onClick ? "pointer" : "inherit")};
   background: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
-  margin: 0 -${({ theme }) => theme.space.element}px;
   padding: ${({ theme }) => `${theme.space.base}px ${theme.space.element}px`};
   padding-left: ${({ theme, level, hasIconOffset }) =>
-    theme.space.element * (level + 1) + (hasIconOffset ? theme.space.base + theme.space.element : 0)}px;
+    theme.space.element * (level + 1) + (hasIconOffset ? theme.space.element - theme.space.base : -theme.space.base)}px;
+  margin: 0 -${({ theme }) => theme.space.element}px;
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover,
@@ -72,6 +72,10 @@ const Header = styled.div<{
       opacity: 0;
     }
   }
+`
+
+const NameTagStyled = styled(NameTag)`
+  margin-right: ${({ theme }) => theme.space.base}px;
 `
 
 const viewMoreIconSize = 18
@@ -175,17 +179,18 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           size: 11,
           left: true,
           color: "color.text.action",
+          style: { marginRight: 4 },
         })}
       {tag && (
-        <NameTag condensed left color={color}>
+        <NameTagStyled condensed left color={color}>
           {tag}
-        </NameTag>
+        </NameTagStyled>
       )}
       {icon &&
         React.createElement(icon, {
           size: 12,
           color: iconColor || "color.text.lighter",
-          style: { marginLeft: 0, marginRight: 8, flex: "0 0 15px" },
+          style: { marginLeft: 0, marginRight: 4, flex: "0 0 15px" },
         })}
       <Label hasChildren={hasChildren} ref={labelRef}>
         <Highlighter
