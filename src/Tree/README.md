@@ -16,56 +16,63 @@ Try it yourself!
 
 ```jsx
 import * as React from "react"
-import { Tree, OlapIcon } from "@operational/components"
-;<Tree
-  trees={[
-    {
-      label: "ERP",
-      tag: "OR",
-      childNodes: [
-        {
-          label: "Region",
-          initiallyOpen: true,
-          childNodes: [
-            {
-              label: "City",
-              icon: OlapIcon,
-              iconColor: "primary",
-              disabled: true,
-              childNodes: [],
-            },
-            {
-              label: "Country",
-              color: "primary",
-              onClick: () => alert("country was clicked"),
-              onContextMenu: () => alert("country was right-clicked"),
-              icon: OlapIcon,
-              childNodes: [],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      label: "Legal Entity",
-      tag: "D2",
-      initiallyOpen: true,
-      childNodes: [
-        {
-          label: "Limited Liability Company",
-          icon: OlapIcon,
-          childNodes: [],
-        },
-        {
-          label: "Inc.",
-          icon: OlapIcon,
-          color: "#2C363F",
-          childNodes: [],
-        },
-      ],
-    },
-  ]}
-/>
+import { Tree, OlapIcon, styled } from "@operational/components"
+
+const Wrapper = styled.div`
+  font-family: monospace;
+`
+
+;<Wrapper>
+  <Tree
+    trees={[
+      {
+        label: "ERP",
+        tag: "OR",
+        childNodes: [
+          {
+            label: "Region",
+            initiallyOpen: true,
+            childNodes: [
+              {
+                label: "City",
+                icon: OlapIcon,
+                iconColor: "primary",
+                disabled: true,
+                childNodes: [],
+              },
+              {
+                label: "Country",
+                color: "primary",
+                onClick: () => alert("country was clicked"),
+                onContextMenu: () => alert("country was right-clicked"),
+                icon: OlapIcon,
+                childNodes: [],
+              },
+            ],
+          },
+        ],
+      },
+      {
+        label: "Legal Entity",
+        tag: "D2",
+        initiallyOpen: true,
+        childNodes: [
+          {
+            label: "Limited Liability Company",
+            icon: OlapIcon,
+            childNodes: [],
+          },
+          {
+            label: "Inc.",
+            icon: OlapIcon,
+            color: "#2C363F",
+            childNodes: [],
+          },
+        ],
+      },
+    ]}
+  />
+</Wrapper>
 ```
 
 ### With Highlighting
