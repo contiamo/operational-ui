@@ -100,7 +100,7 @@ const Modal: React.RefForwardingComponent<HTMLDivElement, ModalProps> = (
         anchorHeight={typeof size[3] === "number" && size[3]}
       >
         <ModalCard ref={ref} fullSize title={title} action={fullSize ? <NoIcon onClick={onClickOutside} /> : undefined}>
-          <ModalContent actions={Boolean(actions)} anchor={Boolean(anchor)}>
+          <ModalContent actions={Boolean(actions)} anchor={Boolean(anchor)} top={size[0]}>
             <ContentWrapper>{children}</ContentWrapper>
             {actions && <Actions childCount={actions.length}>{actions}</Actions>}
           </ModalContent>
