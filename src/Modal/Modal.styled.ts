@@ -55,13 +55,16 @@ export const ModalCard = styled(Card)`
   overflow: hidden;
 `
 
-export const ModalContent = styled.div<{ anchor: boolean; actions: boolean }>`
+export const ModalContent = styled("div", {
+  shouldForwardProp: prop => !["top", "action", "anchor"].includes(prop),
+})<{ anchor: boolean; actions: boolean; top: number }>`
   display: grid;
   grid-template-rows: ${({ actions }) => (actions ? "minmax(auto, 100%) max-content" : "auto")};
   height: 100%;
   max-height: calc(
     /* card title + bottom padding + bottom margin + border */ 100vh -
-      ${({ theme }) => cardHeaderHeight + theme.space.element + theme.space.element + theme.space.element + 1}px
+      ${({ theme, top }) =>
+        cardHeaderHeight + theme.space.element + theme.space.element + theme.space.element + 1 + top * 2}px
   );
   overflow: auto;
   row-gap: ${({ theme }) => theme.space.element}px;
