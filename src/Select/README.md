@@ -236,16 +236,27 @@ const MyComponent = () => {
   const [value, setValue] = React.useState("one")
 
   return (
-    <div style={{ width: "100%", background: "#666" }}>
-      <Select
-        color="white"
-        value={value}
-        naked
-        options={options}
-        filterable
-        placeholder="Choose an option"
-        onChange={newValue => setValue(newValue as string)}
-      />
+    <div style={{ width: "100%", display:"grid", gridGap: "10px"}}>
+      <div style={{ width: "100%", background: "#666", display: "" }}>
+        <Select
+          value={value}
+          options={options}
+          filterable
+          placeholder="Choose an option"
+          onChange={newValue => setValue(newValue as string)}
+        />
+      </div>
+      <div style={{ width: "100%", background: "#666", display: "" }}>
+        <Select
+          color="white"
+          value={value}
+          naked
+          options={options}
+          filterable
+          placeholder="Choose an option"
+          onChange={newValue => setValue(newValue as string)}
+        />
+      </div>
     </div>
   )
 }
