@@ -26,7 +26,7 @@ export const Combobox = styled("div")<{ naked: boolean; isOpen: boolean; hasCust
       !hasCustomOption && isOpen ? theme.color.primary : theme.color.border.select};
   border-width: ${({ naked }) => (naked ? 0 : 1)}px;
   border-radius: ${({ theme }) => theme.borderRadius}px;
-  background-color: ${({ isOpen, naked }) => (!naked && isOpen ? "white" : "transparent")};
+  background-color: ${({ naked }) => (naked ? "transparent" : "white")};
 
   :focus {
     ${({ theme }) => inputFocus({ theme })}
