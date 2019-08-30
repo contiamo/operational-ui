@@ -150,7 +150,6 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
               return (
                 <Cell
                   rowIndex={index}
-                  isEvenRow={index % 2 === 0}
                   key={`op-row-${index}-cell-${cellIndex}`}
                   cell={cellIndex + 1}
                   height={rowHeight}

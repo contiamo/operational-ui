@@ -30,7 +30,6 @@ export const Cell = styled.div<{
   height: number
   cell: number
   rowIndex: number
-  isEvenRow?: boolean
 }>`
   position: relative;
   display: flex;
@@ -47,7 +46,7 @@ export const Cell = styled.div<{
   padding: 0 ${({ theme }) => theme.space.content}px;
   color: ${({ theme }) => theme.color.text.default};
   grid-column: ${({ cell }) => cell};
-  background-color: ${({ theme, isEvenRow }) => (isEvenRow ? theme.color.background.almostWhite : theme.color.white)};
+  background-color: ${({ theme }) => theme.color.white};
 `
 
 export const HeaderRow = styled.div<{
