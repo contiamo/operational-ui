@@ -38,7 +38,7 @@ const Header = styled.div<{
   align-items: center;
   cursor: ${({ onClick, cursor }) => cursor || (onClick ? "pointer" : "inherit")};
   background: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
-  padding: ${({ theme }) => `${theme.space.base}px ${theme.space.element}px`};
+  padding: ${({ theme }) => `${theme.space.base / 2}px ${theme.space.element}px`};
   padding-left: ${({ theme, level, hasIconOffset }) =>
     theme.space.element * (level + 1) + (hasIconOffset ? theme.space.element - theme.space.base : -theme.space.base)}px;
   margin: 0 -${({ theme }) => theme.space.element}px;
