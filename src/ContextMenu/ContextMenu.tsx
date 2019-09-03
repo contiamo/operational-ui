@@ -153,10 +153,10 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     }
   }, [items])
 
-  const [cachedItems, setCachedItems] = React.useState(items)
+  const itemsRef = React.useRef<IContextMenuItem<any>[]>([])
   React.useEffect(() => {
-    if (!isEqual(items, cachedItems)) {
-      setCachedItems(items)
+    if (!isEqual(items, itemsRef.current)) {
+      itemsRef.current = items
       if (!open) {
         return
       }
