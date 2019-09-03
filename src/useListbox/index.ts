@@ -192,5 +192,6 @@ export const useListbox = ({
       id: `${id}-${childItemIndex}`,
     }),
     focusedOptionIndex: focusedOptionIndex,
+    setFocusedOptionIndex,
   }
 }

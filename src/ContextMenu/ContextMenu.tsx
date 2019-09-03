@@ -1,5 +1,6 @@
 import * as React from "react"
 import isString from "lodash/isString"
+import isEqual from "lodash/isEqual"
 
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
@@ -131,7 +132,15 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   ...props
 }) => {
   const uniqueId = useUniqueId(id)
-  const { isOpen, setIsOpen, buttonProps, listboxProps, getChildProps, focusedOptionIndex } = useListbox({
+  const {
+    isOpen,
+    setIsOpen,
+    buttonProps,
+    listboxProps,
+    getChildProps,
+    focusedOptionIndex,
+    setFocusedOptionIndex,
+  } = useListbox({
     itemCount: items.length,
     isMultiSelect: keepOpenOnItemClick,
     isDisabled: disabled,
@@ -141,6 +150,22 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   React.useEffect(() => {
     if (!items) {
       throw new Error("No array of items has been provided for the ContextMenu.")
+    }
+  }, [items])
+
+  const [cachedItems, setCachedItems] = React.useState(items)
+  React.useEffect(() => {
+    if (!isEqual(items, cachedItems)) {
+      setCachedItems(items)
+      if (!open) {
+        return
+      }
+      if (setIsOpen && !isOpen) {
+        setIsOpen(true)
+      }
+      if (setFocusedOptionIndex) {
+        setFocusedOptionIndex(0)
+      }
     }
   }, [items])
 
