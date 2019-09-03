@@ -153,6 +153,13 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     }
   }, [items])
 
+  /*  
+      TODO: Refactor the Context Menu
+      This patch fixes the Autocomplete not showing the items list when input changes
+      See https://contiamo.atlassian.net/browse/UI-130 and https://github.com/contiamo/operational-ui/pull/1229
+      See refactoring rationalisation here: https://www.notion.so/contiamo/b3890a6cab29436188e895bfee4337df?v=95a710c74af6471db0575e217b3bee2b&p=0afec0b5417a4cf5b12959ee817013b2
+      Start of patch
+  */
   const itemsRef = React.useRef<IContextMenuItem<any>[]>([])
   React.useEffect(() => {
     if (!isEqual(items, itemsRef.current)) {
@@ -168,6 +175,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
       }
     }
   }, [items])
+  /* TODO: End of patch */
 
   const renderedChildren = React.useMemo(
     () => (isChildAFunction(children) ? children(isOpen ? isOpen : false) : children),
