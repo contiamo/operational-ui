@@ -174,7 +174,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         setFocusedOptionIndex(0)
       }
     }
-  }, [items])
+  }, [items, isOpen, focusedOptionIndex, setIsOpen, setFocusedOptionIndex])
   /* TODO: End of patch */
 
   const renderedChildren = React.useMemo(
