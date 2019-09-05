@@ -43,8 +43,10 @@ function isBodyAFunction<T>(
 
 export const Actions = styled("div")`
   margin-top: ${({ theme }) => theme.space.element}px;
-  align-self: flex-end;
+  align-self: flex-start;
   height: ${actionsBarSize}px;
+  display: flex;
+  flex-direction: row-reverse;
 `
 
 export const ControlledModalContent = styled("div")<{ fullSize: boolean }>(({ fullSize, theme }) => ({
