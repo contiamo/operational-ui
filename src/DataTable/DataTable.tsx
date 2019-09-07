@@ -15,7 +15,9 @@ import {
   ViewMoreToggle,
 } from "./DataTable.styled"
 import { defaultRowHeight, getRowHeight } from "./DataTable.util"
-import { ChevronDownIcon } from "../Icon"
+import { ChevronDownIcon, CopyIcon } from "../Icon"
+import { Button, OperationalContext } from ".."
+import CopyToClipboard from "react-copy-to-clipboard"
 
 export interface DataTableProps<Columns, Rows> {
   /* The columns of our table. They are an array of header layers. */
@@ -182,6 +184,19 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
     <>
       {viewMorePopup && (
         <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x}>
+          <OperationalContext>
+            {({ pushMessage }) => (
+              <CopyToClipboard
+                text={viewMorePopup.content || ""}
+                onCopy={() => pushMessage({ body: "Copied to clipboard", type: "info" })}
+              >
+                <Button condensed tabIndex={0}>
+                  <CopyIcon size={16} left />
+                  Copy
+                </Button>
+              </CopyToClipboard>
+            )}
+          </OperationalContext>
           {viewMorePopup.content}
         </ViewMorePopup>
       )}
