@@ -13,12 +13,14 @@ export interface TopbarProps {
 const TopbarContainer = styled("div")`
   width: 100%;
   height: ${props => props.theme.topbarHeight}px;
-  background-color: ${props => props.theme.color.background.lighter};
+  background-color: ${props => props.theme.color.white};
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0;
-  border-bottom: 1px solid ${props => props.theme.color.border.default};
+  border-bottom: 1px solid ${props => props.theme.color.border.invisible};
+  border-top: 1px solid ${props => props.theme.color.border.invisible};
+  color: ${props => props.theme.color.text.dark};
 `
 
 const TopbarSection = styled("div")`

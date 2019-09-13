@@ -13,7 +13,7 @@ const Line = styled("div")`
   height: 100%;
   width: 1px;
   border: none;
-  border-left: 1px solid ${({ theme }) => theme.color.border.default};
+  border-left: 1px solid ${({ theme }) => theme.color.border.invisible};
 `
 
 const TopbarSeparator: React.FC<{}> = () => (
