@@ -18,7 +18,6 @@ const Container = styled("div")<{ sections: boolean[] }>`
   height: 100%;
   display: grid;
   grid-template-rows: ${({ sections }) => sections.map(expanded => (expanded ? "1fr" : `${headerHeight}px`)).join(" ")};
-  border: solid 1px ${({ theme }) => theme.color.separators.default};
   border-top: none;
 `
 
