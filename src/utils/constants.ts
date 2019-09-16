@@ -151,7 +151,7 @@ type FontWeight = 400 | 500 | 600
 const font = {
   family: {
     main: `"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif`,
-    code: "Menlo, monospace",
+    code: `Consolas, "Liberation Mono", Menlo, Courier, monospace`,
   },
   /** 1.4 */
   lineHeight: 1.4,
