@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15" width="30" height="30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>AddSolid</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M7.5,0A7.5,7.5,0,1,0,15,7.5,7.5,7.5,0,0,0,7.5,0Zm4.75,8.25h-4v4a.75.75,0,0,1-1.5,0v-4h-4a.75.75,0,0,1,0-1.5h4v-4a.75.75,0,0,1,1.5,0v4h4a.75.75,0,0,1,0,1.5Z"/>
+    </g>
+  </g>
+</svg>
