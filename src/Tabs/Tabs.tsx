@@ -221,10 +221,14 @@ const Tabs: React.FC<TabsProps> = ({
       {scroll && (
         <ScrollButtons>
           <TabButton onMouseDown={scrollLeft} disabled={leftDisabled}>
-            <ChevronLeftIcon size={14} />
+            <IconButton>
+              <ChevronLeftIcon size={14} color={leftDisabled ? "color.text.disabled" : "primary"} />
+            </IconButton>
           </TabButton>
           <TabButton onMouseDown={scrollRight} disabled={rightDisabled}>
-            <ChevronRightIcon size={14} />
+            <IconButton>
+              <ChevronRightIcon size={14} color={rightDisabled ? "color.text.disabled" : "primary"} />
+            </IconButton>
           </TabButton>
         </ScrollButtons>
       )}

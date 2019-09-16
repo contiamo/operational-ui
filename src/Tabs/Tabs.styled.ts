@@ -12,8 +12,8 @@ export const Container = styled.div`
   grid-template-rows: ${headerHeight}px 1fr;
   position: relative;
   height: 100%;
-  background-color: ${({ theme }) => theme.color.background.light};
-  padding-top: 1px;
+  background-color: ${({ theme }) => theme.color.background.lighter};
+  padding-top: 2px;
 `
 
 export const PlusWrapper = styled.div`
@@ -60,21 +60,19 @@ export const TabHeader = styled(SectionHeader, {
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   cursor: pointer;
   font-weight: normal;
-  background-color: ${({ theme, color }) => (color ? expandColor(theme, color)! : theme.color.background.light)};
-  border: 1px solid ${({ theme }) => theme.color.separators.default};
+  background-color: ${({ theme, color }) => (color ? expandColor(theme, color)! : theme.color.border.medium)};
+  border: none;
   border-radius: 4px 4px 0 0;
-  margin: 0;
-  margin-right: ${({ last }) => (last ? 0 : -1)}px;
+  margin: 0 1px;
   padding-right: ${({ theme, center }) => (center ? theme.space.element : theme.space.base)}px;
   ${props =>
     props["aria-selected"]
-      ? `border-bottom: 1px solid ${expandColor(props.theme, props.color) || props.theme.color.background.lighter}; 
-         background-color: ${expandColor(props.theme, props.color) || props.theme.color.background.lighter};
+      ? `border-bottom: none; 
+         background-color: ${expandColor(props.theme, props.color) || props.theme.color.white};
          color: ${props.theme.color.text.action};
          font-weight: bold;
          :hover {
-           background-color: ${expandColor(props.theme, props.color) ||
-             props.theme.color.background.lighter} !important;
+           background-color: ${expandColor(props.theme, props.color) || props.theme.color.white} !important;
          }
          & svg {
           color: ${props.theme.color.text.action};
@@ -103,7 +101,8 @@ export const TabHeader = styled(SectionHeader, {
     cursor: not-allowed;
   }
   :hover {
-    background-color: ${({ theme, color }) => (color ? lighten(expandColor(theme, color)!, 2) : "#e4e9eb")};
+    background-color: ${({ theme, color }) =>
+      color ? lighten(expandColor(theme, color)!, 2) : theme.color.background.lightest};
   }
 `
 
@@ -118,23 +117,21 @@ export const TabButton = styled(SectionHeader, {
   justify-content: center;
   cursor: pointer;
   font-weight: normal;
-  background-color: ${({ theme, isPlusButton }) =>
-    isPlusButton ? theme.color.background.light : theme.color.background.lighter};
+  background-color: ${({ theme }) => theme.color.background.lighter};
   margin: 0;
   padding: 0;
   width: ${({ isPlusButton }) => (isPlusButton ? plusButtonWidth : buttonWidth)}px;
   min-width: ${({ isPlusButton }) => (isPlusButton ? plusButtonWidth : buttonWidth)}px;
-  border: solid ${({ theme }) => theme.color.separators.default};
+  border: none;
   border-width: ${({ isPlusButton }) => (isPlusButton ? `0 0 1px 0` : "1px")};
-  margin-right: -1px;
   & svg {
     color: ${({ theme }) => theme.color.text.lighter};
   }
-  &:disabled {
-    background-color: ${({ theme }) => theme.color.background.light};
-  }
-  &:disabled svg {
-    color: ${({ theme }) => theme.color.separators.default};
+  &:disabled,
+  &:disabled svg,
+  &:disabled span {
+    background-color: ${({ theme }) => theme.color.background.lighter};
+    cursor: default !important;
   }
   &:focus {
     outline: none;
@@ -148,10 +145,8 @@ TabButton.defaultProps = {
 }
 
 export const TabContainer = styled.div`
-  border: solid 1px ${({ theme }) => theme.color.separators.default};
-  margin-top: -1px;
   overflow: hidden;
-  background-color: ${({ theme }) => theme.color.background.lighter};
+  background-color: ${({ theme }) => theme.color.white};
 `
 
 export const TabPanel = styled.div`

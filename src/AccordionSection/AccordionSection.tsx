@@ -28,15 +28,16 @@ const Container = styled.div<{ expanded: boolean }>`
 
 const Header = styled(SectionHeader)<{ expanded: boolean }>(({ theme, expanded }) => ({
   cursor: "pointer",
-  borderTop: `1px solid ${theme.color.separators.default}`,
-  borderBottom: `1px solid ${expanded ? theme.color.separators.default : theme.color.background.lighter}`,
+  borderTop: `1px solid ${theme.color.border.invisible}`,
+  borderBottom: expanded ? `1px solid ${theme.color.border.invisible}` : "none",
+  background: theme.color.background.almostWhite,
   // disable browser focus to customise focus state
   ":focus": {
     outline: "none",
     background: theme.color.border.select,
   },
   ".no-focus &:focus": {
-    background: theme.color.background.lighter,
+    background: theme.color.background.almostWhite,
   },
   paddingRight: 0,
   userSelect: "none",
