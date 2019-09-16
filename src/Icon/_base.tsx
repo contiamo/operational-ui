@@ -48,7 +48,7 @@ export const Svg = styled.svg<IconProps>`
     cursor: pointer;
     outline: none;
     :hover, :focus, .no-focus &:hover:focus {
-      background: ${theme.color.separators.default};
+      background: ${theme.color.background.light};
       /* we need to set it here, because otherwise icon takes shape of ellipse at least in Chrome, for unknown reason */
       border-radius: 100%;
     }
