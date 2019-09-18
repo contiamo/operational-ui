@@ -12,7 +12,7 @@ const StyledSelect = styled(Select)`
   width: calc(100% + ${({ theme }) => theme.space.content * 2}px); /* 2 for left _and_ right. */
   border-radius: 0;
 
-  [role="listbox"] > div:nth-child(2) {
+  [role="listbox"] > div:nth-of-type(2) {
     box-shadow: 0 4px 9px 2px rgba(0, 0, 0, 0.3);
   }
 
