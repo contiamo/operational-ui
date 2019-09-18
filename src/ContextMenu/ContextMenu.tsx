@@ -207,6 +207,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         {isOpen && (
           <ContextMenuPopout
             {...listboxProps}
+            key={`ContextMenuPopout-${uniqueId}-${items.length}-items`}
             ref={containerRef}
             condensed={Boolean(condensed)}
             numRows={items.length}
