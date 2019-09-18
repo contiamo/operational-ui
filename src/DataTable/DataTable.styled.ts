@@ -43,10 +43,24 @@ export const Cell = styled.div<{
   font-family: ${({ theme }) => theme.font.family.code};
   font-size: ${({ theme }) => theme.font.size.fineprint}px;
   font-weight: ${({ theme }) => theme.font.weight.regular};
-  padding: 0 ${({ theme }) => theme.space.content}px;
   color: ${({ theme }) => theme.color.text.default};
   grid-column: ${({ cell }) => cell};
   background-color: ${({ theme }) => theme.color.white};
+`
+
+export const CellGrid = styled.div<{ canTruncate: boolean }>`
+  display: ${({ canTruncate }) => (canTruncate ? "grid" : "flex")};
+  align-items: center;
+  width: 100%;
+  ${({ canTruncate }) => (canTruncate ? "grid-template-columns: calc(100% - 36px) 36px" : "")};
+  padding: 0 ${({ theme }) => theme.space.content}px;
+`
+
+export const CellTruncator = styled.div`
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
 `
 
 export const HeaderRow = styled.div<{
@@ -77,23 +91,12 @@ export const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: DataTa
   top: ${({ numHeaders, rowHeight }) => numHeaders * getHeaderRowHeight(rowHeight)}px;
 `
 
-export const ViewMoreToggle = styled("div", { shouldForwardProp: prop => prop !== "height" })<{ height: number }>`
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: ${({ height }) => height}px;
-  width: 40px;
+export const ViewMoreToggle = styled("div")`
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   cursor: pointer;
-  padding-right: ${({ theme }) => theme.space.small}px;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 1) 46%);
-  border-radius: ${({ theme }) => theme.borderRadius}px;
-
-  > * {
-    pointer-events: none;
-  }
 `
 
 const animateIn = keyframes`
