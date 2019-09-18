@@ -1,5 +1,7 @@
 import * as React from "react"
+
 import styled from "../utils/styled"
+import useSticky from "../useSticky/useSticky"
 
 export interface SidenavPopoutProps {
   ref?: React.RefObject<HTMLDivElement>
@@ -25,29 +27,7 @@ const ScrollTrap = styled("div")`
 
 export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children, ...props }) => {
   const containerNode = React.useRef<HTMLDivElement>(null)
-  const [top, setTop] = React.useState("0")
-  const [alignment, setAlignment] = React.useState("flex-start")
-  const [left, setLeft] = React.useState("100%")
-  const [position, setPosition] = React.useState("absolute")
-
-  React.useLayoutEffect(() => {
-    const node = containerNode.current
-    if (node) {
-      const rect = node.getBoundingClientRect()
-      setLeft(`${rect.left}px`)
-
-      // If we're in the lower half of the screen
-      if (rect.top > window.innerHeight / 2) {
-        // open towards the top
-        setTop(`${rect.top - (rect.height - (node.parentElement ? node.parentElement.clientHeight : 0))}px`)
-        setAlignment("flex-end")
-      } else {
-        setTop(`${rect.top}px`)
-        setAlignment("flex-start")
-      }
-      setPosition("fixed")
-    }
-  }, [])
+  const { alignment, left, position, top } = useSticky(containerNode)
 
   return (
     <Container {...props} position={position} top={top} alignment={alignment} left={left} ref={containerNode}>
