@@ -48,12 +48,16 @@ const ContextMenuPopout = React.forwardRef(
     const fallbackRef = React.useRef<HTMLDivElement | null>(null)
     const ref = forwardRef || fallbackRef
 
-    const { left, position, top, width } = useSticky(ref, {
-      position: "absolute",
-      left: align === "left" ? "0" : "auto",
-      top: embedChildrenInMenu ? "0" : "100%",
-      width: "100%",
-      alignment: "flex-start",
+    const { left, position, top, width } = useSticky({
+      inputRef: ref,
+      options: { shouldAvoidToggler: true },
+      initialValue: {
+        position: "absolute",
+        left: align === "left" ? "0" : "auto",
+        top: embedChildrenInMenu ? "0" : "100%",
+        width: "100%",
+        alignment: "flex-start",
+      },
     })
 
     const areWeFixedYet = position === "fixed"

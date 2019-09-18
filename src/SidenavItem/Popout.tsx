@@ -12,7 +12,7 @@ const Container = styled("div")<{ top: string; alignment: string; left: string; 
   top: ${({ top }) => top};
   left: ${({ left }) => left};
   width: 256px;
-  height: 100vh;
+  max-height: 90vh;
   overflow: hidden;
   z-index: ${({ theme }) => theme.zIndex.selectOptions + 1};
   display: flex;
@@ -27,7 +27,7 @@ const ScrollTrap = styled("div")`
 
 export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children, ...props }) => {
   const containerNode = React.useRef<HTMLDivElement>(null)
-  const { alignment, left, position, top } = useSticky(containerNode)
+  const { alignment, left, position, top } = useSticky({ inputRef: containerNode })
 
   return (
     <Container {...props} position={position} top={top} alignment={alignment} left={left} ref={containerNode}>

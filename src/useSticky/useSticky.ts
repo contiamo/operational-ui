@@ -1,4 +1,5 @@
 import * as React from "react"
+import get from "lodash/get"
 
 /**
  *
@@ -14,16 +15,23 @@ import * as React from "react"
  * @param inputRef - a ref to the component we would like to stick
  * @param initialValue - initial positioning CSS values
  */
-const useSticky = (
-  inputRef: React.Ref<HTMLDivElement>,
+const useSticky = ({
+  inputRef,
+  options,
+  initialValue,
+}: {
+  inputRef: React.Ref<HTMLDivElement>
+  options?: {
+    shouldAvoidToggler: boolean
+  }
   initialValue?: {
     top: string
     left: string
     width?: string
     position: "fixed" | "absolute" | "sticky" | "relative" | "static" | "initial"
     alignment: "flex-start" | "flex-end"
-  },
-) => {
+  }
+}) => {
   const defaultDisplaySettings = {
     top: initialValue ? initialValue.top : "0",
     left: initialValue ? initialValue.left : "100%",
@@ -47,9 +55,12 @@ const useSticky = (
 
       if (!hasEnoughRoomUnderContainer) {
         // open towards the top
-        ;(draftSettings.top = `${rect.top -
-          (rect.height + (node.parentElement ? node.parentElement.getBoundingClientRect().height : 0))}px`),
-          (draftSettings.alignment = "flex-end")
+        draftSettings.top = get(options, "shouldAvoidToggler", false)
+          ? `${rect.top -
+              (rect.height + (node.parentElement ? node.parentElement.getBoundingClientRect().height : 0))}px`
+          : `${rect.top - (rect.height - (node.parentElement ? node.parentElement.clientHeight : 0))}px`
+
+        draftSettings.alignment = "flex-end"
       } else {
         draftSettings.top = `${rect.top}px`
         draftSettings.alignment = "flex-start"
