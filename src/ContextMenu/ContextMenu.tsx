@@ -1,4 +1,5 @@
 import * as React from "react"
+import { createPortal } from "react-dom"
 import isString from "lodash/isString"
 
 import { DefaultProps } from "../types"
@@ -6,6 +7,7 @@ import styled from "../utils/styled"
 import ContextMenuItem, { rowHeight, IContextMenuItem } from "./ContextMenu.Item"
 import { useUniqueId } from "../useUniqueId"
 import { useListbox } from "../useListbox"
+import ContextMenuPopout from "./ContextMenu.Popout"
 
 export interface ContextMenuProps extends DefaultProps {
   /** Optional reference for the menu container  */
@@ -63,28 +65,6 @@ const Container = styled.div<{ side: ContextMenuProps["align"]; isOpen: boolean 
   }),
 )
 
-const MenuContainer = styled.div<{
-  embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
-  numRows: number
-  align: ContextMenuProps["align"]
-  condensed: boolean
-  isOpen: boolean
-}>(({ theme, numRows, align, embedChildrenInMenu, isOpen }) => ({
-  position: "absolute",
-  top: embedChildrenInMenu ? 0 : "100%",
-  left: align === "left" ? 0 : "auto",
-  maxHeight: "50vh",
-  overflow: "auto",
-  boxShadow: theme.shadows.contextMenu,
-  width: "100%",
-  minWidth: "fit-content",
-  minHeight: isOpen ? rowHeight : 0,
-  display: "grid",
-  gridTemplateRows: `repeat(${numRows}, max-content)`,
-  backgroundColor: theme.color.white,
-  padding: isOpen ? `${theme.space.small}px 0` : 0,
-}))
-
 /**
  * Overlay to prevent mouse events when the context menu is open
  */
@@ -130,6 +110,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   open,
   ...props
 }) => {
+  const $invisibleOverlay = React.useRef<HTMLDivElement | null>(null)
   const uniqueId = useUniqueId(id)
   const { isOpen, setIsOpen, buttonProps, listboxProps, getChildProps, focusedOptionIndex } = useListbox({
     itemCount: items.length,
@@ -137,6 +118,20 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     isDisabled: disabled,
     initiallyOpen: open,
   })
+
+  React.useEffect(() => {
+    const hideOnScroll = () => setIsOpen && setIsOpen(false)
+
+    if (isOpen) {
+      document.addEventListener("scroll", hideOnScroll)
+    } else {
+      document.removeEventListener("scroll", hideOnScroll)
+    }
+
+    return () => {
+      document.removeEventListener("scroll", hideOnScroll)
+    }
+  }, [isOpen])
 
   React.useEffect(() => {
     if (!items) {
@@ -170,17 +165,20 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
 
   return (
     <>
-      {isOpen && (
-        <InvisibleOverlay
-          onClick={e => {
-            e.stopPropagation()
-            setIsOpen && setIsOpen(false)
-            if (onOutsideClick) {
-              onOutsideClick()
-            }
-          }}
-        />
-      )}
+      {isOpen &&
+        createPortal(
+          <InvisibleOverlay
+            ref={$invisibleOverlay}
+            onClick={e => {
+              e.stopPropagation()
+              setIsOpen && setIsOpen(false)
+              if (onOutsideClick) {
+                onOutsideClick()
+              }
+            }}
+          />,
+          document.body,
+        )}
       <Container
         {...props}
         isOpen={isOpen || false}
@@ -206,46 +204,49 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         <div style={{ outline: "none", width: "100%" }} {...buttonProps}>
           {renderedChildren}
         </div>
-        <MenuContainer
-          {...listboxProps}
-          ref={containerRef}
-          isOpen={Boolean(isOpen)}
-          condensed={Boolean(condensed)}
-          numRows={items.length}
-          align={align}
-          embedChildrenInMenu={embedChildrenInMenu}
-        >
-          {embedChildrenInMenu && renderedChildren}
-          {items.map((item, index: number) => (
-            <React.Fragment key={index}>
-              {(item.separator === "top" || item.separator === "both") && <Separator />}
-              <ContextMenuItem
-                id={`operational-ui__ContextMenuItem-${uniqueId}-${index}`}
-                isActive={typeof item !== "string" && item.isActive}
-                condensed={condensed}
-                align={align}
-                iconLocation={iconLocation}
-                width={width || "min-content"}
-                item={item}
-                disabled={isString(item) ? !onClick : !item.onClick && !onClick}
-                onClick={e => {
-                  e.stopPropagation() // clicking on an item should not trigger the parent's onClick
-                  if (!keepOpenOnItemClick && setIsOpen) {
-                    setIsOpen(false)
-                  }
-                  if (!isString(item) && item.onClick) {
-                    item.onClick(item)
-                  }
-                  if (onClick) {
-                    onClick(item)
-                  }
-                }}
-                {...(getChildProps ? getChildProps(index) : {})}
-              />
-              {(item.separator === "bottom" || item.separator === "both") && <Separator />}
-            </React.Fragment>
-          ))}
-        </MenuContainer>
+        {isOpen && (
+          <ContextMenuPopout
+            {...listboxProps}
+            ref={containerRef}
+            condensed={Boolean(condensed)}
+            numRows={items.length}
+            align={align}
+            embedChildrenInMenu={embedChildrenInMenu}
+            container={$invisibleOverlay}
+            rowHeight={rowHeight}
+          >
+            {embedChildrenInMenu && renderedChildren}
+            {items.map((item, index: number) => (
+              <React.Fragment key={index}>
+                {(item.separator === "top" || item.separator === "both") && <Separator />}
+                <ContextMenuItem
+                  id={`operational-ui__ContextMenuItem-${uniqueId}-${index}`}
+                  isActive={typeof item !== "string" && item.isActive}
+                  condensed={condensed}
+                  align={align}
+                  iconLocation={iconLocation}
+                  width={width || "min-content"}
+                  item={item}
+                  disabled={isString(item) ? !onClick : !item.onClick && !onClick}
+                  onClick={e => {
+                    e.stopPropagation() // clicking on an item should not trigger the parent's onClick
+                    if (!keepOpenOnItemClick && setIsOpen) {
+                      setIsOpen(false)
+                    }
+                    if (!isString(item) && item.onClick) {
+                      item.onClick(item)
+                    }
+                    if (onClick) {
+                      onClick(item)
+                    }
+                  }}
+                  {...(getChildProps ? getChildProps(index) : {})}
+                />
+                {(item.separator === "bottom" || item.separator === "both") && <Separator />}
+              </React.Fragment>
+            ))}
+          </ContextMenuPopout>
+        )}
       </Container>
       {/* Element to close an open select when blurring it so only one can be open at a time */}
       {isOpen && (
