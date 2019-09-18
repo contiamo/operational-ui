@@ -22,6 +22,7 @@ export { default as DropdownButton, DropdownButtonProps } from "./DropdownButton
 export { default as Contact, ContactProps } from "./Contact/Contact"
 export { default as ContextMenu, ContextMenuProps } from "./ContextMenu/ContextMenu"
 export { default as DataTable, DataTableProps } from "./DataTable/DataTable"
+export { default as DataTableHeader } from "./DataTableHeader/DataTableHeader"
 export { default as DataTableFooter } from "./DataTableFooter/DataTableFooter"
 export { default as DataTableInput } from "./DataTableInput/DataTableInput"
 export { default as DataTableSelect } from "./DataTableSelect/DataTableSelect"
