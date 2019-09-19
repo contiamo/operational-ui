@@ -31,6 +31,7 @@ export const GhostTitleContainer = styled.div<{ hasIcon: boolean }>`
   visibility: hidden;
   pointer-events: none;
   white-space: pre;
+  max-width: 100%;
 `
 
 export const ActionsContainer = styled.div`

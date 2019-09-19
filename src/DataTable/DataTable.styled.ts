@@ -151,8 +151,9 @@ export const GhostCell = styled.div`
   position: absolute;
   top: 0;
   left: ${({ theme }) => theme.space.content}px;
-  overflow: visible;
+  overflow: hidden;
   visibility: hidden;
   white-space: pre;
   pointer-events: none;
+  max-width: 100%;
 `
