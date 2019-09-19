@@ -137,3 +137,22 @@ export const ViewMorePopup = styled.div<{ top: number; left: number }>`
   ${({ top }) =>
     window.innerHeight - top > 0.5 * window.innerHeight ? `top: ${top}` : `bottom: ${window.innerHeight - top}`}px;
 `
+
+/**
+ * We need to render a "ghost cell" in the table
+ * in order to understand if a cell's content is
+ * overflowing its container and then show a
+ * "see more" icon.
+ *
+ * This is that ghost cell.
+ */
+
+export const GhostCell = styled.div`
+  position: absolute;
+  top: 0;
+  left: ${({ theme }) => theme.space.content}px;
+  overflow: visible;
+  visibility: hidden;
+  white-space: pre;
+  pointer-events: none;
+`

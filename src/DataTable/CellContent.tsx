@@ -2,8 +2,10 @@ import * as React from "react"
 import isString from "lodash/isString"
 import noop from "lodash/noop"
 
-import { CellGrid, CellTruncator, ViewMoreToggle } from "./DataTable.styled"
+import { CellGrid, CellTruncator, ViewMoreToggle, GhostCell, dataTableActionContainerSize } from "./DataTable.styled"
 import { DotMenuHorizontalIcon } from "../Icon"
+import useWindowSize from "../useWindowSize"
+import constants from "../utils/constants"
 
 export interface CellContentProps {
   cell: React.ReactNode
@@ -15,26 +17,40 @@ const stringifyIfNeeded = (value: any) => {
   return value === true || value === false ? String(value) : value
 }
 
-const CellContent: React.FC<CellContentProps> = ({ cell, open }: any) => {
-  const glyphSize = 8 // it's an opinionated UI library don't @ me
-  const $cell = React.useRef<HTMLDivElement | null>(null)
-  const [isTextProbablyOverflowing, setIsTextProbablyOverflowing] = React.useState(false)
+const CellContent: React.FC<CellContentProps> = ({ cell, open }) => {
+  const $cell = React.useRef<HTMLDivElement>(null)
+  const $ghostCell = React.useRef<HTMLDivElement>(null)
+  const [isTextOverflowing, setIsTextOverflowing] = React.useState(false)
+  const { width } = useWindowSize()
 
   React.useLayoutEffect(() => {
-    const currentCell = $cell.current
-    if (currentCell) {
-      if (cell.length * glyphSize > currentCell.getBoundingClientRect().width) {
-        setIsTextProbablyOverflowing(true)
-      } else {
-        setIsTextProbablyOverflowing(false)
-      }
+    if (!$cell.current) {
+      return
     }
-  }, [])
+
+    if (!$ghostCell.current) {
+      return
+    }
+
+    if (!cell) {
+      return
+    }
+
+    if (!isString(cell)) {
+      return
+    }
+
+    setIsTextOverflowing(
+      $ghostCell.current.getBoundingClientRect().width >
+        $cell.current.getBoundingClientRect().width - constants.space.content * 2 - dataTableActionContainerSize,
+    )
+  }, [width])
 
   return (
     <CellGrid ref={$cell} canTruncate={isString(cell)}>
       {isString(cell) ? <CellTruncator>{stringifyIfNeeded(cell)}</CellTruncator> : stringifyIfNeeded(cell)}
-      {isString(cell) && isTextProbablyOverflowing ? (
+      {isString(cell) && <GhostCell ref={$ghostCell}>{stringifyIfNeeded(cell)}</GhostCell>}
+      {isString(cell) && isTextOverflowing ? (
         <ViewMoreToggle onClick={open(cell)}>
           <DotMenuHorizontalIcon
             color="color.text.lighter"

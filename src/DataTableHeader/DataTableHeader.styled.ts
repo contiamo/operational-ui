@@ -24,6 +24,14 @@ export const TitleContainer = styled.div`
   overflow: hidden;
   white-space: pre;
 `
+export const GhostTitleContainer = styled.div<{ hasIcon: boolean }>`
+  position: absolute;
+  top: 0;
+  left: ${({ theme, hasIcon }) => (hasIcon ? dataTableActionContainerSize : theme.space.content)}px;
+  visibility: hidden;
+  pointer-events: none;
+  white-space: pre;
+`
 
 export const ActionsContainer = styled.div`
   display: flex;

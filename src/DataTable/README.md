@@ -31,16 +31,16 @@ const CustomCell = styled.span`
     ],
     [
       <DataTableHeader
-        title="Jithin Bas Choondapurrakkal and Nagarajan Ganapathysubramanian are really long Indian names"
+        title="Jithin Bas Choondapurrakkal"
         icon={YesIcon}
         actions={[{ label: "Say hi", onClick: () => alert("HIIII") }]}
       />,
     ],
-    [<DataTableHeader title="Foooood" actions={[{ label: "Say bye", onClick: () => alert("BYEEE <3") }]} />],
+    [<DataTableHeader title="Foooooooooooooood" actions={[{ label: "Say bye", onClick: () => alert("BYEEE <3") }]} />],
     ["Loves You"],
   ]}
   rows={[
-    [String(Math.random()).repeat(1000), "Imogen Mason", "Good Stuff", true],
+    [String(Math.random()) + " whats up", "Imogen Mason", "Good Stuff", true],
     [String(Math.random()).repeat(1000), "Fabien Bernard", "🥖🥐🧀🍷", false],
     [String(Math.random()).repeat(1000), "STEREO BOOSTER", "☕️", true],
     [String(Math.random()).repeat(1000), <CustomCell>Mischa Potomin</CustomCell>, "null", false],
