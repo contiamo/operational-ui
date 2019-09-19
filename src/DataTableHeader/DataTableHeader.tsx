@@ -11,22 +11,11 @@ import useViewMore from "../DataTable/useViewMore"
 import ContextMenu from "../ContextMenu/ContextMenu"
 import useWindowSize from "../useWindowSize"
 
-export interface BaseDataTableHeaderProps {
+export interface DataTableHeaderProps {
   title: React.ReactNode
   icon?: IconComponentType
+  actions?: IContextMenuItem[]
 }
-
-export interface DataTableHeaderPropsWithoutActions extends BaseDataTableHeaderProps {
-  actions?: never
-  onPerformAction?: never
-}
-
-export interface DataTableHeaderPropsWithActions extends BaseDataTableHeaderProps {
-  actions: IContextMenuItem[]
-  onPerformAction: (action: IContextMenuItem) => void
-}
-
-type DataTableHeaderProps = DataTableHeaderPropsWithoutActions | DataTableHeaderPropsWithActions
 
 const DataTableHeader: React.FC<DataTableHeaderProps> = ({ icon: Icon, actions, title }) => {
   const $title = React.useRef<HTMLDivElement>(null)
