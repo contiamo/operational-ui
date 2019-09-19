@@ -74,7 +74,7 @@ In some cases, we'd want our `Autocomplete`s to hold on to the value selected, a
 
 ```jsx
 import * as React from "react"
-import { Autocomplete } from "@operational/components"
+import { Autocomplete, AddIcon } from "@operational/components"
 
 const MyOtherComponent = () => {
   const [text, setText] = React.useState("")
@@ -122,7 +122,7 @@ const MyOtherComponent = () => {
         fullWidth
         value={text}
         loading={loading}
-        resultIcon="Add"
+        resultIcon={AddIcon}
         results={data}
         noResultsMessage="No result Found"
         placeholder="Search for Pokémon..."
