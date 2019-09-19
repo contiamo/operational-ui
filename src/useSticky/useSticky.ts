@@ -41,6 +41,7 @@ const useSticky = ({
   }
 
   const [displaySettings, setDisplaySettings] = React.useState(defaultDisplaySettings)
+  const shouldAvoidToggler = get(options, "shouldAvoidToggler", false)
 
   React.useLayoutEffect(() => {
     /**
@@ -62,7 +63,7 @@ const useSticky = ({
 
       if (!hasEnoughRoomUnderContainer) {
         // open towards the top
-        draftSettings.top = get(options, "shouldAvoidToggler", false)
+        draftSettings.top = shouldAvoidToggler
           ? `${rect.top -
               (rect.height + (node.parentElement ? node.parentElement.getBoundingClientRect().height : 0))}px`
           : `${rect.top - (rect.height - (node.parentElement ? node.parentElement.clientHeight : 0))}px`
@@ -76,7 +77,7 @@ const useSticky = ({
       draftSettings.position = "fixed"
       setDisplaySettings({ ...displaySettings, ...draftSettings })
     }
-  }, [inputRef, options])
+  }, [inputRef, shouldAvoidToggler])
 
   return displaySettings
 }
