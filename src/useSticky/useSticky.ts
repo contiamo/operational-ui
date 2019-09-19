@@ -43,7 +43,14 @@ const useSticky = ({
   const [displaySettings, setDisplaySettings] = React.useState(defaultDisplaySettings)
 
   React.useLayoutEffect(() => {
-    const node = inputRef && (inputRef as React.RefObject<HTMLDivElement>).current // ts can't figure out it's a refObject and thinks it's a function ref.
+    /**
+     * inputRef is of type React.Ref
+     * React.Ref = ((instance: HTMLElement | null) => void) | React.RefObject<HTMLElement> | undefined
+     *
+     * We check for emptiness first with &&, but then we still need the `as` assertion because
+     * ts can't figure out that React.Ref in this case is a React.RefObject and NOT a function-style ref.
+     */
+    const node = inputRef && (inputRef as React.RefObject<HTMLDivElement>).current
 
     if (node) {
       const draftSettings: Partial<typeof defaultDisplaySettings> = {}
