@@ -120,18 +120,14 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   })
 
   React.useEffect(() => {
-    const hideOnScroll = () => setIsOpen && setIsOpen(false)
-
-    if (isOpen) {
+    if (isOpen && setIsOpen) {
+      const hideOnScroll = () => setIsOpen(false)
       document.addEventListener("scroll", hideOnScroll)
-    } else {
-      document.removeEventListener("scroll", hideOnScroll)
+      return () => {
+        document.removeEventListener("scroll", hideOnScroll)
+      }
     }
-
-    return () => {
-      document.removeEventListener("scroll", hideOnScroll)
-    }
-  }, [isOpen])
+  }, [isOpen, setIsOpen])
 
   React.useEffect(() => {
     if (!items) {
