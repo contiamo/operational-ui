@@ -58,10 +58,10 @@ const Tabs: React.FC<TabsProps> = ({
   // track if action was triggered by user or not
   // we need this to activate focus in case action was triggered by user, but not if it was re-render
   const userAction = React.useRef(false)
-  const activeTab = React.useRef<HTMLDivElement>(null)
+  const $activeTab = React.useRef<HTMLDivElement>(null)
   React.useEffect(() => {
-    if (activeTab.current && userAction.current) {
-      activeTab.current.focus()
+    if ($activeTab.current && userAction.current) {
+      $activeTab.current.focus()
       userAction.current = false
     }
   }, [active, tabs])
@@ -121,28 +121,28 @@ const Tabs: React.FC<TabsProps> = ({
     [active, onActivate, onInsert],
   )
 
-  const tabListRef = React.useRef<HTMLDivElement>(null)
-  const tabScrollRef = React.useRef<HTMLDivElement>(null)
+  const $tabList = React.useRef<HTMLDivElement>(null)
+  const $tabScroll = React.useRef<HTMLDivElement>(null)
   const [leftDisabled, setLeftDisabled] = React.useState(true)
   const [rightDisabled, setRightDisabled] = React.useState(true)
 
   const scrollLeft = React.useCallback(event => {
     event && event.preventDefault() // so the button won't get focus when clicked
-    if (tabListRef.current) {
-      tabListRef.current.scrollLeft = tabListRef.current.scrollLeft - 100
+    if ($tabList.current) {
+      $tabList.current.scrollLeft = $tabList.current.scrollLeft - 100
     }
   }, [])
 
   const scrollRight = React.useCallback(event => {
     event && event.preventDefault() // so the button won't get focus when clicked
-    if (tabListRef.current) {
-      tabListRef.current.scrollLeft = tabListRef.current.scrollLeft + 100
+    if ($tabList.current) {
+      $tabList.current.scrollLeft = $tabList.current.scrollLeft + 100
     }
   }, [])
 
   const onScroll = React.useCallback(() => {
-    if (tabListRef.current) {
-      const tabListElement = tabListRef.current
+    if ($tabList.current) {
+      const tabListElement = $tabList.current
       const scrollLeft = tabListElement.scrollLeft
       setLeftDisabled(scrollLeft === 0)
       setRightDisabled(scrollLeft === tabListElement.scrollWidth - tabListElement.offsetWidth)
@@ -159,8 +159,8 @@ const Tabs: React.FC<TabsProps> = ({
   return (
     <Container data-cy="operational-ui__Tabs" style={style}>
       <PlusWrapper>
-        <TabList scroll={Boolean(scroll)} aria-label={label} onKeyDown={onKeyDown} ref={tabListRef} onScroll={onScroll}>
-          <TabScroll ref={tabScrollRef}>
+        <TabList scroll={Boolean(scroll)} aria-label={label} onKeyDown={onKeyDown} ref={$tabList} onScroll={onScroll}>
+          <TabScroll ref={$tabScroll}>
             {tabs.map(({ title, icon, color }, i) => {
               const onClick = () => {
                 onActivate(i)
@@ -180,7 +180,7 @@ const Tabs: React.FC<TabsProps> = ({
                       onClose(i)
                     }
                   }}
-                  ref={i === active ? activeTab : undefined}
+                  ref={i === active ? $activeTab : undefined}
                   color={color}
                   last={i === tabs.length - 1}
                 >

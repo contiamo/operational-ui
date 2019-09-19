@@ -107,16 +107,16 @@ const getTabIndexByName = (tabs: Tab[], tabName?: string): number => {
 }
 
 const SingleTab = ({ id, index, isActive, onTabClick, tab, isKeyboardActive }: SingleTabProps) => {
-  const ref = React.useRef<HTMLDivElement>(null)
+  const $container = React.useRef<HTMLDivElement>(null)
   useEffect(() => {
-    if (isActive && isKeyboardActive && ref.current) {
-      ref.current.focus()
+    if (isActive && isKeyboardActive && $container.current) {
+      $container.current.focus()
     }
   }, [isKeyboardActive, isActive])
 
   return (
     <TabContainer
-      ref={ref}
+      ref={$container}
       role="tab"
       active={isActive}
       aria-selected={isActive}

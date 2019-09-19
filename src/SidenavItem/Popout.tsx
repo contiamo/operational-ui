@@ -26,12 +26,12 @@ const ScrollTrap = styled("div")`
 `
 
 export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children, ...props }) => {
-  const containerNode = React.useRef<HTMLDivElement>(null)
+  const $container = React.useRef<HTMLDivElement>(null)
   const [initialTop, setInitialTop] = React.useState("0")
   const { height } = useWindowSize()
 
   React.useLayoutEffect(() => {
-    const node = containerNode.current
+    const node = $container.current
     if (node) {
       const rect = node.getBoundingClientRect()
       console.log(node, rect.top, height)
@@ -45,10 +45,10 @@ export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children, ...props
     }
   }, [height])
 
-  const { left, position } = useSticky({ inputRef: containerNode })
+  const { left, position } = useSticky({ $el: $container })
 
   return (
-    <Container {...props} position={position} top={initialTop} left={left} ref={containerNode}>
+    <Container {...props} position={position} top={initialTop} left={left} ref={$container}>
       <ScrollTrap>{children}</ScrollTrap>
     </Container>
   )

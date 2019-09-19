@@ -45,11 +45,11 @@ const ContextMenuPopout = React.forwardRef(
     { align, children, condensed, container, embedChildrenInMenu, numRows, rowHeight }: ContextMenuPopoutProps,
     forwardRef: React.Ref<HTMLDivElement>,
   ) => {
-    const fallbackRef = React.useRef<HTMLDivElement | null>(null)
-    const ref = forwardRef || fallbackRef
+    const $fallback = React.useRef<HTMLDivElement | null>(null)
+    const $el = forwardRef || $fallback
 
     const { left, position, top, width } = useSticky({
-      inputRef: ref,
+      $el: $el,
       initialValue: {
         position: "absolute",
         left: align === "left" ? "0" : "auto",
@@ -70,7 +70,7 @@ const ContextMenuPopout = React.forwardRef(
         width={width}
         top={top}
         position={position}
-        ref={ref}
+        ref={$el}
       >
         {children}
       </Container>

@@ -37,12 +37,12 @@ export const Select: React.FC<SelectProps> = ({
 }) => {
   const uniqueId = useUniqueId(id)
   const [filter, setFilter] = React.useState("")
-  const containerRef = React.useRef<HTMLDivElement>(null)
-  const inputRef = React.useMemo(() => React.createRef<HTMLInputElement>(), [])
+  const $container = React.useRef<HTMLDivElement>(null)
+  const $input = React.useMemo(() => React.createRef<HTMLInputElement>(), [])
 
   React.useEffect(() => {
-    if (customOption && value === customOption.value && inputRef.current) {
-      inputRef.current.focus()
+    if (customOption && value === customOption.value && $input.current) {
+      $input.current.focus()
     }
   }, [value, customOption])
 
@@ -114,11 +114,11 @@ export const Select: React.FC<SelectProps> = ({
         if (onChange) {
           onChange(getNewValue(value)(item.value), getOptionFromItem(items)(item))
         }
-        if (containerRef.current) {
-          containerRef.current.focus()
+        if ($container.current) {
+          $container.current.focus()
         }
-        if (inputRef.current) {
-          inputRef.current.focus()
+        if ($input.current) {
+          $input.current.focus()
         }
       }}
       disabled={disabled}
@@ -131,7 +131,7 @@ export const Select: React.FC<SelectProps> = ({
       {isOpen => (
         <Listbox
           fullWidth={Boolean(fullWidth)}
-          ref={containerRef}
+          ref={$container}
           aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
           aria-disabled={Boolean(disabled)}
           disabled={Boolean(disabled)}
@@ -146,7 +146,7 @@ export const Select: React.FC<SelectProps> = ({
             naked={Boolean(naked)}
           >
             <SelectInput
-              inputRef={inputRef}
+              inputRef={$input}
               fullWidth={fullWidth}
               tabIndex={customOption && customOption.value === value ? 0 : -1}
               disabled={disabled}

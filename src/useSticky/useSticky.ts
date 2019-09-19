@@ -12,14 +12,14 @@ import { isRefRefObject } from "../utils/isRefRefObject"
  * - SidenavItem/Popout
  * - ContextMenu
  *
- * @param inputRef - a ref to the component we would like to stick
+ * @param $input - a ref to the component we would like to stick
  * @param initialValue - initial positioning CSS values
  */
 const useSticky = ({
-  inputRef,
+  $el,
   initialValue,
 }: {
-  inputRef: React.Ref<HTMLElement>
+  $el: React.Ref<HTMLElement>
   initialValue?: {
     top?: string
     left?: string
@@ -37,13 +37,13 @@ const useSticky = ({
   const [displaySettings, setDisplaySettings] = React.useState(defaultDisplaySettings)
 
   React.useLayoutEffect(() => {
-    const node = isRefRefObject(inputRef) && inputRef.current
+    const node = isRefRefObject($el) && $el.current
 
     if (node) {
       const rect = node.getBoundingClientRect()
       setDisplaySettings({ position: "fixed", left: `${rect.left}px`, width: `${rect.width}px`, top: `${rect.top}px` })
     }
-  }, [inputRef])
+  }, [$el])
 
   return displaySettings
 }

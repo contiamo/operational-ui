@@ -62,11 +62,11 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
     const item = items.find(item => (typeof item === "string" ? false : item.label === selected))
     return typeof item === "object" && item.icon
   }, [items, selected])
-  const containerRef = useRef<HTMLDivElement>(null)
+  const $container = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
-    if (containerRef.current) {
-      setContainerWidth(containerRef.current.clientWidth)
+    if ($container.current) {
+      setContainerWidth($container.current.clientWidth)
     }
   })
 
@@ -82,7 +82,7 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
       }}
     >
       {isActive => (
-        <TopbarSelectContainer {...props} isActive={isActive} ref={containerRef}>
+        <TopbarSelectContainer {...props} isActive={isActive} ref={$container}>
           <TopbarSelectLabel>{label}</TopbarSelectLabel>
           <TopbarSelectValue>
             {Icon && <Icon left />}
