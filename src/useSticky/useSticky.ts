@@ -20,7 +20,7 @@ const useSticky = ({
   options,
   initialValue,
 }: {
-  inputRef: React.Ref<HTMLDivElement>
+  inputRef: React.Ref<HTMLElement>
   options?: {
     shouldAvoidToggler: boolean
   }

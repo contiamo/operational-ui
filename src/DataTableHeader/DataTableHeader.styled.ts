@@ -1,4 +1,5 @@
 import styled from "../utils/styled"
+import { dataTableActionContainerSize } from "../DataTable/DataTable.styled"
 
 export const Container = styled.div<{ hasIcon: boolean }>`
   display: grid;
@@ -6,7 +7,10 @@ export const Container = styled.div<{ hasIcon: boolean }>`
   /**
    * The columns are: type, name, "see more" icon, and caret for icons
    */
-  grid-template-columns: ${({ hasIcon }) => (hasIcon ? `36px auto 36px 36px` : `auto 36px 36px`)};
+  grid-template-columns: ${({ hasIcon }) =>
+    hasIcon
+      ? `${dataTableActionContainerSize}px auto ${dataTableActionContainerSize}px ${dataTableActionContainerSize}px`
+      : `auto ${dataTableActionContainerSize}px ${dataTableActionContainerSize}px`};
   width: calc(100% + ${({ theme }) => theme.space.content * 2}px);
   height: 100%;
   margin: 0 -${({ theme }) => theme.space.content}px;

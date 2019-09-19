@@ -48,11 +48,16 @@ export const Cell = styled.div<{
   background-color: ${({ theme }) => theme.color.white};
 `
 
+export const dataTableActionContainerSize = 36
+
 export const CellGrid = styled.div<{ canTruncate: boolean }>`
   display: ${({ canTruncate }) => (canTruncate ? "grid" : "flex")};
   align-items: center;
   width: 100%;
-  ${({ canTruncate }) => (canTruncate ? "grid-template-columns: calc(100% - 36px) 36px" : "")};
+  ${({ canTruncate }) =>
+    canTruncate
+      ? `grid-template-columns: calc(100% - ${dataTableActionContainerSize}px) ${dataTableActionContainerSize}px`
+      : ""};
   padding: 0 ${({ theme }) => theme.space.content}px;
 `
 
@@ -91,7 +96,7 @@ export const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: DataTa
   top: ${({ numHeaders, rowHeight }) => numHeaders * getHeaderRowHeight(rowHeight)}px;
 `
 
-export const ViewMoreToggle = styled("div")`
+export const ViewMoreToggle = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
