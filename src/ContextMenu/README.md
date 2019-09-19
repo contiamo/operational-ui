@@ -185,7 +185,7 @@ const Wrapper = () => {
       <Code>
           {`Rect: ${JSON.stringify(rect, null, 2)}`}
       </Code>
-      <ContextMenu open containerRef={menuRef} items={menuItems} onClick={() => alert("clicked")}>
+      <ContextMenu open containerRef={$menu} items={menuItems} onClick={() => alert("clicked")}>
         <Button>Click here</Button>
       </ContextMenu>
     </>
