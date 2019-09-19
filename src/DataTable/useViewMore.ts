@@ -12,16 +12,18 @@ const useViewMore = () => {
       return
     }
 
-    const handleClickOutside = () => {
+    const close = () => {
       setViewMorePopup(false)
     }
 
-    document.addEventListener("click", handleClickOutside)
-    document.addEventListener("contextmenu", handleClickOutside)
+    document.addEventListener("click", close)
+    document.addEventListener("contextmenu", close)
+    document.addEventListener("scroll", close)
 
     return () => {
-      document.removeEventListener("click", handleClickOutside)
-      document.removeEventListener("contextmenu", handleClickOutside)
+      document.removeEventListener("click", close)
+      document.removeEventListener("contextmenu", close)
+      document.removeEventListener("scroll", close)
     }
   }, [viewMorePopup])
 

@@ -4,6 +4,7 @@ import { createPortal } from "react-dom"
 import styled from "../utils/styled"
 import { ContextMenuProps } from "./ContextMenu"
 import useSticky from "../useSticky/useSticky"
+import { isRefRefObject } from "../utils/isRefRefObject"
 
 export interface ContextMenuPopoutProps {
   embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
@@ -40,13 +41,10 @@ const Container = styled.div<ContextMenuPopoutProps & PositionProps>`
   z-index: ${({ theme }) => theme.zIndex.selectOptions + 2};
 `
 
-const ContextMenuPopout = React.forwardRef(
-  (
-    { align, children, condensed, container, embedChildrenInMenu, numRows, rowHeight }: ContextMenuPopoutProps,
-    forwardRef: React.Ref<HTMLDivElement>,
-  ) => {
+const ContextMenuPopout = React.forwardRef<HTMLDivElement, ContextMenuPopoutProps>(
+  ({ align, children, condensed, container, embedChildrenInMenu, numRows, rowHeight }, forwardRef) => {
     const $fallback = React.useRef<HTMLDivElement | null>(null)
-    const $el = forwardRef || $fallback
+    const $el = isRefRefObject(forwardRef) ? forwardRef : $fallback
 
     const { left, position, top, width } = useSticky({
       $el: $el,

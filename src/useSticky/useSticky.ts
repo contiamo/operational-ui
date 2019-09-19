@@ -1,5 +1,4 @@
 import * as React from "react"
-import { isRefRefObject } from "../utils/isRefRefObject"
 
 /**
  *
@@ -19,7 +18,7 @@ const useSticky = ({
   $el,
   initialValue,
 }: {
-  $el: React.Ref<HTMLElement>
+  $el: React.RefObject<HTMLElement>
   initialValue?: {
     top?: string
     left?: string
@@ -37,7 +36,7 @@ const useSticky = ({
   const [displaySettings, setDisplaySettings] = React.useState(defaultDisplaySettings)
 
   React.useLayoutEffect(() => {
-    const node = isRefRefObject($el) && $el.current
+    const node = $el.current
 
     if (node) {
       const rect = node.getBoundingClientRect()
