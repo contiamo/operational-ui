@@ -59,7 +59,7 @@ const CellContent: React.FC<CellContentProps> = ({ cell, open }) => {
           />
         </ViewMoreToggle>
       ) : (
-        <div />
+        <div /> // We need an empty element for CSS Grid to place things correctly
       )}
     </CellGrid>
   )
