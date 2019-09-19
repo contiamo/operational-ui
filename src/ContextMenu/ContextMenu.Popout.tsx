@@ -50,17 +50,16 @@ const ContextMenuPopout = React.forwardRef(
 
     const { left, position, top, width } = useSticky({
       inputRef: ref,
-      options: { shouldAvoidToggler: true },
       initialValue: {
         position: "absolute",
         left: align === "left" ? "0" : "auto",
         top: embedChildrenInMenu ? "0" : "100%",
         width: "100%",
-        alignment: "flex-start",
       },
     })
 
     const areWeFixedYet = position === "fixed"
+
     const popOut = (
       <Container
         align={align}
