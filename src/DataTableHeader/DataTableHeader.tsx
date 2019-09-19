@@ -5,7 +5,7 @@ import noop from "lodash/noop"
 import { ActionsContainer, Container, TitleContainer, GhostTitleContainer } from "./DataTableHeader.styled"
 import { IconComponentType, DotMenuHorizontalIcon, ChevronDownIcon } from "../Icon"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
-import isString = require("lodash/isString")
+import isString from "lodash/isString"
 import { ViewMorePopup } from "../DataTable/DataTable.styled"
 import useViewMore from "../DataTable/useViewMore"
 import ContextMenu from "../ContextMenu/ContextMenu"
