@@ -34,7 +34,6 @@ export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children, ...props
     const node = $container.current
     if (node) {
       const rect = node.getBoundingClientRect()
-      console.log(node, rect.top, height)
       // If we're in the lower half of the screen
       if (rect.top > height / 2) {
         // open towards the top
