@@ -76,7 +76,7 @@ const useSticky = ({
       draftSettings.position = "fixed"
       setDisplaySettings({ ...displaySettings, ...draftSettings })
     }
-  }, [inputRef])
+  }, [inputRef, options])
 
   return displaySettings
 }
