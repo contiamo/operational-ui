@@ -83,11 +83,11 @@ export const HeaderCell = styled(Cell)<{
   rowIndex: number
 }>`
   position: relative;
-  background-color: ${({ theme }) => theme.color.background.grey};
+  background-color: ${({ theme }) => theme.color.background.almostWhite};
   color: ${({ theme }) => theme.color.text.dark};
   font-weight: ${({ theme }) => theme.font.weight.bold};
   border-top: ${({ rowIndex }) => (rowIndex === 0 ? "1px solid" : 0)};
-  border-color: ${({ theme }) => theme.color.border.default};
+  border-color: ${({ theme }) => theme.color.border.medium};
 `
 
 export const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: DataTableProps<any, any>["rowHeight"] }>`
