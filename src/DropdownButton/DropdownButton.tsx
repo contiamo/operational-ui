@@ -83,7 +83,14 @@ const DropdownButton: React.FC<DropdownButtonProps> = ({
   })
 
   return (
-    <ContextMenuWithBorder {...props} onClick={onItemClick} iconLocation="right" items={itemsWithCarets} align={align}>
+    <ContextMenuWithBorder
+      {...props}
+      anchored
+      onClick={onItemClick}
+      iconLocation="right"
+      items={itemsWithCarets}
+      align={align}
+    >
       {isOpen => {
         return (
           <BaseDropdownButton

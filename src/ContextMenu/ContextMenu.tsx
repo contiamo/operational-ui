@@ -41,6 +41,8 @@ export interface ContextMenuProps extends DefaultProps {
   embedChildrenInMenu?: boolean
   /** Where do we start focus from? */
   initialFocusedItemIndex?: number
+  /** Is this ContextMenu anchored to an element? */
+  anchored?: boolean
 }
 
 export interface State {
@@ -108,6 +110,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
   disabled,
   width,
   open,
+  anchored,
   ...props
 }) => {
   const $invisibleOverlay = React.useRef<HTMLDivElement | null>(null)
@@ -159,22 +162,22 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     }
   }, [currentItem, onClick])
 
+  const overlay = (
+    <InvisibleOverlay
+      ref={$invisibleOverlay}
+      onClick={e => {
+        e.stopPropagation()
+        setIsOpen && setIsOpen(false)
+        if (onOutsideClick) {
+          onOutsideClick()
+        }
+      }}
+    />
+  )
+
   return (
     <>
-      {isOpen &&
-        createPortal(
-          <InvisibleOverlay
-            ref={$invisibleOverlay}
-            onClick={e => {
-              e.stopPropagation()
-              setIsOpen && setIsOpen(false)
-              if (onOutsideClick) {
-                onOutsideClick()
-              }
-            }}
-          />,
-          document.body,
-        )}
+      {isOpen && (anchored ? overlay : createPortal(overlay, document.body))}
       <Container
         {...props}
         isOpen={isOpen || false}
@@ -211,6 +214,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
             embedChildrenInMenu={embedChildrenInMenu}
             container={$invisibleOverlay}
             rowHeight={rowHeight}
+            anchored={Boolean(anchored)}
           >
             {embedChildrenInMenu && renderedChildren}
             {items.map((item, index: number) => (

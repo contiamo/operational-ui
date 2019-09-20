@@ -93,7 +93,7 @@ const Container = styled.div<{ isOpen: boolean }>(({ theme, isOpen }) => ({
 }))
 
 const ActionMenu: React.SFC<ActionMenuProps> = ({ items, ...props }) => (
-  <StyledContextMenu align="right" {...props} items={items} condensed>
+  <StyledContextMenu anchored align="right" {...props} items={items} condensed>
     {isOpen => {
       const iconColor = isOpen ? "primary" : "color.text.lighter"
 

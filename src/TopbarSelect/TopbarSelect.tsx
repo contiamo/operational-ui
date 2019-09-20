@@ -72,6 +72,7 @@ const TopbarSelect = ({ label, selected, items, onChange, ...props }: TopbarSele
 
   return (
     <ContextMenu
+      anchored
       condensed
       items={items}
       width={containerWidth}
