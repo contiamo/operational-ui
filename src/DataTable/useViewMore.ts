@@ -22,7 +22,7 @@ const useViewMore = () => {
   )
 
   const close = () => {
-    closeTimeout = window.setTimeout(() => setViewMorePopup(false), 300)
+    closeTimeoutId = window.setTimeout(() => setViewMorePopup(false), 150)
   }
 
   React.useEffect(
