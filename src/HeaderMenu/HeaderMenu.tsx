@@ -91,7 +91,7 @@ class HeaderMenu extends React.PureComponent<HeaderMenuProps, Readonly<HeaderMen
     withCaret: false,
   }
 
-  private menuRef = React.createRef<HTMLDivElement>()
+  private $menu = React.createRef<HTMLDivElement>()
 
   public componentDidMount() {
     this.updateRenderedWidth()
@@ -116,10 +116,10 @@ class HeaderMenu extends React.PureComponent<HeaderMenuProps, Readonly<HeaderMen
   }, 200)
 
   private updateRenderedWidth() {
-    if (!this.menuRef || this.menuRef.current === null) {
+    if (!this.$menu || this.$menu.current === null) {
       return
     }
-    const node = this.menuRef.current
+    const node = this.$menu.current
     const renderedMenuWidth = node.clientWidth
     if (renderedMenuWidth !== this.state.renderedMenuWidth) {
       this.setState(() => ({
@@ -133,7 +133,7 @@ class HeaderMenu extends React.PureComponent<HeaderMenuProps, Readonly<HeaderMen
     return (
       <HeaderContextMenu width={this.state.renderedMenuWidth} {...props}>
         {isOpen => (
-          <Container ref={this.menuRef} isOpen={isOpen} align={props.align} withCaret={Boolean(props.withCaret)}>
+          <Container ref={this.$menu} isOpen={isOpen} align={props.align} withCaret={Boolean(props.withCaret)}>
             {props.children}
           </Container>
         )}

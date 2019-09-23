@@ -145,15 +145,15 @@ const TreeItem: React.SFC<TreeItemProps> = ({
 
   const [viewMorePopup, setViewMorePopup] = useState<{ x: number; y: number; content: string } | null>(null)
   const [isTooLong, setIsTooLong] = useState(false)
-  const labelRef = useRef<HTMLDivElement>(null)
+  const $label = useRef<HTMLDivElement>(null)
 
   // We compute this on every re-render to handle the resize
   // (resize event is only supported by chrome for now)
   useLayoutEffect(() => {
     // We can't attach the ref to `Highlighter`, this is why we attached the ref
     // to the parent and using `children[0]`
-    if (labelRef.current && labelRef.current.children[0]) {
-      const { height } = labelRef.current.children[0].getBoundingClientRect()
+    if ($label.current && $label.current.children[0]) {
+      const { height } = $label.current.children[0].getBoundingClientRect()
       setIsTooLong(height > 16)
     }
   })
@@ -192,7 +192,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           color: iconColor || "color.text.lighter",
           style: { marginLeft: 0, marginRight: 4, flex: "0 0 15px" },
         })}
-      <Label hasChildren={hasChildren} ref={labelRef}>
+      <Label hasChildren={hasChildren} ref={$label}>
         <Highlighter
           textToHighlight={label}
           highlightStyle={{ color: constants.color.text.action, backgroundColor: "transparent", fontWeight: "bold" }}
@@ -207,13 +207,13 @@ const TreeItem: React.SFC<TreeItemProps> = ({
             /** Just the hover style! */
           }}
           onMouseEnter={() => {
-            if (labelRef.current) {
-              const { right, top } = labelRef.current.getBoundingClientRect()
+            if ($label.current) {
+              const { right, top } = $label.current.getBoundingClientRect()
               setViewMorePopup({ y: top + viewMoreIconSize, x: right + viewMoreIconSize, content: label })
             }
           }}
           onMouseLeave={() => {
-            if (labelRef.current) {
+            if ($label.current) {
               setViewMorePopup(null)
             }
           }}

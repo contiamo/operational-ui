@@ -169,14 +169,14 @@ import * as React from "react"
 import { Button, ContextMenu, ContextMenuProps, Code } from "@operational/components"
 
 const menuItems = ["Menu 1", "Menu 2", "Menu 3"]
-const menuRef = React.createRef<HTMLDivElement>();
+const $menu = React.createRef<HTMLDivElement>();
 
 const Wrapper = () => {
   const [rect, setRect] = React.useState<DOMRect>();
 
   React.useEffect(() => {
-    if (menuRef.current) {
-      setRect(menuRef.current.getBoundingClientRect());
+    if ($menu.current) {
+      setRect($menu.current.getBoundingClientRect());
     }
   }, []);
 
@@ -185,7 +185,7 @@ const Wrapper = () => {
       <Code>
           {`Rect: ${JSON.stringify(rect, null, 2)}`}
       </Code>
-      <ContextMenu open containerRef={menuRef} items={menuItems} onClick={() => alert("clicked")}>
+      <ContextMenu open containerRef={$menu} items={menuItems} onClick={() => alert("clicked")}>
         <Button>Click here</Button>
       </ContextMenu>
     </>

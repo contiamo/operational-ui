@@ -94,8 +94,8 @@ const TourModal: React.FC<TourModalProps> = ({
   isLast,
   messages = { quit: "Quit the Tour", finish: "Finish", continue: "Continue" },
 }) => {
-  const body = React.useRef(document.body)
-  useHotkey(body, { key: "Escape" }, () => {
+  const $body = React.useRef(document.body)
+  useHotkey($body, { key: "Escape" }, () => {
     if (onQuit && !isLast) {
       onQuit()
     }

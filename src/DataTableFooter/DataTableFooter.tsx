@@ -11,6 +11,6 @@ const Container = styled("div")<{ onClick?: (e: React.MouseEvent) => void }>`
   border: 1px solid ${({ theme }) => theme.color.border.disabled};
 `
 
-export const DataTableFooter: React.FC = props => <Container {...props} />
+export const DataTableFooter: React.FC<{ onClick?: (e: React.MouseEvent) => void }> = props => <Container {...props} />
 
 export default DataTableFooter

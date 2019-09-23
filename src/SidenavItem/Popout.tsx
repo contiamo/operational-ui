@@ -1,21 +1,23 @@
 import * as React from "react"
+
 import styled from "../utils/styled"
+import useSticky from "../useSticky/useSticky"
+import useWindowSize from "../useWindowSize"
 
 export interface SidenavPopoutProps {
   ref?: React.RefObject<HTMLDivElement>
 }
 
-const Container = styled("div")<{ top: string; alignment: string; left: string; position: string }>`
+const Container = styled("div")<{ top: string; left: string; position: string }>`
   position: ${({ position }) => position};
   top: ${({ top }) => top};
   left: ${({ left }) => left};
   width: 256px;
-  height: 100vh;
+  max-height: 90vh;
   overflow: hidden;
   z-index: ${({ theme }) => theme.zIndex.selectOptions + 1};
   display: flex;
   flex-direction: column;
-  justify-content: ${({ alignment }) => alignment};
 `
 
 const ScrollTrap = styled("div")`
@@ -24,33 +26,28 @@ const ScrollTrap = styled("div")`
 `
 
 export const SidenavPopout: React.FC<SidenavPopoutProps> = ({ children, ...props }) => {
-  const containerNode = React.useRef<HTMLDivElement>(null)
-  const [top, setTop] = React.useState("0")
-  const [alignment, setAlignment] = React.useState("flex-start")
-  const [left, setLeft] = React.useState("100%")
-  const [position, setPosition] = React.useState("absolute")
+  const $container = React.useRef<HTMLDivElement>(null)
+  const [initialTop, setInitialTop] = React.useState("0")
+  const { height } = useWindowSize()
 
   React.useLayoutEffect(() => {
-    const node = containerNode.current
+    const node = $container.current
     if (node) {
       const rect = node.getBoundingClientRect()
-      setLeft(`${rect.left}px`)
-
       // If we're in the lower half of the screen
-      if (rect.top > window.innerHeight / 2) {
+      if (rect.top > height / 2) {
         // open towards the top
-        setTop(`${rect.top - (rect.height - (node.parentElement ? node.parentElement.clientHeight : 0))}px`)
-        setAlignment("flex-end")
+        setInitialTop(`${rect.top - (rect.height - (node.parentElement ? node.parentElement.clientHeight : 0))}px`)
       } else {
-        setTop(`${rect.top}px`)
-        setAlignment("flex-start")
+        setInitialTop(`${rect.top}px`)
       }
-      setPosition("fixed")
     }
-  }, [])
+  }, [height])
+
+  const { left, position } = useSticky({ $el: $container })
 
   return (
-    <Container {...props} position={position} top={top} alignment={alignment} left={left} ref={containerNode}>
+    <Container {...props} position={position} top={initialTop} left={left} ref={$container}>
       <ScrollTrap>{children}</ScrollTrap>
     </Container>
   )

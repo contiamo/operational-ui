@@ -14,16 +14,16 @@ export interface FoldableProps {
 }
 
 const Foldable = ({ initialState = "open", children }: FoldableProps) => {
-  const togglerRef = React.useRef<HTMLDivElement>(null)
+  const $toggler = React.useRef<HTMLDivElement>(null)
   const [isParentFolded, setIsFolded] = React.useState(initialState === "closed")
   const [isTogglerHovered, setIsTogglerHovered] = React.useState(false)
 
   React.useEffect(() => {
     const handleMouseMove = (e: any) => {
-      if (togglerRef.current === null) {
+      if ($toggler.current === null) {
         return
       }
-      if (isTogglerHovered && !e.path.map((el: HTMLElement) => el.className).includes(togglerRef.current.className)) {
+      if (isTogglerHovered && !e.path.map((el: HTMLElement) => el.className).includes($toggler.current.className)) {
         setIsTogglerHovered(false)
       }
     }

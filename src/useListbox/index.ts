@@ -20,14 +20,14 @@ export const useListbox = ({
   isDisabled = false,
   initiallyOpen = false,
 }: UseListboxOptions) => {
-  const buttonRef = useRef<HTMLDivElement>(null)
-  const listboxRef = useRef<HTMLDivElement>(null)
+  const $button = useRef<HTMLDivElement>(null)
+  const $listbox = useRef<HTMLDivElement>(null)
   const [isOpen, _setIsOpen] = useState(initiallyOpen)
   const [focusedOptionIndex, setFocusedOptionIndex] = useState<number | null | undefined>()
   const id = useUniqueId()
 
   useEffect(() => {
-    const node = buttonRef.current
+    const node = $button.current
     if (node) {
       if (focusedOptionIndex === null) {
         node.focus()
@@ -139,7 +139,7 @@ export const useListbox = ({
 
   const handleButtonClick = useCallback(
     e => {
-      const node = buttonRef.current
+      const node = $button.current
       if (e.target === node) {
         _setIsOpen(!isOpen)
       }
@@ -148,7 +148,7 @@ export const useListbox = ({
   )
 
   useEffect(() => {
-    const node = buttonRef.current
+    const node = $button.current
 
     if (node) {
       node.addEventListener("keydown", handleKeyDown)
@@ -170,7 +170,7 @@ export const useListbox = ({
     isOpen: isOpen,
     setIsOpen: setIsOpen,
     buttonProps: {
-      ref: buttonRef,
+      ref: $button,
       tabIndex: isDisabled ? -1 : 0,
       role: "button",
       "aria-expanded": isOpen,
@@ -178,7 +178,7 @@ export const useListbox = ({
       "aria-disabled": Boolean(isDisabled),
     },
     listboxProps: {
-      ref: listboxRef,
+      ref: $listbox,
       role: "listbox",
       // tabIndex: -1,
       ...(focusedOptionIndex !== null && {

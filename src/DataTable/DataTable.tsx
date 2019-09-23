@@ -2,7 +2,7 @@ import * as React from "react"
 import { FixedSizeList, ListChildComponentProps, FixedSizeListProps } from "react-window"
 
 import Message from "../Internals/Message/Message"
-import { truncate } from "../utils/truncate"
+
 import {
   Cell,
   Container,
@@ -12,12 +12,13 @@ import {
   HeadersContainer,
   Row,
   ViewMorePopup,
-  ViewMoreToggle,
 } from "./DataTable.styled"
 import { defaultRowHeight, getRowHeight } from "./DataTable.util"
-import { ChevronDownIcon, CopyIcon } from "../Icon"
+import useViewMore from "./useViewMore"
+import { CopyIcon } from "../Icon"
 import { Button, OperationalContext } from ".."
 import CopyToClipboard from "react-copy-to-clipboard"
+import CellContent from "./CellContent"
 
 export interface DataTableProps<Columns, Rows> {
   /* The columns of our table. They are an array of header layers. */
@@ -46,16 +47,8 @@ export interface DataTableProps<Columns, Rows> {
   /** How wide is each cell? Default `1fr` */
   cellWidth?: string
 
-  /** Max characters in cell */
-  maxCharactersInCell?: number
-
   /** A classname for all your custom CSS ~hacks~ needs */
   className?: string
-}
-
-const stringifyIfNeeded = (value: any) => {
-  // We compare booleans like this and without typeof for perf
-  return value === true || value === false ? String(value) : value
 }
 
 export function DataTable<Columns extends any[][], Rows extends any[][]>({
@@ -66,34 +59,9 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   height = 500,
   width = "100%",
   cellWidth = "minmax(200px, 1fr)",
-  maxCharactersInCell = 30,
   className,
 }: DataTableProps<Columns, Rows>) {
-  const [viewMorePopup, setViewMorePopup] = React.useState<{ content: string; x: number; y: number } | false>(false)
-  React.useEffect(() => {
-    if (!viewMorePopup) {
-      return
-    }
-
-    const handleClickOutside = () => {
-      setViewMorePopup(false)
-    }
-
-    document.addEventListener("click", handleClickOutside)
-    document.addEventListener("contextmenu", handleClickOutside)
-
-    return () => {
-      document.removeEventListener("click", handleClickOutside)
-      document.removeEventListener("contextmenu", handleClickOutside)
-    }
-  }, [viewMorePopup])
-
-  const openViewMore = React.useCallback(
-    (content: string) => (e: React.MouseEvent) => {
-      setViewMorePopup({ content, x: e.clientX, y: e.clientY })
-    },
-    [viewMorePopup],
-  )
+  const { open, viewMorePopup } = useViewMore()
   const rowHeight = React.useMemo(() => getRowHeight(initialRowHeight), [initialRowHeight])
 
   const Table = React.useMemo(
@@ -121,7 +89,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
                     key={`op-column-header-cell-${rowIndex}-${cellIndex}`}
                     height={rowHeight}
                   >
-                    {truncate(maxCharactersInCell)(cell)}
+                    <CellContent open={open} cell={cell} />
                   </HeaderCell>
                 ))}
               </HeaderRow>
@@ -148,7 +116,6 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
         >
           {rows[index] &&
             rows[index].map((cell, cellIndex) => {
-              const cellMaybeString = stringifyIfNeeded(cell)
               return (
                 <Cell
                   rowIndex={index}
@@ -156,13 +123,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
                   cell={cellIndex + 1}
                   height={rowHeight}
                 >
-                  {truncate(maxCharactersInCell)(cellMaybeString)}
-                  {typeof cellMaybeString === "string" && cellMaybeString.length > maxCharactersInCell && (
-                    /* we don't want this to cover the border-bottom */
-                    <ViewMoreToggle height={rowHeight - 1} onClick={openViewMore(cellMaybeString)}>
-                      <ChevronDownIcon color={Boolean(viewMorePopup) ? "primary" : undefined} size={10} />
-                    </ViewMoreToggle>
-                  )}
+                  <CellContent open={open} cell={cell} />
                 </Cell>
               )
             })}

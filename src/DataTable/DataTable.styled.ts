@@ -43,10 +43,29 @@ export const Cell = styled.div<{
   font-family: ${({ theme }) => theme.font.family.code};
   font-size: ${({ theme }) => theme.font.size.fineprint}px;
   font-weight: ${({ theme }) => theme.font.weight.regular};
-  padding: 0 ${({ theme }) => theme.space.content}px;
   color: ${({ theme }) => theme.color.text.default};
   grid-column: ${({ cell }) => cell};
   background-color: ${({ theme }) => theme.color.white};
+`
+
+export const dataTableActionContainerSize = 36
+
+export const CellGrid = styled.div<{ canTruncate: boolean }>`
+  display: ${({ canTruncate }) => (canTruncate ? "grid" : "flex")};
+  align-items: center;
+  width: 100%;
+  ${({ canTruncate }) =>
+    canTruncate
+      ? `grid-template-columns: calc(100% - ${dataTableActionContainerSize}px) ${dataTableActionContainerSize}px`
+      : ""};
+  padding: 0 ${({ theme }) => theme.space.content}px;
+`
+
+export const CellTruncator = styled.div`
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
 `
 
 export const HeaderRow = styled.div<{
@@ -64,11 +83,11 @@ export const HeaderCell = styled(Cell)<{
   rowIndex: number
 }>`
   position: relative;
-  background-color: ${({ theme }) => theme.color.background.grey};
+  background-color: ${({ theme }) => theme.color.background.almostWhite};
   color: ${({ theme }) => theme.color.text.dark};
   font-weight: ${({ theme }) => theme.font.weight.bold};
   border-top: ${({ rowIndex }) => (rowIndex === 0 ? "1px solid" : 0)};
-  border-color: ${({ theme }) => theme.color.border.default};
+  border-color: ${({ theme }) => theme.color.border.medium};
 `
 
 export const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: DataTableProps<any, any>["rowHeight"] }>`
@@ -77,23 +96,12 @@ export const DataWrapper = styled("div")<{ numHeaders: number; rowHeight: DataTa
   top: ${({ numHeaders, rowHeight }) => numHeaders * getHeaderRowHeight(rowHeight)}px;
 `
 
-export const ViewMoreToggle = styled("div", { shouldForwardProp: prop => prop !== "height" })<{ height: number }>`
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: ${({ height }) => height}px;
-  width: 40px;
+export const ViewMoreToggle = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   cursor: pointer;
-  padding-right: ${({ theme }) => theme.space.small}px;
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(255, 255, 255, 1) 46%);
-  border-radius: ${({ theme }) => theme.borderRadius}px;
-
-  > * {
-    pointer-events: none;
-  }
 `
 
 const animateIn = keyframes`
@@ -128,4 +136,24 @@ export const ViewMorePopup = styled.div<{ top: number; left: number }>`
     window.innerWidth - left > 0.5 * window.innerWidth ? `left: ${left}` : `right: ${window.innerWidth - left}`}px;
   ${({ top }) =>
     window.innerHeight - top > 0.5 * window.innerHeight ? `top: ${top}` : `bottom: ${window.innerHeight - top}`}px;
+`
+
+/**
+ * We need to render a "ghost cell" in the table
+ * in order to understand if a cell's content is
+ * overflowing its container and then show a
+ * "see more" icon.
+ *
+ * This is that ghost cell.
+ */
+
+export const GhostCell = styled.div`
+  position: absolute;
+  top: 0;
+  left: ${({ theme }) => theme.space.content}px;
+  overflow: hidden;
+  visibility: hidden;
+  white-space: pre;
+  pointer-events: none;
+  max-width: 100%;
 `

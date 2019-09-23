@@ -160,10 +160,10 @@ const Stepper: React.FC<StepperProps> = props => {
   })
 
   // Set actual focus on each render
-  const focusedTabRef = React.useRef<HTMLLIElement>(null)
+  const $focusedTab = React.useRef<HTMLLIElement>(null)
   React.useEffect(() => {
-    if (focusedTabRef.current && focusedTab.shouldFocus) {
-      focusedTabRef.current.focus()
+    if ($focusedTab.current && focusedTab.shouldFocus) {
+      $focusedTab.current.focus()
       setFocusedTab({ ...focusedTab, shouldFocus: false })
     }
   }, [focusedTab])
@@ -190,7 +190,7 @@ const Stepper: React.FC<StepperProps> = props => {
           return (
             <Step
               data-cy={`operational-ui__Stepper__step-${index}`}
-              ref={index === focusedTab.index ? focusedTabRef : undefined}
+              ref={index === focusedTab.index ? $focusedTab : undefined}
               tabIndex={index === focusedTab.index ? 0 : -1}
               key={index}
               stepState={stepState}

@@ -11,7 +11,15 @@ Additionally, you can supply a component as a cell to customize the styling and 
 
 ```jsx
 import * as React from "react"
-import { DataTable, DataTableSelect, DataTableInput, Checkbox, styled } from "@operational/components"
+import {
+  DataTable,
+  DataTableHeader,
+  DataTableSelect,
+  YesIcon,
+  DataTableInput,
+  Checkbox,
+  styled,
+} from "@operational/components"
 
 const CustomCell = styled.span`
   color: red;
@@ -19,14 +27,20 @@ const CustomCell = styled.span`
 ;<DataTable
   columns={[
     [
-      "I am so long I am the longest the longest of the long LOL look how long I am my mom said I would never be long but I really am the longest KOBE BRYANT AINT GOT NOTHING ON ME HOMIE",
+      "I am so long I am the longest the longest of the long LOL look how long I am my mom said I would never be long but I really am the longest SHAQ AINT GOT NOTHING ON ME HOMIE",
     ],
-    ["Name"],
-    ["Diet"],
+    [
+      <DataTableHeader
+        title="Jithin Bas Choondapurrakkal"
+        icon={YesIcon}
+        actions={[{ label: "Say hi", onClick: () => alert("HIIII") }]}
+      />,
+    ],
+    [<DataTableHeader title="Foooooooooooooood" actions={[{ label: "Say bye", onClick: () => alert("BYEEE <3") }]} />],
     ["Loves You"],
   ]}
   rows={[
-    [String(Math.random()).repeat(1000), "Imogen Mason", "Good Stuff", true],
+    [String(Math.random()) + " whats up", "Imogen Mason", "Good Stuff", true],
     [String(Math.random()).repeat(1000), "Fabien Bernard", "🥖🥐🧀🍷", false],
     [String(Math.random()).repeat(1000), "STEREO BOOSTER", "☕️", true],
     [String(Math.random()).repeat(1000), <CustomCell>Mischa Potomin</CustomCell>, "null", false],
