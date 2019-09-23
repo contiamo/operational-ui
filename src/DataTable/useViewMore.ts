@@ -7,26 +7,6 @@ import * as React from "react"
 const useViewMore = () => {
   const [viewMorePopup, setViewMorePopup] = React.useState<{ content: string; x: number; y: number } | false>(false)
 
-  React.useEffect(() => {
-    if (!viewMorePopup) {
-      return
-    }
-
-    const close = () => {
-      setViewMorePopup(false)
-    }
-
-    document.addEventListener("click", close)
-    document.addEventListener("contextmenu", close)
-    document.addEventListener("scroll", close)
-
-    return () => {
-      document.removeEventListener("click", close)
-      document.removeEventListener("contextmenu", close)
-      document.removeEventListener("scroll", close)
-    }
-  }, [viewMorePopup])
-
   const openViewMore = React.useCallback(
     (content: string) => (e: React.MouseEvent) => {
       e.stopPropagation()
@@ -35,11 +15,13 @@ const useViewMore = () => {
     [viewMorePopup],
   )
 
+  const close = () => setViewMorePopup(false)
+
   return {
     viewMorePopup,
-    toggle: (content: string) => (viewMorePopup ? setViewMorePopup(false) : openViewMore(content)),
+    toggle: (content: string) => (viewMorePopup ? close() : openViewMore(content)),
     open: openViewMore,
-    close: () => setViewMorePopup(false),
+    close,
   }
 }
 
