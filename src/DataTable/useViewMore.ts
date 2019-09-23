@@ -29,6 +29,7 @@ const useViewMore = () => {
 
   const openViewMore = React.useCallback(
     (content: string) => (e: React.MouseEvent) => {
+      e.stopPropagation()
       setViewMorePopup({ content, x: e.clientX, y: e.clientY })
     },
     [viewMorePopup],
