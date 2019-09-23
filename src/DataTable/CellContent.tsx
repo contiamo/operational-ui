@@ -10,6 +10,7 @@ import constants from "../utils/constants"
 export interface CellContentProps {
   cell: React.ReactNode
   open: (content: string) => (e: React.MouseEvent<Element, MouseEvent>) => void
+  close: () => void
 }
 
 const stringifyIfNeeded = (value: any) => {
@@ -17,7 +18,7 @@ const stringifyIfNeeded = (value: any) => {
   return value === true || value === false ? String(value) : value
 }
 
-const CellContent: React.FC<CellContentProps> = ({ cell, open }) => {
+const CellContent: React.FC<CellContentProps> = ({ cell, open, close }) => {
   const $cell = React.useRef<HTMLDivElement>(null)
   const $ghostCell = React.useRef<HTMLDivElement>(null)
   const [isTextOverflowing, setIsTextOverflowing] = React.useState(false)
@@ -51,11 +52,13 @@ const CellContent: React.FC<CellContentProps> = ({ cell, open }) => {
       {isString(cell) ? <CellTruncator>{stringifyIfNeeded(cell)}</CellTruncator> : stringifyIfNeeded(cell)}
       {isString(cell) && <GhostCell ref={$ghostCell}>{stringifyIfNeeded(cell)}</GhostCell>}
       {isString(cell) && isTextOverflowing ? (
-        <ViewMoreToggle onClick={open(cell)}>
+        <ViewMoreToggle>
           <DotMenuHorizontalIcon
             color="color.text.lighter"
             size={20}
             onClick={noop} // for the hover/focus effect
+            onMouseEnter={open(cell)}
+            onMouseLeave={close}
           />
         </ViewMoreToggle>
       ) : (

@@ -5,39 +5,40 @@ import * as React from "react"
  * triggered by a click event.
  */
 const useViewMore = () => {
+  let closeTimeoutId = 0
   const [viewMorePopup, setViewMorePopup] = React.useState<{ content: string; x: number; y: number } | false>(false)
-
-  React.useEffect(() => {
-    if (!viewMorePopup) {
-      return
-    }
-
-    const close = () => {
-      setViewMorePopup(false)
-    }
-
-    document.addEventListener("click", close)
-    document.addEventListener("contextmenu", close)
-    document.addEventListener("scroll", close)
-
-    return () => {
-      document.removeEventListener("click", close)
-      document.removeEventListener("contextmenu", close)
-      document.removeEventListener("scroll", close)
-    }
-  }, [viewMorePopup])
 
   const openViewMore = React.useCallback(
     (content: string) => (e: React.MouseEvent) => {
-      setViewMorePopup({ content, x: e.clientX, y: e.clientY })
+      window.clearTimeout(closeTimeoutId)
+      e.stopPropagation()
+      setViewMorePopup({
+        content,
+        x: e.clientX > window.innerWidth / 2 ? e.clientX - 8 : e.clientX + 8,
+        y: e.clientY > window.innerHeight / 2 ? e.clientY - 8 : e.clientY + 8,
+      })
     },
-    [viewMorePopup],
+    [viewMorePopup, closeTimeoutId],
+  )
+
+  const close = () => {
+    closeTimeoutId = window.setTimeout(() => setViewMorePopup(false), 150)
+  }
+
+  React.useEffect(
+    () => () => {
+      if (closeTimeoutId) {
+        window.clearTimeout(closeTimeoutId)
+      }
+    },
+    [closeTimeoutId],
   )
 
   return {
     viewMorePopup,
-    toggle: (content: string) => (viewMorePopup ? setViewMorePopup(false) : openViewMore(content)),
+    toggle: (content: string) => (viewMorePopup ? close() : openViewMore(content)),
     open: openViewMore,
+    close,
   }
 }
 

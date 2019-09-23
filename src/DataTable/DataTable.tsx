@@ -15,9 +15,6 @@ import {
 } from "./DataTable.styled"
 import { defaultRowHeight, getRowHeight } from "./DataTable.util"
 import useViewMore from "./useViewMore"
-import { CopyIcon } from "../Icon"
-import { Button, OperationalContext } from ".."
-import CopyToClipboard from "react-copy-to-clipboard"
 import CellContent from "./CellContent"
 
 export interface DataTableProps<Columns, Rows> {
@@ -61,7 +58,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   cellWidth = "minmax(200px, 1fr)",
   className,
 }: DataTableProps<Columns, Rows>) {
-  const { open, viewMorePopup } = useViewMore()
+  const { open, close, viewMorePopup } = useViewMore()
   const rowHeight = React.useMemo(() => getRowHeight(initialRowHeight), [initialRowHeight])
 
   const Table = React.useMemo(
@@ -89,7 +86,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
                     key={`op-column-header-cell-${rowIndex}-${cellIndex}`}
                     height={rowHeight}
                   >
-                    <CellContent open={open} cell={cell} />
+                    <CellContent close={close} open={open} cell={cell} />
                   </HeaderCell>
                 ))}
               </HeaderRow>
@@ -123,7 +120,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
                   cell={cellIndex + 1}
                   height={rowHeight}
                 >
-                  <CellContent open={open} cell={cell} />
+                  <CellContent close={close} open={open} cell={cell} />
                 </Cell>
               )
             })}
@@ -145,19 +142,6 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
     <>
       {viewMorePopup && (
         <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x}>
-          <OperationalContext>
-            {({ pushMessage }) => (
-              <CopyToClipboard
-                text={viewMorePopup.content || ""}
-                onCopy={() => pushMessage({ body: "Copied to clipboard", type: "info" })}
-              >
-                <Button condensed tabIndex={0}>
-                  <CopyIcon size={16} left />
-                  Copy
-                </Button>
-              </CopyToClipboard>
-            )}
-          </OperationalContext>
           {viewMorePopup.content}
         </ViewMorePopup>
       )}

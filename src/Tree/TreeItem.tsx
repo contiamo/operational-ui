@@ -1,4 +1,6 @@
 import React, { useCallback, useRef, useLayoutEffect, useState } from "react"
+import noop from "lodash/noop"
+
 import NameTag from "../NameTag/NameTag"
 import { darken, lighten } from "../utils"
 import styled from "../utils/styled"
@@ -6,6 +8,7 @@ import { ChevronRightIcon, ChevronDownIcon, IconComponentType, DotMenuHorizontal
 import Highlighter from "react-highlight-words"
 import constants from "../utils/constants"
 import { ViewMorePopup } from "../DataTable/DataTable.styled"
+import useViewMore from "../DataTable/useViewMore"
 
 interface TreeItemProps {
   level: number
@@ -143,7 +146,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     [onNodeContextMenu, onNodeClick],
   )
 
-  const [viewMorePopup, setViewMorePopup] = useState<{ x: number; y: number; content: string } | null>(null)
+  const { open, close, viewMorePopup } = useViewMore()
   const [isTooLong, setIsTooLong] = useState(false)
   const $label = useRef<HTMLDivElement>(null)
 
@@ -202,21 +205,10 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       {isTooLong && (
         <DotMenuHorizontalIcon
           size={viewMoreIconSize}
+          onClick={noop}
           left
-          onClick={() => {
-            /** Just the hover style! */
-          }}
-          onMouseEnter={() => {
-            if ($label.current) {
-              const { right, top } = $label.current.getBoundingClientRect()
-              setViewMorePopup({ y: top + viewMoreIconSize, x: right + viewMoreIconSize, content: label })
-            }
-          }}
-          onMouseLeave={() => {
-            if ($label.current) {
-              setViewMorePopup(null)
-            }
-          }}
+          onMouseEnter={open(label)}
+          onMouseLeave={close}
         />
       )}
       <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>

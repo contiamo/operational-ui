@@ -41,6 +41,10 @@ export const Svg = styled.svg<IconProps>`
   margin-left: ${({ right, theme }) => (right ? theme.space.small : 0)}px;
   margin-right: ${({ left, theme }) => (left ? theme.space.small : 0)}px;
 
+  > * {
+    pointer-events: none;
+  }
+
   ${({ onClick, theme }) =>
     onClick
       ? `
