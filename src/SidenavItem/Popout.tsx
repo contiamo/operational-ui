@@ -18,6 +18,7 @@ const Container = styled("div")<{ top: string; left: string; position: string }>
   z-index: ${({ theme }) => theme.zIndex.selectOptions + 1};
   display: flex;
   flex-direction: column;
+  pointer-events: none;
 `
 
 const ScrollTrap = styled("div")`
