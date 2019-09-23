@@ -10,7 +10,7 @@ const useViewMore = () => {
 
   const openViewMore = React.useCallback(
     (content: string) => (e: React.MouseEvent) => {
-      window.clearTimeout(closeTimeout)
+      window.clearTimeout(closeTimeoutId)
       e.stopPropagation()
       setViewMorePopup({
         content,
@@ -18,7 +18,7 @@ const useViewMore = () => {
         y: e.clientY > window.innerHeight / 2 ? e.clientY - 8 : e.clientY + 8,
       })
     },
-    [viewMorePopup, closeTimeout],
+    [viewMorePopup, closeTimeoutId],
   )
 
   const close = () => {
@@ -27,11 +27,11 @@ const useViewMore = () => {
 
   React.useEffect(
     () => () => {
-      if (closeTimeout) {
-        window.clearTimeout(closeTimeout)
+      if (closeTimeoutId) {
+        window.clearTimeout(closeTimeoutId)
       }
     },
-    [closeTimeout],
+    [closeTimeoutId],
   )
 
   return {
