@@ -5,7 +5,7 @@ import * as React from "react"
  * triggered by a click event.
  */
 const useViewMore = () => {
-  let closeTimeout = 0
+  let closeTimeoutId = 0
   const [viewMorePopup, setViewMorePopup] = React.useState<{ content: string; x: number; y: number } | false>(false)
 
   const openViewMore = React.useCallback(
