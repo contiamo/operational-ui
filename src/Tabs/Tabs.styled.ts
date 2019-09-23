@@ -4,6 +4,7 @@ import { headerHeight, expandColor } from "../utils/constants"
 import { lighten } from "../utils"
 
 const buttonWidth = 36
+const tabWidth = 194
 const plusButtonWidth = 42
 
 export const Container = styled.div`
@@ -56,6 +57,7 @@ export const TabHeader = styled(SectionHeader, {
   center?: boolean
   color?: string
   last?: boolean
+  size: "fixed" | "flex"
 }>`
   justify-content: ${({ center }) => (center ? "center" : "space-between")};
   cursor: pointer;
@@ -80,9 +82,8 @@ export const TabHeader = styled(SectionHeader, {
          `
       : ""}
 
-  ${({ condensed }) =>
-    condensed ? `max-width: ${buttonWidth}px; min-width: ${buttonWidth}px;` : "max-width: 180px;"}
-  flex-grow: 1;
+  ${({ condensed }) => (condensed ? `max-width: ${buttonWidth}px; min-width: ${buttonWidth}px;` : "max-width: 180px;")}
+  ${({ size }) => (size === "fixed" ? `flex: 0 0 ${tabWidth}px; width: ${tabWidth}px;` : "flex: 1 0;")};
   transition: background-color 0.2s;
 
   /* Fix the cursor on the "add tab" button */

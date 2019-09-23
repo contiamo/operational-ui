@@ -60,7 +60,7 @@ const MyComponent = () => {
 
   return (
     <div style={{ height: "220px" }}>
-      <Tabs tabs={tabs} active={active} onActivate={setActive} onClose={onClose} onInsert={onInsert}>
+      <Tabs tabSize="fixed" tabs={tabs} active={active} onActivate={setActive} onClose={onClose} onInsert={onInsert}>
         <div style={{ padding: 8 }}>
           <Textarea fullWidth height={143} value={`Tab ${active + 1}`} />
         </div>
