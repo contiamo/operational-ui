@@ -21,7 +21,7 @@ const DataTableHeader: React.FC<DataTableHeaderProps> = ({ icon: Icon, actions, 
   const $title = React.useRef<HTMLDivElement>(null)
   const $ghostTitle = React.useRef<HTMLDivElement>(null)
   const [isTitleOverflowing, setIsTitleOverflowing] = React.useState(false)
-  const { open, viewMorePopup } = useViewMore()
+  const { open, close, viewMorePopup } = useViewMore()
   const { width } = useWindowSize()
 
   React.useLayoutEffect(() => {
@@ -52,7 +52,8 @@ const DataTableHeader: React.FC<DataTableHeaderProps> = ({ icon: Icon, actions, 
         {isTitleOverflowing ? (
           <DotMenuHorizontalIcon
             style={{ margin: "auto" }}
-            onClick={isString(title) ? open(title) : noop}
+            onMouseEnter={isString(title) ? open(title) : noop}
+            onMouseLeave={close}
             color="color.text.lighter"
             size={20}
           />

@@ -39,6 +39,7 @@ const useViewMore = () => {
     viewMorePopup,
     toggle: (content: string) => (viewMorePopup ? setViewMorePopup(false) : openViewMore(content)),
     open: openViewMore,
+    close: () => setViewMorePopup(false),
   }
 }
 

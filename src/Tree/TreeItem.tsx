@@ -1,4 +1,6 @@
 import React, { useCallback, useRef, useLayoutEffect, useState } from "react"
+import noop from "lodash/noop"
+
 import NameTag from "../NameTag/NameTag"
 import { darken, lighten } from "../utils"
 import styled from "../utils/styled"
@@ -144,7 +146,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     [onNodeContextMenu, onNodeClick],
   )
 
-  const { open, viewMorePopup } = useViewMore()
+  const { open, close, viewMorePopup } = useViewMore()
   const [isTooLong, setIsTooLong] = useState(false)
   const $label = useRef<HTMLDivElement>(null)
 
@@ -200,7 +202,15 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           searchWords={searchWords}
         />
       </Label>
-      {isTooLong && <DotMenuHorizontalIcon size={viewMoreIconSize} left onClick={open(label)} />}
+      {isTooLong && (
+        <DotMenuHorizontalIcon
+          size={viewMoreIconSize}
+          onClick={noop}
+          left
+          onMouseEnter={open(label)}
+          onMouseLeave={close}
+        />
+      )}
       <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>
     </Header>
   )
