@@ -52,11 +52,13 @@ const CellContent: React.FC<CellContentProps> = ({ cell, open, close }) => {
       {isString(cell) ? <CellTruncator>{stringifyIfNeeded(cell)}</CellTruncator> : stringifyIfNeeded(cell)}
       {isString(cell) && <GhostCell ref={$ghostCell}>{stringifyIfNeeded(cell)}</GhostCell>}
       {isString(cell) && isTextOverflowing ? (
-        <ViewMoreToggle onMouseEnter={open(cell)} onMouseLeave={close}>
+        <ViewMoreToggle>
           <DotMenuHorizontalIcon
             color="color.text.lighter"
             size={20}
             onClick={noop} // for the hover/focus effect
+            onMouseEnter={open(cell)}
+            onMouseLeave={close}
           />
         </ViewMoreToggle>
       ) : (

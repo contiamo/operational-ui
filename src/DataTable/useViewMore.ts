@@ -5,17 +5,34 @@ import * as React from "react"
  * triggered by a click event.
  */
 const useViewMore = () => {
+  let closeTimeout = 0
   const [viewMorePopup, setViewMorePopup] = React.useState<{ content: string; x: number; y: number } | false>(false)
 
   const openViewMore = React.useCallback(
     (content: string) => (e: React.MouseEvent) => {
+      window.clearTimeout(closeTimeout)
       e.stopPropagation()
-      setViewMorePopup({ content, x: e.clientX, y: e.clientY })
+      setViewMorePopup({
+        content,
+        x: e.clientX > window.innerWidth / 2 ? e.clientX - 8 : e.clientX + 8,
+        y: e.clientY > window.innerHeight / 2 ? e.clientY - 8 : e.clientY + 8,
+      })
     },
-    [viewMorePopup],
+    [viewMorePopup, closeTimeout],
   )
 
-  const close = () => setViewMorePopup(false)
+  const close = () => {
+    closeTimeout = window.setTimeout(() => setViewMorePopup(false), 300)
+  }
+
+  React.useEffect(
+    () => () => {
+      if (closeTimeout) {
+        window.clearTimeout(closeTimeout)
+      }
+    },
+    [closeTimeout],
+  )
 
   return {
     viewMorePopup,
