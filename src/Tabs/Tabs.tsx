@@ -34,6 +34,7 @@ export interface TabsProps extends DefaultProps {
   label?: string
   style?: React.CSSProperties
   id?: string
+  tabSize?: "fixed" | "flex"
 }
 
 const Tabs: React.FC<TabsProps> = ({
@@ -46,6 +47,7 @@ const Tabs: React.FC<TabsProps> = ({
   label,
   style,
   id,
+  tabSize = "flex",
   children,
 }) => {
   if (!Number.isInteger(active) || active < 0 || active >= tabs.length) {
@@ -167,6 +169,7 @@ const Tabs: React.FC<TabsProps> = ({
               }
               return (
                 <TabHeader
+                  size={tabSize}
                   center={!scroll}
                   tabIndex={i === active ? 0 : -1}
                   aria-selected={i === active}
