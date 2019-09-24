@@ -14,6 +14,41 @@ import { Page, Card } from "@operational/components"
 </Page>
 ```
 
+### Dynamic Title
+
+You can have whatever you want in your title:
+
+```jsx
+import * as React from "react"
+import { Page, Card } from "@operational/components"
+;<Page
+  title={
+    <div style={{ display: "flex", alignItems: "center" animation: "evolve 5s infinite", width: "100%", marginBottom: 16, padding: 16, color: "white" }}>
+      I AM CONSTANTLY EVOLVING
+      <img style={{ display: "block", marginLeft: "auto", height: "60px" }} alt="LOL" src="https://media.giphy.com/media/WQxkpI7LTStUExhrR7/giphy.gif" />
+    </div>
+  }
+>
+  <Card>Hello, this is page content</Card>
+  <style>
+    {`@keyframes evolve {
+      0% {
+        background-color: #f00;
+      }
+      33% {
+        background-color: #0f0;
+      }
+      66% {
+        background-color: #00f;
+      }
+      100% {
+        background-color: #f00;
+      }
+    }`}
+  </style>
+</Page>
+```
+
 ### Long Children
 
 Here's a case where children are too long. The card has a _hard_ max-width set to its grid area, and any text children are hyphenated.

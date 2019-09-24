@@ -14,7 +14,7 @@ export interface BaseProps extends DefaultProps {
   /** Content of the page */
   children?: PageContentProps["children"]
   /** Page title */
-  title?: string
+  title?: React.ReactNode
   /** Page actions, typically `condensed button` component inside a fragment */
   actions?: React.ReactNode
   /** Toggles a top progress bar to indicate loading state */

@@ -10,6 +10,7 @@ export const Title = styled("h1")<{
   lineHeight: theme.font.lineHeight,
   margin: 0,
   color: theme.color.text[color ? color : "dark"],
+  width: "100%",
 }))
 
 export default Title
