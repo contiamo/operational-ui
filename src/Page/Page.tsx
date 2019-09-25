@@ -1,4 +1,5 @@
 import * as React from "react"
+import isString from "lodash/isString"
 
 import Tabs, { Tab } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
@@ -123,10 +124,6 @@ const TabsContainer = styled("div", { shouldForwardProp: prop => prop !== "fill"
   max-width: ${({ theme, fill }) => (fill ? "100%" : `${theme.pageSize.max}px`)};
 `
 
-const PageTitle = styled(Title)`
-  width: 100%;
-`
-
 const Page: React.FC<PageProps> = ({
   actions,
   activeTabName,
@@ -147,7 +144,7 @@ const Page: React.FC<PageProps> = ({
           {title ? (
             <>
               <TitleContainer fill={Boolean(fill)}>
-                <PageTitle>{title}</PageTitle>
+                {isString(title) ? <Title>{title}</Title> : title}
                 <ActionsContainer>{actions}</ActionsContainer>
               </TitleContainer>
               <TabsContainer fill={Boolean(fill)}>{tabsBar}</TabsContainer>
@@ -165,7 +162,7 @@ const Page: React.FC<PageProps> = ({
     <>
       {title && (
         <TitleContainer fill={Boolean(fill)}>
-          <Title>{title}</Title>
+          {isString(title) ? <Title>{title}</Title> : title}
           <ActionsContainer>{actions}</ActionsContainer>
         </TitleContainer>
       )}
