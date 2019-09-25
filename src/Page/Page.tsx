@@ -1,4 +1,5 @@
 import * as React from "react"
+import isString from "lodash/isString"
 
 import Tabs, { Tab } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
@@ -143,7 +144,7 @@ const Page: React.FC<PageProps> = ({
           {title ? (
             <>
               <TitleContainer fill={Boolean(fill)}>
-                <Title>{title}</Title>
+                {isString(title) ? <Title>{title}</Title> : title}
                 <ActionsContainer>{actions}</ActionsContainer>
               </TitleContainer>
               <TabsContainer fill={Boolean(fill)}>{tabsBar}</TabsContainer>
@@ -161,7 +162,7 @@ const Page: React.FC<PageProps> = ({
     <>
       {title && (
         <TitleContainer fill={Boolean(fill)}>
-          <Title>{title}</Title>
+          {isString(title) ? <Title>{title}</Title> : title}
           <ActionsContainer>{actions}</ActionsContainer>
         </TitleContainer>
       )}
