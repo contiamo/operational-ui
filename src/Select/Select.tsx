@@ -121,6 +121,7 @@ export const Select: React.FC<SelectProps> = ({
           $input.current.focus()
         }
       }}
+      anchored
       disabled={disabled}
       keepOpenOnItemClick={Array.isArray(value)}
       items={items}

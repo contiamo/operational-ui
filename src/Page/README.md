@@ -544,8 +544,10 @@ Modals are a more flexible alternative to the confirm box, that may contain anyt
 
 ```jsx
 import * as React from "react"
-import { Page, Card, Button } from "@operational/components"
-;<Page title="With a modal">
+import { Page, Select, Card, Button } from "@operational/components"
+import * as React from "react"
+import { Select, Page, Card, Button } from "@operational/components"
+;<Page title="Confirmation in modal">
   {({ confirm, modal }) => (
     <Card
       action={
@@ -575,9 +577,27 @@ import { Page, Card, Button } from "@operational/components"
             body: close => (
               <>
                 <p>So tasty :)</p>
+                <Select
+                  value="Hello"
+                  options={[
+                    { label: "hello", value: "world" },
+                    { label: "hello", value: "world" },
+                    { label: "hello", value: "world" },
+                    { label: "hello", value: "world" },
+                    { label: "hello", value: "world" },
+                    { label: "hello", value: "world" },
+                    { label: "hello", value: "world" },
+                    { label: "hello", value: "world" },
+                    { label: "hello", value: "world" },
+                  ]}
+                />
                 <Button
                   onClick={() => {
-                    close()
+                    confirm({
+                      title: "Are you sure?",
+                      body: "Are you sure?",
+                      onConfirm: close,
+                    })
                   }}
                 >
                   Close this modal now!
