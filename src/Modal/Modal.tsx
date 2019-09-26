@@ -15,6 +15,10 @@ export interface ModalProps {
   fullSize?: boolean
 }
 
+const modalContext = React.createContext(false)
+const { Provider: ModalContextProvider } = modalContext
+export const useModalContext = () => React.useContext(modalContext)
+
 const margin = 16
 
 export type Top = number
@@ -89,24 +93,30 @@ const Modal: React.RefForwardingComponent<HTMLDivElement, ModalProps> = (
   return (
     <>
       <Overlay onClick={onClickOutside} />
-      <Container
-        tabIndex={0}
-        ref={$modalContainer}
-        top={size[0]}
-        left={size[1]}
-        width={width || size[2]}
-        height={height}
-        modalHeight={$modalContainer.current && $modalContainer.current.clientHeight}
-        anchorHeight={typeof size[3] === "number" && size[3]}
-        className="modal"
-      >
-        <ModalCard ref={ref} fullSize title={title} action={fullSize ? <NoIcon onClick={onClickOutside} /> : undefined}>
-          <ModalContent actions={Boolean(actions)} anchor={Boolean(anchor)} top={size[0]}>
-            <ContentWrapper>{children}</ContentWrapper>
-            {actions && <Actions childCount={actions.length}>{actions}</Actions>}
-          </ModalContent>
-        </ModalCard>
-      </Container>
+      <ModalContextProvider value={true}>
+        <Container
+          tabIndex={0}
+          ref={$modalContainer}
+          top={size[0]}
+          left={size[1]}
+          width={width || size[2]}
+          height={height}
+          modalHeight={$modalContainer.current && $modalContainer.current.clientHeight}
+          anchorHeight={typeof size[3] === "number" && size[3]}
+        >
+          <ModalCard
+            ref={ref}
+            fullSize
+            title={title}
+            action={fullSize ? <NoIcon onClick={onClickOutside} /> : undefined}
+          >
+            <ModalContent actions={Boolean(actions)} anchor={Boolean(anchor)} top={size[0]}>
+              <ContentWrapper>{children}</ContentWrapper>
+              {actions && <Actions childCount={actions.length}>{actions}</Actions>}
+            </ModalContent>
+          </ModalCard>
+        </Container>
+      </ModalContextProvider>
     </>
   )
 }

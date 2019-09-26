@@ -8,6 +8,7 @@ import ContextMenuItem, { rowHeight, IContextMenuItem } from "./ContextMenu.Item
 import { useUniqueId } from "../useUniqueId"
 import { useListbox } from "../useListbox"
 import ContextMenuPopout from "./ContextMenu.Popout"
+import { useModalContext } from "../Modal/Modal"
 
 export interface ContextMenuProps extends DefaultProps {
   /** Optional reference for the menu container  */
@@ -63,23 +64,19 @@ const Container = styled.div<{ side: ContextMenuProps["align"]; isOpen: boolean 
   align-items: center;
   justify-content: ${({ side }) => (side === "left" ? "flex-start" : "flex-end")};
   z-index: ${({ isOpen, theme }) => (isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions)};
-  /* naive option which will not work because dropdown is created outside of the form */
-  .modal & {
-    z-index: ${({ isOpen, theme }) => (isOpen ? theme.zIndex.modal + 10 : theme.zIndex.selectOptions)};
-  }
 `
 
 /**
  * Overlay to prevent mouse events when the context menu is open
  */
-const InvisibleOverlay = styled.div`
+const InvisibleOverlay = styled.div<{ inModal: boolean }>`
   position: fixed;
   top: 0;
   bottom: 0;
   right: 0;
   left: 0;
   cursor: default;
-  z-index: ${({ theme }) => theme.zIndex.selectOptions + 1};
+  z-index: ${({ theme, inModal }) => (inModal ? theme.zIndex.modal : theme.zIndex.selectOptions + 1)};
 `
 
 const Separator = styled.div`
@@ -164,9 +161,11 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
     }
   }, [currentItem, onClick])
 
+  const inModal = useModalContext()
   const overlay = (
     <InvisibleOverlay
       ref={$invisibleOverlay}
+      inModal={inModal}
       onClick={e => {
         e.stopPropagation()
         setIsOpen && setIsOpen(false)
