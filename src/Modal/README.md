@@ -142,7 +142,7 @@ import { Modal, Body, Button } from "@operational/components"
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-  const galactusRef = React.useRef<HTMLDivElement>(null);
+  const galactusRef = React.useRef<HTMLDivElement>(null)
 
   return (
     <>
@@ -235,7 +235,7 @@ We also would like to have stateful modals sometimes. Here's how one can impleme
 
 ```jsx
 import * as React from "react"
-import { Modal, Form, Input, Button, Checkbox } from "@operational/components"
+import { Modal, Form, Input, Button, Checkbox, Select } from "@operational/components"
 
 const DeleteButton = ({ anchorRef }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
@@ -257,6 +257,17 @@ const DeleteButton = ({ anchorRef }) => {
     </>
   )
 }
+
+const options = [
+  { value: "one" },
+  { value: "two" },
+  { value: "three" },
+  { value: "four" },
+  { value: "five" },
+  { value: "six" },
+  { value: "seven" },
+  { value: "eight" },
+]
 
 const MyComponent = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false)
@@ -325,6 +336,11 @@ const MyComponent = () => {
               value={formData.iceCream}
               placeholder="Rocky Road"
               label="Your Favorite Ice Cream Flavor"
+            />
+            <Select
+              value="one"
+              options={options}
+              onChange={() => {}}
             />
           </Form>
         ) : (
