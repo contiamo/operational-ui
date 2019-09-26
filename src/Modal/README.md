@@ -422,3 +422,26 @@ const MyComponent = () => {
 }
 ;<MyComponent />
 ```
+
+## With shift
+
+Typically, you would use a modal to show some information and close when the area outside of it is clicked. Try it out!
+
+```jsx
+import * as React from "react"
+import { Modal } from "@operational/components"
+
+const MyComponent = () => {
+  const [isModalOpen, setIsModalOpen] = React.useState(false)
+
+  return (
+    <>
+      <div onClick={() => setIsModalOpen(true)}>Trigger the Modal</div>
+      <Modal isOpen={isModalOpen} onClickOutside={() => setIsModalOpen(false)} title="What's up?" shiftOverlay={220}>
+        ← Look the sidebar
+      </Modal>
+    </>
+  )
+}
+;<MyComponent />
+```

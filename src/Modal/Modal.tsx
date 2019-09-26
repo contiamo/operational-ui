@@ -13,6 +13,7 @@ export interface ModalProps {
   anchor?: React.RefObject<HTMLElement>
   actions?: React.ReactNode[]
   fullSize?: boolean
+  shiftOverlay?: number
 }
 
 const margin = 16
@@ -23,7 +24,7 @@ export type Width = ModalProps["width"]
 export type Height = ModalProps["height"] // undefined for `auto`
 
 const Modal: React.RefForwardingComponent<HTMLDivElement, ModalProps> = (
-  { title, anchor, children, onClickOutside, height, isOpen, actions, width, fullSize },
+  { title, anchor, children, onClickOutside, height, isOpen, actions, width, fullSize, shiftOverlay },
   ref,
 ) => {
   const $modalContainer = React.useRef<HTMLDivElement>(null)
@@ -88,7 +89,7 @@ const Modal: React.RefForwardingComponent<HTMLDivElement, ModalProps> = (
 
   return (
     <>
-      <Overlay onClick={onClickOutside} />
+      <Overlay onClick={onClickOutside} shiftOverlay={shiftOverlay} />
       <Container
         tabIndex={0}
         ref={$modalContainer}

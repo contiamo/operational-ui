@@ -5,10 +5,10 @@ import { cardHeaderHeight } from "../Internals/CardHeader"
 import { Top, Left, Width, Height } from "./Modal"
 import { getTop, getContainerHeight } from "./Modal.util"
 
-export const Overlay = styled.div`
+export const Overlay = styled.div<{ shiftOverlay?: number }>`
   position: fixed;
   top: 0;
-  left: 0;
+  left: ${({ shiftOverlay }) => shiftOverlay || 0}px;
   height: 100vh;
   width: 100vw;
   background: rgba(0, 0, 0, 0.5);
@@ -55,9 +55,7 @@ export const ModalCard = styled(Card)`
   overflow: hidden;
 `
 
-export const ModalContent = styled("div", {
-  shouldForwardProp: prop => !["top", "action", "anchor"].includes(prop),
-})<{ anchor: boolean; actions: boolean; top: number }>`
+export const ModalContent = styled.div<{ anchor: boolean; actions: boolean; top: number }>`
   display: grid;
   grid-template-rows: ${({ actions }) => (actions ? "minmax(auto, 100%) max-content" : "auto")};
   height: 100%;
