@@ -53,32 +53,34 @@ export interface State {
 const isChildAFunction = (children: ContextMenuProps["children"]): children is (isActive: boolean) => React.ReactNode =>
   typeof children === "function"
 
-const Container = styled.div<{ side: ContextMenuProps["align"]; isOpen: boolean }>(
-  ({ isOpen, theme, side: align }) => ({
-    label: "contextmenu",
-    cursor: "pointer",
-    outline: "none",
-    position: "relative",
-    width: "fit-content",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: align === "left" ? "flex-start" : "flex-end",
-    zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
-  }),
-)
+const Container = styled.div<{ side: ContextMenuProps["align"]; isOpen: boolean }>`
+  label: contextmenu;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: ${({ side }) => (side === "left" ? "flex-start" : "flex-end")};
+  z-index: ${({ isOpen, theme }) => (isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions)};
+  /* naive option which will not work because dropdown is created outside of the form */
+  .modal & {
+    z-index: ${({ isOpen, theme }) => (isOpen ? theme.zIndex.modal + 10 : theme.zIndex.selectOptions)};
+  }
+`
 
 /**
  * Overlay to prevent mouse events when the context menu is open
  */
-const InvisibleOverlay = styled("div")(({ theme }) => ({
-  position: "fixed",
-  top: 0,
-  bottom: 0,
-  right: 0,
-  left: 0,
-  cursor: "default",
-  zIndex: theme.zIndex.selectOptions + 1,
-}))
+const InvisibleOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  cursor: default;
+  z-index: ${({ theme }) => theme.zIndex.selectOptions + 1};
+`
 
 const Separator = styled.div`
   padding: ${({ theme }) => theme.space.small}px 0;
