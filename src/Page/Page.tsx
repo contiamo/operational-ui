@@ -22,13 +22,13 @@ export interface BaseProps extends DefaultProps {
   loading?: boolean
   /** Render a page without padding */
   noPadding?: boolean
+  /** Fill the entire width */
+  fill?: boolean
 }
 
 export interface PropsWithSimplePage extends BaseProps {
   /** Areas template for `PageArea` disposition */
   areas?: "main"
-  /** Fill the entire width */
-  fill?: boolean
   tabs?: never
   activeTabName?: never
   onTabChange?: never
@@ -37,8 +37,6 @@ export interface PropsWithSimplePage extends BaseProps {
 export interface PropsWithComplexPage extends BaseProps {
   /** Areas template for `PageArea` disposition */
   areas: "main side" | "side main"
-  /** Fill the entire width */
-  fill?: boolean
   tabs?: never
   activeTabName?: never
   onTabChange?: never
@@ -62,7 +60,6 @@ export interface PropsWithTabs extends BaseProps {
   onTabChange?: (name: string) => void
   children?: never
   areas?: never
-  fill?: never
 }
 
 export type PageProps = PropsWithSimplePage | PropsWithComplexPage | PropsWithTabs
