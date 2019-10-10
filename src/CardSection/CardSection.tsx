@@ -107,7 +107,6 @@ const Title = styled("div")<{ withToggle: boolean; forceHoverStyles: boolean }>`
     font-weight: ${theme.font.weight.medium};
     color: ${theme.color.text.lighter};
     font-size: ${theme.font.size.small}px;
-    border-bottom: 1px solid ${theme.color.separators.default};
     ${
       withToggle
         ? `
@@ -187,7 +186,7 @@ const CardSection: React.SFC<CardSectionProps> = ({
 }) => (
   <Container {...props} disabled={disabled}>
     <Overlay overlayType={makeOverlayType(disabled, dragAndDropFeedback)} />
-    {title && (
+    {(title || actions || onToggle) && (
       <Title
         onMouseEnter={onToggleMouseEnter}
         onMouseLeave={onToggleMouseLeave}
