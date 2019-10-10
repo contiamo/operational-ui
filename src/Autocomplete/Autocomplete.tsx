@@ -91,6 +91,7 @@ export function Autocomplete<T>({
 
   return (
     <Container
+      anchored
       open
       iconLocation="right"
       fullWidth={Boolean(fullWidth)}
