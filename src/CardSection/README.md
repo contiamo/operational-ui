@@ -92,6 +92,23 @@ const MyOtherComponent = () => {
 ;<MyOtherComponent />
 ```
 
+### Actions and NO title
+
+```jsx
+import * as React from "react"
+import { Card, CardSection } from "@operational/components"
+;<div style={{ width: 300 }}>
+  <Card
+    stackSections="horizontal"
+    sections={
+      <>
+        <CardSection actions={["Action 1", "Action 2"]}>Content 1</CardSection>
+      </>
+    }
+  />
+</div>
+```
+
 ### Actions
 
 ```jsx
