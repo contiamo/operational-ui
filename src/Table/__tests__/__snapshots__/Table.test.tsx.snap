@@ -14,12 +14,14 @@ exports[`Table Component Should render 1`] = `
       class="css-x4ot8q"
     >
       <tr
-        class="css-16kb41"
+        class="css-1aheh2"
       />
     </thead>
-    <tbody>
+    <tbody
+      data-react-beautiful-dnd-droppable="0"
+    >
       <tr
-        class="css-16kb41"
+        class="css-1aheh2"
       >
         <td
           class="css-zw5kx"
