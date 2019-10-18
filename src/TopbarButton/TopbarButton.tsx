@@ -57,7 +57,7 @@ const TopbarButtonContainer = styled.button<{ disabled?: boolean; flavor: Topbar
 const TopbarButton: React.SFC<TopbarButtonProps> = ({ children, icon: Icon, onClick, flavor, ...props }) => (
   <TopbarButtonContainer {...props} flavor={flavor} onClick={props.disabled ? undefined : onClick}>
     {children}
-    {Icon && <Icon right size={12} />}
+    {Icon && <Icon left size={12} />}
   </TopbarButtonContainer>
 )
 
