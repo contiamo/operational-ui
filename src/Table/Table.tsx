@@ -1,9 +1,19 @@
 import * as React from "react"
+import {
+  Droppable,
+  Draggable,
+  DragDropContext,
+  ResponderProvided,
+  DropResult,
+  DraggableProps,
+} from "react-beautiful-dnd"
+
 import ActionMenu, { ActionMenuProps } from "../ActionMenu/ActionMenu"
 import { DefaultProps } from "../types"
 import Small from "../Typography/Small"
 import styled from "../utils/styled"
 import { IconComponentType, ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon } from "../Icon"
+import { useUniqueId } from "../useUniqueId"
 
 export interface TableProps<T> extends DefaultProps {
   data: T[]
@@ -25,6 +35,8 @@ export interface TableProps<T> extends DefaultProps {
   headless?: boolean
   /** Fixed Layout for performance */
   fixedLayout?: boolean
+  /** On reorder rows, */
+  onReorder?: (result: DropResult, provided: ResponderProvided) => void
 }
 
 export interface Column<T> {
@@ -45,17 +57,21 @@ const Container = styled("table")<{ fixedLayout: TableProps<any>["fixedLayout"] 
   tableLayout: fixedLayout ? "fixed" : "initial",
 }))
 
-const Tr = styled("tr")<{ hover?: boolean; clickable?: boolean }>(({ hover, theme, clickable }) => ({
-  height: 50,
-  ...(hover
-    ? {
-        ":hover, :focus": {
-          backgroundColor: theme.color.background.lighter,
-          cursor: clickable ? "pointer" : "default",
-        },
-      }
-    : {}),
-}))
+const Tr = styled.tr<{ isDragging?: boolean; hover?: boolean; clickable?: boolean }>(
+  ({ isDragging, hover, theme, clickable }) => ({
+    height: 50,
+    display: isDragging ? "table" : "table-row",
+    tableLayout: "fixed",
+    ...(hover
+      ? {
+          ":hover, :focus": {
+            backgroundColor: theme.color.background.lighter,
+            cursor: clickable ? "pointer" : "default",
+          },
+        }
+      : {}),
+  }),
+)
 
 const Thead = styled("thead")`
   tr {
@@ -159,8 +175,10 @@ function Table<T>({
   iconColor,
   headless,
   fixedLayout,
+  onReorder,
   ...props
 }: TableProps<T>) {
+  const uid = useUniqueId()
   const standardizedColumns: Array<Column<T>> = columns.map(column => {
     if (typeof column === "string") {
       return {
@@ -187,95 +205,121 @@ function Table<T>({
     [onRowClick],
   )
 
+  /**
+   * This exists so we don't have to extract <Tr /> further
+   * down, which relies on its closure.
+   */
+  const PseudoDraggable = React.useMemo(() => {
+    if (onReorder) {
+      return Draggable
+    }
+
+    return (((props: DraggableProps) => <>{props.children({} as any, {} as any)}</>) as unknown) as typeof Draggable
+  }, [onReorder])
+
   return (
-    <Container fixedLayout={fixedLayout} {...props}>
-      {!headless && (
-        <Thead>
-          <Tr>
-            {hasIcons && <Th key="-1" />}
-            {standardizedColumns.map((column, columnIndex) => (
-              <Th
-                key={columnIndex}
-                sortable={Boolean(column.onSortClick)}
-                onClick={() => column.onSortClick && column.onSortClick(column.sortOrder === "desc" ? "asc" : "desc")}
-              >
-                <ThContent sorted={Boolean(column.sortOrder)}>
-                  {column.heading}
-                  {column.onSortClick && !column.sortOrder && (
-                    <ChevronUpDownIcon right size={10} color="color.border.disabled" />
-                  )}
-                  {column.sortOrder &&
-                    (column.sortOrder === "desc" ? (
-                      <ChevronUpIcon right size={10} color="primary" />
-                    ) : (
-                      <ChevronDownIcon right size={10} color="primary" />
-                    ))}
-                </ThContent>
-              </Th>
-            ))}
-            {Boolean(rowActions || (onRowClick && rowActionName)) && <Th key="infinity" />}
-          </Tr>
-        </Thead>
-      )}
-      <tbody>
-        {data.length ? (
-          data.map((dataEntry, dataEntryIndex) => {
-            const rowAction = (() => {
-              if (!rowActions) {
-                return null
-              }
-              const dataEntryRowActions = rowActions(dataEntry)
-              return (
-                <Actions>
-                  {Array.isArray(dataEntryRowActions) ? (
-                    <ActionMenu items={dataEntryRowActions as ActionMenuProps["items"]} />
-                  ) : (
-                    dataEntryRowActions
-                  )}
-                </Actions>
-              )
-            })()
-            return (
-              <Tr
-                onKeyDown={handleKeyDownOnRow(dataEntry, dataEntryIndex)}
-                tabIndex={onRowClick ? 0 : undefined}
-                role={onRowClick ? "button" : undefined}
-                hover={Boolean(onRowClick)}
-                key={dataEntryIndex}
-                clickable={Boolean(onRowClick)}
-                onClick={() => {
-                  if (onRowClick) {
-                    onRowClick(dataEntry, dataEntryIndex)
-                  }
-                }}
-              >
-                {hasIcons && (
-                  <CellIcon>
-                    {/** Because has `hasIcon`, it is guaranteed that the `icon` function exists */}
-                    {React.createElement(icon!(dataEntry), { color: iconColor && iconColor(dataEntry) })}
-                  </CellIcon>
-                )}
-                {standardizedColumns.map((column, columnIndex) => (
-                  <Td cellWidth={column.width} key={columnIndex}>
-                    {column.cell(dataEntry, dataEntryIndex)}
-                  </Td>
-                ))}
-                {rowAction}
-                {onRowClick && rowActionName && (
-                  <Actions>
-                    <ActionLabel>{rowActionName}</ActionLabel>
-                  </Actions>
-                )}
-              </Tr>
-            )
-          })
-        ) : (
-          <Tr>
-            <EmptyView colSpan={columns.length}>There are no records available</EmptyView>
-          </Tr>
+    <DragDropContext onDragEnd={onReorder || (() => {})}>
+      <Container fixedLayout={fixedLayout || Boolean(onReorder)} {...props}>
+        {!headless && (
+          <Thead>
+            <Tr>
+              {hasIcons && <Th key="-1" />}
+              {standardizedColumns.map((column, columnIndex) => (
+                <Th
+                  key={columnIndex}
+                  sortable={Boolean(column.onSortClick)}
+                  onClick={() => column.onSortClick && column.onSortClick(column.sortOrder === "desc" ? "asc" : "desc")}
+                >
+                  <ThContent sorted={Boolean(column.sortOrder)}>
+                    {column.heading}
+                    {column.onSortClick && !column.sortOrder && (
+                      <ChevronUpDownIcon right size={10} color="color.border.disabled" />
+                    )}
+                    {column.sortOrder &&
+                      (column.sortOrder === "desc" ? (
+                        <ChevronUpIcon right size={10} color="primary" />
+                      ) : (
+                        <ChevronDownIcon right size={10} color="primary" />
+                      ))}
+                  </ThContent>
+                </Th>
+              ))}
+              {Boolean(rowActions || (onRowClick && rowActionName)) && <Th key="infinity" />}
+            </Tr>
+          </Thead>
         )}
-      </tbody>
-    </Container>
+        <Droppable droppableId={uid}>
+          {droppableProvided => (
+            <tbody ref={droppableProvided.innerRef} {...droppableProvided.droppableProps}>
+              {data.length ? (
+                data.map((dataEntry, dataEntryIndex) => {
+                  const rowAction = (() => {
+                    if (!rowActions) {
+                      return null
+                    }
+                    const dataEntryRowActions = rowActions(dataEntry)
+                    return (
+                      <Actions>
+                        {Array.isArray(dataEntryRowActions) ? (
+                          <ActionMenu items={dataEntryRowActions as ActionMenuProps["items"]} />
+                        ) : (
+                          dataEntryRowActions
+                        )}
+                      </Actions>
+                    )
+                  })()
+                  return (
+                    <PseudoDraggable key={dataEntryIndex} draggableId={String(dataEntryIndex)} index={dataEntryIndex}>
+                      {(provided, snapshot) => (
+                        <Tr
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          ref={provided.innerRef}
+                          isDragging={Boolean(snapshot.isDragging)}
+                          onKeyDown={handleKeyDownOnRow(dataEntry, dataEntryIndex)}
+                          tabIndex={onRowClick ? 0 : undefined}
+                          role={onRowClick ? "button" : undefined}
+                          hover={Boolean(onRowClick)}
+                          key={dataEntryIndex}
+                          clickable={Boolean(onRowClick)}
+                          onClick={() => {
+                            if (onRowClick) {
+                              onRowClick(dataEntry, dataEntryIndex)
+                            }
+                          }}
+                        >
+                          {hasIcons && (
+                            <CellIcon>
+                              {/** Because has `hasIcon`, it is guaranteed that the `icon` function exists */}
+                              {React.createElement(icon!(dataEntry), { color: iconColor && iconColor(dataEntry) })}
+                            </CellIcon>
+                          )}
+                          {standardizedColumns.map((column, columnIndex) => (
+                            <Td cellWidth={column.width} key={columnIndex}>
+                              {column.cell(dataEntry, dataEntryIndex)}
+                            </Td>
+                          ))}
+                          {rowAction}
+                          {onRowClick && rowActionName && (
+                            <Actions>
+                              <ActionLabel>{rowActionName}</ActionLabel>
+                            </Actions>
+                          )}
+                        </Tr>
+                      )}
+                    </PseudoDraggable>
+                  )
+                })
+              ) : (
+                <Tr>
+                  <EmptyView colSpan={columns.length}>There are no records available</EmptyView>
+                </Tr>
+              )}
+            </tbody>
+          )}
+        </Droppable>
+      </Container>
+    </DragDropContext>
   )
 }
 
