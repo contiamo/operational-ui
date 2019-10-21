@@ -27,6 +27,49 @@ import { Table } from "@operational/components"
 />
 ```
 
+### With Reorder capability
+
+```jsx
+import * as React from "react"
+import { Table } from "@operational/components"
+
+function reorder<T>(list: T[], startIndex: number, endIndex: number) {
+  const result = Array.from(list)
+  const [removed] = result.splice(startIndex, 1)
+  result.splice(endIndex, 0, removed)
+
+  return result
+}
+
+const MyComponent = () => {
+  const [data, setData] = React.useState([
+    { name: "Max", profession: "Carpenter" },
+    { name: "Moritz", profession: "Baker" },
+    { name: "Tejas", profession: "Useless" },
+    { name: "Fabien", profession: "Genius" },
+    { name: "Mischa", profession: "Wise One" },
+    { name: "Imogen", profession: "Math Guru" },
+    { name: "Slava", profession: "Stereo Booster" },
+  ])
+
+  return (
+    <div style={{ height: 500 }}>
+      <Table
+        fixedLayout
+        data={data}
+        onReorder={result => {
+          alert("Dropped!")
+          setData(reorder(data, result.source.index, result.destination.index))
+        }}
+        columns={["name", "profession"]}
+      />
+    </div>
+  )
+}
+
+;<MyComponent />
+```
+
 ### Simple Usage without Header
 
 ```jsx
