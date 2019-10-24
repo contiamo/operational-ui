@@ -83,6 +83,14 @@ const NameTagStyled = styled(NameTag)`
 
 const viewMoreIconSize = 18
 
+// These props are extracted to avoid useless re-render
+const highlightStyle: React.CSSProperties = {
+  color: constants.color.text.action,
+  backgroundColor: "transparent",
+  fontWeight: "bold",
+}
+const defaultSearch: string[] = []
+
 const Label = styled.div<{ hasChildren: boolean }>`
   /* Split the label by caract properly and show the first line only */
   overflow-wrap: break-word;
@@ -118,7 +126,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   cursor,
   actions,
   hasIconOffset,
-  searchWords = [],
+  searchWords = defaultSearch,
 }) => {
   const handleKeyDown = useCallback(
     e => {
@@ -196,11 +204,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           style: { marginLeft: 0, marginRight: 4, flex: "0 0 15px" },
         })}
       <Label hasChildren={hasChildren} ref={$label}>
-        <Highlighter
-          textToHighlight={label}
-          highlightStyle={{ color: constants.color.text.action, backgroundColor: "transparent", fontWeight: "bold" }}
-          searchWords={searchWords}
-        />
+        <Highlighter textToHighlight={label} highlightStyle={highlightStyle} searchWords={searchWords} />
       </Label>
       {isTooLong && (
         <DotMenuHorizontalIcon
