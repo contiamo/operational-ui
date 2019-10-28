@@ -171,8 +171,8 @@ TabPanel.defaultProps = {
 // We need this one so that icon and title both would be aligned to the left
 export const TitleIconWrapper = styled.div`
   display: flex;
-  max-width: 120px;
-  justify-content: center;
+  max-width: 128px;
+  width: 100%;
   align-items: center;
   margin-right: ${({ theme }) => theme.space.base}px;
 `
