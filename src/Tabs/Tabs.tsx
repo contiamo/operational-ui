@@ -17,7 +17,7 @@ import {
   TabButton,
   PlusWrapper,
 } from "./Tabs.styled"
-import { Spinner } from ".."
+import Spinner from "../Spinner/Spinner"
 
 export interface Tab {
   title: string
