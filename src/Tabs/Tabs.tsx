@@ -41,9 +41,9 @@ export interface TabsProps extends DefaultProps {
 
 const StatusIcon: React.FC<{ status: Tab["status"] }> = ({ status }) => (
   <div style={{ marginLeft: "auto" }}>
-    {status === "loading" && <Spinner color="primary" size={14} />}
-    {status === "success" && <YesIcon color="success" size={14} />}
-    {status === "error" && <WarningIcon color="error" size={14} />}
+    {status === "loading" && <Spinner right color="primary" size={14} />}
+    {status === "success" && <YesIcon right color="success" size={14} />}
+    {status === "error" && <WarningIcon right color="error" size={14} />}
   </div>
 )
 
