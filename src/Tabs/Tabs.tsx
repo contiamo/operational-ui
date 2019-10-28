@@ -1,7 +1,7 @@
 import * as React from "react"
 import { DefaultProps } from "../types"
 import { useUniqueId } from "../useUniqueId"
-import { NoIcon, PlusIcon, ChevronLeftIcon, ChevronRightIcon } from "../Icon"
+import { NoIcon, PlusIcon, ChevronLeftIcon, ChevronRightIcon, YesIcon, WarningIcon } from "../Icon"
 import {
   Container,
   ScrollButtons,
@@ -17,11 +17,13 @@ import {
   TabButton,
   PlusWrapper,
 } from "./Tabs.styled"
+import Spinner from "../Spinner/Spinner"
 
 export interface Tab {
   title: string
   icon?: React.ReactNode
   color?: string
+  status?: "loading" | "success" | "error"
 }
 
 export interface TabsProps extends DefaultProps {
@@ -36,6 +38,14 @@ export interface TabsProps extends DefaultProps {
   id?: string
   tabSize?: "fixed" | "flex"
 }
+
+const StatusIcon: React.FC<{ status: Tab["status"] }> = ({ status }) => (
+  <div style={{ marginLeft: "auto" }}>
+    {status === "loading" && <Spinner right color="primary" size={14} />}
+    {status === "success" && <YesIcon right color="success" size={14} />}
+    {status === "error" && <WarningIcon right color="error" size={14} />}
+  </div>
+)
 
 const Tabs: React.FC<TabsProps> = ({
   tabs,
@@ -163,7 +173,7 @@ const Tabs: React.FC<TabsProps> = ({
       <PlusWrapper>
         <TabList scroll={Boolean(scroll)} aria-label={label} onKeyDown={onKeyDown} ref={$tabList} onScroll={onScroll}>
           <TabScroll ref={$tabScroll}>
-            {tabs.map(({ title, icon, color }, i) => {
+            {tabs.map(({ title, icon, color, status }, i) => {
               const onClick = () => {
                 onActivate(i)
               }
@@ -190,6 +200,7 @@ const Tabs: React.FC<TabsProps> = ({
                   <TitleIconWrapper>
                     {icon && <TabIcon>{icon}</TabIcon>}
                     <TitleWrapper title={title}>{title}</TitleWrapper>
+                    {status && <StatusIcon status={status} />}
                   </TitleIconWrapper>
                   {onClose && (
                     <IconButton

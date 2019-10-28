@@ -24,6 +24,18 @@ const MyComponent = () => {
     {
       title: "tab 4",
     },
+    {
+      title: "tab 5",
+      status: "loading",
+    },
+    {
+      title: "tab 6",
+      status: "error",
+    },
+    {
+      title: "tab 7",
+      status: "success",
+    },
   ])
   const [active, setActive] = React.useState(0)
 
