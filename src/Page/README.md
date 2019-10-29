@@ -23,7 +23,7 @@ import * as React from "react"
 import { Page, Card } from "@operational/components"
 ;<Page
   title={
-    <div style={{ display: "flex", alignItems: "center" animation: "evolve 5s infinite", width: "100%", marginBottom: 16, padding: 16, color: "white" }}>
+    <div style={{ display: "flex", alignItems: "center" animation: "evolve 5s infinite", width: "100%", padding: 16, color: "white" }}>
       I AM CONSTANTLY EVOLVING
       <img style={{ display: "block", marginLeft: "auto", height: "60px" }} alt="LOL" src="https://media.giphy.com/media/WQxkpI7LTStUExhrR7/giphy.gif" />
     </div>

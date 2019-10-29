@@ -9,7 +9,6 @@ import Progress from "../Progress/Progress"
 import { DefaultProps } from "../types"
 import { Title } from "../Typography/Title"
 import styled from "../utils/styled"
-import { OperationalStyleConstants } from "../utils/constants"
 
 export interface BaseProps extends DefaultProps {
   /** Content of the page */
@@ -64,22 +63,13 @@ export interface PropsWithTabs extends BaseProps {
 
 export type PageProps = PropsWithSimplePage | PropsWithComplexPage | PropsWithTabs
 
-const computeRowHeights = (theme: OperationalStyleConstants, hasTitle: boolean, hasTabs: boolean) => {
-  const titleHeightString = hasTitle ? `${theme.titleHeight}px ` : ""
-  const tabsHeightString = hasTabs ? `${theme.tabsBarHeight}px ` : ""
-  const titleHeightWithRowGap = hasTitle ? theme.titleHeight + theme.space.element : 0
-  const tabsHeightWithRowGap = hasTabs ? theme.tabsBarHeight + theme.space.element : 0
-  const viewContainerHeightString = `calc(100% - ${titleHeightWithRowGap + tabsHeightWithRowGap}px)`
-  return `${titleHeightString}${tabsHeightString}${viewContainerHeightString}`
-}
-
 const Container = styled("div")<{ hasTitle: boolean; hasTabs: boolean }>(({ theme, hasTitle, hasTabs }) => ({
   position: "relative",
   height: "100%",
   display: "grid",
   gridRowGap: theme.space.element,
   backgroundColor: theme.color.white,
-  gridTemplateRows: computeRowHeights(theme, hasTitle, hasTabs),
+  gridTemplateRows: `${hasTitle ? `min-content ` : ""}${hasTabs ? `${theme.tabsBarHeight}px ` : ""}auto`,
   padding: "50px 35px 35px",
   overflow: "auto",
 }))
@@ -88,7 +78,6 @@ const TitleContainer = styled("div", { shouldForwardProp: prop => prop !== "fill
   ({ theme, fill }) => ({
     display: "flex",
     alignItems: "center",
-    height: theme.titleHeight,
     fontWeight: theme.font.weight.medium,
     minWidth: theme.pageSize.min,
     maxWidth: fill ? "100%" : `${theme.pageSize.max}px`,
