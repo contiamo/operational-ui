@@ -5,7 +5,7 @@ export const Container = styled.div<{ hasIcon: boolean }>`
   display: grid;
 
   /**
-   * The columns are: type, name, "see more" icon, and caret for icons
+   * The columns are: type, name, right icon, and caret for icons
    */
   grid-template-columns: ${({ hasIcon }) =>
     hasIcon

@@ -3,7 +3,7 @@ import { createPortal } from "react-dom"
 import noop from "lodash/noop"
 
 import { ActionsContainer, Container, TitleContainer, GhostTitleContainer } from "./DataTableHeader.styled"
-import { IconComponentType, DotMenuHorizontalIcon, ChevronDownIcon } from "../Icon"
+import { IconComponentType, ChevronDownIcon } from "../Icon"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 import isString from "lodash/isString"
 import { ViewMorePopup } from "../DataTable/DataTable.styled"
@@ -13,11 +13,22 @@ import useWindowSize from "../useWindowSize"
 
 export interface DataTableHeaderProps {
   title: React.ReactNode
-  icon?: IconComponentType
+  icon?:
+    | IconComponentType
+    | {
+        left?: IconComponentType
+        right?: IconComponentType
+      }
   actions?: IContextMenuItem[]
 }
 
-const DataTableHeader: React.FC<DataTableHeaderProps> = ({ icon: Icon, actions, title }) => {
+const isIcon = (icon: any): icon is IconComponentType => {
+  return typeof icon === "function"
+}
+
+const DataTableHeader: React.FC<DataTableHeaderProps> = ({ icon, actions, title }) => {
+  const LeftIcon = icon && (isIcon(icon) ? icon : icon.left)
+  const RightIcon = icon && !isIcon(icon) && icon.right
   const $title = React.useRef<HTMLDivElement>(null)
   const $ghostTitle = React.useRef<HTMLDivElement>(null)
   const [isTitleOverflowing, setIsTitleOverflowing] = React.useState(false)
@@ -43,23 +54,19 @@ const DataTableHeader: React.FC<DataTableHeaderProps> = ({ icon: Icon, actions, 
 
   return (
     <>
-      <Container hasIcon={Boolean(Icon)}>
-        {Icon && <Icon color="primary" style={{ margin: "auto" /* for centering */ }} size={12} />}
-        <TitleContainer ref={$title}>{title}</TitleContainer>
-        <GhostTitleContainer hasIcon={Boolean(Icon)} ref={$ghostTitle}>
+      <Container hasIcon={Boolean(LeftIcon)}>
+        {LeftIcon && <LeftIcon color="primary" style={{ margin: "auto" /* for centering */ }} size={12} />}
+        {isTitleOverflowing ? (
+          <TitleContainer onMouseEnter={isString(title) ? open(title) : noop} onMouseLeave={close} ref={$title}>
+            {title}
+          </TitleContainer>
+        ) : (
+          <TitleContainer ref={$title}>{title}</TitleContainer>
+        )}
+        <GhostTitleContainer hasIcon={Boolean(LeftIcon)} ref={$ghostTitle}>
           {title}
         </GhostTitleContainer>
-        {isTitleOverflowing ? (
-          <DotMenuHorizontalIcon
-            style={{ margin: "auto" }}
-            onMouseEnter={isString(title) ? open(title) : noop}
-            onMouseLeave={close}
-            color="color.text.lighter"
-            size={20}
-          />
-        ) : (
-          <div /> // Just to fill the grid column with emptiness and use the next one.
-        )}
+        {RightIcon ? <RightIcon color="primary" style={{ margin: "auto" /* for centering */ }} size={12} /> : <div />}
         {actions && (
           <ActionsContainer>
             <ContextMenu items={actions}>
