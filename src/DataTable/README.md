@@ -36,7 +36,13 @@ const CustomCell = styled.span`
         actions={[{ label: "Say hi", onClick: () => alert("HIIII") }]}
       />,
     ],
-    [<DataTableHeader title="Foooooooooooooood" actions={[{ label: "Say bye", onClick: () => alert("BYEEE <3") }]} />],
+    [
+      <DataTableHeader
+        title="Foooooooooooooood"
+        icon={{ right: YesIcon }}
+        actions={[{ label: "Say bye", onClick: () => alert("BYEEE <3") }]}
+      />,
+    ],
     ["Loves You"],
   ]}
   rows={[

@@ -1,9 +1,7 @@
 import * as React from "react"
 import isString from "lodash/isString"
-import noop from "lodash/noop"
 
-import { CellGrid, CellTruncator, ViewMoreToggle, GhostCell, dataTableActionContainerSize } from "./DataTable.styled"
-import { DotMenuHorizontalIcon } from "../Icon"
+import { CellGrid, CellTruncator, GhostCell, dataTableActionContainerSize } from "./DataTable.styled"
 import useWindowSize from "../useWindowSize"
 import constants from "../utils/constants"
 
@@ -13,9 +11,9 @@ export interface CellContentProps {
   close: () => void
 }
 
-const stringifyIfNeeded = (value: any) => {
+const stringifyBooleanAndNull = (value: any) => {
   // We compare booleans like this and without typeof for perf
-  return value === true || value === false ? String(value) : value
+  return value === true || value === false || value === null ? String(value) : value
 }
 
 const CellContent: React.FC<CellContentProps> = ({ cell, open, close }) => {
@@ -49,21 +47,14 @@ const CellContent: React.FC<CellContentProps> = ({ cell, open, close }) => {
 
   return (
     <CellGrid ref={$cell} canTruncate={isString(cell)}>
-      {isString(cell) ? <CellTruncator>{stringifyIfNeeded(cell)}</CellTruncator> : stringifyIfNeeded(cell)}
-      {isString(cell) && <GhostCell ref={$ghostCell}>{stringifyIfNeeded(cell)}</GhostCell>}
-      {isString(cell) && isTextOverflowing ? (
-        <ViewMoreToggle>
-          <DotMenuHorizontalIcon
-            color="color.text.lighter"
-            size={20}
-            onClick={noop} // for the hover/focus effect
-            onMouseEnter={open(cell)}
-            onMouseLeave={close}
-          />
-        </ViewMoreToggle>
+      {isString(stringifyBooleanAndNull(cell)) && isTextOverflowing ? (
+        <CellTruncator onMouseEnter={open(stringifyBooleanAndNull(cell))} onMouseLeave={close}>
+          {stringifyBooleanAndNull(cell)}
+        </CellTruncator>
       ) : (
-        <div /> // We need an empty element for CSS Grid to place things correctly
+        stringifyBooleanAndNull(cell)
       )}
+      <GhostCell ref={$ghostCell}>{stringifyBooleanAndNull(cell)}</GhostCell>
     </CellGrid>
   )
 }
