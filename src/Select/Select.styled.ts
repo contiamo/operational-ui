@@ -23,7 +23,8 @@ export const Combobox = styled("div")<{ naked: boolean; isOpen: boolean; hasCust
   align-items: stretch;
   box-shadow: 0 0 0 1px
     ${({ theme, isOpen, hasCustomOption }) =>
-      !hasCustomOption && isOpen ? theme.color.primary : theme.color.border.select};
+      !hasCustomOption && isOpen ? theme.color.primary : theme.color.border.select}
+    inset;
   border-width: ${({ naked }) => (naked ? 0 : 1)}px;
   border-radius: ${({ theme }) => theme.borderRadius}px;
   background-color: ${({ naked }) => (naked ? "transparent" : "white")};
