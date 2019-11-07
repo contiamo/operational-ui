@@ -49,7 +49,7 @@ const Input = styled("input")<{ condensed: CheckboxProps["condensed"] }>`
     position: absolute;
     left: ${({ condensed }) => (condensed ? 3 : 6)}px;
     margin: 0 auto;
-    top: 1px;
+    top: 2px;
     transform: rotate(45deg);
     border-right: ${({ condensed, theme }) => `${condensed ? 1 : 2}px solid ${theme.color.primary}`};
     border-bottom: ${({ condensed, theme }) => `${condensed ? 1 : 2}px solid ${theme.color.primary}`};
@@ -67,7 +67,9 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
   position: relative;
   cursor: pointer;
   height: ${({ condensed }) => (condensed ? 13 : 20)}px;
-  display: block;
+  min-height: min-content;
+  display: flex;
+  align-items: center;
   margin-bottom: ${({ theme, condensed }) => (condensed ? 0 : theme.space.small)}px;
   padding-left: ${({ condensed }) => (condensed ? 18 : 32)}px;
   line-height: ${({ condensed }) => (condensed ? 13 : 20)}px;
@@ -96,7 +98,8 @@ const Label = styled("label")<{ condensed: CheckboxProps["condensed"] }>`
     cursor: pointer;
     position: absolute;
     display: block;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%); /* center it optically */
     left: 0;
     width: ${({ condensed }) => (condensed ? 10 : 18)}px;
     height: ${({ condensed }) => (condensed ? 10 : 18)}px;
