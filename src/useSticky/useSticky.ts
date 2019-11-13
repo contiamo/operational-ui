@@ -1,4 +1,5 @@
 import * as React from "react"
+import constants from "../utils/constants"
 
 /**
  *
@@ -44,7 +45,7 @@ const useSticky = ({
       if (needOffset) {
         setDisplaySettings({
           position: "fixed",
-          left: `${window.innerWidth - rect.width - 8}px`,
+          left: `${window.innerWidth - rect.width - constants.space.small}px`,
           width: `${rect.width}px`,
           top: `${rect.top}px`,
         })
