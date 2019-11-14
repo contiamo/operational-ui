@@ -39,6 +39,7 @@ import { Table } from "@operational/components"
 ;<Table
   fixedLayout
   activeRowIndices={[1]}
+  onRowClick={e => alert("You chose" + e.name)}
   data={[
     { name: "Max", profession: "Carpenter" },
     { name: "Michael", profession: "Anti-focusring activist" },
