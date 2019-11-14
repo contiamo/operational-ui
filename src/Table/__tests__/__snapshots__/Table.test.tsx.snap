@@ -14,17 +14,17 @@ exports[`Table Component Should render 1`] = `
       class="css-x4ot8q"
     >
       <tr
-        class="css-1aheh2"
+        class="css-13vzd3l"
       />
     </thead>
     <tbody
       data-react-beautiful-dnd-droppable="0"
     >
       <tr
-        class="css-1aheh2"
+        class="css-13vzd3l"
       >
         <td
-          class="css-zw5kx"
+          class="css-1q4rays"
           colspan="0"
         >
           There are no records available
