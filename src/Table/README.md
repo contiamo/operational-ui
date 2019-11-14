@@ -2,7 +2,8 @@ Tables simply render a semantic HTML table structure based on raw data.
 
 ### Simple usage
 
-You can render a simple use-case of the table by specifying a list of records and supplying the columns as a list of strings which would serve both as column heading and access keys for fields.
+You can render a simple use-case of the table by specifying a list of records and supplying the columns as a list of
+strings which would serve both as column heading and access keys for fields.
 
 ```jsx
 import * as React from "react"
@@ -15,7 +16,8 @@ import { Table } from "@operational/components"
 
 ### With Fixed Layout
 
-Tables perform better with a forced fixed layout, since the browser doesn't have to recalculate positions depending on the contents of the table. Here's what the same table looks like with a fixed layout.
+Tables perform better with a forced fixed layout, since the browser doesn't have to recalculate positions depending on
+the contents of the table. Here's what the same table looks like with a fixed layout.
 
 ```jsx
 import * as React from "react"
@@ -23,6 +25,26 @@ import { Table } from "@operational/components"
 ;<Table
   fixedLayout
   data={[{ name: "Max", profession: "Carpenter" }, { name: "Moritz", profession: "Baker" }]}
+  columns={["name", "profession"]}
+/>
+```
+
+### With an "active" row
+
+Tables perform better with a forced fixed layout, since the browser doesn't have to recalculate positions depending on
+the contents of the table. Here's what the same table looks like with a fixed layout.
+
+```jsx
+import * as React from "react"
+import { Table } from "@operational/components"
+;<Table
+  fixedLayout
+  activeRowIndex={1}
+  data={[
+    { name: "Max", profession: "Carpenter" },
+    { name: "Michael", profession: "Anti-focusring activist" },
+    { name: "Moritz", profession: "Baker" },
+  ]}
   columns={["name", "profession"]}
 />
 ```
@@ -82,13 +104,16 @@ import { Table } from "@operational/components"
 />
 ```
 
-While this approach is convenient, it is not recommended because it makes it too easy to re-use record keys as table headings, and adds a strong coupling between data and view concerns.
+While this approach is convenient, it is not recommended because it makes it too easy to re-use record keys as table
+headings, and adds a strong coupling between data and view concerns.
 
-We suggest taking the time to think about the best way to describe the data fields and then specifying it explicitly as column headers. The following, slightly more verbose version of the API demonstrates how this can be achieved:
+We suggest taking the time to think about the best way to describe the data fields and then specifying it explicitly as
+column headers. The following, slightly more verbose version of the API demonstrates how this can be achieved:
 
 ### With explicit data formatting
 
-In this case, simple functions taking an individual record as an argument specify how cells should be rendered in a given column:
+In this case, simple functions taking an individual record as an argument specify how cells should be rendered in a
+given column:
 
 ```jsx
 import * as React from "react"
@@ -278,7 +303,9 @@ const data = [
 
 ### With row actions
 
-Row actions are specified as a function of an individual record, returning action items conforming to the [ContextMenu](/#ContextMenu) API. The function in the `rowActions` prop can return either the action items as an array or the `ActionMenu` node itself.
+Row actions are specified as a function of an individual record, returning action items conforming to the
+[ContextMenu](/#ContextMenu) API. The function in the `rowActions` prop can return either the action items as an array
+or the `ActionMenu` node itself.
 
 ```jsx
 import * as React from "react"

@@ -14,6 +14,7 @@ import Small from "../Typography/Small"
 import styled from "../utils/styled"
 import { IconComponentType, ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon } from "../Icon"
 import { useUniqueId } from "../useUniqueId"
+import { lighten } from "../utils"
 
 export interface TableProps<T> extends DefaultProps {
   data: T[]
@@ -37,6 +38,8 @@ export interface TableProps<T> extends DefaultProps {
   fixedLayout?: boolean
   /** On reorder rows, */
   onReorder?: (result: DropResult, provided: ResponderProvided) => void
+  /* The index of an active row */
+  activeRowIndex?: number
 }
 
 export interface Column<T> {
@@ -57,11 +60,12 @@ const Container = styled("table")<{ fixedLayout: TableProps<any>["fixedLayout"] 
   tableLayout: fixedLayout ? "fixed" : "initial",
 }))
 
-const Tr = styled.tr<{ isDragging?: boolean; hover?: boolean; clickable?: boolean }>(
-  ({ isDragging, hover, theme, clickable }) => ({
+const Tr = styled.tr<{ active: boolean; isDragging?: boolean; hover?: boolean; clickable?: boolean }>(
+  ({ isDragging, hover, theme, active, clickable }) => ({
     height: 50,
     display: isDragging ? "table" : "table-row",
     tableLayout: "fixed",
+    backgroundColor: active ? lighten(theme.color.primary, 53) : theme.color.white,
     ...(hover
       ? {
           ":hover, :focus": {
@@ -109,23 +113,27 @@ const ThContent = styled("span")<{ sorted?: boolean }>`
   ${props => props.sorted && `color: ${props.theme.color.text.light};`};
 `
 
-const Td = styled("td")<{ cellWidth?: Column<any>["width"] }>(({ theme, cellWidth }) => ({
-  verticalAlign: "middle",
-  borderBottom: `1px solid ${theme.color.separators.default}`,
-  color: theme.color.text.default,
-  hyphens: "auto",
-  "&:first-of-type": {
-    paddingLeft: theme.space.small,
-  },
-  paddingRight: theme.space.small,
-  ...(cellWidth
-    ? {
-        width: cellWidth,
-        wordBreak: "break-all",
-        wordWrap: "break-word",
-      }
-    : {}),
-}))
+const Td = styled("td")<{ cellWidth?: Column<any>["width"]; coloredBorders: boolean }>(
+  ({ theme, cellWidth, coloredBorders }) => ({
+    verticalAlign: "middle",
+    borderBottom: "1px solid",
+    color: theme.color.text.default,
+    borderTop: "1px solid",
+    borderColor: coloredBorders ? theme.color.primary : theme.color.separators.default,
+    hyphens: "auto",
+    "&:first-of-type": {
+      paddingLeft: theme.space.small,
+    },
+    paddingRight: theme.space.small,
+    ...(cellWidth
+      ? {
+          width: cellWidth,
+          wordBreak: "break-all",
+          wordWrap: "break-word",
+        }
+      : {}),
+  }),
+)
 
 const Actions = styled(Td)(({ theme }) => ({
   textAlign: "right",
@@ -176,6 +184,7 @@ function Table<T>({
   headless,
   fixedLayout,
   onReorder,
+  activeRowIndex,
   ...props
 }: TableProps<T>) {
   const uid = useUniqueId()
@@ -222,7 +231,7 @@ function Table<T>({
       <Container fixedLayout={fixedLayout || Boolean(onReorder)} {...props}>
         {!headless && (
           <Thead>
-            <Tr>
+            <Tr active={false /* It's a heading */}>
               {hasIcons && <Th key="-1" />}
               {standardizedColumns.map((column, columnIndex) => (
                 <Th
@@ -253,13 +262,20 @@ function Table<T>({
             <tbody ref={droppableProvided.innerRef} {...droppableProvided.droppableProps}>
               {data.length ? (
                 data.map((dataEntry, dataEntryIndex) => {
+                  /*
+                   Because of how border-collapse works, we need a different border color for this TD
+                   and the subsequent TD if the current row is "active"
+                  */
+                  const shouldTdHaveColoredBorders =
+                    activeRowIndex === dataEntryIndex || activeRowIndex === dataEntryIndex + 1
+
                   const rowAction = (() => {
                     if (!rowActions) {
                       return null
                     }
                     const dataEntryRowActions = rowActions(dataEntry)
                     return (
-                      <Actions>
+                      <Actions coloredBorders={shouldTdHaveColoredBorders}>
                         {Array.isArray(dataEntryRowActions) ? (
                           <ActionMenu items={dataEntryRowActions as ActionMenuProps["items"]} />
                         ) : (
@@ -274,6 +290,7 @@ function Table<T>({
                         <Tr
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
+                          active={activeRowIndex === dataEntryIndex}
                           ref={provided.innerRef}
                           isDragging={Boolean(snapshot.isDragging)}
                           onKeyDown={handleKeyDownOnRow(dataEntry, dataEntryIndex)}
@@ -289,19 +306,19 @@ function Table<T>({
                           }}
                         >
                           {hasIcons && (
-                            <CellIcon>
+                            <CellIcon coloredBorders={shouldTdHaveColoredBorders}>
                               {/** Because has `hasIcon`, it is guaranteed that the `icon` function exists */}
                               {React.createElement(icon!(dataEntry), { color: iconColor && iconColor(dataEntry) })}
                             </CellIcon>
                           )}
                           {standardizedColumns.map((column, columnIndex) => (
-                            <Td cellWidth={column.width} key={columnIndex}>
+                            <Td coloredBorders={shouldTdHaveColoredBorders} cellWidth={column.width} key={columnIndex}>
                               {column.cell(dataEntry, dataEntryIndex)}
                             </Td>
                           ))}
                           {rowAction}
                           {onRowClick && rowActionName && (
-                            <Actions>
+                            <Actions coloredBorders={shouldTdHaveColoredBorders}>
                               <ActionLabel>{rowActionName}</ActionLabel>
                             </Actions>
                           )}
@@ -311,8 +328,10 @@ function Table<T>({
                   )
                 })
               ) : (
-                <Tr>
-                  <EmptyView colSpan={columns.length}>There are no records available</EmptyView>
+                <Tr active={false /* It's empty */}>
+                  <EmptyView coloredBorders={false} colSpan={columns.length}>
+                    There are no records available
+                  </EmptyView>
                 </Tr>
               )}
             </tbody>
