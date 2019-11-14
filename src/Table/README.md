@@ -38,7 +38,7 @@ import * as React from "react"
 import { Table } from "@operational/components"
 ;<Table
   fixedLayout
-  activeRowIndex={1}
+  activeRowIndices={[1]}
   data={[
     { name: "Max", profession: "Carpenter" },
     { name: "Michael", profession: "Anti-focusring activist" },

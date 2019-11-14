@@ -39,7 +39,7 @@ export interface TableProps<T> extends DefaultProps {
   /** On reorder rows, */
   onReorder?: (result: DropResult, provided: ResponderProvided) => void
   /* The index of an active row */
-  activeRowIndex?: number
+  activeRowIndices?: number[]
 }
 
 export interface Column<T> {
@@ -184,7 +184,7 @@ function Table<T>({
   headless,
   fixedLayout,
   onReorder,
-  activeRowIndex,
+  activeRowIndices,
   ...props
 }: TableProps<T>) {
   const uid = useUniqueId()
@@ -266,8 +266,9 @@ function Table<T>({
                    Because of how border-collapse works, we need a different border color for this TD
                    and the subsequent TD if the current row is "active"
                   */
-                  const shouldTdHaveColoredBorders =
-                    activeRowIndex === dataEntryIndex || activeRowIndex === dataEntryIndex + 1
+                  const shouldTdHaveColoredBorders = activeRowIndices
+                    ? activeRowIndices.includes(dataEntryIndex) || activeRowIndices.includes(dataEntryIndex + 1)
+                    : false
 
                   const rowAction = (() => {
                     if (!rowActions) {
@@ -290,7 +291,7 @@ function Table<T>({
                         <Tr
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          active={activeRowIndex === dataEntryIndex}
+                          active={activeRowIndices ? activeRowIndices.includes(dataEntryIndex) : false}
                           ref={provided.innerRef}
                           isDragging={Boolean(snapshot.isDragging)}
                           onKeyDown={handleKeyDownOnRow(dataEntry, dataEntryIndex)}
