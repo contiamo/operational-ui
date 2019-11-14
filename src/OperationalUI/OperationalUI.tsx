@@ -60,6 +60,10 @@ const baseStylesheet = (theme: OperationalStyleConstants) => `
   font-smoothing: antialiased;
 }
 
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
 html,
 body {
   margin: 0;
