@@ -40,13 +40,4 @@ export const ActionsContainer = styled.div`
   margin: auto;
   width: 100%;
   height: 100%;
-
-  /* The ContextMenu */
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
 `

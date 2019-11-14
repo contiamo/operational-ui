@@ -1,4 +1,5 @@
 import * as React from "react"
+import constants from "../utils/constants"
 
 /**
  *
@@ -40,7 +41,22 @@ const useSticky = ({
 
     if (node) {
       const rect = node.getBoundingClientRect()
-      setDisplaySettings({ position: "fixed", left: `${rect.left}px`, width: `${rect.width}px`, top: `${rect.top}px` })
+      const needOffset = rect.left + rect.width > window.innerWidth
+      if (needOffset) {
+        setDisplaySettings({
+          position: "fixed",
+          left: `${window.innerWidth - rect.width - constants.space.small}px`,
+          width: `${rect.width}px`,
+          top: `${rect.top}px`,
+        })
+      } else {
+        setDisplaySettings({
+          position: "fixed",
+          left: `${rect.left}px`,
+          width: `${rect.width}px`,
+          top: `${rect.top}px`,
+        })
+      }
     }
   }, [$el])
 
