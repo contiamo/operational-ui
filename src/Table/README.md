@@ -31,8 +31,7 @@ import { Table } from "@operational/components"
 
 ### With an "active" row
 
-Tables perform better with a forced fixed layout, since the browser doesn't have to recalculate positions depending on
-the contents of the table. Here's what the same table looks like with a fixed layout.
+In some cases, you'd like to higlight a certain row in a table. Here's how you can do this.
 
 ```jsx
 import * as React from "react"
