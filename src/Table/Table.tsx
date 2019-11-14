@@ -68,8 +68,8 @@ const Tr = styled.tr<{ active: boolean; isDragging?: boolean; hover?: boolean; c
     backgroundColor: active ? lighten(theme.color.primary, 54) : theme.color.white,
     ...(hover
       ? {
-          ":hover, :focus": {
-            backgroundColor: theme.color.background.lighter,
+          ":hover": {
+            backgroundColor: active ? lighten(theme.color.primary, 52) : theme.color.background.lighter,
             cursor: clickable ? "pointer" : "default",
           },
         }
@@ -299,7 +299,6 @@ function Table<T>({
                           role={onRowClick ? "button" : undefined}
                           hover={Boolean(onRowClick)}
                           key={dataEntryIndex}
-                          clickable={Boolean(onRowClick)}
                           onClick={() => {
                             if (onRowClick) {
                               onRowClick(dataEntry, dataEntryIndex)
