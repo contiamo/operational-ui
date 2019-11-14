@@ -65,7 +65,7 @@ const Tr = styled.tr<{ active: boolean; isDragging?: boolean; hover?: boolean; c
     height: 50,
     display: isDragging ? "table" : "table-row",
     tableLayout: "fixed",
-    backgroundColor: active ? lighten(theme.color.primary, 53) : theme.color.white,
+    backgroundColor: active ? lighten(theme.color.primary, 54) : theme.color.white,
     ...(hover
       ? {
           ":hover, :focus": {
