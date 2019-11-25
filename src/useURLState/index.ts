@@ -1,6 +1,6 @@
 import noop from "lodash/noop"
 import qs from "qs"
-import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useState, useLayoutEffect } from "react"
 
 import { isClient } from "../utils/isClient"
 
@@ -51,6 +51,12 @@ export const useURLState = <T>(
 
   // Set the initial value
   const [value, setValue] = useState<T>(encodedValue !== undefined ? encodedValue : initialValue)
+
+  useLayoutEffect(() => {
+    if (encodedValue) {
+      setValue(encodedValue)
+    }
+  }, [encodedValue])
 
   // Update the url search param on state update
   useEffect(() => {

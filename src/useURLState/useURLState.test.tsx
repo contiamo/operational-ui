@@ -1,5 +1,5 @@
-import React from "react"
-import { cleanup, fireEvent, render, wait } from "react-testing-library"
+import React, { useState } from "react"
+import { cleanup, fireEvent, render, wait } from "@testing-library/react"
 
 import { useURLState } from "."
 
@@ -90,6 +90,36 @@ describe("useURLState", () => {
     const { getByTestId } = render(<Counter />)
 
     expect(getByTestId("count").textContent).toEqual("0")
+  })
+
+  it.only("should update its state when URL updates", () => {
+    const decoder = (i: any) => +i
+    const replaceState: History["replaceState"] = () => {}
+    const getPathname = () => ""
+    const getHash = () => ""
+
+    const Counter = () => {
+      const [stateCount, setStateCount] = useState(42)
+      const [count] = useURLState<number>("count", 0, decoder, {
+        getSearch: () => "?count=" + stateCount,
+        replaceState,
+        getPathname,
+        getHash,
+      })
+
+      return (
+        <>
+          <h1 data-testid="count">{count}</h1>
+          <button data-testid="navigate" onClick={() => setStateCount(100)} children="go somewhere homie" />
+        </>
+      )
+    }
+
+    const { getByTestId } = render(<Counter />)
+
+    fireEvent.click(getByTestId("navigate"))
+
+    expect(getByTestId("count").textContent).toEqual("100")
   })
 
   it("should call replaceState on state change", async () => {
