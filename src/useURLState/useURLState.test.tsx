@@ -92,7 +92,7 @@ describe("useURLState", () => {
     expect(getByTestId("count").textContent).toEqual("0")
   })
 
-  it.only("should update its state when URL updates", () => {
+  it("should update its state when URL updates", () => {
     const decoder = (i: any) => +i
     const replaceState: History["replaceState"] = () => {}
     const getPathname = () => ""
