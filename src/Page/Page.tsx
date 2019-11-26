@@ -5,7 +5,7 @@ import Tabs, { Tab } from "../Internals/Tabs"
 import PageArea from "../PageArea/PageArea"
 import PageContent, { PageContentProps } from "../PageContent/PageContent"
 import { isChildFunction } from "../utils/isChildFunction"
-import Progress from "../Progress/Progress"
+import { FixedProgress } from "../Progress/Progress"
 import { DefaultProps } from "../types"
 import { Title } from "../Typography/Title"
 import styled from "../utils/styled"
@@ -96,13 +96,6 @@ const ActionsContainer = styled("div")`
   display: flex;
   flex-grow: 1;
   justify-content: flex-end;
-`
-
-const FixedProgress = styled(Progress)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
 `
 
 const TabsContainer = styled("div", { shouldForwardProp: prop => prop !== "fill" })<{ fill: boolean }>`
