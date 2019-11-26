@@ -18,7 +18,7 @@ export interface ProgressProps extends DefaultProps {
   width?: number
 }
 
-const Container = styled("div")<ProgressProps>(
+const Container = styled.div<ProgressProps>(
   {
     label: "progress",
     overflowX: "hidden",
@@ -53,7 +53,7 @@ const fillProgress = keyframes({
   },
 })
 
-const Bar = styled("div")<Pick<ProgressProps, "percentage">>(({ percentage, theme }) => ({
+const Bar = styled.div<Pick<ProgressProps, "percentage">>(({ percentage, theme }) => ({
   width: "100%",
   height: 3,
   position: "relative",
@@ -75,10 +75,17 @@ const Bar = styled("div")<Pick<ProgressProps, "percentage">>(({ percentage, them
       }),
 }))
 
-const Progress: React.SFC<ProgressProps> = ({ onRetry, onClose, percentage, ...props }) => (
+const Progress: React.FC<ProgressProps> = ({ onRetry, onClose, percentage, ...props }) => (
   <Container {...props}>
     <Bar percentage={percentage} />
   </Container>
 )
 
 export default Progress
+
+export const FixedProgress = styled(Progress)`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+`
