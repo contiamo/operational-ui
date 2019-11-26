@@ -902,3 +902,19 @@ const actions = (
   <Card>Hello, this is page content</Card>
 </Page>
 ```
+
+### With a loading bar
+
+```jsx
+import * as React from "react"
+import { Page, Card, Button, SyncIcon } from "@operational/components"
+
+const [isLoading, setIsLoading] = React.useState(false)
+
+;<Page loading={isLoading} title="Page with a fixed loading bar">
+  <Card>Hello, this is a Page with a progress bar</Card>
+  <Button color="primary" icon={SyncIcon} onClick={() => setIsLoading(!isLoading)}>
+    {isLoading ? "Stop loading" : "Start loading"}
+  </Button>
+</Page>
+```
