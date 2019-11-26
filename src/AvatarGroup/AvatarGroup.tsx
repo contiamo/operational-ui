@@ -1,7 +1,9 @@
 import * as React from "react"
+
 import Avatar from "../Avatar/Avatar"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
+import Tooltip from "../Tooltip/Tooltip"
 
 export interface AvatarItem {
   photo?: string
@@ -25,12 +27,27 @@ const Container = styled("div")({
   marginLeft: 12,
 })
 
-const GroupedAvatar = styled(Avatar)({
-  marginLeft: -12,
-})
+const AvatarContainer = styled.div`
+  position: relative;
+  margin-left: -12px;
+
+  [data-avatar] {
+    display: none;
+  }
+  :hover > [data-avatar] {
+    display: block;
+  }
+`
 
 const AvatarGroup: React.SFC<AvatarGroupProps> = ({ avatars, size, onMoreClick, ...props }) => {
-  const avatarsToDisplay = avatars.map((avatar, i) => <GroupedAvatar addBorder size={size} key={i} {...avatar} />)
+  const avatarsToDisplay = avatars.map((avatar, i) => (
+    <AvatarContainer>
+      <Tooltip data-avatar position="top">
+        {avatar.name}
+      </Tooltip>
+      <Avatar addBorder size={size} key={i} {...avatar} />
+    </AvatarContainer>
+  ))
   const count = React.Children.count(avatarsToDisplay)
   const mustSlice = props.maximumToDisplay! < count
 
@@ -38,9 +55,11 @@ const AvatarGroup: React.SFC<AvatarGroupProps> = ({ avatars, size, onMoreClick, 
     <Container {...props}>
       {mustSlice ? React.Children.toArray(avatarsToDisplay).slice(0, props.maximumToDisplay! - 1) : avatarsToDisplay}
       {mustSlice && (
-        <GroupedAvatar addBorder size={size} onClick={onMoreClick} name="more" assignColor={false}>
-          +{count - props.maximumToDisplay! + 1}
-        </GroupedAvatar>
+        <AvatarContainer>
+          <Avatar addBorder size={size} onClick={onMoreClick} name="more" assignColor={false}>
+            +{count - props.maximumToDisplay! + 1}
+          </Avatar>
+        </AvatarContainer>
       )}
     </Container>
   )
