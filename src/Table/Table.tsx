@@ -74,6 +74,10 @@ const Tr = styled.tr<{ active: boolean; isDragging?: boolean; hover?: boolean; c
           },
         }
       : {}),
+    ":focus": {
+      outline: "none",
+      backgroundColor: lighten(theme.color.primary, 52),
+    },
   }),
 )
 
