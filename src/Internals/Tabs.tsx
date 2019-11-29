@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState, useRef } from "react"
 import Spinner from "../Spinner/Spinner"
 import styled from "../utils/styled"
 import { IconComponentType } from "../Icon"
-import { inputFocus } from "../utils"
+import { inputFocus, lighten } from "../utils"
 import { useUniqueId } from "../useUniqueId"
 
 export interface Tab {
@@ -82,6 +82,7 @@ const TabContainer = styled("div")<{ active?: boolean }>(({ theme, active }) => 
   },
   ":hover": {
     cursor: "pointer",
+    backgroundColor: active ? theme.color.white : lighten(theme.color.background.lighter, 3),
   },
   ":focus": {
     ...inputFocus({ theme, isError: false }),
