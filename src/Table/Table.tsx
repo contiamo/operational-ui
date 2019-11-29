@@ -60,17 +60,17 @@ const Container = styled("table")<{ fixedLayout: TableProps<any>["fixedLayout"] 
   tableLayout: fixedLayout ? "fixed" : "initial",
 }))
 
-const Tr = styled.tr<{ active: boolean; isDragging?: boolean; hover?: boolean; clickable?: boolean }>(
-  ({ isDragging, hover, theme, active, clickable }) => ({
+const Tr = styled.tr<{ active: boolean; isDragging?: boolean; draggable?: boolean; clickable?: boolean }>(
+  ({ isDragging, theme, active, draggable, clickable }) => ({
     height: 50,
     display: isDragging ? "table" : "table-row",
     tableLayout: "fixed",
     backgroundColor: active ? lighten(theme.color.primary, 54) : theme.color.white,
-    ...(hover
+    ...(draggable || clickable
       ? {
           ":hover": {
             backgroundColor: active ? lighten(theme.color.primary, 52) : theme.color.background.lighter,
-            cursor: clickable ? "pointer" : "default",
+            cursor: clickable ? "pointer" : draggable ? "move" : "default",
           },
         }
       : {}),
@@ -301,7 +301,8 @@ function Table<T>({
                           onKeyDown={handleKeyDownOnRow(dataEntry, dataEntryIndex)}
                           tabIndex={onRowClick ? 0 : undefined}
                           role={onRowClick ? "button" : undefined}
-                          hover={Boolean(onRowClick)}
+                          draggable={Boolean(onReorder)}
+                          clickable={Boolean(onRowClick)}
                           key={dataEntryIndex}
                           onClick={() => {
                             if (onRowClick) {
