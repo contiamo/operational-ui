@@ -69,7 +69,7 @@ const Tr = styled.tr<{ active: boolean; isDragging?: boolean; draggable?: boolea
     ...(draggable || clickable
       ? {
           ":hover": {
-            backgroundColor: active ? lighten(theme.color.primary, 52) : theme.color.background.lighter,
+            backgroundColor: active ? lighten(theme.color.primary, 52) : lighten(theme.color.primary, 54),
             cursor: clickable ? "pointer" : draggable ? "move" : "default",
           },
         }
@@ -123,7 +123,7 @@ const Td = styled("td")<{ cellWidth?: Column<any>["width"]; coloredBorders: bool
     borderBottom: "1px solid",
     color: theme.color.text.default,
     borderTop: "1px solid",
-    borderColor: coloredBorders ? theme.color.primary : theme.color.separators.default,
+    borderColor: coloredBorders ? theme.color.primary : theme.color.border.medium,
     hyphens: "auto",
     "&:first-of-type": {
       paddingLeft: theme.space.small,
