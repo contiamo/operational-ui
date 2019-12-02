@@ -190,6 +190,10 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
     [activeTab, onTabClick],
   )
 
+  if (tabsWithId.length === 0 || tabs.length === 0) {
+    return null
+  }
+
   // Work around: wrap return in fragment- to prevent type error and not having to change childrens return type
   // https://github.com/Microsoft/TypeScript/issues/21699
   return (
@@ -212,8 +216,8 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
               ))}
           </TabsBar>
         ),
-        activeTabId: tabsWithId[activeTab].id,
-        activeChildren: tabs[activeTab].children,
+        activeTabId: (tabsWithId[activeTab] || tabsWithId[0]).id,
+        activeChildren: (tabs[activeTab] || tabs[0]).children,
       })}
     </>
   )
