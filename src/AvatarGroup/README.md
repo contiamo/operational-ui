@@ -23,6 +23,7 @@ const avatars = [
   <AvatarGroup avatars={avatars.slice(0, 4)} />
   <AvatarGroup avatars={avatars.slice(0, 5)} />
   <AvatarGroup avatars={avatars} />
+  <AvatarGroup avatars={avatars.concat(avatars)} />
 </>
 ```
 
@@ -76,7 +77,7 @@ const avatars = [
 </>
 ```
 
-### Customize how many avatars is on screen
+### Customize how many avatars are displayed
 
 ```jsx
 import * as React from "react"
@@ -100,6 +101,7 @@ const avatars = [
   <AvatarGroup avatars={avatars} maximumToDisplay={2} />
   <AvatarGroup avatars={avatars} maximumToDisplay={5} />
   <AvatarGroup avatars={avatars} maximumToDisplay={8} />
+  <AvatarGroup avatars={avatars} maximumToDisplay={1} />
+  <AvatarGroup avatars={avatars.concat(avatars)} maximumToDisplay={0} />
 </>
 ```
-
