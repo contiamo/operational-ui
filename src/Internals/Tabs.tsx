@@ -212,8 +212,8 @@ const Tabs = ({ onTabChange, tabs, activeTabName, children }: Props) => {
               ))}
           </TabsBar>
         ),
-        activeTabId: tabsWithId[activeTab].id,
-        activeChildren: tabs[activeTab].children,
+        activeTabId: (tabsWithId[activeTab] || tabsWithId[0]).id,
+        activeChildren: (tabs[activeTab] || tabs[0]).children,
       })}
     </>
   )
