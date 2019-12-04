@@ -78,6 +78,9 @@ const Tr = styled.tr<{ active: boolean; isDragging?: boolean; draggable?: boolea
       outline: "none",
       backgroundColor: lighten(theme.color.primary, 52),
     },
+    ".no-focus &:focus": {
+      backgroundColor: active ? lighten(theme.color.primary, 54) : theme.color.white,
+    },
   }),
 )
 
