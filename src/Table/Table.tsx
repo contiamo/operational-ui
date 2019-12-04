@@ -60,20 +60,27 @@ const Container = styled("table")<{ fixedLayout: TableProps<any>["fixedLayout"] 
   tableLayout: fixedLayout ? "fixed" : "initial",
 }))
 
-const Tr = styled.tr<{ active: boolean; isDragging?: boolean; hover?: boolean; clickable?: boolean }>(
-  ({ isDragging, hover, theme, active, clickable }) => ({
+const Tr = styled.tr<{ active: boolean; isDragging?: boolean; draggable?: boolean; clickable?: boolean }>(
+  ({ isDragging, theme, active, draggable, clickable }) => ({
     height: 50,
     display: isDragging ? "table" : "table-row",
     tableLayout: "fixed",
     backgroundColor: active ? lighten(theme.color.primary, 54) : theme.color.white,
-    ...(hover
+    ...(draggable || clickable
       ? {
           ":hover": {
-            backgroundColor: active ? lighten(theme.color.primary, 52) : theme.color.background.lighter,
-            cursor: clickable ? "pointer" : "default",
+            backgroundColor: active ? lighten(theme.color.primary, 52) : lighten(theme.color.primary, 54),
+            cursor: clickable ? "pointer" : draggable ? "move" : "default",
           },
         }
       : {}),
+    ":focus": {
+      outline: "none",
+      backgroundColor: lighten(theme.color.primary, 52),
+    },
+    ".no-focus &:focus": {
+      backgroundColor: active ? lighten(theme.color.primary, 54) : theme.color.white,
+    },
   }),
 )
 
@@ -119,7 +126,7 @@ const Td = styled("td")<{ cellWidth?: Column<any>["width"]; coloredBorders: bool
     borderBottom: "1px solid",
     color: theme.color.text.default,
     borderTop: "1px solid",
-    borderColor: coloredBorders ? theme.color.primary : theme.color.separators.default,
+    borderColor: coloredBorders ? theme.color.primary : theme.color.border.medium,
     hyphens: "auto",
     "&:first-of-type": {
       paddingLeft: theme.space.small,
@@ -297,7 +304,8 @@ function Table<T>({
                           onKeyDown={handleKeyDownOnRow(dataEntry, dataEntryIndex)}
                           tabIndex={onRowClick ? 0 : undefined}
                           role={onRowClick ? "button" : undefined}
-                          hover={Boolean(onRowClick)}
+                          draggable={Boolean(onReorder)}
+                          clickable={Boolean(onRowClick)}
                           key={dataEntryIndex}
                           onClick={() => {
                             if (onRowClick) {
