@@ -1,3 +1,67 @@
+```jsx
+import * as React from "react"
+import {
+  DataTable,
+  DataTableHeader,
+  DataTableSelect,
+  YesIcon,
+  DataTableInput,
+  Checkbox,
+  Button,
+  Title,
+  styled,
+} from "@operational/components"
+
+const numColumns = 200
+const numRows = 10e3
+
+const columnName = index => {
+  index += 1
+  for (var ret = "", a = 1, b = 26; (index -= a) >= 0; a = b, b *= 26) {
+    ret = String.fromCharCode(parseInt((index % b) / a) + 65) + ret
+  }
+  return ret
+}
+
+const cellContent = (column, row) => `${columnName(column)}-${row}`
+
+const columns = []
+const rows = []
+
+for (var c = 0; c < numColumns; c++) {
+  columns.push([columnName(c)])
+}
+
+for (var r = 0; r < numRows; r++) {
+  const row = []
+  for (var c = 0; c < numColumns; c++) {
+    row.push(cellContent(c, r))
+  }
+  rows.push(row)
+}
+
+const MyComponent = () => {
+  const [data, setData] = React.useState({ columns: [["one"]], rows: [["only"]] })
+
+  return (
+    <>
+      <Title>
+        Showing {Intl.NumberFormat().format(data.columns.length)} columns,{" "}
+        {Intl.NumberFormat().format(data.rows.length)} rows
+      </Title>
+      {data.rows.length === 1 && (
+        <Button color="primary" onClick={() => setData({ columns, rows })}>
+          Display big data table
+        </Button>
+      )}
+      <DataTable columns={data.columns} rows={data.rows} />
+    </>
+  )
+}
+
+;<MyComponent />
+```
+
 ## Basic Usage
 
 Our DataTable is used to render tabular data structures. For a basic use case, give it `rows` and `columns`.
