@@ -40,6 +40,8 @@ export interface TableProps<T> extends DefaultProps {
   onReorder?: (result: DropResult, provided: ResponderProvided) => void
   /* The index of an active row */
   activeRowIndices?: number[]
+  /* Compact style rows */
+  condensed?: boolean
 }
 
 export interface Column<T> {
@@ -50,7 +52,17 @@ export interface Column<T> {
   width?: number
 }
 
-const Container = styled("table")<{ fixedLayout: TableProps<any>["fixedLayout"] }>(({ theme, fixedLayout }) => ({
+const CondensedActionMenu = styled(ActionMenu)<{ condensed?: boolean }>`
+  ${({ condensed }) =>
+    condensed
+      ? `& div {
+          margin-bottom: 0;
+          height: 33px;
+        }`
+      : ""}
+`
+
+const Container = styled.table<{ fixedLayout: TableProps<any>["fixedLayout"] }>(({ theme, fixedLayout }) => ({
   width: "100%",
   backgroundColor: theme.color.white,
   textAlign: "left",
@@ -60,37 +72,41 @@ const Container = styled("table")<{ fixedLayout: TableProps<any>["fixedLayout"] 
   tableLayout: fixedLayout ? "fixed" : "initial",
 }))
 
-const Tr = styled.tr<{ active: boolean; isDragging?: boolean; draggable?: boolean; clickable?: boolean }>(
-  ({ isDragging, theme, active, draggable, clickable }) => ({
-    height: 50,
-    display: isDragging ? "table" : "table-row",
-    tableLayout: "fixed",
+const Tr = styled.tr<{
+  active: boolean
+  isDragging?: boolean
+  draggable?: boolean
+  clickable?: boolean
+  condensed?: boolean
+}>(({ isDragging, theme, active, draggable, clickable, condensed }) => ({
+  height: condensed ? 36 : 50,
+  display: isDragging ? "table" : "table-row",
+  tableLayout: "fixed",
+  backgroundColor: active ? lighten(theme.color.primary, 54) : theme.color.white,
+  ...(draggable || clickable
+    ? {
+        ":hover": {
+          backgroundColor: active ? lighten(theme.color.primary, 52) : lighten(theme.color.primary, 54),
+          cursor: clickable ? "pointer" : draggable ? "move" : "default",
+        },
+      }
+    : {}),
+  ":focus": {
+    outline: "none",
+    backgroundColor: lighten(theme.color.primary, 52),
+  },
+  ".no-focus &:focus": {
     backgroundColor: active ? lighten(theme.color.primary, 54) : theme.color.white,
-    ...(draggable || clickable
-      ? {
-          ":hover": {
-            backgroundColor: active ? lighten(theme.color.primary, 52) : lighten(theme.color.primary, 54),
-            cursor: clickable ? "pointer" : draggable ? "move" : "default",
-          },
-        }
-      : {}),
-    ":focus": {
-      outline: "none",
-      backgroundColor: lighten(theme.color.primary, 52),
-    },
-    ".no-focus &:focus": {
-      backgroundColor: active ? lighten(theme.color.primary, 54) : theme.color.white,
-    },
-  }),
-)
+  },
+}))
 
-const Thead = styled("thead")`
+const Thead = styled.thead`
   tr {
     height: initial;
   }
 `
 
-const Th = styled("th")<{ sortable?: boolean }>(({ theme, sortable }) => ({
+const Th = styled.th<{ sortable?: boolean }>(({ theme, sortable }) => ({
   position: "relative",
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.dark,
@@ -113,14 +129,14 @@ const Th = styled("th")<{ sortable?: boolean }>(({ theme, sortable }) => ({
     : {}),
 }))
 
-const ThContent = styled("span")<{ sorted?: boolean }>`
+const ThContent = styled.span<{ sorted?: boolean }>`
   display: inline-flex;
   align-items: center;
   height: ${props => props.theme.space.medium}px;
   ${props => props.sorted && `color: ${props.theme.color.text.light};`};
 `
 
-const Td = styled("td")<{ cellWidth?: Column<any>["width"]; coloredBorders: boolean }>(
+const Td = styled.td<{ cellWidth?: Column<any>["width"]; coloredBorders: boolean }>(
   ({ theme, cellWidth, coloredBorders }) => ({
     verticalAlign: "middle",
     borderBottom: "1px solid",
@@ -161,10 +177,10 @@ const Actions = styled(Td)(({ theme }) => ({
   },
 }))
 
-const CellIcon = styled(Td)`
-  width: 40px;
-  padding: ${props => props.theme.space.base}px;
-  color: ${props => props.theme.color.text.lightest};
+const CellIcon = styled(Td)<{ condensed?: boolean }>`
+  width: ${({ condensed }) => (condensed ? 28 : 42)}px;
+  padding: ${({ theme }) => theme.space.base}px;
+  color: ${({ theme }) => theme.color.text.lightest};
 `
 
 const ActionLabel = styled(Small)`
@@ -173,10 +189,10 @@ const ActionLabel = styled(Small)`
   display: block;
 `
 
-const EmptyView = styled(Td)(({ theme }) => ({
+const EmptyView = styled(Td)<{ condensed?: boolean }>(({ theme, condensed }) => ({
   color: theme.color.text.default,
-  height: 50,
-  lineHeight: "50px",
+  height: condensed ? 36 : 50,
+  lineHeight: condensed ? 36 : 50,
   textAlign: "center",
 }))
 
@@ -192,6 +208,7 @@ function Table<T>({
   fixedLayout,
   onReorder,
   activeRowIndices,
+  condensed,
   ...props
 }: TableProps<T>) {
   const uid = useUniqueId()
@@ -285,7 +302,10 @@ function Table<T>({
                     return (
                       <Actions coloredBorders={shouldTdHaveColoredBorders}>
                         {Array.isArray(dataEntryRowActions) ? (
-                          <ActionMenu items={dataEntryRowActions as ActionMenuProps["items"]} />
+                          <CondensedActionMenu
+                            items={dataEntryRowActions as ActionMenuProps["items"]}
+                            condensed={condensed}
+                          />
                         ) : (
                           dataEntryRowActions
                         )}
@@ -312,6 +332,7 @@ function Table<T>({
                               onRowClick(dataEntry, dataEntryIndex)
                             }
                           }}
+                          condensed={condensed}
                         >
                           {hasIcons && (
                             <CellIcon coloredBorders={shouldTdHaveColoredBorders}>
@@ -337,7 +358,7 @@ function Table<T>({
                 })
               ) : (
                 <Tr active={false /* It's empty */}>
-                  <EmptyView coloredBorders={false} colSpan={columns.length}>
+                  <EmptyView coloredBorders={false} colSpan={columns.length} condensed={condensed}>
                     There are no records available
                   </EmptyView>
                 </Tr>

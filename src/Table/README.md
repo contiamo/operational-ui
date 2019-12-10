@@ -347,6 +347,7 @@ const data = [
   },
 ]
 ;<Table
+  condensed
   data={data}
   columns={[
     { heading: "", cell: dataEntry => <FunctionIcon color="primary" /> },
