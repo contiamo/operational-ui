@@ -54,10 +54,14 @@ const Container = styled.div`
   height: 48px;
   margin-bottom: ${({ theme }) => theme.space.content}px;
 
-  :hover,
-  :focus-within {
+  transition: ease-in-out border 0.2s;
+
+  :hover {
     border: 1px solid ${({ theme }) => theme.color.separators.light};
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  :focus-within {
+    border: 1px solid ${({ theme }) => theme.color.primary};
   }
 `
 
