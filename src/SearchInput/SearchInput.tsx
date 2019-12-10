@@ -26,7 +26,7 @@ export function SearchInput<T = never>(props: SearchInputProps<T>) {
         }
       }}
     >
-      <SearchIcon color="color.text.default" />
+      <SearchIcon color="color.text.default" size={16} />
       <Input
         ref={inputRef}
         value={props.value}
