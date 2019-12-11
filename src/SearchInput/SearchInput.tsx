@@ -2,6 +2,7 @@ import * as React from "react"
 import styled from "../utils/styled"
 import { SearchIcon, CaretDownIcon, CaretUpIcon, EnterIcon } from "../Icon"
 import { lighten } from "../utils"
+import useHotkey from "../useHotkey"
 
 export interface SearchInputProps<TCategory> {
   value: string
@@ -22,14 +23,51 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
     [setIsOpen],
   )
 
+  React.useEffect(() => {
+    if (isOpen && setIsOpen) {
+      const hideOnScroll = () => setIsOpen(false)
+      document.addEventListener("scroll", hideOnScroll)
+      return () => {
+        document.removeEventListener("scroll", hideOnScroll)
+      }
+    }
+  }, [isOpen, setIsOpen])
+
+  const [activeItemIndex, setActiveItemIndex] = React.useState(0)
+
+  const inputRef = React.useRef<HTMLInputElement>(null)
+  const containerRef = React.useRef<HTMLDivElement>(null)
+
+  useHotkey(containerRef, { key: "ArrowDown" }, () => {
+    if (!isOpen) {
+      setIsOpen(true)
+    }
+    setActiveItemIndex(prev => (prev + 1) % (props.categories || []).length)
+  })
+
+  useHotkey(containerRef, { key: "ArrowUp" }, () =>
+    setActiveItemIndex(prev =>
+      prev === 0 ? (props.categories || []).length : (prev - 1) % (props.categories || []).length,
+    ),
+  )
+
+  useHotkey(containerRef, { key: "Enter" }, () => {
+    if (!props.categories || !props.category) {
+      return
+    }
+    props.onChange({ search: props.value, category: props.categories[activeItemIndex] })
+    setIsOpen(false)
+  })
+
+  useHotkey(containerRef, { key: "Escape" }, () => setIsOpen(false))
+
   if (props.categories && !props.categories.includes(props.category!)) {
     throw new Error("[SearchInput] `categories` and `category` props doesn't match!")
   }
 
-  const inputRef = React.useRef<HTMLInputElement>(null)
-
   return (
     <Container
+      ref={containerRef}
       hasCategory={Boolean(props.category)}
       isOpen={isOpen}
       onClick={() => {
@@ -38,6 +76,22 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
         }
       }}
     >
+      {isOpen && (
+        /**
+         * Why do we have two `InvisibleOverlay`?
+         * Because we can focus with tab in two different directions!
+         * So we need to trap the focus before and after our `Input`
+         */
+        <InvisibleOverlay
+          onClick={e => {
+            e.stopPropagation()
+            setIsOpen(false)
+          }}
+          onFocus={() => setIsOpen(false)} /* Close dropdown if the focus is away */
+          tabIndex={0}
+          aria-hidden="true"
+        />
+      )}
       <SearchIcon color="color.text.default" size={16} />
       {props.category && (
         <CategoryDropdown onClick={toggleOpen}>
@@ -60,8 +114,9 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
       />
       {isOpen && props.categories && (
         <DropdownContainer>
-          {props.categories.map(category => (
+          {props.categories.map((category, index) => (
             <DropdownItem
+              isActive={activeItemIndex === index}
               key={category}
               onClick={e => {
                 if (props.value) {
@@ -87,6 +142,9 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
             e.stopPropagation()
             setIsOpen(false)
           }}
+          onFocus={() => setIsOpen(false)} /* Close dropdown if the focus is away */
+          tabIndex={0}
+          aria-hidden="true"
         />
       )}
     </Container>
@@ -125,6 +183,7 @@ const CategoryDropdown = styled.div<{ highlighted?: boolean }>`
   color: ${({ theme }) => theme.color.text.default};
   padding: ${({ theme }) => theme.space.small}px;
   border-radius: ${({ theme }) => theme.borderRadius}px;
+  z-index: ${({ theme }) => theme.zIndex.selectOptions}; /* Ensure to be on top of the InvisibleOverlay */
   min-width: 150px;
   justify-content: space-between;
   display: flex;
@@ -160,7 +219,7 @@ const DropdownContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.color.separators.light};
 `
 
-const DropdownItem = styled.div`
+const DropdownItem = styled.div<{ isActive: boolean }>`
   height: 48px;
   display: grid;
   align-items: center;
@@ -170,13 +229,13 @@ const DropdownItem = styled.div`
   padding: 0 ${({ theme }) => theme.space.content}px;
   cursor: pointer !important;
 
-  :hover {
+  ${({ isActive }) => (isActive ? "" : ":hover {")}
     background-color: ${({ theme }) => theme.color.background.lightest};
 
     > div {
       background-color: ${({ theme }) => theme.color.background.grey}; /* CategoryDropdown */
     }
-  }
+  ${({ isActive }) => (isActive ? "" : "}")}
 `
 
 const Input = styled.input`
@@ -185,6 +244,7 @@ const Input = styled.input`
   font-size: ${({ theme }) => theme.font.size.body}px;
   font-family: ${({ theme }) => theme.font.family.main};
   color: ${({ theme }) => theme.color.text.default};
+  z-index: ${({ theme }) => theme.zIndex.selectOptions}; /* Ensure to be on top of the InvisibleOverlay */
 
   :focus {
     outline: none;
