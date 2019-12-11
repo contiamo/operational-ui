@@ -102,6 +102,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
       <Input
         ref={inputRef}
         value={props.value}
+        aria-label="search"
         placeholder={props.placeholder}
         onFocus={() => setIsOpen(true)}
         onChange={e => {
@@ -113,10 +114,15 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
         }}
       />
       {isOpen && props.categories && (
-        <DropdownContainer>
+        <DropdownContainer aria-activedescendant={`category-${props.categories[activeItemIndex]}`} role="listbox">
           {props.categories.map((category, index) => (
             <DropdownItem
               isActive={activeItemIndex === index}
+              aria-selected={activeItemIndex === index ? "true" : undefined}
+              aria-roledescription="Category"
+              aria-label={category}
+              id={`category-${category}`}
+              role="option"
               key={category}
               onClick={e => {
                 if (props.value) {
