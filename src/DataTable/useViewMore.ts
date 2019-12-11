@@ -5,39 +5,36 @@ import * as React from "react"
  * triggered by a click event.
  */
 const useViewMore = () => {
-  let closeTimeoutId = 0
+  const [closeTimeoutId, setCloseTimeoutId] = React.useState<number>()
   const [viewMorePopup, setViewMorePopup] = React.useState<{ content: string; x: number; y: number } | false>(false)
 
-  const openViewMore = React.useCallback(
+  const close = React.useCallback(() => {
+    if (viewMorePopup) {
+      setCloseTimeoutId(window.setTimeout(() => setViewMorePopup(false), 150))
+    }
+  }, [viewMorePopup])
+  React.useEffect(() => () => window.clearTimeout(closeTimeoutId), [closeTimeoutId])
+
+  const open = React.useCallback(
     (content: string) => (e: React.MouseEvent) => {
-      window.clearTimeout(closeTimeoutId)
       e.stopPropagation()
+      window.clearTimeout(closeTimeoutId)
+      setCloseTimeoutId(undefined)
       setViewMorePopup({
         content,
         x: e.clientX > window.innerWidth / 2 ? e.clientX - 8 : e.clientX + 8,
         y: e.clientY > window.innerHeight / 2 ? e.clientY - 8 : e.clientY + 8,
       })
     },
-    [viewMorePopup, closeTimeoutId],
-  )
-
-  const close = () => {
-    closeTimeoutId = window.setTimeout(() => setViewMorePopup(false), 150)
-  }
-
-  React.useEffect(
-    () => () => {
-      if (closeTimeoutId) {
-        window.clearTimeout(closeTimeoutId)
-      }
-    },
     [closeTimeoutId],
   )
 
+  const toggle = React.useCallback((content: string) => (viewMorePopup ? close() : open(content)), [viewMorePopup])
+
   return {
     viewMorePopup,
-    toggle: (content: string) => (viewMorePopup ? close() : openViewMore(content)),
-    open: openViewMore,
+    toggle,
+    open,
     close,
   }
 }

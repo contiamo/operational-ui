@@ -165,7 +165,10 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     // to the parent and using `children[0]`
     if ($label.current && $label.current.children[0]) {
       const { height } = $label.current.children[0].getBoundingClientRect()
-      setIsTooLong(height > 16)
+      const tooLong = height > 16
+      setIsTooLong(tooLong)
+      // hide popup if we hide DotMenuHorizontalIcon
+      if (!tooLong) close()
     }
   })
 
