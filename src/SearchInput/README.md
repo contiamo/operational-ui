@@ -32,23 +32,25 @@ import { SearchInput } from "@operational/components"
 
 const MyComponent = () => {
   const [search, setSearch] = React.useState("")
-  const [category, setCategory] = React.useState("all")
+  const [category, setCategory] = React.useState("All")
 
   return (
-    <SearchInput
-      value={search}
-      placeholder="Search for data…"
-      onChange={values => {
-        setSearch(values.search)
-        setCategory(values.category)
-      }}
-      category={category}
-      categories={["all", "datasource", "table"]}
-      onClear={() => {
-        setSearch("")
-        setCategory("all")
-      }}
-    />
+    <div style={{ minHeight: 300 }}>
+      <SearchInput
+        value={search}
+        placeholder="Search for data…"
+        onChange={values => {
+          setSearch(values.search)
+          setCategory(values.category)
+        }}
+        category={category}
+        categories={["All", "Datasource", "Table"]}
+        onClear={() => {
+          setSearch("")
+          setCategory("All")
+        }}
+      />
+    </div>
   )
 }
 
