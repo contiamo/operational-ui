@@ -1,6 +1,6 @@
 # Operational UI Components
 
-The `@operational/components` package contains simple, stateless UI building blocks - your typical input fields, buttons, cards, grids, and so on. See [demo and docs](https://operational-ui.js.org/).
+The `@operational/components` package contains simple, stateless UI building blocks - your typical input fields, buttons, cards, grids, and so on. See [demo and docs](https://operational-ui.netlify.com/).
 
 ## Getting Started
 
