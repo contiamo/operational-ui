@@ -1,4 +1,4 @@
-Specialized input for advanced search ux.
+Specialized input for advanced search UX.
 
 ### Simple usage
 

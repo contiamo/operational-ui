@@ -13,6 +13,8 @@ export interface SearchInputProps<TCategory> {
   categories?: TCategory[]
 }
 
+const searchIconWidth = 16
+
 export function SearchInput<T extends string = never>(props: SearchInputProps<T>) {
   const [isOpen, setIsOpen] = React.useState(false)
   const toggleOpen = React.useCallback(
@@ -24,7 +26,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
   )
 
   React.useEffect(() => {
-    if (isOpen && setIsOpen) {
+    if (isOpen) {
       const hideOnScroll = () => setIsOpen(false)
       document.addEventListener("scroll", hideOnScroll)
       return () => {
@@ -39,16 +41,16 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
   const containerRef = React.useRef<HTMLDivElement>(null)
 
   useHotkey(containerRef, { key: "ArrowDown" }, () => {
-    if (!isOpen) {
-      setIsOpen(true)
-    }
+    setIsOpen(true)
     setActiveItemIndex(prev => (prev + 1) % (props.categories || []).length)
   })
 
   useHotkey(containerRef, { key: "ArrowUp" }, () =>
-    setActiveItemIndex(prev =>
-      prev === 0 ? (props.categories || []).length : (prev - 1) % (props.categories || []).length,
-    ),
+    setActiveItemIndex(prev => {
+      const length = (props.categories || []).length
+      const previousIndex = prev - 1
+      return previousIndex < 0 ? length - 1 : previousIndex
+    }),
   )
 
   useHotkey(containerRef, { key: "Enter" }, () => {
@@ -62,7 +64,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
   useHotkey(containerRef, { key: "Escape" }, () => setIsOpen(false))
 
   if (props.categories && !props.categories.includes(props.category!)) {
-    throw new Error("[SearchInput] `categories` and `category` props doesn't match!")
+    throw new Error("[SearchInput] `categories` and `category` props don't match!")
   }
 
   return (
@@ -92,7 +94,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
           aria-hidden="true"
         />
       )}
-      <SearchIcon color="color.text.default" size={16} />
+      <SearchIcon color="color.text.default" size={searchIconWidth} />
       {props.category && (
         <CategoryDropdown onClick={toggleOpen}>
           {props.category}
@@ -125,10 +127,8 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
               role="option"
               key={category}
               onClick={e => {
-                if (props.value) {
-                  setIsOpen(false)
-                  e.stopPropagation()
-                }
+                setIsOpen(false)
+                e.stopPropagation()
                 props.onChange({ search: props.value, category })
               }}
             >
@@ -160,10 +160,15 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
 const Container = styled.div<{ hasCategory: boolean; isOpen: boolean }>`
   display: grid;
   cursor: text;
-  grid-template-columns: ${props => (props.hasCategory ? "16px min-content auto" : "16px auto")};
+  grid-template-columns: ${props =>
+    props.hasCategory ? `${searchIconWidth}px min-content auto` : `${searchIconWidth}px auto`};
   border: 1px solid transparent; /* Avoid jump with hover state */
   border-bottom: 1px solid ${({ theme }) => theme.color.separators.light};
-  gap: ${({ theme, hasCategory }) => theme.space.content + (hasCategory ? 8 : 0)}px;
+  grid-gap: ${({ theme, hasCategory }) =>
+    theme.space.content +
+    (hasCategory
+      ? theme.space.small
+      : 0)}px; /* The offset is for the separator extra width (CategoryDropdown:after.width) */
   padding: 0 ${({ theme }) => theme.space.content}px;
   align-items: center;
   height: 48px;
@@ -230,8 +235,9 @@ const DropdownItem = styled.div<{ isActive: boolean }>`
   display: grid;
   align-items: center;
   width: 100%;
-  grid-template-columns: 16px min-content auto;
-  grid-gap: ${({ theme }) => theme.space.content + 8}px;
+  grid-template-columns: ${searchIconWidth}px min-content auto;
+  grid-gap: ${({ theme }) =>
+    theme.space.content + theme.space.small}px; /* Same as Container.grid-gap (with category) to be aligned */
   padding: 0 ${({ theme }) => theme.space.content}px;
   cursor: pointer !important;
 
