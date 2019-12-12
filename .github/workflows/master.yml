@@ -8,13 +8,15 @@ jobs:
     name: Build, Test and Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '10.x'
+      - uses: actions/checkout@v1
       - uses: nuxt/actions-yarn@97f98f200b7fd42a001f88e7bdfc14d64d695ab2
       - run: yarn install
       - run: yarn build:icons
       - run: yarn build:package
       - run: yarn test:unit
-      - uses: actions/npm@master
       - run: npm version $(npm show . version)-$(git rev-parse --short HEAD) --no-git-tag-version --unsafe-perm
       - run: echo '//registry.npmjs.org/:_authToken=${{ secrets.NPM_AUTH_TOKEN }}'>.npmrc
       - run: npm publish --tag next
