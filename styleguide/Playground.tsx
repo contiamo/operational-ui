@@ -12,6 +12,7 @@ const MonacoEditor = React.lazy(async () => {
 })
 
 const PlayButton = styled(Button)`
+  margin-top: ${({ theme }) => theme.space.small}px;
   margin-bottom: ${({ theme }) => theme.space.element}px;
 `
 

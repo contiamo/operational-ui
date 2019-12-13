@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 13 8.92" height="30" width="30">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+      }
+    </style>
+  </defs>
+  <title>enter</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <g id="Layer_1-2" data-name="Layer 1">
+      <path class="cls-1" d="M12.5,0a.5.5,0,0,0-.5.5V5.2H1.73l2-1.86a.5.5,0,0,0,0-.71A.51.51,0,0,0,3,2.6L.16,5.29A.5.5,0,0,0,0,5.65.51.51,0,0,0,.16,6l3,2.77a.5.5,0,1,0,.68-.73l-2-1.86H12.5a.5.5,0,0,0,.5-.5V.5A.5.5,0,0,0,12.5,0Z"/>
+    </g>
+  </g>
+</svg>
