@@ -3,7 +3,12 @@ import Tree, { TreeProps } from "./Tree"
 import TreeItem from "./TreeItem"
 import styled from "../utils/styled"
 
-type Props = TreeProps["trees"][-1] & { searchWords?: string[]; level: number; hasIconOffset: boolean }
+type Props = TreeProps["trees"][-1] & {
+  searchWords?: string[]
+  level: number
+  hasIconOffset: boolean
+  tooltip?: React.ReactNode
+}
 
 const Container = styled.div<{ hasChildren: boolean; disabled: boolean }>`
   opacity: ${({ disabled }) => (disabled ? 0.5 : 1)};
@@ -30,6 +35,7 @@ const ChildTree: React.SFC<Props> = ({
   level,
   actions,
   hasIconOffset,
+  tooltip,
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
@@ -81,6 +87,7 @@ const ChildTree: React.SFC<Props> = ({
         actions={actions}
         cursor={cursor}
         hasIconOffset={hasIconOffset && !hasChildren}
+        tooltip={tooltip}
       />
       {hasChildren && isOpen && (
         <Tree

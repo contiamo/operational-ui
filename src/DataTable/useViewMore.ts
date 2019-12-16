@@ -6,7 +6,9 @@ import * as React from "react"
  */
 const useViewMore = () => {
   const closeTimeoutIdRef = React.useRef<number>()
-  const [viewMorePopup, setViewMorePopup] = React.useState<{ content: string; x: number; y: number } | false>(false)
+  const [viewMorePopup, setViewMorePopup] = React.useState<{ content: React.ReactNode; x: number; y: number } | false>(
+    false,
+  )
 
   const close = React.useCallback(() => {
     if (viewMorePopup) {
@@ -16,7 +18,7 @@ const useViewMore = () => {
   React.useEffect(() => () => window.clearTimeout(closeTimeoutIdRef.current), [])
 
   const open = React.useCallback(
-    (content: string) => (e: React.MouseEvent) => {
+    (content: React.ReactNode) => (e: React.MouseEvent) => {
       e.stopPropagation()
       window.clearTimeout(closeTimeoutIdRef.current)
       setViewMorePopup({
@@ -28,7 +30,9 @@ const useViewMore = () => {
     [],
   )
 
-  const toggle = React.useCallback((content: string) => (viewMorePopup ? close() : open(content)), [viewMorePopup])
+  const toggle = React.useCallback((content: React.ReactNode) => (viewMorePopup ? close() : open(content)), [
+    viewMorePopup,
+  ])
 
   return {
     viewMorePopup,
