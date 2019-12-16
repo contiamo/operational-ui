@@ -170,7 +170,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       // hide popup if we hide DotMenuHorizontalIcon
       if (!tooLong) close()
     }
-  })
+  }, [close])
 
   return (
     <Header
