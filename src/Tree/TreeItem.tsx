@@ -93,6 +93,7 @@ const Label = styled.div<{ hasChildren: boolean }>`
   /* Split the label by caract properly and show the first line only */
   overflow-wrap: break-word;
   overflow: hidden;
+  text-overflow: ellipsis;
   height: 16px;
 
   font-size: ${({ theme }) => theme.font.size.small}px;
