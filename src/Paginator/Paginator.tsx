@@ -3,16 +3,19 @@ import * as React from "react"
 import Button from "../Button/Button"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
+import { OperationalStyleConstants } from ".."
 
 export interface PaginatorProps extends DefaultProps {
-  /** Function to be executed after changing page */
-  onChange?: (page: PaginatorProps["page"]) => void
   /** Index of the current selected page */
   page: number
   /** Total number of items */
   itemCount: number
   /** Number of items per page */
   itemsPerPage: number
+  /** Compact mode */
+  compact?: boolean
+  /** Function to be executed after changing page */
+  onChange?: (page: PaginatorProps["page"]) => void
 }
 
 const PaginatorSpan = styled("div")(({ theme }) => ({
@@ -36,29 +39,44 @@ interface ControlProps {
   isDisabled: boolean
   itemCount: number
   itemsPerPage: number
-  type: "first" | "previous" | "next" | "last"
+  type: "first" | "previous" | "next" | "next-compact" | "last"
 }
 
-const NavigationButton = styled(Button)(({ type, theme }) => ({
-  width: 96,
-  height: 24,
-  lineHeight: "24px",
-  marginRight: type === "previous" ? theme.space.big : theme.space.small,
-  padding: 0,
-  "& svg": {
-    verticalAlign: "middle",
-    marginTop: 1,
-  },
-  "& span": {
-    padding: `0 ${theme.space.base}px`,
-  },
-}))
+const NavigationButton = styled(Button)<{ type: ControlProps["type"] }>`
+  width: 96px;
+  height: 24px;
+  line-height: 24px;
+  margin-right: ${({ theme, type }) => getRightMargin(theme, type)}px;
+  padding: 0;
+
+  & svg {
+    vertical-align: middle;
+    margin-top: 1;
+  }
+
+  & span {
+    padding: ${({ theme }) => `0 ${theme.space.base}px`};
+  }
+`
+
+const getRightMargin = (theme: OperationalStyleConstants, type: ControlProps["type"]) => {
+  if (type === "previous") {
+    return theme.space.big
+  }
+
+  if (type === "next-compact") {
+    return 0
+  }
+
+  return theme.space.small
+}
 
 const PaginatorControl = ({ children, itemCount, itemsPerPage, page, onChange, type, isDisabled }: ControlProps) => {
   const pageChanges = {
     first: 1,
     previous: page - 1,
     next: page + 1,
+    "next-compact": page + 1,
     last: Math.ceil(itemCount / itemsPerPage),
   }
 
@@ -89,7 +107,7 @@ const Container = styled("div")(({ theme }) => ({
   alignItems: "center",
 }))
 
-const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, onChange, ...props }) => {
+const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, onChange, compact, ...props }) => {
   const controlProps = {
     itemCount,
     itemsPerPage,
@@ -99,6 +117,20 @@ const Paginator: React.SFC<PaginatorProps> = ({ itemCount, itemsPerPage, page, o
 
   const isFirstDisabled = page === 1
   const isLastDisabled = itemsPerPage * page >= itemCount
+
+  if (Boolean(compact)) {
+    return (
+      <Container {...props}>
+        <PaginatorControl type="previous" {...controlProps} isDisabled={isFirstDisabled}>
+          Prev
+        </PaginatorControl>
+        <PaginatorControl type="next-compact" {...controlProps} isDisabled={isLastDisabled}>
+          Next
+        </PaginatorControl>
+      </Container>
+    )
+  }
+
   return (
     <Container {...props}>
       <div>
