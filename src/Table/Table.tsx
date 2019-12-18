@@ -189,12 +189,12 @@ const ActionLabel = styled(Small)`
   display: block;
 `
 
-const EmptyView = styled(Td)<{ condensed?: boolean }>(({ theme, condensed }) => ({
-  color: theme.color.text.default,
-  height: condensed ? 36 : 50,
-  lineHeight: condensed ? 36 : 50,
-  textAlign: "center",
-}))
+const EmptyView = styled(Td)<{ condensed?: boolean }>`
+  color: ${({ theme }) => theme.color.text.default};
+  height: ${({ condensed }) => (condensed ? 36 : 50)}px;
+  height: ${({ condensed }) => (condensed ? 36 : 50)}px;
+  text-align: center;
+`
 
 function Table<T>({
   data = [],
