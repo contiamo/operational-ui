@@ -192,7 +192,7 @@ const ActionLabel = styled(Small)`
 const EmptyView = styled(Td)<{ condensed?: boolean }>`
   color: ${({ theme }) => theme.color.text.default};
   height: ${({ condensed }) => (condensed ? 36 : 50)}px;
-  height: ${({ condensed }) => (condensed ? 36 : 50)}px;
+  line-height: ${({ condensed }) => (condensed ? 36 : 50)}px;
   text-align: center;
 `
 
