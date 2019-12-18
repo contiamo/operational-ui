@@ -117,7 +117,7 @@ const animateIn = keyframes`
 
 export const ViewMorePopup = styled.div<{ top: number; left: number }>`
   position: fixed;
-  padding: ${({ theme }) => theme.space.content}px;
+  padding: 0;
   font-family: ${({ theme }) => theme.font.family.code};
   max-height: 50vh;
   max-width: 50vw;
