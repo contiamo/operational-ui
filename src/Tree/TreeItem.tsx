@@ -9,6 +9,8 @@ import constants from "../utils/constants"
 import { ViewMorePopup } from "../Internals/ViewMorePopup"
 import useViewMore from "../DataTable/useViewMore"
 
+const preventBubbling = (e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()
+
 interface TreeItemProps {
   level: number
   highlight: boolean
@@ -171,7 +173,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       onMouseLeave={close}
     >
       {viewMorePopup && (
-        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x} padding={0}>
+        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x} padding={0} onClick={preventBubbling}>
           {viewMorePopup.content}
         </ViewMorePopup>
       )}
