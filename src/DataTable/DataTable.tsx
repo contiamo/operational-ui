@@ -3,16 +3,8 @@ import { FixedSizeList, ListChildComponentProps, FixedSizeListProps } from "reac
 
 import Message from "../Internals/Message/Message"
 
-import {
-  Cell,
-  Container,
-  DataWrapper,
-  HeaderCell,
-  HeaderRow,
-  HeadersContainer,
-  Row,
-  ViewMorePopup,
-} from "./DataTable.styled"
+import { Cell, Container, DataWrapper, HeaderCell, HeaderRow, HeadersContainer, Row } from "./DataTable.styled"
+import { ViewMorePopup } from "../Internals/ViewMorePopup"
 import { defaultRowHeight, getRowHeight } from "./DataTable.util"
 import useViewMore from "./useViewMore"
 import CellContent from "./CellContent"

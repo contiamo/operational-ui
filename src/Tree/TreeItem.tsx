@@ -1,14 +1,15 @@
-import React, { useCallback, useRef, useLayoutEffect, useState } from "react"
-import noop from "lodash/noop"
+import React, { useCallback } from "react"
 
 import NameTag from "../NameTag/NameTag"
 import { darken, lighten } from "../utils"
 import styled from "../utils/styled"
-import { ChevronRightIcon, ChevronDownIcon, IconComponentType, DotMenuHorizontalIcon } from "../Icon"
+import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
 import Highlighter from "react-highlight-words"
 import constants from "../utils/constants"
-import { ViewMorePopup } from "../DataTable/DataTable.styled"
+import { ViewMorePopup } from "../Internals/ViewMorePopup"
 import useViewMore from "../DataTable/useViewMore"
+
+const preventBubbling = (e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()
 
 interface TreeItemProps {
   level: number
@@ -26,6 +27,7 @@ interface TreeItemProps {
   onNodeContextMenu?: (e: React.MouseEvent<HTMLDivElement>) => void
   actions?: React.ReactNode
   hasIconOffset?: boolean
+  tooltip?: React.ReactNode
 }
 
 const Header = styled.div<{
@@ -81,8 +83,6 @@ const NameTagStyled = styled(NameTag)`
   margin-right: ${({ theme }) => theme.space.base}px;
 `
 
-const viewMoreIconSize = 18
-
 // These props are extracted to avoid useless re-render
 const highlightStyle: React.CSSProperties = {
   color: constants.color.text.action,
@@ -95,6 +95,7 @@ const Label = styled.div<{ hasChildren: boolean }>`
   /* Split the label by caract properly and show the first line only */
   overflow-wrap: break-word;
   overflow: hidden;
+  text-overflow: ellipsis;
   height: 16px;
 
   font-size: ${({ theme }) => theme.font.size.small}px;
@@ -127,6 +128,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   actions,
   hasIconOffset,
   searchWords = defaultSearch,
+  tooltip,
 }) => {
   const handleKeyDown = useCallback(
     e => {
@@ -155,22 +157,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   )
 
   const { open, close, viewMorePopup } = useViewMore()
-  const [isTooLong, setIsTooLong] = useState(false)
-  const $label = useRef<HTMLDivElement>(null)
-
-  // We compute this on every re-render to handle the resize
-  // (resize event is only supported by chrome for now)
-  useLayoutEffect(() => {
-    // We can't attach the ref to `Highlighter`, this is why we attached the ref
-    // to the parent and using `children[0]`
-    if ($label.current && $label.current.children[0]) {
-      const { height } = $label.current.children[0].getBoundingClientRect()
-      const tooLong = height > 16
-      setIsTooLong(tooLong)
-      // hide popup if we hide DotMenuHorizontalIcon
-      if (!tooLong) close()
-    }
-  }, [close])
+  const onMouseEnter = useCallback(e => (tooltip ? open(tooltip)(e) : undefined), [tooltip, open])
 
   return (
     <Header
@@ -182,9 +169,11 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       highlight={Boolean(highlight)}
       cursor={cursor}
       tabIndex={0} // TODO: tabIndex -1 for disabled items
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={close}
     >
       {viewMorePopup && (
-        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x}>
+        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x} padding={0} onClick={preventBubbling}>
           {viewMorePopup.content}
         </ViewMorePopup>
       )}
@@ -206,18 +195,9 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           color: iconColor || "color.text.lighter",
           style: { marginLeft: 0, marginRight: 4, flex: "0 0 15px" },
         })}
-      <Label hasChildren={hasChildren} ref={$label}>
+      <Label hasChildren={hasChildren}>
         <Highlighter textToHighlight={label} highlightStyle={highlightStyle} searchWords={searchWords} />
       </Label>
-      {isTooLong && (
-        <DotMenuHorizontalIcon
-          size={viewMoreIconSize}
-          onClick={noop}
-          left
-          onMouseEnter={open(label)}
-          onMouseLeave={close}
-        />
-      )}
       <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>
     </Header>
   )

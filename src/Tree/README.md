@@ -28,6 +28,13 @@ const Wrapper = styled.div`
       {
         label: "ERP",
         tag: "OR",
+        tooltip: (
+          <>
+            Hello this is tooltip!
+            <br />
+            <b>Bold text</b>
+          </>
+        ),
         childNodes: [
           {
             label: "Region",
