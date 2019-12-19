@@ -171,7 +171,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       onMouseLeave={close}
     >
       {viewMorePopup && (
-        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x}>
+        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x} padding={0}>
           {viewMorePopup.content}
         </ViewMorePopup>
       )}
