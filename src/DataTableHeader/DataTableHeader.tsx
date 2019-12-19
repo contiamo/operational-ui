@@ -6,7 +6,7 @@ import { ActionsContainer, Container, TitleContainer, GhostTitleContainer } from
 import { IconComponentType, ChevronDownIcon } from "../Icon"
 import { IContextMenuItem } from "../ContextMenu/ContextMenu.Item"
 import isString from "lodash/isString"
-import { ViewMorePopup } from "../DataTable/DataTable.styled"
+import { ViewMorePopup } from "../Internals/ViewMorePopup"
 import useViewMore from "../DataTable/useViewMore"
 import ContextMenu from "../ContextMenu/ContextMenu"
 import useWindowSize from "../useWindowSize"

@@ -6,7 +6,7 @@ import styled from "../utils/styled"
 import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
 import Highlighter from "react-highlight-words"
 import constants from "../utils/constants"
-import { ViewMorePopup } from "../DataTable/DataTable.styled"
+import { ViewMorePopup } from "../Internals/ViewMorePopup"
 import useViewMore from "../DataTable/useViewMore"
 
 interface TreeItemProps {
