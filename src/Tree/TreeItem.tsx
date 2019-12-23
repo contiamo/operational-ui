@@ -176,7 +176,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     if (onTooltip) {
       onTooltip(undefined)
     }
-  }, [tooltip, open])
+  }, [onTooltip])
 
   return (
     <Header
