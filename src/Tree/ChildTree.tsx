@@ -8,6 +8,7 @@ type Props = TreeProps["trees"][-1] & {
   level: number
   hasIconOffset: boolean
   tooltip?: React.ReactNode
+  onTooltip?: (e: React.MouseEvent<HTMLDivElement> | undefined) => void
 }
 
 const Container = styled.div<{ hasChildren: boolean; disabled: boolean }>`
@@ -36,6 +37,7 @@ const ChildTree: React.SFC<Props> = ({
   actions,
   hasIconOffset,
   tooltip,
+  onTooltip,
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
@@ -88,6 +90,7 @@ const ChildTree: React.SFC<Props> = ({
         cursor={cursor}
         hasIconOffset={hasIconOffset && !hasChildren}
         tooltip={tooltip}
+        onTooltip={onTooltip}
       />
       {hasChildren && isOpen && (
         <Tree
