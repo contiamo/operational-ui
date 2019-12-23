@@ -25,6 +25,7 @@ interface TreeItemProps {
   cursor?: string
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   onNodeContextMenu?: (e: React.MouseEvent<HTMLDivElement>) => void
+  onTooltip?: (e: React.MouseEvent<HTMLDivElement> | undefined) => void
   actions?: React.ReactNode
   hasIconOffset?: boolean
   tooltip?: React.ReactNode
@@ -129,6 +130,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   hasIconOffset,
   searchWords = defaultSearch,
   tooltip,
+  onTooltip,
 }) => {
   const handleKeyDown = useCallback(
     e => {
@@ -157,7 +159,24 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   )
 
   const { open, close, viewMorePopup } = useViewMore()
-  const onMouseEnter = useCallback(e => (tooltip ? open(tooltip)(e) : undefined), [tooltip, open])
+  const onMouseEnter = useCallback(
+    e => {
+      if (tooltip) {
+        open(tooltip)(e)
+      }
+      if (onTooltip) {
+        onTooltip(e)
+      }
+    },
+    [tooltip, open, onTooltip],
+  )
+
+  const onMouseLeave = useCallback(() => {
+    close()
+    if (onTooltip) {
+      onTooltip(undefined)
+    }
+  }, [tooltip, open])
 
   return (
     <Header
@@ -170,7 +189,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       cursor={cursor}
       tabIndex={0} // TODO: tabIndex -1 for disabled items
       onMouseEnter={onMouseEnter}
-      onMouseLeave={close}
+      onMouseLeave={onMouseLeave}
     >
       {viewMorePopup && (
         <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x} padding={0} onClick={preventBubbling}>
