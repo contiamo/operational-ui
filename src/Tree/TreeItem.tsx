@@ -6,10 +6,6 @@ import styled from "../utils/styled"
 import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
 import Highlighter from "react-highlight-words"
 import constants from "../utils/constants"
-import { ViewMorePopup } from "../Internals/ViewMorePopup"
-import useViewMore from "../DataTable/useViewMore"
-
-const preventBubbling = (e: React.MouseEvent<HTMLDivElement>) => e.stopPropagation()
 
 interface TreeItemProps {
   level: number
@@ -25,9 +21,10 @@ interface TreeItemProps {
   cursor?: string
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   onNodeContextMenu?: (e: React.MouseEvent<HTMLDivElement>) => void
+  onMouseEnter?: (e: React.MouseEvent<HTMLDivElement>) => void
+  onMouseLeave?: (e: React.MouseEvent<HTMLDivElement>) => void
   actions?: React.ReactNode
   hasIconOffset?: boolean
-  tooltip?: React.ReactNode
 }
 
 const Header = styled.div<{
@@ -128,7 +125,8 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   actions,
   hasIconOffset,
   searchWords = defaultSearch,
-  tooltip,
+  onMouseEnter,
+  onMouseLeave,
 }) => {
   const handleKeyDown = useCallback(
     e => {
@@ -156,9 +154,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     [onNodeContextMenu, onNodeClick],
   )
 
-  const { open, close, viewMorePopup } = useViewMore()
-  const onMouseEnter = useCallback(e => (tooltip ? open(tooltip)(e) : undefined), [tooltip, open])
-
   return (
     <Header
       level={level}
@@ -170,13 +165,8 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       cursor={cursor}
       tabIndex={0} // TODO: tabIndex -1 for disabled items
       onMouseEnter={onMouseEnter}
-      onMouseLeave={close}
+      onMouseLeave={onMouseLeave}
     >
-      {viewMorePopup && (
-        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x} padding={0} onClick={preventBubbling}>
-          {viewMorePopup.content}
-        </ViewMorePopup>
-      )}
       {hasChildren &&
         React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
           size: 11,
