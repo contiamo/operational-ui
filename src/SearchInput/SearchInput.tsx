@@ -1,6 +1,6 @@
 import * as React from "react"
 import styled from "../utils/styled"
-import { SearchIcon, CaretDownIcon, CaretUpIcon, EnterIcon } from "../Icon"
+import { SearchIcon, CaretDownIcon, CaretUpIcon, EnterIcon, NoIcon } from "../Icon"
 import { lighten } from "../utils"
 import useHotkey from "../useHotkey"
 
@@ -13,7 +13,7 @@ export interface SearchInputProps<TCategory> {
   categories?: TCategory[]
 }
 
-const searchIconWidth = 16
+const iconWidth = 16
 
 export function SearchInput<T extends string = never>(props: SearchInputProps<T>) {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -36,6 +36,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
   }, [isOpen, setIsOpen])
 
   const [activeItemIndex, setActiveItemIndex] = React.useState(0)
+  const [focusEl, setFocusEl] = React.useState<string | null>(null)
 
   const inputRef = React.useRef<HTMLInputElement>(null)
   const containerRef = React.useRef<HTMLDivElement>(null)
@@ -54,6 +55,10 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
   )
 
   useHotkey(containerRef, { key: "Enter" }, () => {
+    if (focusEl === "clearIcon" && props.onClear) {
+      props.onClear() // Handle keyboard interaction for clear icon
+      return
+    }
     if (!props.categories || !props.category) {
       return
     }
@@ -63,6 +68,10 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
 
   useHotkey(containerRef, { key: "Escape" }, () => setIsOpen(false))
 
+  if (!props.value && props.onClear && focusEl === "clearIcon") {
+    setFocusEl(null) // Clear focus state if the element is not on the screen
+  }
+
   if (props.categories && !props.categories.includes(props.category!)) {
     throw new Error("[SearchInput] `categories` and `category` props don't match!")
   }
@@ -71,6 +80,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
     <Container
       ref={containerRef}
       hasCategory={Boolean(props.category)}
+      isClearable={Boolean(props.value && props.onClear)}
       isOpen={isOpen}
       onClick={() => {
         if (inputRef.current) {
@@ -94,7 +104,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
           aria-hidden="true"
         />
       )}
-      <SearchIcon color="color.text.default" size={searchIconWidth} />
+      <SearchIcon color="color.text.default" size={iconWidth} />
       {props.category && (
         <CategoryDropdown onClick={toggleOpen}>
           {props.category}
@@ -107,6 +117,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
         aria-label="search"
         placeholder={props.placeholder}
         onFocus={() => setIsOpen(true)}
+        onClick={() => setIsOpen(true)}
         onChange={e => {
           setIsOpen(true)
           props.onChange({
@@ -115,6 +126,14 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
           })
         }}
       />
+      {props.value && props.onClear && (
+        <ClearIcon
+          onClick={props.onClear}
+          color="color.text.default"
+          onFocus={() => setFocusEl("clearIcon")}
+          onBlur={() => setFocusEl(null)}
+        />
+      )}
       {isOpen && props.categories && (
         <DropdownContainer aria-activedescendant={`category-${props.categories[activeItemIndex]}`} role="listbox">
           {props.categories.map((category, index) => (
@@ -157,11 +176,13 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
   )
 }
 
-const Container = styled.div<{ hasCategory: boolean; isOpen: boolean }>`
+const Container = styled.div<{ hasCategory: boolean; isOpen: boolean; isClearable: boolean }>`
   display: grid;
   cursor: text;
-  grid-template-columns: ${props =>
-    props.hasCategory ? `${searchIconWidth}px min-content auto` : `${searchIconWidth}px auto`};
+  grid-template-columns: ${props => {
+    const clearIconZone = props.isClearable ? ` ${iconWidth}px` : ""
+    return props.hasCategory ? `${iconWidth}px min-content auto${clearIconZone}` : `${iconWidth}px auto${clearIconZone}`
+  }};
   border: 1px solid transparent; /* Avoid jump with hover state */
   border-bottom: 1px solid ${({ theme }) => theme.color.separators.light};
   grid-gap: ${({ theme, hasCategory }) =>
@@ -235,7 +256,7 @@ const DropdownItem = styled.div<{ isActive: boolean }>`
   display: grid;
   align-items: center;
   width: 100%;
-  grid-template-columns: ${searchIconWidth}px min-content auto;
+  grid-template-columns: ${iconWidth}px min-content auto;
   grid-gap: ${({ theme }) =>
     theme.space.content + theme.space.small}px; /* Same as Container.grid-gap (with category) to be aligned */
   padding: 0 ${({ theme }) => theme.space.content}px;
@@ -275,6 +296,10 @@ const InvisibleOverlay = styled.div`
   bottom: 0;
   cursor: default;
   z-index: ${({ theme }) => theme.zIndex.selectOptions - 1};
+`
+
+const ClearIcon = styled(NoIcon)`
+  z-index: ${({ theme }) => theme.zIndex.selectOptions}; /* Ensure to be on top of the InvisibleOverlay */
 `
 
 export default SearchInput
