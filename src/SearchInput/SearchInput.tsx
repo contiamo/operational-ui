@@ -36,7 +36,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
   }, [isOpen, setIsOpen])
 
   const [activeItemIndex, setActiveItemIndex] = React.useState(0)
-  const [focusEl, setFocusEl] = React.useState<string | null>(null)
+  const [focusEl, setFocusEl] = React.useState<"clearIcon" | null>(null)
 
   const inputRef = React.useRef<HTMLInputElement>(null)
   const containerRef = React.useRef<HTMLDivElement>(null)
