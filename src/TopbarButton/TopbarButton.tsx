@@ -23,10 +23,9 @@ const TopbarButtonContainer = styled.button<{ disabled?: boolean; flavor: Topbar
   height: 36px;
   border-radius: ${({ flavor, theme }) => (flavor === "outline" || flavor === "filled" ? theme.borderRadius : 18)}px;
   padding: 0px
-    ${({ flavor, theme }) =>
-      flavor === "outline" || flavor === "filled" ? theme.space.element : theme.space.medium}px;
-  border: none;    
-  box-shadow ${({ flavor, theme }) => (flavor === "outline" ? ` 0 0 0 1px ${theme.color.text.dark}` : "none")};
+    ${({ flavor, theme }) => (flavor === "outline" || flavor === "filled" ? theme.space.element : theme.space.medium)}px;
+  border: none;
+  box-shadow: ${({ flavor, theme }) => (flavor === "outline" ? ` 0 0 0 1px ${theme.color.text.dark}` : "none")};
   background: ${({ flavor, theme }) =>
     flavor === "filled" ? theme.color.primary : flavor === "outline" ? theme.color.white : "transparent"};
   color: ${({ flavor, theme }) =>
@@ -44,7 +43,8 @@ const TopbarButtonContainer = styled.button<{ disabled?: boolean; flavor: Topbar
   .no-focus &:focus {
     background: none;
   }
-  :hover, .no-focus &:hover:focus {
+  :hover,
+  .no-focus &:hover:focus {
     background: ${({ flavor, disabled }) =>
       disabled || flavor === "outline" || flavor === "filled" ? undefined : "rgba(0,0,25,0.05)"};
   }

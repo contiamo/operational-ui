@@ -15,16 +15,17 @@ export interface FlowProps {
   activeItemIndex?: number
 }
 
-const Container = styled("div")`
+const Container = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: ${({ theme }) => theme.space.element}px;
 `
 
-const Box = styled<
-  "button",
-  { isActive: boolean; condensed: FlowProps["condensed"]; onClick: FlowProps["items"][-1]["onClick"] }
->("button")`
+const Box = styled.button<{
+  isActive: boolean
+  condensed: FlowProps["condensed"]
+  onClick: FlowProps["items"][-1]["onClick"]
+}>`
   width: ${({ condensed }) => (condensed ? 32 : 120)}px;
   height: ${({ condensed }) => (condensed ? 32 : 80)}px;
   border: 1px solid ${({ theme, isActive }) => (isActive ? theme.color.primary : theme.color.border.disabled)};
@@ -52,7 +53,7 @@ const Label = styled(Body)`
   margin: 10px 0 0;
 `
 
-const NextArrow = styled("div")`
+const NextArrow = styled.div`
   width: 0;
   height: 0;
   border: 6px solid transparent;

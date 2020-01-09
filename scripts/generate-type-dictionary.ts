@@ -86,9 +86,9 @@ export const generateTypeDictionary = (outputPath = "styleguide/__generated__") 
             ),
           },
           {
-            path: "node_modules/@emotion/styled-base/index.d.ts",
+            path: "node_modules/@emotion/react/index.d.ts",
             content: replaceStringLiteralTokens(
-              await readFile(join(parentPath, "node_modules/@emotion/styled-base/types/index.d.ts"), "utf8"),
+              await readFile(join(parentPath, "node_modules/@emotion/react/types/index.d.ts"), "utf8"),
             ),
           },
         ]

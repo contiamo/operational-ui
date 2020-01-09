@@ -1,4 +1,4 @@
-import { css, Global } from "@emotion/core"
+import { css, Global } from "@emotion/react"
 import React, { Suspense, useReducer } from "react"
 
 import { Layout, OperationalUI, Page, Spinner } from "../src"

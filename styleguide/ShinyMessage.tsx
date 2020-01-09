@@ -1,6 +1,6 @@
 import React from "react"
 import { styled, Message, MessageProps } from "@operational/components"
-import { keyframes } from "@emotion/core"
+import { keyframes } from "@emotion/react"
 
 const sweep = keyframes({
   "0%": {

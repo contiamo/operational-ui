@@ -1,4 +1,3 @@
-import { Omit } from "emotion-theming/types/helper"
 import * as React from "react"
 import { Draggable, DraggableProps, Droppable, DroppableProps, DroppableStateSnapshot } from "react-beautiful-dnd"
 import styled from "../utils/styled"

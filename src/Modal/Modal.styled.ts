@@ -17,7 +17,8 @@ export const Overlay = styled.div`
 
 // We use styled("div") here to filter out `height` and `width` props.
 export const Container = styled("div", {
-  shouldForwardProp: prop => !["width", "height", "top", "left", "modalHeight", "anchorHeight"].includes(prop),
+  shouldForwardProp: prop =>
+    !["width", "height", "top", "left", "modalHeight", "anchorHeight"].includes(prop.toString()),
 })<{
   top: Top
   left: Left
@@ -56,7 +57,7 @@ export const ModalCard = styled(Card)`
 `
 
 export const ModalContent = styled("div", {
-  shouldForwardProp: prop => !["top", "action", "anchor"].includes(prop),
+  shouldForwardProp: prop => !["top", "action", "anchor"].includes(prop.toString()),
 })<{ anchor: boolean; actions: boolean; top: number }>`
   display: grid;
   grid-template-rows: ${({ actions }) => (actions ? "minmax(auto, 100%) max-content" : "auto")};

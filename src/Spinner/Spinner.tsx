@@ -1,4 +1,4 @@
-import { keyframes } from "@emotion/core"
+import { keyframes } from "@emotion/react"
 import * as React from "react"
 
 import { DefaultProps } from "../types"

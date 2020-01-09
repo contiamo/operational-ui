@@ -2,7 +2,7 @@ import styled from "../utils/styled"
 
 export const StyledSidenavItem = styled("div", {
   shouldForwardProp: prop =>
-    !["isDark", "hasIcon", "hasItems", "compact", "hasOnClick", "as", "isActive"].includes(prop),
+    !["isDark", "hasIcon", "hasItems", "compact", "hasOnClick", "as", "isActive"].includes(prop.toString()),
 })<{
   as: "a" | "div"
   isActive: boolean

@@ -25,7 +25,7 @@ export interface NameTagProps extends DefaultProps {
   condensed?: boolean
 }
 
-const shouldForwardProp = (prop: string) => !["color", "left", "assignColor", "condensed"].includes(prop)
+const shouldForwardProp = (prop: string) => !["color", "left", "assignColor", "condensed"].includes(prop.toString())
 
 const Container = styled("div", {
   shouldForwardProp,

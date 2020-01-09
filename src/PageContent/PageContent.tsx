@@ -39,7 +39,7 @@ export type PageContentProps = PageContentNoPaddingProps | PageContentWithPaddin
 const sideSize = 280
 
 const StyledPageContent = styled("div", {
-  shouldForwardProp: props => !["fill", "padding", "noPadding"].includes(props),
+  shouldForwardProp: props => !["fill", "padding", "noPadding"].includes(props.toString()),
 })<PageContentProps>(props => {
   const gridTemplateColumns = {
     main: props.fill ? "100%" : "auto",

@@ -1,4 +1,4 @@
-import { keyframes } from "@emotion/core"
+import { keyframes } from "@emotion/react"
 
 import { lighten } from "../utils"
 import styled from "../utils/styled"

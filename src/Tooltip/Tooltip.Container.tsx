@@ -1,4 +1,4 @@
-import css from "@emotion/css"
+import { css } from "@emotion/react"
 
 import styled from "../utils/styled"
 import { TooltipProps } from "./Tooltip"

@@ -43,8 +43,7 @@
     "emotion": "^9.2.5",
     "react": "^16.8.0",
     "react-beautiful-dnd": "^11.0.0",
-    "react-dom": "^16.8.0",
-    "react-emotion": "^9.2.5"
+    "react-dom": "^16.8.0"
   },
   "jest": {
     "setupFiles": [
@@ -71,10 +70,9 @@
     ]
   },
   "dependencies": {
-    "@emotion/core": "^10.0.7",
-    "@emotion/styled": "^10.0.7",
+    "@emotion/react": "^11.0.0-next.10",
+    "@emotion/styled": "^11.0.0-next.10",
     "case": "^1.5.5",
-    "emotion-theming": "^10.0.10",
     "lodash": "^4.17.10",
     "moment": "^2.22.2",
     "monaco-editor": "^0.17.0",
@@ -86,7 +84,6 @@
     "react-beautiful-dnd": "^11.0.0",
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16.8.1",
-    "react-emotion": "^10.0.0",
     "react-highlight": "^0.12.0",
     "react-highlight-words": "^0.16.0",
     "react-json-view": "^1.19.1",
@@ -153,7 +150,7 @@
     "ts-jest": "^24.0.0",
     "ts-loader": "^4.4.2",
     "ts-node": "^8.2.0",
-    "typescript": "^3.6.0-dev.20190530",
+    "typescript": "^3.7.4",
     "webpack": "^4.16.2"
   }
 }

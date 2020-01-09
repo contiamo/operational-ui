@@ -1,4 +1,4 @@
-import { keyframes } from "@emotion/core"
+import { keyframes } from "@emotion/react"
 import uniqueId from "lodash/uniqueId"
 import { inputFocus } from "../utils"
 import * as React from "react"

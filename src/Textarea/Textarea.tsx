@@ -56,13 +56,13 @@ export interface State {
   showTooltip: boolean
 }
 
-const TextareaComp = styled("textarea")<{
+const TextareaComp = styled.textarea<{
   isCode: boolean
   disabled: boolean
   resize: ResizeOptions
   autoFocus?: boolean
   height?: number
-}>(({ theme, isCode, resize, autoFocus, height, ...props }) => {
+}>(({ theme, isCode, resize, autoFocus, height }) => {
   return {
     height,
     resize,
@@ -77,7 +77,6 @@ const TextareaComp = styled("textarea")<{
     border: "none",
     // There's an white subpixel if it's theme.borderRadius and no noticeable regression if -1
     borderRadius: theme.borderRadius - 1,
-    ...props,
     ":focus": {
       ...inputFocus({ theme }),
     },

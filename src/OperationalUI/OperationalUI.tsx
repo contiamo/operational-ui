@@ -1,5 +1,4 @@
-import { Global } from "@emotion/core"
-import { ThemeProvider } from "emotion-theming"
+import { Global, ThemeProvider } from "@emotion/react"
 import merge from "lodash/merge"
 import * as React from "react"
 

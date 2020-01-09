@@ -1,4 +1,4 @@
-import { keyframes } from "@emotion/core"
+import { keyframes } from "@emotion/react"
 import * as React from "react"
 import Card, { CardProps } from "../Card/Card"
 import Overlay from "../Internals/Overlay"
