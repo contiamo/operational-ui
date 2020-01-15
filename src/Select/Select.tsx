@@ -3,7 +3,7 @@ import * as React from "react"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import LabelText from "../LabelText/LabelText"
 import { useUniqueId } from "../useUniqueId"
-import { FilterInput, Combobox, Listbox, DropdownButton, SelectInput } from "./Select.styled"
+import { FilterInput, Combobox, Listbox, DropdownButton, SelectInput, CheckboxConteiner } from "./Select.styled"
 import { SelectProps, IOption } from "./Select.types"
 import {
   truncateList,
@@ -16,6 +16,7 @@ import {
   optionsToContextMenuItems,
   getOptionFromItem,
 } from "./Select.util"
+import Checkbox from "../Checkbox/Checkbox"
 
 export const Select: React.FC<SelectProps> = ({
   options,
@@ -39,6 +40,7 @@ export const Select: React.FC<SelectProps> = ({
   const [filter, setFilter] = React.useState("")
   const $container = React.useRef<HTMLDivElement>(null)
   const $input = React.useMemo(() => React.createRef<HTMLInputElement>(), [])
+  const isMultiSelect = Array.isArray(value)
 
   React.useEffect(() => {
     if (customOption && value === customOption.value && $input.current) {
@@ -49,7 +51,7 @@ export const Select: React.FC<SelectProps> = ({
   const appendCustomOption = React.useCallback(
     (optionToAppend: IOption) => (options: ContextMenuProps["items"]): ContextMenuProps["items"] => {
       // We can't have a multiselect _and_ a custom option.
-      if (Array.isArray(value) && process.env.NODE_ENV !== "production") {
+      if (isMultiSelect && process.env.NODE_ENV !== "production") {
         console.trace(
           "⚠️ Cannot show custom option with a multi-select Select component. Please either choose to have a single value, or remove the `customOption` property from your `Select` component.",
         )
@@ -81,7 +83,19 @@ export const Select: React.FC<SelectProps> = ({
     const filteredOptions = filterList(filter)(initialOptions)
     const truncatedOptions = truncateList(maxOptions)(filteredOptions)
     const contextMenuItems = optionsToContextMenuItems(option => ({
-      label: option.label ? option.label : String(option.value),
+      label: isMultiSelect ? (
+        <CheckboxConteiner>
+          <Checkbox
+            condensed
+            value={isOptionSelected(value)(option)}
+            label={option.label ? option.label : String(option.value)}
+          />
+        </CheckboxConteiner>
+      ) : option.label ? (
+        option.label
+      ) : (
+        String(option.value)
+      ),
       isActive: isOptionSelected(value)(option),
     }))(truncatedOptions)
 
@@ -104,7 +118,7 @@ export const Select: React.FC<SelectProps> = ({
 
     // Default case, it's just a normal set of items
     return contextMenuItems
-  }, [options, value, filter, maxOptions, filterable, customOption, onChange])
+  }, [options, value, filter, maxOptions, filterable, customOption, onChange, isMultiSelect])
 
   const isReadOnly = React.useMemo(() => (customOption ? customOption.value !== value : true), [customOption, value])
 
@@ -123,7 +137,7 @@ export const Select: React.FC<SelectProps> = ({
       }}
       anchored
       disabled={disabled}
-      keepOpenOnItemClick={Array.isArray(value)}
+      keepOpenOnItemClick={isMultiSelect}
       items={items}
       aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
       initialFocusedItemIndex={options.findIndex(option => option.value === value)}

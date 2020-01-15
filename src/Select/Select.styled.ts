@@ -2,8 +2,9 @@ import styled from "../utils/styled"
 import { inputFocus } from "../utils"
 import { expandColor } from "../utils/constants"
 import Input from "../Input/Input"
+import { rowHeight } from "../ContextMenu/ContextMenu.Item"
 
-export const Listbox = styled("div")<{ disabled: boolean; color?: string; fullWidth: boolean }>`
+export const Listbox = styled.div<{ disabled: boolean; color?: string; fullWidth: boolean }>`
   label: SelectListbox;
   display: flex;
   flex-direction: column;
@@ -16,7 +17,7 @@ export const Listbox = styled("div")<{ disabled: boolean; color?: string; fullWi
 
 const dropdownButtonWidth = 40
 
-export const Combobox = styled("div")<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean }>`
+export const Combobox = styled.div<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean }>`
   display: grid;
   grid-template-columns: calc(100% - ${dropdownButtonWidth}px) ${dropdownButtonWidth}px;
   grid-gap: 1px;
@@ -59,7 +60,7 @@ export const FilterInput = styled(Input)`
   max-width: none;
 `
 
-export const DropdownButton = styled("div")<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean }>`
+export const DropdownButton = styled.div<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -84,3 +85,9 @@ export const DropdownButton = styled("div")<{ naked: boolean; isOpen: boolean; h
 `
 
 DropdownButton.defaultProps = { role: "button", "aria-disabled": false, "aria-label": "Expand" }
+
+export const CheckboxConteiner = styled.div`
+  height: ${rowHeight}px;
+  display: flex;
+  align-items: center;
+`

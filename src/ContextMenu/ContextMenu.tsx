@@ -197,6 +197,12 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
               e.stopPropagation()
               handleSelect()
               break
+            case "Escape":
+              e.stopPropagation()
+              if (setIsOpen) {
+                setIsOpen(false)
+              }
+              break
           }
         }}
       >
