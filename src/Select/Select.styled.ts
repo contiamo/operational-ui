@@ -102,7 +102,7 @@ export const DropdownButton = styled.div<{ naked: boolean; isOpen: boolean; hasC
 
 DropdownButton.defaultProps = { role: "button", "aria-disabled": false, "aria-label": "Expand" }
 
-export const CheckboxConteiner = styled.div`
+export const CheckboxContainer = styled.div`
   height: ${rowHeight}px;
   display: flex;
   align-items: center;

@@ -9,7 +9,7 @@ import {
   Listbox,
   DropdownButton,
   SelectInput,
-  CheckboxConteiner,
+  CheckboxContainer,
   ClearButton,
 } from "./Select.styled"
 import { SelectProps, IOption } from "./Select.types"
@@ -93,13 +93,13 @@ export const Select: React.FC<SelectProps> = ({
     const truncatedOptions = truncateList(maxOptions)(filteredOptions)
     const contextMenuItems = optionsToContextMenuItems(option => ({
       label: isMultiSelect ? (
-        <CheckboxConteiner>
+        <CheckboxContainer>
           <Checkbox
             condensed
             value={isOptionSelected(value)(option)}
             label={option.label ? option.label : String(option.value)}
           />
-        </CheckboxConteiner>
+        </CheckboxContainer>
       ) : option.label ? (
         option.label
       ) : (
