@@ -3,7 +3,15 @@ import * as React from "react"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import LabelText from "../LabelText/LabelText"
 import { useUniqueId } from "../useUniqueId"
-import { FilterInput, Combobox, Listbox, DropdownButton, SelectInput, CheckboxConteiner } from "./Select.styled"
+import {
+  FilterInput,
+  Combobox,
+  Listbox,
+  DropdownButton,
+  SelectInput,
+  CheckboxConteiner,
+  ClearButton,
+} from "./Select.styled"
 import { SelectProps, IOption } from "./Select.types"
 import {
   truncateList,
@@ -17,6 +25,7 @@ import {
   getOptionFromItem,
 } from "./Select.util"
 import Checkbox from "../Checkbox/Checkbox"
+import { NoIcon } from "../Icon"
 
 export const Select: React.FC<SelectProps> = ({
   options,
@@ -186,11 +195,24 @@ export const Select: React.FC<SelectProps> = ({
                 }
               }}
             />
-            <DropdownButton
-              naked={Boolean(naked)}
-              hasCustomOption={customOption ? customOption.value === value : false}
-              isOpen={isOpen}
-            />
+            {isOpen && !isMultiSelect && (
+              <DropdownButton
+                naked={Boolean(naked)}
+                hasCustomOption={customOption ? customOption.value === value : false}
+                isOpen={isOpen}
+              />
+            )}
+            {isOpen && isMultiSelect && (
+              <ClearButton
+                onClick={() => {
+                  if (onChange) {
+                    onChange([])
+                  }
+                }}
+              >
+                <NoIcon size={12} />
+              </ClearButton>
+            )}
           </Combobox>
         </Listbox>
       )}

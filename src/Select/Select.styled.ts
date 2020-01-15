@@ -60,6 +60,22 @@ export const FilterInput = styled(Input)`
   max-width: none;
 `
 
+export const ClearButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: -1px 0;
+  border: none;
+  border-top-right-radius: ${({ theme }) => theme.borderRadius}px;
+  border-bottom-right-radius: ${({ theme }) => theme.borderRadius}px;
+
+  :focus {
+    box-shadow: none;
+  }
+`
+
+ClearButton.defaultProps = { role: "button", "aria-disabled": false, "aria-label": "Clear" }
+
 export const DropdownButton = styled.div<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean }>`
   display: flex;
   align-items: center;
