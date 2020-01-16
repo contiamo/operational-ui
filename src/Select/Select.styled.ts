@@ -106,4 +106,5 @@ export const CheckboxContainer = styled.div`
   height: ${rowHeight}px;
   display: flex;
   align-items: center;
+  pointer-events: none;
 `
