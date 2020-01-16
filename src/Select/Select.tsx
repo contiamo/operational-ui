@@ -176,7 +176,6 @@ export const Select: React.FC<SelectProps> = ({
               tabIndex={customOption && customOption.value === value ? 0 : -1}
               disabled={disabled}
               placeholder={placeholder}
-              hasCustomOption={customOption ? customOption.value === value : false}
               readOnly={isReadOnly}
               value={getDisplayValue(value)(options)}
               id={`operational-ui__Select-Input-${uniqueId}`}
@@ -207,11 +206,7 @@ export const Select: React.FC<SelectProps> = ({
                 <NoIcon size={12} />
               </ClearButton>
             )}
-            <DropdownButton
-              naked={Boolean(naked)}
-              hasCustomOption={customOption ? customOption.value === value : false}
-              isOpen={isOpen}
-            />
+            <DropdownButton naked={Boolean(naked)} isOpen={isOpen} />
           </Combobox>
         </Listbox>
       )}

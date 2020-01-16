@@ -39,7 +39,7 @@ export const Combobox = styled.div<{ naked: boolean; isOpen: boolean; hasCustomO
   }
 `
 
-export const SelectInput = styled(Input)<{ hasCustomOption: boolean }>`
+export const SelectInput = styled(Input)`
   width: inherit;
   border: 0;
   background: transparent;
@@ -78,9 +78,9 @@ export const ClearButton = styled.div`
   }
 `
 
-ClearButton.defaultProps = { role: "button", "aria-disabled": false, "aria-label": "Clear" }
+ClearButton.defaultProps = { role: "button", "aria-disabled": false, "aria-label": "Clear", tabIndex: 0 }
 
-export const DropdownButton = styled.div<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean }>`
+export const DropdownButton = styled.div<{ naked: boolean; isOpen: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
