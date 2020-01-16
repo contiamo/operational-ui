@@ -75,6 +75,11 @@ export const ClearButton = styled.div`
 
   :focus {
     box-shadow: none;
+    outline: none;
+
+    svg {
+      fill: ${({ theme }) => theme.color.primary};
+    }
   }
 `
 
