@@ -168,6 +168,7 @@ export const Select: React.FC<SelectProps> = ({
             isOpen={isOpen}
             hasCustomOption={customOption ? customOption.value === value : false}
             naked={Boolean(naked)}
+            clearButton={isOpen && isMultiSelect}
           >
             <SelectInput
               inputRef={$input}
@@ -195,13 +196,6 @@ export const Select: React.FC<SelectProps> = ({
                 }
               }}
             />
-            {isOpen && !isMultiSelect && (
-              <DropdownButton
-                naked={Boolean(naked)}
-                hasCustomOption={customOption ? customOption.value === value : false}
-                isOpen={isOpen}
-              />
-            )}
             {isOpen && isMultiSelect && (
               <ClearButton
                 onClick={() => {
@@ -213,6 +207,11 @@ export const Select: React.FC<SelectProps> = ({
                 <NoIcon size={12} />
               </ClearButton>
             )}
+            <DropdownButton
+              naked={Boolean(naked)}
+              hasCustomOption={customOption ? customOption.value === value : false}
+              isOpen={isOpen}
+            />
           </Combobox>
         </Listbox>
       )}

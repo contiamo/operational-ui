@@ -15,12 +15,16 @@ export const Listbox = styled.div<{ disabled: boolean; color?: string; fullWidth
   width: ${({ fullWidth }) => (fullWidth ? "100%" : "initial")};
 `
 
-const dropdownButtonWidth = 40
+const dropdownButtonWidth = 34
+const clearButtonWidth = 16
 
-export const Combobox = styled.div<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean }>`
+export const Combobox = styled.div<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean; clearButton: boolean }>`
   display: grid;
-  grid-template-columns: calc(100% - ${dropdownButtonWidth}px) ${dropdownButtonWidth}px;
-  grid-gap: 1px;
+  grid-template-columns:
+    calc(100% - ${dropdownButtonWidth + clearButtonWidth}px)
+    ${({ clearButton }) => (clearButton ? clearButtonWidth + "px" : "")}
+    ${dropdownButtonWidth}px;
+  grid-column-gap: ${({ clearButton }) => (clearButton ? 0 : clearButtonWidth)}px;
   align-items: stretch;
   box-shadow: 0 0 0 1px
     ${({ theme, isOpen, hasCustomOption }) =>
