@@ -356,7 +356,7 @@ function Table<T>({
                                 key={columnIndex}
                                 {...(column.tdProps ? column.tdProps(dataEntry, dataEntryIndex) : {})}
                               >
-                                {column.cell(dataEntry, dataEntryIndex)}
+                                {cell}
                               </Td>
                             )
                           })}
