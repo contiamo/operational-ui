@@ -131,6 +131,7 @@ const MyOtherComponent = () => {
       options={options}
       placeholder="Choose an option"
       onChange={newValue => setValue(newValue as string[])}
+      filterable
     />
   )
 }
