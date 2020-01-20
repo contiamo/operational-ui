@@ -137,8 +137,8 @@ const ThContent = styled.span<{ sorted?: boolean }>`
   ${props => props.sorted && `color: ${props.theme.color.text.light};`};
 `
 
-const Td = styled.td<{ cellWidth?: Column<any>["width"]; coloredBorders: boolean }>(
-  ({ theme, cellWidth, coloredBorders }) => ({
+const Td = styled.td<{ cellWidth?: Column<any>["width"]; coloredBorders: boolean; fixedLayout?: boolean }>(
+  ({ theme, cellWidth, coloredBorders, fixedLayout }) => ({
     verticalAlign: "middle",
     borderBottom: "1px solid",
     color: theme.color.text.default,
@@ -149,9 +149,9 @@ const Td = styled.td<{ cellWidth?: Column<any>["width"]; coloredBorders: boolean
       paddingLeft: theme.space.small,
     },
     paddingRight: theme.space.small,
-    ...(cellWidth
+    width: cellWidth,
+    ...(cellWidth || fixedLayout
       ? {
-          width: cellWidth,
           wordBreak: "break-all",
           wordWrap: "break-word",
         }
@@ -354,6 +354,7 @@ function Table<T>({
                                 coloredBorders={shouldTdHaveColoredBorders}
                                 cellWidth={column.width}
                                 key={columnIndex}
+                                fixedLayout={fixedLayout || Boolean(onReorder)}
                                 {...(column.tdProps ? column.tdProps(dataEntry, dataEntryIndex) : {})}
                               >
                                 {cell}

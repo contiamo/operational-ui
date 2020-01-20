@@ -24,7 +24,15 @@ import * as React from "react"
 import { Table } from "@operational/components"
 ;<Table
   fixedLayout
-  data={[{ name: "Max", profession: "Carpenter" }, { name: "Moritz", profession: "Baker" }]}
+  data={[
+    { name: "Max", profession: "Carpenter" },
+    { name: "Moritz", profession: "Baker" },
+    {
+      name:
+        "VeryLooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongLine",
+      profession: "Baker",
+    },
+  ]}
   columns={["name", "profession"]}
 />
 ```
