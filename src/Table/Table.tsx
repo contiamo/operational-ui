@@ -264,6 +264,7 @@ function Table<T>({
                   key={columnIndex}
                   sortable={Boolean(column.onSortClick)}
                   onClick={() => column.onSortClick && column.onSortClick(column.sortOrder === "desc" ? "asc" : "desc")}
+                  cellWidth={column.width}
                 >
                   <ThContent sorted={Boolean(column.sortOrder)}>
                     {column.heading}
@@ -307,7 +308,7 @@ function Table<T>({
                       return null
                     }
                     return (
-                      <Actions coloredBorders={shouldTdHaveColoredBorders}>
+                      <Actions coloredBorders={shouldTdHaveColoredBorders} cellWidth={rowActionName ? undefined : 50}>
                         {Array.isArray(dataEntryRowActions) ? (
                           <CondensedActionMenu
                             items={dataEntryRowActions as ActionMenuProps["items"]}
