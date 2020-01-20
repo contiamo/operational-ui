@@ -3,15 +3,7 @@ import * as React from "react"
 import ContextMenu, { ContextMenuProps } from "../ContextMenu/ContextMenu"
 import LabelText from "../LabelText/LabelText"
 import { useUniqueId } from "../useUniqueId"
-import {
-  FilterInput,
-  Combobox,
-  Listbox,
-  DropdownButton,
-  SelectInput,
-  CheckboxContainer,
-  ClearButton,
-} from "./Select.styled"
+import { FilterInput, Combobox, Listbox, DropdownButton, SelectInput, CheckboxContainer } from "./Select.styled"
 import { SelectProps, IOption } from "./Select.types"
 import {
   truncateList,
@@ -25,7 +17,6 @@ import {
   getOptionFromItem,
 } from "./Select.util"
 import Checkbox from "../Checkbox/Checkbox"
-import { NoIcon } from "../Icon"
 
 export const Select: React.FC<SelectProps> = ({
   options,
@@ -168,7 +159,6 @@ export const Select: React.FC<SelectProps> = ({
             isOpen={isOpen}
             hasCustomOption={customOption ? customOption.value === value : false}
             naked={Boolean(naked)}
-            clearButton={isOpen && isMultiSelect}
           >
             <SelectInput
               inputRef={$input}
@@ -195,17 +185,6 @@ export const Select: React.FC<SelectProps> = ({
                 }
               }}
             />
-            {isOpen && isMultiSelect && (
-              <ClearButton
-                onClick={() => {
-                  if (onChange) {
-                    onChange([])
-                  }
-                }}
-              >
-                <NoIcon size={12} />
-              </ClearButton>
-            )}
             <DropdownButton naked={Boolean(naked)} isOpen={isOpen} />
           </Combobox>
         </Listbox>

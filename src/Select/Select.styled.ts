@@ -16,15 +16,10 @@ export const Listbox = styled.div<{ disabled: boolean; color?: string; fullWidth
 `
 
 const dropdownButtonWidth = 34
-const clearButtonWidth = 16
 
-export const Combobox = styled.div<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean; clearButton: boolean }>`
+export const Combobox = styled.div<{ naked: boolean; isOpen: boolean; hasCustomOption: boolean }>`
   display: grid;
-  grid-template-columns:
-    calc(100% - ${dropdownButtonWidth + clearButtonWidth}px)
-    ${({ clearButton }) => (clearButton ? clearButtonWidth + "px" : "")}
-    ${dropdownButtonWidth}px;
-  grid-column-gap: ${({ clearButton }) => (clearButton ? 0 : clearButtonWidth)}px;
+  grid-template-columns: calc(100% - ${dropdownButtonWidth}px) ${dropdownButtonWidth}px;
   align-items: stretch;
   box-shadow: 0 0 0 1px
     ${({ theme, isOpen, hasCustomOption }) =>
@@ -63,27 +58,6 @@ export const FilterInput = styled(Input)`
   min-height: 32px;
   max-width: none;
 `
-
-export const ClearButton = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: -1px 0;
-  border: none;
-  border-top-right-radius: ${({ theme }) => theme.borderRadius}px;
-  border-bottom-right-radius: ${({ theme }) => theme.borderRadius}px;
-
-  :focus {
-    box-shadow: none;
-    outline: none;
-
-    svg {
-      fill: ${({ theme }) => theme.color.primary};
-    }
-  }
-`
-
-ClearButton.defaultProps = { role: "button", "aria-disabled": false, "aria-label": "Clear", tabIndex: 0 }
 
 export const DropdownButton = styled.div<{ naked: boolean; isOpen: boolean }>`
   display: flex;
