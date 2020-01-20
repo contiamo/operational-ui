@@ -47,6 +47,7 @@ export interface TableProps<T> extends DefaultProps {
 export interface Column<T> {
   heading: React.ReactNode
   cell: (dataEntry: T, index: number) => React.ReactNode
+  tdProps?: (dataEntry: T, index: number) => React.TdHTMLAttributes<HTMLTableDataCellElement>
   sortOrder?: "asc" | "desc"
   onSortClick?: (order: "asc" | "desc") => void
   width?: number
@@ -299,6 +300,9 @@ function Table<T>({
                       return null
                     }
                     const dataEntryRowActions = rowActions(dataEntry)
+                    if (dataEntryRowActions === false) {
+                      return null
+                    }
                     return (
                       <Actions coloredBorders={shouldTdHaveColoredBorders}>
                         {Array.isArray(dataEntryRowActions) ? (
@@ -340,11 +344,22 @@ function Table<T>({
                               {React.createElement(icon!(dataEntry), { color: iconColor && iconColor(dataEntry) })}
                             </CellIcon>
                           )}
-                          {standardizedColumns.map((column, columnIndex) => (
-                            <Td coloredBorders={shouldTdHaveColoredBorders} cellWidth={column.width} key={columnIndex}>
-                              {column.cell(dataEntry, dataEntryIndex)}
-                            </Td>
-                          ))}
+                          {standardizedColumns.map((column, columnIndex) => {
+                            const cell = column.cell(dataEntry, dataEntryIndex)
+
+                            if (cell === false) return
+
+                            return (
+                              <Td
+                                coloredBorders={shouldTdHaveColoredBorders}
+                                cellWidth={column.width}
+                                key={columnIndex}
+                                {...(column.tdProps ? column.tdProps(dataEntry, dataEntryIndex) : {})}
+                              >
+                                {cell}
+                              </Td>
+                            )
+                          })}
                           {rowAction}
                           {onRowClick && rowActionName && (
                             <Actions coloredBorders={shouldTdHaveColoredBorders}>
