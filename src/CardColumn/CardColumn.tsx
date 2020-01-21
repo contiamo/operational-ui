@@ -52,19 +52,19 @@ const Action = styled("div")`
 
 const Title = styled("div")(({ theme }) => ({
   fontFamily: theme.font.family.main,
-  fontWeight: theme.font.weight.medium,
+  fontWeight: theme.font.weight.bold,
   color: theme.color.text.dark,
   fontSize: theme.font.size.body,
   borderBottom: `1px solid ${theme.color.separators.default}`,
   paddingBottom: theme.space.small,
   marginBottom: theme.space.content,
   display: "flex",
-  alignItems: "center",
+  alignItems: "flex-end",
 }))
 
 const Tabs = styled("div")`
   display: flex;
-  align-items: center;
+  align-items: baseline;
   margin-left: ${({ theme }) => theme.space.medium}px;
 `
 
@@ -72,6 +72,7 @@ const Tab = styled("div")<{ active: boolean }>`
   padding: 0 ${({ theme }) => theme.space.content}px;
   color: ${({ theme }) => theme.color.text.lighter};
   font-size: ${({ theme }) => theme.font.size.small}px;
+  font-weight: ${({ theme, active }) => (active ? theme.font.weight.bold : theme.font.weight.medium)};
   padding-bottom: ${({ theme }) => theme.space.base}px;
   border-bottom: 2px solid ${({ theme, active }) => (active ? theme.color.text.lighter : "transparent")};
   text-transform: uppercase;
