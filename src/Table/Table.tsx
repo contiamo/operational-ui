@@ -107,7 +107,7 @@ const Thead = styled.thead`
   }
 `
 
-const Th = styled.th<{ sortable?: boolean }>(({ theme, sortable }) => ({
+const Th = styled.th<{ sortable?: boolean; cellWidth?: number }>(({ theme, sortable, cellWidth }) => ({
   position: "relative",
   borderBottom: `1px solid ${theme.color.separators.default}`,
   color: theme.color.text.dark,
@@ -116,6 +116,7 @@ const Th = styled.th<{ sortable?: boolean }>(({ theme, sortable }) => ({
     paddingLeft: theme.space.small,
   },
   paddingRight: theme.space.small,
+  width: cellWidth,
   ...(sortable
     ? {
         ":hover": {
@@ -263,6 +264,7 @@ function Table<T>({
                   key={columnIndex}
                   sortable={Boolean(column.onSortClick)}
                   onClick={() => column.onSortClick && column.onSortClick(column.sortOrder === "desc" ? "asc" : "desc")}
+                  cellWidth={column.width}
                 >
                   <ThContent sorted={Boolean(column.sortOrder)}>
                     {column.heading}
@@ -278,7 +280,9 @@ function Table<T>({
                   </ThContent>
                 </Th>
               ))}
-              {Boolean(rowActions || (onRowClick && rowActionName)) && <Th key="infinity" />}
+              {Boolean(rowActions || (onRowClick && rowActionName)) && (
+                <Th key="infinity" cellWidth={rowActionName ? undefined : 50} />
+              )}
             </Tr>
           </Thead>
         )}
@@ -304,7 +308,7 @@ function Table<T>({
                       return null
                     }
                     return (
-                      <Actions coloredBorders={shouldTdHaveColoredBorders}>
+                      <Actions coloredBorders={shouldTdHaveColoredBorders} cellWidth={rowActionName ? undefined : 50}>
                         {Array.isArray(dataEntryRowActions) ? (
                           <CondensedActionMenu
                             items={dataEntryRowActions as ActionMenuProps["items"]}

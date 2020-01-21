@@ -30,7 +30,21 @@ import { Table } from "@operational/components"
     {
       name:
         "VeryLooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooongLine",
-      profession: "Baker",
+      profession: "Builder",
+    },
+  ]}
+  rowActions={dataEntry => [
+    {
+      label: "Details",
+      onClick: () => {
+        alert("Details on " + dataEntry.name)
+      },
+    },
+    {
+      label: "Delete",
+      onClick: () => {
+        alert("Deleting " + dataEntry.name)
+      },
     },
   ]}
   columns={["name", "profession"]}
