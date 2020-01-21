@@ -27,7 +27,7 @@ import { Card, CardColumns, CardColumn, Button } from "@operational/components"
 ;<Card title="Bundle Information">
   <CardColumns>
     <CardColumn
-      title={<strong>Data Sources</strong>}
+      title="Data Sources"
       action={
         <Button condensed color="primary">
           Add
