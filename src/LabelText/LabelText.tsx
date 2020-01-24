@@ -2,7 +2,7 @@ import styled from "../utils/styled"
 
 // This is a span because it goes _inside_ a <label>
 export const LabelText = styled("span")(({ theme }) => ({
-  fontSize: theme.font.size.fineprint,
+  fontSize: theme.font.size.body,
   display: "block",
   verticalAlign: "middle",
   marginBottom: theme.space.base,
