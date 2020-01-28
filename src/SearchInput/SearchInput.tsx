@@ -147,6 +147,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
               key={category}
               onClick={e => {
                 setIsOpen(false)
+                setActiveItemIndex(index)
                 e.stopPropagation()
                 props.onChange({ search: props.value, category })
               }}
