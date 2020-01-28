@@ -66,7 +66,13 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
     setIsOpen(false)
   })
 
-  useHotkey(containerRef, { key: "Escape" }, () => setIsOpen(false))
+  useHotkey(containerRef, { key: "Escape" }, () => {
+    setIsOpen(false)
+    if (props.category && props.categories) {
+      const activeCategoryIndex = props.categories.findIndex(i => i === props.category)
+      setActiveItemIndex(activeCategoryIndex)
+    }
+  })
 
   if (!props.value && props.onClear && focusEl === "clearIcon") {
     setFocusEl(null) // Clear focus state if the element is not on the screen
@@ -147,6 +153,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
               key={category}
               onClick={e => {
                 setIsOpen(false)
+                setActiveItemIndex(index)
                 e.stopPropagation()
                 props.onChange({ search: props.value, category })
               }}
