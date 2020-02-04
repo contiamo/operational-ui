@@ -56,3 +56,29 @@ const MyComponent = () => {
 
 ;<MyComponent />
 ```
+
+### In sidebar
+
+```jsx
+import * as React from "react"
+import { SearchInput } from "@operational/components"
+
+const MyComponent = () => {
+  const [search, setSearch] = React.useState("")
+
+  return (
+    <div style={{ width: 200 }}>
+      <SearchInput
+        value={search}
+        placeholder="Search for data…"
+        onChange={values => {
+          setSearch(values.search)
+        }}
+        onClear={() => setSearch("")}
+      />
+    </div>
+  )
+}
+
+;<MyComponent />
+```

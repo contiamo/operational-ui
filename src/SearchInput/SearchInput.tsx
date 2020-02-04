@@ -279,6 +279,7 @@ const DropdownItem = styled.div<{ isActive: boolean }>`
 `
 
 const Input = styled.input`
+  width: 100%;
   appearance: none;
   border: 0;
   font-size: ${({ theme }) => theme.font.size.body}px;
