@@ -3,6 +3,7 @@ import styled from "../utils/styled"
 import { SearchIcon, CaretDownIcon, CaretUpIcon, EnterIcon, NoIcon } from "../Icon"
 import { lighten } from "../utils"
 import useHotkey from "../useHotkey"
+import Chip from "../Chip/Chip"
 
 export interface SearchInputProps<TCategory> {
   value: string
@@ -11,9 +12,11 @@ export interface SearchInputProps<TCategory> {
   onClear?: () => void
   category?: TCategory
   categories?: TCategory[]
+  readonly?: boolean
+  condensed?: boolean
 }
 
-const iconWidth = 16
+const getIconWidth = (isCondensed: boolean) => (isCondensed ? 12 : 16)
 
 export function SearchInput<T extends string = never>(props: SearchInputProps<T>) {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -85,6 +88,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
   return (
     <Container
       ref={containerRef}
+      isCondensed={Boolean(props.condensed)}
       hasCategory={Boolean(props.category)}
       isClearable={Boolean(props.value && props.onClear)}
       isOpen={isOpen}
@@ -110,31 +114,38 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
           aria-hidden="true"
         />
       )}
-      <SearchIcon color="color.text.default" size={iconWidth} />
-      {props.category && (
-        <CategoryDropdown onClick={toggleOpen}>
-          {props.category}
-          {isOpen ? <CaretDownIcon size={5} /> : <CaretUpIcon size={5} />}
-        </CategoryDropdown>
+      {props.readonly ? (
+        <ReadonlyChip columnSize={2 + (props.category ? 1 : 0) + (props.onClear ? 1 : 2)}>{props.value}</ReadonlyChip>
+      ) : (
+        <>
+          <SearchIcon color="color.text.default" size={getIconWidth(Boolean(props.condensed))} />
+          {props.category && (
+            <CategoryDropdown onClick={toggleOpen} isCondensed={Boolean(props.condensed)}>
+              {props.category}
+              {isOpen ? <CaretDownIcon size={5} /> : <CaretUpIcon size={5} />}
+            </CategoryDropdown>
+          )}
+          <Input
+            ref={inputRef}
+            value={props.value}
+            aria-label="search"
+            placeholder={props.placeholder}
+            onFocus={() => setIsOpen(true)}
+            onClick={() => setIsOpen(true)}
+            onChange={e => {
+              setIsOpen(true)
+              props.onChange({
+                search: e.target.value,
+                category: props.category!, // Force the type-safety of `category` in the public API (this will be `never` if no `categories` are provided)
+              })
+            }}
+          />
+        </>
       )}
-      <Input
-        ref={inputRef}
-        value={props.value}
-        aria-label="search"
-        placeholder={props.placeholder}
-        onFocus={() => setIsOpen(true)}
-        onClick={() => setIsOpen(true)}
-        onChange={e => {
-          setIsOpen(true)
-          props.onChange({
-            search: e.target.value,
-            category: props.category!, // Force the type-safety of `category` in the public API (this will be `never` if no `categories` are provided)
-          })
-        }}
-      />
       {props.value && props.onClear && (
         <ClearIcon
           onClick={props.onClear}
+          size={props.condensed ? 16 : 18}
           color="color.text.default"
           onFocus={() => setFocusEl("clearIcon")}
           onBlur={() => setFocusEl(null)}
@@ -144,6 +155,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
         <DropdownContainer aria-activedescendant={`category-${props.categories[activeItemIndex]}`} role="listbox">
           {props.categories.map((category, index) => (
             <DropdownItem
+              isCondensed={Boolean(props.condensed)}
               isActive={activeItemIndex === index}
               aria-selected={activeItemIndex === index ? "true" : undefined}
               aria-roledescription="Category"
@@ -159,7 +171,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
               }}
             >
               <div /* Icon spacing */ />
-              <CategoryDropdown highlighted>
+              <CategoryDropdown highlighted isCondensed={Boolean(props.condensed)}>
                 {category}
                 <EnterIcon size={8} />
               </CategoryDropdown>
@@ -183,23 +195,24 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
   )
 }
 
-const Container = styled.div<{ hasCategory: boolean; isOpen: boolean; isClearable: boolean }>`
+const Container = styled.div<{ hasCategory: boolean; isOpen: boolean; isClearable: boolean; isCondensed: boolean }>`
   display: grid;
   cursor: text;
   grid-template-columns: ${props => {
+    const iconWidth = getIconWidth(props.isCondensed)
     const clearIconZone = props.isClearable ? ` ${iconWidth}px` : ""
     return props.hasCategory ? `${iconWidth}px min-content auto${clearIconZone}` : `${iconWidth}px auto${clearIconZone}`
   }};
-  border: 1px solid transparent; /* Avoid jump with hover state */
+  border: 1px solid ${({ theme, isCondensed }) => (isCondensed ? theme.color.separators.light : "transparent")}; /* Avoid jump with hover state */
   border-bottom: 1px solid ${({ theme }) => theme.color.separators.light};
-  grid-gap: ${({ theme, hasCategory }) =>
-    theme.space.content +
+  grid-gap: ${({ theme, hasCategory, isCondensed }) =>
+    (isCondensed ? theme.space.small : theme.space.content) +
     (hasCategory
       ? theme.space.small
       : 0)}px; /* The offset is for the separator extra width (CategoryDropdown:after.width) */
-  padding: 0 ${({ theme }) => theme.space.content}px;
+  padding: 0 ${({ theme, isCondensed }) => (isCondensed ? theme.space.small : theme.space.content)}px;
   align-items: center;
-  height: 48px;
+  height: ${props => (props.isCondensed ? 36 : 48)}px;
   margin-bottom: ${({ theme }) => theme.space.content}px;
 
   transition: ease-in-out border 0.2s;
@@ -216,11 +229,11 @@ const Container = styled.div<{ hasCategory: boolean; isOpen: boolean; isClearabl
   }
 `
 
-const CategoryDropdown = styled.div<{ highlighted?: boolean }>`
+const CategoryDropdown = styled.div<{ highlighted?: boolean; isCondensed?: boolean }>`
   font-size: ${({ theme }) => theme.font.size.body}px;
   font-family: ${({ theme }) => theme.font.family.main};
   color: ${({ theme }) => theme.color.text.default};
-  padding: ${({ theme }) => theme.space.small}px;
+  padding: ${({ theme, isCondensed }) => (isCondensed ? theme.space.base : theme.space.small)}px;
   border-radius: ${({ theme }) => theme.borderRadius}px;
   z-index: ${({ theme }) => theme.zIndex.selectOptions}; /* Ensure to be on top of the InvisibleOverlay */
   min-width: 150px;
@@ -258,15 +271,16 @@ const DropdownContainer = styled.div`
   border: 1px solid ${({ theme }) => theme.color.separators.light};
 `
 
-const DropdownItem = styled.div<{ isActive: boolean }>`
-  height: 48px;
+const DropdownItem = styled.div<{ isActive: boolean; isCondensed: boolean }>`
+  height: ${props => (props.isCondensed ? 36 : 48)}px;
   display: grid;
   align-items: center;
   width: 100%;
-  grid-template-columns: ${iconWidth}px min-content auto;
-  grid-gap: ${({ theme }) =>
-    theme.space.content + theme.space.small}px; /* Same as Container.grid-gap (with category) to be aligned */
-  padding: 0 ${({ theme }) => theme.space.content}px;
+  grid-template-columns: ${props => getIconWidth(props.isCondensed)}px min-content auto;
+  grid-gap: ${({ theme, isCondensed }) =>
+    (isCondensed ? theme.space.small : theme.space.content) +
+    theme.space.small}px; /* Same as Container.grid-gap (with category) to be aligned */
+  padding: 0 ${({ theme, isCondensed }) => (isCondensed ? theme.space.small : theme.space.content)}px;
   cursor: pointer !important;
 
   ${({ isActive }) => (isActive ? "" : ":hover {")}
@@ -279,6 +293,7 @@ const DropdownItem = styled.div<{ isActive: boolean }>`
 `
 
 const Input = styled.input`
+  width: 100%;
   appearance: none;
   border: 0;
   font-size: ${({ theme }) => theme.font.size.body}px;
@@ -307,6 +322,11 @@ const InvisibleOverlay = styled.div`
 
 const ClearIcon = styled(NoIcon)`
   z-index: ${({ theme }) => theme.zIndex.selectOptions}; /* Ensure to be on top of the InvisibleOverlay */
+`
+
+const ReadonlyChip = styled(Chip)<{ columnSize: number }>`
+  grid-column: 1 / ${props => props.columnSize};
+  width: 100%;
 `
 
 export default SearchInput
