@@ -26,7 +26,8 @@ const MAX_MORE = 10
 
 const Container = styled("div")<{ size: AvatarGroupProps["size"] }>`
   display: flex;
-  margin-left: ${({ size }) => (size === "x-small" ? -4 : -12)}px;
+  /** margin-left calculation for x-small = -AvatarContainer.marginLeft - borderSize diff / 2 */
+  margin-left: ${({ size }) => (size === "x-small" ? 4.5 : 12)}px;
 `
 
 const AvatarContainer = styled.div<{ size: AvatarGroupProps["size"] }>`
