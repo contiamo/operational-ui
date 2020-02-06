@@ -24,10 +24,10 @@ export interface AvatarGroupProps extends DefaultProps {
 
 const MAX_MORE = 10
 
-const Container = styled("div")({
-  display: "flex",
-  marginLeft: 12,
-})
+const Container = styled("div")<{ size: AvatarGroupProps["size"] }>`
+  display: flex;
+  margin-left: ${({ size }) => (size === "x-small" ? -4 : -12)}px;
+`
 
 const AvatarContainer = styled.div<{ size: AvatarGroupProps["size"] }>`
   position: relative;
@@ -50,7 +50,7 @@ const AvatarGroup: React.SFC<AvatarGroupProps> = ({ avatars, size, onMoreClick, 
   const moreAvatars = mustSlice ? avatars.slice(maxToDisplay - 1, maxToDisplay - 1 + MAX_MORE) : null
 
   return (
-    <Container {...props}>
+    <Container {...props} size={size}>
       {displayAvatars.map((avatar, i) => (
         <AvatarContainer key={i} size={size}>
           <Tooltip data-avatar position="top">
