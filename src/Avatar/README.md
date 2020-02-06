@@ -10,6 +10,18 @@ import { Avatar } from "@operational/components"
 </>
 ```
 
+### Simple avatar with name (different sizes)
+
+```jsx
+import * as React from "react"
+import { Avatar } from "@operational/components"
+;<>
+  <Avatar showName size="medium" name="Franklin Green" />
+  <Avatar showName size="small" name="Tejas Kumar" />
+  <Avatar showName size="x-small" name="Fabien Bernard" />
+</>
+```
+
 ### Show full name next to the avatar circle
 
 ```jsx

@@ -27,6 +27,33 @@ const avatars = [
 </>
 ```
 
+### Different sizes
+
+```jsx
+import * as React from "react"
+import { AvatarGroup } from "@operational/components"
+const avatars = [
+  {
+    name: "Peter Pan",
+    photo: "https://www.robots-and-dragons.de/sites/default/files/field/image/preview/disney-peter_pan.jpg",
+  },
+  { name: "Wendy Darling" },
+  { name: "John Darling" },
+  { name: "Micheal Darling" },
+  { name: "George Darling" },
+  { name: "Tiger Lily" },
+  { name: "Tinker Bell" },
+  { name: "The Crocodile" },
+  { name: "Captain Hook" },
+  { name: "Mr. Smee" },
+]
+;<>
+  <AvatarGroup avatars={avatars} size="x-small" />
+  <AvatarGroup avatars={avatars} size="small" />
+  <AvatarGroup avatars={avatars} size="medium" />
+</>
+```
+
 ### Provide a custom onMoreClick action
 
 ```jsx

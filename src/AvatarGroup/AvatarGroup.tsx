@@ -19,7 +19,7 @@ export interface AvatarGroupProps extends DefaultProps {
   /** More button handler */
   onMoreClick?: () => void
   /** Size of avatars */
-  size?: "small" | "medium"
+  size?: "x-small" | "small" | "medium"
 }
 
 const MAX_MORE = 10
@@ -29,9 +29,9 @@ const Container = styled("div")({
   marginLeft: 12,
 })
 
-const AvatarContainer = styled.div`
+const AvatarContainer = styled.div<{ size: AvatarGroupProps["size"] }>`
   position: relative;
-  margin-left: -12px;
+  margin-left: ${({ size }) => (size === "x-small" ? -4 : -12)}px;
 
   [data-avatar] {
     display: none;
@@ -52,7 +52,7 @@ const AvatarGroup: React.SFC<AvatarGroupProps> = ({ avatars, size, onMoreClick, 
   return (
     <Container {...props}>
       {displayAvatars.map((avatar, i) => (
-        <AvatarContainer key={i}>
+        <AvatarContainer key={i} size={size}>
           <Tooltip data-avatar position="top">
             {avatar.name}
           </Tooltip>
@@ -60,7 +60,7 @@ const AvatarGroup: React.SFC<AvatarGroupProps> = ({ avatars, size, onMoreClick, 
         </AvatarContainer>
       ))}
       {moreAvatars && (
-        <AvatarContainer key="more">
+        <AvatarContainer key="more" size={size}>
           <Tooltip data-avatar position="top">
             {moreAvatars.map((avatar, i) => (
               <React.Fragment key={i}>
