@@ -72,7 +72,7 @@ const Picture = styled("div")<{
     const backgroundColor = assignedBackgroundColor || fixedBackgroundColor
     const textColor = readableTextColor(backgroundColor, [theme.color.text.default, "white"])
     const sizeInPixels = size === "medium" ? 48 : size === "small" ? 32 : 12
-    const fontSizeInPixels = size === "medium" ? 13 : size === "small" ? 11 : 8
+    const fontSizeInPixels = size === "medium" ? 13 : size === "small" ? 11 : 7
 
     // Calculate sizes based on the state of the size prop
     const sizes = {
@@ -99,7 +99,7 @@ const Picture = styled("div")<{
       ...sizes,
       ...background,
       marginRight: showName ? theme.space.small : 0, // use for offset the display name
-      border: addBorder ? "2px solid white" : 0,
+      border: addBorder ? (size === "x-small" ? "1px solid white" : "2px solid white") : 0,
     }
   },
 )
