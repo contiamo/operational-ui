@@ -21,7 +21,7 @@ export interface AvatarProps extends DefaultProps {
   /** Automatically assign a deterministic color. (Invalidates `color` assignment)  */
   assignColor?: boolean
   /** Size of avatars */
-  size?: "small" | "medium"
+  size?: "x-small" | "small" | "medium"
   /** Add a border to the Avatar? */
   addBorder?: boolean
   children?: React.ReactNode
@@ -71,8 +71,8 @@ const Picture = styled("div")<{
       : null
     const backgroundColor = assignedBackgroundColor || fixedBackgroundColor
     const textColor = readableTextColor(backgroundColor, [theme.color.text.default, "white"])
-    const sizeInPixels = size === "medium" ? 48 : 32
-    const fontSizeInPixels = size === "medium" ? 13 : 11
+    const sizeInPixels = size === "medium" ? 48 : size === "small" ? 32 : 12
+    const fontSizeInPixels = size === "medium" ? 13 : size === "small" ? 11 : 8
 
     // Calculate sizes based on the state of the size prop
     const sizes = {
