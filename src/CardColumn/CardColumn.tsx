@@ -50,12 +50,12 @@ const Action = styled("div")`
   margin-left: auto;
 `
 
-const Title = styled("div")(({ theme }) => ({
+const Title = styled.div(({ theme }) => ({
   fontFamily: theme.font.family.main,
   fontWeight: theme.font.weight.bold,
-  color: theme.color.text.dark,
+  color: theme.color.text.default,
   fontSize: theme.font.size.body,
-  borderBottom: `1px solid ${theme.color.separators.default}`,
+  borderBottom: `1px solid ${theme.color.border.lightest}`,
   paddingBottom: theme.space.small,
   marginBottom: theme.space.content,
   display: "flex",

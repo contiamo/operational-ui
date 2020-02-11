@@ -11,7 +11,7 @@ export const CardColumns = styled("div")<CardColumnsProps>(({ children, theme, c
   return {
     display: "grid",
     gridTemplateColumns: `repeat(${columns}, 1fr)`,
-    gridGap: theme.space.element,
+    gridGap: theme.space.big,
   }
 })
 
