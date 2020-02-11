@@ -55,7 +55,7 @@ const Title = styled.div(({ theme }) => ({
   fontWeight: theme.font.weight.bold,
   color: theme.color.text.default,
   fontSize: theme.font.size.body,
-  borderBottom: `1px solid ${theme.color.separators.light}`,
+  borderBottom: `1px solid ${theme.color.border.lightest}`,
   paddingBottom: theme.space.small,
   marginBottom: theme.space.content,
   display: "flex",
