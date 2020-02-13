@@ -27,7 +27,7 @@ exports[`DatePicker Component Should render 1`] = `
       </svg>
     </div>
     <input
-      class="css-13yzovf"
+      class="css-17t1nns"
       placeholder="Pick a date"
       readonly=""
       value="2018-01-02 - 2018-01-23"
