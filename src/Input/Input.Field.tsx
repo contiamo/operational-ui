@@ -91,7 +91,7 @@ const Field = styled("input")<{
     opacity: disabled ? 0.6 : 1.0,
     border: "none",
     boxShadow: `0 0 0 1px ${isError ? theme.color.error : theme.color.border.default}`,
-    margin: "0 1px", // offset box-shadow like a border
+    margin: "1px 1px", // offset box-shadow like a border
     outline: "none",
     appearance: "none",
     color: preset ? theme.color.text.dark : theme.color.text.default,

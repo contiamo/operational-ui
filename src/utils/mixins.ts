@@ -1,6 +1,6 @@
 import { keyframes } from "@emotion/core"
 
-import { lighten } from "../utils"
+import { lighten, darken } from "../utils"
 import styled from "../utils/styled"
 import { OperationalStyleConstants } from "./constants"
 import memoize from "lodash/memoize"
@@ -30,7 +30,7 @@ export const customScrollbar = memoize(
 
 export const inputFocus = memoize(({ theme, isError }: { theme: OperationalStyleConstants; isError?: boolean }) => ({
   outline: "none",
-  boxShadow: `0 0 0 1px ${isError ? theme.color.error : theme.color.primary}`,
+  boxShadow: `0 0 0 1px ${isError ? darken(theme.color.error, 10) : darken(theme.color.primary, 10)}`,
 }))
 
 export const Label = styled.label<{ fullWidth?: boolean; left?: boolean }>(({ fullWidth, theme, left }) => ({

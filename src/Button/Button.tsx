@@ -61,7 +61,7 @@ export const makeColors = (theme: OperationalStyleConstants, color: string) => {
   const textColor =
     textColors[color] || readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
 
-  const borderColor = borderColors[color] || (isWhite(backgroundColor) ? theme.color.border.disabled : backgroundColor)
+  const borderColor = borderColors[color] || (isWhite(backgroundColor) ? theme.color.border.default : backgroundColor)
 
   return {
     background: backgroundColor,
@@ -103,11 +103,13 @@ const BaseButton = styled<"button" | "a">("button")<{
     justifyContent: "center",
     padding: `0 ${condensed ? theme.space.medium : theme.space.element}px`,
     borderRadius: theme.borderRadius,
-    border: `1px solid ${borderColor}`,
+    border: `none`,
+    boxShadow: `0 0 0 1px ${borderColor}`,
     cursor: disabled ? "not-allowed" : "pointer",
     opacity: disabled ? 0.6 : 1.0,
     position: "relative",
     width: fullWidth ? "100%" : "initial",
+    margin: "1px 1px",
     marginRight: theme.space.small,
     // Apply styles with increased specificity to override defaults
     "&, a:link&, a:visited&": {
@@ -118,9 +120,6 @@ const BaseButton = styled<"button" | "a">("button")<{
       ...inputFocus({ theme, isError: color_ === "error" }),
       //Higher zIndex will make right border appear on ButtonGroup Focus.
       zIndex: theme.zIndex.confirm,
-    },
-    ".no-focus &:focus": {
-      boxShadow: "none",
     },
     ...(!disabled
       ? {
