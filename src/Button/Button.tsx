@@ -61,7 +61,7 @@ export const makeColors = (theme: OperationalStyleConstants, color: string) => {
   const textColor =
     textColors[color] || readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
 
-  const borderColor = borderColors[color] || (isWhite(backgroundColor) ? theme.color.border.disabled : backgroundColor)
+  const borderColor = borderColors[color] || (isWhite(backgroundColor) ? theme.color.border.default : backgroundColor)
 
   return {
     background: backgroundColor,
