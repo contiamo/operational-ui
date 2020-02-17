@@ -12,6 +12,8 @@ export interface SwitchProps extends DefaultProps {
   left?: string
   /** right value */
   right?: string
+  /** id of the label for a11y */
+  labeledBy?: string
 }
 
 const width: number = 28
@@ -31,7 +33,7 @@ const Container = styled.div(
   }),
 )
 
-const RailContainer = styled("div")<{ left?: string; right?: string }>(
+const RailContainer = styled.div<{ left?: string; right?: string }>(
   {
     width,
     height,
@@ -97,11 +99,12 @@ const Rail = styled.div<{ on: boolean }>(
   }),
 )
 
-const Switch: React.SFC<SwitchProps> = ({ on, onChange, left, right, ...props }) => (
+const Switch: React.SFC<SwitchProps> = ({ on, onChange, left, right, labeledBy, ...props }) => (
   <Container
     {...props}
     role="checkbox"
     aria-checked={on}
+    aria-labelledby={labeledBy}
     tabIndex={0}
     onKeyDown={e => {
       if (onChange && e.key === " ") {
