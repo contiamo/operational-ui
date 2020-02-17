@@ -5,11 +5,9 @@ import Message from "../Internals/Message/Message"
 
 import { Cell, Container, DataWrapper, HeaderCell, HeaderRow, HeadersContainer, Row } from "./DataTable.styled"
 import { ViewMorePopup } from "../Internals/ViewMorePopup"
-import { defaultRowHeight, getRowHeight, findScrollableAncestor } from "./DataTable.util"
+import { defaultRowHeight, getRowHeight } from "./DataTable.util"
 import useViewMore from "./useViewMore"
 import CellContent from "./CellContent"
-
-const fixedSizeListClass = "operational-ui__DataTable--virtual-scroller"
 
 export interface DataTableProps<Columns, Rows> {
   /* The columns of our table. They are an array of header layers. */
@@ -52,18 +50,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   cellWidth = "minmax(200px, 1fr)",
   className,
 }: DataTableProps<Columns, Rows>) {
-  const ref = React.useRef<HTMLDivElement>(null)
   const { open, close, viewMorePopup } = useViewMore()
-  React.useEffect(() => {
-    if (ref.current) {
-      const scrollableAncestor = findScrollableAncestor(
-        // we can't get this element other way, because of react-window
-        ref.current.getElementsByClassName(fixedSizeListClass)[0],
-      )
-      scrollableAncestor.addEventListener("scroll", close)
-      return () => scrollableAncestor.removeEventListener("scroll", close)
-    }
-  }, [close, ref])
   const rowHeight = React.useMemo(() => getRowHeight(initialRowHeight), [initialRowHeight])
 
   const Table = React.useMemo(
@@ -102,7 +89,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
           </DataWrapper>
         </>
       )),
-    [columns, rows, rowHeight],
+    [columns, rows, rowHeight, open, close],
   )
 
   const numCells = React.useMemo(() => (rows[0] ? rows[0].length : 0), [rows])
@@ -124,6 +111,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
                   key={`op-row-${index}-cell-${cellIndex}`}
                   cell={cellIndex + 1}
                   height={rowHeight}
+                  onMouseLeave={close}
                 >
                   <CellContent close={close} open={open} cell={cell} />
                 </Cell>
@@ -131,7 +119,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
             })}
         </Row>
       )),
-    [rows, rowHeight],
+    [rows, rowHeight, open, close],
   )
 
   if (rows.length && rows[0].length !== columns.length) {
@@ -146,11 +134,16 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   return (
     <>
       {viewMorePopup && (
-        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x} onMouseLeave={close}>
+        <ViewMorePopup
+          top={viewMorePopup.y}
+          left={viewMorePopup.x}
+          onMouseLeave={close}
+          onMouseEnter={open(viewMorePopup.content)}
+        >
           {viewMorePopup.content}
         </ViewMorePopup>
       )}
-      <Container width={width} className={className} ref={ref}>
+      <Container width={width} className={className} onMouseLeave={close}>
         <FixedSizeList
           itemCount={rows.length}
           itemSize={rowHeight}
@@ -158,7 +151,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
           width={width}
           innerElementType={Table}
           /** can't use data-cy or any other prop because of react-window */
-          className={fixedSizeListClass}
+          className="operational-ui__DataTable--virtual-scroller"
           style={{ willChange: undefined }}
         >
           {VirtualRow}

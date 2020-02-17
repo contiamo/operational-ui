@@ -11,31 +11,28 @@ const useViewMore = () => {
   )
 
   const close = React.useCallback(() => {
-    if (viewMorePopup) {
-      closeTimeoutIdRef.current = window.setTimeout(() => setViewMorePopup(false), 150)
-    }
-  }, [viewMorePopup])
+    window.clearTimeout(closeTimeoutIdRef.current)
+    closeTimeoutIdRef.current = window.setTimeout(() => setViewMorePopup(false), 150)
+  }, [])
   React.useEffect(() => () => window.clearTimeout(closeTimeoutIdRef.current), [])
 
   const open = React.useCallback(
     (content: React.ReactNode) => (e: React.MouseEvent) => {
       e.stopPropagation()
       window.clearTimeout(closeTimeoutIdRef.current)
-      setViewMorePopup(
-        viewMorePopup
-          ? {
-              ...viewMorePopup,
-              // Update content, but not position to prevent "sliding" of popup
-              content,
-            }
+      closeTimeoutIdRef.current = undefined
+      const { clientX, clientY } = e
+      setViewMorePopup(current =>
+        current && current.content === content
+          ? current
           : {
               content,
-              x: e.clientX > window.innerWidth / 2 ? e.clientX - 8 : e.clientX + 8,
-              y: e.clientY > window.innerHeight / 2 ? e.clientY - 8 : e.clientY + 8,
+              x: clientX > window.innerWidth / 2 ? clientX - 8 : clientX + 8,
+              y: clientY > window.innerHeight / 2 ? clientY - 8 : clientY + 8,
             },
       )
     },
-    [viewMorePopup],
+    [],
   )
 
   const toggle = React.useCallback((content: React.ReactNode) => (viewMorePopup ? close() : open(content)), [

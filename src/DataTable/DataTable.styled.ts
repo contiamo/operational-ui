@@ -2,7 +2,7 @@ import styled from "../utils/styled"
 import { DataTableProps } from "./DataTable"
 import { getHeaderRowHeight } from "./DataTable.util"
 
-export const Container = styled.div<{ width: string }>`
+export const Container = styled("div", { shouldForwardProp: prop => prop !== "width" })<{ width: string }>`
   width: ${({ width }) => width};
   overflow: visible;
 `
