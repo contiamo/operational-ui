@@ -54,13 +54,12 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   const { open, close, viewMorePopup } = useViewMore()
   React.useEffect(() => {
     if (ref.current) {
-      const onScroll = () => close()
       const scrollableAncestor = findScrollableAncestor(
         // we can't get this element other way, because of react-window
         ref.current.getElementsByClassName("operational-ui__DataTable--virtual-scroller")[0],
       )
-      scrollableAncestor.addEventListener("scroll", onScroll)
-      return () => scrollableAncestor.removeEventListener("scroll", onScroll)
+      scrollableAncestor.addEventListener("scroll", close)
+      return () => scrollableAncestor.removeEventListener("scroll", close)
     }
   }, [close, ref])
   const rowHeight = React.useMemo(() => getRowHeight(initialRowHeight), [initialRowHeight])
