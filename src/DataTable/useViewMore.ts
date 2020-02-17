@@ -10,7 +10,7 @@ const useViewMore = () => {
     false,
   )
 
-  const close = React.useCallback((immediately?: any) => {
+  const close = React.useCallback((immediately?: true | React.MouseEvent) => {
     window.clearTimeout(closeTimeoutIdRef.current)
     if (immediately === true) {
       closeTimeoutIdRef.current = undefined
