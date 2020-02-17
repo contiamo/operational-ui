@@ -10,9 +10,14 @@ const useViewMore = () => {
     false,
   )
 
-  const close = React.useCallback(() => {
+  const close = React.useCallback((immediately?: any) => {
     window.clearTimeout(closeTimeoutIdRef.current)
-    closeTimeoutIdRef.current = window.setTimeout(() => setViewMorePopup(false), 150)
+    if (immediately === true) {
+      closeTimeoutIdRef.current = undefined
+      setViewMorePopup(false)
+    } else {
+      closeTimeoutIdRef.current = window.setTimeout(() => setViewMorePopup(false), 150)
+    }
   }, [])
   React.useEffect(() => () => window.clearTimeout(closeTimeoutIdRef.current), [])
 
