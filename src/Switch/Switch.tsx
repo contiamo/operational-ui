@@ -18,14 +18,15 @@ const width: number = 28
 const height: number = 16
 const railHeight: number = 16
 
-const Container = styled("div")(
+const Container = styled.div(
   {
     display: "inline-flex",
     alignItems: "center",
   },
   ({ theme }) => ({
-    ":focus": {
-      ...inputFocus({ theme }),
+    ":focus": inputFocus({ theme }),
+    ".no-focus &:focus": {
+      boxShadow: "none",
     },
   }),
 )
@@ -46,7 +47,7 @@ const RailContainer = styled("div")<{ left?: string; right?: string }>(
   }),
 )
 
-const Button = styled("div")<{ on: boolean }>(
+const Button = styled.div<{ on: boolean }>(
   {
     height,
     transition: "transform .3s",
@@ -67,7 +68,7 @@ const Button = styled("div")<{ on: boolean }>(
   }),
 )
 
-const Rail = styled("div")<{ on: boolean }>(
+const Rail = styled.div<{ on: boolean }>(
   {
     width,
     height: railHeight,
@@ -97,7 +98,18 @@ const Rail = styled("div")<{ on: boolean }>(
 )
 
 const Switch: React.SFC<SwitchProps> = ({ on, onChange, left, right, ...props }) => (
-  <Container {...props}>
+  <Container
+    {...props}
+    role="checkbox"
+    aria-checked={on}
+    tabIndex={0}
+    onKeyDown={e => {
+      if (onChange && e.key === " ") {
+        e.preventDefault()
+        onChange(!on)
+      }
+    }}
+  >
     {left}
     <RailContainer
       left={left}
