@@ -5,7 +5,7 @@ import Message from "../Internals/Message/Message"
 
 import { Cell, Container, DataWrapper, HeaderCell, HeaderRow, HeadersContainer, Row } from "./DataTable.styled"
 import { ViewMorePopup } from "../Internals/ViewMorePopup"
-import { defaultRowHeight, getRowHeight } from "./DataTable.util"
+import { defaultRowHeight, getRowHeight, findScrollableAncestor } from "./DataTable.util"
 import useViewMore from "./useViewMore"
 import CellContent from "./CellContent"
 
@@ -50,12 +50,19 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   cellWidth = "minmax(200px, 1fr)",
   className,
 }: DataTableProps<Columns, Rows>) {
+  const ref = React.useRef<HTMLDivElement>(null)
   const { open, close, viewMorePopup } = useViewMore()
   React.useEffect(() => {
-    const onScroll = () => close()
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [close])
+    if (ref.current) {
+      const onScroll = () => close()
+      const scrollableAncestor = findScrollableAncestor(
+        // we can't get this element other way, because of react-window
+        ref.current.getElementsByClassName("operational-ui__DataTable--virtual-scroller")[0],
+      )
+      scrollableAncestor.addEventListener("scroll", onScroll)
+      return () => scrollableAncestor.removeEventListener("scroll", onScroll)
+    }
+  }, [close, ref])
   const rowHeight = React.useMemo(() => getRowHeight(initialRowHeight), [initialRowHeight])
 
   const Table = React.useMemo(
@@ -142,7 +149,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
           {viewMorePopup.content}
         </ViewMorePopup>
       )}
-      <Container width={width} className={className}>
+      <Container width={width} className={className} ref={ref}>
         <FixedSizeList
           itemCount={rows.length}
           itemSize={rowHeight}
