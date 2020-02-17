@@ -9,6 +9,8 @@ import { defaultRowHeight, getRowHeight, findScrollableAncestor } from "./DataTa
 import useViewMore from "./useViewMore"
 import CellContent from "./CellContent"
 
+const fixedSizeListClass = "operational-ui__DataTable--virtual-scroller"
+
 export interface DataTableProps<Columns, Rows> {
   /* The columns of our table. They are an array of header layers. */
   columns: Columns
@@ -56,7 +58,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
     if (ref.current) {
       const scrollableAncestor = findScrollableAncestor(
         // we can't get this element other way, because of react-window
-        ref.current.getElementsByClassName("operational-ui__DataTable--virtual-scroller")[0],
+        ref.current.getElementsByClassName(fixedSizeListClass)[0],
       )
       scrollableAncestor.addEventListener("scroll", close)
       return () => scrollableAncestor.removeEventListener("scroll", close)
@@ -156,7 +158,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
           width={width}
           innerElementType={Table}
           /** can't use data-cy or any other prop because of react-window */
-          className="operational-ui__DataTable--virtual-scroller"
+          className={fixedSizeListClass}
           style={{ willChange: undefined }}
         >
           {VirtualRow}
