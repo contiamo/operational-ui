@@ -4,6 +4,7 @@ import Card, { CardProps } from "../Card/Card"
 import Overlay from "../Internals/Overlay"
 import styled from "../utils/styled"
 import { headerHeight } from "../utils/constants"
+import FocusLock from "react-focus-lock"
 
 export interface ControlledModalProps {
   id?: string
@@ -105,9 +106,17 @@ const ControlledModal: React.SFC<ControlledModalProps> = ({
         }
       }}
     />
-    <ModalContainer type={type} className={contentClassName} fullSize={Boolean(fullSize)} title={title} action={action}>
-      <Content fullSize={Boolean(fullSize)}>{children}</Content>
-    </ModalContainer>
+    <FocusLock autoFocus returnFocus>
+      <ModalContainer
+        type={type}
+        className={contentClassName}
+        fullSize={Boolean(fullSize)}
+        title={title}
+        action={action}
+      >
+        <Content fullSize={Boolean(fullSize)}>{children}</Content>
+      </ModalContainer>
+    </FocusLock>
   </>
 )
 
