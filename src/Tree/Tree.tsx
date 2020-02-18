@@ -20,6 +20,7 @@ interface BaseTree {
   actions?: React.ReactNode
   forwardRef?: (element?: HTMLElement | null) => any
 }
+
 interface TreeWithChildren extends BaseTree {
   childNodes?: Tree[]
   draggableProps?: never
@@ -43,7 +44,8 @@ export interface TreeProps {
   _hasIconOffset?: boolean
 }
 
-const Container = styled("div")`
+const Container = styled.div`
+  label: TreeContainer;
   user-select: none;
 `
 

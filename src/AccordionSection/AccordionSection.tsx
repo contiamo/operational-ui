@@ -39,6 +39,7 @@ const Header = styled(SectionHeader)<{ expanded: boolean }>(({ theme, expanded }
   ".no-focus &:focus": {
     background: theme.color.background.almostWhite,
   },
+  paddingLeft: theme.space.small,
   paddingRight: 0,
   userSelect: "none",
 }))
@@ -50,7 +51,7 @@ const Panel = styled.div`
   /* we need it because of overflow: hidden; above */
   overflow: auto;
   height: 100%;
-  padding: ${({ theme }) => theme.space.element}px;
+  padding: ${({ theme }) => theme.space.small}px;
   background-color: ${({ theme }) => theme.color.white};
 `
 

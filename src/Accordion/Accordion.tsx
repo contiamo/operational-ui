@@ -13,7 +13,7 @@ export interface AccordionProps extends DefaultProps {
   expanded?: boolean[]
 }
 
-const Container = styled("div")<{ sections: boolean[] }>`
+const Container = styled.div<{ sections: boolean[] }>`
   label: Accordion;
   height: 100%;
   display: grid;
