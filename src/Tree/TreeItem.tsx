@@ -42,8 +42,8 @@ const Header = styled.div<{
   background: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
   padding: ${({ theme }) => `${theme.space.base / 2}px ${theme.space.content}px`};
   padding-left: ${({ theme, level, hasIconOffset }) =>
-    theme.space.content * (level + 1) + (hasIconOffset ? theme.space.content - theme.space.base : -theme.space.base)}px;
-  margin: 0 -${({ theme }) => theme.space.medium}px;
+    theme.space.element * (level + 1) + (hasIconOffset ? theme.space.element - theme.space.base : -theme.space.base)}px;
+  margin: 0 -10px;
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover,
@@ -78,7 +78,7 @@ const Header = styled.div<{
 
 const NameTagStyled = styled(NameTag)<{ withIcon?: boolean }>`
   label: NameTagStyled;
-  margin-right: ${({ theme }) => theme.space.base}px;
+  margin-right: ${({ theme }) => theme.space.small}px;
 `
 
 // These props are extracted to avoid useless re-render
@@ -173,7 +173,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           size: 11,
           left: true,
           color: "color.text.lighter",
-          style: { marginRight: 4 },
+          style: { marginRight: 8 },
         })}
       {tag && (
         <NameTagStyled condensed left color={color}>
@@ -184,7 +184,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         React.createElement(icon, {
           size: 12,
           color: iconColor || "color.text.lighter",
-          style: { marginLeft: 0, marginRight: 4, flex: "0 0 11px" },
+          style: { marginLeft: 0, marginRight: 8, flex: "0 0 11px" },
         })}
       <Label hasChildren={hasChildren}>
         <Highlighter textToHighlight={label} highlightStyle={highlightStyle} searchWords={searchWords} />
