@@ -79,6 +79,8 @@ const Header = styled.div<{
 const NameTagStyled = styled(NameTag)<{ withIcon?: boolean }>`
   label: NameTagStyled;
   margin-right: ${({ theme }) => theme.space.small}px;
+  width: ${({ theme }) => theme.space.medium}px;
+  height: ${({ theme }) => theme.space.medium}px;
 `
 
 // These props are extracted to avoid useless re-render
