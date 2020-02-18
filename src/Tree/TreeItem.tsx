@@ -43,7 +43,7 @@ const Header = styled.div<{
   padding: ${({ theme }) => `${theme.space.base / 2}px ${theme.space.content}px`};
   padding-left: ${({ theme, level, hasIconOffset }) =>
     theme.space.element * (level + 1) + (hasIconOffset ? theme.space.element - theme.space.base : -theme.space.base)}px;
-  margin: 0 -10px;
+  margin: 0 -14px;
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover,
