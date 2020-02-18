@@ -8,7 +8,10 @@ exports[`Switch Should render 1`] = `
     class="css-p29iif"
   />
   <div
-    class="css-1pu2ql2"
+    aria-checked="true"
+    class="css-kai3vb"
+    role="checkbox"
+    tabindex="0"
   >
     <div
       class="css-1nz7xkz-switch"
