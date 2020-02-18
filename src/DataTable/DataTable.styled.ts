@@ -7,7 +7,7 @@ export const Container = styled("div", { shouldForwardProp: prop => prop !== "wi
   overflow: visible;
 `
 
-export const HeadersContainer = styled("div")<{
+export const HeadersContainer = styled.div<{
   numColumns: number
   numHeaders: number
   columnWidth: string
@@ -18,7 +18,7 @@ export const HeadersContainer = styled("div")<{
   grid-template-rows: repeat(${({ numHeaders, rowHeight }) => `${numHeaders}, ${getHeaderRowHeight(rowHeight)}px`});
 `
 
-export const Row = styled("div")<{ numCells: number; cellWidth: string }>`
+export const Row = styled.div<{ numCells: number; cellWidth: string }>`
   display: grid;
   grid-template-columns: repeat(${({ numCells, cellWidth }) => `${numCells}, ${cellWidth}`});
 `

@@ -52,7 +52,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
 }: DataTableProps<Columns, Rows>) {
   const { open, close, viewMorePopup } = useViewMore()
   React.useEffect(() => {
-    const onScroll = () => close()
+    const onScroll = () => close(true)
     window.addEventListener("scroll", onScroll)
     return () => window.removeEventListener("scroll", onScroll)
   }, [close])
@@ -94,7 +94,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
           </DataWrapper>
         </>
       )),
-    [columns, rows, rowHeight],
+    [columns, rows, rowHeight, open, close],
   )
 
   const numCells = React.useMemo(() => (rows[0] ? rows[0].length : 0), [rows])
@@ -116,6 +116,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
                   key={`op-row-${index}-cell-${cellIndex}`}
                   cell={cellIndex + 1}
                   height={rowHeight}
+                  onMouseLeave={close}
                 >
                   <CellContent close={close} open={open} cell={cell} />
                 </Cell>
@@ -123,7 +124,7 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
             })}
         </Row>
       )),
-    [rows, rowHeight],
+    [rows, rowHeight, open, close],
   )
 
   if (rows.length && rows[0].length !== columns.length) {
@@ -138,11 +139,16 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   return (
     <>
       {viewMorePopup && (
-        <ViewMorePopup top={viewMorePopup.y} left={viewMorePopup.x} onMouseLeave={close}>
+        <ViewMorePopup
+          top={viewMorePopup.y}
+          left={viewMorePopup.x}
+          onMouseLeave={close}
+          onMouseEnter={open(viewMorePopup.content)}
+        >
           {viewMorePopup.content}
         </ViewMorePopup>
       )}
-      <Container width={width} className={className}>
+      <Container width={width} className={className} onMouseLeave={close}>
         <FixedSizeList
           itemCount={rows.length}
           itemSize={rowHeight}
