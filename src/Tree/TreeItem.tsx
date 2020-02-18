@@ -40,10 +40,10 @@ const Header = styled.div<{
   align-items: center;
   cursor: ${({ onClick, cursor }) => cursor || (onClick ? "pointer" : "inherit")};
   background: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
-  padding: ${({ theme }) => `${theme.space.base / 2}px ${theme.space.element}px`};
+  padding: ${({ theme }) => `${theme.space.base / 2}px ${theme.space.content}px`};
   padding-left: ${({ theme, level, hasIconOffset }) =>
-    theme.space.element * (level + 1) + (hasIconOffset ? theme.space.element - theme.space.base : -theme.space.base)}px;
-  margin: 0 -${({ theme }) => theme.space.element}px;
+    theme.space.content * (level + 1) + (hasIconOffset ? theme.space.content - theme.space.base : -theme.space.base)}px;
+  margin: 0 -${({ theme }) => theme.space.medium}px;
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover,
@@ -76,7 +76,8 @@ const Header = styled.div<{
   }
 `
 
-const NameTagStyled = styled(NameTag)`
+const NameTagStyled = styled(NameTag)<{ withIcon?: boolean }>`
+  label: NameTagStyled;
   margin-right: ${({ theme }) => theme.space.base}px;
 `
 
@@ -171,7 +172,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
           size: 11,
           left: true,
-          color: "color.text.action",
+          color: "color.text.lighter",
           style: { marginRight: 4 },
         })}
       {tag && (
@@ -183,7 +184,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         React.createElement(icon, {
           size: 12,
           color: iconColor || "color.text.lighter",
-          style: { marginLeft: 0, marginRight: 4, flex: "0 0 15px" },
+          style: { marginLeft: 0, marginRight: 4, flex: "0 0 11px" },
         })}
       <Label hasChildren={hasChildren}>
         <Highlighter textToHighlight={label} highlightStyle={highlightStyle} searchWords={searchWords} />
