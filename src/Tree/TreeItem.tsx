@@ -89,15 +89,17 @@ const highlightStyle: React.CSSProperties = {
 }
 const defaultSearch: string[] = []
 
-const Label = styled.div<{ hasChildren: boolean }>`
+const Label = styled.div<{ hasChildren: boolean; level: number }>`
   /* Split the label by caract properly and show the first line only */
   overflow-wrap: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
   height: 16px;
 
-  font-size: ${({ theme }) => theme.font.size.small}px;
-  font-weight: ${({ theme, hasChildren }) => (hasChildren ? theme.font.weight.bold : theme.font.weight.medium)};
+  line-height: 16px;
+  font-size: ${({ theme, level }) => (level < 2 ? theme.font.size.small : theme.font.size.tiny)}px;
+  font-weight: ${({ theme, hasChildren, level }) =>
+    hasChildren && level === 0 ? theme.font.weight.bold : theme.font.weight.regular};
   flex: 1;
 `
 
@@ -186,7 +188,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           color: iconColor || "color.text.lighter",
           style: { marginLeft: 0, marginRight: 8, flex: "0 0 11px" },
         })}
-      <Label hasChildren={hasChildren}>
+      <Label hasChildren={hasChildren} level={level}>
         <Highlighter textToHighlight={label} highlightStyle={highlightStyle} searchWords={searchWords} />
       </Label>
       <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>
