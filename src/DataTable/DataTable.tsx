@@ -51,12 +51,12 @@ export function DataTable<Columns extends any[][], Rows extends any[][]>({
   className,
 }: DataTableProps<Columns, Rows>) {
   const { open, close, viewMorePopup } = useViewMore()
-  const rowHeight = React.useMemo(() => getRowHeight(initialRowHeight), [initialRowHeight])
   React.useEffect(() => {
     const onScroll = () => close(true)
     window.addEventListener("scroll", onScroll)
     return () => window.removeEventListener("scroll", onScroll)
   }, [close])
+  const rowHeight = React.useMemo(() => getRowHeight(initialRowHeight), [initialRowHeight])
 
   const Table = React.useMemo(
     () =>

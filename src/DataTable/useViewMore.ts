@@ -13,7 +13,6 @@ const useViewMore = () => {
   const close = React.useCallback((immediately?: true | React.MouseEvent) => {
     window.clearTimeout(closeTimeoutIdRef.current)
     if (immediately === true) {
-      closeTimeoutIdRef.current = undefined
       setViewMorePopup(false)
     } else {
       closeTimeoutIdRef.current = window.setTimeout(() => setViewMorePopup(false), 150)
@@ -25,7 +24,6 @@ const useViewMore = () => {
     (content: React.ReactNode) => (e: React.MouseEvent) => {
       e.stopPropagation()
       window.clearTimeout(closeTimeoutIdRef.current)
-      closeTimeoutIdRef.current = undefined
       const { clientX, clientY } = e
       setViewMorePopup(current =>
         current && current.content === content
