@@ -18,6 +18,7 @@ const Container = styled.div<{ hasChildren: boolean; disabled: boolean }>`
 `
 
 const ChildTree: React.SFC<Props> = ({
+  paddingLeft,
   initiallyOpen,
   highlight,
   tag,
@@ -74,6 +75,7 @@ const ChildTree: React.SFC<Props> = ({
   return (
     <Container ref={forwardRef} disabled={Boolean(disabled)} hasChildren={hasChildren} {...props}>
       <TreeItem
+        paddingLeft={paddingLeft}
         level={level}
         searchWords={searchWords}
         onNodeClick={onNodeClick}
@@ -96,6 +98,7 @@ const ChildTree: React.SFC<Props> = ({
         <Tree
           _level={level + 1}
           _hasIconOffset={Boolean(icon) || Boolean(tag)}
+          paddingLeft={paddingLeft}
           trees={childNodes}
           searchWords={searchWords}
           droppableProps={droppableProps}

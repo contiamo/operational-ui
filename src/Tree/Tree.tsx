@@ -6,6 +6,7 @@ import ChildTree from "./ChildTree"
 import { IconComponentType } from "../Icon"
 
 interface BaseTree {
+  paddingLeft: number
   label: string
   highlight?: boolean
   initiallyOpen?: boolean
@@ -37,6 +38,7 @@ export type Tree = TreeWithChildren | TreeWithoutChildren
 
 export interface TreeProps {
   trees: Tree[]
+  paddingLeft: number
   searchWords?: string[]
   droppableProps?: Omit<DroppableProps, "children">
   placeholder?: React.ComponentType<DroppableStateSnapshot>
@@ -52,6 +54,7 @@ const Container = styled.div`
 const Tree: React.SFC<TreeProps> = ({
   _level = 0,
   _hasIconOffset = false,
+  paddingLeft = 0,
   trees,
   droppableProps,
   placeholder,
@@ -68,6 +71,7 @@ const Tree: React.SFC<TreeProps> = ({
       <Container>
         {trees.map((treeData, index) => (
           <ChildTree
+            paddingLeft={paddingLeft}
             level={_level}
             hasIconOffset={_hasIconOffset}
             key={index}
@@ -90,6 +94,7 @@ const Tree: React.SFC<TreeProps> = ({
                   {draggableProvided => {
                     return (
                       <ChildTree
+                        paddingLeft={paddingLeft}
                         hasIconOffset={_hasIconOffset}
                         level={_level}
                         forwardRef={draggableProvided.innerRef}

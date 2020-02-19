@@ -8,6 +8,7 @@ import Highlighter from "react-highlight-words"
 import constants from "../utils/constants"
 
 interface TreeItemProps {
+  paddingLeft: number
   level: number
   highlight: boolean
   searchWords?: string[]
@@ -28,6 +29,7 @@ interface TreeItemProps {
 }
 
 const Header = styled.div<{
+  paddingLeft: number
   highlight: boolean
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   cursor?: string
@@ -35,15 +37,17 @@ const Header = styled.div<{
   hasIconOffset: boolean
 }>`
   label: TreeItem;
+  width: 100%;
   display: flex;
   position: relative;
   align-items: center;
   cursor: ${({ onClick, cursor }) => cursor || (onClick ? "pointer" : "inherit")};
   background: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
-  padding: ${({ theme }) => `${theme.space.base / 2}px ${theme.space.content}px`};
-  padding-left: ${({ theme, level, hasIconOffset }) =>
-    theme.space.element * (level + 1) + (hasIconOffset ? theme.space.element - theme.space.base : -theme.space.base)}px;
-  margin: 0 -14px;
+  padding: ${({ theme }) => `${theme.space.base / 2}px`};
+  padding-left: ${({ theme, paddingLeft, level, hasIconOffset }) =>
+    paddingLeft +
+    theme.space.element * level +
+    (hasIconOffset ? theme.space.element - theme.space.base : -theme.space.base)}px;
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover,
@@ -115,6 +119,7 @@ const ActionsContainer = styled.div<{ childrenCount: number }>`
 `
 
 const TreeItem: React.SFC<TreeItemProps> = ({
+  paddingLeft,
   highlight,
   tag,
   icon,
@@ -161,6 +166,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
 
   return (
     <Header
+      paddingLeft={paddingLeft}
       level={level}
       hasIconOffset={Boolean(hasIconOffset)}
       onClick={onNodeClick}

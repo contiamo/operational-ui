@@ -51,7 +51,6 @@ const Panel = styled.div`
   /* we need it because of overflow: hidden; above */
   overflow: auto;
   height: 100%;
-  padding: ${({ theme }) => theme.space.small}px;
   background-color: ${({ theme }) => theme.color.white};
 `
 
