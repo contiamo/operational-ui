@@ -4,6 +4,7 @@ import { Draggable, DraggableProps, Droppable, DroppableProps, DroppableStateSna
 import styled from "../utils/styled"
 import ChildTree from "./ChildTree"
 import { IconComponentType } from "../Icon"
+import constants from "../utils/constants"
 
 interface BaseTree {
   paddingLeft: number
@@ -54,7 +55,7 @@ const Container = styled.div`
 const Tree: React.SFC<TreeProps> = ({
   _level = 0,
   _hasIconOffset = false,
-  paddingLeft = 0,
+  paddingLeft = constants.space.small,
   trees,
   droppableProps,
   placeholder,
