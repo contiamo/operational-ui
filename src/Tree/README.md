@@ -1,3 +1,120 @@
+### On an Accordion
+
+```jsx
+import * as React from "react"
+import constants from "../utils/constants"
+
+import {
+  ExternalIcon,
+  Accordion,
+  Tree,
+  AccordionSection,
+  VirtualIcon,
+  PhysicalTableIcon,
+} from "@operational/components"
+
+const MyComponent = () => {
+  const [expanded, setExpanded] = React.useState([true])
+  const onToggle = index => {
+    const newExpanded = [...expanded]
+    newExpanded[index] = !newExpanded[index]
+    setExpanded(newExpanded)
+  }
+
+  return (
+    <div style={{ height: 400 }}>
+      <Accordion expanded={expanded} onToggle={onToggle}>
+        <AccordionSection
+          title={
+            <div>
+              <ExternalIcon size={12} color="primary" left />
+              My Tree
+            </div>
+          }
+        >
+          <Tree
+            paddingLeft={constants.space.small}
+            trees={[
+              {
+                label: "Store",
+                icon: VirtualIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Region",
+                    icon: PhysicalTableIcon,
+                    initiallyOpen: true,
+                    childNodes: [
+                      {
+                        label: "City",
+                        tag: "D",
+                        disabled: true,
+                        childNodes: [],
+                      },
+                      {
+                        label: "Country",
+                        color: "primary",
+                        tag: "D",
+                        childNodes: [],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Legal Entity",
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Limited Liability Company",
+                    tag: "D",
+                    childNodes: [],
+                  },
+                  {
+                    label: "Inc.",
+                    tag: "D",
+                    color: "#2C363F",
+                    childNodes: [],
+                  },
+                ],
+              },
+              {
+                label: "db_error_01",
+                icon: VirtualIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Region",
+                    icon: PhysicalTableIcon,
+                    initiallyOpen: true,
+                    childNodes: [
+                      {
+                        label: "City",
+                        tag: "D",
+                        disabled: true,
+                        childNodes: [],
+                      },
+                      {
+                        label: "Country",
+                        color: "primary",
+                        tag: "D",
+                        childNodes: [],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ]}
+          />
+        </AccordionSection>
+      </Accordion>
+    </div>
+  )
+}
+
+;<MyComponent />
+```
+
 ### Usage
 
 The tree component renders a tree structure with collapsable nodes in a filetree-like design. Defined items in the tree can have a custom click and a context-click handler.
@@ -418,75 +535,4 @@ const PizzaMaker = () => {
   )
 }
 ;<PizzaMaker />
-```
-
-### On an Accordion
-
-```jsx
-import * as React from "react"
-import { Accordion, Tree, AccordionSection } from "@operational/components"
-
-const MyComponent = () => {
-  const [expanded, setExpanded] = React.useState([true])
-  const onToggle = index => {
-    const newExpanded = [...expanded]
-    newExpanded[index] = !newExpanded[index]
-    setExpanded(newExpanded)
-  }
-
-  return (
-    <div style={{ height: 400 }}>
-      <Accordion expanded={expanded} onToggle={onToggle}>
-        <AccordionSection title="My tree">
-          <Tree
-            trees={[
-              {
-                label: "Store",
-                childNodes: [
-                  {
-                    label: "Region",
-                    initiallyOpen: true,
-                    childNodes: [
-                      {
-                        label: "City",
-                        tag: "D",
-                        disabled: true,
-                        childNodes: [],
-                      },
-                      {
-                        label: "Country",
-                        color: "primary",
-                        tag: "D",
-                        childNodes: [],
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                label: "Legal Entity",
-                initiallyOpen: true,
-                childNodes: [
-                  {
-                    label: "Limited Liability Company",
-                    tag: "D",
-                    childNodes: [],
-                  },
-                  {
-                    label: "Inc.",
-                    tag: "D",
-                    color: "#2C363F",
-                    childNodes: [],
-                  },
-                ],
-              },
-            ]}
-          />
-        </AccordionSection>
-      </Accordion>
-    </div>
-  )
-}
-
-;<MyComponent />
 ```
