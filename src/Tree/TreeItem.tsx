@@ -45,9 +45,7 @@ const Header = styled.div<{
   background: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
   padding: ${({ theme }) => `${theme.space.base / 2}px`};
   padding-left: ${({ theme, paddingLeft, level, hasIconOffset }) =>
-    paddingLeft +
-    theme.space.element * level +
-    (hasIconOffset ? theme.space.element - theme.space.base : -theme.space.base)}px;
+    paddingLeft + theme.space.element * level + (hasIconOffset ? theme.space.element : 0)}px;
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover,
@@ -180,7 +178,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     >
       {hasChildren &&
         React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
-          size: 11,
+          size: 12,
           left: true,
           color: "color.text.lighter",
           style: { marginRight: 8 },
@@ -194,7 +192,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         React.createElement(icon, {
           size: 12,
           color: iconColor || "color.text.lighter",
-          style: { marginLeft: 0, marginRight: 8, flex: "0 0 11px" },
+          style: { marginLeft: 0, marginRight: 8, flex: "0 0 12px" },
         })}
       <Label hasChildren={hasChildren} level={level}>
         <Highlighter textToHighlight={label} highlightStyle={highlightStyle} searchWords={searchWords} />
