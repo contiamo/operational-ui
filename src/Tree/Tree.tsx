@@ -21,6 +21,10 @@ interface BaseTree {
   cursor?: string
   actions?: React.ReactNode
   forwardRef?: (element?: HTMLElement | null) => any
+  strong?: boolean
+  fontSize?: number
+  emphasized?: boolean
+  actionCall?: number
 }
 
 interface TreeWithChildren extends BaseTree {
@@ -62,6 +66,8 @@ const Tree: React.SFC<TreeProps> = ({
   searchWords,
 }) => {
   const isLowestLevel = trees.length === 0 || trees.some(tree => !tree.childNodes || !tree.childNodes.length)
+
+  console.log({ trees })
 
   /**
    * If this is a category with children, no drag and drop

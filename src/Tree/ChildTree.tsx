@@ -39,6 +39,8 @@ const ChildTree: React.SFC<Props> = ({
   hasIconOffset,
   onMouseEnter,
   onMouseLeave,
+  strong,
+  fontSize,
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
@@ -93,6 +95,8 @@ const ChildTree: React.SFC<Props> = ({
         hasIconOffset={hasIconOffset && !hasChildren}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
+        strong={strong}
+        fontSize={fontSize}
       />
       {hasChildren && isOpen && (
         <Tree

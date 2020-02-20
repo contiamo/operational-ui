@@ -1,5 +1,4 @@
 import React, { useCallback } from "react"
-
 import NameTag from "../NameTag/NameTag"
 import { darken, lighten } from "../utils"
 import styled from "../utils/styled"
@@ -26,6 +25,10 @@ interface TreeItemProps {
   onMouseLeave?: (e: React.MouseEvent<HTMLDivElement>) => void
   actions?: React.ReactNode
   hasIconOffset?: boolean
+  strong?: boolean
+  fontSize?: number
+  emphasized?: boolean
+  actionCall?: number
 }
 
 const Header = styled.div<{
@@ -93,7 +96,7 @@ const highlightStyle: React.CSSProperties = {
 }
 const defaultSearch: string[] = []
 
-const Label = styled.div<{ hasChildren: boolean; level: number }>`
+const Label = styled.div<{ strong: boolean; fontSize: number }>`
   /* Split the label by caract properly and show the first line only */
   overflow-wrap: break-word;
   overflow: hidden;
@@ -101,9 +104,8 @@ const Label = styled.div<{ hasChildren: boolean; level: number }>`
   height: 16px;
 
   line-height: 16px;
-  font-size: ${({ theme, level }) => (level < 2 ? theme.font.size.small : theme.font.size.tiny)}px;
-  font-weight: ${({ theme, hasChildren, level }) =>
-    hasChildren && level === 0 ? theme.font.weight.bold : theme.font.weight.regular};
+  font-size: ${({ fontSize }) => fontSize}px;
+  font-weight: ${({ theme, strong }) => (Boolean(strong) ? theme.font.weight.bold : theme.font.weight.regular)};
   flex: 1;
 `
 
@@ -135,6 +137,10 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   searchWords = defaultSearch,
   onMouseEnter,
   onMouseLeave,
+  strong,
+  fontSize,
+  // emphasized,
+  // actionCall,
 }) => {
   const handleKeyDown = useCallback(
     e => {
@@ -161,6 +167,8 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     },
     [onNodeContextMenu, onNodeClick],
   )
+
+  console.log({ fontSize })
 
   return (
     <Header
@@ -194,7 +202,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           color: iconColor || "color.text.lighter",
           style: { marginLeft: 0, marginRight: 8, flex: "0 0 12px" },
         })}
-      <Label hasChildren={hasChildren} level={level}>
+      <Label strong={Boolean(strong)} fontSize={fontSize ? fontSize : constants.font.size.small}>
         <Highlighter textToHighlight={label} highlightStyle={highlightStyle} searchWords={searchWords} />
       </Label>
       <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>
