@@ -97,7 +97,7 @@ const highlightStyle: React.CSSProperties = {
 }
 const defaultSearch: string[] = []
 
-const Label = styled.div<{ strong: boolean; fontSize: number; emphasized: boolean; fontColor: string }>`
+const Label = styled.div<{ strong: boolean; fontSize: number; emphasized: boolean; fontColor?: string }>`
   /* Split the label by caract properly and show the first line only */
   overflow-wrap: break-word;
   overflow: hidden;
@@ -105,7 +105,7 @@ const Label = styled.div<{ strong: boolean; fontSize: number; emphasized: boolea
   height: 16px;
 
   line-height: 16px;
-  color: ${({ fontColor }) => expandColor(constants, fontColor)};
+  color: ${({ fontColor }) => (fontColor ? expandColor(constants, fontColor) : "unset")};
   font-size: ${({ fontSize }) => fontSize}px;
   font-weight: ${({ theme, strong }) => (Boolean(strong) ? theme.font.weight.bold : theme.font.weight.regular)};
   font-style: ${({ emphasized }) => (emphasized ? "italic" : "normal")};
@@ -205,7 +205,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         })}
 
       <Label
-        fontColor={fontColor ? fontColor : constants.color.text.dark}
+        fontColor={fontColor}
         strong={Boolean(strong)}
         fontSize={fontSize ? fontSize : constants.font.size.small}
         emphasized={Boolean(emphasized)}
