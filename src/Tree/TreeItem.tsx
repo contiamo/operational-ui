@@ -11,6 +11,7 @@ interface TreeItemProps {
   level: number
   highlight: boolean
   searchWords?: string[]
+  ignoreSearchWords?: boolean
   hasChildren: boolean
   isOpen: boolean
   label: string
@@ -145,6 +146,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   actions,
   hasIconOffset,
   searchWords = defaultSearch,
+  ignoreSearchWords,
   onMouseEnter,
   onMouseLeave,
   strong,
@@ -219,7 +221,11 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         emphasized={Boolean(emphasized)}
         monospace={Boolean(monospace)}
       >
-        <Highlighter textToHighlight={label} highlightStyle={highlightStyle} searchWords={searchWords} />
+        <Highlighter
+          textToHighlight={label}
+          highlightStyle={highlightStyle}
+          searchWords={!ignoreSearchWords ? searchWords : []}
+        />
       </Label>
       <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>
     </Header>

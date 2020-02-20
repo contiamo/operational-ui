@@ -34,6 +34,7 @@ const ChildTree: React.SFC<Props> = ({
   onContextMenu,
   cursor,
   searchWords,
+  ignoreSearchWords,
   level,
   actions,
   hasIconOffset,
@@ -83,6 +84,7 @@ const ChildTree: React.SFC<Props> = ({
         paddingLeft={paddingLeft}
         level={level}
         searchWords={searchWords}
+        ignoreSearchWords={ignoreSearchWords}
         onNodeClick={onNodeClick}
         onNodeContextMenu={onNodeContextMenu}
         highlight={Boolean(highlight)}

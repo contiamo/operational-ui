@@ -8,6 +8,7 @@ import {
   ExternalIcon,
   Accordion,
   Tree,
+  Input,
   AccordionSection,
   VirtualIcon,
   PhysicalTableIcon,
@@ -29,8 +30,11 @@ const MyComponent = () => {
     setExpanded(newExpanded)
   }
 
+  const [filter, setFilter] = React.useState("loading retry")
+
   return (
-    <div style={{ height: 550 }}>
+    <div style={{ height: 600 }}>
+      <Input value={filter} onChange={setFilter} label="Search" />
       <Accordion expanded={expanded} onToggle={onToggle}>
         <AccordionSection
           title={
@@ -41,6 +45,7 @@ const MyComponent = () => {
           }
         >
           <Tree
+            searchWords={filter.split(" ")}
             trees={[
               {
                 label: "Store",
@@ -110,6 +115,7 @@ const MyComponent = () => {
                       },
                       {
                         label: "loading...",
+                        ignoreSearchWords: true,
                         icon: Spinner,
                         iconColor: "primary",
                         fontSize: constants.font.size.tiny,
@@ -136,6 +142,7 @@ const MyComponent = () => {
                     childNodes: [
                       {
                         label: "Load more...",
+                        ignoreSearchWords: true,
                         fontColor: "primary",
                       },
                     ],
@@ -156,6 +163,7 @@ const MyComponent = () => {
                   },
                   {
                     label: "loading...",
+                    ignoreSearchWords: true,
                     monospace: true,
                     icon: Spinner,
                     iconColor: "primary",
@@ -174,6 +182,7 @@ const MyComponent = () => {
                   },
                   {
                     label: "loading...",
+                    ignoreSearchWords: true,
                     icon: Spinner,
                     iconColor: "primary",
                   },
@@ -187,6 +196,7 @@ const MyComponent = () => {
                 childNodes: [
                   {
                     label: "Load failed. Click to retry.",
+                    ignoreSearchWords: true,
                     icon: WarningIcon,
                     iconColor: "error",
                     emphasized: true,
@@ -195,6 +205,7 @@ const MyComponent = () => {
               },
               {
                 label: "Load failed. Click to retry.",
+                ignoreSearchWords: true,
                 icon: WarningIcon,
                 iconColor: "error",
                 emphasized: true,
@@ -210,7 +221,7 @@ const MyComponent = () => {
 ;<MyComponent />
 ```
 
-<!-- ### Usage
+### Usage
 
 The tree component renders a tree structure with collapsable nodes in a filetree-like design. Defined items in the tree can have a custom click and a context-click handler.
 
@@ -388,6 +399,12 @@ const Example = () => {
                 label: "Limited Liability Company",
                 tag: "D",
                 childNodes: [],
+              },
+              {
+                label: "Liability that should not be discovered by search",
+                tag: "L",
+                highlight: false,
+                ignoreSearchWords: true,
               },
               {
                 label: "Inc.",
@@ -630,4 +647,4 @@ const PizzaMaker = () => {
   )
 }
 ;<PizzaMaker />
-``` -->
+```

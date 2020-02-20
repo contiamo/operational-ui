@@ -26,6 +26,7 @@ interface BaseTree {
   fontColor?: string
   emphasized?: boolean
   monospace?: boolean
+  ignoreSearchWords?: boolean
 }
 
 interface TreeWithChildren extends BaseTree {
