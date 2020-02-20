@@ -96,7 +96,7 @@ const highlightStyle: React.CSSProperties = {
 }
 const defaultSearch: string[] = []
 
-const Label = styled.div<{ strong: boolean; fontSize: number }>`
+const Label = styled.div<{ strong: boolean; fontSize: number; emphasized: boolean }>`
   /* Split the label by caract properly and show the first line only */
   overflow-wrap: break-word;
   overflow: hidden;
@@ -106,6 +106,7 @@ const Label = styled.div<{ strong: boolean; fontSize: number }>`
   line-height: 16px;
   font-size: ${({ fontSize }) => fontSize}px;
   font-weight: ${({ theme, strong }) => (Boolean(strong) ? theme.font.weight.bold : theme.font.weight.regular)};
+  font-style: ${({ emphasized }) => (emphasized ? "italic" : "normal")};
   flex: 1;
 `
 
@@ -139,8 +140,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   onMouseLeave,
   strong,
   fontSize,
-  // emphasized,
-  // actionCall,
+  emphasized,
 }) => {
   const handleKeyDown = useCallback(
     e => {
@@ -202,7 +202,11 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           color: iconColor || "color.text.lighter",
           style: { marginLeft: 0, marginRight: 8, flex: "0 0 12px" },
         })}
-      <Label strong={Boolean(strong)} fontSize={fontSize ? fontSize : constants.font.size.small}>
+      <Label
+        strong={Boolean(strong)}
+        fontSize={fontSize ? fontSize : constants.font.size.small}
+        emphasized={Boolean(emphasized)}
+      >
         <Highlighter textToHighlight={label} highlightStyle={highlightStyle} searchWords={searchWords} />
       </Label>
       <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>

@@ -24,7 +24,6 @@ interface BaseTree {
   strong?: boolean
   fontSize?: number
   emphasized?: boolean
-  actionCall?: number
 }
 
 interface TreeWithChildren extends BaseTree {

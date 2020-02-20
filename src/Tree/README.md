@@ -11,6 +11,7 @@ import {
   AccordionSection,
   VirtualIcon,
   PhysicalTableIcon,
+  WandIcon,
 } from "@operational/components"
 
 const MyComponent = () => {
@@ -88,23 +89,26 @@ const MyComponent = () => {
                 initiallyOpen: true,
                 childNodes: [
                   {
-                    label: "Region",
+                    label: "Tables",
                     icon: PhysicalTableIcon,
                     initiallyOpen: true,
                     childNodes: [
                       {
-                        label: "City",
+                        label: "None",
                         fontSize: constants.font.size.tiny,
-                        tag: "D",
-                        disabled: true,
-                        childNodes: [],
+                        emphasized: true,
                       },
+                    ],
+                  },
+                  {
+                    label: "Functions",
+                    icon: WandIcon,
+                    initiallyOpen: true,
+                    childNodes: [
                       {
-                        label: "Country",
+                        label: "None",
                         fontSize: constants.font.size.tiny,
-                        color: "primary",
-                        tag: "D",
-                        childNodes: [],
+                        emphasized: true,
                       },
                     ],
                   },
