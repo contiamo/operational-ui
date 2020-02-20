@@ -13,6 +13,7 @@ import {
   PhysicalTableIcon,
   WandIcon,
   SchemaIcon,
+  AddIcon,
 } from "@operational/components"
 
 const MyComponent = () => {
@@ -95,9 +96,12 @@ const MyComponent = () => {
                     initiallyOpen: true,
                     childNodes: [
                       {
-                        label: "None",
+                        icon: AddIcon,
+                        label: "Add table",
                         fontSize: constants.font.size.tiny,
-                        emphasized: true,
+                        strong: true,
+                        iconColor: "primary",
+                        fontColor: "primary",
                       },
                     ],
                   },
@@ -120,8 +124,6 @@ const MyComponent = () => {
                     childNodes: [
                       {
                         label: "Load more...",
-                        // fontSize: constants.font.size.tiny,
-                        // emphasized: true,
                         fontColor: "primary",
                       },
                     ],
