@@ -14,7 +14,12 @@ import {
   WandIcon,
   SchemaIcon,
   AddIcon,
+  DimensionIcon,
+  WarningIcon,
+  UserIcon,
 } from "@operational/components"
+
+import Spinner from "../Spinner/Spinner"
 
 const MyComponent = () => {
   const [expanded, setExpanded] = React.useState([true])
@@ -85,7 +90,7 @@ const MyComponent = () => {
                 ],
               },
               {
-                label: "db_error_01",
+                label: "db_01",
                 strong: true,
                 icon: VirtualIcon,
                 initiallyOpen: true,
@@ -102,6 +107,13 @@ const MyComponent = () => {
                         strong: true,
                         iconColor: "primary",
                         fontColor: "primary",
+                      },
+                      {
+                        label: "loading...",
+                        icon: Spinner,
+                        iconColor: "primary",
+                        fontSize: constants.font.size.tiny,
+                        emphasized: true,
                       },
                     ],
                   },
@@ -129,6 +141,39 @@ const MyComponent = () => {
                     ],
                   },
                 ],
+              },
+              {
+                label: "db_hr_2019",
+                strong: true,
+                icon: UserIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "loading...",
+                    icon: Spinner,
+                    iconColor: "primary",
+                  },
+                ],
+              },
+              {
+                label: "db_error_01",
+                strong: true,
+                icon: DimensionIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Load failed. Click to retry.",
+                    icon: WarningIcon,
+                    iconColor: "error",
+                    emphasized: true,
+                  },
+                ],
+              },
+              {
+                label: "Load failed. Click to retry.",
+                icon: WarningIcon,
+                iconColor: "error",
+                emphasized: true,
               },
             ]}
           />
