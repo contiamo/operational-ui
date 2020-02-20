@@ -271,7 +271,7 @@ const Wrapper = styled.div`
               {
                 label: "City",
                 icon: OlapIcon,
-                icontagColor: "primary",
+                iconColor: "primary",
                 disabled: true,
                 childNodes: [],
               },
