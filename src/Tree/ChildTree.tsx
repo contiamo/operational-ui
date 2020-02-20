@@ -22,10 +22,10 @@ const ChildTree: React.SFC<Props> = ({
   initiallyOpen,
   highlight,
   tag,
+  tagColor,
   label,
   icon,
   iconColor,
-  color,
   disabled,
   forwardRef,
   childNodes = [],
@@ -41,6 +41,7 @@ const ChildTree: React.SFC<Props> = ({
   onMouseLeave,
   strong,
   fontSize,
+  fontColor,
   emphasized,
   ...props
 }) => {
@@ -87,8 +88,8 @@ const ChildTree: React.SFC<Props> = ({
         hasChildren={hasChildren}
         isOpen={isOpen}
         tag={tag}
+        tagColor={tagColor}
         label={label}
-        color={color}
         icon={icon}
         iconColor={iconColor}
         actions={actions}
@@ -98,6 +99,7 @@ const ChildTree: React.SFC<Props> = ({
         onMouseLeave={onMouseLeave}
         strong={strong}
         fontSize={fontSize}
+        fontColor={fontColor}
         emphasized={emphasized}
       />
       {hasChildren && isOpen && (

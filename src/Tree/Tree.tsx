@@ -12,8 +12,8 @@ interface BaseTree {
   highlight?: boolean
   initiallyOpen?: boolean
   tag?: string
+  tagColor?: string
   disabled?: boolean
-  color?: string
   icon?: IconComponentType
   iconColor?: string
   onClick?: (event: React.MouseEvent) => void
@@ -23,6 +23,7 @@ interface BaseTree {
   forwardRef?: (element?: HTMLElement | null) => any
   strong?: boolean
   fontSize?: number
+  fontColor?: string
   emphasized?: boolean
 }
 
@@ -65,8 +66,6 @@ const Tree: React.SFC<TreeProps> = ({
   searchWords,
 }) => {
   const isLowestLevel = trees.length === 0 || trees.some(tree => !tree.childNodes || !tree.childNodes.length)
-
-  console.log({ trees })
 
   /**
    * If this is a category with children, no drag and drop

@@ -4,7 +4,7 @@ import { darken, lighten } from "../utils"
 import styled from "../utils/styled"
 import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
 import Highlighter from "react-highlight-words"
-import constants from "../utils/constants"
+import constants, { expandColor } from "../utils/constants"
 
 interface TreeItemProps {
   paddingLeft: number
@@ -15,9 +15,9 @@ interface TreeItemProps {
   isOpen: boolean
   label: string
   tag?: string
+  tagColor?: string
   icon?: IconComponentType
   iconColor?: string
-  color?: string
   cursor?: string
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   onNodeContextMenu?: (e: React.MouseEvent<HTMLDivElement>) => void
@@ -27,6 +27,7 @@ interface TreeItemProps {
   hasIconOffset?: boolean
   strong?: boolean
   fontSize?: number
+  fontColor?: string
   emphasized?: boolean
   actionCall?: number
 }
@@ -96,7 +97,7 @@ const highlightStyle: React.CSSProperties = {
 }
 const defaultSearch: string[] = []
 
-const Label = styled.div<{ strong: boolean; fontSize: number; emphasized: boolean }>`
+const Label = styled.div<{ strong: boolean; fontSize: number; emphasized: boolean; fontColor: string }>`
   /* Split the label by caract properly and show the first line only */
   overflow-wrap: break-word;
   overflow: hidden;
@@ -104,6 +105,7 @@ const Label = styled.div<{ strong: boolean; fontSize: number; emphasized: boolea
   height: 16px;
 
   line-height: 16px;
+  color: ${({ fontColor }) => expandColor(constants, fontColor)};
   font-size: ${({ fontSize }) => fontSize}px;
   font-weight: ${({ theme, strong }) => (Boolean(strong) ? theme.font.weight.bold : theme.font.weight.regular)};
   font-style: ${({ emphasized }) => (emphasized ? "italic" : "normal")};
@@ -123,10 +125,10 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   paddingLeft,
   highlight,
   tag,
+  tagColor,
   icon,
   iconColor,
   label,
-  color,
   onNodeClick,
   onNodeContextMenu,
   hasChildren,
@@ -140,6 +142,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   onMouseLeave,
   strong,
   fontSize,
+  fontColor,
   emphasized,
 }) => {
   const handleKeyDown = useCallback(
@@ -168,8 +171,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
     [onNodeContextMenu, onNodeClick],
   )
 
-  console.log({ fontSize })
-
   return (
     <Header
       paddingLeft={paddingLeft}
@@ -192,7 +193,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           style: { marginRight: 8 },
         })}
       {tag && (
-        <NameTagStyled condensed left color={color}>
+        <NameTagStyled condensed left color={tagColor}>
           {tag}
         </NameTagStyled>
       )}
@@ -202,7 +203,9 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           color: iconColor || "color.text.lighter",
           style: { marginLeft: 0, marginRight: 8, flex: "0 0 12px" },
         })}
+
       <Label
+        fontColor={fontColor ? fontColor : constants.color.text.dark}
         strong={Boolean(strong)}
         fontSize={fontSize ? fontSize : constants.font.size.small}
         emphasized={Boolean(emphasized)}

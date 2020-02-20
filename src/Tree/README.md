@@ -12,6 +12,7 @@ import {
   VirtualIcon,
   PhysicalTableIcon,
   WandIcon,
+  SchemaIcon,
 } from "@operational/components"
 
 const MyComponent = () => {
@@ -56,7 +57,7 @@ const MyComponent = () => {
                       {
                         label: "Country",
                         fontSize: constants.font.size.tiny,
-                        color: "primary",
+                        tagColor: "primary",
                         tag: "D",
                         childNodes: [],
                       },
@@ -77,7 +78,7 @@ const MyComponent = () => {
                   {
                     label: "Inc.",
                     tag: "D",
-                    color: "#2C363F",
+                    tagColor: "#2C363F",
                     childNodes: [],
                   },
                 ],
@@ -109,6 +110,19 @@ const MyComponent = () => {
                         label: "None",
                         fontSize: constants.font.size.tiny,
                         emphasized: true,
+                      },
+                    ],
+                  },
+                  {
+                    label: "Structures",
+                    icon: SchemaIcon,
+                    initiallyOpen: true,
+                    childNodes: [
+                      {
+                        label: "Load more...",
+                        // fontSize: constants.font.size.tiny,
+                        // emphasized: true,
+                        fontColor: "primary",
                       },
                     ],
                   },
@@ -163,13 +177,13 @@ const Wrapper = styled.div`
               {
                 label: "City",
                 icon: OlapIcon,
-                iconColor: "primary",
+                icontagColor: "primary",
                 disabled: true,
                 childNodes: [],
               },
               {
                 label: "Country",
-                color: "primary",
+                tagColor: "primary",
                 onClick: () => alert("country was clicked"),
                 onContextMenu: () => alert("country was right-clicked"),
                 icon: OlapIcon,
@@ -192,7 +206,7 @@ const Wrapper = styled.div`
           {
             label: "Inc.",
             icon: OlapIcon,
-            color: "#2C363F",
+            tagColor: "#2C363F",
             childNodes: [],
           },
         ],
@@ -227,7 +241,7 @@ import { Tree } from "@operational/components"
             },
             {
               label: "Country",
-              color: "primary",
+              tagColor: "primary",
               tag: "D",
               childNodes: [],
             },
@@ -248,7 +262,7 @@ import { Tree } from "@operational/components"
         {
           label: "Inc.",
           tag: "D",
-          color: "#2C363F",
+          tagColor: "#2C363F",
           childNodes: [],
         },
       ],
@@ -287,7 +301,7 @@ const Example = () => {
                   },
                   {
                     label: "Country",
-                    color: "primary",
+                    tagColor: "primary",
                     tag: "D",
                     childNodes: [],
                   },
@@ -307,7 +321,7 @@ const Example = () => {
               {
                 label: "Inc.",
                 tag: "D",
-                color: "#2C363F",
+                tagColor: "#2C363F",
                 childNodes: [],
               },
             ],
@@ -364,7 +378,7 @@ const Example = () => {
                     label: `Lorem superposés valise pourparlers rêver chiots rendez-vous naissance Eiffel myrtille. Grèves Arc de Triomphe encore pourquoi sentiments baguette pédiluve une projet sentiments saperlipopette vachement le. Brume éphémère baguette Bordeaux en fait sommet avoir minitel.
 
 Nous avoir parole la nous moussant. Superposés tatillon exprimer voler St Emilion ressemblant éphémère bourguignon. Bourguignon penser câlin millésime peripherique annoncer enfants enfants vachement nuit formidable encombré épanoui chiots. Arc truc cacatoès lorem flâner.`,
-                    color: "primary",
+                    tagColor: "primary",
                     actions: [
                       <PlusIcon size={20} tabIndex={-1} onClick={() => alert("plus")} key="add" />,
                       <DotMenuIcon size={20} tabIndex={-1} onClick={() => alert("menu")} key="more" />,
@@ -387,7 +401,7 @@ Nous avoir parole la nous moussant. Superposés tatillon exprimer voler St Emili
               {
                 label: "Inc.",
                 tag: "D",
-                color: "#2C363F",
+                tagColor: "#2C363F",
                 childNodes: [],
               },
             ],
