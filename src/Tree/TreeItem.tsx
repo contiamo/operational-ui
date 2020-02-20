@@ -8,6 +8,7 @@ import constants, { expandColor } from "../utils/constants"
 
 interface TreeItemProps {
   paddingLeft: number
+  paddingRight: number
   level: number
   highlight: boolean
   searchWords?: string[]
@@ -35,6 +36,7 @@ interface TreeItemProps {
 
 const Header = styled.div<{
   paddingLeft: number
+  paddingRight: number
   highlight: boolean
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   cursor?: string
@@ -51,6 +53,8 @@ const Header = styled.div<{
   padding: ${({ theme }) => `${theme.space.base / 2}px`};
   padding-left: ${({ theme, paddingLeft, level, hasIconOffset }) =>
     paddingLeft + theme.space.element * level + (hasIconOffset ? theme.space.element : 0)}px;
+  color: ${({ theme }) => theme.color.text.dark};
+  padding-right: ${({ paddingRight }) => paddingRight}px;
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover,
@@ -131,6 +135,7 @@ const ActionsContainer = styled.div<{ childrenCount: number }>`
 
 const TreeItem: React.SFC<TreeItemProps> = ({
   paddingLeft,
+  paddingRight,
   highlight,
   tag,
   tagColor,
@@ -184,6 +189,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   return (
     <Header
       paddingLeft={paddingLeft}
+      paddingRight={paddingRight}
       level={level}
       hasIconOffset={Boolean(hasIconOffset)}
       onClick={onNodeClick}

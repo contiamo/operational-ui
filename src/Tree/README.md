@@ -18,6 +18,7 @@ import {
   DimensionIcon,
   WarningIcon,
   UserIcon,
+  DotMenuIcon,
 } from "@operational/components"
 
 import Spinner from "../Spinner/Spinner"
@@ -33,8 +34,9 @@ const MyComponent = () => {
   const [filter, setFilter] = React.useState("loading retry")
 
   return (
-    <div style={{ height: 600 }}>
+    <div>
       <Input value={filter} onChange={setFilter} label="Search" />
+      <br />
       <Accordion expanded={expanded} onToggle={onToggle}>
         <AccordionSection
           title={
@@ -52,6 +54,16 @@ const MyComponent = () => {
                 strong: true,
                 icon: VirtualIcon,
                 initiallyOpen: true,
+                actions: (
+                  <DotMenuIcon
+                    size={20}
+                    tabIndex={-1}
+                    onClick={e => {
+                      e.stopPropagation()
+                      console.log("menu")
+                    }}
+                  />
+                ),
                 childNodes: [
                   {
                     label: "Region",

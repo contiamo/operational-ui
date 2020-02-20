@@ -8,6 +8,7 @@ import constants from "../utils/constants"
 
 interface BaseTree {
   paddingLeft: number
+  paddingRight: number
   label: string
   highlight?: boolean
   initiallyOpen?: boolean
@@ -46,6 +47,7 @@ export type Tree = TreeWithChildren | TreeWithoutChildren
 export interface TreeProps {
   trees: Tree[]
   paddingLeft: number
+  paddingRight: number
   searchWords?: string[]
   droppableProps?: Omit<DroppableProps, "children">
   placeholder?: React.ComponentType<DroppableStateSnapshot>
@@ -62,6 +64,7 @@ const Tree: React.SFC<TreeProps> = ({
   _level = 0,
   _hasIconOffset = false,
   paddingLeft = constants.space.small,
+  paddingRight = constants.space.small,
   trees,
   droppableProps,
   placeholder,
@@ -102,6 +105,7 @@ const Tree: React.SFC<TreeProps> = ({
                     return (
                       <ChildTree
                         paddingLeft={paddingLeft}
+                        paddingRight={paddingRight}
                         hasIconOffset={_hasIconOffset}
                         level={_level}
                         forwardRef={draggableProvided.innerRef}
