@@ -43,6 +43,7 @@ const ChildTree: React.SFC<Props> = ({
   fontSize,
   fontColor,
   emphasized,
+  monospace,
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
@@ -101,6 +102,7 @@ const ChildTree: React.SFC<Props> = ({
         fontSize={fontSize}
         fontColor={fontColor}
         emphasized={emphasized}
+        monospace={monospace}
       />
       {hasChildren && isOpen && (
         <Tree

@@ -30,7 +30,7 @@ const MyComponent = () => {
   }
 
   return (
-    <div style={{ height: 400 }}>
+    <div style={{ height: 550 }}>
       <Accordion expanded={expanded} onToggle={onToggle}>
         <AccordionSection
           title={
@@ -145,9 +145,33 @@ const MyComponent = () => {
               {
                 label: "db_hr_2019",
                 strong: true,
+                monospace: true,
                 icon: UserIcon,
                 initiallyOpen: true,
                 childNodes: [
+                  {
+                    label: "Region",
+                    icon: PhysicalTableIcon,
+                    monospace: true,
+                  },
+                  {
+                    label: "loading...",
+                    monospace: true,
+                    icon: Spinner,
+                    iconColor: "primary",
+                  },
+                ],
+              },
+              {
+                label: "db_marketing",
+                strong: true,
+                icon: UserIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Region",
+                    icon: PhysicalTableIcon,
+                  },
                   {
                     label: "loading...",
                     icon: Spinner,

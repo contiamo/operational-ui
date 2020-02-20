@@ -25,6 +25,7 @@ interface BaseTree {
   fontSize?: number
   fontColor?: string
   emphasized?: boolean
+  monospace?: boolean
 }
 
 interface TreeWithChildren extends BaseTree {
