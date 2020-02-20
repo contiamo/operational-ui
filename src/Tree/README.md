@@ -1,238 +1,3 @@
-### In an Accordion
-
-```jsx
-import * as React from "react"
-import constants from "../utils/constants"
-
-import {
-  ExternalIcon,
-  Accordion,
-  Tree,
-  Input,
-  AccordionSection,
-  VirtualIcon,
-  PhysicalTableIcon,
-  WandIcon,
-  SchemaIcon,
-  AddIcon,
-  DimensionIcon,
-  WarningIcon,
-  UserIcon,
-  DotMenuIcon,
-} from "@operational/components"
-
-import Spinner from "../Spinner/Spinner"
-
-const MyComponent = () => {
-  const [expanded, setExpanded] = React.useState([true])
-  const onToggle = index => {
-    const newExpanded = [...expanded]
-    newExpanded[index] = !newExpanded[index]
-    setExpanded(newExpanded)
-  }
-
-  const [filter, setFilter] = React.useState("loading retry")
-
-  return (
-    <div>
-      <Input value={filter} onChange={setFilter} label="Search" />
-      <br />
-      <Accordion expanded={expanded} onToggle={onToggle}>
-        <AccordionSection
-          title={
-            <div>
-              <ExternalIcon size={12} color="primary" left />
-              My Tree
-            </div>
-          }
-        >
-          <Tree
-            searchWords={filter.split(" ")}
-            trees={[
-              {
-                label: "Store",
-                strong: true,
-                icon: VirtualIcon,
-                initiallyOpen: true,
-                actions: (
-                  <DotMenuIcon
-                    size={20}
-                    tabIndex={-1}
-                    onClick={e => {
-                      e.stopPropagation()
-                      console.log("menu")
-                    }}
-                  />
-                ),
-                childNodes: [
-                  {
-                    label: "Region",
-                    icon: PhysicalTableIcon,
-                    initiallyOpen: true,
-                    childNodes: [
-                      {
-                        label: "City",
-                        fontSize: constants.font.size.tiny,
-                        tag: "C",
-                        disabled: true,
-                        childNodes: [],
-                      },
-                      {
-                        label: "Country",
-                        fontSize: constants.font.size.tiny,
-                        tagColor: "primary",
-                        tag: "D",
-                        childNodes: [],
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                label: "Legal Entity",
-                strong: true,
-                initiallyOpen: true,
-                childNodes: [
-                  {
-                    label: "Limited Liability Company",
-                    tag: "D",
-                    childNodes: [],
-                  },
-                  {
-                    label: "Inc.",
-                    tag: "D",
-                    tagColor: "#2C363F",
-                    childNodes: [],
-                  },
-                ],
-              },
-              {
-                label: "db_01",
-                strong: true,
-                icon: VirtualIcon,
-                initiallyOpen: true,
-                childNodes: [
-                  {
-                    label: "Tables",
-                    icon: PhysicalTableIcon,
-                    initiallyOpen: true,
-                    childNodes: [
-                      {
-                        icon: AddIcon,
-                        label: "Add table",
-                        fontSize: constants.font.size.tiny,
-                        strong: true,
-                        iconColor: "primary",
-                        fontColor: "primary",
-                      },
-                      {
-                        label: "loading...",
-                        ignoreSearchWords: true,
-                        icon: Spinner,
-                        iconColor: "primary",
-                        fontSize: constants.font.size.tiny,
-                        emphasized: true,
-                      },
-                    ],
-                  },
-                  {
-                    label: "Functions",
-                    icon: WandIcon,
-                    initiallyOpen: true,
-                    childNodes: [
-                      {
-                        label: "None",
-                        fontSize: constants.font.size.tiny,
-                        emphasized: true,
-                      },
-                    ],
-                  },
-                  {
-                    label: "Structures",
-                    icon: SchemaIcon,
-                    initiallyOpen: true,
-                    childNodes: [
-                      {
-                        label: "Load more...",
-                        ignoreSearchWords: true,
-                        fontColor: "primary",
-                      },
-                    ],
-                  },
-                ],
-              },
-              {
-                label: "db_hr_2019",
-                strong: true,
-                monospace: true,
-                icon: UserIcon,
-                initiallyOpen: true,
-                childNodes: [
-                  {
-                    label: "Region",
-                    icon: PhysicalTableIcon,
-                    monospace: true,
-                  },
-                  {
-                    label: "loading...",
-                    ignoreSearchWords: true,
-                    monospace: true,
-                    icon: Spinner,
-                    iconColor: "primary",
-                  },
-                ],
-              },
-              {
-                label: "db_marketing",
-                strong: true,
-                icon: UserIcon,
-                initiallyOpen: true,
-                childNodes: [
-                  {
-                    label: "Region",
-                    icon: PhysicalTableIcon,
-                  },
-                  {
-                    label: "loading...",
-                    ignoreSearchWords: true,
-                    icon: Spinner,
-                    iconColor: "primary",
-                  },
-                ],
-              },
-              {
-                label: "db_error_01",
-                strong: true,
-                icon: DimensionIcon,
-                initiallyOpen: true,
-                childNodes: [
-                  {
-                    label: "Load failed. Click to retry.",
-                    ignoreSearchWords: true,
-                    icon: WarningIcon,
-                    iconColor: "error",
-                    emphasized: true,
-                  },
-                ],
-              },
-              {
-                label: "Load failed. Click to retry.",
-                ignoreSearchWords: true,
-                icon: WarningIcon,
-                iconColor: "error",
-                emphasized: true,
-              },
-            ]}
-          />
-        </AccordionSection>
-      </Accordion>
-    </div>
-  )
-}
-
-;<MyComponent />
-```
-
 ### Usage
 
 The tree component renders a tree structure with collapsable nodes in a filetree-like design. Defined items in the tree can have a custom click and a context-click handler.
@@ -659,4 +424,239 @@ const PizzaMaker = () => {
   )
 }
 ;<PizzaMaker />
+```
+
+### In an Accordion
+
+```jsx
+import * as React from "react"
+import constants from "../utils/constants"
+
+import {
+  ExternalIcon,
+  Accordion,
+  Tree,
+  Input,
+  AccordionSection,
+  VirtualIcon,
+  PhysicalTableIcon,
+  WandIcon,
+  SchemaIcon,
+  AddIcon,
+  DimensionIcon,
+  WarningIcon,
+  UserIcon,
+  DotMenuIcon,
+} from "@operational/components"
+
+import Spinner from "../Spinner/Spinner"
+
+const MyComponent = () => {
+  const [expanded, setExpanded] = React.useState([true])
+  const onToggle = index => {
+    const newExpanded = [...expanded]
+    newExpanded[index] = !newExpanded[index]
+    setExpanded(newExpanded)
+  }
+
+  const [filter, setFilter] = React.useState("loading retry")
+
+  return (
+    <div>
+      <Input value={filter} onChange={setFilter} label="Search" />
+      <br />
+      <Accordion expanded={expanded} onToggle={onToggle}>
+        <AccordionSection
+          title={
+            <div>
+              <ExternalIcon size={12} color="primary" left />
+              My Tree
+            </div>
+          }
+        >
+          <Tree
+            searchWords={filter.split(" ")}
+            trees={[
+              {
+                label: "Store",
+                strong: true,
+                icon: VirtualIcon,
+                initiallyOpen: true,
+                actions: (
+                  <DotMenuIcon
+                    size={20}
+                    tabIndex={-1}
+                    onClick={e => {
+                      e.stopPropagation()
+                      console.log("menu")
+                    }}
+                  />
+                ),
+                childNodes: [
+                  {
+                    label: "Region",
+                    icon: PhysicalTableIcon,
+                    initiallyOpen: true,
+                    childNodes: [
+                      {
+                        label: "City",
+                        fontSize: constants.font.size.tiny,
+                        tag: "C",
+                        disabled: true,
+                        childNodes: [],
+                      },
+                      {
+                        label: "Country",
+                        fontSize: constants.font.size.tiny,
+                        tagColor: "primary",
+                        tag: "D",
+                        childNodes: [],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "Legal Entity",
+                strong: true,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Limited Liability Company",
+                    tag: "D",
+                    childNodes: [],
+                  },
+                  {
+                    label: "Inc.",
+                    tag: "D",
+                    tagColor: "#2C363F",
+                    childNodes: [],
+                  },
+                ],
+              },
+              {
+                label: "db_01",
+                strong: true,
+                icon: VirtualIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Tables",
+                    icon: PhysicalTableIcon,
+                    initiallyOpen: true,
+                    childNodes: [
+                      {
+                        icon: AddIcon,
+                        label: "Add table",
+                        fontSize: constants.font.size.tiny,
+                        strong: true,
+                        iconColor: "primary",
+                        fontColor: "primary",
+                      },
+                      {
+                        label: "loading...",
+                        ignoreSearchWords: true,
+                        icon: Spinner,
+                        iconColor: "primary",
+                        fontSize: constants.font.size.tiny,
+                        emphasized: true,
+                      },
+                    ],
+                  },
+                  {
+                    label: "Functions",
+                    icon: WandIcon,
+                    initiallyOpen: true,
+                    childNodes: [
+                      {
+                        label: "None",
+                        fontSize: constants.font.size.tiny,
+                        emphasized: true,
+                      },
+                    ],
+                  },
+                  {
+                    label: "Structures",
+                    icon: SchemaIcon,
+                    initiallyOpen: true,
+                    childNodes: [
+                      {
+                        label: "Load more...",
+                        ignoreSearchWords: true,
+                        fontColor: "primary",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "db_hr_2019",
+                strong: true,
+                monospace: true,
+                icon: UserIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Region",
+                    icon: PhysicalTableIcon,
+                    monospace: true,
+                  },
+                  {
+                    label: "loading...",
+                    ignoreSearchWords: true,
+                    monospace: true,
+                    icon: Spinner,
+                    iconColor: "primary",
+                  },
+                ],
+              },
+              {
+                label: "db_marketing",
+                strong: true,
+                icon: UserIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Region",
+                    icon: PhysicalTableIcon,
+                  },
+                  {
+                    label: "loading...",
+                    ignoreSearchWords: true,
+                    icon: Spinner,
+                    iconColor: "primary",
+                  },
+                ],
+              },
+              {
+                label: "db_error_01",
+                strong: true,
+                icon: DimensionIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Load failed. Click to retry.",
+                    ignoreSearchWords: true,
+                    icon: WarningIcon,
+                    iconColor: "error",
+                    emphasized: true,
+                  },
+                ],
+              },
+              {
+                label: "Load failed. Click to retry.",
+                ignoreSearchWords: true,
+                icon: WarningIcon,
+                iconColor: "error",
+                emphasized: true,
+              },
+            ]}
+          />
+        </AccordionSection>
+      </Accordion>
+    </div>
+  )
+}
+
+;<MyComponent />
 ```
