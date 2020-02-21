@@ -136,6 +136,8 @@ const ActionsContainer = styled.div<{ childrenCount: number }>`
 
 const sanitizeInput = (input: string) => input.replace(/\\/g, "") // Prevent crashing when entering a backslash "\"
 
+const emptySearchWords: string[] = []
+
 const TreeItem: React.SFC<TreeItemProps> = ({
   paddingLeft,
   paddingRight,
@@ -234,7 +236,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
           textToHighlight={label}
           highlightStyle={highlightStyle}
           sanitize={sanitizeInput}
-          searchWords={!ignoreSearchWords ? searchWords : []}
+          searchWords={ignoreSearchWords ? emptySearchWords : searchWords}
         />
       </Label>
       <ActionsContainer childrenCount={React.Children.count(actions)}>{actions}</ActionsContainer>
