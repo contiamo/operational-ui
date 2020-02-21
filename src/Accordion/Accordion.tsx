@@ -66,6 +66,7 @@ const Accordion = ({ onToggle, expanded, children, id, ...rest }: AccordionProps
           _expanded: sectionsMapped[index],
           _toggleSection: toggleSection,
           _index: index,
+          _last: !Array.isArray(children) || (Array.isArray(children) && children.length - 1 === index),
         }),
       )}
     </Container>
