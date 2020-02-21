@@ -2,6 +2,7 @@ import * as React from "react"
 import Tree, { TreeProps } from "./Tree"
 import TreeItem from "./TreeItem"
 import styled from "../utils/styled"
+import constants from "../utils/constants"
 
 type Props = TreeProps["trees"][-1] & {
   searchWords?: string[]
@@ -82,8 +83,8 @@ const ChildTree: React.SFC<Props> = ({
   return (
     <Container ref={forwardRef} disabled={Boolean(disabled)} hasChildren={hasChildren} {...props}>
       <TreeItem
-        paddingLeft={paddingLeft}
-        paddingRight={paddingRight}
+        paddingLeft={paddingLeft ? paddingLeft : constants.space.small}
+        paddingRight={paddingRight ? paddingRight : constants.space.small}
         level={level}
         searchWords={searchWords}
         ignoreSearchWords={ignoreSearchWords}

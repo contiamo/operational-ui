@@ -4,12 +4,11 @@ import { Draggable, DraggableProps, Droppable, DroppableProps, DroppableStateSna
 import styled from "../utils/styled"
 import ChildTree from "./ChildTree"
 import { IconComponentType } from "../Icon"
-import constants from "../utils/constants"
 
 interface BaseTree {
-  paddingLeft: number
-  paddingRight: number
   label: string
+  paddingLeft?: number
+  paddingRight?: number
   highlight?: boolean
   initiallyOpen?: boolean
   tag?: string
@@ -46,8 +45,8 @@ export type Tree = TreeWithChildren | TreeWithoutChildren
 
 export interface TreeProps {
   trees: Tree[]
-  paddingLeft: number
-  paddingRight: number
+  paddingLeft?: number
+  paddingRight?: number
   searchWords?: string[]
   droppableProps?: Omit<DroppableProps, "children">
   placeholder?: React.ComponentType<DroppableStateSnapshot>
@@ -63,8 +62,8 @@ const Container = styled.div`
 const Tree: React.SFC<TreeProps> = ({
   _level = 0,
   _hasIconOffset = false,
-  paddingLeft = constants.space.small,
-  paddingRight = constants.space.small,
+  paddingLeft,
+  paddingRight,
   trees,
   droppableProps,
   placeholder,
