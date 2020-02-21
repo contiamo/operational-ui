@@ -142,6 +142,7 @@ const Example = () => {
     <>
       <Input value={filter} onChange={setFilter} label="Search" />
       <br />
+      <br />
       <Tree
         searchWords={filter.split(" ")}
         trees={[
@@ -426,7 +427,7 @@ const PizzaMaker = () => {
 ;<PizzaMaker />
 ```
 
-### In an Accordion
+### In an Accordion with different styling options
 
 ```jsx
 import * as React from "react"
@@ -464,6 +465,7 @@ const MyComponent = () => {
   return (
     <div>
       <Input value={filter} onChange={setFilter} label="Search" />
+      <br />
       <br />
       <Accordion expanded={expanded} onToggle={onToggle}>
         <AccordionSection

@@ -116,8 +116,8 @@ const Label = styled.div<{
   height: 16px;
 
   line-height: 16px;
-  color: ${({ fontColor }) => (fontColor ? expandColor(constants, fontColor) : "unset")};
-  font-family: ${({ monospace }) => (monospace ? "monospace" : "unset")};
+  color: ${({ fontColor }) => (fontColor ? expandColor(constants, fontColor) : "inherit")};
+  font-family: ${({ monospace }) => (monospace ? "monospace" : "inherit")};
   font-size: ${({ fontSize }) => fontSize}px;
   font-weight: ${({ theme, strong }) => (Boolean(strong) ? theme.font.weight.bold : theme.font.weight.regular)};
   font-style: ${({ emphasized }) => (emphasized ? "italic" : "normal")};
