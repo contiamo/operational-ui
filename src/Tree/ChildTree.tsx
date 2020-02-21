@@ -98,6 +98,7 @@ const ChildTree: React.SFC<Props> = ({
         label={label}
         icon={icon}
         iconColor={iconColor}
+        disabled={disabled}
         actions={actions}
         cursor={cursor}
         hasIconOffset={hasIconOffset && !hasChildren}

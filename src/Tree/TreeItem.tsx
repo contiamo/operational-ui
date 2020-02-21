@@ -20,6 +20,7 @@ interface TreeItemProps {
   tagColor?: string
   icon?: IconComponentType
   iconColor?: string
+  disabled?: boolean
   cursor?: string
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   onNodeContextMenu?: (e: React.MouseEvent<HTMLDivElement>) => void
@@ -145,6 +146,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   tagColor,
   icon,
   iconColor,
+  disabled,
   label,
   onNodeClick,
   onNodeContextMenu,
@@ -201,7 +203,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       onKeyDown={handleKeyDown}
       highlight={Boolean(highlight)}
       cursor={cursor}
-      tabIndex={0} // TODO: tabIndex -1 for disabled items
+      tabIndex={disabled ? -1 : 0}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
