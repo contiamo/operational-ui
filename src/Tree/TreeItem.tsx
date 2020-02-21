@@ -98,7 +98,6 @@ const NameTagStyled = styled(NameTag)<{ withIcon?: boolean }>`
 const highlightStyle: React.CSSProperties = {
   color: constants.color.text.action,
   backgroundColor: "transparent",
-  fontWeight: "bold",
 }
 
 const defaultSearch: string[] = []
