@@ -82,6 +82,7 @@ const Tree: React.SFC<TreeProps> = ({
         {trees.map((treeData, index) => (
           <ChildTree
             paddingLeft={paddingLeft}
+            paddingRight={paddingRight}
             level={_level}
             hasIconOffset={_hasIconOffset}
             key={index}

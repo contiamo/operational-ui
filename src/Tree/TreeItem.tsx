@@ -53,8 +53,8 @@ const Header = styled.div<{
   padding: ${({ theme }) => `${theme.space.base / 2}px`};
   padding-left: ${({ theme, paddingLeft, level, hasIconOffset }) =>
     paddingLeft + theme.space.element * level + (hasIconOffset ? theme.space.element : 0)}px;
-  color: ${({ theme }) => theme.color.text.dark};
   padding-right: ${({ paddingRight }) => paddingRight}px;
+  color: ${({ theme }) => theme.color.text.dark};
   color: ${({ theme }) => theme.color.text.dark};
 
   :hover,
