@@ -100,6 +100,7 @@ const highlightStyle: React.CSSProperties = {
   backgroundColor: "transparent",
   fontWeight: "bold",
 }
+
 const defaultSearch: string[] = []
 
 const Label = styled.div<{
@@ -132,6 +133,8 @@ const ActionsContainer = styled.div<{ childrenCount: number }>`
   grid-template-columns: repeat(${({ childrenCount }) => childrenCount}, 1fr);
   grid-column-gap: 4px;
 `
+
+const sanitizeInput = (input: string) => input.replace(/\\/g, "") // Prevent crashing when entering a backslash "\"
 
 const TreeItem: React.SFC<TreeItemProps> = ({
   paddingLeft,
@@ -230,7 +233,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         <Highlighter
           textToHighlight={label}
           highlightStyle={highlightStyle}
-          sanitize={(input: string) => input.replace(/\\/g, "")} // Prevent crashing when entering a backslash "\"
+          sanitize={sanitizeInput}
           searchWords={!ignoreSearchWords ? searchWords : []}
         />
       </Label>
