@@ -230,6 +230,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         <Highlighter
           textToHighlight={label}
           highlightStyle={highlightStyle}
+          sanitize={(input: string) => input.replace(/\\/g, "")} // Prevent crashing when entering a backslash "\"
           searchWords={!ignoreSearchWords ? searchWords : []}
         />
       </Label>
