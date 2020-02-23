@@ -7,11 +7,13 @@ import { IconComponentType } from "../Icon"
 
 interface BaseTree {
   label: string
+  paddingLeft?: number
+  paddingRight?: number
   highlight?: boolean
   initiallyOpen?: boolean
   tag?: string
+  tagColor?: string
   disabled?: boolean
-  color?: string
   icon?: IconComponentType
   iconColor?: string
   onClick?: (event: React.MouseEvent) => void
@@ -19,7 +21,14 @@ interface BaseTree {
   cursor?: string
   actions?: React.ReactNode
   forwardRef?: (element?: HTMLElement | null) => any
+  strong?: boolean
+  fontSize?: number
+  fontColor?: string
+  emphasized?: boolean
+  monospace?: boolean
+  ignoreSearchWords?: boolean
 }
+
 interface TreeWithChildren extends BaseTree {
   childNodes?: Tree[]
   draggableProps?: never
@@ -36,6 +45,8 @@ export type Tree = TreeWithChildren | TreeWithoutChildren
 
 export interface TreeProps {
   trees: Tree[]
+  paddingLeft?: number
+  paddingRight?: number
   searchWords?: string[]
   droppableProps?: Omit<DroppableProps, "children">
   placeholder?: React.ComponentType<DroppableStateSnapshot>
@@ -43,13 +54,16 @@ export interface TreeProps {
   _hasIconOffset?: boolean
 }
 
-const Container = styled("div")`
+const Container = styled.div`
+  label: TreeContainer;
   user-select: none;
 `
 
 const Tree: React.SFC<TreeProps> = ({
   _level = 0,
   _hasIconOffset = false,
+  paddingLeft,
+  paddingRight,
   trees,
   droppableProps,
   placeholder,
@@ -66,6 +80,8 @@ const Tree: React.SFC<TreeProps> = ({
       <Container>
         {trees.map((treeData, index) => (
           <ChildTree
+            paddingLeft={paddingLeft}
+            paddingRight={paddingRight}
             level={_level}
             hasIconOffset={_hasIconOffset}
             key={index}
@@ -88,6 +104,8 @@ const Tree: React.SFC<TreeProps> = ({
                   {draggableProvided => {
                     return (
                       <ChildTree
+                        paddingLeft={paddingLeft}
+                        paddingRight={paddingRight}
                         hasIconOffset={_hasIconOffset}
                         level={_level}
                         forwardRef={draggableProvided.innerRef}

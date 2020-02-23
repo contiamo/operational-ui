@@ -42,7 +42,7 @@ const Wrapper = styled.div`
               },
               {
                 label: "Country",
-                color: "primary",
+                tagColor: "primary",
                 onClick: () => alert("country was clicked"),
                 onContextMenu: () => alert("country was right-clicked"),
                 icon: OlapIcon,
@@ -65,7 +65,7 @@ const Wrapper = styled.div`
           {
             label: "Inc.",
             icon: OlapIcon,
-            color: "#2C363F",
+            tagColor: "#2C363F",
             childNodes: [],
           },
         ],
@@ -100,7 +100,7 @@ import { Tree } from "@operational/components"
             },
             {
               label: "Country",
-              color: "primary",
+              tagColor: "primary",
               tag: "D",
               childNodes: [],
             },
@@ -121,7 +121,7 @@ import { Tree } from "@operational/components"
         {
           label: "Inc.",
           tag: "D",
-          color: "#2C363F",
+          tagColor: "#2C363F",
           childNodes: [],
         },
       ],
@@ -142,6 +142,7 @@ const Example = () => {
     <>
       <Input value={filter} onChange={setFilter} label="Search" />
       <br />
+      <br />
       <Tree
         searchWords={filter.split(" ")}
         trees={[
@@ -160,7 +161,7 @@ const Example = () => {
                   },
                   {
                     label: "Country",
-                    color: "primary",
+                    tagColor: "primary",
                     tag: "D",
                     childNodes: [],
                   },
@@ -178,9 +179,15 @@ const Example = () => {
                 childNodes: [],
               },
               {
+                label: "Liability that should not be discovered by search",
+                tag: "L",
+                highlight: false,
+                ignoreSearchWords: true,
+              },
+              {
                 label: "Inc.",
                 tag: "D",
-                color: "#2C363F",
+                tagColor: "#2C363F",
                 childNodes: [],
               },
             ],
@@ -237,7 +244,7 @@ const Example = () => {
                     label: `Lorem superposés valise pourparlers rêver chiots rendez-vous naissance Eiffel myrtille. Grèves Arc de Triomphe encore pourquoi sentiments baguette pédiluve une projet sentiments saperlipopette vachement le. Brume éphémère baguette Bordeaux en fait sommet avoir minitel.
 
 Nous avoir parole la nous moussant. Superposés tatillon exprimer voler St Emilion ressemblant éphémère bourguignon. Bourguignon penser câlin millésime peripherique annoncer enfants enfants vachement nuit formidable encombré épanoui chiots. Arc truc cacatoès lorem flâner.`,
-                    color: "primary",
+                    tagColor: "primary",
                     actions: [
                       <PlusIcon size={20} tabIndex={-1} onClick={() => alert("plus")} key="add" />,
                       <DotMenuIcon size={20} tabIndex={-1} onClick={() => alert("menu")} key="more" />,
@@ -260,7 +267,7 @@ Nous avoir parole la nous moussant. Superposés tatillon exprimer voler St Emili
               {
                 label: "Inc.",
                 tag: "D",
-                color: "#2C363F",
+                tagColor: "#2C363F",
                 childNodes: [],
               },
             ],
@@ -420,11 +427,30 @@ const PizzaMaker = () => {
 ;<PizzaMaker />
 ```
 
-### On an Accordion
+### In an Accordion with different styling options
 
 ```jsx
 import * as React from "react"
-import { Accordion, Tree, AccordionSection } from "@operational/components"
+import constants from "../utils/constants"
+
+import {
+  ExternalIcon,
+  Accordion,
+  Tree,
+  Input,
+  AccordionSection,
+  VirtualIcon,
+  PhysicalTableIcon,
+  WandIcon,
+  SchemaIcon,
+  AddIcon,
+  DimensionIcon,
+  WarningIcon,
+  UserIcon,
+  DotMenuIcon,
+} from "@operational/components"
+
+import Spinner from "../Spinner/Spinner"
 
 const MyComponent = () => {
   const [expanded, setExpanded] = React.useState([true])
@@ -434,28 +460,57 @@ const MyComponent = () => {
     setExpanded(newExpanded)
   }
 
+  const [filter, setFilter] = React.useState("loading retry")
+
   return (
-    <div style={{ height: 400 }}>
+    <div>
+      <Input value={filter} onChange={setFilter} label="Search" />
+      <br />
+      <br />
       <Accordion expanded={expanded} onToggle={onToggle}>
-        <AccordionSection title="My tree">
+        <AccordionSection
+          title={
+            <div>
+              <ExternalIcon size={12} color="primary" left />
+              My Tree
+            </div>
+          }
+        >
           <Tree
+            searchWords={filter.split(" ")}
             trees={[
               {
                 label: "Store",
+                strong: true,
+                icon: VirtualIcon,
+                initiallyOpen: true,
+                actions: (
+                  <DotMenuIcon
+                    size={20}
+                    tabIndex={-1}
+                    onClick={e => {
+                      e.stopPropagation()
+                      console.log("menu")
+                    }}
+                  />
+                ),
                 childNodes: [
                   {
                     label: "Region",
+                    icon: PhysicalTableIcon,
                     initiallyOpen: true,
                     childNodes: [
                       {
                         label: "City",
-                        tag: "D",
+                        fontSize: constants.font.size.tiny,
+                        tag: "C",
                         disabled: true,
                         childNodes: [],
                       },
                       {
                         label: "Country",
-                        color: "primary",
+                        fontSize: constants.font.size.tiny,
+                        tagColor: "primary",
                         tag: "D",
                         childNodes: [],
                       },
@@ -465,6 +520,7 @@ const MyComponent = () => {
               },
               {
                 label: "Legal Entity",
+                strong: true,
                 initiallyOpen: true,
                 childNodes: [
                   {
@@ -475,10 +531,126 @@ const MyComponent = () => {
                   {
                     label: "Inc.",
                     tag: "D",
-                    color: "#2C363F",
+                    tagColor: "#2C363F",
                     childNodes: [],
                   },
                 ],
+              },
+              {
+                label: "db_01",
+                strong: true,
+                icon: VirtualIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Tables",
+                    icon: PhysicalTableIcon,
+                    initiallyOpen: true,
+                    childNodes: [
+                      {
+                        icon: AddIcon,
+                        label: "Add table",
+                        fontSize: constants.font.size.tiny,
+                        strong: true,
+                        iconColor: "primary",
+                        fontColor: "primary",
+                      },
+                      {
+                        label: "loading...",
+                        ignoreSearchWords: true,
+                        icon: Spinner,
+                        iconColor: "primary",
+                        fontSize: constants.font.size.tiny,
+                        emphasized: true,
+                      },
+                    ],
+                  },
+                  {
+                    label: "Functions",
+                    icon: WandIcon,
+                    initiallyOpen: true,
+                    childNodes: [
+                      {
+                        label: "None",
+                        fontSize: constants.font.size.tiny,
+                        emphasized: true,
+                      },
+                    ],
+                  },
+                  {
+                    label: "Structures",
+                    icon: SchemaIcon,
+                    initiallyOpen: true,
+                    childNodes: [
+                      {
+                        label: "Load more...",
+                        ignoreSearchWords: true,
+                        fontColor: "primary",
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                label: "db_hr_2019",
+                strong: true,
+                monospace: true,
+                icon: UserIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Region",
+                    icon: PhysicalTableIcon,
+                    monospace: true,
+                  },
+                  {
+                    label: "loading...",
+                    ignoreSearchWords: true,
+                    monospace: true,
+                    icon: Spinner,
+                    iconColor: "primary",
+                  },
+                ],
+              },
+              {
+                label: "db_marketing",
+                strong: true,
+                icon: UserIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Region",
+                    icon: PhysicalTableIcon,
+                  },
+                  {
+                    label: "loading...",
+                    ignoreSearchWords: true,
+                    icon: Spinner,
+                    iconColor: "primary",
+                  },
+                ],
+              },
+              {
+                label: "db_error_01",
+                strong: true,
+                icon: DimensionIcon,
+                initiallyOpen: true,
+                childNodes: [
+                  {
+                    label: "Load failed. Click to retry.",
+                    ignoreSearchWords: true,
+                    icon: WarningIcon,
+                    iconColor: "error",
+                    emphasized: true,
+                  },
+                ],
+              },
+              {
+                label: "Load failed. Click to retry.",
+                ignoreSearchWords: true,
+                icon: WarningIcon,
+                iconColor: "error",
+                emphasized: true,
               },
             ]}
           />

@@ -12,10 +12,11 @@ export interface AccordionSectionProps extends DefaultProps {
   // for internal use
   _index?: number
   _expanded?: boolean
+  _last?: boolean
   _toggleSection?: (index: number) => void
 }
 
-const Container = styled.div<{ expanded: boolean }>`
+const Container = styled.div`
   label: AccordionSectionContainer;
   /* to make sure it respects parrent grid's row height */
   overflow: hidden;
@@ -26,10 +27,10 @@ const Container = styled.div<{ expanded: boolean }>`
   position: relative;
 `
 
-const Header = styled(SectionHeader)<{ expanded: boolean }>(({ theme, expanded }) => ({
+const Header = styled(SectionHeader)<{ expanded: boolean; last: boolean }>(({ theme, expanded, last }) => ({
   cursor: "pointer",
   borderTop: `1px solid ${theme.color.border.invisible}`,
-  borderBottom: expanded ? `1px solid ${theme.color.border.invisible}` : "none",
+  borderBottom: `1px solid ${last && !expanded ? theme.color.border.invisible : "transparent"}`,
   background: theme.color.background.almostWhite,
   // disable browser focus to customise focus state
   ":focus": {
@@ -39,6 +40,7 @@ const Header = styled(SectionHeader)<{ expanded: boolean }>(({ theme, expanded }
   ".no-focus &:focus": {
     background: theme.color.background.almostWhite,
   },
+  paddingLeft: theme.space.small,
   paddingRight: 0,
   userSelect: "none",
 }))
@@ -50,7 +52,6 @@ const Panel = styled.div`
   /* we need it because of overflow: hidden; above */
   overflow: auto;
   height: 100%;
-  padding: ${({ theme }) => theme.space.element}px;
   background-color: ${({ theme }) => theme.color.white};
 `
 
@@ -70,19 +71,20 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
   children,
   _index,
   _expanded,
+  _last,
   _toggleSection,
 }) => {
   const titleId = `${id}-${_index}-heading`
   const contentId = `${id}-${_index}-panel`
 
-  if (_expanded === undefined || _index === undefined || _toggleSection === undefined) {
+  if (_expanded === undefined || _index === undefined || _toggleSection === undefined || _last === undefined) {
     throw new Error(
       "Only AccordionSections can be used inside Accordion. See https://operational-ui.netlify.com/#!/Accordion for more info.",
     )
   }
 
   return (
-    <Container expanded={_expanded}>
+    <Container>
       <Header
         id={titleId}
         aria-controls={contentId}
@@ -91,6 +93,7 @@ const AccordionSection: React.FC<AccordionSectionProps> = ({
         onClick={() => _toggleSection(_index)}
         onKeyPress={() => _toggleSection(_index)}
         expanded={_expanded}
+        last={_last}
       >
         {title}
         <IconWrapper>
