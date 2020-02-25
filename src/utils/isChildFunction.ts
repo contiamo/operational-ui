@@ -1,4 +1,5 @@
-import { PageContentProps, ModalConfirmContext } from "../PageContent/PageContent"
+import { PageContentProps } from "../PageContent/PageContent"
+import { ModalConfirmContext } from "../PageContent/PageContentContext"
 
 export const isChildFunction = (
   children: PageContentProps["children"],

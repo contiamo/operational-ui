@@ -1,15 +1,11 @@
 import * as React from "react"
-import Confirm, { ConfirmOptions } from "../Internals/Confirm"
-import Modal, { ModalOptions } from "../Internals/Modal"
+import { useModal } from "../Internals/Modal"
 import { DefaultProps } from "../types"
 import { space } from "../utils/constants"
 import styled from "../utils/styled"
 import { isChildFunction } from "../utils/isChildFunction"
-
-export interface ModalConfirmContext {
-  modal: (modalOptions: ModalOptions) => void
-  confirm: <T>(confirmOptions: ConfirmOptions<T>) => void
-}
+import { ConfirmOptions, useConfirm } from "../useConfirm"
+import { PageContentProvider, ModalConfirmContext } from "./PageContentContext"
 
 export interface BasePageContentProps extends DefaultProps {
   /** Children to render, you */
@@ -85,26 +81,27 @@ const StyledPageContent = styled("div", {
   }
 })
 
-const Container = styled("div")({
+const Container = styled.div({
   width: "100%",
   height: "100%",
 })
 
 const PageContent = ({ children, ...props }: PageContentProps) => {
+  const [modal, ModalPlaceholder] = useModal()
+  const [confirmWithUnknownType, ConfirmPlaceholder] = useConfirm()
+  const confirm = confirmWithUnknownType as <T>(confirmOptions: ConfirmOptions<T>) => void
+  const value = React.useMemo(() => ({ confirm, modal }), [confirm, modal])
+
   return (
-    <Modal>
-      {modal => (
-        <Confirm>
-          {confirm => (
-            <Container>
-              <StyledPageContent {...props}>
-                {isChildFunction(children) ? children({ confirm, modal }) : children}
-              </StyledPageContent>
-            </Container>
-          )}
-        </Confirm>
-      )}
-    </Modal>
+    <PageContentProvider value={value}>
+      <Container>
+        <StyledPageContent {...props}>
+          {isChildFunction(children) ? children({ confirm, modal }) : children}
+        </StyledPageContent>
+      </Container>
+      <ConfirmPlaceholder />
+      <ModalPlaceholder />
+    </PageContentProvider>
   )
 }
 

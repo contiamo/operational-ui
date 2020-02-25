@@ -13,7 +13,7 @@ export interface Props {
   children: (modal: (options: ModalOptions) => void) => React.ReactNode
 }
 
-export const Modal = ({ children }: Props) => {
+export const useModal = () => {
   const [options, setOptions] = useState<State>({})
 
   const openModal = useCallback((newOptions: ModalOptions) => {
@@ -24,14 +24,26 @@ export const Modal = ({ children }: Props) => {
     setOptions({})
   }, [])
 
-  return (
-    <>
-      {children(openModal)}
-      {Boolean(options.body) && (
+  const Placeholder: React.FC<{}> = useCallback(
+    () =>
+      Boolean(options.body) ? (
         <ControlledModal fullSize={options.fullSize} title={options.title} onClose={closeModal}>
           {typeof options.body === "function" ? options.body(closeModal) : options.body}
         </ControlledModal>
-      )}
+      ) : null,
+    [],
+  )
+
+  return [openModal, Placeholder] as const
+}
+
+// Can we delete this?
+export const Modal = ({ children }: Props) => {
+  const [open, Placeholder] = useModal()
+  return (
+    <>
+      {children(open)}
+      {<Placeholder />}
     </>
   )
 }

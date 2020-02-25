@@ -51,7 +51,8 @@ export { default as OperationalUI, OperationalUIProps } from "./OperationalUI/Op
 export { default as Page, PageProps } from "./Page/Page"
 export { default as PageArea, PageAreaProps } from "./PageArea/PageArea"
 export { default as PageAreas, PageAreasProps } from "./PageAreas/PageAreas"
-export { default as PageContent, PageContentProps, ModalConfirmContext } from "./PageContent/PageContent"
+export { default as PageContent, PageContentProps } from "./PageContent/PageContent"
+export { ModalConfirmContext } from "./PageContent/PageContentContext"
 export { default as Paginator, PaginatorProps } from "./Paginator/Paginator"
 export { default as Progress, ProgressProps, FixedProgress } from "./Progress/Progress"
 export { default as ProgressPanel, ProgressPanelProps } from "./ProgressPanel/ProgressPanel"
@@ -94,7 +95,7 @@ export { default as Title } from "./Typography/Title"
 export { default as Small } from "./Typography/Small"
 
 // Internals components
-export { Actions, ControlledModalContent, ConfirmBodyProps, ConfirmOptions } from "./Internals/Confirm"
+export { ConfirmBodyProps, ConfirmOptions } from "./useConfirm"
 export { default as ControlledModal } from "./Internals/ControlledModal"
 export { Tab } from "./Internals/Tabs"
 
