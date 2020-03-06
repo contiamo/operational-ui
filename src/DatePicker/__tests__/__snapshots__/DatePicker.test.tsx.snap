@@ -11,7 +11,7 @@ exports[`DatePicker Component Should render 1`] = `
     class="css-hbollr-datepicker"
   >
     <div
-      class="css-1i3ebus"
+      class="css-1risz9b"
     >
       <svg
         class="css-4lr1pn"
@@ -33,7 +33,7 @@ exports[`DatePicker Component Should render 1`] = `
       value="2018-01-02 - 2018-01-23"
     />
     <div
-      class="css-17y4r9v"
+      class="css-10fgunz"
     >
       <div
         class="css-rjp1ph"
