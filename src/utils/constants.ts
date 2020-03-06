@@ -218,6 +218,8 @@ const zIndex = {
   default: 0,
   /** `299` */
   formFieldError: 299,
+  /** `300` */
+  selectContainer: 300,
   /** `400` */
   tooltip: 400,
   /** `500` */
