@@ -53,19 +53,16 @@ export interface State {
 const isChildAFunction = (children: ContextMenuProps["children"]): children is (isActive: boolean) => React.ReactNode =>
   typeof children === "function"
 
-const Container = styled.div<{ side: ContextMenuProps["align"]; isOpen: boolean }>(
-  ({ isOpen, theme, side: align }) => ({
-    label: "contextmenu",
-    cursor: "pointer",
-    outline: "none",
-    position: "relative",
-    width: "fit-content",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: align === "left" ? "flex-start" : "flex-end",
-    zIndex: isOpen ? theme.zIndex.selectOptions + 1 : theme.zIndex.selectOptions,
-  }),
-)
+const Container = styled.div<{ side: ContextMenuProps["align"]; isOpen: boolean }>(({ side: align }) => ({
+  label: "contextmenu",
+  cursor: "pointer",
+  outline: "none",
+  position: "relative",
+  width: "fit-content",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: align === "left" ? "flex-start" : "flex-end",
+}))
 
 /**
  * Overlay to prevent mouse events when the context menu is open
