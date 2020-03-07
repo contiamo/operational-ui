@@ -216,14 +216,14 @@ export const space = {
 const zIndex = {
   /** `0` */
   default: 0,
+  /** `300` */
+  selectOptions: 300,
   /** `299` */
   formFieldError: 299,
   /** `400` */
   tooltip: 400,
   /** `500` */
   modal: 500,
-  /** `550` */
-  selectOptions: 550,
   /** `600` */
   confirm: 600,
   /** `1000` */
