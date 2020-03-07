@@ -17,6 +17,8 @@ import {
   getOptionFromItem,
 } from "./Select.util"
 import Checkbox from "../Checkbox/Checkbox"
+// @ts-ignore https://github.com/Swizec/useDimensions/issues/16
+import useDimensions from "react-use-dimensions"
 
 export const Select: React.FC<SelectProps> = ({
   options,
@@ -122,6 +124,8 @@ export const Select: React.FC<SelectProps> = ({
 
   const isReadOnly = React.useMemo(() => (customOption ? customOption.value !== value : true), [customOption, value])
 
+  const [ref, { width }] = useDimensions()
+
   return (
     <ContextMenu
       onClick={item => {
@@ -141,6 +145,7 @@ export const Select: React.FC<SelectProps> = ({
       items={items}
       aria-labelledby={`operational-ui__Select-Label-${uniqueId}`}
       initialFocusedItemIndex={options.findIndex(option => option.value === value)}
+      width={width}
       {...rest}
     >
       {isOpen => (
@@ -159,6 +164,7 @@ export const Select: React.FC<SelectProps> = ({
             isOpen={isOpen}
             hasCustomOption={customOption ? customOption.value === value : false}
             naked={Boolean(naked)}
+            ref={ref}
           >
             <SelectInput
               inputRef={$input}
