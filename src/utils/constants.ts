@@ -1,5 +1,5 @@
 import get from "lodash/get"
-import { lighten } from "."
+import { setAlpha } from "./color"
 
 /**
  * # Operational UI's styling constants.
@@ -121,7 +121,8 @@ const color = {
   basic: "#636363",
   ghost: "hsla(0, 0%, 100%, 0.33)",
   white: whiteColor,
-  highlight: lighten(primaryColor, 50),
+  highlight: setAlpha(0.05)(primaryColor),
+  /** `#000` */
   black: "#000",
   background: backgroundColors,
   separators: separatorColors,
