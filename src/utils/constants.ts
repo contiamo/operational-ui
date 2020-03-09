@@ -1,4 +1,5 @@
 import get from "lodash/get"
+import { lighten } from "."
 
 /**
  * # Operational UI's styling constants.
@@ -120,9 +121,7 @@ const color = {
   basic: "#636363",
   ghost: "hsla(0, 0%, 100%, 0.33)",
   white: whiteColor,
-  /** `#fff26666` */
-  highlight: "#fff26666",
-  /** `#000` */
+  highlight: lighten(primaryColor, 50),
   black: "#000",
   background: backgroundColors,
   separators: separatorColors,

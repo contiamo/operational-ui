@@ -1,6 +1,6 @@
 import React, { useCallback } from "react"
 import NameTag from "../NameTag/NameTag"
-import { darken, lighten } from "../utils"
+import { lighten } from "../utils"
 import styled from "../utils/styled"
 import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
 import Highlighter from "react-highlight-words"
@@ -60,8 +60,7 @@ const Header = styled.div<{
 
   :hover,
   .no-focus &:hover:focus {
-    background: ${({ theme, highlight }) =>
-      highlight ? darken(theme.color.highlight, 20) : theme.color.background.lighter};
+    background: ${({ theme, highlight }) => (highlight ? theme.color.highlight : theme.color.background.lighter)};
 
     /* Show ActionsContainer on hover */
     div:last-of-type {
