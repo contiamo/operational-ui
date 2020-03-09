@@ -506,4 +506,5 @@ ${JSON.stringify(lastChanged, null, 2)}
     </>
   )
 }
+;<MyComponent />
 ```
