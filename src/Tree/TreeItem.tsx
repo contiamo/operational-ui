@@ -210,7 +210,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
           size: 12,
           left: true,
-          color: "color.text.lighter",
+          color: isOpen ? "color.text.lighter" : "primary",
           style: { marginRight: 8 },
         })}
       {tag && (
