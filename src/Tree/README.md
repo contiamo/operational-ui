@@ -539,6 +539,7 @@ const MyComponent = () => {
               {
                 label: "db_01",
                 strong: true,
+                highlight: true,
                 icon: VirtualIcon,
                 initiallyOpen: true,
                 childNodes: [
