@@ -9084,6 +9084,11 @@ react-textarea-autosize@^6.1.0:
   dependencies:
     prop-types "^15.6.0"
 
+react-use-dimensions@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-use-dimensions/-/react-use-dimensions-1.2.1.tgz#eb1561db7b06c393209d2bffa449931dd93f7870"
+  integrity sha512-XL+Rup9Hosxx3Ap9xpyQMbVwuUa4BSqiOjfBb2zDuGs4uv2FesFV+m8Z/huRx2BNptMd9ARPqFuSNA62zhCozg==
+
 react-waypoint@^8.0.3:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/react-waypoint/-/react-waypoint-8.1.0.tgz#91d926a2fd1be4cbd0351cb8c3d494fac0ef1699"

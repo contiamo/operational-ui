@@ -434,16 +434,13 @@ ${JSON.stringify(lastChanged, null, 2)}
 ```jsx
 import * as React from "react"
 import { Select, Code } from "@operational/components"
-
 const options = [
   { label: "Very looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong option", value: "one" },
   { label: "Short", value: "two" },
 ]
-
 const MyComponent = () => {
   const [value, setValue] = React.useState("one")
   const [lastChanged, setLastChanged] = React.useState(null)
-
   return (
     <>
       <Select
@@ -461,14 +458,12 @@ const MyComponent = () => {
         {`
 Current value: ${value}
 Last changed option:
-
 ${JSON.stringify(lastChanged, null, 2)}
       `}
       </Code>
     </>
   )
 }
-
 ;<MyComponent />
 ```
 
@@ -477,17 +472,14 @@ ${JSON.stringify(lastChanged, null, 2)}
 ```jsx
 import * as React from "react"
 import { Select, Code, Modal } from "@operational/components"
-
 const options = [
   { label: "Very looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong option", value: "one" },
   { label: "Short", value: "two" },
 ]
-
 const MyComponent = () => {
   const [value, setValue] = React.useState("one")
   const [lastChanged, setLastChanged] = React.useState(null)
   const [isModalOpen, setIsModalOpen] = React.useState(false)
-
   return (
     <>
       <div onClick={() => setIsModalOpen(true)}>Trigger the Modal</div>
@@ -507,7 +499,6 @@ const MyComponent = () => {
         {`
 Current value: ${value}
 Last changed option:
-
 ${JSON.stringify(lastChanged, null, 2)}
       `}
       </Code>

@@ -91,14 +91,19 @@ const ContextMenuIconBase = styled("div", { shouldForwardProp: prop => prop !== 
   }
 `
 
+const Ellipsis = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`
+
 const Content: React.SFC<{ value: IContextMenuItem }> = ({ value }) => {
   // Fragments are required to hint to the compiler that these are valid types.
   if (typeof value === "string") {
-    return <>{value}</>
+    return <Ellipsis>{value}</Ellipsis>
   }
 
   if (typeof value.description === "undefined") {
-    return <>{value.label}</>
+    return <Ellipsis>{value.label}</Ellipsis>
   }
 
   return (
