@@ -1,6 +1,6 @@
 import React, { useCallback } from "react"
 import NameTag from "../NameTag/NameTag"
-import { setAlpha } from "../utils"
+import { setAlpha } from "../utils/color"
 import styled from "../utils/styled"
 import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
 import Highlighter from "react-highlight-words"
