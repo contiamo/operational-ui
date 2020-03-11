@@ -23,6 +23,7 @@ const Container = styled.div<{
   fullWidth: InputProps["fullWidth"]
   statusIcon: InputProps["statusIcon"]
 }>`
+  label: InputField;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -31,7 +32,7 @@ const Container = styled.div<{
   max-width: ${({ fullWidth, statusIcon }) => getMaxWidth(fullWidth, statusIcon)};
 `
 
-const Field = styled("input")<{
+const Field = styled.input<{
   isError: boolean
   withIconButton: boolean
   preset: InputProps["preset"]

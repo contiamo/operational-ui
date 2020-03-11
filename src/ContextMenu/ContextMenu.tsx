@@ -221,6 +221,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
             container={$invisibleOverlay}
             rowHeight={rowHeight}
             anchored={Boolean(anchored)}
+            width={width}
           >
             {embedChildrenInMenu && renderedChildren}
             {items.map((item, index: number) => (

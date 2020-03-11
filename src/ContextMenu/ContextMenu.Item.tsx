@@ -30,7 +30,7 @@ export interface IContextMenuItem<TValue = any> {
 
 export const rowHeight = 32
 
-const Container = styled("div")<Props>(({ condensed, disabled, align, theme, width }) => {
+const Container = styled.div<Props>(({ condensed, disabled, align, theme, width }) => {
   return {
     userSelect: "none",
     label: "contextmenuitem",
@@ -57,7 +57,7 @@ const Container = styled("div")<Props>(({ condensed, disabled, align, theme, wid
   }
 })
 
-const Title = styled("p")`
+const Title = styled.p`
   font-weight: bold;
   color: ${({ theme }) => theme.color.text.dark};
   overflow: hidden;
@@ -66,7 +66,7 @@ const Title = styled("p")`
   width: 100%;
 `
 
-const Description = styled("p")`
+const Description = styled.p`
   margin: 0;
   color: ${({ theme }) => theme.color.text.lighter};
   text-overflow: ellipsis;
@@ -74,7 +74,7 @@ const Description = styled("p")`
   overflow: hidden;
 `
 
-const ContentContainer = styled("div")`
+const ContentContainer = styled.div`
   line-height: ${({ theme }) => theme.font.lineHeight};
   padding: ${({ theme }) => theme.space.content}px 0;
   width: calc(100% - ${({ theme }) => theme.space.content}px);
@@ -91,19 +91,23 @@ const ContextMenuIconBase = styled("div", { shouldForwardProp: prop => prop !== 
   }
 `
 
-const Ellipsis = styled.div`
+const Ellipsis = styled.div<{ width?: string | number }>`
+  label: Ellipsis;
   overflow: hidden;
   text-overflow: ellipsis;
+  width: ${({ width }) => (typeof width === "number" ? `${width}px` : width) || "100%"};
+  margin: 0 -${({ theme }) => theme.space.content}px;
+  padding: 0 ${({ theme }) => theme.space.content}px;
 `
 
-const Content: React.SFC<{ value: IContextMenuItem }> = ({ value }) => {
+const Content: React.SFC<{ value: IContextMenuItem; width?: string | number }> = ({ value, width }) => {
   // Fragments are required to hint to the compiler that these are valid types.
   if (typeof value === "string") {
-    return <Ellipsis>{value}</Ellipsis>
+    return <Ellipsis width={width}>{value}</Ellipsis>
   }
 
   if (typeof value.description === "undefined") {
-    return <Ellipsis>{value.label}</Ellipsis>
+    return <Ellipsis width={width}>{value.label}</Ellipsis>
   }
 
   return (
@@ -135,10 +139,10 @@ const ContextMenuItemIcon: React.SFC<Pick<Props, "item" | "iconLocation">> = ({ 
   return <>{item.icon}</>
 }
 
-const ContextMenuItem: React.SFC<Props> = ({ iconLocation, item, onClick, condensed, ...props }) => (
-  <Container {...props} onClick={onClick} condensed={condensed} item={item}>
+const ContextMenuItem: React.SFC<Props> = ({ iconLocation, item, onClick, condensed, width, ...props }) => (
+  <Container {...props} width={width} onClick={onClick} condensed={condensed} item={item}>
     {(!iconLocation || iconLocation === "left") && <ContextMenuItemIcon iconLocation={iconLocation} item={item} />}
-    <Content value={item} />
+    <Content value={item} width={width} />
     {iconLocation === "right" && <ContextMenuItemIcon iconLocation={iconLocation} item={item} />}
   </Container>
 )
