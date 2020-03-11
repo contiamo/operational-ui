@@ -25,6 +25,7 @@ interface PositionProps {
 }
 
 const Container = styled.div<ContextMenuPopoutProps & PositionProps>`
+  label: ContextMenuPopout;
   position: ${({ position }) => position};
   top: ${({ top }) => top};
   left: ${({ left }) => left};
@@ -43,8 +44,11 @@ const Container = styled.div<ContextMenuPopoutProps & PositionProps>`
   ${({ theme, anchored }) => (anchored ? "" : `z-index: ${theme.zIndex.selectOptions + 2};`)}
 `
 
-const ContextMenuPopout = React.forwardRef<HTMLDivElement, ContextMenuPopoutProps>(
-  ({ align, children, condensed, container, embedChildrenInMenu, numRows, rowHeight, anchored }, forwardRef) => {
+const ContextMenuPopout = React.forwardRef<HTMLDivElement, ContextMenuPopoutProps & { width?: number }>(
+  (
+    { align, children, condensed, container, embedChildrenInMenu, numRows, rowHeight, anchored, width: propsWidth },
+    forwardRef,
+  ) => {
     const $fallback = React.useRef<HTMLDivElement | null>(null)
     const $el = isRefRefObject(forwardRef) ? forwardRef : $fallback
 
@@ -52,7 +56,7 @@ const ContextMenuPopout = React.forwardRef<HTMLDivElement, ContextMenuPopoutProp
       position: "absolute",
       left: align === "left" ? "0" : "auto",
       top: embedChildrenInMenu ? "0" : "100%",
-      width: "100%",
+      width: propsWidth ? `${propsWidth}px` : "100%",
     } as const
 
     const { left, position, top, width } = useSticky({
