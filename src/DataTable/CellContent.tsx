@@ -45,16 +45,21 @@ const CellContent: React.FC<CellContentProps> = ({ cell, open, close }) => {
     )
   }, [width])
 
+  const value = React.useMemo(
+    () => (typeof cell === "string" ? cell.replace(/\n/g, " ") : stringifyBooleanAndNull(cell)),
+    [cell],
+  )
+
   return (
-    <CellGrid ref={$cell} canTruncate={isString(cell)}>
-      {isString(stringifyBooleanAndNull(cell)) && isTextOverflowing ? (
-        <CellTruncator onMouseEnter={open(stringifyBooleanAndNull(cell))} onMouseLeave={close}>
-          {stringifyBooleanAndNull(cell)}
+    <CellGrid ref={$cell} canTruncate={isString(value)}>
+      {isString(value) && isTextOverflowing ? (
+        <CellTruncator onMouseEnter={open(value)} onMouseLeave={close}>
+          {value}
         </CellTruncator>
       ) : (
-        stringifyBooleanAndNull(cell)
+        value
       )}
-      <GhostCell ref={$ghostCell}>{stringifyBooleanAndNull(cell)}</GhostCell>
+      <GhostCell ref={$ghostCell}>{value}</GhostCell>
     </CellGrid>
   )
 }
