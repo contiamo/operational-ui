@@ -122,7 +122,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
           {props.category && (
             <CategoryDropdown onClick={toggleOpen} isCondensed={Boolean(props.condensed)}>
               {props.category}
-              {isOpen ? <CaretDownIcon size={5} /> : <CaretUpIcon size={5} />}
+              {isOpen ? <CaretUpIcon size={5} /> : <CaretDownIcon size={5} />}
             </CategoryDropdown>
           )}
           <Input
@@ -130,10 +130,7 @@ export function SearchInput<T extends string = never>(props: SearchInputProps<T>
             value={props.value}
             aria-label="search"
             placeholder={props.placeholder}
-            onFocus={() => setIsOpen(true)}
-            onClick={() => setIsOpen(true)}
             onChange={e => {
-              setIsOpen(true)
               props.onChange({
                 search: e.target.value,
                 category: props.category!, // Force the type-safety of `category` in the public API (this will be `never` if no `categories` are provided)
