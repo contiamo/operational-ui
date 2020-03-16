@@ -47,7 +47,7 @@ const CustomCell = styled.span`
   ]}
   rows={[
     [String(Math.random()) + " whats up", "Imogen Mason", "Good Stuff", true],
-    [String(Math.random()).repeat(1000), "Fabien Bernard", "🥖🥐🧀🍷", false],
+    [String(Math.random() + "\n").repeat(1000), "Fabien Bernard", "🥖🥐🧀🍷", false],
     [String(Math.random()).repeat(1000), "STEREO BOOSTER", "☕️", true],
     [String(Math.random()).repeat(1000), <CustomCell>Mischa Potomin</CustomCell>, "null", false],
     [String(Math.random()).repeat(1000), "Tejas Kumar", "🍗🍖🥓🥩", true],
