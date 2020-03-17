@@ -8,7 +8,7 @@ import Chip from "../Chip/Chip"
 export interface SearchInputProps<TCategory> {
   value: string
   placeholder?: string
-  onChange: (values: { search: string; category: TCategory }) => void
+  onChange: (values: { search: string; category?: TCategory }) => void
   onClear?: () => void
   category?: TCategory
   categories?: TCategory[]
