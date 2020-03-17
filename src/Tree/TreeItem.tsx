@@ -23,6 +23,7 @@ interface TreeItemProps {
   disabled?: boolean
   cursor?: string
   onNodeClick?: (e: React.MouseEvent<HTMLDivElement>) => void
+  onNodeToggle?: (e: React.MouseEvent<HTMLDivElement>) => void
   onNodeContextMenu?: (e: React.MouseEvent<HTMLDivElement>) => void
   onMouseEnter?: (e: React.MouseEvent<HTMLDivElement>) => void
   onMouseLeave?: (e: React.MouseEvent<HTMLDivElement>) => void
@@ -148,6 +149,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   disabled,
   label,
   onNodeClick,
+  onNodeToggle,
   onNodeContextMenu,
   hasChildren,
   isOpen,
@@ -182,13 +184,13 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         case " ":
         case "Space": // the platform™
           e.preventDefault()
-          if (onNodeClick) {
-            onNodeClick(e)
+          if (onNodeToggle) {
+            onNodeToggle(e)
           }
           return
       }
     },
-    [onNodeContextMenu, onNodeClick],
+    [onNodeContextMenu, onNodeClick, onNodeToggle],
   )
 
   return (
@@ -197,7 +199,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       paddingRight={paddingRight}
       level={level}
       hasIconOffset={Boolean(hasIconOffset)}
-      onClick={onNodeClick}
       onContextMenu={onNodeContextMenu}
       onKeyDown={handleKeyDown}
       highlight={Boolean(highlight)}
@@ -205,14 +206,18 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       tabIndex={disabled ? -1 : 0}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onClick={onNodeClick}
     >
-      {hasChildren &&
-        React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
-          size: 12,
-          left: true,
-          color: isOpen ? "color.text.lighter" : "primary",
-          style: { marginRight: 8 },
-        })}
+      {hasChildren && (
+        <span onClick={onNodeToggle}>
+          {React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
+            size: 12,
+            left: true,
+            color: isOpen ? "color.text.lighter" : "primary",
+            style: { marginRight: 8 },
+          })}
+        </span>
+      )}
       {tag && (
         <NameTagStyled condensed left color={tagColor}>
           {tag}
@@ -231,6 +236,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         fontSize={fontSize ? fontSize : constants.font.size.small}
         emphasized={Boolean(emphasized)}
         monospace={Boolean(monospace)}
+        onClick={onNodeClick}
       >
         <Highlighter
           textToHighlight={label}

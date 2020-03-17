@@ -64,19 +64,22 @@ const ChildTree: React.SFC<Props> = ({
   )
 
   const onNodeClick =
-    !disabled && (hasChildren || onClick)
+    !disabled && onClick
       ? (e: React.MouseEvent<HTMLDivElement>) => {
           e.stopPropagation()
           if (e.altKey && onNodeContextMenu) {
             onNodeContextMenu(e)
             return
           }
-          if (hasChildren) {
-            setIsOpen(!isOpen)
-          }
-          if (onClick) {
-            onClick(e)
-          }
+          onClick(e)
+        }
+      : undefined
+
+  const onNodeToggle =
+    !disabled && hasChildren
+      ? (e: React.MouseEvent<HTMLDivElement>) => {
+          e.stopPropagation()
+          setIsOpen(!isOpen)
         }
       : undefined
 
@@ -89,6 +92,7 @@ const ChildTree: React.SFC<Props> = ({
         searchWords={searchWords}
         ignoreSearchWords={ignoreSearchWords}
         onNodeClick={onNodeClick}
+        onNodeToggle={onNodeToggle}
         onNodeContextMenu={onNodeContextMenu}
         highlight={Boolean(highlight)}
         hasChildren={hasChildren}
