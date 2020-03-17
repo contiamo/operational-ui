@@ -236,7 +236,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         fontSize={fontSize ? fontSize : constants.font.size.small}
         emphasized={Boolean(emphasized)}
         monospace={Boolean(monospace)}
-        onClick={onNodeClick}
       >
         <Highlighter
           textToHighlight={label}
