@@ -64,14 +64,16 @@ const ChildTree: React.SFC<Props> = ({
   )
 
   const onNodeClick =
-    !disabled && onClick
+    !disabled && (onClick || onNodeContextMenu)
       ? (e: React.MouseEvent<HTMLDivElement>) => {
           e.stopPropagation()
           if (e.altKey && onNodeContextMenu) {
             onNodeContextMenu(e)
             return
           }
-          onClick(e)
+          if (onClick) {
+            onClick(e)
+          }
         }
       : undefined
 
