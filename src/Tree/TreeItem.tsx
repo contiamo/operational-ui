@@ -199,6 +199,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       paddingRight={paddingRight}
       level={level}
       hasIconOffset={Boolean(hasIconOffset)}
+      onClick={onNodeClick}
       onContextMenu={onNodeContextMenu}
       onKeyDown={handleKeyDown}
       highlight={Boolean(highlight)}
@@ -206,7 +207,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       tabIndex={disabled ? -1 : 0}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      onClick={onNodeClick}
     >
       {hasChildren && (
         <span onClick={onNodeToggle}>
