@@ -14,6 +14,7 @@ import Small from "../Typography/Small"
 import styled from "../utils/styled"
 import { IconComponentType, ChevronDownIcon, ChevronUpDownIcon, ChevronUpIcon } from "../Icon"
 import { useUniqueId } from "../useUniqueId"
+import { getHighlightColor, getAccentColor } from "../utils/constants"
 
 export interface TableProps<T> extends DefaultProps {
   data: T[]
@@ -82,21 +83,21 @@ const Tr = styled.tr<{
   height: condensed ? 36 : 50,
   display: isDragging ? "table" : "table-row",
   tableLayout: "fixed",
-  backgroundColor: active ? theme.color.highlight : theme.color.white,
+  backgroundColor: active ? getHighlightColor(theme) : theme.color.white,
   ...(draggable || clickable
     ? {
         ":hover": {
-          backgroundColor: active ? theme.color.accent : theme.color.highlight,
+          backgroundColor: active ? getAccentColor(theme) : getHighlightColor(theme),
           cursor: clickable ? "pointer" : draggable ? "move" : "default",
         },
       }
     : {}),
   ":focus": {
     outline: "none",
-    backgroundColor: theme.color.highlight,
+    backgroundColor: getHighlightColor(theme),
   },
   ".no-focus &:focus": {
-    backgroundColor: active ? theme.color.highlight : theme.color.white,
+    backgroundColor: active ? getHighlightColor(theme) : theme.color.white,
   },
 }))
 

@@ -3,6 +3,7 @@ import styled from "../utils/styled"
 import { SearchIcon, CaretDownIcon, CaretUpIcon, EnterIcon, NoIcon } from "../Icon"
 import useHotkey from "../useHotkey"
 import Chip from "../Chip/Chip"
+import { getHighlightColor } from "../utils/constants"
 
 export interface SearchInputProps<TCategory> {
   value: string
@@ -243,7 +244,7 @@ const CategoryDropdown = styled.div<{ highlighted?: boolean; isCondensed?: boole
 
   :hover {
     background-color: ${({ theme, highlighted }) =>
-      highlighted ? theme.color.background.grey : theme.color.highlight};
+      highlighted ? theme.color.background.grey : getHighlightColor(theme)};
     color: ${({ theme, highlighted }) => (highlighted ? theme.color.basic : theme.color.primary)};
   }
 

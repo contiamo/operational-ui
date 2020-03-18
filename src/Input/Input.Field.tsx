@@ -6,6 +6,7 @@ import { InputProps } from "./Input"
 import InputButton from "./Input.Button"
 import { height, iconBoxSize, width } from "./Input.constants"
 import { NoIcon, IDIcon } from "../Icon"
+import { getAccentColor } from "../utils/constants"
 
 const getMaxWidth = (fullWidth: InputProps["fullWidth"], statusIcon: InputProps["statusIcon"]) => {
   if (fullWidth && statusIcon) {
@@ -46,7 +47,7 @@ const Field = styled.input<{
     }
 
     if (preset) {
-      return theme.color.accent
+      return getAccentColor(theme)
     }
 
     return theme.color.white

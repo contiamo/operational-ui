@@ -121,8 +121,6 @@ const color = {
   basic: "#636363",
   ghost: "hsla(0, 0%, 100%, 0.33)",
   white: whiteColor,
-  highlight: setAlpha(0.05)(primaryColor),
-  accent: setAlpha(0.1)(primaryColor),
   /** `#000` */
   black: "#000",
   background: backgroundColors,
@@ -142,6 +140,10 @@ const color = {
     "#006865",
   ],
 }
+
+export const getHighlightColor = (theme: OperationalStyleConstants) => setAlpha(0.05)(theme.color.primary)
+
+export const getAccentColor = (theme: OperationalStyleConstants) => setAlpha(0.1)(theme.color.primary)
 
 type FontWeight = 400 | 500 | 600
 
@@ -243,8 +245,8 @@ const zIndex = {
 const shadows = {
   pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
   topBar: "0px 1px 5px #d3d1d1",
-  focus: `inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px ${color.accent}`,
-  insetFocus: `inset 0 0 0px 1px ${primaryColor}`,
+  focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
+  insetFocus: "inset 0 0 0px 1px #1499ce",
   popup: "0 3px 12px rgba(0, 0, 0, .15)",
   contextMenu: "0 2px 4px 0 rgba(0, 0, 0, 0.25)",
 }
