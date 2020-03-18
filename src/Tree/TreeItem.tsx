@@ -33,6 +33,7 @@ interface TreeItemProps {
   fontColor?: string
   emphasized?: boolean
   monospace?: boolean
+  freeze?: boolean
 }
 
 const Header = styled.div<{
@@ -164,6 +165,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   fontColor,
   emphasized,
   monospace,
+  freeze,
 }) => {
   const handleKeyDown = useCallback(
     e => {
@@ -207,6 +209,7 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       onMouseLeave={onMouseLeave}
     >
       {hasChildren &&
+        !freeze &&
         React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
           size: 12,
           left: true,

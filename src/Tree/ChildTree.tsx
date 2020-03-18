@@ -6,6 +6,7 @@ import constants from "../utils/constants"
 
 type Props = TreeProps["trees"][-1] & {
   searchWords?: string[]
+  freeze?: boolean
   level: number
   hasIconOffset: boolean
   onMouseEnter?: (e: React.MouseEvent<HTMLDivElement>) => void
@@ -47,6 +48,7 @@ const ChildTree: React.SFC<Props> = ({
   fontColor,
   emphasized,
   monospace,
+  freeze,
   ...props
 }) => {
   const [isOpen, setIsOpen] = React.useState(Boolean(initiallyOpen))
@@ -71,7 +73,7 @@ const ChildTree: React.SFC<Props> = ({
             onNodeContextMenu(e)
             return
           }
-          if (hasChildren) {
+          if (hasChildren && !freeze) {
             setIsOpen(!isOpen)
           }
           if (onClick) {
@@ -87,6 +89,7 @@ const ChildTree: React.SFC<Props> = ({
         paddingRight={paddingRight ? paddingRight : constants.space.small}
         level={level}
         searchWords={searchWords}
+        freeze={freeze}
         ignoreSearchWords={ignoreSearchWords}
         onNodeClick={onNodeClick}
         onNodeContextMenu={onNodeContextMenu}
@@ -118,6 +121,7 @@ const ChildTree: React.SFC<Props> = ({
           paddingRight={paddingRight}
           trees={childNodes}
           searchWords={searchWords}
+          freeze={freeze}
           droppableProps={droppableProps}
         />
       )}
