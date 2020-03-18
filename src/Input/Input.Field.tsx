@@ -1,11 +1,12 @@
 import * as React from "react"
 
-import { FormFieldError, inputFocus, setAlpha } from "../utils"
+import { FormFieldError, inputFocus } from "../utils"
 import styled from "../utils/styled"
 import { InputProps } from "./Input"
 import InputButton from "./Input.Button"
 import { height, iconBoxSize, width } from "./Input.constants"
 import { NoIcon, IDIcon } from "../Icon"
+import { getAccentColor } from "../utils/constants"
 
 const getMaxWidth = (fullWidth: InputProps["fullWidth"], statusIcon: InputProps["statusIcon"]) => {
   if (fullWidth && statusIcon) {
@@ -46,7 +47,7 @@ const Field = styled.input<{
     }
 
     if (preset) {
-      return setAlpha(0.1)(theme.color.primary)
+      return getAccentColor(theme)
     }
 
     return theme.color.white

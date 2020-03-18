@@ -1,10 +1,9 @@
 import React, { useCallback } from "react"
 import NameTag from "../NameTag/NameTag"
-import { setAlpha } from "../utils/color"
 import styled from "../utils/styled"
 import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
 import Highlighter from "react-highlight-words"
-import constants, { expandColor } from "../utils/constants"
+import constants, { expandColor, getHighlightColor } from "../utils/constants"
 
 interface TreeItemProps {
   paddingLeft: number
@@ -51,7 +50,7 @@ const Header = styled.div<{
   position: relative;
   align-items: center;
   cursor: ${({ onClick, cursor }) => cursor || (onClick ? "pointer" : "inherit")};
-  background: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
+  background: ${({ theme, highlight }) => (highlight ? getHighlightColor(theme) : "none")};
   padding: ${({ theme }) => `${theme.space.base / 2}px`};
   padding-left: ${({ theme, paddingLeft, level, hasIconOffset }) =>
     paddingLeft + theme.space.element * level + (hasIconOffset ? theme.space.element : 0)}px;
@@ -61,7 +60,7 @@ const Header = styled.div<{
 
   :hover,
   .no-focus &:hover:focus {
-    background: ${({ theme, highlight }) => (highlight ? theme.color.highlight : theme.color.background.lighter)};
+    background: ${({ theme, highlight }) => (highlight ? getHighlightColor(theme) : theme.color.background.lighter)};
 
     /* Show ActionsContainer on hover */
     div:last-of-type {
@@ -72,7 +71,7 @@ const Header = styled.div<{
   :focus {
     outline: none;
     color: ${({ theme }) => theme.color.primary};
-    background: ${({ theme }) => setAlpha(0.05)(theme.color.primary)};
+    background: ${({ theme }) => getHighlightColor(theme)};
 
     /* Show ActionsContainer on hover */
     div:last-of-type {
@@ -81,7 +80,7 @@ const Header = styled.div<{
   }
   .no-focus &:focus {
     color: ${({ theme }) => theme.color.text.dark};
-    background: ${({ highlight, theme }) => (highlight ? theme.color.highlight : "none")};
+    background: ${({ theme, highlight }) => (highlight ? getHighlightColor(theme) : "none")};
     div:last-of-type {
       opacity: 0;
     }

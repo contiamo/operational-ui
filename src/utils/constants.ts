@@ -121,7 +121,6 @@ const color = {
   basic: "#636363",
   ghost: "hsla(0, 0%, 100%, 0.33)",
   white: whiteColor,
-  highlight: setAlpha(0.05)(primaryColor),
   /** `#000` */
   black: "#000",
   background: backgroundColors,
@@ -141,6 +140,10 @@ const color = {
     "#006865",
   ],
 }
+
+export const getHighlightColor = (theme: OperationalStyleConstants) => setAlpha(0.05)(theme.color.primary)
+
+export const getAccentColor = (theme: OperationalStyleConstants) => setAlpha(0.1)(theme.color.primary)
 
 type FontWeight = 400 | 500 | 600
 
