@@ -130,6 +130,68 @@ import { Tree } from "@operational/components"
 />
 ```
 
+### With freeze
+
+```jsx
+import * as React from "react"
+import {
+  Tree,
+  DatabaseIcon,
+  WorkbenchIcon,
+  PhysicalTableIcon,
+  ColumnsIcon
+} from "@operational/components"
+
+const Example = () => {
+  const [resourceKind, setResourceKind] = React.useState("datasource")
+
+  return (
+    <Tree
+      freeze
+      trees={[
+        {
+          initiallyOpen: true,
+          strong: true,
+          label: "Data",
+          icon: DatabaseIcon,
+          fontSize: 13,
+          childNodes: [
+            {
+              initiallyOpen: true,
+              label: "Data sources",
+              icon: WorkbenchIcon,
+              fontSize: 13,
+              onClick: () => setResourceKind("datasource"),
+              highlight: resourceKind === "datasource",
+              childNodes: [
+                {
+                  initiallyOpen: true,
+                  label: "Tables",
+                  icon: PhysicalTableIcon,
+                  fontSize: 11,
+                  onClick: () => setResourceKind("table"),
+                  highlight: resourceKind === "table",
+                  childNodes: [
+                    {
+                      initiallyOpen: true,
+                      label: "Columns",
+                      icon: ColumnsIcon,
+                      fontSize: 11,
+                      onClick: () => setResourceKind("column"),
+                      highlight: resourceKind === "column",
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ]}
+    />);
+  }
+;<Example>
+```
+
 ### With higlighted search
 
 ```jsx

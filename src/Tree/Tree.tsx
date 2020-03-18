@@ -50,6 +50,7 @@ export interface TreeProps {
   searchWords?: string[]
   droppableProps?: Omit<DroppableProps, "children">
   placeholder?: React.ComponentType<DroppableStateSnapshot>
+  freeze?: boolean
   _level?: number
   _hasIconOffset?: boolean
 }
@@ -68,6 +69,7 @@ const Tree: React.SFC<TreeProps> = ({
   droppableProps,
   placeholder,
   searchWords,
+  freeze,
 }) => {
   const isLowestLevel = trees.length === 0 || trees.some(tree => !tree.childNodes || !tree.childNodes.length)
 
@@ -87,6 +89,7 @@ const Tree: React.SFC<TreeProps> = ({
             key={index}
             {...treeData}
             searchWords={searchWords}
+            freeze={freeze}
           />
         ))}
       </Container>
@@ -110,6 +113,7 @@ const Tree: React.SFC<TreeProps> = ({
                         level={_level}
                         forwardRef={draggableProvided.innerRef}
                         searchWords={searchWords}
+                        freeze={freeze}
                         {...treeData}
                         {...draggableProvided.draggableProps}
                         {...draggableProvided.dragHandleProps}
