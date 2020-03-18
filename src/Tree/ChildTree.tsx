@@ -64,7 +64,7 @@ const ChildTree: React.SFC<Props> = ({
   )
 
   const onNodeClick =
-    !disabled && (onClick || onNodeContextMenu)
+    !disabled && (onClick || onNodeContextMenu || hasChildren)
       ? (e: React.MouseEvent<HTMLDivElement>) => {
           e.stopPropagation()
           if (e.altKey && onNodeContextMenu) {
@@ -73,6 +73,8 @@ const ChildTree: React.SFC<Props> = ({
           }
           if (onClick) {
             onClick(e)
+          } else if (hasChildren) {
+            setIsOpen(!isOpen)
           }
         }
       : undefined

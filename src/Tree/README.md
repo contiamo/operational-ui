@@ -28,10 +28,12 @@ const Wrapper = styled.div`
       {
         label: "ERP",
         tag: "OR",
+        onClick: () => alert("ERP was clicked"),
         childNodes: [
           {
             label: "Region",
             initiallyOpen: true,
+            onClick: () => alert("Region was clicked"),
             childNodes: [
               {
                 label: "City",
