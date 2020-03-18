@@ -84,6 +84,7 @@ const textColors = {
  * A specialized color palette for borders.
  */
 const borderColors = {
+  primary: setAlpha(0.1)(primaryColor),
   /** `#c0c0c0` */
   default: "#c0c0c0",
   /** `#ddd` */
@@ -242,8 +243,8 @@ const zIndex = {
 const shadows = {
   pressed: "inset 0 1px 1px rgba(0,0,0,0.15)",
   topBar: "0px 1px 5px #d3d1d1",
-  focus: "inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(82,168,236,.6)",
-  insetFocus: "inset 0 0 0px 1px #1499ce",
+  focus: `inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px ${setAlpha(0.1)(primaryColor)}`,
+  insetFocus: `inset 0 0 0px 1px ${primaryColor}`,
   popup: "0 3px 12px rgba(0, 0, 0, .15)",
   contextMenu: "0 2px 4px 0 rgba(0, 0, 0, 0.25)",
 }
