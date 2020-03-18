@@ -84,7 +84,6 @@ const textColors = {
  * A specialized color palette for borders.
  */
 const borderColors = {
-  primary: setAlpha(0.1)(primaryColor),
   /** `#c0c0c0` */
   default: "#c0c0c0",
   /** `#ddd` */
@@ -123,6 +122,7 @@ const color = {
   ghost: "hsla(0, 0%, 100%, 0.33)",
   white: whiteColor,
   highlight: setAlpha(0.05)(primaryColor),
+  accent: setAlpha(0.1)(primaryColor),
   /** `#000` */
   black: "#000",
   background: backgroundColors,
