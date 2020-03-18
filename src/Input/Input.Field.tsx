@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import { FormFieldError, inputFocus, setAlpha } from "../utils"
+import { FormFieldError, inputFocus } from "../utils"
 import styled from "../utils/styled"
 import { InputProps } from "./Input"
 import InputButton from "./Input.Button"
@@ -46,7 +46,7 @@ const Field = styled.input<{
     }
 
     if (preset) {
-      return setAlpha(0.1)(theme.color.primary)
+      return theme.color.accent
     }
 
     return theme.color.white

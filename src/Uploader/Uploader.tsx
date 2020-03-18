@@ -1,7 +1,6 @@
 import * as React from "react"
 import { DefaultProps } from "../types"
 import styled from "../utils/styled"
-import { setAlpha } from "../utils"
 
 export interface UploaderProps extends DefaultProps {
   dragActive: boolean
@@ -17,7 +16,7 @@ const Container = styled("div")<Pick<UploaderProps, "dragActive">>(({ dragActive
   justifyContent: "center",
   ...(dragActive
     ? {
-        backgroundColor: setAlpha(0.05)(theme.color.primary),
+        backgroundColor: theme.color.highlight,
         border: `1px solid ${theme.color.primary}`,
         color: theme.color.primary,
       }

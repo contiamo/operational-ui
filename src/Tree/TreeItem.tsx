@@ -1,6 +1,5 @@
 import React, { useCallback } from "react"
 import NameTag from "../NameTag/NameTag"
-import { setAlpha } from "../utils/color"
 import styled from "../utils/styled"
 import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
 import Highlighter from "react-highlight-words"
@@ -71,7 +70,7 @@ const Header = styled.div<{
   :focus {
     outline: none;
     color: ${({ theme }) => theme.color.primary};
-    background: ${({ theme }) => setAlpha(0.05)(theme.color.primary)};
+    background: ${({ theme }) => theme.color.highlight};
 
     /* Show ActionsContainer on hover */
     div:last-of-type {

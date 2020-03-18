@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled from "../utils/styled"
 import { SearchIcon, CaretDownIcon, CaretUpIcon, EnterIcon, NoIcon } from "../Icon"
-import { setAlpha } from "../utils"
 import useHotkey from "../useHotkey"
 import Chip from "../Chip/Chip"
 
@@ -244,7 +243,7 @@ const CategoryDropdown = styled.div<{ highlighted?: boolean; isCondensed?: boole
 
   :hover {
     background-color: ${({ theme, highlighted }) =>
-      highlighted ? theme.color.background.grey : setAlpha(0.05)(theme.color.primary)};
+      highlighted ? theme.color.background.grey : theme.color.highlight};
     color: ${({ theme, highlighted }) => (highlighted ? theme.color.basic : theme.color.primary)};
   }
 
