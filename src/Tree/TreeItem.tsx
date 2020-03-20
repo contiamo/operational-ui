@@ -2,8 +2,8 @@ import React, { useCallback } from "react"
 import NameTag from "../NameTag/NameTag"
 import styled from "../utils/styled"
 import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
-import Highlighter from "react-highlight-words"
 import constants, { expandColor, getHighlightColor } from "../utils/constants"
+import TreeItemHighlighter from "./TreeItemHighlighter"
 
 interface TreeItemProps {
   paddingLeft: number
@@ -93,12 +93,6 @@ const NameTagStyled = styled(NameTag)<{ withIcon?: boolean }>`
   width: ${({ theme }) => theme.space.medium}px;
   height: ${({ theme }) => theme.space.medium}px;
 `
-
-// These props are extracted to avoid useless re-render
-const highlightStyle: React.CSSProperties = {
-  color: constants.color.text.action,
-  backgroundColor: "transparent",
-}
 
 const defaultSearch: string[] = []
 
@@ -234,9 +228,8 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         emphasized={Boolean(emphasized)}
         monospace={Boolean(monospace)}
       >
-        <Highlighter
+        <TreeItemHighlighter
           textToHighlight={label}
-          highlightStyle={highlightStyle}
           sanitize={sanitizeInput}
           searchWords={ignoreSearchWords ? emptySearchWords : searchWords}
         />
