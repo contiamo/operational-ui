@@ -1287,10 +1287,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-highlight-words@^0.16.0":
-  version "0.16.0"
-  resolved "https://registry.yarnpkg.com/@types/react-highlight-words/-/react-highlight-words-0.16.0.tgz#bcd67e9724fb5f070c955732f604068de5cbe30b"
-  integrity sha512-bSVlhM5OXLO67UZD/orsoT1lS5p7w8ffoDis3TtU1mqmXW7epHHt4kB7QmmZzwXjgzRm++yOo6Xpp7PhRFBpXA==
+"@types/react-highlight-words@^0.16.1":
+  version "0.16.1"
+  resolved "https://registry.yarnpkg.com/@types/react-highlight-words/-/react-highlight-words-0.16.1.tgz#9744f9587e16cf74870b77ab419ec79c29f63068"
+  integrity sha512-J0JTrBbnCEpbGkXYs7FxZXlH/wJVO9cu1R0UYh+DGfw4/leMfUn37/dUdTXkcjkOMCxRSHk+OUNM3jQ//inM8w==
   dependencies:
     "@types/react" "*"
 

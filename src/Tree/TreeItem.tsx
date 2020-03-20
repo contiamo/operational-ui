@@ -1,16 +1,15 @@
-import React, { useCallback, CSSProperties } from "react"
+import React, { useCallback } from "react"
 import NameTag from "../NameTag/NameTag"
 import styled from "../utils/styled"
 import { ChevronRightIcon, ChevronDownIcon, IconComponentType } from "../Icon"
-import Highlighter from "react-highlight-words"
 import constants, { expandColor, getHighlightColor } from "../utils/constants"
+import TreeItemHighlighter from "./TreeItemHighlighter"
 
 interface TreeItemProps {
   paddingLeft: number
   paddingRight: number
   level: number
   highlight: boolean
-  highlightStyle: CSSProperties
   searchWords?: string[]
   ignoreSearchWords?: boolean
   hasChildren: boolean
@@ -136,7 +135,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   paddingLeft,
   paddingRight,
   highlight,
-  highlightStyle,
   tag,
   tagColor,
   icon,
@@ -230,9 +228,8 @@ const TreeItem: React.SFC<TreeItemProps> = ({
         emphasized={Boolean(emphasized)}
         monospace={Boolean(monospace)}
       >
-        <Highlighter
+        <TreeItemHighlighter
           textToHighlight={label}
-          highlightStyle={highlightStyle}
           sanitize={sanitizeInput}
           searchWords={ignoreSearchWords ? emptySearchWords : searchWords}
         />

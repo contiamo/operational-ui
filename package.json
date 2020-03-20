@@ -118,7 +118,7 @@
     "@types/react-beautiful-dnd": "^11.0.0",
     "@types/react-copy-to-clipboard": "^4.2.6",
     "@types/react-dom": "^16.8.4",
-    "@types/react-highlight-words": "^0.16.0",
+    "@types/react-highlight-words": "^0.16.1",
     "@types/react-router": "^4.0.28",
     "@types/react-window": "^1.8.0",
     "@types/tinycolor2": "^1.4.1",
