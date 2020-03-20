@@ -24,6 +24,7 @@ const ChildTree: React.SFC<Props> = ({
   paddingRight,
   initiallyOpen,
   highlight,
+  highlightStyle,
   tag,
   tagColor,
   label,
@@ -94,6 +95,7 @@ const ChildTree: React.SFC<Props> = ({
         onNodeClick={onNodeClick}
         onNodeContextMenu={onNodeContextMenu}
         highlight={Boolean(highlight)}
+        highlightStyle={highlightStyle}
         hasChildren={hasChildren}
         isOpen={isOpen}
         tag={tag}

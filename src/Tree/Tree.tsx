@@ -4,9 +4,13 @@ import { Draggable, DraggableProps, Droppable, DroppableProps, DroppableStateSna
 import styled from "../utils/styled"
 import ChildTree from "./ChildTree"
 import { IconComponentType } from "../Icon"
+import { OperationalStyleConstants } from "../utils/constants"
+import { withTheme } from "emotion-theming"
+import { useMemo, CSSProperties } from "react"
 
 interface BaseTree {
   label: string
+  highlightStyle: CSSProperties
   paddingLeft?: number
   paddingRight?: number
   highlight?: boolean
@@ -53,6 +57,7 @@ export interface TreeProps {
   freeze?: boolean
   _level?: number
   _hasIconOffset?: boolean
+  theme: OperationalStyleConstants
 }
 
 const Container = styled.div`
@@ -70,8 +75,17 @@ const Tree: React.SFC<TreeProps> = ({
   placeholder,
   searchWords,
   freeze,
+  theme,
 }) => {
   const isLowestLevel = trees.length === 0 || trees.some(tree => !tree.childNodes || !tree.childNodes.length)
+
+  const highlightStyle = useMemo(
+    () => ({
+      color: theme.color.text.action,
+      backgroundColor: "transparent",
+    }),
+    [theme],
+  )
 
   /**
    * If this is a category with children, no drag and drop
@@ -90,6 +104,7 @@ const Tree: React.SFC<TreeProps> = ({
             {...treeData}
             searchWords={searchWords}
             freeze={freeze}
+            highlightStyle={highlightStyle}
           />
         ))}
       </Container>
@@ -114,6 +129,7 @@ const Tree: React.SFC<TreeProps> = ({
                         forwardRef={draggableProvided.innerRef}
                         searchWords={searchWords}
                         freeze={freeze}
+                        highlightStyle={highlightStyle}
                         {...treeData}
                         {...draggableProvided.draggableProps}
                         {...draggableProvided.dragHandleProps}
@@ -133,4 +149,4 @@ const Tree: React.SFC<TreeProps> = ({
   )
 }
 
-export default Tree
+export default withTheme(Tree)
