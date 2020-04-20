@@ -11,9 +11,9 @@ export interface CellContentProps {
   close: () => void
 }
 
-const stringifyBooleanAndNull = (value: any) => {
+const stringifyBooleanAndNullAndArray = (value: any) => {
   // We compare booleans like this and without typeof for perf
-  return value === true || value === false || value === null ? String(value) : value
+  return value === true || value === false || value === null || Array.isArray(value) ? String(value) : value
 }
 
 const CellContent: React.FC<CellContentProps> = ({ cell, open, close }) => {
@@ -46,7 +46,7 @@ const CellContent: React.FC<CellContentProps> = ({ cell, open, close }) => {
   }, [width])
 
   const value = React.useMemo(
-    () => (typeof cell === "string" ? cell.replace(/\n/g, " ") : stringifyBooleanAndNull(cell)),
+    () => (typeof cell === "string" ? cell.replace(/\n/g, " ") : stringifyBooleanAndNullAndArray(cell)),
     [cell],
   )
 
