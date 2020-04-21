@@ -276,6 +276,9 @@ const constants = {
 
 export const headerHeight = 36
 
+export const sidenavBorderColor = "#d1dfe5"
+export const sidenavBackground = "#f5f8fa"
+
 /*
  * Expands a color expressed either as a custom hex value
  * or a color key to pick from within the style constants object.

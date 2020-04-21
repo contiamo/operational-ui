@@ -7,6 +7,7 @@ import { isModifiedEvent, isOutsideLink } from "../utils"
 import styled from "../utils/styled"
 import { truncate } from "../utils/truncate"
 import { IconComponentType } from "../Icon"
+import { sidenavBorderColor } from "../utils/constants"
 
 export interface SidenavHeaderProps extends DefaultProps {
   /** Main label for the header */
@@ -46,7 +47,7 @@ const SidenavHeaderBase = styled<"div" | "a">("div")<{
     textDecoration: "none",
     width: "100%",
     borderBottom: compact ? 0 : "1px solid",
-    borderBottomColor: dark ? theme.color.black : theme.color.separators.default,
+    borderBottomColor: dark ? theme.color.black : sidenavBorderColor,
     color,
 
     ":link, :visited": {

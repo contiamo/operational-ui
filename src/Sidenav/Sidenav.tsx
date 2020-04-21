@@ -3,6 +3,7 @@ import * as React from "react"
 import { DefaultProps } from "../types"
 import { readableTextColor, customScrollbar } from "../utils"
 import styled from "../utils/styled"
+import { sidenavBorderColor, sidenavBackground } from "../utils/constants"
 
 export interface SidenavProps extends DefaultProps {
   /** Show the sidebar in compact mode */
@@ -16,10 +17,10 @@ export interface State {
 }
 
 const Container = styled("div")<SidenavProps>(({ theme, compact, dark }) => {
-  const backgroundColor = dark ? theme.color.primaryDark : theme.color.white
+  const backgroundColor = dark ? theme.color.primaryDark : sidenavBackground
   const color = readableTextColor(backgroundColor, [theme.color.text.default, theme.color.white])
   return {
-    color: dark ? theme.color.white : color,
+    color,
     backgroundColor,
     position: "relative",
     display: "flex",
@@ -29,8 +30,7 @@ const Container = styled("div")<SidenavProps>(({ theme, compact, dark }) => {
     width: compact ? theme.compactSidebarWidth : theme.sidebarWidth,
     height: "100%",
     ...(!dark && {
-      borderRight: "1px solid",
-      borderRightColor: theme.color.separators.default,
+      borderRight: `2px solid ${sidenavBorderColor}`,
     }),
 
     ".operational-ui__sidenav-item_end": {
