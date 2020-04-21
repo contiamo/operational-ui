@@ -327,3 +327,14 @@ import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operation
   ]}
 />
 ```
+
+## Data types
+
+```jsx
+import * as React from "react"
+import { DataTable, DataTableSelect, DataTableInput, Checkbox } from "@operational/components"
+;<DataTable
+  columns={[["string"], ["true"], ["false"], ["null"], ["number"]]}
+  rows={[["a", true, false, null, 1], [["a", "b"], [true, true], [false, false], [null, null], [1, 2]]]}
+/>
+```
