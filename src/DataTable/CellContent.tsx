@@ -13,7 +13,7 @@ export interface CellContentProps {
 
 const stringifyBooleanAndNullAndArray = (value: any) => {
   // We compare booleans like this and without typeof for perf
-  return value === true || value === false || value === null || Array.isArray(value) ? String(value) : value
+  return value === true || value === false || value === null || Array.isArray(value) ? JSON.stringify(value) : value
 }
 
 const CellContent: React.FC<CellContentProps> = ({ cell, open, close }) => {
