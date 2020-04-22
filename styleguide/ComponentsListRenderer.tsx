@@ -118,6 +118,7 @@ const ComponentsListRenderer: React.FC<ComponentsListRendererProps> = ({ items }
                       url: `https://operational-ui.netlify.com/${item.href}/${component.name}`,
                     })
                   }}
+                  _level={0}
                 />
               ))}
             </span>

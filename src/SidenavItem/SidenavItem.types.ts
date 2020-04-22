@@ -23,4 +23,6 @@ export interface SidenavItemProps extends DefaultProps, React.BaseHTMLAttributes
   dark?: boolean
   /** Items for sidenav popout */
   items?: Array<IContextMenuItem & { items?: IContextMenuItem[] }>
+  /** for internal use */
+  _level?: number
 }
