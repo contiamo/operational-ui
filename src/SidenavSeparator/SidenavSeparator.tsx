@@ -1,5 +1,6 @@
 import * as React from "react"
 import styled from "../utils/styled"
+import { getDarkLightTheme } from "../utils/constants"
 
 export interface SidenavSeparatorProps {
   dark?: boolean
@@ -8,7 +9,7 @@ export interface SidenavSeparatorProps {
 const Container = styled("div")<SidenavSeparatorProps>`
   height: 1px;
   width: 100%;
-  background-color: ${({ dark }) => `rgba(${dark ? "255,255,255" : "0,0,0"}, 0.14)`};
+  background-color: ${({ theme, dark }) => getDarkLightTheme(theme, dark).border};
   margin: ${({ theme }) => theme.space.content}px 0;
 `
 

@@ -1,4 +1,5 @@
 import styled from "../utils/styled"
+import { sidenavBackground, getDarkLightTheme } from "../utils/constants"
 
 export const StyledSidenavItem = styled("div", {
   shouldForwardProp: prop =>
@@ -26,10 +27,8 @@ export const StyledSidenavItem = styled("div", {
   word-break: break-all;
   word-wrap: break-word;
   hyphens: auto;
-  background: ${({ theme, isActive, isDark }) =>
-    isActive ? theme.color.white : isDark ? theme.color.primaryDark : theme.color.white};
-  color: ${({ theme, isActive, isDark }) =>
-    isActive ? theme.color.primary : isDark ? theme.color.white : theme.color.text.default};
+  background: ${({ theme, isActive, isDark }) => getDarkLightTheme(theme, isDark)[isActive ? "activeBg" : "bg"]};
+  color: ${({ theme, isActive, isDark }) => getDarkLightTheme(theme, isDark)[isActive ? "activeFg" : "fg"]};
   cursor: ${({ hasOnClick }) => (hasOnClick ? "pointer" : "initial")};
   grid-template-columns: ${({ hasItems, hasIcon, compact }) => {
     if (!compact) {
@@ -48,15 +47,13 @@ export const StyledSidenavItem = styled("div", {
 
   :link,
   :visited {
-    color: ${({ theme, isActive, isDark }) =>
-      isActive ? theme.color.primary : isDark ? theme.color.white : theme.color.text.default};
+    color: ${({ theme, isActive, isDark }) => getDarkLightTheme(theme, isDark)[isActive ? "activeFg" : "fg"]};
     cursor: pointer;
   }
 
-  :hover,
-  :focus {
-    background: ${({ theme, isActive, isDark }) =>
-      isActive ? theme.color.white : isDark ? theme.color.black : theme.color.background.lightest};
+  ${({ as }) => (as === "a" ? ":focus," : "")}
+  :hover {
+    background: ${({ theme, isActive, isDark }) => getDarkLightTheme(theme, isDark)[isActive ? "activeBg" : "hoverBg"]};
   }
 
   svg {
@@ -71,7 +68,7 @@ export const Caret = styled("div")<{ isOpen: boolean }>`
   height: 0;
   margin-left: auto;
   border: 4px solid transparent;
-  border-left-color: ${({ theme, isOpen }) => (isOpen ? theme.color.primary : theme.color.white)};
+  border-left-color: ${({ theme, isOpen }) => (isOpen ? theme.color.primary : sidenavBackground)};
 `
 
 export const IconContainer = styled("div")<{ compact: boolean }>`

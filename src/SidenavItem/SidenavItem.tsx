@@ -81,7 +81,6 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
 
   return (
     <StyledSidenavItem
-      tabIndex={to ? 0 : -1}
       {...buttonProps}
       {...props}
       isDark={Boolean(dark)}
