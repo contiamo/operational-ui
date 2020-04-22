@@ -1,6 +1,5 @@
 import styled from "../utils/styled"
-import { sidenavBackground } from "../utils/constants"
-import { setAlpha } from "../utils"
+import { sidenavBackground, getDarkLightTheme } from "../utils/constants"
 
 export const StyledSidenavItem = styled("div", {
   shouldForwardProp: prop =>
@@ -28,14 +27,8 @@ export const StyledSidenavItem = styled("div", {
   word-break: break-all;
   word-wrap: break-word;
   hyphens: auto;
-  background: ${({ theme, isActive, isDark }) => {
-    if (isActive) {
-      return isDark ? theme.color.white : setAlpha(0.2)(theme.color.primary)
-    }
-    return isDark ? theme.color.primaryDark : sidenavBackground
-  }};
-  color: ${({ theme, isActive, isDark }) =>
-    isActive ? theme.color.primary : isDark ? theme.color.white : theme.color.text.default};
+  background: ${({ theme, isActive, isDark }) => getDarkLightTheme(theme, isDark)[isActive ? "activeBg" : "bg"]};
+  color: ${({ theme, isActive, isDark }) => getDarkLightTheme(theme, isDark)[isActive ? "activeFg" : "fg"]};
   cursor: ${({ hasOnClick }) => (hasOnClick ? "pointer" : "initial")};
   grid-template-columns: ${({ hasItems, hasIcon, compact }) => {
     if (!compact) {
@@ -54,19 +47,13 @@ export const StyledSidenavItem = styled("div", {
 
   :link,
   :visited {
-    color: ${({ theme, isActive, isDark }) =>
-      isActive ? theme.color.primary : isDark ? theme.color.white : theme.color.text.default};
+    color: ${({ theme, isActive, isDark }) => getDarkLightTheme(theme, isDark)[isActive ? "activeFg" : "fg"]};
     cursor: pointer;
   }
 
   ${({ as }) => (as === "a" ? ":focus," : "")}
   :hover {
-    background: ${({ theme, isActive, isDark }) => {
-      if (isActive) {
-        return isDark ? theme.color.white : setAlpha(0.2)(theme.color.primary)
-      }
-      return isDark ? theme.color.black : setAlpha(0.15)(theme.color.primary)
-    }};
+    background: ${({ theme, isActive, isDark }) => getDarkLightTheme(theme, isDark)[isActive ? "activeBg" : "hoverBg"]};
   }
 
   svg {
