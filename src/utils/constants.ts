@@ -1,5 +1,5 @@
 import get from "lodash/get"
-import { setAlpha } from "./color"
+import { setAlpha, readableTextColor } from "./color"
 
 /**
  * # Operational UI's styling constants.
@@ -276,9 +276,6 @@ const constants = {
 
 export const headerHeight = 36
 
-export const sidenavBorderColor = "#d1dfe5"
-export const sidenavBackground = "#f5f8fa"
-
 /*
  * Expands a color expressed either as a custom hex value
  * or a color key to pick from within the style constants object.
@@ -310,3 +307,29 @@ export const expandColor = (
 export type OperationalStyleConstants = Readonly<typeof constants>
 
 export default constants
+
+const sidenavBorderColor = "#d1dfe5"
+export const sidenavBackground = "#f5f8fa"
+export const getDarkLightTheme = (theme: OperationalStyleConstants, isDark: boolean | undefined) => {
+  const light = {
+    // background
+    bg: sidenavBackground,
+    // foreground
+    fg: readableTextColor(sidenavBackground, [theme.color.text.default, theme.color.white]),
+    activeBg: setAlpha(0.2)(theme.color.primary),
+    activeFg: theme.color.primary,
+    hoverBg: setAlpha(0.15)(theme.color.primary),
+    border: sidenavBorderColor,
+    headerBorder: sidenavBorderColor,
+  } as const
+  const dark = {
+    bg: theme.color.primaryDark,
+    fg: readableTextColor(theme.color.primaryDark, [theme.color.text.default, theme.color.white]),
+    activeBg: theme.color.white,
+    activeFg: theme.color.primary,
+    hoverBg: theme.color.black,
+    border: "rgba(255,255,255, 0.15)",
+    headerBorder: theme.color.black,
+  } as const
+  return isDark ? dark : light
+}
