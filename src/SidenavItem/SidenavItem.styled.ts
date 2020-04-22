@@ -29,10 +29,10 @@ export const StyledSidenavItem = styled("div", {
   word-wrap: break-word;
   hyphens: auto;
   background: ${({ theme, isActive, isDark }) => {
-    if (!isActive) {
-      return "none"
+    if (isActive) {
+      return isDark ? theme.color.white : setAlpha(0.2)(theme.color.primary)
     }
-    return isDark ? theme.color.white : setAlpha(0.2)(theme.color.primary)
+    return isDark ? theme.color.primaryDark : sidenavBackground
   }};
   color: ${({ theme, isActive, isDark }) =>
     isActive ? theme.color.primary : isDark ? theme.color.white : theme.color.text.default};
