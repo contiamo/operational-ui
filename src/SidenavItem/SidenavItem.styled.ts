@@ -3,7 +3,7 @@ import { sidenavBackground, getDarkLightTheme } from "../utils/constants"
 
 export const StyledSidenavItem = styled("div", {
   shouldForwardProp: prop =>
-    !["isDark", "hasIcon", "hasItems", "compact", "hasOnClick", "as", "isActive"].includes(prop),
+    !["isDark", "hasIcon", "hasItems", "compact", "hasOnClick", "as", "isActive", "fixBorder"].includes(prop),
 })<{
   as: "a" | "div"
   isActive: boolean
@@ -12,6 +12,8 @@ export const StyledSidenavItem = styled("div", {
   hasIcon: boolean
   hasItems: boolean
   hasOnClick: boolean
+  // show border on left to fix visual appearance
+  fixBorder: boolean
 }>`
   position: relative;
   display: grid;
@@ -61,6 +63,9 @@ export const StyledSidenavItem = styled("div", {
   }
 
   outline: none;
+
+  border-left: ${({ theme, isDark, fixBorder }) =>
+    isDark || !fixBorder ? "none" : `2px solid ${getDarkLightTheme(theme, isDark).border}`};
 `
 
 export const Caret = styled("div")<{ isOpen: boolean }>`

@@ -20,6 +20,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
   items,
   onClick,
   dark,
+  _level,
   ...props
 }) => {
   const isActive = Boolean(active)
@@ -95,6 +96,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
       isActive={isActive}
       onClick={handleClickOnSidenavItem}
       {...to && { href: to }} // This is an `a` if there's a to, so `href` is valid but TS can't figure it out yet
+      fixBorder={_level === 1}
     >
       {Icon && (
         <IconContainer compact={Boolean(compact)}>
@@ -104,7 +106,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
       {label && (compact ? isLabelVisible && <Tooltip>{compactLabel || label}</Tooltip> : label)}
       {!compact && items && <Caret isOpen={isOpen || false} />}
       {items && isOpen && (
-        <Popout data-cy="operational-ui__SidenavItemPopover">
+        <Popout data-cy="operational-ui__SidenavItemPopover" dark={Boolean(dark)}>
           {items.map((item, index) => (
             <SidenavItem
               items={item.items}
@@ -114,6 +116,7 @@ const SidenavItem: React.SFC<SidenavItemProps> = ({
               onClick={handleClickOnNestedItem(item)}
               onKeyDown={handleKeyDownOnNestedItem(item)}
               dark={dark}
+              _level={(_level || 0) + 1}
               {...getChildProps && getChildProps(index)}
             />
           ))}
