@@ -2,7 +2,6 @@
 const { join, resolve } = require("path")
 const MonacoWebpackPlugin = require("monaco-editor-webpack-plugin")
 
-const { parse: propsParser } = require("react-docgen-typescript")
 const { version } = require("./package.json")
 
 const { styles, theme } = require("./styleguide/styles.js")
@@ -15,7 +14,8 @@ const fs = require("fs")
 module.exports = {
   title: "Operational UI",
   version,
-  propsParser,
+  // We are skipping the props docs generation in dev to speed-up the dev server
+  propsParser: process.env.NODE_ENV === "development" ? undefined : require("react-docgen-typescript").parse,
   styles,
   theme,
   sections,
