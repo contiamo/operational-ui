@@ -210,7 +210,6 @@ const Container = styled.div<{ hasCategory: boolean; isOpen: boolean; isClearabl
   padding: 0 ${({ theme, isCondensed }) => (isCondensed ? theme.space.small : theme.space.content)}px;
   align-items: center;
   height: ${props => (props.isCondensed ? 36 : 48)}px;
-  margin-bottom: ${({ theme }) => theme.space.content}px;
 
   transition: ease-in-out border 0.2s;
   position: relative;
