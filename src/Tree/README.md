@@ -351,6 +351,7 @@ To offer the most flexibility as possible in your drag & drop implementation, we
 
 FIXME: https://github.com/styleguidist/react-styleguidist/issues/1278
 
+<!--
 ```jsx
 import * as React from "react"
 import { Button, Card, Tree, Title } from "@operational/components"
@@ -488,6 +489,7 @@ const PizzaMaker = () => {
 }
 ;<PizzaMaker />
 ```
+-->
 
 ### In an Accordion with different styling options
 
