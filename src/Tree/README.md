@@ -725,3 +725,70 @@ const MyComponent = () => {
 
 ;<MyComponent />
 ```
+
+### With initiallyOpen change
+
+```jsx
+import * as React from "react"
+import { Tree, Button, OlapIcon } from "@operational/components"
+const Example = () => {
+  const [trees, setTrees] = React.useState([
+    {
+      label: "ERP",
+      childNodes: [
+        {
+          label: "Region",
+          childNodes: [
+            {
+              label: "City",
+              icon: OlapIcon,
+              iconColor: "primary",
+              disabled: true,
+              childNodes: [],
+            },
+            {
+              label: "Country",
+              tagColor: "primary",
+              onClick: () => alert("country was clicked"),
+              onContextMenu: () => alert("country was right-clicked"),
+              icon: OlapIcon,
+              childNodes: [],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      label: "Legal Entity",
+      childNodes: [
+        {
+          label: "Limited Liability Company",
+          icon: OlapIcon,
+          childNodes: [],
+        },
+        {
+          label: "Inc.",
+          icon: OlapIcon,
+          tagColor: "#2C363F",
+          childNodes: [],
+        },
+      ],
+    },
+  ])
+
+  const open = React.useCallback(() => {
+    setTrees(trees => trees.map(x => ({ ...x, initiallyOpen: true })))
+  }, [setTrees])
+
+  return (
+    <>
+      <Button onClick={open}>Open</Button>
+      <br />
+      <br />
+      <Tree trees={trees} />
+    </>
+  )
+}
+
+;<Example />
+```
