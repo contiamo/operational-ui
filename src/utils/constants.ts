@@ -153,8 +153,8 @@ type FontWeight = 400 | 500 | 600
  */
 const font = {
   family: {
-    main: `"Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif`,
-    code: `Consolas, "Liberation Mono", Menlo, Courier, monospace`,
+    main: `-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif`,
+    code: `SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace`,
   },
   /** 1.4 */
   lineHeight: 1.4,
