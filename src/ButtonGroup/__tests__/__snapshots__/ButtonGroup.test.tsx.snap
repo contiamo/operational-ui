@@ -12,7 +12,7 @@ exports[`ButtonGroup Component Should initialize properly 1`] = `
   >
     <button
       aria-label="Hello"
-      class="css-qj6ccr"
+      class="css-15royh3"
       role="button"
     >
       Hello
