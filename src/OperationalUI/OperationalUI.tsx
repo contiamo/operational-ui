@@ -124,7 +124,7 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
   constructor(props: OperationalUIProps) {
     super(props)
     this.onKeyDown = this.onKeyDown.bind(this)
-    this.onMousudown = this.onMousudown.bind(this)
+    this.onMouseDown = this.onMouseDown.bind(this)
   }
 
   /**
@@ -170,17 +170,17 @@ class OperationalUI extends React.Component<OperationalUIProps, State> {
       clearInterval(this.messageTimerInterval)
     }
     document.removeEventListener("keydown", this.onKeyDown)
-    document.removeEventListener("mousedown", this.onMousudown)
+    document.removeEventListener("mousedown", this.onMouseDown)
   }
 
   public componentDidMount() {
     document.addEventListener("keydown", this.onKeyDown)
-    document.addEventListener("mousedown", this.onMousudown)
+    document.addEventListener("mousedown", this.onMouseDown)
     document.body.classList.add("no-focus")
   }
 
   // We tried to use state instead of directly accessing DOM but it breaks
-  private onMousudown() {
+  private onMouseDown() {
     document.body.classList.add("no-focus")
   }
 
