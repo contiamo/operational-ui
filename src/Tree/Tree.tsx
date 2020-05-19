@@ -7,6 +7,7 @@ import { IconComponentType } from "../Icon"
 
 interface BaseTree {
   label: string
+  key?: string | number
   paddingLeft?: number
   paddingRight?: number
   highlight?: boolean
@@ -103,7 +104,11 @@ const Tree: React.SFC<TreeProps> = ({
           {trees.length ? (
             <>
               {trees.map((treeData, index) => (
-                <Draggable key={index} {...treeData.draggableProps || { draggableId: treeData.label }} index={index}>
+                <Draggable
+                  key={treeData.key !== undefined ? treeData.key : index}
+                  {...treeData.draggableProps || { draggableId: treeData.label }}
+                  index={index}
+                >
                   {draggableProvided => {
                     return (
                       <ChildTree

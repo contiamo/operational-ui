@@ -737,6 +737,7 @@ import { Tree, Button, OlapIcon } from "@operational/components"
 const initialTrees = [
   {
     label: "ERP",
+    key: 10,
     childNodes: [
       {
         label: "Region",
@@ -762,6 +763,7 @@ const initialTrees = [
   },
   {
     label: "Legal Entity",
+    key: 20,
     childNodes: [
       {
         label: "Limited Liability Company",
@@ -783,9 +785,10 @@ const Example = () => {
   const open = React.useCallback(() => {}, [setTrees])
   return (
     <>
-      <Button onClick={() => setTrees(initialTrees.map(x => ({ ...x, initiallyOpen: true })))}>Open</Button>
+      <Button onClick={() => setTrees(initialTrees.map(x => ({ ...x, initiallyOpen: true, key: x.key + 1 })))}>
+        Open
+      </Button>
       <Button onClick={() => setTrees(initialTrees)}>Close</Button>
-      <Button onClick={() => setTrees([])}>Empty</Button>
       <br />
       <br />
       <Tree trees={trees} />
