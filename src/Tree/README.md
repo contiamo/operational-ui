@@ -351,6 +351,7 @@ To offer the most flexibility as possible in your drag & drop implementation, we
 
 FIXME: https://github.com/styleguidist/react-styleguidist/issues/1278
 
+<!--
 ```jsx
 import * as React from "react"
 import { Button, Card, Tree, Title } from "@operational/components"
@@ -488,6 +489,7 @@ const PizzaMaker = () => {
 }
 ;<PizzaMaker />
 ```
+-->
 
 ### In an Accordion with different styling options
 
@@ -724,4 +726,75 @@ const MyComponent = () => {
 }
 
 ;<MyComponent />
+```
+
+### With initiallyOpen change
+
+```jsx
+import * as React from "react"
+import { Tree, Button, OlapIcon } from "@operational/components"
+
+const initialTrees = [
+  {
+    label: "ERP",
+    key: 10,
+    childNodes: [
+      {
+        label: "Region",
+        childNodes: [
+          {
+            label: "City",
+            icon: OlapIcon,
+            iconColor: "primary",
+            disabled: true,
+            childNodes: [],
+          },
+          {
+            label: "Country",
+            tagColor: "primary",
+            onClick: () => alert("country was clicked"),
+            onContextMenu: () => alert("country was right-clicked"),
+            icon: OlapIcon,
+            childNodes: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: "Legal Entity",
+    key: 20,
+    childNodes: [
+      {
+        label: "Limited Liability Company",
+        icon: OlapIcon,
+        childNodes: [],
+      },
+      {
+        label: "Inc.",
+        icon: OlapIcon,
+        tagColor: "#2C363F",
+        childNodes: [],
+      },
+    ],
+  },
+]
+
+const Example = () => {
+  const [trees, setTrees] = React.useState(initialTrees)
+  const open = React.useCallback(() => {}, [setTrees])
+  return (
+    <>
+      <Button onClick={() => setTrees(initialTrees.map(x => ({ ...x, initiallyOpen: true, key: x.key + 1 })))}>
+        Open
+      </Button>
+      <Button onClick={() => setTrees(initialTrees)}>Close</Button>
+      <br />
+      <br />
+      <Tree trees={trees} />
+    </>
+  )
+}
+
+;<Example />
 ```
