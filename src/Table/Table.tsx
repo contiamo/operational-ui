@@ -42,6 +42,8 @@ export interface TableProps<T> extends DefaultProps {
   activeRowIndices?: number[]
   /* Compact style rows */
   condensed?: boolean
+  /* Disable all interactions */
+  disabled?: boolean
 }
 
 export interface Column<T> {
@@ -53,6 +55,8 @@ export interface Column<T> {
   width?: number
 }
 
+const noop = () => {}
+
 const CondensedActionMenu = styled(ActionMenu)<{ condensed?: boolean }>`
   ${({ condensed }) =>
     condensed
@@ -63,15 +67,20 @@ const CondensedActionMenu = styled(ActionMenu)<{ condensed?: boolean }>`
       : ""}
 `
 
-const Container = styled.table<{ fixedLayout: TableProps<any>["fixedLayout"] }>(({ theme, fixedLayout }) => ({
-  width: "100%",
-  backgroundColor: theme.color.white,
-  textAlign: "left",
-  borderCollapse: "collapse",
-  fontSize: theme.font.size.small,
-  fontFamily: theme.font.family.main,
-  tableLayout: fixedLayout ? "fixed" : "initial",
-}))
+const Container = styled.table<{ fixedLayout: TableProps<any>["fixedLayout"]; disabled: TableProps<any>["disabled"] }>(
+  ({ theme, fixedLayout, disabled }) => ({
+    width: "100%",
+    backgroundColor: theme.color.white,
+    textAlign: "left",
+    borderCollapse: "collapse",
+    fontSize: theme.font.size.small,
+    fontFamily: theme.font.family.main,
+    tableLayout: fixedLayout ? "fixed" : "initial",
+    opacity: disabled ? 0.5 : 1,
+    userSelect: disabled ? "none" : "auto",
+    cursor: disabled ? "not-allowed" : "auto",
+  }),
+)
 
 const Tr = styled.tr<{
   active: boolean
@@ -211,6 +220,7 @@ function Table<T>({
   onReorder,
   activeRowIndices,
   condensed,
+  disabled,
   ...props
 }: TableProps<T>) {
   const uid = useUniqueId()
@@ -229,7 +239,7 @@ function Table<T>({
 
   const handleKeyDownOnRow = React.useCallback(
     (entry, index) => (e: React.KeyboardEvent<HTMLTableRowElement>) => {
-      if (!onRowClick) {
+      if (!onRowClick || disabled) {
         return
       }
       switch (e.key) {
@@ -237,7 +247,7 @@ function Table<T>({
           onRowClick(entry, index)
       }
     },
-    [onRowClick],
+    [onRowClick, disabled],
   )
 
   /**
@@ -245,16 +255,16 @@ function Table<T>({
    * down, which relies on its closure.
    */
   const PseudoDraggable = React.useMemo(() => {
-    if (onReorder) {
+    if (onReorder && !disabled) {
       return Draggable
     }
 
     return (((props: DraggableProps) => <>{props.children({} as any, {} as any)}</>) as unknown) as typeof Draggable
-  }, [onReorder])
+  }, [onReorder, disabled])
 
   return (
-    <DragDropContext onDragEnd={onReorder || (() => {})}>
-      <Container fixedLayout={fixedLayout || Boolean(onReorder)} {...props}>
+    <DragDropContext onDragEnd={onReorder || noop}>
+      <Container fixedLayout={fixedLayout || Boolean(onReorder)} disabled={disabled} {...props}>
         {!headless && (
           <Thead>
             <Tr active={false /* It's a heading */}>
@@ -280,7 +290,7 @@ function Table<T>({
                   </ThContent>
                 </Th>
               ))}
-              {Boolean(rowActions || (onRowClick && rowActionName)) && (
+              {Boolean(rowActions || (onRowClick && rowActionName)) && !disabled && (
                 <Th key="infinity" cellWidth={rowActionName ? undefined : 50} />
               )}
             </Tr>
@@ -300,7 +310,7 @@ function Table<T>({
                     : false
 
                   const rowAction = (() => {
-                    if (!rowActions) {
+                    if (!rowActions || disabled) {
                       return null
                     }
                     const dataEntryRowActions = rowActions(dataEntry)
@@ -332,7 +342,7 @@ function Table<T>({
                           onKeyDown={handleKeyDownOnRow(dataEntry, dataEntryIndex)}
                           tabIndex={onRowClick ? 0 : undefined}
                           role={onRowClick ? "button" : undefined}
-                          draggable={Boolean(onReorder)}
+                          draggable={Boolean(onReorder) && !disabled}
                           clickable={Boolean(onRowClick)}
                           key={dataEntryIndex}
                           onClick={() => {
