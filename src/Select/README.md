@@ -323,7 +323,7 @@ const MyComponent = () => {
   const [customOptionValue, setCustomOptionValue] = React.useState("chickens")
 
   return (
-    <Form>
+    <>
       <Select
         data-cy="custom-select"
         value={value}
@@ -347,7 +347,7 @@ Last changed option:
 ${JSON.stringify(lastChanged, null, 2)}
       `}
       </Code>
-    </Form>
+    </>
   )
 }
 
@@ -395,7 +395,7 @@ const MyComponent = () => {
   }
 
   return (
-    <Form>
+    <>
       <Select
         data-cy="custom-select"
         value={value}
@@ -422,7 +422,7 @@ Last changed option:
 ${JSON.stringify(lastChanged, null, 2)}
       `}
       </Code>
-    </Form>
+    </>
   )
 }
 
