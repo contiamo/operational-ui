@@ -26,7 +26,6 @@ interface TreeItemProps {
   onMouseEnter?: (e: React.MouseEvent<HTMLDivElement>) => void
   onMouseLeave?: (e: React.MouseEvent<HTMLDivElement>) => void
   actions?: React.ReactNode
-  hasIconOffset?: boolean
   strong?: boolean
   fontSize?: number
   fontColor?: string
@@ -42,7 +41,6 @@ const Header = styled.div<{
   onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   cursor?: string
   level: number
-  hasIconOffset: boolean
 }>`
   label: TreeItem;
   width: 100%;
@@ -52,8 +50,7 @@ const Header = styled.div<{
   cursor: ${({ onClick, cursor }) => cursor || (onClick ? "pointer" : "inherit")};
   background: ${({ theme, highlight }) => (highlight ? getHighlightColor(theme) : "none")};
   padding: ${({ theme }) => `${theme.space.base / 2}px`};
-  padding-left: ${({ theme, paddingLeft, level, hasIconOffset }) =>
-    paddingLeft + theme.space.element * level + (hasIconOffset ? theme.space.element : 0)}px;
+  padding-left: ${({ theme, paddingLeft, level }) => paddingLeft + theme.space.element * level}px;
   padding-right: ${({ paddingRight }) => paddingRight}px;
   color: ${({ theme }) => theme.color.text.dark};
   color: ${({ theme }) => theme.color.text.dark};
@@ -148,7 +145,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   level,
   cursor,
   actions,
-  hasIconOffset,
   searchWords = defaultSearch,
   ignoreSearchWords,
   onMouseEnter,
@@ -191,7 +187,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       paddingLeft={paddingLeft}
       paddingRight={paddingRight}
       level={level}
-      hasIconOffset={Boolean(hasIconOffset)}
       onClick={onNodeClick}
       onContextMenu={onNodeContextMenu}
       onKeyDown={handleKeyDown}

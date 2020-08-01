@@ -8,7 +8,6 @@ type Props = TreeProps["trees"][-1] & {
   searchWords?: string[]
   freeze?: boolean
   level: number
-  hasIconOffset: boolean
   onMouseEnter?: (e: React.MouseEvent<HTMLDivElement>) => void
   onMouseLeave?: (e: React.MouseEvent<HTMLDivElement>) => void
 }
@@ -40,7 +39,6 @@ const ChildTree: React.SFC<Props> = ({
   ignoreSearchWords,
   level,
   actions,
-  hasIconOffset,
   onMouseEnter,
   onMouseLeave,
   strong,
@@ -104,7 +102,6 @@ const ChildTree: React.SFC<Props> = ({
         disabled={disabled}
         actions={actions}
         cursor={cursor}
-        hasIconOffset={hasIconOffset && !hasChildren}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         strong={strong}
@@ -116,7 +113,6 @@ const ChildTree: React.SFC<Props> = ({
       {hasChildren && isOpen && (
         <Tree
           _level={level + 1}
-          _hasIconOffset={Boolean(icon) || Boolean(tag)}
           paddingLeft={paddingLeft}
           paddingRight={paddingRight}
           trees={childNodes}

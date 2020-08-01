@@ -134,13 +134,7 @@ import { Tree } from "@operational/components"
 
 ```jsx
 import * as React from "react"
-import {
-  Tree,
-  DatabaseIcon,
-  WorkbenchIcon,
-  PhysicalTableIcon,
-  ColumnsIcon
-} from "@operational/components"
+import { Tree, DatabaseIcon, WorkbenchIcon, PhysicalTableIcon, ColumnsIcon } from "@operational/components"
 
 const Example = () => {
   const [resourceKind, setResourceKind] = React.useState("datasource")
@@ -187,9 +181,10 @@ const Example = () => {
           ],
         },
       ]}
-    />);
-  }
-;<Example>
+    />
+  )
+}
+;<Example />
 ```
 
 ### With higlighted search

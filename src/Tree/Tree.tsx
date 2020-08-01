@@ -53,7 +53,6 @@ export interface TreeProps {
   placeholder?: React.ComponentType<DroppableStateSnapshot>
   freeze?: boolean
   _level?: number
-  _hasIconOffset?: boolean
 }
 
 const Container = styled.div`
@@ -63,7 +62,6 @@ const Container = styled.div`
 
 const Tree: React.SFC<TreeProps> = ({
   _level = 0,
-  _hasIconOffset = false,
   paddingLeft,
   paddingRight,
   trees,
@@ -86,7 +84,6 @@ const Tree: React.SFC<TreeProps> = ({
             paddingLeft={paddingLeft}
             paddingRight={paddingRight}
             level={_level}
-            hasIconOffset={_hasIconOffset}
             key={index}
             {...treeData}
             searchWords={searchWords}
@@ -114,7 +111,6 @@ const Tree: React.SFC<TreeProps> = ({
                       <ChildTree
                         paddingLeft={paddingLeft}
                         paddingRight={paddingRight}
-                        hasIconOffset={_hasIconOffset}
                         level={_level}
                         forwardRef={draggableProvided.innerRef}
                         searchWords={searchWords}
