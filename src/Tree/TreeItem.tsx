@@ -154,7 +154,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
   fontColor,
   emphasized,
   monospace,
-  freeze,
 }) => {
   const handleKeyDown = useCallback(
     e => {
@@ -197,7 +196,6 @@ const TreeItem: React.SFC<TreeItemProps> = ({
       onMouseLeave={onMouseLeave}
     >
       {hasChildren &&
-        !freeze &&
         React.createElement(isOpen ? ChevronDownIcon : ChevronRightIcon, {
           size: 12,
           left: true,
