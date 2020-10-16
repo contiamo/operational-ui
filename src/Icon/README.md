@@ -75,6 +75,12 @@ const MyComponent = () => {
   const [size, setSize] = React.useState(18)
   const { pushMessage } = useOperationalContext()
 
+  const filters = filter
+    .toLowerCase()
+    .split(",")
+    .map(i => i.trim())
+    .filter(i => i !== "")
+
   return (
     <>
       <div
@@ -104,7 +110,17 @@ const MyComponent = () => {
       </div>
       <Table
         data={Object.keys(Icon)
-          .filter(name => name.endsWith("Icon") && name.toLowerCase().includes(filter.toLowerCase()))
+          .filter(
+            name =>
+              name.endsWith("Icon") &&
+              (filter === "" ||
+                filters.findIndex(f =>
+                  name
+                    .toLowerCase()
+                    .slice(0, -4)
+                    .includes(f),
+                ) !== -1),
+          )
           .map(name => ({ name }))}
         columns={[
           {
