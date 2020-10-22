@@ -32,14 +32,14 @@ const Container = styled.div<ContextMenuPopoutProps & PositionProps>`
   max-height: 50vh;
   overflow: auto;
   box-shadow: ${({ theme }) => theme.shadows.contextMenu};
-  min-width: fit-content;
   width: ${({ width }) => width};
   max-width: 90vw;
   min-height: ${({ rowHeight }) => rowHeight}px;
-  display: grid;
-  grid-template-rows: repeat(${({ numRows }) => numRows}, max-content);
   background-color: ${({ theme }) => theme.color.white};
   padding: ${({ theme }) => theme.space.small}px 0;
+  display: inline-flex;
+  width: auto;
+  flex-direction: column;
 
   ${({ theme, anchored }) => (anchored ? "" : `z-index: ${theme.zIndex.selectOptions + 2};`)}
 `
