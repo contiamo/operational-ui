@@ -215,7 +215,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
             key={`ContextMenuPopout-${uniqueId}-${items.length}-items`}
             ref={containerRef}
             condensed={Boolean(condensed)}
-            numRows={items.length}
             align={align}
             embedChildrenInMenu={embedChildrenInMenu}
             container={$invisibleOverlay}

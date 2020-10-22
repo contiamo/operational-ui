@@ -8,7 +8,6 @@ import { isRefRefObject } from "../utils/isRefRefObject"
 
 export interface ContextMenuPopoutProps {
   embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
-  numRows: number
   align: ContextMenuProps["align"]
   condensed: ContextMenuProps["condensed"]
   rowHeight: number
@@ -46,7 +45,7 @@ const Container = styled.div<ContextMenuPopoutProps & PositionProps>`
 
 const ContextMenuPopout = React.forwardRef<HTMLDivElement, ContextMenuPopoutProps & { width?: number }>(
   (
-    { align, children, condensed, container, embedChildrenInMenu, numRows, rowHeight, anchored, width: propsWidth },
+    { align, children, condensed, container, embedChildrenInMenu, rowHeight, anchored, width: propsWidth },
     forwardRef,
   ) => {
     const $fallback = React.useRef<HTMLDivElement | null>(null)
@@ -70,7 +69,6 @@ const ContextMenuPopout = React.forwardRef<HTMLDivElement, ContextMenuPopoutProp
       <Container
         align={align}
         condensed={condensed}
-        numRows={numRows}
         rowHeight={rowHeight}
         anchored={anchored}
         left={anchored ? initialValue.left : left}
