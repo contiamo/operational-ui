@@ -8,7 +8,6 @@ import { isRefRefObject } from "../utils/isRefRefObject"
 
 export interface ContextMenuPopoutProps {
   embedChildrenInMenu?: ContextMenuProps["embedChildrenInMenu"]
-  numRows: number
   align: ContextMenuProps["align"]
   condensed: ContextMenuProps["condensed"]
   rowHeight: number
@@ -32,21 +31,21 @@ const Container = styled.div<ContextMenuPopoutProps & PositionProps>`
   max-height: 50vh;
   overflow: auto;
   box-shadow: ${({ theme }) => theme.shadows.contextMenu};
-  min-width: fit-content;
   width: ${({ width }) => width};
   max-width: 90vw;
   min-height: ${({ rowHeight }) => rowHeight}px;
-  display: grid;
-  grid-template-rows: repeat(${({ numRows }) => numRows}, max-content);
   background-color: ${({ theme }) => theme.color.white};
   padding: ${({ theme }) => theme.space.small}px 0;
+  display: inline-flex;
+  width: auto;
+  flex-direction: column;
 
   ${({ theme, anchored }) => (anchored ? "" : `z-index: ${theme.zIndex.selectOptions + 2};`)}
 `
 
 const ContextMenuPopout = React.forwardRef<HTMLDivElement, ContextMenuPopoutProps & { width?: number }>(
   (
-    { align, children, condensed, container, embedChildrenInMenu, numRows, rowHeight, anchored, width: propsWidth },
+    { align, children, condensed, container, embedChildrenInMenu, rowHeight, anchored, width: propsWidth },
     forwardRef,
   ) => {
     const $fallback = React.useRef<HTMLDivElement | null>(null)
@@ -70,7 +69,6 @@ const ContextMenuPopout = React.forwardRef<HTMLDivElement, ContextMenuPopoutProp
       <Container
         align={align}
         condensed={condensed}
-        numRows={numRows}
         rowHeight={rowHeight}
         anchored={anchored}
         left={anchored ? initialValue.left : left}
