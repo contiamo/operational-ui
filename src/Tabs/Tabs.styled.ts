@@ -109,7 +109,7 @@ export const TabHeader = styled(SectionHeader, {
 
 TabHeader.defaultProps = {
   role: "tab",
-  as: "button",
+  as: "div",
 }
 
 export const TabButton = styled(SectionHeader, {
