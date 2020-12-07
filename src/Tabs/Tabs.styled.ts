@@ -140,7 +140,7 @@ export const TabButton = styled(SectionHeader, {
 `
 
 TabButton.defaultProps = {
-  as: "button",
+  as: "div",
   "aria-hidden": true,
   tabIndex: -1,
 }
