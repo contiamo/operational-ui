@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 16 14" style="enable-background:new 0 0 16 14;" xml:space="preserve" width="30" height="30">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+</style>
+<path class="st0" d="M12.8,0H3.7c-0.6,0-1,0.5-1,1v2.4c0,0.6,0.5,1,1,1h9.1c0.6,0,1-0.5,1-1V1C13.8,0.5,13.4,0,12.8,0z M12.8,3.4
+	H3.7V1h9.1V3.4z"/>
+<path class="st0" d="M4.9,11.3c-0.3,0-0.5,0.2-0.5,0.5c0,0.3,0.2,0.5,0.5,0.5c0.3,0,0.5-0.2,0.5-0.5C5.4,11.5,5.1,11.3,4.9,11.3z"/>
+<path class="st0" d="M2.7,13c0,0.6,0.5,1,1,1h9.1c0.6,0,1-0.5,1-1v-2.4c0-0.6-0.5-1-1-1H3.7c-0.6,0-1,0.5-1,1V13z M3.7,10.6h9.1V13
+	H3.7V10.6z"/>
+<path class="st0" d="M4.9,2.7c0.3,0,0.5-0.2,0.5-0.5c0-0.3-0.2-0.5-0.5-0.5c-0.3,0-0.5,0.2-0.5,0.5C4.4,2.5,4.6,2.7,4.9,2.7z"/>
+<path class="st0" d="M3.7,9.2h9.1c0.6,0,1-0.5,1-1V5.8c0-0.6-0.5-1-1-1H3.7c-0.6,0-1,0.5-1,1v2.4C2.7,8.8,3.1,9.2,3.7,9.2z M3.7,5.8
+	h9.1v2.4H3.7V5.8z"/>
+<ellipse class="st0" cx="4.9" cy="7" rx="0.5" ry="0.5"/>
+</svg>
