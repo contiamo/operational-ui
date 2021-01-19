@@ -23,6 +23,7 @@ export const isCmdEnter = (ev: React.KeyboardEvent<HTMLElement>) => {
  * @param name
  */
 export const getInitials = (name: string): string => {
+  name = name.trim()
   if (!name) {
     return ""
   }
