@@ -23,17 +23,16 @@ export const isCmdEnter = (ev: React.KeyboardEvent<HTMLElement>) => {
  * @param name
  */
 export const getInitials = (name: string): string => {
-  name = name.trim()
   if (!name) {
     return ""
   }
-  const fullInitials = name
-    .split(" ")
-    .map(([firstLetter]) => firstLetter.toUpperCase())
-    .join("")
 
-  const [firstInitial, , lastInitial] = fullInitials
-  return fullInitials.length > 2 ? firstInitial + lastInitial : fullInitials
+  const firstLetters = name
+    .split(" ")
+    .filter(i => i.length > 0)
+    .map(i => i[0].toUpperCase())
+
+  return firstLetters.length > 1 ? firstLetters[0] + firstLetters[firstLetters.length - 1] : firstLetters.join("")
 }
 
 export const keyCodes = {
