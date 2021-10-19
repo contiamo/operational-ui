@@ -1,0 +1,8 @@
+<svg width="30" height="30" viewBox="0 0 14 14" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" fill-rule="evenodd">
+        <rect fill="none" y="1" width="14" height="14" rx="2" opacity="0.1"/>
+        <text font-family="Menlo-Bold, Menlo" font-size="8" font-weight="bold" fill="none">
+        <tspan x="1.2" y="10.5">AD</tspan>
+        </text>
+    </g>
+</svg>
